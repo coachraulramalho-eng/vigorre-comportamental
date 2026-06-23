@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste IE | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/globals.css">
+  
+  <style>
+    /* ============================================
+       CORES DO TESTE IE (ROXO)
+       ============================================ */
+    :root {
+      --primary: #7C3AED;
+      --primary-light: #A78BFA;
+      --primary-dark: #6D28D9;
+      --gradient-main: linear-gradient(135deg, #7C3AED 0%, #A78BFA 50%, #6D28D9 100%);
+      --gradient-header: linear-gradient(135deg, #6D28D9, #7C3AED);
+      --gradient-footer: linear-gradient(135deg, #7C3AED, #6D28D9);
+      --badge-color: #7C3AED;
+      --shadow-color: rgba(124, 58, 237, 0.3);
+    }
+    
+    /* ============================================
+       REAPROVEITANDO ESTILOS DO DISC
+       ============================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      min-height: 100vh;
+      background: var(--gradient-main);
+      font-family: 'Inter', sans-serif;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    /* ============================================
+       CABEÇALHO ULTRA PREMIUM
+       ============================================ */
+    .header-premium {
+      background: rgba(10, 37, 64, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px 16px 0 0;
+      padding: 24px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-header);
+    }
+    
+    .header-premium::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .header-grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    
+    .header-logo .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-header);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .header-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    
+    .header-logo-text .system-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.02em;
+    }
+    
+    .header-logo-text .system-name .tm {
+      font-size: 0.5rem;
+      vertical-align: super;
+      color: #A78BFA;
+    }
+    
+    .header-logo-text .system-sub {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    
+    .header-center {
+      text-align: center;
+    }
+    
+    .header-center .report-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.02em;
+    }
+    
+    .header-center .report-title .highlight {
+      background: var(--gradient-header);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .header-center .report-sub {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    
+    .header-right {
+      text-align: right;
+    }
+    
+    .header-right .participant-name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: white;
+    }
+    
+    .header-right .participant-company {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .header-right .participant-id {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.3);
+      font-family: 'Courier New', monospace;
+      margin-top: 2px;
+    }
+    
+    /* ============================================
+       CORPO DO TESTE
+       ============================================ */
+    .test-body {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 32px;
+      min-height: 400px;
+    }
+    
+    .progress-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .progress-text {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    
+    .progress-bar {
+      flex: 1;
+      max-width: 300px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0 16px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-header);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    
+    .progress-percent {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.75rem;
+      font-weight: 600;
+      min-width: 40px;
+      text-align: right;
+    }
+    
+    .question-number {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba(124, 58, 237, 0.15);
+      border: 1px solid rgba(124, 58, 237, 0.25);
+      border-radius: 100px;
+      color: #A78BFA;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .question-text {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    
+    .options-grid {
+      display: grid;
+      gap: 12px;
+    }
+    
+    .option-btn {
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .option-btn:hover {
+      border-color: #7C3AED;
+      background: rgba(124, 58, 237, 0.12);
+    }
+    
+    .option-btn.selected {
+      border-color: #A78BFA;
+      background: rgba(124, 58, 237, 0.15);
+      color: white;
+    }
+    
+    .option-btn .letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .option-btn.selected .letter {
+      background: #7C3AED;
+      color: white;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .btn-nav {
+      padding: 12px 32px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-prev {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .btn-prev:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+    
+    .btn-next {
+      background: linear-gradient(135deg, #7C3AED, #A78BFA);
+      color: white;
+      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+    }
+    
+    .btn-next:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(124, 58, 237, 0.5);
+    }
+    
+    .btn-finish {
+      background: linear-gradient(135deg, #6D28D9, #7C3AED);
+      color: white;
+      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+    }
+    
+    .btn-finish:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(124, 58, 237, 0.5);
+    }
+    
+    .btn-nav:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    
+    /* ============================================
+       RESULTADOS
+       ============================================ */
+    .results-container {
+      display: none;
+      animation: fadeIn 0.6s ease;
+    }
+    
+    .results-container.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .results-header {
+      text-align: center;
+      padding: 24px 0 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .results-header h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.75rem;
+      color: white;
+      margin-bottom: 4px;
+    }
+    
+    .results-header .subtitle {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.875rem;
+    }
+    
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 24px;
+      background: var(--gradient-header);
+      border-radius: 100px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-top: 16px;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .result-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    
+    .result-card .label {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .result-card .value {
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    
+    .chart-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    
+    .chart-card h3 {
+      color: white;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .chart-card h3 .highlight {
+      color: #A78BFA;
+    }
+    
+    .chart-container {
+      height: 220px;
+      position: relative;
+    }
+    
+    .result-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    
+    .btn-result {
+      padding: 14px 20px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn-result-primary {
+      background: var(--gradient-header);
+      color: white;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .btn-result-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px var(--shadow-color);
+    }
+    
+    .btn-result-success {
+      background: linear-gradient(135deg, #10B981, #06B6D4);
+      color: white;
+    }
+    
+    .btn-result-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+    }
+    
+    /* ============================================
+       RODAPÉ ULTRA PREMIUM
+       ============================================ */
+    .footer-premium {
+      background: rgba(10, 37, 64, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 24px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer-premium::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gradient-footer);
+    }
+    
+    .footer-premium::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .footer-logo .logo-icon-small {
+      width: 36px;
+      height: 36px;
+      background: var(--gradient-footer);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+    }
+    
+    .footer-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    
+    .footer-logo-text .footer-system {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .footer-logo-text .footer-system .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #A78BFA;
+    }
+    
+    .footer-logo-text .footer-tagline {
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.3);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    
+    .footer-center {
+      text-align: center;
+    }
+    
+    .footer-center .footer-contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.75rem;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .footer-contact-item:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .footer-contact-item .icon {
+      font-size: 0.875rem;
+    }
+    
+    .footer-right {
+      text-align: right;
+    }
+    
+    .footer-right .page-number {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    .footer-right .page-number span {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+      margin: 12px 0;
+    }
+    
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* ============================================
+       LOADING & TOAST
+       ============================================ */
+    .loading-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 37, 64, 0.9);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .loading-overlay.active {
+      display: flex;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #7C3AED;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      color: white;
+      font-weight: 600;
+    }
+    
+    .toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: rgba(30, 41, 59, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 14px 24px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.875rem;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      z-index: 1001;
+      max-width: 400px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease;
+    }
+    
+    .toast.show { display: flex; }
+    .toast.error { border-left: 4px solid #EF4444; }
+    .toast.success { border-left: 4px solid #10B981; }
+    
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .back-link {
+      color: rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+      font-size: 0.75rem;
+      display: inline-block;
+      margin-top: 12px;
+      text-align: center;
+      width: 100%;
+      transition: color 0.3s ease;
+    }
+    
+    .back-link:hover {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    /* ============================================
+       RESPONSIVO
+       ============================================ */
+    @media (max-width: 992px) {
+      .header-grid, .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        text-align: center;
+      }
+      .header-right, .footer-right { text-align: center; }
+      .footer-center .footer-contact { flex-direction: column; gap: 8px; }
+    }
+    
+    @media (max-width: 768px) {
+      .header-premium, .footer-premium { padding: 16px 20px; }
+      .test-body { padding: 20px; }
+      .question-text { font-size: 1.125rem; }
+      .results-grid, .result-actions { grid-template-columns: 1fr; }
+      .nav-buttons { flex-wrap: wrap; }
+      .nav-buttons button { flex: 1; min-width: 100px; }
+      .progress-bar { max-width: 100%; }
+    }
+    
+    @media (max-width: 480px) {
+      body { padding: 12px; }
+      .header-premium, .footer-premium { padding: 12px 16px; }
+      .test-body { padding: 16px; }
+      .option-btn { padding: 12px 16px; font-size: 0.875rem; }
+      .btn-nav { padding: 10px 16px; font-size: 0.8125rem; }
+    }
+    
+    /* ============================================
+       IMPRESSÃO
+       ============================================ */
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .container { max-width: 100% !important; }
+      
+      .header-premium {
+        background: #0A2540 !important;
+        border-radius: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .test-body {
+        background: white !important;
+        border: none !important;
+        padding: 24px !important;
+      }
+      
+      .question-text { color: #0A2540 !important; }
+      
+      .option-btn {
+        border-color: #E2E8F0 !important;
+        color: #334155 !important;
+        background: #F8FAFC !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .option-btn.selected {
+        border-color: #7C3AED !important;
+        background: #EDE9FE !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .option-btn.selected .letter {
+        background: #7C3AED !important;
+        color: white !important;
+      }
+      
+      .footer-premium {
+        background: #0A2540 !important;
+        border-radius: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .btn-nav, .btn-next, .btn-finish, .btn-result, .back-link,
+      .nav-buttons, .progress-section, .result-actions {
+        display: none !important;
+      }
+      
+      .results-container { display: block !important; }
+      
+      .results-header h2 { color: #0A2540 !important; }
+      .result-card { background: #F8FAFC !important; border-color: #E2E8F0 !important; }
+      .result-card .value { color: #0A2540 !important; }
+      .chart-card { background: #F8FAFC !important; border-color: #E2E8F0 !important; }
+      .chart-card h3 { color: #0A2540 !important; }
+      
+      .profile-badge {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .footer-contact-item { color: rgba(255, 255, 255, 0.6) !important; }
+      .header-right .participant-name { color: white !important; }
+      .footer-bottom { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div style="text-align: center;">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Calculando seu perfil de Inteligência Emocional...</p>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <span id="toastIcon">✅</span>
+  <span id="toastMessage">Mensagem</span>
+</div>
+
+<div class="container">
+  
+  <!-- ==========================================
+       CABEÇALHO - IE (ROXO)
+       ========================================== -->
+  <header class="header-premium">
+    <div class="header-grid">
+      <div class="header-logo">
+        <div class="logo-icon">V</div>
+        <div class="header-logo-text">
+          <span class="system-name">VIGORRE ONE<span class="tm">™</span></span>
+          <span class="system-sub">People Analytics Enterprise</span>
+        </div>
+      </div>
+      
+      <div class="header-center">
+        <div class="report-title">
+          <span class="highlight">Teste IE</span>
+        </div>
+        <div class="report-sub">Inteligência Emocional</div>
+      </div>
+      
+      <div class="header-right">
+        <div class="participant-name" id="participantName">Carregando...</div>
+        <div class="participant-company" id="participantCompany">Empresa: --</div>
+        <div class="participant-id" id="participantId">ID: --</div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- ==========================================
+       CORPO DO TESTE
+       ========================================== -->
+  <div class="test-body">
+    
+    <div class="progress-section">
+      <span class="progress-text" id="progressText">Questão 1 de 20</span>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 5%"></div>
+      </div>
+      <span class="progress-percent" id="progressPercent">5%</span>
+    </div>
+    
+    <div id="testArea">
+      <div class="question-number" id="questionNumber">Questão 1 de 20</div>
+      <div class="question-text" id="questionText">Carregando pergunta...</div>
+      
+      <div class="options-grid" id="optionsContainer">
+        <!-- Opções carregadas via JS -->
+      </div>
+      
+      <div class="nav-buttons">
+        <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
+          ← Anterior
+        </button>
+        <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()">
+          Próxima →
+        </button>
+      </div>
+    </div>
+    
+    <!-- Área de Resultados -->
+    <div class="results-container" id="resultsContainer">
+      
+      <div class="results-header">
+        <h2>🧠 Resultado do Teste IE</h2>
+        <p class="subtitle">Análise de Inteligência Emocional</p>
+        <div class="profile-badge" id="profileBadge">
+          <span id="profileEmoji">🧠</span>
+          <span id="profileText">Nível: --</span>
+        </div>
+      </div>
+      
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="label">Participante</div>
+          <div class="value" id="resultParticipant">--</div>
+        </div>
+        <div class="result-card">
+          <div class="label">Empresa</div>
+          <div class="value" id="resultCompany">--</div>
+        </div>
+        <div class="result-card">
+          <div class="label">Data da Avaliação</div>
+          <div class="value" id="resultDate">--</div>
+        </div>
+        <div class="result-card">
+          <div class="label">Status</div>
+          <div class="value" style="color: #10B981;">✅ Concluído</div>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3>📈 Competências Emocionais</h3>
+        <div class="chart-container">
+          <canvas id="ieChart"></canvas>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3>💡 Resumo do Perfil</h3>
+        <p id="profileSummary" style="color: rgba(255, 255, 255, 0.8); line-height: 1.7; font-size: 0.9375rem;">
+          Carregando resumo...
+        </p>
+      </div>
+      
+      <div class="result-actions">
+        <button class="btn-result btn-result-primary" onclick="window.print()">
+          🖨️ Imprimir Resultado
+        </button>
+        <button class="btn-result btn-result-success" onclick="goToDashboard()">
+          📊 Voltar ao Dashboard
+        </button>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <!-- ==========================================
+       RODAPÉ - IE (ROXO)
+       ========================================== -->
+  <footer class="footer-premium">
+    <div class="footer-grid">
+      <div class="footer-logo">
+        <div class="logo-icon-small">V</div>
+        <div class="footer-logo-text">
+          <span class="footer-system">VIGORRE ONE<span class="tm">™</span></span>
+          <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
+        </div>
+      </div>
+      
+      <div class="footer-center">
+        <div class="footer-contact">
+          <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
+            <span class="icon">📧</span> contato@vigorre.com.br
+          </a>
+          <a href="tel:+5534991850735" class="footer-contact-item">
+            <span class="icon">📱</span> (34) 99185-0735
+          </a>
+          <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
+            <span class="icon">🌐</span> www.vigorre.com.br
+          </a>
+          <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
+            <span class="icon">📷</span> @vigorre.oficial
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-right">
+        <div class="page-number">
+          Página <span id="pageNumber">1</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-divider"></div>
+    
+    <div class="footer-bottom">
+      <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
+      <span>v1.0</span>
+    </div>
+  </footer>
+  
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../../supabase-config.js"></script>
+<script src="../../auth.js"></script>
+<script src="../../middleware/auth-guard.js"></script>
+
+<script>
+'use strict';
+
+// ============================================
+// DADOS DO TESTE IE (20 PERGUNTAS)
+// ============================================
+const questions = [
+  { id: 1, text: 'Quando estou sob pressão, consigo manter a calma e pensar com clareza.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 2, text: 'Reconheço minhas emoções e sei como elas afetam meu comportamento.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 3, text: 'Tenho facilidade em entender os sentimentos das outras pessoas.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 4, text: 'Consigo me motivar mesmo quando enfrento dificuldades.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 5, text: 'Tenho controle sobre meus impulsos e reações emocionais.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 6, text: 'Sei pedir ajuda quando preciso.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 7, text: 'Consigo me colocar no lugar do outro com facilidade.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 8, text: 'Mantenho o otimismo mesmo em situações difíceis.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 9, text: 'Reconheço quando estou estressado e sei como lidar com isso.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 10, text: 'Tenho facilidade em expressar meus sentimentos de forma adequada.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 11, text: 'Consigo resolver conflitos de forma construtiva.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 12, text: 'Sou flexível e me adapto bem a mudanças.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 13, text: 'Tenho consciência do impacto que minhas palavras causam nos outros.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 14, text: 'Mantenho relacionamentos saudáveis e duradouros.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 15, text: 'Consigo transformar emoções negativas em aprendizado.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 16, text: 'Sou paciente com as pessoas e com os processos.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 17, text: 'Reconheço meus limites e sei quando preciso descansar.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 18, text: 'Tenho facilidade em trabalhar em equipe.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 19, text: 'Consigo lidar com críticas de forma construtiva.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 20, text: 'Tenho clareza sobre meus valores e propósito de vida.', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] }
+];
+
+// ============================================
+// ESTADO
+// ============================================
+let currentQuestion = 0;
+let answers = new Array(questions.length).fill(null);
+let currentUser = null;
+let participantData = null;
+let companyData = null;
+let chartInstance = null;
+let isCompleted = false;
+
+// ============================================
+// INICIALIZAÇÃO
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🧠 Teste IE - VIGORRE ONE™');
+  
+  const isAuth = window.VigorreAuth.isAuthenticated();
+  if (!isAuth) { window.location.href = '../../login.html'; return; }
+  
+  currentUser = window.VigorreAuth.getCurrentUser();
+  if (!currentUser || currentUser.role !== 'participant') {
+    alert('⚠️ Acesso restrito a participantes.');
+    window.VigorreAuth.logout();
+    return;
+  }
+  
+  loadParticipantData();
+});
+
+function loadParticipantData() {
+  try {
+    const allParticipants = VigorreDB.participants.findAll();
+    participantData = allParticipants.find(p => p.id === currentUser.id);
+    
+    if (!participantData) {
+      participantData = { 
+        id: currentUser.id, 
+        name: currentUser.name || 'Participante', 
+        companyId: currentUser.companyId || null 
+      };
+    }
+    
+    if (participantData.companyId) {
+      companyData = VigorreDB.companies.findById(participantData.companyId);
+    }
+    
+    const companyName = companyData?.name || 'Autônomo';
+    document.getElementById('participantName').textContent = participantData.name || 'Participante';
+    document.getElementById('participantCompany').textContent = `Empresa: ${companyName}`;
+    document.getElementById('participantId').textContent = `ID: ${participantData.id || '--'}`;
+    
+    renderQuestion();
+    
+  } catch (error) {
+    console.error('❌ Erro:', error);
+    showToast('Erro ao carregar dados', 'error');
+  }
+}
+
+function renderQuestion() {
+  const q = questions[currentQuestion];
+  const total = questions.length;
+  const progress = ((currentQuestion + 1) / total) * 100;
+  
+  document.getElementById('questionNumber').textContent = `Questão ${currentQuestion + 1} de ${total}`;
+  document.getElementById('progressText').textContent = `Questão ${currentQuestion + 1} de ${total}`;
+  document.getElementById('progressFill').style.width = `${progress}%`;
+  document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+  document.getElementById('questionText').textContent = q.text;
+  
+  const container = document.getElementById('optionsContainer');
+  const letters = ['A', 'B', 'C', 'D'];
+  
+  container.innerHTML = q.options.map((opt, idx) => {
+    const isSelected = answers[currentQuestion] === idx;
+    return `
+      <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectOption(${idx})">
+        <span class="letter">${letters[idx]}</span>
+        ${opt}
+      </button>
+    `;
+  }).join('');
+  
+  document.getElementById('btnPrev').disabled = currentQuestion === 0;
+  
+  const nextBtn = document.getElementById('btnNext');
+  if (currentQuestion === total - 1) {
+    nextBtn.textContent = '📊 Finalizar Teste';
+    nextBtn.className = 'btn-nav btn-finish';
+    nextBtn.onclick = finishTest;
+  } else {
+    nextBtn.textContent = 'Próxima →';
+    nextBtn.className = 'btn-nav btn-next';
+    nextBtn.onclick = nextQuestion;
+  }
+}
+
+function selectOption(index) {
+  answers[currentQuestion] = index;
+  renderQuestion();
+}
+
+function nextQuestion() {
+  if (answers[currentQuestion] === null) {
+    showToast('⚠️ Selecione uma opção antes de continuar.', 'error');
+    return;
+  }
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    renderQuestion();
+  }
+}
+
+function prevQuestion() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
+  }
+}
+
+function finishTest() {
+  if (answers[currentQuestion] === null) {
+    showToast('⚠️ Selecione uma opção para a última questão.', 'error');
+    return;
+  }
+  
+  const total = answers.filter(a => a !== null).length;
+  const remaining = questions.length - total;
+  
+  if (remaining > 0) {
+    if (!confirm(`Você respondeu ${total} de ${questions.length} questões. ${remaining} não respondidas. Finalizar mesmo assim?`)) {
+      return;
+    }
+  }
+  
+  if (!confirm('Finalizar teste IE? Suas respostas serão salvas.')) {
+    return;
+  }
+  
+  document.getElementById('loadingOverlay').classList.add('active');
+  
+  setTimeout(() => {
+    const result = calculateResult();
+    saveResult(result);
+    showResults(result);
+  }, 1500);
+}
+
+function calculateResult() {
+  // Mapeamento para 5 competências da IE
+  const competencies = {
+    autoconhecimento: 0,
+    autorregulacao: 0,
+    motivacao: 0,
+    empatia: 0,
+    habilidades_sociais: 0
+  };
+  
+  // Distribui as 20 perguntas entre as 5 competências
+  answers.forEach((ans, idx) => {
+    if (ans !== null) {
+      const comps = ['autoconhecimento', 'autorregulacao', 'motivacao', 'empatia', 'habilidades_sociais'];
+      const comp = comps[idx % comps.length];
+      competencies[comp] += (4 - ans);
+    }
+  });
+  
+  const maxScore = Object.values(competencies).reduce((a, b) => a + b, 0) || 1;
+  const percentages = {};
+  for (const [key, value] of Object.entries(competencies)) {
+    percentages[key] = Math.round((value / maxScore) * 100);
+  }
+  
+  // Calcula nível geral
+  const total = Object.values(percentages).reduce((a, b) => a + b, 0) / Object.keys(percentages).length;
+  let level = 'Médio';
+  let emoji = '📊';
+  if (total >= 80) { level = 'Excelente'; emoji = '🏆'; }
+  else if (total >= 60) { level = 'Bom'; emoji = '🌟'; }
+  else if (total >= 40) { level = 'Médio'; emoji = '📊'; }
+  else { level = 'Em Desenvolvimento'; emoji = '🌱'; }
+  
+  return {
+    competencies: competencies,
+    percentages: percentages,
+    total: total,
+    level: level,
+    emoji: emoji,
+    date: new Date().toISOString()
+  };
+}
+
+function saveResult(result) {
+  try {
+    const allParticipants = VigorreDB.participants.findAll();
+    const p = allParticipants.find(p => p.id === currentUser.id);
+    
+    if (p) {
+      if (!p.completedTests) p.completedTests = [];
+      if (!p.completedTests.includes('IE')) {
+        p.completedTests.push('IE');
+      }
+      if (!p.results) p.results = {};
+      p.results.IE = result;
+      
+      const allTests = p.tests || [];
+      const allCompleted = allTests.every(t => p.completedTests.includes(t));
+      p.status = allCompleted ? 'completed' : 'in_progress';
+      
+      const idx = allParticipants.findIndex(p => p.id === currentUser.id);
+      if (idx > -1) {
+        allParticipants[idx] = p;
+        localStorage.setItem('vigorre_participants', JSON.stringify(allParticipants));
+      }
+      
+      // Salva resultado no localStorage para o relatório
+      localStorage.setItem('vigorre_last_ie_result', JSON.stringify(result));
+    }
+    
+    console.log('✅ Resultado IE salvo:', result);
+    
+  } catch (error) {
+    console.error('❌ Erro ao salvar:', error);
+  }
+}
+
+function showResults(result) {
+  document.getElementById('loadingOverlay').classList.remove('active');
+  document.getElementById('testArea').style.display = 'none';
+  document.getElementById('resultsContainer').classList.add('active');
+  
+  document.getElementById('resultParticipant').textContent = participantData.name || '--';
+  document.getElementById('resultCompany').textContent = companyData?.name || 'Autônomo';
+  document.getElementById('resultDate').textContent = new Date(result.date).toLocaleDateString('pt-BR');
+  
+  document.getElementById('profileText').textContent = `${result.emoji} ${result.level} (${Math.round(result.total)}%)`;
+  
+  // Gera resumo personalizado
+  const sorted = Object.entries(result.percentages).sort((a, b) => b[1] - a[1]);
+  const top = sorted[0];
+  const topName = {
+    autoconhecimento: 'Autoconhecimento',
+    autorregulacao: 'Autorregulação',
+    motivacao: 'Motivação',
+    empatia: 'Empatia',
+    habilidades_sociais: 'Habilidades Sociais'
+  }[top[0]] || top[0];
+  
+  document.getElementById('profileSummary').textContent = 
+    `Seu nível de Inteligência Emocional é ${result.level} (${Math.round(result.total)}%). ` +
+    `Sua maior competência é ${topName} com ${top[1]}%. ` +
+    `${result.total >= 60 ? 'Você demonstra boa capacidade de autoconhecimento e gestão emocional.' : 'Há oportunidades para desenvolver competências emocionais.'}`;
+  
+  document.getElementById('pageNumber').textContent = '1';
+  
+  setTimeout(() => {
+    renderCharts(result.percentages);
+  }, 200);
+  
+  isCompleted = true;
+}
+
+function renderCharts(percentages) {
+  try {
+    const ctx = document.getElementById('ieChart').getContext('2d');
+    if (chartInstance) chartInstance.destroy();
+    
+    const labels = ['Autoconhecimento', 'Autorregulação', 'Motivação', 'Empatia', 'Habilidades Sociais'];
+    const data = [
+      percentages.autoconhecimento || 0,
+      percentages.autorregulacao || 0,
+      percentages.motivacao || 0,
+      percentages.empatia || 0,
+      percentages.habilidades_sociais || 0
+    ];
+    
+    const colors = ['#A78BFA', '#8B5CF6', '#7C3AED', '#6D28D9', '#5B21B6'];
+    const borderColors = ['#8B5CF6', '#7C3AED', '#6D28D9', '#5B21B6', '#4C1D95'];
+    
+    chartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Percentual',
+          data: data,
+          backgroundColor: colors,
+          borderColor: borderColors,
+          borderWidth: 2,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { 
+          legend: { display: false } 
+        },
+        scales: {
+          y: { 
+            beginAtZero: true, 
+            max: 100, 
+            grid: { color: 'rgba(255,255,255,0.05)' }, 
+            ticks: { color: 'rgba(255,255,255,0.5)' } 
+          },
+          x: { 
+            grid: { display: false }, 
+            ticks: { color: 'rgba(255,255,255,0.7)' } 
+          }
+        }
+      }
+    });
+    
+    console.log('✅ Gráfico IE renderizado');
+    
+  } catch (error) {
+    console.error('❌ Erro ao renderizar gráfico:', error);
+  }
+}
+
+function goToDashboard() {
+  window.location.href = '../dashboard.html';
+}
+
+function showToast(message, type) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastIcon').textContent = type === 'error' ? '❌' : '✅';
+  document.getElementById('toastMessage').textContent = message;
+  toast.className = `toast show ${type === 'error' ? 'error' : 'success'}`;
+  setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+window.history.pushState(null, '', window.location.href);
+window.addEventListener('popstate', function(e) {
+  if (!isCompleted) {
+    if (!confirm('Você está no meio do teste. Deseja sair?')) {
+      window.history.pushState(null, '', window.location.href);
+    } else {
+      window.location.href = '../dashboard.html';
+    }
+  }
+});
+
+console.log('🧠 Teste IE carregado com sucesso!');
+</script>
+
+</body>
+</html>
