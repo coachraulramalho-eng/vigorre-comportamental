@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Painel | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/globals.css" />
+  
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%);
+      font-family: 'Inter', sans-serif;
+      padding: 24px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 20px 32px;
+      border-radius: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #06B6D4, #7C3AED);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .logo h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0A2540;
+      margin: 0;
+    }
+    
+    .logo .tm {
+      font-size: 0.5rem;
+      vertical-align: super;
+      color: #06B6D4;
+    }
+    
+    .logo span {
+      font-size: 0.7rem;
+      opacity: 0.6;
+      display: block;
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #1D4ED8, #7C3AED);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    
+    .welcome-card {
+      background: linear-gradient(135deg, #0A2540, #1D4ED8);
+      border-radius: 16px;
+      padding: 32px 40px;
+      color: white;
+      margin-bottom: 24px;
+    }
+    
+    .welcome-card h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+    
+    .welcome-card p {
+      opacity: 0.8;
+    }
+    
+    .status-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+    }
+    
+    .status-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      color: #0A2540;
+      margin-bottom: 16px;
+    }
+    
+    .tests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    
+    .test-card {
+      background: #F8FAFC;
+      border-radius: 12px;
+      padding: 20px;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .test-card:hover {
+      border-color: #1D4ED8;
+      transform: translateY(-2px);
+    }
+    
+    .test-card .icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    
+    .test-card h4 {
+      font-weight: 600;
+      color: #0A2540;
+      margin-bottom: 4px;
+    }
+    
+    .test-card p {
+      font-size: 0.875rem;
+      color: #64748B;
+      margin-bottom: 12px;
+    }
+    
+    .test-card .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .status.available {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    
+    .status.completed {
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+    
+    .status.locked {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+    
+    .btn-start {
+      margin-top: 12px;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, #1D4ED8, #7C3AED);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .btn-start:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
+    }
+    
+    .btn-start:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .laudo-area {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+      border: 2px solid #E2E8F0;
+    }
+    
+    .laudo-area h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      color: #0A2540;
+      margin-bottom: 8px;
+    }
+    
+    .laudo-area p {
+      color: #64748B;
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+    }
+    
+    .btn-laudo {
+      padding: 12px 32px;
+      background: linear-gradient(135deg, #7C3AED, #06B6D4);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-laudo:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+    }
+    
+    .btn-laudo:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .btn-sair {
+      padding: 10px 20px;
+      background: transparent;
+      color: #EF4444;
+      border: 2px solid #EF4444;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-sair:hover {
+      background: #EF4444;
+      color: white;
+    }
+    
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+      
+      .welcome-card {
+        padding: 24px;
+      }
+      
+      .tests-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">V</div>
+      <div>
+        <h1>VIGORRE ONE<span class="tm">™</span></h1>
+        <span>Meu Painel</span>
+      </div>
+    </div>
+    <div class="user-info">
+      <span id="userNameDisplay" style="font-weight: 600; color: #0A2540;">Carregando...</span>
+      <div class="user-avatar" id="userAvatar">?</div>
+      <button class="btn-sair" onclick="handleLogout()">Sair</button>
+    </div>
+  </header>
+  
+  <!-- Welcome -->
+  <div class="welcome-card">
+    <h2>Olá, <span id="welcomeName">Participante</span>! 👋</h2>
+    <p>Bem-vindo ao VIGORRE ONE™. Realize seus testes e acompanhe seu progresso.</p>
+  </div>
+  
+  <!-- Status -->
+  <div class="status-card">
+    <h3>📋 Meus Testes</h3>
+    <div class="tests-grid" id="testsGrid">
+      <!-- Testes serão carregados via JS -->
+    </div>
+  </div>
+  
+  <!-- Laudo -->
+  <div class="laudo-area">
+    <h3>📄 Meu Laudo Completo</h3>
+    <p>Quando todos os testes forem concluídos, seu laudo completo estará disponível.</p>
+    <button class="btn-laudo" id="btnLaudo" disabled onclick="viewLaudo()">
+      📄 Visualizar Laudo Completo
+    </button>
+  </div>
+  
+</div>
+
+<!-- Scripts -->
+<script src="../supabase-config.js"></script>
+<script src="../auth.js"></script>
+<script src="../middleware/auth-guard.js"></script>
+
+<script>
+'use strict';
+
+let currentUser = null;
+let participantData = null;
+
+// ============================================
+// INICIALIZAÇÃO
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('👤 Dashboard do Participante - VIGORRE ONE™');
+  
+  // Verifica autenticação
+  const isAuth = window.VigorreAuth.isAuthenticated();
+  if (!isAuth) {
+    window.location.href = '../login.html';
+    return;
+  }
+  
+  currentUser = window.VigorreAuth.getCurrentUser();
+  if (!currentUser || currentUser.role !== 'participant') {
+    alert('⚠️ Acesso restrito a participantes.');
+    window.VigorreAuth.logout();
+    return;
+  }
+  
+  // Carrega dados do participante
+  loadParticipantData();
+});
+
+// ============================================
+// CARREGAR DADOS DO PARTICIPANTE
+// ============================================
+function loadParticipantData() {
+  try {
+    // Busca dados do participante no banco
+    const allParticipants = VigorreDB.participants.findAll();
+    participantData = allParticipants.find(p => p.id === currentUser.id);
+    
+    if (!participantData) {
+      // Se não encontrar, usa dados do usuário
+      participantData = {
+        id: currentUser.id,
+        name: currentUser.name,
+        email: currentUser.email,
+        tests: currentUser.tests || ['DISC', 'IE', 'Valores'],
+        completedTests: currentUser.completedTests || [],
+        status: currentUser.status || 'pending'
+      };
+    }
+    
+    // Atualiza UI
+    document.getElementById('welcomeName').textContent = participantData.name;
+    document.getElementById('userNameDisplay').textContent = participantData.name;
+    document.getElementById('userAvatar').textContent = participantData.name.charAt(0).toUpperCase();
+    
+    renderTests();
+    updateLaudoButton();
+    
+  } catch (error) {
+    console.error('❌ Erro ao carregar dados:', error);
+  }
+}
+
+// ============================================
+// RENDERIZAR TESTES
+// ============================================
+function renderTests() {
+  const grid = document.getElementById('testsGrid');
+  const tests = participantData.tests || [];
+  const completed = participantData.completedTests || [];
+  
+  if (tests.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; padding: 32px; color: #64748B;">
+        Nenhum teste disponível no momento.
+      </div>
+    `;
+    return;
+  }
+  
+  const testConfigs = {
+    'DISC': { icon: '📊', label: 'Teste DISC', desc: 'Perfis comportamentais' },
+    'IE': { icon: '🧠', label: 'Inteligência Emocional', desc: 'Competências emocionais' },
+    'Valores': { icon: '💎', label: 'Valores Pessoais', desc: 'Teoria de Schwartz' },
+    'Lideranca': { icon: '👔', label: 'Liderança', desc: 'Perfil de liderança' },
+    'Clima': { icon: '🌤️', label: 'Clima Organizacional', desc: 'Ambiente de trabalho' },
+    'Burnout': { icon: '🔥', label: 'Burnout', desc: 'Saúde mental' }
+  };
+  
+  grid.innerHTML = tests.map(test => {
+    const config = testConfigs[test] || { icon: '📝', label: test, desc: '' };
+    const isCompleted = completed.includes(test);
+    
+    let statusHTML = '';
+    let btnHTML = '';
+    
+    if (isCompleted) {
+      statusHTML = `<span class="status completed">✅ Concluído</span>`;
+      btnHTML = `<button class="btn-start" disabled>✅ Já Realizado</button>`;
+    } else {
+      statusHTML = `<span class="status available">✅ Disponível</span>`;
+      btnHTML = `<button class="btn-start" onclick="startTest('${test}')">▶️ Iniciar Teste</button>`;
+    }
+    
+    return `
+      <div class="test-card">
+        <div class="icon">${config.icon}</div>
+        <h4>${config.label}</h4>
+        <p>${config.desc}</p>
+        ${statusHTML}
+        ${btnHTML}
+      </div>
+    `;
+  }).join('');
+}
+
+// ============================================
+// INICIAR TESTE
+// ============================================
+function startTest(testType) {
+  const url = `testes/${testType.toLowerCase()}.html`;
+  console.log(`🚀 Iniciando teste: ${testType}`);
+  window.location.href = url;
+}
+
+// ============================================
+// ATUALIZAR BOTÃO DO LAUDO
+// ============================================
+function updateLaudoButton() {
+  const btn = document.getElementById('btnLaudo');
+  const tests = participantData.tests || [];
+  const completed = participantData.completedTests || [];
+  
+  const allCompleted = tests.length > 0 && tests.every(t => completed.includes(t));
+  
+  if (allCompleted) {
+    btn.disabled = false;
+    btn.textContent = '📄 Visualizar Laudo Completo';
+    btn.style.background = 'linear-gradient(135deg, #7C3AED, #06B6D4)';
+  } else {
+    btn.disabled = true;
+    btn.textContent = '🔒 Complete todos os testes para liberar';
+    btn.style.background = '#64748B';
+  }
+}
+
+// ============================================
+// VISUALIZAR LAUDO
+// ============================================
+function viewLaudo() {
+  console.log('📄 Visualizando laudo completo');
+  window.location.href = '../participante/laudo/index.html';
+}
+
+// ============================================
+// LOGOUT
+// ============================================
+function handleLogout() {
+  if (confirm('Deseja realmente sair?')) {
+    window.VigorreAuth.logout();
+  }
+}
+
+console.log('👤 Dashboard Participante carregado');
+</script>
+
+</body>
+</html>
