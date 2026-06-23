@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VIGORRE ONE™ - Dashboard do Administrador" />
+  <title>Dashboard | VIGORRE ONE™</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="../assets/css/globals.css" />
+  
+  <style>
+    /* ============================================
+       ESTILOS ESPECÍFICOS - ADMIN DASHBOARD
+       ============================================ */
+    
+    body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+      background: #F1F5F9;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* ============================================
+       SIDEBAR
+       ============================================ */
+    .sidebar {
+      background: #0A2540;
+      color: white;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-y: auto;
+    }
+    
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+    }
+    
+    .sidebar-logo .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #06B6D4, #7C3AED);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+    }
+    
+    .sidebar-logo .logo-text h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.2;
+    }
+    
+    .sidebar-logo .logo-text .tm {
+      font-size: 0.5rem;
+      vertical-align: super;
+      color: #06B6D4;
+    }
+    
+    .sidebar-logo .logo-text span {
+      font-size: 0.65rem;
+      opacity: 0.6;
+      display: block;
+    }
+    
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+      flex: 1;
+    }
+    
+    .sidebar-menu li {
+      margin-bottom: 4px;
+    }
+    
+    .sidebar-menu a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .sidebar-menu a:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: white;
+    }
+    
+    .sidebar-menu a.active {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      border-left: 3px solid #06B6D4;
+    }
+    
+    .sidebar-menu .menu-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.3);
+      padding: 16px 14px 8px;
+    }
+    
+    .sidebar-menu a.danger {
+      color: #FCA5A5;
+      margin-top: 8px;
+    }
+    
+    .sidebar-menu a.danger:hover {
+      background: rgba(239, 68, 68, 0.15);
+      color: #FCA5A5;
+    }
+    
+    .sidebar-user {
+      padding: 16px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: auto;
+    }
+    
+    .sidebar-user .user-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    
+    .sidebar-user .user-role {
+      font-size: 0.75rem;
+      opacity: 0.5;
+    }
+    
+    /* ============================================
+       MAIN CONTENT
+       ============================================ */
+    .main-content {
+      padding: 24px 32px;
+      overflow-y: auto;
+    }
+    
+    /* Header */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      background: white;
+      padding: 20px 24px;
+      border-radius: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    
+    .page-header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      color: #0A2540;
+      margin: 0;
+    }
+    
+    .page-header p {
+      color: #64748B;
+      font-size: 0.875rem;
+      margin: 0;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .stat-card {
+      background: white;
+      padding: 20px 24px;
+      border-radius: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    
+    .stat-card .stat-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0A2540;
+      line-height: 1.2;
+    }
+    
+    .stat-card .stat-label {
+      color: #64748B;
+      font-size: 0.8125rem;
+      margin-top: 4px;
+    }
+    
+    .stat-card .stat-icon {
+      font-size: 1.5rem;
+      float: right;
+      opacity: 0.6;
+    }
+    
+    .stat-card.purple .stat-number { color: #7C3AED; }
+    .stat-card.blue .stat-number { color: #1D4ED8; }
+    .stat-card.cyan .stat-number { color: #06B6D4; }
+    .stat-card.green .stat-number { color: #10B981; }
+    .stat-card.orange .stat-number { color: #F59E0B; }
+    .stat-card.rose .stat-number { color: #EF4444; }
+    
+    /* Quick Actions */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .quick-action-btn {
+      background: white;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: #0A2540;
+    }
+    
+    .quick-action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-color: #1D4ED8;
+    }
+    
+    .quick-action-btn .icon {
+      font-size: 1.5rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+    
+    .quick-action-btn .label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+    
+    /* Table Card */
+    .table-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+    
+    .table-card .table-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .table-card .table-header h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      color: #0A2540;
+      margin: 0;
+    }
+    
+    .table-card table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .table-card th {
+      text-align: left;
+      padding: 12px 24px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: #64748B;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      background: #F8FAFC;
+    }
+    
+    .table-card td {
+      padding: 12px 24px;
+      border-top: 1px solid rgba(0, 0, 0, 0.04);
+      font-size: 0.875rem;
+      color: #0A2540;
+    }
+    
+    .table-card tr:hover td {
+      background: #F8FAFC;
+    }
+    
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    
+    .badge-status.active {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    
+    .badge-status.pending {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+    
+    .badge-status.inactive {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+    
+    /* ============================================
+       RESPONSIVO
+       ============================================ */
+    @media (max-width: 1024px) {
+      body {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        display: none;
+      }
+      
+      .main-content {
+        padding: 16px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .quick-actions {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .table-card {
+        overflow-x: auto;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       SIDEBAR
+       ============================================ -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-logo">
+      <div class="logo-icon">V</div>
+      <div class="logo-text">
+        <h2>VIGORRE ONE<span class="tm">™</span></h2>
+        <span>Administrador</span>
+      </div>
+    </a>
+    
+    <ul class="sidebar-menu">
+      <li class="menu-label">Navegação</li>
+      <li><a href="dashboard.html" class="active">📊 Dashboard</a></li>
+      
+      <li class="menu-label">Gestão</li>
+      <li><a href="empresas/index.html">🏢 Empresas</a></li>
+      <li><a href="recrutadores/index.html">👤 Recrutadores</a></li>
+      <li><a href="participantes/index.html">👥 Participantes</a></li>
+      
+      <li class="menu-label">Operações</li>
+      <li><a href="creditos/index.html">💳 Créditos</a></li>
+      <li><a href="relatorios/index.html">📄 Relatórios</a></li>
+      
+      <li class="menu-label">Sistema</li>
+      <li><a href="../login.html" class="danger">🚪 Sair</a></li>
+    </ul>
+    
+    <div class="sidebar-user">
+      <div class="user-name" id="userName">Carregando...</div>
+      <div class="user-role">Administrador Master</div>
+    </div>
+  </aside>
+
+  <!-- ============================================
+       MAIN CONTENT
+       ============================================ -->
+  <main class="main-content">
+    
+    <!-- Header -->
+    <header class="page-header">
+      <div>
+        <h1>📊 Dashboard</h1>
+        <p>Visão geral da plataforma VIGORRE ONE™</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-primary" onclick="refreshData()">
+          🔄 Atualizar
+        </button>
+      </div>
+    </header>
+    
+    <!-- Stats -->
+    <section class="stats-grid">
+      <div class="stat-card purple">
+        <span class="stat-icon">👥</span>
+        <div class="stat-number" id="totalUsers">0</div>
+        <div class="stat-label">Usuários</div>
+      </div>
+      
+      <div class="stat-card blue">
+        <span class="stat-icon">🏢</span>
+        <div class="stat-number" id="totalCompanies">0</div>
+        <div class="stat-label">Empresas</div>
+      </div>
+      
+      <div class="stat-card cyan">
+        <span class="stat-icon">📝</span>
+        <div class="stat-number" id="totalTests">0</div>
+        <div class="stat-label">Testes Aplicados</div>
+      </div>
+      
+      <div class="stat-card green">
+        <span class="stat-icon">📊</span>
+        <div class="stat-number" id="totalReports">0</div>
+        <div class="stat-label">Relatórios Gerados</div>
+      </div>
+      
+      <div class="stat-card orange">
+        <span class="stat-icon">📄</span>
+        <div class="stat-number" id="totalLaudos">0</div>
+        <div class="stat-label">Laudos Emitidos</div>
+      </div>
+      
+      <div class="stat-card rose">
+        <span class="stat-icon">💰</span>
+        <div class="stat-number" id="totalRevenue">R$ 0</div>
+        <div class="stat-label">Receita Total</div>
+      </div>
+    </section>
+    
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+      <a href="empresas/index.html" class="quick-action-btn">
+        <span class="icon">🏢</span>
+        <span class="label">Nova Empresa</span>
+      </a>
+      <a href="recrutadores/index.html" class="quick-action-btn">
+        <span class="icon">👤</span>
+        <span class="label">Novo Recrutador</span>
+      </a>
+      <a href="participantes/index.html" class="quick-action-btn">
+        <span class="icon">👥</span>
+        <span class="label">Novo Participante</span>
+      </a>
+      <a href="relatorios/index.html" class="quick-action-btn">
+        <span class="icon">📄</span>
+        <span class="label">Gerar Relatório</span>
+      </a>
+      <a href="creditos/index.html" class="quick-action-btn">
+        <span class="icon">💳</span>
+        <span class="label">Gerenciar Créditos</span>
+      </a>
+    </section>
+    
+    <!-- Recent Activity -->
+    <section class="table-card">
+      <div class="table-header">
+        <h3>📋 Atividades Recentes</h3>
+        <span style="font-size: 0.75rem; color: #64748B;">Últimos 7 dias</span>
+      </div>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Usuário</th>
+            <th>Ação</th>
+            <th>Data</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="activityTableBody">
+          <tr>
+            <td colspan="4" style="text-align: center; padding: 32px; color: #64748B;">
+              Carregando atividades...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+  </main>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  
+  <!-- Supabase Config -->
+  <script src="../supabase-config.js"></script>
+  
+  <!-- Auth System -->
+  <script src="../auth.js"></script>
+  
+  <!-- Auth Guard -->
+  <script src="../middleware/auth-guard.js"></script>
+  
+  <script>
+    'use strict';
+    
+    // ============================================
+    // INICIALIZAÇÃO
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📊 Dashboard do Administrador - VIGORRE ONE™');
+      
+      // Verifica autenticação e permissão
+      const isAuth = window.VigorreAuth.isAuthenticated();
+      if (!isAuth) {
+        window.location.href = '../login.html';
+        return;
+      }
+      
+      const user = window.VigorreAuth.getCurrentUser();
+      if (!user || (user.role !== 'admin' && user.role !== 'master')) {
+        alert('⚠️ Acesso restrito a administradores.');
+        window.VigorreAuth.logout();
+        return;
+      }
+      
+      // Atualiza nome do usuário
+      document.getElementById('userName').textContent = user.name || 'Administrador';
+      
+      // Carrega dados
+      loadDashboardData();
+      loadRecentActivities();
+    });
+    
+    // ============================================
+    // CARREGAR DADOS DO DASHBOARD
+    // ============================================
+    function loadDashboardData() {
+      try {
+        // Usa dados do VigorreDB
+        const users = VigorreDB.users.findAll();
+        const companies = VigorreDB.companies.findAll();
+        const participants = VigorreDB.participants.findAll();
+        const reports = VigorreDB.reports.findAll();
+        const logs = VigorreDB.auditLogs.findAll();
+        
+        // Atualiza os cards
+        document.getElementById('totalUsers').textContent = users.length;
+        document.getElementById('totalCompanies').textContent = companies.length;
+        document.getElementById('totalTests').textContent = participants.reduce((sum, p) => sum + (p.tests?.length || 0), 0);
+        document.getElementById('totalReports').textContent = reports.length;
+        document.getElementById('totalLaudos').textContent = reports.filter(r => r.type === 'laudo').length;
+        document.getElementById('totalRevenue').textContent = 'R$ 0'; // Em produção: calcular receita
+        
+        console.log('✅ Dados carregados:', {
+          users: users.length,
+          companies: companies.length,
+          participants: participants.length,
+          reports: reports.length,
+          logs: logs.length
+        });
+        
+      } catch (error) {
+        console.error('❌ Erro ao carregar dados:', error);
+      }
+    }
+    
+    // ============================================
+    // CARREGAR ATIVIDADES RECENTES
+    // ============================================
+    function loadRecentActivities() {
+      try {
+        const logs = VigorreDB.auditLogs.findAll();
+        const tbody = document.getElementById('activityTableBody');
+        
+        if (logs.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="4" style="text-align: center; padding: 32px; color: #64748B;">
+                Nenhuma atividade recente
+              </td>
+            </tr>
+          `;
+          return;
+        }
+        
+        // Pega os últimos 10 logs
+        const recentLogs = logs.slice(-10).reverse();
+        
+        tbody.innerHTML = recentLogs.map(log => {
+          const user = VigorreDB.users.findById(log.userId);
+          const userName = user?.name || 'Sistema';
+          
+          const status = log.status || 'completed';
+          const statusBadge = status === 'completed' 
+            ? '<span class="badge-status active">✅ Concluído</span>'
+            : '<span class="badge-status pending">⏳ Pendente</span>';
+          
+          return `
+            <tr>
+              <td><strong>${userName}</strong></td>
+              <td>${log.action || 'Ação não especificada'}</td>
+              <td>${VigorreDB.formatDate(log.timestamp || new Date())}</td>
+              <td>${statusBadge}</td>
+            </tr>
+          `;
+        }).join('');
+        
+      } catch (error) {
+        console.error('❌ Erro ao carregar atividades:', error);
+      }
+    }
+    
+    // ============================================
+    // ATUALIZAR DADOS
+    // ============================================
+    function refreshData() {
+      console.log('🔄 Atualizando dados...');
+      loadDashboardData();
+      loadRecentActivities();
+      
+      // Feedback visual
+      const btn = event?.target;
+      if (btn) {
+        btn.textContent = '✅ Atualizado!';
+        setTimeout(() => { btn.textContent = '🔄 Atualizar'; }, 2000);
+      }
+    }
+    
+    // ============================================
+    // LOG
+    // ============================================
+    console.log('📊 Dashboard Admin carregado');
+  </script>
+  
+</body>
+</html>
