@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teste DISC | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../assets/css/globals.css" />
+  
+  <style>
+    body {
+      min-height: 100vh;
+      background: #F1F5F9;
+      font-family: 'Inter', sans-serif;
+      padding: 24px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      background: white;
+      padding: 20px 32px;
+      border-radius: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      color: #0A2540;
+      margin: 0;
+    }
+    
+    .progress {
+      font-weight: 600;
+      color: #1D4ED8;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+    }
+    
+    .question-number {
+      font-size: 0.875rem;
+      color: #64748B;
+      margin-bottom: 8px;
+    }
+    
+    .question-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0A2540;
+      margin-bottom: 24px;
+    }
+    
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+    
+    .option-btn {
+      padding: 16px 20px;
+      background: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: #0A2540;
+    }
+    
+    .option-btn:hover {
+      border-color: #1D4ED8;
+      background: #EFF6FF;
+    }
+    
+    .option-btn.selected {
+      border-color: #1D4ED8;
+      background: #DBEAFE;
+    }
+    
+    .option-btn .letter {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      background: #E2E8F0;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      margin-right: 12px;
+    }
+    
+    .option-btn.selected .letter {
+      background: #1D4ED8;
+      color: white;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    
+    .btn-nav {
+      padding: 12px 32px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-prev {
+      background: #E2E8F0;
+      color: #64748B;
+    }
+    
+    .btn-prev:hover:not(:disabled) {
+      background: #CBD5E1;
+    }
+    
+    .btn-next {
+      background: linear-gradient(135deg, #1D4ED8, #7C3AED);
+      color: white;
+    }
+    
+    .btn-next:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
+    }
+    
+    .btn-nav:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    
+    .btn-finish {
+      background: linear-gradient(135deg, #10B981, #06B6D4);
+      color: white;
+      padding: 12px 40px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-finish:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+    }
+    
+    .back-link {
+      color: #64748B;
+      text-decoration: none;
+      font-size: 0.875rem;
+      display: inline-block;
+      margin-top: 8px;
+    }
+    
+    .back-link:hover {
+      color: #0A2540;
+    }
+    
+    .timer {
+      font-size: 0.875rem;
+      color: #64748B;
+      text-align: center;
+      margin-top: 16px;
+    }
+    
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+      
+      .question-text {
+        font-size: 1.1rem;
+      }
+      
+      .nav-buttons {
+        flex-wrap: wrap;
+      }
+      
+      .nav-buttons button {
+        flex: 1;
+        min-width: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Header -->
+  <header class="header">
+    <h1>📊 Teste DISC</h1>
+    <div class="progress" id="progressDisplay">Questão 1 de 24</div>
+  </header>
+  
+  <!-- Question Card -->
+  <div class="card" id="questionCard">
+    <div class="question-number" id="questionNumber">Questão 1 de 24</div>
+    <div class="question-text" id="questionText">Carregando questão...</div>
+    
+    <div class="options" id="optionsContainer">
+      <!-- Opções serão carregadas via JS -->
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
+        ← Anterior
+      </button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()">
+        Próxima →
+      </button>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div style="text-align: center;">
+    <a href="../dashboard.html" class="back-link">← Voltar ao dashboard</a>
+    <div class="timer" id="timerDisplay">⏱️ Tempo: 00:00</div>
+  </div>
+  
+</div>
+
+<script src="../../supabase-config.js"></script>
+<script src="../../auth.js"></script>
+<script src="../../middleware/auth-guard.js"></script>
+
+<script>
+'use strict';
+
+// ============================================
+// DADOS DO TESTE DISC
+// ============================================
+const questions = [
+  { id: 1, text: 'Em uma equipe, você geralmente assume a liderança naturalmente?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 2, text: 'Você prefere trabalhar em tarefas que exigem detalhamento e precisão?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 3, text: 'Você se considera uma pessoa paciente e calma sob pressão?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 4, text: 'Você gosta de influenciar e persuadir outras pessoas?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 5, text: 'Você prefere seguir regras e procedimentos estabelecidos?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 6, text: 'Você se sente motivado por desafios e metas ousadas?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 7, text: 'Você valoriza a harmonia e evita conflitos?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 8, text: 'Você se adapta facilmente a mudanças inesperadas?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 9, text: 'Você prefere trabalhar de forma independente?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 10, text: 'Você gosta de ensinar e orientar outras pessoas?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 11, text: 'Você se considera uma pessoa organizada e metódica?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 12, text: 'Você toma decisões rapidamente?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 13, text: 'Você evita correr riscos desnecessários?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 14, text: 'Você gosta de ser o centro das atenções?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 15, text: 'Você é persistente em alcançar seus objetivos?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 16, text: 'Você se preocupa com os sentimentos dos outros?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 17, text: 'Você prefere ambientes estáveis e previsíveis?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 18, text: 'Você é criativo e gosta de inovar?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 19, text: 'Você se sente confortável em situações de pressão?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 20, text: 'Você prefere delegar tarefas a fazer tudo sozinho?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 21, text: 'Você é detalhista e atento a pequenos erros?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 22, text: 'Você é otimista e contagia os outros com sua energia?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 23, text: 'Você prefere ouvir a falar em reuniões?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
+  { id: 24, text: 'Você gosta de encerrar tarefas antes de começar outras?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] }
+];
+
+// ============================================
+// ESTADO DO TESTE
+// ============================================
+let currentQuestion = 0;
+let answers = new Array(questions.length).fill(null);
+let timerSeconds = 0;
+let timerInterval = null;
+
+// ============================================
+// INICIALIZAÇÃO
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('📊 Teste DISC - VIGORRE ONE™');
+  
+  // Verifica autenticação
+  const isAuth = window.VigorreAuth.isAuthenticated();
+  if (!isAuth) {
+    window.location.href = '../../login.html';
+    return;
+  }
+  
+  const user = window.VigorreAuth.getCurrentUser();
+  if (user.role !== 'participant') {
+    alert('⚠️ Acesso restrito a participantes.');
+    window.VigorreAuth.logout();
+    return;
+  }
+  
+  renderQuestion();
+  startTimer();
+});
+
+// ============================================
+// RENDERIZAR QUESTÃO
+// ============================================
+function renderQuestion() {
+  const q = questions[currentQuestion];
+  const total = questions.length;
+  
+  document.getElementById('questionNumber').textContent = `Questão ${currentQuestion + 1} de ${total}`;
+  document.getElementById('progressDisplay').textContent = `Questão ${currentQuestion + 1} de ${total}`;
+  document.getElementById('questionText').textContent = q.text;
+  
+  const container = document.getElementById('optionsContainer');
+  const letters = ['A', 'B', 'C', 'D'];
+  
+  container.innerHTML = q.options.map((opt, idx) => {
+    const isSelected = answers[currentQuestion] === idx;
+    return `
+      <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectOption(${idx})">
+        <span class="letter">${letters[idx]}</span>
+        ${opt}
+      </button>
+    `;
+  }).join('');
+  
+  // Atualiza botões
+  document.getElementById('btnPrev').disabled = currentQuestion === 0;
+  document.getElementById('btnNext').textContent = currentQuestion === total - 1 ? '📊 Finalizar' : 'Próxima →';
+  document.getElementById('btnNext').onclick = currentQuestion === total - 1 ? finishTest : nextQuestion;
+}
+
+// ============================================
+// SELECIONAR OPÇÃO
+// ============================================
+function selectOption(index) {
+  answers[currentQuestion] = index;
+  renderQuestion();
+}
+
+// ============================================
+// NAVEGAÇÃO
+// ============================================
+function nextQuestion() {
+  if (answers[currentQuestion] === null) {
+    alert('⚠️ Por favor, selecione uma opção antes de continuar.');
+    return;
+  }
+  
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    renderQuestion();
+  }
+}
+
+function prevQuestion() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
+  }
+}
+
+// ============================================
+// FINALIZAR TESTE
+// ============================================
+function finishTest() {
+  // Verifica se todas foram respondidas
+  const unanswered = answers.some(a => a === null);
+  if (unanswered) {
+    const total = answers.filter(a => a !== null).length;
+    const remaining = questions.length - total;
+    if (!confirm(`Você respondeu ${total} de ${questions.length} questões. ${remaining} questões não foram respondidas. Deseja finalizar mesmo assim?`)) {
+      return;
+    }
+  }
+  
+  if (!confirm('Deseja finalizar o teste DISC? Suas respostas serão salvas.')) {
+    return;
+  }
+  
+  // Para o timer
+  stopTimer();
+  
+  // Calcula resultado
+  const result = calculateResult();
+  
+  // Salva resultado
+  saveResult(result);
+  
+  // Redireciona
+  alert('✅ Teste DISC concluído com sucesso!');
+  window.location.href = '../dashboard.html';
+}
+
+// ============================================
+// CALCULAR RESULTADO
+// ============================================
+function calculateResult() {
+  // Mapeamento simples para demonstração
+  // Em produção, usar algoritmo real do DISC
+  const scores = { D: 0, I: 0, S: 0, C: 0 };
+  
+  answers.forEach((ans, idx) => {
+    if (ans !== null) {
+      // Simulação: cada questão contribui para um perfil
+      const profile = ['D', 'I', 'S', 'C'][idx % 4];
+      scores[profile] += (4 - ans);
+    }
+  });
+  
+  // Encontra o perfil dominante
+  let maxProfile = 'D';
+  let maxScore = 0;
+  for (const [key, value] of Object.entries(scores)) {
+    if (value > maxScore) {
+      maxScore = value;
+      maxProfile = key;
+    }
+  }
+  
+  return {
+    scores: scores,
+    profile: maxProfile,
+    date: new Date().toISOString()
+  };
+}
+
+// ============================================
+// SALVAR RESULTADO
+// ============================================
+function saveResult(result) {
+  try {
+    const user = window.VigorreAuth.getCurrentUser();
+    
+    // Atualiza dados do participante
+    const allParticipants = VigorreDB.participants.findAll();
+    const p = allParticipants.find(p => p.id === user.id);
+    
+    if (p) {
+      if (!p.completedTests) p.completedTests = [];
+      if (!p.completedTests.includes('DISC')) {
+        p.completedTests.push('DISC');
+      }
+      
+      if (!p.results) p.results = {};
+      p.results.DISC = result;
+      
+      // Verifica se todos os testes foram concluídos
+      const allTests = p.tests || [];
+      const allCompleted = allTests.every(t => p.completedTests.includes(t));
+      p.status = allCompleted ? 'completed' : 'in_progress';
+      
+      // Salva no banco
+      const idx = allParticipants.findIndex(p => p.id === user.id);
+      if (idx > -1) {
+        allParticipants[idx] = p;
+        localStorage.setItem('vigorre_participants', JSON.stringify(allParticipants));
+      }
+      
+      // Registra no audit log
+      VigorreDB.auditLogs.add('Teste DISC concluído', user.id, { profile: result.profile });
+    }
+    
+    // Cria relatório
+    const company = VigorreDB.companies.findById(p?.companyId);
+    VigorreDB.reports.add({
+      id: VigorreDB.generateId(),
+      participantId: user.id,
+      participantName: user.name,
+      companyName: company?.name || '-',
+      testType: 'DISC',
+      date: new Date().toISOString(),
+      status: 'completed',
+      summary: `Perfil ${result.profile} predominante.`,
+      results: result
+    });
+    
+    console.log('✅ Resultado DISC salvo:', result);
+    
+  } catch (error) {
+    console.error('❌ Erro ao salvar resultado:', error);
+  }
+}
+
+// ============================================
+// TIMER
+// ============================================
+function startTimer() {
+  timerInterval = setInterval(() => {
+    timerSeconds++;
+    const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+    const secs = String(timerSeconds % 60).padStart(2, '0');
+    document.getElementById('timerDisplay').textContent = `⏱️ Tempo: ${mins}:${secs}`;
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+}
+
+// ============================================
+// BLOQUEAR NAVEGAÇÃO DO NAVEGADOR
+// ============================================
+window.history.pushState(null, '', window.location.href);
+window.addEventListener('popstate', function(e) {
+  if (!confirm('Você está no meio do teste. Deseja sair? Suas respostas serão perdidas.')) {
+    window.history.pushState(null, '', window.location.href);
+  } else {
+    stopTimer();
+    window.location.href = '../dashboard.html';
+  }
+});
+
+console.log('📊 Teste DISC carregado');
+</script>
+
+</body>
+</html>
