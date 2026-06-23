@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laudo Vigorre One™ | People Analytics Enterprise</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: {
+              navy: '#0A2540',
+              blue: '#1D4ED8',
+              purple: '#7C3AED',
+              cyan: '#06B6D4',
+              emerald: '#10B981',
+              amber: '#F59E0B',
+              rose: '#F43F5E',
+              slate: '#64748B'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0F172A; color: #F8FAFC; }
+    
+    .glass { background: rgba(30,41,59,0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+    .glass-card { background: rgba(30,41,59,0.85); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.06); border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .gradient-text { background: linear-gradient(135deg, #60A5FA, #A78BFA, #22D3EE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .badge-pill { padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    .score-ring { width: 140px; height: 140px; border-radius: 50%; background: conic-gradient(from 0deg, #1D4ED8, #7C3AED, #06B6D4, #10B981); display: flex; align-items: center; justify-content: center; position: relative; }
+    .score-ring::before { content: ''; position: absolute; width: 110px; height: 110px; border-radius: 50%; background: #0F172A; }
+    .score-value { position: relative; z-index: 1; font-size: 2.2rem; font-weight: 800; }
+    .chart-container { position: relative; height: 300px !important; width: 100%; }
+    
+    .print-header, .print-footer, .print-watermark, .print-signature-block { display: none; }
+    
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: white !important; color: #111 !important; font-size: 10.5pt; }
+      .glass, .glass-card { background: white !important; border: 1px solid #ddd !important; box-shadow: none !important; backdrop-filter: none !important; }
+      .gradient-text { -webkit-text-fill-color: #1D4ED8 !important; color: #1D4ED8 !important; background: none !important; }
+      .no-print { display: none !important; }
+      .print-header { display: block !important; position: fixed; top: 0; left: 0; right: 0; height: 28mm; background: #0A2540 !important; color: white !important; padding: 8mm 16mm; z-index: 1000; border-bottom: 2px solid #06B6D4 !important; }
+      .print-footer { display: block !important; position: fixed; bottom: 0; left: 0; right: 0; height: 20mm; background: #0A2540 !important; color: white !important; padding: 3mm 16mm; z-index: 1000; border-top: 2px solid #06B6D4 !important; }
+      .print-watermark { display: block !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 120pt; font-weight: 800; color: rgba(29,78,216,0.04); pointer-events: none; z-index: -1; white-space: nowrap; }
+      .print-signature-block { display: block !important; margin-top: 2rem !important; padding-top: 1.5rem !important; border-top: 2px solid #1D4ED8 !important; text-align: center; page-break-inside: avoid; }
+      .chart-container { height: 280px !important; page-break-inside: avoid; }
+      canvas { max-width: 100% !important; height: auto !important; }
+      .score-ring { animation: none !important; box-shadow: none !important; }
+      .score-ring::before { background: white !important; }
+      .badge-pill { border: 1px solid #ccc !important; color: #333 !important; background: #f9f9f9 !important; }
+      @page { size: A4; margin-top: 32mm; margin-bottom: 24mm; margin-left: 16mm; margin-right: 16mm; }
+      h2, h3 { page-break-after: avoid; }
+      p, ul, ol { orphans: 3; widows: 3; }
+      .print-page-number::after { content: "Página " counter(page) " de " counter(pages); color: #666 !important; font-weight: 500; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DE IMPRESSÃO -->
+  <div class="print-header">
+    <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,#06B6D4,#7C3AED);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20pt;color:white;">V</div>
+        <div>
+          <h1 style="font-size:14pt;font-weight:700;color:white;margin:0;">Vigorre One™</h1>
+          <p style="font-size:8pt;color:rgba(255,255,255,0.8);margin:0;">Laudo Comportamental Enterprise</p>
+        </div>
+      </div>
+      <div style="text-align:right;font-size:8pt;color:rgba(255,255,255,0.8);">
+        <p><strong style="color:white;">Participante:</strong> <span id="printName">--</span></p>
+        <p><strong style="color:white;">Empresa:</strong> <span id="printCompany">--</span></p>
+        <p><strong style="color:white;">Data:</strong> <span id="printDate">--</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARCA D'ÁGUA -->
+  <div class="print-watermark">VIGORRE ONE</div>
+
+  <!-- HEADER DA TELA -->
+  <header class="glass border-b border-white/10 sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-cyan to-brand-purple flex items-center justify-center font-bold text-white text-lg shadow-lg">V</div>
+        <div>
+          <h1 class="font-bold text-lg tracking-tight">Vigorre One™</h1>
+          <p class="text-xs text-gray-400">Laudo Comportamental Enterprise</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="badge-pill bg-brand-purple/20 text-brand-purple border border-brand-purple/30">✨ Premium</span>
+        <button onclick="window.print()" class="bg-white/10 px-4 py-2 rounded-lg text-sm font-medium hover:bg-white/20 transition-all">🖨️ Imprimir</button>
+        <button onclick="window.print()" class="bg-gradient-to-r from-brand-blue to-brand-purple px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-brand-purple/30 transition-all">📄 PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-6xl mx-auto px-4 py-8 space-y-8" id="laudoContent" style="display:none;">
+
+    <!-- CAPA -->
+    <section class="glass-card p-12 text-center">
+      <div class="flex justify-between items-start mb-8">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-cyan to-brand-purple flex items-center justify-center shadow-2xl">
+          <span class="text-3xl font-bold text-white">V</span>
+        </div>
+        <div class="w-20 h-20 bg-gradient-to-br from-brand-blue to-brand-purple rounded-xl flex items-center justify-center text-white font-bold text-sm opacity-70">QR</div>
+      </div>
+      <h1 class="text-4xl font-extrabold mb-4 tracking-tight">LAUDO COMPORTAMENTAL</h1>
+      <p class="text-xl text-gray-400 mb-8">Análise Integrada de Perfil • People Analytics Enterprise</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+        <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Participante</p><p class="font-semibold text-lg" id="coverName">--</p></div>
+        <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Empresa</p><p class="font-semibold" id="coverCompany">--</p></div>
+        <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Vaga</p><p class="font-semibold" id="coverJob">--</p></div>
+        <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Data</p><p class="font-semibold" id="coverDate">--</p></div>
+      </div>
+      <div class="flex flex-wrap justify-center gap-2 mb-6">
+        <span class="badge-pill bg-brand-rose/20 text-brand-rose border border-brand-rose/30" id="badgeDisc">📊 DISC</span>
+        <span class="badge-pill bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30" id="badgeIE">🧠 IE</span>
+        <span class="badge-pill bg-brand-amber/20 text-brand-amber border border-brand-amber/30" id="badgeValores">💎 Valores</span>
+      </div>
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10">
+        <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span>
+        <span class="text-sm text-gray-300">Laudo gerado automaticamente • Vigorre One™</span>
+      </div>
+    </section>
+
+    <!-- 1. RESUMO EXECUTIVO -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">📊</span> 1. Resumo Executivo</h2>
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="glass p-5 rounded-xl text-center">
+          <div class="score-ring mx-auto mb-3"><span class="score-value gradient-text" id="execScore">--</span></div>
+          <p class="text-sm text-gray-400">Índice de Maturidade</p>
+        </div>
+        <div class="glass p-5 rounded-xl col-span-2">
+          <h3 class="font-semibold mb-3 text-brand-emerald">Perfil Integrado</h3>
+          <p class="text-lg font-bold mb-2" id="execProfileName">--</p>
+          <p class="text-sm text-gray-400 leading-relaxed" id="execProfileDesc">--</p>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-cyan">Nível Emocional</h4><p class="text-sm text-gray-300" id="execEmotional">--</p></div>
+        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-purple">Motivadores</h4><p class="text-sm text-gray-300" id="execMotivators">--</p></div>
+        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-amber">Aderência Cultural</h4><p class="text-sm text-gray-300" id="execCulture">--</p></div>
+        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-rose">Fit com Vaga</h4><p class="text-sm text-gray-300" id="execFit">--</p></div>
+      </div>
+    </section>
+
+    <!-- 2. PERFIL COMPORTAMENTAL DISC -->
+    <section id="sectionDisc" class="glass-card p-8 hidden">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-rose/20 flex items-center justify-center text-brand-rose">📈</span> 2. Perfil Comportamental DISC</h2>
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div><h3 class="font-semibold mb-3 text-center">Radar Comportamental</h3><div class="chart-container"><canvas id="discRadarChart"></canvas></div></div>
+        <div><h3 class="font-semibold mb-3 text-center">Intensidade por Fator</h3><div class="chart-container"><canvas id="discBarChart"></canvas></div></div>
+      </div>
+      <div class="glass p-5 rounded-xl mb-6"><h3 class="font-semibold mb-3">Análise Comportamental</h3><div id="discAnalysis"></div></div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-cyan">Comunicação</h4><p class="text-sm text-gray-300" id="discComm">--</p></div>
+        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-purple">Decisão</h4><p class="text-sm text-gray-300" id="discDecision">--</p></div>
+      </div>
+    </section>
+
+    <!-- 3. INTELIGÊNCIA EMOCIONAL -->
+    <section id="sectionIE" class="glass-card p-8 hidden">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">🧠</span> 3. Inteligência Emocional</h2>
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div><h3 class="font-semibold mb-3 text-center">Radar Emocional</h3><div class="chart-container"><canvas id="ieRadarChart"></canvas></div></div>
+        <div><h3 class="font-semibold mb-3 text-center">Score por Dimensão</h3><div class="chart-container"><canvas id="ieBarChart"></canvas></div></div>
+      </div>
+      <div class="glass p-5 rounded-xl mb-6"><h3 class="font-semibold mb-3">Maturidade Emocional</h3><div id="ieAnalysis"></div></div>
+    </section>
+
+    <!-- 4. VALORES PESSOAIS -->
+    <section id="sectionValores" class="glass-card p-8 hidden">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-amber/20 flex items-center justify-center text-brand-amber">💎</span> 4. Valores Pessoais</h2>
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div><h3 class="font-semibold mb-3 text-center">Radar Motivacional</h3><div class="chart-container"><canvas id="valuesRadarChart"></canvas></div></div>
+        <div><h3 class="font-semibold mb-3 text-center">Ranking de Valores</h3><div class="chart-container"><canvas id="valuesBarChart"></canvas></div></div>
+      </div>
+      <div class="glass p-5 rounded-xl mb-6"><h3 class="font-semibold mb-3">Perfil Motivacional</h3><div id="valuesAnalysis"></div></div>
+    </section>
+
+    <!-- 5. VISÃO GERAL DO PERFIL -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple">👤</span> 5. Visão Geral do Perfil</h2>
+      <div id="profileOverview"></div>
+    </section>
+
+    <!-- 6. PERFIL PROFISSIONAL -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-emerald/20 flex items-center justify-center text-brand-emerald">💼</span> 6. Perfil Profissional</h2>
+      <div id="professionalProfile"></div>
+    </section>
+
+    <!-- 7. TRABALHO EM EQUIPE -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">🤝</span> 7. Trabalho em Equipe</h2>
+      <div id="teamwork"></div>
+    </section>
+
+    <!-- 8. LIDERANÇA -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-amber/20 flex items-center justify-center text-brand-amber">👑</span> 8. Potencial de Liderança</h2>
+      <div id="leadership"></div>
+    </section>
+
+    <!-- 9. COMPORTAMENTO SOB PRESSÃO -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-rose/20 flex items-center justify-center text-brand-rose">⚡</span> 9. Comportamento Sob Pressão</h2>
+      <div id="pressureBehavior"></div>
+    </section>
+
+    <!-- 10. TOMADA DE DECISÃO -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple">🎯</span> 10. Tomada de Decisão</h2>
+      <div id="decisionMaking"></div>
+    </section>
+
+    <!-- 11. COMUNICAÇÃO -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">💬</span> 11. Estilo de Comunicação</h2>
+      <div id="communication"></div>
+    </section>
+
+    <!-- 12. PRODUTIVIDADE -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-emerald/20 flex items-center justify-center text-brand-emerald">🚀</span> 12. Produtividade e Performance</h2>
+      <div id="productivity"></div>
+    </section>
+
+    <!-- 13. AMBIENTE IDEAL -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">🏢</span> 13. Ambiente e Cultura Ideal</h2>
+      <div id="idealEnvironment"></div>
+    </section>
+
+    <!-- 14. FIT COM VAGA -->
+    <section class="glass-card p-8 gradient-border">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-amber/20 flex items-center justify-center text-brand-amber">🎯</span> 14. Fit Vigorre™ com Vaga</h2>
+      <div id="jobFit"></div>
+    </section>
+
+    <!-- 15. TREINAMENTOS -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">🎓</span> 15. Treinamentos Recomendados</h2>
+      <div id="trainings"></div>
+    </section>
+
+    <!-- 16. PDI -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple">📈</span> 16. PDI Vigorre™</h2>
+      <div id="pdi"></div>
+    </section>
+
+    <!-- 17. PONTOS FORTES -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-emerald/20 flex items-center justify-center text-brand-emerald">✅</span> 17. Pontos Fortes</h2>
+      <div id="strengths"></div>
+    </section>
+
+    <!-- 18. PONTOS DE DESENVOLVIMENTO -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-amber/20 flex items-center justify-center text-brand-amber">📈</span> 18. Pontos de Desenvolvimento</h2>
+      <div id="developments"></div>
+    </section>
+
+    <!-- 19. RECOMENDAÇÕES RH -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">👔</span> 19. Recomendações para RH</h2>
+      <div id="rhRecs"></div>
+    </section>
+
+    <!-- 20. RECOMENDAÇÕES PARTICIPANTE -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple">🧭</span> 20. Recomendações para o Participante</h2>
+      <div id="participantRecs"></div>
+    </section>
+
+    <!-- 21. CONCLUSÃO -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">📜</span> 21. Conclusão Executiva</h2>
+      <div id="conclusion"></div>
+    </section>
+
+    <!-- 22. FRASE FINAL -->
+    <section class="glass-card p-8 text-center">
+      <blockquote class="text-xl md:text-2xl italic text-gray-200 mb-4 font-light">"<span id="finalQuote">Carregando...</span>"</blockquote>
+      <p class="text-sm text-gray-500">— Vigorre One™ • People Analytics</p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER DA TELA -->
+  <footer class="glass border-t border-white/10 py-8 mt-12 no-print">
+    <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+      <p>© 2024 Vigorre One™ • People Analytics Enterprise</p>
+      <p class="text-xs mt-1">Documento confidencial. Uso exclusivo para desenvolvimento profissional.</p>
+    </div>
+  </footer>
+
+  <!-- RODAPÉ DE IMPRESSÃO -->
+  <div class="print-footer">
+    <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-weight:600;font-size:7pt;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.5px;">CONFIDENCIAL</span>
+        <span style="color:rgba(255,255,255,0.3);">•</span>
+        <span style="font-size:7pt;color:rgba(255,255,255,0.5);">Vigorre One™</span>
+      </div>
+      <div style="font-size:7pt;color:rgba(255,255,255,0.5);text-align:center;">
+        <span>contato@vigorre.com.br</span> <span style="color:rgba(255,255,255,0.3);">|</span> <span>(34) 99185-0735</span>
+      </div>
+      <div style="text-align:right;font-size:7pt;color:rgba(255,255,255,0.5);">
+        <span class="print-page-number"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASSINATURA CORPORATIVA -->
+  <div class="print-signature-block">
+    <p class="print-signature-title" style="font-size:9pt;font-weight:600;color:#111;margin-bottom:0.5rem;">Documento Confidencial — Vigorre One™</p>
+    <p style="font-size:8pt;color:#555;line-height:1.4;">Este laudo foi gerado automaticamente pela plataforma Vigorre One™ utilizando metodologia proprietária de assessment comportamental integrado.</p>
+    <p style="margin-top:0.5rem;font-size:7.5pt;color:#777;">📱 (34) 99185-0735 • 📧 contato@vigorre.com.br • 🌐 www.vigorre.com.br</p>
+  </div>
+
+  <!-- LOADING -->
+  <div id="loadingOverlay" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div class="text-center">
+      <div class="w-24 h-24 mx-auto mb-6 border-4 border-white/10 border-t-brand-cyan border-r-brand-purple rounded-full animate-spin"></div>
+      <h3 class="text-xl font-semibold mb-2">Gerando Laudo Vigorre™</h3>
+      <p class="text-gray-400">Processando análise integrada...</p>
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // CONFIGURAÇÕES E DADOS
+    // ============================================
+    const AppState = {
+      participant: null,
+      company: null,
+      job: null,
+      results: { disc: null, ie: null, valores: null },
+      charts: {}
+    };
+
+    const DISC_INSIGHTS = {
+      D: { name: 'Dominância', color: '#EF4444', strengths: ['Liderança natural', 'Decisão rápida', 'Foco em resultados'], desc: 'Orientado a resultados e ação.' },
+      I: { name: 'Influência', color: '#3B82F6', strengths: ['Comunicação', 'Motivação', 'Networking'], desc: 'Comunicativo e persuasivo.' },
+      S: { name: 'Estabilidade', color: '#10B981', strengths: ['Paciência', 'Lealdade', 'Suporte'], desc: 'Calmo, paciente e confiável.' },
+      C: { name: 'Conformidade', color: '#7C3AED', strengths: ['Análise', 'Precisão', 'Planejamento'], desc: 'Analítico e orientado a qualidade.' }
+    };
+
+    const IE_INSIGHTS = {
+      autoconsciencia: { name: 'Autoconsciência', high: 'Excelente percepção emocional.' },
+      autocontrole: { name: 'Autocontrole', high: 'Ótima regulação sob pressão.' },
+      empatia: { name: 'Empatia', high: 'Alta sensibilidade interpessoal.' },
+      resiliencia: { name: 'Resiliência', high: 'Recuperação rápida após adversidades.' },
+      social: { name: 'Inteligência Social', high: 'Excelente navegação social.' },
+      adaptabilidade: { name: 'Adaptabilidade', high: 'Alta flexibilidade emocional.' }
+    };
+
+    // ============================================
+    // INICIALIZAÇÃO
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('📋 Laudo Vigorre One™ - Inicializando...');
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const participantId = urlParams.get('participantId');
+
+      if (!participantId) {
+        document.getElementById('loadingOverlay').classList.add('hidden');
+        document.getElementById('laudoContent').style.display = 'block';
+        document.getElementById('laudoContent').innerHTML = `
+          <div class="glass-card p-8 text-center"><h2 class="text-xl font-bold text-brand-rose mb-4">⚠️ Participante não identificado</h2>
+          <p class="text-gray-400">Nenhum ID de participante foi fornecido na URL.</p></div>`;
+        return;
+      }
+
+      await loadSession(participantId);
+      await loadResults(participantId);
+      generateLaudo();
+    });
+
+    // ============================================
+    // CARREGAR SESSÃO
+    // ============================================
+    async function loadSession(participantId) {
+      try {
+        if (window.VigorreDB?.supabase) {
+          const { data } = await VigorreDB.supabase.from('participants').select('*').eq('id', participantId).maybeSingle();
+          if (data) {
+            AppState.participant = data;
+            if (data.company_id) {
+              const { data: company } = await VigorreDB.supabase.from('companies').select('*').eq('id', data.company_id).maybeSingle();
+              if (company) AppState.company = company;
+            }
+            return;
+          }
+        }
+        const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+        AppState.participant = participants.find(p => p.id === participantId);
+        if (AppState.participant?.companyId) {
+          const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+          AppState.company = companies.find(c => c.id === AppState.participant.companyId);
+        }
+      } catch (e) { console.error('Erro ao carregar sessão:', e); }
+    }
+
+    // ============================================
+    // CARREGAR RESULTADOS
+    // ============================================
+    async function loadResults(participantId) {
+      try {
+        if (window.VigorreDB?.supabase) {
+          const { data: disc } = await VigorreDB.supabase.from('test_results').select('*').eq('participant_id', participantId).eq('test_type', 'DISC').maybeSingle();
+          if (disc) AppState.results.disc = disc;
+          const { data: ie } = await VigorreDB.supabase.from('test_results').select('*').eq('participant_id', participantId).eq('test_type', 'IE').maybeSingle();
+          if (ie) AppState.results.ie = ie;
+          const { data: valores } = await VigorreDB.supabase.from('test_results').select('*').eq('participant_id', participantId).eq('test_type', 'Valores').maybeSingle();
+          if (valores) AppState.results.valores = valores;
+          return;
+        }
+        const disc = localStorage.getItem('vigorre_last_disc_result');
+        const ie = localStorage.getItem('vigorre_last_ie_result');
+        const valores = localStorage.getItem('vigorre_last_valores_result');
+        if (disc) AppState.results.disc = JSON.parse(disc);
+        if (ie) AppState.results.ie = JSON.parse(ie);
+        if (valores) AppState.results.valores = JSON.parse(valores);
+      } catch (e) { console.error('Erro ao carregar resultados:', e); }
+    }
+
+    // ============================================
+    // GERAR LAUDO
+    // ============================================
+    function generateLaudo() {
+      const p = AppState.participant;
+      const c = AppState.company;
+
+      // Capa
+      document.getElementById('coverName').textContent = p?.name || '--';
+      document.getElementById('coverCompany').textContent = c?.name || 'Independente';
+      document.getElementById('coverJob').textContent = p?.jobName || 'Não vinculada';
+      document.getElementById('coverDate').textContent = new Date().toLocaleDateString('pt-BR');
+
+      // Print
+      document.getElementById('printName').textContent = p?.name || '--';
+      document.getElementById('printCompany').textContent = c?.name || 'Independente';
+      document.getElementById('printDate').textContent = new Date().toLocaleDateString('pt-BR');
+
+      // Badges
+      const tests = [];
+      if (AppState.results.disc) { tests.push('DISC'); document.getElementById('badgeDisc').style.display = 'inline-flex'; }
+      if (AppState.results.ie) { tests.push('IE'); document.getElementById('badgeIE').style.display = 'inline-flex'; }
+      if (AppState.results.valores) { tests.push('Valores'); document.getElementById('badgeValores').style.display = 'inline-flex'; }
+
+      if (tests.length === 0) {
+        document.getElementById('loadingOverlay').classList.add('hidden');
+        document.getElementById('laudoContent').style.display = 'block';
+        document.getElementById('laudoContent').innerHTML = `
+          <div class="glass-card p-8 text-center"><h2 class="text-xl font-bold text-brand-amber mb-4">📋 Nenhum teste concluído</h2>
+          <p class="text-gray-400">Complete pelo menos um teste para gerar o laudo.</p>
+          <button onclick="window.location.href='../dashboard.html'" class="mt-4 bg-gradient-to-r from-brand-blue to-brand-purple px-6 py-3 rounded-lg font-medium">Voltar ao Dashboard</button></div>`;
+        return;
+      }
+
+      // Seções
+      if (AppState.results.disc) { document.getElementById('sectionDisc').classList.remove('hidden'); renderDisc(); }
+      if (AppState.results.ie) { document.getElementById('sectionIE').classList.remove('hidden'); renderIE(); }
+      if (AppState.results.valores) { document.getElementById('sectionValores').classList.remove('hidden'); renderValores(); }
+
+      // Resumo Executivo
+      renderExecutiveSummary(tests);
+
+      // Todas as outras seções
+      renderAllSections(tests);
+
+      // Mostrar
+      document.getElementById('loadingOverlay').classList.add('hidden');
+      document.getElementById('laudoContent').style.display = 'block';
+      document.getElementById('laudoContent').classList.remove('hidden');
+
+      console.log('✅ Laudo gerado com sucesso!');
+    }
+
+    // ============================================
+    // RENDERIZAR SEÇÕES
+    // ============================================
+    function renderDisc() {
+      const r = AppState.results.disc;
+      const pct = r.percentages || {};
+      const dominant = Object.entries(pct).sort((a,b) => b[1]-a[1])[0]?.[0] || 'D';
+      const profile = DISC_INSIGHTS[dominant];
+
+      document.getElementById('discAnalysis').innerHTML = `
+        <p class="text-gray-300 mb-4">Perfil predominante <strong style="color:${profile.color}">${profile.name}</strong> com ${pct[dominant] || 0}% de intensidade.</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="glass p-4 rounded-lg"><h4 class="font-medium mb-2 text-brand-emerald">Pontos Fortes</h4><ul class="space-y-1 text-sm text-gray-300">${profile.strengths.map(s => `<li>• ${s}</li>`).join('')}</ul></div>
+          <div class="glass p-4 rounded-lg"><h4 class="font-medium mb-2 text-brand-rose">Áreas de Desenvolvimento</h4><p class="text-sm text-gray-300">Desenvolver flexibilidade e escuta ativa.</p></div>
+        </div>
+      `;
+
+      document.getElementById('discComm').textContent = 'Comunicação direta e objetiva.';
+      document.getElementById('discDecision').textContent = 'Decisão rápida e orientada a resultados.';
+
+      renderDiscCharts(pct);
+    }
+
+    function renderIE() {
+      const r = AppState.results.ie;
+      const pct = r.percentages || {};
+      const avgQE = r.avg_qe || r.avgQE || 0;
+
+      document.getElementById('ieAnalysis').innerHTML = `
+        <p class="text-gray-300">Índice QE de <strong style="color:${avgQE >= 70 ? '#10B981' : '#F59E0B'}">${avgQE}%</strong>. ${avgQE >= 70 ? 'Alta inteligência emocional.' : 'Em desenvolvimento.'}</p>
+      `;
+
+      renderIECharts(pct);
+    }
+
+    function renderValores() {
+      const r = AppState.results.valores;
+      const pct = r.percentages || {};
+      const dominant = r.dominant || Object.entries(pct).sort((a,b) => b[1]-a[1])[0]?.[0] || 'proposito';
+
+      document.getElementById('valuesAnalysis').innerHTML = `
+        <p class="text-gray-300">Valor predominante <strong style="color:#F59E0B">${dominant}</strong> com ${pct[dominant] || 0}%.</p>
+      `;
+
+      renderValuesCharts(pct);
+    }
+
+    // ============================================
+    // EXECUTIVE SUMMARY
+    // ============================================
+    function renderExecutiveSummary(tests) {
+      let totalScore = 0;
+      let count = 0;
+      if (AppState.results.disc?.percentages) {
+        const vals = Object.values(AppState.results.disc.percentages);
+        totalScore += vals.reduce((a,b) => a + b, 0) / vals.length;
+        count++;
+      }
+      if (AppState.results.ie?.avg_qe || AppState.results.ie?.avgQE) {
+        totalScore += AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0;
+        count++;
+      }
+      if (AppState.results.valores?.percentages) {
+        const vals = Object.values(AppState.results.valores.percentages);
+        totalScore += vals.reduce((a,b) => a + b, 0) / vals.length;
+        count++;
+      }
+      const avg = count > 0 ? Math.round(totalScore / count) : 0;
+
+      document.getElementById('execScore').textContent = avg + '%';
+      document.getElementById('execProfileName').textContent = `Perfil Integrado • ${avg >= 70 ? 'Alta Performance' : avg >= 50 ? 'Potencial em Desenvolvimento' : 'Base para Crescimento'}`;
+      document.getElementById('execProfileDesc').textContent = `Laudo baseado em ${tests.join(', ')}. Índice geral de ${avg}% indicando ${avg >= 70 ? 'perfil alinhado a posições de alta complexidade' : avg >= 50 ? 'potencial com desenvolvimento direcionado' : 'oportunidades de crescimento estruturado'}.`;
+      document.getElementById('execEmotional').textContent = AppState.results.ie ? `${AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0}%` : 'Não avaliado';
+      document.getElementById('execMotivators').textContent = AppState.results.valores ? Object.entries(AppState.results.valores.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] || '--' : 'Não avaliado';
+      document.getElementById('execCulture').textContent = avg >= 70 ? 'Alta Aderência' : avg >= 50 ? 'Aderência Moderada' : 'Em Desenvolvimento';
+      document.getElementById('execFit').textContent = AppState.job ? 'Em Análise' : 'Sem Vaga Vinculada';
+    }
+
+    // ============================================
+    // TODAS AS OUTRAS SEÇÕES
+    // ============================================
+    function renderAllSections(tests) {
+      const p = AppState.participant;
+      const avg = 70;
+
+      // Visão Geral
+      document.getElementById('profileOverview').innerHTML = `
+        <p class="text-gray-300 leading-relaxed">Perfil integrado baseado em ${tests.join(', ')}. ${avg >= 70 ? 'Apresenta maturidade profissional e comportamental para posições estratégicas.' : 'Demonstra potencial para crescimento com desenvolvimento direcionado.'}</p>
+      `;
+
+      // Perfil Profissional
+      document.getElementById('professionalProfile').innerHTML = `
+        <div class="grid md:grid-cols-3 gap-4 mb-4">
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-1">Ritmo de Trabalho</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Acelerado e orientado a impacto' : 'Consistente e adaptável'}</p></div>
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-1">Autonomia</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Alta necessidade de independência' : 'Equilíbrio entre diretrizes e auto-gestão'}</p></div>
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-1">Foco em Resultados</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Orientação extrema a métricas e entregas' : 'Equilíbrio entre qualidade e prazo'}</p></div>
+        </div>
+        <div class="glass p-5 rounded-xl"><h3 class="font-semibold mb-2">Estilo de Execução</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Execução ágil com capacidade de pivô rápido.' : 'Execução consistente com foco em qualidade e sustentabilidade.'}</p></div>
+      `;
+
+      // Trabalho em Equipe
+      document.getElementById('teamwork').innerHTML = `
+        <p class="text-gray-300 mb-4">${avg >= 70 ? 'Integra-se rapidamente e contribui com liderança natural.' : 'Colabora de forma consistente e apoia o time.'}</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-cyan">Integração</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Conecta departamentos e facilita trocas' : 'Mantém coesão e apoia membros'}</p></div>
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-rose">Gestão de Conflitos</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Media com diplomacia e busca soluções win-win' : 'Aborda com cautela e busca entendimento'}</p></div>
+        </div>
+      `;
+
+      // Liderança
+      document.getElementById('leadership').innerHTML = `
+        <div class="glass p-5 rounded-xl mb-4"><h3 class="font-semibold mb-2">Arquétipo de Liderança</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Líder Inspirador e Orientado a Resultados' : 'Líder Facilitador e de Suporte'}</p></div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Motivação de Equipe</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Usa desafios e reconhecimento para engajar' : 'Oferece segurança e crescimento estável'}</p></div>
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Delegação</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Delega autoridade e cobra resultados' : 'Delega com suporte próximo'}</p></div>
+        </div>
+      `;
+
+      // Pressão
+      document.getElementById('pressureBehavior').innerHTML = `
+        <p class="text-gray-300 mb-4">${avg >= 70 ? 'Mantém clareza e compostura sob pressão.' : 'Busca equilíbrio e apoio em cenários desafiadores.'}</p>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Estabilidade</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-cyan h-2 rounded-full" style="width:${avg}%"></div></div></div>
+          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Tolerância</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-emerald h-2 rounded-full" style="width:${avg}%"></div></div></div>
+          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Resiliência</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-purple h-2 rounded-full" style="width:${avg}%"></div></div></div>
+        </div>
+      `;
+
+      // Decisão
+      document.getElementById('decisionMaking').innerHTML = `
+        <p class="text-gray-300 mb-4">${avg >= 70 ? 'Decisões rápidas, pragmáticas e orientadas a impacto.' : 'Decisões ponderadas, com análise de riscos e consequências.'}</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-cyan">Velocidade vs Cautela</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Rápido e assertivo' : 'Cauteloso e analítico'}</p></div>
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-amber">Racionalidade vs Intuição</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Equilibra dados e instinto' : 'Baseado em fatos e métricas'}</p></div>
+        </div>
+      `;
+
+      // Comunicação
+      document.getElementById('communication').innerHTML = `
+        <div class="grid md:grid-cols-2 gap-6 mb-4">
+          <div class="glass p-5 rounded-xl"><h3 class="font-semibold mb-3 text-brand-emerald">Padrão Comunicacional</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Direto, objetivo e influente.' : 'Calmo, empático e estruturado.'}</p></div>
+          <div class="glass p-5 rounded-xl"><h3 class="font-semibold mb-3 text-brand-amber">Em Reuniões</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Lidera pautas e engaja participantes.' : 'Ouve ativamente e valida contribuições.'}</p></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Clareza</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-emerald h-2 rounded-full" style="width:${avg}%"></div></div></div>
+          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Influência</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-blue h-2 rounded-full" style="width:${avg}%"></div></div></div>
+          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Empatia</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-purple h-2 rounded-full" style="width:${avg}%"></div></div></div>
+        </div>
+      `;
+
+      // Produtividade
+      document.getElementById('productivity').innerHTML = `
+        <p class="text-gray-300 mb-4">${avg >= 70 ? 'Capacidade de entrega acelerada com foco em impacto.' : 'Capacidade de entrega consistente com foco em qualidade.'}</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Consistência</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Alta, com oscilações conforme engajamento' : 'Muito alta, com previsibilidade de entregas'}</p></div>
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Adaptabilidade</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Pivota rapidamente diante de mudanças' : 'Adapta-se com transição estruturada'}</p></div>
+        </div>
+      `;
+
+      // Ambiente Ideal
+      document.getElementById('idealEnvironment').innerHTML = `
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="glass p-5 rounded-xl"><h3 class="font-semibold mb-2 text-brand-emerald">Cultura Aderente</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Ambientes dinâmicos, com autonomia e reconhecimento.' : 'Ambientes estruturados, com previsibilidade e suporte.'}</p></div>
+          <div class="glass p-5 rounded-xl"><h3 class="font-semibold mb-2 text-brand-amber">Estilo de Gestão</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Gestão por objetivos e resultados.' : 'Gestão participativa e de suporte.'}</p></div>
+        </div>
+      `;
+
+      // Fit com Vaga
+      document.getElementById('jobFit').innerHTML = `
+        <div class="glass p-5 rounded-xl mb-6 text-center">
+          <div class="score-ring mx-auto mb-3" style="width:120px;height:120px;"><span class="score-value gradient-text" style="font-size:1.8rem;">${avg}%</span></div>
+          <h3 class="font-semibold text-lg">${avg >= 70 ? 'Alta Compatibilidade' : 'Compatibilidade em Desenvolvimento'}</h3>
+          <p class="text-sm text-gray-400">${AppState.job ? `Para a vaga "${AppState.job.name || 'Não especificada'}"` : 'Nenhuma vaga vinculada.'}</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Compatibilidade DISC</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Alta' : 'Moderada'}</p></div>
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Aderência Emocional</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Alta' : 'Moderada'}</p></div>
+          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Fit Cultural</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Alta' : 'Moderada'}</p></div>
+        </div>
+      `;
+
+      // Treinamentos
+      const trainings = [
+        { title: 'Comunicação Assertiva', desc: 'Técnicas para comunicação clara e influente.' },
+        { title: 'Gestão Emocional', desc: 'Regulação emocional para alta performance.' },
+        { title: 'Liderança Adaptativa', desc: 'Ajuste de estilo conforme o contexto.' }
+      ];
+      document.getElementById('trainings').innerHTML = `<div class="grid md:grid-cols-3 gap-4">${trainings.map(t => `<div class="glass p-4 rounded-xl"><h4 class="font-medium text-brand-cyan">${t.title}</h4><p class="text-sm text-gray-300">${t.desc}</p></div>`).join('')}</div>`;
+
+      // PDI
+      document.getElementById('pdi').innerHTML = `
+        <div class="space-y-4">
+          <div class="glass p-4 rounded-xl border-l-4 border-brand-emerald"><h4 class="font-semibold mb-2 text-brand-emerald">🎯 Curto Prazo (0-3 meses)</h4><ul class="space-y-1 text-sm text-gray-300"><li>• Estabelecer rotina de auto-observação</li><li>• Praticar pausa estratégica antes de decisões</li></ul></div>
+          <div class="glass p-4 rounded-xl border-l-4 border-brand-amber"><h4 class="font-semibold mb-2 text-brand-amber">🚀 Médio Prazo (3-12 meses)</h4><ul class="space-y-1 text-sm text-gray-300"><li>• Desenvolver competência específica identificada</li><li>• Aplicar técnicas de regulação em cenários reais</li></ul></div>
+          <div class="glass p-4 rounded-xl border-l-4 border-brand-purple"><h4 class="font-semibold mb-2 text-brand-purple">🌟 Longo Prazo (12+ meses)</h4><ul class="space-y-1 text-sm text-gray-300"><li>• Assumir papel de modelo comportamental</li><li>• Integrar inteligência comportamental em processos estratégicos</li></ul></div>
+        </div>
+      `;
+
+      // Pontos Fortes
+      document.getElementById('strengths').innerHTML = `<div class="grid md:grid-cols-2 gap-4">${['Liderança natural', 'Comunicação clara', 'Foco em resultados', 'Resiliência emocional'].map(s => `<div class="glass p-4 rounded-xl flex items-center gap-3"><span class="text-brand-emerald text-xl">✓</span><p class="font-medium">${s}</p></div>`).join('')}</div>`;
+
+      // Desenvolvimentos
+      document.getElementById('developments').innerHTML = `<div class="grid md:grid-cols-2 gap-4">${['Escuta ativa', 'Paciência processual', 'Delegação efetiva', 'Flexibilidade cognitiva'].map(d => `<div class="glass p-4 rounded-xl flex items-center gap-3"><span class="text-brand-amber text-xl">⚡</span><p class="font-medium">${d}</p></div>`).join('')}</div>`;
+
+      // RH Recs
+      document.getElementById('rhRecs').innerHTML = `
+        <div class="space-y-3">
+          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-cyan mt-1">➤</span><p class="text-sm text-gray-300">Onboarding: Focar em integração com a cultura e metas claras.</p></div>
+          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-cyan mt-1">➤</span><p class="text-sm text-gray-300">Estilo de Gestão: Adotar abordagem participativa e inspiracional.</p></div>
+          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-cyan mt-1">➤</span><p class="text-sm text-gray-300">Retenção: Oferecer crescimento, reconhecimento e desafios alinhados.</p></div>
+        </div>
+      `;
+
+      // Participante Recs
+      document.getElementById('participantRecs').innerHTML = `
+        <div class="space-y-3">
+          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-purple mt-1">🧭</span><p class="text-sm text-gray-300">Fortalecer inteligência relacional através de escuta ativa.</p></div>
+          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-purple mt-1">🧭</span><p class="text-sm text-gray-300">Desenvolver assertividade em decisões e negociações.</p></div>
+          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-purple mt-1">🧭</span><p class="text-sm text-gray-300">Estabelecer rotina de autoconhecimento e feedback estruturado.</p></div>
+        </div>
+      `;
+
+      // Conclusão
+      document.getElementById('conclusion').innerHTML = `
+        <div class="glass p-5 rounded-xl"><p class="text-gray-300 leading-relaxed">O participante demonstra um perfil ${avg >= 70 ? 'maduro e alinhado a posições de alta complexidade' : 'com potencial para crescimento acelerado com desenvolvimento direcionado'}. Recomenda-se acompanhamento contínuo via PDI Vigorre™, garantindo evolução profissional e maximização de impacto organizacional.</p></div>
+      `;
+
+      // Frase Final
+      const quotes = ['O autoconhecimento transforma potencial em performance.', 'Compreender comportamento é acelerar resultados.', 'A maturidade comportamental é o maior diferencial competitivo.'];
+      document.getElementById('finalQuote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+    }
+
+    // ============================================
+    // GRÁFICOS
+    // ============================================
+    function renderDiscCharts(pct) {
+      const ctx1 = document.getElementById('discRadarChart');
+      if (ctx1) {
+        if (AppState.charts.discRadar) AppState.charts.discRadar.destroy();
+        AppState.charts.discRadar = new Chart(ctx1, {
+          type: 'radar',
+          data: { labels: ['D', 'I', 'S', 'C'], datasets: [{ label: 'Perfil', data: [pct.D || 0, pct.I || 0, pct.S || 0, pct.C || 0], backgroundColor: 'rgba(124,58,237,0.25)', borderColor: '#7C3AED', borderWidth: 2 }] },
+          options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
+        });
+      }
+      const ctx2 = document.getElementById('discBarChart');
+      if (ctx2) {
+        if (AppState.charts.discBar) AppState.charts.discBar.destroy();
+        AppState.charts.discBar = new Chart(ctx2, {
+          type: 'bar',
+          data: { labels: ['D', 'I', 'S', 'C'], datasets: [{ label: '%', data: [pct.D || 0, pct.I || 0, pct.S || 0, pct.C || 0], backgroundColor: ['#EF4444', '#3B82F6', '#10B981', '#7C3AED'], borderRadius: 8 }] },
+          options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
+        });
+      }
+    }
+
+    function renderIECharts(pct) {
+      const ctx1 = document.getElementById('ieRadarChart');
+      if (ctx1) {
+        if (AppState.charts.ieRadar) AppState.charts.ieRadar.destroy();
+        AppState.charts.ieRadar = new Chart(ctx1, {
+          type: 'radar',
+          data: { labels: ['AC', 'AT', 'EM', 'RS', 'IS', 'AD'], datasets: [{ label: 'IE', data: [pct.autoconsciencia || 0, pct.autocontrole || 0, pct.empatia || 0, pct.resiliencia || 0, pct.social || 0, pct.adaptabilidade || 0], backgroundColor: 'rgba(6,182,212,0.25)', borderColor: '#06B6D4', borderWidth: 2 }] },
+          options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
+        });
+      }
+      const ctx2 = document.getElementById('ieBarChart');
+      if (ctx2) {
+        if (AppState.charts.ieBar) AppState.charts.ieBar.destroy();
+        AppState.charts.ieBar = new Chart(ctx2, {
+          type: 'bar',
+          data: { labels: ['AC', 'AT', 'EM', 'RS', 'IS', 'AD'], datasets: [{ label: '%', data: [pct.autoconsciencia || 0, pct.autocontrole || 0, pct.empatia || 0, pct.resiliencia || 0, pct.social || 0, pct.adaptabilidade || 0], backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#7C3AED', '#06B6D4', '#EC4899'], borderRadius: 8 }] },
+          options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
+        });
+      }
+    }
+
+    function renderValuesCharts(pct) {
+      const ctx1 = document.getElementById('valuesRadarChart');
+      if (ctx1) {
+        if (AppState.charts.valuesRadar) AppState.charts.valuesRadar.destroy();
+        AppState.charts.valuesRadar = new Chart(ctx1, {
+          type: 'radar',
+          data: { labels: ['PR', 'RC', 'ES', 'AU', 'RL', 'IN', 'RZ', 'EQ'], datasets: [{ label: 'Valores', data: [pct.proposito || 0, pct.reconhecimento || 0, pct.estabilidade || 0, pct.autonomia || 0, pct.relacionamento || 0, pct.inovacao || 0, pct.realizacao || 0, pct.equilibrio || 0], backgroundColor: 'rgba(245,158,11,0.25)', borderColor: '#F59E0B', borderWidth: 2 }] },
+          options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
+        });
+      }
+      const ctx2 = document.getElementById('valuesBarChart');
+      if (ctx2) {
+        if (AppState.charts.valuesBar) AppState.charts.valuesBar.destroy();
+        AppState.charts.valuesBar = new Chart(ctx2, {
+          type: 'bar',
+          data: { labels: ['PR', 'RC', 'ES', 'AU', 'RL', 'IN', 'RZ', 'EQ'], datasets: [{ label: '%', data: [pct.proposito || 0, pct.reconhecimento || 0, pct.estabilidade || 0, pct.autonomia || 0, pct.relacionamento || 0, pct.inovacao || 0, pct.realizacao || 0, pct.equilibrio || 0], backgroundColor: ['#10B981', '#F59E0B', '#3B82F6', '#7C3AED', '#06B6D4', '#EC4899', '#8B5CF6', '#14B8A6'], borderRadius: 8 }] },
+          options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
+        });
+      }
+    }
+
+    // ============================================
+    // OTIMIZAÇÃO DE IMPRESSÃO
+    // ============================================
+    window.onbeforeprint = function() {
+      Object.values(AppState.charts).forEach(chart => {
+        if (chart && chart.canvas) { chart.resize(); chart.update('none'); }
+      });
+    };
+
+    window.onafterprint = function() {
+      setTimeout(() => {
+        if (AppState.results.disc) renderDiscCharts(AppState.results.disc.percentages);
+        if (AppState.results.ie) renderIECharts(AppState.results.ie.percentages);
+        if (AppState.results.valores) renderValuesCharts(AppState.results.valores.percentages);
+      }, 300);
+    };
+
+    console.log('📋 Laudo Vigorre™ carregado com sucesso!');
+  </script>
+</body>
+</html>
