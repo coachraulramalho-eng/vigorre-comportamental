@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VIGORRE ONE™ - Login" />
+  <title>Login | VIGORRE ONE™</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/globals.css" />
+  
+  <style>
+    /* ============================================
+       ESTILOS ESPECÍFICOS - LOGIN
+       ============================================ */
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0A2540 0%, #1D4ED8 50%, #7C3AED 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .login-container {
+      background: white;
+      border-radius: 24px;
+      padding: 48px 40px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.5s ease;
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    
+    .login-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    
+    .login-logo .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #06B6D4, #7C3AED);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .login-logo h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0A2540;
+      margin: 0;
+      line-height: 1.2;
+    }
+    
+    .login-logo .tm {
+      font-size: 0.5rem;
+      vertical-align: super;
+      color: #06B6D4;
+    }
+    
+    .login-subtitle {
+      color: #64748B;
+      font-size: 0.875rem;
+      margin-top: 4px;
+    }
+    
+    .login-form .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .login-form label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #0A2540;
+      margin-bottom: 6px;
+    }
+    
+    .login-form input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #E2E8F0;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      background: #F8FAFC;
+    }
+    
+    .login-form input:focus {
+      outline: none;
+      border-color: #1D4ED8;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1);
+    }
+    
+    .login-form input::placeholder {
+      color: #94A3B8;
+    }
+    
+    .login-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 0.875rem;
+    }
+    
+    .login-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      color: #64748B;
+    }
+    
+    .login-options a {
+      color: #1D4ED8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .login-options a:hover {
+      color: #7C3AED;
+    }
+    
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1D4ED8, #7C3AED);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(29, 78, 216, 0.3);
+    }
+    
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(29, 78, 216, 0.4);
+    }
+    
+    .btn-login:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .login-error {
+      background: #FEE2E2;
+      color: #991B1B;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+      display: none;
+      border-left: 4px solid #EF4444;
+    }
+    
+    .login-error.show {
+      display: block;
+    }
+    
+    .login-footer {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #E2E8F0;
+    }
+    
+    .login-footer p {
+      color: #64748B;
+      font-size: 0.875rem;
+    }
+    
+    .login-footer a {
+      color: #1D4ED8;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    
+    .login-footer a:hover {
+      color: #7C3AED;
+    }
+    
+    .login-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Credenciais de demonstração */
+    .demo-creds {
+      background: #F1F5F9;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 20px;
+      font-size: 0.8125rem;
+    }
+    
+    .demo-creds strong {
+      color: #0A2540;
+    }
+    
+    .demo-creds .cred-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      color: #64748B;
+    }
+    
+    .demo-creds .cred-row span:last-child {
+      font-family: 'Courier New', monospace;
+      color: #0A2540;
+      font-weight: 600;
+    }
+    
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 32px 24px;
+      }
+      
+      .login-logo h1 {
+        font-size: 1.25rem;
+      }
+      
+      .login-options {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    
+    <!-- Header -->
+    <div class="login-header">
+      <div class="login-logo">
+        <div class="logo-icon">V</div>
+        <h1>VIGORRE ONE<span class="tm">™</span></h1>
+      </div>
+      <p class="login-subtitle">Entre com suas credenciais</p>
+    </div>
+    
+    <!-- Error Message -->
+    <div id="loginError" class="login-error">
+      ⚠️ <span id="errorMessage">Credenciais inválidas</span>
+    </div>
+    
+    <!-- Form -->
+    <form id="loginForm" class="login-form" onsubmit="handleLogin(event)">
+      
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input 
+          type="email" 
+          id="email" 
+          placeholder="seu@email.com" 
+          required 
+          autocomplete="email"
+          value="master@vigorre.com"
+        />
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input 
+          type="password" 
+          id="password" 
+          placeholder="••••••••" 
+          required 
+          autocomplete="current-password"
+          value="master123"
+        />
+      </div>
+      
+      <div class="login-options">
+        <label>
+          <input type="checkbox" checked /> Manter conectado
+        </label>
+        <a href="#">Esqueceu a senha?</a>
+      </div>
+      
+      <button type="submit" id="loginBtn" class="btn-login">
+        Entrar no Sistema
+      </button>
+      
+    </form>
+    
+    <!-- Demo Credentials -->
+    <div class="demo-creds">
+      <strong>🔑 Credenciais de Demonstração</strong>
+      <div class="cred-row">
+        <span>👑 Master</span>
+        <span>master@vigorre.com / master123</span>
+      </div>
+      <div class="cred-row">
+        <span>👤 Admin</span>
+        <span>admin@vigorre.com / admin123</span>
+      </div>
+      <div class="cred-row">
+        <span>🎯 Recrutador</span>
+        <span>recrutador@teste.com / rec123</span>
+      </div>
+      <div class="cred-row">
+        <span>👤 Participante</span>
+        <span>participante@teste.com / part123</span>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="login-footer">
+      <p>
+        <a href="index.html">← Voltar para o site</a>
+      </p>
+    </div>
+    
+  </div>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  
+  <!-- Supabase Config -->
+  <script src="supabase-config.js"></script>
+  
+  <!-- Auth System -->
+  <script src="auth.js"></script>
+  
+  <script>
+    'use strict';
+    
+    // ============================================
+    // ELEMENTOS
+    // ============================================
+    const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const loginBtn = document.getElementById('loginBtn');
+    const errorDiv = document.getElementById('loginError');
+    const errorMessage = document.getElementById('errorMessage');
+    
+    // ============================================
+    // VERIFICAR SE JÁ ESTÁ LOGADO
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🔐 Página de Login - VIGORRE ONE™');
+      
+      // Se já estiver logado, redireciona
+      if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
+        const user = window.VigorreAuth.getCurrentUser();
+        console.log('✅ Usuário já logado:', user?.name);
+        window.VigorreAuth.redirectByRole(user);
+      }
+    });
+    
+    // ============================================
+    // FUNÇÃO DE LOGIN
+    // ============================================
+    async function handleLogin(event) {
+      event.preventDefault();
+      
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+      
+      // Validação básica
+      if (!email || !password) {
+        showError('Preencha todos os campos');
+        return;
+      }
+      
+      // Desabilita botão
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<span class="login-spinner"></span> Entrando...';
+      hideError();
+      
+      try {
+        console.log('🔄 Tentando login:', email);
+        
+        // Usa o sistema de autenticação
+        const user = await window.VigorreAuth.login(email, password);
+        
+        console.log('✅ Login bem-sucedido:', user.name);
+        
+        // Redireciona conforme o perfil
+        window.VigorreAuth.redirectByRole(user);
+        
+      } catch (error) {
+        console.error('❌ Erro no login:', error);
+        showError(error.message || 'Credenciais inválidas. Tente novamente.');
+        
+        // Reabilita botão
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = 'Entrar no Sistema';
+      }
+    }
+    
+    // ============================================
+    // FUNÇÕES DE ERRO
+    // ============================================
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorDiv.classList.add('show');
+    }
+    
+    function hideError() {
+      errorDiv.classList.remove('show');
+    }
+    
+    // ============================================
+    // ENTER PARA SUBMIT
+    // ============================================
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const active = document.activeElement;
+        if (active === emailInput || active === passwordInput) {
+          form.dispatchEvent(new Event('submit'));
+        }
+      }
+    });
+    
+    // ============================================
+    // LOG DE INICIALIZAÇÃO
+    // ============================================
+    console.log('🔐 Sistema de login carregado');
+    console.log('📌 Use as credenciais de demonstração para testar');
+  </script>
+  
+</body>
+</html>
