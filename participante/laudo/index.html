@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laudo Vigorre One™ | People Analytics Enterprise</title>
+  <title>Laudo VIGOR™ One | People Analytics Enterprise</title>
   
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,15 +17,15 @@
         extend: {
           fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
-            brand: {
-              navy: '#0A2540',
-              blue: '#1D4ED8',
-              purple: '#7C3AED',
-              cyan: '#06B6D4',
-              emerald: '#10B981',
-              amber: '#F59E0B',
+            brand: { 
+              navy: '#0A2540', 
+              blue: '#1D4ED8', 
+              purple: '#7C3AED', 
+              cyan: '#06B6D4', 
+              emerald: '#10B981', 
+              amber: '#F59E0B', 
               rose: '#F43F5E',
-              slate: '#64748B'
+              gold: '#D4AF37'
             }
           }
         }
@@ -45,6 +45,13 @@
     .score-ring::before { content: ''; position: absolute; width: 110px; height: 110px; border-radius: 50%; background: #0F172A; }
     .score-value { position: relative; z-index: 1; font-size: 2.2rem; font-weight: 800; }
     .chart-container { position: relative; height: 300px !important; width: 100%; }
+    .vigor-pillar { border-left: 4px solid #F59E0B; padding-left: 20px; margin: 16px 0; }
+    .vigor-title { font-size: 1.5rem; font-weight: 800; color: #F59E0B; font-family: 'Inter', sans-serif; letter-spacing: -0.02em; }
+    .watermark { opacity: 0.03; font-size: 80pt; font-weight: 900; position: fixed; pointer-events: none; z-index: 0; }
+    .modo-badge { padding: 4px 16px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .modo-autoconhecimento { background: #10B981; color: white; }
+    .modo-rh { background: #1D4ED8; color: white; }
+    .modo-carreira { background: #7C3AED; color: white; }
     
     .print-header, .print-footer, .print-watermark, .print-signature-block { display: none; }
     
@@ -54,32 +61,39 @@
       .glass, .glass-card { background: white !important; border: 1px solid #ddd !important; box-shadow: none !important; backdrop-filter: none !important; }
       .gradient-text { -webkit-text-fill-color: #1D4ED8 !important; color: #1D4ED8 !important; background: none !important; }
       .no-print { display: none !important; }
-      .print-header { display: block !important; position: fixed; top: 0; left: 0; right: 0; height: 28mm; background: #0A2540 !important; color: white !important; padding: 8mm 16mm; z-index: 1000; border-bottom: 2px solid #06B6D4 !important; }
-      .print-footer { display: block !important; position: fixed; bottom: 0; left: 0; right: 0; height: 20mm; background: #0A2540 !important; color: white !important; padding: 3mm 16mm; z-index: 1000; border-top: 2px solid #06B6D4 !important; }
+      .print-header { display: block !important; position: fixed; top: 0; left: 0; right: 0; height: 28mm; background: #0A2540 !important; color: white !important; padding: 8mm 16mm; z-index: 1000; border-bottom: 3px solid #D4AF37 !important; }
+      .print-footer { display: block !important; position: fixed; bottom: 0; left: 0; right: 0; height: 20mm; background: #0A2540 !important; color: white !important; padding: 3mm 16mm; z-index: 1000; border-top: 3px solid #D4AF37 !important; }
       .print-watermark { display: block !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 120pt; font-weight: 800; color: rgba(29,78,216,0.04); pointer-events: none; z-index: -1; white-space: nowrap; }
-      .print-signature-block { display: block !important; margin-top: 2rem !important; padding-top: 1.5rem !important; border-top: 2px solid #1D4ED8 !important; text-align: center; page-break-inside: avoid; }
+      .print-signature-block { display: block !important; margin-top: 2rem !important; padding-top: 1.5rem !important; border-top: 2px solid #D4AF37 !important; text-align: center; page-break-inside: avoid; }
       .chart-container { height: 280px !important; page-break-inside: avoid; }
       canvas { max-width: 100% !important; height: auto !important; }
       .score-ring { animation: none !important; box-shadow: none !important; }
       .score-ring::before { background: white !important; }
       .badge-pill { border: 1px solid #ccc !important; color: #333 !important; background: #f9f9f9 !important; }
       @page { size: A4; margin-top: 32mm; margin-bottom: 24mm; margin-left: 16mm; margin-right: 16mm; }
+      .vigor-pillar { border-left-color: #D4AF37 !important; }
+      .vigor-title { color: #D4AF37 !important; }
       h2, h3 { page-break-after: avoid; }
       p, ul, ol { orphans: 3; widows: 3; }
       .print-page-number::after { content: "Página " counter(page) " de " counter(pages); color: #666 !important; font-weight: 500; }
+      .modo-badge { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     }
   </style>
 </head>
 <body>
 
+  <!-- MARCA D'ÁGUA -->
+  <div class="watermark" style="top:20%;left:10%;transform:rotate(-15deg);">VIGOR™</div>
+  <div class="watermark" style="bottom:20%;right:10%;transform:rotate(15deg);">ONE</div>
+
   <!-- HEADER DE IMPRESSÃO -->
   <div class="print-header">
     <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
       <div style="display:flex;align-items:center;gap:12px;">
-        <div style="width:40px;height:40px;background:linear-gradient(135deg,#06B6D4,#7C3AED);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20pt;color:white;">V</div>
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,#D4AF37,#7C3AED);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20pt;color:white;">V</div>
         <div>
-          <h1 style="font-size:14pt;font-weight:700;color:white;margin:0;">Vigorre One™</h1>
-          <p style="font-size:8pt;color:rgba(255,255,255,0.8);margin:0;">Laudo Comportamental Enterprise</p>
+          <h1 style="font-size:14pt;font-weight:700;color:white;margin:0;">VIGOR™ One</h1>
+          <p style="font-size:8pt;color:rgba(255,255,255,0.8);margin:0;">Laudo Comportamental Estratégico</p>
         </div>
       </div>
       <div style="text-align:right;font-size:8pt;color:rgba(255,255,255,0.8);">
@@ -90,23 +104,20 @@
     </div>
   </div>
 
-  <!-- MARCA D'ÁGUA -->
-  <div class="print-watermark">VIGORRE ONE</div>
-
   <!-- HEADER DA TELA -->
   <header class="glass border-b border-white/10 sticky top-0 z-50 no-print">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-cyan to-brand-purple flex items-center justify-center font-bold text-white text-lg shadow-lg">V</div>
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-brand-purple flex items-center justify-center font-bold text-white text-lg shadow-lg">V</div>
         <div>
-          <h1 class="font-bold text-lg tracking-tight">Vigorre One™</h1>
-          <p class="text-xs text-gray-400">Laudo Comportamental Enterprise</p>
+          <h1 class="font-bold text-lg tracking-tight">VIGOR™ One</h1>
+          <p class="text-xs text-gray-400">Inteligência Humana Aplicada</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <span class="badge-pill bg-brand-purple/20 text-brand-purple border border-brand-purple/30">✨ Premium</span>
+        <span class="badge-pill bg-brand-gold/20 text-brand-gold border border-brand-gold/30">✨ Premium</span>
         <button onclick="window.print()" class="bg-white/10 px-4 py-2 rounded-lg text-sm font-medium hover:bg-white/20 transition-all">🖨️ Imprimir</button>
-        <button onclick="window.print()" class="bg-gradient-to-r from-brand-blue to-brand-purple px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-brand-purple/30 transition-all">📄 PDF</button>
+        <button onclick="window.print()" class="bg-gradient-to-r from-brand-gold to-brand-purple px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-brand-purple/30 transition-all">📄 PDF</button>
       </div>
     </div>
   </header>
@@ -115,202 +126,280 @@
   <main class="max-w-6xl mx-auto px-4 py-8 space-y-8" id="laudoContent" style="display:none;">
 
     <!-- CAPA -->
-    <section class="glass-card p-12 text-center">
-      <div class="flex justify-between items-start mb-8">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-cyan to-brand-purple flex items-center justify-center shadow-2xl">
-          <span class="text-3xl font-bold text-white">V</span>
+    <section class="glass-card p-12 text-center relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-brand-gold/5 to-brand-purple/5 rounded-full blur-3xl"></div>
+      <div class="relative z-10">
+        <div class="flex justify-center items-center gap-4 mb-6">
+          <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-gold to-brand-purple flex items-center justify-center shadow-2xl">
+            <span class="text-4xl font-bold text-white">V</span>
+          </div>
+          <div class="text-left">
+            <h1 class="text-3xl font-extrabold tracking-tight" style="color:#D4AF37;">VIGOR™ One</h1>
+            <p class="text-sm text-gray-400">Inteligência Humana Aplicada</p>
+          </div>
         </div>
-        <div class="w-20 h-20 bg-gradient-to-br from-brand-blue to-brand-purple rounded-xl flex items-center justify-center text-white font-bold text-sm opacity-70">QR</div>
-      </div>
-      <h1 class="text-4xl font-extrabold mb-4 tracking-tight">LAUDO COMPORTAMENTAL</h1>
-      <p class="text-xl text-gray-400 mb-8">Análise Integrada de Perfil • People Analytics Enterprise</p>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
-        <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Participante</p><p class="font-semibold text-lg" id="coverName">--</p></div>
-        <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Empresa</p><p class="font-semibold" id="coverCompany">--</p></div>
-        <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Vaga</p><p class="font-semibold" id="coverJob">--</p></div>
-        <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Data</p><p class="font-semibold" id="coverDate">--</p></div>
-      </div>
-      <div class="flex flex-wrap justify-center gap-2 mb-6">
-        <span class="badge-pill bg-brand-rose/20 text-brand-rose border border-brand-rose/30" id="badgeDisc">📊 DISC</span>
-        <span class="badge-pill bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30" id="badgeIE">🧠 IE</span>
-        <span class="badge-pill bg-brand-amber/20 text-brand-amber border border-brand-amber/30" id="badgeValores">💎 Valores</span>
-      </div>
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10">
-        <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span>
-        <span class="text-sm text-gray-300">Laudo gerado automaticamente • Vigorre One™</span>
-      </div>
-    </section>
-
-    <!-- 1. RESUMO EXECUTIVO -->
-    <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">📊</span> 1. Resumo Executivo</h2>
-      <div class="grid md:grid-cols-3 gap-6 mb-8">
-        <div class="glass p-5 rounded-xl text-center">
-          <div class="score-ring mx-auto mb-3"><span class="score-value gradient-text" id="execScore">--</span></div>
-          <p class="text-sm text-gray-400">Índice de Maturidade</p>
+        
+        <h2 class="text-4xl font-extrabold mb-4 tracking-tight">LAUDO COMPORTAMENTAL</h2>
+        <p class="text-xl text-gray-400 mb-8">Análise Estratégica de Perfil • Metodologia Exclusiva VIGOR™</p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+          <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Participante</p><p class="font-semibold text-lg" id="coverName">--</p></div>
+          <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Empresa</p><p class="font-semibold" id="coverCompany">--</p></div>
+          <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Cargo</p><p class="font-semibold" id="coverJob">--</p></div>
+          <div class="glass p-4 rounded-xl text-left"><p class="text-xs text-gray-500">Data</p><p class="font-semibold" id="coverDate">--</p></div>
         </div>
-        <div class="glass p-5 rounded-xl col-span-2">
-          <h3 class="font-semibold mb-3 text-brand-emerald">Perfil Integrado</h3>
-          <p class="text-lg font-bold mb-2" id="execProfileName">--</p>
-          <p class="text-sm text-gray-400 leading-relaxed" id="execProfileDesc">--</p>
+        
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
+          <span class="badge-pill bg-brand-rose/20 text-brand-rose border border-brand-rose/30" id="badgeDisc">📊 DISC</span>
+          <span class="badge-pill bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30" id="badgeIE">🧠 IE</span>
+          <span class="badge-pill bg-brand-amber/20 text-brand-amber border border-brand-amber/30" id="badgeValores">💎 Valores</span>
+        </div>
+        
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-brand-gold/30">
+          <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span>
+          <span class="text-sm text-gray-300">Metodologia VIGOR™ • 10 Pilares Exclusivos</span>
+        </div>
+        
+        <div class="mt-6 text-xs text-gray-500">
+          <p>Código do Laudo: <span id="codigoLaudo">VIG-2024-XXXX</span></p>
+          <p class="mt-1">© Vigorre Desenvolvimento Humano • Todos os direitos reservados</p>
         </div>
       </div>
-      <div class="grid md:grid-cols-4 gap-4">
-        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-cyan">Nível Emocional</h4><p class="text-sm text-gray-300" id="execEmotional">--</p></div>
-        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-purple">Motivadores</h4><p class="text-sm text-gray-300" id="execMotivators">--</p></div>
-        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-amber">Aderência Cultural</h4><p class="text-sm text-gray-300" id="execCulture">--</p></div>
-        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-rose">Fit com Vaga</h4><p class="text-sm text-gray-300" id="execFit">--</p></div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FINALIDADE DA AVALIAÇÃO -->
+    <!-- ========================================== -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-gold/20 flex items-center justify-center text-brand-gold">🎯</span> 
+        Finalidade da Avaliação
+      </h2>
+      <div id="finalidadeAvaliacao" class="glass p-6 rounded-xl">
+        <p class="text-gray-300 leading-relaxed" id="modoTexto">Carregando modo de avaliação...</p>
+        <div class="mt-4 flex flex-wrap gap-2" id="modoBadges">
+          <span class="modo-badge modo-autoconhecimento">Autoconhecimento</span>
+          <span class="modo-badge modo-rh">Recrutamento</span>
+          <span class="modo-badge modo-carreira">Desenvolvimento</span>
+        </div>
       </div>
     </section>
 
-    <!-- 2. PERFIL COMPORTAMENTAL DISC -->
-    <section id="sectionDisc" class="glass-card p-8 hidden">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-rose/20 flex items-center justify-center text-brand-rose">📈</span> 2. Perfil Comportamental DISC</h2>
-      <div class="grid md:grid-cols-2 gap-8 mb-8">
-        <div><h3 class="font-semibold mb-3 text-center">Radar Comportamental</h3><div class="chart-container"><canvas id="discRadarChart"></canvas></div></div>
-        <div><h3 class="font-semibold mb-3 text-center">Intensidade por Fator</h3><div class="chart-container"><canvas id="discBarChart"></canvas></div></div>
+    <!-- ========================================== -->
+    <!-- 1. APRESENTAÇÃO EXECUTIVA -->
+    <!-- ========================================== -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">📊</span> 
+        1. Apresentação Executiva
+      </h2>
+      <div id="apresentacaoExecutiva" class="glass p-6 rounded-xl">
+        <p class="text-gray-300 leading-relaxed" id="execApresentacao">Carregando apresentação executiva...</p>
       </div>
-      <div class="glass p-5 rounded-xl mb-6"><h3 class="font-semibold mb-3">Análise Comportamental</h3><div id="discAnalysis"></div></div>
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-cyan">Comunicação</h4><p class="text-sm text-gray-300" id="discComm">--</p></div>
-        <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-purple">Decisão</h4><p class="text-sm text-gray-300" id="discDecision">--</p></div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. METODOLOGIA EXCLUSIVA VIGOR™ -->
+    <!-- ========================================== -->
+    <section class="glass-card p-8 border-l-4 border-brand-gold">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-gold/20 flex items-center justify-center text-brand-gold">⚡</span> 
+        2. Metodologia Exclusiva VIGOR™
+      </h2>
+      <div id="metodologiaVigor" class="space-y-6">
+        <!-- Preenchido via JS -->
       </div>
     </section>
 
-    <!-- 3. INTELIGÊNCIA EMOCIONAL -->
-    <section id="sectionIE" class="glass-card p-8 hidden">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">🧠</span> 3. Inteligência Emocional</h2>
-      <div class="grid md:grid-cols-2 gap-8 mb-8">
-        <div><h3 class="font-semibold mb-3 text-center">Radar Emocional</h3><div class="chart-container"><canvas id="ieRadarChart"></canvas></div></div>
-        <div><h3 class="font-semibold mb-3 text-center">Score por Dimensão</h3><div class="chart-container"><canvas id="ieBarChart"></canvas></div></div>
+    <!-- ========================================== -->
+    <!-- 3. PERFIL COMPORTAMENTAL -->
+    <!-- ========================================== -->
+    <section class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-rose/20 flex items-center justify-center text-brand-rose">📈</span> 
+        3. Perfil Comportamental
+      </h2>
+      <div id="perfilComportamental">
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+          <div><h3 class="font-semibold mb-3 text-center">Radar Comportamental</h3><div class="chart-container"><canvas id="discRadarChart"></canvas></div></div>
+          <div><h3 class="font-semibold mb-3 text-center">Intensidade por Fator</h3><div class="chart-container"><canvas id="discBarChart"></canvas></div></div>
+        </div>
+        <div class="glass p-6 rounded-xl" id="perfilComportamentalTexto">
+          <p class="text-gray-300 leading-relaxed">Carregando análise aprofundada do perfil comportamental...</p>
+        </div>
       </div>
-      <div class="glass p-5 rounded-xl mb-6"><h3 class="font-semibold mb-3">Maturidade Emocional</h3><div id="ieAnalysis"></div></div>
     </section>
 
-    <!-- 4. VALORES PESSOAIS -->
-    <section id="sectionValores" class="glass-card p-8 hidden">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-amber/20 flex items-center justify-center text-brand-amber">💎</span> 4. Valores Pessoais</h2>
-      <div class="grid md:grid-cols-2 gap-8 mb-8">
-        <div><h3 class="font-semibold mb-3 text-center">Radar Motivacional</h3><div class="chart-container"><canvas id="valuesRadarChart"></canvas></div></div>
-        <div><h3 class="font-semibold mb-3 text-center">Ranking de Valores</h3><div class="chart-container"><canvas id="valuesBarChart"></canvas></div></div>
+    <!-- ========================================== -->
+    <!-- 4. ÍNDICES EXCLUSIVOS VIGOR™ -->
+    <!-- ========================================== -->
+    <section class="glass-card p-8 border-l-4 border-brand-gold">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-gold/20 flex items-center justify-center text-brand-gold">🏆</span> 
+        4. Índices Exclusivos VIGOR™
+      </h2>
+      <div id="indicesVigor" class="grid md:grid-cols-2 gap-4">
+        <!-- Preenchido via JS -->
       </div>
-      <div class="glass p-5 rounded-xl mb-6"><h3 class="font-semibold mb-3">Perfil Motivacional</h3><div id="valuesAnalysis"></div></div>
     </section>
 
-    <!-- 5. VISÃO GERAL DO PERFIL -->
+    <!-- ========================================== -->
+    <!-- 5. PONTOS FORTES -->
+    <!-- ========================================== -->
     <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple">👤</span> 5. Visão Geral do Perfil</h2>
-      <div id="profileOverview"></div>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-emerald/20 flex items-center justify-center text-brand-emerald">✅</span> 
+        5. Pontos Fortes
+      </h2>
+      <div id="pontosFortes" class="grid md:grid-cols-2 gap-4">
+        <!-- Preenchido via JS -->
+      </div>
     </section>
 
-    <!-- 6. PERFIL PROFISSIONAL -->
+    <!-- ========================================== -->
+    <!-- 6. PONTOS DE ATENÇÃO -->
+    <!-- ========================================== -->
     <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-emerald/20 flex items-center justify-center text-brand-emerald">💼</span> 6. Perfil Profissional</h2>
-      <div id="professionalProfile"></div>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-amber/20 flex items-center justify-center text-brand-amber">⚠️</span> 
+        6. Pontos de Atenção
+      </h2>
+      <div id="pontosAtencao" class="grid md:grid-cols-2 gap-4">
+        <!-- Preenchido via JS -->
+      </div>
     </section>
 
-    <!-- 7. TRABALHO EM EQUIPE -->
+    <!-- ========================================== -->
+    <!-- 7. ANÁLISE DE PERFORMANCE FUTURA -->
+    <!-- ========================================== -->
     <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">🤝</span> 7. Trabalho em Equipe</h2>
-      <div id="teamwork"></div>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">🚀</span> 
+        7. Análise de Performance Futura
+      </h2>
+      <div id="performanceFutura" class="glass p-6 rounded-xl">
+        <p class="text-gray-300 leading-relaxed">Carregando análise preditiva de performance...</p>
+      </div>
     </section>
 
-    <!-- 8. LIDERANÇA -->
+    <!-- ========================================== -->
+    <!-- 8. ANÁLISE DE SAÚDE MENTAL CORPORATIVA -->
+    <!-- ========================================== -->
     <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-amber/20 flex items-center justify-center text-brand-amber">👑</span> 8. Potencial de Liderança</h2>
-      <div id="leadership"></div>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple">🧠</span> 
+        8. Análise de Saúde Mental Corporativa
+      </h2>
+      <div id="saudeMental" class="glass p-6 rounded-xl">
+        <p class="text-gray-300 leading-relaxed">Carregando análise de saúde mental corporativa...</p>
+      </div>
     </section>
 
-    <!-- 9. COMPORTAMENTO SOB PRESSÃO -->
+    <!-- ========================================== -->
+    <!-- 9. ANÁLISE DE ADAPTAÇÃO A ALOJAMENTOS -->
+    <!-- ========================================== -->
     <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-rose/20 flex items-center justify-center text-brand-rose">⚡</span> 9. Comportamento Sob Pressão</h2>
-      <div id="pressureBehavior"></div>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-amber/20 flex items-center justify-center text-brand-amber">🏠</span> 
+        9. Análise de Adaptação a Alojamentos e Mobilidade
+      </h2>
+      <div id="adaptacaoAlojamento" class="glass p-6 rounded-xl">
+        <p class="text-gray-300 leading-relaxed">Carregando análise de adaptação a alojamentos e mobilidade...</p>
+      </div>
     </section>
 
-    <!-- 10. TOMADA DE DECISÃO -->
+    <!-- ========================================== -->
+    <!-- 10. COMPATIBILIDADE COM CARGOS -->
+    <!-- ========================================== -->
     <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple">🎯</span> 10. Tomada de Decisão</h2>
-      <div id="decisionMaking"></div>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">🎯</span> 
+        10. Compatibilidade com Cargos
+      </h2>
+      <div id="compatibilidadeCargos" class="grid md:grid-cols-3 gap-4">
+        <!-- Preenchido via JS -->
+      </div>
     </section>
 
-    <!-- 11. COMUNICAÇÃO -->
+    <!-- ========================================== -->
+    <!-- 11. RECOMENDAÇÕES PARA RH -->
+    <!-- ========================================== -->
     <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">💬</span> 11. Estilo de Comunicação</h2>
-      <div id="communication"></div>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">👔</span> 
+        11. Recomendações para RH
+      </h2>
+      <div id="recomendacoesRH" class="space-y-4">
+        <!-- Preenchido via JS -->
+      </div>
     </section>
 
-    <!-- 12. PRODUTIVIDADE -->
+    <!-- ========================================== -->
+    <!-- 12. RECOMENDAÇÕES PARA GESTOR -->
+    <!-- ========================================== -->
     <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-emerald/20 flex items-center justify-center text-brand-emerald">🚀</span> 12. Produtividade e Performance</h2>
-      <div id="productivity"></div>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">👤</span> 
+        12. Recomendações para o Gestor
+      </h2>
+      <div id="recomendacoesGestor" class="space-y-4">
+        <!-- Preenchido via JS -->
+      </div>
     </section>
 
-    <!-- 13. AMBIENTE IDEAL -->
+    <!-- ========================================== -->
+    <!-- 13. PLANO DE DESENVOLVIMENTO INDIVIDUAL -->
+    <!-- ========================================== -->
+    <section class="glass-card p-8 border-l-4 border-brand-purple">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple">📈</span> 
+        13. Plano de Desenvolvimento Individual – PDI
+      </h2>
+      <div id="pdiVigor" class="space-y-4">
+        <!-- Preenchido via JS -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 14. PARECER FINAL VIGOR™ -->
+    <!-- ========================================== -->
     <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">🏢</span> 13. Ambiente e Cultura Ideal</h2>
-      <div id="idealEnvironment"></div>
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-brand-gold/20 flex items-center justify-center text-brand-gold">📜</span> 
+        14. Parecer Final VIGOR™
+      </h2>
+      <div id="parecerFinal" class="glass p-6 rounded-xl">
+        <p class="text-gray-300 leading-relaxed">Carregando parecer final...</p>
+      </div>
     </section>
 
-    <!-- 14. FIT COM VAGA -->
-    <section class="glass-card p-8 gradient-border">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-amber/20 flex items-center justify-center text-brand-amber">🎯</span> 14. Fit Vigorre™ com Vaga</h2>
-      <div id="jobFit"></div>
+    <!-- ========================================== -->
+    <!-- CLASSIFICAÇÃO FINAL -->
+    <!-- ========================================== -->
+    <section class="glass-card p-8 text-center gradient-border">
+      <h2 class="text-2xl font-bold mb-4">CLASSIFICAÇÃO FINAL VIGOR™</h2>
+      <div class="inline-flex items-center gap-4 px-8 py-4 rounded-2xl glass border border-brand-gold/30">
+        <span class="text-4xl" id="nivelEmoji">🏆</span>
+        <div>
+          <p class="text-sm text-gray-400">Nível</p>
+          <p class="text-2xl font-extrabold gradient-text" id="nivelFinal">--</p>
+        </div>
+      </div>
+      <p class="text-sm text-gray-400 mt-4" id="nivelJustificativa">Carregando justificativa técnica...</p>
     </section>
 
-    <!-- 15. TREINAMENTOS -->
-    <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">🎓</span> 15. Treinamentos Recomendados</h2>
-      <div id="trainings"></div>
-    </section>
-
-    <!-- 16. PDI -->
-    <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple">📈</span> 16. PDI Vigorre™</h2>
-      <div id="pdi"></div>
-    </section>
-
-    <!-- 17. PONTOS FORTES -->
-    <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-emerald/20 flex items-center justify-center text-brand-emerald">✅</span> 17. Pontos Fortes</h2>
-      <div id="strengths"></div>
-    </section>
-
-    <!-- 18. PONTOS DE DESENVOLVIMENTO -->
-    <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-amber/20 flex items-center justify-center text-brand-amber">📈</span> 18. Pontos de Desenvolvimento</h2>
-      <div id="developments"></div>
-    </section>
-
-    <!-- 19. RECOMENDAÇÕES RH -->
-    <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue">👔</span> 19. Recomendações para RH</h2>
-      <div id="rhRecs"></div>
-    </section>
-
-    <!-- 20. RECOMENDAÇÕES PARTICIPANTE -->
-    <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center text-brand-purple">🧭</span> 20. Recomendações para o Participante</h2>
-      <div id="participantRecs"></div>
-    </section>
-
-    <!-- 21. CONCLUSÃO -->
-    <section class="glass-card p-8">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-brand-cyan/20 flex items-center justify-center text-brand-cyan">📜</span> 21. Conclusão Executiva</h2>
-      <div id="conclusion"></div>
-    </section>
-
-    <!-- 22. FRASE FINAL -->
+    <!-- FRASE FINAL -->
     <section class="glass-card p-8 text-center">
-      <blockquote class="text-xl md:text-2xl italic text-gray-200 mb-4 font-light">"<span id="finalQuote">Carregando...</span>"</blockquote>
-      <p class="text-sm text-gray-500">— Vigorre One™ • People Analytics</p>
+      <blockquote class="text-xl md:text-2xl italic text-gray-200 mb-4 font-light">"<span id="finalQuote">Transformando dados humanos em decisões inteligentes.</span>"</blockquote>
+      <p class="text-sm text-gray-500">— VIGOR™ One • Inteligência Humana Aplicada</p>
     </section>
 
   </main>
 
-  <!-- FOOTER DA TELA -->
+  <!-- FOOTER -->
   <footer class="glass border-t border-white/10 py-8 mt-12 no-print">
     <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
-      <p>© 2024 Vigorre One™ • People Analytics Enterprise</p>
+      <p>© 2024 VIGOR™ One • Inteligência Humana Aplicada</p>
       <p class="text-xs mt-1">Documento confidencial. Uso exclusivo para desenvolvimento profissional.</p>
     </div>
   </footer>
@@ -321,7 +410,7 @@
       <div style="display:flex;align-items:center;gap:8px;">
         <span style="font-weight:600;font-size:7pt;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.5px;">CONFIDENCIAL</span>
         <span style="color:rgba(255,255,255,0.3);">•</span>
-        <span style="font-size:7pt;color:rgba(255,255,255,0.5);">Vigorre One™</span>
+        <span style="font-size:7pt;color:rgba(255,255,255,0.5);">VIGOR™ One</span>
       </div>
       <div style="font-size:7pt;color:rgba(255,255,255,0.5);text-align:center;">
         <span>contato@vigorre.com.br</span> <span style="color:rgba(255,255,255,0.3);">|</span> <span>(34) 99185-0735</span>
@@ -332,58 +421,46 @@
     </div>
   </div>
 
-  <!-- ASSINATURA CORPORATIVA -->
+  <!-- ASSINATURA -->
   <div class="print-signature-block">
-    <p class="print-signature-title" style="font-size:9pt;font-weight:600;color:#111;margin-bottom:0.5rem;">Documento Confidencial — Vigorre One™</p>
-    <p style="font-size:8pt;color:#555;line-height:1.4;">Este laudo foi gerado automaticamente pela plataforma Vigorre One™ utilizando metodologia proprietária de assessment comportamental integrado.</p>
+    <p style="font-size:9pt;font-weight:600;color:#111;margin-bottom:0.5rem;">Documento Confidencial — VIGOR™ One</p>
+    <p style="font-size:8pt;color:#555;line-height:1.4;">Este laudo foi gerado pela plataforma VIGOR™ One utilizando metodologia proprietária de Inteligência Humana Aplicada.</p>
     <p style="margin-top:0.5rem;font-size:7.5pt;color:#777;">📱 (34) 99185-0735 • 📧 contato@vigorre.com.br • 🌐 www.vigorre.com.br</p>
+    <p style="margin-top:0.3rem;font-size:7pt;color:#999;">Código de Autenticidade: <span id="codigoAutenticidade">VIG-2024-XXXX</span></p>
   </div>
 
   <!-- LOADING -->
   <div id="loadingOverlay" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
     <div class="text-center">
-      <div class="w-24 h-24 mx-auto mb-6 border-4 border-white/10 border-t-brand-cyan border-r-brand-purple rounded-full animate-spin"></div>
-      <h3 class="text-xl font-semibold mb-2">Gerando Laudo Vigorre™</h3>
-      <p class="text-gray-400">Processando análise integrada...</p>
+      <div class="w-24 h-24 mx-auto mb-6 border-4 border-white/10 border-t-brand-gold border-r-brand-purple rounded-full animate-spin"></div>
+      <h3 class="text-xl font-semibold mb-2">Gerando Laudo VIGOR™ One</h3>
+      <p class="text-gray-400">Processando análise aprofundada com 10 pilares exclusivos...</p>
     </div>
   </div>
 
   <script>
     // ============================================
-    // CONFIGURAÇÕES E DADOS
+    // DADOS E CONFIGURAÇÕES
     // ============================================
     const AppState = {
       participant: null,
       company: null,
       job: null,
+      modo: 'autoconhecimento', // autoconhecimento | rh | carreira
       results: { disc: null, ie: null, valores: null },
       charts: {}
     };
 
-    const DISC_INSIGHTS = {
-      D: { name: 'Dominância', color: '#EF4444', strengths: ['Liderança natural', 'Decisão rápida', 'Foco em resultados'], desc: 'Orientado a resultados e ação.' },
-      I: { name: 'Influência', color: '#3B82F6', strengths: ['Comunicação', 'Motivação', 'Networking'], desc: 'Comunicativo e persuasivo.' },
-      S: { name: 'Estabilidade', color: '#10B981', strengths: ['Paciência', 'Lealdade', 'Suporte'], desc: 'Calmo, paciente e confiável.' },
-      C: { name: 'Conformidade', color: '#7C3AED', strengths: ['Análise', 'Precisão', 'Planejamento'], desc: 'Analítico e orientado a qualidade.' }
-    };
-
-    const IE_INSIGHTS = {
-      autoconsciencia: { name: 'Autoconsciência', high: 'Excelente percepção emocional.' },
-      autocontrole: { name: 'Autocontrole', high: 'Ótima regulação sob pressão.' },
-      empatia: { name: 'Empatia', high: 'Alta sensibilidade interpessoal.' },
-      resiliencia: { name: 'Resiliência', high: 'Recuperação rápida após adversidades.' },
-      social: { name: 'Inteligência Social', high: 'Excelente navegação social.' },
-      adaptabilidade: { name: 'Adaptabilidade', high: 'Alta flexibilidade emocional.' }
-    };
-
     // ============================================
-    // INICIALIZAÇÃO
+    // CARREGAR DADOS
     // ============================================
     document.addEventListener('DOMContentLoaded', async () => {
-      console.log('📋 Laudo Vigorre One™ - Inicializando...');
+      console.log('📋 Laudo VIGOR™ One - Inicializando...');
 
       const urlParams = new URLSearchParams(window.location.search);
       const participantId = urlParams.get('participantId');
+      const modo = urlParams.get('modo') || 'autoconhecimento';
+      AppState.modo = modo;
 
       if (!participantId) {
         document.getElementById('loadingOverlay').classList.add('hidden');
@@ -399,9 +476,6 @@
       generateLaudo();
     });
 
-    // ============================================
-    // CARREGAR SESSÃO
-    // ============================================
     async function loadSession(participantId) {
       try {
         if (window.VigorreDB?.supabase) {
@@ -412,6 +486,7 @@
               const { data: company } = await VigorreDB.supabase.from('companies').select('*').eq('id', data.company_id).maybeSingle();
               if (company) AppState.company = company;
             }
+            if (data.job) AppState.job = data.job;
             return;
           }
         }
@@ -421,12 +496,10 @@
           const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
           AppState.company = companies.find(c => c.id === AppState.participant.companyId);
         }
-      } catch (e) { console.error('Erro ao carregar sessão:', e); }
+        if (AppState.participant?.job) AppState.job = AppState.participant.job;
+      } catch (e) { console.error('Erro:', e); }
     }
 
-    // ============================================
-    // CARREGAR RESULTADOS
-    // ============================================
     async function loadResults(participantId) {
       try {
         if (window.VigorreDB?.supabase) {
@@ -444,26 +517,33 @@
         if (disc) AppState.results.disc = JSON.parse(disc);
         if (ie) AppState.results.ie = JSON.parse(ie);
         if (valores) AppState.results.valores = JSON.parse(valores);
-      } catch (e) { console.error('Erro ao carregar resultados:', e); }
+      } catch (e) { console.error('Erro:', e); }
     }
 
     // ============================================
-    // GERAR LAUDO
+    // GERAR LAUDO COMPLETO
     // ============================================
     function generateLaudo() {
       const p = AppState.participant;
       const c = AppState.company;
+      const modo = AppState.modo;
+      
+      const nome = p?.name || 'Participante';
+      const empresa = c?.name || (modo === 'autoconhecimento' ? 'Profissional Autônomo' : 'Não informada');
+      const cargo = p?.job || p?.cargo || (modo === 'autoconhecimento' ? 'Em desenvolvimento profissional' : 'Não informado');
 
       // Capa
-      document.getElementById('coverName').textContent = p?.name || '--';
-      document.getElementById('coverCompany').textContent = c?.name || 'Independente';
-      document.getElementById('coverJob').textContent = p?.jobName || 'Não vinculada';
+      document.getElementById('coverName').textContent = nome;
+      document.getElementById('coverCompany').textContent = empresa;
+      document.getElementById('coverJob').textContent = cargo;
       document.getElementById('coverDate').textContent = new Date().toLocaleDateString('pt-BR');
-
-      // Print
-      document.getElementById('printName').textContent = p?.name || '--';
-      document.getElementById('printCompany').textContent = c?.name || 'Independente';
+      document.getElementById('printName').textContent = nome;
+      document.getElementById('printCompany').textContent = empresa;
       document.getElementById('printDate').textContent = new Date().toLocaleDateString('pt-BR');
+      
+      const codigo = 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 9000 + 1000));
+      document.getElementById('codigoLaudo').textContent = codigo;
+      document.getElementById('codigoAutenticidade').textContent = codigo;
 
       // Badges
       const tests = [];
@@ -476,259 +556,685 @@
         document.getElementById('laudoContent').style.display = 'block';
         document.getElementById('laudoContent').innerHTML = `
           <div class="glass-card p-8 text-center"><h2 class="text-xl font-bold text-brand-amber mb-4">📋 Nenhum teste concluído</h2>
-          <p class="text-gray-400">Complete pelo menos um teste para gerar o laudo.</p>
-          <button onclick="window.location.href='../dashboard.html'" class="mt-4 bg-gradient-to-r from-brand-blue to-brand-purple px-6 py-3 rounded-lg font-medium">Voltar ao Dashboard</button></div>`;
+          <p class="text-gray-400">Complete pelo menos um teste para gerar o laudo VIGOR™ One.</p>
+          <button onclick="window.location.href='../dashboard.html'" class="mt-4 bg-gradient-to-r from-brand-gold to-brand-purple px-6 py-3 rounded-lg font-medium">Voltar ao Dashboard</button></div>`;
         return;
       }
 
-      // Seções
-      if (AppState.results.disc) { document.getElementById('sectionDisc').classList.remove('hidden'); renderDisc(); }
-      if (AppState.results.ie) { document.getElementById('sectionIE').classList.remove('hidden'); renderIE(); }
-      if (AppState.results.valores) { document.getElementById('sectionValores').classList.remove('hidden'); renderValores(); }
+      // Renderizar gráficos DISC
+      if (AppState.results.disc) {
+        renderDiscCharts(AppState.results.disc.percentages || {});
+      }
 
-      // Resumo Executivo
-      renderExecutiveSummary(tests);
-
-      // Todas as outras seções
-      renderAllSections(tests);
+      // Gerar conteúdo
+      generateFinalidade(modo);
+      generateApresentacaoExecutiva(modo, tests);
+      generateMetodologiaVigor();
+      generatePerfilComportamental(tests);
+      generateIndicesVigor(tests);
+      generatePontosFortes(tests);
+      generatePontosAtencao(tests);
+      generatePerformanceFutura(tests, modo);
+      generateSaudeMental(tests);
+      generateAdaptacaoAlojamento(tests);
+      generateCompatibilidadeCargos(tests);
+      generateRecomendacoesRH(tests, modo);
+      generateRecomendacoesGestor(tests, modo);
+      generatePDI(tests, modo);
+      generateParecerFinal(tests, modo);
+      generateClassificacaoFinal(tests);
+      generateFinalQuote();
 
       // Mostrar
       document.getElementById('loadingOverlay').classList.add('hidden');
       document.getElementById('laudoContent').style.display = 'block';
-      document.getElementById('laudoContent').classList.remove('hidden');
-
-      console.log('✅ Laudo gerado com sucesso!');
+      console.log('✅ Laudo VIGOR™ One gerado com sucesso!');
     }
 
     // ============================================
-    // RENDERIZAR SEÇÕES
+    // FINALIDADE DA AVALIAÇÃO
     // ============================================
-    function renderDisc() {
-      const r = AppState.results.disc;
-      const pct = r.percentages || {};
-      const dominant = Object.entries(pct).sort((a,b) => b[1]-a[1])[0]?.[0] || 'D';
-      const profile = DISC_INSIGHTS[dominant];
+    function generateFinalidade(modo) {
+      const modos = {
+        autoconhecimento: {
+          texto: 'Esta avaliação tem como objetivo proporcionar autoconhecimento profissional, identificando talentos naturais, áreas de desenvolvimento e direcionamento de carreira.',
+          badge: 'Autoconhecimento Profissional',
+          class: 'modo-autoconhecimento'
+        },
+        rh: {
+          texto: 'Esta avaliação tem como objetivo apoiar processos de recrutamento e seleção, fornecendo análise de compatibilidade com a vaga, cultura e gestor.',
+          badge: 'Recrutamento e Seleção',
+          class: 'modo-rh'
+        },
+        carreira: {
+          texto: 'Esta avaliação tem como objetivo apoiar o desenvolvimento profissional e de carreira, identificando potencial de crescimento, promoção e liderança.',
+          badge: 'Desenvolvimento e Carreira',
+          class: 'modo-carreira'
+        }
+      };
 
-      document.getElementById('discAnalysis').innerHTML = `
-        <p class="text-gray-300 mb-4">Perfil predominante <strong style="color:${profile.color}">${profile.name}</strong> com ${pct[dominant] || 0}% de intensidade.</p>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="glass p-4 rounded-lg"><h4 class="font-medium mb-2 text-brand-emerald">Pontos Fortes</h4><ul class="space-y-1 text-sm text-gray-300">${profile.strengths.map(s => `<li>• ${s}</li>`).join('')}</ul></div>
-          <div class="glass p-4 rounded-lg"><h4 class="font-medium mb-2 text-brand-rose">Áreas de Desenvolvimento</h4><p class="text-sm text-gray-300">Desenvolver flexibilidade e escuta ativa.</p></div>
-        </div>
-      `;
-
-      document.getElementById('discComm').textContent = 'Comunicação direta e objetiva.';
-      document.getElementById('discDecision').textContent = 'Decisão rápida e orientada a resultados.';
-
-      renderDiscCharts(pct);
-    }
-
-    function renderIE() {
-      const r = AppState.results.ie;
-      const pct = r.percentages || {};
-      const avgQE = r.avg_qe || r.avgQE || 0;
-
-      document.getElementById('ieAnalysis').innerHTML = `
-        <p class="text-gray-300">Índice QE de <strong style="color:${avgQE >= 70 ? '#10B981' : '#F59E0B'}">${avgQE}%</strong>. ${avgQE >= 70 ? 'Alta inteligência emocional.' : 'Em desenvolvimento.'}</p>
-      `;
-
-      renderIECharts(pct);
-    }
-
-    function renderValores() {
-      const r = AppState.results.valores;
-      const pct = r.percentages || {};
-      const dominant = r.dominant || Object.entries(pct).sort((a,b) => b[1]-a[1])[0]?.[0] || 'proposito';
-
-      document.getElementById('valuesAnalysis').innerHTML = `
-        <p class="text-gray-300">Valor predominante <strong style="color:#F59E0B">${dominant}</strong> com ${pct[dominant] || 0}%.</p>
-      `;
-
-      renderValuesCharts(pct);
+      const info = modos[modo] || modos.autoconhecimento;
+      document.getElementById('modoTexto').textContent = info.texto;
+      document.getElementById('modoBadges').innerHTML = `<span class="modo-badge ${info.class}">${info.badge}</span>`;
     }
 
     // ============================================
-    // EXECUTIVE SUMMARY
+    // 1. APRESENTAÇÃO EXECUTIVA
     // ============================================
-    function renderExecutiveSummary(tests) {
-      let totalScore = 0;
-      let count = 0;
-      if (AppState.results.disc?.percentages) {
-        const vals = Object.values(AppState.results.disc.percentages);
-        totalScore += vals.reduce((a,b) => a + b, 0) / vals.length;
-        count++;
+    function generateApresentacaoExecutiva(modo, tests) {
+      const nome = AppState.participant?.name || 'O participante';
+      const temDisc = tests.includes('DISC');
+      const temIE = tests.includes('IE');
+      const temValores = tests.includes('Valores');
+
+      let discTexto = '';
+      if (temDisc && AppState.results.disc) {
+        const pct = AppState.results.disc.percentages || {};
+        const dominant = Object.entries(pct).sort((a,b) => b[1]-a[1])[0]?.[0] || 'D';
+        const perfis = { D: 'Dominância', I: 'Influência', S: 'Estabilidade', C: 'Conformidade' };
+        discTexto = `perfil comportamental predominante de ${perfis[dominant]}`;
       }
-      if (AppState.results.ie?.avg_qe || AppState.results.ie?.avgQE) {
-        totalScore += AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0;
-        count++;
-      }
-      if (AppState.results.valores?.percentages) {
-        const vals = Object.values(AppState.results.valores.percentages);
-        totalScore += vals.reduce((a,b) => a + b, 0) / vals.length;
-        count++;
-      }
-      const avg = count > 0 ? Math.round(totalScore / count) : 0;
 
-      document.getElementById('execScore').textContent = avg + '%';
-      document.getElementById('execProfileName').textContent = `Perfil Integrado • ${avg >= 70 ? 'Alta Performance' : avg >= 50 ? 'Potencial em Desenvolvimento' : 'Base para Crescimento'}`;
-      document.getElementById('execProfileDesc').textContent = `Laudo baseado em ${tests.join(', ')}. Índice geral de ${avg}% indicando ${avg >= 70 ? 'perfil alinhado a posições de alta complexidade' : avg >= 50 ? 'potencial com desenvolvimento direcionado' : 'oportunidades de crescimento estruturado'}.`;
-      document.getElementById('execEmotional').textContent = AppState.results.ie ? `${AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0}%` : 'Não avaliado';
-      document.getElementById('execMotivators').textContent = AppState.results.valores ? Object.entries(AppState.results.valores.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] || '--' : 'Não avaliado';
-      document.getElementById('execCulture').textContent = avg >= 70 ? 'Alta Aderência' : avg >= 50 ? 'Aderência Moderada' : 'Em Desenvolvimento';
-      document.getElementById('execFit').textContent = AppState.job ? 'Em Análise' : 'Sem Vaga Vinculada';
+      let ieTexto = '';
+      if (temIE && AppState.results.ie) {
+        const avg = AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0;
+        ieTexto = `inteligência emocional ${avg >= 70 ? 'de alta performance' : avg >= 50 ? 'em desenvolvimento' : 'em construção'}`;
+      }
+
+      let valoresTexto = '';
+      if (temValores && AppState.results.valores) {
+        const pct = AppState.results.valores.percentages || {};
+        const dominant = AppState.results.valores.dominant || Object.entries(pct).sort((a,b) => b[1]-a[1])[0]?.[0] || 'proposito';
+        const perfis = { proposito: 'Propósito', reconhecimento: 'Reconhecimento', estabilidade: 'Estabilidade', autonomia: 'Autonomia', relacionamento: 'Relacionamento', inovacao: 'Inovação', realizacao: 'Realização', equilibrio: 'Equilíbrio' };
+        valoresTexto = `orientação por valores de ${perfis[dominant] || 'Propósito'}`;
+      }
+
+      let modoTexto = '';
+      if (modo === 'autoconhecimento') modoTexto = 'autoconhecimento e desenvolvimento profissional';
+      else if (modo === 'rh') modoTexto = 'recrutamento e seleção';
+      else modoTexto = 'desenvolvimento de carreira';
+
+      const texto = `
+        <p><strong>Objetivo da Avaliação:</strong> O presente laudo foi desenvolvido com base na Metodologia Exclusiva VIGOR™ One, com o objetivo de apoiar o ${modoTexto} de <strong>${nome}</strong>.</p>
+        
+        <p class="mt-4"><strong>Metodologia VIGOR™:</strong> Diferentemente dos testes tradicionais que apenas descrevem quem a pessoa é, a Metodologia VIGOR™ analisa o comportamento humano de forma integrada, avaliando não apenas características pessoais, mas também <strong>potencial profissional, sustentação emocional, adaptabilidade, permanência, performance futura e compatibilidade organizacional</strong>.</p>
+        
+        <p class="mt-4"><strong>Análise Integrada:</strong> Este laudo combina ${temDisc ? `análise comportamental (${discTexto})` : ''} ${temIE ? `, ${ieTexto}` : ''} ${temValores ? `e ${valoresTexto}` : ''} para oferecer uma visão completa do perfil humano e seu potencial de aplicação no ambiente profissional.</p>
+        
+        <p class="mt-4"><strong>Importância dos Resultados:</strong> Os insights aqui apresentados são ferramentas estratégicas para ${modo === 'autoconhecimento' ? 'orientar decisões de carreira, identificar talentos naturais e construir um plano de desenvolvimento personalizado' : modo === 'rh' ? 'apoiar decisões de contratação, alocação e desenvolvimento de talentos' : 'orientar planos de carreira, sucessão e desenvolvimento de liderança'}.</p>
+        
+        <p class="mt-4">O laudo não avalia apenas <strong>personalidade</strong>, mas também <strong>potencial profissional</strong>, <strong>sustentação emocional</strong>, <strong>adaptabilidade</strong>, <strong>permanência</strong>, <strong>performance futura</strong> e <strong>compatibilidade organizacional</strong> — elementos que tornam a Metodologia VIGOR™ única no mercado.</p>
+      `;
+
+      document.getElementById('execApresentacao').innerHTML = texto;
     }
 
     // ============================================
-    // TODAS AS OUTRAS SEÇÕES
+    // 2. METODOLOGIA EXCLUSIVA VIGOR™
     // ============================================
-    function renderAllSections(tests) {
-      const p = AppState.participant;
-      const avg = 70;
-
-      // Visão Geral
-      document.getElementById('profileOverview').innerHTML = `
-        <p class="text-gray-300 leading-relaxed">Perfil integrado baseado em ${tests.join(', ')}. ${avg >= 70 ? 'Apresenta maturidade profissional e comportamental para posições estratégicas.' : 'Demonstra potencial para crescimento com desenvolvimento direcionado.'}</p>
-      `;
-
-      // Perfil Profissional
-      document.getElementById('professionalProfile').innerHTML = `
-        <div class="grid md:grid-cols-3 gap-4 mb-4">
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-1">Ritmo de Trabalho</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Acelerado e orientado a impacto' : 'Consistente e adaptável'}</p></div>
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-1">Autonomia</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Alta necessidade de independência' : 'Equilíbrio entre diretrizes e auto-gestão'}</p></div>
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-1">Foco em Resultados</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Orientação extrema a métricas e entregas' : 'Equilíbrio entre qualidade e prazo'}</p></div>
-        </div>
-        <div class="glass p-5 rounded-xl"><h3 class="font-semibold mb-2">Estilo de Execução</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Execução ágil com capacidade de pivô rápido.' : 'Execução consistente com foco em qualidade e sustentabilidade.'}</p></div>
-      `;
-
-      // Trabalho em Equipe
-      document.getElementById('teamwork').innerHTML = `
-        <p class="text-gray-300 mb-4">${avg >= 70 ? 'Integra-se rapidamente e contribui com liderança natural.' : 'Colabora de forma consistente e apoia o time.'}</p>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-cyan">Integração</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Conecta departamentos e facilita trocas' : 'Mantém coesão e apoia membros'}</p></div>
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-rose">Gestão de Conflitos</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Media com diplomacia e busca soluções win-win' : 'Aborda com cautela e busca entendimento'}</p></div>
-        </div>
-      `;
-
-      // Liderança
-      document.getElementById('leadership').innerHTML = `
-        <div class="glass p-5 rounded-xl mb-4"><h3 class="font-semibold mb-2">Arquétipo de Liderança</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Líder Inspirador e Orientado a Resultados' : 'Líder Facilitador e de Suporte'}</p></div>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Motivação de Equipe</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Usa desafios e reconhecimento para engajar' : 'Oferece segurança e crescimento estável'}</p></div>
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Delegação</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Delega autoridade e cobra resultados' : 'Delega com suporte próximo'}</p></div>
-        </div>
-      `;
-
-      // Pressão
-      document.getElementById('pressureBehavior').innerHTML = `
-        <p class="text-gray-300 mb-4">${avg >= 70 ? 'Mantém clareza e compostura sob pressão.' : 'Busca equilíbrio e apoio em cenários desafiadores.'}</p>
-        <div class="grid md:grid-cols-3 gap-4">
-          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Estabilidade</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-cyan h-2 rounded-full" style="width:${avg}%"></div></div></div>
-          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Tolerância</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-emerald h-2 rounded-full" style="width:${avg}%"></div></div></div>
-          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Resiliência</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-purple h-2 rounded-full" style="width:${avg}%"></div></div></div>
-        </div>
-      `;
-
-      // Decisão
-      document.getElementById('decisionMaking').innerHTML = `
-        <p class="text-gray-300 mb-4">${avg >= 70 ? 'Decisões rápidas, pragmáticas e orientadas a impacto.' : 'Decisões ponderadas, com análise de riscos e consequências.'}</p>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-cyan">Velocidade vs Cautela</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Rápido e assertivo' : 'Cauteloso e analítico'}</p></div>
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2 text-brand-amber">Racionalidade vs Intuição</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Equilibra dados e instinto' : 'Baseado em fatos e métricas'}</p></div>
-        </div>
-      `;
-
-      // Comunicação
-      document.getElementById('communication').innerHTML = `
-        <div class="grid md:grid-cols-2 gap-6 mb-4">
-          <div class="glass p-5 rounded-xl"><h3 class="font-semibold mb-3 text-brand-emerald">Padrão Comunicacional</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Direto, objetivo e influente.' : 'Calmo, empático e estruturado.'}</p></div>
-          <div class="glass p-5 rounded-xl"><h3 class="font-semibold mb-3 text-brand-amber">Em Reuniões</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Lidera pautas e engaja participantes.' : 'Ouve ativamente e valida contribuições.'}</p></div>
-        </div>
-        <div class="grid md:grid-cols-3 gap-4">
-          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Clareza</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-emerald h-2 rounded-full" style="width:${avg}%"></div></div></div>
-          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Influência</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-blue h-2 rounded-full" style="width:${avg}%"></div></div></div>
-          <div class="glass p-4 rounded-xl text-center"><h4 class="text-xs text-gray-500 mb-1">Empatia</h4><div class="w-full bg-white/10 rounded-full h-2"><div class="bg-brand-purple h-2 rounded-full" style="width:${avg}%"></div></div></div>
-        </div>
-      `;
-
-      // Produtividade
-      document.getElementById('productivity').innerHTML = `
-        <p class="text-gray-300 mb-4">${avg >= 70 ? 'Capacidade de entrega acelerada com foco em impacto.' : 'Capacidade de entrega consistente com foco em qualidade.'}</p>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Consistência</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Alta, com oscilações conforme engajamento' : 'Muito alta, com previsibilidade de entregas'}</p></div>
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Adaptabilidade</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Pivota rapidamente diante de mudanças' : 'Adapta-se com transição estruturada'}</p></div>
-        </div>
-      `;
-
-      // Ambiente Ideal
-      document.getElementById('idealEnvironment').innerHTML = `
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="glass p-5 rounded-xl"><h3 class="font-semibold mb-2 text-brand-emerald">Cultura Aderente</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Ambientes dinâmicos, com autonomia e reconhecimento.' : 'Ambientes estruturados, com previsibilidade e suporte.'}</p></div>
-          <div class="glass p-5 rounded-xl"><h3 class="font-semibold mb-2 text-brand-amber">Estilo de Gestão</h3><p class="text-sm text-gray-300">${avg >= 70 ? 'Gestão por objetivos e resultados.' : 'Gestão participativa e de suporte.'}</p></div>
-        </div>
-      `;
-
-      // Fit com Vaga
-      document.getElementById('jobFit').innerHTML = `
-        <div class="glass p-5 rounded-xl mb-6 text-center">
-          <div class="score-ring mx-auto mb-3" style="width:120px;height:120px;"><span class="score-value gradient-text" style="font-size:1.8rem;">${avg}%</span></div>
-          <h3 class="font-semibold text-lg">${avg >= 70 ? 'Alta Compatibilidade' : 'Compatibilidade em Desenvolvimento'}</h3>
-          <p class="text-sm text-gray-400">${AppState.job ? `Para a vaga "${AppState.job.name || 'Não especificada'}"` : 'Nenhuma vaga vinculada.'}</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-4">
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Compatibilidade DISC</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Alta' : 'Moderada'}</p></div>
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Aderência Emocional</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Alta' : 'Moderada'}</p></div>
-          <div class="glass p-4 rounded-xl"><h4 class="font-medium mb-2">Fit Cultural</h4><p class="text-sm text-gray-300">${avg >= 70 ? 'Alta' : 'Moderada'}</p></div>
-        </div>
-      `;
-
-      // Treinamentos
-      const trainings = [
-        { title: 'Comunicação Assertiva', desc: 'Técnicas para comunicação clara e influente.' },
-        { title: 'Gestão Emocional', desc: 'Regulação emocional para alta performance.' },
-        { title: 'Liderança Adaptativa', desc: 'Ajuste de estilo conforme o contexto.' }
+    function generateMetodologiaVigor() {
+      const pilares = [
+        { sigla: 'FV™', nome: 'Fator VIGOR™', desc: 'Avalia energia profissional, resiliência, adaptabilidade, capacidade de crescimento e sustentação de desempenho. Pontuação de 0 a 1000.', cor: '#D4AF37' },
+        { sigla: 'ISP™', nome: 'Índice de Sustentação Profissional', desc: 'Avalia resistência emocional, capacidade de manter resultados, tolerância à pressão e gestão do estresse. Classificação: Baixa, Moderada, Alta, Excelente.', cor: '#10B981' },
+        { sigla: 'ICA™', nome: 'Índice de Compatibilidade Organizacional', desc: 'Avalia compatibilidade com a cultura, com a liderança e com o ambiente operacional. Percentual de compatibilidade.', cor: '#1D4ED8' },
+        { sigla: 'RP™', nome: 'Radar de Permanência', desc: 'Avalia probabilidade de retenção, risco de desligamento e motivadores de permanência.', cor: '#7C3AED' },
+        { sigla: 'IPO™', nome: 'Índice de Prontidão Operacional', desc: 'Avalia velocidade de adaptação, curva de aprendizagem e tempo estimado para alta performance.', cor: '#06B6D4' },
+        { sigla: 'MRH™', nome: 'Mapa de Riscos Humanos', desc: 'Avalia conflitos, desengajamento, absenteísmo, rotatividade e resistência à mudança.', cor: '#F43F5E' },
+        { sigla: 'DL™', nome: 'Diagnóstico de Liderabilidade', desc: 'Avalia potencial de liderança, influência, tomada de decisão e gestão de equipes.', cor: '#F59E0B' },
+        { sigla: 'TSO™', nome: 'Termômetro de Saúde Organizacional', desc: 'Avalia engajamento, segurança psicológica, comunicação e clima organizacional.', cor: '#EC4899' },
+        { sigla: 'IAM™', nome: 'Inteligência de Alojamento e Mobilidade', desc: 'Avalia adaptação longe da família, convivência coletiva, isolamento emocional e resiliência em alojamentos.', cor: '#8B5CF6' },
+        { sigla: 'IPE™', nome: 'Índice de Potencial Evolutivo', desc: 'Avalia crescimento futuro, aprendizagem e desenvolvimento profissional.', cor: '#14B8A6' }
       ];
-      document.getElementById('trainings').innerHTML = `<div class="grid md:grid-cols-3 gap-4">${trainings.map(t => `<div class="glass p-4 rounded-xl"><h4 class="font-medium text-brand-cyan">${t.title}</h4><p class="text-sm text-gray-300">${t.desc}</p></div>`).join('')}</div>`;
 
-      // PDI
-      document.getElementById('pdi').innerHTML = `
+      document.getElementById('metodologiaVigor').innerHTML = `
+        <div class="glass p-6 rounded-xl mb-4">
+          <h3 class="text-xl font-bold text-brand-gold mb-3">A Metodologia VIGOR™ é composta por 10 pilares exclusivos:</h3>
+          <p class="text-gray-300 text-sm mb-4">Enquanto os concorrentes respondem <em>"Quem é essa pessoa?"</em>, a VIGOR™ responde: <strong>"Quem é essa pessoa, como ela irá performar, quanto tempo permanecerá, quais riscos apresenta e como potencializar seus resultados."</strong></p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          ${pilares.map(p => `
+            <div class="glass p-4 rounded-xl border-l-4" style="border-color:${p.cor}">
+              <h4 class="font-bold" style="color:${p.cor}">${p.sigla} — ${p.nome}</h4>
+              <p class="text-sm text-gray-300 mt-1">${p.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+        <div class="glass p-4 rounded-xl mt-4 text-center border border-brand-gold/20">
+          <p class="text-sm text-gray-400">Equação Oficial: <strong class="text-brand-gold">FV™ + ISP™ + ICA™ + RP™ + IPO™ + MRH™ + DL™ + TSO™ + IAM™ + IPE™ = PERFORMANCE HUMANA SUSTENTÁVEL™</strong></p>
+        </div>
+      `;
+    }
+
+    // ============================================
+    // 3. PERFIL COMPORTAMENTAL
+    // ============================================
+    function generatePerfilComportamental(tests) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const pct = hasDisc ? AppState.results.disc.percentages : {};
+      const dominant = hasDisc ? Object.entries(pct).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+      
+      const profiles = {
+        D: { name: 'Dominância', color: '#EF4444', 
+          desc: 'orientado a resultados, assertivo e com forte capacidade de liderança. Toma decisões rápidas e assume riscos calculados.',
+          comm: 'direto, objetivo e focado em eficiência',
+          decision: 'rápido, pragmático e orientado a impacto',
+          pressure: 'acelera a execução e pode tornar-se mais exigente',
+          team: 'lidera pelo exemplo e cobra resultados',
+          change: 'adapta-se rapidamente, mas pode ser impaciente com processos lentos',
+          conflict: 'enfrenta conflitos de forma direta e busca soluções rápidas'
+        },
+        I: { name: 'Influência', color: '#3B82F6',
+          desc: 'comunicativo, persuasivo e com forte capacidade de engajamento. Constrói redes e motiva equipes.',
+          comm: 'entusiasta, persuasivo e focado em conexões',
+          decision: 'considera impacto nas pessoas e busca consenso',
+          pressure: 'mantém otimismo e busca soluções colaborativas',
+          team: 'integra grupos e mantém clima positivo',
+          change: 'alta adaptabilidade, mas pode perder foco com excesso de ideias',
+          conflict: 'media conflitos com diplomacia e busca consenso'
+        },
+        S: { name: 'Estabilidade', color: '#10B981',
+          desc: 'paciente, empático e com forte capacidade de suporte. Mantém harmonia e constância.',
+          comm: 'calmo, empático e focado em entendimento mútuo',
+          decision: 'cauteloso, analisa impactos nas pessoas e busca segurança',
+          pressure: 'busca apoio e divide responsabilidades',
+          team: 'apoia colegas e mantém coerência',
+          change: 'adapta-se com transição estruturada, pode resistir a mudanças bruscas',
+          conflict: 'evita conflitos e busca harmonia'
+        },
+        C: { name: 'Conformidade', color: '#7C3AED',
+          desc: 'analítico, detalhista e com forte capacidade de planejamento. Busca precisão e qualidade.',
+          comm: 'preciso, baseado em fatos e estruturado',
+          decision: 'metódico, avalia minuciosamente e busca mitigar riscos',
+          pressure: 'organiza prioridades e segue planos',
+          team: 'organiza processos e garante qualidade',
+          change: 'adapta-se com planejamento, pode ser resistente a improvisos',
+          conflict: 'analisa conflitos com objetividade e busca soluções estruturadas'
+        }
+      };
+
+      const profile = profiles[dominant] || profiles.D;
+      const nome = AppState.participant?.name || 'O participante';
+
+      const html = `
         <div class="space-y-4">
-          <div class="glass p-4 rounded-xl border-l-4 border-brand-emerald"><h4 class="font-semibold mb-2 text-brand-emerald">🎯 Curto Prazo (0-3 meses)</h4><ul class="space-y-1 text-sm text-gray-300"><li>• Estabelecer rotina de auto-observação</li><li>• Praticar pausa estratégica antes de decisões</li></ul></div>
-          <div class="glass p-4 rounded-xl border-l-4 border-brand-amber"><h4 class="font-semibold mb-2 text-brand-amber">🚀 Médio Prazo (3-12 meses)</h4><ul class="space-y-1 text-sm text-gray-300"><li>• Desenvolver competência específica identificada</li><li>• Aplicar técnicas de regulação em cenários reais</li></ul></div>
-          <div class="glass p-4 rounded-xl border-l-4 border-brand-purple"><h4 class="font-semibold mb-2 text-brand-purple">🌟 Longo Prazo (12+ meses)</h4><ul class="space-y-1 text-sm text-gray-300"><li>• Assumir papel de modelo comportamental</li><li>• Integrar inteligência comportamental em processos estratégicos</li></ul></div>
+          <p><strong style="color:${profile.color}">Perfil Predominante: ${profile.name}</strong> — ${profile.desc}</p>
+          
+          <p><strong>Como pensa:</strong> ${nome} tende a processar informações de forma ${dominant === 'D' ? 'rápida e orientada a ação, focando no essencial para tomar decisões' : dominant === 'I' ? 'criativa e conectiva, buscando padrões e oportunidades' : dominant === 'S' ? 'reflexiva e estruturada, avaliando impactos antes de agir' : 'analítica e detalhada, buscando precisão e compreensão profunda'}.</p>
+          
+          <p><strong>Como toma decisões:</strong> ${profile.decision}.</p>
+          
+          <p><strong>Como reage sob pressão:</strong> ${profile.pressure}.</p>
+          
+          <p><strong>Como se comunica:</strong> ${profile.comm}.</p>
+          
+          <p><strong>Como trabalha em equipe:</strong> ${profile.team}.</p>
+          
+          <p><strong>Como lida com mudanças:</strong> ${profile.change}.</p>
+          
+          <p><strong>Como lida com conflitos:</strong> ${profile.conflict}.</p>
+          
+          <p><strong>Como se relaciona com líderes:</strong> ${dominant === 'D' ? 'Respeita líderes que são diretos, competentes e focados em resultados. Valoriza autonomia e confiança.' : dominant === 'I' ? 'Busca líderes inspiradores, que valorizam pessoas e comunicação aberta.' : dominant === 'S' ? 'Valoriza líderes que oferecem suporte, consistência e estabilidade.' : 'Respeita líderes técnicos, que valorizam qualidade e precisão.'}</p>
+          
+          <p><strong>Como lidera pessoas:</strong> ${dominant === 'D' ? 'Liderança diretiva, orientada a metas e resultados. Cobra performance e reconhece conquistas.' : dominant === 'I' ? 'Liderança inspiradora, participativa e motivadora. Engaja equipes com visão e entusiasmo.' : dominant === 'S' ? 'Liderança servidora, focada em desenvolvimento e suporte. Constrói equipes coesas.' : 'Liderança técnica, focada em processos e qualidade. Garante excelência e precisão.'}</p>
+          
+          <p><strong>Como reage a metas:</strong> ${dominant === 'D' ? 'Aceita metas desafiadoras como combustível para performance. Busca superar expectativas.' : dominant === 'I' ? 'Se engaja em metas que tragam impacto e reconhecimento. Busca envolvimento.' : dominant === 'S' ? 'Cumpre metas com consistência e qualidade. Valoriza planejamento.' : 'Analisa metas com precisão e busca excelência na execução.'}</p>
+          
+          <p><strong>Como reage a cobranças:</strong> ${dominant === 'D' ? 'Recebe cobranças como estímulo para entregar resultados mais rápidos.' : dominant === 'I' ? 'Prefere cobranças feitas de forma construtiva e motivadora.' : dominant === 'S' ? 'Pode sentir-se pressionado, mas mantém foco na qualidade.' : 'Processa cobranças analiticamente e busca melhorias.'}</p>
         </div>
       `;
 
-      // Pontos Fortes
-      document.getElementById('strengths').innerHTML = `<div class="grid md:grid-cols-2 gap-4">${['Liderança natural', 'Comunicação clara', 'Foco em resultados', 'Resiliência emocional'].map(s => `<div class="glass p-4 rounded-xl flex items-center gap-3"><span class="text-brand-emerald text-xl">✓</span><p class="font-medium">${s}</p></div>`).join('')}</div>`;
+      document.getElementById('perfilComportamentalTexto').innerHTML = html;
+    }
 
-      // Desenvolvimentos
-      document.getElementById('developments').innerHTML = `<div class="grid md:grid-cols-2 gap-4">${['Escuta ativa', 'Paciência processual', 'Delegação efetiva', 'Flexibilidade cognitiva'].map(d => `<div class="glass p-4 rounded-xl flex items-center gap-3"><span class="text-brand-amber text-xl">⚡</span><p class="font-medium">${d}</p></div>`).join('')}</div>`;
+    // ============================================
+    // 4. ÍNDICES EXCLUSIVOS VIGOR™
+    // ============================================
+    function generateIndicesVigor(tests) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const hasIE = tests.includes('IE') && AppState.results.ie;
+      const hasValores = tests.includes('Valores') && AppState.results.valores;
+      
+      const dominant = hasDisc ? Object.entries(AppState.results.disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+      const ieAvg = hasIE ? (AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0) : 0;
+      
+      // Calcular índices
+      const fv = Math.min(980, Math.max(400, 500 + (dominant === 'D' ? 80 : dominant === 'I' ? 70 : dominant === 'S' ? 60 : 90) + (ieAvg >= 70 ? 100 : ieAvg >= 50 ? 50 : 0)));
+      const isp = ieAvg >= 70 ? 'Excelente' : ieAvg >= 50 ? 'Alta' : ieAvg >= 35 ? 'Moderada' : 'Baixa';
+      const ica = Math.min(98, Math.max(45, 50 + (dominant === 'D' ? 20 : dominant === 'I' ? 15 : dominant === 'S' ? 10 : 25) + (ieAvg >= 70 ? 20 : 10)));
+      const rp = Math.min(95, Math.max(40, 50 + (dominant === 'S' ? 25 : dominant === 'C' ? 20 : 10) + (ieAvg >= 70 ? 15 : 5)));
+      const ipo = Math.min(98, Math.max(40, 50 + (dominant === 'D' ? 30 : dominant === 'I' ? 20 : 10) + (ieAvg >= 70 ? 15 : 5)));
 
-      // RH Recs
-      document.getElementById('rhRecs').innerHTML = `
-        <div class="space-y-3">
-          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-cyan mt-1">➤</span><p class="text-sm text-gray-300">Onboarding: Focar em integração com a cultura e metas claras.</p></div>
-          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-cyan mt-1">➤</span><p class="text-sm text-gray-300">Estilo de Gestão: Adotar abordagem participativa e inspiracional.</p></div>
-          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-cyan mt-1">➤</span><p class="text-sm text-gray-300">Retenção: Oferecer crescimento, reconhecimento e desafios alinhados.</p></div>
+      const indices = [
+        { sigla: 'FV™', nome: 'Fator VIGOR™', valor: fv, max: 1000, label: fv >= 800 ? 'Excelente' : fv >= 600 ? 'Alto' : fv >= 450 ? 'Moderado' : 'Em desenvolvimento', cor: fv >= 800 ? '#10B981' : fv >= 600 ? '#F59E0B' : '#F43F5E' },
+        { sigla: 'ISP™', nome: 'Índice de Sustentação Profissional', valor: isp === 'Excelente' ? 90 : isp === 'Alta' ? 75 : isp === 'Moderada' ? 55 : 35, max: 100, label: isp, cor: isp === 'Excelente' ? '#10B981' : isp === 'Alta' ? '#06B6D4' : isp === 'Moderada' ? '#F59E0B' : '#F43F5E' },
+        { sigla: 'ICA™', nome: 'Índice de Compatibilidade Organizacional', valor: ica, max: 100, label: `${ica}%`, cor: ica >= 80 ? '#10B981' : ica >= 60 ? '#F59E0B' : '#F43F5E' },
+        { sigla: 'RP™', nome: 'Radar de Permanência', valor: rp, max: 100, label: `${rp}%`, cor: rp >= 70 ? '#10B981' : rp >= 50 ? '#F59E0B' : '#F43F5E' },
+        { sigla: 'IPO™', nome: 'Índice de Prontidão Operacional', valor: ipo, max: 100, label: `${ipo}%`, cor: ipo >= 80 ? '#10B981' : ipo >= 60 ? '#F59E0B' : '#F43F5E' },
+        { sigla: 'IPE™', nome: 'Índice de Potencial Evolutivo', valor: Math.min(95, 50 + (dominant === 'D' ? 25 : dominant === 'I' ? 20 : 15) + (ieAvg >= 70 ? 20 : 5)), max: 100, label: 'Alto', cor: '#7C3AED' }
+      ];
+
+      document.getElementById('indicesVigor').innerHTML = indices.map(i => `
+        <div class="glass p-4 rounded-xl">
+          <div class="flex justify-between items-center mb-2">
+            <span class="font-bold" style="color:${i.cor}">${i.sigla}</span>
+            <span class="text-sm" style="color:${i.cor}">${i.label}</span>
+          </div>
+          <div class="w-full bg-white/10 rounded-full h-2">
+            <div class="h-2 rounded-full transition-all" style="width:${(i.valor/i.max)*100}%;background:${i.cor}"></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-1">${i.nome}</p>
+        </div>
+      `).join('');
+    }
+
+    // ============================================
+    // 5. PONTOS FORTES (10+)
+    // ============================================
+    function generatePontosFortes(tests) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const hasIE = tests.includes('IE') && AppState.results.ie;
+      const dominant = hasDisc ? Object.entries(AppState.results.disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+
+      const forcas = [
+        { titulo: 'Liderança Natural', desc: 'Capacidade de assumir a liderança em situações desafiadoras, inspirando confiança.', impacto: 'Alta performance em gestão de equipes e projetos.', exemplo: 'Assume protagonismo em momentos de crise.' },
+        { titulo: 'Tomada de Decisão Ágil', desc: 'Capacidade de avaliar cenários rapidamente e agir com assertividade.', impacto: 'Aceleração de processos e redução de gargalos.', exemplo: 'Decide com rapidez em situações de alta pressão.' },
+        { titulo: 'Comunicação Persuasiva', desc: 'Capacidade de transmitir ideias com clareza e influenciar positivamente.', impacto: 'Engajamento de equipes e stakeholders.', exemplo: 'Apresenta propostas que geram adesão.' },
+        { titulo: 'Inteligência Emocional', desc: 'Capacidade de regular emoções e manter equilíbrio sob pressão.', impacto: 'Ambiente de trabalho saudável e produtivo.', exemplo: 'Mantém calma e clareza em negociações difíceis.' },
+        { titulo: 'Resiliência', desc: 'Capacidade de recuperação rápida após adversidades.', impacto: 'Sustentação de performance em momentos desafiadores.', exemplo: 'Transforma fracassos em aprendizado.' },
+        { titulo: 'Pensamento Analítico', desc: 'Capacidade de analisar dados e cenários com profundidade.', impacto: 'Decisões mais precisas e redução de riscos.', exemplo: 'Identifica padrões e tendências antes dos outros.' },
+        { titulo: 'Adaptabilidade', desc: 'Capacidade de se ajustar a mudanças com flexibilidade.', impacto: 'Resiliência organizacional em cenários de transformação.', exemplo: 'Se adapta rapidamente a novos processos.' },
+        { titulo: 'Visão Estratégica', desc: 'Capacidade de conectar ações cotidianas a objetivos de longo prazo.', impacto: 'Alinhamento de esforços a metas organizacionais.', exemplo: 'Planeja com visão de futuro.' },
+        { titulo: 'Empatia', desc: 'Capacidade de compreender e validar perspectivas alheias.', impacto: 'Construção de relações de confiança.', exemplo: 'Constrói conexões autênticas com colegas.' },
+        { titulo: 'Foco em Resultados', desc: 'Orientação constante a metas e entregas de qualidade.', impacto: 'Produtividade elevada e cumprimento de prazos.', exemplo: 'Entrega resultados acima da expectativa.' }
+      ];
+
+      document.getElementById('pontosFortes').innerHTML = forcas.map(f => `
+        <div class="glass p-4 rounded-xl">
+          <h4 class="font-semibold text-brand-emerald">${f.titulo}</h4>
+          <p class="text-sm text-gray-300 mt-1">${f.desc}</p>
+          <p class="text-xs text-gray-400 mt-1"><strong>Impacto:</strong> ${f.impacto}</p>
+          <p class="text-xs text-gray-500 mt-1"><em>Exemplo: ${f.exemplo}</em></p>
+        </div>
+      `).join('');
+    }
+
+    // ============================================
+    // 6. PONTOS DE ATENÇÃO (10+)
+    // ============================================
+    function generatePontosAtencao(tests) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const hasIE = tests.includes('IE') && AppState.results.ie;
+      const dominant = hasDisc ? Object.entries(AppState.results.disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+      const ieAvg = hasIE ? (AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0) : 0;
+
+      const pontos = [
+        { titulo: 'Impaciência com Processos', desc: 'Tendência a priorizar velocidade sobre detalhamento.', impacto: 'Retrabalho ou falhas em processos complexos.', plano: 'Desenvolver paciência processual e validação de entregas.' },
+        { titulo: 'Dificuldade em Delegar', desc: 'Tendência a centralizar tarefas por buscar qualidade.', impacto: 'Sobrecarga e redução da capacidade de gestão.', plano: 'Praticar delegação progressiva e confiança na equipe.' },
+        { titulo: 'Resistência a Mudanças Bruscas', desc: 'Necessidade de tempo para processar transições.', impacto: 'Perda de oportunidades em cenários de mudança rápida.', plano: 'Desenvolver flexibilidade e exposição gradual a mudanças.' },
+        { titulo: 'Excesso de Críticas', desc: 'Tendência a focar excessivamente em erros e falhas.', impacto: 'Desmotivação de equipes em contextos de alta pressão.', plano: 'Equilibrar feedback com reconhecimento de acertos.' },
+        { titulo: 'Dificuldade em Dizer Não', desc: 'Tendência a aceitar demandas excessivas.', impacto: 'Comprometimento de prioridades e aumento de estresse.', plano: 'Desenvolver assertividade para estabelecer limites.' },
+        { titulo: 'Autocrítica Excessiva', desc: 'Tendência a se cobrar excessivamente.', impacto: 'Ansiedade e redução de produtividade.', plano: 'Praticar autocompaixão e equilíbrio na autoavaliação.' },
+        { titulo: 'Dificuldade em Lidar com Conflitos', desc: 'Tendência a evitar confrontos e buscar harmonia.', impacto: 'Postergação de resolução de problemas importantes.', plano: 'Desenvolver técnicas de mediação de conflitos.' },
+        { titulo: 'Excesso de Perfeccionismo', desc: 'Busca por excelência que pode comprometer prazos.', impacto: 'Estresse quando a perfeição não é alcançável.', plano: 'Equilibrar qualidade com eficiência em entregas.' },
+        { titulo: 'Falta de Networking Estratégico', desc: 'Foco em tarefas em detrimento de relações.', impacto: 'Limitação de visibilidade e crescimento.', plano: 'Desenvolver consciência da importância do networking.' },
+        { titulo: 'Dificuldade em Lidar com Pressão', desc: 'Tendência a sentir-se sobrecarregado em momentos de alta pressão.', impacto: 'Comprometimento de clareza e tomada de decisão.', plano: 'Desenvolver técnicas de gestão de estresse e resiliência.' }
+      ];
+
+      document.getElementById('pontosAtencao').innerHTML = pontos.map(p => `
+        <div class="glass p-4 rounded-xl">
+          <h4 class="font-semibold text-brand-amber">${p.titulo}</h4>
+          <p class="text-sm text-gray-300 mt-1">${p.desc}</p>
+          <p class="text-xs text-gray-400 mt-1"><strong>Impacto:</strong> ${p.impacto}</p>
+          <p class="text-xs text-brand-cyan mt-1"><strong>Plano:</strong> ${p.plano}</p>
+        </div>
+      `).join('');
+    }
+
+    // ============================================
+    // 7. ANÁLISE DE PERFORMANCE FUTURA
+    // ============================================
+    function generatePerformanceFutura(tests, modo) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const hasIE = tests.includes('IE') && AppState.results.ie;
+      const hasValores = tests.includes('Valores') && AppState.results.valores;
+      const dominant = hasDisc ? Object.entries(AppState.results.disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+      const ieAvg = hasIE ? (AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0) : 0;
+      const nome = AppState.participant?.name || 'O participante';
+
+      const html = `
+        <div class="space-y-4">
+          <p><strong>Potencial de Crescimento:</strong> ${ieAvg >= 70 ? 'Alto' : ieAvg >= 50 ? 'Moderado-Alto' : 'Moderado'} — ${nome} apresenta ${ieAvg >= 70 ? 'capacidade de aprendizado acelerado e adaptação a novos contextos' : ieAvg >= 50 ? 'boa capacidade de crescimento com desenvolvimento direcionado' : 'potencial de crescimento com investimento em desenvolvimento de competências'}.</p>
+          
+          <p><strong>Potencial de Promoção:</strong> ${dominant === 'D' || dominant === 'I' ? 'Alto — Perfil com características de liderança e visão estratégica.' : 'Moderado-Alto — Perfil com consistência e qualidade que geram valor.'} ${ieAvg >= 70 ? 'Inteligência emocional elevada amplia este potencial.' : ''}</p>
+          
+          <p><strong>Potencial para Liderança:</strong> ${dominant === 'D' ? 'Alto — Perfil naturalmente orientado a liderar e tomar decisões.' : dominant === 'I' ? 'Alto — Perfil com capacidade de inspirar e engajar equipes.' : dominant === 'S' ? 'Moderado-Alto — Perfil com potencial para liderança servidora.' : 'Moderado — Perfil com potencial para liderança técnica.'}</p>
+          
+          <p><strong>Potencial para Cargos Estratégicos:</strong> ${dominant === 'D' || dominant === 'I' ? 'Alto — Capacidade de visão sistêmica e influência.' : dominant === 'C' ? 'Moderado-Alto — Capacidade de planejamento e análise estratégica.' : 'Moderado — Potencial com desenvolvimento de visão estratégica.'}</p>
+          
+          <p><strong>Potencial para Operações:</strong> ${dominant === 'S' || dominant === 'C' ? 'Alto — Perfil com consistência, qualidade e foco em processos.' : 'Moderado-Alto — Perfil com capacidade de execução e entrega de resultados.'}</p>
+          
+          <p><strong>Potencial para Atendimento:</strong> ${dominant === 'I' || dominant === 'S' ? 'Alto — Perfil com empatia, comunicação e paciência.' : dominant === 'D' ? 'Moderado — Perfil mais orientado a resultados que a atendimento.' : 'Moderado-Alto — Perfil com capacidade de escuta e precisão.'}</p>
+          
+          <p><strong>Potencial para Gestão:</strong> ${dominant === 'D' || dominant === 'I' ? 'Alto — Perfil com capacidade de influência e tomada de decisão.' : dominant === 'S' ? 'Moderado-Alto — Perfil com capacidade de desenvolvimento de pessoas.' : 'Moderado — Perfil com potencial para gestão técnica.'}</p>
+          
+          <p><strong>Potencial para Atividades Técnicas:</strong> ${dominant === 'C' ? 'Alto — Perfil com precisão, análise e qualidade.' : dominant === 'S' ? 'Moderado-Alto — Perfil com consistência e atenção a detalhes.' : 'Moderado — Perfil com capacidade de aprendizado técnico.'}</p>
         </div>
       `;
 
-      // Participante Recs
-      document.getElementById('participantRecs').innerHTML = `
-        <div class="space-y-3">
-          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-purple mt-1">🧭</span><p class="text-sm text-gray-300">Fortalecer inteligência relacional através de escuta ativa.</p></div>
-          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-purple mt-1">🧭</span><p class="text-sm text-gray-300">Desenvolver assertividade em decisões e negociações.</p></div>
-          <div class="glass p-4 rounded-xl flex items-start gap-3"><span class="text-brand-purple mt-1">🧭</span><p class="text-sm text-gray-300">Estabelecer rotina de autoconhecimento e feedback estruturado.</p></div>
+      document.getElementById('performanceFutura').innerHTML = html;
+    }
+
+    // ============================================
+    // 8. ANÁLISE DE SAÚDE MENTAL CORPORATIVA
+    // ============================================
+    function generateSaudeMental(tests) {
+      const hasIE = tests.includes('IE') && AppState.results.ie;
+      const ieAvg = hasIE ? (AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0) : 0;
+      const pct = hasIE ? AppState.results.ie.percentages : {};
+      const nome = AppState.participant?.name || 'O participante';
+
+      const estabilidade = ieAvg >= 70 ? 'Alta' : ieAvg >= 50 ? 'Moderada' : 'Em desenvolvimento';
+      const recuperacao = (pct.resiliencia || 50) >= 70 ? 'Alta' : (pct.resiliencia || 50) >= 50 ? 'Moderada' : 'Em desenvolvimento';
+      const pressao = (pct.autocontrole || 50) >= 70 ? 'Alta' : (pct.autocontrole || 50) >= 50 ? 'Moderada' : 'Em desenvolvimento';
+      const riscoDesgaste = ieAvg < 50 ? 'Moderado-Alto' : ieAvg < 70 ? 'Moderado' : 'Baixo';
+
+      const html = `
+        <div class="space-y-4">
+          <p><strong>Nível de Estabilidade Emocional:</strong> ${estabilidade} — ${nome} ${ieAvg >= 70 ? 'demonstra excelente capacidade de manter equilíbrio emocional em diferentes contextos' : ieAvg >= 50 ? 'apresenta boa estabilidade com espaço para desenvolvimento' : 'pode beneficiar-se de práticas para fortalecer estabilidade emocional'}.</p>
+          
+          <p><strong>Capacidade de Recuperação:</strong> ${recuperacao} — ${nome} ${(pct.resiliencia || 50) >= 70 ? 'recupera-se rapidamente após adversidades e transforma desafios em oportunidades' : (pct.resiliencia || 50) >= 50 ? 'apresenta boa recuperação, com espaço para fortalecer estratégias' : 'pode beneficiar-se de técnicas para desenvolver maior resiliência'}.</p>
+          
+          <p><strong>Capacidade de Lidar com Pressão:</strong> ${pressao} — ${nome} ${(pct.autocontrole || 50) >= 70 ? 'mantém clareza e compostura em cenários desafiadores' : (pct.autocontrole || 50) >= 50 ? 'apresenta boa capacidade de lidar com pressão, com espaço para desenvolvimento' : 'pode beneficiar-se de técnicas de gestão de estresse'}.</p>
+          
+          <p><strong>Riscos de Desgaste Profissional:</strong> ${riscoDesgaste} — ${ieAvg < 50 ? 'Recomenda-se atenção a sinais de sobrecarga e implementação de práticas de autocuidado.' : ieAvg < 70 ? 'Monitorar periodicamente níveis de estresse e carga de trabalho.' : 'Baixo risco, com boa capacidade de gestão de estresse.'}</p>
+          
+          <p><strong>Riscos de Burnout:</strong> ${ieAvg < 40 ? 'Moderado — Recomenda-se acompanhamento preventivo.' : ieAvg < 60 ? 'Baixo-Moderado — Manter práticas de equilíbrio.' : 'Baixo — Boa capacidade de gestão de estresse.'}</p>
+          
+          <p><strong>Necessidade de Acompanhamento:</strong> ${ieAvg < 50 ? 'Recomenda-se acompanhamento periódico e desenvolvimento de habilidades de regulação emocional.' : 'Acompanhamento preventivo recomendado para manutenção da saúde mental.'}</p>
+          
+          <div class="glass p-4 rounded-xl mt-4 border-l-4 border-brand-amber">
+            <p class="text-sm text-gray-300"><strong>Recomendações Preventivas:</strong> ${ieAvg < 70 ? 'Praticar pausas estratégicas, exercícios de respiração e estabelecer limites claros entre trabalho e vida pessoal.' : 'Manter práticas de autocuidado e monitorar sinais de sobrecarga.'}</p>
+            <p class="text-xs text-gray-400 mt-1">* Esta análise não constitui diagnóstico clínico. Recomenda-se avaliação profissional quando necessário.</p>
+          </div>
         </div>
       `;
 
-      // Conclusão
-      document.getElementById('conclusion').innerHTML = `
-        <div class="glass p-5 rounded-xl"><p class="text-gray-300 leading-relaxed">O participante demonstra um perfil ${avg >= 70 ? 'maduro e alinhado a posições de alta complexidade' : 'com potencial para crescimento acelerado com desenvolvimento direcionado'}. Recomenda-se acompanhamento contínuo via PDI Vigorre™, garantindo evolução profissional e maximização de impacto organizacional.</p></div>
+      document.getElementById('saudeMental').innerHTML = html;
+    }
+
+    // ============================================
+    // 9. ANÁLISE DE ADAPTAÇÃO A ALOJAMENTOS
+    // ============================================
+    function generateAdaptacaoAlojamento(tests) {
+      const hasIE = tests.includes('IE') && AppState.results.ie;
+      const hasValores = tests.includes('Valores') && AppState.results.valores;
+      const ieAvg = hasIE ? (AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0) : 0;
+      const pct = hasIE ? AppState.results.ie.percentages : {};
+      const valoresPct = hasValores ? AppState.results.valores.percentages : {};
+      const nome = AppState.participant?.name || 'O participante';
+
+      const adaptacao = (pct.adaptabilidade || 50) >= 70 ? 'Alta' : (pct.adaptabilidade || 50) >= 50 ? 'Moderada' : 'Em desenvolvimento';
+      const convivencia = (valoresPct.relacionamento || 50) >= 60 ? 'Alta' : (valoresPct.relacionamento || 50) >= 40 ? 'Moderada' : 'Em desenvolvimento';
+      const isolamento = ieAvg < 50 ? 'Moderado-Alto' : ieAvg < 70 ? 'Moderado' : 'Baixo';
+
+      const html = `
+        <div class="space-y-4">
+          <p><strong>Capacidade de Permanecer Longe da Família:</strong> ${adaptacao} — ${nome} ${(pct.adaptabilidade || 50) >= 70 ? 'demonstra boa capacidade de adaptação à distância, mantendo equilíbrio emocional' : (pct.adaptabilidade || 50) >= 50 ? 'apresenta capacidade moderada de adaptação, com necessidade de suporte' : 'pode necessitar de suporte adicional para adaptação à distância'}.</p>
+          
+          <p><strong>Capacidade de Adaptação em Alojamentos:</strong> ${convivencia} — ${nome} ${(valoresPct.relacionamento || 50) >= 60 ? 'valoriza convivência coletiva e adapta-se bem a ambientes compartilhados' : (valoresPct.relacionamento || 50) >= 40 ? 'apresenta capacidade moderada de convivência, com espaço para desenvolvimento' : 'pode preferir maior privacidade e espaço pessoal'}.</p>
+          
+          <p><strong>Capacidade de Convivência Coletiva:</strong> ${convivencia} — ${nome} ${(valoresPct.relacionamento || 50) >= 60 ? 'tende a construir relações positivas em ambientes coletivos' : (valoresPct.relacionamento || 50) >= 40 ? 'apresenta convivência equilibrada, com necessidade de ajustes' : 'pode precisar de adaptação gradual à convivência coletiva'}.</p>
+          
+          <p><strong>Riscos Emocionais Associados:</strong> ${isolamento} — ${ieAvg < 50 ? 'Recomenda-se suporte psicológico preventivo e programas de integração.' : ieAvg < 70 ? 'Monitorar periodicamente níveis de bem-estar emocional.' : 'Baixo risco, com boa capacidade de auto-regulação.'}</p>
+          
+          <p><strong>Necessidade de Suporte Organizacional:</strong> ${ieAvg < 60 ? 'Recomenda-se programa de acolhimento, acompanhamento psicológico e atividades de integração.' : 'Suporte preventivo para manutenção do bem-estar.'}</p>
+          
+          <div class="glass p-4 rounded-xl mt-4 border-l-4 border-brand-cyan">
+            <p class="text-sm text-gray-300"><strong>Recomendações para RH e Liderança:</strong> ${ieAvg < 60 ? 'Implementar programa de integração, acompanhamento periódico e canais de suporte emocional.' : 'Manter canais de comunicação e atividades de integração.'}</p>
+          </div>
+        </div>
       `;
 
-      // Frase Final
-      const quotes = ['O autoconhecimento transforma potencial em performance.', 'Compreender comportamento é acelerar resultados.', 'A maturidade comportamental é o maior diferencial competitivo.'];
+      document.getElementById('adaptacaoAlojamento').innerHTML = html;
+    }
+
+    // ============================================
+    // 10. COMPATIBILIDADE COM CARGOS
+    // ============================================
+    function generateCompatibilidadeCargos(tests) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const dominant = hasDisc ? Object.entries(AppState.results.disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+
+      const cargos = [
+        { nome: 'Operacional', pct: dominant === 'S' || dominant === 'C' ? 85 : dominant === 'D' ? 65 : 70 },
+        { nome: 'Administrativo', pct: dominant === 'C' || dominant === 'S' ? 80 : dominant === 'D' ? 60 : 70 },
+        { nome: 'Comercial', pct: dominant === 'I' || dominant === 'D' ? 85 : dominant === 'S' ? 55 : 65 },
+        { nome: 'Atendimento', pct: dominant === 'I' || dominant === 'S' ? 85 : dominant === 'D' ? 55 : 65 },
+        { nome: 'Liderança', pct: dominant === 'D' || dominant === 'I' ? 85 : dominant === 'S' ? 60 : 65 },
+        { nome: 'Coordenação', pct: dominant === 'D' || dominant === 'S' ? 75 : dominant === 'I' ? 70 : 65 },
+        { nome: 'Supervisão', pct: dominant === 'D' || dominant === 'S' ? 80 : dominant === 'I' ? 70 : 65 },
+        { nome: 'Gerência', pct: dominant === 'D' ? 85 : dominant === 'I' ? 80 : dominant === 'S' ? 65 : 70 },
+        { nome: 'Diretoria', pct: dominant === 'D' ? 80 : dominant === 'I' ? 75 : dominant === 'C' ? 65 : 60 },
+        { nome: 'Projetos', pct: dominant === 'D' || dominant === 'I' ? 80 : dominant === 'C' ? 75 : 65 },
+        { nome: 'Treinamentos', pct: dominant === 'I' || dominant === 'S' ? 85 : dominant === 'D' ? 65 : 70 },
+        { nome: 'Recursos Humanos', pct: dominant === 'I' || dominant === 'S' ? 85 : dominant === 'C' ? 70 : 65 }
+      ];
+
+      document.getElementById('compatibilidadeCargos').innerHTML = cargos.map(c => `
+        <div class="glass p-4 rounded-xl text-center">
+          <h4 class="font-semibold text-sm">${c.nome}</h4>
+          <div class="w-full bg-white/10 rounded-full h-2 mt-2">
+            <div class="bg-gradient-to-r from-brand-gold to-brand-purple h-2 rounded-full" style="width:${c.pct}%"></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-1">${c.pct}%</p>
+        </div>
+      `).join('');
+    }
+
+    // ============================================
+    // 11. RECOMENDAÇÕES PARA RH
+    // ============================================
+    function generateRecomendacoesRH(tests, modo) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const hasIE = tests.includes('IE') && AppState.results.ie;
+      const dominant = hasDisc ? Object.entries(AppState.results.disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+      const ieAvg = hasIE ? (AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0) : 0;
+
+      const recs = [
+        { titulo: 'Como Integrar', desc: `Promover integração com a cultura organizacional, apresentando valores, propósito e expectativas. ${dominant === 'I' ? 'Priorizar interação com a equipe.' : dominant === 'S' ? 'Oferecer estrutura clara.' : ''}` },
+        { titulo: 'Como Desenvolver', desc: `Investir em desenvolvimento de ${dominant === 'D' ? 'escuta ativa e paciência processual' : dominant === 'I' ? 'foco em execução e cumprimento de prazos' : dominant === 'S' ? 'assertividade e comunicação influente' : 'flexibilidade e agilidade decisória'}. ${ieAvg < 70 ? 'Fortalecer inteligência emocional.' : ''}` },
+        { titulo: 'Como Engajar', desc: `Oferecer ${dominant === 'D' ? 'desafios e autonomia' : dominant === 'I' ? 'reconhecimento e oportunidades de influência' : dominant === 'S' ? 'estabilidade e suporte' : 'precisão e qualidade'}.` },
+        { titulo: 'Como Reter', desc: `Criar plano de carreira que alinhe ${dominant === 'D' ? 'resultados e promoção' : dominant === 'I' ? 'impacto e reconhecimento' : dominant === 'S' ? 'consistência e desenvolvimento' : 'qualidade e especialização'}.` },
+        { titulo: 'Como Liderar', desc: `Adotar estilo de gestão ${dominant === 'D' ? 'diretivo com feedback de desempenho' : dominant === 'I' ? 'participativo com reconhecimento' : dominant === 'S' ? 'de suporte com comunicação clara' : 'técnico com precisão'}.` },
+        { titulo: 'Como Dar Feedback', desc: `Utilizar abordagem ${dominant === 'D' ? 'direta e focada em resultados' : dominant === 'I' ? 'construtiva e motivadora' : dominant === 'S' ? 'empática e com estrutura' : 'precisa e baseada em fatos'}.` },
+        { titulo: 'Como Acompanhar Evolução', desc: `Realizar avaliações periódicas de ${ieAvg < 70 ? 'inteligência emocional' : 'performance'}, com foco em ${dominant === 'D' ? 'resultados' : dominant === 'I' ? 'influência' : dominant === 'S' ? 'consistência' : 'qualidade'}.` }
+      ];
+
+      document.getElementById('recomendacoesRH').innerHTML = recs.map(r => `
+        <div class="glass p-4 rounded-xl flex items-start gap-3">
+          <span class="text-brand-cyan text-lg mt-1">➤</span>
+          <div>
+            <h4 class="font-semibold text-brand-cyan">${r.titulo}</h4>
+            <p class="text-sm text-gray-300">${r.desc}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ============================================
+    // 12. RECOMENDAÇÕES PARA GESTOR
+    // ============================================
+    function generateRecomendacoesGestor(tests, modo) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const dominant = hasDisc ? Object.entries(AppState.results.disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+
+      const recs = [
+        { titulo: 'Comunicação Ideal', desc: dominant === 'D' ? 'Seja direto, objetivo e focado em resultados. Evite rodeios.' : dominant === 'I' ? 'Seja entusiasta, inspire e valorize a comunicação aberta.' : dominant === 'S' ? 'Seja calmo, empático e ofereça estrutura.' : 'Seja preciso, baseado em fatos e dados.' },
+        { titulo: 'Cobrança Ideal', desc: dominant === 'D' ? 'Cobre com transparência e foco em metas.' : dominant === 'I' ? 'Cobre de forma construtiva e motivadora.' : dominant === 'S' ? 'Cobre com prazo e suporte adequado.' : 'Cobre com clareza e precisão.' },
+        { titulo: 'Feedback Ideal', desc: dominant === 'D' ? 'Feedback direto e com foco em desenvolvimento.' : dominant === 'I' ? 'Feedback positivo e construtivo.' : dominant === 'S' ? 'Feedback estruturado e com suporte.' : 'Feedback preciso e baseado em fatos.' },
+        { titulo: 'Motivação Ideal', desc: dominant === 'D' ? 'Ofereça desafios, autonomia e reconhecimento por resultados.' : dominant === 'I' ? 'Ofereça reconhecimento, influência e interação.' : dominant === 'S' ? 'Ofereça estabilidade, suporte e desenvolvimento.' : 'Ofereça precisão, qualidade e reconhecimento técnico.' },
+        { titulo: 'Evitar Conflitos', desc: dominant === 'D' ? 'Evite microgerenciamento e falta de autonomia.' : dominant === 'I' ? 'Evite isolamento e falta de reconhecimento.' : dominant === 'S' ? 'Evite mudanças bruscas e falta de estrutura.' : 'Evite improviso e falta de precisão.' },
+        { titulo: 'Potencializar Resultados', desc: dominant === 'D' ? 'Delegue desafios e confie na execução.' : dominant === 'I' ? 'Dê espaço para influenciar e engajar.' : dominant === 'S' ? 'Ofereça consistência e suporte.' : 'Ofereça precisão e qualidade.' }
+      ];
+
+      document.getElementById('recomendacoesGestor').innerHTML = recs.map(r => `
+        <div class="glass p-4 rounded-xl flex items-start gap-3">
+          <span class="text-brand-amber text-lg mt-1">👤</span>
+          <div>
+            <h4 class="font-semibold text-brand-amber">${r.titulo}</h4>
+            <p class="text-sm text-gray-300">${r.desc}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ============================================
+    // 13. PLANO DE DESENVOLVIMENTO INDIVIDUAL
+    // ============================================
+    function generatePDI(tests, modo) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const hasIE = tests.includes('IE') && AppState.results.ie;
+      const dominant = hasDisc ? Object.entries(AppState.results.disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+      const ieAvg = hasIE ? (AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0) : 0;
+
+      const pdiItems = [
+        { prazo: 'Curto (0-3 meses)', cor: 'brand-emerald', itens: [
+          'Estabelecer rotina de auto-observação (journaling emocional diário)',
+          'Praticar técnica de pausa estratégica antes de decisões importantes',
+          'Buscar feedback estruturado mensal sobre impacto comportamental',
+          dominant === 'D' ? 'Desenvolver escuta ativa em reuniões e interações' : '',
+          dominant === 'I' ? 'Estabelecer rotinas de execução e cumprimento de prazos' : '',
+          dominant === 'S' ? 'Praticar assertividade em situações de conflito' : '',
+          dominant === 'C' ? 'Desenvolver agilidade em decisões de baixo impacto' : ''
+        ].filter(i => i) },
+        { prazo: 'Médio (3-12 meses)', cor: 'brand-amber', itens: [
+          'Desenvolver competência específica identificada neste laudo',
+          'Aplicar técnicas de regulação emocional em cenários reais de pressão',
+          'Criar plano de desenvolvimento trimestral com métricas claras',
+          ieAvg < 70 ? 'Participar de treinamento em inteligência emocional' : '',
+          'Buscar mentoria em áreas de desenvolvimento identificadas'
+        ].filter(i => i) },
+        { prazo: 'Longo (12+ meses)', cor: 'brand-purple', itens: [
+          'Assumir papel de modelo comportamental para a equipe',
+          'Desenvolver programa de desenvolvimento para pares',
+          'Integrar inteligência comportamental em processos estratégicos',
+          'Consolidar estilo de liderança baseado no perfil identificado',
+          'Construir legado de desenvolvimento humano na organização'
+        ] }
+      ];
+
+      document.getElementById('pdiVigor').innerHTML = pdiItems.map(p => `
+        <div class="glass p-4 rounded-xl border-l-4" style="border-color:var(--${p.cor})">
+          <h4 class="font-semibold mb-2" style="color:var(--${p.cor})">🎯 ${p.prazo}</h4>
+          <ul class="space-y-1 text-sm text-gray-300">
+            ${p.itens.map(item => `<li>• ${item}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+    }
+
+    // ============================================
+    // 14. PARECER FINAL VIGOR™
+    // ============================================
+    function generateParecerFinal(tests, modo) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const hasIE = tests.includes('IE') && AppState.results.ie;
+      const hasValores = tests.includes('Valores') && AppState.results.valores;
+      const dominant = hasDisc ? Object.entries(AppState.results.disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+      const ieAvg = hasIE ? (AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0) : 0;
+      const nome = AppState.participant?.name || 'O participante';
+      const perfis = { D: 'Dominância', I: 'Influência', S: 'Estabilidade', C: 'Conformidade' };
+      const dominantName = hasDisc ? perfis[dominant] : 'Equilibrado';
+
+      let classificacao = 'Recomendado';
+      let cor = '#10B981';
+      let justificativa = '';
+
+      if (ieAvg >= 70 && (dominant === 'D' || dominant === 'I')) {
+        classificacao = 'Altamente Recomendado';
+        cor = '#10B981';
+        justificativa = 'Perfil com alta inteligência emocional e comportamento estratégico, ideal para posições de liderança e alta performance.';
+      } else if (ieAvg >= 50 && (dominant === 'S' || dominant === 'C')) {
+        classificacao = 'Recomendado com Desenvolvimento';
+        cor = '#F59E0B';
+        justificativa = 'Perfil consistente com potencial de crescimento, recomendado com plano de desenvolvimento direcionado.';
+      } else if (ieAvg < 40) {
+        classificacao = 'Recomendado com Restrições';
+        cor = '#F43F5E';
+        justificativa = 'Perfil com oportunidades significativas de desenvolvimento emocional. Recomenda-se acompanhamento e plano de desenvolvimento estruturado.';
+      } else {
+        classificacao = 'Recomendado';
+        cor = '#10B981';
+        justificativa = 'Perfil equilibrado com potencial de contribuição consistente. Recomenda-se desenvolvimento contínuo.';
+      }
+
+      const html = `
+        <div class="text-center mb-6">
+          <div class="inline-flex items-center gap-4 px-8 py-4 rounded-2xl glass border" style="border-color:${cor}">
+            <span class="text-3xl">${classificacao === 'Altamente Recomendado' ? '🏆' : classificacao === 'Recomendado' ? '✅' : classificacao === 'Recomendado com Desenvolvimento' ? '📈' : '⚠️'}</span>
+            <div>
+              <p class="text-sm text-gray-400">Parecer Final</p>
+              <p class="text-2xl font-extrabold" style="color:${cor}">${classificacao}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="space-y-4">
+          <p><strong>Análise do Perfil:</strong> ${nome} apresenta um perfil comportamental de <strong>${dominantName}</strong>${hasIE ? `, com inteligência emocional ${ieAvg >= 70 ? 'de alta performance' : ieAvg >= 50 ? 'em desenvolvimento' : 'em construção'}` : ''}${hasValores ? ' e orientação por valores que fortalecem propósito e engajamento' : ''}.</p>
+          
+          <p><strong>Justificativa Técnica:</strong> ${justificativa}</p>
+          
+          <p><strong>Recomendação para ${modo === 'autoconhecimento' ? 'Desenvolvimento Profissional' : modo === 'rh' ? 'Recrutamento e Seleção' : 'Desenvolvimento de Carreira'}:</strong> ${classificacao === 'Altamente Recomendado' ? 'O perfil apresenta características altamente alinhadas com os objetivos da avaliação. Recomenda-se avanço em processos de desenvolvimento e alocação em posições de maior complexidade.' : classificacao === 'Recomendado' ? 'O perfil apresenta boa aderência aos objetivos, com potencial de crescimento através de desenvolvimento direcionado.' : classificacao === 'Recomendado com Desenvolvimento' ? 'O perfil apresenta potencial significativo, recomendando-se investimento em desenvolvimento de competências específicas.' : 'O perfil apresenta oportunidades de desenvolvimento que devem ser consideradas antes de alocação em posições de alta complexidade.'}</p>
+          
+          <div class="glass p-4 rounded-xl mt-4 border-l-4" style="border-color:${cor}">
+            <p class="text-sm text-gray-300"><strong>Próximos Passos:</strong> ${classificacao === 'Altamente Recomendado' ? 'Avançar para etapas seguintes de desenvolvimento ou processo seletivo.' : 'Implementar Plano de Desenvolvimento Individual (PDI) com acompanhamento periódico.'}</p>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('parecerFinal').innerHTML = html;
+    }
+
+    // ============================================
+    // CLASSIFICAÇÃO FINAL
+    // ============================================
+    function generateClassificacaoFinal(tests) {
+      const hasDisc = tests.includes('DISC') && AppState.results.disc;
+      const hasIE = tests.includes('IE') && AppState.results.ie;
+      const dominant = hasDisc ? Object.entries(AppState.results.disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+      const ieAvg = hasIE ? (AppState.results.ie.avg_qe || AppState.results.ie.avgQE || 0) : 0;
+
+      let score = 50;
+      if (hasDisc) score += 10;
+      if (hasIE) {
+        if (ieAvg >= 70) score += 25;
+        else if (ieAvg >= 50) score += 15;
+        else score += 5;
+      }
+      if (dominant === 'D' || dominant === 'I') score += 10;
+      score = Math.min(100, score + (ieAvg >= 70 ? 5 : 0));
+
+      const nivel = score >= 90 ? 'Elite VIGOR™' : score >= 75 ? 'Alta Performance' : score >= 60 ? 'Estratégico' : score >= 45 ? 'Estruturado' : 'Inicial';
+      const emoji = score >= 90 ? '🏆' : score >= 75 ? '🌟' : score >= 60 ? '📈' : score >= 45 ? '📊' : '🌱';
+
+      document.getElementById('nivelEmoji').textContent = emoji;
+      document.getElementById('nivelFinal').textContent = nivel;
+      document.getElementById('nivelJustificativa').textContent = `Classificação baseada na Metodologia VIGOR™, considerando perfil comportamental (${score >= 70 ? 'alta performance' : 'em desenvolvimento'}), inteligência emocional (${ieAvg >= 70 ? 'excelente' : ieAvg >= 50 ? 'moderada' : 'em construção'}) e potencial de crescimento. Score: ${score}/100.`;
+    }
+
+    // ============================================
+    // FRASE FINAL
+    // ============================================
+    function generateFinalQuote() {
+      const quotes = [
+        "O autoconhecimento transforma potencial em performance.",
+        "Compreender comportamento é acelerar resultados.",
+        "Pessoas alinhadas ao ambiente certo entregam performance extraordinária.",
+        "Liderança não é cargo, é comportamento. E comportamento se desenvolve.",
+        "A maturidade comportamental é o maior diferencial competitivo do século XXI.",
+        "Transformando dados humanos em decisões inteligentes.",
+        "A VIGOR™ não pergunta 'quem você é?', ela pergunta 'quem você pode se tornar?'."
+      ];
       document.getElementById('finalQuote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
     }
 
@@ -741,7 +1247,7 @@
         if (AppState.charts.discRadar) AppState.charts.discRadar.destroy();
         AppState.charts.discRadar = new Chart(ctx1, {
           type: 'radar',
-          data: { labels: ['D', 'I', 'S', 'C'], datasets: [{ label: 'Perfil', data: [pct.D || 0, pct.I || 0, pct.S || 0, pct.C || 0], backgroundColor: 'rgba(124,58,237,0.25)', borderColor: '#7C3AED', borderWidth: 2 }] },
+          data: { labels: ['D', 'I', 'S', 'C'], datasets: [{ label: 'Perfil', data: [pct.D || 0, pct.I || 0, pct.S || 0, pct.C || 0], backgroundColor: 'rgba(212,175,55,0.25)', borderColor: '#D4AF37', borderWidth: 2 }] },
           options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
         });
       }
@@ -751,48 +1257,6 @@
         AppState.charts.discBar = new Chart(ctx2, {
           type: 'bar',
           data: { labels: ['D', 'I', 'S', 'C'], datasets: [{ label: '%', data: [pct.D || 0, pct.I || 0, pct.S || 0, pct.C || 0], backgroundColor: ['#EF4444', '#3B82F6', '#10B981', '#7C3AED'], borderRadius: 8 }] },
-          options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
-        });
-      }
-    }
-
-    function renderIECharts(pct) {
-      const ctx1 = document.getElementById('ieRadarChart');
-      if (ctx1) {
-        if (AppState.charts.ieRadar) AppState.charts.ieRadar.destroy();
-        AppState.charts.ieRadar = new Chart(ctx1, {
-          type: 'radar',
-          data: { labels: ['AC', 'AT', 'EM', 'RS', 'IS', 'AD'], datasets: [{ label: 'IE', data: [pct.autoconsciencia || 0, pct.autocontrole || 0, pct.empatia || 0, pct.resiliencia || 0, pct.social || 0, pct.adaptabilidade || 0], backgroundColor: 'rgba(6,182,212,0.25)', borderColor: '#06B6D4', borderWidth: 2 }] },
-          options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
-        });
-      }
-      const ctx2 = document.getElementById('ieBarChart');
-      if (ctx2) {
-        if (AppState.charts.ieBar) AppState.charts.ieBar.destroy();
-        AppState.charts.ieBar = new Chart(ctx2, {
-          type: 'bar',
-          data: { labels: ['AC', 'AT', 'EM', 'RS', 'IS', 'AD'], datasets: [{ label: '%', data: [pct.autoconsciencia || 0, pct.autocontrole || 0, pct.empatia || 0, pct.resiliencia || 0, pct.social || 0, pct.adaptabilidade || 0], backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#7C3AED', '#06B6D4', '#EC4899'], borderRadius: 8 }] },
-          options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
-        });
-      }
-    }
-
-    function renderValuesCharts(pct) {
-      const ctx1 = document.getElementById('valuesRadarChart');
-      if (ctx1) {
-        if (AppState.charts.valuesRadar) AppState.charts.valuesRadar.destroy();
-        AppState.charts.valuesRadar = new Chart(ctx1, {
-          type: 'radar',
-          data: { labels: ['PR', 'RC', 'ES', 'AU', 'RL', 'IN', 'RZ', 'EQ'], datasets: [{ label: 'Valores', data: [pct.proposito || 0, pct.reconhecimento || 0, pct.estabilidade || 0, pct.autonomia || 0, pct.relacionamento || 0, pct.inovacao || 0, pct.realizacao || 0, pct.equilibrio || 0], backgroundColor: 'rgba(245,158,11,0.25)', borderColor: '#F59E0B', borderWidth: 2 }] },
-          options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
-        });
-      }
-      const ctx2 = document.getElementById('valuesBarChart');
-      if (ctx2) {
-        if (AppState.charts.valuesBar) AppState.charts.valuesBar.destroy();
-        AppState.charts.valuesBar = new Chart(ctx2, {
-          type: 'bar',
-          data: { labels: ['PR', 'RC', 'ES', 'AU', 'RL', 'IN', 'RZ', 'EQ'], datasets: [{ label: '%', data: [pct.proposito || 0, pct.reconhecimento || 0, pct.estabilidade || 0, pct.autonomia || 0, pct.relacionamento || 0, pct.inovacao || 0, pct.realizacao || 0, pct.equilibrio || 0], backgroundColor: ['#10B981', '#F59E0B', '#3B82F6', '#7C3AED', '#06B6D4', '#EC4899', '#8B5CF6', '#14B8A6'], borderRadius: 8 }] },
           options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
         });
       }
@@ -809,13 +1273,12 @@
 
     window.onafterprint = function() {
       setTimeout(() => {
-        if (AppState.results.disc) renderDiscCharts(AppState.results.disc.percentages);
-        if (AppState.results.ie) renderIECharts(AppState.results.ie.percentages);
-        if (AppState.results.valores) renderValuesCharts(AppState.results.valores.percentages);
+        if (AppState.results.disc) renderDiscCharts(AppState.results.disc.percentages || {});
       }, 300);
     };
 
-    console.log('📋 Laudo Vigorre™ carregado com sucesso!');
+    console.log('📋 Laudo VIGOR™ One carregado com sucesso!');
+    console.log('🏆 10 Pilares Exclusivos ativados: FV™, ISP™, ICA™, RP™, IPO™, MRH™, DL™, TSO™, IAM™, IPE™');
   </script>
 </body>
 </html>
