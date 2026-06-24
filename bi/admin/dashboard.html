@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BI Administrador | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-bi {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 20% 80%, rgba(29,78,216,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.06) 0%, transparent 50%);
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    /* HEADER */
+    .header-bi {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .header-bi .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .header-bi .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #D4AF37, #7C3AED);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .header-bi .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-bi .logo-text .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #D4AF37;
+    }
+    
+    .header-bi .logo-text span {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.4);
+      display: block;
+    }
+    
+    .header-bi .btn-back {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .header-bi .btn-back:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    .btn-print {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #D4AF37, #7C3AED);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+    }
+    
+    /* CORPO */
+    .bi-body {
+      background: rgba(30,41,59,0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 32px;
+    }
+    
+    .bi-title {
+      text-align: center;
+      padding: 16px 0 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+    }
+    
+    .bi-title h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .bi-title .gold {
+      color: #D4AF37;
+    }
+    
+    .bi-title p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    /* CARDS */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .card-metric {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .card-metric:hover {
+      border-color: rgba(212,175,55,0.2);
+      transform: translateY(-2px);
+    }
+    
+    .card-metric .number {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #D4AF37;
+    }
+    
+    .card-metric .label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+    }
+    
+    .card-metric .change {
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    
+    .card-metric .change.up { color: #10B981; }
+    .card-metric .change.down { color: #F43F5E; }
+    
+    /* GRÁFICOS */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .chart-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .chart-card h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .chart-container {
+      height: 250px;
+      position: relative;
+    }
+    
+    .chart-container-small {
+      height: 200px;
+      position: relative;
+    }
+    
+    /* RANKING */
+    .ranking-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .ranking-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .ranking-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .ranking-list .pos {
+      font-weight: 700;
+      color: #D4AF37;
+      margin-right: 12px;
+    }
+    
+    .ranking-list .value {
+      font-weight: 600;
+      color: #D4AF37;
+    }
+    
+    /* RODAPÉ */
+    .footer-bi {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .footer-bi .contact {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-bi .contact a {
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-bi .contact a:hover {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    @media (max-width: 992px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-bi {
+        flex-direction: column;
+        text-align: center;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .footer-bi {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .header-bi, .bi-body, .footer-bi {
+        background: white !important;
+        border-color: #ddd !important;
+        color: #111 !important;
+      }
+      .bi-title h1 { color: #111 !important; }
+      .bi-title .gold { color: #D4AF37 !important; }
+      .card-metric { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .card-metric .number { color: #D4AF37 !important; }
+      .chart-card { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .btn-back, .btn-print { display: none !important; }
+      .footer-bi .contact a { color: #666 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-bi"></div>
+
+  <div class="container">
+    
+    <!-- HEADER -->
+    <div class="header-bi">
+      <div class="logo">
+        <div class="logo-icon">V</div>
+        <div class="logo-text">
+          VIGORRE ONE™ <span class="tm">™</span>
+          <span>BI • Administrador Master</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir</button>
+        <a href="../../admin/dashboard.html" class="btn-back">← Voltar</a>
+      </div>
+    </div>
+    
+    <!-- CORPO -->
+    <div class="bi-body">
+      
+      <div class="bi-title">
+        <h1>📊 Business Intelligence <span class="gold">VIGORRE™</span></h1>
+        <p>Dashboard Executivo em Tempo Real</p>
+      </div>
+      
+      <!-- CARDS -->
+      <div class="cards-grid">
+        <div class="card-metric">
+          <div class="number" id="totalEmpresas">0</div>
+          <div class="label">🏢 Empresas</div>
+          <div class="change up">↑ 12%</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="totalRecrutadores">0</div>
+          <div class="label">👤 Recrutadores</div>
+          <div class="change up">↑ 8%</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="totalParticipantes">0</div>
+          <div class="label">👥 Participantes</div>
+          <div class="change up">↑ 15%</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="totalAvaliacoes">0</div>
+          <div class="label">📝 Avaliações</div>
+          <div class="change up">↑ 22%</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="totalRelatorios">0</div>
+          <div class="label">📄 Relatórios</div>
+          <div class="change up">↑ 18%</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="totalLaudos">0</div>
+          <div class="label">📋 Laudos</div>
+          <div class="change up">↑ 10%</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="taxaConclusao">0%</div>
+          <div class="label">✅ Taxa de Conclusão</div>
+          <div class="change up">↑ 5%</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="mediaGeral">0</div>
+          <div class="label">📊 Média Geral</div>
+          <div class="change up">↑ 3%</div>
+        </div>
+      </div>
+      
+      <!-- GRÁFICOS -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>📈 Evolução Mensal</h3>
+          <div class="chart-container">
+            <canvas id="evolucaoChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>📊 Distribuição DISC</h3>
+          <div class="chart-container">
+            <canvas id="discChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>🧠 Distribuição Big Five</h3>
+          <div class="chart-container">
+            <canvas id="bigFiveChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>🏆 Índice VIGOR™</h3>
+          <div class="chart-container">
+            <canvas id="vigorChart"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <!-- RANKINGS -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="chart-card">
+          <h3>🏢 Empresas Mais Ativas</h3>
+          <ul class="ranking-list" id="rankingEmpresas">
+            <li><span><span class="pos">1</span> TechCorp</span><span class="value">156</span></li>
+            <li><span><span class="pos">2</span> InovaLab</span><span class="value">98</span></li>
+            <li><span><span class="pos">3</span> AgroBrasil</span><span class="value">72</span></li>
+          </ul>
+        </div>
+        <div class="chart-card">
+          <h3>🎯 Recrutadores Mais Ativos</h3>
+          <ul class="ranking-list" id="rankingRecrutadores">
+            <li><span><span class="pos">1</span> João Silva</span><span class="value">45</span></li>
+            <li><span><span class="pos">2</span> Maria Santos</span><span class="value">38</span></li>
+            <li><span><span class="pos">3</span> Pedro Costa</span><span class="value">29</span></li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <div class="footer-bi">
+      <span>© 2024 VIGORRE ONE™</span>
+      <div class="contact">
+        <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+        <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+        <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
+      </div>
+      <span>v1.0</span>
+    </div>
+    
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📊 BI Administrador - VIGORRE ONE™');
+      
+      // Dados simulados
+      document.getElementById('totalEmpresas').textContent = '47';
+      document.getElementById('totalRecrutadores').textContent = '128';
+      document.getElementById('totalParticipantes').textContent = '1,247';
+      document.getElementById('totalAvaliacoes').textContent = '3,892';
+      document.getElementById('totalRelatorios').textContent = '2,156';
+      document.getElementById('totalLaudos').textContent = '876';
+      document.getElementById('taxaConclusao').textContent = '78%';
+      document.getElementById('mediaGeral').textContent = '72';
+      
+      // Gráfico Evolução
+      const ctx1 = document.getElementById('evolucaoChart').getContext('2d');
+      new Chart(ctx1, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+          datasets: [{
+            label: 'Avaliações',
+            data: [120, 150, 180, 210, 260, 320],
+            borderColor: '#D4AF37',
+            backgroundColor: 'rgba(212,175,55,0.1)',
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: 'rgba(255,255,255,0.6)' } } },
+          scales: {
+            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)' } },
+            x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)' } }
+          }
+        }
+      });
+      
+      // Gráfico DISC
+      const ctx2 = document.getElementById('discChart').getContext('2d');
+      new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: ['D', 'I', 'S', 'C'],
+          datasets: [{
+            label: 'Percentual',
+            data: [32, 28, 22, 18],
+            backgroundColor: ['#EF4444', '#3B82F6', '#10B981', '#7C3AED'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, max: 50, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)' } },
+            x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)' } }
+          }
+        }
+      });
+      
+      // Gráfico Big Five
+      const ctx3 = document.getElementById('bigFiveChart').getContext('2d');
+      new Chart(ctx3, {
+        type: 'radar',
+        data: {
+          labels: ['Abertura', 'Conscienciosidade', 'Extroversão', 'Amabilidade', 'Estabilidade'],
+          datasets: [{
+            label: 'Média',
+            data: [68, 72, 65, 70, 60],
+            backgroundColor: 'rgba(124,58,237,0.15)',
+            borderColor: '#7C3AED',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: { display: false },
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              pointLabels: { color: 'rgba(255,255,255,0.4)' }
+            }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+      
+      // Gráfico VIGOR
+      const ctx4 = document.getElementById('vigorChart').getContext('2d');
+      new Chart(ctx4, {
+        type: 'bar',
+        data: {
+          labels: ['V', 'I', 'G', 'O', 'R'],
+          datasets: [{
+            label: 'Índice',
+            data: [72, 68, 75, 70, 65],
+            backgroundColor: ['#06B6D4', '#10B981', '#F59E0B', '#7C3AED', '#F43F5E'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)' } },
+            x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)' } }
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
