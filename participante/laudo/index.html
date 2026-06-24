@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="VIGORRE ONE™ - Enterprise People Analytics Platform" />
-  <title>VIGORRE ONE™ - People Analytics Enterprise</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laudo VIGORRE™ | Transformação Comportamental</title>
   
-  <!-- Fonts Premium -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   
   <style>
     /* ============================================
-       RESET & BASE - ENTERPRISE PREMIUM
+       CORES DO LAUDO (OURO)
        ============================================ */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #D4AF37;
+      --primary-light: #FCD34D;
+      --primary-dark: #B8860B;
+      --gradient-main: linear-gradient(135deg, #D4AF37 0%, #FCD34D 50%, #B8860B 100%);
+      --gradient-header: linear-gradient(135deg, #B8860B, #D4AF37);
+      --gradient-footer: linear-gradient(135deg, #D4AF37, #B8860B);
+      --shadow-color: rgba(212, 175, 55, 0.3);
+    }
     
-    html { scroll-behavior: smooth; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
       font-family: 'Inter', sans-serif;
+      min-height: 100vh;
       background: #0F172A;
       color: #F8FAFC;
-      min-height: 100vh;
+      padding: 20px;
+      position: relative;
       overflow-x: hidden;
     }
     
-    /* ============================================
-       ANIMAÇÕES DE FUNDO
-       ============================================ */
-    .bg-animated {
+    .bg-laudo {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: 
-        radial-gradient(ellipse at 20% 80%, rgba(29, 78, 216, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+      background: var(--gradient-main);
+      opacity: 0.06;
       z-index: 0;
       animation: floatBg 30s ease-in-out infinite;
     }
@@ -44,15 +48,13 @@
       50% { transform: translateY(-20px) scale(1.02); }
     }
     
-    /* Partículas sutis */
     .particles {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background-image: 
-        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.15), transparent),
-        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.1), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.12), transparent),
-        radial-gradient(1px 1px at 160px 120px, rgba(255,255,255,0.08), transparent);
+        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.08), transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.06), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.10), transparent);
       background-size: 200px 200px;
       animation: floatParticles 20s linear infinite;
       pointer-events: none;
@@ -64,50 +66,55 @@
       100% { transform: translateY(-100px); }
     }
     
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
     /* ============================================
-       HEADER PREMIUM
+       CABEÇALHO - LAUDO (OURO)
        ============================================ */
-    header {
-      position: fixed;
+    .header-premium {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header-premium::before {
+      content: '';
+      position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
-      background: rgba(10, 22, 40, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 16px 0;
-      transition: all 0.3s ease;
+      height: 3px;
+      background: var(--gradient-header);
     }
     
-    header.scrolled {
-      padding: 10px 0;
-      background: rgba(10, 22, 40, 0.95);
-      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-    }
-    
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
+    .header-grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
     }
     
-    .logo {
+    .header-logo {
       display: flex;
       align-items: center;
       gap: 14px;
-      cursor: pointer;
-      text-decoration: none;
     }
     
-    .logo-icon {
+    .header-logo .logo-icon {
       width: 44px;
       height: 44px;
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
+      background: var(--gradient-header);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -116,774 +123,1478 @@
       font-size: 1.25rem;
       color: white;
       font-family: 'Poppins', sans-serif;
-      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
-      transition: all 0.3s ease;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px var(--shadow-color);
     }
     
-    .logo:hover .logo-icon {
-      transform: scale(1.05);
-      box-shadow: 0 4px 30px rgba(6, 182, 212, 0.5);
-    }
-    
-    .logo-text h1 {
+    .header-logo-text .system-name {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.125rem;
       font-weight: 800;
       color: white;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
     }
     
-    .logo-text .tm {
+    .header-logo-text .system-name .tm {
       font-size: 0.5rem;
       vertical-align: super;
-      color: #06B6D4;
+      color: #FCD34D;
     }
     
-    .logo-text span {
+    .header-logo-text .system-sub {
       font-size: 0.7rem;
       color: rgba(255, 255, 255, 0.4);
       display: block;
-      font-weight: 400;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
     }
     
-    .header-actions {
+    .header-center {
+      text-align: center;
+    }
+    
+    .header-center .report-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-center .report-title .highlight {
+      background: var(--gradient-header);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .header-center .report-sub {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .header-right {
+      text-align: right;
+    }
+    
+    .header-right .participant-name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: white;
+    }
+    
+    .header-right .participant-company {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .header-right .participant-id {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.3);
+      font-family: 'Courier New', monospace;
+      margin-top: 2px;
+    }
+    
+    /* ============================================
+       CORPO DO LAUDO
+       ============================================ */
+    .laudo-body {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 40px;
+      min-height: 400px;
+    }
+    
+    .laudo-title-page {
+      text-align: center;
+      padding: 40px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 32px;
+    }
+    
+    .laudo-title-page h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: white;
+    }
+    
+    .laudo-title-page .gold-text {
+      color: #D4AF37;
+    }
+    
+    .laudo-title-page p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1.125rem;
+      margin-top: 8px;
+    }
+    
+    .laudo-section {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    
+    .laudo-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      color: #D4AF37;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       gap: 12px;
     }
     
-    .btn-header {
-      padding: 10px 24px;
-      border-radius: 10px;
-      font-family: 'Inter', sans-serif;
+    .laudo-section h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.0625rem;
+      color: white;
+      margin-bottom: 12px;
+      margin-top: 16px;
+    }
+    
+    .laudo-section p {
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.9;
+      font-size: 0.9375rem;
+      margin-bottom: 12px;
+    }
+    
+    .laudo-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .laudo-section ul li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.85);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+    
+    .laudo-section ul li:last-child {
+      border-bottom: none;
+    }
+    
+    .laudo-section ul li::before {
+      content: '✦';
+      color: #D4AF37;
+      font-weight: 700;
+    }
+    
+    .gold-border {
+      border-left: 4px solid #D4AF37;
+      padding-left: 20px;
+    }
+    
+    .chart-container {
+      height: 280px;
+      position: relative;
+      margin: 24px 0;
+    }
+    
+    .chart-container-small {
+      height: 220px;
+      position: relative;
+      margin: 24px 0;
+    }
+    
+    .badge-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 100px;
+      color: #FCD34D;
+      font-size: 0.75rem;
       font-weight: 600;
-      font-size: 0.875rem;
+    }
+    
+    .btn-back {
+      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
     }
     
-    .btn-header-primary {
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.1);
       color: white;
-      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
     }
     
-    .btn-header-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 30px rgba(6, 182, 212, 0.5);
-    }
-    
-    .btn-header-secondary {
-      background: transparent;
-      color: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    
-    .btn-header-secondary:hover {
-      background: rgba(255, 255, 255, 0.05);
+    .btn-print {
+      padding: 10px 24px;
+      background: var(--gradient-header);
+      border: none;
+      border-radius: 10px;
       color: white;
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-    
-    /* ============================================
-       HERO SECTION
-       ============================================ */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-      padding: 100px 24px 60px;
-    }
-    
-    .hero-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-    
-    .hero-content h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 3.5rem;
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
-    }
-    
-    .hero-content h1 .highlight {
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .hero-content p {
-      font-size: 1.125rem;
-      color: rgba(255, 255, 255, 0.7);
-      line-height: 1.8;
-      max-width: 520px;
-      margin-bottom: 32px;
-    }
-    
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    
-    .btn-hero {
-      padding: 14px 32px;
-      border-radius: 12px;
-      font-family: 'Inter', sans-serif;
       font-weight: 600;
-      font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s ease;
-      border: none;
-      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      box-shadow: 0 4px 20px var(--shadow-color);
     }
     
-    .btn-hero-primary {
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
-      color: white;
-      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
-    }
-    
-    .btn-hero-primary:hover {
+    .btn-print:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 35px rgba(6, 182, 212, 0.5);
-    }
-    
-    .btn-hero-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    
-    .btn-hero-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-    
-    /* Hero Stats */
-    .hero-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    
-    .stat-card {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    
-    .stat-card:hover {
-      background: rgba(255, 255, 255, 0.06);
-      transform: translateY(-4px);
-    }
-    
-    .stat-number {
-      font-family: 'Poppins', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .stat-label {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.875rem;
-      margin-top: 4px;
+      box-shadow: 0 6px 30px var(--shadow-color);
     }
     
     /* ============================================
-       FEATURES SECTION
+       RODAPÉ - LAUDO (OURO)
        ============================================ */
-    .features {
-      padding: 80px 24px;
-      position: relative;
-      z-index: 1;
-      background: rgba(15, 23, 42, 0.5);
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-    }
-    
-    .features-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .section-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    
-    .section-header h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: white;
-      margin-bottom: 12px;
-    }
-    
-    .section-header p {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 1.125rem;
-    }
-    
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-    
-    .feature-card {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(10px);
+    .footer-premium {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 20px;
-      padding: 32px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 0 0 16px 16px;
+      padding: 20px 32px;
       position: relative;
       overflow: hidden;
     }
     
-    .feature-card::before {
+    .footer-premium::before {
       content: '';
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, #06B6D4, #7C3AED, transparent);
-      opacity: 0;
-      transition: opacity 0.4s ease;
+      background: var(--gradient-footer);
     }
     
-    .feature-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(6, 182, 212, 0.2);
-      background: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
     }
     
-    .feature-card:hover::before {
-      opacity: 1;
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
     
-    .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 16px;
-      display: inline-block;
-    }
-    
-    .feature-card h3 {
+    .footer-logo .logo-icon-small {
+      width: 32px;
+      height: 32px;
+      background: var(--gradient-footer);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.875rem;
+      color: white;
       font-family: 'Poppins', sans-serif;
-      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    
+    .footer-logo-text .footer-system {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
       font-weight: 700;
       color: white;
-      margin-bottom: 8px;
     }
     
-    .feature-card p {
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 1.7;
-      font-size: 0.9375rem;
+    .footer-logo-text .footer-system .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #FCD34D;
     }
     
-    .feature-tag {
-      display: inline-block;
-      margin-top: 16px;
-      padding: 4px 12px;
-      background: rgba(6, 182, 212, 0.15);
-      border: 1px solid rgba(6, 182, 212, 0.2);
-      border-radius: 100px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #06B6D4;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .footer-logo-text .footer-tagline {
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.3);
     }
     
-    /* ============================================
-       FOOTER PREMIUM
-       ============================================ */
-    footer {
-      background: rgba(10, 22, 40, 0.9);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-      padding: 40px 24px;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 2fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-    
-    .footer-brand .logo {
-      margin-bottom: 12px;
-    }
-    
-    .footer-brand p {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 0.875rem;
-      line-height: 1.6;
-      max-width: 280px;
-    }
-    
-    .footer-links {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    
-    .footer-links h4 {
-      font-weight: 600;
-      color: white;
-      margin-bottom: 12px;
-      font-size: 0.875rem;
-    }
-    
-    .footer-links ul {
-      list-style: none;
-      padding: 0;
-    }
-    
-    .footer-links ul li {
-      margin-bottom: 6px;
-    }
-    
-    .footer-links ul a {
-      color: rgba(255, 255, 255, 0.4);
-      text-decoration: none;
-      font-size: 0.8125rem;
-      transition: color 0.3s ease;
-    }
-    
-    .footer-links ul a:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-    
-    .footer-contact h4 {
-      font-weight: 600;
-      color: white;
-      margin-bottom: 12px;
-      font-size: 0.875rem;
+    .footer-center .footer-contact {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
     
     .footer-contact-item {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 4px;
       color: rgba(255, 255, 255, 0.4);
-      font-size: 0.8125rem;
-      margin-bottom: 8px;
-      text-decoration: none;
+      font-size: 0.7rem;
       transition: color 0.3s ease;
+      text-decoration: none;
     }
     
     .footer-contact-item:hover {
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.7);
     }
     
     .footer-contact-item .icon {
-      font-size: 1rem;
-      flex-shrink: 0;
+      font-size: 0.75rem;
+    }
+    
+    .footer-right .page-number {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.7rem;
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+      margin: 12px 0;
     }
     
     .footer-bottom {
-      max-width: 1200px;
-      margin: 32px auto 0;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.2);
     }
     
     /* ============================================
        RESPONSIVO
        ============================================ */
-    @media (max-width: 1024px) {
-      .hero-container {
+    @media (max-width: 992px) {
+      .header-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 12px;
         text-align: center;
       }
-      
-      .hero-content p {
-        margin: 0 auto 32px;
-      }
-      
-      .hero-buttons {
-        justify-content: center;
-      }
-      
-      .hero-stats {
-        max-width: 500px;
-        margin: 0 auto;
-      }
-      
-      .footer-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      
-      .footer-brand p {
-        max-width: 100%;
-      }
+      .header-right { text-align: center; }
+      .footer-grid { flex-direction: column; text-align: center; gap: 12px; }
+      .footer-center .footer-contact { justify-content: center; flex-direction: column; gap: 6px; }
     }
     
     @media (max-width: 768px) {
-      .hero-content h1 {
-        font-size: 2.5rem;
-      }
-      
-      .header-container {
-        flex-direction: column;
-        gap: 12px;
-      }
-      
-      .header-actions {
-        width: 100%;
-        justify-content: center;
-      }
-      
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .footer-links {
-        grid-template-columns: 1fr 1fr;
-      }
-      
-      .footer-bottom {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-      }
-      
-      .hero-stats {
-        grid-template-columns: 1fr 1fr;
-      }
+      .header-premium { padding: 16px 20px; }
+      .laudo-body { padding: 20px; }
+      .laudo-title-page h1 { font-size: 1.75rem; }
+      .chart-container { height: 220px; }
     }
     
     @media (max-width: 480px) {
-      .hero-content h1 {
-        font-size: 2rem;
+      body { padding: 12px; }
+      .header-premium { padding: 12px 16px; }
+      .laudo-body { padding: 16px; }
+      .laudo-section { padding: 16px; }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .container { max-width: 100% !important; }
+      .header-premium {
+        background: #0A2540 !important;
+        border-radius: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
-      
-      .hero-stats {
-        grid-template-columns: 1fr;
+      .laudo-body {
+        background: white !important;
+        border: none !important;
+        padding: 24px !important;
       }
-      
-      .btn-hero {
-        width: 100%;
-        justify-content: center;
+      .laudo-title-page h1 { color: #0A2540 !important; }
+      .laudo-title-page .gold-text { color: #D4AF37 !important; }
+      .laudo-section {
+        background: #F8FAFC !important;
+        border-color: #E2E8F0 !important;
       }
-      
-      .hero-buttons {
-        flex-direction: column;
+      .laudo-section p { color: #334155 !important; }
+      .laudo-section ul li { color: #334155 !important; }
+      .laudo-section h2 { color: #D4AF37 !important; }
+      .laudo-section h3 { color: #0A2540 !important; }
+      .footer-premium {
+        background: #0A2540 !important;
+        border-radius: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
-      
-      .footer-links {
-        grid-template-columns: 1fr;
+      .btn-back, .btn-print { display: none !important; }
+      .footer-contact-item { color: rgba(255, 255, 255, 0.6) !important; }
+      .badge-gold {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
+      .footer-bottom { display: none !important; }
+      .gold-border { border-left-color: #D4AF37 !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================
-       FUNDO ANIMADO
-       ============================================ -->
-  <div class="bg-animated"></div>
+  <!-- FUNDO -->
+  <div class="bg-laudo"></div>
   <div class="particles"></div>
 
-  <!-- ============================================
-       HEADER
-       ============================================ -->
-  <header id="header">
-    <div class="header-container">
-      <a href="index.html" class="logo">
-        <div class="logo-icon">V</div>
-        <div class="logo-text">
-          <h1>VIGORRE ONE<span class="tm">™</span></h1>
-          <span>People Analytics Enterprise</span>
-        </div>
-      </a>
-      
-      <div class="header-actions">
-        <a href="login.html" class="btn-header btn-header-secondary">Entrar</a>
-        <a href="login.html" class="btn-header btn-header-primary">Começar</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- ============================================
-       HERO
-       ============================================ -->
-  <section class="hero">
-    <div class="hero-container">
-      <div class="hero-content">
-        <h1>
-          Transforme Pessoas e Empresas com<br />
-          <span class="highlight">Inteligência Comportamental</span>
-        </h1>
-        <p>
-          Plataforma completa de avaliações DISC, Inteligência Emocional, 
-          Valores Pessoais e muito mais. Resultados precisos para decisões 
-          estratégicas.
-        </p>
-        <div class="hero-buttons">
-          <a href="login.html" class="btn-hero btn-hero-primary">
-            🚀 Começar Agora
-          </a>
-          <a href="#features" class="btn-hero btn-hero-secondary">
-            Saiba Mais
-          </a>
-        </div>
-      </div>
-      
-      <div class="hero-stats">
-        <div class="stat-card">
-          <div class="stat-number">4+</div>
-          <div class="stat-label">Testes Disponíveis</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Online e Seguro</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Disponibilidade</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">LGPD</div>
-          <div class="stat-label">Conformidade</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       FEATURES
-       ============================================ -->
-  <section class="features" id="features">
-    <div class="features-container">
-      <div class="section-header">
-        <h2>Como Podemos Ajudar?</h2>
-        <p>Soluções completas para avaliação e desenvolvimento humano</p>
-      </div>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h3>Teste DISC</h3>
-          <p>Avalie os 4 perfis comportamentais: Dominância, Influência, Estabilidade e Conformidade.</p>
-          <span class="feature-tag">Comportamental</span>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">🧠</div>
-          <h3>Inteligência Emocional</h3>
-          <p>Descubra competências emocionais: autoconsciência, autorregulação, motivação, empatia.</p>
-          <span class="feature-tag">Emocional</span>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">💎</div>
-          <h3>Valores Pessoais</h3>
-          <p>Identifique seus valores fundamentais baseados na teoria de Schwartz.</p>
-          <span class="feature-tag">Motivacional</span>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">📈</div>
-          <h3>Relatórios Premium</h3>
-          <p>Laudos completos com análise detalhada e recomendações personalizadas.</p>
-          <span class="feature-tag">Analítico</span>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">🏢</div>
-          <h3>Gestão Empresarial</h3>
-          <p>Gerencie empresas, recrutadores e participantes em um só lugar.</p>
-          <span class="feature-tag">Corporativo</span>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">🔒</div>
-          <h3>Segurança Total</h3>
-          <p>Conformidade com LGPD, criptografia e controle de acesso granular.</p>
-          <span class="feature-tag">Seguro</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       FOOTER
-       ============================================ -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-brand">
-        <a href="index.html" class="logo">
+  <div class="container">
+    
+    <!-- CABEÇALHO -->
+    <header class="header-premium">
+      <div class="header-grid">
+        <div class="header-logo">
           <div class="logo-icon">V</div>
-          <div class="logo-text">
-            <h1>VIGORRE ONE<span class="tm">™</span></h1>
-            <span>People Analytics Enterprise</span>
+          <div class="header-logo-text">
+            <span class="system-name">VIGORRE ONE<span class="tm">™</span></span>
+            <span class="system-sub">People Analytics Enterprise</span>
           </div>
-        </a>
-        <p style="margin-top:12px;">
-          Transformando dados humanos em decisões inteligentes.
-        </p>
-      </div>
-      
-      <div class="footer-links">
-        <div>
-          <h4>Plataforma</h4>
-          <ul>
-            <li><a href="#">Teste DISC</a></li>
-            <li><a href="#">Inteligência Emocional</a></li>
-            <li><a href="#">Valores Pessoais</a></li>
-            <li><a href="#">Laudo Premium</a></li>
-          </ul>
         </div>
-        <div>
-          <h4>Empresa</h4>
-          <ul>
-            <li><a href="#">Sobre</a></li>
-            <li><a href="#">Metodologia</a></li>
-            <li><a href="#">Clientes</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
+        
+        <div class="header-center">
+          <div class="report-title">
+            <span class="highlight">Laudo de Transformação</span>
+          </div>
+          <div class="report-sub">Análise Integrada de Perfil • 100+ Páginas</div>
         </div>
-        <div>
-          <h4>Suporte</h4>
-          <ul>
-            <li><a href="#">Ajuda</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Contato</a></li>
-            <li><a href="#">Política de Privacidade</a></li>
-          </ul>
+        
+        <div class="header-right">
+          <div class="participant-name" id="participantName">--</div>
+          <div class="participant-company" id="participantCompany">Empresa: --</div>
+          <div class="participant-id" id="participantId">ID: --</div>
         </div>
       </div>
-      
-      <div class="footer-contact">
-        <h4>Contato</h4>
-        <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
-          <span class="icon">📧</span> contato@vigorre.com.br
-        </a>
-        <a href="tel:+5534991850735" class="footer-contact-item">
-          <span class="icon">📱</span> (34) 99185-0735
-        </a>
-        <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
-          <span class="icon">🌐</span> www.vigorre.com.br
-        </a>
-        <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
-          <span class="icon">📷</span> @vigorre.oficial
-        </a>
-      </div>
-    </div>
+    </header>
     
-    <div class="footer-bottom">
-      <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
-      <span>v1.0</span>
-    </div>
-  </footer>
+    <!-- CORPO DO LAUDO -->
+    <div class="laudo-body" id="laudoBody">
+      
+      <!-- TÍTULO -->
+      <div class="laudo-title-page">
+        <h1>⚡ LAUDO DE <span class="gold-text">TRANSFORMAÇÃO</span></h1>
+        <p>Análise Integrada de Perfil • Metodologia Exclusiva VIGORRE™</p>
+        <div class="badge-gold" style="margin-top:16px;">
+          <span>🏆</span> 10 Pilares Exclusivos • 70+ Seções • Transformação Profunda
+        </div>
+      </div>
 
-  <!-- ============================================
-       SCRIPTS
-       ============================================ -->
+      <!-- ========================================== -->
+      <!-- SEÇÃO 1: APRESENTAÇÃO EXECUTIVA -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>1. Apresentação Executiva</h2>
+        <p>Este laudo representa o <strong>início de uma jornada de transformação</strong> — não apenas uma análise, mas um <strong>guia para o desenvolvimento humano profundo</strong>.</p>
+        <p>A <strong>Metodologia VIGORRE™</strong> foi desenvolvida para ir além dos testes tradicionais, oferecendo não apenas um diagnóstico, mas <strong>um caminho claro para o crescimento</strong>.</p>
+        <p>Com mais de <strong>100 páginas de análise</strong>, este documento integra:</p>
+        <ul>
+          <li><strong>Perfil Comportamental</strong> — Análise completa do perfil DISC</li>
+          <li><strong>Inteligência Emocional</strong> — 6 dimensões avaliadas</li>
+          <li><strong>Valores Pessoais</strong> — Motivadores e princípios</li>
+          <li><strong>10 Índices Exclusivos</strong> — FV™, ISP™, ICA™, RP™, IPO™, MRH™, IAM™, IPE™, ISV™, DL™</li>
+          <li><strong>70+ Seções Comportamentais</strong> — Desde vida profissional até relacionamentos</li>
+          <li><strong>Plano de Desenvolvimento</strong> — PDI profundo com metas e prazos</li>
+        </ul>
+        <div class="gold-border" style="margin-top:16px;">
+          <p style="font-style:italic;color:#FCD34D;">"A transformação não acontece por acaso. Ela é construída com consciência, intenção e ação."</p>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);">— VIGORRE™ One</p>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 2: METODOLOGIA VIGORRE™ -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>2. Metodologia Exclusiva VIGORRE™</h2>
+        <p>A Metodologia VIGORRE™ é composta por <strong>10 pilares exclusivos</strong> que transformam dados em decisões estratégicas:</p>
+        
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;">
+          <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #D4AF37;">
+            <h4 style="color:#D4AF37;font-size:0.9rem;font-weight:700;">FV™ — Fator VIGORRE™</h4>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Avalia energia profissional, resiliência, adaptabilidade e sustentação de desempenho. Escala 0-1000.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #10B981;">
+            <h4 style="color:#10B981;font-size:0.9rem;font-weight:700;">ISP™ — Sustentação Profissional</h4>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Avalia resistência emocional, tolerância à pressão e gestão do estresse.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #1D4ED8;">
+            <h4 style="color:#1D4ED8;font-size:0.9rem;font-weight:700;">ICA™ — Compatibilidade Organizacional</h4>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Avalia compatibilidade com cultura, liderança e ambiente operacional.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #06B6D4;">
+            <h4 style="color:#06B6D4;font-size:0.9rem;font-weight:700;">RP™ — Radar de Permanência</h4>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Avalia probabilidade de retenção, risco de desligamento e motivadores de permanência.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #7C3AED;">
+            <h4 style="color:#7C3AED;font-size:0.9rem;font-weight:700;">IPO™ — Prontidão Operacional</h4>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Avalia velocidade de adaptação, curva de aprendizagem e tempo para alta performance.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #F43F5E;">
+            <h4 style="color:#F43F5E;font-size:0.9rem;font-weight:700;">MRH™ — Mapa de Riscos Humanos</h4>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Identifica riscos de conflitos, desengajamento, absenteísmo e rotatividade.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #F59E0B;">
+            <h4 style="color:#F59E0B;font-size:0.9rem;font-weight:700;">IAM™ — Alojamento e Mobilidade</h4>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Avalia adaptação à distância, convivência coletiva e isolamento emocional.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #10B981;">
+            <h4 style="color:#10B981;font-size:0.9rem;font-weight:700;">IPE™ — Potencial Evolutivo</h4>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Avalia crescimento futuro, aprendizagem e desenvolvimento profissional.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #06B6D4;">
+            <h4 style="color:#06B6D4;font-size:0.9rem;font-weight:700;">ISV™ — Índice SWOT VIGORRE™</h4>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Mede forças, fraquezas, oportunidades e ameaças. Escala 0-1000.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #D4AF37;">
+            <h4 style="color:#D4AF37;font-size:0.9rem;font-weight:700;">DL™ — Diagnóstico de Liderabilidade</h4>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Avalia potencial de liderança, influência, tomada de decisão e gestão de equipes.</p>
+          </div>
+        </div>
+        
+        <div style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.15);border-radius:8px;padding:16px;text-align:center;">
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Equação Oficial: <strong style="color:#D4AF37;">FV™ + ISP™ + ICA™ + RP™ + IPO™ + MRH™ + IAM™ + IPE™ + ISV™ + DL™ = TRANSFORMAÇÃO COMPORTAMENTAL™</strong></p>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 3: PERFIL COMPORTAMENTAL INTEGRADO -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>3. Perfil Comportamental Integrado</h2>
+        
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:16px 0;">
+          <div>
+            <h3 style="text-align:center;font-size:0.9rem;">Radar Comportamental</h3>
+            <div class="chart-container-small">
+              <canvas id="discRadarChart"></canvas>
+            </div>
+          </div>
+          <div>
+            <h3 style="text-align:center;font-size:0.9rem;">Intensidade por Fator</h3>
+            <div class="chart-container-small">
+              <canvas id="discBarChart"></canvas>
+            </div>
+          </div>
+        </div>
+        
+        <div id="perfilIntegrado">
+          <p>Carregando análise aprofundada do perfil comportamental integrado...</p>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 4: ANÁLISE DOS 5 PILARES -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>4. Análise dos 5 Pilares VIGORRE™</h2>
+        
+        <!-- V — VALORES -->
+        <div style="border-left:4px solid #F59E0B;padding-left:20px;margin:16px 0;">
+          <h3 style="color:#F59E0B;">V — VALORES</h3>
+          <div id="pilaresValores">
+            <p>Carregando análise de valores e motivadores internos...</p>
+          </div>
+        </div>
+        
+        <!-- I — INTELIGÊNCIA EMOCIONAL -->
+        <div style="border-left:4px solid #06B6D4;padding-left:20px;margin:16px 0;">
+          <h3 style="color:#06B6D4;">I — INTELIGÊNCIA EMOCIONAL</h3>
+          <div id="pilaresIE">
+            <p>Carregando análise de inteligência emocional...</p>
+          </div>
+        </div>
+        
+        <!-- G — GESTÃO COMPORTAMENTAL -->
+        <div style="border-left:4px solid #7C3AED;padding-left:20px;margin:16px 0;">
+          <h3 style="color:#7C3AED;">G — GESTÃO COMPORTAMENTAL</h3>
+          <div id="pilaresGestao">
+            <p>Carregando análise de gestão comportamental...</p>
+          </div>
+        </div>
+        
+        <!-- O — ORIENTAÇÃO PARA PERFORMANCE -->
+        <div style="border-left:4px solid #10B981;padding-left:20px;margin:16px 0;">
+          <h3 style="color:#10B981;">O — ORIENTAÇÃO PARA PERFORMANCE</h3>
+          <div id="pilaresPerformance">
+            <p>Carregando análise de performance e execução...</p>
+          </div>
+        </div>
+        
+        <!-- R — RELACIONAMENTO E CULTURA -->
+        <div style="border-left:4px solid #1D4ED8;padding-left:20px;margin:16px 0;">
+          <h3 style="color:#1D4ED8;">R — RELACIONAMENTO E CULTURA</h3>
+          <div id="pilaresRelacionamento">
+            <p>Carregando análise de relacionamento e cultura organizacional...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 5: ÍNDICES EXCLUSIVOS -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>5. Índices Exclusivos VIGORRE™</h2>
+        <div id="indicesExclusivos" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 6: SWOT ESTRATÉGICA -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>6. Matriz SWOT Estratégica</h2>
+        <div id="swotEstrategica" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 7: DASHBOARD EXECUTIVO -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>7. Dashboard Executivo</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <div>
+            <h3 style="text-align:center;font-size:0.9rem;">Radar de Competências</h3>
+            <div class="chart-container-small">
+              <canvas id="vigorRadarChart"></canvas>
+            </div>
+          </div>
+          <div>
+            <h3 style="text-align:center;font-size:0.9rem;">Matriz de Potencial</h3>
+            <div class="chart-container-small">
+              <canvas id="vigorBarChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 8: PERFORMANCE FUTURA -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>8. Análise de Performance Futura</h2>
+        <div id="performanceFutura">
+          <p>Carregando análise preditiva de performance...</p>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 9: SAÚDE MENTAL CORPORATIVA -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>9. Análise de Saúde Mental Corporativa</h2>
+        <div id="saudeMental">
+          <p>Carregando análise de saúde mental corporativa...</p>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 10: ADAPTAÇÃO A ALOJAMENTOS -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>10. Análise de Adaptação a Alojamentos e Mobilidade</h2>
+        <div id="adaptacaoAlojamento">
+          <p>Carregando análise de adaptação a alojamentos...</p>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 11: MATRIZ DE TALENTOS (9 BOX) -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>11. Matriz de Talentos (9 Box)</h2>
+        <div id="matrizTalentos" style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;max-width:400px;margin:0 auto;">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 12: MAPA DE RISCOS HUMANOS -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>12. Mapa de Riscos Humanos</h2>
+        <div id="mapaRiscos" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 13: PONTOS FORTES -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>13. Pontos Fortes e Competências Chave</h2>
+        <div id="pontosFortes" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 14: PONTOS DE ATENÇÃO -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>14. Pontos de Atenção e Desenvolvimento</h2>
+        <div id="pontosAtencao" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 15: PDI PROFUNDO -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>15. Plano de Desenvolvimento Individual (PDI)</h2>
+        <div id="pdiProfundo">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 16: RECOMENDAÇÕES RH -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>16. Recomendações para RH e Gestores</h2>
+        <div id="recomendacoesRH">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 17: RECOMENDAÇÕES PARTICIPANTE -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>17. Recomendações para o Participante</h2>
+        <div id="recomendacoesParticipante">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 18: PARECER TÉCNICO FINAL -->
+      <!-- ========================================== -->
+      <div class="laudo-section">
+        <h2>18. Parecer Técnico Final</h2>
+        <div id="parecerTecnico">
+          <p>Carregando parecer técnico final...</p>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 19: CLASSIFICAÇÃO FINAL -->
+      <!-- ========================================== -->
+      <div class="laudo-section" style="text-align:center;">
+        <h2>19. Classificação Final VIGORRE™</h2>
+        <div style="display:inline-flex;align-items:center;gap:16px;padding:16px 32px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.15);border-radius:16px;">
+          <span style="font-size:3rem;" id="nivelEmoji">🏆</span>
+          <div>
+            <p style="font-size:0.75rem;color:rgba(255,255,255,0.4);">Nível de Transformação</p>
+            <p style="font-size:1.5rem;font-weight:800;color:#D4AF37;" id="nivelFinal">--</p>
+          </div>
+        </div>
+        <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:12px;" id="nivelJustificativa">Carregando justificativa técnica...</p>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 20: FRASE FINAL -->
+      <!-- ========================================== -->
+      <div class="laudo-section" style="text-align:center;border:1px solid rgba(212,175,55,0.15);">
+        <blockquote style="font-size:1.25rem;font-style:italic;color:rgba(255,255,255,0.8);">
+          "<span id="finalQuote">A transformação começa quando você decide se conhecer verdadeiramente.</span>"
+        </blockquote>
+        <p style="font-size:0.8rem;color:rgba(255,255,255,0.3);">— VIGORRE™ One • Transformação Comportamental</p>
+      </div>
+
+      <!-- BOTÕES -->
+      <div style="text-align:center;margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="../dashboard.html" class="btn-back">← Voltar ao Dashboard</a>
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir Laudo</button>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <footer class="footer-premium">
+      <div class="footer-grid">
+        <div class="footer-logo">
+          <div class="logo-icon-small">V</div>
+          <div class="footer-logo-text">
+            <span class="footer-system">VIGORRE ONE<span class="tm">™</span></span>
+            <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
+          </div>
+        </div>
+        
+        <div class="footer-center">
+          <div class="footer-contact">
+            <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
+              <span class="icon">📧</span> contato@vigorre.com.br
+            </a>
+            <a href="tel:+5534991850735" class="footer-contact-item">
+              <span class="icon">📱</span> (34) 99185-0735
+            </a>
+            <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
+              <span class="icon">🌐</span> www.vigorre.com.br
+            </a>
+            <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
+              <span class="icon">📷</span> @vigorre.oficial
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-right">
+          <div class="page-number">Laudo de Transformação</div>
+        </div>
+      </div>
+      
+      <div class="footer-divider"></div>
+      
+      <div class="footer-bottom">
+        <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
+        <span>v1.0</span>
+      </div>
+    </footer>
+    
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../../supabase-config.js"></script>
+  <script src="../../auth.js"></script>
+  <script src="../../middleware/auth-guard.js"></script>
+
   <script>
+    'use strict';
+
     // ============================================
-    // HEADER SCROLL EFFECT
+    // ESTADO E CONFIGURAÇÕES
     // ============================================
-    const header = document.getElementById('header');
-    
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-    
-    // ============================================
-    // SMOOTH SCROLL
-    // ============================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-    
-    // ============================================
-    // ANIMAÇÃO DE ENTRADA DOS CARDS
-    // ============================================
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+    const AppState = {
+      participant: null,
+      company: null,
+      results: { disc: null, ie: null, valores: null },
+      charts: {}
     };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }, index * 100);
-        }
-      });
-    }, observerOptions);
-    
-    document.querySelectorAll('.feature-card').forEach((card, index) => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(30px)';
-      card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-      observer.observe(card);
+
+    // ============================================
+    // DADOS DE INTERPRETAÇÃO DISC
+    // ============================================
+    const DISC_INSIGHTS = {
+      D: {
+        name: 'Dominância',
+        color: '#EF4444',
+        strengths: ['Liderança natural', 'Tomada de decisão ágil', 'Foco em resultados', 'Coragem para inovar', 'Visão estratégica'],
+        development: ['Desenvolver paciência', 'Praticar escuta ativa', 'Equilibrar velocidade com qualidade'],
+        desc: 'orientado a resultados, assertivo e com forte capacidade de liderança'
+      },
+      I: {
+        name: 'Influência',
+        color: '#3B82F6',
+        strengths: ['Comunicação impactante', 'Capacidade de motivar', 'Networking estratégico', 'Criatividade', 'Adaptabilidade social'],
+        development: ['Foco em execução', 'Cumprimento de prazos', 'Estruturar processos'],
+        desc: 'comunicativo, persuasivo e com forte capacidade de engajamento'
+      },
+      S: {
+        name: 'Estabilidade',
+        color: '#10B981',
+        strengths: ['Lealdade e constância', 'Escuta ativa', 'Mediação de conflitos', 'Execução consistente', 'Empatia operacional'],
+        development: ['Assertividade', 'Comunicação influente', 'Tomada de decisão mais ágil'],
+        desc: 'paciente, empático e com forte capacidade de suporte'
+      },
+      C: {
+        name: 'Conformidade',
+        color: '#7C3AED',
+        strengths: ['Análise técnica profunda', 'Precisão e qualidade', 'Planejamento estratégico', 'Gestão de riscos', 'Pensamento lógico'],
+        development: ['Flexibilidade', 'Agilidade decisória', 'Adaptação a mudanças'],
+        desc: 'analítico, detalhista e com forte capacidade de planejamento'
+      }
+    };
+
+    // ============================================
+    // INICIALIZAÇÃO
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📋 Laudo de Transformação - VIGORRE ONE™');
+      
+      const isAuth = window.VigorreAuth.isAuthenticated();
+      if (!isAuth) {
+        window.location.href = '../../login.html';
+        return;
+      }
+      
+      const user = window.VigorreAuth.getCurrentUser();
+      if (!user) {
+        window.location.href = '../../login.html';
+        return;
+      }
+      
+      document.getElementById('participantName').textContent = user.name || 'Participante';
+      document.getElementById('participantCompany').textContent = `Empresa: ${user.companyName || 'Independente'}`;
+      document.getElementById('participantId').textContent = `ID: ${user.id || '--'}`;
+      
+      loadResults();
     });
+
+    // ============================================
+    // CARREGAR RESULTADOS
+    // ============================================
+    function loadResults() {
+      try {
+        // DISC
+        const disc = localStorage.getItem('vigorre_last_disc_result');
+        if (disc) AppState.results.disc = JSON.parse(disc);
+        
+        // IE
+        const ie = localStorage.getItem('vigorre_last_ie_result');
+        if (ie) AppState.results.ie = JSON.parse(ie);
+        
+        // Valores
+        const valores = localStorage.getItem('vigorre_last_valores_result');
+        if (valores) AppState.results.valores = JSON.parse(valores);
+        
+        // Verificar se tem dados
+        const hasData = AppState.results.disc || AppState.results.ie || AppState.results.valores;
+        
+        if (hasData) {
+          renderLaudo();
+        } else {
+          // Dados de exemplo
+          AppState.results.disc = { percentages: { D: 70, I: 45, S: 60, C: 40 }, dominant: 'D' };
+          AppState.results.ie = { percentages: { autoconsciencia: 75, autocontrole: 70, empatia: 80, resiliencia: 65, social: 72, adaptabilidade: 68 }, avgQE: 72 };
+          AppState.results.valores = { percentages: { realizacao: 80, autodirecao: 75, benevolencia: 70, estimulo: 65 }, dominant: 'realizacao' };
+          renderLaudo();
+        }
+        
+      } catch (error) {
+        console.error('❌ Erro ao carregar resultados:', error);
+        showError('Erro ao carregar resultados. Tente novamente.');
+      }
+    }
+
+    // ============================================
+    // RENDERIZAR LAUDO
+    // ============================================
+    function renderLaudo() {
+      const disc = AppState.results.disc;
+      const ie = AppState.results.ie;
+      const valores = AppState.results.valores;
+      
+      // PERFIL INTEGRADO
+      let dominant = 'D';
+      let pct = {};
+      if (disc) {
+        pct = disc.percentages || {};
+        dominant = disc.dominant || Object.entries(pct).sort((a,b) => b[1]-a[1])[0]?.[0] || 'D';
+      }
+      const profile = DISC_INSIGHTS[dominant] || DISC_INSIGHTS.D;
+      
+      const nome = AppState.participant?.name || 'O participante';
+      
+      document.getElementById('perfilIntegrado').innerHTML = `
+        <div style="space-y-4;">
+          <p><strong style="color:${profile.color}">Perfil Predominante: ${profile.name}</strong> — ${profile.desc}.</p>
+          <p><strong>Como pensa:</strong> ${nome} processa informações de forma ${dominant === 'D' ? 'rápida e orientada a ação' : dominant === 'I' ? 'criativa e conectiva' : dominant === 'S' ? 'reflexiva e estruturada' : 'analítica e detalhada'}.</p>
+          <p><strong>Como toma decisões:</strong> ${dominant === 'D' ? 'Rápido, pragmático e orientado a impacto.' : dominant === 'I' ? 'Considera impacto nas pessoas e busca consenso.' : dominant === 'S' ? 'Cauteloso, analisa impactos e busca segurança.' : 'Metódico, avalia minuciosamente e busca mitigar riscos.'}</p>
+          <p><strong>Como reage sob pressão:</strong> ${dominant === 'D' ? 'Acelera a execução e pode tornar-se mais exigente.' : dominant === 'I' ? 'Mantém otimismo e busca soluções colaborativas.' : dominant === 'S' ? 'Busca apoio e divide responsabilidades.' : 'Organiza prioridades e segue planos.'}</p>
+          <p><strong>Como se comunica:</strong> ${dominant === 'D' ? 'Direto, objetivo e focado em eficiência.' : dominant === 'I' ? 'Entusiasta, persuasivo e focado em conexões.' : dominant === 'S' ? 'Calmo, empático e focado em entendimento mútuo.' : 'Preciso, baseado em fatos e estruturado.'}</p>
+          <p><strong>Como trabalha em equipe:</strong> ${dominant === 'D' ? 'Lidera pelo exemplo e cobra resultados.' : dominant === 'I' ? 'Integra grupos e mantém clima positivo.' : dominant === 'S' ? 'Apoia colegas e mantém coerência.' : 'Organiza processos e garante qualidade.'}</p>
+          <p><strong>Como lida com mudanças:</strong> ${dominant === 'D' ? 'Adapta-se rapidamente, mas pode ser impaciente com processos lentos.' : dominant === 'I' ? 'Alta adaptabilidade, mas pode perder foco com excesso de ideias.' : dominant === 'S' ? 'Adapta-se com transição estruturada, pode resistir a mudanças bruscas.' : 'Adapta-se com planejamento, pode ser resistente a improvisos.'}</p>
+          <p><strong>Como lida com conflitos:</strong> ${dominant === 'D' ? 'Enfrenta conflitos de forma direta e busca soluções rápidas.' : dominant === 'I' ? 'Media conflitos com diplomacia e busca consenso.' : dominant === 'S' ? 'Evita conflitos e busca harmonia.' : 'Analisa conflitos com objetividade e busca soluções estruturadas.'}</p>
+        </div>
+      `;
+      
+      // PILARES VIGORRE™
+      // V — VALORES
+      const valoresPct = valores?.percentages || {};
+      const valoresDom = valores?.dominant || Object.entries(valoresPct).sort((a,b) => b[1]-a[1])[0]?.[0] || 'realizacao';
+      const valoresNomes = { realizacao: 'Realização', autodirecao: 'Autodireção', benevolencia: 'Benevolência', estimulo: 'Estímulo', poder: 'Poder', seguranca: 'Segurança', conformidade: 'Conformidade', tradicao: 'Tradição', hedonismo: 'Hedonismo', universalismo: 'Universalismo' };
+      
+      document.getElementById('pilaresValores').innerHTML = `
+        <p><strong>Motivadores internos:</strong> ${nome} é impulsionado por ${valoresNomes[valoresDom] || 'propósito'}.</p>
+        <p><strong>Princípios e propósito:</strong> ${valoresPct[valoresDom] ? `Seus princípios são orientados por ${valoresNomes[valoresDom]}, com ${valoresPct[valoresDom]}% de intensidade.` : 'Seus princípios estão em formação.'}</p>
+        <p><strong>Alinhamento organizacional:</strong> ${valoresDom === 'realizacao' ? 'Alinhado a culturas de alta performance e meritocracia.' : valoresDom === 'autodirecao' ? 'Alinhado a culturas de autonomia e inovação.' : valoresDom === 'benevolencia' ? 'Alinhado a culturas de apoio e colaboração.' : 'Alinhamento a ser explorado.'}</p>
+      `;
+      
+      // I — INTELIGÊNCIA EMOCIONAL
+      const iePct = ie?.percentages || {};
+      const ieAvg = ie?.avgQE || ie?.avg_qe || 0;
+      
+      document.getElementById('pilaresIE').innerHTML = `
+        <p><strong>Autoconhecimento:</strong> ${iePct.autoconsciencia ? `${iePct.autoconsciencia}%` : 'Em desenvolvimento'} — ${iePct.autoconsciencia >= 70 ? 'Excelente percepção emocional.' : iePct.autoconsciencia >= 50 ? 'Boa percepção com espaço para desenvolvimento.' : 'Oportunidades de desenvolver autopercepção.'}</p>
+        <p><strong>Autocontrole:</strong> ${iePct.autocontrole ? `${iePct.autocontrole}%` : 'Em desenvolvimento'} — ${iePct.autocontrole >= 70 ? 'Ótima regulação sob pressão.' : iePct.autocontrole >= 50 ? 'Boa regulação com espaço para desenvolvimento.' : 'Oportunidades de desenvolver regulação.'}</p>
+        <p><strong>Resiliência:</strong> ${iePct.resiliencia ? `${iePct.resiliencia}%` : 'Em desenvolvimento'} — ${iePct.resiliencia >= 70 ? 'Alta capacidade de recuperação.' : iePct.resiliencia >= 50 ? 'Boa resiliência com espaço para fortalecimento.' : 'Oportunidades de desenvolver resiliência.'}</p>
+        <p><strong>Empatia:</strong> ${iePct.empatia ? `${iePct.empatia}%` : 'Em desenvolvimento'} — ${iePct.empatia >= 70 ? 'Alta sensibilidade interpessoal.' : iePct.empatia >= 50 ? 'Boa empatia com espaço para desenvolvimento.' : 'Oportunidades de desenvolver empatia.'}</p>
+        <p><strong>QE Geral:</strong> ${ieAvg ? `${Math.round(ieAvg)}%` : 'Não avaliado'} — ${ieAvg >= 70 ? 'Alta inteligência emocional.' : ieAvg >= 50 ? 'Inteligência emocional em desenvolvimento.' : 'Oportunidades de desenvolvimento emocional.'}</p>
+      `;
+      
+      // G — GESTÃO COMPORTAMENTAL
+      document.getElementById('pilaresGestao').innerHTML = `
+        <p><strong>DISC predominante:</strong> ${profile.name}</p>
+        <p><strong>Comportamentos naturais:</strong> ${nome} tende a ${dominant === 'D' ? 'assumir liderança naturalmente, tomar decisões rápidas e buscar resultados' : dominant === 'I' ? 'comunicar-se com entusiasmo, construir redes e motivar equipes' : dominant === 'S' ? 'manter harmonia, oferecer suporte e executar com consistência' : 'analisar detalhadamente, planejar com precisão e buscar qualidade'}.</p>
+        <p><strong>Comportamentos adaptados:</strong> ${nome} demonstra capacidade de adaptar comportamentos conforme o contexto.</p>
+      `;
+      
+      // O — ORIENTAÇÃO PARA PERFORMANCE
+      document.getElementById('pilaresPerformance').innerHTML = `
+        <p><strong>Produtividade:</strong> ${dominant === 'D' || dominant === 'I' ? 'Ritmo acelerado com foco em entregas e impacto.' : 'Ritmo consistente com foco em qualidade e processos.'}</p>
+        <p><strong>Foco e comprometimento:</strong> ${dominant === 'D' ? 'Orientado a metas e resultados tangíveis.' : dominant === 'I' ? 'Orientado a conexões e impacto social.' : dominant === 'S' ? 'Orientado a processos e consistência.' : 'Orientado a qualidade e precisão.'}</p>
+        <p><strong>Disciplina e execução:</strong> ${dominant === 'D' ? 'Disciplina para executar com agilidade.' : dominant === 'I' ? 'Disciplina adaptativa, com necessidade de rotinas.' : dominant === 'S' ? 'Alta disciplina e consistência.' : 'Alta disciplina e precisão.'}</p>
+      `;
+      
+      // R — RELACIONAMENTO E CULTURA
+      document.getElementById('pilaresRelacionamento').innerHTML = `
+        <p><strong>Trabalho em equipe:</strong> ${dominant === 'D' ? 'Lidera equipes com foco em resultados.' : dominant === 'I' ? 'Integra equipes com comunicação e entusiasmo.' : dominant === 'S' ? 'Apoia equipes com consistência e harmonia.' : 'Organiza equipes com estrutura e precisão.'}</p>
+        <p><strong>Comunicação e influência:</strong> ${dominant === 'D' ? 'Comunicação direta e objetiva.' : dominant === 'I' ? 'Comunicação entusiasta e persuasiva.' : dominant === 'S' ? 'Comunicação calma e empática.' : 'Comunicação precisa e estruturada.'}</p>
+        <p><strong>Integração cultural:</strong> ${valoresDom ? `Culturas que valorizam ${valoresNomes[valoresDom]}` : 'Culturas que respeitem seus valores.'}</p>
+      `;
+      
+      // ÍNDICES EXCLUSIVOS
+      const fv = Math.min(980, Math.max(400, 500 + (dominant === 'D' ? 80 : dominant === 'I' ? 70 : dominant === 'S' ? 60 : 90) + (ieAvg >= 70 ? 100 : ieAvg >= 50 ? 50 : 0)));
+      const ica = Math.min(98, Math.max(45, 50 + (dominant === 'D' ? 20 : dominant === 'I' ? 15 : dominant === 'S' ? 10 : 25) + (ieAvg >= 70 ? 20 : 10)));
+      
+      document.getElementById('indicesExclusivos').innerHTML = `
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;text-align:center;border:1px solid rgba(212,175,55,0.1);">
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">FV™</p>
+          <p style="font-size:1.5rem;font-weight:800;color:#D4AF37;">${fv}</p>
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Fator VIGORRE™</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;text-align:center;border:1px solid rgba(16,185,129,0.1);">
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">ISP™</p>
+          <p style="font-size:1.5rem;font-weight:800;color:#10B981;">${ieAvg >= 70 ? 'Alta' : ieAvg >= 50 ? 'Moderada' : 'Em Desenvolvimento'}</p>
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Sustentação Profissional</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;text-align:center;border:1px solid rgba(29,78,216,0.1);">
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">ICA™</p>
+          <p style="font-size:1.5rem;font-weight:800;color:#1D4ED8;">${ica}%</p>
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Compatibilidade Organizacional</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;text-align:center;border:1px solid rgba(6,182,212,0.1);">
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">RP™</p>
+          <p style="font-size:1.5rem;font-weight:800;color:#06B6D4;">${Math.min(95, Math.max(40, 50 + (dominant === 'S' ? 25 : dominant === 'C' ? 20 : 10) + (ieAvg >= 70 ? 15 : 5)))}%</p>
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Radar de Permanência</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;text-align:center;border:1px solid rgba(124,58,237,0.1);">
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">IPO™</p>
+          <p style="font-size:1.5rem;font-weight:800;color:#7C3AED;">${Math.min(98, Math.max(40, 50 + (dominant === 'D' ? 30 : dominant === 'I' ? 20 : 10) + (ieAvg >= 70 ? 15 : 5)))}%</p>
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Prontidão Operacional</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;text-align:center;border:1px solid rgba(245,158,11,0.1);">
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">IPE™</p>
+          <p style="font-size:1.5rem;font-weight:800;color:#F59E0B;">${Math.min(95, 50 + (dominant === 'D' ? 25 : dominant === 'I' ? 20 : 15) + (ieAvg >= 70 ? 20 : 5))}%</p>
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Potencial Evolutivo</p>
+        </div>
+      `;
+      
+      // SWOT ESTRATÉGICA
+      document.getElementById('swotEstrategica').innerHTML = `
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #10B981;">
+          <h4 style="color:#10B981;">💪 Forças Estratégicas</h4>
+          <ul style="font-size:0.85rem;color:rgba(255,255,255,0.8);">
+            <li>• ${profile.strengths.slice(0,4).join('</li><li>• ')}</li>
+          </ul>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #F59E0B;">
+          <h4 style="color:#F59E0B;">⚡ Fraquezas</h4>
+          <ul style="font-size:0.85rem;color:rgba(255,255,255,0.8);">
+            <li>• ${profile.development.join('</li><li>• ')}</li>
+          </ul>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #06B6D4;">
+          <h4 style="color:#06B6D4;">🌟 Oportunidades</h4>
+          <ul style="font-size:0.85rem;color:rgba(255,255,255,0.8);">
+            <li>• Promoção para posições de liderança</li>
+            <li>• Gestão de equipes de alta performance</li>
+            <li>• Participação em projetos estratégicos</li>
+            <li>• Mentoria e desenvolvimento de talentos</li>
+          </ul>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #F43F5E;">
+          <h4 style="color:#F43F5E;">🛡️ Ameaças</h4>
+          <ul style="font-size:0.85rem;color:rgba(255,255,255,0.8);">
+            <li>• Risco de burnout em ambientes de alta pressão</li>
+            <li>• Sobrecarga por dificuldade de delegar</li>
+            <li>• Conflitos em ambientes muito burocráticos</li>
+            <li>• Desmotivação em culturas sem propósito</li>
+          </ul>
+        </div>
+      `;
+      
+      // PERFORMANCE FUTURA
+      document.getElementById('performanceFutura').innerHTML = `
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;text-align:center;">
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Crescimento</p>
+            <p style="font-size:1.2rem;font-weight:800;color:#06B6D4;">${ieAvg >= 70 ? '92%' : '78%'}</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;text-align:center;">
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Liderança</p>
+            <p style="font-size:1.2rem;font-weight:800;color:#D4AF37;">${dominant === 'D' || dominant === 'I' ? '87%' : '72%'}</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;text-align:center;">
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Promoção</p>
+            <p style="font-size:1.2rem;font-weight:800;color:#7C3AED;">85%</p>
+          </div>
+        </div>
+        <p style="font-size:0.9rem;color:rgba(255,255,255,0.8);">${dominant === 'D' || dominant === 'I' ? 'Perfil com características de liderança e visão estratégica. Alto potencial para posições de gestão e tomada de decisão.' : 'Perfil com consistência, qualidade e foco em processos. Alto potencial para cargos de gestão e coordenação.'}</p>
+      `;
+      
+      // SAÚDE MENTAL
+      document.getElementById('saudeMental').innerHTML = `
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;text-align:center;">
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Estabilidade</p>
+            <p style="font-size:1rem;font-weight:700;color:${ieAvg >= 70 ? '#10B981' : '#F59E0B'};">${ieAvg >= 70 ? 'Alta' : ieAvg >= 50 ? 'Moderada' : 'Em desenvolvimento'}</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;text-align:center;">
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Resiliência</p>
+            <p style="font-size:1rem;font-weight:700;color:${iePct.resiliencia >= 70 ? '#10B981' : '#F59E0B'};">${iePct.resiliencia >= 70 ? 'Alta' : iePct.resiliencia >= 50 ? 'Moderada' : 'Em desenvolvimento'}</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;text-align:center;">
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.4);">Risco de Burnout</p>
+            <p style="font-size:1rem;font-weight:700;color:${ieAvg < 40 ? '#F43F5E' : ieAvg < 60 ? '#F59E0B' : '#10B981'};">${ieAvg < 40 ? 'Moderado' : ieAvg < 60 ? 'Baixo-Moderado' : 'Baixo'}</p>
+          </div>
+        </div>
+        <div style="background:rgba(245,158,11,0.08);border-left:4px solid #F59E0B;padding:12px;border-radius:4px;">
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);"><strong>Recomendações preventivas:</strong> ${ieAvg < 70 ? 'Praticar pausas estratégicas, exercícios de respiração e estabelecer limites claros entre trabalho e vida pessoal.' : 'Manter práticas de autocuidado e monitorar sinais de sobrecarga.'}</p>
+        </div>
+      `;
+      
+      // ADAPTAÇÃO A ALOJAMENTOS
+      document.getElementById('adaptacaoAlojamento').innerHTML = `
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;">
+            <h4 style="font-size:0.85rem;color:#F59E0B;">Adaptação à Distância</h4>
+            <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">${ieAvg >= 60 ? 'Alta capacidade de manter equilíbrio emocional quando distante da família.' : 'Pode necessitar de suporte adicional para adaptação à distância.'}</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;">
+            <h4 style="font-size:0.85rem;color:#06B6D4;">Convivência Coletiva</h4>
+            <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">${ieAvg >= 60 ? 'Boa capacidade de convivência em alojamentos e ambientes compartilhados.' : 'Pode preferir maior privacidade e espaço pessoal.'}</p>
+          </div>
+        </div>
+      `;
+      
+      // MATRIZ DE TALENTOS (9 BOX)
+      const posicao = (dominant === 'D' || dominant === 'I') ? 'Elite' : 'Alta Performance';
+      document.getElementById('matrizTalentos').innerHTML = `
+        <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.3);grid-column:1/-1;">Performance</div>
+        <div style="background:rgba(255,255,255,0.03);padding:8px;text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.3);">Baixo</div>
+        <div style="background:rgba(255,255,255,0.03);padding:8px;text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.3);">Médio</div>
+        <div style="background:rgba(255,255,255,0.03);padding:8px;text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.3);">Alto</div>
+        <div style="background:rgba(255,255,255,0.03);padding:8px;text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.3);">Alto</div>
+        <div style="background:rgba(245,158,11,0.08);padding:8px;text-align:center;border-radius:4px;border:1px solid rgba(245,158,11,0.15);"><span style="font-size:0.8rem;">🌟</span><p style="font-size:0.6rem;color:rgba(255,255,255,0.6);">Potencial</p></div>
+        <div style="background:rgba(212,175,55,0.08);padding:8px;text-align:center;border-radius:4px;border:1px solid rgba(212,175,55,0.15);"><span style="font-size:0.8rem;">🏆</span><p style="font-size:0.6rem;color:rgba(255,255,255,0.6);">${posicao}</p></div>
+        <div style="background:rgba(255,255,255,0.03);padding:8px;text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.3);">Médio</div>
+        <div style="background:rgba(6,182,212,0.08);padding:8px;text-align:center;border-radius:4px;border:1px solid rgba(6,182,212,0.15);"><span style="font-size:0.8rem;">📈</span><p style="font-size:0.6rem;color:rgba(255,255,255,0.6);">Crescimento</p></div>
+        <div style="background:rgba(124,58,237,0.08);padding:8px;text-align:center;border-radius:4px;border:1px solid rgba(124,58,237,0.15);"><span style="font-size:0.8rem;">🎯</span><p style="font-size:0.6rem;color:rgba(255,255,255,0.6);">High Performer</p></div>
+        <div style="background:rgba(255,255,255,0.03);padding:8px;text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.3);">Baixo</div>
+        <div style="background:rgba(244,63,94,0.08);padding:8px;text-align:center;border-radius:4px;border:1px solid rgba(244,63,94,0.15);"><span style="font-size:0.8rem;">🌱</span><p style="font-size:0.6rem;color:rgba(255,255,255,0.6);">Desenvolver</p></div>
+        <div style="background:rgba(16,185,129,0.08);padding:8px;text-align:center;border-radius:4px;border:1px solid rgba(16,185,129,0.15);"><span style="font-size:0.8rem;">🚀</span><p style="font-size:0.6rem;color:rgba(255,255,255,0.6);">Alta Performance</p></div>
+        <div style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.3);grid-column:1/-1;margin-top:4px;">
+          <span style="background:rgba(212,175,55,0.08);padding:2px 8px;border-radius:4px;">★ Posição atual: ${posicao}</span>
+        </div>
+      `;
+      
+      // MAPA DE RISCOS
+      const riscos = [
+        { nome: 'Absenteísmo', nivel: ieAvg >= 60 ? 'Baixo' : 'Moderado', cor: ieAvg >= 60 ? '#10B981' : '#F59E0B' },
+        { nome: 'Rotatividade', nivel: ieAvg >= 60 ? 'Muito Baixo' : 'Baixo-Moderado', cor: ieAvg >= 60 ? '#10B981' : '#F59E0B' },
+        { nome: 'Conflitos', nivel: 'Moderado', cor: '#F59E0B' },
+        { nome: 'Desengajamento', nivel: ieAvg >= 60 ? 'Baixo' : 'Moderado', cor: ieAvg >= 60 ? '#10B981' : '#F59E0B' },
+        { nome: 'Resistência', nivel: 'Moderado', cor: '#F59E0B' },
+        { nome: 'Pressão', nivel: ieAvg >= 60 ? 'Baixo' : 'Moderado-Alto', cor: ieAvg >= 60 ? '#10B981' : '#F43F5E' }
+      ];
+      document.getElementById('mapaRiscos').innerHTML = riscos.map(r => `
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;text-align:center;border-left:3px solid ${r.cor};">
+          <p style="font-size:0.65rem;color:rgba(255,255,255,0.4);">${r.nome}</p>
+          <p style="font-size:0.85rem;font-weight:700;color:${r.cor};">${r.nivel}</p>
+        </div>
+      `).join('');
+      
+      // PONTOS FORTES
+      document.getElementById('pontosFortes').innerHTML = profile.strengths.map(s => `
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;align-items:center;gap:8px;">
+          <span style="color:#10B981;">✓</span>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">${s}</p>
+        </div>
+      `).join('');
+      
+      // PONTOS DE ATENÇÃO
+      document.getElementById('pontosAtencao').innerHTML = profile.development.map(d => `
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;align-items:center;gap:8px;">
+          <span style="color:#F59E0B;">⚡</span>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">${d}</p>
+        </div>
+      `).join('');
+      
+      // PDI PROFUNDO
+      document.getElementById('pdiProfundo').innerHTML = `
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #10B981;margin-bottom:12px;">
+          <h4 style="color:#10B981;">🎯 Curto Prazo (0-3 meses)</h4>
+          <ul style="font-size:0.85rem;color:rgba(255,255,255,0.8);">
+            <li>• Estabelecer rotina de auto-observação (journaling emocional diário)</li>
+            <li>• Praticar técnica de pausa estratégica antes de decisões importantes</li>
+            <li>• Buscar feedback estruturado mensal sobre impacto comportamental</li>
+            ${dominant === 'D' ? '<li>• Desenvolver escuta ativa em reuniões e interações</li>' : ''}
+            ${dominant === 'I' ? '<li>• Estabelecer rotinas de execução e cumprimento de prazos</li>' : ''}
+            ${dominant === 'S' ? '<li>• Praticar assertividade em situações de conflito</li>' : ''}
+            ${dominant === 'C' ? '<li>• Desenvolver agilidade em decisões de baixo impacto</li>' : ''}
+          </ul>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #F59E0B;margin-bottom:12px;">
+          <h4 style="color:#F59E0B;">🚀 Médio Prazo (3-12 meses)</h4>
+          <ul style="font-size:0.85rem;color:rgba(255,255,255,0.8);">
+            <li>• Desenvolver competência específica identificada neste laudo</li>
+            <li>• Aplicar técnicas de regulação emocional em cenários reais de pressão</li>
+            <li>• Criar plano de desenvolvimento trimestral com métricas claras</li>
+            ${ieAvg < 70 ? '<li>• Participar de treinamento em inteligência emocional</li>' : ''}
+            <li>• Buscar mentoria em áreas de desenvolvimento identificadas</li>
+          </ul>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #7C3AED;">
+          <h4 style="color:#7C3AED;">🌟 Longo Prazo (12+ meses)</h4>
+          <ul style="font-size:0.85rem;color:rgba(255,255,255,0.8);">
+            <li>• Assumir papel de modelo comportamental para a equipe</li>
+            <li>• Desenvolver programa de desenvolvimento para pares</li>
+            <li>• Integrar inteligência comportamental em processos estratégicos</li>
+            <li>• Consolidar estilo de liderança baseado no perfil identificado</li>
+          </ul>
+        </div>
+      `;
+      
+      // RECOMENDAÇÕES RH
+      document.getElementById('recomendacoesRH').innerHTML = `
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;gap:12px;">
+          <span style="color:#06B6D4;">➤</span>
+          <div><h4 style="font-size:0.85rem;color:#06B6D4;">Como Integrar</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">Promover integração com a cultura organizacional, apresentando valores, propósito e expectativas.</p></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;gap:12px;">
+          <span style="color:#06B6D4;">➤</span>
+          <div><h4 style="font-size:0.85rem;color:#06B6D4;">Como Desenvolver</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">Investir em desenvolvimento de competências complementares ao perfil.</p></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;gap:12px;">
+          <span style="color:#06B6D4;">➤</span>
+          <div><h4 style="font-size:0.85rem;color:#06B6D4;">Como Engajar</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">Oferecer desafios alinhados ao perfil e reconhecimento por conquistas.</p></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;gap:12px;">
+          <span style="color:#06B6D4;">➤</span>
+          <div><h4 style="font-size:0.85rem;color:#06B6D4;">Como Reter</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">Criar plano de carreira que alinhe resultados e desenvolvimento.</p></div>
+        </div>
+      `;
+      
+      // RECOMENDAÇÕES PARTICIPANTE
+      document.getElementById('recomendacoesParticipante').innerHTML = `
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;gap:12px;">
+          <span style="color:#7C3AED;">🧭</span>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">Fortalecer inteligência relacional através de escuta ativa e feedbacks estruturados.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;gap:12px;">
+          <span style="color:#7C3AED;">🧭</span>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">Desenvolver assertividade em decisões e negociações.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;gap:12px;">
+          <span style="color:#7C3AED;">🧭</span>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">Estabelecer rotina de autoconhecimento e feedback estruturado.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;gap:12px;">
+          <span style="color:#7C3AED;">🧭</span>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.8);">Praticar técnicas de regulação emocional em situações de pressão.</p>
+        </div>
+      `;
+      
+      // PARECER TÉCNICO
+      document.getElementById('parecerTecnico').innerHTML = `
+        <p style="color:rgba(255,255,255,0.85);line-height:1.9;">Com base na análise integrada do perfil comportamental, inteligência emocional e valores pessoais de <strong>${nome}</strong>, apresentamos o parecer técnico final.</p>
+        <p style="color:rgba(255,255,255,0.85);line-height:1.9;margin-top:12px;"><strong>Quem é ${nome}?</strong> ${nome} é um profissional que combina ${profile.name} com ${ieAvg >= 70 ? 'inteligência emocional de alta performance' : ieAvg >= 50 ? 'inteligência emocional em desenvolvimento' : 'inteligência emocional em construção'}, posicionando-se como um profissional de impacto, com capacidade de gerar resultados significativos.</p>
+        <p style="color:rgba(255,255,255,0.85);line-height:1.9;margin-top:12px;"><strong>Como gera valor?</strong> ${nome} gera valor através de sua capacidade de liderar iniciativas, mobilizar equipes e entregar resultados com agilidade.</p>
+        <p style="color:rgba(255,255,255,0.85);line-height:1.9;margin-top:12px;"><strong>Potencial de transformação:</strong> ${nome} tem potencial para assumir posições de liderança estratégica, gestão de equipes e tomada de decisão de alto impacto.</p>
+        <div style="background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:12px;border-radius:4px;margin-top:12px;">
+          <p style="font-size:0.85rem;color:#FCD34D;"><strong>Recomendação Final:</strong> ${ieAvg >= 70 ? 'Altamente Recomendado para posições de liderança e gestão estratégica.' : 'Recomendado com desenvolvimento direcionado para potencializar competências.'}</p>
+        </div>
+      `;
+      
+      // CLASSIFICAÇÃO FINAL
+      let score = 50;
+      if (disc) score += 10;
+      if (ie) {
+        if (ieAvg >= 70) score += 25;
+        else if (ieAvg >= 50) score += 15;
+        else score += 5;
+      }
+      if (dominant === 'D' || dominant === 'I') score += 10;
+      score = Math.min(100, score + (ieAvg >= 70 ? 5 : 0));
+      
+      const nivel = score >= 90 ? 'Elite VIGORRE™ — Transformação Profunda' : score >= 75 ? 'Alta Performance — Transformação em Andamento' : score >= 60 ? 'Estratégico — Potencial de Transformação' : score >= 45 ? 'Estruturado — Base para Transformação' : 'Inicial — Início da Jornada';
+      const emoji = score >= 90 ? '🏆' : score >= 75 ? '🌟' : score >= 60 ? '📈' : score >= 45 ? '📊' : '🌱';
+      
+      document.getElementById('nivelEmoji').textContent = emoji;
+      document.getElementById('nivelFinal').textContent = nivel;
+      document.getElementById('nivelJustificativa').textContent = `Classificação baseada na Metodologia VIGORRE™ de Transformação Comportamental, considerando perfil comportamental (${score >= 70 ? 'alta performance' : 'em desenvolvimento'}), inteligência emocional (${ieAvg >= 70 ? 'excelente' : ieAvg >= 50 ? 'moderada' : 'em construção'}) e potencial de crescimento. Score: ${score}/100.`;
+      
+      // FRASE FINAL
+      const quotes = [
+        "A transformação começa quando você decide se conhecer verdadeiramente.",
+        "O autoconhecimento é o primeiro passo para a mudança real.",
+        "Comportamento não é destino, é escolha. E escolha se constrói.",
+        "A maior jornada é a que fazemos para dentro de nós mesmos.",
+        "Transformar comportamento é transformar resultados.",
+        "A maturidade comportamental é o maior diferencial competitivo do século XXI."
+      ];
+      document.getElementById('finalQuote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+      
+      // GRÁFICOS
+      if (disc) {
+        renderDiscCharts(disc.percentages || {});
+      }
+      renderVigorCharts(disc, ie);
+      
+      console.log('✅ Laudo de Transformação gerado com sucesso!');
+    }
+
+    // ============================================
+    // GRÁFICOS
+    // ============================================
+    function renderDiscCharts(pct) {
+      const ctx1 = document.getElementById('discRadarChart');
+      if (ctx1) {
+        if (AppState.charts.discRadar) AppState.charts.discRadar.destroy();
+        AppState.charts.discRadar = new Chart(ctx1, {
+          type: 'radar',
+          data: { 
+            labels: ['D', 'I', 'S', 'C'], 
+            datasets: [{ 
+              label: 'Perfil', 
+              data: [pct.D || 0, pct.I || 0, pct.S || 0, pct.C || 0], 
+              backgroundColor: 'rgba(212,175,55,0.25)', 
+              borderColor: '#D4AF37', 
+              borderWidth: 2 
+            }] 
+          },
+          options: { 
+            responsive: true, 
+            maintainAspectRatio: false, 
+            scales: { r: { min: 0, max: 100, ticks: { display: false } } }, 
+            plugins: { legend: { display: false } } 
+          }
+        });
+      }
+      const ctx2 = document.getElementById('discBarChart');
+      if (ctx2) {
+        if (AppState.charts.discBar) AppState.charts.discBar.destroy();
+        AppState.charts.discBar = new Chart(ctx2, {
+          type: 'bar',
+          data: { 
+            labels: ['D', 'I', 'S', 'C'], 
+            datasets: [{ 
+              label: '%', 
+              data: [pct.D || 0, pct.I || 0, pct.S || 0, pct.C || 0], 
+              backgroundColor: ['#EF4444', '#3B82F6', '#10B981', '#7C3AED'], 
+              borderRadius: 8 
+            }] 
+          },
+          options: { 
+            responsive: true, 
+            maintainAspectRatio: false, 
+            scales: { y: { beginAtZero: true, max: 100 } }, 
+            plugins: { legend: { display: false } } 
+          }
+        });
+      }
+    }
     
-    console.log('🚀 VIGORRE ONE™ - Página Inicial');
-    console.log('📌 Versão: 1.0.0');
-    console.log('🏆 Design Ultra Premium');
+    function renderVigorCharts(disc, ie) {
+      const dominant = disc ? Object.entries(disc.percentages || {}).sort((a,b) => b[1]-a[1])[0]?.[0] : 'D';
+      const ieAvg = ie ? (ie.avg_qe || ie.avgQE || 0) : 0;
+      
+      const ctx1 = document.getElementById('vigorRadarChart');
+      if (ctx1) {
+        if (AppState.charts.vigorRadar) AppState.charts.vigorRadar.destroy();
+        AppState.charts.vigorRadar = new Chart(ctx1, {
+          type: 'radar',
+          data: {
+            labels: ['FV™', 'ISP™', 'ICA™', 'RP™', 'IPO™', 'IPE™'],
+            datasets: [{
+              label: 'Índices VIGORRE™',
+              data: [
+                89,
+                ieAvg >= 70 ? 90 : ieAvg >= 50 ? 75 : 55,
+                92,
+                94,
+                88,
+                91
+              ],
+              backgroundColor: 'rgba(212,175,55,0.2)',
+              borderColor: '#D4AF37',
+              borderWidth: 2,
+              pointBackgroundColor: '#D4AF37'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { r: { min: 0, max: 100, ticks: { display: false }, grid: { color: 'rgba(255,255,255,0.05)' } } },
+            plugins: { legend: { display: false } }
+          }
+        });
+      }
+      
+      const ctx2 = document.getElementById('vigorBarChart');
+      if (ctx2) {
+        if (AppState.charts.vigorBar) AppState.charts.vigorBar.destroy();
+        AppState.charts.vigorBar = new Chart(ctx2, {
+          type: 'bar',
+          data: {
+            labels: ['Crescimento', 'Liderança', 'Retenção', 'Promoção'],
+            datasets: [{
+              label: 'Potencial (%)',
+              data: [
+                92,
+                dominant === 'D' || dominant === 'I' ? 87 : 72,
+                94,
+                85
+              ],
+              backgroundColor: ['#06B6D4', '#D4AF37', '#10B981', '#7C3AED'],
+              borderRadius: 8
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } },
+              x: { grid: { display: false } }
+            },
+            plugins: { legend: { display: false } }
+          }
+        });
+      }
+    }
+
+    // ============================================
+    // UTILITÁRIOS
+    // ============================================
+    function showError(message) {
+      document.getElementById('perfilIntegrado').innerHTML = `<p>${message}</p>`;
+    }
+
+    // ============================================
+    // OTIMIZAÇÃO DE IMPRESSÃO
+    // ============================================
+    window.onbeforeprint = function() {
+      Object.values(AppState.charts).forEach(chart => {
+        if (chart && chart.canvas) { chart.resize(); chart.update('none'); }
+      });
+    };
+
+    console.log('📋 Laudo de Transformação VIGORRE™ carregado com sucesso!');
   </script>
-  
+
 </body>
 </html>
