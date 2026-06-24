@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BI Recrutador | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-bi {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 20% 80%, rgba(6,182,212,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.06) 0%, transparent 50%);
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    /* HEADER */
+    .header-bi {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .header-bi .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .header-bi .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #06B6D4, #7C3AED);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .header-bi .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-bi .logo-text .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #06B6D4;
+    }
+    
+    .header-bi .logo-text span {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.4);
+      display: block;
+    }
+    
+    .header-bi .btn-back {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .header-bi .btn-back:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    .btn-print {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #06B6D4, #7C3AED);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(6,182,212,0.3);
+    }
+    
+    /* CORPO */
+    .bi-body {
+      background: rgba(30,41,59,0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 32px;
+    }
+    
+    .bi-title {
+      text-align: center;
+      padding: 16px 0 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+    }
+    
+    .bi-title h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .bi-title .cyan {
+      color: #06B6D4;
+    }
+    
+    .bi-title p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    /* CARDS */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .card-metric {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .card-metric:hover {
+      border-color: rgba(6,182,212,0.2);
+      transform: translateY(-2px);
+    }
+    
+    .card-metric .number {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #06B6D4;
+    }
+    
+    .card-metric .label {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+    }
+    
+    /* FUNIL */
+    .funil-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0 24px;
+    }
+    
+    .funil-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    
+    .funil-item .number {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+    
+    .funil-item .label {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+    }
+    
+    .funil-item .bar {
+      height: 4px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    
+    .funil-item .bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+    
+    .funil-item.convocados .bar-fill { background: #06B6D4; }
+    .funil-item.andamento .bar-fill { background: #F59E0B; }
+    .funil-item.finalizados .bar-fill { background: #10B981; }
+    .funil-item.aprovados .bar-fill { background: #7C3AED; }
+    
+    .funil-item.convocados .number { color: #06B6D4; }
+    .funil-item.andamento .number { color: #F59E0B; }
+    .funil-item.finalizados .number { color: #10B981; }
+    .funil-item.aprovados .number { color: #7C3AED; }
+    
+    /* GRÁFICOS */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .chart-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .chart-card h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .chart-container {
+      height: 220px;
+      position: relative;
+    }
+    
+    /* RANKING */
+    .ranking-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .ranking-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .ranking-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .ranking-list .pos {
+      font-weight: 700;
+      color: #06B6D4;
+      margin-right: 12px;
+    }
+    
+    .ranking-list .value {
+      font-weight: 600;
+      color: #06B6D4;
+    }
+    
+    /* COMPARADOR */
+    .comparador-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+    
+    .comparador-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    
+    .comparador-item .candidato {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .comparador-item .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #06B6D4, #7C3AED);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .comparador-item .score {
+      font-weight: 700;
+      color: #D4AF37;
+    }
+    
+    /* RODAPÉ */
+    .footer-bi {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .footer-bi .contact {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-bi .contact a {
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-bi .contact a:hover {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    @media (max-width: 992px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+      .funil-container {
+        grid-template-columns: 1fr 1fr;
+      }
+      .comparador-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-bi {
+        flex-direction: column;
+        text-align: center;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .funil-container {
+        grid-template-columns: 1fr;
+      }
+      .footer-bi {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .header-bi, .bi-body, .footer-bi {
+        background: white !important;
+        border-color: #ddd !important;
+        color: #111 !important;
+      }
+      .bi-title h1 { color: #111 !important; }
+      .bi-title .cyan { color: #06B6D4 !important; }
+      .card-metric { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .card-metric .number { color: #06B6D4 !important; }
+      .chart-card { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .funil-item { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .comparador-item { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .btn-back, .btn-print { display: none !important; }
+      .footer-bi .contact a { color: #666 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-bi"></div>
+
+  <div class="container">
+    
+    <!-- HEADER -->
+    <div class="header-bi">
+      <div class="logo">
+        <div class="logo-icon">V</div>
+        <div class="logo-text">
+          VIGORRE ONE™ <span class="tm">™</span>
+          <span>BI • Recrutador</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir</button>
+        <a href="../../recrutador/dashboard.html" class="btn-back">← Voltar</a>
+      </div>
+    </div>
+    
+    <!-- CORPO -->
+    <div class="bi-body">
+      
+      <div class="bi-title">
+        <h1>📊 Meu <span class="cyan">BI</span> VIGORRE™</h1>
+        <p>Dashboard do Recrutador</p>
+      </div>
+      
+      <!-- CARDS -->
+      <div class="cards-grid">
+        <div class="card-metric">
+          <div class="number" id="totalParticipantes">0</div>
+          <div class="label">👥 Participantes</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="ativos">0</div>
+          <div class="label">🟢 Ativos</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="pendentes">0</div>
+          <div class="label">⏳ Pendentes</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="concluidos">0</div>
+          <div class="label">✅ Concluídos</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="relatoriosDisponiveis">0</div>
+          <div class="label">📄 Relatórios Disponíveis</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="relatoriosConsumidos">0</div>
+          <div class="label">📊 Relatórios Consumidos</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="relatoriosRestantes">0</div>
+          <div class="label">📋 Relatórios Restantes</div>
+        </div>
+        <div class="card-metric">
+          <div class="number" id="taxaConversao">0%</div>
+          <div class="label">🎯 Taxa de Conversão</div>
+        </div>
+      </div>
+      
+      <!-- FUNIL -->
+      <div class="funil-container">
+        <div class="funil-item convocados">
+          <div class="number" id="funilConvocados">0</div>
+          <div class="label">📞 Convocados</div>
+          <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
+        </div>
+        <div class="funil-item andamento">
+          <div class="number" id="funilAndamento">0</div>
+          <div class="label">🔄 Em Andamento</div>
+          <div class="bar"><div class="bar-fill" style="width:65%"></div></div>
+        </div>
+        <div class="funil-item finalizados">
+          <div class="number" id="funilFinalizados">0</div>
+          <div class="label">✅ Finalizados</div>
+          <div class="bar"><div class="bar-fill" style="width:40%"></div></div>
+        </div>
+        <div class="funil-item aprovados">
+          <div class="number" id="funilAprovados">0</div>
+          <div class="label">🏆 Aprovados</div>
+          <div class="bar"><div class="bar-fill" style="width:25%"></div></div>
+        </div>
+      </div>
+      
+      <!-- GRÁFICOS -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>📈 Participantes por Mês</h3>
+          <div class="chart-container">
+            <canvas id="participantesChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>📊 Distribuição DISC</h3>
+          <div class="chart-container">
+            <canvas id="discChart"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <!-- COMPARADOR E RANKING -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="chart-card">
+          <h3>🔍 Comparador Inteligente</h3>
+          <div class="comparador-grid" id="comparadorGrid">
+            <div class="comparador-item">
+              <div class="candidato"><div class="avatar">A</div> Ana Silva</div>
+              <span class="score">92%</span>
+            </div>
+            <div class="comparador-item">
+              <div class="candidato"><div class="avatar">B</div> Carlos Souza</div>
+              <span class="score">87%</span>
+            </div>
+            <div class="comparador-item">
+              <div class="candidato"><div class="avatar">C</div> Mariana Costa</div>
+              <span class="score">85%</span>
+            </div>
+            <div class="comparador-item">
+              <div class="candidato"><div class="avatar">D</div> Pedro Lima</div>
+              <span class="score">78%</span>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>🏆 Top Candidatos</h3>
+          <ul class="ranking-list" id="rankingCandidatos">
+            <li><span><span class="pos">1</span> Ana Silva</span><span class="value">92%</span></li>
+            <li><span><span class="pos">2</span> Carlos Souza</span><span class="value">87%</span></li>
+            <li><span><span class="pos">3</span> Mariana Costa</span><span class="value">85%</span></li>
+            <li><span><span class="pos">4</span> Pedro Lima</span><span class="value">78%</span></li>
+            <li><span><span class="pos">5</span> Julia Santos</span><span class="value">74%</span></li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <div class="footer-bi">
+      <span>© 2024 VIGORRE ONE™</span>
+      <div class="contact">
+        <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+        <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+        <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
+      </div>
+      <span>v1.0</span>
+    </div>
+    
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📊 BI Recrutador - VIGORRE ONE™');
+      
+      // Dados simulados
+      document.getElementById('totalParticipantes').textContent = '47';
+      document.getElementById('ativos').textContent = '28';
+      document.getElementById('pendentes').textContent = '12';
+      document.getElementById('concluidos').textContent = '7';
+      document.getElementById('relatoriosDisponiveis').textContent = '24';
+      document.getElementById('relatoriosConsumidos').textContent = '18';
+      document.getElementById('relatoriosRestantes').textContent = '6';
+      document.getElementById('taxaConversao').textContent = '73%';
+      
+      // Funil
+      document.getElementById('funilConvocados').textContent = '47';
+      document.getElementById('funilAndamento').textContent = '28';
+      document.getElementById('funilFinalizados').textContent = '15';
+      document.getElementById('funilAprovados').textContent = '7';
+      
+      // Gráfico Participantes
+      const ctx1 = document.getElementById('participantesChart').getContext('2d');
+      new Chart(ctx1, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+          datasets: [{
+            label: 'Participantes',
+            data: [8, 12, 15, 20, 25, 30],
+            borderColor: '#06B6D4',
+            backgroundColor: 'rgba(6,182,212,0.1)',
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: 'rgba(255,255,255,0.6)' } } },
+          scales: {
+            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)' } },
+            x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)' } }
+          }
+        }
+      });
+      
+      // Gráfico DISC
+      const ctx2 = document.getElementById('discChart').getContext('2d');
+      new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: ['D', 'I', 'S', 'C'],
+          datasets: [{
+            label: 'Percentual',
+            data: [35, 25, 20, 20],
+            backgroundColor: ['#EF4444', '#3B82F6', '#10B981', '#7C3AED'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, max: 50, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)' } },
+            x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)' } }
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
