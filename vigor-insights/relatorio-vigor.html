@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório VIGOR™ | Inteligência Humana Aplicada</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: {
+              navy: '#0A2540',
+              blue: '#1D4ED8',
+              purple: '#7C3AED',
+              cyan: '#06B6D4',
+              emerald: '#10B981',
+              amber: '#F59E0B',
+              rose: '#F43F5E',
+              gold: '#D4AF37'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0F172A; color: #F8FAFC; min-height: 100vh; }
+    
+    .glass { background: rgba(30,41,59,0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+    .glass-card { background: rgba(30,41,59,0.85); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.06); border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .gradient-text { background: linear-gradient(135deg, #D4AF37, #7C3AED, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .badge-pill { padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    .chart-container { position: relative; height: 250px; width: 100%; }
+    
+    .slide-up { animation: slideUp 0.6s ease-out; }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .print-header, .print-footer { display: none; }
+    
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: white !important; color: #111 !important; }
+      .glass, .glass-card { background: white !important; border: 1px solid #ddd !important; box-shadow: none !important; backdrop-filter: none !important; }
+      .gradient-text { -webkit-text-fill-color: #D4AF37 !important; color: #D4AF37 !important; background: none !important; }
+      .no-print { display: none !important; }
+      .print-header { display: block !important; position: fixed; top: 0; left: 0; right: 0; height: 28mm; background: #0A2540 !important; color: white !important; padding: 8mm 16mm; z-index: 1000; border-bottom: 3px solid #D4AF37 !important; }
+      .print-footer { display: block !important; position: fixed; bottom: 0; left: 0; right: 0; height: 20mm; background: #0A2540 !important; color: white !important; padding: 3mm 16mm; z-index: 1000; border-top: 3px solid #D4AF37 !important; }
+      @page { size: A4; margin-top: 32mm; margin-bottom: 24mm; margin-left: 16mm; margin-right: 16mm; }
+      .chart-container { height: 200px !important; }
+      .print-page-number::after { content: "Página " counter(page) " de " counter(pages); color: #666 !important; font-weight: 500; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="glass border-b border-white/10 sticky top-0 z-50 no-print">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-brand-purple flex items-center justify-center font-bold text-white text-lg shadow-lg">V</div>
+        <div>
+          <h1 class="font-bold text-lg tracking-tight">Relatório VIGOR™</h1>
+          <p class="text-xs text-gray-400">2-3 páginas • Leitura Executiva</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="badge-pill bg-brand-gold/20 text-brand-gold border border-brand-gold/30">✨ Premium</span>
+        <button onclick="window.print()" class="bg-white/10 px-4 py-2 rounded-lg text-sm font-medium hover:bg-white/20 transition-all">🖨️ Imprimir</button>
+        <button onclick="window.location.href='janela-vigor.html'" class="bg-gradient-to-r from-brand-gold to-brand-purple px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-brand-purple/30 transition-all">← Voltar</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PRINT HEADER -->
+  <div class="print-header">
+    <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,#D4AF37,#7C3AED);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20pt;color:white;">V</div>
+        <div><h1 style="font-size:14pt;font-weight:700;color:white;margin:0;">VIGOR™ One</h1><p style="font-size:8pt;color:rgba(255,255,255,0.8);margin:0;">Relatório Executivo</p></div>
+      </div>
+      <div style="text-align:right;font-size:8pt;color:rgba(255,255,255,0.8);">
+        <p><strong style="color:white;">Participante:</strong> <span id="printName">--</span></p>
+        <p><strong style="color:white;">Empresa:</strong> <span id="printCompany">--</span></p>
+        <p><strong style="color:white;">Data:</strong> <span id="printDate">--</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+    <!-- TÍTULO -->
+    <section class="glass-card p-8 text-center slide-up">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-2">
+        <span class="gradient-text">Relatório VIGOR™</span>
+      </h1>
+      <p class="text-gray-400 text-lg">Análise Executiva de Perfil e Potencial</p>
+      <div class="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full glass border border-brand-gold/30">
+        <span class="text-sm text-gray-300">Código:</span>
+        <span class="text-sm font-mono text-brand-gold">VIG-2024-894</span>
+      </div>
+    </section>
+
+    <!-- RESUMO EXECUTIVO -->
+    <section class="glass-card p-8 slide-up" style="animation-delay:0.1s;">
+      <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+        <span class="text-3xl">📊</span>
+        Resumo Executivo
+      </h2>
+      <div class="space-y-4 text-gray-300 leading-relaxed">
+        <p><strong>Ana Silva</strong> apresenta um perfil comportamental de <strong>Dominância e Influência</strong>, com inteligência emocional <strong>de alta performance</strong> e orientação por valores de <strong>propósito e reconhecimento</strong>.</p>
+        <p>O <strong>Fator VIGOR™ (894)</strong> indica <strong>alto potencial profissional</strong>, com capacidade de sustentação de performance em ambientes desafiadores.</p>
+        <p>A compatibilidade organizacional de <strong>92%</strong> sugere forte aderência à cultura e ambiente de trabalho.</p>
+        <p>O radar de permanência de <strong>94%</strong> indica baixo risco de rotatividade, com alto engajamento e motivação.</p>
+      </div>
+    </section>
+
+    <!-- INDICADORES -->
+    <section class="grid md:grid-cols-3 gap-4 slide-up" style="animation-delay:0.2s;">
+      <div class="glass-card p-6 text-center">
+        <h3 class="font-bold text-brand-gold">FV™</h3>
+        <p class="text-4xl font-extrabold gradient-text">894</p>
+        <p class="text-sm text-gray-400">Fator VIGOR™</p>
+        <p class="text-xs text-brand-emerald mt-1">Excelente</p>
+      </div>
+      <div class="glass-card p-6 text-center">
+        <h3 class="font-bold text-brand-cyan">ICA™</h3>
+        <p class="text-4xl font-extrabold text-brand-cyan">92%</p>
+        <p class="text-sm text-gray-400">Compatibilidade Organizacional</p>
+        <p class="text-xs text-brand-cyan mt-1">Alta</p>
+      </div>
+      <div class="glass-card p-6 text-center">
+        <h3 class="font-bold text-brand-emerald">RP™</h3>
+        <p class="text-4xl font-extrabold text-brand-emerald">94%</p>
+        <p class="text-sm text-gray-400">Radar de Permanência</p>
+        <p class="text-xs text-brand-emerald mt-1">Muito Baixo Risco</p>
+      </div>
+    </section>
+
+    <!-- SWOT -->
+    <section class="glass-card p-8 slide-up" style="animation-delay:0.3s;">
+      <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+        <span class="text-3xl">📈</span>
+        SWOT Estratégica
+      </h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <h4 class="font-semibold text-brand-emerald mb-2">💪 Forças</h4>
+          <ul class="space-y-1 text-sm text-gray-300">
+            <li>• Comunicação persuasiva</li>
+            <li>• Liderança natural</li>
+            <li>• Resiliência</li>
+            <li>• Visão estratégica</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-brand-amber mb-2">⚡ Fraquezas</h4>
+          <ul class="space-y-1 text-sm text-gray-300">
+            <li>• Ansiedade sob pressão extrema</li>
+            <li>• Perfeccionismo</li>
+            <li>• Dificuldade em delegar</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-brand-cyan mb-2">🌟 Oportunidades</h4>
+          <ul class="space-y-1 text-sm text-gray-300">
+            <li>• Promoção</li>
+            <li>• Gestão de equipes</li>
+            <li>• Projetos estratégicos</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-brand-rose mb-2">🛡️ Ameaças</h4>
+          <ul class="space-y-1 text-sm text-gray-300">
+            <li>• Burnout</li>
+            <li>• Sobrecarga</li>
+            <li>• Conflitos culturais</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRÁFICO RÁPIDO -->
+    <section class="glass-card p-8 slide-up" style="animation-delay:0.4s;">
+      <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+        <span class="text-3xl">📊</span>
+        Índices de Performance
+      </h2>
+      <div class="chart-container">
+        <canvas id="performanceChart"></canvas>
+      </div>
+    </section>
+
+    <!-- RECOMENDAÇÕES -->
+    <section class="glass-card p-8 slide-up" style="animation-delay:0.5s;">
+      <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+        <span class="text-3xl">🎯</span>
+        Recomendações
+      </h2>
+      <div class="space-y-3 text-sm text-gray-300">
+        <div class="flex items-start gap-3">
+          <span class="text-brand-gold">➤</span>
+          <p><strong>Para RH:</strong> Investir em desenvolvimento de liderança e plano de carreira estruturado.</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-brand-gold">➤</span>
+          <p><strong>Para Gestor:</strong> Comunicação direta, feedback de desempenho e autonomia para decisões.</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-brand-gold">➤</span>
+          <p><strong>Para Participante:</strong> Fortalecer inteligência emocional e técnicas de regulação sob pressão.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARECER -->
+    <section class="glass-card p-8 slide-up" style="animation-delay:0.6s;">
+      <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+        <span class="text-3xl">📜</span>
+        Parecer Final
+      </h2>
+      <div class="glass p-4 rounded-xl border-l-4 border-brand-gold">
+        <p class="text-gray-300 leading-relaxed">
+          <strong>Recomendado para posições de liderança e gestão estratégica.</strong> 
+          Perfil com alta performance, resiliência e potencial de crescimento.
+          Compatibilidade organizacional de <strong>92%</strong>.
+        </p>
+        <div class="flex gap-2 mt-3">
+          <span class="badge-pill bg-brand-emerald/20 text-brand-emerald border border-brand-emerald/30">✅ Altamente Recomendado</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTÃO VOLTAR -->
+    <section class="text-center slide-up">
+      <button onclick="window.location.href='janela-vigor.html'" class="bg-gradient-to-r from-brand-gold to-brand-purple px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-lg hover:shadow-brand-purple/30 transition-all">
+        ← Voltar para Janela VIGOR™
+      </button>
+    </section>
+
+  </main>
+
+  <!-- PRINT FOOTER -->
+  <div class="print-footer">
+    <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-weight:600;font-size:7pt;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.5px;">CONFIDENCIAL</span>
+        <span style="color:rgba(255,255,255,0.3);">•</span>
+        <span style="font-size:7pt;color:rgba(255,255,255,0.5);">VIGOR™ One</span>
+      </div>
+      <div style="font-size:7pt;color:rgba(255,255,255,0.5);text-align:center;">
+        <span>contato@vigorre.com.br</span> <span style="color:rgba(255,255,255,0.3);">|</span> <span>(34) 99185-0735</span>
+      </div>
+      <div style="text-align:right;font-size:7pt;color:rgba(255,255,255,0.5);">
+        <span class="print-page-number"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📄 Relatório VIGOR™ carregado!');
+      
+      document.getElementById('printName').textContent = 'Ana Silva';
+      document.getElementById('printCompany').textContent = 'TechCorp Solutions';
+      document.getElementById('printDate').textContent = new Date().toLocaleDateString('pt-BR');
+      
+      initChart();
+    });
+
+    function initChart() {
+      const ctx = document.getElementById('performanceChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['FV™', 'ICA™', 'RP™', 'IPO™', 'IPE™'],
+          datasets: [{
+            label: 'Índices (%)',
+            data: [89, 92, 94, 88, 91],
+            backgroundColor: ['#D4AF37', '#1D4ED8', '#10B981', '#06B6D4', '#7C3AED'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } },
+            x: { grid: { display: false } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
