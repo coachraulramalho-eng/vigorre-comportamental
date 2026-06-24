@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWOT | VIGORRE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-swot {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 20% 80%, rgba(212,175,55,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.06) 0%, transparent 50%);
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .header-swot {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .header-swot .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .header-swot .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #D4AF37, #7C3AED);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .header-swot .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-swot .logo-text .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #D4AF37;
+    }
+    
+    .header-swot .logo-text span {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.4);
+      display: block;
+    }
+    
+    .header-swot .btn-back {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .header-swot .btn-back:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    .swot-body {
+      background: rgba(30,41,59,0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 32px;
+    }
+    
+    .swot-title {
+      text-align: center;
+      padding: 24px 0 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+    }
+    
+    .swot-title h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .swot-title .gold {
+      color: #D4AF37;
+    }
+    
+    .swot-title p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    .swot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    
+    .swot-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .swot-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .swot-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .swot-card ul li {
+      padding: 6px 0;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.875rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    
+    .swot-card ul li:last-child {
+      border-bottom: none;
+    }
+    
+    .swot-card ul li::before {
+      font-weight: 700;
+    }
+    
+    .swot-card.strengths h3 { color: #10B981; }
+    .swot-card.strengths ul li::before { content: '✓'; color: #10B981; }
+    .swot-card.weaknesses h3 { color: #F59E0B; }
+    .swot-card.weaknesses ul li::before { content: '⚡'; color: #F59E0B; }
+    .swot-card.opportunities h3 { color: #06B6D4; }
+    .swot-card.opportunities ul li::before { content: '✦'; color: #06B6D4; }
+    .swot-card.threats h3 { color: #F43F5E; }
+    .swot-card.threats ul li::before { content: '⚠'; color: #F43F5E; }
+    
+    .fv-display {
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      margin-top: 16px;
+    }
+    
+    .fv-display .fv-number {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #D4AF37;
+    }
+    
+    .fv-display .fv-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+    }
+    
+    .fv-display .fv-class {
+      font-size: 0.85rem;
+      color: #10B981;
+      font-weight: 600;
+    }
+    
+    .footer-swot {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .footer-swot .contact {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-swot .contact a {
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-swot .contact a:hover {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .btn-print {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #D4AF37, #7C3AED);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+    }
+    
+    @media (max-width: 768px) {
+      .swot-grid {
+        grid-template-columns: 1fr;
+      }
+      .header-swot {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-swot {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .header-swot, .swot-body, .footer-swot {
+        background: white !important;
+        border-color: #ddd !important;
+        color: #111 !important;
+      }
+      .swot-title h1 { color: #111 !important; }
+      .swot-title .gold { color: #D4AF37 !important; }
+      .swot-card { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .swot-card ul li { color: #333 !important; }
+      .fv-display { background: #f0f0f0 !important; }
+      .btn-back, .btn-print { display: none !important; }
+      .footer-swot .contact a { color: #666 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-swot"></div>
+
+  <div class="container">
+    
+    <!-- CABEÇALHO -->
+    <div class="header-swot">
+      <div class="logo">
+        <div class="logo-icon">V</div>
+        <div class="logo-text">
+          VIGORRE™ <span class="tm">™</span>
+          <span>Análise de Autoconhecimento</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir</button>
+        <a href="../janela-vigor.html" class="btn-back">← Voltar</a>
+      </div>
+    </div>
+    
+    <!-- CORPO -->
+    <div class="swot-body">
+      
+      <div class="swot-title">
+        <h1>📊 Minha <span class="gold">SWOT</span> VIGORRE™</h1>
+        <p>Análise de Forças, Fraquezas, Oportunidades e Ameaças</p>
+      </div>
+      
+      <div class="swot-grid">
+        
+        <!-- FORÇAS -->
+        <div class="swot-card strengths">
+          <h3>💪 Minhas Forças</h3>
+          <ul>
+            <li>Comunicação persuasiva</li>
+            <li>Liderança natural</li>
+            <li>Resiliência</li>
+            <li>Adaptabilidade</li>
+            <li>Visão estratégica</li>
+          </ul>
+        </div>
+        
+        <!-- FRAQUEZAS -->
+        <div class="swot-card weaknesses">
+          <h3>⚡ O que Posso Melhorar</h3>
+          <ul>
+            <li>Ansiedade sob pressão extrema</li>
+            <li>Perfeccionismo</li>
+            <li>Dificuldade em delegar</li>
+            <li>Necessidade de maior planejamento</li>
+          </ul>
+        </div>
+        
+        <!-- OPORTUNIDADES -->
+        <div class="swot-card opportunities">
+          <h3>🌟 Oportunidades para Minha Carreira</h3>
+          <ul>
+            <li>Promoção</li>
+            <li>Gestão de equipes</li>
+            <li>Projetos estratégicos</li>
+            <li>Mentoria</li>
+            <li>Treinamentos avançados</li>
+          </ul>
+        </div>
+        
+        <!-- AMEAÇAS -->
+        <div class="swot-card threats">
+          <h3>🛡️ Cuidados Importantes</h3>
+          <ul>
+            <li>Risco de burnout</li>
+            <li>Sobrecarga de trabalho</li>
+            <li>Conflitos culturais</li>
+            <li>Desmotivação</li>
+            <li>Rotatividade</li>
+          </ul>
+        </div>
+        
+      </div>
+      
+      <!-- FV™ DISPLAY -->
+      <div class="fv-display">
+        <div class="fv-number" id="fvNumber">894</div>
+        <div class="fv-label">Fator VIGORRE™</div>
+        <div class="fv-class" id="fvClass">Alto Potencial Profissional</div>
+      </div>
+      
+      <!-- PLANO DE EVOLUÇÃO -->
+      <div style="margin-top:16px;background:rgba(255,255,255,0.03);border-radius:12px;padding:20px;border:1px solid rgba(255,255,255,0.06);">
+        <h3 style="font-family:'Poppins',sans-serif;font-size:0.9rem;color:#D4AF37;margin-bottom:12px;">📈 Meu Plano de Evolução</h3>
+        
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;border-left:3px solid #10B981;">
+            <h4 style="color:#10B981;font-size:0.8rem;font-weight:700;">30 Dias</h4>
+            <ul style="list-style:none;padding:0;font-size:0.75rem;color:rgba(255,255,255,0.7);">
+              <li>• Auto-observação diária</li>
+              <li>• Pausa estratégica</li>
+              <li>• Feedback de mentores</li>
+            </ul>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;border-left:3px solid #F59E0B;">
+            <h4 style="color:#F59E0B;font-size:0.8rem;font-weight:700;">60 Dias</h4>
+            <ul style="list-style:none;padding:0;font-size:0.75rem;color:rgba(255,255,255,0.7);">
+              <li>• Treinamento em IE</li>
+              <li>• Aplicação prática</li>
+              <li>• Plano de desenvolvimento</li>
+            </ul>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;border-left:3px solid #7C3AED;">
+            <h4 style="color:#7C3AED;font-size:0.8rem;font-weight:700;">90 Dias</h4>
+            <ul style="list-style:none;padding:0;font-size:0.75rem;color:rgba(255,255,255,0.7);">
+              <li>• Modelo comportamental</li>
+              <li>• Estilo de liderança</li>
+              <li>• Legado profissional</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <div class="footer-swot">
+      <span>© 2024 VIGORRE™</span>
+      <div class="contact">
+        <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+        <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+        <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
+      </div>
+      <span>v1.0</span>
+    </div>
+    
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📊 SWOT VIGORRE™ - Versão Participante');
+      
+      // Simular FV™
+      const fv = 894;
+      document.getElementById('fvNumber').textContent = fv;
+      
+      let classText = 'Alto Potencial Profissional';
+      if (fv >= 900) classText = '🏆 Elite VIGORRE™';
+      else if (fv >= 800) classText = '🌟 Alta Performance';
+      else if (fv >= 650) classText = '📈 Alto Potencial Profissional';
+      else if (fv >= 500) classText = '📊 Potencial em Desenvolvimento';
+      else classText = '🌱 Início da Jornada';
+      
+      document.getElementById('fvClass').textContent = classText;
+    });
+  </script>
+
+</body>
+</html>
