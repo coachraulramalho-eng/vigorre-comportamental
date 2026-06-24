@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Executivo | VIGOR™ One</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: {
+              navy: '#0A2540',
+              blue: '#1D4ED8',
+              purple: '#7C3AED',
+              cyan: '#06B6D4',
+              emerald: '#10B981',
+              amber: '#F59E0B',
+              rose: '#F43F5E',
+              gold: '#D4AF37'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0F172A; color: #F8FAFC; min-height: 100vh; }
+    
+    .glass { background: rgba(30,41,59,0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+    .glass-card { background: rgba(30,41,59,0.85); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.06); border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .gradient-text { background: linear-gradient(135deg, #D4AF37, #7C3AED, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .badge-pill { padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    
+    .chart-container { position: relative; height: 280px; width: 100%; }
+    .metric-card { transition: all 0.3s ease; }
+    .metric-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    
+    .slide-up { animation: slideUp 0.6s ease-out; }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .gauge-container { position: relative; width: 120px; height: 120px; margin: 0 auto; }
+    .gauge-container svg { transform: rotate(-90deg); width: 120px; height: 120px; }
+    
+    .print-header, .print-footer { display: none; }
+    
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: white !important; color: #111 !important; }
+      .glass, .glass-card { background: white !important; border: 1px solid #ddd !important; box-shadow: none !important; backdrop-filter: none !important; }
+      .gradient-text { -webkit-text-fill-color: #D4AF37 !important; color: #D4AF37 !important; background: none !important; }
+      .no-print { display: none !important; }
+      .print-header { display: block !important; position: fixed; top: 0; left: 0; right: 0; height: 28mm; background: #0A2540 !important; color: white !important; padding: 8mm 16mm; z-index: 1000; border-bottom: 3px solid #D4AF37 !important; }
+      .print-footer { display: block !important; position: fixed; bottom: 0; left: 0; right: 0; height: 20mm; background: #0A2540 !important; color: white !important; padding: 3mm 16mm; z-index: 1000; border-top: 3px solid #D4AF37 !important; }
+      @page { size: A4; margin-top: 32mm; margin-bottom: 24mm; margin-left: 16mm; margin-right: 16mm; }
+      .chart-container { height: 220px !important; }
+      .print-page-number::after { content: "Página " counter(page) " de " counter(pages); color: #666 !important; font-weight: 500; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="glass border-b border-white/10 sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-brand-purple flex items-center justify-center font-bold text-white text-lg shadow-lg">V</div>
+        <div>
+          <h1 class="font-bold text-lg tracking-tight">Dashboard Executivo</h1>
+          <p class="text-xs text-gray-400">VIGOR™ Insights 360° • High Definition</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="badge-pill bg-brand-gold/20 text-brand-gold border border-brand-gold/30">✨ Premium</span>
+        <button onclick="window.print()" class="bg-white/10 px-4 py-2 rounded-lg text-sm font-medium hover:bg-white/20 transition-all">🖨️ Imprimir</button>
+        <button onclick="window.location.href='../janela-vigor.html'" class="bg-gradient-to-r from-brand-gold to-brand-purple px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-brand-purple/30 transition-all">← Voltar</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PRINT HEADER -->
+  <div class="print-header">
+    <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,#D4AF37,#7C3AED);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20pt;color:white;">V</div>
+        <div><h1 style="font-size:14pt;font-weight:700;color:white;margin:0;">VIGOR™ One</h1><p style="font-size:8pt;color:rgba(255,255,255,0.8);margin:0;">Dashboard Executivo</p></div>
+      </div>
+      <div style="text-align:right;font-size:8pt;color:rgba(255,255,255,0.8);">
+        <p><strong style="color:white;">Participante:</strong> <span id="printName">--</span></p>
+        <p><strong style="color:white;">Empresa:</strong> <span id="printCompany">--</span></p>
+        <p><strong style="color:white;">Data:</strong> <span id="printDate">--</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+    <!-- TÍTULO -->
+    <section class="glass-card p-8 text-center slide-up">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-2">
+        <span class="gradient-text">Dashboard de Talentos</span>
+      </h1>
+      <p class="text-gray-400 text-lg">Visão 360° do Potencial Humano • Indicadores HD</p>
+      <div class="flex flex-wrap justify-center gap-2 mt-4">
+        <span class="badge-pill bg-brand-emerald/20 text-brand-emerald border border-brand-emerald/30">📊 10 Indicadores</span>
+        <span class="badge-pill bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30">🎯 IA Preditiva</span>
+        <span class="badge-pill bg-brand-gold/20 text-brand-gold border border-brand-gold/30">🏆 Elite VIGOR™</span>
+      </div>
+    </section>
+
+    <!-- CARDS MÉTRICAS -->
+    <section class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 slide-up" style="animation-delay:0.1s;">
+      <div class="glass-card p-6 metric-card text-center">
+        <div class="text-4xl mb-2">🏆</div>
+        <h3 class="text-3xl font-extrabold gradient-text">894</h3>
+        <p class="font-semibold text-brand-gold">FV™</p>
+        <p class="text-xs text-gray-400">Fator VIGOR™</p>
+        <p class="text-sm text-brand-emerald mt-1">Excelente</p>
+      </div>
+      <div class="glass-card p-6 metric-card text-center">
+        <div class="text-4xl mb-2">📈</div>
+        <h3 class="text-3xl font-extrabold text-brand-cyan">92%</h3>
+        <p class="font-semibold text-brand-cyan">Crescimento</p>
+        <p class="text-xs text-gray-400">Potencial Evolutivo</p>
+        <p class="text-sm text-brand-cyan mt-1">Alto</p>
+      </div>
+      <div class="glass-card p-6 metric-card text-center">
+        <div class="text-4xl mb-2">👑</div>
+        <h3 class="text-3xl font-extrabold text-brand-gold">87%</h3>
+        <p class="font-semibold text-brand-gold">Liderança</p>
+        <p class="text-xs text-gray-400">Potencial de Liderança</p>
+        <p class="text-sm text-brand-gold mt-1">Muito Alto</p>
+      </div>
+      <div class="glass-card p-6 metric-card text-center">
+        <div class="text-4xl mb-2">🛡️</div>
+        <h3 class="text-3xl font-extrabold text-brand-emerald">94%</h3>
+        <p class="font-semibold text-brand-emerald">Retenção</p>
+        <p class="text-xs text-gray-400">Radar de Permanência</p>
+        <p class="text-sm text-brand-emerald mt-1">Muito Baixo Risco</p>
+      </div>
+    </section>
+
+    <!-- GRÁFICOS -->
+    <section class="grid md:grid-cols-2 gap-8 slide-up" style="animation-delay:0.2s;">
+      <div class="glass-card p-6">
+        <h3 class="font-bold text-center mb-4">Radar de Competências</h3>
+        <div class="chart-container">
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+      <div class="glass-card p-6">
+        <h3 class="font-bold text-center mb-4">Matriz de Potencial</h3>
+        <div class="chart-container">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- HEAT MAP -->
+    <section class="glass-card p-8 slide-up" style="animation-delay:0.3s;">
+      <h3 class="font-bold text-center mb-4">Mapa de Riscos Humanos</h3>
+      <div class="grid grid-cols-5 gap-2 max-w-3xl mx-auto">
+        <div class="glass p-3 text-center rounded-lg bg-brand-emerald/20 border border-brand-emerald/30">
+          <p class="text-xs text-gray-400">Absenteísmo</p>
+          <p class="text-sm font-bold text-brand-emerald">Baixo</p>
+        </div>
+        <div class="glass p-3 text-center rounded-lg bg-brand-emerald/20 border border-brand-emerald/30">
+          <p class="text-xs text-gray-400">Rotatividade</p>
+          <p class="text-sm font-bold text-brand-emerald">Muito Baixo</p>
+        </div>
+        <div class="glass p-3 text-center rounded-lg bg-brand-amber/20 border border-brand-amber/30">
+          <p class="text-xs text-gray-400">Conflitos</p>
+          <p class="text-sm font-bold text-brand-amber">Moderado</p>
+        </div>
+        <div class="glass p-3 text-center rounded-lg bg-brand-emerald/20 border border-brand-emerald/30">
+          <p class="text-xs text-gray-400">Desengajamento</p>
+          <p class="text-sm font-bold text-brand-emerald">Baixo</p>
+        </div>
+        <div class="glass p-3 text-center rounded-lg bg-brand-amber/20 border border-brand-amber/30">
+          <p class="text-xs text-gray-400">Resistência</p>
+          <p class="text-sm font-bold text-brand-amber">Moderado</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÍNDICES COMPLETOS -->
+    <section class="glass-card p-8 slide-up" style="animation-delay:0.4s;">
+      <h3 class="font-bold text-center mb-6">Todos os Índices VIGOR™</h3>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="glass p-4 rounded-xl text-center">
+          <p class="text-xs text-gray-400">FV™</p>
+          <p class="text-lg font-bold text-brand-gold">894</p>
+          <p class="text-xs text-gray-400">Fator VIGOR™</p>
+        </div>
+        <div class="glass p-4 rounded-xl text-center">
+          <p class="text-xs text-gray-400">ISP™</p>
+          <p class="text-lg font-bold text-brand-emerald">Excelente</p>
+          <p class="text-xs text-gray-400">Sustentação Profissional</p>
+        </div>
+        <div class="glass p-4 rounded-xl text-center">
+          <p class="text-xs text-gray-400">ICA™</p>
+          <p class="text-lg font-bold text-brand-blue">92%</p>
+          <p class="text-xs text-gray-400">Compatibilidade Organizacional</p>
+        </div>
+        <div class="glass p-4 rounded-xl text-center">
+          <p class="text-xs text-gray-400">RP™</p>
+          <p class="text-lg font-bold text-brand-cyan">94%</p>
+          <p class="text-xs text-gray-400">Radar de Permanência</p>
+        </div>
+        <div class="glass p-4 rounded-xl text-center">
+          <p class="text-xs text-gray-400">IPO™</p>
+          <p class="text-lg font-bold text-brand-purple">88%</p>
+          <p class="text-xs text-gray-400">Prontidão Operacional</p>
+        </div>
+        <div class="glass p-4 rounded-xl text-center">
+          <p class="text-xs text-gray-400">IPE™</p>
+          <p class="text-lg font-bold text-brand-amber">91%</p>
+          <p class="text-xs text-gray-400">Potencial Evolutivo</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTÃO VOLTAR -->
+    <section class="text-center slide-up">
+      <button onclick="window.location.href='../janela-vigor.html'" class="bg-gradient-to-r from-brand-gold to-brand-purple px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-lg hover:shadow-brand-purple/30 transition-all">
+        ← Voltar para Janela VIGOR™
+      </button>
+    </section>
+
+  </main>
+
+  <!-- PRINT FOOTER -->
+  <div class="print-footer">
+    <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-weight:600;font-size:7pt;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.5px;">CONFIDENCIAL</span>
+        <span style="color:rgba(255,255,255,0.3);">•</span>
+        <span style="font-size:7pt;color:rgba(255,255,255,0.5);">VIGOR™ One</span>
+      </div>
+      <div style="font-size:7pt;color:rgba(255,255,255,0.5);text-align:center;">
+        <span>contato@vigorre.com.br</span> <span style="color:rgba(255,255,255,0.3);">|</span> <span>(34) 99185-0735</span>
+      </div>
+      <div style="text-align:right;font-size:7pt;color:rgba(255,255,255,0.5);">
+        <span class="print-page-number"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📊 Dashboard Executivo VIGOR™ carregado!');
+      
+      document.getElementById('printName').textContent = 'Ana Silva';
+      document.getElementById('printCompany').textContent = 'TechCorp Solutions';
+      document.getElementById('printDate').textContent = new Date().toLocaleDateString('pt-BR');
+      
+      initCharts();
+    });
+
+    function initCharts() {
+      // Radar Chart
+      const radarCtx = document.getElementById('radarChart').getContext('2d');
+      new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+          labels: ['FV™', 'ISP™', 'ICA™', 'RP™', 'IPO™', 'IPE™'],
+          datasets: [{
+            label: 'Perfil VIGOR™',
+            data: [89, 85, 92, 94, 88, 91],
+            backgroundColor: 'rgba(212,175,55,0.2)',
+            borderColor: '#D4AF37',
+            borderWidth: 2,
+            pointBackgroundColor: '#D4AF37'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: { display: false },
+              grid: { color: 'rgba(255,255,255,0.05)' }
+            }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // Bar Chart
+      const barCtx = document.getElementById('barChart').getContext('2d');
+      new Chart(barCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Crescimento', 'Liderança', 'Retenção', 'Promoção', 'Sucessão'],
+          datasets: [{
+            label: 'Potencial (%)',
+            data: [92, 87, 94, 85, 82],
+            backgroundColor: ['#06B6D4', '#D4AF37', '#10B981', '#7C3AED', '#3B82F6'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } },
+            x: { grid: { display: false } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
