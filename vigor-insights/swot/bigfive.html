@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste Big Five | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/globals.css">
+  
+  <style>
+    /* ============================================
+       CORES DO BIG FIVE (MULTICOLOR)
+       ============================================ */
+    :root {
+      --openness: #06B6D4;
+      --conscientiousness: #10B981;
+      --extraversion: #F59E0B;
+      --agreeableness: #7C3AED;
+      --neuroticism: #F43F5E;
+      --gradient-main: linear-gradient(135deg, #06B6D4 0%, #10B981 30%, #F59E0B 60%, #7C3AED 85%, #F43F5E 100%);
+      --gradient-header: linear-gradient(135deg, #06B6D4, #7C3AED);
+      --gradient-footer: linear-gradient(135deg, #7C3AED, #06B6D4);
+      --shadow-color: rgba(124, 58, 237, 0.3);
+    }
+    
+    /* ============================================
+       BASE - ULTRA PREMIUM
+       ============================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-test {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--gradient-main);
+      opacity: 0.06;
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .particles {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.08), transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.06), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.10), transparent);
+      background-size: 200px 200px;
+      animation: floatParticles 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes floatParticles {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100px); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    /* ============================================
+       CABEÇALHO - BIG FIVE (MULTICOLOR)
+       ============================================ */
+    .header-premium {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-main);
+    }
+    
+    .header-grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    
+    .header-logo .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gradient-header);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .header-logo-text .system-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .header-logo-text .system-name .tm {
+      font-size: 0.5rem;
+      vertical-align: super;
+      color: #06B6D4;
+    }
+    
+    .header-logo-text .system-sub {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.4);
+      display: block;
+    }
+    
+    .header-center {
+      text-align: center;
+    }
+    
+    .header-center .report-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-center .report-title .highlight {
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .header-center .report-sub {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .header-right {
+      text-align: right;
+    }
+    
+    .header-right .participant-name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: white;
+    }
+    
+    .header-right .participant-company {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .header-right .participant-id {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.3);
+      font-family: 'Courier New', monospace;
+      margin-top: 2px;
+    }
+    
+    /* ============================================
+       CORPO DO TESTE
+       ============================================ */
+    .test-body {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 32px;
+      min-height: 400px;
+    }
+    
+    .progress-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .progress-text {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    
+    .progress-bar {
+      flex: 1;
+      max-width: 300px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0 16px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-main);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    
+    .progress-percent {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.75rem;
+      font-weight: 600;
+      min-width: 40px;
+      text-align: right;
+    }
+    
+    .question-number {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba(124, 58, 237, 0.15);
+      border: 1px solid rgba(124, 58, 237, 0.25);
+      border-radius: 100px;
+      color: #A78BFA;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .question-text {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    
+    .options-grid {
+      display: grid;
+      gap: 12px;
+    }
+    
+    .option-btn {
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .option-btn:hover {
+      border-color: #7C3AED;
+      background: rgba(124, 58, 237, 0.08);
+      transform: translateX(4px);
+    }
+    
+    .option-btn.selected {
+      border-color: #A78BFA;
+      background: rgba(124, 58, 237, 0.12);
+      color: white;
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+    }
+    
+    .option-btn .letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .option-btn.selected .letter {
+      background: #7C3AED;
+      color: white;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .btn-nav {
+      padding: 12px 32px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-prev {
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .btn-prev:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+    
+    .btn-next {
+      background: var(--gradient-header);
+      color: white;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .btn-next:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px var(--shadow-color);
+    }
+    
+    .btn-finish {
+      background: linear-gradient(135deg, #7C3AED, #06B6D4);
+      color: white;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .btn-finish:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px var(--shadow-color);
+    }
+    
+    .btn-nav:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    
+    /* ============================================
+       RESULTADOS BIG FIVE
+       ============================================ */
+    .results-container {
+      display: none;
+      animation: fadeIn 0.6s ease;
+    }
+    
+    .results-container.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .results-header {
+      text-align: center;
+      padding: 24px 0 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .results-header h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.75rem;
+      color: white;
+      margin-bottom: 4px;
+    }
+    
+    .results-header .subtitle {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.875rem;
+    }
+    
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 24px;
+      background: var(--gradient-header);
+      border-radius: 100px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-top: 16px;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .result-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    
+    .result-card .label {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .result-card .value {
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    
+    .chart-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    
+    .chart-card h3 {
+      color: white;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .chart-container {
+      height: 280px;
+      position: relative;
+    }
+    
+    .result-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    
+    .btn-result {
+      padding: 14px 20px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn-result-primary {
+      background: var(--gradient-header);
+      color: white;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .btn-result-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px var(--shadow-color);
+    }
+    
+    .btn-result-success {
+      background: linear-gradient(135deg, #10B981, #06B6D4);
+      color: white;
+    }
+    
+    .btn-result-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+    }
+    
+    /* ============================================
+       RODAPÉ - BIG FIVE (MULTICOLOR)
+       ============================================ */
+    .footer-premium {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 20px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer-premium::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gradient-footer);
+    }
+    
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .footer-logo .logo-icon-small {
+      width: 32px;
+      height: 32px;
+      background: var(--gradient-footer);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.875rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+    }
+    
+    .footer-logo-text .footer-system {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .footer-logo-text .footer-system .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #06B6D4;
+    }
+    
+    .footer-logo-text .footer-tagline {
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .footer-center .footer-contact {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.7rem;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .footer-contact-item:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-contact-item .icon {
+      font-size: 0.75rem;
+    }
+    
+    .footer-right .page-number {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.7rem;
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+      margin: 12px 0;
+    }
+    
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* ============================================
+       LOADING & TOAST
+       ============================================ */
+    .loading-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 22, 40, 0.9);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .loading-overlay.active {
+      display: flex;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #7C3AED;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      color: white;
+      font-weight: 600;
+    }
+    
+    .toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: rgba(30, 41, 59, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 14px 24px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.875rem;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      z-index: 1001;
+      max-width: 400px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease;
+    }
+    
+    .toast.show { display: flex; }
+    .toast.error { border-left: 4px solid #EF4444; }
+    .toast.success { border-left: 4px solid #10B981; }
+    
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .back-link {
+      color: rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+      font-size: 0.75rem;
+      display: inline-block;
+      margin-top: 12px;
+      text-align: center;
+      width: 100%;
+      transition: color 0.3s ease;
+    }
+    
+    .back-link:hover {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    /* ============================================
+       RESPONSIVO
+       ============================================ */
+    @media (max-width: 992px) {
+      .header-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        text-align: center;
+      }
+      .header-right { text-align: center; }
+      .footer-grid { flex-direction: column; text-align: center; gap: 12px; }
+      .footer-center .footer-contact { justify-content: center; flex-direction: column; gap: 6px; }
+    }
+    
+    @media (max-width: 768px) {
+      .header-premium { padding: 16px 20px; }
+      .test-body { padding: 20px; }
+      .question-text { font-size: 1.125rem; }
+      .results-grid { grid-template-columns: 1fr; }
+      .result-actions { grid-template-columns: 1fr; }
+      .nav-buttons { flex-wrap: wrap; }
+      .nav-buttons button { flex: 1; min-width: 100px; }
+      .progress-bar { max-width: 100%; }
+    }
+    
+    @media (max-width: 480px) {
+      body { padding: 12px; }
+      .header-premium { padding: 12px 16px; }
+      .test-body { padding: 16px; }
+      .option-btn { padding: 12px 16px; font-size: 0.875rem; }
+      .btn-nav { padding: 10px 16px; font-size: 0.8125rem; }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .container { max-width: 100% !important; }
+      .header-premium {
+        background: #0A2540 !important;
+        border-radius: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .test-body {
+        background: white !important;
+        border: none !important;
+        padding: 24px !important;
+      }
+      .question-text { color: #0A2540 !important; }
+      .option-btn {
+        border-color: #E2E8F0 !important;
+        color: #334155 !important;
+        background: #F8FAFC !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .option-btn.selected {
+        border-color: #7C3AED !important;
+        background: #EDE9FE !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .option-btn.selected .letter {
+        background: #7C3AED !important;
+        color: white !important;
+      }
+      .footer-premium {
+        background: #0A2540 !important;
+        border-radius: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .btn-nav, .btn-next, .btn-finish, .btn-result, .back-link,
+      .nav-buttons, .progress-section, .result-actions {
+        display: none !important;
+      }
+      .results-container { display: block !important; }
+      .results-header h2 { color: #0A2540 !important; }
+      .result-card { background: #F8FAFC !important; border-color: #E2E8F0 !important; }
+      .result-card .value { color: #0A2540 !important; }
+      .chart-card { background: #F8FAFC !important; border-color: #E2E8F0 !important; }
+      .chart-card h3 { color: #0A2540 !important; }
+      .profile-badge {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .footer-contact-item { color: rgba(255, 255, 255, 0.6) !important; }
+      .header-right .participant-name { color: white !important; }
+      .footer-bottom { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-test"></div>
+  <div class="particles"></div>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div style="text-align: center;">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Analisando seu perfil Big Five...</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <span id="toastIcon">✅</span>
+    <span id="toastMessage">Mensagem</span>
+  </div>
+
+  <div class="container">
+    
+    <!-- CABEÇALHO - BIG FIVE -->
+    <header class="header-premium">
+      <div class="header-grid">
+        <div class="header-logo">
+          <div class="logo-icon">V</div>
+          <div class="header-logo-text">
+            <span class="system-name">VIGORRE ONE<span class="tm">™</span></span>
+            <span class="system-sub">People Analytics Enterprise</span>
+          </div>
+        </div>
+        
+        <div class="header-center">
+          <div class="report-title">
+            <span class="highlight">Teste Big Five</span>
+          </div>
+          <div class="report-sub">Modelo OCEAN • 5 Dimensões</div>
+        </div>
+        
+        <div class="header-right">
+          <div class="participant-name" id="participantName">Carregando...</div>
+          <div class="participant-company" id="participantCompany">Empresa: --</div>
+          <div class="participant-id" id="participantId">ID: --</div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- CORPO DO TESTE -->
+    <div class="test-body">
+      
+      <div class="progress-section">
+        <span class="progress-text" id="progressText">Questão 1 de 50</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 2%"></div>
+        </div>
+        <span class="progress-percent" id="progressPercent">2%</span>
+      </div>
+      
+      <div id="testArea">
+        <div class="question-number" id="questionNumber">Questão 1 de 50</div>
+        <div class="question-text" id="questionText">Carregando pergunta...</div>
+        
+        <div class="options-grid" id="optionsContainer">
+          <!-- Opções carregadas via JS -->
+        </div>
+        
+        <div class="nav-buttons">
+          <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
+            ← Anterior
+          </button>
+          <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()">
+            Próxima →
+          </button>
+        </div>
+      </div>
+      
+      <!-- RESULTADOS -->
+      <div class="results-container" id="resultsContainer">
+        
+        <div class="results-header">
+          <h2>🧠 Seu Perfil Big Five</h2>
+          <p class="subtitle">Análise das 5 dimensões da personalidade (OCEAN)</p>
+          <div class="profile-badge" id="profileBadge">
+            <span id="profileEmoji">🌟</span>
+            <span id="profileText">Perfil: --</span>
+          </div>
+        </div>
+        
+        <div class="results-grid">
+          <div class="result-card">
+            <div class="label">Participante</div>
+            <div class="value" id="resultParticipant">--</div>
+          </div>
+          <div class="result-card">
+            <div class="label">Empresa</div>
+            <div class="value" id="resultCompany">--</div>
+          </div>
+          <div class="result-card">
+            <div class="label">Data da Avaliação</div>
+            <div class="value" id="resultDate">--</div>
+          </div>
+          <div class="result-card">
+            <div class="label">Status</div>
+            <div class="value" style="color: #34D399;">✅ Concluído</div>
+          </div>
+        </div>
+        
+        <div class="chart-card">
+          <h3>📊 Distribuição das Dimensões OCEAN</h3>
+          <div class="chart-container">
+            <canvas id="bigFiveChart"></canvas>
+          </div>
+        </div>
+        
+        <div class="chart-card">
+          <h3>💡 Resumo do Perfil</h3>
+          <p id="profileSummary" style="color: rgba(255, 255, 255, 0.8); line-height: 1.7; font-size: 0.9375rem;">
+            Carregando resumo...
+          </p>
+        </div>
+        
+        <div class="result-actions">
+          <button class="btn-result btn-result-primary" onclick="window.print()">
+            🖨️ Imprimir Resultado
+          </button>
+          <button class="btn-result btn-result-success" onclick="goToDashboard()">
+            📊 Voltar ao Dashboard
+          </button>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <footer class="footer-premium">
+      <div class="footer-grid">
+        <div class="footer-logo">
+          <div class="logo-icon-small">V</div>
+          <div class="footer-logo-text">
+            <span class="footer-system">VIGORRE ONE<span class="tm">™</span></span>
+            <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
+          </div>
+        </div>
+        
+        <div class="footer-center">
+          <div class="footer-contact">
+            <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
+              <span class="icon">📧</span> contato@vigorre.com.br
+            </a>
+            <a href="tel:+5534991850735" class="footer-contact-item">
+              <span class="icon">📱</span> (34) 99185-0735
+            </a>
+            <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
+              <span class="icon">🌐</span> www.vigorre.com.br
+            </a>
+            <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
+              <span class="icon">📷</span> @vigorre.oficial
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-right">
+          <div class="page-number">
+            Página <span id="pageNumber">1</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-divider"></div>
+      
+      <div class="footer-bottom">
+        <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
+        <span>v1.0</span>
+      </div>
+    </footer>
+    
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../../supabase-config.js"></script>
+  <script src="../../auth.js"></script>
+  <script src="../../middleware/auth-guard.js"></script>
+
+  <script>
+    'use strict';
+
+    // ============================================
+    // PERGUNTAS BIG FIVE (50 PERGUNTAS)
+    // ============================================
+    const questions = [
+      // Abertura à Experiência (O) - 10 perguntas
+      { id: 1, dimension: 'O', text: 'Eu tenho uma imaginação ativa.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 2, dimension: 'O', text: 'Eu sou curioso sobre muitas coisas diferentes.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 3, dimension: 'O', text: 'Eu gosto de explorar novas ideias.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 4, dimension: 'O', text: 'Eu aprecio a arte e a beleza.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 5, dimension: 'O', text: 'Eu sou aberto a novas experiências.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 6, dimension: 'O', text: 'Eu gosto de pensar em ideias abstratas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 7, dimension: 'O', text: 'Eu sou criativo e inovador.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 8, dimension: 'O', text: 'Eu gosto de aprender coisas novas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 9, dimension: 'O', text: 'Eu tenho uma mente aberta.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 10, dimension: 'O', text: 'Eu gosto de experimentar coisas diferentes.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      
+      // Conscienciosidade (C) - 10 perguntas
+      { id: 11, dimension: 'C', text: 'Eu sou organizado e metódico.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 12, dimension: 'C', text: 'Eu cumpro minhas obrigações com responsabilidade.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 13, dimension: 'C', text: 'Eu planejo minhas atividades com antecedência.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 14, dimension: 'C', text: 'Eu sou disciplinado e focado.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 15, dimension: 'C', text: 'Eu presto atenção aos detalhes.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 16, dimension: 'C', text: 'Eu concluo as tarefas que começo.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 17, dimension: 'C', text: 'Eu sou persistente e determinado.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 18, dimension: 'C', text: 'Eu mantenho minhas coisas em ordem.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 19, dimension: 'C', text: 'Eu sou confiável e pontual.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 20, dimension: 'C', text: 'Eu busco a excelência no que faço.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      
+      // Extroversão (E) - 10 perguntas
+      { id: 21, dimension: 'E', text: 'Eu gosto de estar com outras pessoas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 22, dimension: 'E', text: 'Eu me sinto energizado em ambientes sociais.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 23, dimension: 'E', text: 'Eu sou uma pessoa comunicativa.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 24, dimension: 'E', text: 'Eu gosto de falar em público.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 25, dimension: 'E', text: 'Eu sou extrovertido e sociável.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 26, dimension: 'E', text: 'Eu gosto de eventos e festas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 27, dimension: 'E', text: 'Eu influencio e inspiro outras pessoas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 28, dimension: 'E', text: 'Eu construo redes de contatos facilmente.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 29, dimension: 'E', text: 'Eu me sinto confiante em situações sociais.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 30, dimension: 'E', text: 'Eu gosto de liderar grupos e equipes.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      
+      // Amabilidade (A) - 10 perguntas
+      { id: 31, dimension: 'A', text: 'Eu sou empático e compreensivo.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 32, dimension: 'A', text: 'Eu me importo com os sentimentos dos outros.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 33, dimension: 'A', text: 'Eu sou cooperativo e colaborativo.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 34, dimension: 'A', text: 'Eu respeito as diferenças das pessoas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 35, dimension: 'A', text: 'Eu escuto ativamente as pessoas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 36, dimension: 'A', text: 'Eu sou diplomático e cortês.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 37, dimension: 'A', text: 'Eu evito conflitos desnecessários.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 38, dimension: 'A', text: 'Eu sou generoso e solidário.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 39, dimension: 'A', text: 'Eu confio nas pessoas facilmente.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 40, dimension: 'A', text: 'Eu medito conflitos com equilíbrio.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      
+      // Neuroticismo (N) - 10 perguntas
+      { id: 41, dimension: 'N', text: 'Eu me preocupo com muitas coisas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 42, dimension: 'N', text: 'Eu fico ansioso em situações difíceis.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 43, dimension: 'N', text: 'Eu me estresso com facilidade.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 44, dimension: 'N', text: 'Eu tenho oscilações de humor.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 45, dimension: 'N', text: 'Eu me sinto inseguro frequentemente.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 46, dimension: 'N', text: 'Eu reajo intensamente a críticas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 47, dimension: 'N', text: 'Eu me sinto sobrecarregado com facilidade.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 48, dimension: 'N', text: 'Eu tenho dificuldade em relaxar.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 49, dimension: 'N', text: 'Eu me sinto triste ou deprimido às vezes.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
+      { id: 50, dimension: 'N', text: 'Eu sou sensível a eventos estressantes.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] }
+    ];
+
+    // ============================================
+    // ESTADO
+    // ============================================
+    let currentQuestion = 0;
+    let answers = new Array(questions.length).fill(null);
+    let currentUser = null;
+    let participantData = null;
+    let companyData = null;
+    let chartInstance = null;
+    let isCompleted = false;
+
+    // ============================================
+    // NOMES DAS DIMENSÕES
+    // ============================================
+    const dimensionNames = {
+      'O': { name: 'Abertura à Experiência', color: '#06B6D4', emoji: '🎨' },
+      'C': { name: 'Conscienciosidade', color: '#10B981', emoji: '📋' },
+      'E': { name: 'Extroversão', color: '#F59E0B', emoji: '🗣️' },
+      'A': { name: 'Amabilidade', color: '#7C3AED', emoji: '❤️' },
+      'N': { name: 'Estabilidade Emocional', color: '#F43F5E', emoji: '🧘' }
+    };
+
+    // ============================================
+    // INICIALIZAÇÃO
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🧠 Teste Big Five - VIGORRE ONE™');
+      
+      const isAuth = window.VigorreAuth.isAuthenticated();
+      if (!isAuth) { window.location.href = '../../login.html'; return; }
+      
+      currentUser = window.VigorreAuth.getCurrentUser();
+      if (!currentUser || currentUser.role !== 'participant') {
+        alert('⚠️ Acesso restrito a participantes.');
+        window.VigorreAuth.logout();
+        return;
+      }
+      
+      loadParticipantData();
+    });
+
+    // ============================================
+    // CARREGAR DADOS DO PARTICIPANTE
+    // ============================================
+    function loadParticipantData() {
+      try {
+        const allParticipants = VigorreDB.participants.findAll();
+        participantData = allParticipants.find(p => p.id === currentUser.id);
+        
+        if (!participantData) {
+          participantData = { 
+            id: currentUser.id, 
+            name: currentUser.name || 'Participante', 
+            companyId: currentUser.companyId || null 
+          };
+        }
+        
+        if (participantData.companyId) {
+          companyData = VigorreDB.companies.findById(participantData.companyId);
+        }
+        
+        const companyName = companyData?.name || 'Autônomo';
+        document.getElementById('participantName').textContent = participantData.name || 'Participante';
+        document.getElementById('participantCompany').textContent = `Empresa: ${companyName}`;
+        document.getElementById('participantId').textContent = `ID: ${participantData.id || '--'}`;
+        
+        renderQuestion();
+        
+      } catch (error) {
+        console.error('❌ Erro:', error);
+        showToast('Erro ao carregar dados', 'error');
+      }
+    }
+
+    // ============================================
+    // RENDERIZAR PERGUNTA
+    // ============================================
+    function renderQuestion() {
+      const q = questions[currentQuestion];
+      const total = questions.length;
+      const progress = ((currentQuestion + 1) / total) * 100;
+      const dim = dimensionNames[q.dimension];
+      
+      document.getElementById('questionNumber').textContent = `Questão ${currentQuestion + 1} de ${total} • ${dim.emoji} ${dim.name}`;
+      document.getElementById('progressText').textContent = `Questão ${currentQuestion + 1} de ${total}`;
+      document.getElementById('progressFill').style.width = `${progress}%`;
+      document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+      document.getElementById('questionText').textContent = q.text;
+      
+      const container = document.getElementById('optionsContainer');
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+      
+      container.innerHTML = q.options.map((opt, idx) => {
+        const isSelected = answers[currentQuestion] === idx;
+        return `
+          <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectOption(${idx})">
+            <span class="letter">${letters[idx]}</span>
+            ${opt}
+          </button>
+        `;
+      }).join('');
+      
+      document.getElementById('btnPrev').disabled = currentQuestion === 0;
+      
+      const nextBtn = document.getElementById('btnNext');
+      if (currentQuestion === total - 1) {
+        nextBtn.textContent = '📊 Finalizar Teste';
+        nextBtn.className = 'btn-nav btn-finish';
+        nextBtn.onclick = finishTest;
+      } else {
+        nextBtn.textContent = 'Próxima →';
+        nextBtn.className = 'btn-nav btn-next';
+        nextBtn.onclick = nextQuestion;
+      }
+    }
+
+    // ============================================
+    // SELECIONAR OPÇÃO
+    // ============================================
+    function selectOption(index) {
+      answers[currentQuestion] = index;
+      renderQuestion();
+    }
+
+    // ============================================
+    // NAVEGAÇÃO
+    // ============================================
+    function nextQuestion() {
+      if (answers[currentQuestion] === null) {
+        showToast('⚠️ Selecione uma opção antes de continuar.', 'error');
+        return;
+      }
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+      }
+    }
+
+    // ============================================
+    // FINALIZAR TESTE
+    // ============================================
+    function finishTest() {
+      if (answers[currentQuestion] === null) {
+        showToast('⚠️ Selecione uma opção para a última questão.', 'error');
+        return;
+      }
+      
+      const total = answers.filter(a => a !== null).length;
+      const remaining = questions.length - total;
+      
+      if (remaining > 0) {
+        if (!confirm(`Você respondeu ${total} de ${questions.length} questões. ${remaining} não respondidas. Finalizar mesmo assim?`)) {
+          return;
+        }
+      }
+      
+      if (!confirm('Finalizar teste Big Five? Suas respostas serão salvas.')) {
+        return;
+      }
+      
+      document.getElementById('loadingOverlay').classList.add('active');
+      
+      setTimeout(() => {
+        const result = calculateResult();
+        saveResult(result);
+        showResults(result);
+      }, 1500);
+    }
+
+    // ============================================
+    // CALCULAR RESULTADO
+    // ============================================
+    function calculateResult() {
+      const scores = { O: 0, C: 0, E: 0, A: 0, N: 0 };
+      const counts = { O: 0, C: 0, E: 0, A: 0, N: 0 };
+      
+      questions.forEach((q, idx) => {
+        if (answers[idx] !== null) {
+          const dim = q.dimension;
+          scores[dim] += (4 - answers[idx]); // 0-4, inverte para N
+          counts[dim]++;
+        }
+      });
+      
+      const percentages = {};
+      for (const dim of Object.keys(scores)) {
+        const maxScore = counts[dim] * 4;
+        percentages[dim] = maxScore > 0 ? Math.round((scores[dim] / maxScore) * 100) : 0;
+      }
+      
+      // Inverter N (Neuroticismo) para Estabilidade Emocional
+      percentages['N'] = 100 - percentages['N'];
+      
+      // Encontrar dimensão predominante
+      let dominant = 'O';
+      let maxValue = 0;
+      for (const [key, value] of Object.entries(percentages)) {
+        if (value > maxValue) {
+          maxValue = value;
+          dominant = key;
+        }
+      }
+      
+      const profile = dimensionNames[dominant];
+      
+      // Classificação de nível
+      let level = 'Moderado';
+      let emoji = '📊';
+      if (maxValue >= 80) { level = 'Muito Alto'; emoji = '🏆'; }
+      else if (maxValue >= 65) { level = 'Alto'; emoji = '🌟'; }
+      else if (maxValue >= 45) { level = 'Moderado'; emoji = '📊'; }
+      else if (maxValue >= 25) { level = 'Baixo'; emoji = '🌱'; }
+      else { level = 'Muito Baixo'; emoji = '📉'; }
+      
+      return {
+        percentages: percentages,
+        dominant: dominant,
+        dominantName: profile.name,
+        dominantEmoji: profile.emoji,
+        level: level,
+        emoji: emoji,
+        date: new Date().toISOString()
+      };
+    }
+
+    // ============================================
+    // SALVAR RESULTADO
+    // ============================================
+    function saveResult(result) {
+      try {
+        const allParticipants = VigorreDB.participants.findAll();
+        const p = allParticipants.find(p => p.id === currentUser.id);
+        
+        if (p) {
+          if (!p.completedTests) p.completedTests = [];
+          if (!p.completedTests.includes('Big Five')) {
+            p.completedTests.push('Big Five');
+          }
+          if (!p.results) p.results = {};
+          p.results.BigFive = result;
+          
+          const allTests = p.tests || [];
+          const allCompleted = allTests.every(t => p.completedTests.includes(t));
+          p.status = allCompleted ? 'completed' : 'in_progress';
+          
+          const idx = allParticipants.findIndex(p => p.id === currentUser.id);
+          if (idx > -1) {
+            allParticipants[idx] = p;
+            localStorage.setItem('vigorre_participants', JSON.stringify(allParticipants));
+          }
+        }
+        
+        // Salvar no localStorage
+        localStorage.setItem('vigorre_last_bigfive_result', JSON.stringify(result));
+        console.log('✅ Resultado Big Five salvo:', result);
+        
+      } catch (error) {
+        console.error('❌ Erro ao salvar:', error);
+      }
+    }
+
+    // ============================================
+    // EXIBIR RESULTADOS
+    // ============================================
+    function showResults(result) {
+      document.getElementById('loadingOverlay').classList.remove('active');
+      document.getElementById('testArea').style.display = 'none';
+      document.getElementById('resultsContainer').classList.add('active');
+      
+      document.getElementById('resultParticipant').textContent = participantData.name || '--';
+      document.getElementById('resultCompany').textContent = companyData?.name || 'Autônomo';
+      document.getElementById('resultDate').textContent = new Date(result.date).toLocaleDateString('pt-BR');
+      
+      document.getElementById('profileText').textContent = `${result.dominantEmoji} ${result.dominantName} (${result.emoji} ${result.level})`;
+      
+      // Resumo
+      const sorted = Object.entries(result.percentages).sort((a, b) => b[1] - a[1]);
+      const top = sorted[0];
+      const second = sorted[1];
+      
+      document.getElementById('profileSummary').textContent = 
+        `Seu perfil Big Five é predominantemente ${top[0]} - ${dimensionNames[top[0]].name} com ${top[1]}%. ` +
+        `Sua segunda característica mais forte é ${second[0]} - ${dimensionNames[second[0]].name} com ${second[1]}%. ` +
+        `Este perfil sugere ${top[0] === 'O' ? 'alta criatividade e abertura a novas experiências.' : 
+        top[0] === 'C' ? 'alta organização, disciplina e foco em resultados.' : 
+        top[0] === 'E' ? 'forte sociabilidade, comunicação e influência.' : 
+        top[0] === 'A' ? 'grande empatia, cooperação e capacidade de trabalhar em equipe.' : 
+        'boa estabilidade emocional, resiliência e capacidade de lidar com pressão.'}`;
+      
+      document.getElementById('pageNumber').textContent = '1';
+      
+      setTimeout(() => {
+        renderCharts(result.percentages);
+      }, 200);
+      
+      isCompleted = true;
+    }
+
+    // ============================================
+    // RENDERIZAR GRÁFICOS
+    // ============================================
+    function renderCharts(percentages) {
+      try {
+        const ctx = document.getElementById('bigFiveChart').getContext('2d');
+        if (chartInstance) chartInstance.destroy();
+        
+        const labels = ['Abertura (O)', 'Conscienciosidade (C)', 'Extroversão (E)', 'Amabilidade (A)', 'Estabilidade Emocional (N)'];
+        const data = [
+          percentages.O || 0,
+          percentages.C || 0,
+          percentages.E || 0,
+          percentages.A || 0,
+          percentages.N || 0
+        ];
+        const colors = ['#06B6D4', '#10B981', '#F59E0B', '#7C3AED', '#F43F5E'];
+        
+        chartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Percentual',
+              data: data,
+              backgroundColor: colors.map(c => c + 'CC'),
+              borderColor: colors,
+              borderWidth: 2,
+              borderRadius: 8
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.5)' } },
+              x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.7)' } }
+            }
+          }
+        });
+        
+      } catch (error) {
+        console.error('❌ Erro ao renderizar gráfico:', error);
+      }
+    }
+
+    // ============================================
+    // VOLTAR AO DASHBOARD
+    // ============================================
+    function goToDashboard() {
+      window.location.href = '../dashboard.html';
+    }
+
+    // ============================================
+    // TOAST
+    // ============================================
+    function showToast(message, type) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastIcon').textContent = type === 'error' ? '❌' : '✅';
+      document.getElementById('toastMessage').textContent = message;
+      toast.className = `toast show ${type === 'error' ? 'error' : 'success'}`;
+      setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    // ============================================
+    // BLOQUEAR NAVEGAÇÃO
+    // ============================================
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', function(e) {
+      if (!isCompleted) {
+        if (!confirm('Você está no meio do teste. Deseja sair?')) {
+          window.history.pushState(null, '', window.location.href);
+        } else {
+          window.location.href = '../dashboard.html';
+        }
+      }
+    });
+
+    console.log('🧠 Teste Big Five carregado com sucesso!');
+  </script>
+
+</body>
+</html>
