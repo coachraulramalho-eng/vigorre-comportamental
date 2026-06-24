@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório Big Five | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       CORES DO BIG FIVE (MULTICOLOR)
+       ============================================ */
+    :root {
+      --openness: #06B6D4;
+      --conscientiousness: #10B981;
+      --extraversion: #F59E0B;
+      --agreeableness: #7C3AED;
+      --neuroticism: #F43F5E;
+      --gradient-main: linear-gradient(135deg, #06B6D4 0%, #10B981 30%, #F59E0B 60%, #7C3AED 85%, #F43F5E 100%);
+      --gradient-header: linear-gradient(135deg, #06B6D4, #7C3AED);
+      --gradient-footer: linear-gradient(135deg, #7C3AED, #06B6D4);
+      --shadow-color: rgba(124, 58, 237, 0.3);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-report {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--gradient-main);
+      opacity: 0.06;
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .particles {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.06), transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.04), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.08), transparent);
+      background-size: 200px 200px;
+      animation: floatParticles 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes floatParticles {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100px); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    /* ============================================
+       CABEÇALHO
+       ============================================ */
+    .header-premium {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-main);
+    }
+    
+    .header-grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    
+    .header-logo .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gradient-header);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .header-logo-text .system-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .header-logo-text .system-name .tm {
+      font-size: 0.5rem;
+      vertical-align: super;
+      color: #06B6D4;
+    }
+    
+    .header-logo-text .system-sub {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.4);
+      display: block;
+    }
+    
+    .header-center {
+      text-align: center;
+    }
+    
+    .header-center .report-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-center .report-title .highlight {
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .header-center .report-sub {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .header-right {
+      text-align: right;
+    }
+    
+    .header-right .participant-name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: white;
+    }
+    
+    .header-right .participant-company {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* ============================================
+       CORPO DO RELATÓRIO
+       ============================================ */
+    .report-body {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 40px;
+      min-height: 400px;
+    }
+    
+    .report-title-page {
+      text-align: center;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 32px;
+    }
+    
+    .report-title-page h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .report-title-page p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1rem;
+      margin-top: 8px;
+    }
+    
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 24px;
+      background: var(--gradient-header);
+      border-radius: 100px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-top: 16px;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .report-section {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .report-section h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      color: white;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .report-section p {
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.8;
+      font-size: 0.9375rem;
+    }
+    
+    .report-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .report-section ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9375rem;
+    }
+    
+    .report-section ul li:last-child {
+      border-bottom: none;
+    }
+    
+    .report-section ul li::before {
+      content: '✦';
+      color: #D4AF37;
+      font-weight: 700;
+    }
+    
+    .chart-container {
+      height: 280px;
+      position: relative;
+      margin-bottom: 24px;
+    }
+    
+    .btn-back {
+      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+    
+    .btn-print {
+      padding: 10px 24px;
+      background: var(--gradient-header);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px var(--shadow-color);
+    }
+    
+    /* UPGRADE CALL-TO-ACTION */
+    .upgrade-banner {
+      background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(124,58,237,0.08));
+      border: 2px solid rgba(212,175,55,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 24px;
+    }
+    
+    .upgrade-banner h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      color: #D4AF37;
+      margin-bottom: 8px;
+    }
+    
+    .upgrade-banner p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+    }
+    
+    .btn-upgrade {
+      padding: 12px 32px;
+      background: linear-gradient(135deg, #D4AF37, #7C3AED);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9375rem;
+      box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+    }
+    
+    .btn-upgrade:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(212,175,55,0.5);
+    }
+    
+    /* ============================================
+       RODAPÉ
+       ============================================ */
+    .footer-premium {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 20px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer-premium::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gradient-footer);
+    }
+    
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .footer-logo .logo-icon-small {
+      width: 32px;
+      height: 32px;
+      background: var(--gradient-footer);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.875rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+    }
+    
+    .footer-logo-text .footer-system {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .footer-logo-text .footer-system .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #06B6D4;
+    }
+    
+    .footer-logo-text .footer-tagline {
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .footer-center .footer-contact {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.7rem;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .footer-contact-item:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-contact-item .icon {
+      font-size: 0.75rem;
+    }
+    
+    .footer-right .page-number {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.7rem;
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+      margin: 12px 0;
+    }
+    
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.2);
+    }
+    
+    @media (max-width: 992px) {
+      .header-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        text-align: center;
+      }
+      .header-right { text-align: center; }
+      .footer-grid { flex-direction: column; text-align: center; gap: 12px; }
+      .footer-center .footer-contact { justify-content: center; flex-direction: column; gap: 6px; }
+    }
+    
+    @media (max-width: 768px) {
+      .header-premium { padding: 16px 20px; }
+      .report-body { padding: 20px; }
+      .report-title-page h1 { font-size: 1.5rem; }
+      .chart-container { height: 220px; }
+    }
+    
+    @media (max-width: 480px) {
+      body { padding: 12px; }
+      .header-premium { padding: 12px 16px; }
+      .report-body { padding: 16px; }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .container { max-width: 100% !important; }
+      .header-premium {
+        background: #0A2540 !important;
+        border-radius: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .report-body {
+        background: white !important;
+        border: none !important;
+        padding: 24px !important;
+      }
+      .report-title-page h1 { color: #0A2540 !important; }
+      .report-section {
+        background: #F8FAFC !important;
+        border-color: #E2E8F0 !important;
+      }
+      .report-section p { color: #334155 !important; }
+      .report-section ul li { color: #334155 !important; }
+      .footer-premium {
+        background: #0A2540 !important;
+        border-radius: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .btn-back, .btn-print, .btn-upgrade { display: none !important; }
+      .upgrade-banner { display: none !important; }
+      .footer-contact-item { color: rgba(255, 255, 255, 0.6) !important; }
+      .profile-badge {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .footer-bottom { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-report"></div>
+  <div class="particles"></div>
+
+  <div class="container">
+    
+    <!-- CABEÇALHO -->
+    <header class="header-premium">
+      <div class="header-grid">
+        <div class="header-logo">
+          <div class="logo-icon">V</div>
+          <div class="header-logo-text">
+            <span class="system-name">VIGORRE ONE<span class="tm">™</span></span>
+            <span class="system-sub">People Analytics Enterprise</span>
+          </div>
+        </div>
+        
+        <div class="header-center">
+          <div class="report-title">
+            <span class="highlight">Relatório Big Five</span>
+          </div>
+          <div class="report-sub">Análise de Personalidade OCEAN</div>
+        </div>
+        
+        <div class="header-right">
+          <div class="participant-name" id="participantName">--</div>
+          <div class="participant-company" id="participantCompany">Empresa: --</div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- CORPO -->
+    <div class="report-body">
+      
+      <div class="report-title-page">
+        <h1>🧠 Relatório Big Five</h1>
+        <p>Análise das 5 dimensões da personalidade (OCEAN)</p>
+        <div class="profile-badge" id="profileBadge">
+          <span>🌟</span>
+          <span id="profileText">Perfil: --</span>
+        </div>
+      </div>
+      
+      <!-- GRÁFICO -->
+      <div class="report-section">
+        <h3>📊 Perfil Big Five</h3>
+        <div class="chart-container">
+          <canvas id="bigFiveChart"></canvas>
+        </div>
+      </div>
+      
+      <!-- RESUMO EXECUTIVO -->
+      <div class="report-section">
+        <h3>📋 Resumo Executivo</h3>
+        <p id="executiveSummary">Carregando resumo executivo...</p>
+      </div>
+      
+      <!-- DIMENSÕES -->
+      <div class="report-section">
+        <h3>🔍 Análise das Dimensões</h3>
+        <div id="dimensionsAnalysis">
+          <p>Carregando análise das dimensões...</p>
+        </div>
+      </div>
+      
+      <!-- RECOMENDAÇÕES -->
+      <div class="report-section">
+        <h3>💡 Recomendações</h3>
+        <ul id="recommendations">
+          <li>Carregando recomendações...</li>
+        </ul>
+      </div>
+      
+      <!-- UPGRADE BANNER -->
+      <div class="upgrade-banner">
+        <h3>🚀 Descubra seu Potencial Completo!</h3>
+        <p>Este é um resumo do seu perfil Big Five. Adquira o <strong>Relatório Completo</strong> com análise aprofundada, SWOT estratégica, PDI personalizado e muito mais!</p>
+        <button class="btn-upgrade" onclick="window.location.href='completo.html'">
+          📄 Adquirir Relatório Completo
+        </button>
+      </div>
+      
+      <!-- BOTÕES -->
+      <div style="text-align: center; margin-top: 24px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="../../participante/dashboard.html" class="btn-back">← Voltar ao Dashboard</a>
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir</button>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <footer class="footer-premium">
+      <div class="footer-grid">
+        <div class="footer-logo">
+          <div class="logo-icon-small">V</div>
+          <div class="footer-logo-text">
+            <span class="footer-system">VIGORRE ONE<span class="tm">™</span></span>
+            <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
+          </div>
+        </div>
+        
+        <div class="footer-center">
+          <div class="footer-contact">
+            <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
+              <span class="icon">📧</span> contato@vigorre.com.br
+            </a>
+            <a href="tel:+5534991850735" class="footer-contact-item">
+              <span class="icon">📱</span> (34) 99185-0735
+            </a>
+            <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
+              <span class="icon">🌐</span> www.vigorre.com.br
+            </a>
+            <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
+              <span class="icon">📷</span> @vigorre.oficial
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-right">
+          <div class="page-number">Relatório Big Five</div>
+        </div>
+      </div>
+      
+      <div class="footer-divider"></div>
+      
+      <div class="footer-bottom">
+        <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
+        <span>v1.0</span>
+      </div>
+    </footer>
+    
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../../supabase-config.js"></script>
+  <script src="../../auth.js"></script>
+  <script src="../../middleware/auth-guard.js"></script>
+
+  <script>
+    'use strict';
+
+    let chartInstance = null;
+    let results = null;
+
+    const dimensionNames = {
+      'O': { name: 'Abertura à Experiência', color: '#06B6D4', emoji: '🎨', desc: 'Criatividade, curiosidade, flexibilidade mental' },
+      'C': { name: 'Conscienciosidade', color: '#10B981', emoji: '📋', desc: 'Organização, disciplina, responsabilidade' },
+      'E': { name: 'Extroversão', color: '#F59E0B', emoji: '🗣️', desc: 'Sociabilidade, comunicação, influência' },
+      'A': { name: 'Amabilidade', color: '#7C3AED', emoji: '❤️', desc: 'Empatia, cooperação, escuta ativa' },
+      'N': { name: 'Estabilidade Emocional', color: '#F43F5E', emoji: '🧘', desc: 'Resiliência, controle emocional, equilíbrio' }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📄 Relatório Big Five - VIGORRE ONE™');
+      
+      const isAuth = window.VigorreAuth.isAuthenticated();
+      if (!isAuth) {
+        window.location.href = '../../login.html';
+        return;
+      }
+      
+      const user = window.VigorreAuth.getCurrentUser();
+      if (!user) {
+        window.location.href = '../../login.html';
+        return;
+      }
+      
+      document.getElementById('participantName').textContent = user.name || 'Participante';
+      document.getElementById('participantCompany').textContent = `Empresa: ${user.companyName || 'Independente'}`;
+      
+      loadResults();
+    });
+
+    function loadResults() {
+      try {
+        const saved = localStorage.getItem('vigorre_last_bigfive_result');
+        if (saved) {
+          results = JSON.parse(saved);
+          renderReport(results);
+          return;
+        }
+        
+        const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+        const user = window.VigorreAuth.getCurrentUser();
+        const p = participants.find(p => p.id === user.id);
+        if (p?.results?.BigFive) {
+          results = p.results.BigFive;
+          renderReport(results);
+          return;
+        }
+        
+        // Dados de exemplo
+        results = {
+          percentages: { O: 75, C: 70, E: 80, A: 65, N: 60 },
+          dominant: 'E',
+          dominantName: 'Extroversão',
+          dominantEmoji: '🗣️',
+          level: 'Alto',
+          emoji: '🌟',
+          date: new Date().toISOString()
+        };
+        renderReport(results);
+        
+      } catch (error) {
+        console.error('❌ Erro ao carregar resultados:', error);
+        showError('Erro ao carregar resultados. Tente novamente.');
+      }
+    }
+
+    function renderReport(result) {
+      const pct = result.percentages || {};
+      const dominant = result.dominant || 'E';
+      const profile = dimensionNames[dominant];
+      
+      // Perfil
+      document.getElementById('profileText').textContent = `${profile.emoji} ${profile.name} (${result.emoji} ${result.level})`;
+      
+      // Resumo
+      const sorted = Object.entries(pct).sort((a,b) => b[1]-a[1]);
+      const top = sorted[0];
+      const second = sorted[1];
+      
+      const summaryText = 
+        `Seu perfil Big Five é predominantemente <strong>${dimensionNames[top[0]].name}</strong> com <strong>${top[1]}%</strong>. ` +
+        `Sua segunda característica mais forte é <strong>${dimensionNames[second[0]].name}</strong> com <strong>${second[1]}%</strong>. ` +
+        `Este perfil sugere ${top[0] === 'O' ? 'alta criatividade e abertura a novas experiências.' : 
+        top[0] === 'C' ? 'alta organização, disciplina e foco em resultados.' : 
+        top[0] === 'E' ? 'forte sociabilidade, comunicação e influência.' : 
+        top[0] === 'A' ? 'grande empatia, cooperação e capacidade de trabalhar em equipe.' : 
+        'boa estabilidade emocional, resiliência e capacidade de lidar com pressão.'}`;
+      
+      document.getElementById('executiveSummary').innerHTML = summaryText;
+      
+      // Dimensões
+      const dimHTML = Object.entries(pct).map(([key, value]) => {
+        const dim = dimensionNames[key];
+        const level = value >= 80 ? 'Muito Alto' : value >= 65 ? 'Alto' : value >= 45 ? 'Moderado' : value >= 25 ? 'Baixo' : 'Muito Baixo';
+        return `
+          <div style="margin-bottom:16px;padding:16px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:4px solid ${dim.color};">
+            <h4 style="color:${dim.color};">${dim.emoji} ${dim.name} — ${value}% (${level})</h4>
+            <p style="color:rgba(255,255,255,0.7);font-size:0.875rem;">${dim.desc}</p>
+          </div>
+        `;
+      }).join('');
+      document.getElementById('dimensionsAnalysis').innerHTML = dimHTML;
+      
+      // Recomendações
+      const recommendations = [
+        `Aproveite sua ${dimensionNames[top[0]].name.toLowerCase()} para buscar oportunidades alinhadas ao seu perfil`,
+        `Desenvolva competências complementares para equilibrar seu perfil`,
+        `Considere o Relatório Completo para uma análise aprofundada`,
+        `Aplique seu autoconhecimento para potencializar sua carreira`
+      ];
+      document.getElementById('recommendations').innerHTML = recommendations.map(r => `<li>${r}</li>`).join('');
+      
+      // Gráficos
+      renderCharts(pct);
+    }
+
+    function renderCharts(percentages) {
+      const ctx = document.getElementById('bigFiveChart');
+      if (!ctx) return;
+      
+      if (chartInstance) chartInstance.destroy();
+      
+      const labels = ['Abertura (O)', 'Conscienciosidade (C)', 'Extroversão (E)', 'Amabilidade (A)', 'Estabilidade Emocional (N)'];
+      const data = [
+        percentages.O || 0,
+        percentages.C || 0,
+        percentages.E || 0,
+        percentages.A || 0,
+        percentages.N || 0
+      ];
+      const colors = ['#06B6D4', '#10B981', '#F59E0B', '#7C3AED', '#F43F5E'];
+      
+      chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Percentual',
+            data: data,
+            backgroundColor: colors.map(c => c + 'CC'),
+            borderColor: colors,
+            borderWidth: 2,
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.5)' } },
+            x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.7)' } }
+          }
+        }
+      });
+    }
+
+    function showError(message) {
+      document.getElementById('executiveSummary').textContent = message;
+    }
+
+    console.log('📄 Relatório Big Five carregado com sucesso!');
+  </script>
+
+</body>
+</html>
