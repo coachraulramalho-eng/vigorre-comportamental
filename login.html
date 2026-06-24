@@ -6,40 +6,93 @@
   <meta name="description" content="VIGORRE ONE™ - Login" />
   <title>Login | VIGORRE ONE™</title>
   
-  <!-- Fonts -->
+  <!-- Fonts Premium -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
-  <!-- Styles -->
-  <link rel="stylesheet" href="assets/css/globals.css" />
-  
   <style>
     /* ============================================
-       ESTILOS ESPECÍFICOS - LOGIN
+       RESET & BASE
        ============================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      background: linear-gradient(135deg, #0A2540 0%, #1D4ED8 50%, #7C3AED 100%);
+      background: #0F172A;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
-      font-family: 'Inter', sans-serif;
+      position: relative;
+      overflow: hidden;
     }
     
+    /* Fundo animado */
+    .bg-login {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 80%, rgba(29, 78, 216, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    /* Partículas */
+    .particles {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.15), transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.1), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.12), transparent),
+        radial-gradient(1px 1px at 160px 120px, rgba(255,255,255,0.08), transparent);
+      background-size: 200px 200px;
+      animation: floatParticles 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes floatParticles {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100px); }
+    }
+    
+    /* ============================================
+       CONTAINER DE LOGIN
+       ============================================ */
     .login-container {
-      background: white;
+      position: relative;
+      z-index: 1;
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 24px;
       padding: 48px 40px;
       max-width: 440px;
       width: 100%;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
-      animation: slideUp 0.5s ease;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.6s ease-out;
     }
     
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    
+    /* ============================================
+       HEADER DO LOGIN
+       ============================================ */
     .login-header {
       text-align: center;
       margin-bottom: 32px;
@@ -65,13 +118,14 @@
       font-size: 1.25rem;
       color: white;
       font-family: 'Poppins', sans-serif;
+      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
     }
     
     .login-logo h1 {
       font-family: 'Poppins', sans-serif;
       font-size: 1.5rem;
       font-weight: 800;
-      color: #0A2540;
+      color: white;
       margin: 0;
       line-height: 1.2;
     }
@@ -83,11 +137,14 @@
     }
     
     .login-subtitle {
-      color: #64748B;
+      color: rgba(255, 255, 255, 0.5);
       font-size: 0.875rem;
       margin-top: 4px;
     }
     
+    /* ============================================
+       FORMULÁRIO
+       ============================================ */
     .login-form .form-group {
       margin-bottom: 20px;
     }
@@ -96,32 +153,36 @@
       display: block;
       font-weight: 600;
       font-size: 0.875rem;
-      color: #0A2540;
+      color: rgba(255, 255, 255, 0.8);
       margin-bottom: 6px;
     }
     
     .login-form input {
       width: 100%;
       padding: 12px 16px;
-      border: 2px solid #E2E8F0;
+      border: 2px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       font-size: 1rem;
       font-family: 'Inter', sans-serif;
       transition: all 0.3s ease;
-      background: #F8FAFC;
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+    }
+    
+    .login-form input::placeholder {
+      color: rgba(255, 255, 255, 0.3);
     }
     
     .login-form input:focus {
       outline: none;
-      border-color: #1D4ED8;
-      background: white;
-      box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1);
+      border-color: #06B6D4;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.1);
     }
     
-    .login-form input::placeholder {
-      color: #94A3B8;
-    }
-    
+    /* ============================================
+       OPÇÕES
+       ============================================ */
     .login-options {
       display: flex;
       justify-content: space-between;
@@ -135,23 +196,33 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      color: #64748B;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .login-options label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #06B6D4;
     }
     
     .login-options a {
-      color: #1D4ED8;
+      color: #06B6D4;
       text-decoration: none;
       font-weight: 600;
+      transition: color 0.3s ease;
     }
     
     .login-options a:hover {
       color: #7C3AED;
     }
     
+    /* ============================================
+       BOTÃO
+       ============================================ */
     .btn-login {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(135deg, #1D4ED8, #7C3AED);
+      background: linear-gradient(135deg, #06B6D4, #7C3AED);
       color: white;
       border: none;
       border-radius: 12px;
@@ -160,12 +231,12 @@
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 16px rgba(29, 78, 216, 0.3);
+      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
     }
     
     .btn-login:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(29, 78, 216, 0.4);
+      box-shadow: 0 8px 30px rgba(6, 182, 212, 0.5);
     }
     
     .btn-login:disabled {
@@ -174,9 +245,13 @@
       transform: none;
     }
     
+    /* ============================================
+       ERRO
+       ============================================ */
     .login-error {
-      background: #FEE2E2;
-      color: #991B1B;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #FCA5A5;
       padding: 12px 16px;
       border-radius: 12px;
       font-size: 0.875rem;
@@ -189,28 +264,35 @@
       display: block;
     }
     
+    /* ============================================
+       FOOTER
+       ============================================ */
     .login-footer {
       text-align: center;
       margin-top: 24px;
       padding-top: 24px;
-      border-top: 1px solid #E2E8F0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
     
     .login-footer p {
-      color: #64748B;
+      color: rgba(255, 255, 255, 0.3);
       font-size: 0.875rem;
     }
     
     .login-footer a {
-      color: #1D4ED8;
-      font-weight: 600;
+      color: rgba(255, 255, 255, 0.5);
       text-decoration: none;
+      transition: color 0.3s ease;
+      font-weight: 500;
     }
     
     .login-footer a:hover {
-      color: #7C3AED;
+      color: rgba(255, 255, 255, 0.8);
     }
     
+    /* ============================================
+       SPINNER
+       ============================================ */
     .login-spinner {
       display: inline-block;
       width: 20px;
@@ -227,32 +309,41 @@
       to { transform: rotate(360deg); }
     }
     
-    /* Credenciais de demonstração */
+    /* ============================================
+       CREDENCIAIS DE DEMO
+       ============================================ */
     .demo-creds {
-      background: #F1F5F9;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 12px;
       padding: 16px;
       margin-top: 20px;
-      font-size: 0.8125rem;
     }
     
     .demo-creds strong {
-      color: #0A2540;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.75rem;
+      display: block;
+      margin-bottom: 8px;
     }
     
     .demo-creds .cred-row {
       display: flex;
       justify-content: space-between;
       padding: 4px 0;
-      color: #64748B;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.75rem;
     }
     
     .demo-creds .cred-row span:last-child {
       font-family: 'Courier New', monospace;
-      color: #0A2540;
+      color: rgba(255, 255, 255, 0.6);
       font-weight: 600;
     }
     
+    /* ============================================
+       RESPONSIVO
+       ============================================ */
     @media (max-width: 480px) {
       .login-container {
         padding: 32px 24px;
@@ -272,6 +363,11 @@
 </head>
 <body>
 
+  <!-- Fundo animado -->
+  <div class="bg-login"></div>
+  <div class="particles"></div>
+
+  <!-- Container -->
   <div class="login-container">
     
     <!-- Header -->
@@ -283,7 +379,7 @@
       <p class="login-subtitle">Entre com suas credenciais</p>
     </div>
     
-    <!-- Error Message -->
+    <!-- Error -->
     <div id="loginError" class="login-error">
       ⚠️ <span id="errorMessage">Credenciais inválidas</span>
     </div>
@@ -311,7 +407,7 @@
           placeholder="••••••••" 
           required 
           autocomplete="current-password"
-          value="master123"
+          value="adminvigor10"
         />
       </div>
       
@@ -333,11 +429,11 @@
       <strong>🔑 Credenciais de Demonstração</strong>
       <div class="cred-row">
         <span>👑 Master</span>
-        <span>master@vigorre.com / master123</span>
+        <span>master@vigorre.com / adminvigor10</span>
       </div>
       <div class="cred-row">
         <span>👤 Admin</span>
-        <span>admin@vigorre.com / admin123</span>
+        <span>admin@vigorre.com / adminvigor10</span>
       </div>
       <div class="cred-row">
         <span>🎯 Recrutador</span>
@@ -387,7 +483,6 @@
     document.addEventListener('DOMContentLoaded', function() {
       console.log('🔐 Página de Login - VIGORRE ONE™');
       
-      // Se já estiver logado, redireciona
       if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
         const user = window.VigorreAuth.getCurrentUser();
         console.log('✅ Usuário já logado:', user?.name);
@@ -404,33 +499,23 @@
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
       
-      // Validação básica
       if (!email || !password) {
         showError('Preencha todos os campos');
         return;
       }
       
-      // Desabilita botão
       loginBtn.disabled = true;
       loginBtn.innerHTML = '<span class="login-spinner"></span> Entrando...';
       hideError();
       
       try {
         console.log('🔄 Tentando login:', email);
-        
-        // Usa o sistema de autenticação
         const user = await window.VigorreAuth.login(email, password);
-        
         console.log('✅ Login bem-sucedido:', user.name);
-        
-        // Redireciona conforme o perfil
         window.VigorreAuth.redirectByRole(user);
-        
       } catch (error) {
         console.error('❌ Erro no login:', error);
         showError(error.message || 'Credenciais inválidas. Tente novamente.');
-        
-        // Reabilita botão
         loginBtn.disabled = false;
         loginBtn.innerHTML = 'Entrar no Sistema';
       }
@@ -460,11 +545,7 @@
       }
     });
     
-    // ============================================
-    // LOG DE INICIALIZAÇÃO
-    // ============================================
     console.log('🔐 Sistema de login carregado');
-    console.log('📌 Use as credenciais de demonstração para testar');
   </script>
   
 </body>
