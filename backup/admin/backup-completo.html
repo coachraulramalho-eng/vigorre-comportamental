@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backup Completo | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-backup {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 20% 80%, rgba(16,185,129,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.06) 0%, transparent 50%);
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* HEADER */
+    .header-backup {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .header-backup .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .header-backup .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #10B981, #D4AF37);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .header-backup .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-backup .logo-text .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #10B981;
+    }
+    
+    .header-backup .logo-text span {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.4);
+      display: block;
+    }
+    
+    .header-backup .btn-back {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .header-backup .btn-back:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    /* CORPO */
+    .backup-body {
+      background: rgba(30,41,59,0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 32px;
+    }
+    
+    .backup-title {
+      text-align: center;
+      padding: 16px 0 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+    }
+    
+    .backup-title h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .backup-title .green {
+      color: #10B981;
+    }
+    
+    .backup-title p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    .backup-motivation {
+      background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(212,175,55,0.08));
+      border: 1px solid rgba(16,185,129,0.15);
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    
+    .backup-motivation .icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    
+    .backup-motivation p {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .backup-motivation .highlight {
+      color: #10B981;
+      font-weight: 700;
+    }
+    
+    /* OPÇÕES DE BACKUP */
+    .backup-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .backup-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .backup-card:hover {
+      border-color: rgba(16,185,129,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+    
+    .backup-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+    
+    .backup-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+    
+    .backup-card p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 12px;
+    }
+    
+    .backup-card .btn-backup {
+      padding: 8px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, #10B981, #D4AF37);
+      color: white;
+    }
+    
+    .backup-card .btn-backup:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(16,185,129,0.3);
+    }
+    
+    /* SELEÇÃO DE DADOS */
+    .backup-selection {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    
+    .backup-selection h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 12px;
+    }
+    
+    .backup-selection .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+    }
+    
+    .backup-selection .item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .backup-selection .item:hover {
+      border-color: rgba(16,185,129,0.2);
+    }
+    
+    .backup-selection .item input[type="checkbox"] {
+      accent-color: #10B981;
+      width: 16px;
+      height: 16px;
+    }
+    
+    .backup-selection .item label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+    }
+    
+    /* FORMATOS */
+    .backup-formats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .format-btn {
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    
+    .format-btn:hover {
+      border-color: rgba(16,185,129,0.2);
+      background: rgba(16,185,129,0.05);
+    }
+    
+    .format-btn.active {
+      border-color: #10B981;
+      background: rgba(16,185,129,0.1);
+      color: #10B981;
+    }
+    
+    .format-btn .icon {
+      font-size: 1.5rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+    
+    /* BOTÃO PRINCIPAL */
+    .btn-backup-main {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #10B981, #D4AF37);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-backup-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(16,185,129,0.3);
+    }
+    
+    .btn-backup-main:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    /* TOAST */
+    .toast-backup {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(30,41,59,0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 12px;
+      padding: 16px 24px;
+      color: white;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      z-index: 1000;
+      max-width: 400px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease;
+    }
+    
+    .toast-backup.show { display: flex; }
+    .toast-backup .icon { font-size: 1.2rem; }
+    .toast-backup .text { font-size: 0.85rem; }
+    .toast-backup .progress {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .toast-backup .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10B981, #D4AF37);
+      border-radius: 2px;
+      transition: width 0.5s ease;
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateX(120%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    /* MODAL CONFIRMAÇÃO */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,22,40,0.9);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: rgba(30,41,59,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .modal-content h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+    }
+    
+    .modal-content p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    
+    .modal-content .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    
+    .modal-content .actions button {
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      border: none;
+    }
+    
+    .modal-content .btn-cancel {
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .modal-content .btn-cancel:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .modal-content .btn-confirm {
+      background: linear-gradient(135deg, #10B981, #D4AF37);
+      color: white;
+    }
+    
+    .modal-content .btn-confirm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(16,185,129,0.3);
+    }
+    
+    /* RODAPÉ */
+    .footer-backup {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .footer-backup .contact {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-backup .contact a {
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-backup .contact a:hover {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    @media (max-width: 768px) {
+      .header-backup { flex-direction: column; text-align: center; }
+      .backup-options { grid-template-columns: 1fr; }
+      .backup-formats { grid-template-columns: 1fr; }
+      .backup-selection .grid { grid-template-columns: 1fr; }
+      .footer-backup { flex-direction: column; text-align: center; }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .header-backup, .backup-body, .footer-backup {
+        background: white !important;
+        border-color: #ddd !important;
+        color: #111 !important;
+      }
+      .backup-title h1 { color: #111 !important; }
+      .backup-title .green { color: #10B981 !important; }
+      .backup-card { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .btn-back, .btn-backup, .btn-backup-main { display: none !important; }
+      .footer-backup .contact a { color: #666 !important; }
+      .toast-backup, .modal-overlay { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-backup"></div>
+
+  <!-- TOAST -->
+  <div class="toast-backup" id="toastBackup">
+    <div style="flex:1;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="icon" id="toastIcon">📦</span>
+        <span class="text" id="toastText">Backup em andamento...</span>
+      </div>
+      <div class="progress"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- MODAL CONFIRMAÇÃO -->
+  <div class="modal-overlay" id="modalConfirm">
+    <div class="modal-content">
+      <h2>⚠️ Confirmar Backup</h2>
+      <p>Você está prestes a realizar um <strong>backup completo</strong> do sistema. Este processo pode levar alguns minutos.</p>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);">Dados incluídos: Empresas, Recrutadores, Participantes, Relatórios, Laudos e Configurações.</p>
+      <div class="actions">
+        <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+        <button class="btn-confirm" onclick="startBackup()">✅ Confirmar Backup</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <!-- HEADER -->
+    <div class="header-backup">
+      <div class="logo">
+        <div class="logo-icon">V</div>
+        <div class="logo-text">
+          VIGORRE ONE™ <span class="tm">™</span>
+          <span>Backup • Administrador Master</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <a href="../../admin/dashboard.html" class="btn-back">← Voltar</a>
+      </div>
+    </div>
+    
+    <!-- CORPO -->
+    <div class="backup-body">
+      
+      <div class="backup-title">
+        <h1>💾 Backup <span class="green">VIGORRÊ CLOUD™</span></h1>
+        <p>Proteja seus dados com segurança</p>
+      </div>
+      
+      <!-- MOTIVAÇÃO -->
+      <div class="backup-motivation">
+        <div class="icon">🛡️</div>
+        <p>
+          "<span class="highlight">A segurança das informações é tão importante quanto a qualidade das decisões.</span> 
+          Mantenha seus backups atualizados e garanta a continuidade de sua operação."
+        </p>
+      </div>
+      
+      <!-- OPÇÕES DE BACKUP -->
+      <div class="backup-options">
+        <div class="backup-card" onclick="selectBackup('completo')">
+          <div class="icon">📦</div>
+          <h3>Backup Completo</h3>
+          <p>Todos os dados do sistema</p>
+          <button class="btn-backup" onclick="event.stopPropagation();openModal()">Iniciar</button>
+        </div>
+        <div class="backup-card" onclick="selectBackup('parcial')">
+          <div class="icon">📋</div>
+          <h3>Backup Direcionado</h3>
+          <p>Selecione os dados desejados</p>
+          <button class="btn-backup" onclick="event.stopPropagation();openModal()">Iniciar</button>
+        </div>
+        <div class="backup-card" onclick="selectBackup('automatico')">
+          <div class="icon">🔄</div>
+          <h3>Backup Automático</h3>
+          <p>Agendamento diário/semanal</p>
+          <button class="btn-backup" onclick="event.stopPropagation();openModal()">Configurar</button>
+        </div>
+      </div>
+      
+      <!-- SELEÇÃO DE DADOS -->
+      <div class="backup-selection">
+        <h3>📋 Selecione os dados para backup direcionado:</h3>
+        <div class="grid">
+          <div class="item"><input type="checkbox" checked id="chkEmpresas"><label for="chkEmpresas">🏢 Empresas</label></div>
+          <div class="item"><input type="checkbox" checked id="chkRecrutadores"><label for="chkRecrutadores">👤 Recrutadores</label></div>
+          <div class="item"><input type="checkbox" checked id="chkParticipantes"><label for="chkParticipantes">👥 Participantes</label></div>
+          <div class="item"><input type="checkbox" checked id="chkRelatorios"><label for="chkRelatorios">📄 Relatórios</label></div>
+          <div class="item"><input type="checkbox" checked id="chkLaudos"><label for="chkLaudos">📋 Laudos</label></div>
+          <div class="item"><input type="checkbox" checked id="chkConfig"><label for="chkConfig">⚙️ Configurações</label></div>
+        </div>
+      </div>
+      
+      <!-- FORMATOS -->
+      <div class="backup-formats">
+        <div class="format-btn active" data-format="pdf" onclick="selectFormat('pdf')">
+          <span class="icon">📄</span>
+          PDF
+        </div>
+        <div class="format-btn" data-format="xls" onclick="selectFormat('xls')">
+          <span class="icon">📊</span>
+          Excel (XLSX)
+        </div>
+        <div class="format-btn" data-format="json" onclick="selectFormat('json')">
+          <span class="icon">📁</span>
+          JSON (Sistema)
+        </div>
+      </div>
+      
+      <!-- BOTÃO PRINCIPAL -->
+      <button class="btn-backup-main" onclick="openModal()">
+        🚀 Iniciar Backup Agora
+      </button>
+      
+      <!-- ÚLTIMO BACKUP -->
+      <div style="margin-top:16px;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.3);">
+        Último backup: <span id="lastBackup">15/06/2024 14:32</span> • 
+        <span id="backupStatus">✅ Concluído com sucesso</span>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <div class="footer-backup">
+      <span>© 2024 VIGORRE ONE™</span>
+      <div class="contact">
+        <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+        <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+        <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
+      </div>
+      <span>v1.0</span>
+    </div>
+    
+  </div>
+
+  <script>
+    let selectedFormat = 'pdf';
+    let backupRunning = false;
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('💾 Backup VIGORRÊ CLOUD™ - Administrador');
+    });
+    
+    function selectFormat(format) {
+      selectedFormat = format;
+      document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.format-btn[data-format="${format}"]`).classList.add('active');
+    }
+    
+    function selectBackup(type) {
+      console.log('📦 Tipo selecionado:', type);
+    }
+    
+    function openModal() {
+      document.getElementById('modalConfirm').classList.add('active');
+    }
+    
+    function closeModal() {
+      document.getElementById('modalConfirm').classList.remove('active');
+    }
+    
+    function startBackup() {
+      closeModal();
+      if (backupRunning) return;
+      backupRunning = true;
+      
+      const toast = document.getElementById('toastBackup');
+      const progress = document.getElementById('progressFill');
+      const text = document.getElementById('toastText');
+      const icon = document.getElementById('toastIcon');
+      
+      toast.classList.add('show');
+      text.textContent = '📦 Iniciando backup...';
+      progress.style.width = '0%';
+      
+      let p = 0;
+      const interval = setInterval(() => {
+        p += Math.random() * 15 + 5;
+        if (p > 100) p = 100;
+        progress.style.width = p + '%';
+        
+        if (p < 30) text.textContent = '📦 Coletando dados...';
+        else if (p < 60) text.textContent = '📦 Processando informações...';
+        else if (p < 85) text.textContent = '📦 Gerando arquivo...';
+        else text.textContent = '📦 Finalizando...';
+        
+        if (p >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            icon.textContent = '✅';
+            text.textContent = 'Backup concluído com sucesso!';
+            setTimeout(() => {
+              toast.classList.remove('show');
+              backupRunning = false;
+              document.getElementById('lastBackup').textContent = new Date().toLocaleString('pt-BR');
+              document.getElementById('backupStatus').textContent = '✅ Concluído com sucesso';
+              
+              // Simular download
+              const formatNames = { pdf: 'PDF', xls: 'Excel', json: 'JSON' };
+              alert(`📥 Backup ${formatNames[selectedFormat]} concluído!\n\nArquivo: backup_vigorre_${new Date().toISOString().slice(0,10)}.${selectedFormat}`);
+            }, 1000);
+          }, 500);
+        }
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
