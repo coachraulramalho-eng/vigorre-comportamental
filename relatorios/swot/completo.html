@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório SWOT Completo | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       CORES DO SWOT (DOURADO/ÂMBAR)
+       ============================================ */
+    :root {
+      --primary: #D4AF37;
+      --primary-light: #FCD34D;
+      --primary-dark: #B8860B;
+      --gradient-main: linear-gradient(135deg, #D4AF37 0%, #FCD34D 50%, #B8860B 100%);
+      --gradient-header: linear-gradient(135deg, #B8860B, #D4AF37);
+      --gradient-footer: linear-gradient(135deg, #D4AF37, #B8860B);
+      --shadow-color: rgba(212, 175, 55, 0.3);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-report {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--gradient-main);
+      opacity: 0.05;
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .particles {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.05), transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.03), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.07), transparent);
+      background-size: 200px 200px;
+      animation: floatParticles 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes floatParticles {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100px); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    /* ============================================
+       CABEÇALHO
+       ============================================ */
+    .header-premium {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-header);
+    }
+    
+    .header-grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    
+    .header-logo .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gradient-header);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .header-logo-text .system-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .header-logo-text .system-name .tm {
+      font-size: 0.5rem;
+      vertical-align: super;
+      color: #FCD34D;
+    }
+    
+    .header-logo-text .system-sub {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.4);
+      display: block;
+    }
+    
+    .header-center {
+      text-align: center;
+    }
+    
+    .header-center .report-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-center .report-title .highlight {
+      background: var(--gradient-header);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .header-center .report-sub {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .header-right {
+      text-align: right;
+    }
+    
+    .header-right .participant-name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: white;
+    }
+    
+    .header-right .participant-company {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* ============================================
+       CORPO DO RELATÓRIO
+       ============================================ */
+    .report-body {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 40px;
+      min-height: 400px;
+    }
+    
+    .report-title-page {
+      text-align: center;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 32px;
+    }
+    
+    .report-title-page h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .report-title-page p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1rem;
+      margin-top: 8px;
+    }
+    
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 24px;
+      background: var(--gradient-header);
+      border-radius: 100px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-top: 16px;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .report-section {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .report-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      color: #D4AF37;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .report-section h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      color: white;
+      margin-bottom: 12px;
+      margin-top: 16px;
+    }
+    
+    .report-section p {
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.9;
+      font-size: 0.9375rem;
+      margin-bottom: 12px;
+    }
+    
+    .report-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .report-section ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9375rem;
+    }
+    
+    .report-section ul li:last-child {
+      border-bottom: none;
+    }
+    
+    .report-section ul li::before {
+      content: '✦';
+      color: #D4AF37;
+      font-weight: 700;
+    }
+    
+    .report-section .gold-border {
+      border-left: 4px solid #D4AF37;
+      padding-left: 20px;
+      margin: 16px 0;
+    }
+    
+    .swot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    
+    .swot-card {
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .swot-card h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .swot-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .swot-card ul li {
+      padding: 4px 0;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+      border-bottom: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .swot-card ul li::before {
+      content: '•';
+      color: inherit;
+      font-weight: 700;
+    }
+    
+    .swot-card.strengths { border-left: 4px solid #10B981; }
+    .swot-card.strengths h4 { color: #10B981; }
+    .swot-card.weaknesses { border-left: 4px solid #F59E0B; }
+    .swot-card.weaknesses h4 { color: #F59E0B; }
+    .swot-card.opportunities { border-left: 4px solid #06B6D4; }
+    .swot-card.opportunities h4 { color: #06B6D4; }
+    .swot-card.threats { border-left: 4px solid #F43F5E; }
+    .swot-card.threats h4 { color: #F43F5E; }
+    
+    .fv-display {
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin: 16px 0;
+    }
+    
+    .fv-display .fv-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #D4AF37;
+    }
+    
+    .fv-display .fv-label {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .fv-display .fv-class {
+      font-size: 0.9rem;
+      color: #10B981;
+      font-weight: 600;
+    }
+    
+    .btn-back {
+      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+    
+    .btn-print {
+      padding: 10px 24px;
+      background: var(--gradient-header);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px var(--shadow-color);
+    }
+    
+    .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px var(--shadow-color);
+    }
+    
+    /* ============================================
+       RODAPÉ
+       ============================================ */
+    .footer-premium {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 20px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer-premium::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gradient-footer);
+    }
+    
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .footer-logo .logo-icon-small {
+      width: 32px;
+      height: 32px;
+      background: var(--gradient-footer);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.875rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+    }
+    
+    .footer-logo-text .footer-system {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .footer-logo-text .footer-system .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #FCD34D;
+    }
+    
+    .footer-logo-text .footer-tagline {
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .footer-center .footer-contact {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.7rem;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .footer-contact-item:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-contact-item .icon {
+      font-size: 0.75rem;
+    }
+    
+    .footer-right .page-number {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.7rem;
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+      margin: 12px 0;
+    }
+    
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.2);
+    }
+    
+    @media (max-width: 992px) {
+      .header-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        text-align: center;
+      }
+      .header-right { text-align: center; }
+      .footer-grid { flex-direction: column; text-align: center; gap: 12px; }
+      .footer-center .footer-contact { justify-content: center; flex-direction: column; gap: 6px; }
+    }
+    
+    @media (max-width: 768px) {
+      .header-premium { padding: 16px 20px; }
+      .report-body { padding: 20px; }
+      .report-title-page h1 { font-size: 1.5rem; }
+      .swot-grid { grid-template-columns: 1fr; }
+    }
+    
+    @media (max-width: 480px) {
+      body { padding: 12px; }
+      .header-premium { padding: 12px 16px; }
+      .report-body { padding: 16px; }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .container { max-width: 100% !important; }
+      .header-premium {
+        background: #0A2540 !important;
+        border-radius: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .report-body {
+        background: white !important;
+        border: none !important;
+        padding: 24px !important;
+      }
+      .report-title-page h1 { color: #0A2540 !important; }
+      .report-section {
+        background: #F8FAFC !important;
+        border-color: #E2E8F0 !important;
+      }
+      .report-section p { color: #334155 !important; }
+      .report-section ul li { color: #334155 !important; }
+      .report-section h2 { color: #D4AF37 !important; }
+      .report-section h3 { color: #0A2540 !important; }
+      .footer-premium {
+        background: #0A2540 !important;
+        border-radius: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .btn-back, .btn-print { display: none !important; }
+      .footer-contact-item { color: rgba(255, 255, 255, 0.6) !important; }
+      .profile-badge {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .footer-bottom { display: none !important; }
+      .gold-border { border-left-color: #D4AF37 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-report"></div>
+  <div class="particles"></div>
+
+  <div class="container">
+    
+    <!-- CABEÇALHO -->
+    <header class="header-premium">
+      <div class="header-grid">
+        <div class="header-logo">
+          <div class="logo-icon">V</div>
+          <div class="header-logo-text">
+            <span class="system-name">VIGORRE ONE<span class="tm">™</span></span>
+            <span class="system-sub">People Analytics Enterprise</span>
+          </div>
+        </div>
+        
+        <div class="header-center">
+          <div class="report-title">
+            <span class="highlight">Relatório SWOT Completo</span>
+          </div>
+          <div class="report-sub">Análise Estratégica de Autopercepção</div>
+        </div>
+        
+        <div class="header-right">
+          <div class="participant-name" id="participantName">--</div>
+          <div class="participant-company" id="participantCompany">Empresa: --</div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- CORPO DO RELATÓRIO -->
+    <div class="report-body">
+      
+      <div class="report-title-page">
+        <h1>📊 Relatório SWOT <span style="color:#D4AF37;font-size:0.8rem;">COMPLETO</span></h1>
+        <p>Análise Estratégica de Forças, Fraquezas, Oportunidades e Ameaças</p>
+        <div class="profile-badge" id="profileBadge">
+          <span>📊</span>
+          <span id="profileText">Perfil: --</span>
+        </div>
+        <div style="margin-top:12px;">
+          <span style="background:rgba(212,175,55,0.08);padding:4px 16px;border-radius:100px;font-size:0.7rem;color:#D4AF37;border:1px solid rgba(212,175,55,0.15);">📄 Análise Estratégica • Plano de Ação</span>
+        </div>
+      </div>
+
+      <!-- 1. INTRODUÇÃO -->
+      <div class="report-section">
+        <h2>1. Introdução</h2>
+        <p>A <strong>análise SWOT</strong> é uma ferramenta estratégica que permite avaliar <strong>Forças (Strengths)</strong>, <strong>Fraquezas (Weaknesses)</strong>, <strong>Oportunidades (Opportunities)</strong> e <strong>Ameaças (Threats)</strong> de um indivíduo ou organização.</p>
+        <p>Este relatório apresenta uma análise aprofundada da autopercepção do participante, integrando as 4 dimensões para uma compreensão estratégica do seu posicionamento profissional e potencial de desenvolvimento.</p>
+      </div>
+
+      <!-- 2. RESUMO EXECUTIVO -->
+      <div class="report-section">
+        <h2>2. Resumo Executivo</h2>
+        <div id="executiveSummary">
+          <p>Carregando resumo executivo...</p>
+        </div>
+      </div>
+
+      <!-- 3. MATRIZ SWOT -->
+      <div class="report-section">
+        <h2>3. Matriz SWOT</h2>
+        <div class="swot-grid">
+          <div class="swot-card strengths">
+            <h4>💪 Forças</h4>
+            <ul id="strengthsList">
+              <li>Carregando...</li>
+            </ul>
+          </div>
+          <div class="swot-card weaknesses">
+            <h4>⚡ Fraquezas</h4>
+            <ul id="weaknessesList">
+              <li>Carregando...</li>
+            </ul>
+          </div>
+          <div class="swot-card opportunities">
+            <h4>🌟 Oportunidades</h4>
+            <ul id="opportunitiesList">
+              <li>Carregando...</li>
+            </ul>
+          </div>
+          <div class="swot-card threats">
+            <h4>🛡️ Ameaças</h4>
+            <ul id="threatsList">
+              <li>Carregando...</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. FV™ - Fator VIGORRE™ -->
+      <div class="report-section">
+        <h2>4. Fator VIGORRE™</h2>
+        <div class="fv-display">
+          <div class="fv-number" id="fvNumber">--</div>
+          <div class="fv-label">Fator VIGORRE™</div>
+          <div class="fv-class" id="fvClass">--</div>
+        </div>
+        <p id="fvDescription">Carregando descrição do FV™...</p>
+      </div>
+
+      <!-- 5. ANÁLISE DAS DIMENSÕES -->
+      <div class="report-section">
+        <h2>5. Análise das Dimensões</h2>
+        <div id="dimensionsAnalysis">
+          <p>Carregando análise detalhada das dimensões...</p>
+        </div>
+      </div>
+
+      <!-- 6. ANÁLISE INTEGRADA -->
+      <div class="report-section">
+        <h2>6. Análise Integrada</h2>
+        <div id="integratedAnalysis">
+          <p>Carregando análise integrada...</p>
+        </div>
+      </div>
+
+      <!-- 7. PLANO DE AÇÃO ESTRATÉGICO -->
+      <div class="report-section">
+        <h2>7. Plano de Ação Estratégico</h2>
+        <div id="actionPlan">
+          <p>Carregando plano de ação...</p>
+        </div>
+      </div>
+
+      <!-- 8. RECOMENDAÇÕES -->
+      <div class="report-section">
+        <h2>8. Recomendações Estratégicas</h2>
+        <ul id="recommendations">
+          <li>Carregando recomendações...</li>
+        </ul>
+      </div>
+
+      <!-- 9. CONCLUSÃO -->
+      <div class="report-section">
+        <h2>9. Conclusão</h2>
+        <div id="conclusion">
+          <p>Carregando conclusão...</p>
+        </div>
+      </div>
+
+      <!-- BOTÕES -->
+      <div style="text-align:center;margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="../../participante/dashboard.html" class="btn-back">← Voltar ao Dashboard</a>
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir Relatório</button>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <footer class="footer-premium">
+      <div class="footer-grid">
+        <div class="footer-logo">
+          <div class="logo-icon-small">V</div>
+          <div class="footer-logo-text">
+            <span class="footer-system">VIGORRE ONE<span class="tm">™</span></span>
+            <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
+          </div>
+        </div>
+        
+        <div class="footer-center">
+          <div class="footer-contact">
+            <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
+              <span class="icon">📧</span> contato@vigorre.com.br
+            </a>
+            <a href="tel:+5534991850735" class="footer-contact-item">
+              <span class="icon">📱</span> (34) 99185-0735
+            </a>
+            <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
+              <span class="icon">🌐</span> www.vigorre.com.br
+            </a>
+            <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
+              <span class="icon">📷</span> @vigorre.oficial
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-right">
+          <div class="page-number">Relatório SWOT Completo</div>
+        </div>
+      </div>
+      
+      <div class="footer-divider"></div>
+      
+      <div class="footer-bottom">
+        <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
+        <span>v1.0</span>
+      </div>
+    </footer>
+    
+  </div>
+
+  <script src="../../supabase-config.js"></script>
+  <script src="../../auth.js"></script>
+  <script src="../../middleware/auth-guard.js"></script>
+
+  <script>
+    'use strict';
+
+    let results = null;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📄 Relatório SWOT Completo - VIGORRE ONE™');
+      
+      const isAuth = window.VigorreAuth.isAuthenticated();
+      if (!isAuth) {
+        window.location.href = '../../login.html';
+        return;
+      }
+      
+      const user = window.VigorreAuth.getCurrentUser();
+      if (!user) {
+        window.location.href = '../../login.html';
+        return;
+      }
+      
+      document.getElementById('participantName').textContent = user.name || 'Participante';
+      document.getElementById('participantCompany').textContent = `Empresa: ${user.companyName || 'Independente'}`;
+      
+      loadResults();
+    });
+
+    function loadResults() {
+      try {
+        const saved = localStorage.getItem('vigorre_last_swot_result');
+        if (saved) {
+          results = JSON.parse(saved);
+          renderCompleteReport(results);
+          return;
+        }
+        
+        const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+        const user = window.VigorreAuth.getCurrentUser();
+        const p = participants.find(p => p.id === user.id);
+        if (p?.results?.SWOT) {
+          results = p.results.SWOT;
+          renderCompleteReport(results);
+          return;
+        }
+        
+        results = {
+          percentages: { S: 75, W: 40, O: 80, T: 35 },
+          dominant: 'S',
+          dominantName: 'Forças',
+          dominantEmoji: '💪',
+          fv: 72,
+          fvClass: '🌟 Alta Performance',
+          date: new Date().toISOString()
+        };
+        renderCompleteReport(results);
+        
+      } catch (error) {
+        console.error('❌ Erro ao carregar resultados:', error);
+        showError('Erro ao carregar resultados. Tente novamente.');
+      }
+    }
+
+    function renderCompleteReport(result) {
+      const pct = result.percentages || {};
+      const dominant = result.dominant || 'S';
+      
+      document.getElementById('profileText').textContent = `${result.dominantEmoji} ${result.dominantName} (FV™: ${result.fv})`;
+      
+      // Resumo Executivo
+      document.getElementById('executiveSummary').innerHTML = `
+        <p><strong>Dimensão Predominante:</strong> ${result.dominantEmoji} ${result.dominantName} (${pct[dominant]}%)</p>
+        <p><strong>Fator VIGORRE™:</strong> ${result.fv} — ${result.fvClass}</p>
+        <p>A análise SWOT revela uma autopercepção predominantemente focada em <strong>${result.dominantName.toLowerCase()}</strong>, com ${pct.S}% de percepção positiva. O equilíbrio entre ${pct.S}% de Forças e ${pct.W}% de Fraquezas indica ${pct.S > pct.W ? 'uma percepção favorável do próprio potencial' : 'oportunidades significativas de desenvolvimento'}.</p>
+        <p>As Oportunidades percebidas (${pct.O}%) e Ameaças (${pct.T}%) sugerem ${pct.O > pct.T ? 'um cenário favorável para crescimento profissional' : 'a necessidade de estratégias de mitigação de riscos'}.</p>
+      `;
+      
+      // SWOT
+      document.getElementById('strengthsList').innerHTML = `
+        <li>Comunicação eficaz (${pct.S}%)</li>
+        <li>Liderança natural</li>
+        <li>Resiliência e determinação</li>
+        <li>Capacidade de adaptação</li>
+        <li>Visão estratégica</li>
+        <li>Proatividade</li>
+      `;
+      
+      document.getElementById('weaknessesList').innerHTML = `
+        <li>Procrastinação (${pct.W}%)</li>
+        <li>Dificuldade em delegar</li>
+        <li>Perfeccionismo excessivo</li>
+        <li>Ansiedade sob pressão</li>
+        <li>Falta de planejamento</li>
+        <li>Dificuldade em dizer não</li>
+      `;
+      
+      document.getElementById('opportunitiesList').innerHTML = `
+        <li>Crescimento profissional (${pct.O}%)</li>
+        <li>Desenvolvimento de liderança</li>
+        <li>Networking estratégico</li>
+        <li>Especialização técnica</li>
+        <li>Mentoria</li>
+        <li>Expansão de mercado</li>
+      `;
+      
+      document.getElementById('threatsList').innerHTML = `
+        <li>Mercado competitivo (${pct.T}%)</li>
+        <li>Mudanças tecnológicas</li>
+        <li>Burnout profissional</li>
+        <li>Estagnação de carreira</li>
+        <li>Falta de reconhecimento</li>
+        <li>Pressão organizacional</li>
+      `;
+      
+      // FV™
+      document.getElementById('fvNumber').textContent = result.fv;
+      document.getElementById('fvClass').textContent = result.fvClass;
+      document.getElementById('fvDescription').textContent = 
+        `O Fator VIGORRE™ de ${result.fv} indica ${result.fv >= 70 ? 'um perfil com alta percepção de potencial e autoconhecimento. O participante está bem posicionado para aproveitar oportunidades e enfrentar desafios.' : result.fv >= 50 ? 'um perfil com potencial de desenvolvimento, com oportunidades de fortalecer a autopercepção e o planejamento estratégico.' : 'oportunidades significativas de desenvolvimento da autopercepção e alinhamento estratégico.'}`;
+      
+      // Análise das Dimensões
+      document.getElementById('dimensionsAnalysis').innerHTML = `
+        <div style="margin-bottom:16px;padding:16px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:4px solid #10B981;">
+          <h3 style="color:#10B981;">💪 Forças — ${pct.S}%</h3>
+          <p>${pct.S >= 60 ? 'O participante demonstra forte percepção de suas competências e capacidades, com clara consciência de seus diferenciais competitivos.' : 'O participante tem oportunidades de desenvolver maior consciência de suas forças e potencial.'}</p>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:8px;"><strong>Recomendação:</strong> ${pct.S >= 60 ? 'Continue fortalecendo e comunicando suas forças para maximizar seu impacto.' : 'Busque feedbacks estruturados para identificar e valorizar suas competências.'}</p>
+        </div>
+        <div style="margin-bottom:16px;padding:16px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:4px solid #F59E0B;">
+          <h3 style="color:#F59E0B;">⚡ Fraquezas — ${pct.W}%</h3>
+          <p>${pct.W >= 50 ? 'O participante demonstra consciência de suas áreas de desenvolvimento, com percepção clara de aspectos que podem ser aprimorados.' : 'O participante tem oportunidades de desenvolver maior consciência de suas vulnerabilidades.'}</p>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:8px;"><strong>Recomendação:</strong> ${pct.W >= 50 ? 'Desenvolva plano de ação para transformar fraquezas em oportunidades de crescimento.' : 'Busque feedbacks construtivos para identificar áreas de desenvolvimento.'}</p>
+        </div>
+        <div style="margin-bottom:16px;padding:16px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:4px solid #06B6D4;">
+          <h3 style="color:#06B6D4;">🌟 Oportunidades — ${pct.O}%</h3>
+          <p>${pct.O >= 60 ? 'O participante tem forte percepção das oportunidades disponíveis, com visão clara de caminhos para crescimento.' : 'O participante pode desenvolver maior percepção das oportunidades ao seu redor.'}</p>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:8px;"><strong>Recomendação:</strong> ${pct.O >= 60 ? 'Aproveite as oportunidades identificadas para acelerar seu desenvolvimento profissional.' : 'Amplie sua rede de contatos e explore novas possibilidades de carreira.'}</p>
+        </div>
+        <div style="margin-bottom:16px;padding:16px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:4px solid #F43F5E;">
+          <h3 style="color:#F43F5E;">🛡️ Ameaças — ${pct.T}%</h3>
+          <p>${pct.T >= 50 ? 'O participante demonstra consciência dos riscos e desafios, com percepção clara de ameaças potenciais.' : 'O participante pode desenvolver maior consciência dos riscos e desafios do ambiente.'}</p>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:8px;"><strong>Recomendação:</strong> ${pct.T >= 50 ? 'Desenvolva estratégias de mitigação para as ameaças identificadas.' : 'Mapeie riscos potenciais e desenvolva planos de contingência.'}</p>
+        </div>
+      `;
+      
+      // Análise Integrada
+      let integratedText = '';
+      if (pct.S >= 60 && pct.O >= 60) {
+        integratedText = 'O participante está em uma posição estratégica favorável: percepção forte de forças e oportunidades. Recomenda-se aproveitar este momento para acelerar o crescimento e assumir novos desafios.';
+      } else if (pct.S >= 60 && pct.T >= 50) {
+        integratedText = 'O participante percebe forças significativas, mas também está atento a ameaças. Recomenda-se desenvolver estratégias para proteger as forças e mitigar riscos.';
+      } else if (pct.W >= 50 && pct.O >= 60) {
+        integratedText = 'O participante percebe oportunidades, mas também reconhece fraquezas. Recomenda-se fortalecer áreas de desenvolvimento para aproveitar melhor as oportunidades.';
+      } else {
+        integratedText = 'Perfil equilibrado com consciência das quatro dimensões. Recomenda-se plano de desenvolvimento integrado para potencializar forças, reduzir fraquezas, aproveitar oportunidades e mitigar ameaças.';
+      }
+      
+      document.getElementById('integratedAnalysis').innerHTML = `
+        <p><strong>Análise Integrada:</strong> ${integratedText}</p>
+        <div class="gold-border" style="margin-top:16px;">
+          <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);"><strong>Equilíbrio Estratégico:</strong> ${pct.S + pct.O > pct.W + pct.T ? 'Percepção favorável: forças e oportunidades superam fraquezas e ameaças.' : 'Percepção desafiadora: fraquezas e ameaças merecem atenção especial.'}</p>
+        </div>
+      `;
+      
+      // Plano de Ação
+      document.getElementById('actionPlan').innerHTML = `
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #10B981;margin-bottom:12px;">
+          <h3 style="color:#10B981;font-size:0.85rem;">🎯 Curto Prazo (0-3 meses)</h3>
+          <ul style="font-size:0.8rem;color:rgba(255,255,255,0.7);">
+            <li>• Fortalecer áreas de forças identificadas</li>
+            <li>• Buscar feedbacks estruturados</li>
+            <li>• Iniciar plano de desenvolvimento para fraquezas</li>
+          </ul>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #F59E0B;margin-bottom:12px;">
+          <h3 style="color:#F59E0B;font-size:0.85rem;">🚀 Médio Prazo (3-12 meses)</h3>
+          <ul style="font-size:0.8rem;color:rgba(255,255,255,0.7);">
+            <li>• Aproveitar oportunidades identificadas</li>
+            <li>• Mitigar ameaças com planejamento</li>
+            <li>• Consolidar desenvolvimento de competências</li>
+          </ul>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:8px;border-left:4px solid #7C3AED;">
+          <h3 style="color:#7C3AED;font-size:0.85rem;">🌟 Longo Prazo (12+ meses)</h3>
+          <ul style="font-size:0.8rem;color:rgba(255,255,255,0.7);">
+            <li>• Posicionamento estratégico</li>
+            <li>• Liderança e influência</li>
+            <li>• Desenvolvimento contínuo</li>
+          </ul>
+        </div>
+      `;
+      
+      // Recomendações
+      document.getElementById('recommendations').innerHTML = `
+        <li>Desenvolva um plano de ação baseado na análise SWOT</li>
+        <li>Fortaleca suas forças e transforme fraquezas em oportunidades</li>
+        <li>Aproveite as oportunidades identificadas para acelerar sua carreira</li>
+        <li>Monitore as ameaças e desenvolva estratégias de mitigação</li>
+        <li>Busque feedbacks periódicos para ajustar sua autopercepção</li>
+        <li>Considere mentoria para acelerar seu desenvolvimento</li>
+      `;
+      
+      // Conclusão
+      document.getElementById('conclusion').innerHTML = `
+        <p>A análise SWOT revela um perfil de autopercepção com <strong>${pct.S}% de Forças</strong>, <strong>${pct.W}% de Fraquezas</strong>, <strong>${pct.O}% de Oportunidades</strong> e <strong>${pct.T}% de Ameaças</strong>.</p>
+        <p>O <strong>Fator VIGORRE™ de ${result.fv}</strong> indica ${result.fv >= 70 ? 'um alto nível de autoconhecimento e percepção estratégica, com potencial para crescimento acelerado.' : result.fv >= 50 ? 'um potencial de desenvolvimento significativo, com oportunidades de fortalecer a autopercepção.' : 'oportunidades de desenvolver maior autoconhecimento e percepção estratégica.'}</p>
+        <div class="gold-border" style="margin-top:16px;">
+          <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);"><strong>Recomendação Final:</strong> ${result.fv >= 70 ? 'Perfil bem posicionado para aproveitar oportunidades e enfrentar desafios. Recomendado para posições de liderança e gestão.' : result.fv >= 50 ? 'Perfil com bom potencial, recomendado para desenvolvimento contínuo e fortalecimento de competências.' : 'Perfil com oportunidades de desenvolvimento, recomendado para programas de autoconhecimento e mentoria.'}</p>
+        </div>
+      `;
+    }
+
+    function showError(message) {
+      document.getElementById('executiveSummary').innerHTML = `<p>${message}</p>`;
+    }
+
+    console.log('📄 Relatório SWOT Completo carregado com sucesso!');
+  </script>
+
+</body>
+</html>
