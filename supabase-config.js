@@ -149,7 +149,352 @@ async function deleteFromSupabase(table, id, localStorageKey) {
 }
 
 // ============================================
-// 5. VERIFICAR CONEXÃO
+// 5. NOVA FUNÇÃO: DETECÇÃO DE INCONSISTÊNCIA
+// ============================================
+function detectInconsistency(answers, timeSpent, testType) {
+  let score = 100;
+  const avgTime = timeSpent / answers.length;
+  
+  // 5.1 Respostas muito rápidas (menos de 3 segundos por pergunta)
+  if (avgTime < 3) {
+    score -= 20;
+    console.warn('⚠️ Respostas muito rápidas detectadas');
+  }
+  
+  // 5.2 Respostas muito lentas (mais de 30 segundos por pergunta)
+  if (avgTime > 30) {
+    score -= 10;
+    console.warn('⚠️ Respostas muito lentas detectadas');
+  }
+  
+  // 5.3 Detectar contradições lógicas (DISC)
+  if (testType === 'DISC' && answers.length >= 24) {
+    // Se Dominância alta e Estabilidade alta ao mesmo tempo (contradição)
+    const dCount = answers.filter(a => a.type === 'D' && a.value >= 3).length;
+    const sCount = answers.filter(a => a.type === 'S' && a.value >= 3).length;
+    if (dCount > 5 && sCount > 5) {
+      score -= 15;
+      console.warn('⚠️ Contradição: Dominância e Estabilidade altas simultaneamente');
+    }
+  }
+  
+  // 5.4 Detectar padrão de respostas (ex: todas na mesma coluna)
+  const uniqueAnswers = new Set(answers.map(a => a.value));
+  if (uniqueAnswers.size < 3) {
+    score -= 10;
+    console.warn('⚠️ Baixa variabilidade nas respostas');
+  }
+  
+  return Math.max(0, Math.min(100, score));
+}
+
+// ============================================
+// 6. NOVA FUNÇÃO: CALCULAR CONSISTÊNCIA
+// ============================================
+function calculateConsistency(previousResults, currentResults) {
+  if (!previousResults || !currentResults) {
+    return { status: 'unknown', message: 'Sem dados anteriores para comparação' };
+  }
+  
+  // Calcular diferença percentual
+  let totalDiff = 0;
+  let count = 0;
+  
+  if (previousResults.percentages && currentResults.percentages) {
+    const keys = Object.keys(previousResults.percentages);
+    for (const key of keys) {
+      if (currentResults.percentages[key] !== undefined) {
+        totalDiff += Math.abs(previousResults.percentages[key] - currentResults.percentages[key]);
+        count++;
+      }
+    }
+  }
+  
+  const avgDiff = count > 0 ? totalDiff / count : 0;
+  
+  if (avgDiff <= 5) {
+    return { status: 'stable', message: 'Resultados consistentes e confiáveis', diff: avgDiff };
+  } else if (avgDiff <= 15) {
+    return { status: 'moderate', message: 'Variação moderada detectada. Recomenda-se revisão.', diff: avgDiff };
+  } else {
+    return { status: 'unstable', message: 'Variação significativa detectada. Novo teste recomendado.', diff: avgDiff };
+  }
+}
+
+// ============================================
+// 7. NOVA FUNÇÃO: ANALISAR POR CARGO
+// ============================================
+function analyzeByJob(results, job) {
+  const cargoWeights = {
+    'Vendedor': { 
+      persuasao: 0.8, comunicacao: 0.9, energia: 0.7, resiliencia: 0.6, negociacao: 0.8,
+      disc_weights: { D: 0.9, I: 0.8, S: 0.3, C: 0.4 }
+    },
+    'RH': { 
+      empatia: 0.9, escuta: 0.8, organizacao: 0.7, inteligencia_emocional: 0.9,
+      disc_weights: { D: 0.4, I: 0.7, S: 0.8, C: 0.6 }
+    },
+    'Diretor': { 
+      lideranca: 0.9, estrategia: 0.9, decisao: 0.8, conflitos: 0.7,
+      disc_weights: { D: 0.9, I: 0.7, S: 0.4, C: 0.6 }
+    },
+    'Financeiro': { 
+      precisao: 0.9, concentracao: 0.8, organizacao: 0.8, detalhes: 0.9,
+      disc_weights: { D: 0.5, I: 0.3, S: 0.6, C: 0.9 }
+    },
+    'Operacional': {
+      disciplina: 0.9, consistencia: 0.8, execucao: 0.9, processos: 0.8,
+      disc_weights: { D: 0.5, I: 0.3, S: 0.8, C: 0.7 }
+    },
+    'Atendimento': {
+      empatia: 0.9, paciencia: 0.8, comunicacao: 0.8, resolucao: 0.7,
+      disc_weights: { D: 0.3, I: 0.6, S: 0.9, C: 0.4 }
+    },
+    'Gestor': {
+      lideranca: 0.9, delegacao: 0.8, planejamento: 0.8, motivacao: 0.7,
+      disc_weights: { D: 0.8, I: 0.7, S: 0.5, C: 0.6 }
+    },
+    'Coordenador': {
+      lideranca: 0.7, organizacao: 0.8, comunicacao: 0.7, resolucao: 0.8,
+      disc_weights: { D: 0.7, I: 0.6, S: 0.6, C: 0.7 }
+    },
+    'Analista': {
+      analise: 0.9, precisao: 0.8, organizacao: 0.8, comunicacao: 0.6,
+      disc_weights: { D: 0.4, I: 0.4, S: 0.6, C: 0.9 }
+    },
+    'Tecnico': {
+      precisao: 0.9, conhecimento: 0.9, resolucao: 0.8, atencao: 0.8,
+      disc_weights: { D: 0.4, I: 0.3, S: 0.6, C: 0.9 }
+    },
+    'Professor': {
+      comunicacao: 0.9, empatia: 0.8, organizacao: 0.7, paciencia: 0.8,
+      disc_weights: { D: 0.4, I: 0.7, S: 0.7, C: 0.6 }
+    },
+    'Consultor': {
+      analise: 0.9, comunicacao: 0.8, estrategia: 0.8, resolucao: 0.8,
+      disc_weights: { D: 0.7, I: 0.6, S: 0.4, C: 0.7 }
+    }
+  };
+
+  const weights = cargoWeights[job] || cargoWeights['Gestor'];
+  const discPct = results.disc?.percentages || { D: 0, I: 0, S: 0, C: 0 };
+  const iePct = results.ie?.percentages || {};
+  const bigFivePct = results.bigfive?.percentages || {};
+  const valoresPct = results.valores?.percentages || {};
+  
+  // Calcular aderência ao cargo
+  let aderencia = 0;
+  if (weights.disc_weights) {
+    aderencia = 
+      (discPct.D || 0) * weights.disc_weights.D +
+      (discPct.I || 0) * weights.disc_weights.I +
+      (discPct.S || 0) * weights.disc_weights.S +
+      (discPct.C || 0) * weights.disc_weights.C;
+    aderencia = Math.round(aderencia / 4);
+  }
+  
+  // Análise complementar com IE
+  let ieScore = 0;
+  if (weights.inteligencia_emocional) {
+    const avgIE = Object.values(iePct).reduce((a,b) => a + b, 0) / Object.keys(iePct).length;
+    ieScore = Math.round(avgIE * weights.inteligencia_emocional);
+  }
+  
+  // Análise complementar com Big Five
+  let bfScore = 0;
+  if (weights.lideranca) {
+    bfScore = Math.round((bigFivePct.E || 0) * 0.5 + (bigFivePct.C || 0) * 0.3 + (bigFivePct.A || 0) * 0.2);
+  }
+  
+  return {
+    job: job,
+    aderencia: Math.min(98, Math.round(aderencia)),
+    ieScore: Math.min(98, Math.round(ieScore)),
+    bfScore: Math.min(98, Math.round(bfScore)),
+    weightDetails: weights,
+    overall: Math.round((aderencia + ieScore + bfScore) / 3)
+  };
+}
+
+// ============================================
+// 8. NOVA FUNÇÃO: PERFIL SEM CARGO (AUTÔNOMO)
+// ============================================
+function generateGeneralProfile(results) {
+  const discPct = results.disc?.percentages || { D: 0, I: 0, S: 0, C: 0 };
+  const dominant = Object.entries(discPct).sort((a,b) => b[1]-a[1])[0]?.[0] || 'D';
+  const iePct = results.ie?.percentages || {};
+  const bigFivePct = results.bigfive?.percentages || {};
+  
+  const profiles = {
+    D: {
+      title: 'Perfil Empreendedor',
+      desc: 'Orientado a resultados, assume riscos e lidera iniciativas. Ideal para empreendedorismo, gestão e posições de liderança.',
+      areas: ['Liderança', 'Estratégia', 'Tomada de decisão', 'Negociação'],
+      strengths: ['Visão estratégica', 'Coragem para inovar', 'Capacidade de decisão'],
+      development: ['Paciência processual', 'Escuta ativa', 'Delegação']
+    },
+    I: {
+      title: 'Perfil Influente',
+      desc: 'Comunicativo, persuasivo e conectado. Ideal para vendas, marketing, relações públicas e desenvolvimento de pessoas.',
+      areas: ['Comunicação', 'Networking', 'Influência', 'Criatividade'],
+      strengths: ['Comunicação persuasiva', 'Networking estratégico', 'Criatividade'],
+      development: ['Foco em execução', 'Cumprimento de prazos', 'Estruturação de processos']
+    },
+    S: {
+      title: 'Perfil de Suporte',
+      desc: 'Estável, paciente e colaborativo. Ideal para atendimento, RH, suporte e gestão de pessoas.',
+      areas: ['Empatia', 'Suporte', 'Colaboração', 'Estabilidade'],
+      strengths: ['Paciência', 'Escuta ativa', 'Suporte à equipe'],
+      development: ['Assertividade', 'Comunicação influente', 'Tomada de decisão ágil']
+    },
+    C: {
+      title: 'Perfil Técnico',
+      desc: 'Analítico, preciso e estruturado. Ideal para áreas técnicas, análise de dados, planejamento e controle.',
+      areas: ['Análise', 'Precisão', 'Planejamento', 'Qualidade'],
+      strengths: ['Análise precisa', 'Planejamento estruturado', 'Atenção a detalhes'],
+      development: ['Flexibilidade', 'Agilidade decisória', 'Adaptação a mudanças']
+    }
+  };
+  
+  // Adicionar insights de IE
+  const avgIE = Object.values(iePct).reduce((a,b) => a + b, 0) / Object.keys(iePct).length;
+  let ieInsight = '';
+  if (avgIE >= 70) {
+    ieInsight = 'Com alta inteligência emocional, potencializa a capacidade de liderar e influenciar positivamente.';
+  } else if (avgIE >= 50) {
+    ieInsight = 'Com boa inteligência emocional em desenvolvimento, pode ampliar ainda mais seu impacto.';
+  } else {
+    ieInsight = 'O desenvolvimento da inteligência emocional pode potencializar significativamente seu perfil.';
+  }
+  
+  // Adicionar insights de Big Five
+  const bfInsight = bigFivePct.E >= 60 ? 'Alta energia e sociabilidade.' : bigFivePct.C >= 60 ? 'Alta disciplina e organização.' : 'Perfil equilibrado e adaptável.';
+  
+  const base = profiles[dominant] || profiles.D;
+  
+  return {
+    ...base,
+    ieInsight: ieInsight,
+    bfInsight: bfInsight,
+    fullDescription: `${base.desc} ${ieInsight} ${bfInsight}`
+  };
+}
+
+// ============================================
+// 9. NOVA FUNÇÃO: AVALIAÇÃO DE TURNOVER
+// ============================================
+function calculateTurnoverRisk(results, job) {
+  const discPct = results.disc?.percentages || { D: 0, I: 0, S: 0, C: 0 };
+  const iePct = results.ie?.percentages || {};
+  const bigFivePct = results.bigfive?.percentages || {};
+  
+  let risk = 50;
+  
+  // Estabilidade (S) reduz risco
+  risk -= (discPct.S || 0) * 0.2;
+  
+  // Resiliência (IE) reduz risco
+  risk -= (iePct.resiliencia || 0) * 0.15;
+  
+  // Estabilidade emocional (Big Five N) reduz risco
+  risk -= (bigFivePct.N || 0) * 0.1;
+  
+  // Extroversão (Big Five E) pode aumentar risco em cargos operacionais
+  if (job === 'Operacional' || job === 'Financeiro') {
+    risk += (bigFivePct.E || 0) * 0.1;
+  }
+  
+  // Se não tiver vaga, reduzir risco
+  if (!job) {
+    risk -= 10;
+  }
+  
+  // Garantir que fique entre 0 e 100
+  risk = Math.max(0, Math.min(100, Math.round(risk)));
+  
+  let level = '';
+  if (risk <= 25) { level = 'Muito Baixo'; }
+  else if (risk <= 45) { level = 'Baixo'; }
+  else if (risk <= 65) { level = 'Moderado'; }
+  else if (risk <= 85) { level = 'Alto'; }
+  else { level = 'Muito Alto'; }
+  
+  return {
+    score: risk,
+    level: level,
+    recommendation: risk <= 45 ? 'Baixo risco de turnover. Perfil estável e engajado.' :
+                      risk <= 65 ? 'Risco moderado. Monitorar engajamento e satisfação.' :
+                      'Risco elevado. Avaliar fatores de retenção e plano de carreira.'
+  };
+}
+
+// ============================================
+// 10. NOVA FUNÇÃO: POTENCIAL DE CRESCIMENTO
+// ============================================
+function calculateGrowthPotential(results) {
+  const discPct = results.disc?.percentages || { D: 0, I: 0, S: 0, C: 0 };
+  const iePct = results.ie?.percentages || {};
+  const bigFivePct = results.bigfive?.percentages || {};
+  const valoresPct = results.valores?.percentages || {};
+  
+  let score = 50;
+  
+  // Dominância (D) indica potencial de liderança
+  score += (discPct.D || 0) * 0.15;
+  
+  // Conscienciosidade (Big Five C) indica potencial de crescimento
+  score += (bigFivePct.C || 0) * 0.15;
+  
+  // Abertura (Big Five O) indica potencial de aprendizado
+  score += (bigFivePct.O || 0) * 0.1;
+  
+  // Autocontrole (IE) indica potencial de regulação
+  score += (iePct.autocontrole || 0) * 0.1;
+  
+  // Realização (Valores) indica ambição
+  score += (valoresPct.realizacao || 0) * 0.1;
+  
+  // Garantir que fique entre 0 e 100
+  score = Math.max(0, Math.min(100, Math.round(score)));
+  
+  let level = '';
+  if (score >= 80) { level = 'Excelente'; }
+  else if (score >= 65) { level = 'Alto'; }
+  else if (score >= 50) { level = 'Moderado'; }
+  else if (score >= 35) { level = 'Baixo'; }
+  else { level = 'Muito Baixo'; }
+  
+  return {
+    score: score,
+    level: level,
+    recommendation: score >= 65 ? 'Alto potencial de crescimento. Preparado para posições de maior complexidade.' :
+                      score >= 50 ? 'Potencial moderado. Com desenvolvimento direcionado, pode acelerar crescimento.' :
+                      'Potencial a ser desenvolvido. Investir em capacitação e mentoria.'
+  };
+}
+
+// ============================================
+// 11. NOVA FUNÇÃO: ADERÊNCIA AO CARGO (DETALHADA)
+// ============================================
+function getJobFitDetails(results, job) {
+  const analysis = analyzeByJob(results, job);
+  const turnover = calculateTurnoverRisk(results, job);
+  const growth = calculateGrowthPotential(results);
+  
+  return {
+    job: job,
+    aderencia: analysis.aderencia,
+    turnoverRisk: turnover,
+    growthPotential: growth,
+    overallFit: Math.round((analysis.aderencia + (100 - turnover.score) + growth.score) / 3),
+    recommendation: analysis.aderencia >= 80 ? 'Altamente recomendado para este cargo.' :
+                    analysis.aderencia >= 60 ? 'Recomendado com desenvolvimento direcionado.' :
+                    'Recomendado com restrições. Avaliar outros cargos.'
+  };
+}
+
+// ============================================
+// 12. VERIFICAR CONEXÃO
 // ============================================
 async function checkConnection() {
   try {
@@ -164,7 +509,7 @@ async function checkConnection() {
 }
 
 // ============================================
-// 6. DADOS DE DEMONSTRAÇÃO (FALLBACK)
+// 13. DADOS DE DEMONSTRAÇÃO (FALLBACK)
 // ============================================
 const VigorreDB = {
   supabase: supabaseClient,
@@ -176,10 +521,17 @@ const VigorreDB = {
   loadAllFromSupabase: loadAllFromSupabase,
   deleteFromSupabase: deleteFromSupabase,
   checkConnection: checkConnection,
+  detectInconsistency: detectInconsistency,
+  calculateConsistency: calculateConsistency,
+  analyzeByJob: analyzeByJob,
+  generateGeneralProfile: generateGeneralProfile,
+  calculateTurnoverRisk: calculateTurnoverRisk,
+  calculateGrowthPotential: calculateGrowthPotential,
+  getJobFitDetails: getJobFitDetails,
   isOnline: navigator.onLine,
   
   // ============================================
-  // USUÁRIOS (com senha admin atualizada)
+  // USUÁRIOS
   // ============================================
   users: {
     _data: [
@@ -511,35 +863,23 @@ const VigorreDB = {
 };
 
 // ============================================
-// 7. EXPORTAR PARA USO GLOBAL
+// 14. EXPORTAR PARA USO GLOBAL
 // ============================================
 window.VigorreDB = VigorreDB;
 window.supabase = supabaseClient;
 
 // ============================================
-// 8. MENSAGEM DE CONFIRMAÇÃO
+// 15. MENSAGEM DE CONFIRMAÇÃO
 // ============================================
 console.log('🔗 VigorreDB conectado ao Supabase');
 console.log('📊 URL:', SUPABASE_URL);
 console.log('✅ Sistema pronto para uso online e offline');
 console.log('📡 Status:', navigator.onLine ? '🟢 Online' : '🔴 Offline');
+console.log('🧠 Motor de Avaliação Avançado ativado!');
 
 // ============================================
-// 9. CREDENCIAIS DE ACESSO
+// 16. CREDENCIAIS DE ACESSO
 // ============================================
 console.log('🔐 Credenciais de Acesso:');
 console.log('👑 Admin: master@vigorre.com / adminvigor10');
-console.log('👤 Admin Staff: admin@vigorre.com / adminvigor10');
-console.log('🎯 Recrutador: recrutador@teste.com / rec123');
-console.log('👤 Participante: participante@teste.com / part123');
-
-// Monitorar mudanças de conexão
-window.addEventListener('online', () => {
-  console.log('🟢 Conexão restaurada - sincronizando...');
-  window.VigorreDB.isOnline = true;
-});
-
-window.addEventListener('offline', () => {
-  console.log('🔴 Conexão perdida - modo offline ativado');
-  window.VigorreDB.isOnline = false;
-});
+console.log('👤 Admin Staff: admin@vigorre.com / adminvigor10
