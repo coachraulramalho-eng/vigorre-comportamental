@@ -882,4 +882,17 @@ console.log('🧠 Motor de Avaliação Avançado ativado!');
 // ============================================
 console.log('🔐 Credenciais de Acesso:');
 console.log('👑 Admin: master@vigorre.com / adminvigor10');
-console.log('👤 Admin Staff: admin@vigorre.com / adminvigor10
+console.log('👤 Admin Staff: admin@vigorre.com / adminvigor10');
+console.log('🎯 Recrutador: recrutador@teste.com / rec123');
+console.log('👤 Participante: participante@teste.com / part123');
+
+// Monitorar mudanças de conexão
+window.addEventListener('online', () => {
+  console.log('🟢 Conexão restaurada - sincronizando...');
+  window.VigorreDB.isOnline = true;
+});
+
+window.addEventListener('offline', () => {
+  console.log('🔴 Conexão perdida - modo offline ativado');
+  window.VigorreDB.isOnline = false;
+});
