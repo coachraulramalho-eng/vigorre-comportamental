@@ -1,0 +1,111 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "admin/**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "recrutador/**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "participante/**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "relatorios/**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "assets/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "middleware/**/*.js",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/login",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin/dashboard.html"
+    },
+    {
+      "src": "/recrutador",
+      "dest": "/recrutador/dashboard.html"
+    },
+    {
+      "src": "/participante",
+      "dest": "/participante/dashboard.html"
+    },
+    {
+      "src": "/laudo",
+      "dest": "/participante/laudo/index.html"
+    },
+    {
+      "src": "/testes/(.*)",
+      "dest": "/participante/testes/$1"
+    },
+    {
+      "src": "/relatorios/(.*)",
+      "dest": "/relatorios/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, immutable"
+        }
+      ]
+    }
+  ]
+}
