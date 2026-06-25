@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Análise SWOT Pessoal - VIGORRE ONE™">
   <title>Teste SWOT | VIGORRE ONE™</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -10,22 +11,36 @@
   
   <style>
     /* ============================================
-       CORES DO SWOT (DOURADO/ÂMBAR)
+       VIGORRE ONE™ - TESTE SWOT
+       VERSÃO COMPLETA SEM OTIMIZAÇÃO
+       ============================================ */
+    
+    /* ============================================
+       CORES DO TESTE SWOT (ROXO/VERDE)
        ============================================ */
     :root {
-      --primary: #D4AF37;
-      --primary-light: #FCD34D;
-      --primary-dark: #B8860B;
-      --gradient-main: linear-gradient(135deg, #D4AF37 0%, #FCD34D 50%, #B8860B 100%);
-      --gradient-header: linear-gradient(135deg, #B8860B, #D4AF37);
-      --gradient-footer: linear-gradient(135deg, #D4AF37, #B8860B);
-      --shadow-color: rgba(212, 175, 55, 0.3);
+      --test-primary: #7C3AED;
+      --test-primary-light: #A78BFA;
+      --test-primary-dark: #5B21B6;
+      --test-secondary: #10B981;
+      --test-secondary-light: #34D399;
+      --test-gradient-main: linear-gradient(135deg, #7C3AED 0%, #10B981 50%, #5B21B6 100%);
+      --test-gradient-header: linear-gradient(135deg, #5B21B6, #7C3AED);
+      --test-gradient-footer: linear-gradient(135deg, #7C3AED, #5B21B6);
+      --test-shadow-color: rgba(124, 58, 237, 0.3);
     }
     
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ============================================
+       BASE - ULTRA PREMIUM
+       ============================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
       background: #0F172A;
       color: #F8FAFC;
@@ -34,54 +49,86 @@
       overflow-x: hidden;
     }
     
+    /* ============================================
+       FUNDO ANIMADO
+       ============================================ */
     .bg-test {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: var(--gradient-main);
-      opacity: 0.06;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--test-gradient-main);
+      opacity: 0.08;
       z-index: 0;
-      animation: floatBg 30s ease-in-out infinite;
+      animation: floatBg 45s ease-in-out infinite;
     }
     
     @keyframes floatBg {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.02); }
+      0%, 100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+      33% {
+        transform: translateY(-25px) scale(1.01) rotate(0.5deg);
+      }
+      66% {
+        transform: translateY(15px) scale(0.99) rotate(-0.5deg);
+      }
     }
     
+    /* ============================================
+       PARTÍCULAS
+       ============================================ */
     .particles {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.08), transparent),
-        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.06), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.10), transparent);
-      background-size: 200px 200px;
-      animation: floatParticles 20s linear infinite;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        radial-gradient(2px 2px at 25px 35px, rgba(124,58,237,0.12), transparent),
+        radial-gradient(2px 2px at 55px 85px, rgba(16,185,129,0.10), transparent),
+        radial-gradient(2px 2px at 110px 45px, rgba(124,58,237,0.14), transparent),
+        radial-gradient(2px 2px at 180px 140px, rgba(16,185,129,0.08), transparent),
+        radial-gradient(2px 2px at 260px 65px, rgba(124,58,237,0.11), transparent);
+      background-size: 320px 320px;
+      animation: floatParticles 40s linear infinite;
       pointer-events: none;
       z-index: 0;
     }
     
     @keyframes floatParticles {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-100px); }
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+      50% {
+        transform: translateY(-80px) translateX(25px);
+      }
+      100% {
+        transform: translateY(-160px) translateX(-20px);
+      }
     }
     
+    /* ============================================
+       CONTAINER PRINCIPAL
+       ============================================ */
     .container {
       position: relative;
       z-index: 1;
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
     }
     
     /* ============================================
-       CABEÇALHO - SWOT (DOURADO)
+       CABEÇALHO PREMIUM
        ============================================ */
     .header-premium {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(20px);
+      background: rgba(30, 41, 59, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px 16px 0 0;
-      padding: 20px 32px;
+      border-radius: 20px 20px 0 0;
+      padding: 24px 36px;
       position: relative;
       overflow: hidden;
     }
@@ -92,10 +139,23 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: var(--gradient-header);
+      height: 4px;
+      background: var(--test-gradient-header);
     }
     
+    .header-premium::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    }
+    
+    /* ============================================
+       HEADER GRID
+       ============================================ */
     .header-grid {
       display: grid;
       grid-template-columns: auto 1fr auto;
@@ -105,6 +165,9 @@
       z-index: 1;
     }
     
+    /* ============================================
+       LOGO
+       ============================================ */
     .header-logo {
       display: flex;
       align-items: center;
@@ -112,80 +175,90 @@
     }
     
     .header-logo .logo-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--gradient-header);
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      background: var(--test-gradient-header);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: white;
       font-family: 'Poppins', sans-serif;
       flex-shrink: 0;
-      box-shadow: 0 4px 20px var(--shadow-color);
+      box-shadow: 0 4px 24px var(--test-shadow-color);
     }
     
     .header-logo-text .system-name {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.125rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: white;
+      letter-spacing: -0.02em;
     }
     
     .header-logo-text .system-name .tm {
       font-size: 0.5rem;
       vertical-align: super;
-      color: #FCD34D;
+      color: #A78BFA;
     }
     
     .header-logo-text .system-sub {
       font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.35);
       display: block;
+      letter-spacing: 0.03em;
     }
     
+    /* ============================================
+       CENTRO DO CABEÇALHO
+       ============================================ */
     .header-center {
       text-align: center;
     }
     
     .header-center .report-title {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.125rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: white;
     }
     
     .header-center .report-title .highlight {
-      background: var(--gradient-header);
+      background: var(--test-gradient-header);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .header-center .report-sub {
       font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.05em;
     }
     
+    /* ============================================
+       DIREITA DO CABEÇALHO
+       ============================================ */
     .header-right {
       text-align: right;
     }
     
     .header-right .participant-name {
-      font-size: 0.9375rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: white;
     }
     
     .header-right .participant-company {
-      font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.4);
     }
     
     .header-right .participant-id {
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.25);
       font-family: 'Courier New', monospace;
       margin-top: 2px;
     }
@@ -194,140 +267,205 @@
        CORPO DO TESTE
        ============================================ */
     .test-body {
-      background: rgba(30, 41, 59, 0.6);
+      background: rgba(30, 41, 59, 0.55);
       backdrop-filter: blur(20px);
-      border-left: 1px solid rgba(255, 255, 255, 0.06);
-      border-right: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 32px;
-      min-height: 400px;
+      -webkit-backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.04);
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 36px 36px 32px;
+      min-height: 450px;
     }
     
+    /* ============================================
+       PROGRESSO
+       ============================================ */
     .progress-section {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 24px;
       padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      flex-wrap: wrap;
+      gap: 8px;
     }
     
     .progress-text {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
       font-weight: 600;
     }
     
     .progress-bar {
       flex: 1;
-      max-width: 300px;
+      max-width: 340px;
       height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
       overflow: hidden;
       margin: 0 16px;
     }
     
     .progress-fill {
       height: 100%;
-      background: var(--gradient-header);
-      border-radius: 3px;
-      transition: width 0.5s ease;
+      background: var(--test-gradient-header);
+      border-radius: 4px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .progress-percent {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.4);
       font-size: 0.75rem;
       font-weight: 600;
-      min-width: 40px;
+      min-width: 44px;
       text-align: right;
     }
     
+    /* ============================================
+       TIMER E CONFIABILIDADE
+       ============================================ */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .status-bar .timer {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.3);
+      font-family: 'Courier New', monospace;
+    }
+    
+    .reliability-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .reliability-badge.high {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    
+    .reliability-badge.medium {
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+    
+    .reliability-badge.low {
+      background: rgba(239, 68, 68, 0.15);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    
+    /* ============================================
+       PERGUNTA
+       ============================================ */
     .question-number {
       display: inline-block;
-      padding: 4px 14px;
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid rgba(212, 175, 55, 0.25);
+      padding: 4px 16px;
+      background: rgba(124, 58, 237, 0.12);
+      border: 1px solid rgba(124, 58, 237, 0.2);
       border-radius: 100px;
-      color: #FCD34D;
+      color: #A78BFA;
       font-size: 0.75rem;
       font-weight: 700;
       margin-bottom: 16px;
+      letter-spacing: 0.03em;
     }
     
     .question-text {
-      font-size: 1.375rem;
+      font-size: 1.35rem;
       font-weight: 700;
       color: white;
-      line-height: 1.5;
-      margin-bottom: 24px;
+      line-height: 1.6;
+      margin-bottom: 28px;
     }
     
+    /* ============================================
+       OPÇÕES
+       ============================================ */
     .options-grid {
       display: grid;
       gap: 12px;
     }
     
     .option-btn {
-      padding: 16px 20px;
+      padding: 18px 24px;
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
       cursor: pointer;
       transition: all 0.3s ease;
       text-align: left;
       font-family: 'Inter', sans-serif;
-      font-size: 0.9375rem;
-      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.75);
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
     
     .option-btn:hover {
-      border-color: #D4AF37;
-      background: rgba(212, 175, 55, 0.08);
-      transform: translateX(4px);
+      border-color: #7C3AED;
+      background: rgba(124, 58, 237, 0.06);
+      transform: translateX(6px);
     }
     
     .option-btn.selected {
-      border-color: #FCD34D;
-      background: rgba(212, 175, 55, 0.12);
+      border-color: #A78BFA;
+      background: rgba(124, 58, 237, 0.12);
       color: white;
-      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.08);
     }
     
     .option-btn .letter {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.08);
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.06);
       border-radius: 50%;
       font-weight: 700;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       flex-shrink: 0;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.35);
+      transition: all 0.3s ease;
     }
     
     .option-btn.selected .letter {
-      background: #D4AF37;
+      background: #7C3AED;
       color: white;
+      box-shadow: 0 2px 12px var(--test-shadow-color);
     }
     
+    /* ============================================
+       NAVEGAÇÃO
+       ============================================ */
     .nav-buttons {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
-      margin-top: 24px;
+      gap: 16px;
+      margin-top: 28px;
       padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .btn-nav {
-      padding: 12px 32px;
+      padding: 14px 36px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 600;
       font-size: 0.875rem;
       cursor: pointer;
@@ -336,8 +474,8 @@
     }
     
     .btn-prev {
-      background: rgba(255, 255, 255, 0.06);
-      color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.5);
     }
     
     .btn-prev:hover:not(:disabled) {
@@ -346,82 +484,101 @@
     }
     
     .btn-next {
-      background: var(--gradient-header);
+      background: var(--test-gradient-header);
       color: white;
-      box-shadow: 0 4px 20px var(--shadow-color);
+      box-shadow: 0 4px 24px var(--test-shadow-color);
     }
     
     .btn-next:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 6px 30px var(--shadow-color);
+      box-shadow: 0 6px 32px var(--test-shadow-color);
     }
     
     .btn-finish {
-      background: linear-gradient(135deg, #B8860B, #D4AF37);
+      background: linear-gradient(135deg, #5B21B6, #7C3AED);
       color: white;
-      box-shadow: 0 4px 20px var(--shadow-color);
+      box-shadow: 0 4px 24px var(--test-shadow-color);
     }
     
-    .btn-finish:hover {
+    .btn-finish:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 6px 30px var(--shadow-color);
+      box-shadow: 0 6px 32px var(--test-shadow-color);
     }
     
     .btn-nav:disabled {
-      opacity: 0.4;
+      opacity: 0.3;
       cursor: not-allowed;
       transform: none !important;
     }
     
     /* ============================================
-       RESULTADOS SWOT
+       RESULTADOS
        ============================================ */
     .results-container {
       display: none;
-      animation: fadeIn 0.6s ease;
+      animation: fadeInUp 0.6s ease;
     }
     
     .results-container.active {
       display: block;
     }
     
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
+    /* ============================================
+       CABEÇALHO DOS RESULTADOS
+       ============================================ */
     .results-header {
       text-align: center;
-      padding: 24px 0 32px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 28px 0 36px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .results-header h2 {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.75rem;
+      font-size: 1.8rem;
       color: white;
       margin-bottom: 4px;
     }
     
     .results-header .subtitle {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.85rem;
     }
     
+    /* ============================================
+       PERFIL BADGE
+       ============================================ */
     .profile-badge {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      padding: 10px 24px;
-      background: var(--gradient-header);
+      gap: 14px;
+      padding: 12px 32px;
+      background: var(--test-gradient-header);
       border-radius: 100px;
       color: white;
       font-weight: 700;
-      font-size: 1.125rem;
-      margin-top: 16px;
-      box-shadow: 0 4px 20px var(--shadow-color);
+      font-size: 1.1rem;
+      margin-top: 18px;
+      box-shadow: 0 4px 24px var(--test-shadow-color);
     }
     
+    .profile-badge .emoji {
+      font-size: 1.3rem;
+    }
+    
+    /* ============================================
+       RESULTADOS GRID
+       ============================================ */
     .results-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -431,13 +588,13 @@
     
     .result-card {
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 16px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 18px 22px;
     }
     
     .result-card .label {
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.35);
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -450,17 +607,196 @@
       margin-top: 4px;
     }
     
-    .result-actions {
+    .result-card .value.success {
+      color: #34D399;
+    }
+    
+    /* ============================================
+       GRÁFICO
+       ============================================ */
+    .chart-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    
+    .chart-card h3 {
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    
+    .chart-container {
+      height: 240px;
+      position: relative;
+    }
+    
+    /* ============================================
+       RESUMO DO PERFIL
+       ============================================ */
+    .profile-summary {
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+    
+    .profile-summary strong {
+      color: white;
+    }
+    
+    /* ============================================
+       SWOT GRID (4 QUADRANTES)
+       ============================================ */
+    .swot-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    
+    .swot-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .swot-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-2px);
+    }
+    
+    .swot-card .swot-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+    
+    .swot-card .swot-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 2px;
+    }
+    
+    .swot-card .swot-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 4px 0;
+    }
+    
+    .swot-card .swot-bar {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    
+    .swot-card .swot-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+    
+    .swot-card .swot-desc {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 8px;
+    }
+    
+    .swot-card.swot-forcas .swot-value { color: #10B981; }
+    .swot-card.swot-fraquezas .swot-value { color: #EF4444; }
+    .swot-card.swot-oportunidades .swot-value { color: #3B82F6; }
+    .swot-card.swot-ameacas .swot-value { color: #F59E0B; }
+    
+    /* ============================================
+       CARD DE CONSISTÊNCIA
+       ============================================ */
+    .consistency-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    
+    .consistency-card.active {
+      display: block;
+    }
+    
+    .consistency-card h3 {
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .consistency-card .status-text {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    
+    .consistency-card .detail-text {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.35);
+    }
+    
+    /* ============================================
+       RELIABILITY NO RESULTADO
+       ============================================ */
+    .result-reliability {
+      margin-top: 12px;
+    }
+    
+    .result-reliability .badge-large {
+      display: inline-flex;
+      align-items: center;
       gap: 12px;
-      margin-top: 16px;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .result-reliability .badge-large.high {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    
+    .result-reliability .badge-large.medium {
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+    
+    .result-reliability .badge-large.low {
+      background: rgba(239, 68, 68, 0.15);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    
+    /* ============================================
+       AÇÕES DOS RESULTADOS
+       ============================================ */
+    .result-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
     }
     
     .btn-result {
-      padding: 14px 20px;
+      padding: 16px 20px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 600;
       font-size: 0.875rem;
       cursor: pointer;
@@ -469,18 +805,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
     }
     
     .btn-result-primary {
-      background: var(--gradient-header);
+      background: var(--test-gradient-header);
       color: white;
-      box-shadow: 0 4px 20px var(--shadow-color);
+      box-shadow: 0 4px 20px var(--test-shadow-color);
     }
     
     .btn-result-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 30px var(--shadow-color);
+      box-shadow: 0 6px 28px var(--test-shadow-color);
     }
     
     .btn-result-success {
@@ -490,18 +826,29 @@
     
     .btn-result-success:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn-result-warning {
+      background: linear-gradient(135deg, #F59E0B, #F97316);
+      color: white;
+    }
+    
+    .btn-result-warning:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
     }
     
     /* ============================================
-       RODAPÉ - SWOT (DOURADO)
+       RODAPÉ PREMIUM
        ============================================ */
     .footer-premium {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 0 0 16px 16px;
-      padding: 20px 32px;
+      background: rgba(30, 41, 59, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 0 0 20px 20px;
+      padding: 24px 36px;
       position: relative;
       overflow: hidden;
     }
@@ -512,8 +859,8 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 2px;
-      background: var(--gradient-footer);
+      height: 3px;
+      background: var(--test-gradient-footer);
     }
     
     .footer-grid {
@@ -531,15 +878,15 @@
     }
     
     .footer-logo .logo-icon-small {
-      width: 32px;
-      height: 32px;
-      background: var(--gradient-footer);
-      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      background: var(--test-gradient-footer);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       color: white;
       font-family: 'Poppins', sans-serif;
       flex-shrink: 0;
@@ -547,7 +894,7 @@
     
     .footer-logo-text .footer-system {
       font-family: 'Poppins', sans-serif;
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: white;
     }
@@ -555,18 +902,18 @@
     .footer-logo-text .footer-system .tm {
       font-size: 0.4rem;
       vertical-align: super;
-      color: #FCD34D;
+      color: #A78BFA;
     }
     
     .footer-logo-text .footer-tagline {
       font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.25);
     }
     
     .footer-center .footer-contact {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
       flex-wrap: wrap;
     }
     
@@ -574,29 +921,30 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.35);
       font-size: 0.7rem;
       transition: color 0.3s ease;
       text-decoration: none;
     }
     
     .footer-contact-item:hover {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.6);
     }
     
     .footer-contact-item .icon {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
     }
     
     .footer-right .page-number {
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.2);
       font-size: 0.7rem;
+      font-family: 'Courier New', monospace;
     }
     
     .footer-divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-      margin: 12px 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      margin: 14px 0;
     }
     
     .footer-bottom {
@@ -604,17 +952,20 @@
       justify-content: space-between;
       align-items: center;
       font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.15);
     }
     
     /* ============================================
-       LOADING & TOAST
+       LOADING
        ============================================ */
     .loading-overlay {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(10, 22, 40, 0.9);
-      backdrop-filter: blur(10px);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 22, 40, 0.92);
+      backdrop-filter: blur(12px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -625,118 +976,250 @@
       display: flex;
     }
     
+    .loading-content {
+      text-align: center;
+    }
+    
     .loading-spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid rgba(255, 255, 255, 0.1);
-      border-top-color: #D4AF37;
+      width: 56px;
+      height: 56px;
+      border: 4px solid rgba(255, 255, 255, 0.08);
+      border-top-color: #7C3AED;
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin: 0 auto 16px;
+      margin: 0 auto 18px;
     }
     
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
     
     .loading-text {
       color: white;
       font-weight: 600;
+      font-size: 1rem;
     }
     
+    .loading-sub {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+    
+    /* ============================================
+       TOAST
+       ============================================ */
     .toast {
       position: fixed;
       top: 24px;
       right: 24px;
       background: rgba(30, 41, 59, 0.95);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 14px 24px;
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px 28px;
       color: white;
       font-weight: 600;
       font-size: 0.875rem;
       display: none;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       z-index: 1001;
-      max-width: 400px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      max-width: 420px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
       animation: slideIn 0.3s ease;
     }
     
-    .toast.show { display: flex; }
-    .toast.error { border-left: 4px solid #EF4444; }
-    .toast.success { border-left: 4px solid #10B981; }
-    
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+    .toast.show {
+      display: flex;
     }
     
+    .toast.error {
+      border-left: 4px solid #EF4444;
+    }
+    
+    .toast.success {
+      border-left: 4px solid #10B981;
+    }
+    
+    .toast.warning {
+      border-left: 4px solid #F59E0B;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    /* ============================================
+       BACK LINK
+       ============================================ */
     .back-link {
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.2);
       text-decoration: none;
       font-size: 0.75rem;
       display: inline-block;
-      margin-top: 12px;
+      margin-top: 16px;
       text-align: center;
       width: 100%;
       transition: color 0.3s ease;
     }
     
     .back-link:hover {
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.5);
     }
     
     /* ============================================
        RESPONSIVO
        ============================================ */
-    @media (max-width: 992px) {
+    @media (max-width: 1024px) {
       .header-grid {
         grid-template-columns: 1fr;
         gap: 12px;
         text-align: center;
       }
-      .header-right { text-align: center; }
-      .footer-grid { flex-direction: column; text-align: center; gap: 12px; }
-      .footer-center .footer-contact { justify-content: center; flex-direction: column; gap: 6px; }
+      .header-right {
+        text-align: center;
+      }
+      .footer-grid {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      .footer-center .footer-contact {
+        justify-content: center;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .swot-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
     
     @media (max-width: 768px) {
-      .header-premium { padding: 16px 20px; }
-      .test-body { padding: 20px; }
-      .question-text { font-size: 1.125rem; }
-      .results-grid { grid-template-columns: 1fr; }
-      .result-actions { grid-template-columns: 1fr; }
-      .nav-buttons { flex-wrap: wrap; }
-      .nav-buttons button { flex: 1; min-width: 100px; }
-      .progress-bar { max-width: 100%; }
+      body {
+        padding: 12px;
+      }
+      .header-premium {
+        padding: 16px 20px;
+        border-radius: 16px 16px 0 0;
+      }
+      .test-body {
+        padding: 20px;
+        min-height: 350px;
+      }
+      .question-text {
+        font-size: 1.1rem;
+      }
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+      .result-actions {
+        grid-template-columns: 1fr;
+      }
+      .swot-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-buttons {
+        flex-wrap: wrap;
+      }
+      .nav-buttons button {
+        flex: 1;
+        min-width: 100px;
+      }
+      .progress-bar {
+        max-width: 100%;
+      }
+      .footer-premium {
+        padding: 16px 20px;
+        border-radius: 0 0 16px 16px;
+      }
     }
     
     @media (max-width: 480px) {
-      body { padding: 12px; }
-      .header-premium { padding: 12px 16px; }
-      .test-body { padding: 16px; }
-      .option-btn { padding: 12px 16px; font-size: 0.875rem; }
-      .btn-nav { padding: 10px 16px; font-size: 0.8125rem; }
+      body {
+        padding: 8px;
+      }
+      .header-premium {
+        padding: 12px 16px;
+      }
+      .test-body {
+        padding: 14px;
+      }
+      .option-btn {
+        padding: 14px 16px;
+        font-size: 0.85rem;
+      }
+      .btn-nav {
+        padding: 10px 16px;
+        font-size: 0.8rem;
+      }
+      .profile-badge {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+      }
+      .results-header h2 {
+        font-size: 1.4rem;
+      }
+      .chart-container {
+        height: 180px;
+      }
     }
     
+    /* ============================================
+       IMPRESSÃO
+       ============================================ */
     @media print {
-      body { background: white !important; padding: 0 !important; }
-      .container { max-width: 100% !important; }
+      body {
+        background: white !important;
+        padding: 0 !important;
+        color: #0A2540 !important;
+      }
+      
+      .bg-test, .particles {
+        display: none !important;
+      }
+      
+      .container {
+        max-width: 100% !important;
+      }
+      
       .header-premium {
         background: #0A2540 !important;
         border-radius: 0 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
+        padding: 20px 30px !important;
       }
+      
+      .header-premium::before {
+        display: none !important;
+      }
+      
+      .header-premium::after {
+        display: none !important;
+      }
+      
       .test-body {
         background: white !important;
         border: none !important;
-        padding: 24px !important;
+        padding: 24px 30px !important;
+        backdrop-filter: none !important;
       }
-      .question-text { color: #0A2540 !important; }
+      
+      .question-text {
+        color: #0A2540 !important;
+      }
+      
       .option-btn {
         border-color: #E2E8F0 !important;
         color: #334155 !important;
@@ -744,60 +1227,169 @@
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
+      
       .option-btn.selected {
-        border-color: #D4AF37 !important;
-        background: #FEF3C7 !important;
+        border-color: #7C3AED !important;
+        background: #EDE9FE !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
+      
       .option-btn.selected .letter {
-        background: #D4AF37 !important;
+        background: #7C3AED !important;
         color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
+      
       .footer-premium {
         background: #0A2540 !important;
         border-radius: 0 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
+        padding: 16px 30px !important;
       }
+      
+      .footer-premium::before {
+        display: none !important;
+      }
+      
       .btn-nav, .btn-next, .btn-finish, .btn-result, .back-link,
       .nav-buttons, .progress-section, .result-actions {
         display: none !important;
       }
-      .results-container { display: block !important; }
-      .results-header h2 { color: #0A2540 !important; }
-      .result-card { background: #F8FAFC !important; border-color: #E2E8F0 !important; }
-      .result-card .value { color: #0A2540 !important; }
+      
+      .results-container {
+        display: block !important;
+      }
+      
+      .results-header h2 {
+        color: #0A2540 !important;
+      }
+      
+      .result-card {
+        background: #F8FAFC !important;
+        border-color: #E2E8F0 !important;
+      }
+      
+      .result-card .value {
+        color: #0A2540 !important;
+      }
+      
+      .chart-card {
+        background: #F8FAFC !important;
+        border-color: #E2E8F0 !important;
+      }
+      
+      .chart-card h3 {
+        color: #0A2540 !important;
+      }
+      
       .profile-badge {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
-      .footer-contact-item { color: rgba(255, 255, 255, 0.6) !important; }
-      .header-right .participant-name { color: white !important; }
-      .footer-bottom { display: none !important; }
+      
+      .footer-contact-item {
+        color: rgba(255, 255, 255, 0.6) !important;
+      }
+      
+      .header-right .participant-name {
+        color: white !important;
+      }
+      
+      .footer-bottom {
+        display: none !important;
+      }
+      
+      .reliability-badge {
+        display: none !important;
+      }
+      
+      .status-bar .timer {
+        display: none !important;
+      }
+      
+      .consistency-card {
+        display: none !important;
+      }
+      
+      .result-reliability {
+        display: none !important;
+      }
+      
+      .profile-summary {
+        color: #334155 !important;
+      }
+      
+      .profile-summary strong {
+        color: #0A2540 !important;
+      }
+      
+      .question-number {
+        color: #7C3AED !important;
+        border-color: #7C3AED !important;
+        background: rgba(124, 58, 237, 0.08) !important;
+      }
+      
+      .footer-divider {
+        display: none !important;
+      }
+      
+      .swot-card {
+        background: #F8FAFC !important;
+        border-color: #E2E8F0 !important;
+      }
+      
+      .swot-card .swot-name {
+        color: #0A2540 !important;
+      }
+      
+      .swot-card .swot-value {
+        color: #0A2540 !important;
+      }
+      
+      .swot-card .swot-desc {
+        color: #64748B !important;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- ============================================
+       FUNDO
+  ============================================ -->
   <div class="bg-test"></div>
   <div class="particles"></div>
 
+  <!-- ============================================
+       LOADING
+  ============================================ -->
   <div class="loading-overlay" id="loadingOverlay">
-    <div style="text-align: center;">
+    <div class="loading-content">
       <div class="loading-spinner"></div>
-      <p class="loading-text">Analisando seu perfil SWOT...</p>
+      <p class="loading-text">Analisando seu SWOT</p>
+      <p class="loading-sub">Análise estratégica pessoal</p>
     </div>
   </div>
 
+  <!-- ============================================
+       TOAST
+  ============================================ -->
   <div class="toast" id="toast">
     <span id="toastIcon">✅</span>
     <span id="toastMessage">Mensagem</span>
   </div>
 
+  <!-- ============================================
+       CONTAINER PRINCIPAL
+  ============================================ -->
   <div class="container">
-    
-    <!-- CABEÇALHO - SWOT (DOURADO) -->
+
+    <!-- ============================================
+         CABEÇALHO
+    ============================================ -->
     <header class="header-premium">
       <div class="header-grid">
         <div class="header-logo">
@@ -807,14 +1399,14 @@
             <span class="system-sub">People Analytics Enterprise</span>
           </div>
         </div>
-        
+
         <div class="header-center">
           <div class="report-title">
-            <span class="highlight">Teste SWOT</span>
+            <span class="highlight">Análise SWOT Pessoal</span>
           </div>
-          <div class="report-sub">Análise de Autopercepção</div>
+          <div class="report-sub">Forças • Fraquezas • Oportunidades • Ameaças</div>
         </div>
-        
+
         <div class="header-right">
           <div class="participant-name" id="participantName">Carregando...</div>
           <div class="participant-company" id="participantCompany">Empresa: --</div>
@@ -822,26 +1414,43 @@
         </div>
       </div>
     </header>
-    
-    <!-- CORPO DO TESTE -->
+
+    <!-- ============================================
+         CORPO DO TESTE
+    ============================================ -->
     <div class="test-body">
-      
+
+      <!-- ============================================
+           PROGRESSO
+      ============================================ -->
       <div class="progress-section">
-        <span class="progress-text" id="progressText">Questão 1 de 40</span>
+        <span class="progress-text" id="progressText">Questão 1 de 20</span>
         <div class="progress-bar">
-          <div class="progress-fill" id="progressFill" style="width: 2.5%"></div>
+          <div class="progress-fill" id="progressFill" style="width: 5%"></div>
         </div>
-        <span class="progress-percent" id="progressPercent">2.5%</span>
+        <span class="progress-percent" id="progressPercent">5%</span>
       </div>
-      
+
+      <!-- ============================================
+           STATUS BAR (TIMER + CONFIABILIDADE)
+      ============================================ -->
+      <div class="status-bar">
+        <span class="timer" id="timerDisplay">⏱️ Tempo: 00:00</span>
+        <span class="reliability-badge high" id="reliabilityBadge">✅ Confiabilidade: --</span>
+      </div>
+
+      <!-- ============================================
+           ÁREA DO TESTE
+      ============================================ -->
       <div id="testArea">
-        <div class="question-number" id="questionNumber">Questão 1 de 40</div>
+
+        <div class="question-number" id="questionNumber">Questão 1 de 20</div>
         <div class="question-text" id="questionText">Carregando pergunta...</div>
-        
+
         <div class="options-grid" id="optionsContainer">
-          <!-- Opções carregadas via JS -->
+          <!-- Opções carregadas via JavaScript -->
         </div>
-        
+
         <div class="nav-buttons">
           <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
             ← Anterior
@@ -850,20 +1459,26 @@
             Próxima →
           </button>
         </div>
+
       </div>
-      
-      <!-- RESULTADOS -->
+
+      <!-- ============================================
+           RESULTADOS
+      ============================================ -->
       <div class="results-container" id="resultsContainer">
-        
+
+        <!-- Cabeçalho dos Resultados -->
         <div class="results-header">
-          <h2>📊 Resultado da SWOT</h2>
-          <p class="subtitle">Análise de Forças, Fraquezas, Oportunidades e Ameaças</p>
+          <h2>📊 Análise SWOT Pessoal</h2>
+          <p class="subtitle">Forças, Fraquezas, Oportunidades e Ameaças</p>
           <div class="profile-badge" id="profileBadge">
-            <span>📊</span>
-            <span id="profileText">Perfil: --</span>
+            <span class="emoji" id="profileEmoji">📊</span>
+            <span id="profileText">Perfil Estratégico: --</span>
           </div>
+          <div class="result-reliability" id="resultReliability"></div>
         </div>
-        
+
+        <!-- Cards de Informação -->
         <div class="results-grid">
           <div class="result-card">
             <div class="label">Participante</div>
@@ -879,57 +1494,63 @@
           </div>
           <div class="result-card">
             <div class="label">Status</div>
-            <div class="value" style="color: #34D399;">✅ Concluído</div>
+            <div class="value success" id="resultStatus">✅ Concluído</div>
           </div>
         </div>
-        
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
-          <div style="background:rgba(16,185,129,0.05);padding:16px;border-radius:12px;border-left:4px solid #10B981;">
-            <h4 style="color:#10B981;font-size:0.85rem;">💪 Forças</h4>
-            <ul id="strengthsResult" style="list-style:none;padding:0;font-size:0.8rem;color:rgba(255,255,255,0.7);">
-              <li>Carregando...</li>
-            </ul>
-          </div>
-          <div style="background:rgba(245,158,11,0.05);padding:16px;border-radius:12px;border-left:4px solid #F59E0B;">
-            <h4 style="color:#F59E0B;font-size:0.85rem;">⚡ Fraquezas</h4>
-            <ul id="weaknessesResult" style="list-style:none;padding:0;font-size:0.8rem;color:rgba(255,255,255,0.7);">
-              <li>Carregando...</li>
-            </ul>
-          </div>
-          <div style="background:rgba(6,182,212,0.05);padding:16px;border-radius:12px;border-left:4px solid #06B6D4;">
-            <h4 style="color:#06B6D4;font-size:0.85rem;">🌟 Oportunidades</h4>
-            <ul id="opportunitiesResult" style="list-style:none;padding:0;font-size:0.8rem;color:rgba(255,255,255,0.7);">
-              <li>Carregando...</li>
-            </ul>
-          </div>
-          <div style="background:rgba(244,63,94,0.05);padding:16px;border-radius:12px;border-left:4px solid #F43F5E;">
-            <h4 style="color:#F43F5E;font-size:0.85rem;">🛡️ Ameaças</h4>
-            <ul id="threatsResult" style="list-style:none;padding:0;font-size:0.8rem;color:rgba(255,255,255,0.7);">
-              <li>Carregando...</li>
-            </ul>
+
+        <!-- SWOT Grid -->
+        <div class="chart-card">
+          <h3>📊 Matriz SWOT</h3>
+          <div class="swot-grid" id="swotGrid">
+            <!-- Carregado via JavaScript -->
           </div>
         </div>
-        
-        <div style="background:rgba(212,175,55,0.08);padding:16px;border-radius:12px;text-align:center;border:1px solid rgba(212,175,55,0.15);margin-bottom:24px;">
-          <p style="font-size:0.75rem;color:rgba(255,255,255,0.4);">Fator VIGORRE™</p>
-          <p style="font-size:2rem;font-weight:800;color:#D4AF37;" id="fvResult">--</p>
-          <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);" id="fvClassResult">--</p>
+
+        <!-- Gráfico -->
+        <div class="chart-card">
+          <h3>📈 Distribuição SWOT</h3>
+          <div class="chart-container">
+            <canvas id="swotChart"></canvas>
+          </div>
         </div>
-        
+
+        <!-- Resumo do Perfil -->
+        <div class="chart-card">
+          <h3>💡 Resumo Estratégico</h3>
+          <div class="profile-summary" id="profileSummary">
+            Carregando resumo...
+          </div>
+        </div>
+
+        <!-- Card de Consistência -->
+        <div class="consistency-card" id="consistencyCard">
+          <h3>📊 Consistência dos Resultados</h3>
+          <div id="consistencyContent">
+            <p class="status-text" id="consistencyStatus">--</p>
+            <p class="detail-text" id="consistencyDetail">--</p>
+          </div>
+        </div>
+
+        <!-- Ações -->
         <div class="result-actions">
           <button class="btn-result btn-result-primary" onclick="window.print()">
-            🖨️ Imprimir Resultado
+            🖨️ Imprimir
           </button>
           <button class="btn-result btn-result-success" onclick="goToDashboard()">
-            📊 Voltar ao Dashboard
+            📊 Dashboard
+          </button>
+          <button class="btn-result btn-result-warning" onclick="refazerTeste()">
+            🔄 Refazer Teste
           </button>
         </div>
-        
+
       </div>
-      
+
     </div>
-    
-    <!-- RODAPÉ -->
+
+    <!-- ============================================
+         RODAPÉ
+    ============================================ -->
     <footer class="footer-premium">
       <div class="footer-grid">
         <div class="footer-logo">
@@ -939,7 +1560,7 @@
             <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
           </div>
         </div>
-        
+
         <div class="footer-center">
           <div class="footer-contact">
             <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
@@ -956,188 +1577,360 @@
             </a>
           </div>
         </div>
-        
+
         <div class="footer-right">
           <div class="page-number">
             Página <span id="pageNumber">1</span>
           </div>
         </div>
       </div>
-      
+
       <div class="footer-divider"></div>
-      
+
       <div class="footer-bottom">
         <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
-        <span>v1.0</span>
+        <span>v2.0 - Motor Avançado</span>
       </div>
     </footer>
-    
+
   </div>
 
+  <!-- ============================================
+       SCRIPTS
+  ============================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+  </script>
   <script src="../../supabase-config.js"></script>
   <script src="../../auth.js"></script>
   <script src="../../middleware/auth-guard.js"></script>
 
   <script>
+    /* ================================================
+       VIGORRE ONE™ - TESTE SWOT
+       VERSÃO COMPLETA COM MOTOR AVANÇADO
+       ================================================ */
+
     'use strict';
 
     // ============================================
-    // PERGUNTAS SWOT (40 PERGUNTAS)
+    // 1. CONFIGURAÇÃO SWOT
+    // ============================================
+    const swotConfig = {
+      forcas: {
+        label: 'Forças',
+        icon: '💪',
+        color: '#10B981',
+        bgColor: 'rgba(16, 185, 129, 0.15)',
+        description: 'Vantagens competitivas e pontos fortes pessoais.'
+      },
+      fraquezas: {
+        label: 'Fraquezas',
+        icon: '🔻',
+        color: '#EF4444',
+        bgColor: 'rgba(239, 68, 68, 0.15)',
+        description: 'Áreas que necessitam desenvolvimento e melhoria.'
+      },
+      oportunidades: {
+        label: 'Oportunidades',
+        icon: '🚀',
+        color: '#3B82F6',
+        bgColor: 'rgba(59, 130, 246, 0.15)',
+        description: 'Fatores externos que podem ser aproveitados.'
+      },
+      ameacas: {
+        label: 'Ameaças',
+        icon: '⚠️',
+        color: '#F59E0B',
+        bgColor: 'rgba(245, 158, 11, 0.15)',
+        description: 'Fatores externos que representam riscos ou desafios.'
+      }
+    };
+
+    const swotKeys = ['forcas', 'fraquezas', 'oportunidades', 'ameacas'];
+
+    // ============================================
+    // 2. DADOS DO TESTE (20 PERGUNTAS - 5 POR ÁREA)
     // ============================================
     const questions = [
-      // FORÇAS (S) - 10 perguntas
-      { id: 1, dimension: 'S', text: 'Eu tenho facilidade para me comunicar com diferentes pessoas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 2, dimension: 'S', text: 'Eu sou uma pessoa confiante e segura de mim.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 3, dimension: 'S', text: 'Eu resolvo problemas com criatividade e eficiência.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 4, dimension: 'S', text: 'Eu tenho facilidade para aprender coisas novas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 5, dimension: 'S', text: 'Eu sou uma pessoa organizada e disciplinada.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 6, dimension: 'S', text: 'Eu influencio positivamente as pessoas ao meu redor.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 7, dimension: 'S', text: 'Eu tenho uma visão clara do que quero para minha carreira.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 8, dimension: 'S', text: 'Eu sou resiliente e supero desafios com determinação.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 9, dimension: 'S', text: 'Eu construo relacionamentos profissionais duradouros.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 10, dimension: 'S', text: 'Eu tenho habilidades de liderança natural.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      
-      // FRAQUEZAS (W) - 10 perguntas
-      { id: 11, dimension: 'W', text: 'Eu procrastino tarefas importantes.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 12, dimension: 'W', text: 'Eu tenho dificuldade em lidar com críticas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 13, dimension: 'W', text: 'Eu me sinto ansioso em situações de pressão.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 14, dimension: 'W', text: 'Eu tenho dificuldade em delegar tarefas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 15, dimension: 'W', text: 'Eu sou perfeccionista e isso atrasa minhas entregas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 16, dimension: 'W', text: 'Eu tenho dificuldade em dizer "não" para os outros.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 17, dimension: 'W', text: 'Eu me desmotivo facilmente quando as coisas não saem como planejado.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 18, dimension: 'W', text: 'Eu tenho dificuldade em manter o foco em tarefas repetitivas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 19, dimension: 'W', text: 'Eu evito conflitos mesmo quando necessário.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 20, dimension: 'W', text: 'Eu me sinto sobrecarregado com múltiplas responsabilidades.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      
-      // OPORTUNIDADES (O) - 10 perguntas
-      { id: 21, dimension: 'O', text: 'Eu vejo oportunidades onde outros veem problemas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 22, dimension: 'O', text: 'Eu estou aberto a novas experiências e aprendizados.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 23, dimension: 'O', text: 'Eu identifico facilmente áreas de melhoria na minha carreira.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 24, dimension: 'O', text: 'Eu busco ativamente oportunidades de crescimento profissional.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 25, dimension: 'O', text: 'Eu me adapto bem a mudanças e novos desafios.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 26, dimension: 'O', text: 'Eu enxergo possibilidades de inovação no meu trabalho.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 27, dimension: 'O', text: 'Eu acredito que posso alcançar posições de maior destaque.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 28, dimension: 'O', text: 'Eu estou disposto a investir no meu desenvolvimento.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 29, dimension: 'O', text: 'Eu construo redes de contatos que abrem portas.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 30, dimension: 'O', text: 'Eu acredito que meu futuro profissional é promissor.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      
-      // AMEAÇAS (T) - 10 perguntas
-      { id: 31, dimension: 'T', text: 'Eu me preocupo com a instabilidade do mercado de trabalho.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 32, dimension: 'T', text: 'Eu sinto que minha área pode ficar obsoleta.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 33, dimension: 'T', text: 'Eu tenho medo de não alcançar meus objetivos.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 34, dimension: 'T', text: 'Eu percebo que pessoas mais jovens estão avançando mais rápido.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 35, dimension: 'T', text: 'Eu sinto que a concorrência na minha área é muito alta.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 36, dimension: 'T', text: 'Eu me preocupo com a automação substituindo meu trabalho.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 37, dimension: 'T', text: 'Eu sinto que não tenho tempo suficiente para me qualificar.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 38, dimension: 'T', text: 'Eu vejo barreiras para meu crescimento profissional.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 39, dimension: 'T', text: 'Eu me preocupo com a falta de reconhecimento no trabalho.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] },
-      { id: 40, dimension: 'T', text: 'Eu sinto que o ambiente corporativo está cada vez mais competitivo.', options: ['Discordo Totalmente', 'Discordo', 'Neutro', 'Concordo', 'Concordo Totalmente'] }
+      // FORÇAS (5 perguntas)
+      {
+        id: 1,
+        text: 'Você possui habilidades técnicas que se destacam?',
+        options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
+        swot: 'forcas'
+      },
+      {
+        id: 2,
+        text: 'Você tem facilidade para construir relacionamentos profissionais?',
+        options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
+        swot: 'forcas'
+      },
+      {
+        id: 3,
+        text: 'Você é reconhecido pela sua capacidade de resolver problemas?',
+        options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
+        swot: 'forcas'
+      },
+      {
+        id: 4,
+        text: 'Você possui uma rede de contatos relevante?',
+        options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
+        swot: 'forcas'
+      },
+      {
+        id: 5,
+        text: 'Você tem facilidade para aprender novas habilidades?',
+        options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
+        swot: 'forcas'
+      },
+
+      // FRAQUEZAS (5 perguntas)
+      {
+        id: 6,
+        text: 'Você tem dificuldade em lidar com prazos apertados?',
+        options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
+        swot: 'fraquezas'
+      },
+      {
+        id: 7,
+        text: 'Você se sente inseguro em apresentações públicas?',
+        options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
+        swot: 'fraquezas'
+      },
+      {
+        id: 8,
+        text: 'Você tem dificuldade em delegar tarefas?',
+        options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
+        swot: 'fraquezas'
+      },
+      {
+        id: 9,
+        text: 'Você procrastina em tarefas importantes?',
+        options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
+        swot: 'fraquezas'
+      },
+      {
+        id: 10,
+        text: 'Você tem dificuldade em dizer "não" para novas demandas?',
+        options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
+        swot: 'fraquezas'
+      },
+
+      // OPORTUNIDADES (5 perguntas)
+      {
+        id: 11,
+        text: 'O mercado está oferecendo oportunidades na sua área?',
+        options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
+        swot: 'oportunidades'
+      },
+      {
+        id: 12,
+        text: 'Novas tecnologias podem favorecer sua atuação?',
+        options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
+        swot: 'oportunidades'
+      },
+      {
+        id: 13,
+        text: 'Existem tendências positivas no seu setor?',
+        options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
+        swot: 'oportunidades'
+      },
+      {
+        id: 14,
+        text: 'Sua rede de contatos pode abrir novas portas?',
+        options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
+        swot: 'oportunidades'
+      },
+      {
+        id: 15,
+        text: 'Há demanda por suas habilidades no mercado atual?',
+        options: ['Alta', 'Moderada', 'Baixa', 'Nenhuma'],
+        swot: 'oportunidades'
+      },
+
+      // AMEAÇAS (5 perguntas)
+      {
+        id: 16,
+        text: 'A concorrência na sua área é intensa?',
+        options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
+        swot: 'ameacas'
+      },
+      {
+        id: 17,
+        text: 'Mudanças tecnológicas podem desvalorizar suas habilidades?',
+        options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
+        swot: 'ameacas'
+      },
+      {
+        id: 18,
+        text: 'O mercado de trabalho está instável na sua área?',
+        options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
+        swot: 'ameacas'
+      },
+      {
+        id: 19,
+        text: 'Há risco de sua área ser automatizada?',
+        options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
+        swot: 'ameacas'
+      },
+      {
+        id: 20,
+        text: 'As exigências do mercado estão aumentando rapidamente?',
+        options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
+        swot: 'ameacas'
+      }
     ];
 
     // ============================================
-    // ESTADO
+    // 3. ESTADO DA APLICAÇÃO
     // ============================================
-    let currentQuestion = 0;
+    let currentQuestionIndex = 0;
     let answers = new Array(questions.length).fill(null);
     let currentUser = null;
     let participantData = null;
     let companyData = null;
+    let chartInstance = null;
     let isCompleted = false;
 
-    // ============================================
-    // NOMES DAS DIMENSÕES SWOT
-    // ============================================
-    const dimensionNames = {
-      'S': { name: 'Forças', color: '#10B981', emoji: '💪' },
-      'W': { name: 'Fraquezas', color: '#F59E0B', emoji: '⚡' },
-      'O': { name: 'Oportunidades', color: '#06B6D4', emoji: '🌟' },
-      'T': { name: 'Ameaças', color: '#F43F5E', emoji: '🛡️' }
-    };
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let questionStartTime = Date.now();
+    let answerTimes = [];
+    let testHistory = [];
 
     // ============================================
-    // INICIALIZAÇÃO
+    // 4. INICIALIZAÇÃO
     // ============================================
     document.addEventListener('DOMContentLoaded', function() {
       console.log('📊 Teste SWOT - VIGORRE ONE™');
-      
+      console.log('🎯 Análise Estratégica Pessoal');
+
       const isAuth = window.VigorreAuth.isAuthenticated();
-      if (!isAuth) { window.location.href = '../../login.html'; return; }
-      
+      if (!isAuth) {
+        window.location.href = '../../login.html';
+        return;
+      }
+
       currentUser = window.VigorreAuth.getCurrentUser();
       if (!currentUser || currentUser.role !== 'participant') {
         alert('⚠️ Acesso restrito a participantes.');
         window.VigorreAuth.logout();
         return;
       }
-      
+
       loadParticipantData();
+      startTimer();
+      setupNavigationGuard();
+
+      console.log('✅ Teste SWOT inicializado com sucesso');
     });
 
     // ============================================
-    // CARREGAR DADOS DO PARTICIPANTE
+    // 5. CARREGAR DADOS DO PARTICIPANTE
     // ============================================
     function loadParticipantData() {
       try {
         const allParticipants = VigorreDB.participants.findAll();
         participantData = allParticipants.find(p => p.id === currentUser.id);
-        
+
         if (!participantData) {
-          participantData = { 
-            id: currentUser.id, 
-            name: currentUser.name || 'Participante', 
-            companyId: currentUser.companyId || null 
+          participantData = {
+            id: currentUser.id,
+            name: currentUser.name || 'Participante',
+            companyId: currentUser.companyId || null,
+            tests: ['DISC', 'IE', 'Valores', 'BigFive', 'SWOT'],
+            completedTests: [],
+            results: {}
           };
         }
-        
+
         if (participantData.companyId) {
           companyData = VigorreDB.companies.findById(participantData.companyId);
         }
-        
+
         const companyName = companyData?.name || 'Autônomo';
+
         document.getElementById('participantName').textContent = participantData.name || 'Participante';
         document.getElementById('participantCompany').textContent = `Empresa: ${companyName}`;
         document.getElementById('participantId').textContent = `ID: ${participantData.id || '--'}`;
-        
+
+        loadTestHistory();
         renderQuestion();
-        
+
       } catch (error) {
-        console.error('❌ Erro:', error);
-        showToast('Erro ao carregar dados', 'error');
+        console.error('❌ Erro ao carregar dados:', error);
+        showToast('Erro ao carregar dados do participante', 'error');
       }
     }
 
     // ============================================
-    // RENDERIZAR PERGUNTA
+    // 6. CARREGAR HISTÓRICO
+    // ============================================
+    function loadTestHistory() {
+      try {
+        if (window.VigorreAuth && window.VigorreAuth.getTestHistory) {
+          testHistory = window.VigorreAuth.getTestHistory('SWOT');
+          console.log(`📚 Histórico de testes SWOT: ${testHistory.length} registros`);
+        }
+      } catch (error) {
+        console.error('❌ Erro ao carregar histórico:', error);
+        testHistory = [];
+      }
+    }
+
+    // ============================================
+    // 7. TIMER
+    // ============================================
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+        const secs = String(timerSeconds % 60).padStart(2, '0');
+        document.getElementById('timerDisplay').textContent = `⏱️ Tempo: ${mins}:${secs}`;
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+
+    // ============================================
+    // 8. RENDERIZAR PERGUNTA
     // ============================================
     function renderQuestion() {
-      const q = questions[currentQuestion];
+      const q = questions[currentQuestionIndex];
       const total = questions.length;
-      const progress = ((currentQuestion + 1) / total) * 100;
-      const dim = dimensionNames[q.dimension];
-      
-      document.getElementById('questionNumber').textContent = `Questão ${currentQuestion + 1} de ${total} • ${dim.emoji} ${dim.name}`;
-      document.getElementById('progressText').textContent = `Questão ${currentQuestion + 1} de ${total}`;
+      const progress = ((currentQuestionIndex + 1) / total) * 100;
+
+      questionStartTime = Date.now();
+
+      document.getElementById('questionNumber').textContent = `Questão ${currentQuestionIndex + 1} de ${total}`;
+      document.getElementById('progressText').textContent = `Questão ${currentQuestionIndex + 1} de ${total}`;
       document.getElementById('progressFill').style.width = `${progress}%`;
       document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
       document.getElementById('questionText').textContent = q.text;
-      
+
       const container = document.getElementById('optionsContainer');
-      const letters = ['A', 'B', 'C', 'D', 'E'];
-      
+      const letters = ['A', 'B', 'C', 'D'];
+
       container.innerHTML = q.options.map((opt, idx) => {
-        const isSelected = answers[currentQuestion] === idx;
+        const isSelected = answers[currentQuestionIndex] === idx;
         return `
-          <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectOption(${idx})">
-            <span class="letter">${letters[idx]}</span>
-            ${opt}
-          </button>
-        `;
+              <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectOption(${idx})">
+                <span class="letter">${letters[idx]}</span>
+                ${opt}
+              </button>
+            `;
       }).join('');
-      
-      document.getElementById('btnPrev').disabled = currentQuestion === 0;
-      
+
+      document.getElementById('btnPrev').disabled = currentQuestionIndex === 0;
+
       const nextBtn = document.getElementById('btnNext');
-      if (currentQuestion === total - 1) {
+      if (currentQuestionIndex === total - 1) {
         nextBtn.textContent = '📊 Finalizar Teste';
         nextBtn.className = 'btn-nav btn-finish';
         nextBtn.onclick = finishTest;
@@ -1146,133 +1939,332 @@
         nextBtn.className = 'btn-nav btn-next';
         nextBtn.onclick = nextQuestion;
       }
+
+      updateReliabilityBadge();
     }
 
     // ============================================
-    // SELECIONAR OPÇÃO
+    // 9. SELECIONAR OPÇÃO
     // ============================================
     function selectOption(index) {
-      answers[currentQuestion] = index;
+      const timeSpent = (Date.now() - questionStartTime) / 1000;
+      answerTimes[currentQuestionIndex] = timeSpent;
+
+      answers[currentQuestionIndex] = index;
       renderQuestion();
+      updateReliabilityBadge();
     }
 
     // ============================================
-    // NAVEGAÇÃO
+    // 10. NAVEGAÇÃO
     // ============================================
     function nextQuestion() {
-      if (answers[currentQuestion] === null) {
+      if (answers[currentQuestionIndex] === null) {
         showToast('⚠️ Selecione uma opção antes de continuar.', 'error');
         return;
       }
-      if (currentQuestion < questions.length - 1) {
-        currentQuestion++;
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
         renderQuestion();
       }
     }
 
     function prevQuestion() {
-      if (currentQuestion > 0) {
-        currentQuestion--;
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
         renderQuestion();
       }
     }
 
     // ============================================
-    // FINALIZAR TESTE
+    // 11. ÍNDICE DE CONFIABILIDADE
+    // ============================================
+    function updateReliabilityBadge() {
+      const answered = answers.filter(a => a !== null).length;
+      if (answered < 3) {
+        document.getElementById('reliabilityBadge').textContent = '✅ Confiabilidade: Aguardando...';
+        return;
+      }
+
+      let reliability = 100;
+
+      const validTimes = answerTimes.filter(t => t !== undefined && t !== null);
+      if (validTimes.length > 0) {
+        const avgTime = validTimes.reduce((a, b) => a + b, 0) / validTimes.length;
+        if (avgTime < 3) reliability -= 20;
+        if (avgTime < 2) reliability -= 20;
+        if (avgTime < 1.5) reliability -= 20;
+        if (avgTime > 30) reliability -= 10;
+        if (avgTime > 60) reliability -= 15;
+      }
+
+      const uniqueAnswers = new Set(answers.filter(a => a !== null));
+      if (uniqueAnswers.size < 2 && answered >= 8) reliability -= 15;
+      if (uniqueAnswers.size === 1 && answered >= 12) reliability -= 25;
+
+      const positionCount = {};
+      answers.filter(a => a !== null).forEach(a => {
+        positionCount[a] = (positionCount[a] || 0) + 1;
+      });
+      const maxCount = Math.max(...Object.values(positionCount));
+      if (maxCount / answered > 0.7 && answered >= 10) reliability -= 20;
+
+      reliability = Math.max(0, Math.min(100, Math.round(reliability)));
+
+      const badge = document.getElementById('reliabilityBadge');
+      let status = '';
+      let colorClass = '';
+
+      if (reliability >= 80) {
+        status = 'Muito Confiável';
+        colorClass = 'high';
+      } else if (reliability >= 60) {
+        status = 'Confiável';
+        colorClass = 'medium';
+      } else if (reliability >= 40) {
+        status = 'Atenção';
+        colorClass = 'low';
+      } else {
+        status = 'Baixa Confiabilidade';
+        colorClass = 'low';
+      }
+
+      badge.className = `reliability-badge ${colorClass}`;
+      badge.textContent = `✅ Confiabilidade: ${reliability}% (${status})`;
+    }
+
+    // ============================================
+    // 12. CALCULAR RESULTADO
+    // ============================================
+    function calculateResult() {
+      const scores = {};
+      const counts = {};
+
+      for (const key of swotKeys) {
+        scores[key] = 0;
+        counts[key] = 0;
+      }
+
+      questions.forEach((q, idx) => {
+        if (answers[idx] !== null) {
+          const swot = q.swot;
+          // Para Forças e Oportunidades: valores mais altos são melhores
+          // Para Fraquezas e Ameaças: valores mais baixos são melhores
+          const isInverted = swot === 'fraquezas' || swot === 'ameacas';
+          const value = isInverted ? answers[idx] : (3 - answers[idx]);
+          scores[swot] += value;
+          counts[swot]++;
+        }
+      });
+
+      const averages = {};
+      const percentages = {};
+
+      for (const key of swotKeys) {
+        averages[key] = counts[key] > 0 ? scores[key] / counts[key] : 0;
+        // Normalizar para 0-100 (máximo = 4)
+        percentages[key] = Math.round((averages[key] / 4) * 100);
+      }
+
+      // Determinar o quadrante mais forte
+      const sorted = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
+      const topSwot = sorted[0] ? sorted[0][0] : 'forcas';
+      const topPercent = sorted[0] ? sorted[0][1] : 0;
+
+      // Determinar o quadrante mais fraco
+      const bottomSwot = sorted[sorted.length - 1] ? sorted[sorted.length - 1][0] : 'ameacas';
+      const bottomPercent = sorted[sorted.length - 1] ? sorted[sorted.length - 1][1] : 0;
+
+      // Estratégias recomendadas
+      const estrategias = {
+        forcas: 'Use suas forças para aproveitar oportunidades e mitigar ameaças.',
+        fraquezas: 'Desenvolva planos para superar suas fraquezas e minimizar impactos.',
+        oportunidades: 'Aproveite as oportunidades usando suas forças e melhorando fraquezas.',
+        ameacas: 'Crie estratégias defensivas para reduzir o impacto das ameaças.'
+      };
+
+      // Perfil estratégico
+      let perfil = '';
+      let perfilIcon = '';
+      let perfilDesc = '';
+
+      if (topSwot === 'forcas') {
+        perfil = 'Perfil de Força';
+        perfilIcon = '💪';
+        perfilDesc = 'Você possui vantagens competitivas significativas. Use-as para criar valor.';
+      } else if (topSwot === 'oportunidades') {
+        perfil = 'Perfil de Oportunidade';
+        perfilIcon = '🚀';
+        perfilDesc = 'Você está bem posicionado para aproveitar oportunidades do mercado.';
+      } else if (topSwot === 'fraquezas') {
+        perfil = 'Perfil de Desenvolvimento';
+        perfilIcon = '📈';
+        perfilDesc = 'Foco em desenvolver pontos fracos para se tornar mais competitivo.';
+      } else {
+        perfil = 'Perfil de Resiliência';
+        perfilIcon = '🛡️';
+        perfilDesc = 'Capacidade de enfrentar e superar desafios e ameaças.';
+      }
+
+      return {
+        scores: scores,
+        averages: averages,
+        percentages: percentages,
+        topSwot: topSwot,
+        topPercent: topPercent,
+        bottomSwot: bottomSwot,
+        bottomPercent: bottomPercent,
+        perfil: perfil,
+        perfilIcon: perfilIcon,
+        perfilDesc: perfilDesc,
+        estrategia: estrategias[topSwot] || 'Desenvolva um plano estratégico equilibrado.',
+        date: new Date().toISOString(),
+        reliability: 0,
+        sorted: sorted
+      };
+    }
+
+    // ============================================
+    // 13. FINALIZAR TESTE
     // ============================================
     function finishTest() {
-      if (answers[currentQuestion] === null) {
+      if (answers[currentQuestionIndex] === null) {
         showToast('⚠️ Selecione uma opção para a última questão.', 'error');
         return;
       }
-      
+
       const total = answers.filter(a => a !== null).length;
       const remaining = questions.length - total;
-      
+
       if (remaining > 0) {
         if (!confirm(`Você respondeu ${total} de ${questions.length} questões. ${remaining} não respondidas. Finalizar mesmo assim?`)) {
           return;
         }
       }
-      
-      if (!confirm('Finalizar teste SWOT? Suas respostas serão salvas.')) {
+
+      if (!confirm('Finalizar análise SWOT? Suas respostas serão salvas e analisadas.')) {
         return;
       }
-      
+
+      stopTimer();
       document.getElementById('loadingOverlay').classList.add('active');
-      
+
       setTimeout(() => {
         const result = calculateResult();
-        saveResult(result);
-        showResults(result);
+        const reliability = calculateFinalReliability();
+        const consistency = checkConsistency(result);
+
+        saveResult(result, reliability, consistency);
+        showResults(result, reliability, consistency);
+
       }, 1500);
     }
 
     // ============================================
-    // CALCULAR RESULTADO
+    // 14. CALCULAR CONFIABILIDADE FINAL
     // ============================================
-    function calculateResult() {
-      const scores = { S: 0, W: 0, O: 0, T: 0 };
-      const counts = { S: 0, W: 0, O: 0, T: 0 };
-      
-      questions.forEach((q, idx) => {
-        if (answers[idx] !== null) {
-          const dim = q.dimension;
-          scores[dim] += (answers[idx] + 1);
-          counts[dim]++;
-        }
+    function calculateFinalReliability() {
+      const answered = answers.filter(a => a !== null).length;
+      if (answered < 6) return 50;
+
+      let reliability = 100;
+
+      const validTimes = answerTimes.filter(t => t !== undefined && t !== null);
+      if (validTimes.length > 0) {
+        const avgTime = validTimes.reduce((a, b) => a + b, 0) / validTimes.length;
+        if (avgTime < 3) reliability -= 20;
+        if (avgTime < 2) reliability -= 15;
+        if (avgTime < 1.5) reliability -= 15;
+        if (avgTime > 30) reliability -= 10;
+      }
+
+      const uniqueAnswers = new Set(answers.filter(a => a !== null));
+      if (uniqueAnswers.size < 2 && answered >= 8) reliability -= 15;
+      if (uniqueAnswers.size === 1 && answered >= 12) reliability -= 25;
+
+      const positionCount = {};
+      answers.filter(a => a !== null).forEach(a => {
+        positionCount[a] = (positionCount[a] || 0) + 1;
       });
-      
-      // Calcular porcentagens
-      const percentages = {};
-      for (const dim of Object.keys(scores)) {
-        const maxScore = counts[dim] * 5;
-        percentages[dim] = maxScore > 0 ? Math.round((scores[dim] / maxScore) * 100) : 0;
+      const maxCount = Math.max(...Object.values(positionCount));
+      if (maxCount / answered > 0.7 && answered >= 10) reliability -= 20;
+
+      return Math.max(0, Math.min(100, Math.round(reliability)));
+    }
+
+    // ============================================
+    // 15. VERIFICAR CONSISTÊNCIA
+    // ============================================
+    function checkConsistency(currentResult) {
+      if (testHistory.length === 0) {
+        return {
+          status: 'no_data',
+          message: 'Primeira realização do teste. Sem dados anteriores para comparação.'
+        };
       }
-      
-      // Calcular FV™ (Fator VIGORRE™) - média ponderada
-      const fv = Math.round((percentages.S * 0.4 + (100 - percentages.W) * 0.3 + percentages.O * 0.2 + (100 - percentages.T) * 0.1));
-      const fvFinal = Math.min(100, Math.max(0, fv));
-      
-      // Classificação do FV™
-      let fvClass = '';
-      if (fvFinal >= 80) { fvClass = '🏆 Elite VIGORRE™'; }
-      else if (fvFinal >= 70) { fvClass = '🌟 Alta Performance'; }
-      else if (fvFinal >= 60) { fvClass = '📈 Alto Potencial'; }
-      else if (fvFinal >= 45) { fvClass = '📊 Potencial em Desenvolvimento'; }
-      else { fvClass = '🌱 Início da Jornada'; }
-      
-      // Determinar dimensão predominante
-      let dominant = 'S';
-      let maxValue = 0;
-      for (const [key, value] of Object.entries(percentages)) {
-        if (value > maxValue) {
-          maxValue = value;
-          dominant = key;
+
+      const previous = testHistory[testHistory.length - 1]?.results;
+      if (!previous) {
+        return {
+          status: 'no_data',
+          message: 'Sem dados anteriores para comparação.'
+        };
+      }
+
+      const prevPcts = previous.percentages || {};
+      const currPcts = currentResult.percentages || {};
+
+      let totalDiff = 0;
+      let count = 0;
+
+      for (const key of swotKeys) {
+        if (prevPcts[key] !== undefined && currPcts[key] !== undefined) {
+          totalDiff += Math.abs(prevPcts[key] - currPcts[key]);
+          count++;
         }
       }
-      
-      const profile = dimensionNames[dominant];
-      
+
+      const avgDiff = count > 0 ? totalDiff / count : 100;
+      const roundedDiff = Math.round(avgDiff);
+
+      let status, message, recommendation;
+
+      if (avgDiff <= 5) {
+        status = 'stable';
+        message = 'Resultados consistentes e confiáveis. Perfil estratégico estável.';
+        recommendation = 'Perfil SWOT consistente com avaliações anteriores.';
+      } else if (avgDiff <= 15) {
+        status = 'moderate';
+        message = 'Variação moderada detectada. Pode indicar mudança no ambiente.';
+        recommendation = 'Recomenda-se revisão dos resultados com profissional especializado.';
+      } else {
+        status = 'unstable';
+        message = 'Variação significativa detectada. Pode indicar inconsistência.';
+        recommendation = 'Recomenda-se realizar novo teste ou avaliação complementar.';
+      }
+
       return {
-        percentages: percentages,
-        dominant: dominant,
-        dominantName: profile.name,
-        dominantEmoji: profile.emoji,
-        fv: fvFinal,
-        fvClass: fvClass,
-        date: new Date().toISOString()
+        status: status,
+        message: message,
+        recommendation: recommendation,
+        diff: roundedDiff,
+        previous: prevPcts,
+        current: currPcts
       };
     }
 
     // ============================================
-    // SALVAR RESULTADO
+    // 16. SALVAR RESULTADO
     // ============================================
-    function saveResult(result) {
+    function saveResult(result, reliability, consistency) {
       try {
+        result.reliability = reliability;
+        result.consistency = consistency;
+        result.answerTimes = answerTimes;
+
         const allParticipants = VigorreDB.participants.findAll();
         const p = allParticipants.find(p => p.id === currentUser.id);
-        
+
         if (p) {
           if (!p.completedTests) p.completedTests = [];
           if (!p.completedTests.includes('SWOT')) {
@@ -1280,114 +2272,379 @@
           }
           if (!p.results) p.results = {};
           p.results.SWOT = result;
-          
+
           const allTests = p.tests || [];
           const allCompleted = allTests.every(t => p.completedTests.includes(t));
           p.status = allCompleted ? 'completed' : 'in_progress';
-          
+
           const idx = allParticipants.findIndex(p => p.id === currentUser.id);
           if (idx > -1) {
             allParticipants[idx] = p;
             localStorage.setItem('vigorre_participants', JSON.stringify(allParticipants));
           }
         }
-        
+
+        if (window.VigorreAuth && window.VigorreAuth.saveTestHistory) {
+          window.VigorreAuth.saveTestHistory('SWOT', result);
+        }
+
+        if (window.VigorreAuth && window.VigorreAuth.logActivity) {
+          window.VigorreAuth.logActivity('Teste SWOT concluído', {
+            participant: participantData.name,
+            topSwot: result.topSwot,
+            reliability: reliability,
+            consistency: consistency?.status || 'no_data'
+          });
+        }
+
         localStorage.setItem('vigorre_last_swot_result', JSON.stringify(result));
-        console.log('✅ Resultado SWOT salvo:', result);
-        
+
+        console.log('✅ Resultado SWOT salvo com sucesso!');
+        console.log('📊 Quadrante Principal:', result.topSwot);
+        console.log('🔒 Confiabilidade:', reliability + '%');
+        console.log('📈 Consistência:', consistency?.status || 'no_data');
+
       } catch (error) {
-        console.error('❌ Erro ao salvar:', error);
+        console.error('❌ Erro ao salvar resultado:', error);
       }
     }
 
     // ============================================
-    // EXIBIR RESULTADOS
+    // 17. EXIBIR RESULTADOS
     // ============================================
-    function showResults(result) {
+    function showResults(result, reliability, consistency) {
       document.getElementById('loadingOverlay').classList.remove('active');
       document.getElementById('testArea').style.display = 'none';
       document.getElementById('resultsContainer').classList.add('active');
-      
+
       document.getElementById('resultParticipant').textContent = participantData.name || '--';
       document.getElementById('resultCompany').textContent = companyData?.name || 'Autônomo';
-      document.getElementById('resultDate').textContent = new Date(result.date).toLocaleDateString('pt-BR');
-      
-      document.getElementById('profileText').textContent = `${result.dominantEmoji} ${result.dominantName} (FV™: ${result.fv})`;
-      
-      // Forças
-      document.getElementById('strengthsResult').innerHTML = `
-        <li>• Capacidade de comunicação eficaz</li>
-        <li>• Liderança e influência natural</li>
-        <li>• Resiliência e determinação</li>
-        <li>• Aprendizagem ágil</li>
-      `;
-      
-      // Fraquezas
-      document.getElementById('weaknessesResult').innerHTML = `
-        <li>• Tendência à procrastinação</li>
-        <li>• Dificuldade em delegar</li>
-        <li>• Perfeccionismo excessivo</li>
-        <li>• Ansiedade sob pressão</li>
-      `;
-      
-      // Oportunidades
-      document.getElementById('opportunitiesResult').innerHTML = `
-        <li>• Crescimento profissional acelerado</li>
-        <li>• Desenvolvimento de liderança</li>
-        <li>• Networking estratégico</li>
-        <li>• Especialização técnica</li>
-      `;
-      
-      // Ameaças
-      document.getElementById('threatsResult').innerHTML = `
-        <li>• Mercado de trabalho competitivo</li>
-        <li>• Mudanças tecnológicas</li>
-        <li>• Burnout profissional</li>
-        <li>• Estagnação de carreira</li>
-      `;
-      
-      // FV™
-      document.getElementById('fvResult').textContent = result.fv;
-      document.getElementById('fvClassResult').textContent = result.fvClass;
-      
+      document.getElementById('resultDate').textContent = new Date(result.date).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      document.getElementById('profileEmoji').textContent = result.perfilIcon;
+      document.getElementById('profileText').textContent =
+        `${result.perfil} (${result.percentages[result.topSwot]}%)`;
+
+      // Exibir SWOT Grid
+      const grid = document.getElementById('swotGrid');
+      grid.innerHTML = '';
+
+      for (const [key, value] of Object.entries(result.percentages)) {
+        const config = swotConfig[key];
+        const color = config.color;
+        const className = `swot-card swot-${key}`;
+
+        let desc = '';
+        if (value >= 75) desc = `${config.icon} ${config.label} muito forte. Excelente vantagem.`;
+        else if (value >= 50) desc = `${config.icon} ${config.label} em bom nível.`;
+        else if (value >= 25) desc = `${config.icon} ${config.label} em desenvolvimento.`;
+        else desc = `${config.icon} ${config.label} requer atenção prioritária.`;
+
+        grid.innerHTML += `
+              <div class="${className}">
+                <span class="swot-icon">${config.icon}</span>
+                <div class="swot-name">${config.label}</div>
+                <div class="swot-value">${value}%</div>
+                <div class="swot-bar">
+                  <div class="swot-bar-fill" style="width: ${value}%; background: ${color};"></div>
+                </div>
+                <div class="swot-desc">${desc}</div>
+              </div>
+            `;
+      }
+
+      // Resumo do perfil
+      const summary = `
+            <p>
+              <strong>${result.perfilIcon} Perfil Estratégico:</strong> 
+              <span style="color: ${swotConfig[result.topSwot].color};">${result.perfil}</span>
+              (${result.topPercent}%)
+            </p>
+            <p style="margin-top: 8px;">${result.perfilDesc}</p>
+            <p style="margin-top: 12px;">
+              <strong>🎯 Estratégia Recomendada:</strong> ${result.estrategia}
+            </p>
+            <p style="margin-top: 8px; color: rgba(255,255,255,0.4); font-size: 0.85rem;">
+              <strong>Área com menor pontuação:</strong> ${swotConfig[result.bottomSwot].icon} 
+              ${swotConfig[result.bottomSwot].label} (${result.bottomPercent}%)
+            </p>
+          `;
+
+      document.getElementById('profileSummary').innerHTML = summary;
+
+      // Confiabilidade
+      const reliabilityDiv = document.getElementById('resultReliability');
+      let reliabilityText = '';
+      let reliabilityClass = '';
+
+      if (reliability >= 80) {
+        reliabilityText = '🟢 Resultado Muito Confiável';
+        reliabilityClass = 'high';
+      } else if (reliability >= 60) {
+        reliabilityText = '🟡 Resultado Confiável';
+        reliabilityClass = 'medium';
+      } else if (reliability >= 40) {
+        reliabilityText = '🟠 Atenção - Verificar Respostas';
+        reliabilityClass = 'low';
+      } else {
+        reliabilityText = '🔴 Baixa Confiabilidade - Recomenda-se Refazer';
+        reliabilityClass = 'low';
+      }
+
+      reliabilityDiv.innerHTML = `
+            <span class="badge-large ${reliabilityClass}">
+              ${reliabilityText} (${reliability}%)
+            </span>
+          `;
+
+      // Consistência
+      if (consistency && consistency.status !== 'no_data') {
+        const card = document.getElementById('consistencyCard');
+        card.classList.add('active');
+
+        const statusEl = document.getElementById('consistencyStatus');
+        const detailEl = document.getElementById('consistencyDetail');
+
+        let color = '';
+        let icon = '';
+
+        if (consistency.status === 'stable') {
+          color = '#10B981';
+          icon = '✅';
+          statusEl.style.color = color;
+          statusEl.textContent = `${icon} ${consistency.message}`;
+        } else if (consistency.status === 'moderate') {
+          color = '#F59E0B';
+          icon = '⚠️';
+          statusEl.style.color = color;
+          statusEl.textContent = `${icon} ${consistency.message}`;
+        } else {
+          color = '#EF4444';
+          icon = '❌';
+          statusEl.style.color = color;
+          statusEl.textContent = `${icon} ${consistency.message}`;
+        }
+
+        detailEl.textContent = `Diferença: ${consistency.diff}% • ${consistency.recommendation}`;
+      }
+
       document.getElementById('pageNumber').textContent = '1';
-      
+
+      setTimeout(() => {
+        renderChart(result.percentages);
+      }, 300);
+
       isCompleted = true;
     }
 
     // ============================================
-    // VOLTAR AO DASHBOARD
+    // 18. RENDERIZAR GRÁFICO
+    // ============================================
+    function renderChart(percentages) {
+      try {
+        const ctx = document.getElementById('swotChart').getContext('2d');
+
+        if (chartInstance) {
+          chartInstance.destroy();
+        }
+
+        const labels = swotKeys.map(key => swotConfig[key].label);
+        const data = swotKeys.map(key => percentages[key] || 0);
+        const colors = swotKeys.map(key => swotConfig[key].color);
+
+        chartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Pontuação SWOT',
+              data: data,
+              backgroundColor: colors.map(c => c + '80'),
+              borderColor: colors,
+              borderWidth: 2,
+              borderRadius: 8,
+              maxBarThickness: 60
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    return `${context.parsed.y}%`;
+                  }
+                }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 100,
+                grid: {
+                  color: 'rgba(255,255,255,0.05)'
+                },
+                ticks: {
+                  color: 'rgba(255,255,255,0.3)',
+                  callback: function(value) {
+                    return value + '%';
+                  }
+                }
+              },
+              x: {
+                grid: {
+                  display: false
+                },
+                ticks: {
+                  color: 'rgba(255,255,255,0.5)',
+                  font: {
+                    size: 11,
+                    weight: '600'
+                  }
+                }
+              }
+            }
+          }
+        });
+
+        console.log('📊 Gráfico SWOT renderizado com sucesso');
+
+      } catch (error) {
+        console.error('❌ Erro ao renderizar gráfico:', error);
+      }
+    }
+
+    // ============================================
+    // 19. NAVEGAÇÃO
     // ============================================
     function goToDashboard() {
       window.location.href = '../dashboard.html';
     }
 
-    // ============================================
-    // TOAST
-    // ============================================
-    function showToast(message, type) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toastIcon').textContent = type === 'error' ? '❌' : '✅';
-      document.getElementById('toastMessage').textContent = message;
-      toast.className = `toast show ${type === 'error' ? 'error' : 'success'}`;
-      setTimeout(() => toast.classList.remove('show'), 4000);
+    function refazerTeste() {
+      if (!confirm('Deseja refazer a análise SWOT? Todas as respostas atuais serão perdidas.')) {
+        return;
+      }
+
+      if (!confirm('Tem certeza? Esta ação não pode ser desfeita.')) {
+        return;
+      }
+
+      answers = new Array(questions.length).fill(null);
+      answerTimes = [];
+      currentQuestionIndex = 0;
+      isCompleted = false;
+
+      timerSeconds = 0;
+      document.getElementById('timerDisplay').textContent = '⏱️ Tempo: 00:00';
+
+      document.getElementById('resultsContainer').classList.remove('active');
+      document.getElementById('testArea').style.display = 'block';
+      document.getElementById('consistencyCard').classList.remove('active');
+
+      if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
+      }
+
+      stopTimer();
+      startTimer();
+      renderQuestion();
+
+      if (window.VigorreAuth && window.VigorreAuth.logActivity) {
+        window.VigorreAuth.logActivity('Refez teste SWOT', {
+          participant: participantData.name,
+          action: 'refazer_teste'
+        });
+      }
+
+      showToast('🔄 Teste reiniciado. Boa sorte!', 'success');
     }
 
     // ============================================
-    // BLOQUEAR NAVEGAÇÃO
+    // 20. TOAST
     // ============================================
-    window.history.pushState(null, '', window.location.href);
-    window.addEventListener('popstate', function(e) {
-      if (!isCompleted) {
-        if (!confirm('Você está no meio do teste. Deseja sair?')) {
-          window.history.pushState(null, '', window.location.href);
-        } else {
-          window.location.href = '../dashboard.html';
-        }
+    function showToast(message, type) {
+      const toast = document.getElementById('toast');
+      const icon = document.getElementById('toastIcon');
+      const msg = document.getElementById('toastMessage');
+
+      if (type === 'error') {
+        icon.textContent = '❌';
+      } else if (type === 'warning') {
+        icon.textContent = '⚠️';
+      } else {
+        icon.textContent = '✅';
       }
+
+      msg.textContent = message;
+      toast.className = `toast show ${type || 'success'}`;
+
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4000);
+    }
+
+    // ============================================
+    // 21. GUARD DE NAVEGAÇÃO
+    // ============================================
+    function setupNavigationGuard() {
+      window.history.pushState(null, '', window.location.href);
+
+      window.addEventListener('popstate', function(e) {
+        if (!isCompleted) {
+          if (!confirm('Você está no meio do teste. Deseja sair? Suas respostas serão perdidas.')) {
+            window.history.pushState(null, '', window.location.href);
+          } else {
+            stopTimer();
+            window.location.href = '../dashboard.html';
+          }
+        }
+      });
+
+      window.addEventListener('beforeunload', function(e) {
+        if (!isCompleted && answers.some(a => a !== null)) {
+          e.preventDefault();
+          e.returnValue = 'Você tem respostas não salvas. Deseja realmente sair?';
+        }
+      });
+    }
+
+    // ============================================
+    // 22. EXPORTAÇÃO
+    // ============================================
+    window.addEventListener('load', function() {
+      console.log('📊 Teste SWOT carregado com sucesso!');
+      console.log('🎯 Análise Estratégica Pessoal');
+      console.log('🔒 Índice de Confiabilidade: implementado');
+      console.log('📈 Consistência com Histórico: implementado');
+      console.log('📝 Log de Auditoria: implementado');
     });
 
-    console.log('📊 Teste SWOT carregado com sucesso!');
+    // Expor variáveis para depuração
+    window.questions = questions;
+    window.answers = answers;
+    window.currentQuestionIndex = currentQuestionIndex;
+    window.testHistory = testHistory;
+    window.participantData = participantData;
+    window.swotConfig = swotConfig;
+
+    console.log('✅ Teste SWOT pronto para uso!');
+    console.log('📋 Comandos de depuração disponíveis:');
+    console.log('  - window.questions: lista de perguntas');
+    console.log('  - window.answers: respostas atuais');
+    console.log('  - window.swotConfig: configuração SWOT');
   </script>
 
 </body>
