@@ -608,6 +608,7 @@
         </div>
     </aside>
 
+    <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
 
     <!-- ============================================
@@ -622,6 +623,7 @@
             <div class="date" id="currentDate"></div>
         </div>
 
+        <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-top">
@@ -657,7 +659,9 @@
             </div>
         </div>
 
+        <!-- Dashboard Grid -->
         <div class="dashboard-grid">
+            <!-- Chart -->
             <div class="card">
                 <div class="card-header">
                     <h3>📈 Testes por Mês</h3>
@@ -668,6 +672,7 @@
                 </div>
             </div>
 
+            <!-- Quick Actions -->
             <div class="card">
                 <div class="card-header">
                     <h3>⚡ Ações Rápidas</h3>
@@ -693,6 +698,7 @@
             </div>
         </div>
 
+        <!-- Recent Activity -->
         <div class="card">
             <div class="card-header">
                 <h3>🔄 Atividade Recente</h3>
@@ -709,6 +715,7 @@
                         </tr>
                     </thead>
                     <tbody id="activityTable">
+                        <!-- Carregado via JS -->
                     </tbody>
                 </table>
             </div>
@@ -727,6 +734,9 @@
     <script>
         'use strict';
 
+        // ============================================
+        // TOGGLE SIDEBAR
+        // ============================================
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobileOverlay');
@@ -734,21 +744,31 @@
             overlay.classList.toggle('active');
         }
 
+        // ============================================
+        // LOGOUT
+        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.VigorreAuth.logout();
             }
         }
 
+        // ============================================
+        // DATA
+        // ============================================
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('pt-BR', {
             day: '2-digit',
             month: 'long',
             year: 'numeric'
         });
 
+        // ============================================
+        // INICIALIZAR DASHBOARD
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Admin Dashboard - VIGORRE ONE™');
 
+            // Verificar autenticação
             const isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../login.html';
@@ -762,25 +782,37 @@
                 return;
             }
 
+            // Atualizar nome do usuário
             document.getElementById('userName').textContent = user.name || 'Administrador';
 
+            // Carregar dados
             loadDashboardData();
+
+            // Renderizar gráfico
             renderChart();
+
+            // Renderizar atividade
             renderActivity();
         });
 
+        // ============================================
+        // CARREGAR DADOS
+        // ============================================
         function loadDashboardData() {
             try {
+                // Buscar dados do localStorage (fallback)
                 const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
                 const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                 const users = VigorreDB?.users?._data || [];
 
                 const recruiters = users.filter(u => u.role === 'recruiter' || u.role === 'admin');
 
+                // Atualizar stats
                 document.getElementById('totalCompanies').textContent = companies.length;
                 document.getElementById('totalRecruiters').textContent = recruiters.length;
                 document.getElementById('totalParticipants').textContent = participants.length;
 
+                // Contar testes realizados
                 let testsCount = 0;
                 participants.forEach(p => {
                     if (p.completedTests) testsCount += p.completedTests.length;
@@ -792,6 +824,9 @@
             }
         }
 
+        // ============================================
+        // RENDERIZAR GRÁFICO
+        // ============================================
         function renderChart() {
             try {
                 const ctx = document.getElementById('testsChart').getContext('2d');
@@ -834,6 +869,9 @@
             }
         }
 
+        // ============================================
+        // RENDERIZAR ATIVIDADE
+        // ============================================
         function renderActivity() {
             const tbody = document.getElementById('activityTable');
 
