@@ -82,24 +82,15 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .sidebar .logo .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1rem;
-            color: white;
-            flex-shrink: 0;
+        .sidebar .logo .logo-img {
+            height: 36px;
+            width: auto;
+            display: block;
         }
 
         .sidebar .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             color: white;
         }
@@ -111,7 +102,7 @@
         }
 
         .sidebar .logo .logo-text .sub {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: rgba(255, 255, 255, 0.4);
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -539,6 +530,9 @@
             .stat-card .stat-value {
                 font-size: 1.4rem;
             }
+            .sidebar .logo .logo-img {
+                height: 28px;
+            }
         }
 
         /* ============================================
@@ -556,6 +550,21 @@
             background: rgba(255, 255, 255, 0.15);
             border-radius: 4px;
         }
+
+        @media print {
+            .sidebar {
+                display: none !important;
+            }
+            .main {
+                margin-left: 0 !important;
+            }
+            .mobile-toggle {
+                display: none !important;
+            }
+            .logo-img {
+                height: 36px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -565,7 +574,7 @@
     ============================================ -->
     <aside class="sidebar" id="sidebar">
         <a href="#" class="logo">
-            <div class="logo-icon">V</div>
+            <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-text">
                 <span class="name">VIGORRE ONE<span class="tm">™</span></span>
                 <span class="sub">People Analytics Enterprise</span>
@@ -599,7 +608,6 @@
         </div>
     </aside>
 
-    <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
 
     <!-- ============================================
@@ -614,7 +622,6 @@
             <div class="date" id="currentDate"></div>
         </div>
 
-        <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-top">
@@ -650,9 +657,7 @@
             </div>
         </div>
 
-        <!-- Dashboard Grid -->
         <div class="dashboard-grid">
-            <!-- Chart -->
             <div class="card">
                 <div class="card-header">
                     <h3>📈 Testes por Mês</h3>
@@ -663,7 +668,6 @@
                 </div>
             </div>
 
-            <!-- Quick Actions -->
             <div class="card">
                 <div class="card-header">
                     <h3>⚡ Ações Rápidas</h3>
@@ -689,7 +693,6 @@
             </div>
         </div>
 
-        <!-- Recent Activity -->
         <div class="card">
             <div class="card-header">
                 <h3>🔄 Atividade Recente</h3>
@@ -706,7 +709,6 @@
                         </tr>
                     </thead>
                     <tbody id="activityTable">
-                        <!-- Carregado via JS -->
                     </tbody>
                 </table>
             </div>
@@ -725,9 +727,6 @@
     <script>
         'use strict';
 
-        // ============================================
-        // TOGGLE SIDEBAR
-        // ============================================
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobileOverlay');
@@ -735,31 +734,21 @@
             overlay.classList.toggle('active');
         }
 
-        // ============================================
-        // LOGOUT
-        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.VigorreAuth.logout();
             }
         }
 
-        // ============================================
-        // DATA
-        // ============================================
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('pt-BR', {
             day: '2-digit',
             month: 'long',
             year: 'numeric'
         });
 
-        // ============================================
-        // INICIALIZAR DASHBOARD
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Admin Dashboard - VIGORRE ONE™');
 
-            // Verificar autenticação
             const isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../login.html';
@@ -773,37 +762,25 @@
                 return;
             }
 
-            // Atualizar nome do usuário
             document.getElementById('userName').textContent = user.name || 'Administrador';
 
-            // Carregar dados
             loadDashboardData();
-
-            // Renderizar gráfico
             renderChart();
-
-            // Renderizar atividade
             renderActivity();
         });
 
-        // ============================================
-        // CARREGAR DADOS
-        // ============================================
         function loadDashboardData() {
             try {
-                // Buscar dados do localStorage (fallback)
                 const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
                 const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                 const users = VigorreDB?.users?._data || [];
 
                 const recruiters = users.filter(u => u.role === 'recruiter' || u.role === 'admin');
 
-                // Atualizar stats
                 document.getElementById('totalCompanies').textContent = companies.length;
                 document.getElementById('totalRecruiters').textContent = recruiters.length;
                 document.getElementById('totalParticipants').textContent = participants.length;
 
-                // Contar testes realizados
                 let testsCount = 0;
                 participants.forEach(p => {
                     if (p.completedTests) testsCount += p.completedTests.length;
@@ -815,9 +792,6 @@
             }
         }
 
-        // ============================================
-        // RENDERIZAR GRÁFICO
-        // ============================================
         function renderChart() {
             try {
                 const ctx = document.getElementById('testsChart').getContext('2d');
@@ -860,9 +834,6 @@
             }
         }
 
-        // ============================================
-        // RENDERIZAR ATIVIDADE
-        // ============================================
         function renderActivity() {
             const tbody = document.getElementById('activityTable');
 
