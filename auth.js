@@ -50,6 +50,7 @@ class VigorreAuth {
   // ============================================
   async login(email, password) {
     try {
+      // Tentar Supabase primeiro
       if (window.supabase) {
         try {
           const { data, error } = await window.supabase.auth.signInWithPassword({
@@ -73,11 +74,70 @@ class VigorreAuth {
         }
       }
       
-      const user = VigorreDB.users.findByEmail(email);
+      // FALLBACK: Dados locais de exemplo
+      // === CREDENCIAIS DE TESTE ===
+      // 👑 Admin: master@vigorre.com / adminvigor10
+      // 🎯 Recrutador: recrutador@teste.com / rec123
+      // 👤 Participante: participante@teste.com / part123
       
-      if (!user) throw new Error('Usuário não encontrado');
-      if (user.password !== password) throw new Error('Senha incorreta');
+      const users = [
+        {
+          id: 'admin1',
+          name: 'Administrador Master',
+          email: 'master@vigorre.com',
+          password: 'adminvigor10',
+          role: 'master',
+          permissions: ['all']
+        },
+        {
+          id: 'admin2',
+          name: 'Administrador Staff',
+          email: 'admin@vigorre.com',
+          password: 'adminvigor10',
+          role: 'admin',
+          permissions: ['view', 'create', 'edit', 'delete', 'export', 'generate_reports']
+        },
+        {
+          id: 'rec1',
+          name: 'Recrutador Teste',
+          email: 'recrutador@teste.com',
+          password: 'rec123',
+          role: 'recruiter',
+          companyIds: ['emp1', 'emp2'],
+          credits: {
+            DISC: 10,
+            IE: 8,
+            Valores: 5,
+            Lideranca: 3,
+            Clima: 3
+          },
+          phone: '(11) 99999-9999',
+          document: '123.456.789-00'
+        },
+        {
+          id: 'part1',
+          name: 'Participante Teste',
+          email: 'participante@teste.com',
+          password: 'part123',
+          role: 'participant',
+          companyId: 'emp1',
+          tests: ['DISC', 'IE', 'Valores', 'BigFive', 'SWOT'],
+          completedTests: [],
+          status: 'active'
+        }
+      ];
       
+      const user = users.find(u => u.email === email);
+      
+      if (!user) {
+        throw new Error('Usuário não encontrado');
+      }
+      
+      if (user.password !== password) {
+        throw new Error('Senha incorreta');
+      }
+      
+      // Remove a senha antes de salvar
       const { password: _, ...userData } = user;
       return this.createSession(userData);
       
@@ -94,7 +154,7 @@ class VigorreAuth {
     const session = {
       userId: userData.id,
       role: userData.role,
-      expiresAt: Date.now() + (24 * 60 * 60 * 1000),
+      expiresAt: Date.now() + (24 * 60 * 60 * 1000), // 24h
       createdAt: Date.now()
     };
     
@@ -152,7 +212,7 @@ class VigorreAuth {
     const user = this.getCurrentUser();
     if (!user) return false;
     
-    if (requiredRole === 'admin') {
+    if (requiredRole === 'admin' || requiredRole === 'master') {
       return user.role === 'admin' || user.role === 'master';
     }
     
@@ -222,6 +282,7 @@ class VigorreAuth {
     localStorage.removeItem(this.USER_KEY);
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem('vigorre_scope');
+    localStorage.removeItem('vigorre_remember');
     
     this.currentUser = null;
     console.log('👋 Usuário desconectado');
@@ -267,7 +328,7 @@ class VigorreAuth {
   }
   
   // ============================================
-  // NOVA FUNÇÃO: SALVAR HISTÓRICO DE TESTES
+  // SALVAR HISTÓRICO DE TESTES
   // ============================================
   saveTestHistory(testType, results) {
     try {
@@ -295,7 +356,7 @@ class VigorreAuth {
   }
   
   // ============================================
-  // NOVA FUNÇÃO: OBTER HISTÓRICO DE TESTES
+  // OBTER HISTÓRICO DE TESTES
   // ============================================
   getTestHistory(testType) {
     try {
@@ -309,7 +370,7 @@ class VigorreAuth {
   }
   
   // ============================================
-  // NOVA FUNÇÃO: VERIFICAR CONSISTÊNCIA DO TESTE
+  // VERIFICAR CONSISTÊNCIA DO TESTE
   // ============================================
   checkTestConsistency(testType, currentResults) {
     const history = this.getTestHistory(testType);
@@ -326,7 +387,7 @@ class VigorreAuth {
   }
   
   // ============================================
-  // NOVA FUNÇÃO: REGISTRAR ATIVIDADE
+  // REGISTRAR ATIVIDADE
   // ============================================
   logActivity(action, details) {
     try {
@@ -350,3 +411,8 @@ window.VigorreAuth = auth;
 console.log('🔐 Vigorre Auth inicializado');
 console.log('📊 Usuário atual:', auth.getCurrentUser()?.name || 'Nenhum');
 console.log('🧠 Sistema de autenticação com histórico e consistência ativado!');
+console.log('');
+console.log('🔐 Credenciais de Demonstração:');
+console.log('👑 Admin: master@vigorre.com / adminvigor10');
+console.log('🎯 Recrutador: recrutador@teste.com / rec123');
+console.log('👤 Participante: participante@teste.com / part123');
