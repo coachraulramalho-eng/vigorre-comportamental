@@ -30,7 +30,7 @@
   <style>
     /* =========================================================
        VIGORRE ONE™ — LANDING PAGE ENTERPRISE
-       Design System + A11y + Performance + Responsividade
+       v2.1 — Fix: hero overlap + WhatsApp CTA
        ========================================================= */
 
     :root {
@@ -285,6 +285,10 @@
       gap: 10px;
     }
 
+    /* =========================
+       Buttons
+       ========================= */
+
     .btn {
       position: relative;
       isolation: isolate;
@@ -297,6 +301,7 @@
       border: 1px solid transparent;
       border-radius: var(--radius-full);
       font-weight: 800;
+      font-size: 0.95rem;
       line-height: 1;
       cursor: pointer;
       transition:
@@ -344,8 +349,19 @@
       box-shadow: 0 18px 42px rgba(29, 78, 216, 0.28);
     }
 
+    .btn-whatsapp {
+      color: var(--white);
+      background: #25D366;
+      box-shadow: 0 14px 30px rgba(37, 211, 102, 0.22);
+    }
+
+    .btn-whatsapp:hover {
+      background: #1EBE5A;
+      box-shadow: 0 18px 42px rgba(37, 211, 102, 0.32);
+    }
+
     /* =========================
-       Hero
+       Hero — FIX: overlap resolvido
        ========================= */
 
     .hero {
@@ -380,14 +396,18 @@
       background: radial-gradient(circle, rgba(29, 78, 216, 0.12), transparent 70%);
     }
 
+    /* ★ FIX: grid com gap maior e proporção que evita sobreposição */
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+      grid-template-columns: 1.15fr 0.85fr;
       align-items: center;
-      gap: clamp(36px, 6vw, 72px);
+      gap: clamp(40px, 7vw, 80px);
     }
 
+    /* ★ FIX: z-index garante texto sempre acima */
     .hero-copy {
+      position: relative;
+      z-index: 2;
       max-width: 690px;
     }
 
@@ -420,17 +440,17 @@
       max-width: 780px;
       color: var(--navy);
       font-family: var(--font-display);
-      font-size: clamp(2.7rem, 6vw, 5.3rem);
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
       font-weight: 800;
-      line-height: 0.98;
-      letter-spacing: -0.065em;
+      line-height: 1.02;
+      letter-spacing: -0.055em;
     }
 
     .hero-lead {
-      max-width: 640px;
+      max-width: 580px;
       margin-top: 24px;
       color: var(--text-soft);
-      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
       line-height: 1.75;
     }
 
@@ -471,16 +491,20 @@
     }
 
     /* =========================
-       Hero panel
+       Hero panel — FIX: contido dentro da coluna
        ========================= */
 
     .hero-panel {
       position: relative;
+      z-index: 1;
+      /* ★ FIX: largura máxima impede invasão da coluna esquerda */
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .hero-panel::before {
       position: absolute;
-      inset: -18px;
+      inset: -14px;
       z-index: -1;
       content: "";
       background:
@@ -539,6 +563,7 @@
       font-size: 0.74rem;
       font-weight: 900;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .status-badge::before {
@@ -547,6 +572,7 @@
       background: #10B981;
       border-radius: 50%;
       content: "";
+      flex-shrink: 0;
     }
 
     .score-grid {
@@ -565,7 +591,7 @@
 
     .score-label {
       color: var(--slate-500);
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -575,7 +601,7 @@
       margin-top: 8px;
       color: var(--navy);
       font-family: var(--font-display);
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       font-weight: 800;
       line-height: 1;
       letter-spacing: -0.05em;
@@ -584,7 +610,7 @@
     .score-note {
       margin-top: 5px;
       color: var(--slate-500);
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 600;
     }
 
@@ -1110,8 +1136,10 @@
         max-width: none;
       }
 
+      /* ★ FIX: no tablet, painel fica abaixo do texto */
       .hero-panel {
-        max-width: 620px;
+        max-width: 560px;
+        margin: 0 auto;
       }
 
       .features-grid {
@@ -1146,6 +1174,10 @@
 
       .hero {
         padding-top: 7rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 7vw, 2.6rem);
       }
 
       .hero-actions,
@@ -1227,6 +1259,7 @@
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
 
+  <!-- ========================= HEADER ========================= -->
   <header class="site-header" data-header>
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Página inicial VIGORRE ONE">
@@ -1262,9 +1295,14 @@
     </div>
   </header>
 
+  <!-- ========================= MAIN ========================= -->
   <main id="conteudo">
+
+    <!-- ========================= HERO ========================= -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
+
+        <!-- ★ Coluna esquerda: texto sempre visível -->
         <div class="hero-copy">
           <div class="eyebrow">
             <span class="eyebrow-dot" aria-hidden="true"></span>
@@ -1283,7 +1321,7 @@
             com dados comportamentais claros.
           </p>
 
-          <div class="hero-actions" aria-label="Ações principais">
+          <div class="hero-actions">
             <a class="btn btn-primary" href="/login.html">
               Comece agora
               <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none">
@@ -1303,6 +1341,7 @@
           </div>
         </div>
 
+        <!-- ★ Coluna direita: dashboard mockup — contido na coluna -->
         <aside class="hero-panel" aria-label="Prévia visual de dashboard comportamental">
           <div class="analytics-card">
             <div class="analytics-top">
@@ -1369,11 +1408,11 @@
       </div>
     </section>
 
+    <!-- ========================= METRICS ========================= -->
     <section class="metrics" aria-labelledby="metrics-title">
       <div class="container">
         <h2 id="metrics-title" class="sr-only">Indicadores da plataforma</h2>
 
-        <!-- Substitua por métricas auditadas se estes números não forem reais. -->
         <div class="metrics-box">
           <dl class="metrics-grid">
             <div class="metric">
@@ -1400,6 +1439,7 @@
       </div>
     </section>
 
+    <!-- ========================= FEATURES ========================= -->
     <section class="section section-muted" id="features" aria-labelledby="features-title">
       <div class="container">
         <div class="section-head">
@@ -1504,6 +1544,7 @@
       </div>
     </section>
 
+    <!-- ========================= METHOD ========================= -->
     <section class="section" id="method" aria-labelledby="method-title">
       <div class="container method-grid">
         <div class="method-copy">
@@ -1554,6 +1595,7 @@
       </div>
     </section>
 
+    <!-- ========================= PLATFORM ========================= -->
     <section class="section" id="platform" aria-labelledby="platform-title">
       <div class="container">
         <div class="platform-card">
@@ -1577,6 +1619,7 @@
       </div>
     </section>
 
+    <!-- ========================= CTA ========================= -->
     <section class="cta" id="contact" aria-labelledby="cta-title">
       <div class="container">
         <div class="cta-box">
@@ -1596,7 +1639,16 @@
               </svg>
             </a>
 
-            <a class="btn btn-secondary" href="mailto:contato@vigorre.com.br">
+            <!-- ★ FIX: WhatsApp direto -->
+            <a
+              class="btn btn-whatsapp"
+              href="https://wa.me/5534991850735?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20plataforma%20VIGORRE%20ONE."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+              </svg>
               Falar com especialista
             </a>
           </div>
@@ -1605,6 +1657,7 @@
     </section>
   </main>
 
+  <!-- ========================= FOOTER ========================= -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top">
@@ -1628,7 +1681,13 @@
           <a href="/login.html">Entrar</a>
           <a href="#features">Soluções</a>
           <a href="mailto:contato@vigorre.com.br">contato@vigorre.com.br</a>
-          <a href="tel:+5534991850735">(34) 99185-0735</a>
+          <a
+            href="https://wa.me/5534991850735?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20plataforma%20VIGORRE%20ONE."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp (34) 99185-0735
+          </a>
         </nav>
       </div>
 
@@ -1639,6 +1698,7 @@
     </div>
   </footer>
 
+  <!-- ========================= SCRIPT ========================= -->
   <script>
     (() => {
       const header = document.querySelector('[data-header]');
