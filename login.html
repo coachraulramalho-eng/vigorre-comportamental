@@ -54,7 +54,6 @@
             overflow: hidden;
         }
 
-        /* Fundo decorativo */
         body::before {
             content: '';
             position: fixed;
@@ -118,20 +117,10 @@
             margin-bottom: 20px;
         }
 
-        .login-logo .logo-icon {
-            width: 44px;
+        .login-logo .logo-img {
             height: 44px;
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: white;
-            flex-shrink: 0;
-            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.25);
+            width: auto;
+            display: block;
         }
 
         .login-logo .logo-text {
@@ -377,6 +366,9 @@
             body {
                 padding: 16px;
             }
+            .login-logo .logo-img {
+                height: 32px;
+            }
         }
 
         @media print {
@@ -391,6 +383,9 @@
                 background: var(--navy) !important;
                 box-shadow: none !important;
             }
+            .login-logo .logo-img {
+                height: 36px;
+            }
         }
     </style>
 </head>
@@ -398,16 +393,14 @@
 
     <div class="login-container">
 
-        <!-- Toast -->
         <div class="toast" id="toast">
             <span id="toastIcon">✅</span>
             <span id="toastMessage">Mensagem</span>
         </div>
 
-        <!-- Header -->
         <div class="login-header">
             <a href="index.html" class="login-logo">
-                <div class="logo-icon">V</div>
+                <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
                 <div class="logo-text">
                     <span class="name">VIGORRE ONE<span class="tm">™</span></span>
                     <span class="sub">People Analytics Enterprise</span>
@@ -417,7 +410,6 @@
             <p>Entre com suas credenciais para acessar a plataforma</p>
         </div>
 
-        <!-- Formulário -->
         <form id="loginForm" onsubmit="handleLogin(event)">
             <div class="error-message" id="errorMessage">
                 ⚠️ <span id="errorText">Credenciais inválidas. Tente novamente.</span>
@@ -473,9 +465,6 @@
     <script>
         'use strict';
 
-        // ============================================
-        // HANDLE LOGIN
-        // ============================================
         async function handleLogin(event) {
             event.preventDefault();
 
@@ -486,28 +475,23 @@
             const errorMsg = document.getElementById('errorMessage');
             const errorText = document.getElementById('errorText');
 
-            // Reset
             errorMsg.classList.remove('show');
             btn.disabled = true;
             btn.textContent = '⏳ Entrando...';
 
             try {
-                // Verifica se o auth está disponível
                 if (typeof window.VigorreAuth === 'undefined') {
                     throw new Error('Sistema de autenticação não disponível.');
                 }
 
-                // Tenta fazer login
                 const user = await window.VigorreAuth.login(email, password);
 
-                // Salva preferência de lembrar
                 if (remember) {
                     localStorage.setItem('vigorre_remember', 'true');
                 } else {
                     localStorage.removeItem('vigorre_remember');
                 }
 
-                // Redireciona conforme o perfil
                 showToast('✅ Login realizado com sucesso!', 'success');
 
                 setTimeout(() => {
@@ -517,7 +501,6 @@
             } catch (error) {
                 console.error('❌ Erro no login:', error);
 
-                // Mostra mensagem de erro amigável
                 let message = 'Credenciais inválidas. Tente novamente.';
                 if (error.message === 'Usuário não encontrado') {
                     message = 'Usuário não encontrado. Verifique seu e-mail.';
@@ -537,9 +520,6 @@
             }
         }
 
-        // ============================================
-        // TOAST
-        // ============================================
         function showToast(message, type) {
             const toast = document.getElementById('toast');
             const icon = document.getElementById('toastIcon');
@@ -562,9 +542,6 @@
             }, 4000);
         }
 
-        // ============================================
-        // ENTER PARA SUBMIT
-        // ============================================
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 const form = document.getElementById('loginForm');
@@ -574,9 +551,6 @@
             }
         });
 
-        // ============================================
-        // PREENCHER CREDENCIAIS DE DEMO (CLIQUE)
-        // ============================================
         document.querySelectorAll('.login-footer a, .login-divider + div strong').forEach(el => {
             el.addEventListener('click', function(e) {
                 if (this.textContent.includes('master@vigorre.com')) {
@@ -595,9 +569,6 @@
             });
         });
 
-        // ============================================
-        // VERIFICAR SE JÁ ESTÁ LOGADO
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof window.VigorreAuth !== 'undefined') {
                 const isAuth = window.VigorreAuth.isAuthenticated();
