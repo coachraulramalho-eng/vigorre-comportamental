@@ -24,7 +24,6 @@
 
         :root {
             --navy: #0A2540;
-            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
@@ -38,7 +37,6 @@
             --radius: 16px;
             --radius-full: 9999px;
             --shadow: 0 20px 60px rgba(10, 37, 64, 0.08);
-            --shadow-hover: 0 30px 80px rgba(10, 37, 64, 0.12);
             --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -349,6 +347,52 @@
         }
 
         /* ============================================
+           CREDENCIAIS DEMO - BOTÕES RÁPIDOS
+           ============================================ */
+        .demo-credentials {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .demo-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            background: var(--gray-100);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .demo-btn:hover {
+            background: var(--white);
+            border-color: var(--blue);
+            box-shadow: 0 2px 12px rgba(29, 78, 216, 0.08);
+        }
+
+        .demo-btn .demo-emoji {
+            font-size: 1rem;
+        }
+
+        .demo-btn .demo-email {
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .demo-btn .demo-pass {
+            color: var(--gray-500);
+            font-size: 0.7rem;
+        }
+
+        /* ============================================
            RESPONSIVO
            ============================================ */
         @media (max-width: 480px) {
@@ -393,11 +437,13 @@
 
     <div class="login-container">
 
+        <!-- Toast -->
         <div class="toast" id="toast">
             <span id="toastIcon">✅</span>
             <span id="toastMessage">Mensagem</span>
         </div>
 
+        <!-- Header -->
         <div class="login-header">
             <a href="index.html" class="login-logo">
                 <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
@@ -410,6 +456,7 @@
             <p>Entre com suas credenciais para acessar a plataforma</p>
         </div>
 
+        <!-- Formulário -->
         <form id="loginForm" onsubmit="handleLogin(event)">
             <div class="error-message" id="errorMessage">
                 ⚠️ <span id="errorText">Credenciais inválidas. Tente novamente.</span>
@@ -439,14 +486,23 @@
 
             <div class="login-divider">ou</div>
 
-            <div style="text-align: center; font-size: 0.85rem; color: var(--gray-500);">
-                <strong>Credenciais de Demonstração:</strong>
-                <br />
-                👑 Admin: <strong>master@vigorre.com</strong> / <strong>adminvigor10</strong>
-                <br />
-                🎯 Recrutador: <strong>recrutador@teste.com</strong> / <strong>rec123</strong>
-                <br />
-                👤 Participante: <strong>participante@teste.com</strong> / <strong>part123</strong>
+            <!-- Credenciais de Demonstração - Botões Rápidos -->
+            <div class="demo-credentials">
+                <button type="button" class="demo-btn" onclick="fillCredentials('master@vigorre.com', 'adminvigor10')">
+                    <span class="demo-emoji">👑</span>
+                    <span><span class="demo-email">master@vigorre.com</span> / <span class="demo-pass">adminvigor10</span></span>
+                    <span style="margin-left:auto;font-size:0.65rem;color:var(--gray-400);">Admin</span>
+                </button>
+                <button type="button" class="demo-btn" onclick="fillCredentials('recrutador@teste.com', 'rec123')">
+                    <span class="demo-emoji">🎯</span>
+                    <span><span class="demo-email">recrutador@teste.com</span> / <span class="demo-pass">rec123</span></span>
+                    <span style="margin-left:auto;font-size:0.65rem;color:var(--gray-400);">Recrutador</span>
+                </button>
+                <button type="button" class="demo-btn" onclick="fillCredentials('participante@teste.com', 'part123')">
+                    <span class="demo-emoji">👤</span>
+                    <span><span class="demo-email">participante@teste.com</span> / <span class="demo-pass">part123</span></span>
+                    <span style="margin-left:auto;font-size:0.65rem;color:var(--gray-400);">Participante</span>
+                </button>
             </div>
 
             <div class="login-footer">
@@ -465,6 +521,18 @@
     <script>
         'use strict';
 
+        // ============================================
+        // PREENCHER CREDENCIAIS
+        // ============================================
+        function fillCredentials(email, password) {
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = password;
+            showToast('🔑 Credenciais preenchidas! Clique em "Entrar"', 'success');
+        }
+
+        // ============================================
+        // HANDLE LOGIN
+        // ============================================
         async function handleLogin(event) {
             event.preventDefault();
 
@@ -475,23 +543,28 @@
             const errorMsg = document.getElementById('errorMessage');
             const errorText = document.getElementById('errorText');
 
+            // Reset
             errorMsg.classList.remove('show');
             btn.disabled = true;
             btn.textContent = '⏳ Entrando...';
 
             try {
+                // Verifica se o auth está disponível
                 if (typeof window.VigorreAuth === 'undefined') {
                     throw new Error('Sistema de autenticação não disponível.');
                 }
 
+                // Tenta fazer login
                 const user = await window.VigorreAuth.login(email, password);
 
+                // Salva preferência de lembrar
                 if (remember) {
                     localStorage.setItem('vigorre_remember', 'true');
                 } else {
                     localStorage.removeItem('vigorre_remember');
                 }
 
+                // Redireciona conforme o perfil
                 showToast('✅ Login realizado com sucesso!', 'success');
 
                 setTimeout(() => {
@@ -501,6 +574,7 @@
             } catch (error) {
                 console.error('❌ Erro no login:', error);
 
+                // Mostra mensagem de erro amigável
                 let message = 'Credenciais inválidas. Tente novamente.';
                 if (error.message === 'Usuário não encontrado') {
                     message = 'Usuário não encontrado. Verifique seu e-mail.';
@@ -520,6 +594,9 @@
             }
         }
 
+        // ============================================
+        // TOAST
+        // ============================================
         function showToast(message, type) {
             const toast = document.getElementById('toast');
             const icon = document.getElementById('toastIcon');
@@ -542,6 +619,9 @@
             }, 4000);
         }
 
+        // ============================================
+        // ENTER PARA SUBMIT
+        // ============================================
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 const form = document.getElementById('loginForm');
@@ -551,24 +631,9 @@
             }
         });
 
-        document.querySelectorAll('.login-footer a, .login-divider + div strong').forEach(el => {
-            el.addEventListener('click', function(e) {
-                if (this.textContent.includes('master@vigorre.com')) {
-                    document.getElementById('email').value = 'master@vigorre.com';
-                    document.getElementById('password').value = 'adminvigor10';
-                    showToast('🔑 Credenciais Admin preenchidas!', 'success');
-                } else if (this.textContent.includes('recrutador@teste.com')) {
-                    document.getElementById('email').value = 'recrutador@teste.com';
-                    document.getElementById('password').value = 'rec123';
-                    showToast('🔑 Credenciais Recrutador preenchidas!', 'success');
-                } else if (this.textContent.includes('participante@teste.com')) {
-                    document.getElementById('email').value = 'participante@teste.com';
-                    document.getElementById('password').value = 'part123';
-                    showToast('🔑 Credenciais Participante preenchidas!', 'success');
-                }
-            });
-        });
-
+        // ============================================
+        // VERIFICAR SE JÁ ESTÁ LOGADO
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof window.VigorreAuth !== 'undefined') {
                 const isAuth = window.VigorreAuth.isAuthenticated();
@@ -585,7 +650,10 @@
         });
 
         console.log('🔐 Página de Login - VIGORRE ONE™');
-        console.log('📧 master@vigorre.com / adminvigor10');
+        console.log('🔑 Clique nos botões de demonstração para preencher as credenciais');
+        console.log('👑 Admin: master@vigorre.com / adminvigor10');
+        console.log('🎯 Recrutador: recrutador@teste.com / rec123');
+        console.log('👤 Participante: participante@teste.com / part123');
     </script>
 
 </body>
