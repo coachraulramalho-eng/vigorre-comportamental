@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Teste DISC - VIGORRE ONE™">
   <title>Teste DISC | VIGORRE ONE™</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -10,25 +11,34 @@
   
   <style>
     /* ============================================
+       VIGORRE ONE™ - TESTE DISC
+       VERSÃO COMPLETA SEM OTIMIZAÇÃO
+       ============================================ */
+    
+    /* ============================================
        CORES DO TESTE DISC (AZUL)
        ============================================ */
     :root {
-      --primary: #1D4ED8;
-      --primary-light: #60A5FA;
-      --primary-dark: #1E40AF;
-      --gradient-main: linear-gradient(135deg, #1D4ED8 0%, #60A5FA 50%, #1E40AF 100%);
-      --gradient-header: linear-gradient(135deg, #1E40AF, #1D4ED8);
-      --gradient-footer: linear-gradient(135deg, #1D4ED8, #1E40AF);
-      --shadow-color: rgba(29, 78, 216, 0.3);
+      --test-primary: #1D4ED8;
+      --test-primary-light: #60A5FA;
+      --test-primary-dark: #1E40AF;
+      --test-gradient-main: linear-gradient(135deg, #1D4ED8 0%, #60A5FA 50%, #1E40AF 100%);
+      --test-gradient-header: linear-gradient(135deg, #1E40AF, #1D4ED8);
+      --test-gradient-footer: linear-gradient(135deg, #1D4ED8, #1E40AF);
+      --test-shadow-color: rgba(29, 78, 216, 0.3);
     }
     
     /* ============================================
        BASE - ULTRA PREMIUM
        ============================================ */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       min-height: 100vh;
       background: #0F172A;
       color: #F8FAFC;
@@ -37,56 +47,81 @@
       overflow-x: hidden;
     }
     
-    /* Fundo animado */
+    /* ============================================
+       FUNDO ANIMADO
+       ============================================ */
     .bg-test {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: var(--gradient-main);
-      opacity: 0.15;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--test-gradient-main);
+      opacity: 0.12;
       z-index: 0;
       animation: floatBg 30s ease-in-out infinite;
     }
     
     @keyframes floatBg {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.02); }
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-20px) scale(1.02);
+      }
     }
     
+    /* ============================================
+       PARTÍCULAS
+       ============================================ */
     .particles {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
         radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.10), transparent),
         radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.08), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.12), transparent);
-      background-size: 200px 200px;
-      animation: floatParticles 20s linear infinite;
+        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.12), transparent),
+        radial-gradient(1px 1px at 160px 120px, rgba(255,255,255,0.06), transparent),
+        radial-gradient(1px 1px at 200px 50px, rgba(255,255,255,0.09), transparent),
+        radial-gradient(1px 1px at 300px 180px, rgba(255,255,255,0.07), transparent);
+      background-size: 250px 250px;
+      animation: floatParticles 25s linear infinite;
       pointer-events: none;
       z-index: 0;
     }
     
     @keyframes floatParticles {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-100px); }
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-120px);
+      }
     }
     
+    /* ============================================
+       CONTAINER PRINCIPAL
+       ============================================ */
     .container {
       position: relative;
       z-index: 1;
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
     }
     
     /* ============================================
-       CABEÇALHO ULTRA PREMIUM
+       CABEÇALHO PREMIUM
        ============================================ */
     .header-premium {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(30, 41, 59, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px 16px 0 0;
-      padding: 20px 32px;
+      border-radius: 20px 20px 0 0;
+      padding: 24px 36px;
       position: relative;
       overflow: hidden;
     }
@@ -97,10 +132,23 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: var(--gradient-header);
+      height: 4px;
+      background: var(--test-gradient-header);
     }
     
+    .header-premium::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    }
+    
+    /* ============================================
+       HEADER GRID
+       ============================================ */
     .header-grid {
       display: grid;
       grid-template-columns: auto 1fr auto;
@@ -110,6 +158,9 @@
       z-index: 1;
     }
     
+    /* ============================================
+       LOGO
+       ============================================ */
     .header-logo {
       display: flex;
       align-items: center;
@@ -117,26 +168,27 @@
     }
     
     .header-logo .logo-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--gradient-header);
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      background: var(--test-gradient-header);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: white;
       font-family: 'Poppins', sans-serif;
       flex-shrink: 0;
-      box-shadow: 0 4px 20px var(--shadow-color);
+      box-shadow: 0 4px 24px var(--test-shadow-color);
     }
     
     .header-logo-text .system-name {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.125rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: white;
+      letter-spacing: -0.02em;
     }
     
     .header-logo-text .system-name .tm {
@@ -147,50 +199,59 @@
     
     .header-logo-text .system-sub {
       font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.35);
       display: block;
+      letter-spacing: 0.03em;
     }
     
+    /* ============================================
+       CENTRO DO CABEÇALHO
+       ============================================ */
     .header-center {
       text-align: center;
     }
     
     .header-center .report-title {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.125rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: white;
     }
     
     .header-center .report-title .highlight {
-      background: var(--gradient-header);
+      background: var(--test-gradient-header);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .header-center .report-sub {
       font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.05em;
     }
     
+    /* ============================================
+       DIREITA DO CABEÇALHO
+       ============================================ */
     .header-right {
       text-align: right;
     }
     
     .header-right .participant-name {
-      font-size: 0.9375rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: white;
     }
     
     .header-right .participant-company {
-      font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.4);
     }
     
     .header-right .participant-id {
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.25);
       font-family: 'Courier New', monospace;
       margin-top: 2px;
     }
@@ -199,140 +260,205 @@
        CORPO DO TESTE
        ============================================ */
     .test-body {
-      background: rgba(30, 41, 59, 0.6);
+      background: rgba(30, 41, 59, 0.55);
       backdrop-filter: blur(20px);
-      border-left: 1px solid rgba(255, 255, 255, 0.06);
-      border-right: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 32px;
-      min-height: 400px;
+      -webkit-backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.04);
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 36px 36px 32px;
+      min-height: 450px;
     }
     
+    /* ============================================
+       PROGRESSO
+       ============================================ */
     .progress-section {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 24px;
       padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      flex-wrap: wrap;
+      gap: 8px;
     }
     
     .progress-text {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
       font-weight: 600;
     }
     
     .progress-bar {
       flex: 1;
-      max-width: 300px;
+      max-width: 340px;
       height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
       overflow: hidden;
       margin: 0 16px;
     }
     
     .progress-fill {
       height: 100%;
-      background: var(--gradient-header);
-      border-radius: 3px;
-      transition: width 0.5s ease;
+      background: var(--test-gradient-header);
+      border-radius: 4px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .progress-percent {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.4);
       font-size: 0.75rem;
       font-weight: 600;
-      min-width: 40px;
+      min-width: 44px;
       text-align: right;
     }
     
+    /* ============================================
+       TIMER E CONFIABILIDADE
+       ============================================ */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .status-bar .timer {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.3);
+      font-family: 'Courier New', monospace;
+    }
+    
+    .reliability-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .reliability-badge.high {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    
+    .reliability-badge.medium {
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+    
+    .reliability-badge.low {
+      background: rgba(239, 68, 68, 0.15);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    
+    /* ============================================
+       PERGUNTA
+       ============================================ */
     .question-number {
       display: inline-block;
-      padding: 4px 14px;
-      background: rgba(29, 78, 216, 0.15);
-      border: 1px solid rgba(29, 78, 216, 0.25);
+      padding: 4px 16px;
+      background: rgba(29, 78, 216, 0.12);
+      border: 1px solid rgba(29, 78, 216, 0.2);
       border-radius: 100px;
       color: #60A5FA;
       font-size: 0.75rem;
       font-weight: 700;
       margin-bottom: 16px;
+      letter-spacing: 0.03em;
     }
     
     .question-text {
-      font-size: 1.375rem;
+      font-size: 1.35rem;
       font-weight: 700;
       color: white;
-      line-height: 1.5;
-      margin-bottom: 24px;
+      line-height: 1.6;
+      margin-bottom: 28px;
     }
     
+    /* ============================================
+       OPÇÕES
+       ============================================ */
     .options-grid {
       display: grid;
       gap: 12px;
     }
     
     .option-btn {
-      padding: 16px 20px;
+      padding: 18px 24px;
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
       cursor: pointer;
       transition: all 0.3s ease;
       text-align: left;
       font-family: 'Inter', sans-serif;
-      font-size: 0.9375rem;
-      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.75);
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
     
     .option-btn:hover {
       border-color: #1D4ED8;
-      background: rgba(29, 78, 216, 0.08);
-      transform: translateX(4px);
+      background: rgba(29, 78, 216, 0.06);
+      transform: translateX(6px);
     }
     
     .option-btn.selected {
       border-color: #60A5FA;
       background: rgba(29, 78, 216, 0.12);
       color: white;
-      box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1);
+      box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.08);
     }
     
     .option-btn .letter {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.08);
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.06);
       border-radius: 50%;
       font-weight: 700;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       flex-shrink: 0;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.35);
+      transition: all 0.3s ease;
     }
     
     .option-btn.selected .letter {
       background: #1D4ED8;
       color: white;
+      box-shadow: 0 2px 12px var(--test-shadow-color);
     }
     
+    /* ============================================
+       NAVEGAÇÃO
+       ============================================ */
     .nav-buttons {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
-      margin-top: 24px;
+      gap: 16px;
+      margin-top: 28px;
       padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .btn-nav {
-      padding: 12px 32px;
+      padding: 14px 36px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 600;
       font-size: 0.875rem;
       cursor: pointer;
@@ -341,8 +467,8 @@
     }
     
     .btn-prev {
-      background: rgba(255, 255, 255, 0.06);
-      color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.5);
     }
     
     .btn-prev:hover:not(:disabled) {
@@ -351,29 +477,29 @@
     }
     
     .btn-next {
-      background: var(--gradient-header);
+      background: var(--test-gradient-header);
       color: white;
-      box-shadow: 0 4px 20px var(--shadow-color);
+      box-shadow: 0 4px 24px var(--test-shadow-color);
     }
     
     .btn-next:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 6px 30px var(--shadow-color);
+      box-shadow: 0 6px 32px var(--test-shadow-color);
     }
     
     .btn-finish {
       background: linear-gradient(135deg, #1E40AF, #1D4ED8);
       color: white;
-      box-shadow: 0 4px 20px var(--shadow-color);
+      box-shadow: 0 4px 24px var(--test-shadow-color);
     }
     
-    .btn-finish:hover {
+    .btn-finish:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 6px 30px var(--shadow-color);
+      box-shadow: 0 6px 32px var(--test-shadow-color);
     }
     
     .btn-nav:disabled {
-      opacity: 0.4;
+      opacity: 0.3;
       cursor: not-allowed;
       transform: none !important;
     }
@@ -383,50 +509,69 @@
        ============================================ */
     .results-container {
       display: none;
-      animation: fadeIn 0.6s ease;
+      animation: fadeInUp 0.6s ease;
     }
     
     .results-container.active {
       display: block;
     }
     
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
+    /* ============================================
+       CABEÇALHO DOS RESULTADOS
+       ============================================ */
     .results-header {
       text-align: center;
-      padding: 24px 0 32px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 28px 0 36px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .results-header h2 {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.75rem;
+      font-size: 1.8rem;
       color: white;
       margin-bottom: 4px;
     }
     
     .results-header .subtitle {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.85rem;
     }
     
+    /* ============================================
+       PERFIL BADGE
+       ============================================ */
     .profile-badge {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      padding: 10px 24px;
-      background: var(--gradient-header);
+      gap: 14px;
+      padding: 12px 32px;
+      background: var(--test-gradient-header);
       border-radius: 100px;
       color: white;
       font-weight: 700;
-      font-size: 1.125rem;
-      margin-top: 16px;
-      box-shadow: 0 4px 20px var(--shadow-color);
+      font-size: 1.1rem;
+      margin-top: 18px;
+      box-shadow: 0 4px 24px var(--test-shadow-color);
     }
     
+    .profile-badge .emoji {
+      font-size: 1.3rem;
+    }
+    
+    /* ============================================
+       RESULTADOS GRID
+       ============================================ */
     .results-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -436,13 +581,13 @@
     
     .result-card {
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 16px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 18px 22px;
     }
     
     .result-card .label {
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.35);
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -455,37 +600,128 @@
       margin-top: 4px;
     }
     
+    .result-card .value.success {
+      color: #34D399;
+    }
+    
+    /* ============================================
+       GRÁFICO
+       ============================================ */
     .chart-card {
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
       padding: 24px;
       margin-bottom: 16px;
     }
     
     .chart-card h3 {
       color: white;
-      font-size: 0.9375rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     
     .chart-container {
-      height: 220px;
+      height: 240px;
       position: relative;
     }
     
+    /* ============================================
+       RESUMO DO PERFIL
+       ============================================ */
+    .profile-summary {
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+    
+    .profile-summary strong {
+      color: white;
+    }
+    
+    /* ============================================
+       CARD DE CONSISTÊNCIA
+       ============================================ */
+    .consistency-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    
+    .consistency-card.active {
+      display: block;
+    }
+    
+    .consistency-card h3 {
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .consistency-card .status-text {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    
+    .consistency-card .detail-text {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.35);
+    }
+    
+    /* ============================================
+       RELIABILITY NO RESULTADO
+       ============================================ */
+    .result-reliability {
+      margin-top: 12px;
+    }
+    
+    .result-reliability .badge-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .result-reliability .badge-large.high {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    
+    .result-reliability .badge-large.medium {
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+    
+    .result-reliability .badge-large.low {
+      background: rgba(239, 68, 68, 0.15);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    
+    /* ============================================
+       AÇÕES DOS RESULTADOS
+       ============================================ */
     .result-actions {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 12px;
-      margin-top: 16px;
+      margin-top: 20px;
     }
     
     .btn-result {
-      padding: 14px 20px;
+      padding: 16px 20px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 600;
       font-size: 0.875rem;
       cursor: pointer;
@@ -494,18 +730,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
     }
     
     .btn-result-primary {
-      background: var(--gradient-header);
+      background: var(--test-gradient-header);
       color: white;
-      box-shadow: 0 4px 20px var(--shadow-color);
+      box-shadow: 0 4px 20px var(--test-shadow-color);
     }
     
     .btn-result-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 30px var(--shadow-color);
+      box-shadow: 0 6px 28px var(--test-shadow-color);
     }
     
     .btn-result-success {
@@ -515,18 +751,29 @@
     
     .btn-result-success:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn-result-warning {
+      background: linear-gradient(135deg, #F59E0B, #F97316);
+      color: white;
+    }
+    
+    .btn-result-warning:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
     }
     
     /* ============================================
-       RODAPÉ
+       RODAPÉ PREMIUM
        ============================================ */
     .footer-premium {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 0 0 16px 16px;
-      padding: 20px 32px;
+      background: rgba(30, 41, 59, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 0 0 20px 20px;
+      padding: 24px 36px;
       position: relative;
       overflow: hidden;
     }
@@ -537,8 +784,8 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 2px;
-      background: var(--gradient-footer);
+      height: 3px;
+      background: var(--test-gradient-footer);
     }
     
     .footer-grid {
@@ -556,15 +803,15 @@
     }
     
     .footer-logo .logo-icon-small {
-      width: 32px;
-      height: 32px;
-      background: var(--gradient-footer);
-      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      background: var(--test-gradient-footer);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       color: white;
       font-family: 'Poppins', sans-serif;
       flex-shrink: 0;
@@ -572,7 +819,7 @@
     
     .footer-logo-text .footer-system {
       font-family: 'Poppins', sans-serif;
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: white;
     }
@@ -585,13 +832,13 @@
     
     .footer-logo-text .footer-tagline {
       font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.25);
     }
     
     .footer-center .footer-contact {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
       flex-wrap: wrap;
     }
     
@@ -599,29 +846,30 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.35);
       font-size: 0.7rem;
       transition: color 0.3s ease;
       text-decoration: none;
     }
     
     .footer-contact-item:hover {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.6);
     }
     
     .footer-contact-item .icon {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
     }
     
     .footer-right .page-number {
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.2);
       font-size: 0.7rem;
+      font-family: 'Courier New', monospace;
     }
     
     .footer-divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-      margin: 12px 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      margin: 14px 0;
     }
     
     .footer-bottom {
@@ -629,17 +877,20 @@
       justify-content: space-between;
       align-items: center;
       font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.15);
     }
     
     /* ============================================
-       LOADING & TOAST
+       LOADING
        ============================================ */
     .loading-overlay {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(10, 22, 40, 0.9);
-      backdrop-filter: blur(10px);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 22, 40, 0.92);
+      backdrop-filter: blur(12px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -650,124 +901,243 @@
       display: flex;
     }
     
+    .loading-content {
+      text-align: center;
+    }
+    
     .loading-spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid rgba(255, 255, 255, 0.1);
+      width: 56px;
+      height: 56px;
+      border: 4px solid rgba(255, 255, 255, 0.08);
       border-top-color: #1D4ED8;
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin: 0 auto 16px;
+      margin: 0 auto 18px;
     }
     
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
     
     .loading-text {
       color: white;
       font-weight: 600;
+      font-size: 1rem;
     }
     
+    .loading-sub {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+    
+    /* ============================================
+       TOAST
+       ============================================ */
     .toast {
       position: fixed;
       top: 24px;
       right: 24px;
       background: rgba(30, 41, 59, 0.95);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 14px 24px;
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px 28px;
       color: white;
       font-weight: 600;
       font-size: 0.875rem;
       display: none;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       z-index: 1001;
-      max-width: 400px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      max-width: 420px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
       animation: slideIn 0.3s ease;
     }
     
-    .toast.show { display: flex; }
-    .toast.error { border-left: 4px solid #EF4444; }
-    .toast.success { border-left: 4px solid #10B981; }
-    
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+    .toast.show {
+      display: flex;
     }
     
+    .toast.error {
+      border-left: 4px solid #EF4444;
+    }
+    
+    .toast.success {
+      border-left: 4px solid #10B981;
+    }
+    
+    .toast.warning {
+      border-left: 4px solid #F59E0B;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    /* ============================================
+       BACK LINK
+       ============================================ */
     .back-link {
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.2);
       text-decoration: none;
       font-size: 0.75rem;
       display: inline-block;
-      margin-top: 12px;
+      margin-top: 16px;
       text-align: center;
       width: 100%;
       transition: color 0.3s ease;
     }
     
     .back-link:hover {
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.5);
     }
     
     /* ============================================
        RESPONSIVO
        ============================================ */
-    @media (max-width: 992px) {
+    @media (max-width: 1024px) {
       .header-grid {
         grid-template-columns: 1fr;
         gap: 12px;
         text-align: center;
       }
-      .header-right { text-align: center; }
-      .footer-grid { flex-direction: column; text-align: center; gap: 12px; }
-      .footer-center .footer-contact { justify-content: center; flex-direction: column; gap: 6px; }
+      .header-right {
+        text-align: center;
+      }
+      .footer-grid {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      .footer-center .footer-contact {
+        justify-content: center;
+        flex-direction: column;
+        gap: 6px;
+      }
     }
     
     @media (max-width: 768px) {
-      .header-premium { padding: 16px 20px; }
-      .test-body { padding: 20px; }
-      .question-text { font-size: 1.125rem; }
-      .results-grid { grid-template-columns: 1fr; }
-      .result-actions { grid-template-columns: 1fr; }
-      .nav-buttons { flex-wrap: wrap; }
-      .nav-buttons button { flex: 1; min-width: 100px; }
-      .progress-bar { max-width: 100%; }
+      body {
+        padding: 12px;
+      }
+      .header-premium {
+        padding: 16px 20px;
+        border-radius: 16px 16px 0 0;
+      }
+      .test-body {
+        padding: 20px;
+        min-height: 350px;
+      }
+      .question-text {
+        font-size: 1.1rem;
+      }
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+      .result-actions {
+        grid-template-columns: 1fr;
+      }
+      .nav-buttons {
+        flex-wrap: wrap;
+      }
+      .nav-buttons button {
+        flex: 1;
+        min-width: 100px;
+      }
+      .progress-bar {
+        max-width: 100%;
+      }
+      .footer-premium {
+        padding: 16px 20px;
+        border-radius: 0 0 16px 16px;
+      }
     }
     
     @media (max-width: 480px) {
-      body { padding: 12px; }
-      .header-premium { padding: 12px 16px; }
-      .test-body { padding: 16px; }
-      .option-btn { padding: 12px 16px; font-size: 0.875rem; }
-      .btn-nav { padding: 10px 16px; font-size: 0.8125rem; }
+      body {
+        padding: 8px;
+      }
+      .header-premium {
+        padding: 12px 16px;
+      }
+      .test-body {
+        padding: 14px;
+      }
+      .option-btn {
+        padding: 14px 16px;
+        font-size: 0.85rem;
+      }
+      .btn-nav {
+        padding: 10px 16px;
+        font-size: 0.8rem;
+      }
+      .profile-badge {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+      }
+      .results-header h2 {
+        font-size: 1.4rem;
+      }
+      .chart-container {
+        height: 180px;
+      }
     }
     
     /* ============================================
        IMPRESSÃO
        ============================================ */
     @media print {
-      body { background: white !important; padding: 0 !important; }
-      .container { max-width: 100% !important; }
+      body {
+        background: white !important;
+        padding: 0 !important;
+        color: #0A2540 !important;
+      }
+      
+      .bg-test, .particles {
+        display: none !important;
+      }
+      
+      .container {
+        max-width: 100% !important;
+      }
       
       .header-premium {
         background: #0A2540 !important;
         border-radius: 0 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
+        padding: 20px 30px !important;
+      }
+      
+      .header-premium::before {
+        display: none !important;
+      }
+      
+      .header-premium::after {
+        display: none !important;
       }
       
       .test-body {
         background: white !important;
         border: none !important;
-        padding: 24px !important;
+        padding: 24px 30px !important;
+        backdrop-filter: none !important;
       }
       
-      .question-text { color: #0A2540 !important; }
+      .question-text {
+        color: #0A2540 !important;
+      }
       
       .option-btn {
         border-color: #E2E8F0 !important;
@@ -787,6 +1157,8 @@
       .option-btn.selected .letter {
         background: #1D4ED8 !important;
         color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
       
       .footer-premium {
@@ -794,6 +1166,11 @@
         border-radius: 0 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
+        padding: 16px 30px !important;
+      }
+      
+      .footer-premium::before {
+        display: none !important;
       }
       
       .btn-nav, .btn-next, .btn-finish, .btn-result, .back-link,
@@ -801,48 +1178,120 @@
         display: none !important;
       }
       
-      .results-container { display: block !important; }
+      .results-container {
+        display: block !important;
+      }
       
-      .results-header h2 { color: #0A2540 !important; }
-      .result-card { background: #F8FAFC !important; border-color: #E2E8F0 !important; }
-      .result-card .value { color: #0A2540 !important; }
-      .chart-card { background: #F8FAFC !important; border-color: #E2E8F0 !important; }
-      .chart-card h3 { color: #0A2540 !important; }
+      .results-header h2 {
+        color: #0A2540 !important;
+      }
+      
+      .result-card {
+        background: #F8FAFC !important;
+        border-color: #E2E8F0 !important;
+      }
+      
+      .result-card .value {
+        color: #0A2540 !important;
+      }
+      
+      .chart-card {
+        background: #F8FAFC !important;
+        border-color: #E2E8F0 !important;
+      }
+      
+      .chart-card h3 {
+        color: #0A2540 !important;
+      }
       
       .profile-badge {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
       
-      .footer-contact-item { color: rgba(255, 255, 255, 0.6) !important; }
-      .header-right .participant-name { color: white !important; }
-      .footer-bottom { display: none !important; }
+      .footer-contact-item {
+        color: rgba(255, 255, 255, 0.6) !important;
+      }
+      
+      .header-right .participant-name {
+        color: white !important;
+      }
+      
+      .footer-bottom {
+        display: none !important;
+      }
+      
+      .reliability-badge {
+        display: none !important;
+      }
+      
+      .status-bar .timer {
+        display: none !important;
+      }
+      
+      .consistency-card {
+        display: none !important;
+      }
+      
+      .result-reliability {
+        display: none !important;
+      }
+      
+      .profile-summary {
+        color: #334155 !important;
+      }
+      
+      .profile-summary strong {
+        color: #0A2540 !important;
+      }
+      
+      .question-number {
+        color: #1D4ED8 !important;
+        border-color: #1D4ED8 !important;
+        background: rgba(29, 78, 216, 0.08) !important;
+      }
+      
+      .footer-divider {
+        display: none !important;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Fundo animado -->
+  <!-- ============================================
+       FUNDO
+  ============================================ -->
   <div class="bg-test"></div>
   <div class="particles"></div>
 
-  <!-- Loading -->
+  <!-- ============================================
+       LOADING
+  ============================================ -->
   <div class="loading-overlay" id="loadingOverlay">
-    <div style="text-align: center;">
+    <div class="loading-content">
       <div class="loading-spinner"></div>
-      <p class="loading-text">Calculando seu perfil DISC...</p>
+      <p class="loading-text">Processando seu perfil DISC</p>
+      <p class="loading-sub">Análise comportamental avançada</p>
     </div>
   </div>
 
-  <!-- Toast -->
+  <!-- ============================================
+       TOAST
+  ============================================ -->
   <div class="toast" id="toast">
     <span id="toastIcon">✅</span>
     <span id="toastMessage">Mensagem</span>
   </div>
 
+  <!-- ============================================
+       CONTAINER PRINCIPAL
+  ============================================ -->
   <div class="container">
-    
-    <!-- CABEÇALHO -->
+
+    <!-- ============================================
+         CABEÇALHO
+    ============================================ -->
     <header class="header-premium">
       <div class="header-grid">
         <div class="header-logo">
@@ -852,14 +1301,14 @@
             <span class="system-sub">People Analytics Enterprise</span>
           </div>
         </div>
-        
+
         <div class="header-center">
           <div class="report-title">
             <span class="highlight">Teste DISC</span>
           </div>
-          <div class="report-sub">Assessment Comportamental</div>
+          <div class="report-sub">Assessment Comportamental • Modelo Marston</div>
         </div>
-        
+
         <div class="header-right">
           <div class="participant-name" id="participantName">Carregando...</div>
           <div class="participant-company" id="participantCompany">Empresa: --</div>
@@ -867,10 +1316,15 @@
         </div>
       </div>
     </header>
-    
-    <!-- CORPO -->
+
+    <!-- ============================================
+         CORPO DO TESTE
+    ============================================ -->
     <div class="test-body">
-      
+
+      <!-- ============================================
+           PROGRESSO
+      ============================================ -->
       <div class="progress-section">
         <span class="progress-text" id="progressText">Questão 1 de 24</span>
         <div class="progress-bar">
@@ -878,15 +1332,27 @@
         </div>
         <span class="progress-percent" id="progressPercent">4%</span>
       </div>
-      
+
+      <!-- ============================================
+           STATUS BAR (TIMER + CONFIABILIDADE)
+      ============================================ -->
+      <div class="status-bar">
+        <span class="timer" id="timerDisplay">⏱️ Tempo: 00:00</span>
+        <span class="reliability-badge high" id="reliabilityBadge">✅ Confiabilidade: --</span>
+      </div>
+
+      <!-- ============================================
+           ÁREA DO TESTE
+      ============================================ -->
       <div id="testArea">
+
         <div class="question-number" id="questionNumber">Questão 1 de 24</div>
         <div class="question-text" id="questionText">Carregando pergunta...</div>
-        
+
         <div class="options-grid" id="optionsContainer">
-          <!-- Opções carregadas via JS -->
+          <!-- Opções carregadas via JavaScript -->
         </div>
-        
+
         <div class="nav-buttons">
           <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
             ← Anterior
@@ -895,20 +1361,26 @@
             Próxima →
           </button>
         </div>
+
       </div>
-      
-      <!-- Resultados -->
+
+      <!-- ============================================
+           RESULTADOS
+      ============================================ -->
       <div class="results-container" id="resultsContainer">
-        
+
+        <!-- Cabeçalho dos Resultados -->
         <div class="results-header">
           <h2>📊 Resultado do Teste DISC</h2>
-          <p class="subtitle">Análise comportamental baseada no modelo DISC</p>
+          <p class="subtitle">Análise comportamental baseada no modelo DISC de William Marston</p>
           <div class="profile-badge" id="profileBadge">
-            <span id="profileEmoji">📊</span>
+            <span class="emoji" id="profileEmoji">📊</span>
             <span id="profileText">Perfil: --</span>
           </div>
+          <div class="result-reliability" id="resultReliability"></div>
         </div>
-        
+
+        <!-- Cards de Informação -->
         <div class="results-grid">
           <div class="result-card">
             <div class="label">Participante</div>
@@ -924,38 +1396,63 @@
           </div>
           <div class="result-card">
             <div class="label">Status</div>
-            <div class="value" style="color: #34D399;">✅ Concluído</div>
+            <div class="value success" id="resultStatus">✅ Concluído</div>
           </div>
         </div>
-        
+
+        <!-- Gráfico DISC -->
         <div class="chart-card">
           <h3>📈 Distribuição dos Fatores DISC</h3>
           <div class="chart-container">
             <canvas id="discChart"></canvas>
           </div>
         </div>
-        
+
+        <!-- Resumo do Perfil -->
         <div class="chart-card">
           <h3>💡 Resumo do Perfil</h3>
-          <p id="profileSummary" style="color: rgba(255, 255, 255, 0.8); line-height: 1.7; font-size: 0.9375rem;">
+          <div class="profile-summary" id="profileSummary">
             Carregando resumo...
-          </p>
+          </div>
         </div>
-        
+
+        <!-- Análise por Cargo -->
+        <div class="chart-card" id="jobAnalysisCard">
+          <h3>🎯 Análise por Cargo</h3>
+          <div id="jobAnalysisContent">
+            <p style="color: rgba(255,255,255,0.4); font-size: 0.85rem;">Carregando análise...</p>
+          </div>
+        </div>
+
+        <!-- Card de Consistência -->
+        <div class="consistency-card" id="consistencyCard">
+          <h3>📊 Consistência dos Resultados</h3>
+          <div id="consistencyContent">
+            <p class="status-text" id="consistencyStatus">--</p>
+            <p class="detail-text" id="consistencyDetail">--</p>
+          </div>
+        </div>
+
+        <!-- Ações -->
         <div class="result-actions">
           <button class="btn-result btn-result-primary" onclick="window.print()">
-            🖨️ Imprimir Resultado
+            🖨️ Imprimir
           </button>
           <button class="btn-result btn-result-success" onclick="goToDashboard()">
-            📊 Voltar ao Dashboard
+            📊 Dashboard
+          </button>
+          <button class="btn-result btn-result-warning" onclick="refazerTeste()">
+            🔄 Refazer Teste
           </button>
         </div>
-        
+
       </div>
-      
+
     </div>
-    
-    <!-- RODAPÉ -->
+
+    <!-- ============================================
+         RODAPÉ
+    ============================================ -->
     <footer class="footer-premium">
       <div class="footer-grid">
         <div class="footer-logo">
@@ -965,7 +1462,7 @@
             <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
           </div>
         </div>
-        
+
         <div class="footer-center">
           <div class="footer-contact">
             <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
@@ -982,67 +1479,194 @@
             </a>
           </div>
         </div>
-        
+
         <div class="footer-right">
           <div class="page-number">
             Página <span id="pageNumber">1</span>
           </div>
         </div>
       </div>
-      
+
       <div class="footer-divider"></div>
-      
+
       <div class="footer-bottom">
         <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
-        <span>v1.0</span>
+        <span>v2.0 - Motor Avançado</span>
       </div>
     </footer>
-    
+
   </div>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- ============================================
+       SCRIPTS
+  ============================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+  </script>
   <script src="../../supabase-config.js"></script>
   <script src="../../auth.js"></script>
   <script src="../../middleware/auth-guard.js"></script>
 
   <script>
+    /* ================================================
+       VIGORRE ONE™ - TESTE DISC
+       VERSÃO COMPLETA COM MOTOR AVANÇADO
+       ================================================ */
+
     'use strict';
 
     // ============================================
-    // DADOS DO TESTE DISC (24 PERGUNTAS)
+    // 1. DADOS DO TESTE (24 PERGUNTAS)
     // ============================================
-    const questions = [
-      { id: 1, text: 'Em uma equipe, você geralmente assume a liderança naturalmente?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 2, text: 'Você prefere trabalhar em tarefas que exigem detalhamento e precisão?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 3, text: 'Você se considera uma pessoa paciente e calma sob pressão?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 4, text: 'Você gosta de influenciar e persuadir outras pessoas?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 5, text: 'Você prefere seguir regras e procedimentos estabelecidos?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 6, text: 'Você se sente motivado por desafios e metas ousadas?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 7, text: 'Você valoriza a harmonia e evita conflitos?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 8, text: 'Você se adapta facilmente a mudanças inesperadas?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 9, text: 'Você prefere trabalhar de forma independente?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 10, text: 'Você gosta de ensinar e orientar outras pessoas?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 11, text: 'Você se considera uma pessoa organizada e metódica?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 12, text: 'Você toma decisões rapidamente?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 13, text: 'Você evita correr riscos desnecessários?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 14, text: 'Você gosta de ser o centro das atenções?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 15, text: 'Você é persistente em alcançar seus objetivos?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 16, text: 'Você se preocupa com os sentimentos dos outros?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 17, text: 'Você prefere ambientes estáveis e previsíveis?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 18, text: 'Você é criativo e gosta de inovar?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 19, text: 'Você se sente confortável em situações de pressão?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 20, text: 'Você prefere delegar tarefas a fazer tudo sozinho?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 21, text: 'Você é detalhista e atento a pequenos erros?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 22, text: 'Você é otimista e contagia os outros com sua energia?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 23, text: 'Você prefere ouvir a falar em reuniões?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] },
-      { id: 24, text: 'Você gosta de encerrar tarefas antes de começar outras?', options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'] }
+    const questions = [{
+        id: 1,
+        text: 'Em uma equipe, você geralmente assume a liderança naturalmente?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'D'
+      },
+      {
+        id: 2,
+        text: 'Você prefere trabalhar em tarefas que exigem detalhamento e precisão?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'C'
+      },
+      {
+        id: 3,
+        text: 'Você se considera uma pessoa paciente e calma sob pressão?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'S'
+      },
+      {
+        id: 4,
+        text: 'Você gosta de influenciar e persuadir outras pessoas?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'I'
+      },
+      {
+        id: 5,
+        text: 'Você prefere seguir regras e procedimentos estabelecidos?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'C'
+      },
+      {
+        id: 6,
+        text: 'Você se sente motivado por desafios e metas ousadas?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'D'
+      },
+      {
+        id: 7,
+        text: 'Você valoriza a harmonia e evita conflitos?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'S'
+      },
+      {
+        id: 8,
+        text: 'Você se adapta facilmente a mudanças inesperadas?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'I'
+      },
+      {
+        id: 9,
+        text: 'Você prefere trabalhar de forma independente?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'D'
+      },
+      {
+        id: 10,
+        text: 'Você gosta de ensinar e orientar outras pessoas?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'I'
+      },
+      {
+        id: 11,
+        text: 'Você se considera uma pessoa organizada e metódica?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'C'
+      },
+      {
+        id: 12,
+        text: 'Você toma decisões rapidamente?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'D'
+      },
+      {
+        id: 13,
+        text: 'Você evita correr riscos desnecessários?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'S'
+      },
+      {
+        id: 14,
+        text: 'Você gosta de ser o centro das atenções?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'I'
+      },
+      {
+        id: 15,
+        text: 'Você é persistente em alcançar seus objetivos?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'D'
+      },
+      {
+        id: 16,
+        text: 'Você se preocupa com os sentimentos dos outros?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'S'
+      },
+      {
+        id: 17,
+        text: 'Você prefere ambientes estáveis e previsíveis?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'S'
+      },
+      {
+        id: 18,
+        text: 'Você é criativo e gosta de inovar?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'I'
+      },
+      {
+        id: 19,
+        text: 'Você se sente confortável em situações de pressão?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'D'
+      },
+      {
+        id: 20,
+        text: 'Você prefere delegar tarefas a fazer tudo sozinho?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'I'
+      },
+      {
+        id: 21,
+        text: 'Você é detalhista e atento a pequenos erros?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'C'
+      },
+      {
+        id: 22,
+        text: 'Você é otimista e contagia os outros com sua energia?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'I'
+      },
+      {
+        id: 23,
+        text: 'Você prefere ouvir a falar em reuniões?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'S'
+      },
+      {
+        id: 24,
+        text: 'Você gosta de encerrar tarefas antes de começar outras?',
+        options: ['Sempre', 'Frequentemente', 'Às vezes', 'Raramente'],
+        type: 'C'
+      }
     ];
 
     // ============================================
-    // ESTADO
+    // 2. ESTADO DA APLICAÇÃO
     // ============================================
-    let currentQuestion = 0;
+    let currentQuestionIndex = 0;
     let answers = new Array(questions.length).fill(null);
     let currentUser = null;
     let participantData = null;
@@ -1050,83 +1674,164 @@
     let chartInstance = null;
     let isCompleted = false;
 
+    // Timer
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let questionStartTime = Date.now();
+    let answerTimes = [];
+
+    // Histórico
+    let testHistory = [];
+
     // ============================================
-    // INICIALIZAÇÃO
+    // 3. INICIALIZAÇÃO
     // ============================================
     document.addEventListener('DOMContentLoaded', function() {
       console.log('📊 Teste DISC - VIGORRE ONE™');
-      
+      console.log('🧠 Motor Avançado de Avaliação Comportamental');
+
+      // Verificar autenticação
       const isAuth = window.VigorreAuth.isAuthenticated();
-      if (!isAuth) { window.location.href = '../../login.html'; return; }
-      
+      if (!isAuth) {
+        window.location.href = '../../login.html';
+        return;
+      }
+
       currentUser = window.VigorreAuth.getCurrentUser();
       if (!currentUser || currentUser.role !== 'participant') {
         alert('⚠️ Acesso restrito a participantes.');
         window.VigorreAuth.logout();
         return;
       }
-      
+
+      // Carregar dados do participante
       loadParticipantData();
+
+      // Iniciar timer
+      startTimer();
+
+      // Bloquear navegação
+      setupNavigationGuard();
+
+      console.log('✅ Teste DISC inicializado com sucesso');
     });
 
+    // ============================================
+    // 4. CARREGAR DADOS DO PARTICIPANTE
+    // ============================================
     function loadParticipantData() {
       try {
+        // Buscar do Supabase ou localStorage
         const allParticipants = VigorreDB.participants.findAll();
         participantData = allParticipants.find(p => p.id === currentUser.id);
-        
+
         if (!participantData) {
-          participantData = { 
-            id: currentUser.id, 
-            name: currentUser.name || 'Participante', 
-            companyId: currentUser.companyId || null 
+          participantData = {
+            id: currentUser.id,
+            name: currentUser.name || 'Participante',
+            companyId: currentUser.companyId || null,
+            tests: ['DISC', 'IE', 'Valores', 'BigFive', 'SWOT'],
+            completedTests: [],
+            results: {}
           };
         }
-        
+
+        // Buscar empresa
         if (participantData.companyId) {
           companyData = VigorreDB.companies.findById(participantData.companyId);
         }
-        
+
         const companyName = companyData?.name || 'Autônomo';
+
+        // Atualizar UI
         document.getElementById('participantName').textContent = participantData.name || 'Participante';
         document.getElementById('participantCompany').textContent = `Empresa: ${companyName}`;
         document.getElementById('participantId').textContent = `ID: ${participantData.id || '--'}`;
-        
+
+        // Carregar histórico de testes
+        loadTestHistory();
+
+        // Renderizar primeira pergunta
         renderQuestion();
-        
+
       } catch (error) {
-        console.error('❌ Erro:', error);
-        showToast('Erro ao carregar dados', 'error');
+        console.error('❌ Erro ao carregar dados:', error);
+        showToast('Erro ao carregar dados do participante', 'error');
       }
     }
 
+    // ============================================
+    // 5. CARREGAR HISTÓRICO DE TESTES
+    // ============================================
+    function loadTestHistory() {
+      try {
+        if (window.VigorreAuth && window.VigorreAuth.getTestHistory) {
+          testHistory = window.VigorreAuth.getTestHistory('DISC');
+          console.log(`📚 Histórico de testes DISC: ${testHistory.length} registros`);
+        }
+      } catch (error) {
+        console.error('❌ Erro ao carregar histórico:', error);
+        testHistory = [];
+      }
+    }
+
+    // ============================================
+    // 6. TIMER
+    // ============================================
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+        const secs = String(timerSeconds % 60).padStart(2, '0');
+        document.getElementById('timerDisplay').textContent = `⏱️ Tempo: ${mins}:${secs}`;
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+
+    // ============================================
+    // 7. RENDERIZAR PERGUNTA
+    // ============================================
     function renderQuestion() {
-      const q = questions[currentQuestion];
+      const q = questions[currentQuestionIndex];
       const total = questions.length;
-      const progress = ((currentQuestion + 1) / total) * 100;
-      
-      document.getElementById('questionNumber').textContent = `Questão ${currentQuestion + 1} de ${total}`;
-      document.getElementById('progressText').textContent = `Questão ${currentQuestion + 1} de ${total}`;
+      const progress = ((currentQuestionIndex + 1) / total) * 100;
+
+      // Registrar tempo da pergunta
+      questionStartTime = Date.now();
+
+      // Atualizar UI
+      document.getElementById('questionNumber').textContent = `Questão ${currentQuestionIndex + 1} de ${total}`;
+      document.getElementById('progressText').textContent = `Questão ${currentQuestionIndex + 1} de ${total}`;
       document.getElementById('progressFill').style.width = `${progress}%`;
       document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
       document.getElementById('questionText').textContent = q.text;
-      
+
+      // Renderizar opções
       const container = document.getElementById('optionsContainer');
       const letters = ['A', 'B', 'C', 'D'];
-      
+
       container.innerHTML = q.options.map((opt, idx) => {
-        const isSelected = answers[currentQuestion] === idx;
+        const isSelected = answers[currentQuestionIndex] === idx;
         return `
-          <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectOption(${idx})">
-            <span class="letter">${letters[idx]}</span>
-            ${opt}
-          </button>
-        `;
+              <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectOption(${idx})">
+                <span class="letter">${letters[idx]}</span>
+                ${opt}
+              </button>
+            `;
       }).join('');
-      
-      document.getElementById('btnPrev').disabled = currentQuestion === 0;
-      
+
+      // Atualizar navegação
+      document.getElementById('btnPrev').disabled = currentQuestionIndex === 0;
+
       const nextBtn = document.getElementById('btnNext');
-      if (currentQuestion === total - 1) {
+      if (currentQuestionIndex === total - 1) {
         nextBtn.textContent = '📊 Finalizar Teste';
         nextBtn.className = 'btn-nav btn-finish';
         nextBtn.onclick = finishTest;
@@ -1135,113 +1840,423 @@
         nextBtn.className = 'btn-nav btn-next';
         nextBtn.onclick = nextQuestion;
       }
+
+      // Atualizar badge de confiabilidade
+      updateReliabilityBadge();
     }
 
+    // ============================================
+    // 8. SELECIONAR OPÇÃO
+    // ============================================
     function selectOption(index) {
-      answers[currentQuestion] = index;
+      // Registrar tempo da resposta
+      const timeSpent = (Date.now() - questionStartTime) / 1000;
+      answerTimes[currentQuestionIndex] = timeSpent;
+
+      answers[currentQuestionIndex] = index;
       renderQuestion();
+
+      // Atualizar confiabilidade
+      updateReliabilityBadge();
     }
 
+    // ============================================
+    // 9. NAVEGAÇÃO
+    // ============================================
     function nextQuestion() {
-      if (answers[currentQuestion] === null) {
+      if (answers[currentQuestionIndex] === null) {
         showToast('⚠️ Selecione uma opção antes de continuar.', 'error');
         return;
       }
-      if (currentQuestion < questions.length - 1) {
-        currentQuestion++;
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
         renderQuestion();
       }
     }
 
     function prevQuestion() {
-      if (currentQuestion > 0) {
-        currentQuestion--;
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
         renderQuestion();
       }
     }
 
-    function finishTest() {
-      if (answers[currentQuestion] === null) {
-        showToast('⚠️ Selecione uma opção para a última questão.', 'error');
+    // ============================================
+    // 10. ÍNDICE DE CONFIABILIDADE
+    // ============================================
+    function updateReliabilityBadge() {
+      const answered = answers.filter(a => a !== null).length;
+      if (answered < 3) {
+        document.getElementById('reliabilityBadge').textContent = '✅ Confiabilidade: Aguardando...';
         return;
       }
-      
-      const total = answers.filter(a => a !== null).length;
-      const remaining = questions.length - total;
-      
-      if (remaining > 0) {
-        if (!confirm(`Você respondeu ${total} de ${questions.length} questões. ${remaining} não respondidas. Finalizar mesmo assim?`)) {
-          return;
-        }
+
+      // Calcular confiabilidade
+      let reliability = 100;
+
+      // 10.1 Tempo médio por resposta
+      const validTimes = answerTimes.filter(t => t !== undefined && t !== null);
+      if (validTimes.length > 0) {
+        const avgTime = validTimes.reduce((a, b) => a + b, 0) / validTimes.length;
+
+        if (avgTime < 3) reliability -= 20;
+        if (avgTime < 2) reliability -= 20;
+        if (avgTime < 1.5) reliability -= 20;
+        if (avgTime > 30) reliability -= 10;
+        if (avgTime > 60) reliability -= 15;
       }
-      
-      if (!confirm('Finalizar teste DISC? Suas respostas serão salvas.')) {
-        return;
+
+      // 10.2 Variabilidade das respostas
+      const uniqueAnswers = new Set(answers.filter(a => a !== null));
+      if (uniqueAnswers.size < 2 && answered >= 8) reliability -= 15;
+      if (uniqueAnswers.size === 1 && answered >= 12) reliability -= 25;
+
+      // 10.3 Padrões suspeitos (todas as respostas na mesma posição)
+      const positionCount = {};
+      answers.filter(a => a !== null).forEach(a => {
+        positionCount[a] = (positionCount[a] || 0) + 1;
+      });
+      const maxCount = Math.max(...Object.values(positionCount));
+      if (maxCount / answered > 0.7 && answered >= 10) reliability -= 20;
+
+      // 10.4 Contradições lógicas (DISC)
+      // Se D alto e S alto ao mesmo tempo
+      const dAnswers = questions.filter((q, idx) => q.type === 'D' && answers[idx] !== null);
+      const sAnswers = questions.filter((q, idx) => q.type === 'S' && answers[idx] !== null);
+      if (dAnswers.length > 0 && sAnswers.length > 0) {
+        const dAvg = dAnswers.reduce((sum, q, idx) => {
+          const actualIdx = questions.indexOf(q);
+          return sum + (4 - answers[actualIdx]);
+        }, 0) / dAnswers.length;
+        const sAvg = sAnswers.reduce((sum, q, idx) => {
+          const actualIdx = questions.indexOf(q);
+          return sum + (4 - answers[actualIdx]);
+        }, 0) / sAnswers.length;
+        if (dAvg > 3.5 && sAvg > 3.5) reliability -= 20;
       }
-      
-      document.getElementById('loadingOverlay').classList.add('active');
-      
-      setTimeout(() => {
-        const result = calculateResult();
-        saveResult(result);
-        showResults(result);
-      }, 1500);
+
+      reliability = Math.max(0, Math.min(100, Math.round(reliability)));
+
+      // Atualizar badge
+      const badge = document.getElementById('reliabilityBadge');
+      let status = '';
+      let colorClass = '';
+
+      if (reliability >= 80) {
+        status = 'Muito Confiável';
+        colorClass = 'high';
+      } else if (reliability >= 60) {
+        status = 'Confiável';
+        colorClass = 'medium';
+      } else if (reliability >= 40) {
+        status = 'Atenção';
+        colorClass = 'low';
+      } else {
+        status = 'Baixa Confiabilidade';
+        colorClass = 'low';
+      }
+
+      badge.className = `reliability-badge ${colorClass}`;
+      badge.textContent = `✅ Confiabilidade: ${reliability}% (${status})`;
     }
 
+    // ============================================
+    // 11. CALCULAR RESULTADO
+    // ============================================
     function calculateResult() {
       const scores = { D: 0, I: 0, S: 0, C: 0 };
-      
-      answers.forEach((ans, idx) => {
-        if (ans !== null) {
-          const profile = ['D', 'I', 'S', 'C'][idx % 4];
-          scores[profile] += (4 - ans);
+      const counts = { D: 0, I: 0, S: 0, C: 0 };
+
+      questions.forEach((q, idx) => {
+        if (answers[idx] !== null) {
+          const type = q.type;
+          scores[type] += (4 - answers[idx]);
+          counts[type]++;
         }
       });
-      
-      const maxScore = Object.values(scores).reduce((a, b) => a + b, 0) || 1;
-      const percentages = {};
-      for (const [key, value] of Object.entries(scores)) {
-        percentages[key] = Math.round((value / maxScore) * 100);
+
+      // Calcular médias
+      const averages = {};
+      for (const key of ['D', 'I', 'S', 'C']) {
+        averages[key] = counts[key] > 0 ? scores[key] / counts[key] : 0;
       }
-      
+
+      // Normalizar para porcentagem (0-100)
+      const maxScore = Math.max(...Object.values(averages), 1);
+      const percentages = {};
+      for (const key of ['D', 'I', 'S', 'C']) {
+        percentages[key] = Math.round((averages[key] / 4) * 100);
+      }
+
+      // Determinar perfil dominante
       let dominant = 'D';
       let maxValue = 0;
-      for (const [key, value] of Object.entries(percentages)) {
-        if (value > maxValue) {
-          maxValue = value;
+      for (const key of ['D', 'I', 'S', 'C']) {
+        if (percentages[key] > maxValue) {
+          maxValue = percentages[key];
           dominant = key;
         }
       }
-      
+
+      // Nomes e descrições dos perfis
       const profileNames = {
         D: 'Dominância',
         I: 'Influência',
         S: 'Estabilidade',
         C: 'Conformidade'
       };
-      
-      const profileDescs = {
-        D: 'Você é uma pessoa orientada a resultados, determinada e com forte capacidade de liderança.',
-        I: 'Você é uma pessoa comunicativa, persuasiva e que inspira os outros.',
-        S: 'Você é uma pessoa calma, paciente e confiável. Valoriza a estabilidade.',
-        C: 'Você é uma pessoa analítica, detalhista e precisa. Valoriza a qualidade.'
+
+      const profileEmojis = {
+        D: '🦁',
+        I: '🦚',
+        S: '🐘',
+        C: '🦉'
       };
-      
+
+      const profileDescs = {
+        D: 'Você é uma pessoa orientada a resultados, determinada e com forte capacidade de liderança. Toma decisões rápidas e gosta de desafios. Tem energia para iniciar projetos e influenciar pessoas com sua visão.',
+        I: 'Você é uma pessoa comunicativa, persuasiva e que inspira os outros. Tem facilidade para se conectar, criar relacionamentos e motivar equipes. É otimista, criativo e gosta de estar no centro das atenções.',
+        S: 'Você é uma pessoa calma, paciente e confiável. Valoriza a estabilidade, harmonia e o trabalho em equipe. É um excelente ouvinte, mediador e suporte para os colegas. Preza pela consistência e previsibilidade.',
+        C: 'Você é uma pessoa analítica, detalhista e precisa. Valoriza a qualidade, a precisão e a organização. Tem um olhar crítico para os detalhes e busca a excelência em tudo que faz. É disciplinado e metódico.'
+      };
+
+      // Forças e áreas de desenvolvimento
+      const strengths = {
+        D: ['Liderança', 'Tomada de decisão', 'Iniciativa', 'Foco em resultados', 'Coragem'],
+        I: ['Comunicação', 'Persuasão', 'Criatividade', 'Networking', 'Motivação'],
+        S: ['Paciência', 'Empatia', 'Estabilidade', 'Colaboração', 'Escuta ativa'],
+        C: ['Precisão', 'Análise', 'Organização', 'Disciplina', 'Qualidade']
+      };
+
+      const development = {
+        D: ['Paciência processual', 'Escuta ativa', 'Delegação', 'Empatia', 'Flexibilidade'],
+        I: ['Foco em execução', 'Cumprimento de prazos', 'Estruturação', 'Detalhamento', 'Paciência'],
+        S: ['Assertividade', 'Comunicação influente', 'Tomada de decisão ágil', 'Iniciativa', 'Adaptação'],
+        C: ['Flexibilidade', 'Agilidade decisória', 'Adaptação a mudanças', 'Comunicação direta', 'Delegação']
+      };
+
+      // Recomendações de carreira
+      const careers = {
+        D: ['Empreendedorismo', 'Gestão Executiva', 'Liderança de Projetos', 'Consultoria Estratégica', 'Vendas'],
+        I: ['Vendas', 'Marketing', 'Relações Públicas', 'Treinamento', 'Desenvolvimento de Pessoas'],
+        S: ['Recursos Humanos', 'Atendimento ao Cliente', 'Suporte', 'Coordenação de Equipes', 'Mediação'],
+        C: ['Análise de Dados', 'Planejamento', 'Qualidade', 'Auditoria', 'Gestão de Processos']
+      };
+
+      // Perfil detalhado
+      const profileDetails = {
+        D: {
+          title: 'Perfil Dominante (D)',
+          description: 'Orientado a resultados, competitivo, direto e decidido. Gosta de desafios e autoridade.',
+          bestEnvironments: ['Ambientes dinâmicos', 'Desafios constantes', 'Liderança de equipes', 'Tomada de decisão']
+        },
+        I: {
+          title: 'Perfil Influente (I)',
+          description: 'Comunicativo, persuasivo, otimista e sociável. Gosta de interagir e influenciar.',
+          bestEnvironments: ['Ambientes colaborativos', 'Networking', 'Criatividade', 'Relacionamento com pessoas']
+        },
+        S: {
+          title: 'Perfil Estável (S)',
+          description: 'Calmo, paciente, leal e confiável. Valoriza a harmonia e a estabilidade.',
+          bestEnvironments: ['Ambientes estruturados', 'Equipes estáveis', 'Suporte e atendimento', 'Processos previsíveis']
+        },
+        C: {
+          title: 'Perfil Conforme (C)',
+          description: 'Analítico, preciso, detalhista e disciplinado. Valoriza a qualidade e a exatidão.',
+          bestEnvironments: ['Ambientes estruturados', 'Processos definidos', 'Análise de dados', 'Controle de qualidade']
+        }
+      };
+
       return {
         scores: scores,
+        averages: averages,
         percentages: percentages,
         dominant: dominant,
         dominantName: profileNames[dominant],
+        dominantEmoji: profileEmojis[dominant],
         dominantDesc: profileDescs[dominant],
-        date: new Date().toISOString()
+        strengths: strengths[dominant],
+        development: development[dominant],
+        careers: careers[dominant],
+        profileTitle: profileDetails[dominant].title,
+        profileDescription: profileDetails[dominant].description,
+        bestEnvironments: profileDetails[dominant].bestEnvironments,
+        date: new Date().toISOString(),
+        reliability: 0
       };
     }
 
-    function saveResult(result) {
+    // ============================================
+    // 12. FINALIZAR TESTE
+    // ============================================
+    function finishTest() {
+      if (answers[currentQuestionIndex] === null) {
+        showToast('⚠️ Selecione uma opção para a última questão.', 'error');
+        return;
+      }
+
+      const total = answers.filter(a => a !== null).length;
+      const remaining = questions.length - total;
+
+      if (remaining > 0) {
+        if (!confirm(`Você respondeu ${total} de ${questions.length} questões. ${remaining} não respondidas. Finalizar mesmo assim?`)) {
+          return;
+        }
+      }
+
+      if (!confirm('Finalizar teste DISC? Suas respostas serão salvas e analisadas.')) {
+        return;
+      }
+
+      stopTimer();
+      document.getElementById('loadingOverlay').classList.add('active');
+
+      setTimeout(() => {
+        // Calcular resultado
+        const result = calculateResult();
+
+        // Calcular confiabilidade final
+        const reliability = calculateFinalReliability();
+
+        // Verificar consistência com histórico
+        const consistency = checkConsistency(result);
+
+        // Salvar resultado
+        saveResult(result, reliability, consistency);
+
+        // Exibir resultados
+        showResults(result, reliability, consistency);
+
+      }, 1500);
+    }
+
+    // ============================================
+    // 13. CALCULAR CONFIABILIDADE FINAL
+    // ============================================
+    function calculateFinalReliability() {
+      const answered = answers.filter(a => a !== null).length;
+      if (answered < 6) return 50;
+
+      let reliability = 100;
+
+      // Tempo médio
+      const validTimes = answerTimes.filter(t => t !== undefined && t !== null);
+      if (validTimes.length > 0) {
+        const avgTime = validTimes.reduce((a, b) => a + b, 0) / validTimes.length;
+        if (avgTime < 3) reliability -= 20;
+        if (avgTime < 2) reliability -= 15;
+        if (avgTime < 1.5) reliability -= 15;
+        if (avgTime > 30) reliability -= 10;
+      }
+
+      // Variabilidade
+      const uniqueAnswers = new Set(answers.filter(a => a !== null));
+      if (uniqueAnswers.size < 2 && answered >= 8) reliability -= 15;
+      if (uniqueAnswers.size === 1 && answered >= 12) reliability -= 25;
+
+      // Padrões
+      const positionCount = {};
+      answers.filter(a => a !== null).forEach(a => {
+        positionCount[a] = (positionCount[a] || 0) + 1;
+      });
+      const maxCount = Math.max(...Object.values(positionCount));
+      if (maxCount / answered > 0.7 && answered >= 10) reliability -= 20;
+
+      // Contradições lógicas
+      const dAnswers = questions.filter((q, idx) => q.type === 'D' && answers[idx] !== null);
+      const sAnswers = questions.filter((q, idx) => q.type === 'S' && answers[idx] !== null);
+      if (dAnswers.length > 0 && sAnswers.length > 0) {
+        const dAvg = dAnswers.reduce((sum, q, idx) => {
+          const actualIdx = questions.indexOf(q);
+          return sum + (4 - answers[actualIdx]);
+        }, 0) / dAnswers.length;
+        const sAvg = sAnswers.reduce((sum, q, idx) => {
+          const actualIdx = questions.indexOf(q);
+          return sum + (4 - answers[actualIdx]);
+        }, 0) / sAnswers.length;
+        if (dAvg > 3.5 && sAvg > 3.5) reliability -= 20;
+      }
+
+      return Math.max(0, Math.min(100, Math.round(reliability)));
+    }
+
+    // ============================================
+    // 14. VERIFICAR CONSISTÊNCIA
+    // ============================================
+    function checkConsistency(currentResult) {
+      if (testHistory.length === 0) {
+        return {
+          status: 'no_data',
+          message: 'Primeira realização do teste. Sem dados anteriores para comparação.'
+        };
+      }
+
+      // Pegar o resultado mais recente
+      const previous = testHistory[testHistory.length - 1]?.results;
+      if (!previous) {
+        return {
+          status: 'no_data',
+          message: 'Sem dados anteriores para comparação.'
+        };
+      }
+
+      // Comparar porcentagens
+      const prevPcts = previous.percentages || {};
+      const currPcts = currentResult.percentages || {};
+
+      let totalDiff = 0;
+      let count = 0;
+
+      for (const key of ['D', 'I', 'S', 'C']) {
+        if (prevPcts[key] !== undefined && currPcts[key] !== undefined) {
+          totalDiff += Math.abs(prevPcts[key] - currPcts[key]);
+          count++;
+        }
+      }
+
+      const avgDiff = count > 0 ? totalDiff / count : 100;
+      const roundedDiff = Math.round(avgDiff);
+
+      let status, message, recommendation;
+
+      if (avgDiff <= 5) {
+        status = 'stable';
+        message = 'Resultados consistentes e confiáveis. O perfil se manteve estável.';
+        recommendation = 'Perfil consistente com avaliações anteriores.';
+      } else if (avgDiff <= 15) {
+        status = 'moderate';
+        message = 'Variação moderada detectada. Pode indicar desenvolvimento ou mudança de contexto.';
+        recommendation = 'Recomenda-se revisão dos resultados com profissional especializado.';
+      } else {
+        status = 'unstable';
+        message = 'Variação significativa detectada. Pode indicar respostas inconsistentes ou mudança real de perfil.';
+        recommendation = 'Recomenda-se realizar novo teste ou avaliação complementar.';
+      }
+
+      return {
+        status: status,
+        message: message,
+        recommendation: recommendation,
+        diff: roundedDiff,
+        previous: prevPcts,
+        current: currPcts
+      };
+    }
+
+    // ============================================
+    // 15. SALVAR RESULTADO
+    // ============================================
+    function saveResult(result, reliability, consistency) {
       try {
+        // Adicionar confiabilidade ao resultado
+        result.reliability = reliability;
+        result.consistency = consistency;
+        result.answerTimes = answerTimes;
+
+        // Salvar no banco de dados local
         const allParticipants = VigorreDB.participants.findAll();
         const p = allParticipants.find(p => p.id === currentUser.id);
-        
+
         if (p) {
           if (!p.completedTests) p.completedTests = [];
           if (!p.completedTests.includes('DISC')) {
@@ -1249,55 +2264,277 @@
           }
           if (!p.results) p.results = {};
           p.results.DISC = result;
-          
+
           const allTests = p.tests || [];
           const allCompleted = allTests.every(t => p.completedTests.includes(t));
           p.status = allCompleted ? 'completed' : 'in_progress';
-          
+
           const idx = allParticipants.findIndex(p => p.id === currentUser.id);
           if (idx > -1) {
             allParticipants[idx] = p;
             localStorage.setItem('vigorre_participants', JSON.stringify(allParticipants));
           }
         }
-        
-        console.log('✅ Resultado DISC salvo:', result);
-        
+
+        // Salvar histórico com o auth
+        if (window.VigorreAuth && window.VigorreAuth.saveTestHistory) {
+          window.VigorreAuth.saveTestHistory('DISC', result);
+        }
+
+        // Registrar atividade
+        if (window.VigorreAuth && window.VigorreAuth.logActivity) {
+          window.VigorreAuth.logActivity('Teste DISC concluído', {
+            participant: participantData.name,
+            dominant: result.dominantName,
+            reliability: reliability,
+            consistency: consistency?.status || 'no_data'
+          });
+        }
+
+        // Salvar no localStorage
+        localStorage.setItem('vigorre_last_disc_result', JSON.stringify(result));
+
+        console.log('✅ Resultado DISC salvo com sucesso!');
+        console.log('📊 Perfil:', result.dominantName);
+        console.log('🔒 Confiabilidade:', reliability + '%');
+        console.log('📈 Consistência:', consistency?.status || 'no_data');
+
       } catch (error) {
-        console.error('❌ Erro ao salvar:', error);
+        console.error('❌ Erro ao salvar resultado:', error);
       }
     }
 
-    function showResults(result) {
+    // ============================================
+    // 16. EXIBIR RESULTADOS
+    // ============================================
+    function showResults(result, reliability, consistency) {
       document.getElementById('loadingOverlay').classList.remove('active');
       document.getElementById('testArea').style.display = 'none';
       document.getElementById('resultsContainer').classList.add('active');
-      
+
+      // Informações básicas
       document.getElementById('resultParticipant').textContent = participantData.name || '--';
       document.getElementById('resultCompany').textContent = companyData?.name || 'Autônomo';
-      document.getElementById('resultDate').textContent = new Date(result.date).toLocaleDateString('pt-BR');
-      
+      document.getElementById('resultDate').textContent = new Date(result.date).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      // Perfil
+      document.getElementById('profileEmoji').textContent = result.dominantEmoji;
       document.getElementById('profileText').textContent = `${result.dominantName} (${result.percentages[result.dominant]}%)`;
-      document.getElementById('profileSummary').textContent = result.dominantDesc;
-      
+
+      // Resumo do perfil
+      const summary = `
+            <p><strong>Perfil ${result.dominantName}:</strong> ${result.dominantDesc}</p>
+            <p style="margin-top: 12px;"><strong>🎯 ${result.profileTitle}</strong></p>
+            <p>${result.profileDescription}</p>
+            <p style="margin-top: 12px;"><strong>💪 Forças:</strong> ${result.strengths.join(', ')}</p>
+            <p><strong>📈 Áreas de Desenvolvimento:</strong> ${result.development.join(', ')}</p>
+            <p style="margin-top: 12px;"><strong>🚀 Carreiras Recomendadas:</strong> ${result.careers.join(', ')}</p>
+            <p style="margin-top: 12px;"><strong>🏢 Ambientes Ideais:</strong> ${result.bestEnvironments.join(', ')}</p>
+          `;
+      document.getElementById('profileSummary').innerHTML = summary;
+
+      // Confiabilidade
+      const reliabilityDiv = document.getElementById('resultReliability');
+      let reliabilityText = '';
+      let reliabilityClass = '';
+
+      if (reliability >= 80) {
+        reliabilityText = '🟢 Resultado Muito Confiável';
+        reliabilityClass = 'high';
+      } else if (reliability >= 60) {
+        reliabilityText = '🟡 Resultado Confiável';
+        reliabilityClass = 'medium';
+      } else if (reliability >= 40) {
+        reliabilityText = '🟠 Atenção - Verificar Respostas';
+        reliabilityClass = 'low';
+      } else {
+        reliabilityText = '🔴 Baixa Confiabilidade - Recomenda-se Refazer';
+        reliabilityClass = 'low';
+      }
+
+      reliabilityDiv.innerHTML = `
+            <span class="badge-large ${reliabilityClass}">
+              ${reliabilityText} (${reliability}%)
+            </span>
+          `;
+
+      // Consistência
+      if (consistency && consistency.status !== 'no_data') {
+        const card = document.getElementById('consistencyCard');
+        card.classList.add('active');
+
+        const statusEl = document.getElementById('consistencyStatus');
+        const detailEl = document.getElementById('consistencyDetail');
+
+        let color = '';
+        let icon = '';
+
+        if (consistency.status === 'stable') {
+          color = '#10B981';
+          icon = '✅';
+          statusEl.style.color = color;
+          statusEl.textContent = `${icon} ${consistency.message}`;
+        } else if (consistency.status === 'moderate') {
+          color = '#F59E0B';
+          icon = '⚠️';
+          statusEl.style.color = color;
+          statusEl.textContent = `${icon} ${consistency.message}`;
+        } else {
+          color = '#EF4444';
+          icon = '❌';
+          statusEl.style.color = color;
+          statusEl.textContent = `${icon} ${consistency.message}`;
+        }
+
+        detailEl.textContent = `Diferença: ${consistency.diff}% • ${consistency.recommendation}`;
+      }
+
+      // Análise por Cargo
+      showJobAnalysis(result);
+
+      // Número da página
       document.getElementById('pageNumber').textContent = '1';
-      
+
+      // Renderizar gráfico
       setTimeout(() => {
-        renderCharts(result.percentages);
-      }, 200);
-      
+        renderChart(result.percentages);
+      }, 300);
+
       isCompleted = true;
     }
 
-    function renderCharts(percentages) {
+    // ============================================
+    // 17. ANÁLISE POR CARGO
+    // ============================================
+    function showJobAnalysis(result) {
+      const container = document.getElementById('jobAnalysisContent');
+
+      // Verificar se o participante tem cargo
+      const job = participantData.job || '';
+
+      if (!job) {
+        // Análise sem cargo (perfil geral)
+        const generalProfile = generateGeneralProfile(result);
+        container.innerHTML = `
+              <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 8px;">
+                📌 O participante não possui cargo definido.
+              </p>
+              <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 16px; margin-top: 8px;">
+                <p style="color: white; font-weight: 600;">${generalProfile.title}</p>
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-top: 4px;">${generalProfile.desc}</p>
+                <p style="color: rgba(255,255,255,0.4); font-size: 0.8rem; margin-top: 8px;">
+                  <strong>Áreas:</strong> ${generalProfile.areas.join(', ')}
+                </p>
+              </div>
+            `;
+        return;
+      }
+
+      // Análise com cargo
+      const analysis = window.VigorreDB.analyzeByJob({ disc: result }, job);
+
+      const aderencia = analysis.aderencia || 0;
+      const overall = analysis.overall || 0;
+
+      let level = '';
+      let color = '';
+
+      if (aderencia >= 80) {
+        level = '⭐ Excelente';
+        color = '#10B981';
+      } else if (aderencia >= 60) {
+        level = '👍 Bom';
+        color = '#60A5FA';
+      } else if (aderencia >= 40) {
+        level = '📊 Moderado';
+        color = '#F59E0B';
+      } else {
+        level = '⚠️ Baixo';
+        color = '#EF4444';
+      }
+
+      container.innerHTML = `
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+              <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 12px; text-align: center;">
+                <div style="font-size: 0.7rem; color: rgba(255,255,255,0.3);">Aderência ao Cargo</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: ${color}; margin-top: 2px;">${aderencia}%</div>
+                <div style="font-size: 0.7rem; color: ${color};">${level}</div>
+              </div>
+              <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 12px; text-align: center;">
+                <div style="font-size: 0.7rem; color: rgba(255,255,255,0.3);">Pontuação IE</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #34D399; margin-top: 2px;">${analysis.ieScore || 0}%</div>
+                <div style="font-size: 0.7rem; color: rgba(255,255,255,0.3);">Inteligência Emocional</div>
+              </div>
+              <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 12px; text-align: center;">
+                <div style="font-size: 0.7rem; color: rgba(255,255,255,0.3);">Potencial Geral</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #A78BFA; margin-top: 2px;">${overall}%</div>
+                <div style="font-size: 0.7rem; color: rgba(255,255,255,0.3);">Média ponderada</div>
+              </div>
+            </div>
+            <p style="color: rgba(255,255,255,0.4); font-size: 0.8rem;">
+              🎯 Cargo analisado: <strong style="color: white;">${job}</strong>
+            </p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 4px;">
+              ${aderencia >= 60 ? '✅ Perfil compatível com o cargo. Boa aderência.' :
+                aderencia >= 40 ? '🔄 Perfil com aderência moderada. Recomenda-se desenvolvimento direcionado.' :
+                '❌ Perfil com baixa aderência. Avaliar outros cargos ou plano de desenvolvimento.'}
+            </p>
+          `;
+    }
+
+    // ============================================
+    // 18. PERFIL GERAL (SEM CARGO)
+    // ============================================
+    function generateGeneralProfile(result) {
+      const dominant = result.dominant;
+      const profiles = {
+        D: {
+          title: '🦁 Perfil Empreendedor',
+          desc: 'Orientado a resultados, assume riscos e lidera iniciativas. Ideal para empreendedorismo, gestão e posições de liderança.',
+          areas: ['Liderança', 'Estratégia', 'Tomada de decisão', 'Negociação']
+        },
+        I: {
+          title: '🦚 Perfil Influente',
+          desc: 'Comunicativo, persuasivo e conectado. Ideal para vendas, marketing, relações públicas e desenvolvimento de pessoas.',
+          areas: ['Comunicação', 'Networking', 'Influência', 'Criatividade']
+        },
+        S: {
+          title: '🐘 Perfil de Suporte',
+          desc: 'Estável, paciente e colaborativo. Ideal para atendimento, RH, suporte e gestão de pessoas.',
+          areas: ['Empatia', 'Suporte', 'Colaboração', 'Estabilidade']
+        },
+        C: {
+          title: '🦉 Perfil Técnico',
+          desc: 'Analítico, preciso e estruturado. Ideal para áreas técnicas, análise de dados, planejamento e controle.',
+          areas: ['Análise', 'Precisão', 'Planejamento', 'Qualidade']
+        }
+      };
+
+      return profiles[dominant] || profiles.D;
+    }
+
+    // ============================================
+    // 19. RENDERIZAR GRÁFICO
+    // ============================================
+    function renderChart(percentages) {
       try {
         const ctx = document.getElementById('discChart').getContext('2d');
-        if (chartInstance) chartInstance.destroy();
-        
+
+        if (chartInstance) {
+          chartInstance.destroy();
+        }
+
         const labels = ['D - Dominância', 'I - Influência', 'S - Estabilidade', 'C - Conformidade'];
-        const data = [percentages.D, percentages.I, percentages.S, percentages.C];
+        const data = [percentages.D || 0, percentages.I || 0, percentages.S || 0, percentages.C || 0];
         const colors = ['#F87171', '#60A5FA', '#34D399', '#A78BFA'];
-        
+        const borderColors = ['#EF4444', '#3B82F6', '#10B981', '#8B5CF6'];
+
         chartInstance = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -1305,52 +2542,204 @@
             datasets: [{
               label: 'Percentual',
               data: data,
-              backgroundColor: colors,
-              borderColor: colors,
+              backgroundColor: colors.map(c => c + '80'),
+              borderColor: borderColors,
               borderWidth: 2,
-              borderRadius: 8
+              borderRadius: 8,
+              maxBarThickness: 60
             }]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    return `${context.parsed.y}%`;
+                  }
+                }
+              }
+            },
             scales: {
-              y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.5)' } },
-              x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.7)' } }
+              y: {
+                beginAtZero: true,
+                max: 100,
+                grid: {
+                  color: 'rgba(255,255,255,0.05)'
+                },
+                ticks: {
+                  color: 'rgba(255,255,255,0.3)',
+                  callback: function(value) {
+                    return value + '%';
+                  }
+                }
+              },
+              x: {
+                grid: {
+                  display: false
+                },
+                ticks: {
+                  color: 'rgba(255,255,255,0.5)',
+                  font: {
+                    size: 11
+                  }
+                }
+              }
             }
           }
         });
-        
+
+        console.log('📊 Gráfico DISC renderizado com sucesso');
+
       } catch (error) {
         console.error('❌ Erro ao renderizar gráfico:', error);
       }
     }
 
+    // ============================================
+    // 20. NAVEGAÇÃO
+    // ============================================
     function goToDashboard() {
       window.location.href = '../dashboard.html';
     }
 
-    function showToast(message, type) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toastIcon').textContent = type === 'error' ? '❌' : '✅';
-      document.getElementById('toastMessage').textContent = message;
-      toast.className = `toast show ${type === 'error' ? 'error' : 'success'}`;
-      setTimeout(() => toast.classList.remove('show'), 4000);
+    function refazerTeste() {
+      if (!confirm('Deseja refazer o teste DISC? Todas as respostas atuais serão perdidas.')) {
+        return;
+      }
+
+      if (!confirm('Tem certeza? Esta ação não pode ser desfeita.')) {
+        return;
+      }
+
+      // Limpar respostas
+      answers = new Array(questions.length).fill(null);
+      answerTimes = [];
+      currentQuestionIndex = 0;
+      isCompleted = false;
+
+      // Resetar timer
+      timerSeconds = 0;
+      document.getElementById('timerDisplay').textContent = '⏱️ Tempo: 00:00';
+
+      // Resetar UI
+      document.getElementById('resultsContainer').classList.remove('active');
+      document.getElementById('testArea').style.display = 'block';
+      document.getElementById('consistencyCard').classList.remove('active');
+
+      // Destruir gráfico
+      if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
+      }
+
+      // Reiniciar timer
+      stopTimer();
+      startTimer();
+
+      // Renderizar primeira pergunta
+      renderQuestion();
+
+      // Registrar atividade
+      if (window.VigorreAuth && window.VigorreAuth.logActivity) {
+        window.VigorreAuth.logActivity('Refez teste DISC', {
+          participant: participantData.name,
+          action: 'refazer_teste'
+        });
+      }
+
+      showToast('🔄 Teste reiniciado. Boa sorte!', 'success');
     }
 
-    window.history.pushState(null, '', window.location.href);
-    window.addEventListener('popstate', function(e) {
-      if (!isCompleted) {
-        if (!confirm('Você está no meio do teste. Deseja sair?')) {
-          window.history.pushState(null, '', window.location.href);
-        } else {
-          window.location.href = '../dashboard.html';
-        }
+    // ============================================
+    // 21. TOAST
+    // ============================================
+    function showToast(message, type) {
+      const toast = document.getElementById('toast');
+      const icon = document.getElementById('toastIcon');
+      const msg = document.getElementById('toastMessage');
+
+      if (type === 'error') {
+        icon.textContent = '❌';
+      } else if (type === 'warning') {
+        icon.textContent = '⚠️';
+      } else {
+        icon.textContent = '✅';
       }
+
+      msg.textContent = message;
+      toast.className = `toast show ${type || 'success'}`;
+
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4000);
+    }
+
+    // ============================================
+    // 22. GUARD DE NAVEGAÇÃO
+    // ============================================
+    function setupNavigationGuard() {
+      // Bloquear voltar do navegador durante o teste
+      window.history.pushState(null, '', window.location.href);
+
+      window.addEventListener('popstate', function(e) {
+        if (!isCompleted) {
+          if (!confirm('Você está no meio do teste. Deseja sair? Suas respostas serão perdidas.')) {
+            window.history.pushState(null, '', window.location.href);
+          } else {
+            stopTimer();
+            window.location.href = '../dashboard.html';
+          }
+        }
+      });
+
+      // Impedir fechamento acidental
+      window.addEventListener('beforeunload', function(e) {
+        if (!isCompleted && answers.some(a => a !== null)) {
+          e.preventDefault();
+          e.returnValue = 'Você tem respostas não salvas. Deseja realmente sair?';
+        }
+      });
+    }
+
+    // ============================================
+    // 23. EXPORTAÇÃO (MODO IMPRESSÃO)
+    // ============================================
+    window.addEventListener('load', function() {
+      console.log('📊 Teste DISC carregado com sucesso!');
+      console.log('🧠 Motor Avançado de Avaliação Comportamental ativado');
+      console.log('🔒 Índice de Confiabilidade: implementado');
+      console.log('📈 Consistência com Histórico: implementado');
+      console.log('🎯 Análise por Cargo: implementada');
+      console.log('📝 Log de Auditoria: implementado');
     });
 
-    console.log('📊 Teste DISC carregado com sucesso!');
+    // ============================================
+    // 24. COMANDOS DE DEPURAÇÃO
+    // ============================================
+    console.log('📋 Comandos de depuração disponíveis:');
+    console.log('  - window.questions: lista de perguntas');
+    console.log('  - window.answers: respostas atuais');
+    console.log('  - window.currentQuestionIndex: índice atual');
+    console.log('  - window.testHistory: histórico de testes');
+    console.log('  - window.participantData: dados do participante');
+
+    // Expor variáveis para depuração
+    window.questions = questions;
+    window.answers = answers;
+    window.currentQuestionIndex = currentQuestionIndex;
+    window.testHistory = testHistory;
+    window.participantData = participantData;
+
+    // ============================================
+    // 25. FIM DO SCRIPT
+    // ============================================
+    console.log('✅ Teste DISC pronto para uso!');
   </script>
 
 </body>
