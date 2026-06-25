@@ -8,6 +8,7 @@ class VigorreAuth {
     this.SESSION_KEY = 'vigorre_session';
     this.USER_KEY = 'vigorre_current_user';
     this.TOKEN_KEY = 'vigorre_token';
+    this.HISTORY_KEY = 'vigorre_test_history';
     this.currentUser = null;
     this.sessionTimer = null;
     this.init();
@@ -49,7 +50,6 @@ class VigorreAuth {
   // ============================================
   async login(email, password) {
     try {
-      // Tenta Supabase
       if (window.supabase) {
         try {
           const { data, error } = await window.supabase.auth.signInWithPassword({
@@ -73,7 +73,6 @@ class VigorreAuth {
         }
       }
       
-      // FALLBACK: Dados locais
       const user = VigorreDB.users.findByEmail(email);
       
       if (!user) throw new Error('Usuário não encontrado');
@@ -95,7 +94,7 @@ class VigorreAuth {
     const session = {
       userId: userData.id,
       role: userData.role,
-      expiresAt: Date.now() + (24 * 60 * 60 * 1000), // 24h
+      expiresAt: Date.now() + (24 * 60 * 60 * 1000),
       createdAt: Date.now()
     };
     
@@ -266,6 +265,80 @@ class VigorreAuth {
     this.refreshSession();
     return true;
   }
+  
+  // ============================================
+  // NOVA FUNÇÃO: SALVAR HISTÓRICO DE TESTES
+  // ============================================
+  saveTestHistory(testType, results) {
+    try {
+      const history = JSON.parse(localStorage.getItem(this.HISTORY_KEY) || '[]');
+      const user = this.getCurrentUser();
+      
+      history.push({
+        id: Date.now().toString(),
+        userId: user?.id || 'unknown',
+        testType: testType,
+        results: results,
+        timestamp: new Date().toISOString(),
+        consistency: window.VigorreDB?.calculateConsistency ? 
+          window.VigorreDB.calculateConsistency(
+            history.filter(h => h.testType === testType && h.userId === user?.id).slice(-1)[0]?.results,
+            results
+          ) : null
+      });
+      
+      localStorage.setItem(this.HISTORY_KEY, JSON.stringify(history));
+      console.log('✅ Histórico de teste salvo:', testType);
+    } catch (e) {
+      console.error('❌ Erro ao salvar histórico:', e);
+    }
+  }
+  
+  // ============================================
+  // NOVA FUNÇÃO: OBTER HISTÓRICO DE TESTES
+  // ============================================
+  getTestHistory(testType) {
+    try {
+      const history = JSON.parse(localStorage.getItem(this.HISTORY_KEY) || '[]');
+      const user = this.getCurrentUser();
+      return history.filter(h => h.testType === testType && h.userId === user?.id);
+    } catch (e) {
+      console.error('❌ Erro ao obter histórico:', e);
+      return [];
+    }
+  }
+  
+  // ============================================
+  // NOVA FUNÇÃO: VERIFICAR CONSISTÊNCIA DO TESTE
+  // ============================================
+  checkTestConsistency(testType, currentResults) {
+    const history = this.getTestHistory(testType);
+    if (history.length < 2) {
+      return { status: 'no_data', message: 'Primeira realização do teste. Sem dados anteriores para comparação.' };
+    }
+    
+    const previous = history[history.length - 1]?.results;
+    if (!previous) {
+      return { status: 'no_data', message: 'Sem dados anteriores para comparação.' };
+    }
+    
+    return window.VigorreDB?.calculateConsistency(previous, currentResults) || { status: 'unknown', message: 'Não foi possível calcular a consistência.' };
+  }
+  
+  // ============================================
+  // NOVA FUNÇÃO: REGISTRAR ATIVIDADE
+  // ============================================
+  logActivity(action, details) {
+    try {
+      const user = this.getCurrentUser();
+      if (window.VigorreDB?.auditLogs) {
+        window.VigorreDB.auditLogs.add(action, user?.id || 'unknown', details);
+        console.log('📝 Atividade registrada:', action);
+      }
+    } catch (e) {
+      console.error('❌ Erro ao registrar atividade:', e);
+    }
+  }
 }
 
 // ============================================
@@ -276,3 +349,4 @@ window.VigorreAuth = auth;
 
 console.log('🔐 Vigorre Auth inicializado');
 console.log('📊 Usuário atual:', auth.getCurrentUser()?.name || 'Nenhum');
+console.log('🧠 Sistema de autenticação com histórico e consistência ativado!');
