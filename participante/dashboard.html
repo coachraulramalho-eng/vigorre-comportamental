@@ -76,24 +76,15 @@
             text-decoration: none;
         }
 
-        .header .logo .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1rem;
-            color: white;
-            flex-shrink: 0;
+        .header .logo .logo-img {
+            height: 36px;
+            width: auto;
+            display: block;
         }
 
         .header .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             color: white;
         }
@@ -105,7 +96,7 @@
         }
 
         .header .logo .logo-text .sub {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: rgba(255, 255, 255, 0.4);
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -445,6 +436,9 @@
             .progress-card .progress-details {
                 grid-template-columns: 1fr 1fr;
             }
+            .header .logo .logo-img {
+                height: 28px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -464,6 +458,33 @@
             .test-card {
                 padding: 18px;
             }
+            .header .logo .logo-img {
+                height: 24px;
+            }
+        }
+
+        @media print {
+            .header {
+                background: #0A2540 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .header .logo .logo-img {
+                height: 32px !important;
+            }
+            .logout-btn {
+                display: none !important;
+            }
+            .laudo-card {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .btn-test {
+                display: none !important;
+            }
+            .btn-laudo {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -474,7 +495,7 @@
     ============================================ -->
     <header class="header">
         <a href="#" class="logo">
-            <div class="logo-icon">V</div>
+            <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-text">
                 <span class="name">VIGORRE ONE<span class="tm">™</span></span>
                 <span class="sub">People Analytics Enterprise</span>
@@ -508,13 +529,11 @@
                 <div class="fill" id="progressFill"></div>
             </div>
             <div class="progress-details" id="progressDetails">
-                <!-- Carregado via JS -->
             </div>
         </div>
 
         <!-- Tests Grid -->
         <div class="tests-grid" id="testsGrid">
-            <!-- Carregado via JS -->
         </div>
 
         <!-- Laudo Card -->
@@ -537,18 +556,12 @@
     <script>
         'use strict';
 
-        // ============================================
-        // LOGOUT
-        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.VigorreAuth.logout();
             }
         }
 
-        // ============================================
-        // TESTES DISPONÍVEIS
-        // ============================================
         const tests = [{
             id: 'disc',
             name: 'DISC',
@@ -581,9 +594,6 @@
             url: 'testes/bigfive.html'
         }];
 
-        // ============================================
-        // INICIALIZAR
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Participante Dashboard - VIGORRE ONE™');
 
@@ -606,12 +616,8 @@
             loadDashboard(user);
         });
 
-        // ============================================
-        // CARREGAR DASHBOARD
-        // ============================================
         function loadDashboard(user) {
             try {
-                // Buscar dados do participante
                 const allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                 const participant = allParticipants.find(p => p.id === user.id) || {
                     tests: ['DISC', 'IE', 'Valores', 'SWOT', 'BigFive'],
@@ -622,7 +628,6 @@
                 const availableTests = participant.tests || ['DISC', 'IE', 'Valores', 'SWOT', 'BigFive'];
                 const completedTests = participant.completedTests || [];
 
-                // Progresso
                 const total = availableTests.length;
                 const done = completedTests.filter(t => availableTests.includes(t)).length;
                 const progress = total > 0 ? Math.round((done / total) * 100) : 0;
@@ -630,7 +635,6 @@
                 document.getElementById('progressPercentage').textContent = progress + '%';
                 document.getElementById('progressFill').style.width = progress + '%';
 
-                // Detalhes do progresso
                 const detailsContainer = document.getElementById('progressDetails');
                 detailsContainer.innerHTML = availableTests.map(t => {
                     const isDone = completedTests.includes(t);
@@ -644,7 +648,6 @@
                         `;
                 }).join('');
 
-                // Testes Grid
                 const grid = document.getElementById('testsGrid');
                 grid.innerHTML = tests.map(test => {
                     const isCompleted = completedTests.includes(test.id.toUpperCase()) ||
@@ -689,7 +692,6 @@
                         `;
                 }).join('');
 
-                // Laudo
                 const btnLaudo = document.getElementById('btnLaudo');
                 if (progress === 100) {
                     btnLaudo.disabled = false;
