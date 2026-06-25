@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Entrevistas | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-entrevistas {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 20% 80%, rgba(6,182,212,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.06) 0%, transparent 50%);
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header-entrevistas {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .header-entrevistas .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .header-entrevistas .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #06B6D4, #7C3AED);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .header-entrevistas .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-entrevistas .logo-text .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #06B6D4;
+    }
+    
+    .header-entrevistas .logo-text span {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.4);
+      display: block;
+    }
+    
+    .header-entrevistas .btn-back {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .header-entrevistas .btn-back:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    .entrevistas-body {
+      background: rgba(30,41,59,0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 32px;
+    }
+    
+    .entrevistas-title {
+      text-align: center;
+      padding: 16px 0 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+    }
+    
+    .entrevistas-title h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .entrevistas-title .cyan {
+      color: #06B6D4;
+    }
+    
+    .entrevistas-title p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .stat-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    
+    .stat-card .number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #06B6D4;
+    }
+    
+    .stat-card .label {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+      margin-bottom: 16px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+    
+    table th {
+      text-align: left;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.5);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    
+    table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.8);
+    }
+    
+    table tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+    
+    .badge-status {
+      padding: 2px 10px;
+      border-radius: 100px;
+      font-size: 0.6rem;
+      font-weight: 600;
+    }
+    
+    .badge-status.scheduled { background: rgba(6,182,212,0.15); color: #06B6D4; }
+    .badge-status.done { background: rgba(16,185,129,0.15); color: #10B981; }
+    .badge-status.canceled { background: rgba(244,63,94,0.15); color: #F43F5E; }
+    .badge-status.pending { background: rgba(245,158,11,0.15); color: #F59E0B; }
+    
+    .btn-action {
+      padding: 4px 12px;
+      border-radius: 4px;
+      border: none;
+      font-size: 0.65rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-action.edit { background: rgba(29,78,216,0.15); color: #60A5FA; }
+    .btn-action.edit:hover { background: rgba(29,78,216,0.25); }
+    .btn-action.delete { background: rgba(244,63,94,0.15); color: #FCA5A5; }
+    .btn-action.delete:hover { background: rgba(244,63,94,0.25); }
+    
+    .btn-add {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #06B6D4, #10B981);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 4px 20px rgba(6,182,212,0.3);
+    }
+    
+    .btn-add:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(6,182,212,0.5);
+    }
+    
+    .footer-entrevistas {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .footer-entrevistas .contact {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-entrevistas .contact a {
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-entrevistas .contact a:hover {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    @media (max-width: 768px) {
+      .header-entrevistas { flex-direction: column; text-align: center; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-entrevistas { flex-direction: column; text-align: center; }
+    }
+    
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .header-entrevistas, .entrevistas-body, .footer-entrevistas {
+        background: white !important;
+        border-color: #ddd !important;
+        color: #111 !important;
+      }
+      .entrevistas-title h1 { color: #111 !important; }
+      .entrevistas-title .cyan { color: #06B6D4 !important; }
+      .stat-card { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .stat-card .number { color: #06B6D4 !important; }
+      table { border-collapse: collapse; }
+      table th, table td { border: 1px solid #ddd; padding: 8px; }
+      .btn-back, .btn-add, .btn-action { display: none !important; }
+      .footer-entrevistas .contact a { color: #666 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-entrevistas"></div>
+
+  <div class="container">
+    
+    <!-- HEADER -->
+    <div class="header-entrevistas">
+      <div class="logo">
+        <div class="logo-icon">V</div>
+        <div class="logo-text">
+          VIGORRE ONE™ <span class="tm">™</span>
+          <span>Gestão de Entrevistas</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="btn-back" onclick="window.print()">🖨️ Imprimir</button>
+        <a href="../../recrutador/dashboard.html" class="btn-back">← Voltar</a>
+      </div>
+    </div>
+    
+    <!-- CORPO -->
+    <div class="entrevistas-body">
+      
+      <div class="entrevistas-title">
+        <h1>📞 Gestão de <span class="cyan">Entrevistas</span></h1>
+        <p>Agende, acompanhe e gerencie suas entrevistas</p>
+      </div>
+      
+      <!-- STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">12</div>
+          <div class="label">📋 Total</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">5</div>
+          <div class="label">🔵 Agendadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">4</div>
+          <div class="label">✅ Realizadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">2</div>
+          <div class="label">⏳ Pendentes</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">1</div>
+          <div class="label">❌ Canceladas</div>
+        </div>
+      </div>
+      
+      <!-- TABELA -->
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+        <h3 style="font-size:0.9rem;font-weight:600;color:white;">📋 Lista de Entrevistas</h3>
+        <button class="btn-add" onclick="alert('📅 Nova entrevista agendada!')">➕ Nova Entrevista</button>
+      </div>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Candidato</th>
+              <th>Cargo</th>
+              <th>Data/Hora</th>
+              <th>Modalidade</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ana Silva</strong></td>
+              <td>Gerente de RH</td>
+              <td>14/06 10:00</td>
+              <td>Presencial</td>
+              <td><span class="badge-status scheduled">🔵 Agendada</span></td>
+              <td><button class="btn-action edit">✏️</button> <button class="btn-action delete">🗑️</button></td>
+            </tr>
+            <tr>
+              <td><strong>Carlos Souza</strong></td>
+              <td>Analista de Dados</td>
+              <td>13/06 15:30</td>
+              <td>Online</td>
+              <td><span class="badge-status done">✅ Realizada</span></td>
+              <td><button class="btn-action edit">✏️</button> <button class="btn-action delete">🗑️</button></td>
+            </tr>
+            <tr>
+              <td><strong>Mariana Costa</strong></td>
+              <td>Coordenadora Comercial</td>
+              <td>15/06 09:00</td>
+              <td>Presencial</td>
+              <td><span class="badge-status pending">⏳ Pendente</span></td>
+              <td><button class="btn-action edit">✏️</button> <button class="btn-action delete">🗑️</button></td>
+            </tr>
+            <tr>
+              <td><strong>Pedro Lima</strong></td>
+              <td>Desenvolvedor</td>
+              <td>12/06 14:00</td>
+              <td>Online</td>
+              <td><span class="badge-status done">✅ Realizada</span></td>
+              <td><button class="btn-action edit">✏️</button> <button class="btn-action delete">🗑️</button></td>
+            </tr>
+            <tr>
+              <td><strong>Julia Santos</strong></td>
+              <td>Designer UX</td>
+              <td>16/06 11:00</td>
+              <td>Presencial</td>
+              <td><span class="badge-status canceled">❌ Cancelada</span></td>
+              <td><button class="btn-action edit">✏️</button> <button class="btn-action delete">🗑️</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- PAGINAÇÃO -->
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:16px;">
+        <button style="padding:6px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.06);border-radius:6px;color:rgba(255,255,255,0.6);cursor:pointer;font-family:'Inter',sans-serif;font-size:0.75rem;">Anterior</button>
+        <button style="padding:6px 14px;background:rgba(6,182,212,0.15);border:1px solid rgba(6,182,212,0.2);border-radius:6px;color:#06B6D4;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.75rem;">1</button>
+        <button style="padding:6px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.06);border-radius:6px;color:rgba(255,255,255,0.6);cursor:pointer;font-family:'Inter',sans-serif;font-size:0.75rem;">2</button>
+        <button style="padding:6px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.06);border-radius:6px;color:rgba(255,255,255,0.6);cursor:pointer;font-family:'Inter',sans-serif;font-size:0.75rem;">Próximo</button>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <div class="footer-entrevistas">
+      <span>© 2024 VIGORRE ONE™</span>
+      <div class="contact">
+        <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+        <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+        <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
+      </div>
+      <span>v1.0</span>
+    </div>
+    
+  </div>
+
+</body>
+</html>
