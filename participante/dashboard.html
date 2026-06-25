@@ -1,798 +1,713 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard | VIGORRE ONE™</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/globals.css" />
-  
-  <style>
-    /* ============================================
-       BASE - ULTRA PREMIUM
-       ============================================ */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      background: #0F172A;
-      color: #F8FAFC;
-      padding: 20px;
-      position: relative;
-      overflow-x: hidden;
-    }
-    
-    /* Fundo animado */
-    .bg-dashboard {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: 
-        radial-gradient(ellipse at 20% 80%, rgba(29, 78, 216, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.10) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.06) 0%, transparent 70%);
-      z-index: 0;
-      animation: floatBg 30s ease-in-out infinite;
-    }
-    
-    @keyframes floatBg {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.02); }
-    }
-    
-    .particles {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.10), transparent),
-        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.08), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.12), transparent);
-      background-size: 200px 200px;
-      animation: floatParticles 20s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    @keyframes floatParticles {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-100px); }
-    }
-    
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    /* ============================================
-       HEADER PREMIUM
-       ============================================ */
-    .header-premium {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px 16px 0 0;
-      padding: 20px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .header-premium::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #06B6D4, #7C3AED, #1D4ED8);
-    }
-    
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    
-    .header-left .logo-icon {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.25rem;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      flex-shrink: 0;
-      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
-    }
-    
-    .header-left .system-name {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.125rem;
-      font-weight: 800;
-      color: white;
-    }
-    
-    .header-left .system-name .tm {
-      font-size: 0.5rem;
-      vertical-align: super;
-      color: #06B6D4;
-    }
-    
-    .header-left .system-sub {
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.4);
-      display: block;
-    }
-    
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    
-    .header-right .user-name {
-      font-weight: 600;
-      color: white;
-      font-size: 0.9375rem;
-    }
-    
-    .user-avatar {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 700;
-      font-size: 1rem;
-    }
-    
-    .btn-sair {
-      padding: 8px 16px;
-      background: transparent;
-      color: #FCA5A5;
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8125rem;
-    }
-    
-    .btn-sair:hover {
-      background: rgba(239, 68, 68, 0.15);
-      color: #FCA5A5;
-      border-color: rgba(239, 68, 68, 0.5);
-    }
-    
-    /* ============================================
-       CORPO DO DASHBOARD
-       ============================================ */
-    .dashboard-body {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(20px);
-      border-left: 1px solid rgba(255, 255, 255, 0.06);
-      border-right: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 32px;
-      min-height: 400px;
-    }
-    
-    /* ============================================
-       WELCOME CARD
-       ============================================ */
-    .welcome-card {
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(124, 58, 237, 0.15));
-      border: 1px solid rgba(6, 182, 212, 0.15);
-      border-radius: 16px;
-      padding: 32px 40px;
-      color: white;
-      margin-bottom: 24px;
-    }
-    
-    .welcome-card h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.5rem;
-      margin-bottom: 4px;
-    }
-    
-    .welcome-card p {
-      color: rgba(255, 255, 255, 0.6);
-    }
-    
-    /* ============================================
-       STATUS CARD
-       ============================================ */
-    .status-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 24px;
-    }
-    
-    .status-card h3 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      color: white;
-      margin-bottom: 16px;
-    }
-    
-    /* ============================================
-       TESTES GRID
-       ============================================ */
-    .tests-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
-    }
-    
-    .test-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 20px;
-      transition: all 0.3s ease;
-    }
-    
-    .test-card:hover {
-      border-color: rgba(6, 182, 212, 0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-    }
-    
-    .test-card .icon {
-      font-size: 2rem;
-      margin-bottom: 8px;
-    }
-    
-    .test-card h4 {
-      font-weight: 600;
-      color: white;
-      margin-bottom: 4px;
-    }
-    
-    .test-card p {
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 12px;
-    }
-    
-    .test-card .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    
-    .status.available {
-      background: rgba(16, 185, 129, 0.15);
-      color: #34D399;
-      border: 1px solid rgba(16, 185, 129, 0.2);
-    }
-    
-    .status.completed {
-      background: rgba(59, 130, 246, 0.15);
-      color: #60A5FA;
-      border: 1px solid rgba(59, 130, 246, 0.2);
-    }
-    
-    .status.locked {
-      background: rgba(239, 68, 68, 0.15);
-      color: #FCA5A5;
-      border: 1px solid rgba(239, 68, 68, 0.2);
-    }
-    
-    .btn-start {
-      margin-top: 12px;
-      padding: 8px 20px;
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-    }
-    
-    .btn-start:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
-    }
-    
-    .btn-start:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-    
-    /* ============================================
-       LAUDO AREA
-       ============================================ */
-    .laudo-area {
-      background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(6, 182, 212, 0.15));
-      border: 1px solid rgba(124, 58, 237, 0.2);
-      border-radius: 16px;
-      padding: 24px;
-    }
-    
-    .laudo-area h3 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      color: white;
-      margin-bottom: 8px;
-    }
-    
-    .laudo-area p {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.875rem;
-      margin-bottom: 16px;
-    }
-    
-    .btn-laudo {
-      padding: 12px 32px;
-      background: linear-gradient(135deg, #7C3AED, #06B6D4);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9375rem;
-    }
-    
-    .btn-laudo:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
-    }
-    
-    .btn-laudo:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-    
-    /* ============================================
-       RODAPÉ
-       ============================================ */
-    .footer-premium {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 0 0 16px 16px;
-      padding: 20px 32px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .footer-premium::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #06B6D4, #7C3AED, #1D4ED8);
-    }
-    
-    .footer-grid {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .footer-logo .logo-icon-small {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 0.875rem;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      flex-shrink: 0;
-    }
-    
-    .footer-logo-text .footer-system {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: white;
-    }
-    
-    .footer-logo-text .footer-system .tm {
-      font-size: 0.4rem;
-      vertical-align: super;
-      color: #06B6D4;
-    }
-    
-    .footer-logo-text .footer-tagline {
-      font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.3);
-    }
-    
-    .footer-center .footer-contact {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    
-    .footer-contact-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 0.7rem;
-      transition: color 0.3s ease;
-      text-decoration: none;
-    }
-    
-    .footer-contact-item:hover {
-      color: rgba(255, 255, 255, 0.7);
-    }
-    
-    .footer-contact-item .icon {
-      font-size: 0.75rem;
-    }
-    
-    .footer-right .page-number {
-      color: rgba(255, 255, 255, 0.3);
-      font-size: 0.7rem;
-    }
-    
-    .footer-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-      margin: 12px 0;
-    }
-    
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.2);
-    }
-    
-    /* ============================================
-       RESPONSIVO
-       ============================================ */
-    @media (max-width: 768px) {
-      .header-premium {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-        padding: 16px 20px;
-      }
-      
-      .header-right {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .dashboard-body {
-        padding: 20px;
-      }
-      
-      .welcome-card {
-        padding: 20px 24px;
-      }
-      
-      .welcome-card h2 {
-        font-size: 1.25rem;
-      }
-      
-      .tests-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .footer-grid {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-      }
-      
-      .footer-center .footer-contact {
-        justify-content: center;
-        flex-direction: column;
-        gap: 6px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Participante Dashboard | VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ============================================
+           VIGORRE ONE™ - PARTICIPANTE DASHBOARD
+           ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0A2540;
+            --blue: #1D4ED8;
+            --blue-light: #3B82F6;
+            --cyan: #06B6D4;
+            --gold: #D97706;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
+            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            background: var(--navy);
+            color: white;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .header .logo .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .header .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .header .logo .logo-text .name .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
+
+        .header .logo .logo-text .sub {
+            font-size: 0.55rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .header .user-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header .user-info .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .header .user-info .badge {
+            padding: 4px 14px;
+            background: rgba(59, 130, 246, 0.15);
+            border-radius: var(--radius-full);
+            font-size: 0.65rem;
+            color: var(--blue-light);
+            font-weight: 600;
+        }
+
+        .header .logout-btn {
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-full);
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .header .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.15);
+            color: #F87171;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        /* ============================================
+           MAIN
+           ============================================ */
+        .main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 24px 40px;
+        }
+
+        .main-header {
+            margin-bottom: 28px;
+        }
+
+        .main-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .main-header h1 .highlight {
+            color: var(--cyan);
+        }
+
+        .main-header p {
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           PROGRESS CARD
+           ============================================ */
+        .progress-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10, 37, 64, 0.04);
+            margin-bottom: 32px;
+        }
+
+        .progress-card .progress-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .progress-card .progress-top .label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--gray-700);
+        }
+
+        .progress-card .progress-top .percentage {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--blue);
+        }
+
+        .progress-card .progress-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-card .progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            border-radius: 4px;
+            transition: width 0.8s ease;
+            width: 0%;
+        }
+
+        .progress-card .progress-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .progress-card .progress-details .item {
+            text-align: center;
+        }
+
+        .progress-card .progress-details .item .status {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .progress-card .progress-details .item .status.done {
+            color: #10B981;
+        }
+        .progress-card .progress-details .item .status.pending {
+            color: #F59E0B;
+        }
+        .progress-card .progress-details .item .status.not {
+            color: var(--gray-400);
+        }
+
+        .progress-card .progress-details .item .name {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           TESTS GRID
+           ============================================ */
+        .tests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .test-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10, 37, 64, 0.04);
+            transition: var(--transition);
+        }
+
+        .test-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        .test-card .test-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .test-card .test-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+
+        .test-card .test-desc {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            margin: 4px 0 12px;
+            line-height: 1.5;
+        }
+
+        .test-card .test-status {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .test-card .test-status.completed {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        .test-card .test-status.pending {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        .test-card .test-status.locked {
+            background: var(--gray-100);
+            color: var(--gray-400);
+        }
+
+        .test-card .btn-test {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .test-card .btn-test.primary {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
+        }
+
+        .test-card .btn-test.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
+        }
+
+        .test-card .btn-test.secondary {
+            background: var(--gray-100);
+            color: var(--gray-500);
+            cursor: not-allowed;
+        }
+
+        .test-card .btn-test.success {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .test-card .btn-test.success:hover {
+            background: #A7F3D0;
+        }
+
+        /* ============================================
+           LAUDO CARD
+           ============================================ */
+        .laudo-card {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            border-radius: var(--radius);
+            padding: 32px 36px;
+            color: white;
+            box-shadow: 0 8px 40px rgba(10, 37, 64, 0.15);
+            margin-top: 8px;
+        }
+
+        .laudo-card .laudo-icon {
+            font-size: 2.4rem;
+            margin-bottom: 8px;
+        }
+
+        .laudo-card h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .laudo-card p {
+            color: rgba(255, 255, 255, 0.6);
+            margin: 4px 0 16px;
+            font-size: 0.9rem;
+        }
+
+        .laudo-card .btn-laudo {
+            display: inline-block;
+            padding: 12px 32px;
+            background: white;
+            color: var(--navy);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .laudo-card .btn-laudo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .laudo-card .btn-laudo:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 16px;
+            }
+            .main {
+                padding: 20px 16px;
+            }
+            .laudo-card {
+                padding: 24px 20px;
+            }
+            .tests-grid {
+                grid-template-columns: 1fr;
+            }
+            .progress-card .progress-details {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header .user-info .name {
+                font-size: 0.8rem;
+            }
+            .header .logout-btn {
+                font-size: 0.7rem;
+                padding: 6px 14px;
+            }
+            .main-header h1 {
+                font-size: 1.2rem;
+            }
+            .progress-card .progress-details {
+                grid-template-columns: 1fr;
+            }
+            .test-card {
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Fundo -->
-  <div class="bg-dashboard"></div>
-  <div class="particles"></div>
+    <!-- ============================================
+    HEADER
+    ============================================ -->
+    <header class="header">
+        <a href="#" class="logo">
+            <div class="logo-icon">V</div>
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Analytics Enterprise</span>
+            </div>
+        </a>
 
-  <div class="container">
-    
-    <!-- CABEÇALHO -->
-    <header class="header-premium">
-      <div class="header-left">
-        <div class="logo-icon">V</div>
-        <div>
-          <span class="system-name">VIGORRE ONE<span class="tm">™</span></span>
-          <span class="system-sub">Meu Painel</span>
+        <div class="user-info">
+            <span class="name" id="userName">Participante</span>
+            <span class="badge">👤 Participante</span>
+            <button class="logout-btn" onclick="logout()">🚪 Sair</button>
         </div>
-      </div>
-      <div class="header-right">
-        <span class="user-name" id="userNameDisplay">Carregando...</span>
-        <div class="user-avatar" id="userAvatar">?</div>
-        <button class="btn-sair" onclick="handleLogout()">Sair</button>
-      </div>
     </header>
-    
-    <!-- CORPO -->
-    <div class="dashboard-body">
-      
-      <!-- Welcome -->
-      <div class="welcome-card">
-        <h2>Olá, <span id="welcomeName">Participante</span>! 👋</h2>
-        <p>Bem-vindo ao VIGORRE ONE™. Realize seus testes e acompanhe seu progresso.</p>
-      </div>
-      
-      <!-- Status -->
-      <div class="status-card">
-        <h3>📋 Meus Testes</h3>
+
+    <!-- ============================================
+    MAIN
+    ============================================ -->
+    <main class="main">
+
+        <div class="main-header">
+            <h1>Olá, <span class="highlight" id="greetingName">Participante</span> 👋</h1>
+            <p>Acompanhe seus testes e resultados aqui.</p>
+        </div>
+
+        <!-- Progress Card -->
+        <div class="progress-card">
+            <div class="progress-top">
+                <span class="label">📊 Progresso Geral</span>
+                <span class="percentage" id="progressPercentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="fill" id="progressFill"></div>
+            </div>
+            <div class="progress-details" id="progressDetails">
+                <!-- Carregado via JS -->
+            </div>
+        </div>
+
+        <!-- Tests Grid -->
         <div class="tests-grid" id="testsGrid">
-          <!-- Testes carregados via JS -->
+            <!-- Carregado via JS -->
         </div>
-      </div>
-      
-      <!-- Laudo -->
-      <div class="laudo-area">
-        <h3>📄 Meu Laudo Completo</h3>
-        <p>Quando todos os testes forem concluídos, seu laudo completo estará disponível.</p>
-        <button class="btn-laudo" id="btnLaudo" disabled onclick="viewLaudo()">
-          🔒 Complete todos os testes para liberar
-        </button>
-      </div>
-      
-    </div>
-    
-    <!-- RODAPÉ -->
-    <footer class="footer-premium">
-      <div class="footer-grid">
-        <div class="footer-logo">
-          <div class="logo-icon-small">V</div>
-          <div class="footer-logo-text">
-            <span class="footer-system">VIGORRE ONE<span class="tm">™</span></span>
-            <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
-          </div>
+
+        <!-- Laudo Card -->
+        <div class="laudo-card">
+            <div class="laudo-icon">📄</div>
+            <h2>Laudo Comportamental Integrado</h2>
+            <p>Análise completa com todos os seus testes em um único documento profissional.</p>
+            <a href="laudo/" class="btn-laudo" id="btnLaudo">📄 Acessar Laudo</a>
         </div>
-        
-        <div class="footer-center">
-          <div class="footer-contact">
-            <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
-              <span class="icon">📧</span> contato@vigorre.com.br
-            </a>
-            <a href="tel:+5534991850735" class="footer-contact-item">
-              <span class="icon">📱</span> (34) 99185-0735
-            </a>
-            <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
-              <span class="icon">🌐</span> www.vigorre.com.br
-            </a>
-            <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
-              <span class="icon">📷</span> @vigorre.oficial
-            </a>
-          </div>
-        </div>
-        
-        <div class="footer-right">
-          <div class="page-number">Dashboard</div>
-        </div>
-      </div>
-      
-      <div class="footer-divider"></div>
-      
-      <div class="footer-bottom">
-        <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
-        <span>v1.0</span>
-      </div>
-    </footer>
-    
-  </div>
 
-  <!-- Scripts -->
-  <script src="../supabase-config.js"></script>
-  <script src="../auth.js"></script>
-  <script src="../middleware/auth-guard.js"></script>
+    </main>
 
-  <script>
-    'use strict';
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../middleware/auth-guard.js"></script>
 
-    let currentUser = null;
-    let participantData = null;
+    <script>
+        'use strict';
 
-    // ============================================
-    // INICIALIZAÇÃO
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('👤 Dashboard do Participante - VIGORRE ONE™');
-      
-      const isAuth = window.VigorreAuth.isAuthenticated();
-      if (!isAuth) {
-        window.location.href = '../login.html';
-        return;
-      }
-      
-      currentUser = window.VigorreAuth.getCurrentUser();
-      if (!currentUser || currentUser.role !== 'participant') {
-        alert('⚠️ Acesso restrito a participantes.');
-        window.VigorreAuth.logout();
-        return;
-      }
-      
-      loadParticipantData();
-    });
-
-    // ============================================
-    // CARREGAR DADOS DO PARTICIPANTE
-    // ============================================
-    function loadParticipantData() {
-      try {
-        const allParticipants = VigorreDB.participants.findAll();
-        participantData = allParticipants.find(p => p.id === currentUser.id);
-        
-        if (!participantData) {
-          participantData = {
-            id: currentUser.id,
-            name: currentUser.name || 'Participante',
-            email: currentUser.email,
-            tests: currentUser.tests || ['DISC', 'IE', 'Valores'],
-            completedTests: currentUser.completedTests || [],
-            status: currentUser.status || 'pending'
-          };
+        // ============================================
+        // LOGOUT
+        // ============================================
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                window.VigorreAuth.logout();
+            }
         }
-        
-        document.getElementById('welcomeName').textContent = participantData.name;
-        document.getElementById('userNameDisplay').textContent = participantData.name;
-        document.getElementById('userAvatar').textContent = participantData.name.charAt(0).toUpperCase();
-        
-        renderTests();
-        updateLaudoButton();
-        
-      } catch (error) {
-        console.error('❌ Erro ao carregar dados:', error);
-      }
-    }
 
-    // ============================================
-    // RENDERIZAR TESTES
-    // ============================================
-    function renderTests() {
-      const grid = document.getElementById('testsGrid');
-      const tests = participantData.tests || [];
-      const completed = participantData.completedTests || [];
-      
-      if (tests.length === 0) {
-        grid.innerHTML = `
-          <div style="grid-column: 1/-1; text-align: center; padding: 32px; color: rgba(255,255,255,0.4);">
-            Nenhum teste disponível no momento.
-          </div>
-        `;
-        return;
-      }
-      
-      const testConfigs = {
-        'DISC': { icon: '📊', label: 'Teste DISC', desc: 'Perfis comportamentais' },
-        'IE': { icon: '🧠', label: 'Inteligência Emocional', desc: 'Competências emocionais' },
-        'Valores': { icon: '💎', label: 'Valores Pessoais', desc: 'Teoria de Schwartz' },
-        'Lideranca': { icon: '👔', label: 'Liderança', desc: 'Perfil de liderança' },
-        'Clima': { icon: '🌤️', label: 'Clima Organizacional', desc: 'Ambiente de trabalho' },
-        'Burnout': { icon: '🔥', label: 'Burnout', desc: 'Saúde mental' }
-      };
-      
-      grid.innerHTML = tests.map(test => {
-        const config = testConfigs[test] || { icon: '📝', label: test, desc: '' };
-        const isCompleted = completed.includes(test);
-        
-        let statusHTML = '';
-        let btnHTML = '';
-        
-        if (isCompleted) {
-          statusHTML = `<span class="status completed">✅ Concluído</span>`;
-          btnHTML = `<button class="btn-start" disabled>✅ Já Realizado</button>`;
-        } else {
-          statusHTML = `<span class="status available">✅ Disponível</span>`;
-          btnHTML = `<button class="btn-start" onclick="startTest('${test}')">▶️ Iniciar Teste</button>`;
+        // ============================================
+        // TESTES DISPONÍVEIS
+        // ============================================
+        const tests = [{
+            id: 'disc',
+            name: 'DISC',
+            icon: '📊',
+            desc: 'Avalie seus perfis comportamentais: Dominância, Influência, Estabilidade e Conformidade.',
+            url: 'testes/disc.html'
+        }, {
+            id: 'ie',
+            name: 'Inteligência Emocional',
+            icon: '🧠',
+            desc: 'Descubra suas competências emocionais: autoconsciência, autorregulação, motivação, empatia e habilidades sociais.',
+            url: 'testes/ie.html'
+        }, {
+            id: 'valores',
+            name: 'Valores Pessoais',
+            icon: '💎',
+            desc: 'Identifique seus valores fundamentais baseados na teoria de Schwartz.',
+            url: 'testes/valores.html'
+        }, {
+            id: 'swot',
+            name: 'SWOT Pessoal',
+            icon: '📋',
+            desc: 'Análise estratégica pessoal: Forças, Fraquezas, Oportunidades e Ameaças.',
+            url: 'testes/swot.html'
+        }, {
+            id: 'bigfive',
+            name: 'Big Five',
+            icon: '🧬',
+            desc: 'Os 5 grandes fatores da personalidade: Abertura, Conscienciosidade, Extroversão, Amabilidade e Neuroticismo.',
+            url: 'testes/bigfive.html'
+        }];
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📊 Participante Dashboard - VIGORRE ONE™');
+
+            const isAuth = window.VigorreAuth.isAuthenticated();
+            if (!isAuth) {
+                window.location.href = '../login.html';
+                return;
+            }
+
+            const user = window.VigorreAuth.getCurrentUser();
+            if (!user || user.role !== 'participant') {
+                alert('⚠️ Acesso restrito a participantes.');
+                window.VigorreAuth.logout();
+                return;
+            }
+
+            document.getElementById('userName').textContent = user.name || 'Participante';
+            document.getElementById('greetingName').textContent = user.name || 'Participante';
+
+            loadDashboard(user);
+        });
+
+        // ============================================
+        // CARREGAR DASHBOARD
+        // ============================================
+        function loadDashboard(user) {
+            try {
+                // Buscar dados do participante
+                const allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                const participant = allParticipants.find(p => p.id === user.id) || {
+                    tests: ['DISC', 'IE', 'Valores', 'SWOT', 'BigFive'],
+                    completedTests: [],
+                    results: {}
+                };
+
+                const availableTests = participant.tests || ['DISC', 'IE', 'Valores', 'SWOT', 'BigFive'];
+                const completedTests = participant.completedTests || [];
+
+                // Progresso
+                const total = availableTests.length;
+                const done = completedTests.filter(t => availableTests.includes(t)).length;
+                const progress = total > 0 ? Math.round((done / total) * 100) : 0;
+
+                document.getElementById('progressPercentage').textContent = progress + '%';
+                document.getElementById('progressFill').style.width = progress + '%';
+
+                // Detalhes do progresso
+                const detailsContainer = document.getElementById('progressDetails');
+                detailsContainer.innerHTML = availableTests.map(t => {
+                    const isDone = completedTests.includes(t);
+                    const statusClass = isDone ? 'done' : 'pending';
+                    const statusText = isDone ? '✅ Concluído' : '⏳ Pendente';
+                    return `
+                            <div class="item">
+                                <div class="status ${statusClass}">${statusText}</div>
+                                <div class="name">${t}</div>
+                            </div>
+                        `;
+                }).join('');
+
+                // Testes Grid
+                const grid = document.getElementById('testsGrid');
+                grid.innerHTML = tests.map(test => {
+                    const isCompleted = completedTests.includes(test.id.toUpperCase()) ||
+                        completedTests.includes(test.id.charAt(0).toUpperCase() + test.id.slice(1));
+                    const isAvailable = availableTests.includes(test.id.toUpperCase()) ||
+                        availableTests.includes(test.id.charAt(0).toUpperCase() + test.id.slice(1));
+
+                    let statusHtml = '';
+                    let btnHtml = '';
+
+                    if (isCompleted) {
+                        statusHtml = `<span class="test-status completed">✅ Concluído</span>`;
+                        btnHtml = `
+                                <a href="testes/${test.id}.html" class="btn-test success" style="text-align:center;text-decoration:none;">
+                                    📄 Ver Resultado
+                                </a>
+                            `;
+                    } else if (isAvailable) {
+                        statusHtml = `<span class="test-status pending">⏳ Pendente</span>`;
+                        btnHtml = `
+                                <a href="${test.url}" class="btn-test primary" style="text-align:center;text-decoration:none;">
+                                    🚀 Iniciar Teste
+                                </a>
+                            `;
+                    } else {
+                        statusHtml = `<span class="test-status locked">🔒 Bloqueado</span>`;
+                        btnHtml = `
+                                <button class="btn-test secondary" disabled>
+                                    🔒 Aguarde liberação
+                                </button>
+                            `;
+                    }
+
+                    return `
+                            <div class="test-card">
+                                <span class="test-icon">${test.icon}</span>
+                                <div class="test-name">${test.name}</div>
+                                <div class="test-desc">${test.desc}</div>
+                                ${statusHtml}
+                                ${btnHtml}
+                            </div>
+                        `;
+                }).join('');
+
+                // Laudo
+                const btnLaudo = document.getElementById('btnLaudo');
+                if (progress === 100) {
+                    btnLaudo.disabled = false;
+                    btnLaudo.textContent = '📄 Acessar Laudo Completo';
+                } else {
+                    btnLaudo.disabled = true;
+                    btnLaudo.textContent = `🔒 Complete todos os testes (${progress}%)`;
+                    btnLaudo.style.opacity = '0.5';
+                    btnLaudo.style.cursor = 'not-allowed';
+                }
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dashboard:', error);
+            }
         }
-        
-        return `
-          <div class="test-card">
-            <div class="icon">${config.icon}</div>
-            <h4>${config.label}</h4>
-            <p>${config.desc}</p>
-            ${statusHTML}
-            ${btnHTML}
-          </div>
-        `;
-      }).join('');
-    }
 
-    // ============================================
-    // INICIAR TESTE
-    // ============================================
-    function startTest(testType) {
-      const url = `testes/${testType.toLowerCase()}.html`;
-      console.log(`🚀 Iniciando teste: ${testType}`);
-      window.location.href = url;
-    }
-
-    // ============================================
-    // ATUALIZAR BOTÃO DO LAUDO
-    // ============================================
-    function updateLaudoButton() {
-      const btn = document.getElementById('btnLaudo');
-      const tests = participantData.tests || [];
-      const completed = participantData.completedTests || [];
-      
-      const allCompleted = tests.length > 0 && tests.every(t => completed.includes(t));
-      
-      if (allCompleted) {
-        btn.disabled = false;
-        btn.textContent = '📄 Visualizar Laudo Completo';
-        btn.style.background = 'linear-gradient(135deg, #7C3AED, #06B6D4)';
-      } else {
-        btn.disabled = true;
-        btn.textContent = '🔒 Complete todos os testes para liberar';
-        btn.style.background = 'rgba(255,255,255,0.1)';
-        btn.style.color = 'rgba(255,255,255,0.4)';
-      }
-    }
-
-    // ============================================
-    // VISUALIZAR LAUDO
-    // ============================================
-    function viewLaudo() {
-      console.log('📄 Visualizando laudo completo');
-      window.location.href = '../participante/laudo/index.html';
-    }
-
-    // ============================================
-    // LOGOUT
-    // ============================================
-    function handleLogout() {
-      if (confirm('Deseja realmente sair?')) {
-        window.VigorreAuth.logout();
-      }
-    }
-
-    console.log('👤 Dashboard Participante carregado');
-  </script>
+        console.log('✅ Participante Dashboard carregado com sucesso!');
+    </script>
 
 </body>
 </html>
