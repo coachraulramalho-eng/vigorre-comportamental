@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de Auditoria | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-audit {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 20% 80%, rgba(124,58,237,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.06) 0%, transparent 50%);
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header-audit {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .header-audit .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .header-audit .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #7C3AED, #D4AF37);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .header-audit .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-audit .logo-text .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #7C3AED;
+    }
+    
+    .header-audit .logo-text span {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.4);
+      display: block;
+    }
+    
+    .header-audit .btn-back {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .header-audit .btn-back:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    .audit-body {
+      background: rgba(30,41,59,0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 32px;
+    }
+    
+    .audit-title {
+      text-align: center;
+      padding: 16px 0 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+    }
+    
+    .audit-title h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .audit-title .purple {
+      color: #7C3AED;
+    }
+    
+    .audit-title p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    /* FILTROS */
+    .filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    
+    .filters input, .filters select {
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+    }
+    
+    .filters input:focus, .filters select:focus {
+      outline: none;
+      border-color: #7C3AED;
+    }
+    
+    .filters input::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .filters select option {
+      background: #1E293B;
+    }
+    
+    /* TABELA */
+    .table-container {
+      overflow-x: auto;
+      margin-bottom: 16px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+    
+    table th {
+      text-align: left;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.5);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    
+    table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.8);
+    }
+    
+    table tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+    
+    .badge-audit {
+      padding: 2px 10px;
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
+    
+    .badge-audit.login { background: rgba(6,182,212,0.15); color: #06B6D4; }
+    .badge-audit.logout { background: rgba(244,63,94,0.15); color: #F43F5E; }
+    .badge-audit.create { background: rgba(16,185,129,0.15); color: #10B981; }
+    .badge-audit.edit { background: rgba(245,158,11,0.15); color: #F59E0B; }
+    .badge-audit.delete { background: rgba(239,68,68,0.15); color: #EF4444; }
+    .badge-audit.generate { background: rgba(124,58,237,0.15); color: #7C3AED; }
+    
+    .pagination {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    
+    .pagination button {
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+    }
+    
+    .pagination button:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    .pagination button.active {
+      background: rgba(124,58,237,0.15);
+      border-color: #7C3AED;
+      color: #7C3AED;
+    }
+    
+    .btn-export {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #7C3AED, #D4AF37);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-export:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(124,58,237,0.3);
+    }
+    
+    .footer-audit {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .footer-audit .contact {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-audit .contact a {
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-audit .contact a:hover {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    @media (max-width: 768px) {
+      .header-audit { flex-direction: column; text-align: center; }
+      .filters { flex-direction: column; }
+      .filters input, .filters select { width: 100%; }
+      .footer-audit { flex-direction: column; text-align: center; }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .header-audit, .audit-body, .footer-audit {
+        background: white !important;
+        border-color: #ddd !important;
+        color: #111 !important;
+      }
+      .audit-title h1 { color: #111 !important; }
+      .audit-title .purple { color: #7C3AED !important; }
+      .btn-back, .btn-export, .pagination { display: none !important; }
+      table { border-collapse: collapse; }
+      table th, table td { border: 1px solid #ddd; padding: 8px; }
+      .footer-audit .contact a { color: #666 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-audit"></div>
+
+  <div class="container">
+    
+    <!-- HEADER -->
+    <div class="header-audit">
+      <div class="logo">
+        <div class="logo-icon">V</div>
+        <div class="logo-text">
+          VIGORRE ONE™ <span class="tm">™</span>
+          <span>Central de Auditoria</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="btn-export" onclick="alert('📥 Relatório de auditoria exportado com sucesso!')">📥 Exportar</button>
+        <a href="../../admin/dashboard.html" class="btn-back">← Voltar</a>
+      </div>
+    </div>
+    
+    <!-- CORPO -->
+    <div class="audit-body">
+      
+      <div class="audit-title">
+        <h1>🔍 Central de <span class="purple">Auditoria</span></h1>
+        <p>Registro completo de todas as ações realizadas na plataforma</p>
+      </div>
+      
+      <!-- FILTROS -->
+      <div class="filters">
+        <input type="text" placeholder="🔍 Buscar por usuário ou ação..." style="flex:1;min-width:200px;">
+        <select>
+          <option value="">Todos os tipos</option>
+          <option value="login">Login</option>
+          <option value="logout">Logout</option>
+          <option value="create">Criação</option>
+          <option value="edit">Edição</option>
+          <option value="delete">Exclusão</option>
+          <option value="generate">Geração</option>
+        </select>
+        <input type="date" value="2024-06-01">
+        <input type="date" value="2024-06-15">
+        <button style="padding:8px 20px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.2);border-radius:8px;color:#7C3AED;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;">Filtrar</button>
+      </div>
+      
+      <!-- TABELA -->
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Data/Hora</th>
+              <th>Usuário</th>
+              <th>Ação</th>
+              <th>IP</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15/06/2024 14:32</td>
+              <td>Admin Master</td>
+              <td><span class="badge-audit login">🔐 Login</span></td>
+              <td>192.168.1.100</td>
+              <td>✅ Sucesso</td>
+            </tr>
+            <tr>
+              <td>15/06/2024 13:15</td>
+              <td>João Silva</td>
+              <td><span class="badge-audit create">📝 Criou participante</span></td>
+              <td>192.168.1.101</td>
+              <td>✅ Sucesso</td>
+            </tr>
+            <tr>
+              <td>15/06/2024 12:45</td>
+              <td>Maria Santos</td>
+              <td><span class="badge-audit generate">📄 Gerou laudo</span></td>
+              <td>192.168.1.102</td>
+              <td>✅ Sucesso</td>
+            </tr>
+            <tr>
+              <td>15/06/2024 11:30</td>
+              <td>Admin Master</td>
+              <td><span class="badge-audit edit">✏️ Editou empresa</span></td>
+              <td>192.168.1.100</td>
+              <td>✅ Sucesso</td>
+            </tr>
+            <tr>
+              <td>15/06/2024 10:20</td>
+              <td>Pedro Costa</td>
+              <td><span class="badge-audit delete">🗑️ Excluiu participante</span></td>
+              <td>192.168.1.103</td>
+              <td>⚠️ Restrito</td>
+            </tr>
+            <tr>
+              <td>15/06/2024 09:00</td>
+              <td>Ana Silva</td>
+              <td><span class="badge-audit login">🔐 Login</span></td>
+              <td>192.168.1.104</td>
+              <td>✅ Sucesso</td>
+            </tr>
+            <tr>
+              <td>14/06/2024 17:45</td>
+              <td>Admin Master</td>
+              <td><span class="badge-audit generate">📄 Gerou relatório</span></td>
+              <td>192.168.1.100</td>
+              <td>✅ Sucesso</td>
+            </tr>
+            <tr>
+              <td>14/06/2024 16:30</td>
+              <td>João Silva</td>
+              <td><span class="badge-audit create">📝 Criou empresa</span></td>
+              <td>192.168.1.101</td>
+              <td>✅ Sucesso</td>
+            </tr>
+            <tr>
+              <td>14/06/2024 15:20</td>
+              <td>Maria Santos</td>
+              <td><span class="badge-audit edit">✏️ Editou permissões</span></td>
+              <td>192.168.1.102</td>
+              <td>✅ Sucesso</td>
+            </tr>
+            <tr>
+              <td>14/06/2024 14:00</td>
+              <td>Pedro Costa</td>
+              <td><span class="badge-audit logout">🚪 Logout</span></td>
+              <td>192.168.1.103</td>
+              <td>✅ Sucesso</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- PAGINAÇÃO -->
+      <div class="pagination">
+        <button>Anterior</button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>...</button>
+        <button>10</button>
+        <button>Próximo</button>
+      </div>
+      
+      <!-- RESUMO -->
+      <div style="margin-top:16px;padding:12px 16px;background:rgba(255,255,255,0.03);border-radius:8px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:0.75rem;color:rgba(255,255,255,0.4);">
+        <span>📊 Total de registros: <strong style="color:white;">1,247</strong></span>
+        <span>📅 Últimos 7 dias: <strong style="color:white;">89</strong></span>
+        <span>👤 Usuários ativos hoje: <strong style="color:white;">12</strong></span>
+        <span>🔄 Ações mais comuns: <strong style="color:white;">Login (34%)</strong></span>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <div class="footer-audit">
+      <span>© 2024 VIGORRE ONE™</span>
+      <div class="contact">
+        <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+        <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+        <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
+      </div>
+      <span>v1.0</span>
+    </div>
+    
+  </div>
+
+</body>
+</html>
