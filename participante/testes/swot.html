@@ -1,2651 +1,2670 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Análise SWOT Pessoal - VIGORRE ONE™">
-  <title>Teste SWOT | VIGORRE ONE™</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/globals.css">
-  
-  <style>
-    /* ============================================
-       VIGORRE ONE™ - TESTE SWOT
-       VERSÃO COMPLETA SEM OTIMIZAÇÃO
-       ============================================ */
-    
-    /* ============================================
-       CORES DO TESTE SWOT (ROXO/VERDE)
-       ============================================ */
-    :root {
-      --test-primary: #7C3AED;
-      --test-primary-light: #A78BFA;
-      --test-primary-dark: #5B21B6;
-      --test-secondary: #10B981;
-      --test-secondary-light: #34D399;
-      --test-gradient-main: linear-gradient(135deg, #7C3AED 0%, #10B981 50%, #5B21B6 100%);
-      --test-gradient-header: linear-gradient(135deg, #5B21B6, #7C3AED);
-      --test-gradient-footer: linear-gradient(135deg, #7C3AED, #5B21B6);
-      --test-shadow-color: rgba(124, 58, 237, 0.3);
-    }
-    
-    /* ============================================
-       BASE - ULTRA PREMIUM
-       ============================================ */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      min-height: 100vh;
-      background: #0F172A;
-      color: #F8FAFC;
-      padding: 20px;
-      position: relative;
-      overflow-x: hidden;
-    }
-    
-    /* ============================================
-       FUNDO ANIMADO
-       ============================================ */
-    .bg-test {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--test-gradient-main);
-      opacity: 0.08;
-      z-index: 0;
-      animation: floatBg 45s ease-in-out infinite;
-    }
-    
-    @keyframes floatBg {
-      0%, 100% {
-        transform: translateY(0) scale(1) rotate(0deg);
-      }
-      33% {
-        transform: translateY(-25px) scale(1.01) rotate(0.5deg);
-      }
-      66% {
-        transform: translateY(15px) scale(0.99) rotate(-0.5deg);
-      }
-    }
-    
-    /* ============================================
-       PARTÍCULAS
-       ============================================ */
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image:
-        radial-gradient(2px 2px at 25px 35px, rgba(124,58,237,0.12), transparent),
-        radial-gradient(2px 2px at 55px 85px, rgba(16,185,129,0.10), transparent),
-        radial-gradient(2px 2px at 110px 45px, rgba(124,58,237,0.14), transparent),
-        radial-gradient(2px 2px at 180px 140px, rgba(16,185,129,0.08), transparent),
-        radial-gradient(2px 2px at 260px 65px, rgba(124,58,237,0.11), transparent);
-      background-size: 320px 320px;
-      animation: floatParticles 40s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    @keyframes floatParticles {
-      0% {
-        transform: translateY(0) translateX(0);
-      }
-      50% {
-        transform: translateY(-80px) translateX(25px);
-      }
-      100% {
-        transform: translateY(-160px) translateX(-20px);
-      }
-    }
-    
-    /* ============================================
-       CONTAINER PRINCIPAL
-       ============================================ */
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    
-    /* ============================================
-       CABEÇALHO PREMIUM
-       ============================================ */
-    .header-premium {
-      background: rgba(30, 41, 59, 0.88);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 20px 20px 0 0;
-      padding: 24px 36px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .header-premium::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--test-gradient-header);
-    }
-    
-    .header-premium::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
-    }
-    
-    /* ============================================
-       HEADER GRID
-       ============================================ */
-    .header-grid {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 24px;
-      position: relative;
-      z-index: 1;
-    }
-    
-    /* ============================================
-       LOGO
-       ============================================ */
-    .header-logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    
-    .header-logo .logo-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--test-gradient-header);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.3rem;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      flex-shrink: 0;
-      box-shadow: 0 4px 24px var(--test-shadow-color);
-    }
-    
-    .header-logo-text .system-name {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: white;
-      letter-spacing: -0.02em;
-    }
-    
-    .header-logo-text .system-name .tm {
-      font-size: 0.5rem;
-      vertical-align: super;
-      color: #A78BFA;
-    }
-    
-    .header-logo-text .system-sub {
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.35);
-      display: block;
-      letter-spacing: 0.03em;
-    }
-    
-    /* ============================================
-       CENTRO DO CABEÇALHO
-       ============================================ */
-    .header-center {
-      text-align: center;
-    }
-    
-    .header-center .report-title {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: white;
-    }
-    
-    .header-center .report-title .highlight {
-      background: var(--test-gradient-header);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .header-center .report-sub {
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.35);
-      letter-spacing: 0.05em;
-    }
-    
-    /* ============================================
-       DIREITA DO CABEÇALHO
-       ============================================ */
-    .header-right {
-      text-align: right;
-    }
-    
-    .header-right .participant-name {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: white;
-    }
-    
-    .header-right .participant-company {
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.4);
-    }
-    
-    .header-right .participant-id {
-      font-size: 0.65rem;
-      color: rgba(255, 255, 255, 0.25);
-      font-family: 'Courier New', monospace;
-      margin-top: 2px;
-    }
-    
-    /* ============================================
-       CORPO DO TESTE
-       ============================================ */
-    .test-body {
-      background: rgba(30, 41, 59, 0.55);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-left: 1px solid rgba(255, 255, 255, 0.04);
-      border-right: 1px solid rgba(255, 255, 255, 0.04);
-      padding: 36px 36px 32px;
-      min-height: 450px;
-    }
-    
-    /* ============================================
-       PROGRESSO
-       ============================================ */
-    .progress-section {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    
-    .progress-text {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-    
-    .progress-bar {
-      flex: 1;
-      max-width: 340px;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 4px;
-      overflow: hidden;
-      margin: 0 16px;
-    }
-    
-    .progress-fill {
-      height: 100%;
-      background: var(--test-gradient-header);
-      border-radius: 4px;
-      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .progress-percent {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 0.75rem;
-      font-weight: 600;
-      min-width: 44px;
-      text-align: right;
-    }
-    
-    /* ============================================
-       TIMER E CONFIABILIDADE
-       ============================================ */
-    .status-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    
-    .status-bar .timer {
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.3);
-      font-family: 'Courier New', monospace;
-    }
-    
-    .reliability-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-    
-    .reliability-badge.high {
-      background: rgba(16, 185, 129, 0.15);
-      color: #10B981;
-      border: 1px solid rgba(16, 185, 129, 0.2);
-    }
-    
-    .reliability-badge.medium {
-      background: rgba(245, 158, 11, 0.15);
-      color: #F59E0B;
-      border: 1px solid rgba(245, 158, 11, 0.2);
-    }
-    
-    .reliability-badge.low {
-      background: rgba(239, 68, 68, 0.15);
-      color: #EF4444;
-      border: 1px solid rgba(239, 68, 68, 0.2);
-    }
-    
-    /* ============================================
-       PERGUNTA
-       ============================================ */
-    .question-number {
-      display: inline-block;
-      padding: 4px 16px;
-      background: rgba(124, 58, 237, 0.12);
-      border: 1px solid rgba(124, 58, 237, 0.2);
-      border-radius: 100px;
-      color: #A78BFA;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      letter-spacing: 0.03em;
-    }
-    
-    .question-text {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: white;
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
-    
-    /* ============================================
-       OPÇÕES
-       ============================================ */
-    .options-grid {
-      display: grid;
-      gap: 12px;
-    }
-    
-    .option-btn {
-      padding: 18px 24px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: left;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.75);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    
-    .option-btn:hover {
-      border-color: #7C3AED;
-      background: rgba(124, 58, 237, 0.06);
-      transform: translateX(6px);
-    }
-    
-    .option-btn.selected {
-      border-color: #A78BFA;
-      background: rgba(124, 58, 237, 0.12);
-      color: white;
-      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.08);
-    }
-    
-    .option-btn .letter {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 50%;
-      font-weight: 700;
-      font-size: 0.8rem;
-      flex-shrink: 0;
-      color: rgba(255, 255, 255, 0.35);
-      transition: all 0.3s ease;
-    }
-    
-    .option-btn.selected .letter {
-      background: #7C3AED;
-      color: white;
-      box-shadow: 0 2px 12px var(--test-shadow-color);
-    }
-    
-    /* ============================================
-       NAVEGAÇÃO
-       ============================================ */
-    .nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      margin-top: 28px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .btn-nav {
-      padding: 14px 36px;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.875rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'Inter', sans-serif;
-    }
-    
-    .btn-prev {
-      background: rgba(255, 255, 255, 0.05);
-      color: rgba(255, 255, 255, 0.5);
-    }
-    
-    .btn-prev:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-    }
-    
-    .btn-next {
-      background: var(--test-gradient-header);
-      color: white;
-      box-shadow: 0 4px 24px var(--test-shadow-color);
-    }
-    
-    .btn-next:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 32px var(--test-shadow-color);
-    }
-    
-    .btn-finish {
-      background: linear-gradient(135deg, #5B21B6, #7C3AED);
-      color: white;
-      box-shadow: 0 4px 24px var(--test-shadow-color);
-    }
-    
-    .btn-finish:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 32px var(--test-shadow-color);
-    }
-    
-    .btn-nav:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-      transform: none !important;
-    }
-    
-    /* ============================================
-       RESULTADOS
-       ============================================ */
-    .results-container {
-      display: none;
-      animation: fadeInUp 0.6s ease;
-    }
-    
-    .results-container.active {
-      display: block;
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    /* ============================================
-       CABEÇALHO DOS RESULTADOS
-       ============================================ */
-    .results-header {
-      text-align: center;
-      padding: 28px 0 36px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .results-header h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.8rem;
-      color: white;
-      margin-bottom: 4px;
-    }
-    
-    .results-header .subtitle {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 0.85rem;
-    }
-    
-    /* ============================================
-       PERFIL BADGE
-       ============================================ */
-    .profile-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      padding: 12px 32px;
-      background: var(--test-gradient-header);
-      border-radius: 100px;
-      color: white;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-top: 18px;
-      box-shadow: 0 4px 24px var(--test-shadow-color);
-    }
-    
-    .profile-badge .emoji {
-      font-size: 1.3rem;
-    }
-    
-    /* ============================================
-       RESULTADOS GRID
-       ============================================ */
-    .results-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 24px 0;
-    }
-    
-    .result-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      padding: 18px 22px;
-    }
-    
-    .result-card .label {
-      color: rgba(255, 255, 255, 0.35);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    .result-card .value {
-      color: white;
-      font-size: 1rem;
-      font-weight: 600;
-      margin-top: 4px;
-    }
-    
-    .result-card .value.success {
-      color: #34D399;
-    }
-    
-    /* ============================================
-       GRÁFICO
-       ============================================ */
-    .chart-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      padding: 24px;
-      margin-bottom: 16px;
-    }
-    
-    .chart-card h3 {
-      color: white;
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
-    
-    .chart-container {
-      height: 240px;
-      position: relative;
-    }
-    
-    /* ============================================
-       RESUMO DO PERFIL
-       ============================================ */
-    .profile-summary {
-      color: rgba(255, 255, 255, 0.75);
-      line-height: 1.8;
-      font-size: 0.95rem;
-    }
-    
-    .profile-summary strong {
-      color: white;
-    }
-    
-    /* ============================================
-       SWOT GRID (4 QUADRANTES)
-       ============================================ */
-    .swot-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 16px 0;
-    }
-    
-    .swot-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      padding: 20px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    
-    .swot-card:hover {
-      background: rgba(255, 255, 255, 0.06);
-      transform: translateY(-2px);
-    }
-    
-    .swot-card .swot-icon {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 4px;
-    }
-    
-    .swot-card .swot-name {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 2px;
-    }
-    
-    .swot-card .swot-value {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin: 4px 0;
-    }
-    
-    .swot-card .swot-bar {
-      height: 4px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 2px;
-      margin-top: 8px;
-      overflow: hidden;
-    }
-    
-    .swot-card .swot-bar-fill {
-      height: 100%;
-      border-radius: 2px;
-      transition: width 1s ease;
-    }
-    
-    .swot-card .swot-desc {
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.4);
-      margin-top: 8px;
-    }
-    
-    .swot-card.swot-forcas .swot-value { color: #10B981; }
-    .swot-card.swot-fraquezas .swot-value { color: #EF4444; }
-    .swot-card.swot-oportunidades .swot-value { color: #3B82F6; }
-    .swot-card.swot-ameacas .swot-value { color: #F59E0B; }
-    
-    /* ============================================
-       CARD DE CONSISTÊNCIA
-       ============================================ */
-    .consistency-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      padding: 24px;
-      margin-bottom: 16px;
-      display: none;
-    }
-    
-    .consistency-card.active {
-      display: block;
-    }
-    
-    .consistency-card h3 {
-      color: white;
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-    
-    .consistency-card .status-text {
-      font-size: 0.9rem;
-      margin-bottom: 4px;
-    }
-    
-    .consistency-card .detail-text {
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.35);
-    }
-    
-    /* ============================================
-       RELIABILITY NO RESULTADO
-       ============================================ */
-    .result-reliability {
-      margin-top: 12px;
-    }
-    
-    .result-reliability .badge-large {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 24px;
-      border-radius: 100px;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-    
-    .result-reliability .badge-large.high {
-      background: rgba(16, 185, 129, 0.15);
-      color: #10B981;
-      border: 1px solid rgba(16, 185, 129, 0.2);
-    }
-    
-    .result-reliability .badge-large.medium {
-      background: rgba(245, 158, 11, 0.15);
-      color: #F59E0B;
-      border: 1px solid rgba(245, 158, 11, 0.2);
-    }
-    
-    .result-reliability .badge-large.low {
-      background: rgba(239, 68, 68, 0.15);
-      color: #EF4444;
-      border: 1px solid rgba(239, 68, 68, 0.2);
-    }
-    
-    /* ============================================
-       AÇÕES DOS RESULTADOS
-       ============================================ */
-    .result-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      margin-top: 20px;
-    }
-    
-    .btn-result {
-      padding: 16px 20px;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.875rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    
-    .btn-result-primary {
-      background: var(--test-gradient-header);
-      color: white;
-      box-shadow: 0 4px 20px var(--test-shadow-color);
-    }
-    
-    .btn-result-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 28px var(--test-shadow-color);
-    }
-    
-    .btn-result-success {
-      background: linear-gradient(135deg, #10B981, #06B6D4);
-      color: white;
-    }
-    
-    .btn-result-success:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
-    }
-    
-    .btn-result-warning {
-      background: linear-gradient(135deg, #F59E0B, #F97316);
-      color: white;
-    }
-    
-    .btn-result-warning:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
-    }
-    
-    /* ============================================
-       RODAPÉ PREMIUM
-       ============================================ */
-    .footer-premium {
-      background: rgba(30, 41, 59, 0.88);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 0 0 20px 20px;
-      padding: 24px 36px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .footer-premium::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--test-gradient-footer);
-    }
-    
-    .footer-grid {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .footer-logo .logo-icon-small {
-      width: 36px;
-      height: 36px;
-      background: var(--test-gradient-footer);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 0.9rem;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      flex-shrink: 0;
-    }
-    
-    .footer-logo-text .footer-system {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: white;
-    }
-    
-    .footer-logo-text .footer-system .tm {
-      font-size: 0.4rem;
-      vertical-align: super;
-      color: #A78BFA;
-    }
-    
-    .footer-logo-text .footer-tagline {
-      font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.25);
-    }
-    
-    .footer-center .footer-contact {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-    
-    .footer-contact-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      color: rgba(255, 255, 255, 0.35);
-      font-size: 0.7rem;
-      transition: color 0.3s ease;
-      text-decoration: none;
-    }
-    
-    .footer-contact-item:hover {
-      color: rgba(255, 255, 255, 0.6);
-    }
-    
-    .footer-contact-item .icon {
-      font-size: 0.8rem;
-    }
-    
-    .footer-right .page-number {
-      color: rgba(255, 255, 255, 0.2);
-      font-size: 0.7rem;
-      font-family: 'Courier New', monospace;
-    }
-    
-    .footer-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-      margin: 14px 0;
-    }
-    
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.15);
-    }
-    
-    /* ============================================
-       LOADING
-       ============================================ */
-    .loading-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(10, 22, 40, 0.92);
-      backdrop-filter: blur(12px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-    
-    .loading-overlay.active {
-      display: flex;
-    }
-    
-    .loading-content {
-      text-align: center;
-    }
-    
-    .loading-spinner {
-      width: 56px;
-      height: 56px;
-      border: 4px solid rgba(255, 255, 255, 0.08);
-      border-top-color: #7C3AED;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 18px;
-    }
-    
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-    
-    .loading-text {
-      color: white;
-      font-weight: 600;
-      font-size: 1rem;
-    }
-    
-    .loading-sub {
-      color: rgba(255, 255, 255, 0.3);
-      font-size: 0.8rem;
-      margin-top: 4px;
-    }
-    
-    /* ============================================
-       TOAST
-       ============================================ */
-    .toast {
-      position: fixed;
-      top: 24px;
-      right: 24px;
-      background: rgba(30, 41, 59, 0.95);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 16px 28px;
-      color: white;
-      font-weight: 600;
-      font-size: 0.875rem;
-      display: none;
-      align-items: center;
-      gap: 14px;
-      z-index: 1001;
-      max-width: 420px;
-      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
-      animation: slideIn 0.3s ease;
-    }
-    
-    .toast.show {
-      display: flex;
-    }
-    
-    .toast.error {
-      border-left: 4px solid #EF4444;
-    }
-    
-    .toast.success {
-      border-left: 4px solid #10B981;
-    }
-    
-    .toast.warning {
-      border-left: 4px solid #F59E0B;
-    }
-    
-    @keyframes slideIn {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-    
-    /* ============================================
-       BACK LINK
-       ============================================ */
-    .back-link {
-      color: rgba(255, 255, 255, 0.2);
-      text-decoration: none;
-      font-size: 0.75rem;
-      display: inline-block;
-      margin-top: 16px;
-      text-align: center;
-      width: 100%;
-      transition: color 0.3s ease;
-    }
-    
-    .back-link:hover {
-      color: rgba(255, 255, 255, 0.5);
-    }
-    
-    /* ============================================
-       RESPONSIVO
-       ============================================ */
-    @media (max-width: 1024px) {
-      .header-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        text-align: center;
-      }
-      .header-right {
-        text-align: center;
-      }
-      .footer-grid {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-      }
-      .footer-center .footer-contact {
-        justify-content: center;
-        flex-direction: column;
-        gap: 6px;
-      }
-      .swot-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      body {
-        padding: 12px;
-      }
-      .header-premium {
-        padding: 16px 20px;
-        border-radius: 16px 16px 0 0;
-      }
-      .test-body {
-        padding: 20px;
-        min-height: 350px;
-      }
-      .question-text {
-        font-size: 1.1rem;
-      }
-      .results-grid {
-        grid-template-columns: 1fr;
-      }
-      .result-actions {
-        grid-template-columns: 1fr;
-      }
-      .swot-grid {
-        grid-template-columns: 1fr;
-      }
-      .nav-buttons {
-        flex-wrap: wrap;
-      }
-      .nav-buttons button {
-        flex: 1;
-        min-width: 100px;
-      }
-      .progress-bar {
-        max-width: 100%;
-      }
-      .footer-premium {
-        padding: 16px 20px;
-        border-radius: 0 0 16px 16px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      body {
-        padding: 8px;
-      }
-      .header-premium {
-        padding: 12px 16px;
-      }
-      .test-body {
-        padding: 14px;
-      }
-      .option-btn {
-        padding: 14px 16px;
-        font-size: 0.85rem;
-      }
-      .btn-nav {
-        padding: 10px 16px;
-        font-size: 0.8rem;
-      }
-      .profile-badge {
-        padding: 10px 20px;
-        font-size: 0.95rem;
-      }
-      .results-header h2 {
-        font-size: 1.4rem;
-      }
-      .chart-container {
-        height: 180px;
-      }
-    }
-    
-    /* ============================================
-       IMPRESSÃO
-       ============================================ */
-    @media print {
-      body {
-        background: white !important;
-        padding: 0 !important;
-        color: #0A2540 !important;
-      }
-      
-      .bg-test, .particles {
-        display: none !important;
-      }
-      
-      .container {
-        max-width: 100% !important;
-      }
-      
-      .header-premium {
-        background: #0A2540 !important;
-        border-radius: 0 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        padding: 20px 30px !important;
-      }
-      
-      .header-premium::before {
-        display: none !important;
-      }
-      
-      .header-premium::after {
-        display: none !important;
-      }
-      
-      .test-body {
-        background: white !important;
-        border: none !important;
-        padding: 24px 30px !important;
-        backdrop-filter: none !important;
-      }
-      
-      .question-text {
-        color: #0A2540 !important;
-      }
-      
-      .option-btn {
-        border-color: #E2E8F0 !important;
-        color: #334155 !important;
-        background: #F8FAFC !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-      
-      .option-btn.selected {
-        border-color: #7C3AED !important;
-        background: #EDE9FE !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-      
-      .option-btn.selected .letter {
-        background: #7C3AED !important;
-        color: white !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-      
-      .footer-premium {
-        background: #0A2540 !important;
-        border-radius: 0 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        padding: 16px 30px !important;
-      }
-      
-      .footer-premium::before {
-        display: none !important;
-      }
-      
-      .btn-nav, .btn-next, .btn-finish, .btn-result, .back-link,
-      .nav-buttons, .progress-section, .result-actions {
-        display: none !important;
-      }
-      
-      .results-container {
-        display: block !important;
-      }
-      
-      .results-header h2 {
-        color: #0A2540 !important;
-      }
-      
-      .result-card {
-        background: #F8FAFC !important;
-        border-color: #E2E8F0 !important;
-      }
-      
-      .result-card .value {
-        color: #0A2540 !important;
-      }
-      
-      .chart-card {
-        background: #F8FAFC !important;
-        border-color: #E2E8F0 !important;
-      }
-      
-      .chart-card h3 {
-        color: #0A2540 !important;
-      }
-      
-      .profile-badge {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-      
-      .footer-contact-item {
-        color: rgba(255, 255, 255, 0.6) !important;
-      }
-      
-      .header-right .participant-name {
-        color: white !important;
-      }
-      
-      .footer-bottom {
-        display: none !important;
-      }
-      
-      .reliability-badge {
-        display: none !important;
-      }
-      
-      .status-bar .timer {
-        display: none !important;
-      }
-      
-      .consistency-card {
-        display: none !important;
-      }
-      
-      .result-reliability {
-        display: none !important;
-      }
-      
-      .profile-summary {
-        color: #334155 !important;
-      }
-      
-      .profile-summary strong {
-        color: #0A2540 !important;
-      }
-      
-      .question-number {
-        color: #7C3AED !important;
-        border-color: #7C3AED !important;
-        background: rgba(124, 58, 237, 0.08) !important;
-      }
-      
-      .footer-divider {
-        display: none !important;
-      }
-      
-      .swot-card {
-        background: #F8FAFC !important;
-        border-color: #E2E8F0 !important;
-      }
-      
-      .swot-card .swot-name {
-        color: #0A2540 !important;
-      }
-      
-      .swot-card .swot-value {
-        color: #0A2540 !important;
-      }
-      
-      .swot-card .swot-desc {
-        color: #64748B !important;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Análise SWOT Pessoal - VIGORRE ONE™">
+    <title>Teste SWOT | VIGORRE ONE™</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/globals.css">
+
+    <style>
+        /* ============================================
+           VIGORRE ONE™ - TESTE SWOT
+           VERSÃO COMPLETA COM LOGO
+           ============================================ */
+
+        /* ============================================
+           CORES DO TESTE SWOT (ROXO/VERDE)
+           ============================================ */
+        :root {
+            --test-primary: #7C3AED;
+            --test-primary-light: #A78BFA;
+            --test-primary-dark: #5B21B6;
+            --test-secondary: #10B981;
+            --test-secondary-light: #34D399;
+            --test-gradient-main: linear-gradient(135deg, #7C3AED 0%, #10B981 50%, #5B21B6 100%);
+            --test-gradient-header: linear-gradient(135deg, #5B21B6, #7C3AED);
+            --test-gradient-footer: linear-gradient(135deg, #7C3AED, #5B21B6);
+            --test-shadow-color: rgba(124, 58, 237, 0.3);
+        }
+
+        /* ============================================
+           BASE - ULTRA PREMIUM
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            background: #0F172A;
+            color: #F8FAFC;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           FUNDO ANIMADO
+           ============================================ */
+        .bg-test {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--test-gradient-main);
+            opacity: 0.08;
+            z-index: 0;
+            animation: floatBg 45s ease-in-out infinite;
+        }
+
+        @keyframes floatBg {
+            0%,
+            100% {
+                transform: translateY(0) scale(1) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-25px) scale(1.01) rotate(0.5deg);
+            }
+            66% {
+                transform: translateY(15px) scale(0.99) rotate(-0.5deg);
+            }
+        }
+
+        /* ============================================
+           PARTÍCULAS
+           ============================================ */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(2px 2px at 25px 35px, rgba(124, 58, 237, 0.12), transparent),
+                radial-gradient(2px 2px at 55px 85px, rgba(16, 185, 129, 0.10), transparent),
+                radial-gradient(2px 2px at 110px 45px, rgba(124, 58, 237, 0.14), transparent),
+                radial-gradient(2px 2px at 180px 140px, rgba(16, 185, 129, 0.08), transparent),
+                radial-gradient(2px 2px at 260px 65px, rgba(124, 58, 237, 0.11), transparent);
+            background-size: 320px 320px;
+            animation: floatParticles 40s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatParticles {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-80px) translateX(25px);
+            }
+            100% {
+                transform: translateY(-160px) translateX(-20px);
+            }
+        }
+
+        /* ============================================
+           CONTAINER PRINCIPAL
+           ============================================ */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           CABEÇALHO PREMIUM
+           ============================================ */
+        .header-premium {
+            background: rgba(30, 41, 59, 0.88);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px 20px 0 0;
+            padding: 24px 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--test-gradient-header);
+        }
+
+        .header-premium::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+        }
+
+        /* ============================================
+           HEADER GRID
+           ============================================ */
+        .header-grid {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+           LOGO - COM IMAGEM
+           ============================================ */
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .header-logo .logo-img {
+            height: 44px;
+            width: auto;
+            display: block;
+        }
+
+        .header-logo-text .system-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+
+        .header-logo-text .system-name .tm {
+            font-size: 0.5rem;
+            vertical-align: super;
+            color: #A78BFA;
+        }
+
+        .header-logo-text .system-sub {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.35);
+            display: block;
+            letter-spacing: 0.03em;
+        }
+
+        /* ============================================
+           LOGO - RESPONSIVO
+           ============================================ */
+        @media (max-width: 768px) {
+            .header-logo .logo-img {
+                height: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-logo .logo-img {
+                height: 28px;
+            }
+        }
+
+        @media print {
+            .header-logo .logo-img {
+                height: 36px;
+            }
+        }
+
+        /* ============================================
+           CENTRO DO CABEÇALHO
+           ============================================ */
+        .header-center {
+            text-align: center;
+        }
+
+        .header-center .report-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .header-center .report-title .highlight {
+            background: var(--test-gradient-header);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-center .report-sub {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0.05em;
+        }
+
+        /* ============================================
+           DIREITA DO CABEÇALHO
+           ============================================ */
+        .header-right {
+            text-align: right;
+        }
+
+        .header-right .participant-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .header-right .participant-company {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .header-right .participant-id {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.25);
+            font-family: 'Courier New', monospace;
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           CORPO DO TESTE
+           ============================================ */
+        .test-body {
+            background: rgba(30, 41, 59, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.04);
+            border-right: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 36px 36px 32px;
+            min-height: 450px;
+        }
+
+        /* ============================================
+           PROGRESSO
+           ============================================ */
+        .progress-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .progress-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            flex: 1;
+            max-width: 340px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 16px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--test-gradient-header);
+            border-radius: 4px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-percent {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            font-weight: 600;
+            min-width: 44px;
+            text-align: right;
+        }
+
+        /* ============================================
+           TIMER E CONFIABILIDADE
+           ============================================ */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .status-bar .timer {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-family: 'Courier New', monospace;
+        }
+
+        .reliability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .reliability-badge.high {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .reliability-badge.medium {
+            background: rgba(245, 158, 11, 0.15);
+            color: #F59E0B;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .reliability-badge.low {
+            background: rgba(239, 68, 68, 0.15);
+            color: #EF4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        /* ============================================
+           PERGUNTA
+           ============================================ */
+        .question-number {
+            display: inline-block;
+            padding: 4px 16px;
+            background: rgba(124, 58, 237, 0.12);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 100px;
+            color: #A78BFA;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 0.03em;
+        }
+
+        .question-text {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        /* ============================================
+           OPÇÕES
+           ============================================ */
+        .options-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option-btn {
+            padding: 18px 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.75);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .option-btn:hover {
+            border-color: #7C3AED;
+            background: rgba(124, 58, 237, 0.06);
+            transform: translateX(6px);
+        }
+
+        .option-btn.selected {
+            border-color: #A78BFA;
+            background: rgba(124, 58, 237, 0.12);
+            color: white;
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.08);
+        }
+
+        .option-btn .letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            color: rgba(255, 255, 255, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .option-btn.selected .letter {
+            background: #7C3AED;
+            color: white;
+            box-shadow: 0 2px 12px var(--test-shadow-color);
+        }
+
+        /* ============================================
+           NAVEGAÇÃO
+           ============================================ */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-nav {
+            padding: 14px 36px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-prev:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .btn-next {
+            background: var(--test-gradient-header);
+            color: white;
+            box-shadow: 0 4px 24px var(--test-shadow-color);
+        }
+
+        .btn-next:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 32px var(--test-shadow-color);
+        }
+
+        .btn-finish {
+            background: linear-gradient(135deg, #5B21B6, #7C3AED);
+            color: white;
+            box-shadow: 0 4px 24px var(--test-shadow-color);
+        }
+
+        .btn-finish:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 32px var(--test-shadow-color);
+        }
+
+        .btn-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ============================================
+           RESULTADOS
+           ============================================ */
+        .results-container {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .results-container.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           CABEÇALHO DOS RESULTADOS
+           ============================================ */
+        .results-header {
+            text-align: center;
+            padding: 28px 0 36px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .results-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .results-header .subtitle {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           PERFIL BADGE
+           ============================================ */
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 32px;
+            background: var(--test-gradient-header);
+            border-radius: 100px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 18px;
+            box-shadow: 0 4px 24px var(--test-shadow-color);
+        }
+
+        .profile-badge .emoji {
+            font-size: 1.3rem;
+        }
+
+        /* ============================================
+           RESULTADOS GRID
+           ============================================ */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 18px 22px;
+        }
+
+        .result-card .label {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .result-card .value {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .result-card .value.success {
+            color: #34D399;
+        }
+
+        /* ============================================
+           GRÁFICO
+           ============================================ */
+        .chart-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .chart-card h3 {
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .chart-container {
+            height: 240px;
+            position: relative;
+        }
+
+        /* ============================================
+           RESUMO DO PERFIL
+           ============================================ */
+        .profile-summary {
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .profile-summary strong {
+            color: white;
+        }
+
+        /* ============================================
+           SWOT GRID (4 QUADRANTES)
+           ============================================ */
+        .swot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .swot-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .swot-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .swot-card .swot-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .swot-card .swot-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .swot-card .swot-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 4px 0;
+        }
+
+        .swot-card .swot-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .swot-card .swot-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 1s ease;
+        }
+
+        .swot-card .swot-desc {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 8px;
+        }
+
+        .swot-card.swot-forcas .swot-value {
+            color: #10B981;
+        }
+        .swot-card.swot-fraquezas .swot-value {
+            color: #EF4444;
+        }
+        .swot-card.swot-oportunidades .swot-value {
+            color: #3B82F6;
+        }
+        .swot-card.swot-ameacas .swot-value {
+            color: #F59E0B;
+        }
+
+        /* ============================================
+           CARD DE CONSISTÊNCIA
+           ============================================ */
+        .consistency-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .consistency-card.active {
+            display: block;
+        }
+
+        .consistency-card h3 {
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .consistency-card .status-text {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .consistency-card .detail-text {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* ============================================
+           RELIABILITY NO RESULTADO
+           ============================================ */
+        .result-reliability {
+            margin-top: 12px;
+        }
+
+        .result-reliability .badge-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .result-reliability .badge-large.high {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .result-reliability .badge-large.medium {
+            background: rgba(245, 158, 11, 0.15);
+            color: #F59E0B;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .result-reliability .badge-large.low {
+            background: rgba(239, 68, 68, 0.15);
+            color: #EF4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        /* ============================================
+           AÇÕES DOS RESULTADOS
+           ============================================ */
+        .result-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn-result {
+            padding: 16px 20px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-result-primary {
+            background: var(--test-gradient-header);
+            color: white;
+            box-shadow: 0 4px 20px var(--test-shadow-color);
+        }
+
+        .btn-result-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px var(--test-shadow-color);
+        }
+
+        .btn-result-success {
+            background: linear-gradient(135deg, #10B981, #06B6D4);
+            color: white;
+        }
+
+        .btn-result-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-result-warning {
+            background: linear-gradient(135deg, #F59E0B, #F97316);
+            color: white;
+        }
+
+        .btn-result-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        /* ============================================
+           RODAPÉ PREMIUM
+           ============================================ */
+        .footer-premium {
+            background: rgba(30, 41, 59, 0.88);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 0 0 20px 20px;
+            padding: 24px 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-premium::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--test-gradient-footer);
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo .logo-icon-small {
+            width: 36px;
+            height: 36px;
+            background: var(--test-gradient-footer);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            flex-shrink: 0;
+        }
+
+        .footer-logo-text .footer-system {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-logo-text .footer-system .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: #A78BFA;
+        }
+
+        .footer-logo-text .footer-tagline {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .footer-center .footer-contact {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.7rem;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-contact-item:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-contact-item .icon {
+            font-size: 0.8rem;
+        }
+
+        .footer-right .page-number {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.7rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            margin: 14px 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ============================================
+           LOADING
+           ============================================ */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 22, 40, 0.92);
+            backdrop-filter: blur(12px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 56px;
+            height: 56px;
+            border: 4px solid rgba(255, 255, 255, 0.08);
+            border-top-color: #7C3AED;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 18px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .loading-sub {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 16px 28px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: none;
+            align-items: center;
+            gap: 14px;
+            z-index: 1001;
+            max-width: 420px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.error {
+            border-left: 4px solid #EF4444;
+        }
+
+        .toast.success {
+            border-left: 4px solid #10B981;
+        }
+
+        .toast.warning {
+            border-left: 4px solid #F59E0B;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* ============================================
+           BACK LINK
+           ============================================ */
+        .back-link {
+            color: rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            font-size: 0.75rem;
+            display: inline-block;
+            margin-top: 16px;
+            text-align: center;
+            width: 100%;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
+        @media (max-width: 1024px) {
+            .header-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                text-align: center;
+            }
+            .header-right {
+                text-align: center;
+            }
+            .footer-grid {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+            .footer-center .footer-contact {
+                justify-content: center;
+                flex-direction: column;
+                gap: 6px;
+            }
+            .swot-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .header-premium {
+                padding: 16px 20px;
+                border-radius: 16px 16px 0 0;
+            }
+            .test-body {
+                padding: 20px;
+                min-height: 350px;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-actions {
+                grid-template-columns: 1fr;
+            }
+            .swot-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-buttons {
+                flex-wrap: wrap;
+            }
+            .nav-buttons button {
+                flex: 1;
+                min-width: 100px;
+            }
+            .progress-bar {
+                max-width: 100%;
+            }
+            .footer-premium {
+                padding: 16px 20px;
+                border-radius: 0 0 16px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            .header-premium {
+                padding: 12px 16px;
+            }
+            .test-body {
+                padding: 14px;
+            }
+            .option-btn {
+                padding: 14px 16px;
+                font-size: 0.85rem;
+            }
+            .btn-nav {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+            .profile-badge {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+            }
+            .results-header h2 {
+                font-size: 1.4rem;
+            }
+            .chart-container {
+                height: 180px;
+            }
+        }
+
+        /* ============================================
+           IMPRESSÃO
+           ============================================ */
+        @media print {
+            body {
+                background: white !important;
+                padding: 0 !important;
+                color: #0A2540 !important;
+            }
+
+            .bg-test,
+            .particles {
+                display: none !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+            }
+
+            .header-premium {
+                background: #0A2540 !important;
+                border-radius: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                padding: 20px 30px !important;
+            }
+
+            .header-premium::before {
+                display: none !important;
+            }
+
+            .header-premium::after {
+                display: none !important;
+            }
+
+            .test-body {
+                background: white !important;
+                border: none !important;
+                padding: 24px 30px !important;
+                backdrop-filter: none !important;
+            }
+
+            .question-text {
+                color: #0A2540 !important;
+            }
+
+            .option-btn {
+                border-color: #E2E8F0 !important;
+                color: #334155 !important;
+                background: #F8FAFC !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .option-btn.selected {
+                border-color: #7C3AED !important;
+                background: #EDE9FE !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .option-btn.selected .letter {
+                background: #7C3AED !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .footer-premium {
+                background: #0A2540 !important;
+                border-radius: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                padding: 16px 30px !important;
+            }
+
+            .footer-premium::before {
+                display: none !important;
+            }
+
+            .btn-nav,
+            .btn-next,
+            .btn-finish,
+            .btn-result,
+            .back-link,
+            .nav-buttons,
+            .progress-section,
+            .result-actions {
+                display: none !important;
+            }
+
+            .results-container {
+                display: block !important;
+            }
+
+            .results-header h2 {
+                color: #0A2540 !important;
+            }
+
+            .result-card {
+                background: #F8FAFC !important;
+                border-color: #E2E8F0 !important;
+            }
+
+            .result-card .value {
+                color: #0A2540 !important;
+            }
+
+            .chart-card {
+                background: #F8FAFC !important;
+                border-color: #E2E8F0 !important;
+            }
+
+            .chart-card h3 {
+                color: #0A2540 !important;
+            }
+
+            .profile-badge {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .footer-contact-item {
+                color: rgba(255, 255, 255, 0.6) !important;
+            }
+
+            .header-right .participant-name {
+                color: white !important;
+            }
+
+            .footer-bottom {
+                display: none !important;
+            }
+
+            .reliability-badge {
+                display: none !important;
+            }
+
+            .status-bar .timer {
+                display: none !important;
+            }
+
+            .consistency-card {
+                display: none !important;
+            }
+
+            .result-reliability {
+                display: none !important;
+            }
+
+            .profile-summary {
+                color: #334155 !important;
+            }
+
+            .profile-summary strong {
+                color: #0A2540 !important;
+            }
+
+            .question-number {
+                color: #7C3AED !important;
+                border-color: #7C3AED !important;
+                background: rgba(124, 58, 237, 0.08) !important;
+            }
+
+            .footer-divider {
+                display: none !important;
+            }
+
+            .swot-card {
+                background: #F8FAFC !important;
+                border-color: #E2E8F0 !important;
+            }
+
+            .swot-card .swot-name {
+                color: #0A2540 !important;
+            }
+
+            .swot-card .swot-value {
+                color: #0A2540 !important;
+            }
+
+            .swot-card .swot-desc {
+                color: #64748B !important;
+            }
+
+            .header-logo .logo-img {
+                height: 36px !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- ============================================
+    <!-- ============================================
        FUNDO
-  ============================================ -->
-  <div class="bg-test"></div>
-  <div class="particles"></div>
+    ============================================ -->
+    <div class="bg-test"></div>
+    <div class="particles"></div>
 
-  <!-- ============================================
+    <!-- ============================================
        LOADING
-  ============================================ -->
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-content">
-      <div class="loading-spinner"></div>
-      <p class="loading-text">Analisando seu SWOT</p>
-      <p class="loading-sub">Análise estratégica pessoal</p>
+    ============================================ -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Analisando seu SWOT</p>
+            <p class="loading-sub">Análise estratégica pessoal</p>
+        </div>
     </div>
-  </div>
 
-  <!-- ============================================
+    <!-- ============================================
        TOAST
-  ============================================ -->
-  <div class="toast" id="toast">
-    <span id="toastIcon">✅</span>
-    <span id="toastMessage">Mensagem</span>
-  </div>
+    ============================================ -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
 
-  <!-- ============================================
+    <!-- ============================================
        CONTAINER PRINCIPAL
-  ============================================ -->
-  <div class="container">
-
-    <!-- ============================================
-         CABEÇALHO
     ============================================ -->
-    <header class="header-premium">
-      <div class="header-grid">
-        <div class="header-logo">
-          <div class="logo-icon">V</div>
-          <div class="header-logo-text">
-            <span class="system-name">VIGORRE ONE<span class="tm">™</span></span>
-            <span class="system-sub">People Analytics Enterprise</span>
-          </div>
+    <div class="container">
+
+        <!-- ============================================
+           CABEÇALHO
+        ============================================ -->
+        <header class="header-premium">
+            <div class="header-grid">
+                <div class="header-logo">
+                    <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                    <div class="header-logo-text">
+                        <span class="system-name">VIGORRE ONE<span class="tm">™</span></span>
+                        <span class="system-sub">People Analytics Enterprise</span>
+                    </div>
+                </div>
+
+                <div class="header-center">
+                    <div class="report-title">
+                        <span class="highlight">Análise SWOT Pessoal</span>
+                    </div>
+                    <div class="report-sub">Forças • Fraquezas • Oportunidades • Ameaças</div>
+                </div>
+
+                <div class="header-right">
+                    <div class="participant-name" id="participantName">Carregando...</div>
+                    <div class="participant-company" id="participantCompany">Empresa: --</div>
+                    <div class="participant-id" id="participantId">ID: --</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ============================================
+           CORPO DO TESTE
+        ============================================ -->
+        <div class="test-body">
+
+            <!-- ============================================
+               PROGRESSO
+            ============================================ -->
+            <div class="progress-section">
+                <span class="progress-text" id="progressText">Questão 1 de 20</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 5%"></div>
+                </div>
+                <span class="progress-percent" id="progressPercent">5%</span>
+            </div>
+
+            <!-- ============================================
+               STATUS BAR (TIMER + CONFIABILIDADE)
+            ============================================ -->
+            <div class="status-bar">
+                <span class="timer" id="timerDisplay">⏱️ Tempo: 00:00</span>
+                <span class="reliability-badge high" id="reliabilityBadge">✅ Confiabilidade: --</span>
+            </div>
+
+            <!-- ============================================
+               ÁREA DO TESTE
+            ============================================ -->
+            <div id="testArea">
+
+                <div class="question-number" id="questionNumber">Questão 1 de 20</div>
+                <div class="question-text" id="questionText">Carregando pergunta...</div>
+
+                <div class="options-grid" id="optionsContainer">
+                    <!-- Opções carregadas via JavaScript -->
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
+                        ← Anterior
+                    </button>
+                    <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()">
+                        Próxima →
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- ============================================
+               RESULTADOS
+            ============================================ -->
+            <div class="results-container" id="resultsContainer">
+
+                <!-- Cabeçalho dos Resultados -->
+                <div class="results-header">
+                    <h2>📊 Análise SWOT Pessoal</h2>
+                    <p class="subtitle">Forças, Fraquezas, Oportunidades e Ameaças</p>
+                    <div class="profile-badge" id="profileBadge">
+                        <span class="emoji" id="profileEmoji">📊</span>
+                        <span id="profileText">Perfil Estratégico: --</span>
+                    </div>
+                    <div class="result-reliability" id="resultReliability"></div>
+                </div>
+
+                <!-- Cards de Informação -->
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="label">Participante</div>
+                        <div class="value" id="resultParticipant">--</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="label">Empresa</div>
+                        <div class="value" id="resultCompany">--</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="label">Data da Avaliação</div>
+                        <div class="value" id="resultDate">--</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="label">Status</div>
+                        <div class="value success" id="resultStatus">✅ Concluído</div>
+                    </div>
+                </div>
+
+                <!-- SWOT Grid -->
+                <div class="chart-card">
+                    <h3>📊 Matriz SWOT</h3>
+                    <div class="swot-grid" id="swotGrid">
+                        <!-- Carregado via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Gráfico -->
+                <div class="chart-card">
+                    <h3>📈 Distribuição SWOT</h3>
+                    <div class="chart-container">
+                        <canvas id="swotChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Resumo do Perfil -->
+                <div class="chart-card">
+                    <h3>💡 Resumo Estratégico</h3>
+                    <div class="profile-summary" id="profileSummary">
+                        Carregando resumo...
+                    </div>
+                </div>
+
+                <!-- Card de Consistência -->
+                <div class="consistency-card" id="consistencyCard">
+                    <h3>📊 Consistência dos Resultados</h3>
+                    <div id="consistencyContent">
+                        <p class="status-text" id="consistencyStatus">--</p>
+                        <p class="detail-text" id="consistencyDetail">--</p>
+                    </div>
+                </div>
+
+                <!-- Ações -->
+                <div class="result-actions">
+                    <button class="btn-result btn-result-primary" onclick="window.print()">
+                        🖨️ Imprimir
+                    </button>
+                    <button class="btn-result btn-result-success" onclick="goToDashboard()">
+                        📊 Dashboard
+                    </button>
+                    <button class="btn-result btn-result-warning" onclick="refazerTeste()">
+                        🔄 Refazer Teste
+                    </button>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="header-center">
-          <div class="report-title">
-            <span class="highlight">Análise SWOT Pessoal</span>
-          </div>
-          <div class="report-sub">Forças • Fraquezas • Oportunidades • Ameaças</div>
-        </div>
+        <!-- ============================================
+           RODAPÉ
+        ============================================ -->
+        <footer class="footer-premium">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <div class="logo-icon-small">V</div>
+                    <div class="footer-logo-text">
+                        <span class="footer-system">VIGORRE ONE<span class="tm">™</span></span>
+                        <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
+                    </div>
+                </div>
 
-        <div class="header-right">
-          <div class="participant-name" id="participantName">Carregando...</div>
-          <div class="participant-company" id="participantCompany">Empresa: --</div>
-          <div class="participant-id" id="participantId">ID: --</div>
-        </div>
-      </div>
-    </header>
+                <div class="footer-center">
+                    <div class="footer-contact">
+                        <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
+                            <span class="icon">📧</span> contato@vigorre.com.br
+                        </a>
+                        <a href="tel:+5534991850735" class="footer-contact-item">
+                            <span class="icon">📱</span> (34) 99185-0735
+                        </a>
+                        <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
+                            <span class="icon">🌐</span> www.vigorre.com.br
+                        </a>
+                        <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
+                            <span class="icon">📷</span> @vigorre.oficial
+                        </a>
+                    </div>
+                </div>
 
-    <!-- ============================================
-         CORPO DO TESTE
-    ============================================ -->
-    <div class="test-body">
+                <div class="footer-right">
+                    <div class="page-number">
+                        Página <span id="pageNumber">1</span>
+                    </div>
+                </div>
+            </div>
 
-      <!-- ============================================
-           PROGRESSO
-      ============================================ -->
-      <div class="progress-section">
-        <span class="progress-text" id="progressText">Questão 1 de 20</span>
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill" style="width: 5%"></div>
-        </div>
-        <span class="progress-percent" id="progressPercent">5%</span>
-      </div>
+            <div class="footer-divider"></div>
 
-      <!-- ============================================
-           STATUS BAR (TIMER + CONFIABILIDADE)
-      ============================================ -->
-      <div class="status-bar">
-        <span class="timer" id="timerDisplay">⏱️ Tempo: 00:00</span>
-        <span class="reliability-badge high" id="reliabilityBadge">✅ Confiabilidade: --</span>
-      </div>
-
-      <!-- ============================================
-           ÁREA DO TESTE
-      ============================================ -->
-      <div id="testArea">
-
-        <div class="question-number" id="questionNumber">Questão 1 de 20</div>
-        <div class="question-text" id="questionText">Carregando pergunta...</div>
-
-        <div class="options-grid" id="optionsContainer">
-          <!-- Opções carregadas via JavaScript -->
-        </div>
-
-        <div class="nav-buttons">
-          <button class="btn-nav btn-prev" id="btnPrev" onclick="prevQuestion()" disabled>
-            ← Anterior
-          </button>
-          <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()">
-            Próxima →
-          </button>
-        </div>
-
-      </div>
-
-      <!-- ============================================
-           RESULTADOS
-      ============================================ -->
-      <div class="results-container" id="resultsContainer">
-
-        <!-- Cabeçalho dos Resultados -->
-        <div class="results-header">
-          <h2>📊 Análise SWOT Pessoal</h2>
-          <p class="subtitle">Forças, Fraquezas, Oportunidades e Ameaças</p>
-          <div class="profile-badge" id="profileBadge">
-            <span class="emoji" id="profileEmoji">📊</span>
-            <span id="profileText">Perfil Estratégico: --</span>
-          </div>
-          <div class="result-reliability" id="resultReliability"></div>
-        </div>
-
-        <!-- Cards de Informação -->
-        <div class="results-grid">
-          <div class="result-card">
-            <div class="label">Participante</div>
-            <div class="value" id="resultParticipant">--</div>
-          </div>
-          <div class="result-card">
-            <div class="label">Empresa</div>
-            <div class="value" id="resultCompany">--</div>
-          </div>
-          <div class="result-card">
-            <div class="label">Data da Avaliação</div>
-            <div class="value" id="resultDate">--</div>
-          </div>
-          <div class="result-card">
-            <div class="label">Status</div>
-            <div class="value success" id="resultStatus">✅ Concluído</div>
-          </div>
-        </div>
-
-        <!-- SWOT Grid -->
-        <div class="chart-card">
-          <h3>📊 Matriz SWOT</h3>
-          <div class="swot-grid" id="swotGrid">
-            <!-- Carregado via JavaScript -->
-          </div>
-        </div>
-
-        <!-- Gráfico -->
-        <div class="chart-card">
-          <h3>📈 Distribuição SWOT</h3>
-          <div class="chart-container">
-            <canvas id="swotChart"></canvas>
-          </div>
-        </div>
-
-        <!-- Resumo do Perfil -->
-        <div class="chart-card">
-          <h3>💡 Resumo Estratégico</h3>
-          <div class="profile-summary" id="profileSummary">
-            Carregando resumo...
-          </div>
-        </div>
-
-        <!-- Card de Consistência -->
-        <div class="consistency-card" id="consistencyCard">
-          <h3>📊 Consistência dos Resultados</h3>
-          <div id="consistencyContent">
-            <p class="status-text" id="consistencyStatus">--</p>
-            <p class="detail-text" id="consistencyDetail">--</p>
-          </div>
-        </div>
-
-        <!-- Ações -->
-        <div class="result-actions">
-          <button class="btn-result btn-result-primary" onclick="window.print()">
-            🖨️ Imprimir
-          </button>
-          <button class="btn-result btn-result-success" onclick="goToDashboard()">
-            📊 Dashboard
-          </button>
-          <button class="btn-result btn-result-warning" onclick="refazerTeste()">
-            🔄 Refazer Teste
-          </button>
-        </div>
-
-      </div>
+            <div class="footer-bottom">
+                <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
+                <span>v2.0 - Motor Avançado</span>
+            </div>
+        </footer>
 
     </div>
 
     <!-- ============================================
-         RODAPÉ
-    ============================================ -->
-    <footer class="footer-premium">
-      <div class="footer-grid">
-        <div class="footer-logo">
-          <div class="logo-icon-small">V</div>
-          <div class="footer-logo-text">
-            <span class="footer-system">VIGORRE ONE<span class="tm">™</span></span>
-            <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
-          </div>
-        </div>
-
-        <div class="footer-center">
-          <div class="footer-contact">
-            <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
-              <span class="icon">📧</span> contato@vigorre.com.br
-            </a>
-            <a href="tel:+5534991850735" class="footer-contact-item">
-              <span class="icon">📱</span> (34) 99185-0735
-            </a>
-            <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
-              <span class="icon">🌐</span> www.vigorre.com.br
-            </a>
-            <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
-              <span class="icon">📷</span> @vigorre.oficial
-            </a>
-          </div>
-        </div>
-
-        <div class="footer-right">
-          <div class="page-number">
-            Página <span id="pageNumber">1</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-divider"></div>
-
-      <div class="footer-bottom">
-        <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
-        <span>v2.0 - Motor Avançado</span>
-      </div>
-    </footer>
-
-  </div>
-
-  <!-- ============================================
        SCRIPTS
-  ============================================ -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
-  </script>
-  <script src="../../supabase-config.js"></script>
-  <script src="../../auth.js"></script>
-  <script src="../../middleware/auth-guard.js"></script>
-
-  <script>
-    /* ================================================
-       VIGORRE ONE™ - TESTE SWOT
-       VERSÃO COMPLETA COM MOTOR AVANÇADO
-       ================================================ */
-
-    'use strict';
-
-    // ============================================
-    // 1. CONFIGURAÇÃO SWOT
-    // ============================================
-    const swotConfig = {
-      forcas: {
-        label: 'Forças',
-        icon: '💪',
-        color: '#10B981',
-        bgColor: 'rgba(16, 185, 129, 0.15)',
-        description: 'Vantagens competitivas e pontos fortes pessoais.'
-      },
-      fraquezas: {
-        label: 'Fraquezas',
-        icon: '🔻',
-        color: '#EF4444',
-        bgColor: 'rgba(239, 68, 68, 0.15)',
-        description: 'Áreas que necessitam desenvolvimento e melhoria.'
-      },
-      oportunidades: {
-        label: 'Oportunidades',
-        icon: '🚀',
-        color: '#3B82F6',
-        bgColor: 'rgba(59, 130, 246, 0.15)',
-        description: 'Fatores externos que podem ser aproveitados.'
-      },
-      ameacas: {
-        label: 'Ameaças',
-        icon: '⚠️',
-        color: '#F59E0B',
-        bgColor: 'rgba(245, 158, 11, 0.15)',
-        description: 'Fatores externos que representam riscos ou desafios.'
-      }
-    };
-
-    const swotKeys = ['forcas', 'fraquezas', 'oportunidades', 'ameacas'];
-
-    // ============================================
-    // 2. DADOS DO TESTE (20 PERGUNTAS - 5 POR ÁREA)
-    // ============================================
-    const questions = [
-      // FORÇAS (5 perguntas)
-      {
-        id: 1,
-        text: 'Você possui habilidades técnicas que se destacam?',
-        options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
-        swot: 'forcas'
-      },
-      {
-        id: 2,
-        text: 'Você tem facilidade para construir relacionamentos profissionais?',
-        options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
-        swot: 'forcas'
-      },
-      {
-        id: 3,
-        text: 'Você é reconhecido pela sua capacidade de resolver problemas?',
-        options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
-        swot: 'forcas'
-      },
-      {
-        id: 4,
-        text: 'Você possui uma rede de contatos relevante?',
-        options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
-        swot: 'forcas'
-      },
-      {
-        id: 5,
-        text: 'Você tem facilidade para aprender novas habilidades?',
-        options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
-        swot: 'forcas'
-      },
-
-      // FRAQUEZAS (5 perguntas)
-      {
-        id: 6,
-        text: 'Você tem dificuldade em lidar com prazos apertados?',
-        options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
-        swot: 'fraquezas'
-      },
-      {
-        id: 7,
-        text: 'Você se sente inseguro em apresentações públicas?',
-        options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
-        swot: 'fraquezas'
-      },
-      {
-        id: 8,
-        text: 'Você tem dificuldade em delegar tarefas?',
-        options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
-        swot: 'fraquezas'
-      },
-      {
-        id: 9,
-        text: 'Você procrastina em tarefas importantes?',
-        options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
-        swot: 'fraquezas'
-      },
-      {
-        id: 10,
-        text: 'Você tem dificuldade em dizer "não" para novas demandas?',
-        options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
-        swot: 'fraquezas'
-      },
-
-      // OPORTUNIDADES (5 perguntas)
-      {
-        id: 11,
-        text: 'O mercado está oferecendo oportunidades na sua área?',
-        options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
-        swot: 'oportunidades'
-      },
-      {
-        id: 12,
-        text: 'Novas tecnologias podem favorecer sua atuação?',
-        options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
-        swot: 'oportunidades'
-      },
-      {
-        id: 13,
-        text: 'Existem tendências positivas no seu setor?',
-        options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
-        swot: 'oportunidades'
-      },
-      {
-        id: 14,
-        text: 'Sua rede de contatos pode abrir novas portas?',
-        options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
-        swot: 'oportunidades'
-      },
-      {
-        id: 15,
-        text: 'Há demanda por suas habilidades no mercado atual?',
-        options: ['Alta', 'Moderada', 'Baixa', 'Nenhuma'],
-        swot: 'oportunidades'
-      },
-
-      // AMEAÇAS (5 perguntas)
-      {
-        id: 16,
-        text: 'A concorrência na sua área é intensa?',
-        options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
-        swot: 'ameacas'
-      },
-      {
-        id: 17,
-        text: 'Mudanças tecnológicas podem desvalorizar suas habilidades?',
-        options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
-        swot: 'ameacas'
-      },
-      {
-        id: 18,
-        text: 'O mercado de trabalho está instável na sua área?',
-        options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
-        swot: 'ameacas'
-      },
-      {
-        id: 19,
-        text: 'Há risco de sua área ser automatizada?',
-        options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
-        swot: 'ameacas'
-      },
-      {
-        id: 20,
-        text: 'As exigências do mercado estão aumentando rapidamente?',
-        options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
-        swot: 'ameacas'
-      }
-    ];
-
-    // ============================================
-    // 3. ESTADO DA APLICAÇÃO
-    // ============================================
-    let currentQuestionIndex = 0;
-    let answers = new Array(questions.length).fill(null);
-    let currentUser = null;
-    let participantData = null;
-    let companyData = null;
-    let chartInstance = null;
-    let isCompleted = false;
-
-    let timerSeconds = 0;
-    let timerInterval = null;
-    let questionStartTime = Date.now();
-    let answerTimes = [];
-    let testHistory = [];
-
-    // ============================================
-    // 4. INICIALIZAÇÃO
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('📊 Teste SWOT - VIGORRE ONE™');
-      console.log('🎯 Análise Estratégica Pessoal');
-
-      const isAuth = window.VigorreAuth.isAuthenticated();
-      if (!isAuth) {
-        window.location.href = '../../login.html';
-        return;
-      }
-
-      currentUser = window.VigorreAuth.getCurrentUser();
-      if (!currentUser || currentUser.role !== 'participant') {
-        alert('⚠️ Acesso restrito a participantes.');
-        window.VigorreAuth.logout();
-        return;
-      }
-
-      loadParticipantData();
-      startTimer();
-      setupNavigationGuard();
-
-      console.log('✅ Teste SWOT inicializado com sucesso');
-    });
-
-    // ============================================
-    // 5. CARREGAR DADOS DO PARTICIPANTE
-    // ============================================
-    function loadParticipantData() {
-      try {
-        const allParticipants = VigorreDB.participants.findAll();
-        participantData = allParticipants.find(p => p.id === currentUser.id);
-
-        if (!participantData) {
-          participantData = {
-            id: currentUser.id,
-            name: currentUser.name || 'Participante',
-            companyId: currentUser.companyId || null,
-            tests: ['DISC', 'IE', 'Valores', 'BigFive', 'SWOT'],
-            completedTests: [],
-            results: {}
-          };
-        }
-
-        if (participantData.companyId) {
-          companyData = VigorreDB.companies.findById(participantData.companyId);
-        }
-
-        const companyName = companyData?.name || 'Autônomo';
-
-        document.getElementById('participantName').textContent = participantData.name || 'Participante';
-        document.getElementById('participantCompany').textContent = `Empresa: ${companyName}`;
-        document.getElementById('participantId').textContent = `ID: ${participantData.id || '--'}`;
-
-        loadTestHistory();
-        renderQuestion();
-
-      } catch (error) {
-        console.error('❌ Erro ao carregar dados:', error);
-        showToast('Erro ao carregar dados do participante', 'error');
-      }
-    }
-
-    // ============================================
-    // 6. CARREGAR HISTÓRICO
-    // ============================================
-    function loadTestHistory() {
-      try {
-        if (window.VigorreAuth && window.VigorreAuth.getTestHistory) {
-          testHistory = window.VigorreAuth.getTestHistory('SWOT');
-          console.log(`📚 Histórico de testes SWOT: ${testHistory.length} registros`);
-        }
-      } catch (error) {
-        console.error('❌ Erro ao carregar histórico:', error);
-        testHistory = [];
-      }
-    }
-
-    // ============================================
-    // 7. TIMER
-    // ============================================
-    function startTimer() {
-      if (timerInterval) clearInterval(timerInterval);
-      timerInterval = setInterval(() => {
-        timerSeconds++;
-        const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
-        const secs = String(timerSeconds % 60).padStart(2, '0');
-        document.getElementById('timerDisplay').textContent = `⏱️ Tempo: ${mins}:${secs}`;
-      }, 1000);
-    }
-
-    function stopTimer() {
-      if (timerInterval) {
-        clearInterval(timerInterval);
-        timerInterval = null;
-      }
-    }
-
-    // ============================================
-    // 8. RENDERIZAR PERGUNTA
-    // ============================================
-    function renderQuestion() {
-      const q = questions[currentQuestionIndex];
-      const total = questions.length;
-      const progress = ((currentQuestionIndex + 1) / total) * 100;
-
-      questionStartTime = Date.now();
-
-      document.getElementById('questionNumber').textContent = `Questão ${currentQuestionIndex + 1} de ${total}`;
-      document.getElementById('progressText').textContent = `Questão ${currentQuestionIndex + 1} de ${total}`;
-      document.getElementById('progressFill').style.width = `${progress}%`;
-      document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
-      document.getElementById('questionText').textContent = q.text;
-
-      const container = document.getElementById('optionsContainer');
-      const letters = ['A', 'B', 'C', 'D'];
-
-      container.innerHTML = q.options.map((opt, idx) => {
-        const isSelected = answers[currentQuestionIndex] === idx;
-        return `
-              <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectOption(${idx})">
-                <span class="letter">${letters[idx]}</span>
-                ${opt}
-              </button>
-            `;
-      }).join('');
-
-      document.getElementById('btnPrev').disabled = currentQuestionIndex === 0;
-
-      const nextBtn = document.getElementById('btnNext');
-      if (currentQuestionIndex === total - 1) {
-        nextBtn.textContent = '📊 Finalizar Teste';
-        nextBtn.className = 'btn-nav btn-finish';
-        nextBtn.onclick = finishTest;
-      } else {
-        nextBtn.textContent = 'Próxima →';
-        nextBtn.className = 'btn-nav btn-next';
-        nextBtn.onclick = nextQuestion;
-      }
-
-      updateReliabilityBadge();
-    }
-
-    // ============================================
-    // 9. SELECIONAR OPÇÃO
-    // ============================================
-    function selectOption(index) {
-      const timeSpent = (Date.now() - questionStartTime) / 1000;
-      answerTimes[currentQuestionIndex] = timeSpent;
-
-      answers[currentQuestionIndex] = index;
-      renderQuestion();
-      updateReliabilityBadge();
-    }
-
-    // ============================================
-    // 10. NAVEGAÇÃO
-    // ============================================
-    function nextQuestion() {
-      if (answers[currentQuestionIndex] === null) {
-        showToast('⚠️ Selecione uma opção antes de continuar.', 'error');
-        return;
-      }
-      if (currentQuestionIndex < questions.length - 1) {
-        currentQuestionIndex++;
-        renderQuestion();
-      }
-    }
-
-    function prevQuestion() {
-      if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        renderQuestion();
-      }
-    }
-
-    // ============================================
-    // 11. ÍNDICE DE CONFIABILIDADE
-    // ============================================
-    function updateReliabilityBadge() {
-      const answered = answers.filter(a => a !== null).length;
-      if (answered < 3) {
-        document.getElementById('reliabilityBadge').textContent = '✅ Confiabilidade: Aguardando...';
-        return;
-      }
-
-      let reliability = 100;
-
-      const validTimes = answerTimes.filter(t => t !== undefined && t !== null);
-      if (validTimes.length > 0) {
-        const avgTime = validTimes.reduce((a, b) => a + b, 0) / validTimes.length;
-        if (avgTime < 3) reliability -= 20;
-        if (avgTime < 2) reliability -= 20;
-        if (avgTime < 1.5) reliability -= 20;
-        if (avgTime > 30) reliability -= 10;
-        if (avgTime > 60) reliability -= 15;
-      }
-
-      const uniqueAnswers = new Set(answers.filter(a => a !== null));
-      if (uniqueAnswers.size < 2 && answered >= 8) reliability -= 15;
-      if (uniqueAnswers.size === 1 && answered >= 12) reliability -= 25;
-
-      const positionCount = {};
-      answers.filter(a => a !== null).forEach(a => {
-        positionCount[a] = (positionCount[a] || 0) + 1;
-      });
-      const maxCount = Math.max(...Object.values(positionCount));
-      if (maxCount / answered > 0.7 && answered >= 10) reliability -= 20;
-
-      reliability = Math.max(0, Math.min(100, Math.round(reliability)));
-
-      const badge = document.getElementById('reliabilityBadge');
-      let status = '';
-      let colorClass = '';
-
-      if (reliability >= 80) {
-        status = 'Muito Confiável';
-        colorClass = 'high';
-      } else if (reliability >= 60) {
-        status = 'Confiável';
-        colorClass = 'medium';
-      } else if (reliability >= 40) {
-        status = 'Atenção';
-        colorClass = 'low';
-      } else {
-        status = 'Baixa Confiabilidade';
-        colorClass = 'low';
-      }
-
-      badge.className = `reliability-badge ${colorClass}`;
-      badge.textContent = `✅ Confiabilidade: ${reliability}% (${status})`;
-    }
-
-    // ============================================
-    // 12. CALCULAR RESULTADO
-    // ============================================
-    function calculateResult() {
-      const scores = {};
-      const counts = {};
-
-      for (const key of swotKeys) {
-        scores[key] = 0;
-        counts[key] = 0;
-      }
-
-      questions.forEach((q, idx) => {
-        if (answers[idx] !== null) {
-          const swot = q.swot;
-          // Para Forças e Oportunidades: valores mais altos são melhores
-          // Para Fraquezas e Ameaças: valores mais baixos são melhores
-          const isInverted = swot === 'fraquezas' || swot === 'ameacas';
-          const value = isInverted ? answers[idx] : (3 - answers[idx]);
-          scores[swot] += value;
-          counts[swot]++;
-        }
-      });
-
-      const averages = {};
-      const percentages = {};
-
-      for (const key of swotKeys) {
-        averages[key] = counts[key] > 0 ? scores[key] / counts[key] : 0;
-        // Normalizar para 0-100 (máximo = 4)
-        percentages[key] = Math.round((averages[key] / 4) * 100);
-      }
-
-      // Determinar o quadrante mais forte
-      const sorted = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
-      const topSwot = sorted[0] ? sorted[0][0] : 'forcas';
-      const topPercent = sorted[0] ? sorted[0][1] : 0;
-
-      // Determinar o quadrante mais fraco
-      const bottomSwot = sorted[sorted.length - 1] ? sorted[sorted.length - 1][0] : 'ameacas';
-      const bottomPercent = sorted[sorted.length - 1] ? sorted[sorted.length - 1][1] : 0;
-
-      // Estratégias recomendadas
-      const estrategias = {
-        forcas: 'Use suas forças para aproveitar oportunidades e mitigar ameaças.',
-        fraquezas: 'Desenvolva planos para superar suas fraquezas e minimizar impactos.',
-        oportunidades: 'Aproveite as oportunidades usando suas forças e melhorando fraquezas.',
-        ameacas: 'Crie estratégias defensivas para reduzir o impacto das ameaças.'
-      };
-
-      // Perfil estratégico
-      let perfil = '';
-      let perfilIcon = '';
-      let perfilDesc = '';
-
-      if (topSwot === 'forcas') {
-        perfil = 'Perfil de Força';
-        perfilIcon = '💪';
-        perfilDesc = 'Você possui vantagens competitivas significativas. Use-as para criar valor.';
-      } else if (topSwot === 'oportunidades') {
-        perfil = 'Perfil de Oportunidade';
-        perfilIcon = '🚀';
-        perfilDesc = 'Você está bem posicionado para aproveitar oportunidades do mercado.';
-      } else if (topSwot === 'fraquezas') {
-        perfil = 'Perfil de Desenvolvimento';
-        perfilIcon = '📈';
-        perfilDesc = 'Foco em desenvolver pontos fracos para se tornar mais competitivo.';
-      } else {
-        perfil = 'Perfil de Resiliência';
-        perfilIcon = '🛡️';
-        perfilDesc = 'Capacidade de enfrentar e superar desafios e ameaças.';
-      }
-
-      return {
-        scores: scores,
-        averages: averages,
-        percentages: percentages,
-        topSwot: topSwot,
-        topPercent: topPercent,
-        bottomSwot: bottomSwot,
-        bottomPercent: bottomPercent,
-        perfil: perfil,
-        perfilIcon: perfilIcon,
-        perfilDesc: perfilDesc,
-        estrategia: estrategias[topSwot] || 'Desenvolva um plano estratégico equilibrado.',
-        date: new Date().toISOString(),
-        reliability: 0,
-        sorted: sorted
-      };
-    }
-
-    // ============================================
-    // 13. FINALIZAR TESTE
-    // ============================================
-    function finishTest() {
-      if (answers[currentQuestionIndex] === null) {
-        showToast('⚠️ Selecione uma opção para a última questão.', 'error');
-        return;
-      }
-
-      const total = answers.filter(a => a !== null).length;
-      const remaining = questions.length - total;
-
-      if (remaining > 0) {
-        if (!confirm(`Você respondeu ${total} de ${questions.length} questões. ${remaining} não respondidas. Finalizar mesmo assim?`)) {
-          return;
-        }
-      }
-
-      if (!confirm('Finalizar análise SWOT? Suas respostas serão salvas e analisadas.')) {
-        return;
-      }
-
-      stopTimer();
-      document.getElementById('loadingOverlay').classList.add('active');
-
-      setTimeout(() => {
-        const result = calculateResult();
-        const reliability = calculateFinalReliability();
-        const consistency = checkConsistency(result);
-
-        saveResult(result, reliability, consistency);
-        showResults(result, reliability, consistency);
-
-      }, 1500);
-    }
-
-    // ============================================
-    // 14. CALCULAR CONFIABILIDADE FINAL
-    // ============================================
-    function calculateFinalReliability() {
-      const answered = answers.filter(a => a !== null).length;
-      if (answered < 6) return 50;
-
-      let reliability = 100;
-
-      const validTimes = answerTimes.filter(t => t !== undefined && t !== null);
-      if (validTimes.length > 0) {
-        const avgTime = validTimes.reduce((a, b) => a + b, 0) / validTimes.length;
-        if (avgTime < 3) reliability -= 20;
-        if (avgTime < 2) reliability -= 15;
-        if (avgTime < 1.5) reliability -= 15;
-        if (avgTime > 30) reliability -= 10;
-      }
-
-      const uniqueAnswers = new Set(answers.filter(a => a !== null));
-      if (uniqueAnswers.size < 2 && answered >= 8) reliability -= 15;
-      if (uniqueAnswers.size === 1 && answered >= 12) reliability -= 25;
-
-      const positionCount = {};
-      answers.filter(a => a !== null).forEach(a => {
-        positionCount[a] = (positionCount[a] || 0) + 1;
-      });
-      const maxCount = Math.max(...Object.values(positionCount));
-      if (maxCount / answered > 0.7 && answered >= 10) reliability -= 20;
-
-      return Math.max(0, Math.min(100, Math.round(reliability)));
-    }
-
-    // ============================================
-    // 15. VERIFICAR CONSISTÊNCIA
-    // ============================================
-    function checkConsistency(currentResult) {
-      if (testHistory.length === 0) {
-        return {
-          status: 'no_data',
-          message: 'Primeira realização do teste. Sem dados anteriores para comparação.'
-        };
-      }
-
-      const previous = testHistory[testHistory.length - 1]?.results;
-      if (!previous) {
-        return {
-          status: 'no_data',
-          message: 'Sem dados anteriores para comparação.'
-        };
-      }
-
-      const prevPcts = previous.percentages || {};
-      const currPcts = currentResult.percentages || {};
-
-      let totalDiff = 0;
-      let count = 0;
-
-      for (const key of swotKeys) {
-        if (prevPcts[key] !== undefined && currPcts[key] !== undefined) {
-          totalDiff += Math.abs(prevPcts[key] - currPcts[key]);
-          count++;
-        }
-      }
-
-      const avgDiff = count > 0 ? totalDiff / count : 100;
-      const roundedDiff = Math.round(avgDiff);
-
-      let status, message, recommendation;
-
-      if (avgDiff <= 5) {
-        status = 'stable';
-        message = 'Resultados consistentes e confiáveis. Perfil estratégico estável.';
-        recommendation = 'Perfil SWOT consistente com avaliações anteriores.';
-      } else if (avgDiff <= 15) {
-        status = 'moderate';
-        message = 'Variação moderada detectada. Pode indicar mudança no ambiente.';
-        recommendation = 'Recomenda-se revisão dos resultados com profissional especializado.';
-      } else {
-        status = 'unstable';
-        message = 'Variação significativa detectada. Pode indicar inconsistência.';
-        recommendation = 'Recomenda-se realizar novo teste ou avaliação complementar.';
-      }
-
-      return {
-        status: status,
-        message: message,
-        recommendation: recommendation,
-        diff: roundedDiff,
-        previous: prevPcts,
-        current: currPcts
-      };
-    }
-
-    // ============================================
-    // 16. SALVAR RESULTADO
-    // ============================================
-    function saveResult(result, reliability, consistency) {
-      try {
-        result.reliability = reliability;
-        result.consistency = consistency;
-        result.answerTimes = answerTimes;
-
-        const allParticipants = VigorreDB.participants.findAll();
-        const p = allParticipants.find(p => p.id === currentUser.id);
-
-        if (p) {
-          if (!p.completedTests) p.completedTests = [];
-          if (!p.completedTests.includes('SWOT')) {
-            p.completedTests.push('SWOT');
-          }
-          if (!p.results) p.results = {};
-          p.results.SWOT = result;
-
-          const allTests = p.tests || [];
-          const allCompleted = allTests.every(t => p.completedTests.includes(t));
-          p.status = allCompleted ? 'completed' : 'in_progress';
-
-          const idx = allParticipants.findIndex(p => p.id === currentUser.id);
-          if (idx > -1) {
-            allParticipants[idx] = p;
-            localStorage.setItem('vigorre_participants', JSON.stringify(allParticipants));
-          }
-        }
-
-        if (window.VigorreAuth && window.VigorreAuth.saveTestHistory) {
-          window.VigorreAuth.saveTestHistory('SWOT', result);
-        }
-
-        if (window.VigorreAuth && window.VigorreAuth.logActivity) {
-          window.VigorreAuth.logActivity('Teste SWOT concluído', {
-            participant: participantData.name,
-            topSwot: result.topSwot,
-            reliability: reliability,
-            consistency: consistency?.status || 'no_data'
-          });
-        }
-
-        localStorage.setItem('vigorre_last_swot_result', JSON.stringify(result));
-
-        console.log('✅ Resultado SWOT salvo com sucesso!');
-        console.log('📊 Quadrante Principal:', result.topSwot);
-        console.log('🔒 Confiabilidade:', reliability + '%');
-        console.log('📈 Consistência:', consistency?.status || 'no_data');
-
-      } catch (error) {
-        console.error('❌ Erro ao salvar resultado:', error);
-      }
-    }
-
-    // ============================================
-    // 17. EXIBIR RESULTADOS
-    // ============================================
-    function showResults(result, reliability, consistency) {
-      document.getElementById('loadingOverlay').classList.remove('active');
-      document.getElementById('testArea').style.display = 'none';
-      document.getElementById('resultsContainer').classList.add('active');
-
-      document.getElementById('resultParticipant').textContent = participantData.name || '--';
-      document.getElementById('resultCompany').textContent = companyData?.name || 'Autônomo';
-      document.getElementById('resultDate').textContent = new Date(result.date).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-
-      document.getElementById('profileEmoji').textContent = result.perfilIcon;
-      document.getElementById('profileText').textContent =
-        `${result.perfil} (${result.percentages[result.topSwot]}%)`;
-
-      // Exibir SWOT Grid
-      const grid = document.getElementById('swotGrid');
-      grid.innerHTML = '';
-
-      for (const [key, value] of Object.entries(result.percentages)) {
-        const config = swotConfig[key];
-        const color = config.color;
-        const className = `swot-card swot-${key}`;
-
-        let desc = '';
-        if (value >= 75) desc = `${config.icon} ${config.label} muito forte. Excelente vantagem.`;
-        else if (value >= 50) desc = `${config.icon} ${config.label} em bom nível.`;
-        else if (value >= 25) desc = `${config.icon} ${config.label} em desenvolvimento.`;
-        else desc = `${config.icon} ${config.label} requer atenção prioritária.`;
-
-        grid.innerHTML += `
-              <div class="${className}">
-                <span class="swot-icon">${config.icon}</span>
-                <div class="swot-name">${config.label}</div>
-                <div class="swot-value">${value}%</div>
-                <div class="swot-bar">
-                  <div class="swot-bar-fill" style="width: ${value}%; background: ${color};"></div>
-                </div>
-                <div class="swot-desc">${desc}</div>
-              </div>
-            `;
-      }
-
-      // Resumo do perfil
-      const summary = `
-            <p>
-              <strong>${result.perfilIcon} Perfil Estratégico:</strong> 
-              <span style="color: ${swotConfig[result.topSwot].color};">${result.perfil}</span>
-              (${result.topPercent}%)
-            </p>
-            <p style="margin-top: 8px;">${result.perfilDesc}</p>
-            <p style="margin-top: 12px;">
-              <strong>🎯 Estratégia Recomendada:</strong> ${result.estrategia}
-            </p>
-            <p style="margin-top: 8px; color: rgba(255,255,255,0.4); font-size: 0.85rem;">
-              <strong>Área com menor pontuação:</strong> ${swotConfig[result.bottomSwot].icon} 
-              ${swotConfig[result.bottomSwot].label} (${result.bottomPercent}%)
-            </p>
-          `;
-
-      document.getElementById('profileSummary').innerHTML = summary;
-
-      // Confiabilidade
-      const reliabilityDiv = document.getElementById('resultReliability');
-      let reliabilityText = '';
-      let reliabilityClass = '';
-
-      if (reliability >= 80) {
-        reliabilityText = '🟢 Resultado Muito Confiável';
-        reliabilityClass = 'high';
-      } else if (reliability >= 60) {
-        reliabilityText = '🟡 Resultado Confiável';
-        reliabilityClass = 'medium';
-      } else if (reliability >= 40) {
-        reliabilityText = '🟠 Atenção - Verificar Respostas';
-        reliabilityClass = 'low';
-      } else {
-        reliabilityText = '🔴 Baixa Confiabilidade - Recomenda-se Refazer';
-        reliabilityClass = 'low';
-      }
-
-      reliabilityDiv.innerHTML = `
-            <span class="badge-large ${reliabilityClass}">
-              ${reliabilityText} (${reliability}%)
-            </span>
-          `;
-
-      // Consistência
-      if (consistency && consistency.status !== 'no_data') {
-        const card = document.getElementById('consistencyCard');
-        card.classList.add('active');
-
-        const statusEl = document.getElementById('consistencyStatus');
-        const detailEl = document.getElementById('consistencyDetail');
-
-        let color = '';
-        let icon = '';
-
-        if (consistency.status === 'stable') {
-          color = '#10B981';
-          icon = '✅';
-          statusEl.style.color = color;
-          statusEl.textContent = `${icon} ${consistency.message}`;
-        } else if (consistency.status === 'moderate') {
-          color = '#F59E0B';
-          icon = '⚠️';
-          statusEl.style.color = color;
-          statusEl.textContent = `${icon} ${consistency.message}`;
-        } else {
-          color = '#EF4444';
-          icon = '❌';
-          statusEl.style.color = color;
-          statusEl.textContent = `${icon} ${consistency.message}`;
-        }
-
-        detailEl.textContent = `Diferença: ${consistency.diff}% • ${consistency.recommendation}`;
-      }
-
-      document.getElementById('pageNumber').textContent = '1';
-
-      setTimeout(() => {
-        renderChart(result.percentages);
-      }, 300);
-
-      isCompleted = true;
-    }
-
-    // ============================================
-    // 18. RENDERIZAR GRÁFICO
-    // ============================================
-    function renderChart(percentages) {
-      try {
-        const ctx = document.getElementById('swotChart').getContext('2d');
-
-        if (chartInstance) {
-          chartInstance.destroy();
-        }
-
-        const labels = swotKeys.map(key => swotConfig[key].label);
-        const data = swotKeys.map(key => percentages[key] || 0);
-        const colors = swotKeys.map(key => swotConfig[key].color);
-
-        chartInstance = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Pontuação SWOT',
-              data: data,
-              backgroundColor: colors.map(c => c + '80'),
-              borderColor: colors,
-              borderWidth: 2,
-              borderRadius: 8,
-              maxBarThickness: 60
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                display: false
-              },
-              tooltip: {
-                callbacks: {
-                  label: function(context) {
-                    return `${context.parsed.y}%`;
-                  }
-                }
-              }
+    ============================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <script src="../../supabase-config.js"></script>
+    <script src="../../auth.js"></script>
+    <script src="../../middleware/auth-guard.js"></script>
+
+    <script>
+        /* ================================================
+           VIGORRE ONE™ - TESTE SWOT
+           VERSÃO COMPLETA COM MOTOR AVANÇADO
+           ================================================ */
+
+        'use strict';
+
+        // ============================================
+        // 1. CONFIGURAÇÃO SWOT
+        // ============================================
+        const swotConfig = {
+            forcas: {
+                label: 'Forças',
+                icon: '💪',
+                color: '#10B981',
+                bgColor: 'rgba(16, 185, 129, 0.15)',
+                description: 'Vantagens competitivas e pontos fortes pessoais.'
             },
-            scales: {
-              y: {
-                beginAtZero: true,
-                max: 100,
-                grid: {
-                  color: 'rgba(255,255,255,0.05)'
-                },
-                ticks: {
-                  color: 'rgba(255,255,255,0.3)',
-                  callback: function(value) {
-                    return value + '%';
-                  }
-                }
-              },
-              x: {
-                grid: {
-                  display: false
-                },
-                ticks: {
-                  color: 'rgba(255,255,255,0.5)',
-                  font: {
-                    size: 11,
-                    weight: '600'
-                  }
-                }
-              }
+            fraquezas: {
+                label: 'Fraquezas',
+                icon: '🔻',
+                color: '#EF4444',
+                bgColor: 'rgba(239, 68, 68, 0.15)',
+                description: 'Áreas que necessitam desenvolvimento e melhoria.'
+            },
+            oportunidades: {
+                label: 'Oportunidades',
+                icon: '🚀',
+                color: '#3B82F6',
+                bgColor: 'rgba(59, 130, 246, 0.15)',
+                description: 'Fatores externos que podem ser aproveitados.'
+            },
+            ameacas: {
+                label: 'Ameaças',
+                icon: '⚠️',
+                color: '#F59E0B',
+                bgColor: 'rgba(245, 158, 11, 0.15)',
+                description: 'Fatores externos que representam riscos ou desafios.'
             }
-          }
+        };
+
+        const swotKeys = ['forcas', 'fraquezas', 'oportunidades', 'ameacas'];
+
+        // ============================================
+        // 2. DADOS DO TESTE (20 PERGUNTAS - 5 POR ÁREA)
+        // ============================================
+        const questions = [
+            // FORÇAS (5 perguntas)
+            {
+                id: 1,
+                text: 'Você possui habilidades técnicas que se destacam?',
+                options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
+                swot: 'forcas'
+            },
+            {
+                id: 2,
+                text: 'Você tem facilidade para construir relacionamentos profissionais?',
+                options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
+                swot: 'forcas'
+            },
+            {
+                id: 3,
+                text: 'Você é reconhecido pela sua capacidade de resolver problemas?',
+                options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
+                swot: 'forcas'
+            },
+            {
+                id: 4,
+                text: 'Você possui uma rede de contatos relevante?',
+                options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
+                swot: 'forcas'
+            },
+            {
+                id: 5,
+                text: 'Você tem facilidade para aprender novas habilidades?',
+                options: ['Muito Forte', 'Forte', 'Moderado', 'Fraco'],
+                swot: 'forcas'
+            },
+
+            // FRAQUEZAS (5 perguntas)
+            {
+                id: 6,
+                text: 'Você tem dificuldade em lidar com prazos apertados?',
+                options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
+                swot: 'fraquezas'
+            },
+            {
+                id: 7,
+                text: 'Você se sente inseguro em apresentações públicas?',
+                options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
+                swot: 'fraquezas'
+            },
+            {
+                id: 8,
+                text: 'Você tem dificuldade em delegar tarefas?',
+                options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
+                swot: 'fraquezas'
+            },
+            {
+                id: 9,
+                text: 'Você procrastina em tarefas importantes?',
+                options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
+                swot: 'fraquezas'
+            },
+            {
+                id: 10,
+                text: 'Você tem dificuldade em dizer "não" para novas demandas?',
+                options: ['Nunca', 'Raramente', 'Às vezes', 'Sempre'],
+                swot: 'fraquezas'
+            },
+
+            // OPORTUNIDADES (5 perguntas)
+            {
+                id: 11,
+                text: 'O mercado está oferecendo oportunidades na sua área?',
+                options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
+                swot: 'oportunidades'
+            },
+            {
+                id: 12,
+                text: 'Novas tecnologias podem favorecer sua atuação?',
+                options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
+                swot: 'oportunidades'
+            },
+            {
+                id: 13,
+                text: 'Existem tendências positivas no seu setor?',
+                options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
+                swot: 'oportunidades'
+            },
+            {
+                id: 14,
+                text: 'Sua rede de contatos pode abrir novas portas?',
+                options: ['Muitas', 'Algumas', 'Poucas', 'Nenhuma'],
+                swot: 'oportunidades'
+            },
+            {
+                id: 15,
+                text: 'Há demanda por suas habilidades no mercado atual?',
+                options: ['Alta', 'Moderada', 'Baixa', 'Nenhuma'],
+                swot: 'oportunidades'
+            },
+
+            // AMEAÇAS (5 perguntas)
+            {
+                id: 16,
+                text: 'A concorrência na sua área é intensa?',
+                options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
+                swot: 'ameacas'
+            },
+            {
+                id: 17,
+                text: 'Mudanças tecnológicas podem desvalorizar suas habilidades?',
+                options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
+                swot: 'ameacas'
+            },
+            {
+                id: 18,
+                text: 'O mercado de trabalho está instável na sua área?',
+                options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
+                swot: 'ameacas'
+            },
+            {
+                id: 19,
+                text: 'Há risco de sua área ser automatizada?',
+                options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
+                swot: 'ameacas'
+            },
+            {
+                id: 20,
+                text: 'As exigências do mercado estão aumentando rapidamente?',
+                options: ['Extremamente', 'Muito', 'Moderada', 'Pouca'],
+                swot: 'ameacas'
+            }
+        ];
+
+        // ============================================
+        // 3. ESTADO DA APLICAÇÃO
+        // ============================================
+        let currentQuestionIndex = 0;
+        let answers = new Array(questions.length).fill(null);
+        let currentUser = null;
+        let participantData = null;
+        let companyData = null;
+        let chartInstance = null;
+        let isCompleted = false;
+
+        let timerSeconds = 0;
+        let timerInterval = null;
+        let questionStartTime = Date.now();
+        let answerTimes = [];
+        let testHistory = [];
+
+        // ============================================
+        // 4. INICIALIZAÇÃO
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📊 Teste SWOT - VIGORRE ONE™');
+            console.log('🎯 Análise Estratégica Pessoal');
+
+            const isAuth = window.VigorreAuth.isAuthenticated();
+            if (!isAuth) {
+                window.location.href = '../../login.html';
+                return;
+            }
+
+            currentUser = window.VigorreAuth.getCurrentUser();
+            if (!currentUser || currentUser.role !== 'participant') {
+                alert('⚠️ Acesso restrito a participantes.');
+                window.VigorreAuth.logout();
+                return;
+            }
+
+            loadParticipantData();
+            startTimer();
+            setupNavigationGuard();
+
+            console.log('✅ Teste SWOT inicializado com sucesso');
         });
 
-        console.log('📊 Gráfico SWOT renderizado com sucesso');
+        // ============================================
+        // 5. CARREGAR DADOS DO PARTICIPANTE
+        // ============================================
+        function loadParticipantData() {
+            try {
+                const allParticipants = VigorreDB.participants.findAll();
+                participantData = allParticipants.find(p => p.id === currentUser.id);
 
-      } catch (error) {
-        console.error('❌ Erro ao renderizar gráfico:', error);
-      }
-    }
+                if (!participantData) {
+                    participantData = {
+                        id: currentUser.id,
+                        name: currentUser.name || 'Participante',
+                        companyId: currentUser.companyId || null,
+                        tests: ['DISC', 'IE', 'Valores', 'BigFive', 'SWOT'],
+                        completedTests: [],
+                        results: {}
+                    };
+                }
 
-    // ============================================
-    // 19. NAVEGAÇÃO
-    // ============================================
-    function goToDashboard() {
-      window.location.href = '../dashboard.html';
-    }
+                if (participantData.companyId) {
+                    companyData = VigorreDB.companies.findById(participantData.companyId);
+                }
 
-    function refazerTeste() {
-      if (!confirm('Deseja refazer a análise SWOT? Todas as respostas atuais serão perdidas.')) {
-        return;
-      }
+                const companyName = companyData?.name || 'Autônomo';
 
-      if (!confirm('Tem certeza? Esta ação não pode ser desfeita.')) {
-        return;
-      }
+                document.getElementById('participantName').textContent = participantData.name || 'Participante';
+                document.getElementById('participantCompany').textContent = `Empresa: ${companyName}`;
+                document.getElementById('participantId').textContent = `ID: ${participantData.id || '--'}`;
 
-      answers = new Array(questions.length).fill(null);
-      answerTimes = [];
-      currentQuestionIndex = 0;
-      isCompleted = false;
+                loadTestHistory();
+                renderQuestion();
 
-      timerSeconds = 0;
-      document.getElementById('timerDisplay').textContent = '⏱️ Tempo: 00:00';
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                showToast('Erro ao carregar dados do participante', 'error');
+            }
+        }
 
-      document.getElementById('resultsContainer').classList.remove('active');
-      document.getElementById('testArea').style.display = 'block';
-      document.getElementById('consistencyCard').classList.remove('active');
+        // ============================================
+        // 6. CARREGAR HISTÓRICO
+        // ============================================
+        function loadTestHistory() {
+            try {
+                if (window.VigorreAuth && window.VigorreAuth.getTestHistory) {
+                    testHistory = window.VigorreAuth.getTestHistory('SWOT');
+                    console.log(`📚 Histórico de testes SWOT: ${testHistory.length} registros`);
+                }
+            } catch (error) {
+                console.error('❌ Erro ao carregar histórico:', error);
+                testHistory = [];
+            }
+        }
 
-      if (chartInstance) {
-        chartInstance.destroy();
-        chartInstance = null;
-      }
+        // ============================================
+        // 7. TIMER
+        // ============================================
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+                const secs = String(timerSeconds % 60).padStart(2, '0');
+                document.getElementById('timerDisplay').textContent = `⏱️ Tempo: ${mins}:${secs}`;
+            }, 1000);
+        }
 
-      stopTimer();
-      startTimer();
-      renderQuestion();
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
 
-      if (window.VigorreAuth && window.VigorreAuth.logActivity) {
-        window.VigorreAuth.logActivity('Refez teste SWOT', {
-          participant: participantData.name,
-          action: 'refazer_teste'
-        });
-      }
+        // ============================================
+        // 8. RENDERIZAR PERGUNTA
+        // ============================================
+        function renderQuestion() {
+            const q = questions[currentQuestionIndex];
+            const total = questions.length;
+            const progress = ((currentQuestionIndex + 1) / total) * 100;
 
-      showToast('🔄 Teste reiniciado. Boa sorte!', 'success');
-    }
+            questionStartTime = Date.now();
 
-    // ============================================
-    // 20. TOAST
-    // ============================================
-    function showToast(message, type) {
-      const toast = document.getElementById('toast');
-      const icon = document.getElementById('toastIcon');
-      const msg = document.getElementById('toastMessage');
+            document.getElementById('questionNumber').textContent = `Questão ${currentQuestionIndex + 1} de ${total}`;
+            document.getElementById('progressText').textContent = `Questão ${currentQuestionIndex + 1} de ${total}`;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+            document.getElementById('questionText').textContent = q.text;
 
-      if (type === 'error') {
-        icon.textContent = '❌';
-      } else if (type === 'warning') {
-        icon.textContent = '⚠️';
-      } else {
-        icon.textContent = '✅';
-      }
+            const container = document.getElementById('optionsContainer');
+            const letters = ['A', 'B', 'C', 'D'];
 
-      msg.textContent = message;
-      toast.className = `toast show ${type || 'success'}`;
+            container.innerHTML = q.options.map((opt, idx) => {
+                const isSelected = answers[currentQuestionIndex] === idx;
+                return `
+                          <button class="option-btn ${isSelected ? 'selected' : ''}" onclick="selectOption(${idx})">
+                            <span class="letter">${letters[idx]}</span>
+                            ${opt}
+                          </button>
+                        `;
+            }).join('');
 
-      clearTimeout(toast._timeout);
-      toast._timeout = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 4000);
-    }
+            document.getElementById('btnPrev').disabled = currentQuestionIndex === 0;
 
-    // ============================================
-    // 21. GUARD DE NAVEGAÇÃO
-    // ============================================
-    function setupNavigationGuard() {
-      window.history.pushState(null, '', window.location.href);
+            const nextBtn = document.getElementById('btnNext');
+            if (currentQuestionIndex === total - 1) {
+                nextBtn.textContent = '📊 Finalizar Teste';
+                nextBtn.className = 'btn-nav btn-finish';
+                nextBtn.onclick = finishTest;
+            } else {
+                nextBtn.textContent = 'Próxima →';
+                nextBtn.className = 'btn-nav btn-next';
+                nextBtn.onclick = nextQuestion;
+            }
 
-      window.addEventListener('popstate', function(e) {
-        if (!isCompleted) {
-          if (!confirm('Você está no meio do teste. Deseja sair? Suas respostas serão perdidas.')) {
-            window.history.pushState(null, '', window.location.href);
-          } else {
+            updateReliabilityBadge();
+        }
+
+        // ============================================
+        // 9. SELECIONAR OPÇÃO
+        // ============================================
+        function selectOption(index) {
+            const timeSpent = (Date.now() - questionStartTime) / 1000;
+            answerTimes[currentQuestionIndex] = timeSpent;
+
+            answers[currentQuestionIndex] = index;
+            renderQuestion();
+            updateReliabilityBadge();
+        }
+
+        // ============================================
+        // 10. NAVEGAÇÃO
+        // ============================================
+        function nextQuestion() {
+            if (answers[currentQuestionIndex] === null) {
+                showToast('⚠️ Selecione uma opção antes de continuar.', 'error');
+                return;
+            }
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        // ============================================
+        // 11. ÍNDICE DE CONFIABILIDADE
+        // ============================================
+        function updateReliabilityBadge() {
+            const answered = answers.filter(a => a !== null).length;
+            if (answered < 3) {
+                document.getElementById('reliabilityBadge').textContent = '✅ Confiabilidade: Aguardando...';
+                return;
+            }
+
+            let reliability = 100;
+
+            const validTimes = answerTimes.filter(t => t !== undefined && t !== null);
+            if (validTimes.length > 0) {
+                const avgTime = validTimes.reduce((a, b) => a + b, 0) / validTimes.length;
+                if (avgTime < 3) reliability -= 20;
+                if (avgTime < 2) reliability -= 20;
+                if (avgTime < 1.5) reliability -= 20;
+                if (avgTime > 30) reliability -= 10;
+                if (avgTime > 60) reliability -= 15;
+            }
+
+            const uniqueAnswers = new Set(answers.filter(a => a !== null));
+            if (uniqueAnswers.size < 2 && answered >= 8) reliability -= 15;
+            if (uniqueAnswers.size === 1 && answered >= 12) reliability -= 25;
+
+            const positionCount = {};
+            answers.filter(a => a !== null).forEach(a => {
+                positionCount[a] = (positionCount[a] || 0) + 1;
+            });
+            const maxCount = Math.max(...Object.values(positionCount));
+            if (maxCount / answered > 0.7 && answered >= 10) reliability -= 20;
+
+            reliability = Math.max(0, Math.min(100, Math.round(reliability)));
+
+            const badge = document.getElementById('reliabilityBadge');
+            let status = '';
+            let colorClass = '';
+
+            if (reliability >= 80) {
+                status = 'Muito Confiável';
+                colorClass = 'high';
+            } else if (reliability >= 60) {
+                status = 'Confiável';
+                colorClass = 'medium';
+            } else if (reliability >= 40) {
+                status = 'Atenção';
+                colorClass = 'low';
+            } else {
+                status = 'Baixa Confiabilidade';
+                colorClass = 'low';
+            }
+
+            badge.className = `reliability-badge ${colorClass}`;
+            badge.textContent = `✅ Confiabilidade: ${reliability}% (${status})`;
+        }
+
+        // ============================================
+        // 12. CALCULAR RESULTADO
+        // ============================================
+        function calculateResult() {
+            const scores = {};
+            const counts = {};
+
+            for (const key of swotKeys) {
+                scores[key] = 0;
+                counts[key] = 0;
+            }
+
+            questions.forEach((q, idx) => {
+                if (answers[idx] !== null) {
+                    const swot = q.swot;
+                    const isInverted = swot === 'fraquezas' || swot === 'ameacas';
+                    const value = isInverted ? answers[idx] : (3 - answers[idx]);
+                    scores[swot] += value;
+                    counts[swot]++;
+                }
+            });
+
+            const averages = {};
+            const percentages = {};
+
+            for (const key of swotKeys) {
+                averages[key] = counts[key] > 0 ? scores[key] / counts[key] : 0;
+                percentages[key] = Math.round((averages[key] / 4) * 100);
+            }
+
+            const sorted = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
+            const topSwot = sorted[0] ? sorted[0][0] : 'forcas';
+            const topPercent = sorted[0] ? sorted[0][1] : 0;
+
+            const bottomSwot = sorted[sorted.length - 1] ? sorted[sorted.length - 1][0] : 'ameacas';
+            const bottomPercent = sorted[sorted.length - 1] ? sorted[sorted.length - 1][1] : 0;
+
+            const estrategias = {
+                forcas: 'Use suas forças para aproveitar oportunidades e mitigar ameaças.',
+                fraquezas: 'Desenvolva planos para superar suas fraquezas e minimizar impactos.',
+                oportunidades: 'Aproveite as oportunidades usando suas forças e melhorando fraquezas.',
+                ameacas: 'Crie estratégias defensivas para reduzir o impacto das ameaças.'
+            };
+
+            let perfil = '';
+            let perfilIcon = '';
+            let perfilDesc = '';
+
+            if (topSwot === 'forcas') {
+                perfil = 'Perfil de Força';
+                perfilIcon = '💪';
+                perfilDesc = 'Você possui vantagens competitivas significativas. Use-as para criar valor.';
+            } else if (topSwot === 'oportunidades') {
+                perfil = 'Perfil de Oportunidade';
+                perfilIcon = '🚀';
+                perfilDesc = 'Você está bem posicionado para aproveitar oportunidades do mercado.';
+            } else if (topSwot === 'fraquezas') {
+                perfil = 'Perfil de Desenvolvimento';
+                perfilIcon = '📈';
+                perfilDesc = 'Foco em desenvolver pontos fracos para se tornar mais competitivo.';
+            } else {
+                perfil = 'Perfil de Resiliência';
+                perfilIcon = '🛡️';
+                perfilDesc = 'Capacidade de enfrentar e superar desafios e ameaças.';
+            }
+
+            return {
+                scores: scores,
+                averages: averages,
+                percentages: percentages,
+                topSwot: topSwot,
+                topPercent: topPercent,
+                bottomSwot: bottomSwot,
+                bottomPercent: bottomPercent,
+                perfil: perfil,
+                perfilIcon: perfilIcon,
+                perfilDesc: perfilDesc,
+                estrategia: estrategias[topSwot] || 'Desenvolva um plano estratégico equilibrado.',
+                date: new Date().toISOString(),
+                reliability: 0,
+                sorted: sorted
+            };
+        }
+
+        // ============================================
+        // 13. FINALIZAR TESTE
+        // ============================================
+        function finishTest() {
+            if (answers[currentQuestionIndex] === null) {
+                showToast('⚠️ Selecione uma opção para a última questão.', 'error');
+                return;
+            }
+
+            const total = answers.filter(a => a !== null).length;
+            const remaining = questions.length - total;
+
+            if (remaining > 0) {
+                if (!confirm(`Você respondeu ${total} de ${questions.length} questões. ${remaining} não respondidas. Finalizar mesmo assim?`)) {
+                    return;
+                }
+            }
+
+            if (!confirm('Finalizar análise SWOT? Suas respostas serão salvas e analisadas.')) {
+                return;
+            }
+
             stopTimer();
+            document.getElementById('loadingOverlay').classList.add('active');
+
+            setTimeout(() => {
+                const result = calculateResult();
+                const reliability = calculateFinalReliability();
+                const consistency = checkConsistency(result);
+
+                saveResult(result, reliability, consistency);
+                showResults(result, reliability, consistency);
+
+            }, 1500);
+        }
+
+        // ============================================
+        // 14. CALCULAR CONFIABILIDADE FINAL
+        // ============================================
+        function calculateFinalReliability() {
+            const answered = answers.filter(a => a !== null).length;
+            if (answered < 6) return 50;
+
+            let reliability = 100;
+
+            const validTimes = answerTimes.filter(t => t !== undefined && t !== null);
+            if (validTimes.length > 0) {
+                const avgTime = validTimes.reduce((a, b) => a + b, 0) / validTimes.length;
+                if (avgTime < 3) reliability -= 20;
+                if (avgTime < 2) reliability -= 15;
+                if (avgTime < 1.5) reliability -= 15;
+                if (avgTime > 30) reliability -= 10;
+            }
+
+            const uniqueAnswers = new Set(answers.filter(a => a !== null));
+            if (uniqueAnswers.size < 2 && answered >= 8) reliability -= 15;
+            if (uniqueAnswers.size === 1 && answered >= 12) reliability -= 25;
+
+            const positionCount = {};
+            answers.filter(a => a !== null).forEach(a => {
+                positionCount[a] = (positionCount[a] || 0) + 1;
+            });
+            const maxCount = Math.max(...Object.values(positionCount));
+            if (maxCount / answered > 0.7 && answered >= 10) reliability -= 20;
+
+            return Math.max(0, Math.min(100, Math.round(reliability)));
+        }
+
+        // ============================================
+        // 15. VERIFICAR CONSISTÊNCIA
+        // ============================================
+        function checkConsistency(currentResult) {
+            if (testHistory.length === 0) {
+                return {
+                    status: 'no_data',
+                    message: 'Primeira realização do teste. Sem dados anteriores para comparação.'
+                };
+            }
+
+            const previous = testHistory[testHistory.length - 1]?.results;
+            if (!previous) {
+                return {
+                    status: 'no_data',
+                    message: 'Sem dados anteriores para comparação.'
+                };
+            }
+
+            const prevPcts = previous.percentages || {};
+            const currPcts = currentResult.percentages || {};
+
+            let totalDiff = 0;
+            let count = 0;
+
+            for (const key of swotKeys) {
+                if (prevPcts[key] !== undefined && currPcts[key] !== undefined) {
+                    totalDiff += Math.abs(prevPcts[key] - currPcts[key]);
+                    count++;
+                }
+            }
+
+            const avgDiff = count > 0 ? totalDiff / count : 100;
+            const roundedDiff = Math.round(avgDiff);
+
+            let status, message, recommendation;
+
+            if (avgDiff <= 5) {
+                status = 'stable';
+                message = 'Resultados consistentes e confiáveis. Perfil estratégico estável.';
+                recommendation = 'Perfil SWOT consistente com avaliações anteriores.';
+            } else if (avgDiff <= 15) {
+                status = 'moderate';
+                message = 'Variação moderada detectada. Pode indicar mudança no ambiente.';
+                recommendation = 'Recomenda-se revisão dos resultados com profissional especializado.';
+            } else {
+                status = 'unstable';
+                message = 'Variação significativa detectada. Pode indicar inconsistência.';
+                recommendation = 'Recomenda-se realizar novo teste ou avaliação complementar.';
+            }
+
+            return {
+                status: status,
+                message: message,
+                recommendation: recommendation,
+                diff: roundedDiff,
+                previous: prevPcts,
+                current: currPcts
+            };
+        }
+
+        // ============================================
+        // 16. SALVAR RESULTADO
+        // ============================================
+        function saveResult(result, reliability, consistency) {
+            try {
+                result.reliability = reliability;
+                result.consistency = consistency;
+                result.answerTimes = answerTimes;
+
+                const allParticipants = VigorreDB.participants.findAll();
+                const p = allParticipants.find(p => p.id === currentUser.id);
+
+                if (p) {
+                    if (!p.completedTests) p.completedTests = [];
+                    if (!p.completedTests.includes('SWOT')) {
+                        p.completedTests.push('SWOT');
+                    }
+                    if (!p.results) p.results = {};
+                    p.results.SWOT = result;
+
+                    const allTests = p.tests || [];
+                    const allCompleted = allTests.every(t => p.completedTests.includes(t));
+                    p.status = allCompleted ? 'completed' : 'in_progress';
+
+                    const idx = allParticipants.findIndex(p => p.id === currentUser.id);
+                    if (idx > -1) {
+                        allParticipants[idx] = p;
+                        localStorage.setItem('vigorre_participants', JSON.stringify(allParticipants));
+                    }
+                }
+
+                if (window.VigorreAuth && window.VigorreAuth.saveTestHistory) {
+                    window.VigorreAuth.saveTestHistory('SWOT', result);
+                }
+
+                if (window.VigorreAuth && window.VigorreAuth.logActivity) {
+                    window.VigorreAuth.logActivity('Teste SWOT concluído', {
+                        participant: participantData.name,
+                        topSwot: result.topSwot,
+                        reliability: reliability,
+                        consistency: consistency?.status || 'no_data'
+                    });
+                }
+
+                localStorage.setItem('vigorre_last_swot_result', JSON.stringify(result));
+
+                console.log('✅ Resultado SWOT salvo com sucesso!');
+                console.log('📊 Quadrante Principal:', result.topSwot);
+                console.log('🔒 Confiabilidade:', reliability + '%');
+                console.log('📈 Consistência:', consistency?.status || 'no_data');
+
+            } catch (error) {
+                console.error('❌ Erro ao salvar resultado:', error);
+            }
+        }
+
+        // ============================================
+        // 17. EXIBIR RESULTADOS
+        // ============================================
+        function showResults(result, reliability, consistency) {
+            document.getElementById('loadingOverlay').classList.remove('active');
+            document.getElementById('testArea').style.display = 'none';
+            document.getElementById('resultsContainer').classList.add('active');
+
+            document.getElementById('resultParticipant').textContent = participantData.name || '--';
+            document.getElementById('resultCompany').textContent = companyData?.name || 'Autônomo';
+            document.getElementById('resultDate').textContent = new Date(result.date).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            document.getElementById('profileEmoji').textContent = result.perfilIcon;
+            document.getElementById('profileText').textContent =
+                `${result.perfil} (${result.percentages[result.topSwot]}%)`;
+
+            const grid = document.getElementById('swotGrid');
+            grid.innerHTML = '';
+
+            for (const [key, value] of Object.entries(result.percentages)) {
+                const config = swotConfig[key];
+                const color = config.color;
+                const className = `swot-card swot-${key}`;
+
+                let desc = '';
+                if (value >= 75) desc = `${config.icon} ${config.label} muito forte. Excelente vantagem.`;
+                else if (value >= 50) desc = `${config.icon} ${config.label} em bom nível.`;
+                else if (value >= 25) desc = `${config.icon} ${config.label} em desenvolvimento.`;
+                else desc = `${config.icon} ${config.label} requer atenção prioritária.`;
+
+                grid.innerHTML += `
+                      <div class="${className}">
+                        <span class="swot-icon">${config.icon}</span>
+                        <div class="swot-name">${config.label}</div>
+                        <div class="swot-value">${value}%</div>
+                        <div class="swot-bar">
+                          <div class="swot-bar-fill" style="width: ${value}%; background: ${color};"></div>
+                        </div>
+                        <div class="swot-desc">${desc}</div>
+                      </div>
+                    `;
+            }
+
+            const summary = `
+                    <p>
+                      <strong>${result.perfilIcon} Perfil Estratégico:</strong> 
+                      <span style="color: ${swotConfig[result.topSwot].color};">${result.perfil}</span>
+                      (${result.topPercent}%)
+                    </p>
+                    <p style="margin-top: 8px;">${result.perfilDesc}</p>
+                    <p style="margin-top: 12px;">
+                      <strong>🎯 Estratégia Recomendada:</strong> ${result.estrategia}
+                    </p>
+                    <p style="margin-top: 8px; color: rgba(255,255,255,0.4); font-size: 0.85rem;">
+                      <strong>Área com menor pontuação:</strong> ${swotConfig[result.bottomSwot].icon} 
+                      ${swotConfig[result.bottomSwot].label} (${result.bottomPercent}%)
+                    </p>
+                  `;
+
+            document.getElementById('profileSummary').innerHTML = summary;
+
+            const reliabilityDiv = document.getElementById('resultReliability');
+            let reliabilityText = '';
+            let reliabilityClass = '';
+
+            if (reliability >= 80) {
+                reliabilityText = '🟢 Resultado Muito Confiável';
+                reliabilityClass = 'high';
+            } else if (reliability >= 60) {
+                reliabilityText = '🟡 Resultado Confiável';
+                reliabilityClass = 'medium';
+            } else if (reliability >= 40) {
+                reliabilityText = '🟠 Atenção - Verificar Respostas';
+                reliabilityClass = 'low';
+            } else {
+                reliabilityText = '🔴 Baixa Confiabilidade - Recomenda-se Refazer';
+                reliabilityClass = 'low';
+            }
+
+            reliabilityDiv.innerHTML = `
+                    <span class="badge-large ${reliabilityClass}">
+                      ${reliabilityText} (${reliability}%)
+                    </span>
+                  `;
+
+            if (consistency && consistency.status !== 'no_data') {
+                const card = document.getElementById('consistencyCard');
+                card.classList.add('active');
+
+                const statusEl = document.getElementById('consistencyStatus');
+                const detailEl = document.getElementById('consistencyDetail');
+
+                let color = '';
+                let icon = '';
+
+                if (consistency.status === 'stable') {
+                    color = '#10B981';
+                    icon = '✅';
+                    statusEl.style.color = color;
+                    statusEl.textContent = `${icon} ${consistency.message}`;
+                } else if (consistency.status === 'moderate') {
+                    color = '#F59E0B';
+                    icon = '⚠️';
+                    statusEl.style.color = color;
+                    statusEl.textContent = `${icon} ${consistency.message}`;
+                } else {
+                    color = '#EF4444';
+                    icon = '❌';
+                    statusEl.style.color = color;
+                    statusEl.textContent = `${icon} ${consistency.message}`;
+                }
+
+                detailEl.textContent = `Diferença: ${consistency.diff}% • ${consistency.recommendation}`;
+            }
+
+            document.getElementById('pageNumber').textContent = '1';
+
+            setTimeout(() => {
+                renderChart(result.percentages);
+            }, 300);
+
+            isCompleted = true;
+        }
+
+        // ============================================
+        // 18. RENDERIZAR GRÁFICO
+        // ============================================
+        function renderChart(percentages) {
+            try {
+                const ctx = document.getElementById('swotChart').getContext('2d');
+
+                if (chartInstance) {
+                    chartInstance.destroy();
+                }
+
+                const labels = swotKeys.map(key => swotConfig[key].label);
+                const data = swotKeys.map(key => percentages[key] || 0);
+                const colors = swotKeys.map(key => swotConfig[key].color);
+
+                chartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Pontuação SWOT',
+                            data: data,
+                            backgroundColor: colors.map(c => c + '80'),
+                            borderColor: colors,
+                            borderWidth: 2,
+                            borderRadius: 8,
+                            maxBarThickness: 60
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.parsed.y}%`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                grid: {
+                                    color: 'rgba(255,255,255,0.05)'
+                                },
+                                ticks: {
+                                    color: 'rgba(255,255,255,0.3)',
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: 'rgba(255,255,255,0.5)',
+                                    font: {
+                                        size: 11,
+                                        weight: '600'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                console.log('📊 Gráfico SWOT renderizado com sucesso');
+
+            } catch (error) {
+                console.error('❌ Erro ao renderizar gráfico:', error);
+            }
+        }
+
+        // ============================================
+        // 19. NAVEGAÇÃO
+        // ============================================
+        function goToDashboard() {
             window.location.href = '../dashboard.html';
-          }
         }
-      });
 
-      window.addEventListener('beforeunload', function(e) {
-        if (!isCompleted && answers.some(a => a !== null)) {
-          e.preventDefault();
-          e.returnValue = 'Você tem respostas não salvas. Deseja realmente sair?';
+        function refazerTeste() {
+            if (!confirm('Deseja refazer a análise SWOT? Todas as respostas atuais serão perdidas.')) {
+                return;
+            }
+
+            if (!confirm('Tem certeza? Esta ação não pode ser desfeita.')) {
+                return;
+            }
+
+            answers = new Array(questions.length).fill(null);
+            answerTimes = [];
+            currentQuestionIndex = 0;
+            isCompleted = false;
+
+            timerSeconds = 0;
+            document.getElementById('timerDisplay').textContent = '⏱️ Tempo: 00:00';
+
+            document.getElementById('resultsContainer').classList.remove('active');
+            document.getElementById('testArea').style.display = 'block';
+            document.getElementById('consistencyCard').classList.remove('active');
+
+            if (chartInstance) {
+                chartInstance.destroy();
+                chartInstance = null;
+            }
+
+            stopTimer();
+            startTimer();
+            renderQuestion();
+
+            if (window.VigorreAuth && window.VigorreAuth.logActivity) {
+                window.VigorreAuth.logActivity('Refez teste SWOT', {
+                    participant: participantData.name,
+                    action: 'refazer_teste'
+                });
+            }
+
+            showToast('🔄 Teste reiniciado. Boa sorte!', 'success');
         }
-      });
-    }
 
-    // ============================================
-    // 22. EXPORTAÇÃO
-    // ============================================
-    window.addEventListener('load', function() {
-      console.log('📊 Teste SWOT carregado com sucesso!');
-      console.log('🎯 Análise Estratégica Pessoal');
-      console.log('🔒 Índice de Confiabilidade: implementado');
-      console.log('📈 Consistência com Histórico: implementado');
-      console.log('📝 Log de Auditoria: implementado');
-    });
+        // ============================================
+        // 20. TOAST
+        // ============================================
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
 
-    // Expor variáveis para depuração
-    window.questions = questions;
-    window.answers = answers;
-    window.currentQuestionIndex = currentQuestionIndex;
-    window.testHistory = testHistory;
-    window.participantData = participantData;
-    window.swotConfig = swotConfig;
+            if (type === 'error') {
+                icon.textContent = '❌';
+            } else if (type === 'warning') {
+                icon.textContent = '⚠️';
+            } else {
+                icon.textContent = '✅';
+            }
 
-    console.log('✅ Teste SWOT pronto para uso!');
-    console.log('📋 Comandos de depuração disponíveis:');
-    console.log('  - window.questions: lista de perguntas');
-    console.log('  - window.answers: respostas atuais');
-    console.log('  - window.swotConfig: configuração SWOT');
-  </script>
+            msg.textContent = message;
+            toast.className = `toast show ${type || 'success'}`;
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ============================================
+        // 21. GUARD DE NAVEGAÇÃO
+        // ============================================
+        function setupNavigationGuard() {
+            window.history.pushState(null, '', window.location.href);
+
+            window.addEventListener('popstate', function(e) {
+                if (!isCompleted) {
+                    if (!confirm('Você está no meio do teste. Deseja sair? Suas respostas serão perdidas.')) {
+                        window.history.pushState(null, '', window.location.href);
+                    } else {
+                        stopTimer();
+                        window.location.href = '../dashboard.html';
+                    }
+                }
+            });
+
+            window.addEventListener('beforeunload', function(e) {
+                if (!isCompleted && answers.some(a => a !== null)) {
+                    e.preventDefault();
+                    e.returnValue = 'Você tem respostas não salvas. Deseja realmente sair?';
+                }
+            });
+        }
+
+        // ============================================
+        // 22. EXPORTAÇÃO
+        // ============================================
+        window.addEventListener('load', function() {
+            console.log('📊 Teste SWOT carregado com sucesso!');
+            console.log('🎯 Análise Estratégica Pessoal');
+            console.log('🔒 Índice de Confiabilidade: implementado');
+            console.log('📈 Consistência com Histórico: implementado');
+            console.log('📝 Log de Auditoria: implementado');
+        });
+
+        window.questions = questions;
+        window.answers = answers;
+        window.currentQuestionIndex = currentQuestionIndex;
+        window.testHistory = testHistory;
+        window.participantData = participantData;
+        window.swotConfig = swotConfig;
+
+        console.log('✅ Teste SWOT pronto para uso!');
+        console.log('📋 Comandos de depuração disponíveis:');
+        console.log('  - window.questions: lista de perguntas');
+        console.log('  - window.answers: respostas atuais');
+        console.log('  - window.swotConfig: configuração SWOT');
+    </script>
 
 </body>
 </html>
