@@ -1,552 +1,621 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="VIGORRE ONE™ - Login" />
-  <title>Login | VIGORRE ONE™</title>
-  
-  <!-- Fonts Premium -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-  
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
-  <style>
-    /* ============================================
-       RESET & BASE
-       ============================================ */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      background: #0F172A;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    /* Fundo animado */
-    .bg-login {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: 
-        radial-gradient(ellipse at 20% 80%, rgba(29, 78, 216, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
-      z-index: 0;
-      animation: floatBg 30s ease-in-out infinite;
-    }
-    
-    @keyframes floatBg {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.02); }
-    }
-    
-    /* Partículas */
-    .particles {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.15), transparent),
-        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.1), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.12), transparent),
-        radial-gradient(1px 1px at 160px 120px, rgba(255,255,255,0.08), transparent);
-      background-size: 200px 200px;
-      animation: floatParticles 20s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    @keyframes floatParticles {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-100px); }
-    }
-    
-    /* ============================================
-       CONTAINER DE LOGIN
-       ============================================ */
-    .login-container {
-      position: relative;
-      z-index: 1;
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 24px;
-      padding: 48px 40px;
-      max-width: 440px;
-      width: 100%;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
-      animation: slideUp 0.6s ease-out;
-    }
-    
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    
-    /* ============================================
-       HEADER DO LOGIN
-       ============================================ */
-    .login-header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-    
-    .login-logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-    
-    .login-logo .logo-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.25rem;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
-    }
-    
-    .login-logo h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: white;
-      margin: 0;
-      line-height: 1.2;
-    }
-    
-    .login-logo .tm {
-      font-size: 0.5rem;
-      vertical-align: super;
-      color: #06B6D4;
-    }
-    
-    .login-subtitle {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.875rem;
-      margin-top: 4px;
-    }
-    
-    /* ============================================
-       FORMULÁRIO
-       ============================================ */
-    .login-form .form-group {
-      margin-bottom: 20px;
-    }
-    
-    .login-form label {
-      display: block;
-      font-weight: 600;
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 6px;
-    }
-    
-    .login-form input {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      font-size: 1rem;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.05);
-      color: white;
-    }
-    
-    .login-form input::placeholder {
-      color: rgba(255, 255, 255, 0.3);
-    }
-    
-    .login-form input:focus {
-      outline: none;
-      border-color: #06B6D4;
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.1);
-    }
-    
-    /* ============================================
-       OPÇÕES
-       ============================================ */
-    .login-options {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      font-size: 0.875rem;
-    }
-    
-    .login-options label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      color: rgba(255, 255, 255, 0.5);
-    }
-    
-    .login-options label input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      accent-color: #06B6D4;
-    }
-    
-    .login-options a {
-      color: #06B6D4;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-    
-    .login-options a:hover {
-      color: #7C3AED;
-    }
-    
-    /* ============================================
-       BOTÃO
-       ============================================ */
-    .btn-login {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #06B6D4, #7C3AED);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
-    }
-    
-    .btn-login:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(6, 182, 212, 0.5);
-    }
-    
-    .btn-login:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-      transform: none;
-    }
-    
-    /* ============================================
-       ERRO
-       ============================================ */
-    .login-error {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.2);
-      color: #FCA5A5;
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-size: 0.875rem;
-      margin-bottom: 16px;
-      display: none;
-      border-left: 4px solid #EF4444;
-    }
-    
-    .login-error.show {
-      display: block;
-    }
-    
-    /* ============================================
-       FOOTER
-       ============================================ */
-    .login-footer {
-      text-align: center;
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    
-    .login-footer p {
-      color: rgba(255, 255, 255, 0.3);
-      font-size: 0.875rem;
-    }
-    
-    .login-footer a {
-      color: rgba(255, 255, 255, 0.5);
-      text-decoration: none;
-      transition: color 0.3s ease;
-      font-weight: 500;
-    }
-    
-    .login-footer a:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-    
-    /* ============================================
-       SPINNER
-       ============================================ */
-    .login-spinner {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: white;
-      animation: spin 0.8s linear infinite;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    /* ============================================
-       CREDENCIAIS DE DEMO
-       ============================================ */
-    .demo-creds {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 16px;
-      margin-top: 20px;
-    }
-    
-    .demo-creds strong {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.75rem;
-      display: block;
-      margin-bottom: 8px;
-    }
-    
-    .demo-creds .cred-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 4px 0;
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 0.75rem;
-    }
-    
-    .demo-creds .cred-row span:last-child {
-      font-family: 'Courier New', monospace;
-      color: rgba(255, 255, 255, 0.6);
-      font-weight: 600;
-    }
-    
-    /* ============================================
-       RESPONSIVO
-       ============================================ */
-    @media (max-width: 480px) {
-      .login-container {
-        padding: 32px 24px;
-      }
-      
-      .login-logo h1 {
-        font-size: 1.25rem;
-      }
-      
-      .login-options {
-        flex-direction: column;
-        gap: 12px;
-        align-items: flex-start;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ============================================
+           VIGORRE ONE™ - LOGIN ULTRA PREMIUM
+           ============================================ */
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0A2540;
+            --navy-light: #1A3A5C;
+            --blue: #1D4ED8;
+            --blue-light: #3B82F6;
+            --cyan: #06B6D4;
+            --white: #FFFFFF;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-500: #64748B;
+            --gray-700: #334155;
+            --gray-900: #0F172A;
+            --radius: 16px;
+            --radius-full: 9999px;
+            --shadow: 0 20px 60px rgba(10, 37, 64, 0.08);
+            --shadow-hover: 0 30px 80px rgba(10, 37, 64, 0.12);
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-100);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fundo decorativo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -30%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(29, 78, 216, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -40%;
+            left: -30%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 440px;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 48px 40px 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10, 37, 64, 0.04);
+            animation: fadeUp 0.6s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .login-logo .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.25);
+        }
+
+        .login-logo .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .login-logo .logo-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+        }
+
+        .login-logo .logo-text .name .tm {
+            font-size: 0.5rem;
+            vertical-align: super;
+            color: var(--blue);
+        }
+
+        .login-logo .logo-text .sub {
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--gray-500);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .login-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+
+        .login-header p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--gray-200);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--white);
+            color: var(--gray-900);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.08);
+        }
+
+        .form-group input::placeholder {
+            color: var(--gray-300);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 0.85rem;
+        }
+
+        .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray-500);
+            cursor: pointer;
+        }
+
+        .form-options label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--blue);
+            cursor: pointer;
+        }
+
+        .form-options a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .form-options a:hover {
+            color: var(--cyan);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 24px rgba(29, 78, 216, 0.25);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(29, 78, 216, 0.35);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: var(--gray-300);
+            font-size: 0.8rem;
+        }
+
+        .login-divider::before,
+        .login-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+
+        .login-footer a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .login-footer a:hover {
+            color: var(--cyan);
+        }
+
+        .error-message {
+            background: #FEE2E2;
+            color: #991B1B;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: var(--white);
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 1000;
+            border-left: 4px solid var(--blue);
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.error {
+            border-left-color: #EF4444;
+        }
+
+        .toast.success {
+            border-left-color: #10B981;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 32px 24px 28px;
+            }
+            .login-header h1 {
+                font-size: 1.3rem;
+            }
+            .form-options {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+            body {
+                padding: 16px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white !important;
+            }
+            .login-container {
+                box-shadow: none !important;
+                border: 1px solid #E2E8F0 !important;
+            }
+            .btn-login {
+                background: var(--navy) !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Fundo animado -->
-  <div class="bg-login"></div>
-  <div class="particles"></div>
+    <div class="login-container">
 
-  <!-- Container -->
-  <div class="login-container">
-    
-    <!-- Header -->
-    <div class="login-header">
-      <div class="login-logo">
-        <div class="logo-icon">V</div>
-        <h1>VIGORRE ONE<span class="tm">™</span></h1>
-      </div>
-      <p class="login-subtitle">Entre com suas credenciais</p>
-    </div>
-    
-    <!-- Error -->
-    <div id="loginError" class="login-error">
-      ⚠️ <span id="errorMessage">Credenciais inválidas</span>
-    </div>
-    
-    <!-- Form -->
-    <form id="loginForm" class="login-form" onsubmit="handleLogin(event)">
-      
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input 
-          type="email" 
-          id="email" 
-          placeholder="seu@email.com" 
-          required 
-          autocomplete="email"
-          value="master@vigorre.com"
-        />
-      </div>
-      
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input 
-          type="password" 
-          id="password" 
-          placeholder="••••••••" 
-          required 
-          autocomplete="current-password"
-          value="adminvigor10"
-        />
-      </div>
-      
-      <div class="login-options">
-        <label>
-          <input type="checkbox" checked /> Manter conectado
-        </label>
-        <a href="#">Esqueceu a senha?</a>
-      </div>
-      
-      <button type="submit" id="loginBtn" class="btn-login">
-        Entrar no Sistema
-      </button>
-      
-    </form>
-    
-    <!-- Demo Credentials -->
-    <div class="demo-creds">
-      <strong>🔑 Credenciais de Demonstração</strong>
-      <div class="cred-row">
-        <span>👑 Master</span>
-        <span>master@vigorre.com / adminvigor10</span>
-      </div>
-      <div class="cred-row">
-        <span>👤 Admin</span>
-        <span>admin@vigorre.com / adminvigor10</span>
-      </div>
-      <div class="cred-row">
-        <span>🎯 Recrutador</span>
-        <span>recrutador@teste.com / rec123</span>
-      </div>
-      <div class="cred-row">
-        <span>👤 Participante</span>
-        <span>participante@teste.com / part123</span>
-      </div>
-    </div>
-    
-    <!-- Footer -->
-    <div class="login-footer">
-      <p>
-        <a href="index.html">← Voltar para o site</a>
-      </p>
-    </div>
-    
-  </div>
+        <!-- Toast -->
+        <div class="toast" id="toast">
+            <span id="toastIcon">✅</span>
+            <span id="toastMessage">Mensagem</span>
+        </div>
 
-  <!-- ============================================
-       SCRIPTS
-       ============================================ -->
-  
-  <!-- Supabase Config -->
-  <script src="supabase-config.js"></script>
-  
-  <!-- Auth System -->
-  <script src="auth.js"></script>
-  
-  <script>
-    'use strict';
-    
-    // ============================================
-    // ELEMENTOS
-    // ============================================
-    const form = document.getElementById('loginForm');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const loginBtn = document.getElementById('loginBtn');
-    const errorDiv = document.getElementById('loginError');
-    const errorMessage = document.getElementById('errorMessage');
-    
-    // ============================================
-    // VERIFICAR SE JÁ ESTÁ LOGADO
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('🔐 Página de Login - VIGORRE ONE™');
-      
-      if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
-        const user = window.VigorreAuth.getCurrentUser();
-        console.log('✅ Usuário já logado:', user?.name);
-        window.VigorreAuth.redirectByRole(user);
-      }
-    });
-    
-    // ============================================
-    // FUNÇÃO DE LOGIN
-    // ============================================
-    async function handleLogin(event) {
-      event.preventDefault();
-      
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
-      
-      if (!email || !password) {
-        showError('Preencha todos os campos');
-        return;
-      }
-      
-      loginBtn.disabled = true;
-      loginBtn.innerHTML = '<span class="login-spinner"></span> Entrando...';
-      hideError();
-      
-      try {
-        console.log('🔄 Tentando login:', email);
-        const user = await window.VigorreAuth.login(email, password);
-        console.log('✅ Login bem-sucedido:', user.name);
-        window.VigorreAuth.redirectByRole(user);
-      } catch (error) {
-        console.error('❌ Erro no login:', error);
-        showError(error.message || 'Credenciais inválidas. Tente novamente.');
-        loginBtn.disabled = false;
-        loginBtn.innerHTML = 'Entrar no Sistema';
-      }
-    }
-    
-    // ============================================
-    // FUNÇÕES DE ERRO
-    // ============================================
-    function showError(message) {
-      errorMessage.textContent = message;
-      errorDiv.classList.add('show');
-    }
-    
-    function hideError() {
-      errorDiv.classList.remove('show');
-    }
-    
-    // ============================================
-    // ENTER PARA SUBMIT
-    // ============================================
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const active = document.activeElement;
-        if (active === emailInput || active === passwordInput) {
-          form.dispatchEvent(new Event('submit'));
+        <!-- Header -->
+        <div class="login-header">
+            <a href="index.html" class="login-logo">
+                <div class="logo-icon">V</div>
+                <div class="logo-text">
+                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                    <span class="sub">People Analytics Enterprise</span>
+                </div>
+            </a>
+            <h1>Bem-vindo de volta</h1>
+            <p>Entre com suas credenciais para acessar a plataforma</p>
+        </div>
+
+        <!-- Formulário -->
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="error-message" id="errorMessage">
+                ⚠️ <span id="errorText">Credenciais inválidas. Tente novamente.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="seu@email.com" required autocomplete="email" />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password" />
+            </div>
+
+            <div class="form-options">
+                <label>
+                    <input type="checkbox" id="remember" />
+                    Lembrar-me
+                </label>
+                <a href="#">Esqueceu a senha?</a>
+            </div>
+
+            <button type="submit" class="btn-login" id="loginBtn">
+                Entrar na Plataforma
+            </button>
+
+            <div class="login-divider">ou</div>
+
+            <div style="text-align: center; font-size: 0.85rem; color: var(--gray-500);">
+                <strong>Credenciais de Demonstração:</strong>
+                <br />
+                👑 Admin: <strong>master@vigorre.com</strong> / <strong>adminvigor10</strong>
+                <br />
+                🎯 Recrutador: <strong>recrutador@teste.com</strong> / <strong>rec123</strong>
+                <br />
+                👤 Participante: <strong>participante@teste.com</strong> / <strong>part123</strong>
+            </div>
+
+            <div class="login-footer">
+                Não tem uma conta? <a href="#">Solicite acesso</a>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
+    <script src="supabase-config.js"></script>
+    <script src="auth.js"></script>
+
+    <script>
+        'use strict';
+
+        // ============================================
+        // HANDLE LOGIN
+        // ============================================
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const remember = document.getElementById('remember').checked;
+            const btn = document.getElementById('loginBtn');
+            const errorMsg = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+
+            // Reset
+            errorMsg.classList.remove('show');
+            btn.disabled = true;
+            btn.textContent = '⏳ Entrando...';
+
+            try {
+                // Verifica se o auth está disponível
+                if (typeof window.VigorreAuth === 'undefined') {
+                    throw new Error('Sistema de autenticação não disponível.');
+                }
+
+                // Tenta fazer login
+                const user = await window.VigorreAuth.login(email, password);
+
+                // Salva preferência de lembrar
+                if (remember) {
+                    localStorage.setItem('vigorre_remember', 'true');
+                } else {
+                    localStorage.removeItem('vigorre_remember');
+                }
+
+                // Redireciona conforme o perfil
+                showToast('✅ Login realizado com sucesso!', 'success');
+
+                setTimeout(() => {
+                    window.VigorreAuth.redirectByRole(user);
+                }, 500);
+
+            } catch (error) {
+                console.error('❌ Erro no login:', error);
+
+                // Mostra mensagem de erro amigável
+                let message = 'Credenciais inválidas. Tente novamente.';
+                if (error.message === 'Usuário não encontrado') {
+                    message = 'Usuário não encontrado. Verifique seu e-mail.';
+                } else if (error.message === 'Senha incorreta') {
+                    message = 'Senha incorreta. Tente novamente.';
+                } else if (error.message.includes('Supabase')) {
+                    message = 'Erro de conexão. Verifique sua internet e tente novamente.';
+                }
+
+                errorText.textContent = message;
+                errorMsg.classList.add('show');
+                showToast('❌ ' + message, 'error');
+
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Entrar na Plataforma';
+            }
         }
-      }
-    });
-    
-    console.log('🔐 Sistema de login carregado');
-  </script>
-  
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+
+            if (type === 'error') {
+                icon.textContent = '❌';
+            } else if (type === 'success') {
+                icon.textContent = '✅';
+            } else {
+                icon.textContent = 'ℹ️';
+            }
+
+            msg.textContent = message;
+            toast.className = `toast show ${type || ''}`;
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ============================================
+        // ENTER PARA SUBMIT
+        // ============================================
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const form = document.getElementById('loginForm');
+                if (form && document.activeElement && document.activeElement.closest('form') === form) {
+                    form.dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+
+        // ============================================
+        // PREENCHER CREDENCIAIS DE DEMO (CLIQUE)
+        // ============================================
+        document.querySelectorAll('.login-footer a, .login-divider + div strong').forEach(el => {
+            el.addEventListener('click', function(e) {
+                if (this.textContent.includes('master@vigorre.com')) {
+                    document.getElementById('email').value = 'master@vigorre.com';
+                    document.getElementById('password').value = 'adminvigor10';
+                    showToast('🔑 Credenciais Admin preenchidas!', 'success');
+                } else if (this.textContent.includes('recrutador@teste.com')) {
+                    document.getElementById('email').value = 'recrutador@teste.com';
+                    document.getElementById('password').value = 'rec123';
+                    showToast('🔑 Credenciais Recrutador preenchidas!', 'success');
+                } else if (this.textContent.includes('participante@teste.com')) {
+                    document.getElementById('email').value = 'participante@teste.com';
+                    document.getElementById('password').value = 'part123';
+                    showToast('🔑 Credenciais Participante preenchidas!', 'success');
+                }
+            });
+        });
+
+        // ============================================
+        // VERIFICAR SE JÁ ESTÁ LOGADO
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof window.VigorreAuth !== 'undefined') {
+                const isAuth = window.VigorreAuth.isAuthenticated();
+                if (isAuth) {
+                    const user = window.VigorreAuth.getCurrentUser();
+                    if (user) {
+                        showToast('🔄 Você já está logado. Redirecionando...', 'success');
+                        setTimeout(() => {
+                            window.VigorreAuth.redirectByRole(user);
+                        }, 1000);
+                    }
+                }
+            }
+        });
+
+        console.log('🔐 Página de Login - VIGORRE ONE™');
+        console.log('📧 master@vigorre.com / adminvigor10');
+    </script>
+
 </body>
 </html>
