@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Comportamental | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-analytics {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 20% 80%, rgba(29,78,216,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.06) 0%, transparent 50%);
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .header-analytics {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .header-analytics .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .header-analytics .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #1D4ED8, #7C3AED);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .header-analytics .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-analytics .logo-text .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #1D4ED8;
+    }
+    
+    .header-analytics .logo-text span {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.4);
+      display: block;
+    }
+    
+    .header-analytics .btn-back {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .header-analytics .btn-back:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    .analytics-body {
+      background: rgba(30,41,59,0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 32px;
+    }
+    
+    .analytics-title {
+      text-align: center;
+      padding: 16px 0 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+    }
+    
+    .analytics-title h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .analytics-title .blue {
+      color: #1D4ED8;
+    }
+    
+    .analytics-title p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .chart-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .chart-card h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .chart-container {
+      height: 250px;
+      position: relative;
+    }
+    
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .summary-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    
+    .summary-card .number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #D4AF37;
+    }
+    
+    .summary-card .label {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+    }
+    
+    .footer-analytics {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .footer-analytics .contact {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-analytics .contact a {
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-analytics .contact a:hover {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    @media (max-width: 992px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-analytics { flex-direction: column; text-align: center; }
+      .summary-grid { grid-template-columns: 1fr 1fr; }
+      .footer-analytics { flex-direction: column; text-align: center; }
+    }
+    
+    @media (max-width: 480px) {
+      .summary-grid { grid-template-columns: 1fr; }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .header-analytics, .analytics-body, .footer-analytics {
+        background: white !important;
+        border-color: #ddd !important;
+        color: #111 !important;
+      }
+      .analytics-title h1 { color: #111 !important; }
+      .analytics-title .blue { color: #1D4ED8 !important; }
+      .chart-card { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .summary-card { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .btn-back { display: none !important; }
+      .footer-analytics .contact a { color: #666 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-analytics"></div>
+
+  <div class="container">
+    
+    <!-- HEADER -->
+    <div class="header-analytics">
+      <div class="logo">
+        <div class="logo-icon">V</div>
+        <div class="logo-text">
+          VIGORRE ONE™ <span class="tm">™</span>
+          <span>Analytics Comportamental</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="btn-back" onclick="window.print()">🖨️ Imprimir</button>
+        <a href="../../admin/dashboard.html" class="btn-back">← Voltar</a>
+      </div>
+    </div>
+    
+    <!-- CORPO -->
+    <div class="analytics-body">
+      
+      <div class="analytics-title">
+        <h1>📊 Analytics <span class="blue">Comportamental</span></h1>
+        <p>Distribuição de perfis e tendências da plataforma</p>
+      </div>
+      
+      <!-- RESUMO -->
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="number">1,247</div>
+          <div class="label">👥 Total de Participantes</div>
+        </div>
+        <div class="summary-card">
+          <div class="number">3,892</div>
+          <div class="label">📝 Avaliações Realizadas</div>
+        </div>
+        <div class="summary-card">
+          <div class="number">72%</div>
+          <div class="label">📊 Média Geral</div>
+        </div>
+        <div class="summary-card">
+          <div class="number">47</div>
+          <div class="label">🏢 Empresas Ativas</div>
+        </div>
+      </div>
+      
+      <!-- GRÁFICOS -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>📊 Distribuição DISC</h3>
+          <div class="chart-container">
+            <canvas id="discChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>📊 Distribuição Big Five</h3>
+          <div class="chart-container">
+            <canvas id="bigFiveChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>🏆 Índice VIGOR™ (Média)</h3>
+          <div class="chart-container">
+            <canvas id="vigorChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>📈 Tendência de Avaliações</h3>
+          <div class="chart-container">
+            <canvas id="tendenciaChart"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <!-- INSIGHTS -->
+      <div style="background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.1);border-radius:12px;padding:20px;">
+        <h3 style="font-size:0.9rem;font-weight:700;color:#D4AF37;margin-bottom:8px;">💡 Insights da Plataforma</h3>
+        <ul style="list-style:none;padding:0;font-size:0.8rem;color:rgba(255,255,255,0.6);">
+          <li style="padding:4px 0;">• <strong style="color:white;">32%</strong> dos participantes têm perfil <strong style="color:#EF4444;">Dominância (D)</strong> no DISC</li>
+          <li style="padding:4px 0;">• <strong style="color:white;">68%</strong> dos participantes têm <strong style="color:#10B981;">Conscienciosidade</strong> acima da média</li>
+          <li style="padding:4px 0;">• O <strong style="color:white;">Índice VIGOR™</strong> médio é de <strong style="color:#D4AF37;">72</strong>, indicando alto potencial</li>
+          <li style="padding:4px 0;">• <strong style="color:white;">+22%</strong> de crescimento nas avaliações nos últimos 3 meses</li>
+        </ul>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <div class="footer-analytics">
+      <span>© 2024 VIGORRE ONE™</span>
+      <div class="contact">
+        <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+        <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+        <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
+      </div>
+      <span>v1.0</span>
+    </div>
+    
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📊 Analytics Comportamental - VIGORRE ONE™');
+      
+      // Gráfico DISC
+      const ctx1 = document.getElementById('discChart').getContext('2d');
+      new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: ['D', 'I', 'S', 'C'],
+          datasets: [{
+            label: 'Percentual',
+            data: [32, 28, 22, 18],
+            backgroundColor: ['#EF4444', '#3B82F6', '#10B981', '#7C3AED'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, max: 50, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)' } },
+            x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)' } }
+          }
+        }
+      });
+      
+      // Gráfico Big Five
+      const ctx2 = document.getElementById('bigFiveChart').getContext('2d');
+      new Chart(ctx2, {
+        type: 'radar',
+        data: {
+          labels: ['Abertura', 'Conscienciosidade', 'Extroversão', 'Amabilidade', 'Estabilidade'],
+          datasets: [{
+            label: 'Média',
+            data: [68, 72, 65, 70, 60],
+            backgroundColor: 'rgba(29,78,216,0.15)',
+            borderColor: '#1D4ED8',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: { display: false },
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              pointLabels: { color: 'rgba(255,255,255,0.4)' }
+            }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+      
+      // Gráfico VIGOR
+      const ctx3 = document.getElementById('vigorChart').getContext('2d');
+      new Chart(ctx3, {
+        type: 'bar',
+        data: {
+          labels: ['V', 'I', 'G', 'O', 'R'],
+          datasets: [{
+            label: 'Índice Médio',
+            data: [72, 68, 75, 70, 65],
+            backgroundColor: ['#06B6D4', '#10B981', '#F59E0B', '#7C3AED', '#F43F5E'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)' } },
+            x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)' } }
+          }
+        }
+      });
+      
+      // Gráfico Tendência
+      const ctx4 = document.getElementById('tendenciaChart').getContext('2d');
+      new Chart(ctx4, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+          datasets: [{
+            label: 'Avaliações',
+            data: [120, 150, 180, 210, 260, 320],
+            borderColor: '#D4AF37',
+            backgroundColor: 'rgba(212,175,55,0.1)',
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: 'rgba(255,255,255,0.6)' } } },
+          scales: {
+            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)' } },
+            x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)' } }
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
