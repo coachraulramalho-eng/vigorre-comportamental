@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendário Recrutador | VIGORRE ONE™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .bg-agenda {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 20% 80%, rgba(6,182,212,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(16,185,129,0.06) 0%, transparent 50%);
+      z-index: 0;
+      animation: floatBg 30s ease-in-out infinite;
+    }
+    
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.02); }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header-agenda {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .header-agenda .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .header-agenda .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #06B6D4, #10B981);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .header-agenda .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .header-agenda .logo-text .tm {
+      font-size: 0.4rem;
+      vertical-align: super;
+      color: #06B6D4;
+    }
+    
+    .header-agenda .logo-text span {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.4);
+      display: block;
+    }
+    
+    .header-agenda .btn-back {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .header-agenda .btn-back:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    .agenda-body {
+      background: rgba(30,41,59,0.6);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 32px;
+    }
+    
+    .agenda-title {
+      text-align: center;
+      padding: 16px 0 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+    }
+    
+    .agenda-title h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    
+    .agenda-title .cyan {
+      color: #06B6D4;
+    }
+    
+    .agenda-title p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    /* INDICADORES */
+    .indicators {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .indicator-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    
+    .indicator-card .number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #06B6D4;
+    }
+    
+    .indicator-card .label {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+    }
+    
+    .calendar-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .calendar-nav h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .calendar-nav .nav-buttons {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .calendar-nav .nav-buttons button {
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+    }
+    
+    .calendar-nav .nav-buttons button:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    
+    .calendar-grid .day-name {
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      padding: 8px 0;
+      text-transform: uppercase;
+    }
+    
+    .calendar-grid .day {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 8px 4px;
+      min-height: 70px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .calendar-grid .day:hover {
+      border-color: rgba(6,182,212,0.2);
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .calendar-grid .day .date {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 4px;
+    }
+    
+    .calendar-grid .day .date.today {
+      color: #06B6D4;
+    }
+    
+    .calendar-grid .day .event {
+      font-size: 0.6rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .calendar-grid .day .event.interview { background: rgba(29,78,216,0.2); color: #60A5FA; }
+    .calendar-grid .day .event.test { background: rgba(124,58,237,0.2); color: #A78BFA; }
+    .calendar-grid .day .event.feedback { background: rgba(16,185,129,0.2); color: #34D399; }
+    
+    .calendar-grid .day.empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+    
+    /* BOTÃO RÁPIDO */
+    .btn-rapido {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #06B6D4, #10B981);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 4px 20px rgba(6,182,212,0.3);
+      margin-right: 8px;
+    }
+    
+    .btn-rapido:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(6,182,212,0.5);
+    }
+    
+    .btn-ia {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #7C3AED, #D4AF37);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.3);
+    }
+    
+    .btn-ia:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(124,58,237,0.5);
+    }
+    
+    .footer-agenda {
+      background: rgba(30,41,59,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0 0 16px 16px;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .footer-agenda .contact {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-agenda .contact a {
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-agenda .contact a:hover {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    @media (max-width: 768px) {
+      .header-agenda { flex-direction: column; text-align: center; }
+      .calendar-grid { grid-template-columns: repeat(7, 1fr); }
+      .calendar-grid .day { min-height: 55px; padding: 4px; }
+      .calendar-grid .day .date { font-size: 0.65rem; }
+      .calendar-grid .day .event { font-size: 0.5rem; padding: 1px 4px; }
+      .indicators { grid-template-columns: 1fr 1fr; }
+      .footer-agenda { flex-direction: column; text-align: center; }
+    }
+    
+    @media (max-width: 480px) {
+      .calendar-grid .day { min-height: 45px; }
+      .calendar-grid .day .date { font-size: 0.55rem; }
+      .calendar-grid .day .event { display: none; }
+    }
+    
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .header-agenda, .agenda-body, .footer-agenda {
+        background: white !important;
+        border-color: #ddd !important;
+        color: #111 !important;
+      }
+      .agenda-title h1 { color: #111 !important; }
+      .agenda-title .cyan { color: #06B6D4 !important; }
+      .calendar-grid .day { background: #f9f9f9 !important; border-color: #ddd !important; }
+      .calendar-grid .day .date { color: #333 !important; }
+      .btn-back, .btn-rapido, .btn-ia { display: none !important; }
+      .footer-agenda .contact a { color: #666 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-agenda"></div>
+
+  <div class="container">
+    
+    <!-- HEADER -->
+    <div class="header-agenda">
+      <div class="logo">
+        <div class="logo-icon">V</div>
+        <div class="logo-text">
+          VIGORRE ONE™ <span class="tm">™</span>
+          <span>Agenda • Recrutador</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="btn-back" onclick="window.print()">🖨️ Imprimir</button>
+        <a href="../../recrutador/dashboard.html" class="btn-back">← Voltar</a>
+      </div>
+    </div>
+    
+    <!-- CORPO -->
+    <div class="agenda-body">
+      
+      <div class="agenda-title">
+        <h1>📅 Minha <span class="cyan">Agenda</span></h1>
+        <p>Entrevistas, testes e feedbacks organizados</p>
+      </div>
+      
+      <!-- INDICADORES -->
+      <div class="indicators">
+        <div class="indicator-card">
+          <div class="number">5</div>
+          <div class="label">📞 Entrevistas Hoje</div>
+        </div>
+        <div class="indicator-card">
+          <div class="number">12</div>
+          <div class="label">📝 Testes Agendados</div>
+        </div>
+        <div class="indicator-card">
+          <div class="number">3</div>
+          <div class="label">📋 Feedbacks</div>
+        </div>
+        <div class="indicator-card">
+          <div class="number">4</div>
+          <div class="label">⏳ Pendentes</div>
+        </div>
+      </div>
+      
+      <!-- CALENDÁRIO -->
+      <div class="calendar-nav">
+        <h2>Junho 2024</h2>
+        <div class="nav-buttons">
+          <button>◀</button>
+          <button>Hoje</button>
+          <button>▶</button>
+        </div>
+      </div>
+      
+      <div class="calendar-grid">
+        <div class="day-name">Dom</div>
+        <div class="day-name">Seg</div>
+        <div class="day-name">Ter</div>
+        <div class="day-name">Qua</div>
+        <div class="day-name">Qui</div>
+        <div class="day-name">Sex</div>
+        <div class="day-name">Sáb</div>
+        
+        <div class="day empty"></div>
+        <div class="day empty"></div>
+        <div class="day empty"></div>
+        <div class="day empty"></div>
+        <div class="day empty"></div>
+        <div class="day"><div class="date">1</div></div>
+        <div class="day"><div class="date">2</div></div>
+        <div class="day"><div class="date">3</div></div>
+        <div class="day"><div class="date">4</div><div class="event interview">Entrevista - Ana</div></div>
+        <div class="day"><div class="date">5</div></div>
+        <div class="day"><div class="date">6</div></div>
+        <div class="day"><div class="date">7</div><div class="event test">Teste DISC</div></div>
+        <div class="day"><div class="date">8</div></div>
+        <div class="day"><div class="date">9</div></div>
+        <div class="day"><div class="date">10</div></div>
+        <div class="day"><div class="date">11</div></div>
+        <div class="day"><div class="date">12</div><div class="event feedback">Feedback - Carlos</div></div>
+        <div class="day"><div class="date">13</div></div>
+        <div class="day"><div class="date today">14</div><div class="event interview">Hoje • Entrevista</div></div>
+        <div class="day"><div class="date">15</div><div class="event test">Teste - Mariana</div></div>
+        <div class="day"><div class="date">16</div></div>
+        <div class="day"><div class="date">17</div></div>
+        <div class="day"><div class="date">18</div><div class="event interview">Entrevista - Pedro</div></div>
+        <div class="day"><div class="date">19</div></div>
+        <div class="day"><div class="date">20</div></div>
+        <div class="day"><div class="date">21</div></div>
+        <div class="day"><div class="date">22</div><div class="event feedback">Feedback - Julia</div></div>
+        <div class="day"><div class="date">23</div></div>
+        <div class="day"><div class="date">24</div></div>
+        <div class="day"><div class="date">25</div></div>
+        <div class="day"><div class="date">26</div></div>
+        <div class="day"><div class="date">27</div></div>
+        <div class="day"><div class="date">28</div></div>
+        <div class="day"><div class="date">29</div></div>
+        <div class="day"><div class="date">30</div></div>
+      </div>
+      
+      <!-- AÇÕES -->
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px;">
+        <button class="btn-rapido" onclick="alert('📅 Novo evento agendado!')">➕ Novo Evento</button>
+        <button class="btn-rapido" onclick="alert('📋 Agendando entrevista...')">📞 Agendar Entrevista</button>
+        <button class="btn-ia" onclick="alert('🤖 IA Assistente: Otimizando sua agenda...\n\n✅ 2 entrevistas reagendadas\n✅ 1 teste priorizado\n✅ 3 lembretes criados')">🤖 IA Assistente</button>
+      </div>
+      
+    </div>
+    
+    <!-- RODAPÉ -->
+    <div class="footer-agenda">
+      <span>© 2024 VIGORRE ONE™</span>
+      <div class="contact">
+        <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+        <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+        <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
+      </div>
+      <span>v1.0</span>
+    </div>
+    
+  </div>
+
+</body>
+</html>
