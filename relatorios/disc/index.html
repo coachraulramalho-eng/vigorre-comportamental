@@ -1,1120 +1,940 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Relatório DISC | VIGORRE ONE™</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/globals.css">
-  
-  <style>
-    /* ============================================
-       CORES DO RELATÓRIO DISC (AZUL)
-       ============================================ */
-    :root {
-      --primary: #1D4ED8;
-      --primary-light: #60A5FA;
-      --primary-dark: #1E40AF;
-      --gradient-main: linear-gradient(135deg, #1D4ED8 0%, #60A5FA 50%, #1E40AF 100%);
-      --gradient-header: linear-gradient(135deg, #1E40AF, #1D4ED8);
-      --gradient-footer: linear-gradient(135deg, #1D4ED8, #1E40AF);
-      --shadow-color: rgba(29, 78, 216, 0.3);
-    }
-    
-    /* ============================================
-       BASE - ULTRA PREMIUM
-       ============================================ */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      background: #0F172A;
-      color: #F8FAFC;
-      padding: 20px;
-      position: relative;
-      overflow-x: hidden;
-    }
-    
-    .bg-report {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: var(--gradient-main);
-      opacity: 0.10;
-      z-index: 0;
-      animation: floatBg 30s ease-in-out infinite;
-    }
-    
-    @keyframes floatBg {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.02); }
-    }
-    
-    .particles {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.10), transparent),
-        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.08), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.12), transparent);
-      background-size: 200px 200px;
-      animation: floatParticles 20s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    @keyframes floatParticles {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-100px); }
-    }
-    
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    
-    /* ============================================
-       CABEÇALHO
-       ============================================ */
-    .header-premium {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px 16px 0 0;
-      padding: 20px 32px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .header-premium::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--gradient-header);
-    }
-    
-    .header-grid {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 24px;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .header-logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    
-    .header-logo .logo-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--gradient-header);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.25rem;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      flex-shrink: 0;
-      box-shadow: 0 4px 20px var(--shadow-color);
-    }
-    
-    .header-logo-text .system-name {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.125rem;
-      font-weight: 800;
-      color: white;
-    }
-    
-    .header-logo-text .system-name .tm {
-      font-size: 0.5rem;
-      vertical-align: super;
-      color: #60A5FA;
-    }
-    
-    .header-logo-text .system-sub {
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.4);
-      display: block;
-    }
-    
-    .header-center {
-      text-align: center;
-    }
-    
-    .header-center .report-title {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.125rem;
-      font-weight: 700;
-      color: white;
-    }
-    
-    .header-center .report-title .highlight {
-      background: var(--gradient-header);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .header-center .report-sub {
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.4);
-    }
-    
-    .header-right {
-      text-align: right;
-    }
-    
-    .header-right .participant-name {
-      font-size: 0.9375rem;
-      font-weight: 600;
-      color: white;
-    }
-    
-    .header-right .participant-company {
-      font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.5);
-    }
-    
-    /* ============================================
-       CORPO DO RELATÓRIO
-       ============================================ */
-    .report-body {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(20px);
-      border-left: 1px solid rgba(255, 255, 255, 0.06);
-      border-right: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 40px;
-      min-height: 400px;
-    }
-    
-    .report-title-page {
-      text-align: center;
-      padding: 32px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      margin-bottom: 32px;
-    }
-    
-    .report-title-page h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      color: white;
-    }
-    
-    .report-title-page p {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 1rem;
-      margin-top: 8px;
-    }
-    
-    .profile-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 24px;
-      background: var(--gradient-header);
-      border-radius: 100px;
-      color: white;
-      font-weight: 700;
-      font-size: 1.125rem;
-      margin-top: 16px;
-      box-shadow: 0 4px 20px var(--shadow-color);
-    }
-    
-    .report-section {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 24px;
-    }
-    
-    .report-section h3 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.125rem;
-      color: white;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .report-section p {
-      color: rgba(255, 255, 255, 0.8);
-      line-height: 1.8;
-      font-size: 0.9375rem;
-    }
-    
-    .report-section ul {
-      list-style: none;
-      padding: 0;
-    }
-    
-    .report-section ul li {
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      color: rgba(255, 255, 255, 0.8);
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.9375rem;
-    }
-    
-    .report-section ul li:last-child {
-      border-bottom: none;
-    }
-    
-    .report-section ul li::before {
-      content: '✓';
-      color: #60A5FA;
-      font-weight: 700;
-    }
-    
-    .chart-container {
-      height: 280px;
-      position: relative;
-      margin-bottom: 24px;
-    }
-    
-    .chart-container-small {
-      height: 220px;
-      position: relative;
-    }
-    
-    /* ============================================
-       RODAPÉ
-       ============================================ */
-    .footer-premium {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 0 0 16px 16px;
-      padding: 20px 32px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .footer-premium::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--gradient-footer);
-    }
-    
-    .footer-grid {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .footer-logo .logo-icon-small {
-      width: 32px;
-      height: 32px;
-      background: var(--gradient-footer);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 0.875rem;
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      flex-shrink: 0;
-    }
-    
-    .footer-logo-text .footer-system {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: white;
-    }
-    
-    .footer-logo-text .footer-system .tm {
-      font-size: 0.4rem;
-      vertical-align: super;
-      color: #60A5FA;
-    }
-    
-    .footer-logo-text .footer-tagline {
-      font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.3);
-    }
-    
-    .footer-center .footer-contact {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    
-    .footer-contact-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 0.7rem;
-      transition: color 0.3s ease;
-      text-decoration: none;
-    }
-    
-    .footer-contact-item:hover {
-      color: rgba(255, 255, 255, 0.7);
-    }
-    
-    .footer-contact-item .icon {
-      font-size: 0.75rem;
-    }
-    
-    .footer-right .page-number {
-      color: rgba(255, 255, 255, 0.3);
-      font-size: 0.7rem;
-    }
-    
-    .footer-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-      margin: 12px 0;
-    }
-    
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.2);
-    }
-    
-    .btn-back {
-      padding: 10px 24px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      color: rgba(255, 255, 255, 0.7);
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .btn-back:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-    }
-    
-    /* ============================================
-       RESPONSIVO
-       ============================================ */
-    @media (max-width: 992px) {
-      .header-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        text-align: center;
-      }
-      .header-right { text-align: center; }
-      .footer-grid { flex-direction: column; text-align: center; gap: 12px; }
-      .footer-center .footer-contact { justify-content: center; flex-direction: column; gap: 6px; }
-    }
-    
-    @media (max-width: 768px) {
-      .header-premium { padding: 16px 20px; }
-      .report-body { padding: 20px; }
-      .report-title-page h1 { font-size: 1.5rem; }
-      .chart-container { height: 220px; }
-    }
-    
-    @media (max-width: 480px) {
-      body { padding: 12px; }
-      .header-premium { padding: 12px 16px; }
-      .report-body { padding: 16px; }
-    }
-    
-    @media print {
-      body { background: white !important; padding: 0 !important; }
-      .container { max-width: 100% !important; }
-      .header-premium {
-        background: #0A2540 !important;
-        border-radius: 0 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-      .report-body {
-        background: white !important;
-        border: none !important;
-        padding: 24px !important;
-      }
-      .report-title-page h1 { color: #0A2540 !important; }
-      .report-section {
-        background: #F8FAFC !important;
-        border-color: #E2E8F0 !important;
-      }
-      .report-section p { color: #334155 !important; }
-      .report-section ul li { color: #334155 !important; }
-      .footer-premium {
-        background: #0A2540 !important;
-        border-radius: 0 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-      .btn-back { display: none !important; }
-      .footer-contact-item { color: rgba(255, 255, 255, 0.6) !important; }
-      .profile-badge {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-      .footer-bottom { display: none !important; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Relatório DISC - VIGORRE ONE™">
+    <title>Relatório DISC | VIGORRE ONE™</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/globals.css">
+
+    <style>
+        /* ============================================
+           RELATÓRIO DISC SIMPLES
+           ============================================ */
+
+        :root {
+            --report-primary: #1D4ED8;
+            --report-primary-light: #60A5FA;
+            --report-primary-dark: #1E40AF;
+            --report-cyan: #06B6D4;
+            --report-gradient-header: linear-gradient(135deg, #1E40AF, #1D4ED8);
+            --report-gradient-footer: linear-gradient(135deg, #1D4ED8, #1E40AF);
+            --report-shadow-color: rgba(29, 78, 216, 0.3);
+            --disc-d: #EF4444;
+            --disc-i: #3B82F6;
+            --disc-s: #10B981;
+            --disc-c: #8B5CF6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0F172A;
+            color: #F8FAFC;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           CABEÇALHO
+           ============================================ */
+        .header-premium {
+            background: rgba(30, 41, 59, 0.88);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px 20px 0 0;
+            padding: 24px 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--report-gradient-header);
+        }
+
+        .header-grid {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .header-logo .logo-img {
+            height: 44px;
+            width: auto;
+            display: block;
+        }
+
+        .header-logo-text .system-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+
+        .header-logo-text .system-name .tm {
+            font-size: 0.5rem;
+            vertical-align: super;
+            color: #60A5FA;
+        }
+
+        .header-logo-text .system-sub {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.35);
+            display: block;
+            letter-spacing: 0.03em;
+        }
+
+        .header-center {
+            text-align: center;
+        }
+
+        .header-center .report-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .header-center .report-title .highlight {
+            background: var(--report-gradient-header);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-center .report-sub {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0.05em;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-right .participant-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .header-right .participant-company {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .header-right .participant-id {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.25);
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .header-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                text-align: center;
+            }
+            .header-right {
+                text-align: center;
+            }
+            .header-logo .logo-img {
+                height: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-logo .logo-img {
+                height: 28px;
+            }
+        }
+
+        @media print {
+            .header-logo .logo-img {
+                height: 36px;
+            }
+            .header-premium {
+                background: #0A2540 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* ============================================
+           CORPO DO RELATÓRIO
+           ============================================ */
+        .report-body {
+            background: rgba(30, 41, 59, 0.55);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.04);
+            border-right: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 32px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .section-text {
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .section-text strong {
+            color: white;
+        }
+
+        /* ============================================
+           GRÁFICO
+           ============================================ */
+        .chart-container {
+            height: 260px;
+            position: relative;
+            margin: 16px 0;
+        }
+
+        /* ============================================
+           CARDS DE PERFIL
+           ============================================ */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 18px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .profile-card .card-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .profile-card .card-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .profile-card .card-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 2px 0;
+        }
+
+        .profile-card .card-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+
+        .profile-card .card-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 1s ease;
+        }
+
+        .profile-card.disc-d .card-value {
+            color: var(--disc-d);
+        }
+        .profile-card.disc-i .card-value {
+            color: var(--disc-i);
+        }
+        .profile-card.disc-s .card-value {
+            color: var(--disc-s);
+        }
+        .profile-card.disc-c .card-value {
+            color: var(--disc-c);
+        }
+
+        /* ============================================
+           BADGE
+           ============================================ */
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 28px;
+            background: var(--report-gradient-header);
+            border-radius: 100px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 8px 0 16px;
+            box-shadow: 0 4px 20px var(--report-shadow-color);
+        }
+
+        /* ============================================
+           AÇÕES
+           ============================================ */
+        .actions-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-action {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--report-gradient-header);
+            color: white;
+            box-shadow: 0 4px 20px var(--report-shadow-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px var(--report-shadow-color);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        /* ============================================
+           RODAPÉ
+           ============================================ */
+        .footer-premium {
+            background: rgba(30, 41, 59, 0.88);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 0 0 20px 20px;
+            padding: 24px 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-premium::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--report-gradient-footer);
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo .logo-icon-small {
+            width: 36px;
+            height: 36px;
+            background: var(--report-gradient-footer);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            flex-shrink: 0;
+        }
+
+        .footer-logo-text .footer-system {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-logo-text .footer-system .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: #60A5FA;
+        }
+
+        .footer-logo-text .footer-tagline {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .footer-center .footer-contact {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.7rem;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-contact-item:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-contact-item .icon {
+            font-size: 0.8rem;
+        }
+
+        .footer-right .page-number {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.7rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            margin: 14px 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .report-body {
+                padding: 20px;
+            }
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+            .actions-bar {
+                flex-direction: column;
+            }
+            .btn-action {
+                justify-content: center;
+            }
+            .footer-grid {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+            .footer-center .footer-contact {
+                justify-content: center;
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white !important;
+                padding: 0 !important;
+                color: #0A2540 !important;
+            }
+            .report-body {
+                background: white !important;
+                border: none !important;
+                padding: 24px 30px !important;
+                backdrop-filter: none !important;
+            }
+            .section-title {
+                color: #0A2540 !important;
+            }
+            .section-text {
+                color: #334155 !important;
+            }
+            .section-text strong {
+                color: #0A2540 !important;
+            }
+            .profile-card {
+                background: #F8FAFC !important;
+                border-color: #E2E8F0 !important;
+            }
+            .profile-card .card-title {
+                color: #64748B !important;
+            }
+            .profile-card .card-value {
+                color: #0A2540 !important;
+            }
+            .footer-premium {
+                background: #0A2540 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .actions-bar {
+                display: none !important;
+            }
+            .header-premium {
+                background: #0A2540 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .profile-badge {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .footer-contact-item {
+                color: rgba(255, 255, 255, 0.6) !important;
+            }
+            .header-right .participant-name {
+                color: white !important;
+            }
+            .footer-bottom {
+                display: none !important;
+            }
+            .chart-container {
+                height: 200px !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="bg-report"></div>
-  <div class="particles"></div>
+    <div class="container">
 
-  <div class="container">
-    
-    <!-- CABEÇALHO -->
-    <header class="header-premium">
-      <div class="header-grid">
-        <div class="header-logo">
-          <div class="logo-icon">V</div>
-          <div class="header-logo-text">
-            <span class="system-name">VIGORRE ONE<span class="tm">™</span></span>
-            <span class="system-sub">People Analytics Enterprise</span>
-          </div>
+        <!-- ============================================
+           CABEÇALHO
+        ============================================ -->
+        <header class="header-premium">
+            <div class="header-grid">
+                <div class="header-logo">
+                    <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                    <div class="header-logo-text">
+                        <span class="system-name">VIGORRE ONE<span class="tm">™</span></span>
+                        <span class="system-sub">People Analytics Enterprise</span>
+                    </div>
+                </div>
+
+                <div class="header-center">
+                    <div class="report-title">
+                        <span class="highlight">Relatório DISC</span>
+                    </div>
+                    <div class="report-sub">Análise Comportamental</div>
+                </div>
+
+                <div class="header-right">
+                    <div class="participant-name" id="participantName">Carregando...</div>
+                    <div class="participant-company" id="participantCompany">Empresa: --</div>
+                    <div class="participant-id" id="participantId">ID: --</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ============================================
+           CORPO DO RELATÓRIO
+        ============================================ -->
+        <div class="report-body" id="reportBody">
+
+            <!-- ============================================
+               SEÇÃO 1: RESUMO
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title">📊 Perfil DISC</h2>
+
+                <div class="profile-badge" id="profileBadge">
+                    <span id="profileEmoji">🦁</span>
+                    <span id="profileText">Perfil: --</span>
+                </div>
+
+                <p class="section-text" id="profileDescription">
+                    Carregando descrição do perfil...
+                </p>
+            </section>
+
+            <!-- ============================================
+               SEÇÃO 2: DISTRIBUIÇÃO
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title">📈 Distribuição dos Fatores</h2>
+
+                <div class="profile-grid" id="profileGrid">
+                    <!-- Carregado via JavaScript -->
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="discChart"></canvas>
+                </div>
+            </section>
+
+            <!-- ============================================
+               SEÇÃO 3: DETALHES
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title">💡 Análise Detalhada</h2>
+
+                <p class="section-text" id="detailedAnalysis">
+                    Carregando análise detalhada...
+                </p>
+
+                <p class="section-text" style="margin-top: 16px;" id="recommendations">
+                    Carregando recomendações...
+                </p>
+            </section>
+
+            <!-- ============================================
+               AÇÕES
+            ============================================ -->
+            <div class="actions-bar">
+                <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
+                <button class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+                <a href="completo.html" class="btn-action btn-primary" style="text-decoration:none;">📄 Ver Completo</a>
+            </div>
+
         </div>
-        
-        <div class="header-center">
-          <div class="report-title">
-            <span class="highlight">Relatório DISC</span>
-          </div>
-          <div class="report-sub">Análise Comportamental Premium</div>
-        </div>
-        
-        <div class="header-right">
-          <div class="participant-name" id="participantName">--</div>
-          <div class="participant-company" id="participantCompany">Empresa: --</div>
-        </div>
-      </div>
-    </header>
-    
-    <!-- CORPO DO RELATÓRIO -->
-    <div class="report-body">
-      
-      <!-- TÍTULO -->
-      <div class="report-title-page">
-        <h1>📊 Relatório Comportamental DISC</h1>
-        <p>Análise completa do perfil comportamental baseada no modelo DISC</p>
-        <div class="profile-badge" id="profileBadge">
-          <span>📊</span>
-          <span id="profileText">Perfil: --</span>
-        </div>
-      </div>
 
-      <!-- 1. INTRODUÇÃO -->
-      <div class="report-section">
-        <h3>📋 1. Introdução</h3>
-        <p>O modelo DISC é uma ferramenta de avaliação comportamental que identifica quatro dimensões principais da personalidade: <strong>Dominância (D)</strong>, <strong>Influência (I)</strong>, <strong>Estabilidade (S)</strong> e <strong>Conformidade (C)</strong>. Este relatório apresenta uma análise detalhada do seu perfil comportamental, com base em suas respostas, fornecendo insights sobre como você se comporta no ambiente profissional.</p>
-      </div>
+        <!-- ============================================
+           RODAPÉ
+        ============================================ -->
+        <footer class="footer-premium">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <div class="logo-icon-small">V</div>
+                    <div class="footer-logo-text">
+                        <span class="footer-system">VIGORRE ONE<span class="tm">™</span></span>
+                        <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
+                    </div>
+                </div>
 
-      <!-- 2. SEU PERFIL DISC -->
-      <div class="report-section">
-        <h3>📊 2. Seu Perfil DISC</h3>
-        <div id="profileAnalysis">
-          <p>Carregando análise do perfil...</p>
-        </div>
-      </div>
+                <div class="footer-center">
+                    <div class="footer-contact">
+                        <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
+                            <span class="icon">📧</span> contato@vigorre.com.br
+                        </a>
+                        <a href="tel:+5534991850735" class="footer-contact-item">
+                            <span class="icon">📱</span> (34) 99185-0735
+                        </a>
+                        <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
+                            <span class="icon">🌐</span> www.vigorre.com.br
+                        </a>
+                        <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
+                            <span class="icon">📷</span> @vigorre.oficial
+                        </a>
+                    </div>
+                </div>
 
-      <!-- 3. GRÁFICOS -->
-      <div class="report-section">
-        <h3>📈 3. Distribuição dos Fatores DISC</h3>
-        <div class="chart-container">
-          <canvas id="discChart"></canvas>
-        </div>
-        <div class="chart-container-small">
-          <canvas id="discRadarChart"></canvas>
-        </div>
-      </div>
+                <div class="footer-right">
+                    <div class="page-number">Página <span id="pageNumber">1</span></div>
+                </div>
+            </div>
 
-      <!-- 4. ANÁLISE DETALHADA POR FATOR -->
-      <div class="report-section">
-        <h3>🔍 4. Análise Detalhada por Fator</h3>
-        <div id="factorAnalysis">
-          <p>Carregando análise detalhada...</p>
-        </div>
-      </div>
+            <div class="footer-divider"></div>
 
-      <!-- 5. PONTOS FORTES -->
-      <div class="report-section">
-        <h3>✅ 5. Pontos Fortes</h3>
-        <ul id="strengthsList">
-          <li>Carregando pontos fortes...</li>
-        </ul>
-      </div>
+            <div class="footer-bottom">
+                <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
+                <span>v2.0</span>
+            </div>
+        </footer>
 
-      <!-- 6. ÁREAS DE DESENVOLVIMENTO -->
-      <div class="report-section">
-        <h3>📈 6. Áreas de Desenvolvimento</h3>
-        <ul id="developmentList">
-          <li>Carregando áreas de desenvolvimento...</li>
-        </ul>
-      </div>
-
-      <!-- 7. ESTILO DE COMUNICAÇÃO -->
-      <div class="report-section">
-        <h3>💬 7. Estilo de Comunicação</h3>
-        <p id="commStyle">Carregando estilo de comunicação...</p>
-      </div>
-
-      <!-- 8. TOMADA DE DECISÃO -->
-      <div class="report-section">
-        <h3>🎯 8. Tomada de Decisão</h3>
-        <p id="decisionStyle">Carregando estilo de decisão...</p>
-      </div>
-
-      <!-- 9. TRABALHO EM EQUIPE -->
-      <div class="report-section">
-        <h3>🤝 9. Trabalho em Equipe</h3>
-        <p id="teamStyle">Carregando estilo de trabalho em equipe...</p>
-      </div>
-
-      <!-- 10. LIDERANÇA -->
-      <div class="report-section">
-        <h3>👑 10. Estilo de Liderança</h3>
-        <p id="leadershipStyle">Carregando estilo de liderança...</p>
-      </div>
-
-      <!-- 11. COMPORTAMENTO SOB PRESSÃO -->
-      <div class="report-section">
-        <h3>⚡ 11. Comportamento Sob Pressão</h3>
-        <p id="pressureStyle">Carregando comportamento sob pressão...</p>
-      </div>
-
-      <!-- 12. RECOMENDAÇÕES -->
-      <div class="report-section">
-        <h3>💡 12. Recomendações para Desenvolvimento</h3>
-        <ul id="recommendationsList">
-          <li>Carregando recomendações...</li>
-        </ul>
-      </div>
-
-      <!-- 13. MOTIVADORES -->
-      <div class="report-section">
-        <h3>🔥 13. Motivadores</h3>
-        <ul id="motivatorsList">
-          <li>Carregando motivadores...</li>
-        </ul>
-      </div>
-
-      <!-- 14. CULTURA IDEAL -->
-      <div class="report-section">
-        <h3>🏢 14. Cultura Organizacional Ideal</h3>
-        <p id="cultureStyle">Carregando cultura ideal...</p>
-      </div>
-
-      <!-- 15. RESULTADOS DE ALTA PERFORMANCE -->
-      <div class="report-section">
-        <h3>🚀 15. Resultados de Alta Performance</h3>
-        <p id="highPerformanceStyle">Carregando resultados de alta performance...</p>
-      </div>
-
-      <!-- 16. RESULTADOS DE BAIXA PERFORMANCE -->
-      <div class="report-section">
-        <h3>⚠️ 16. Resultados de Baixa Performance</h3>
-        <p id="lowPerformanceStyle">Carregando resultados de baixa performance...</p>
-      </div>
-
-      <!-- 17. GESTÃO DO TEMPO -->
-      <div class="report-section">
-        <h3>⏰ 17. Gestão do Tempo</h3>
-        <p id="timeManagementStyle">Carregando estilo de gestão do tempo...</p>
-      </div>
-
-      <!-- 18. PRODUTIVIDADE -->
-      <div class="report-section">
-        <h3>📊 18. Produtividade</h3>
-        <p id="productivityStyle">Carregando estilo de produtividade...</p>
-      </div>
-
-      <!-- 19. RELAÇÃO COM AUTORIDADE -->
-      <div class="report-section">
-        <h3>👤 19. Relação com Autoridade</h3>
-        <p id="authorityStyle">Carregando relação com autoridade...</p>
-      </div>
-
-      <!-- 20. RESILIÊNCIA -->
-      <div class="report-section">
-        <h3>🌱 20. Resiliência</h3>
-        <p id="resilienceStyle">Carregando resiliência...</p>
-      </div>
-
-      <!-- 21. INTELIGÊNCIA EMOCIONAL -->
-      <div class="report-section">
-        <h3>🧠 21. Inteligência Emocional</h3>
-        <p id="eqStyle">Carregando inteligência emocional...</p>
-      </div>
-
-      <!-- 22. RECOMENDAÇÕES PARA O GESTOR -->
-      <div class="report-section">
-        <h3>👔 22. Recomendações para o Gestor</h3>
-        <ul id="managerRecommendations">
-          <li>Carregando recomendações...</li>
-        </ul>
-      </div>
-
-      <!-- 23. PLANO DE AÇÃO -->
-      <div class="report-section">
-        <h3>📋 23. Plano de Ação</h3>
-        <ul id="actionPlan">
-          <li>Carregando plano de ação...</li>
-        </ul>
-      </div>
-
-      <!-- 24. CONCLUSÃO -->
-      <div class="report-section">
-        <h3>📜 24. Conclusão</h3>
-        <p id="conclusion">Carregando conclusão...</p>
-      </div>
-
-      <!-- BOTÕES -->
-      <div style="text-align: center; margin-top: 24px;">
-        <a href="../../participante/dashboard.html" class="btn-back">← Voltar ao Dashboard</a>
-        <button onclick="window.print()" class="btn-back" style="margin-left: 12px;">🖨️ Imprimir Relatório</button>
-      </div>
-      
     </div>
-    
-    <!-- RODAPÉ -->
-    <footer class="footer-premium">
-      <div class="footer-grid">
-        <div class="footer-logo">
-          <div class="logo-icon-small">V</div>
-          <div class="footer-logo-text">
-            <span class="footer-system">VIGORRE ONE<span class="tm">™</span></span>
-            <span class="footer-tagline">People Analytics • Assessment Intelligence</span>
-          </div>
-        </div>
-        
-        <div class="footer-center">
-          <div class="footer-contact">
-            <a href="mailto:contato@vigorre.com.br" class="footer-contact-item">
-              <span class="icon">📧</span> contato@vigorre.com.br
-            </a>
-            <a href="tel:+5534991850735" class="footer-contact-item">
-              <span class="icon">📱</span> (34) 99185-0735
-            </a>
-            <a href="https://www.vigorre.com.br" target="_blank" class="footer-contact-item">
-              <span class="icon">🌐</span> www.vigorre.com.br
-            </a>
-            <a href="https://instagram.com/vigorre.oficial" target="_blank" class="footer-contact-item">
-              <span class="icon">📷</span> @vigorre.oficial
-            </a>
-          </div>
-        </div>
-        
-        <div class="footer-right">
-          <div class="page-number">Relatório DISC</div>
-        </div>
-      </div>
-      
-      <div class="footer-divider"></div>
-      
-      <div class="footer-bottom">
-        <span>© 2024 VIGORRE ONE™ - Todos os direitos reservados</span>
-        <span>v1.0</span>
-      </div>
-    </footer>
-    
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="../../supabase-config.js"></script>
-  <script src="../../auth.js"></script>
-  <script src="../../middleware/auth-guard.js"></script>
+    <!-- ============================================
+       SCRIPTS
+    ============================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <script src="../../supabase-config.js"></script>
+    <script src="../../auth.js"></script>
+    <script src="../../middleware/auth-guard.js"></script>
 
-  <script>
-    'use strict';
+    <script>
+        'use strict';
 
-    let chartInstance = null;
-    let radarInstance = null;
-    let results = null;
-
-    // ============================================
-    // INTERPRETAÇÕES DISC
-    // ============================================
-    const DISC_INTERPRETATIONS = {
-      D: {
-        name: 'Dominância',
-        desc: 'orientado a resultados, assertivo e com forte capacidade de liderança. Toma decisões rápidas e assume riscos calculados.',
-        strengths: ['Liderança natural', 'Tomada de decisão ágil', 'Foco em resultados', 'Coragem para inovar', 'Visão estratégica'],
-        development: ['Desenvolver paciência em processos longos', 'Praticar escuta ativa', 'Equilibrar velocidade com qualidade'],
-        comm: 'Direto, objetivo e focado em eficiência. Valoriza reuniões produtivas.',
-        decision: 'Rápido, pragmático e orientado a impacto. Avalia riscos de forma ágil.',
-        team: 'Lidera pelo exemplo e cobra resultados. Pode precisar desenvolver escuta ativa.',
-        pressure: 'Mantém foco e acelera a execução. Pode tornar-se mais exigente sob estresse.',
-        leadership: 'Liderança diretiva, orientada a metas e resultados. Cobra performance e reconhece conquistas.',
-        motivators: ['Desafios complexos', 'Autonomia decisória', 'Reconhecimento por resultados', 'Crescimento acelerado'],
-        culture: 'Culturas dinâmicas, com autonomia e meritocracia.',
-        highPerformance: 'Excelente capacidade de liderança em situações desafiadoras. Toma decisões rápidas e assume responsabilidades.',
-        lowPerformance: 'Pode ser percebido como autoritário ou impaciente em situações de baixa performance.',
-        timeManagement: 'Focado em metas e prazos. Pode negligenciar detalhes em prol da velocidade.',
-        productivity: 'Alta produtividade orientada a entregas. Pode perder qualidade em tarefas minuciosas.',
-        authority: 'Respeita líderes diretos e competentes. Valoriza autonomia e confiança.',
-        resilience: 'Alta capacidade de recuperação após contratempos. Transforma desafios em oportunidades.',
-        eq: 'Boa capacidade de reconhecer próprias emoções. Pode desenvolver maior empatia.'
-      },
-      I: {
-        name: 'Influência',
-        desc: 'comunicativo, persuasivo e com forte capacidade de engajamento. Constrói redes e motiva equipes.',
-        strengths: ['Comunicação impactante', 'Capacidade de motivar', 'Networking estratégico', 'Criatividade', 'Adaptabilidade social'],
-        development: ['Foco em execução', 'Cumprimento de prazos', 'Estruturar processos', 'Desenvolver paciência'],
-        comm: 'Entusiasta, persuasivo e focado em conexões. Usa storytelling e engaja plateias.',
-        decision: 'Considera impacto nas pessoas e busca consenso. Valoriza inovação.',
-        team: 'Integra grupos, resolve tensões com diplomacia e mantém clima positivo.',
-        pressure: 'Mantém otimismo e busca soluções colaborativas. Pode dispersar energia.',
-        leadership: 'Liderança inspiradora, participativa e motivadora. Engaja equipes com visão e entusiasmo.',
-        motivators: ['Reconhecimento público', 'Ambiente colaborativo', 'Liberdade criativa', 'Interação constante'],
-        culture: 'Culturas colaborativas, com reconhecimento e inovação.',
-        highPerformance: 'Excelente habilidade de comunicação e persuasão. Motiva e engaja equipes com entusiasmo.',
-        lowPerformance: 'Pode priorizar relações sobre prazos em situações de baixa performance.',
-        timeManagement: 'Gosta de variedade e pode procrastinar tarefas rotineiras.',
-        productivity: 'Produtividade criativa. Pode perder foco em tarefas repetitivas.',
-        authority: 'Busca líderes inspiradores, que valorizam pessoas e comunicação aberta.',
-        resilience: 'Boa capacidade de recuperação, apoiado em rede de contatos.',
-        eq: 'Boa capacidade de ler emoções alheias. Pode desenvolver autoconsciência.'
-      },
-      S: {
-        name: 'Estabilidade',
-        desc: 'paciente, empático e com forte capacidade de suporte. Mantém harmonia e constância.',
-        strengths: ['Lealdade e constância', 'Escuta ativa', 'Mediação de conflitos', 'Execução consistente', 'Empatia operacional'],
-        development: ['Assertividade', 'Comunicação influente', 'Tomada de decisão mais ágil', 'Desenvolver liderança'],
-        comm: 'Calmo, empático e focado em entendimento mútuo. Evita confrontos.',
-        decision: 'Cauteloso, analisa impactos nas pessoas e busca segurança.',
-        team: 'Apoia colegas, mantém coerência e resolve conflitos com mediação.',
-        pressure: 'Busca apoio e divide responsabilidades. Pode precisar de tempo para processar mudanças.',
-        leadership: 'Liderança servidora, focada em desenvolvimento e suporte. Constrói equipes coesas.',
-        motivators: ['Estabilidade organizacional', 'Reconhecimento por suporte', 'Clima harmonioso', 'Processos claros'],
-        culture: 'Culturas estáveis, com processos claros e suporte.',
-        highPerformance: 'Excelente capacidade de manter harmonia e apoiar equipes. Constância e confiabilidade.',
-        lowPerformance: 'Pode evitar conflitos necessários em situações de baixa performance.',
-        timeManagement: 'Organizado e metódico. Pode ter dificuldade com mudanças abruptas.',
-        productivity: 'Produtividade consistente. Valoriza qualidade e processos.',
-        authority: 'Valoriza líderes que oferecem suporte, consistência e estabilidade.',
-        resilience: 'Boa resiliência, apoiada em rotinas e suporte social.',
-        eq: 'Boa capacidade de empatia. Pode desenvolver assertividade.'
-      },
-      C: {
-        name: 'Conformidade',
-        desc: 'analítico, detalhista e com forte capacidade de planejamento. Busca precisão e qualidade.',
-        strengths: ['Análise técnica profunda', 'Precisão e qualidade', 'Planejamento estratégico', 'Gestão de riscos', 'Pensamento lógico'],
-        development: ['Flexibilidade', 'Agilidade decisória', 'Adaptação a mudanças', 'Delegação efetiva'],
-        comm: 'Preciso, baseado em fatos e estruturado. Valoriza clareza e dados.',
-        decision: 'Metódico, avalia minuciosamente e busca mitigar riscos.',
-        team: 'Organiza processos, garante qualidade e antecipa falhas.',
-        pressure: 'Organiza prioridades e segue planos. Pode precisar de estrutura.',
-        leadership: 'Liderança técnica, focada em processos e qualidade. Garante excelência.',
-        motivators: ['Padrões de excelência', 'Autonomia técnica', 'Processos otimizados', 'Desafios analíticos'],
-        culture: 'Culturas estruturadas, com foco em qualidade e precisão.',
-        highPerformance: 'Excelência na análise de dados e atenção a detalhes. Planejamento estruturado.',
-        lowPerformance: 'Pode demorar para decidir em situações de baixa performance.',
-        timeManagement: 'Planejamento detalhado. Pode perder prazos por perfeccionismo.',
-        productivity: 'Produtividade baseada em qualidade. Pode ser mais lento em entregas.',
-        authority: 'Respeita líderes técnicos, que valorizam qualidade e precisão.',
-        resilience: 'Resiliência baseada em planejamento. Pode ter dificuldade com imprevistos.',
-        eq: 'Boa capacidade de análise. Pode desenvolver expressão emocional.'
-      }
-    };
-
-    // ============================================
-    // INICIALIZAÇÃO
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('📄 Relatório DISC - VIGORRE ONE™');
-      
-      const isAuth = window.VigorreAuth.isAuthenticated();
-      if (!isAuth) {
-        window.location.href = '../../login.html';
-        return;
-      }
-      
-      const user = window.VigorreAuth.getCurrentUser();
-      if (!user) {
-        window.location.href = '../../login.html';
-        return;
-      }
-      
-      document.getElementById('participantName').textContent = user.name || 'Participante';
-      document.getElementById('participantCompany').textContent = `Empresa: ${user.companyName || 'Independente'}`;
-      
-      loadResults();
-    });
-
-    // ============================================
-    // CARREGAR RESULTADOS
-    // ============================================
-    function loadResults() {
-      try {
-        const saved = localStorage.getItem('vigorre_last_disc_result');
-        if (saved) {
-          results = JSON.parse(saved);
-          renderReport(results);
-          return;
-        }
-        
-        const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-        const user = window.VigorreAuth.getCurrentUser();
-        const p = participants.find(p => p.id === user.id);
-        if (p?.results?.DISC) {
-          results = p.results.DISC;
-          renderReport(results);
-          return;
-        }
-        
-        // Dados de exemplo para demonstração
-        results = {
-          percentages: { D: 70, I: 45, S: 60, C: 40 },
-          dominant: 'D',
-          dominantName: 'Dominância',
-          dominantDesc: 'Você é uma pessoa orientada a resultados, determinada e com forte capacidade de liderança.'
+        // ============================================
+        // DADOS DE EXEMPLO
+        // ============================================
+        const sampleData = {
+            participantName: 'Ana Silva',
+            companyName: 'TechCorp Solutions',
+            participantId: 'P001',
+            date: new Date().toISOString(),
+            percentages: { D: 78, I: 45, S: 62, C: 38 },
+            dominant: 'D'
         };
-        renderReport(results);
-        
-      } catch (error) {
-        console.error('❌ Erro ao carregar resultados:', error);
-        showError('Erro ao carregar resultados. Tente novamente.');
-      }
-    }
 
-    // ============================================
-    // RENDERIZAR RELATÓRIO
-    // ============================================
-    function renderReport(result) {
-      const pct = result.percentages || {};
-      const dominant = result.dominant || Object.entries(pct).sort((a,b) => b[1]-a[1])[0]?.[0] || 'D';
-      const profile = DISC_INTERPRETATIONS[dominant] || DISC_INTERPRETATIONS.D;
-      
-      // Perfil
-      document.getElementById('profileText').textContent = `${profile.name} (${pct[dominant]}%)`;
-      
-      // Análise do Perfil
-      document.getElementById('profileAnalysis').innerHTML = `
-        <p><strong>Perfil Predominante: ${profile.name}</strong></p>
-        <p>${profile.desc}</p>
-        <p style="margin-top:12px;"><strong>Intensidade:</strong> ${pct[dominant]}%</p>
-        <p><strong>Características Principais:</strong> ${profile.strengths.slice(0, 3).join(', ')}</p>
-      `;
-      
-      // Análise por Fator
-      const factorHTML = Object.entries(pct).map(([key, value]) => {
-        const factor = DISC_INTERPRETATIONS[key];
-        if (!factor) return '';
-        return `
-          <div style="margin-bottom:16px;padding:16px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:4px solid ${key === 'D' ? '#EF4444' : key === 'I' ? '#3B82F6' : key === 'S' ? '#10B981' : '#7C3AED'}">
-            <h4 style="color:${key === 'D' ? '#EF4444' : key === 'I' ? '#3B82F6' : key === 'S' ? '#10B981' : '#7C3AED'}">${factor.name} — ${value}%</h4>
-            <p style="color:rgba(255,255,255,0.8);font-size:0.875rem;">${factor.desc}</p>
-          </div>
-        `;
-      }).join('');
-      document.getElementById('factorAnalysis').innerHTML = factorHTML;
-      
-      // Pontos Fortes
-      document.getElementById('strengthsList').innerHTML = profile.strengths.map(s => `<li>${s}</li>`).join('');
-      
-      // Áreas de Desenvolvimento
-      document.getElementById('developmentList').innerHTML = profile.development.map(d => `<li>${d}</li>`).join('');
-      
-      // Estilo de Comunicação
-      document.getElementById('commStyle').textContent = profile.comm;
-      
-      // Tomada de Decisão
-      document.getElementById('decisionStyle').textContent = profile.decision;
-      
-      // Trabalho em Equipe
-      document.getElementById('teamStyle').textContent = profile.team;
-      
-      // Liderança
-      document.getElementById('leadershipStyle').textContent = profile.leadership;
-      
-      // Comportamento sob Pressão
-      document.getElementById('pressureStyle').textContent = profile.pressure;
-      
-      // Recomendações
-      const recommendations = [
-        `Pratique auto-observação diária para fortalecer consciência comportamental`,
-        `Solicite feedback regular sobre seu impacto nas relações profissionais`,
-        `Considere o laudo completo VIGORRE para análise integrada com IE e Valores`,
-        `Desenvolva competências complementares às suas características naturais`,
-        ...profile.development.map(d => `Foque em: ${d}`)
-      ];
-      document.getElementById('recommendationsList').innerHTML = recommendations.slice(0, 5).map(r => `<li>${r}</li>`).join('');
-      
-      // Motivadores
-      document.getElementById('motivatorsList').innerHTML = profile.motivators.map(m => `<li>${m}</li>`).join('');
-      
-      // Cultura Ideal
-      document.getElementById('cultureStyle').textContent = profile.culture;
-      
-      // Alta Performance
-      document.getElementById('highPerformanceStyle').textContent = profile.highPerformance;
-      
-      // Baixa Performance
-      document.getElementById('lowPerformanceStyle').textContent = profile.lowPerformance;
-      
-      // Gestão do Tempo
-      document.getElementById('timeManagementStyle').textContent = profile.timeManagement;
-      
-      // Produtividade
-      document.getElementById('productivityStyle').textContent = profile.productivity;
-      
-      // Relação com Autoridade
-      document.getElementById('authorityStyle').textContent = profile.authority;
-      
-      // Resiliência
-      document.getElementById('resilienceStyle').textContent = profile.resilience;
-      
-      // Inteligência Emocional
-      document.getElementById('eqStyle').textContent = profile.eq;
-      
-      // Recomendações para o Gestor
-      const managerRecs = [
-        `Comunique-se de forma ${dominant === 'D' ? 'direta e objetiva' : dominant === 'I' ? 'entusiasta e motivadora' : dominant === 'S' ? 'calma e estruturada' : 'precisa e baseada em fatos'}`,
-        `Ofereça ${dominant === 'D' ? 'autonomia e desafios' : dominant === 'I' ? 'reconhecimento e oportunidades de influência' : dominant === 'S' ? 'estabilidade e suporte' : 'precisão e qualidade'}`,
-        `Feedback deve ser ${dominant === 'D' ? 'direto e focado em resultados' : dominant === 'I' ? 'construtivo e motivador' : dominant === 'S' ? 'empático e com estrutura' : 'preciso e baseado em fatos'}`
-      ];
-      document.getElementById('managerRecommendations').innerHTML = managerRecs.map(r => `<li>${r}</li>`).join('');
-      
-      // Plano de Ação
-      const actionPlan = [
-        `Curto Prazo (0-3 meses): Estabelecer rotina de auto-observação`,
-        `Médio Prazo (3-12 meses): Desenvolver competências complementares`,
-        `Longo Prazo (12+ meses): Consolidar estilo de liderança baseado no perfil`
-      ];
-      document.getElementById('actionPlan').innerHTML = actionPlan.map(p => `<li>${p}</li>`).join('');
-      
-      // Conclusão
-      document.getElementById('conclusion').textContent = 
-        `Seu perfil DISC predominante é ${profile.name} com ${pct[dominant]}% de intensidade. ` +
-        `${profile.desc} Este perfil indica potencial para ${dominant === 'D' || dominant === 'I' ? 'liderança e influência, com capacidade de motivar equipes e tomar decisões rápidas' : 'suporte, consistência e qualidade, com capacidade de executar com precisão e manter harmonia'}. ` +
-        `Recomenda-se acompanhamento contínuo via PDI focado em desenvolvimento de competências complementares, garantindo evolução profissional e maximização de impacto organizacional.`;
-      
-      // Gráficos
-      renderCharts(pct);
-    }
+        const discConfig = {
+            D: { label: 'Dominância', icon: '🦁', color: '#EF4444', desc: 'Orientado a resultados, determinado e competitivo. Toma decisões rápidas e gosta de desafios.' },
+            I: { label: 'Influência', icon: '🦚', color: '#3B82F6', desc: 'Comunicativo, persuasivo e otimista. Inspira e motiva as pessoas ao seu redor.' },
+            S: { label: 'Estabilidade', icon: '🐘', color: '#10B981', desc: 'Calmo, paciente e confiável. Valoriza a harmonia e a estabilidade.' },
+            C: { label: 'Conformidade', icon: '🦉', color: '#8B5CF6', desc: 'Analítico, preciso e detalhista. Valoriza a qualidade e a exatidão.' }
+        };
 
-    // ============================================
-    // RENDERIZAR GRÁFICOS
-    // ============================================
-    function renderCharts(percentages) {
-      // Gráfico de Barras
-      const ctx = document.getElementById('discChart');
-      if (ctx) {
-        if (chartInstance) chartInstance.destroy();
-        
-        const labels = ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'];
-        const data = [percentages.D || 0, percentages.I || 0, percentages.S || 0, percentages.C || 0];
-        const colors = ['#EF4444', '#3B82F6', '#10B981', '#7C3AED'];
-        
-        chartInstance = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Intensidade (%)',
-              data: data,
-              backgroundColor: colors.map(c => c + 'CC'),
-              borderColor: colors,
-              borderWidth: 2,
-              borderRadius: 8
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-              y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.5)' } },
-              x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.7)' } }
+        // ============================================
+        // INICIALIZAÇÃO
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 Relatório DISC - VIGORRE ONE™');
+
+            const isAuth = window.VigorreAuth.isAuthenticated();
+            if (!isAuth) {
+                window.location.href = '../../login.html';
+                return;
             }
-          }
-        });
-      }
-      
-      // Gráfico Radar
-      const radarCtx = document.getElementById('discRadarChart');
-      if (radarCtx) {
-        if (radarInstance) radarInstance.destroy();
-        
-        radarInstance = new Chart(radarCtx, {
-          type: 'radar',
-          data: {
-            labels: ['Dominância', 'Influência', 'Estabilidade', 'Conformidade'],
-            datasets: [{
-              label: 'Seu Perfil',
-              data: [percentages.D || 0, percentages.I || 0, percentages.S || 0, percentages.C || 0],
-              backgroundColor: 'rgba(29, 78, 216, 0.25)',
-              borderColor: '#1D4ED8',
-              borderWidth: 2,
-              pointBackgroundColor: '#1D4ED8',
-              pointBorderColor: '#fff',
-              pointBorderWidth: 2
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              r: {
-                min: 0,
-                max: 100,
-                angleLines: { color: 'rgba(255,255,255,0.1)' },
-                grid: { color: 'rgba(255,255,255,0.1)' },
-                pointLabels: { color: 'rgba(255,255,255,0.7)' },
-                ticks: { display: false }
-              }
-            },
-            plugins: { legend: { display: false } }
-          }
-        });
-      }
-    }
 
-    // ============================================
-    // UTILITÁRIOS
-    // ============================================
-    function showError(message) {
-      document.getElementById('executiveSummary').textContent = message;
-      document.getElementById('recommendationsList').innerHTML = '<li>Complete o teste DISC para ver suas recomendações personalizadas.</li>';
-    }
+            loadData();
+        });
 
-    console.log('📄 Relatório DISC carregado com sucesso!');
-  </script>
+        function loadData() {
+            try {
+                const currentUser = window.VigorreAuth.getCurrentUser();
+                if (!currentUser) {
+                    renderReport(sampleData);
+                    return;
+                }
+
+                const allParticipants = VigorreDB.participants.findAll();
+                const participant = allParticipants.find(p => p.id === currentUser.id);
+
+                if (!participant) {
+                    renderReport(sampleData);
+                    return;
+                }
+
+                const discResult = participant.results?.DISC || sampleData;
+
+                let companyName = 'Autônomo';
+                if (participant.companyId) {
+                    const company = VigorreDB.companies.findById(participant.companyId);
+                    if (company) companyName = company.name;
+                }
+
+                const data = {
+                    participantName: participant.name || sampleData.participantName,
+                    companyName: companyName,
+                    participantId: participant.id || sampleData.participantId,
+                    date: new Date().toISOString(),
+                    percentages: discResult.percentages || sampleData.percentages,
+                    dominant: discResult.dominant || sampleData.dominant
+                };
+
+                renderReport(data);
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                renderReport(sampleData);
+            }
+        }
+
+        // ============================================
+        // RENDERIZAR RELATÓRIO
+        // ============================================
+        function renderReport(data) {
+            document.getElementById('participantName').textContent = data.participantName;
+            document.getElementById('participantCompany').textContent = `Empresa: ${data.companyName}`;
+            document.getElementById('participantId').textContent = `ID: ${data.participantId}`;
+
+            const profile = discConfig[data.dominant];
+            const pcts = data.percentages;
+
+            document.getElementById('profileEmoji').textContent = profile.icon;
+            document.getElementById('profileText').textContent = `${profile.label} (${pcts[data.dominant]}%)`;
+
+            document.getElementById('profileDescription').innerHTML = `
+                    <strong>Perfil ${profile.icon} ${profile.label}:</strong> ${profile.desc}
+                    <br><br>
+                    <strong>Distribuição:</strong>
+                    🦁 Dominância (D): ${pcts.D || 0}% &nbsp;|&nbsp;
+                    🦚 Influência (I): ${pcts.I || 0}% &nbsp;|&nbsp;
+                    🐘 Estabilidade (S): ${pcts.S || 0}% &nbsp;|&nbsp;
+                    🦉 Conformidade (C): ${pcts.C || 0}%
+                `;
+
+            // Cards
+            const grid = document.getElementById('profileGrid');
+            grid.innerHTML = '';
+            const discKeys = ['D', 'I', 'S', 'C'];
+            discKeys.forEach(key => {
+                const config = discConfig[key];
+                const value = pcts[key] || 0;
+                const isDominant = key === data.dominant;
+                grid.innerHTML += `
+                        <div class="profile-card disc-${key.toLowerCase()}" style="${isDominant ? 'border-color: ' + config.color + '; border-width: 2px;' : ''}">
+                            <span class="card-icon">${config.icon}</span>
+                            <div class="card-title">${config.label} ${isDominant ? '⭐' : ''}</div>
+                            <div class="card-value">${value}%</div>
+                            <div class="card-bar">
+                                <div class="card-bar-fill" style="width: ${value}%; background: ${config.color};"></div>
+                            </div>
+                        </div>
+                    `;
+            });
+
+            // Análise detalhada
+            document.getElementById('detailedAnalysis').innerHTML = `
+                    <strong>${profile.icon} ${profile.label} em destaque:</strong>
+                    <br>
+                    ${profile.desc}
+                    <br><br>
+                    <strong>Pontos fortes associados a este perfil:</strong>
+                    <br>
+                    ${profile.label === 'Dominância' ? '• Liderança e tomada de decisão<br>• Iniciativa e proatividade<br>• Foco em resultados' :
+                      profile.label === 'Influência' ? '• Comunicação e persuasão<br>• Criatividade e otimismo<br>• Networking e relacionamentos' :
+                      profile.label === 'Estabilidade' ? '• Paciência e empatia<br>• Confiabilidade e lealdade<br>• Estabilidade em momentos de crise' :
+                      '• Precisão e análise detalhada<br>• Organização e disciplina<br>• Qualidade e excelência'}
+                `;
+
+            // Recomendações
+            document.getElementById('recommendations').innerHTML = `
+                    <strong>🎯 Recomendações para desenvolvimento:</strong>
+                    <br>
+                    ${data.dominant === 'D' ? '• Desenvolver paciência em processos burocráticos<br>• Praticar escuta ativa em reuniões<br>• Buscar feedback sobre impacto emocional' :
+                      data.dominant === 'I' ? '• Desenvolver foco em execução<br>• Melhorar cumprimento de prazos<br>• Estruturar processos e planejamento' :
+                      data.dominant === 'S' ? '• Desenvolver assertividade<br>• Praticar tomada de decisão ágil<br>• Assumir mais iniciativas' :
+                      '• Desenvolver flexibilidade<br>• Praticar comunicação direta<br>• Adaptar-se a mudanças'}
+                `;
+
+            document.getElementById('pageNumber').textContent = '1';
+
+            setTimeout(() => {
+                renderChart(pcts);
+            }, 300);
+
+            console.log('✅ Relatório DISC renderizado com sucesso');
+        }
+
+        // ============================================
+        // RENDERIZAR GRÁFICO
+        // ============================================
+        function renderChart(percentages) {
+            try {
+                const ctx = document.getElementById('discChart').getContext('2d');
+
+                const labels = ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'];
+                const data = [percentages.D || 0, percentages.I || 0, percentages.S || 0, percentages.C || 0];
+                const colors = ['#EF4444', '#3B82F6', '#10B981', '#8B5CF6'];
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Percentual',
+                            data: data,
+                            backgroundColor: colors.map(c => c + 'CC'),
+                            borderColor: colors,
+                            borderWidth: 2,
+                            borderRadius: 8,
+                            maxBarThickness: 60
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y + '%';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                grid: { color: 'rgba(255,255,255,0.05)' },
+                                ticks: { color: 'rgba(255,255,255,0.3)', callback: function(v) { return v + '%'; } }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 11 } }
+                            }
+                        }
+                    }
+                });
+
+                console.log('📊 Gráfico DISC renderizado');
+
+            } catch (error) {
+                console.error('❌ Erro ao renderizar gráfico:', error);
+            }
+        }
+
+        console.log('✅ Relatório DISC carregado');
+    </script>
 
 </body>
 </html>
