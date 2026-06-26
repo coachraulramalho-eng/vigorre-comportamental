@@ -532,6 +532,16 @@
             color: #92400E;
         }
 
+        .badge-status.generated {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .badge-status.not_generated {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
         .badge-test {
             display: inline-block;
             padding: 2px 10px;
@@ -620,6 +630,11 @@
             color: #BE185D;
         }
 
+        .btn-action.generate {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
         .btn-action:hover {
             transform: translateY(-1px);
             box-shadow: var(--shadow-sm);
@@ -694,7 +709,7 @@
             background: white;
             border-radius: var(--radius);
             padding: 32px;
-            max-width: 680px;
+            max-width: 780px;
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
@@ -853,6 +868,71 @@
         }
 
         /* ============================================
+           RELATÓRIOS E LAUDOS - BOTÕES
+           ============================================ */
+        .report-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .report-buttons .btn-report {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-report.generate {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .btn-report.generate:hover {
+            background: #BFDBFE;
+            transform: translateY(-1px);
+        }
+
+        .btn-report.generated {
+            background: #D1FAE5;
+            color: #065F46;
+            cursor: default;
+        }
+
+        .btn-report.generated:hover {
+            transform: none;
+        }
+
+        .btn-report.laudo {
+            background: #EDE9FE;
+            color: #5B21B6;
+        }
+
+        .btn-report.laudo:hover {
+            background: #DDD6FE;
+            transform: translateY(-1px);
+        }
+
+        .btn-report.laudo-generated {
+            background: #D1FAE5;
+            color: #065F46;
+            cursor: default;
+        }
+
+        .btn-report.laudo-generated:hover {
+            transform: none;
+        }
+
+        /* ============================================
            TOAST
            ============================================ */
         .toast {
@@ -958,6 +1038,10 @@
             .form-row-3 {
                 grid-template-columns: 1fr;
             }
+
+            .report-buttons {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -979,6 +1063,9 @@
             }
             .modal-content {
                 padding: 20px;
+            }
+            .report-buttons {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1206,12 +1293,18 @@
                     <label><input type="checkbox" value="BigFive" /> Big Five</label>
                 </div>
 
-                <!-- Relatório e Laudo -->
-                <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--gray-800);margin:20px 0 12px;">📄 Relatório e Laudo</h3>
+                <!-- Relatórios -->
+                <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--gray-800);margin:20px 0 12px;">📄 Relatórios</h3>
 
-                <div class="checkbox-group">
-                    <label><input type="checkbox" id="relatorioLiberado" checked /> Relatório</label>
-                    <label><input type="checkbox" id="laudoLiberado" /> Laudo</label>
+                <div class="report-buttons" id="reportsContainer">
+                    <!-- Carregado via JavaScript -->
+                </div>
+
+                <!-- Laudo -->
+                <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--gray-800);margin:20px 0 12px;">📋 Laudo</h3>
+
+                <div class="report-buttons" id="laudoContainer">
+                    <!-- Carregado via JavaScript -->
                 </div>
 
                 <!-- Credenciais -->
@@ -1282,6 +1375,12 @@
         let currentPage = 1;
         const pageSize = 10;
         let editingId = null;
+
+        // Testes disponíveis
+        const testTypes = ['DISC', 'IE', 'Valores', 'SWOT', 'BigFive'];
+
+        // Estado dos relatórios (por participante)
+        let reportStatus = {};
 
         // ============================================
         // TOGGLE SIDEBAR
@@ -1410,6 +1509,248 @@
         }
 
         // ============================================
+        // GERAR RELATÓRIO
+        // ============================================
+        function gerarRelatorio(participantId, testType) {
+            const participant = participants.find(p => p.id === participantId);
+            if (!participant) {
+                showToast('Participante não encontrado', 'error');
+                return;
+            }
+
+            // Verifica se o teste foi concluído
+            const completed = participant.completedTests || [];
+            if (!completed.includes(testType)) {
+                showToast(`⚠️ O participante ainda não concluiu o teste ${testType}`, 'warning');
+                return;
+            }
+
+            // Simula geração do relatório
+            showToast(`📄 Gerando relatório ${testType} para ${participant.name}...`, 'success');
+
+            // Abrir para impressão (simulado)
+            setTimeout(() => {
+                // Criar uma janela de impressão com o relatório
+                const printWindow = window.open('', '_blank', 'width=800,height=600');
+                if (printWindow) {
+                    printWindow.document.write(`
+                        <html>
+                            <head>
+                                <title>Relatório ${testType} - ${participant.name}</title>
+                                <style>
+                                    body { font-family: Arial, sans-serif; padding: 40px; color: #0A2540; }
+                                    h1 { color: #1D4ED8; border-bottom: 2px solid #1D4ED8; padding-bottom: 10px; }
+                                    .header { text-align: center; margin-bottom: 30px; }
+                                    .content { line-height: 1.8; }
+                                    .footer { margin-top: 40px; text-align: center; color: #94A3B8; font-size: 0.8rem; border-top: 1px solid #E2E8F0; padding-top: 20px; }
+                                </style>
+                            </head>
+                            <body>
+                                <div class="header">
+                                    <h1>VIGORRE ONE™</h1>
+                                    <h2>Relatório ${testType}</h2>
+                                    <p><strong>Participante:</strong> ${participant.name}</p>
+                                    <p><strong>Data:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
+                                </div>
+                                <div class="content">
+                                    <p><strong>Resultado do teste ${testType}:</strong></p>
+                                    <p>Este é um relatório gerado automaticamente para o participante ${participant.name}.</p>
+                                    <p>O teste ${testType} foi concluído com sucesso.</p>
+                                    <p style="margin-top: 20px;"><em>Relatório gerado em ${new Date().toLocaleString('pt-BR')}</em></p>
+                                </div>
+                                <div class="footer">
+                                    © 2024 VIGORRE ONE™ - Todos os direitos reservados
+                                </div>
+                                <script>
+                                    window.onload = function() { window.print(); }
+                                <\/script>
+                            </body>
+                        </html>
+                    `);
+                    printWindow.document.close();
+                } else {
+                    showToast('⚠️ Bloqueie o pop-up para imprimir o relatório', 'warning');
+                }
+
+                // Atualizar status do relatório
+                if (!reportStatus[participantId]) {
+                    reportStatus[participantId] = {};
+                }
+                reportStatus[participantId][testType] = 'generated';
+                atualizarBotoesRelatorio(participantId);
+
+            }, 1500);
+        }
+
+        // ============================================
+        // GERAR LAUDO
+        // ============================================
+        function gerarLaudo(participantId) {
+            const participant = participants.find(p => p.id === participantId);
+            if (!participant) {
+                showToast('Participante não encontrado', 'error');
+                return;
+            }
+
+            // Verifica se todos os testes foram concluídos
+            const available = participant.tests || [];
+            const completed = participant.completedTests || [];
+            const missing = available.filter(t => !completed.includes(t));
+
+            if (missing.length > 0) {
+                showToast(`⚠️ Faltam testes: ${missing.join(', ')}. Complete todos para gerar o laudo.`, 'warning');
+                return;
+            }
+
+            if (available.length === 0) {
+                showToast('⚠️ Nenhum teste liberado para este participante', 'warning');
+                return;
+            }
+
+            // Simula geração do laudo
+            showToast(`📋 Gerando laudo completo para ${participant.name}...`, 'success');
+
+            setTimeout(() => {
+                // Abrir para impressão
+                const printWindow = window.open('', '_blank', 'width=800,height=600');
+                if (printWindow) {
+                    printWindow.document.write(`
+                        <html>
+                            <head>
+                                <title>Laudo - ${participant.name}</title>
+                                <style>
+                                    body { font-family: Arial, sans-serif; padding: 40px; color: #0A2540; }
+                                    h1 { color: #1D4ED8; border-bottom: 2px solid #1D4ED8; padding-bottom: 10px; }
+                                    .header { text-align: center; margin-bottom: 30px; }
+                                    .content { line-height: 1.8; }
+                                    .section { margin: 20px 0; padding: 15px; background: #F8FAFC; border-radius: 8px; }
+                                    .footer { margin-top: 40px; text-align: center; color: #94A3B8; font-size: 0.8rem; border-top: 1px solid #E2E8F0; padding-top: 20px; }
+                                </style>
+                            </head>
+                            <body>
+                                <div class="header">
+                                    <h1>VIGORRE ONE™</h1>
+                                    <h2>Laudo Comportamental Integrado</h2>
+                                    <p><strong>Participante:</strong> ${participant.name}</p>
+                                    <p><strong>Data:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
+                                </div>
+                                <div class="content">
+                                    <div class="section">
+                                        <h3>📊 Resumo Executivo</h3>
+                                        <p>Laudo completo gerado para ${participant.name}.</p>
+                                        <p>Testes analisados: ${available.join(', ')}</p>
+                                    </div>
+                                    <div class="section">
+                                        <h3>📈 Análise por Teste</h3>
+                                        ${available.map(t => `<p><strong>${t}:</strong> Análise detalhada disponível.</p>`).join('')}
+                                    </div>
+                                    <div class="section">
+                                        <h3>💡 Recomendações</h3>
+                                        <p>Com base nos resultados, recomenda-se...</p>
+                                    </div>
+                                    <p style="margin-top: 20px;"><em>Laudo gerado em ${new Date().toLocaleString('pt-BR')}</em></p>
+                                </div>
+                                <div class="footer">
+                                    © 2024 VIGORRE ONE™ - Todos os direitos reservados
+                                </div>
+                                <script>
+                                    window.onload = function() { window.print(); }
+                                <\/script>
+                            </body>
+                        </html>
+                    `);
+                    printWindow.document.close();
+                } else {
+                    showToast('⚠️ Bloqueie o pop-up para imprimir o laudo', 'warning');
+                }
+
+                // Atualizar status do laudo
+                if (!reportStatus[participantId]) {
+                    reportStatus[participantId] = {};
+                }
+                reportStatus[participantId].laudo = 'generated';
+                atualizarBotoesLaudo(participantId);
+
+            }, 1500);
+        }
+
+        // ============================================
+        // ATUALIZAR BOTÕES RELATÓRIO
+        // ============================================
+        function atualizarBotoesRelatorio(participantId) {
+            const container = document.getElementById('reportsContainer');
+            if (!container) return;
+
+            const participant = participants.find(p => p.id === participantId);
+            if (!participant) return;
+
+            const tests = participant.tests || [];
+            const completed = participant.completedTests || [];
+            const status = reportStatus[participantId] || {};
+
+            container.innerHTML = tests.map(test => {
+                const isCompleted = completed.includes(test);
+                const isGenerated = status[test] === 'generated';
+
+                let btnClass = 'btn-report generate';
+                let btnText = `📄 Gerar ${test}`;
+                let disabled = '';
+
+                if (isGenerated) {
+                    btnClass = 'btn-report generated';
+                    btnText = `✅ ${test} Gerado`;
+                    disabled = 'disabled';
+                } else if (!isCompleted) {
+                    btnClass = 'btn-report generate';
+                    btnText = `🔒 ${test} (pendente)`;
+                    disabled = 'disabled';
+                }
+
+                return `<button type="button" class="${btnClass}" onclick="gerarRelatorio('${participantId}', '${test}')" ${disabled} data-tooltip="${isGenerated ? 'Relatório já gerado' : isCompleted ? 'Gerar relatório' : 'Teste pendente'}">
+                    ${btnText}
+                </button>`;
+            }).join('');
+        }
+
+        // ============================================
+        // ATUALIZAR BOTÕES LAUDO
+        // ============================================
+        function atualizarBotoesLaudo(participantId) {
+            const container = document.getElementById('laudoContainer');
+            if (!container) return;
+
+            const participant = participants.find(p => p.id === participantId);
+            if (!participant) return;
+
+            const tests = participant.tests || [];
+            const completed = participant.completedTests || [];
+            const status = reportStatus[participantId] || {};
+
+            const allCompleted = tests.length > 0 && tests.every(t => completed.includes(t));
+            const isGenerated = status.laudo === 'generated';
+
+            let btnClass = 'btn-report laudo';
+            let btnText = '📋 Gerar Laudo';
+            let disabled = '';
+
+            if (isGenerated) {
+                btnClass = 'btn-report laudo-generated';
+                btnText = '✅ Laudo Gerado';
+                disabled = 'disabled';
+            } else if (!allCompleted) {
+                btnClass = 'btn-report laudo';
+                btnText = `🔒 Laudo (${completed.length}/${tests.length})`;
+                disabled = 'disabled';
+            }
+
+            container.innerHTML = `
+                <button type="button" class="${btnClass}" onclick="gerarLaudo('${participantId}')" ${disabled} data-tooltip="${isGenerated ? 'Laudo já gerado' : allCompleted ? 'Gerar laudo completo' : 'Complete todos os testes'}">
+                    ${btnText}
+                </button>
+            `;
+        }
+
+        // ============================================
         // CARREGAR PARTICIPANTES
         // ============================================
         function loadParticipants() {
@@ -1422,21 +1763,28 @@
                             document: '123.456.789-00', companyId: 'emp1', jobId: 'job1', tests: ['DISC', 'IE',
                                 'Valores'
                             ], completedTests: ['DISC'], status: 'active', notes: 'Em andamento',
-                            relatorioLiberado: true, laudoLiberado: false, created_at: '2024-01-20' },
+                            created_at: '2024-01-20' },
                         { id: 'part2', name: 'Carlos Souza', email: 'carlos@email.com', phone: '(11) 88888-8888',
                             document: '987.654.321-00', companyId: 'emp2', jobId: null, tests: ['DISC'],
                             completedTests: ['DISC'], status: 'active', notes: 'Concluído com sucesso',
-                            relatorioLiberado: true, laudoLiberado: true, created_at: '2024-01-22' },
+                            created_at: '2024-01-22' },
                         { id: 'part3', name: 'Mariana Costa', email: 'mariana@email.com', phone: '(11) 77777-7777',
                             document: '456.789.123-00', companyId: 'emp1', jobId: 'job2', tests: ['DISC', 'IE',
                                 'Valores', 'SWOT'
                             ], completedTests: [], status: 'blocked', notes: 'Aguardando início',
-                            relatorioLiberado: false, laudoLiberado: false, created_at: '2024-01-25' }
+                            created_at: '2024-01-25' }
                     ];
                     localStorage.setItem('vigorre_participants', JSON.stringify(participants));
                 } else {
                     participants = stored;
                 }
+
+                // Inicializar status de relatórios
+                participants.forEach(p => {
+                    if (!reportStatus[p.id]) {
+                        reportStatus[p.id] = {};
+                    }
+                });
 
                 filteredParticipants = [...participants];
                 renderTable();
@@ -1487,10 +1835,6 @@
                     return `<span class="badge-test ${label}">${t} ${isCompleted ? '✅' : '⏳'}</span>`;
                 }).join(' ');
 
-                // Status de relatório e laudo
-                const relatorioStatus = p.relatorioLiberado ? '✅' : '🔒';
-                const laudoStatus = p.laudoLiberado ? '✅' : '🔒';
-
                 return `
                         <tr>
                             <td>
@@ -1504,7 +1848,6 @@
                             <td>${testBadges || '-'}</td>
                             <td>
                                 <span class="badge-status ${p.status || 'active'}">${statusMap[p.status] || 'Ativo'}</span>
-                                <br /><span style="font-size:0.65rem;color:var(--gray-400);">📄 ${relatorioStatus} | 📋 ${laudoStatus}</span>
                             </td>
                             <td style="text-align:center;">
                                 <div class="actions-cell" style="justify-content:center;">
@@ -1573,12 +1916,17 @@
             document.getElementById('participantForm').reset();
             document.getElementById('participantId').value = '';
             document.getElementById('participantModal').classList.add('active');
+
             // Resetar checkboxes
             document.querySelectorAll('#testsCheckboxGroup input[type="checkbox"]').forEach(cb => {
                 cb.checked = ['DISC', 'IE', 'Valores'].includes(cb.value);
             });
-            document.getElementById('relatorioLiberado').checked = true;
-            document.getElementById('laudoLiberado').checked = false;
+
+            // Limpar status de relatórios para novo participante
+            const tempId = 'temp_' + Date.now();
+            reportStatus[tempId] = {};
+            atualizarBotoesRelatorio(tempId);
+            atualizarBotoesLaudo(tempId);
         }
 
         function closeModal() {
@@ -1611,8 +1959,6 @@
                 completedTests: [],
                 status: document.getElementById('participantStatus').value,
                 notes: document.getElementById('participantNotes').value,
-                relatorioLiberado: document.getElementById('relatorioLiberado').checked,
-                laudoLiberado: document.getElementById('laudoLiberado').checked,
                 username: document.getElementById('participantUsername').value,
                 password: document.getElementById('participantPassword').value,
                 created_at: new Date().toISOString()
@@ -1631,6 +1977,13 @@
                 localStorage.setItem('vigorre_participants', JSON.stringify(all));
                 participants = all;
                 filteredParticipants = [...participants];
+
+                // Transferir status de relatório para o ID real
+                if (reportStatus['temp_' + id]) {
+                    reportStatus[id] = reportStatus['temp_' + id];
+                    delete reportStatus['temp_' + id];
+                }
+
                 renderTable();
 
                 showToast(`✅ Participante ${participant.name} salvo com sucesso!`, 'success');
@@ -1669,8 +2022,12 @@
                 cb.checked = (participant.tests || []).includes(cb.value);
             });
 
-            document.getElementById('relatorioLiberado').checked = participant.relatorioLiberado || false;
-            document.getElementById('laudoLiberado').checked = participant.laudoLiberado || false;
+            // Restaurar status de relatórios
+            if (!reportStatus[id]) {
+                reportStatus[id] = {};
+            }
+            atualizarBotoesRelatorio(id);
+            atualizarBotoesLaudo(id);
 
             document.getElementById('participantModal').classList.add('active');
         }
@@ -1679,14 +2036,14 @@
         // RESETAR TESTE (MODAL)
         // ============================================
         function resetarTeste() {
-            if (!confirm('⚠️ Tem certeza que deseja resetar TODOS os testes deste participante? Esta ação não pode ser desfeita.')) return;
-            if (!confirm('🔄 Confirmar reset de testes?')) return;
-
             const id = document.getElementById('participantId').value;
             if (!id) {
                 showToast('Salve o participante antes de resetar os testes', 'warning');
                 return;
             }
+
+            if (!confirm('⚠️ Tem certeza que deseja resetar TODOS os testes deste participante? Esta ação não pode ser desfeita.')) return;
+            if (!confirm('🔄 Confirmar reset de testes?')) return;
 
             resetarTesteParticipante(id);
         }
@@ -1728,16 +2085,13 @@
             if (!confirm('⚠️ Tem certeza que deseja resetar o relatório deste participante?')) return;
 
             try {
-                const all = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const idx = all.findIndex(p => p.id === id);
-                if (idx > -1) {
-                    all[idx].relatorioLiberado = false;
-                    localStorage.setItem('vigorre_participants', JSON.stringify(all));
-                    participants = all;
-                    filteredParticipants = [...participants];
-                    renderTable();
-                    showToast('🔄 Relatório resetado com sucesso!', 'success');
+                if (reportStatus[id]) {
+                    testTypes.forEach(test => {
+                        reportStatus[id][test] = undefined;
+                    });
                 }
+                atualizarBotoesRelatorio(id);
+                showToast('🔄 Relatório resetado com sucesso!', 'success');
             } catch (error) {
                 console.error('❌ Erro ao resetar relatório:', error);
                 showToast('Erro ao resetar relatório', 'error');
@@ -1757,16 +2111,11 @@
             if (!confirm('⚠️ Tem certeza que deseja resetar o laudo deste participante?')) return;
 
             try {
-                const all = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const idx = all.findIndex(p => p.id === id);
-                if (idx > -1) {
-                    all[idx].laudoLiberado = false;
-                    localStorage.setItem('vigorre_participants', JSON.stringify(all));
-                    participants = all;
-                    filteredParticipants = [...participants];
-                    renderTable();
-                    showToast('🔄 Laudo resetado com sucesso!', 'success');
+                if (reportStatus[id]) {
+                    reportStatus[id].laudo = undefined;
                 }
+                atualizarBotoesLaudo(id);
+                showToast('🔄 Laudo resetado com sucesso!', 'success');
             } catch (error) {
                 console.error('❌ Erro ao resetar laudo:', error);
                 showToast('Erro ao resetar laudo', 'error');
@@ -1823,7 +2172,7 @@
             const completed = (participant.completedTests || []).join(', ') || 'Nenhum';
 
             alert(
-                `👤 ${participant.name}\n\n📧 Email: ${participant.email || '-'}\n📱 Telefone: ${participant.phone || '-'}\n📄 CPF: ${participant.document || '-'}\n🏢 Empresa: ${companyName}\n📌 Vaga: ${jobName}\n📊 Status: ${participant.status || 'Pendente'}\n📋 Testes disponíveis: ${tests}\n✅ Testes concluídos: ${completed}\n📄 Relatório: ${participant.relatorioLiberado ? '✅ Liberado' : '🔒 Bloqueado'}\n📋 Laudo: ${participant.laudoLiberado ? '✅ Liberado' : '🔒 Bloqueado'}\n📝 Observações: ${participant.notes || 'Nenhuma'}`
+                `👤 ${participant.name}\n\n📧 Email: ${participant.email || '-'}\n📱 Telefone: ${participant.phone || '-'}\n📄 CPF: ${participant.document || '-'}\n🏢 Empresa: ${companyName}\n📌 Vaga: ${jobName}\n📊 Status: ${participant.status || 'Pendente'}\n📋 Testes disponíveis: ${tests}\n✅ Testes concluídos: ${completed}\n📝 Observações: ${participant.notes || 'Nenhuma'}`
                 );
         }
 
