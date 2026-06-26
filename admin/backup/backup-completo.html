@@ -907,15 +907,14 @@
                 auditLogs = JSON.parse(localStorage.getItem('vigorre_audit_logs') || '[]');
 
                 if (auditLogs.length === 0) {
-                    // Dados de exemplo de auditoria
                     const user = window.VigorreAuth.getCurrentUser();
                     const userName = user ? user.name : 'Admin';
 
                     auditLogs = [
                         { id: 'aud1', user: userName, action: 'Login', details: 'Acesso ao sistema', type: 'audit',
                             timestamp: new Date(Date.now() - 3600000).toISOString() },
-                        { id: 'aud2', user: userName, action: 'Backup', details: 'Backup completo gerado', type: 'backup',
-                            timestamp: new Date(Date.now() - 7200000).toISOString() },
+                        { id: 'aud2', user: userName, action: 'Backup', details: 'Backup completo gerado',
+                            type: 'backup', timestamp: new Date(Date.now() - 7200000).toISOString() },
                         { id: 'aud3', user: 'João Silva', action: 'Cadastro', details: 'Nova empresa: TechCorp',
                             type: 'audit', timestamp: new Date(Date.now() - 86400000).toISOString() },
                         { id: 'aud4', user: 'Maria Santos', action: 'Liberação', details: 'Teste DISC liberado',
@@ -926,14 +925,13 @@
                     localStorage.setItem('vigorre_audit_logs', JSON.stringify(auditLogs));
                 }
 
-                // Carregar backups de exemplo se não houver
                 if (backups.length === 0) {
                     const date = new Date();
                     backups = [
-                        { id: 'bkp1', name: 'Backup Completo', size: '2.4 MB', date: new Date(Date.now() -
-                            86400000).toISOString(), type: 'full' },
-                        { id: 'bkp2', name: 'Backup Parcial', size: '1.2 MB', date: new Date(Date.now() -
-                            172800000).toISOString(), type: 'partial' }
+                        { id: 'bkp1', name: 'Backup Completo', size: '2.4 MB',
+                            date: new Date(Date.now() - 86400000).toISOString(), type: 'full' },
+                        { id: 'bkp2', name: 'Backup Parcial', size: '1.2 MB',
+                            date: new Date(Date.now() - 172800000).toISOString(), type: 'partial' }
                     ];
                     localStorage.setItem('vigorre_backups', JSON.stringify(backups));
                 }
@@ -959,7 +957,6 @@
                     minute: '2-digit' }) :
                 'Nunca';
 
-            // Tamanho total (simulado)
             let totalSize = 0;
             backups.forEach(b => {
                 const sizeStr = b.size || '0 KB';
@@ -976,7 +973,6 @@
 
             document.getElementById('totalAudits').textContent = auditLogs.length;
 
-            // Último backup completo
             const fullBackup = backups.filter(b => b.type === 'full').slice(-1)[0];
             document.getElementById('lastFullBackup').textContent = fullBackup ?
                 new Date(fullBackup.date).toLocaleDateString('pt-BR') :
@@ -1008,7 +1004,6 @@
                 return;
             }
 
-            // Mostrar últimos 10 registros (mais recentes primeiro)
             const recentLogs = [...auditLogs].reverse().slice(0, 10);
 
             const typeMap = {
@@ -1050,7 +1045,6 @@
 
             const user = window.VigorreAuth.getCurrentUser();
 
-            // Coletar todos os dados
             const data = {
                 timestamp: new Date().toISOString(),
                 version: '2.0',
@@ -1066,7 +1060,6 @@
                 }
             };
 
-            // Salvar backup
             const backupId = 'bkp_' + Date.now();
             const size = new Blob([JSON.stringify(data)]).size;
             const sizeStr = size > 1024 * 1024 ?
@@ -1086,7 +1079,6 @@
             allBackups.push(backup);
             localStorage.setItem('vigorre_backups', JSON.stringify(allBackups));
 
-            // Registrar na auditoria
             const audit = {
                 id: 'aud_' + Date.now(),
                 user: user ? user.name : 'Admin',
@@ -1158,7 +1150,6 @@
             try {
                 const data = lastBackup.data;
 
-                // Restaurar dados
                 if (data.companies) localStorage.setItem('vigorre_companies', JSON.stringify(data.companies));
                 if (data.recruiters) localStorage.setItem('vigorre_recruiters', JSON.stringify(data.recruiters));
                 if (data.participants) localStorage.setItem('vigorre_participants', JSON.stringify(data.participants));
@@ -1168,7 +1159,6 @@
                 if (data.audit) localStorage.setItem('vigorre_audit_logs', JSON.stringify(data.audit));
                 if (data.backups) localStorage.setItem('vigorre_backups', JSON.stringify(data.backups));
 
-                // Registrar na auditoria
                 const user = window.VigorreAuth.getCurrentUser();
                 const audit = {
                     id: 'aud_' + Date.now(),
@@ -1183,7 +1173,6 @@
                 allAudits.push(audit);
                 localStorage.setItem('vigorre_audit_logs', JSON.stringify(allAudits));
 
-                // Recarregar dados
                 loadData();
 
                 showToast('✅ Backup restaurado com sucesso!', 'success');
