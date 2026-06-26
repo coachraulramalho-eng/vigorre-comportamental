@@ -295,6 +295,105 @@
             background: var(--gray-200);
         }
 
+        .btn-danger {
+            padding: 10px 24px;
+            background: #EF4444;
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.25);
+        }
+
+        .btn-success {
+            padding: 10px 24px;
+            background: #10B981;
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-warning {
+            padding: 10px 24px;
+            background: #F59E0B;
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.25);
+        }
+
+        /* ============================================
+           TOOLTIP
+           ============================================ */
+        [data-tooltip] {
+            position: relative;
+            cursor: pointer;
+        }
+
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            padding: 6px 14px;
+            background: var(--navy);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 500;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            z-index: 100;
+        }
+
+        [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px);
+        }
+
         /* ============================================
            FILTERS
            ============================================ */
@@ -408,6 +507,16 @@
             font-weight: 600;
         }
 
+        .badge-status.active {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .badge-status.blocked {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
         .badge-status.completed {
             background: #D1FAE5;
             color: #065F46;
@@ -421,11 +530,6 @@
         .badge-status.pending {
             background: #FEF3C7;
             color: #92400E;
-        }
-
-        .badge-status.blocked {
-            background: #FEE2E2;
-            color: #991B1B;
         }
 
         .badge-test {
@@ -462,9 +566,20 @@
             color: #BE185D;
         }
 
+        .badge-test.laudo {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .badge-test.relatorio {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
         .actions-cell {
             display: flex;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .btn-action {
@@ -498,6 +613,11 @@
         .btn-action.liberate {
             background: #D1FAE5;
             color: #065F46;
+        }
+
+        .btn-action.reset {
+            background: #FCE7F3;
+            color: #BE185D;
         }
 
         .btn-action:hover {
@@ -550,7 +670,7 @@
         }
 
         /* ============================================
-           MODAL
+           MODAL - ESTILOS COMPLETOS
            ============================================ */
         .modal-overlay {
             position: fixed;
@@ -574,7 +694,7 @@
             background: white;
             border-radius: var(--radius);
             padding: 32px;
-            max-width: 560px;
+            max-width: 680px;
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
@@ -634,6 +754,10 @@
             margin-bottom: 4px;
         }
 
+        .form-group label .required {
+            color: #EF4444;
+        }
+
         .form-group input,
         .form-group select,
         .form-group textarea {
@@ -665,13 +789,67 @@
             gap: 16px;
         }
 
-        .modal-footer {
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* ============================================
+           CAMPO SENHA COM OLHO
+           ============================================ */
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            width: 100%;
+            padding-right: 44px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--gray-400);
+            transition: var(--transition);
+            padding: 4px;
+        }
+
+        .password-toggle:hover {
+            color: var(--gray-700);
+        }
+
+        /* ============================================
+           CHECKBOX LISTA
+           ============================================ */
+        .checkbox-group {
             display: flex;
-            justify-content: flex-end;
+            flex-wrap: wrap;
             gap: 12px;
-            margin-top: 24px;
-            padding-top: 16px;
-            border-top: 1px solid var(--gray-100);
+            padding: 8px 0;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: var(--gray-700);
+            cursor: pointer;
+        }
+
+        .checkbox-group label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--blue);
+            cursor: pointer;
         }
 
         /* ============================================
@@ -705,6 +883,10 @@
 
         .toast.success {
             border-left-color: #10B981;
+        }
+
+        .toast.warning {
+            border-left-color: #F59E0B;
         }
 
         @keyframes slideIn {
@@ -772,6 +954,10 @@
             .form-row {
                 grid-template-columns: 1fr;
             }
+
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -790,6 +976,9 @@
             }
             .actions-cell {
                 flex-wrap: wrap;
+            }
+            .modal-content {
+                padding: 20px;
             }
         }
 
@@ -863,9 +1052,9 @@
             <li><a href="../creditos/"><span class="icon">💳</span> Créditos</a></li>
             <li><a href="../relatorios/"><span class="icon">📄</span> Relatórios</a></li>
             <div class="divider"></div>
-            <li><a href="../agenda/"><span class="icon">📅</span> Agenda</a></li>
-            <li><a href="../backup/"><span class="icon">💾</span> Backup</a></li>
-            <li><a href="../bi/"><span class="icon">📈</span> BI Analytics</a></li>
+            <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
+            <li><a href="../bi/dashboard.html"><span class="icon">📈</span> BI Analytics</a></li>
         </ul>
 
         <div class="logout">
@@ -891,7 +1080,7 @@
                 <p style="color: var(--gray-500); font-size: 0.9rem;">Gerencie todos os participantes da plataforma</p>
             </div>
             <div class="actions">
-                <button class="btn-primary" onclick="openModal()">➕ Novo Participante</button>
+                <button class="btn-primary" data-tooltip="Cadastrar novo participante" onclick="openModal()">➕ Novo Participante</button>
             </div>
         </div>
 
@@ -903,9 +1092,7 @@
             </div>
             <select class="filter-select" id="statusFilter" onchange="filterTable()">
                 <option value="">Todos os status</option>
-                <option value="completed">Concluídos</option>
-                <option value="in_progress">Em andamento</option>
-                <option value="pending">Pendentes</option>
+                <option value="active">Ativos</option>
                 <option value="blocked">Bloqueados</option>
             </select>
             <select class="filter-select" id="companyFilter" onchange="filterTable()">
@@ -920,16 +1107,15 @@
                     <thead>
                         <tr>
                             <th>Participante</th>
-                            <th>Empresa</th>
+                            <th>Empresa / Vaga</th>
                             <th>Testes</th>
                             <th>Status</th>
-                            <th>Data</th>
                             <th style="text-align:center;">Ações</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
                         <tr>
-                            <td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400);">
+                            <td colspan="5" style="text-align:center;padding:40px;color:var(--gray-400);">
                                 Carregando participantes...
                             </td>
                         </tr>
@@ -939,35 +1125,39 @@
             <div class="pagination">
                 <span class="info" id="paginationInfo">Mostrando 0 de 0 participantes</span>
                 <div class="buttons">
-                    <button onclick="prevPage()" id="prevBtn">Anterior</button>
+                    <button onclick="prevPage()" id="prevBtn" data-tooltip="Página anterior">Anterior</button>
                     <button class="active" id="pageIndicator">1</button>
-                    <button onclick="nextPage()" id="nextBtn">Próximo</button>
+                    <button onclick="nextPage()" id="nextBtn" data-tooltip="Próxima página">Próximo</button>
                 </div>
             </div>
         </div>
     </main>
 
     <!-- ============================================
-    MODAL
+    MODAL - CADASTRO/EDIÇÃO DE PARTICIPANTE
     ============================================ -->
     <div class="modal-overlay" id="participantModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle">Novo Participante</h2>
-                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <button class="modal-close" onclick="closeModal()" data-tooltip="Fechar">&times;</button>
             </div>
 
             <form id="participantForm" onsubmit="saveParticipant(event)">
                 <input type="hidden" id="participantId" />
 
-                <div class="form-group">
-                    <label>Nome Completo *</label>
-                    <input type="text" id="participantName" placeholder="Nome do participante" required />
-                </div>
+                <!-- Dados Pessoais -->
+                <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--gray-800);margin-bottom:12px;">📋 Dados Pessoais</h3>
 
-                <div class="form-group">
-                    <label>E-mail *</label>
-                    <input type="email" id="participantEmail" placeholder="email@participante.com" required />
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome Completo <span class="required">*</span></label>
+                        <input type="text" id="participantName" placeholder="Nome do participante" required />
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail <span class="required">*</span></label>
+                        <input type="email" id="participantEmail" placeholder="email@participante.com" required />
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -976,59 +1166,97 @@
                         <input type="tel" id="participantPhone" placeholder="(00) 00000-0000" />
                     </div>
                     <div class="form-group">
-                        <label>Empresa</label>
-                        <select id="participantCompany">
-                            <option value="">Selecione uma empresa</option>
-                        </select>
+                        <label>CPF</label>
+                        <input type="text" id="participantDocument" placeholder="000.000.000-00" />
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Testes Disponíveis</label>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
-                        <label style="font-weight:400;font-size:0.85rem;display:flex;align-items:center;gap:4px;cursor:pointer;">
-                            <input type="checkbox" value="DISC" checked /> DISC
-                        </label>
-                        <label style="font-weight:400;font-size:0.85rem;display:flex;align-items:center;gap:4px;cursor:pointer;">
-                            <input type="checkbox" value="IE" checked /> IE
-                        </label>
-                        <label style="font-weight:400;font-size:0.85rem;display:flex;align-items:center;gap:4px;cursor:pointer;">
-                            <input type="checkbox" value="Valores" checked /> Valores
-                        </label>
-                        <label style="font-weight:400;font-size:0.85rem;display:flex;align-items:center;gap:4px;cursor:pointer;">
-                            <input type="checkbox" value="SWOT" /> SWOT
-                        </label>
-                        <label style="font-weight:400;font-size:0.85rem;display:flex;align-items:center;gap:4px;cursor:pointer;">
-                            <input type="checkbox" value="BigFive" /> Big Five
-                        </label>
+                <!-- Empresa e Vaga -->
+                <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--gray-800);margin:20px 0 12px;">🏢 Empresa e Vaga</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Empresa</label>
+                        <div style="display:flex;gap:8px;">
+                            <select id="participantCompany" style="flex:1;">
+                                <option value="">Selecione uma empresa</option>
+                            </select>
+                            <button type="button" class="btn-secondary" onclick="vincularEmpresa()" data-tooltip="Vincular empresa ao participante" style="padding:10px 16px;font-size:0.8rem;">➕ Incluir</button>
+                        </div>
                     </div>
-                    <small style="color:var(--gray-400);font-size:0.7rem;">Selecione quais testes o participante pode realizar</small>
+                    <div class="form-group">
+                        <label>Vaga / Cargo</label>
+                        <div style="display:flex;gap:8px;">
+                            <select id="participantJob" style="flex:1;">
+                                <option value="">Selecione uma vaga</option>
+                            </select>
+                            <button type="button" class="btn-secondary" onclick="vincularVaga()" data-tooltip="Vincular vaga ao participante" style="padding:10px 16px;font-size:0.8rem;">➕ Incluir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testes Liberados -->
+                <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--gray-800);margin:20px 0 12px;">📊 Testes Liberados</h3>
+
+                <div class="checkbox-group" id="testsCheckboxGroup">
+                    <label><input type="checkbox" value="DISC" checked /> DISC</label>
+                    <label><input type="checkbox" value="IE" checked /> IE</label>
+                    <label><input type="checkbox" value="Valores" checked /> Valores</label>
+                    <label><input type="checkbox" value="SWOT" /> SWOT</label>
+                    <label><input type="checkbox" value="BigFive" /> Big Five</label>
+                </div>
+
+                <!-- Relatório e Laudo -->
+                <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--gray-800);margin:20px 0 12px;">📄 Relatório e Laudo</h3>
+
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="relatorioLiberado" checked /> Relatório</label>
+                    <label><input type="checkbox" id="laudoLiberado" /> Laudo</label>
+                </div>
+
+                <!-- Credenciais -->
+                <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--gray-800);margin:20px 0 12px;">🔐 Credenciais</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Usuário <span class="required">*</span></label>
+                        <input type="text" id="participantUsername" placeholder="usuário" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Senha <span class="required">*</span></label>
+                        <div class="password-wrapper">
+                            <input type="password" id="participantPassword" placeholder="••••••••" required />
+                            <button type="button" class="password-toggle" onclick="togglePassword('participantPassword', this)" data-tooltip="Mostrar/Ocultar senha">👁️</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label>Status</label>
                         <select id="participantStatus">
-                            <option value="pending">Pendente</option>
-                            <option value="in_progress">Em andamento</option>
-                            <option value="completed">Concluído</option>
-                            <option value="blocked">Bloqueado</option>
+                            <option value="active">✅ Ativado</option>
+                            <option value="blocked">🔒 Bloqueado</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Senha</label>
-                        <input type="text" id="participantPassword" placeholder="Deixe em branco para gerar automaticamente" />
+                        <label>Observações</label>
+                        <input type="text" id="participantNotes" placeholder="Informações adicionais..." />
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Observações</label>
-                    <textarea id="participantNotes" placeholder="Informações adicionais..."></textarea>
+                <!-- Botões Reset -->
+                <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--gray-800);margin:20px 0 12px;">🔄 Resetar</h3>
+
+                <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                    <button type="button" class="btn-warning" onclick="resetarTeste()" data-tooltip="Resetar todos os testes do participante" style="padding:8px 16px;font-size:0.8rem;">🔄 Resetar Testes</button>
+                    <button type="button" class="btn-warning" onclick="resetarRelatorio()" data-tooltip="Resetar relatório do participante" style="padding:8px 16px;font-size:0.8rem;">🔄 Resetar Relatório</button>
+                    <button type="button" class="btn-warning" onclick="resetarLaudo()" data-tooltip="Resetar laudo do participante" style="padding:8px 16px;font-size:0.8rem;">🔄 Resetar Laudo</button>
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
-                    <button type="submit" class="btn-primary">💾 Salvar</button>
+                <div class="modal-footer" style="display:flex;justify-content:flex-end;gap:12px;margin-top:24px;padding-top:16px;border-top:1px solid var(--gray-100);">
+                    <button type="button" class="btn-secondary" onclick="closeModal()" data-tooltip="Cancelar e fechar">Cancelar</button>
+                    <button type="submit" class="btn-primary" data-tooltip="Salvar participante">💾 Salvar</button>
                 </div>
             </form>
         </div>
@@ -1050,8 +1278,10 @@
         let participants = [];
         let filteredParticipants = [];
         let companies = [];
+        let jobs = [];
         let currentPage = 1;
         const pageSize = 10;
+        let editingId = null;
 
         // ============================================
         // TOGGLE SIDEBAR
@@ -1061,6 +1291,20 @@
             const overlay = document.getElementById('mobileOverlay');
             sidebar.classList.toggle('open');
             overlay.classList.toggle('active');
+        }
+
+        // ============================================
+        // TOGGLE PASSWORD
+        // ============================================
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+            }
         }
 
         // ============================================
@@ -1094,6 +1338,7 @@
             document.getElementById('userName').textContent = user.name || 'Administrador';
 
             loadCompanies();
+            loadJobs();
             loadParticipants();
         });
 
@@ -1104,18 +1349,63 @@
             try {
                 companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
 
-                // Popula select da empresa no modal
                 const select = document.getElementById('participantCompany');
                 select.innerHTML = '<option value="">Selecione uma empresa</option>' +
                     companies.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
 
-                // Popula filtro de empresa
                 const filterSelect = document.getElementById('companyFilter');
                 filterSelect.innerHTML = '<option value="">Todas as empresas</option>' +
                     companies.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
 
             } catch (error) {
                 console.error('❌ Erro ao carregar empresas:', error);
+            }
+        }
+
+        // ============================================
+        // CARREGAR VAGAS
+        // ============================================
+        function loadJobs() {
+            try {
+                jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
+
+                const select = document.getElementById('participantJob');
+                select.innerHTML = '<option value="">Selecione uma vaga</option>' +
+                    jobs.map(j => `<option value="${j.id}">${j.title || j.name || 'Vaga'}</option>`).join('');
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar vagas:', error);
+                jobs = [];
+            }
+        }
+
+        // ============================================
+        // VINCULAR EMPRESA
+        // ============================================
+        function vincularEmpresa() {
+            const select = document.getElementById('participantCompany');
+            if (!select.value) {
+                showToast('Selecione uma empresa primeiro', 'warning');
+                return;
+            }
+            const company = companies.find(c => c.id === select.value);
+            if (company) {
+                showToast(`✅ Empresa "${company.name}" vinculada!`, 'success');
+            }
+        }
+
+        // ============================================
+        // VINCULAR VAGA
+        // ============================================
+        function vincularVaga() {
+            const select = document.getElementById('participantJob');
+            if (!select.value) {
+                showToast('Selecione uma vaga primeiro', 'warning');
+                return;
+            }
+            const job = jobs.find(j => j.id === select.value);
+            if (job) {
+                showToast(`✅ Vaga "${job.title || job.name}" vinculada!`, 'success');
             }
         }
 
@@ -1127,23 +1417,21 @@
                 const stored = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
 
                 if (stored.length === 0) {
-                    // Dados de exemplo
                     participants = [
                         { id: 'part1', name: 'Ana Silva', email: 'ana@email.com', phone: '(11) 99999-9999',
-                            companyId: 'emp1', tests: ['DISC', 'IE', 'Valores'], completedTests: ['DISC'],
-                            status: 'in_progress', notes: 'Em andamento', created_at: '2024-01-20' },
+                            document: '123.456.789-00', companyId: 'emp1', jobId: 'job1', tests: ['DISC', 'IE',
+                                'Valores'
+                            ], completedTests: ['DISC'], status: 'active', notes: 'Em andamento',
+                            relatorioLiberado: true, laudoLiberado: false, created_at: '2024-01-20' },
                         { id: 'part2', name: 'Carlos Souza', email: 'carlos@email.com', phone: '(11) 88888-8888',
-                            companyId: 'emp2', tests: ['DISC'], completedTests: ['DISC'], status: 'completed',
-                            notes: 'Concluído com sucesso', created_at: '2024-01-22' },
+                            document: '987.654.321-00', companyId: 'emp2', jobId: null, tests: ['DISC'],
+                            completedTests: ['DISC'], status: 'active', notes: 'Concluído com sucesso',
+                            relatorioLiberado: true, laudoLiberado: true, created_at: '2024-01-22' },
                         { id: 'part3', name: 'Mariana Costa', email: 'mariana@email.com', phone: '(11) 77777-7777',
-                            companyId: 'emp1', tests: ['DISC', 'IE', 'Valores', 'SWOT'], completedTests: [],
-                            status: 'pending', notes: 'Aguardando início', created_at: '2024-01-25' },
-                        { id: 'part4', name: 'Pedro Lima', email: 'pedro@email.com', phone: '(11) 66666-6666',
-                            companyId: 'emp3', tests: ['DISC', 'BigFive'], completedTests: ['DISC', 'BigFive'],
-                            status: 'completed', notes: 'Perfil de liderança', created_at: '2024-02-01' },
-                        { id: 'part5', name: 'Julia Santos', email: 'julia@email.com', phone: '(11) 55555-5555',
-                            companyId: 'emp4', tests: ['IE', 'Valores'], completedTests: ['IE'], status: 'in_progress',
-                            notes: 'Em andamento', created_at: '2024-02-10' }
+                            document: '456.789.123-00', companyId: 'emp1', jobId: 'job2', tests: ['DISC', 'IE',
+                                'Valores', 'SWOT'
+                            ], completedTests: [], status: 'blocked', notes: 'Aguardando início',
+                            relatorioLiberado: false, laudoLiberado: false, created_at: '2024-01-25' }
                     ];
                     localStorage.setItem('vigorre_participants', JSON.stringify(participants));
                 } else {
@@ -1168,7 +1456,7 @@
             if (filteredParticipants.length === 0) {
                 tbody.innerHTML = `
                         <tr>
-                            <td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400);">
+                            <td colspan="5" style="text-align:center;padding:40px;color:var(--gray-400);">
                                 📭 Nenhum participante encontrado
                             </td>
                         </tr>
@@ -1182,14 +1470,14 @@
             const pageItems = filteredParticipants.slice(start, end);
 
             const statusMap = {
-                completed: 'Concluído',
-                in_progress: 'Em andamento',
-                pending: 'Pendente',
+                active: 'Ativo',
                 blocked: 'Bloqueado'
             };
 
             tbody.innerHTML = pageItems.map(p => {
                 const companyName = companies.find(c => c.id === p.companyId)?.name || 'Autônomo';
+                const jobName = jobs.find(j => j.id === p.jobId)?.title || jobs.find(j => j.id === p.jobId)?.name ||
+                    'Não vinculado';
 
                 // Badges dos testes
                 const testBadges = (p.tests || []).map(t => {
@@ -1199,19 +1487,32 @@
                     return `<span class="badge-test ${label}">${t} ${isCompleted ? '✅' : '⏳'}</span>`;
                 }).join(' ');
 
+                // Status de relatório e laudo
+                const relatorioStatus = p.relatorioLiberado ? '✅' : '🔒';
+                const laudoStatus = p.laudoLiberado ? '✅' : '🔒';
+
                 return `
                         <tr>
-                            <td><strong>${p.name || 'Sem nome'}</strong><br /><span style="font-size:0.75rem;color:var(--gray-400);">${p.email || '-'}</span></td>
-                            <td>${companyName}</td>
+                            <td>
+                                <strong>${p.name || 'Sem nome'}</strong>
+                                <br /><span style="font-size:0.75rem;color:var(--gray-400);">${p.email || '-'}</span>
+                            </td>
+                            <td>
+                                <span style="font-size:0.8rem;">🏢 ${companyName}</span>
+                                <br /><span style="font-size:0.75rem;color:var(--gray-400);">📌 ${jobName}</span>
+                            </td>
                             <td>${testBadges || '-'}</td>
-                            <td><span class="badge-status ${p.status || 'pending'}">${statusMap[p.status] || 'Pendente'}</span></td>
-                            <td style="font-size:0.8rem;color:var(--gray-500);">${p.created_at ? new Date(p.created_at).toLocaleDateString('pt-BR') : '-'}</td>
+                            <td>
+                                <span class="badge-status ${p.status || 'active'}">${statusMap[p.status] || 'Ativo'}</span>
+                                <br /><span style="font-size:0.65rem;color:var(--gray-400);">📄 ${relatorioStatus} | 📋 ${laudoStatus}</span>
+                            </td>
                             <td style="text-align:center;">
                                 <div class="actions-cell" style="justify-content:center;">
-                                    <button class="btn-action view" onclick="viewParticipant('${p.id}')">👁️</button>
-                                    <button class="btn-action edit" onclick="editParticipant('${p.id}')">✏️</button>
-                                    <button class="btn-action liberate" onclick="liberateTests('${p.id}')">🔓</button>
-                                    <button class="btn-action delete" onclick="deleteParticipant('${p.id}')">🗑️</button>
+                                    <button class="btn-action view" onclick="viewParticipant('${p.id}')" data-tooltip="Visualizar participante">👁️</button>
+                                    <button class="btn-action edit" onclick="editParticipant('${p.id}')" data-tooltip="Editar participante">✏️</button>
+                                    <button class="btn-action liberate" onclick="liberateTests('${p.id}')" data-tooltip="Liberar testes pendentes">🔓</button>
+                                    <button class="btn-action reset" onclick="resetarTesteParticipante('${p.id}')" data-tooltip="Resetar testes do participante">🔄</button>
+                                    <button class="btn-action delete" onclick="deleteParticipant('${p.id}')" data-tooltip="Excluir participante">🗑️</button>
                                 </div>
                             </td>
                         </tr>
@@ -1267,10 +1568,17 @@
         // MODAL
         // ============================================
         function openModal() {
+            editingId = null;
             document.getElementById('modalTitle').textContent = 'Novo Participante';
             document.getElementById('participantForm').reset();
             document.getElementById('participantId').value = '';
             document.getElementById('participantModal').classList.add('active');
+            // Resetar checkboxes
+            document.querySelectorAll('#testsCheckboxGroup input[type="checkbox"]').forEach(cb => {
+                cb.checked = ['DISC', 'IE', 'Valores'].includes(cb.value);
+            });
+            document.getElementById('relatorioLiberado').checked = true;
+            document.getElementById('laudoLiberado').checked = false;
         }
 
         function closeModal() {
@@ -1286,7 +1594,7 @@
             const id = document.getElementById('participantId').value || Date.now().toString();
 
             // Pegar testes selecionados
-            const testCheckboxes = document.querySelectorAll('#participantForm input[type="checkbox"]');
+            const testCheckboxes = document.querySelectorAll('#testsCheckboxGroup input[type="checkbox"]');
             const tests = Array.from(testCheckboxes)
                 .filter(cb => cb.checked)
                 .map(cb => cb.value);
@@ -1296,21 +1604,19 @@
                 name: document.getElementById('participantName').value,
                 email: document.getElementById('participantEmail').value,
                 phone: document.getElementById('participantPhone').value,
+                document: document.getElementById('participantDocument').value,
                 companyId: document.getElementById('participantCompany').value || null,
+                jobId: document.getElementById('participantJob').value || null,
                 tests: tests,
                 completedTests: [],
                 status: document.getElementById('participantStatus').value,
                 notes: document.getElementById('participantNotes').value,
+                relatorioLiberado: document.getElementById('relatorioLiberado').checked,
+                laudoLiberado: document.getElementById('laudoLiberado').checked,
+                username: document.getElementById('participantUsername').value,
+                password: document.getElementById('participantPassword').value,
                 created_at: new Date().toISOString()
             };
-
-            // Gerar senha automaticamente se não for fornecida
-            const password = document.getElementById('participantPassword').value;
-            if (password) {
-                participant.password = password;
-            } else {
-                participant.password = 'part' + Math.random().toString(36).substring(2, 6);
-            }
 
             try {
                 const all = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
@@ -1327,7 +1633,7 @@
                 filteredParticipants = [...participants];
                 renderTable();
 
-                showToast(`✅ Participante salvo! Senha: ${participant.password}`, 'success');
+                showToast(`✅ Participante ${participant.name} salvo com sucesso!`, 'success');
                 closeModal();
 
             } catch (error) {
@@ -1343,23 +1649,128 @@
             const participant = participants.find(p => p.id === id);
             if (!participant) return;
 
+            editingId = id;
             document.getElementById('modalTitle').textContent = 'Editar Participante';
             document.getElementById('participantId').value = participant.id;
             document.getElementById('participantName').value = participant.name || '';
             document.getElementById('participantEmail').value = participant.email || '';
             document.getElementById('participantPhone').value = participant.phone || '';
+            document.getElementById('participantDocument').value = participant.document || '';
             document.getElementById('participantCompany').value = participant.companyId || '';
-            document.getElementById('participantStatus').value = participant.status || 'pending';
+            document.getElementById('participantJob').value = participant.jobId || '';
+            document.getElementById('participantStatus').value = participant.status || 'active';
             document.getElementById('participantNotes').value = participant.notes || '';
-            document.getElementById('participantPassword').value = '';
+            document.getElementById('participantUsername').value = participant.username || participant.email || '';
+            document.getElementById('participantPassword').value = participant.password || '';
 
             // Selecionar testes
-            const checkboxes = document.querySelectorAll('#participantForm input[type="checkbox"]');
+            const checkboxes = document.querySelectorAll('#testsCheckboxGroup input[type="checkbox"]');
             checkboxes.forEach(cb => {
                 cb.checked = (participant.tests || []).includes(cb.value);
             });
 
+            document.getElementById('relatorioLiberado').checked = participant.relatorioLiberado || false;
+            document.getElementById('laudoLiberado').checked = participant.laudoLiberado || false;
+
             document.getElementById('participantModal').classList.add('active');
+        }
+
+        // ============================================
+        // RESETAR TESTE (MODAL)
+        // ============================================
+        function resetarTeste() {
+            if (!confirm('⚠️ Tem certeza que deseja resetar TODOS os testes deste participante? Esta ação não pode ser desfeita.')) return;
+            if (!confirm('🔄 Confirmar reset de testes?')) return;
+
+            const id = document.getElementById('participantId').value;
+            if (!id) {
+                showToast('Salve o participante antes de resetar os testes', 'warning');
+                return;
+            }
+
+            resetarTesteParticipante(id);
+        }
+
+        // ============================================
+        // RESETAR TESTE (PARTICIPANTE)
+        // ============================================
+        function resetarTesteParticipante(id) {
+            if (!confirm('⚠️ Tem certeza que deseja resetar os testes deste participante?')) return;
+
+            try {
+                const all = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                const idx = all.findIndex(p => p.id === id);
+                if (idx > -1) {
+                    all[idx].completedTests = [];
+                    all[idx].status = 'pending';
+                    localStorage.setItem('vigorre_participants', JSON.stringify(all));
+                    participants = all;
+                    filteredParticipants = [...participants];
+                    renderTable();
+                    showToast('🔄 Testes resetados com sucesso!', 'success');
+                }
+            } catch (error) {
+                console.error('❌ Erro ao resetar testes:', error);
+                showToast('Erro ao resetar testes', 'error');
+            }
+        }
+
+        // ============================================
+        // RESETAR RELATÓRIO
+        // ============================================
+        function resetarRelatorio() {
+            const id = document.getElementById('participantId').value;
+            if (!id) {
+                showToast('Salve o participante primeiro', 'warning');
+                return;
+            }
+
+            if (!confirm('⚠️ Tem certeza que deseja resetar o relatório deste participante?')) return;
+
+            try {
+                const all = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                const idx = all.findIndex(p => p.id === id);
+                if (idx > -1) {
+                    all[idx].relatorioLiberado = false;
+                    localStorage.setItem('vigorre_participants', JSON.stringify(all));
+                    participants = all;
+                    filteredParticipants = [...participants];
+                    renderTable();
+                    showToast('🔄 Relatório resetado com sucesso!', 'success');
+                }
+            } catch (error) {
+                console.error('❌ Erro ao resetar relatório:', error);
+                showToast('Erro ao resetar relatório', 'error');
+            }
+        }
+
+        // ============================================
+        // RESETAR LAUDO
+        // ============================================
+        function resetarLaudo() {
+            const id = document.getElementById('participantId').value;
+            if (!id) {
+                showToast('Salve o participante primeiro', 'warning');
+                return;
+            }
+
+            if (!confirm('⚠️ Tem certeza que deseja resetar o laudo deste participante?')) return;
+
+            try {
+                const all = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                const idx = all.findIndex(p => p.id === id);
+                if (idx > -1) {
+                    all[idx].laudoLiberado = false;
+                    localStorage.setItem('vigorre_participants', JSON.stringify(all));
+                    participants = all;
+                    filteredParticipants = [...participants];
+                    renderTable();
+                    showToast('🔄 Laudo resetado com sucesso!', 'success');
+                }
+            } catch (error) {
+                console.error('❌ Erro ao resetar laudo:', error);
+                showToast('Erro ao resetar laudo', 'error');
+            }
         }
 
         // ============================================
@@ -1384,7 +1795,6 @@
                 const all = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                 const idx = all.findIndex(p => p.id === id);
                 if (idx > -1) {
-                    // Resetar completedTests para forçar refazer
                     all[idx].completedTests = [];
                     all[idx].status = 'in_progress';
                     localStorage.setItem('vigorre_participants', JSON.stringify(all));
@@ -1407,11 +1817,13 @@
             if (!participant) return;
 
             const companyName = companies.find(c => c.id === participant.companyId)?.name || 'Autônomo';
+            const jobName = jobs.find(j => j.id === participant.jobId)?.title || jobs.find(j => j.id === participant.jobId)
+                ?.name || 'Não vinculado';
             const tests = (participant.tests || []).join(', ') || 'Nenhum';
             const completed = (participant.completedTests || []).join(', ') || 'Nenhum';
 
             alert(
-                `👤 ${participant.name}\n\n📧 Email: ${participant.email || '-'}\n📱 Telefone: ${participant.phone || '-'}\n🏢 Empresa: ${companyName}\n📊 Status: ${participant.status || 'Pendente'}\n📋 Testes disponíveis: ${tests}\n✅ Testes concluídos: ${completed}\n📝 Observações: ${participant.notes || 'Nenhuma'}`
+                `👤 ${participant.name}\n\n📧 Email: ${participant.email || '-'}\n📱 Telefone: ${participant.phone || '-'}\n📄 CPF: ${participant.document || '-'}\n🏢 Empresa: ${companyName}\n📌 Vaga: ${jobName}\n📊 Status: ${participant.status || 'Pendente'}\n📋 Testes disponíveis: ${tests}\n✅ Testes concluídos: ${completed}\n📄 Relatório: ${participant.relatorioLiberado ? '✅ Liberado' : '🔒 Bloqueado'}\n📋 Laudo: ${participant.laudoLiberado ? '✅ Liberado' : '🔒 Bloqueado'}\n📝 Observações: ${participant.notes || 'Nenhuma'}`
                 );
         }
 
@@ -1419,7 +1831,7 @@
         // DELETAR PARTICIPANTE
         // ============================================
         function deleteParticipant(id) {
-            if (!confirm('Tem certeza que deseja excluir este participante? Esta ação não pode ser desfeita.')) return;
+            if (!confirm('⚠️ Tem certeza que deseja excluir este participante? Esta ação não pode ser desfeita.')) return;
 
             try {
                 const all = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
@@ -1428,7 +1840,7 @@
                 participants = filtered;
                 filteredParticipants = [...participants];
                 renderTable();
-                showToast('Participante excluído com sucesso!', 'success');
+                showToast('✅ Participante excluído com sucesso!', 'success');
             } catch (error) {
                 console.error('❌ Erro ao excluir:', error);
                 showToast('Erro ao excluir participante', 'error');
@@ -1445,6 +1857,8 @@
 
             if (type === 'error') {
                 icon.textContent = '❌';
+            } else if (type === 'warning') {
+                icon.textContent = '⚠️';
             } else {
                 icon.textContent = '✅';
             }
