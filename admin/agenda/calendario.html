@@ -296,7 +296,7 @@
         }
 
         /* ============================================
-           CALENDAR HEADER
+           CALENDAR NAV
            ============================================ */
         .calendar-nav {
             display: flex;
@@ -840,9 +840,9 @@
             <li><a href="../creditos/"><span class="icon">💳</span> Créditos</a></li>
             <li><a href="../relatorios/"><span class="icon">📄</span> Relatórios</a></li>
             <div class="divider"></div>
-            <li><a href="index.html" class="active"><span class="icon">📅</span> Agenda</a></li>
-            <li><a href="../backup/"><span class="icon">💾</span> Backup</a></li>
-            <li><a href="../bi/"><span class="icon">📈</span> BI Analytics</a></li>
+            <li><a href="calendario.html" class="active"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
+            <li><a href="../bi/dashboard.html"><span class="icon">📈</span> BI Analytics</a></li>
         </ul>
 
         <div class="logout">
@@ -865,13 +865,10 @@
                     <a href="../dashboard.html">Dashboard</a> / Agenda
                 </div>
                 <h1>📅 Agenda</h1>
-                <p style="color: var(--gray-500); font-size: 0.9rem;">Gerencie compromissos, entrevistas e tarefas</p>
+                <p style="color: var(--gray-500); font-size: 0.9rem;">Gerencie seus compromissos e eventos</p>
             </div>
             <div class="actions">
                 <button class="btn-primary" onclick="openModal()">➕ Novo Evento</button>
-                <button class="btn-secondary" onclick="window.location.href='entrevistas.html'">🎯 Entrevistas</button>
-                <button class="btn-secondary" onclick="window.location.href='tarefas.html'">✅ Tarefas</button>
-                <button class="btn-secondary" onclick="window.location.href='lembretes.html'">🔔 Lembretes</button>
             </div>
         </div>
 
@@ -1033,18 +1030,27 @@
                 const stored = JSON.parse(localStorage.getItem('vigorre_events') || '[]');
 
                 if (stored.length === 0) {
-                    // Dados de exemplo
                     const today = new Date();
                     const year = today.getFullYear();
                     const month = today.getMonth();
                     const day = today.getDate();
 
                     events = [
-                        { id: 'ev1', title: 'Reunião com RH', type: 'meeting', date: `${year}-${String(month+1).padStart(2,'0')}-${String(day+2).padStart(2,'0')}`, time: '10:00', description: 'Alinhamento sobre novos recrutadores', link: '' },
-                        { id: 'ev2', title: 'Entrevista - João Silva', type: 'interview', date: `${year}-${String(month+1).padStart(2,'0')}-${String(day+5).padStart(2,'0')}`, time: '14:30', description: 'Entrevista para vaga de desenvolvedor', link: '' },
-                        { id: 'ev3', title: 'Revisão de créditos', type: 'task', date: `${year}-${String(month+1).padStart(2,'0')}-${String(day+1).padStart(2,'0')}`, time: '09:00', description: 'Revisar créditos dos recrutadores', link: '' },
-                        { id: 'ev4', title: 'Lembrete: Relatórios', type: 'reminder', date: `${year}-${String(month+1).padStart(2,'0')}-${String(day+3).padStart(2,'0')}`, time: '16:00', description: 'Gerar relatórios mensais', link: '' },
-                        { id: 'ev5', title: 'Workshop de DISC', type: 'other', date: `${year}-${String(month+1).padStart(2,'0')}-${String(day+7).padStart(2,'0')}`, time: '08:30', description: 'Workshop sobre aplicação do teste DISC', link: '' }
+                        { id: 'ev1', title: 'Reunião com RH', type: 'meeting',
+                            date: `${year}-${String(month+1).padStart(2,'0')}-${String(day+2).padStart(2,'0')}`,
+                            time: '10:00', description: 'Alinhamento sobre novos recrutadores', link: '' },
+                        { id: 'ev2', title: 'Entrevista - João Silva', type: 'interview',
+                            date: `${year}-${String(month+1).padStart(2,'0')}-${String(day+5).padStart(2,'0')}`,
+                            time: '14:30', description: 'Entrevista para vaga de desenvolvedor', link: '' },
+                        { id: 'ev3', title: 'Revisão de créditos', type: 'task',
+                            date: `${year}-${String(month+1).padStart(2,'0')}-${String(day+1).padStart(2,'0')}`,
+                            time: '09:00', description: 'Revisar créditos dos recrutadores', link: '' },
+                        { id: 'ev4', title: 'Lembrete: Relatórios', type: 'reminder',
+                            date: `${year}-${String(month+1).padStart(2,'0')}-${String(day+3).padStart(2,'0')}`,
+                            time: '16:00', description: 'Gerar relatórios mensais', link: '' },
+                        { id: 'ev5', title: 'Workshop de DISC', type: 'other',
+                            date: `${year}-${String(month+1).padStart(2,'0')}-${String(day+7).padStart(2,'0')}`,
+                            time: '08:30', description: 'Workshop sobre aplicação do teste DISC', link: '' }
                     ];
                     localStorage.setItem('vigorre_events', JSON.stringify(events));
                 } else {
@@ -1061,7 +1067,9 @@
         // ============================================
         function renderCalendar() {
             const monthYear = document.getElementById('monthYear');
-            const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+                'Outubro', 'Novembro', 'Dezembro'
+            ];
             monthYear.textContent = `${monthNames[currentMonth]} ${currentYear}`;
 
             const firstDay = new Date(currentYear, currentMonth, 1).getDay();
@@ -1075,7 +1083,6 @@
 
             let html = '';
 
-            // Dias do mês anterior
             for (let i = firstDay - 1; i >= 0; i--) {
                 const day = daysInPrevMonth - i;
                 html += `
@@ -1086,12 +1093,11 @@
                     `;
             }
 
-            // Dias do mês atual
             for (let d = 1; d <= daysInMonth; d++) {
-                const dateStr = `${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                const dateStr =
+                    `${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
                 const isToday = d === todayDate && currentMonth === todayMonth && currentYear === todayYear;
 
-                // Buscar eventos do dia
                 const dayEvents = events.filter(e => e.date === dateStr);
 
                 let eventsHtml = '';
@@ -1100,7 +1106,8 @@
                 dayEvents.slice(0, 2).forEach(e => {
                     const typeClass = e.type || 'other';
                     const time = e.time ? `${e.time} - ` : '';
-                    eventsHtml += `<div class="event-item ${typeClass}" onclick="viewEvent('${e.id}')">${time}${e.title}</div>`;
+                    eventsHtml +=
+                        `<div class="event-item ${typeClass}" onclick="viewEvent('${e.id}')">${time}${e.title}</div>`;
                 });
 
                 if (dayEvents.length > 2) {
@@ -1117,7 +1124,6 @@
                     `;
             }
 
-            // Preencher dias restantes do próximo mês
             const totalDays = firstDay + daysInMonth;
             const remainingDays = (7 - (totalDays % 7)) % 7;
             for (let d = 1; d <= remainingDays; d++) {
@@ -1186,11 +1192,11 @@
             const id = document.getElementById('eventId').value || Date.now().toString();
             const date = document.getElementById('eventDate').value;
 
-            // Se não tiver data, usa a data atual
             let eventDate = date;
             if (!eventDate) {
                 const today = new Date();
-                eventDate = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+                eventDate =
+                    `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
             }
 
             const event = {
@@ -1258,7 +1264,8 @@
 
             let msg = `📅 Eventos do dia ${dateStr}:\n\n`;
             dayEvents.forEach(e => {
-                const typeMap = { meeting: 'Reunião', interview: 'Entrevista', task: 'Tarefa', reminder: 'Lembrete', other: 'Outro' };
+                const typeMap = { meeting: 'Reunião', interview: 'Entrevista', task: 'Tarefa', reminder: 'Lembrete',
+                    other: 'Outro' };
                 msg += `• ${e.time || '--'} - ${e.title} (${typeMap[e.type] || e.type})\n`;
             });
 
@@ -1275,6 +1282,8 @@
 
             if (type === 'error') {
                 icon.textContent = '❌';
+            } else if (type === 'info') {
+                icon.textContent = 'ℹ️';
             } else {
                 icon.textContent = '✅';
             }
