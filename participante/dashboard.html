@@ -171,6 +171,82 @@
         }
 
         /* ============================================
+           IA CARD (NOVO)
+           ============================================ */
+        .ia-card {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            color: white;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 40px rgba(10, 37, 64, 0.15);
+        }
+
+        .ia-card .ia-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .ia-card .ia-top .ia-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ia-card .ia-top .ia-badge {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--cyan);
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .ia-card .ia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .ia-card .ia-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .ia-card .ia-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .ia-card .ia-item .ia-item-icon {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .ia-card .ia-item .ia-item-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: white;
+        }
+
+        .ia-card .ia-item .ia-item-desc {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        /* ============================================
            PROGRESS CARD
            ============================================ */
         .progress-card {
@@ -439,6 +515,9 @@
             .header .logo .logo-img {
                 height: 28px;
             }
+            .ia-card .ia-content {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 480px) {
@@ -517,6 +596,17 @@
         <div class="main-header">
             <h1>Olá, <span class="highlight" id="greetingName">Participante</span> 👋</h1>
             <p>Acompanhe seus testes e resultados aqui.</p>
+        </div>
+
+        <!-- IA Recomendações (NOVO) -->
+        <div class="ia-card">
+            <div class="ia-top">
+                <span class="ia-title">🤖 Recomendações para você</span>
+                <span class="ia-badge">Atualizado agora</span>
+            </div>
+            <div class="ia-content" id="iaContent">
+                <!-- Carregado via JS -->
+            </div>
         </div>
 
         <!-- Progress Card -->
@@ -613,9 +703,38 @@
             document.getElementById('userName').textContent = user.name || 'Participante';
             document.getElementById('greetingName').textContent = user.name || 'Participante';
 
+            loadIAContent();
             loadDashboard(user);
         });
 
+        // ============================================
+        // IA RECOMENDAÇÕES
+        // ============================================
+        function loadIAContent() {
+            const container = document.getElementById('iaContent');
+
+            const recommendations = [
+                { icon: '📊', title: 'Complete o DISC', desc: 'Falta apenas 1 teste para o laudo' },
+                { icon: '🧠', title: 'IE em destaque', desc: 'Sua autoconsciência está acima da média' },
+                { icon: '💎', title: 'Valores alinhados', desc: 'Seus valores combinam com liderança' }
+            ];
+
+            container.innerHTML = recommendations.map(item => `
+                    <div class="ia-item" onclick="handleIAClick('${item.title}')">
+                        <div class="ia-item-icon">${item.icon}</div>
+                        <div class="ia-item-title">${item.title}</div>
+                        <div class="ia-item-desc">${item.desc}</div>
+                    </div>
+                `).join('');
+        }
+
+        function handleIAClick(title) {
+            alert(`🤖 IA: ${title}\n\nClique para mais detalhes.`);
+        }
+
+        // ============================================
+        // CARREGAR DASHBOARD
+        // ============================================
         function loadDashboard(user) {
             try {
                 const allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
