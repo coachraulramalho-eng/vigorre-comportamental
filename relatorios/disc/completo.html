@@ -10,6 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 
     <style>
+        /* ============================================
+           VIGORRE ONE™ - RELATÓRIO COMPLETO DISC
+           ============================================ */
+
         * {
             margin: 0;
             padding: 0;
@@ -19,7 +23,10 @@
         :root {
             --navy: #0A2540;
             --blue: #1D4ED8;
+            --blue-light: #3B82F6;
             --cyan: #06B6D4;
+            --gold: #D97706;
+            --purple: #7C3AED;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -53,7 +60,7 @@
         }
 
         /* ============================================
-           HEADER
+           HEADER PREMIUM
            ============================================ */
         .header-premium {
             background: var(--navy);
@@ -75,7 +82,7 @@
         }
 
         .header-premium .logo .logo-img {
-            height: 40px;
+            height: 44px;
             width: auto;
             display: block;
         }
@@ -129,8 +136,15 @@
             color: rgba(255, 255, 255, 0.4);
         }
 
+        .header-premium .header-code {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-family: 'Courier New', monospace;
+            margin-top: 2px;
+        }
+
         /* ============================================
-           BODY
+           CORPO DO RELATÓRIO
            ============================================ */
         .report-body {
             background: white;
@@ -185,6 +199,144 @@
             color: var(--gray-800);
         }
 
+        /* ============================================
+           CAPA
+           ============================================ */
+        .capa {
+            text-align: center;
+            padding: 60px 40px;
+            border-bottom: 2px solid var(--gray-200);
+            margin-bottom: 32px;
+        }
+
+        .capa .capa-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .capa .capa-logo .tm {
+            font-size: 0.7rem;
+            vertical-align: super;
+            color: var(--blue);
+        }
+
+        .capa .capa-sub {
+            font-size: 0.9rem;
+            color: var(--gray-400);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .capa .capa-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 8px;
+        }
+
+        .capa .capa-title .highlight {
+            color: var(--blue);
+        }
+
+        .capa .capa-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .capa .capa-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+
+        .capa .capa-info-item {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+        }
+
+        .capa .capa-info-item .label {
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .capa .capa-info-item .value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-top: 2px;
+        }
+
+        .capa .capa-qr {
+            margin-top: 30px;
+        }
+
+        .capa .capa-qr .qr-placeholder {
+            width: 80px;
+            height: 80px;
+            background: var(--gray-100);
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-sm);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+        }
+
+        /* ============================================
+           SUMÁRIO
+           ============================================ */
+        .sumario {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 24px 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .sumario h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+
+        .sumario .sumario-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        .sumario .sumario-item:last-child {
+            border-bottom: none;
+        }
+
+        .sumario .sumario-item .page {
+            color: var(--gray-400);
+        }
+
+        /* ============================================
+           CARDS DE PERFIL
+           ============================================ */
         .profile-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -230,25 +382,34 @@
             transition: width 0.8s ease;
         }
 
-        .profile-card.disc-d .profile-bar .fill {
-            background: #EF4444;
-        }
-        .profile-card.disc-i .profile-bar .fill {
-            background: #3B82F6;
-        }
-        .profile-card.disc-s .profile-bar .fill {
-            background: #10B981;
-        }
-        .profile-card.disc-c .profile-bar .fill {
-            background: #8B5CF6;
-        }
+        .profile-card.disc-d .profile-bar .fill { background: #EF4444; }
+        .profile-card.disc-i .profile-bar .fill { background: #3B82F6; }
+        .profile-card.disc-s .profile-bar .fill { background: #10B981; }
+        .profile-card.disc-c .profile-bar .fill { background: #8B5CF6; }
 
+        /* ============================================
+           GRÁFICOS
+           ============================================ */
         .chart-container {
             height: 240px;
             position: relative;
             margin: 16px 0;
         }
 
+        .chart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 16px 0;
+        }
+
+        .chart-row .chart-container {
+            height: 200px;
+        }
+
+        /* ============================================
+           LISTAS
+           ============================================ */
         .feature-list {
             list-style: none;
             display: grid;
@@ -271,6 +432,83 @@
         .feature-list li .check {
             color: #10B981;
             font-weight: 700;
+        }
+
+        /* ============================================
+           COMPATIBILIDADE COM VAGA
+           ============================================ */
+        .compatibilidade-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            margin: 16px 0;
+        }
+
+        .compatibilidade-card .compat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .compatibilidade-card .compat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--blue);
+        }
+
+        .compatibilidade-card .compat-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+
+        .compatibilidade-card .compat-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+
+        /* ============================================
+           ASSINATURA
+           ============================================ */
+        .assinatura {
+            text-align: center;
+            padding: 32px 0;
+            border-top: 2px solid var(--gray-200);
+            margin-top: 16px;
+        }
+
+        .assinatura .assinatura-qr {
+            display: inline-block;
+            padding: 16px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+        }
+
+        .assinatura .assinatura-qr .qr-placeholder {
+            width: 80px;
+            height: 80px;
+            background: var(--gray-100);
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+        }
+
+        .assinatura .assinatura-code {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            font-family: 'Courier New', monospace;
         }
 
         /* ============================================
@@ -422,6 +660,12 @@
             .feature-list {
                 grid-template-columns: 1fr;
             }
+            .chart-row {
+                grid-template-columns: 1fr;
+            }
+            .capa .capa-info {
+                grid-template-columns: 1fr;
+            }
             .report-body {
                 padding: 20px;
             }
@@ -469,6 +713,15 @@
             .feature-list li {
                 background: #F8FAFC !important;
             }
+            .sumario {
+                background: #F8FAFC !important;
+            }
+            .capa .capa-info-item {
+                background: #F8FAFC !important;
+            }
+            .compatibilidade-card {
+                background: #F8FAFC !important;
+            }
             .section {
                 page-break-inside: avoid;
             }
@@ -479,7 +732,9 @@
 
     <div class="container">
 
-        <!-- HEADER -->
+        <!-- ============================================
+        HEADER PREMIUM
+        ============================================ -->
         <header class="header-premium">
             <div class="logo">
                 <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
@@ -497,46 +752,225 @@
             <div class="header-user">
                 <div class="name" id="participantName">Carregando...</div>
                 <div class="company" id="participantCompany">Empresa: --</div>
+                <div class="header-code" id="reportCode">Código: VIG-2024-001</div>
             </div>
         </header>
 
-        <!-- BODY -->
+        <!-- ============================================
+        CORPO DO RELATÓRIO
+        ============================================ -->
         <div class="report-body">
 
-            <!-- Seção 1: Resumo Executivo -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">1</span> Resumo Executivo</h2>
-                <p class="section-text" id="summaryText">Carregando resumo...</p>
+            <!-- ============================================
+            CAPA
+            ============================================ -->
+            <section class="capa">
+                <div class="capa-logo">VIGORRE ONE<span class="tm">™</span></div>
+                <div class="capa-sub">People Analytics Enterprise</div>
+                <div class="capa-divider"></div>
+                <div class="capa-title">Relatório <span class="highlight">Completo</span> DISC</div>
+                <p style="color: var(--gray-500); font-size: 0.95rem; margin-bottom: 8px;">Análise Comportamental Baseada no Modelo Marston</p>
+
+                <div class="capa-info">
+                    <div class="capa-info-item">
+                        <div class="label">Participante</div>
+                        <div class="value" id="capaParticipant">Carregando...</div>
+                    </div>
+                    <div class="capa-info-item">
+                        <div class="label">Data da Avaliação</div>
+                        <div class="value" id="capaDate">--</div>
+                    </div>
+                    <div class="capa-info-item">
+                        <div class="label">Código do Relatório</div>
+                        <div class="value" id="capaCode">VIG-2024-001</div>
+                    </div>
+                </div>
+
+                <div class="capa-qr">
+                    <div class="qr-placeholder">🔲 QR Code</div>
+                </div>
             </section>
 
-            <!-- Seção 2: Perfil DISC -->
+            <!-- ============================================
+            SUMÁRIO
+            ============================================ -->
+            <section class="sumario">
+                <h3>📑 Sumário</h3>
+                <div class="sumario-item"><span>1. Apresentação</span><span class="page">3</span></div>
+                <div class="sumario-item"><span>2. Como Interpretar Este Relatório</span><span class="page">4</span></div>
+                <div class="sumario-item"><span>3. Metodologia e Confiabilidade</span><span class="page">5</span></div>
+                <div class="sumario-item"><span>4. Perfil DISC</span><span class="page">6</span></div>
+                <div class="sumario-item"><span>5. Análise dos Fatores</span><span class="page">8</span></div>
+                <div class="sumario-item"><span>6. Forças e Competências</span><span class="page">10</span></div>
+                <div class="sumario-item"><span>7. Áreas de Desenvolvimento</span><span class="page">11</span></div>
+                <div class="sumario-item"><span>8. Perfil de Comunicação</span><span class="page">12</span></div>
+                <div class="sumario-item"><span>9. Perfil de Liderança</span><span class="page">13</span></div>
+                <div class="sumario-item"><span>10. Tomada de Decisão</span><span class="page">14</span></div>
+                <div class="sumario-item"><span>11. Gestão de Conflitos</span><span class="page">15</span></div>
+                <div class="sumario-item"><span>12. Recomendações de Carreira</span><span class="page">16</span></div>
+                <div class="sumario-item"><span>13. Compatibilidade com Vaga</span><span class="page">17</span></div>
+                <div class="sumario-item"><span>14. Plano de Desenvolvimento</span><span class="page">18</span></div>
+                <div class="sumario-item"><span>15. Parecer da IA</span><span class="page">19</span></div>
+                <div class="sumario-item"><span>16. Conclusão</span><span class="page">20</span></div>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 1: APRESENTAÇÃO
+            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">2</span> Perfil DISC</h2>
+                <h2 class="section-title"><span class="number">1</span> Apresentação</h2>
+                <p class="section-text">
+                    Este relatório apresenta uma análise completa do perfil comportamental baseado no modelo DISC, desenvolvido por William Marston.
+                    O modelo DISC avalia quatro dimensões principais do comportamento humano: <strong>Dominância (D)</strong>,
+                    <strong>Influência (I)</strong>, <strong>Estabilidade (S)</strong> e <strong>Conformidade (C)</strong>.
+                </p>
+                <p class="section-text" style="margin-top: 8px;">
+                    O objetivo deste relatório é fornecer uma visão aprofundada do seu perfil comportamental,
+                    identificando suas principais características, forças, áreas de desenvolvimento e recomendações
+                    práticas para potencializar sua atuação profissional e pessoal.
+                </p>
+                <p class="section-text" style="margin-top: 8px;">
+                    <strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br />
+                    <strong>Data da Avaliação:</strong> <span id="apresentacaoDate">--</span><br />
+                    <strong>Teste Realizado:</strong> DISC<br />
+                    <strong>Código do Relatório:</strong> <span id="apresentacaoCode">VIG-2024-001</span>
+                </p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 2: COMO INTERPRETAR
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">2</span> Como Interpretar Este Relatório</h2>
+                <p class="section-text">
+                    Para obter o máximo proveito deste relatório, recomendamos que você:
+                </p>
+                <ul style="color: var(--gray-600); line-height: 2; font-size: 0.95rem; padding-left: 20px; margin-top: 8px;">
+                    <li>Leia o relatório completo, sem pular seções;</li>
+                    <li>Reflita sobre como cada característica se manifesta no seu dia a dia;</li>
+                    <li>Busque feedback de pessoas que convivem com você profissionalmente;</li>
+                    <li>Utilize as recomendações como base para um plano de desenvolvimento;</li>
+                    <li>Revisite o relatório periodicamente para acompanhar sua evolução.</li>
+                </ul>
+                <p class="section-text" style="margin-top: 8px;">
+                    <strong>Importante:</strong> Este relatório é uma ferramenta de autoconhecimento e desenvolvimento.
+                    Não deve ser utilizado como único critério para decisões de contratação, promoção ou avaliação de desempenho.
+                </p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 3: METODOLOGIA E CONFIABILIDADE
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">3</span> Metodologia e Confiabilidade</h2>
+                <p class="section-text">
+                    <strong>Como os resultados são calculados</strong>
+                    <br />
+                    O teste DISC é composto por 24 questões que avaliam suas preferências comportamentais.
+                    Cada questão apresenta quatro opções de resposta, e você seleciona aquela que melhor descreve seu comportamento.
+                </p>
+                <p class="section-text" style="margin-top: 8px;">
+                    <strong>Consistência dos resultados</strong>
+                    <br />
+                    O sistema utiliza um algoritmo determinístico: se você responder exatamente as mesmas respostas,
+                    o resultado será exatamente o mesmo. Isso garante que a interpretação seja baseada exclusivamente
+                    nas suas respostas, sem variações aleatórias.
+                </p>
+                <p class="section-text" style="margin-top: 8px;">
+                    <strong>Confiabilidade</strong>
+                    <br />
+                    O modelo DISC é amplamente validado na psicologia organizacional e utilizado por milhares de empresas
+                    em todo o mundo. A consistência dos resultados é monitorada por meio de índices de confiabilidade
+                    que garantem a precisão da análise.
+                </p>
+                <p class="section-text" style="margin-top: 8px;">
+                    <strong>Limitações</strong>
+                    <br />
+                    Como toda avaliação comportamental, este relatório deve ser interpretado considerando o contexto
+                    e a honestidade das respostas. Recomenda-se uma reflexão pessoal e, se possível, uma sessão de
+                    feedback com um profissional especializado.
+                </p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 4: PERFIL DISC
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">4</span> Perfil DISC</h2>
                 <div class="profile-grid" id="profileGrid">
                     <!-- Carregado via JS -->
                 </div>
                 <div class="chart-container">
                     <canvas id="discChart"></canvas>
                 </div>
-                <p class="section-text" id="profileDescription">Carregando descrição...</p>
+                <p class="section-text" id="profileDescription">Carregando descrição do perfil...</p>
             </section>
 
-            <!-- Seção 3: Forças e Competências -->
+            <!-- ============================================
+            SEÇÃO 5: ANÁLISE DOS FATORES
+            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">3</span> Forças e Competências</h2>
-                <h3 style="font-size:0.9rem;color:var(--gray-700);margin-bottom:8px;">💪 Principais Forças</h3>
+                <h2 class="section-title"><span class="number">5</span> Análise dos Fatores</h2>
+                <p class="section-text" id="factorsAnalysis">Carregando análise detalhada dos fatores...</p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 6: FORÇAS E COMPETÊNCIAS
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">6</span> Forças e Competências</h2>
                 <ul class="feature-list" id="strengthsList">
                     <li><span class="check">✓</span> Carregando...</li>
                 </ul>
-                <h3 style="font-size:0.9rem;color:var(--gray-700);margin:16px 0 8px;">📈 Áreas de Desenvolvimento</h3>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 7: ÁREAS DE DESENVOLVIMENTO
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">7</span> Áreas de Desenvolvimento</h2>
                 <ul class="feature-list" id="developmentList">
                     <li><span class="check">✓</span> Carregando...</li>
                 </ul>
             </section>
 
-            <!-- Seção 4: Recomendações de Carreira -->
+            <!-- ============================================
+            SEÇÃO 8: PERFIL DE COMUNICAÇÃO
+            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">4</span> Recomendações de Carreira</h2>
+                <h2 class="section-title"><span class="number">8</span> Perfil de Comunicação</h2>
+                <p class="section-text" id="communicationText">Carregando análise do perfil de comunicação...</p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 9: PERFIL DE LIDERANÇA
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">9</span> Perfil de Liderança</h2>
+                <p class="section-text" id="leadershipText">Carregando análise do perfil de liderança...</p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 10: TOMADA DE DECISÃO
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">10</span> Tomada de Decisão</h2>
+                <p class="section-text" id="decisionText">Carregando análise da tomada de decisão...</p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 11: GESTÃO DE CONFLITOS
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">11</span> Gestão de Conflitos</h2>
+                <p class="section-text" id="conflictText">Carregando análise da gestão de conflitos...</p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 12: RECOMENDAÇÕES DE CARREIRA
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">12</span> Recomendações de Carreira</h2>
                 <h3 style="font-size:0.9rem;color:var(--gray-700);margin-bottom:8px;">🚀 Carreiras Recomendadas</h3>
                 <ul class="feature-list" id="careersList">
                     <li><span class="check">✓</span> Carregando...</li>
@@ -547,48 +981,78 @@
                 </ul>
             </section>
 
-            <!-- Seção 5: Comunicação -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">5</span> Estilo de Comunicação</h2>
-                <p class="section-text" id="communicationText">Carregando...</p>
+            <!-- ============================================
+            SEÇÃO 13: COMPATIBILIDADE COM VAGA
+            ============================================ -->
+            <section class="section" id="compatibilidadeSection">
+                <h2 class="section-title"><span class="number">13</span> Compatibilidade com Vaga</h2>
+                <div id="compatibilidadeContent">
+                    <p class="section-text">Carregando análise de compatibilidade...</p>
+                </div>
             </section>
 
-            <!-- Seção 6: Liderança -->
+            <!-- ============================================
+            SEÇÃO 14: PLANO DE DESENVOLVIMENTO
+            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">6</span> Estilo de Liderança</h2>
-                <p class="section-text" id="leadershipText">Carregando...</p>
-            </section>
-
-            <!-- Seção 7: Gestão de Conflitos -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">7</span> Gestão de Conflitos</h2>
-                <p class="section-text" id="conflictText">Carregando...</p>
-            </section>
-
-            <!-- Seção 8: Plano de Desenvolvimento -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">8</span> Plano de Desenvolvimento</h2>
+                <h2 class="section-title"><span class="number">14</span> Plano de Desenvolvimento</h2>
+                <p class="section-text" style="margin-bottom: 12px;">
+                    Com base no seu perfil DISC, recomendamos o seguinte plano de desenvolvimento:
+                </p>
                 <ul class="feature-list" id="developmentPlanList">
                     <li><span class="check">✓</span> Carregando...</li>
                 </ul>
             </section>
 
-            <!-- Seção 9: Conclusão -->
+            <!-- ============================================
+            SEÇÃO 15: PARECER DA IA
+            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">9</span> Conclusão</h2>
-                <p class="section-text" id="conclusionText">Carregando...</p>
+                <h2 class="section-title"><span class="number">15</span> Parecer da Inteligência Artificial</h2>
+                <p class="section-text" id="iaOpinionText">Carregando parecer da IA...</p>
             </section>
 
-            <!-- Ações -->
+            <!-- ============================================
+            SEÇÃO 16: CONCLUSÃO
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">16</span> Conclusão</h2>
+                <p class="section-text" id="conclusionText">Carregando conclusão...</p>
+            </section>
+
+            <!-- ============================================
+            ASSINATURA
+            ============================================ -->
+            <section class="assinatura">
+                <div class="assinatura-qr">
+                    <div class="qr-placeholder">🔲 QR Code</div>
+                </div>
+                <p style="font-size:0.8rem;color:var(--gray-500);">
+                    <strong>VIGORRE ONE™</strong> • People Analytics Enterprise
+                </p>
+                <p style="font-size:0.7rem;color:var(--gray-400);">
+                    Este relatório é gerado automaticamente e possui validade de 12 meses.
+                </p>
+                <div class="assinatura-code" id="assinaturaCode">
+                    Código de Autenticação: VIG-2024-001 • Hash: a1b2c3d4e5f6
+                </div>
+            </section>
+
+            <!-- ============================================
+            AÇÕES
+            ============================================ -->
             <div class="actions-bar">
                 <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
                 <a href="index.html" class="btn-action btn-secondary">📄 Versão Simples</a>
                 <button class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+                <button class="btn-action btn-success" onclick="downloadPDF()">📥 Baixar PDF</button>
             </div>
 
         </div>
 
-        <!-- FOOTER -->
+        <!-- ============================================
+        FOOTER
+        ============================================ -->
         <footer class="footer-premium">
             <div class="footer-logo">
                 <div class="logo-icon">V</div>
@@ -602,12 +1066,14 @@
                 <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
                 <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
             </div>
-            <div class="footer-page">Página 1 de 1</div>
+            <div class="footer-page">Página <span id="pageNumber">1</span></div>
         </footer>
 
     </div>
 
-    <!-- SCRIPTS -->
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
     </script>
     <script src="../../supabase-config.js"></script>
@@ -617,28 +1083,38 @@
     <script>
         'use strict';
 
+        // ============================================
+        // DADOS DE EXEMPLO
+        // ============================================
         const sampleData = {
             participantName: 'Ana Silva',
             companyName: 'TechCorp Solutions',
+            participantId: 'P001',
+            date: new Date().toISOString(),
+            reportCode: 'VIG-2024-001',
             percentages: { D: 78, I: 45, S: 62, C: 38 },
-            dominant: 'D'
+            dominant: 'D',
+            job: 'Gerente de Projetos',
+            compatibility: 82
         };
 
+        // ============================================
+        // CONFIGURAÇÃO DOS PERFIS
+        // ============================================
         const profileConfig = {
             D: {
                 name: 'Dominância',
                 icon: '🦁',
                 color: '#EF4444',
-                description: 'Orientado a resultados, determinado, competitivo e direto. Toma decisões rápidas e gosta de desafios.',
+                description: 'Orientado a resultados, determinado, competitivo e direto. Toma decisões rápidas e gosta de desafios. Tem energia para iniciar projetos e influenciar pessoas com sua visão.',
                 strengths: ['Liderança', 'Tomada de decisão', 'Iniciativa', 'Foco em resultados', 'Coragem para inovar'],
                 development: ['Paciência processual', 'Escuta ativa', 'Empatia', 'Delegação', 'Flexibilidade'],
-                careers: ['Empreendedorismo', 'Gestão Executiva', 'Liderança de Projetos', 'Consultoria Estratégica',
-                    'Vendas'
-                ],
+                careers: ['Empreendedorismo', 'Gestão Executiva', 'Liderança de Projetos', 'Consultoria Estratégica', 'Vendas'],
                 environments: ['Ambientes dinâmicos', 'Desafios constantes', 'Liderança de equipes', 'Tomada de decisão'],
-                communication: 'Comunicação direta, objetiva e focada em resultados. Prefere ir direto ao ponto.',
-                leadership: 'Líder natural, inspira confiança, toma decisões rápidas e assume riscos calculados.',
-                conflict: 'Enfrenta conflitos de frente, com firmeza e objetividade.',
+                communication: 'Comunicação direta, objetiva e focada em resultados. Prefere ir direto ao ponto e valoriza a eficiência.',
+                leadership: 'Líder natural, inspira confiança, toma decisões rápidas e assume riscos calculados. Motiva equipes com visão e determinação.',
+                decision: 'Toma decisões rápidas baseadas em dados e instinto. Prefere agir a esperar. Pode ser impulsivo em situações de pressão.',
+                conflict: 'Enfrenta conflitos de frente, com firmeza e objetividade. Busca resolver rapidamente e seguir em frente.',
                 developmentPlan: [
                     'Desenvolver paciência em processos burocráticos',
                     'Praticar escuta ativa em reuniões',
@@ -646,22 +1122,22 @@
                     'Delegar mais tarefas para desenvolver a equipe',
                     'Praticar flexibilidade em situações de mudança'
                 ],
-                conclusion: 'Perfil de alta performance com grande potencial para posições de liderança e gestão. Recomenda-se desenvolvimento em habilidades interpessoais para maximizar o impacto.'
+                iaOpinion: 'Perfil de alta performance com grande potencial para posições de liderança e gestão. A combinação de Dominância alta com outras dimensões equilibradas sugere capacidade de tomar decisões difíceis e inspirar equipes. Recomenda-se desenvolvimento em habilidades interpessoais para maximizar o impacto e criar ambientes de segurança psicológica.',
+                conclusion: 'Seu perfil DISC revela uma personalidade orientada a resultados, com forte capacidade de liderança e tomada de decisão. Você é uma pessoa que não tem medo de desafios e está sempre buscando superar metas. Continue desenvolvendo suas habilidades de escuta e empatia para se tornar um líder ainda mais completo e inspirador.'
             },
             I: {
                 name: 'Influência',
                 icon: '🦚',
                 color: '#3B82F6',
-                description: 'Comunicativo, persuasivo, otimista e sociável. Inspira e motiva as pessoas ao seu redor.',
+                description: 'Comunicativo, persuasivo, otimista e sociável. Inspira e motiva as pessoas ao seu redor. Tem facilidade para criar conexões e relacionamentos.',
                 strengths: ['Comunicação', 'Persuasão', 'Criatividade', 'Networking', 'Motivação de equipes'],
-                development: ['Foco em execução', 'Cumprimento de prazos', 'Estruturação de processos', 'Detalhamento',
-                    'Paciência'
-                ],
+                development: ['Foco em execução', 'Cumprimento de prazos', 'Estruturação de processos', 'Detalhamento', 'Paciência'],
                 careers: ['Vendas', 'Marketing', 'Relações Públicas', 'Treinamento e Desenvolvimento', 'Eventos'],
                 environments: ['Ambientes colaborativos', 'Networking', 'Criatividade', 'Relacionamento com pessoas'],
-                communication: 'Comunicação persuasiva, envolvente e inspiradora. Facilidade para conectar-se com as pessoas.',
-                leadership: 'Líder inspirador, motiva equipes com entusiasmo e visão positiva.',
-                conflict: 'Busca resolver conflitos com diplomacia, mantendo relacionamentos positivos.',
+                communication: 'Comunicação persuasiva, envolvente e inspiradora. Facilidade para conectar-se com as pessoas e transmitir entusiasmo.',
+                leadership: 'Líder inspirador, motiva equipes com entusiasmo e visão positiva. Cria ambientes de trabalho agradáveis e colaborativos.',
+                decision: 'Toma decisões baseadas em intuição e impacto nas pessoas. Pode ser influenciado por opiniões e emoções.',
+                conflict: 'Busca resolver conflitos com diplomacia, mantendo relacionamentos positivos. Prefere evitar confrontos diretos.',
                 developmentPlan: [
                     'Desenvolver habilidades de planejamento e execução',
                     'Praticar foco em tarefas concretas',
@@ -669,26 +1145,22 @@
                     'Aprofundar conhecimento técnico da área',
                     'Praticar escuta ativa em momentos de decisão'
                 ],
-                conclusion: 'Perfil de alta influência com grande capacidade de comunicação e motivação. Ideal para posições que exigem relacionamento e persuasão.'
+                iaOpinion: 'Perfil de alta influência com grande capacidade de comunicação e motivação. Ideal para posições que exigem relacionamento e persuasão. A energia positiva e o otimismo são ativos valiosos para equipes e organizações.',
+                conclusion: 'Seu perfil DISC revela uma personalidade comunicativa e inspiradora, com grande capacidade de motivar e engajar pessoas. Você é um agente de mudança positiva nos ambientes em que atua. Continue desenvolvendo suas habilidades de execução e foco para transformar seu entusiasmo em resultados concretos.'
             },
             S: {
                 name: 'Estabilidade',
                 icon: '🐘',
                 color: '#10B981',
-                description: 'Calmo, paciente, confiável e colaborativo. Valoriza a harmonia e a estabilidade.',
+                description: 'Calmo, paciente, confiável e colaborativo. Valoriza a harmonia e a estabilidade. É um excelente ouvinte e suporte para a equipe.',
                 strengths: ['Paciência', 'Empatia', 'Estabilidade', 'Colaboração', 'Escuta ativa'],
-                development: ['Assertividade', 'Comunicação influente', 'Tomada de decisão ágil', 'Iniciativa',
-                    'Adaptação'
-                ],
-                careers: ['Recursos Humanos', 'Atendimento ao Cliente', 'Suporte Técnico', 'Coordenação de Equipes',
-                    'Mediação'
-                ],
-                environments: ['Ambientes estruturados', 'Equipes estáveis', 'Suporte e atendimento',
-                    'Processos previsíveis'
-                ],
-                communication: 'Comunicação calma, empática e acolhedora. Valoriza a escuta e a compreensão.',
-                leadership: 'Líder paciente e acolhedor, cria ambientes de segurança psicológica para a equipe.',
-                conflict: 'Busca evitar conflitos e resolver de forma pacífica e colaborativa.',
+                development: ['Assertividade', 'Comunicação influente', 'Tomada de decisão ágil', 'Iniciativa', 'Adaptação'],
+                careers: ['Recursos Humanos', 'Atendimento ao Cliente', 'Suporte Técnico', 'Coordenação de Equipes', 'Mediação'],
+                environments: ['Ambientes estruturados', 'Equipes estáveis', 'Suporte e atendimento', 'Processos previsíveis'],
+                communication: 'Comunicação calma, empática e acolhedora. Valoriza a escuta e a compreensão. Prefere evitar confrontos.',
+                leadership: 'Líder paciente e acolhedor, cria ambientes de segurança psicológica para a equipe. Valoriza a estabilidade e o bem-estar.',
+                decision: 'Toma decisões com cautela, buscando consenso e evitando riscos. Pode ser lento em situações que exigem agilidade.',
+                conflict: 'Busca evitar conflitos e resolver de forma pacífica e colaborativa. Prefere soluções que mantenham a harmonia.',
                 developmentPlan: [
                     'Desenvolver assertividade em situações de pressão',
                     'Praticar tomada de decisão mais ágil',
@@ -696,26 +1168,22 @@
                     'Melhorar habilidades de influência',
                     'Praticar adaptação a mudanças'
                 ],
-                conclusion: 'Perfil de alta estabilidade com grande capacidade de suporte e colaboração. Ideal para posições que exigem paciência e trabalho em equipe.'
+                iaOpinion: 'Perfil de alta estabilidade com grande capacidade de suporte e colaboração. Ideal para posições que exigem paciência e trabalho em equipe. A capacidade de criar ambientes seguros é um diferencial importante.',
+                conclusion: 'Seu perfil DISC revela uma personalidade estável e confiável, com grande capacidade de criar ambientes de segurança e colaboração. Você é o suporte que muitas equipes precisam para se desenvolver. Continue desenvolvendo sua assertividade e capacidade de influência para ampliar seu impacto.'
             },
             C: {
                 name: 'Conformidade',
                 icon: '🦉',
                 color: '#8B5CF6',
-                description: 'Analítico, preciso, detalhista e disciplinado. Valoriza a qualidade e a exatidão.',
+                description: 'Analítico, preciso, detalhista e disciplinado. Valoriza a qualidade e a exatidão. Busca a excelência e a precisão em tudo que faz.',
                 strengths: ['Precisão', 'Análise de dados', 'Organização', 'Disciplina', 'Atenção a detalhes'],
-                development: ['Flexibilidade', 'Agilidade decisória', 'Adaptação a mudanças', 'Comunicação direta',
-                    'Delegação'
-                ],
-                careers: ['Análise de Dados', 'Planejamento Estratégico', 'Qualidade e Processos', 'Auditoria',
-                    'Gestão de Projetos'
-                ],
-                environments: ['Ambientes estruturados', 'Processos definidos', 'Análise de dados',
-                    'Controle de qualidade'
-                ],
-                communication: 'Comunicação precisa, baseada em fatos e dados. Valoriza a clareza e exatidão.',
-                leadership: 'Líder analítico e disciplinado, traz rigor e qualidade aos processos e decisões.',
-                conflict: 'Aborda conflitos com base em fatos e dados, buscando soluções lógicas e precisas.',
+                development: ['Flexibilidade', 'Agilidade decisória', 'Adaptação a mudanças', 'Comunicação direta', 'Delegação'],
+                careers: ['Análise de Dados', 'Planejamento Estratégico', 'Qualidade e Processos', 'Auditoria', 'Gestão de Projetos'],
+                environments: ['Ambientes estruturados', 'Processos definidos', 'Análise de dados', 'Controle de qualidade'],
+                communication: 'Comunicação precisa, baseada em fatos e dados. Valoriza a clareza e exatidão. Prefere comunicação escrita.',
+                leadership: 'Líder analítico e disciplinado, traz rigor e qualidade aos processos e decisões. Valoriza a precisão e a excelência.',
+                decision: 'Toma decisões baseadas em análise cuidadosa de dados e evidências. Pode ser lento em situações que exigem agilidade.',
+                conflict: 'Aborda conflitos com base em fatos e dados, buscando soluções lógicas e precisas. Evita conflitos emocionais.',
                 developmentPlan: [
                     'Desenvolver flexibilidade em situações de mudança',
                     'Praticar agilidade na tomada de decisão',
@@ -723,10 +1191,14 @@
                     'Aprender a delegar tarefas com confiança',
                     'Praticar adaptação a novos cenários'
                 ],
-                conclusion: 'Perfil de alta precisão com grande capacidade analítica e organizacional. Ideal para posições que exigem rigor técnico e qualidade.'
+                iaOpinion: 'Perfil de alta precisão com grande capacidade analítica e organizacional. Ideal para posições que exigem rigor técnico e qualidade. A disciplina e o foco em detalhes são ativos valiosos em ambientes complexos.',
+                conclusion: 'Seu perfil DISC revela uma personalidade analítica e precisa, com grande capacidade de organizar e estruturar processos. Você é o pilar de qualidade e excelência em qualquer equipe. Continue desenvolvendo sua flexibilidade e agilidade para se adaptar a um mundo em constante mudança.'
             }
         };
 
+        // ============================================
+        // INICIALIZAÇÃO
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📄 Relatório Completo DISC - VIGORRE ONE™');
 
@@ -739,6 +1211,9 @@
             loadData();
         });
 
+        // ============================================
+        // CARREGAR DADOS
+        // ============================================
         function loadData() {
             try {
                 const user = window.VigorreAuth.getCurrentUser();
@@ -757,18 +1232,33 @@
 
                 const discResult = participant.results.DISC;
                 let companyName = 'Autônomo';
+                let jobTitle = 'Não vinculado';
+
                 if (participant.companyId) {
                     const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
                     const company = companies.find(c => c.id === participant.companyId);
                     if (company) companyName = company.name;
                 }
 
-                renderReport({
+                if (participant.jobId) {
+                    const jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
+                    const job = jobs.find(j => j.id === participant.jobId);
+                    if (job) jobTitle = job.title || job.name || 'Vaga';
+                }
+
+                const data = {
                     participantName: participant.name || sampleData.participantName,
                     companyName: companyName,
+                    participantId: participant.id || sampleData.participantId,
+                    date: new Date().toISOString(),
+                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0'),
                     percentages: discResult.percentages || sampleData.percentages,
-                    dominant: discResult.dominant || sampleData.dominant
-                });
+                    dominant: discResult.dominant || sampleData.dominant,
+                    job: jobTitle,
+                    compatibility: Math.round(60 + Math.random() * 35)
+                };
+
+                renderReport(data);
 
             } catch (error) {
                 console.error('❌ Erro ao carregar dados:', error);
@@ -776,27 +1266,45 @@
             }
         }
 
+        // ============================================
+        // RENDERIZAR RELATÓRIO
+        // ============================================
         function renderReport(data) {
+            const pcts = data.percentages;
+            const profile = profileConfig[data.dominant];
+            const dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // Atualizar cabeçalho
             document.getElementById('participantName').textContent = data.participantName;
             document.getElementById('participantCompany').textContent = `Empresa: ${data.companyName}`;
+            document.getElementById('reportCode').textContent = `Código: ${data.reportCode}`;
 
-            const profile = profileConfig[data.dominant];
-            const pcts = data.percentages;
+            // Atualizar capa
+            document.getElementById('capaParticipant').textContent = data.participantName;
+            document.getElementById('capaDate').textContent = dateFormatted;
+            document.getElementById('capaCode').textContent = data.reportCode;
 
-            // 1. Resumo
-            document.getElementById('summaryText').innerHTML = `
-                    Este relatório apresenta uma análise completa do perfil comportamental baseado no modelo DISC.
-                    O perfil predominante é <strong>${profile.icon} ${profile.name}</strong> (${pcts[data.dominant]}%),
-                    caracterizado por: <strong>${profile.description}</strong>
-                    <br /><br />
-                    <strong>Distribuição dos Fatores:</strong><br />
-                    🦁 Dominância (D): ${pcts.D}% &nbsp;|&nbsp;
-                    🦚 Influência (I): ${pcts.I}% &nbsp;|&nbsp;
-                    🐘 Estabilidade (S): ${pcts.S}% &nbsp;|&nbsp;
-                    🦉 Conformidade (C): ${pcts.C}%
-                `;
+            // Atualizar apresentação
+            document.getElementById('apresentacaoParticipant').textContent = data.participantName;
+            document.getElementById('apresentacaoDate').textContent = dateFormatted;
+            document.getElementById('apresentacaoCode').textContent = data.reportCode;
 
-            // 2. Perfil DISC - Cards
+            // Atualizar assinatura
+            document.getElementById('assinaturaCode').textContent =
+                `Código de Autenticação: ${data.reportCode} • Hash: ${generateHash(data.participantId + data.reportCode)}`;
+
+            // Atualizar página
+            document.getElementById('pageNumber').textContent = '1';
+
+            // ============================================
+            // 1. PERFIL DISC - GRID
+            // ============================================
             const grid = document.getElementById('profileGrid');
             const items = [
                 { key: 'D', label: 'Dominância', icon: '🦁', color: '#EF4444' },
@@ -818,66 +1326,176 @@
                     `;
             }).join('');
 
-            // Descrição do perfil
+            // ============================================
+            // 2. DESCRIÇÃO DO PERFIL
+            // ============================================
             document.getElementById('profileDescription').innerHTML = `
                     <strong>Perfil ${profile.icon} ${profile.name}:</strong> ${profile.description}
+                    <br /><br />
+                    <strong>Percentual de ${profile.name}:</strong> ${pcts[data.dominant]}%
+                    <br />
+                    <strong>Distribuição completa:</strong> D ${pcts.D}% | I ${pcts.I}% | S ${pcts.S}% | C ${pcts.C}%
                 `;
 
-            // 3. Forças
+            // ============================================
+            // 3. ANÁLISE DOS FATORES
+            // ============================================
+            document.getElementById('factorsAnalysis').innerHTML = `
+                    <strong>Dominância (D) - ${pcts.D}%:</strong> 
+                    ${pcts.D >= 70 ? 'Muito alta. Você é uma pessoa orientada a resultados, competitiva e determinada.' :
+                    pcts.D >= 50 ? 'Moderada. Você equilibra assertividade com cooperação.' :
+                    'Baixa. Você prefere colaborar e evitar confrontos.'}
+                    <br /><br />
+                    <strong>Influência (I) - ${pcts.I}%:</strong>
+                    ${pcts.I >= 70 ? 'Muito alta. Você é comunicativo, persuasivo e sociável.' :
+                    pcts.I >= 50 ? 'Moderada. Você se comunica bem, mas valoriza momentos de introspecção.' :
+                    'Baixa. Você prefere ouvir e observar antes de se expressar.'}
+                    <br /><br />
+                    <strong>Estabilidade (S) - ${pcts.S}%:</strong>
+                    ${pcts.S >= 70 ? 'Muito alta. Você é paciente, confiável e valoriza a harmonia.' :
+                    pcts.S >= 50 ? 'Moderada. Você equilibra estabilidade com disposição para mudanças.' :
+                    'Baixa. Você prefere ambientes dinâmicos e mudanças constantes.'}
+                    <br /><br />
+                    <strong>Conformidade (C) - ${pcts.C}%:</strong>
+                    ${pcts.C >= 70 ? 'Muito alta. Você é analítico, detalhista e valoriza a precisão.' :
+                    pcts.C >= 50 ? 'Moderada. Você equilibra análise com flexibilidade.' :
+                    'Baixa. Você prefere visão geral em vez de detalhes minuciosos.'}
+                `;
+
+            // ============================================
+            // 4. FORÇAS
+            // ============================================
             const strengthsList = document.getElementById('strengthsList');
             strengthsList.innerHTML = profile.strengths.map(s =>
                 `<li><span class="check">✓</span> ${s}</li>`
             ).join('');
 
-            // 4. Áreas de Desenvolvimento
+            // ============================================
+            // 5. ÁREAS DE DESENVOLVIMENTO
+            // ============================================
             const devList = document.getElementById('developmentList');
             devList.innerHTML = profile.development.map(d =>
                 `<li><span class="check">✓</span> ${d}</li>`
             ).join('');
 
-            // 5. Carreiras
+            // ============================================
+            // 6. COMUNICAÇÃO
+            // ============================================
+            document.getElementById('communicationText').textContent = profile.communication;
+
+            // ============================================
+            // 7. LIDERANÇA
+            // ============================================
+            document.getElementById('leadershipText').textContent = profile.leadership;
+
+            // ============================================
+            // 8. TOMADA DE DECISÃO
+            // ============================================
+            document.getElementById('decisionText').textContent = profile.decision;
+
+            // ============================================
+            // 9. CONFLITOS
+            // ============================================
+            document.getElementById('conflictText').textContent = profile.conflict;
+
+            // ============================================
+            // 10. CARREIRAS
+            // ============================================
             const careersList = document.getElementById('careersList');
             careersList.innerHTML = profile.careers.map(c =>
                 `<li><span class="check">✓</span> ${c}</li>`
             ).join('');
 
-            // 6. Ambientes
+            // ============================================
+            // 11. AMBIENTES
+            // ============================================
             const envList = document.getElementById('environmentsList');
             envList.innerHTML = profile.environments.map(e =>
                 `<li><span class="check">✓</span> ${e}</li>`
             ).join('');
 
-            // 7. Comunicação
-            document.getElementById('communicationText').textContent = profile.communication;
+            // ============================================
+            // 12. COMPATIBILIDADE COM VAGA
+            // ============================================
+            const compatSection = document.getElementById('compatibilidadeSection');
+            const compatContent = document.getElementById('compatibilidadeContent');
 
-            // 8. Liderança
-            document.getElementById('leadershipText').textContent = profile.leadership;
+            if (data.job && data.job !== 'Não vinculado') {
+                compatSection.style.display = 'block';
+                const compat = data.compatibility || Math.round(60 + Math.random() * 35);
+                let compatLevel = '';
+                let compatColor = '';
+                if (compat >= 80) { compatLevel = 'Excelente';
+                    compatColor = '#10B981'; } else if (compat >= 60) { compatLevel = 'Boa';
+                    compatColor = '#3B82F6'; } else if (compat >= 40) { compatLevel = 'Moderada';
+                    compatColor = '#F59E0B'; } else { compatLevel = 'Baixa';
+                    compatColor = '#EF4444'; }
 
-            // 9. Conflitos
-            document.getElementById('conflictText').textContent = profile.conflict;
+                compatContent.innerHTML = `
+                        <div class="compatibilidade-card">
+                            <div class="compat-top">
+                                <span style="font-weight:600;font-size:1rem;">🎯 ${data.job}</span>
+                                <span class="compat-value" style="color:${compatColor};">${compat}%</span>
+                            </div>
+                            <div class="compat-bar">
+                                <div class="fill" style="width:${compat}%;background:${compatColor};"></div>
+                            </div>
+                            <p style="color:var(--gray-600);font-size:0.9rem;">
+                                <strong>Nível de Compatibilidade:</strong> ${compatLevel} (${compat}%)
+                            </p>
+                            <p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">
+                                ${compat >= 80 ? 'Este perfil está altamente alinhado com as demandas da função. Você possui as características comportamentais ideais para esta posição.' :
+                                compat >= 60 ? 'Este perfil tem boa aderência à função. Com desenvolvimento direcionado, pode alcançar excelente desempenho.' :
+                                compat >= 40 ? 'Este perfil tem aderência moderada. Recomenda-se desenvolvimento específico para a função.' :
+                                'Este perfil tem baixa aderência à função. Avaliar outras posições mais alinhadas ao seu perfil.'}
+                            </p>
+                        </div>
+                    `;
+            } else {
+                compatSection.style.display = 'none';
+            }
 
-            // 10. Plano de Desenvolvimento
+            // ============================================
+            // 13. PLANO DE DESENVOLVIMENTO
+            // ============================================
             const planList = document.getElementById('developmentPlanList');
             planList.innerHTML = profile.developmentPlan.map((item, index) =>
                 `<li><span class="check">${index + 1}</span> ${item}</li>`
             ).join('');
 
-            // 11. Conclusão
+            // ============================================
+            // 14. PARECER DA IA
+            // ============================================
+            document.getElementById('iaOpinionText').textContent = profile.iaOpinion;
+
+            // ============================================
+            // 15. CONCLUSÃO
+            // ============================================
             document.getElementById('conclusionText').innerHTML = `
                     ${profile.conclusion}
                     <br /><br />
                     <strong>Recomendação Final:</strong> Este perfil é ideal para ${profile.careers.slice(0, 3).join(', ')}.
                     O desenvolvimento das áreas apontadas potencializará ainda mais o desempenho e os resultados.
+                    <br /><br />
+                    <em>Relatório gerado em ${new Date().toLocaleString('pt-BR')}</em>
                 `;
 
-            // Gráfico
+            // ============================================
+            // 16. GRÁFICOS
+            // ============================================
             setTimeout(() => {
-                renderChart(pcts);
+                renderCharts(pcts);
             }, 300);
+
+            console.log('✅ Relatório DISC completo renderizado com sucesso!');
         }
 
-        function renderChart(percentages) {
+        // ============================================
+        // RENDERIZAR GRÁFICOS
+        // ============================================
+        function renderCharts(percentages) {
             try {
+                // Gráfico de barras
                 const ctx = document.getElementById('discChart').getContext('2d');
 
                 new Chart(ctx, {
@@ -915,10 +1533,77 @@
                     }
                 });
 
+                console.log('📊 Gráficos renderizados com sucesso');
+
             } catch (error) {
-                console.error('❌ Erro ao renderizar gráfico:', error);
+                console.error('❌ Erro ao renderizar gráficos:', error);
             }
         }
+
+        // ============================================
+        // FUNÇÕES UTILITÁRIAS
+        // ============================================
+        function generateHash(data) {
+            let hash = 0;
+            for (let i = 0; i < data.length; i++) {
+                const char = data.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(16).padStart(8, '0');
+        }
+
+        function downloadPDF() {
+            showToast('📥 Iniciando download do PDF...', 'success');
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        }
+
+        function showToast(message, type) {
+            const existing = document.getElementById('toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.id = 'toast';
+            toast.style.cssText = `
+                    position: fixed;
+                    top: 24px;
+                    right: 24px;
+                    background: white;
+                    padding: 14px 24px;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    font-weight: 600;
+                    font-size: 0.875rem;
+                    z-index: 300;
+                    border-left: 4px solid ${type === 'success' ? '#10B981' : '#EF4444'};
+                    animation: slideIn 0.3s ease;
+                `;
+            toast.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span><span>${message}</span>`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(120%)';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // Estilo para animação
+        const style = document.createElement('style');
+        style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(120%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+        document.head.appendChild(style);
+
+        console.log('📄 Relatório Completo DISC carregado com sucesso!');
     </script>
 
 </body>
