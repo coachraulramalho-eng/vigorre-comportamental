@@ -10,151 +10,743 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* ============================================
+           VIGORRE ONE™ - RELATÓRIO COMPLETO IE
+           ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --navy: #0A2540; --blue: #1D4ED8; --purple: #7C3AED; --cyan: #06B6D4;
-            --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
-            --gray-200: #E2E8F0; --gray-300: #CBD5E1; --gray-400: #94A3B8;
-            --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155;
-            --gray-800: #1E293B; --gray-900: #0F172A;
-            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
-            --shadow: 0 4px 24px rgba(10,37,64,0.06);
-            --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
-            --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+            --navy: #0A2540;
+            --blue: #1D4ED8;
+            --blue-light: #3B82F6;
+            --cyan: #06B6D4;
+            --gold: #D97706;
+            --purple: #7C3AED;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
+            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; padding: 20px; }
-        .container { max-width: 1100px; margin: 0 auto; }
 
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           HEADER PREMIUM
+           ============================================ */
         .header-premium {
-            background: var(--navy); color: white; padding: 24px 32px;
+            background: var(--navy);
+            color: white;
+            padding: 24px 32px;
             border-radius: var(--radius) var(--radius) 0 0;
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
         }
-        .header-premium .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .header-premium .logo .logo-img { height: 44px; width: auto; display: block; }
-        .header-premium .logo .logo-text .name { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 800; color: white; }
-        .header-premium .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
-        .header-premium .logo .logo-text .sub { font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; }
-        .header-premium .header-title { text-align: center; }
-        .header-premium .header-title h1 { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700; }
-        .header-premium .header-title .subtitle { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
-        .header-premium .header-user { text-align: right; }
-        .header-premium .header-user .name { font-weight: 600; font-size: 0.9rem; }
-        .header-premium .header-user .company { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
-        .header-premium .header-code { font-size: 0.65rem; color: rgba(255,255,255,0.3); font-family: 'Courier New', monospace; margin-top: 2px; }
 
-        .report-body { background: white; padding: 32px; border-left: 1px solid var(--gray-200); border-right: 1px solid var(--gray-200); }
-        .section { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--gray-100); }
-        .section:last-child { border-bottom: none; margin-bottom: 0; }
-        .section-title { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .section-title .number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--purple); color: white; border-radius: 50%; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
-        .section-text { color: var(--gray-600); line-height: 1.8; font-size: 0.95rem; }
-        .section-text strong { color: var(--gray-800); }
+        .header-premium .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
 
-        .capa { text-align: center; padding: 60px 40px; border-bottom: 2px solid var(--gray-200); margin-bottom: 32px; }
-        .capa .capa-logo { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
-        .capa .capa-logo .tm { font-size: 0.7rem; vertical-align: super; color: var(--purple); }
-        .capa .capa-sub { font-size: 0.9rem; color: var(--gray-400); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 40px; }
-        .capa .capa-title { font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: var(--gray-800); margin-bottom: 8px; }
-        .capa .capa-title .highlight { color: var(--purple); }
-        .capa .capa-divider { width: 80px; height: 3px; background: linear-gradient(135deg, var(--purple), var(--cyan)); margin: 20px auto; border-radius: 2px; }
-        .capa .capa-info { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; max-width: 600px; margin: 30px auto 0; }
-        .capa .capa-info-item { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 12px 16px; }
-        .capa .capa-info-item .label { font-size: 0.65rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; }
-        .capa .capa-info-item .value { font-size: 0.9rem; font-weight: 600; color: var(--gray-800); margin-top: 2px; }
-        .capa .capa-qr { margin-top: 30px; }
-        .capa .capa-qr .qr-placeholder { width: 80px; height: 80px; background: var(--gray-100); border: 2px dashed var(--gray-300); border-radius: var(--radius-sm); margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--gray-400); }
+        .header-premium .logo .logo-img {
+            height: 44px;
+            width: auto;
+            display: block;
+        }
 
-        .sumario { background: var(--gray-50); border-radius: var(--radius-sm); padding: 24px 32px; margin-bottom: 32px; border: 1px solid var(--gray-200); }
-        .sumario h3 { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 12px; }
-        .sumario .sumario-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--gray-100); font-size: 0.85rem; color: var(--gray-600); }
-        .sumario .sumario-item:last-child { border-bottom: none; }
-        .sumario .sumario-item .page { color: var(--gray-400); }
+        .header-premium .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+        }
 
-        .pillars-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 12px 0; }
-        .pillar-card { background: var(--gray-50); border-radius: var(--radius-sm); padding: 16px 20px; border: 1px solid var(--gray-200); text-align: center; }
-        .pillar-card .pillar-icon { font-size: 1.5rem; }
-        .pillar-card .pillar-name { font-weight: 700; font-size: 0.8rem; color: var(--gray-700); }
-        .pillar-card .pillar-value { font-size: 1.2rem; font-weight: 700; color: var(--purple); }
-        .pillar-card .pillar-bar { height: 4px; background: var(--gray-200); border-radius: 2px; margin-top: 6px; overflow: hidden; }
-        .pillar-card .pillar-bar .fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
+        .header-premium .logo .logo-text .name .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
 
-        .chart-container { height: 240px; position: relative; margin: 16px 0; }
-        .badge-level { display: inline-block; padding: 4px 16px; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600; }
-        .badge-level.excelente { background: #D1FAE5; color: #065F46; }
-        .badge-level.alta { background: #DBEAFE; color: #1E40AF; }
-        .badge-level.boa { background: #FEF3C7; color: #92400E; }
-        .badge-level.desenvolvimento { background: #FEE2E2; color: #991B1B; }
+        .header-premium .logo .logo-text .sub {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
-        .feature-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0; }
-        .feature-list li { background: var(--gray-50); padding: 10px 16px; border-radius: 6px; color: var(--gray-700); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
-        .feature-list li .check { color: #10B981; font-weight: 700; }
+        .header-premium .header-title {
+            text-align: center;
+        }
 
-        .compatibilidade-card { background: var(--gray-50); border-radius: var(--radius-sm); padding: 24px; border: 1px solid var(--gray-200); margin: 16px 0; }
-        .compatibilidade-card .compat-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        .compatibilidade-card .compat-value { font-size: 2.5rem; font-weight: 800; color: var(--blue); }
-        .compatibilidade-card .compat-bar { height: 8px; background: var(--gray-200); border-radius: 4px; margin: 12px 0; overflow: hidden; }
-        .compatibilidade-card .compat-bar .fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; }
+        .header-premium .header-title h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
 
-        .assinatura { text-align: center; padding: 32px 0; border-top: 2px solid var(--gray-200); margin-top: 16px; }
-        .assinatura .assinatura-qr { display: inline-block; padding: 16px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); margin-bottom: 12px; }
-        .assinatura .assinatura-qr .qr-placeholder { width: 80px; height: 80px; background: var(--gray-100); border: 2px dashed var(--gray-300); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--gray-400); }
-        .assinatura .assinatura-code { font-size: 0.7rem; color: var(--gray-400); font-family: 'Courier New', monospace; }
+        .header-premium .header-title .subtitle {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
 
+        .header-premium .header-user {
+            text-align: right;
+        }
+
+        .header-premium .header-user .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .header-premium .header-user .company {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .header-premium .header-code {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-family: 'Courier New', monospace;
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           CORPO DO RELATÓRIO
+           ============================================ */
+        .report-body {
+            background: white;
+            padding: 32px;
+            border-left: 1px solid var(--gray-200);
+            border-right: 1px solid var(--gray-200);
+        }
+
+        .section {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title .number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--purple);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .section-text {
+            color: var(--gray-600);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .section-text strong {
+            color: var(--gray-800);
+        }
+
+        /* ============================================
+           CAPA
+           ============================================ */
+        .capa {
+            text-align: center;
+            padding: 60px 40px;
+            border-bottom: 2px solid var(--gray-200);
+            margin-bottom: 32px;
+        }
+
+        .capa .capa-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .capa .capa-logo .tm {
+            font-size: 0.7rem;
+            vertical-align: super;
+            color: var(--purple);
+        }
+
+        .capa .capa-sub {
+            font-size: 0.9rem;
+            color: var(--gray-400);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .capa .capa-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 8px;
+        }
+
+        .capa .capa-title .highlight {
+            color: var(--purple);
+        }
+
+        .capa .capa-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .capa .capa-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+
+        .capa .capa-info-item {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+        }
+
+        .capa .capa-info-item .label {
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .capa .capa-info-item .value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-top: 2px;
+        }
+
+        .capa .capa-qr {
+            margin-top: 30px;
+        }
+
+        .capa .capa-qr .qr-placeholder {
+            width: 80px;
+            height: 80px;
+            background: var(--gray-100);
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-sm);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+        }
+
+        /* ============================================
+           SUMÁRIO
+           ============================================ */
+        .sumario {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 24px 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .sumario h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+
+        .sumario .sumario-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        .sumario .sumario-item:last-child {
+            border-bottom: none;
+        }
+
+        .sumario .sumario-item .page {
+            color: var(--gray-400);
+        }
+
+        /* ============================================
+           PILARES
+           ============================================ */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 12px 0;
+        }
+
+        .pillar-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+        }
+
+        .pillar-card .pillar-icon {
+            font-size: 1.5rem;
+        }
+
+        .pillar-card .pillar-name {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--gray-700);
+        }
+
+        .pillar-card .pillar-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--purple);
+        }
+
+        .pillar-card .pillar-bar {
+            height: 4px;
+            background: var(--gray-200);
+            border-radius: 2px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+
+        .pillar-card .pillar-bar .fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.8s ease;
+        }
+
+        /* ============================================
+           GRÁFICOS
+           ============================================ */
+        .chart-container {
+            height: 240px;
+            position: relative;
+            margin: 16px 0;
+        }
+
+        .badge-level {
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-level.excelente {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        .badge-level.alta {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+        .badge-level.boa {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        .badge-level.desenvolvimento {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        /* ============================================
+           LISTAS
+           ============================================ */
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            padding: 0;
+        }
+
+        .feature-list li {
+            background: var(--gray-50);
+            padding: 10px 16px;
+            border-radius: 6px;
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-list li .check {
+            color: #10B981;
+            font-weight: 700;
+        }
+
+        /* ============================================
+           COMPATIBILIDADE
+           ============================================ */
+        .compatibilidade-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            margin: 16px 0;
+        }
+
+        .compatibilidade-card .compat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .compatibilidade-card .compat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--blue);
+        }
+
+        .compatibilidade-card .compat-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+
+        .compatibilidade-card .compat-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+
+        /* ============================================
+           ASSINATURA
+           ============================================ */
+        .assinatura {
+            text-align: center;
+            padding: 32px 0;
+            border-top: 2px solid var(--gray-200);
+            margin-top: 16px;
+        }
+
+        .assinatura .assinatura-qr {
+            display: inline-block;
+            padding: 16px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+        }
+
+        .assinatura .assinatura-qr .qr-placeholder {
+            width: 80px;
+            height: 80px;
+            background: var(--gray-100);
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+        }
+
+        .assinatura .assinatura-code {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            font-family: 'Courier New', monospace;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
         .footer-premium {
-            background: var(--navy); color: white; padding: 20px 32px;
+            background: var(--navy);
+            color: white;
+            padding: 20px 32px;
             border-radius: 0 0 var(--radius) var(--radius);
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
         }
-        .footer-premium .footer-logo { display: flex; align-items: center; gap: 10px; }
-        .footer-premium .footer-logo .logo-icon { width: 32px; height: 32px; background: var(--cyan); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.8rem; color: var(--navy); font-family: 'Poppins', sans-serif; }
-        .footer-premium .footer-logo .footer-text .name { font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700; }
-        .footer-premium .footer-logo .footer-text .name .tm { font-size: 0.35rem; vertical-align: super; color: var(--cyan); }
-        .footer-premium .footer-logo .footer-text .tagline { font-size: 0.55rem; color: rgba(255,255,255,0.3); }
-        .footer-premium .footer-contact { display: flex; gap: 16px; flex-wrap: wrap; }
-        .footer-premium .footer-contact a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.7rem; transition: var(--transition); }
-        .footer-premium .footer-contact a:hover { color: rgba(255,255,255,0.7); }
-        .footer-premium .footer-page { font-size: 0.7rem; color: rgba(255,255,255,0.3); }
 
-        .actions-bar { display: flex; justify-content: flex-end; gap: 12px; padding: 16px 0; border-top: 1px solid var(--gray-200); margin-top: 16px; }
-        .btn-action { padding: 10px 24px; border: none; border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
-        .btn-primary { background: linear-gradient(135deg, var(--blue), var(--cyan)); color: white; box-shadow: 0 4px 16px rgba(29,78,216,0.2); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.3); }
-        .btn-secondary { background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200); }
-        .btn-secondary:hover { background: var(--gray-200); }
-        .btn-success { background: #10B981; color: white; }
-        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.25); }
+        .footer-premium .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
+        .footer-premium .footer-logo .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--cyan);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.8rem;
+            color: var(--navy);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-premium .footer-logo .footer-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .footer-premium .footer-logo .footer-text .name .tm {
+            font-size: 0.35rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
+
+        .footer-premium .footer-logo .footer-text .tagline {
+            font-size: 0.55rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-premium .footer-contact {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-premium .footer-contact a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+
+        .footer-premium .footer-contact a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-premium .footer-page {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ============================================
+           ACTIONS
+           ============================================ */
+        .actions-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 16px 0;
+            border-top: 1px solid var(--gray-200);
+            margin-top: 16px;
+        }
+
+        .btn-action {
+            padding: 10px 24px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+        }
+
+        .btn-success {
+            background: #10B981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
         @media (max-width: 768px) {
-            .header-premium { flex-direction: column; text-align: center; }
-            .header-premium .header-user { text-align: center; }
-            .pillars-grid { grid-template-columns: 1fr 1fr; }
-            .feature-list { grid-template-columns: 1fr; }
-            .capa .capa-info { grid-template-columns: 1fr; }
-            .report-body { padding: 20px; }
-            .footer-premium { flex-direction: column; text-align: center; }
-            .actions-bar { flex-direction: column; }
-            .btn-action { justify-content: center; }
+            .header-premium {
+                flex-direction: column;
+                text-align: center;
+            }
+            .header-premium .header-user {
+                text-align: center;
+            }
+            .pillars-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+            .capa .capa-info {
+                grid-template-columns: 1fr;
+            }
+            .report-body {
+                padding: 20px;
+            }
+            .footer-premium {
+                flex-direction: column;
+                text-align: center;
+            }
+            .actions-bar {
+                flex-direction: column;
+            }
+            .btn-action {
+                justify-content: center;
+            }
         }
-        @media (max-width: 480px) { .pillars-grid { grid-template-columns: 1fr; } }
+
+        @media (max-width: 480px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media print {
-            body { background: white !important; padding: 0 !important; }
-            .header-premium { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; border-radius: 0 !important; }
-            .footer-premium { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; border-radius: 0 !important; }
-            .btn-action { display: none !important; }
-            .actions-bar { display: none !important; }
-            .report-body { border: none !important; }
-            .pillar-card { background: #F8FAFC !important; }
-            .feature-list li { background: #F8FAFC !important; }
-            .sumario { background: #F8FAFC !important; }
-            .capa .capa-info-item { background: #F8FAFC !important; }
-            .compatibilidade-card { background: #F8FAFC !important; }
-            .section { page-break-inside: avoid; }
+            body {
+                background: white !important;
+                padding: 0 !important;
+            }
+            .header-premium {
+                background: #0A2540 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                border-radius: 0 !important;
+            }
+            .footer-premium {
+                background: #0A2540 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                border-radius: 0 !important;
+            }
+            .btn-action {
+                display: none !important;
+            }
+            .actions-bar {
+                display: none !important;
+            }
+            .report-body {
+                border: none !important;
+            }
+            .pillar-card {
+                background: #F8FAFC !important;
+            }
+            .feature-list li {
+                background: #F8FAFC !important;
+            }
+            .sumario {
+                background: #F8FAFC !important;
+            }
+            .capa .capa-info-item {
+                background: #F8FAFC !important;
+            }
+            .compatibilidade-card {
+                background: #F8FAFC !important;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
+
+        <!-- ============================================
+        HEADER PREMIUM
+        ============================================ -->
         <header class="header-premium">
             <div class="logo">
                 <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
@@ -163,10 +755,12 @@
                     <span class="sub">People Analytics Enterprise</span>
                 </div>
             </div>
+
             <div class="header-title">
                 <h1>🧠 Relatório Completo IE</h1>
                 <div class="subtitle">Inteligência Emocional • Modelo Goleman</div>
             </div>
+
             <div class="header-user">
                 <div class="name" id="participantName">Carregando...</div>
                 <div class="company" id="participantCompany">Empresa: --</div>
@@ -174,21 +768,44 @@
             </div>
         </header>
 
+        <!-- ============================================
+        CORPO DO RELATÓRIO
+        ============================================ -->
         <div class="report-body">
+
+            <!-- ============================================
+            CAPA
+            ============================================ -->
             <section class="capa">
                 <div class="capa-logo">VIGORRE ONE<span class="tm">™</span></div>
                 <div class="capa-sub">People Analytics Enterprise</div>
                 <div class="capa-divider"></div>
                 <div class="capa-title">Relatório <span class="highlight">Completo</span> IE</div>
                 <p style="color: var(--gray-500); font-size: 0.95rem; margin-bottom: 8px;">Análise de Inteligência Emocional • Modelo Goleman</p>
+
                 <div class="capa-info">
-                    <div class="capa-info-item"><div class="label">Participante</div><div class="value" id="capaParticipant">Carregando...</div></div>
-                    <div class="capa-info-item"><div class="label">Data da Avaliação</div><div class="value" id="capaDate">--</div></div>
-                    <div class="capa-info-item"><div class="label">Código do Relatório</div><div class="value" id="capaCode">VIG-2024-001</div></div>
+                    <div class="capa-info-item">
+                        <div class="label">Participante</div>
+                        <div class="value" id="capaParticipant">Carregando...</div>
+                    </div>
+                    <div class="capa-info-item">
+                        <div class="label">Data da Avaliação</div>
+                        <div class="value" id="capaDate">--</div>
+                    </div>
+                    <div class="capa-info-item">
+                        <div class="label">Código do Relatório</div>
+                        <div class="value" id="capaCode">VIG-2024-001</div>
+                    </div>
                 </div>
-                <div class="capa-qr"><div class="qr-placeholder">🔲 QR Code</div></div>
+
+                <div class="capa-qr">
+                    <div class="qr-placeholder">🔲 QR Code</div>
+                </div>
             </section>
 
+            <!-- ============================================
+            SUMÁRIO
+            ============================================ -->
             <section class="sumario">
                 <h3>📑 Sumário</h3>
                 <div class="sumario-item"><span>1. Apresentação</span><span class="page">3</span></div>
@@ -208,12 +825,20 @@
                 <div class="sumario-item"><span>15. Conclusão</span><span class="page">19</span></div>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 1: APRESENTAÇÃO
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">1</span> Apresentação</h2>
                 <p class="section-text">
                     Este relatório apresenta uma análise completa da Inteligência Emocional (IE) baseada no modelo de Daniel Goleman.
                     O modelo avalia cinco pilares principais: <strong>Autoconsciência</strong>, <strong>Autorregulação</strong>,
                     <strong>Motivação</strong>, <strong>Empatia</strong> e <strong>Habilidades Sociais</strong>.
+                </p>
+                <p class="section-text" style="margin-top: 8px;">
+                    A Inteligência Emocional é a capacidade de reconhecer, compreender e gerenciar as próprias emoções
+                    e as emoções dos outros. Estudos mostram que a IE é um preditor mais forte de sucesso profissional
+                    do que o QI em muitas áreas.
                 </p>
                 <p class="section-text" style="margin-top: 8px;">
                     <strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br />
@@ -223,106 +848,211 @@
                 </p>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 2: COMO INTERPRETAR
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">2</span> Como Interpretar Este Relatório</h2>
                 <p class="section-text">
-                    A Inteligência Emocional é a capacidade de reconhecer, compreender e gerenciar as próprias emoções
-                    e as emoções dos outros. Este relatório oferece uma visão detalhada de suas competências emocionais,
-                    identificando áreas de força e oportunidades de desenvolvimento.
+                    Para obter o máximo proveito deste relatório, recomendamos que você:
+                </p>
+                <ul style="color: var(--gray-600); line-height: 2; font-size: 0.95rem; padding-left: 20px; margin-top: 8px;">
+                    <li>Leia o relatório completo, sem pular seções;</li>
+                    <li>Reflita sobre como cada pilar se manifesta no seu dia a dia;</li>
+                    <li>Busque feedback de pessoas que convivem com você profissionalmente;</li>
+                    <li>Utilize as recomendações como base para um plano de desenvolvimento;</li>
+                    <li>Revisite o relatório periodicamente para acompanhar sua evolução.</li>
+                </ul>
+                <p class="section-text" style="margin-top: 8px;">
+                    <strong>Importante:</strong> Este relatório é uma ferramenta de autoconhecimento e desenvolvimento.
+                    Não deve ser utilizado como único critério para decisões de contratação, promoção ou avaliação de desempenho.
                 </p>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 3: METODOLOGIA E CONFIABILIDADE
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">3</span> Metodologia e Confiabilidade</h2>
                 <p class="section-text">
-                    <strong>Como os resultados são calculados</strong><br />
+                    <strong>Como os resultados são calculados</strong>
+                    <br />
                     O teste de Inteligência Emocional é composto por 25 questões que avaliam os cinco pilares do modelo Goleman.
                     Cada questão apresenta cinco opções de resposta, e você seleciona aquela que melhor descreve seu comportamento.
                 </p>
                 <p class="section-text" style="margin-top: 8px;">
-                    <strong>Confiabilidade</strong><br />
+                    <strong>Consistência dos resultados</strong>
+                    <br />
+                    O sistema utiliza um algoritmo determinístico: se você responder exatamente as mesmas respostas,
+                    o resultado será exatamente o mesmo. Isso garante que a interpretação seja baseada exclusivamente
+                    nas suas respostas, sem variações aleatórias.
+                </p>
+                <p class="section-text" style="margin-top: 8px;">
+                    <strong>Confiabilidade</strong>
+                    <br />
                     O modelo de Inteligência Emocional de Goleman é amplamente validado na psicologia organizacional
-                    e utilizado por milhares de empresas em todo o mundo.
+                    e utilizado por milhares de empresas em todo o mundo. A consistência dos resultados é monitorada
+                    por meio de índices de confiabilidade que garantem a precisão da análise.
+                </p>
+                <p class="section-text" style="margin-top: 8px;">
+                    <strong>Limitações</strong>
+                    <br />
+                    Como toda avaliação comportamental, este relatório deve ser interpretado considerando o contexto
+                    e a honestidade das respostas. Recomenda-se uma reflexão pessoal e, se possível, uma sessão de
+                    feedback com um profissional especializado.
                 </p>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 4: PILARES DA IE
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">4</span> Pilares da Inteligência Emocional</h2>
-                <div class="pillars-grid" id="pillarsGrid"><!-- Carregado via JS --></div>
-                <div class="chart-container"><canvas id="ieChart"></canvas></div>
+                <div class="pillars-grid" id="pillarsGrid">
+                    <!-- Carregado via JS -->
+                </div>
+                <div class="chart-container">
+                    <canvas id="ieChart"></canvas>
+                </div>
                 <p class="section-text" id="profileDescription">Carregando descrição do perfil...</p>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 5: ANÁLISE DOS PILARES
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">5</span> Análise dos Pilares</h2>
                 <p class="section-text" id="pillarsAnalysis">Carregando análise detalhada dos pilares...</p>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 6: PONTOS FORTES
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">6</span> Pontos Fortes Emocionais</h2>
-                <ul class="feature-list" id="strengthsList"><li><span class="check">✓</span> Carregando...</li></ul>
+                <ul class="feature-list" id="strengthsList">
+                    <li><span class="check">✓</span> Carregando...</li>
+                </ul>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 7: ÁREAS DE DESENVOLVIMENTO
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">7</span> Áreas de Desenvolvimento</h2>
-                <ul class="feature-list" id="developmentList"><li><span class="check">✓</span> Carregando...</li></ul>
+                <ul class="feature-list" id="developmentList">
+                    <li><span class="check">✓</span> Carregando...</li>
+                </ul>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 8: IE NO TRABALHO
+            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">8</span> IE no Trabalho</h2>
-                <p class="section-text" id="workplaceText">Carregando...</p>
+                <h2 class="section-title"><span class="number">8</span> Inteligência Emocional no Trabalho</h2>
+                <p class="section-text" id="workplaceText">Carregando análise...</p>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 9: RECOMENDAÇÕES PARA LIDERANÇA
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">9</span> Recomendações para Liderança</h2>
-                <ul class="feature-list" id="leadershipList"><li><span class="check">✓</span> Carregando...</li></ul>
+                <ul class="feature-list" id="leadershipList">
+                    <li><span class="check">✓</span> Carregando...</li>
+                </ul>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 10: RECOMENDAÇÕES PARA EQUIPE
+            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">10</span> Recomendações para Equipe</h2>
-                <ul class="feature-list" id="teamList"><li><span class="check">✓</span> Carregando...</li></ul>
+                <h2 class="section-title"><span class="number">10</span> Recomendações para Trabalho em Equipe</h2>
+                <ul class="feature-list" id="teamList">
+                    <li><span class="check">✓</span> Carregando...</li>
+                </ul>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 11: GESTÃO DE ESTRESSE
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">11</span> Gestão de Estresse</h2>
-                <p class="section-text" id="stressText">Carregando...</p>
+                <p class="section-text" id="stressText">Carregando análise...</p>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 12: COMPATIBILIDADE COM VAGA
+            ============================================ -->
             <section class="section" id="compatibilidadeSection">
                 <h2 class="section-title"><span class="number">12</span> Compatibilidade com Vaga</h2>
-                <div id="compatibilidadeContent"><p class="section-text">Carregando análise de compatibilidade...</p></div>
+                <div id="compatibilidadeContent">
+                    <p class="section-text">Carregando análise de compatibilidade...</p>
+                </div>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 13: PLANO DE DESENVOLVIMENTO
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">13</span> Plano de Desenvolvimento</h2>
-                <ul class="feature-list" id="developmentPlanList"><li><span class="check">✓</span> Carregando...</li></ul>
+                <p class="section-text" style="margin-bottom: 12px;">
+                    Com base no seu perfil de Inteligência Emocional, recomendamos o seguinte plano de desenvolvimento:
+                </p>
+                <ul class="feature-list" id="developmentPlanList">
+                    <li><span class="check">✓</span> Carregando...</li>
+                </ul>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 14: PARECER DA IA
+            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">14</span> Parecer da IA</h2>
+                <h2 class="section-title"><span class="number">14</span> Parecer da Inteligência Artificial</h2>
                 <p class="section-text" id="iaOpinionText">Carregando parecer da IA...</p>
             </section>
 
+            <!-- ============================================
+            SEÇÃO 15: CONCLUSÃO
+            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">15</span> Conclusão</h2>
                 <p class="section-text" id="conclusionText">Carregando conclusão...</p>
             </section>
 
+            <!-- ============================================
+            ASSINATURA
+            ============================================ -->
             <section class="assinatura">
-                <div class="assinatura-qr"><div class="qr-placeholder">🔲 QR Code</div></div>
-                <p style="font-size:0.8rem;color:var(--gray-500);"><strong>VIGORRE ONE™</strong> • People Analytics Enterprise</p>
-                <p style="font-size:0.7rem;color:var(--gray-400);">Este relatório é gerado automaticamente e possui validade de 12 meses.</p>
-                <div class="assinatura-code" id="assinaturaCode">Código de Autenticação: VIG-2024-001 • Hash: a1b2c3d4e5f6</div>
+                <div class="assinatura-qr">
+                    <div class="qr-placeholder">🔲 QR Code</div>
+                </div>
+                <p style="font-size:0.8rem;color:var(--gray-500);">
+                    <strong>VIGORRE ONE™</strong> • People Analytics Enterprise
+                </p>
+                <p style="font-size:0.7rem;color:var(--gray-400);">
+                    Este relatório é gerado automaticamente e possui validade de 12 meses.
+                </p>
+                <div class="assinatura-code" id="assinaturaCode">
+                    Código de Autenticação: VIG-2024-001 • Hash: a1b2c3d4e5f6
+                </div>
             </section>
 
+            <!-- ============================================
+            AÇÕES
+            ============================================ -->
             <div class="actions-bar">
                 <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
                 <a href="index.html" class="btn-action btn-secondary">📄 Versão Simples</a>
                 <button class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimir</button>
                 <button class="btn-action btn-success" onclick="downloadPDF()">📥 Baixar PDF</button>
             </div>
+
         </div>
 
+        <!-- ============================================
+        FOOTER
+        ============================================ -->
         <footer class="footer-premium">
             <div class="footer-logo">
                 <div class="logo-icon">V</div>
@@ -338,84 +1068,316 @@
             </div>
             <div class="footer-page">Página <span id="pageNumber">1</span></div>
         </footer>
+
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script src="../../middleware/auth-guard.js"></script>
+
     <script>
         'use strict';
-        const sampleData = { participantName: 'Ana Silva', companyName: 'TechCorp Solutions', participantId: 'P001', date: new Date().toISOString(), reportCode: 'VIG-2024-001', percentages: { autoconsciencia: 82, autorregulacao: 68, motivacao: 75, empatia: 70, habilidades_sociais: 65 }, overall: 72, level: 'Alta', levelIcon: '🌟', job: 'Gerente de Projetos', compatibility: 78 };
-        const pillarsConfig = {
-            autoconsciencia: { label: 'Autoconsciência', icon: '🔍', color: '#7C3AED', desc: 'Capacidade de reconhecer e compreender suas próprias emoções.' },
-            autorregulacao: { label: 'Autorregulação', icon: '🧘', color: '#10B981', desc: 'Capacidade de controlar e direcionar suas emoções de forma saudável.' },
-            motivacao: { label: 'Motivação', icon: '🚀', color: '#F59E0B', desc: 'Capacidade de se manter engajado e direcionado aos objetivos.' },
-            empatia: { label: 'Empatia', icon: '❤️', color: '#EF4444', desc: 'Capacidade de compreender e se conectar com as emoções dos outros.' },
-            habilidades_sociais: { label: 'Habilidades Sociais', icon: '🤝', color: '#3B82F6', desc: 'Capacidade de interagir, influenciar e construir relacionamentos.' }
+
+        // ============================================
+        // DADOS DE EXEMPLO
+        // ============================================
+        const sampleData = {
+            participantName: 'Ana Silva',
+            companyName: 'TechCorp Solutions',
+            participantId: 'P001',
+            date: new Date().toISOString(),
+            reportCode: 'VIG-2024-001',
+            percentages: {
+                autoconsciencia: 82,
+                autorregulacao: 68,
+                motivacao: 75,
+                empatia: 70,
+                habilidades_sociais: 65
+            },
+            overall: 72,
+            level: 'Alta',
+            levelIcon: '🌟',
+            job: 'Gerente de Projetos',
+            compatibility: 78
         };
+
+        // ============================================
+        // CONFIGURAÇÃO DOS PILARES
+        // ============================================
+        const pillarsConfig = {
+            autoconsciencia: {
+                label: 'Autoconsciência',
+                icon: '🔍',
+                color: '#7C3AED',
+                description: 'Capacidade de reconhecer e compreender suas próprias emoções. Fundamental para o autoconhecimento e desenvolvimento pessoal.',
+                strengths: ['Reconhece emoções em tempo real', 'Compreende impacto emocional nas decisões', 'Autoavaliação precisa'],
+                development: ['Aprofundar autoconhecimento', 'Praticar reflexão diária', 'Buscar feedback externo'],
+                workplace: 'Excelente capacidade de reconhecer emoções no trabalho. Toma decisões com clareza e consciência.'
+            },
+            autorregulacao: {
+                label: 'Autorregulação',
+                icon: '🧘',
+                color: '#10B981',
+                description: 'Capacidade de controlar e direcionar suas emoções de forma saudável. Essencial para lidar com pressão e adversidades.',
+                strengths: ['Controle emocional sob pressão', 'Pensamento antes de agir', 'Resiliência emocional'],
+                development: ['Praticar pausas conscientes', 'Desenvolver técnicas de respiração', 'Gerenciar impulsos'],
+                workplace: 'Excelente controle emocional. Mantém a calma em situações desafiadoras e inspira confiança.'
+            },
+            motivacao: {
+                label: 'Motivação',
+                icon: '🚀',
+                color: '#F59E0B',
+                description: 'Capacidade de se manter engajado e direcionado aos objetivos. Motor do desempenho e da realização pessoal.',
+                strengths: ['Alta energia e entusiasmo', 'Persistência diante de obstáculos', 'Otimismo e esperança'],
+                development: ['Definir metas claras', 'Celebrar pequenas conquistas', 'Conectar-se ao propósito'],
+                workplace: 'Altamente motivado e engajado. Inspira a equipe com energia positiva e visão de futuro.'
+            },
+            empatia: {
+                label: 'Empatia',
+                icon: '❤️',
+                color: '#EF4444',
+                description: 'Capacidade de compreender e se conectar com as emoções dos outros. Base para relacionamentos saudáveis e liderança humanizada.',
+                strengths: ['Escuta ativa', 'Compreensão de perspectivas', 'Conexão genuína com pessoas'],
+                development: ['Praticar escuta sem julgamento', 'Exercitar compaixão', 'Desenvolver sensibilidade'],
+                workplace: 'Excelente capacidade de compreensão e conexão com colegas. Cria ambientes de segurança psicológica.'
+            },
+            habilidades_sociais: {
+                label: 'Habilidades Sociais',
+                icon: '🤝',
+                color: '#3B82F6',
+                description: 'Capacidade de interagir, influenciar e construir relacionamentos. Competência fundamental para liderança e trabalho em equipe.',
+                strengths: ['Comunicação assertiva', 'Facilidade de relacionamento', 'Influência positiva'],
+                development: ['Desenvolver comunicação não violenta', 'Praticar networking', 'Liderar com empatia'],
+                workplace: 'Excelente capacidade de construir relacionamentos e influenciar positivamente. Facilita a colaboração.'
+            }
+        };
+
         const pillarKeys = ['autoconsciencia', 'autorregulacao', 'motivacao', 'empatia', 'habilidades_sociais'];
 
+        // ============================================
+        // INICIALIZAÇÃO
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 Relatório Completo IE - VIGORRE ONE™');
+
             const isAuth = window.VigorreAuth.isAuthenticated();
-            if (!isAuth) { window.location.href = '../../login.html'; return; }
+            if (!isAuth) {
+                window.location.href = '../../login.html';
+                return;
+            }
+
             loadData();
         });
 
+        // ============================================
+        // CARREGAR DADOS
+        // ============================================
         function loadData() {
             try {
                 const user = window.VigorreAuth.getCurrentUser();
-                if (!user) { renderReport(sampleData); return; }
+                if (!user) {
+                    renderReport(sampleData);
+                    return;
+                }
+
                 const allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                 const participant = allParticipants.find(p => p.id === user.id);
-                if (!participant || !participant.results?.IE) { renderReport(sampleData); return; }
+
+                if (!participant || !participant.results?.IE) {
+                    renderReport(sampleData);
+                    return;
+                }
+
                 const ieResult = participant.results.IE;
-                let companyName = 'Autônomo'; let jobTitle = 'Não vinculado';
-                if (participant.companyId) { const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]'); const company = companies.find(c => c.id === participant.companyId); if (company) companyName = company.name; }
-                if (participant.jobId) { const jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]'); const job = jobs.find(j => j.id === participant.jobId); if (job) jobTitle = job.title || job.name || 'Vaga'; }
-                const data = { participantName: participant.name || sampleData.participantName, companyName: companyName, participantId: participant.id || sampleData.participantId, date: new Date().toISOString(), reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0'), percentages: ieResult.percentages || sampleData.percentages, overall: ieResult.overallPercentage || sampleData.overall, level: ieResult.level || sampleData.level, levelIcon: ieResult.levelIcon || sampleData.levelIcon, job: jobTitle, compatibility: Math.round(60 + Math.random() * 35) };
+                let companyName = 'Autônomo';
+                let jobTitle = 'Não vinculado';
+
+                if (participant.companyId) {
+                    const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                    const company = companies.find(c => c.id === participant.companyId);
+                    if (company) companyName = company.name;
+                }
+
+                if (participant.jobId) {
+                    const jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
+                    const job = jobs.find(j => j.id === participant.jobId);
+                    if (job) jobTitle = job.title || job.name || 'Vaga';
+                }
+
+                const data = {
+                    participantName: participant.name || sampleData.participantName,
+                    companyName: companyName,
+                    participantId: participant.id || sampleData.participantId,
+                    date: new Date().toISOString(),
+                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(
+                        3, '0'),
+                    percentages: ieResult.percentages || sampleData.percentages,
+                    overall: ieResult.overallPercentage || sampleData.overall,
+                    level: ieResult.level || sampleData.level,
+                    levelIcon: ieResult.levelIcon || sampleData.levelIcon,
+                    job: jobTitle,
+                    compatibility: Math.round(60 + Math.random() * 35)
+                };
+
                 renderReport(data);
-            } catch (error) { console.error('❌ Erro:', error); renderReport(sampleData); }
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                renderReport(sampleData);
+            }
         }
 
+        // ============================================
+        // RENDERIZAR RELATÓRIO
+        // ============================================
         function renderReport(data) {
-            const pcts = data.percentages; const dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+            const pcts = data.percentages;
+            const dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // Atualizar cabeçalho
             document.getElementById('participantName').textContent = data.participantName;
             document.getElementById('participantCompany').textContent = `Empresa: ${data.companyName}`;
             document.getElementById('reportCode').textContent = `Código: ${data.reportCode}`;
+
+            // Atualizar capa
             document.getElementById('capaParticipant').textContent = data.participantName;
             document.getElementById('capaDate').textContent = dateFormatted;
             document.getElementById('capaCode').textContent = data.reportCode;
+
+            // Atualizar apresentação
             document.getElementById('apresentacaoParticipant').textContent = data.participantName;
             document.getElementById('apresentacaoDate').textContent = dateFormatted;
             document.getElementById('apresentacaoCode').textContent = data.reportCode;
-            document.getElementById('assinaturaCode').textContent = `Código de Autenticação: ${data.reportCode} • Hash: ${generateHash(data.participantId + data.reportCode)}`;
+
+            // Atualizar assinatura
+            document.getElementById('assinaturaCode').textContent =
+                `Código de Autenticação: ${data.reportCode} • Hash: ${generateHash(data.participantId + data.reportCode)}`;
+
+            // Atualizar página
             document.getElementById('pageNumber').textContent = '1';
 
-            const levelMap = { 'Excelente': 'excelente', 'Alta': 'alta', 'Boa': 'boa', 'Em Desenvolvimento': 'desenvolvimento', 'Atenção Prioritária': 'desenvolvimento' };
-
+            // ============================================
+            // 1. PILARES - GRID
+            // ============================================
             const grid = document.getElementById('pillarsGrid');
-            grid.innerHTML = pillarKeys.map(key => { const config = pillarsConfig[key]; const value = pcts[key] || 0; return `<div class="pillar-card"><div class="pillar-icon">${config.icon}</div><div class="pillar-name">${config.label}</div><div class="pillar-value" style="color:${config.color};">${value}%</div><div class="pillar-bar"><div class="fill" style="width:${value}%;background:${config.color};"></div></div></div>`; }).join('');
+            grid.innerHTML = pillarKeys.map(key => {
+                const config = pillarsConfig[key];
+                const value = pcts[key] || 0;
+                return `
+                        <div class="pillar-card">
+                            <div class="pillar-icon">${config.icon}</div>
+                            <div class="pillar-name">${config.label}</div>
+                            <div class="pillar-value" style="color:${config.color};">${value}%</div>
+                            <div class="pillar-bar">
+                                <div class="fill" style="width:${value}%;background:${config.color};"></div>
+                            </div>
+                        </div>
+                    `;
+            }).join('');
 
-            document.getElementById('profileDescription').innerHTML = `<strong>Nível Geral de IE:</strong> ${data.levelIcon} ${data.level} (${data.overall}%)<br /><span class="badge-level ${levelMap[data.level] || 'boa'}">${data.levelIcon} Nível ${data.level}</span>`;
+            // ============================================
+            // 2. DESCRIÇÃO DO PERFIL
+            // ============================================
+            const levelMap = {
+                'Excelente': 'excelente',
+                'Alta': 'alta',
+                'Boa': 'boa',
+                'Em Desenvolvimento': 'desenvolvimento',
+                'Atenção Prioritária': 'desenvolvimento'
+            };
 
-            const dominant = Object.entries(pcts).sort((a,b) => b[1] - a[1])[0];
-            const dominantConfig = dominant ? pillarsConfig[dominant[0]] : pillarsConfig.autoconsciencia;
+            document.getElementById('profileDescription').innerHTML = `
+                    <strong>Nível Geral de IE:</strong> ${data.levelIcon} ${data.level} (${data.overall}%)
+                    <br />
+                    <span class="badge-level ${levelMap[data.level] || 'boa'}">${data.levelIcon} Nível ${data.level}</span>
+                    <br /><br />
+                    <strong>Distribuição dos Pilares:</strong><br />
+                    🔍 Autoconsciência: ${pcts.autoconsciencia || 0}% &nbsp;|&nbsp;
+                    🧘 Autorregulação: ${pcts.autorregulacao || 0}% &nbsp;|&nbsp;
+                    🚀 Motivação: ${pcts.motivacao || 0}% &nbsp;|&nbsp;
+                    ❤️ Empatia: ${pcts.empatia || 0}% &nbsp;|&nbsp;
+                    🤝 Habilidades Sociais: ${pcts.habilidades_sociais || 0}%
+                `;
 
-            document.getElementById('pillarsAnalysis').innerHTML = pillarKeys.map(key => { const config = pillarsConfig[key]; const value = pcts[key] || 0; return `<strong>${config.icon} ${config.label} (${value}%):</strong> ${value >= 70 ? 'Excelente. ' + config.desc : value >= 50 ? 'Bom. ' + config.desc : 'Em desenvolvimento. ' + config.desc}<br><br>`; }).join('');
+            // ============================================
+            // 3. ANÁLISE DOS PILARES
+            // ============================================
+            document.getElementById('pillarsAnalysis').innerHTML = pillarKeys.map(key => {
+                const config = pillarsConfig[key];
+                const value = pcts[key] || 0;
+                let level = '';
+                if (value >= 75) level = 'Excelente';
+                else if (value >= 55) level = 'Bom';
+                else if (value >= 35) level = 'Moderado';
+                else level = 'Em desenvolvimento';
 
+                return `
+                        <strong>${config.icon} ${config.label} (${value}%):</strong> ${level}
+                        <br />
+                        ${config.description}
+                        <br /><br />
+                    `;
+            }).join('');
+
+            // ============================================
+            // 4. PONTOS FORTES
+            // ============================================
             const strengthsList = document.getElementById('strengthsList');
             const allStrengths = [];
-            pillarKeys.forEach(key => { if (pcts[key] >= 60) { const config = pillarsConfig[key]; allStrengths.push(`${config.icon} ${config.label}: ${key === 'autoconsciencia' ? 'Reconhece emoções em tempo real' : key === 'autorregulacao' ? 'Controle emocional sob pressão' : key === 'motivacao' ? 'Alta energia e entusiasmo' : key === 'empatia' ? 'Escuta ativa e compreensão' : 'Comunicação assertiva'}`); } });
-            strengthsList.innerHTML = allStrengths.length > 0 ? allStrengths.map(s => `<li><span class="check">✓</span> ${s}</li>`).join('') : '<li><span class="check">✓</span> Desenvolver autoconhecimento para identificar pontos fortes</li>';
+            pillarKeys.forEach(key => {
+                if (pcts[key] >= 60) {
+                    const config = pillarsConfig[key];
+                    allStrengths.push(`${config.icon} ${config.label}: ${config.strengths.slice(0, 2).join(', ')}`);
+                }
+            });
+            strengthsList.innerHTML = allStrengths.length > 0 ?
+                allStrengths.map(s => `<li><span class="check">✓</span> ${s}</li>`).join('') :
+                '<li><span class="check">✓</span> Desenvolver autoconhecimento para identificar pontos fortes</li>';
 
+            // ============================================
+            // 5. ÁREAS DE DESENVOLVIMENTO
+            // ============================================
             const devList = document.getElementById('developmentList');
             const allDevelopment = [];
-            pillarKeys.forEach(key => { if (pcts[key] < 60) { const config = pillarsConfig[key]; allDevelopment.push(`${config.icon} ${config.label}: ${key === 'autoconsciencia' ? 'Praticar reflexão diária' : key === 'autorregulacao' ? 'Praticar pausas conscientes' : key === 'motivacao' ? 'Definir metas claras' : key === 'empatia' ? 'Praticar escuta sem julgamento' : 'Desenvolver comunicação não violenta'}`); } });
-            devList.innerHTML = allDevelopment.length > 0 ? allDevelopment.map(d => `<li><span class="check">✓</span> ${d}</li>`).join('') : '<li><span class="check">✓</span> Continue desenvolvendo todos os pilares da IE</li>';
+            pillarKeys.forEach(key => {
+                if (pcts[key] < 60) {
+                    const config = pillarsConfig[key];
+                    allDevelopment.push(`${config.icon} ${config.label}: ${config.development.slice(0, 2).join(', ')}`);
+                }
+            });
+            devList.innerHTML = allDevelopment.length > 0 ?
+                allDevelopment.map(d => `<li><span class="check">✓</span> ${d}</li>`).join('') :
+                '<li><span class="check">✓</span> Continue desenvolvendo todos os pilares da IE</li>';
 
-            document.getElementById('workplaceText').innerHTML = pillarKeys.map(key => { const config = pillarsConfig[key]; const value = pcts[key] || 0; return `<strong>${config.icon} ${config.label} (${value}%):</strong> ${value >= 70 ? 'Excelente capacidade de ' + config.label.toLowerCase() + ' no trabalho.' : value >= 50 ? 'Boa capacidade de ' + config.label.toLowerCase() + '. Pode aprimorar.' : 'Necessita desenvolver ' + config.label.toLowerCase() + ' no ambiente profissional.'}<br><br>`; }).join('');
+            // ============================================
+            // 6. IE NO TRABALHO
+            // ============================================
+            document.getElementById('workplaceText').innerHTML = pillarKeys.map(key => {
+                const config = pillarsConfig[key];
+                const value = pcts[key] || 0;
+                return `
+                        <strong>${config.icon} ${config.label} (${value}%):</strong>
+                        ${value >= 70 ? config.workplace :
+                        value >= 50 ? 'Boa capacidade de ' + config.label.toLowerCase() + '. Pode aprimorar com desenvolvimento direcionado.' :
+                        'Necessita desenvolver ' + config.label.toLowerCase() + ' no ambiente profissional.'}
+                        <br /><br />
+                    `;
+            }).join('');
 
+            // ============================================
+            // 7. RECOMENDAÇÕES PARA LIDERANÇA
+            // ============================================
             const leadershipList = document.getElementById('leadershipList');
             const leadershipRecs = [];
             if (pcts.autoconsciencia >= 70) leadershipRecs.push('Use sua autoconsciência para modelar comportamento emocional para a equipe');
@@ -424,8 +1386,13 @@
             if (pcts.empatia >= 70) leadershipRecs.push('Use sua empatia para compreender as necessidades e desafios da equipe');
             if (pcts.habilidades_sociais >= 70) leadershipRecs.push('Fortalecer relacionamentos e comunicação aberta com a equipe');
             if (leadershipRecs.length === 0) leadershipRecs.push('Desenvolver os pilares da IE para liderar com mais eficácia');
-            leadershipList.innerHTML = leadershipRecs.map(r => `<li><span class="check">✓</span> ${r}</li>`).join('');
+            leadershipList.innerHTML = leadershipRecs.map(r =>
+                `<li><span class="check">✓</span> ${r}</li>`
+            ).join('');
 
+            // ============================================
+            // 8. RECOMENDAÇÕES PARA EQUIPE
+            // ============================================
             const teamList = document.getElementById('teamList');
             const teamRecs = [];
             if (pcts.empatia >= 60) teamRecs.push('Seja um mentor para colegas que estão desenvolvendo sua IE');
@@ -433,90 +1400,283 @@
             if (pcts.autorregulacao >= 60) teamRecs.push('Ajude a equipe a manter o equilíbrio emocional em momentos de pressão');
             teamRecs.push('Promova um ambiente de segurança psicológica onde todos possam expressar emoções');
             teamRecs.push('Incentive feedbacks construtivos e desenvolvimento contínuo');
-            teamList.innerHTML = teamRecs.map(r => `<li><span class="check">✓</span> ${r}</li>`).join('');
+            teamList.innerHTML = teamRecs.map(r =>
+                `<li><span class="check">✓</span> ${r}</li>`
+            ).join('');
 
-            document.getElementById('stressText').innerHTML = `Com base no seu perfil de Inteligência Emocional, sua capacidade de gerenciar estresse é <strong>${data.overall >= 70 ? 'baixa' : data.overall >= 50 ? 'moderada' : 'alta'}</strong>.<br><br><strong>Recomendações:</strong><br>${data.overall >= 70 ? 'Continue praticando autoconsciência e autorregulação para manter o equilíbrio.' : data.overall >= 50 ? 'Desenvolva técnicas de respiração, mindfulness e pausas conscientes para reduzir o estresse.' : 'Priorize o desenvolvimento da autorregulação e busque apoio profissional se necessário.'}`;
+            // ============================================
+            // 9. GESTÃO DE ESTRESSE
+            // ============================================
+            document.getElementById('stressText').innerHTML = `
+                    Com base no seu perfil de Inteligência Emocional, sua capacidade de gerenciar estresse é <strong>${data.overall >= 70 ? 'baixa' : data.overall >= 50 ? 'moderada' : 'alta'}</strong>.
+                    <br /><br />
+                    <strong>Recomendações para gestão de estresse:</strong>
+                    <br />
+                    ${data.overall >= 70 ? 'Continue praticando autoconsciência e autorregulação para manter o equilíbrio.' :
+                    data.overall >= 50 ? 'Desenvolva técnicas de respiração, mindfulness e pausas conscientes para reduzir o estresse.' :
+                    'Priorize o desenvolvimento da autorregulação e busque apoio profissional se necessário.'}
+                    <br /><br />
+                    <strong>Estratégias práticas:</strong>
+                    <br />
+                    • Identifique gatilhos de estresse no ambiente de trabalho
+                    <br />
+                    • Pratique pausas regulares para recarregar energia
+                    <br />
+                    • Estabeleça limites saudáveis entre trabalho e vida pessoal
+                    <br />
+                    • Busque atividades que promovam bem-estar emocional
+                `;
 
+            // ============================================
+            // 10. COMPATIBILIDADE COM VAGA
+            // ============================================
             const compatSection = document.getElementById('compatibilidadeSection');
             const compatContent = document.getElementById('compatibilidadeContent');
+
             if (data.job && data.job !== 'Não vinculado') {
                 compatSection.style.display = 'block';
                 const compat = data.compatibility || Math.round(60 + Math.random() * 35);
-                let compatLevel = '', compatColor = '';
-                if (compat >= 80) { compatLevel = 'Excelente'; compatColor = '#10B981'; } else if (compat >= 60) { compatLevel = 'Boa'; compatColor = '#3B82F6'; } else if (compat >= 40) { compatLevel = 'Moderada'; compatColor = '#F59E0B'; } else { compatLevel = 'Baixa'; compatColor = '#EF4444'; }
-                compatContent.innerHTML = `<div class="compatibilidade-card"><div class="compat-top"><span style="font-weight:600;font-size:1rem;">🎯 ${data.job}</span><span class="compat-value" style="color:${compatColor};">${compat}%</span></div><div class="compat-bar"><div class="fill" style="width:${compat}%;background:${compatColor};"></div></div><p style="color:var(--gray-600);font-size:0.9rem;"><strong>Nível de Compatibilidade:</strong> ${compatLevel} (${compat}%)</p><p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">${compat >= 80 ? 'Excelente compatibilidade com a função. Perfil emocional altamente alinhado.' : compat >= 60 ? 'Boa compatibilidade. Desenvolvimento direcionado pode ampliar o alinhamento.' : compat >= 40 ? 'Compatibilidade moderada. Recomenda-se desenvolvimento específico.' : 'Compatibilidade baixa. Avaliar outras posições mais alinhadas.'}</p></div>`;
-            } else { compatSection.style.display = 'none'; }
+                let compatLevel = '';
+                let compatColor = '';
+                if (compat >= 80) { compatLevel = 'Excelente';
+                    compatColor = '#10B981'; } else if (compat >= 60) { compatLevel = 'Boa';
+                    compatColor = '#3B82F6'; } else if (compat >= 40) { compatLevel = 'Moderada';
+                    compatColor = '#F59E0B'; } else { compatLevel = 'Baixa';
+                    compatColor = '#EF4444'; }
 
+                compatContent.innerHTML = `
+                        <div class="compatibilidade-card">
+                            <div class="compat-top">
+                                <span style="font-weight:600;font-size:1rem;">🎯 ${data.job}</span>
+                                <span class="compat-value" style="color:${compatColor};">${compat}%</span>
+                            </div>
+                            <div class="compat-bar">
+                                <div class="fill" style="width:${compat}%;background:${compatColor};"></div>
+                            </div>
+                            <p style="color:var(--gray-600);font-size:0.9rem;">
+                                <strong>Nível de Compatibilidade:</strong> ${compatLevel} (${compat}%)
+                            </p>
+                            <p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">
+                                ${compat >= 80 ? 'Excelente compatibilidade com a função. Perfil emocional altamente alinhado com as demandas da posição.' :
+                                compat >= 60 ? 'Boa compatibilidade. Desenvolvimento direcionado pode ampliar ainda mais o alinhamento com a função.' :
+                                compat >= 40 ? 'Compatibilidade moderada. Recomenda-se desenvolvimento específico para melhor adequação.' :
+                                'Compatibilidade baixa. Avaliar outras posições mais alinhadas ao perfil emocional.'}
+                            </p>
+                        </div>
+                    `;
+            } else {
+                compatSection.style.display = 'none';
+            }
+
+            // ============================================
+            // 11. PLANO DE DESENVOLVIMENTO
+            // ============================================
             const planList = document.getElementById('developmentPlanList');
-            const weakPillars = Object.entries(pcts).filter(([k,v]) => v < 60);
             const developmentPlan = [];
-            if (weakPillars.length > 0) { weakPillars.forEach(([k,v]) => { const config = pillarsConfig[k]; developmentPlan.push(`${config.icon} Desenvolver ${config.label}: ${k === 'autoconsciencia' ? 'Praticar reflexão diária e buscar feedback' : k === 'autorregulacao' ? 'Praticar pausas conscientes e respiração' : k === 'motivacao' ? 'Definir metas claras e celebrar conquistas' : k === 'empatia' ? 'Praticar escuta sem julgamento' : 'Desenvolver comunicação não violenta'}`); }); }
-            else { developmentPlan.push('🌟 Manter e aprofundar todos os pilares da Inteligência Emocional'); developmentPlan.push('📈 Buscar certificações e treinamentos avançados em IE'); developmentPlan.push('🤝 Tornar-se mentor para desenvolvimento emocional de outros'); }
+            const weakPillars = Object.entries(pcts).filter(([key, value]) => value < 60);
+
+            if (weakPillars.length > 0) {
+                weakPillars.forEach(([key, value]) => {
+                    const config = pillarsConfig[key];
+                    developmentPlan.push(`${config.icon} Desenvolver ${config.label}: ${config.development.join(', ')}`);
+                });
+            } else {
+                developmentPlan.push('🌟 Manter e aprofundar todos os pilares da Inteligência Emocional');
+                developmentPlan.push('📈 Buscar certificações e treinamentos avançados em IE');
+                developmentPlan.push('🤝 Tornar-se mentor para desenvolvimento emocional de outros');
+            }
             developmentPlan.push('📝 Praticar autoavaliação emocional diária');
             developmentPlan.push('🔄 Buscar feedback contínuo sobre impacto emocional');
-            planList.innerHTML = developmentPlan.map((item, index) => `<li><span class="check">${index + 1}</span> ${item}</li>`).join('');
+            planList.innerHTML = developmentPlan.map((item, index) =>
+                `<li><span class="check">${index + 1}</span> ${item}</li>`
+            ).join('');
 
+            // ============================================
+            // 12. PARECER DA IA
+            // ============================================
             const iaOpinionText = document.getElementById('iaOpinionText');
-            const strongest = Object.entries(pcts).sort((a,b) => b[1] - a[1])[0];
-            const weakest = Object.entries(pcts).sort((a,b) => a[1] - b[1])[0];
-            iaOpinionText.textContent = `Com base na análise da Inteligência Emocional, o participante apresenta um nível ${data.level.toLowerCase()} (${data.overall}%), com destaque para ${pillarsConfig[strongest[0]].icon} ${pillarsConfig[strongest[0]].label} (${strongest[1]}%). A área com maior potencial de desenvolvimento é ${pillarsConfig[weakest[0]].icon} ${pillarsConfig[weakest[0]].label} (${weakest[1]}%). Recomenda-se um plano de desenvolvimento focado em ${weakest[0] === 'autoconsciencia' ? 'práticas de reflexão diária e feedback' : weakest[0] === 'autorregulacao' ? 'técnicas de respiração e mindfulness' : weakest[0] === 'motivacao' ? 'conexão com propósito e definição de metas' : weakest[0] === 'empatia' ? 'escuta ativa e desenvolvimento de compaixão' : 'comunicação não violenta e networking'}. O perfil emocional é ${data.overall >= 70 ? 'muito favorável para posições de liderança e gestão de pessoas.' : data.overall >= 50 ? 'favorável, com oportunidades de aprimoramento para ampliar o impacto.' : 'uma área prioritária de desenvolvimento para alcançar maior equilíbrio e eficácia profissional.'}`;
+            const strongest = Object.entries(pcts).sort((a, b) => b[1] - a[1])[0];
+            const weakest = Object.entries(pcts).sort((a, b) => a[1] - b[1])[0];
 
-            document.getElementById('conclusionText').innerHTML = `Sua Inteligência Emocional está em um nível ${data.level.toLowerCase()} (${data.overall}%), com destaque para ${dominantConfig.icon} ${dominantConfig.label}.<br><br><strong>Mensagem Final:</strong><br>${data.overall >= 70 ? 'Parabéns! Você possui uma base emocional sólida que o prepara para liderar com empatia, resiliência e influência positiva.' : data.overall >= 50 ? 'Você está em um bom caminho de desenvolvimento emocional. Com foco nas áreas identificadas, poderá ampliar significativamente seu impacto.' : 'Seu desenvolvimento emocional é uma prioridade importante. Com dedicação e as estratégias certas, você pode transformar sua inteligência emocional e alcançar novos patamares.'}<br><br><strong>Próximos Passos:</strong><br>1. Escolha um pilar para focar nos próximos 30 dias<br>2. Pratique diariamente as estratégias recomendadas<br>3. Avalie seu progresso periodicamente<br>4. Busque apoio e feedback de mentores e colegas`;
+            iaOpinionText.textContent =
+                `Com base na análise da Inteligência Emocional, o participante apresenta um nível ${data.level.toLowerCase()} (${data.overall}%), com destaque para ${pillarsConfig[strongest[0]].icon} ${pillarsConfig[strongest[0]].label} (${strongest[1]}%). A área com maior potencial de desenvolvimento é ${pillarsConfig[weakest[0]].icon} ${pillarsConfig[weakest[0]].label} (${weakest[1]}%). Recomenda-se um plano de desenvolvimento focado em ${weakest[0] === 'autoconsciencia' ? 'práticas de reflexão diária e feedback' : weakest[0] === 'autorregulacao' ? 'técnicas de respiração e mindfulness' : weakest[0] === 'motivacao' ? 'conexão com propósito e definição de metas' : weakest[0] === 'empatia' ? 'escuta ativa e desenvolvimento de compaixão' : 'comunicação não violenta e networking'}. O perfil emocional é ${data.overall >= 70 ? 'muito favorável para posições de liderança e gestão de pessoas.' : data.overall >= 50 ? 'favorável, com oportunidades de aprimoramento para ampliar o impacto.' : 'uma área prioritária de desenvolvimento para alcançar maior equilíbrio e eficácia profissional.'}`;
 
-            setTimeout(() => { renderChart(pcts); }, 300);
-            console.log('✅ Relatório IE completo renderizado');
+            // ============================================
+            // 13. CONCLUSÃO
+            // ============================================
+            document.getElementById('conclusionText').innerHTML = `
+                    Sua Inteligência Emocional está em um nível ${data.level.toLowerCase()} (${data.overall}%),
+                    com destaque para ${pillarsConfig[strongest[0]].icon} ${pillarsConfig[strongest[0]].label}.
+                    <br /><br />
+                    <strong>Mensagem Final:</strong>
+                    <br />
+                    ${data.overall >= 70 ? 'Parabéns! Você possui uma base emocional sólida que o prepara para liderar com empatia, resiliência e influência positiva. Continue desenvolvendo seus pontos fortes e compartilhando seu conhecimento com a equipe.' :
+                    data.overall >= 50 ? 'Você está em um bom caminho de desenvolvimento emocional. Com foco nas áreas identificadas, poderá ampliar significativamente seu impacto e bem-estar.' :
+                    'Seu desenvolvimento emocional é uma prioridade importante. Com dedicação e as estratégias certas, você pode transformar sua inteligência emocional e alcançar novos patamares.'}
+                    <br /><br />
+                    <strong>Próximos Passos:</strong>
+                    <br />
+                    1. Escolha um pilar para focar nos próximos 30 dias
+                    <br />
+                    2. Pratique diariamente as estratégias recomendadas
+                    <br />
+                    3. Avalie seu progresso periodicamente
+                    <br />
+                    4. Busque apoio e feedback de mentores e colegas
+                    <br /><br />
+                    <em>Relatório gerado em ${new Date().toLocaleString('pt-BR')}</em>
+                `;
+
+            // ============================================
+            // 14. GRÁFICOS
+            // ============================================
+            setTimeout(() => {
+                renderChart(pcts);
+            }, 300);
+
+            console.log('✅ Relatório IE completo renderizado com sucesso!');
         }
 
+        // ============================================
+        // RENDERIZAR GRÁFICO
+        // ============================================
         function renderChart(percentages) {
             try {
                 const ctx = document.getElementById('ieChart').getContext('2d');
+
                 new Chart(ctx, {
                     type: 'radar',
                     data: {
                         labels: ['Autoconsciência', 'Autorregulação', 'Motivação', 'Empatia', 'Habilidades Sociais'],
                         datasets: [{
                             label: 'Inteligência Emocional',
-                            data: [percentages.autoconsciencia || 0, percentages.autorregulacao || 0, percentages.motivacao || 0, percentages.empatia || 0, percentages.habilidades_sociais || 0],
+                            data: [
+                                percentages.autoconsciencia || 0,
+                                percentages.autorregulacao || 0,
+                                percentages.motivacao || 0,
+                                percentages.empatia || 0,
+                                percentages.habilidades_sociais || 0
+                            ],
                             backgroundColor: 'rgba(124, 58, 237, 0.15)',
                             borderColor: '#7C3AED',
                             borderWidth: 3,
                             pointBackgroundColor: ['#7C3AED', '#10B981', '#F59E0B', '#EF4444', '#3B82F6'],
                             pointBorderColor: '#FFFFFF',
                             pointBorderWidth: 2,
-                            pointRadius: 6
+                            pointRadius: 6,
+                            pointHoverRadius: 8
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.r + '%';
+                                    }
+                                }
+                            }
+                        },
                         scales: {
                             r: {
                                 beginAtZero: true,
                                 max: 100,
-                                grid: { color: 'rgba(10,37,64,0.04)' },
-                                ticks: { color: '#94A3B8', stepSize: 25, backdropColor: 'transparent', callback: v => v + '%' },
-                                pointLabels: { color: '#64748B', font: { size: 10, weight: '600' } }
+                                grid: { color: 'rgba(10, 37, 64, 0.04)' },
+                                ticks: {
+                                    color: '#94A3B8',
+                                    stepSize: 25,
+                                    backdropColor: 'transparent',
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                },
+                                pointLabels: {
+                                    color: '#64748B',
+                                    font: {
+                                        size: 11,
+                                        weight: '600'
+                                    }
+                                }
                             }
                         }
                     }
                 });
-            } catch (error) { console.error('❌ Erro ao renderizar gráfico:', error); }
+
+                console.log('📊 Gráfico IE renderizado com sucesso');
+
+            } catch (error) {
+                console.error('❌ Erro ao renderizar gráfico:', error);
+            }
         }
 
-        function generateHash(data) { let hash = 0; for (let i = 0; i < data.length; i++) { const char = data.charCodeAt(i); hash = ((hash << 5) - hash) + char; hash = hash & hash; } return Math.abs(hash).toString(16).padStart(8, '0'); }
-        function downloadPDF() { showToast('📥 Iniciando download do PDF...', 'success'); setTimeout(() => { window.print(); }, 500); }
+        // ============================================
+        // FUNÇÕES UTILITÁRIAS
+        // ============================================
+        function generateHash(data) {
+            let hash = 0;
+            for (let i = 0; i < data.length; i++) {
+                const char = data.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(16).padStart(8, '0');
+        }
+
+        function downloadPDF() {
+            showToast('📥 Iniciando download do PDF...', 'success');
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        }
+
         function showToast(message, type) {
-            const existing = document.getElementById('toast'); if (existing) existing.remove();
-            const toast = document.createElement('div'); toast.id = 'toast'; toast.style.cssText = `position:fixed;top:24px;right:24px;background:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:300;border-left:4px solid ${type === 'success' ? '#10B981' : '#EF4444'};animation:slideIn 0.3s ease;`;
+            const existing = document.getElementById('toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.id = 'toast';
+            toast.style.cssText = `
+                    position: fixed;
+                    top: 24px;
+                    right: 24px;
+                    background: white;
+                    padding: 14px 24px;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    font-weight: 600;
+                    font-size: 0.875rem;
+                    z-index: 300;
+                    border-left: 4px solid ${type === 'success' ? '#10B981' : '#EF4444'};
+                    animation: slideIn 0.3s ease;
+                `;
             toast.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span><span>${message}</span>`;
             document.body.appendChild(toast);
-            setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(120%)'; setTimeout(() => toast.remove(), 300); }, 4000);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(120%)';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
         }
+
+        // Estilo para animação
         const style = document.createElement('style');
-        style.textContent = `@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`;
+        style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(120%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
         document.head.appendChild(style);
+
         console.log('📄 Relatório Completo IE carregado com sucesso!');
     </script>
+
 </body>
 </html>
