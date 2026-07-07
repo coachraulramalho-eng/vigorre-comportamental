@@ -52,6 +52,9 @@
             min-height: 100vh;
         }
 
+        /* ============================================
+           SIDEBAR
+           ============================================ */
         .sidebar {
             position: fixed;
             top: 0;
@@ -223,6 +226,9 @@
             color: #F87171;
         }
 
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
         .main {
             margin-left: 260px;
             padding: 24px 32px 40px;
@@ -254,6 +260,9 @@
             color: var(--gray-500);
         }
 
+        /* ============================================
+           STATS CARDS
+           ============================================ */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -301,6 +310,100 @@
             margin: 4px 0;
         }
 
+        .stat-card .stat-change {
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stat-card .stat-change.up {
+            color: #10B981;
+        }
+        .stat-card .stat-change.down {
+            color: #EF4444;
+        }
+
+        /* ============================================
+           IA CARD (NOVO)
+           ============================================ */
+        .ia-card {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            color: white;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 40px rgba(10, 37, 64, 0.15);
+        }
+
+        .ia-card .ia-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .ia-card .ia-top .ia-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ia-card .ia-top .ia-badge {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--cyan);
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .ia-card .ia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .ia-card .ia-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .ia-card .ia-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .ia-card .ia-item .ia-item-icon {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .ia-card .ia-item .ia-item-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: white;
+        }
+
+        .ia-card .ia-item .ia-item-desc {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           DASHBOARD GRID
+           ============================================ */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -347,6 +450,9 @@
             position: relative;
         }
 
+        /* ============================================
+           TABLE
+           ============================================ */
         .table-container {
             overflow-x: auto;
         }
@@ -399,6 +505,9 @@
             color: #1E40AF;
         }
 
+        /* ============================================
+           QUICK ACTIONS
+           ============================================ */
         .quick-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -433,6 +542,9 @@
             font-weight: 600;
         }
 
+        /* ============================================
+           MOBILE TOGGLE
+           ============================================ */
         .mobile-toggle {
             display: none;
             background: none;
@@ -443,11 +555,17 @@
             padding: 8px;
         }
 
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
         @media (max-width: 1200px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .ia-card .ia-content {
                 grid-template-columns: 1fr;
             }
         }
@@ -480,6 +598,9 @@
             }
             .mobile-overlay.active {
                 display: block;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -558,8 +679,8 @@
             <li><a href="creditos/"><span class="icon">💳</span> Créditos</a></li>
             <li><a href="relatorios/"><span class="icon">📄</span> Relatórios</a></li>
             <div class="divider"></div>
-            <li><a href="agenda/"><span class="icon">📅</span> Agenda</a></li>
-            <li><a href="backup/"><span class="icon">💾</span> Meu Backup</a></li>
+            <li><a href="agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="backup/meu-backup.html"><span class="icon">💾</span> Meu Backup</a></li>
         </ul>
 
         <div class="logout">
@@ -583,6 +704,7 @@
             <div class="date" id="currentDate"></div>
         </div>
 
+        <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-top">
@@ -590,6 +712,7 @@
                     <span class="stat-icon">👥</span>
                 </div>
                 <div class="stat-value" id="totalParticipants">0</div>
+                <span class="stat-change up">↑ 5% este mês</span>
             </div>
             <div class="stat-card">
                 <div class="stat-top">
@@ -597,6 +720,7 @@
                     <span class="stat-icon">✅</span>
                 </div>
                 <div class="stat-value" id="totalCompleted">0</div>
+                <span class="stat-change up">↑ 12% este mês</span>
             </div>
             <div class="stat-card">
                 <div class="stat-top">
@@ -604,9 +728,22 @@
                     <span class="stat-icon">⏳</span>
                 </div>
                 <div class="stat-value" id="totalPending">0</div>
+                <span class="stat-change down">↓ 3% este mês</span>
             </div>
         </div>
 
+        <!-- IA Recomendações (NOVO) -->
+        <div class="ia-card">
+            <div class="ia-top">
+                <span class="ia-title">🤖 Recomendações da IA</span>
+                <span class="ia-badge">Atualizado agora</span>
+            </div>
+            <div class="ia-content" id="iaContent">
+                <!-- Carregado via JS -->
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
         <div class="dashboard-grid">
             <div class="card">
                 <div class="card-header">
@@ -642,6 +779,7 @@
             </div>
         </div>
 
+        <!-- Participantes -->
         <div class="card">
             <div class="card-header">
                 <h3>📋 Meus Participantes</h3>
@@ -677,6 +815,9 @@
     <script>
         'use strict';
 
+        // ============================================
+        // TOGGLE SIDEBAR
+        // ============================================
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobileOverlay');
@@ -684,18 +825,52 @@
             overlay.classList.toggle('active');
         }
 
+        // ============================================
+        // LOGOUT
+        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.VigorreAuth.logout();
             }
         }
 
+        // ============================================
+        // DATA
+        // ============================================
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('pt-BR', {
             day: '2-digit',
             month: 'long',
             year: 'numeric'
         });
 
+        // ============================================
+        // IA RECOMENDAÇÕES
+        // ============================================
+        function loadIAContent() {
+            const container = document.getElementById('iaContent');
+
+            const recommendations = [
+                { icon: '👥', title: 'Novos Participantes', desc: '3 participantes aguardando avaliação' },
+                { icon: '📊', title: 'Testes DISC', desc: '2 testes pendentes para liberar' },
+                { icon: '🎯', title: 'Perfil Ideal', desc: 'Sugestão de perfil para vaga em aberto' }
+            ];
+
+            container.innerHTML = recommendations.map(item => `
+                    <div class="ia-item" onclick="handleIAClick('${item.title}')">
+                        <div class="ia-item-icon">${item.icon}</div>
+                        <div class="ia-item-title">${item.title}</div>
+                        <div class="ia-item-desc">${item.desc}</div>
+                    </div>
+                `).join('');
+        }
+
+        function handleIAClick(title) {
+            alert(`🤖 IA: ${title}\n\nClique para mais detalhes.`);
+        }
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Recrutador Dashboard - VIGORRE ONE™');
 
@@ -719,10 +894,14 @@
             document.getElementById('credIE').textContent = credits.IE || 0;
             document.getElementById('credValores').textContent = credits.Valores || 0;
 
+            loadIAContent();
             loadData();
             renderChart();
         });
 
+        // ============================================
+        // CARREGAR DADOS
+        // ============================================
         function loadData() {
             try {
                 const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
@@ -758,6 +937,9 @@
             }
         }
 
+        // ============================================
+        // RENDERIZAR GRÁFICO
+        // ============================================
         function renderChart() {
             try {
                 const ctx = document.getElementById('progressChart').getContext('2d');
