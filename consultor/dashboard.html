@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultor Dashboard | VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ============================================
+           VIGORRE ONE™ - DASHBOARD CONSULTOR
+           ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0A2540;
+            --blue: #1D4ED8;
+            --blue-light: #3B82F6;
+            --cyan: #06B6D4;
+            --gold: #D97706;
+            --purple: #7C3AED;
+            --pink: #EC4899;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
+            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            background: var(--navy);
+            color: white;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .header .logo .logo-img {
+            height: 36px;
+            width: auto;
+            display: block;
+        }
+
+        .header .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .header .logo .logo-text .name .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
+
+        .header .logo .logo-text .sub {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .header .user-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header .user-info .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .header .user-info .badge {
+            padding: 4px 14px;
+            background: rgba(124, 58, 237, 0.15);
+            border-radius: var(--radius-full);
+            font-size: 0.65rem;
+            color: var(--purple);
+            font-weight: 600;
+        }
+
+        .header .logout-btn {
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-full);
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .header .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.15);
+            color: #F87171;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        /* ============================================
+           SIDEBAR (CONSULTOR)
+           ============================================ */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--navy);
+            color: white;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: var(--transition);
+            overflow-y: auto;
+        }
+
+        .sidebar .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sidebar .logo .logo-img {
+            height: 32px;
+            width: auto;
+            display: block;
+        }
+
+        .sidebar .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .sidebar .logo .logo-text .name .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
+
+        .sidebar .logo .logo-text .sub {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar .user-info {
+            padding: 16px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-sm);
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .sidebar .user-info .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .sidebar .user-info .role {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar .user-info .role .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            background: rgba(124, 58, 237, 0.15);
+            color: var(--purple);
+            border-radius: var(--radius-full);
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+
+        .sidebar .user-info .credits {
+            margin-top: 8px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .sidebar .user-info .credits .credit-item {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .sidebar .user-info .credits .credit-item strong {
+            color: white;
+        }
+
+        .sidebar .nav {
+            list-style: none;
+            flex: 1;
+        }
+
+        .sidebar .nav li {
+            margin-bottom: 2px;
+        }
+
+        .sidebar .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .sidebar .nav a:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: white;
+        }
+
+        .sidebar .nav a.active {
+            background: rgba(124, 58, 237, 0.12);
+            color: white;
+            border-left: 3px solid var(--purple);
+        }
+
+        .sidebar .nav a .icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar .nav .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.04);
+            margin: 12px 0;
+        }
+
+        .sidebar .logout {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sidebar .logout a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .sidebar .logout a:hover {
+            background: rgba(239, 68, 68, 0.12);
+            color: #F87171;
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 37, 64, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-700);
+            padding: 8px;
+        }
+
+        /* ============================================
+           MAIN
+           ============================================ */
+        .main {
+            margin-left: 260px;
+            padding: 24px 32px 40px;
+            min-height: 100vh;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .main-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .main-header h1 .highlight {
+            color: var(--purple);
+        }
+
+        .main-header .date {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+
+        /* ============================================
+           STATS CARDS
+           ============================================ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10, 37, 64, 0.04);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .stat-card .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .stat-card .stat-icon {
+            font-size: 1.6rem;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-card .stat-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin: 4px 0;
+        }
+
+        .stat-card .stat-change {
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stat-card .stat-change.up {
+            color: #10B981;
+        }
+        .stat-card .stat-change.down {
+            color: #EF4444;
+        }
+
+        /* ============================================
+           IA CARD
+           ============================================ */
+        .ia-card {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            color: white;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 40px rgba(10, 37, 64, 0.15);
+        }
+
+        .ia-card .ia-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .ia-card .ia-top .ia-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ia-card .ia-top .ia-badge {
+            background: rgba(124, 58, 237, 0.15);
+            color: var(--purple);
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .ia-card .ia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .ia-card .ia-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .ia-card .ia-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .ia-card .ia-item .ia-item-icon {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .ia-card .ia-item .ia-item-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: white;
+        }
+
+        .ia-card .ia-item .ia-item-desc {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           CHARTS
+           ============================================ */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10, 37, 64, 0.04);
+        }
+
+        .card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card .card-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .card .card-header .action {
+            font-size: 0.75rem;
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .card .card-header .action:hover {
+            color: var(--cyan);
+        }
+
+        .chart-container {
+            height: 200px;
+            position: relative;
+        }
+
+        /* ============================================
+           TABLE
+           ============================================ */
+        .table-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10, 37, 64, 0.04);
+            overflow: hidden;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .table-container th {
+            text-align: left;
+            padding: 12px 16px;
+            background: var(--gray-50);
+            font-weight: 600;
+            color: var(--gray-500);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .table-container td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .table-container tr:hover td {
+            background: var(--gray-50);
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .badge-status.completed {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        .badge-status.pending {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        .badge-status.in_progress {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        /* ============================================
+           QUICK ACTIONS
+           ============================================ */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .quick-action {
+            padding: 16px;
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            text-decoration: none;
+            color: var(--gray-700);
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .quick-action:hover {
+            background: white;
+            border-color: var(--purple);
+            box-shadow: var(--shadow);
+        }
+
+        .quick-action .icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .quick-action .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .ia-card .ia-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 16px;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .mobile-overlay.active {
+                display: block;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            .main-header h1 {
+                font-size: 1.2rem;
+            }
+            .sidebar .logo .logo-img {
+                height: 28px;
+            }
+            .header .logo .logo-img {
+                height: 24px;
+            }
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+
+        @media print {
+            .sidebar {
+                display: none !important;
+            }
+            .main {
+                margin-left: 0 !important;
+            }
+            .mobile-toggle {
+                display: none !important;
+            }
+            .logo-img {
+                height: 32px !important;
+            }
+            .stats-grid {
+                display: none !important;
+            }
+            .ia-card {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+    SIDEBAR
+    ============================================ -->
+    <aside class="sidebar" id="sidebar">
+        <a href="#" class="logo">
+            <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Analytics Enterprise</span>
+            </div>
+        </a>
+
+        <div class="user-info">
+            <div class="name" id="userName">Consultor</div>
+            <div class="role">
+                <span class="badge">🎯 Consultor</span>
+            </div>
+            <div class="credits" id="creditsDisplay">
+                <span class="credit-item">📊 DISC: <strong id="credDisc">0</strong></span>
+                <span class="credit-item">🧠 IE: <strong id="credIE">0</strong></span>
+                <span class="credit-item">💎 Valores: <strong id="credValores">0</strong></span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="#" class="active"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="clientes/"><span class="icon">👥</span> Clientes</a></li>
+            <li><a href="avaliacoes/"><span class="icon">📊</span> Avaliações</a></li>
+            <li><a href="relatorios/"><span class="icon">📄</span> Relatórios</a></li>
+            <li><a href="laudos/"><span class="icon">📋</span> Laudos</a></li>
+            <li><a href="creditos/"><span class="icon">💳</span> Créditos</a></li>
+            <div class="divider"></div>
+            <li><a href="agenda/"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="faturamento/"><span class="icon">💰</span> Faturamento</a></li>
+        </ul>
+
+        <div class="logout">
+            <a href="#" onclick="logout()">
+                <span class="icon">🚪</span> Sair
+            </a>
+        </div>
+    </aside>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- ============================================
+    HEADER (MOBILE)
+    ============================================ -->
+    <header class="header" style="margin-left:0;position:sticky;top:0;z-index:50;">
+        <div style="display:flex;align-items:center;gap:12px;">
+            <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+            <div class="logo" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+                <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" style="height:28px;width:auto;display:block;" />
+                <div class="logo-text">
+                    <span class="name" style="font-family:'Poppins',sans-serif;font-size:0.85rem;font-weight:800;color:white;">VIGORRE ONE<span class="tm" style="font-size:0.35rem;vertical-align:super;color:var(--cyan);">™</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="user-info">
+            <span class="name" id="headerUserName" style="font-weight:600;font-size:0.85rem;">Consultor</span>
+            <button class="logout-btn" onclick="logout()" style="padding:6px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-full);color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.75rem;font-weight:500;transition:var(--transition);cursor:pointer;">🚪 Sair</button>
+        </div>
+    </header>
+
+    <!-- ============================================
+    MAIN CONTENT
+    ============================================ -->
+    <main class="main">
+        <div class="main-header">
+            <div>
+                <h1>Dashboard <span class="highlight">Consultor</span></h1>
+                <p style="color: var(--gray-500); font-size: 0.9rem;">Gerencie seus clientes, avaliações e resultados</p>
+            </div>
+            <div class="date" id="currentDate"></div>
+        </div>
+
+        <!-- IA Recomendações -->
+        <div class="ia-card">
+            <div class="ia-top">
+                <span class="ia-title">🤖 Recomendações da IA</span>
+                <span class="ia-badge">Atualizado agora</span>
+            </div>
+            <div class="ia-content" id="iaContent">
+                <!-- Carregado via JS -->
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">Total Clientes</span>
+                    <span class="stat-icon">👥</span>
+                </div>
+                <div class="stat-value" id="totalClients">0</div>
+                <span class="stat-change up">↑ 12% este mês</span>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">Avaliações Realizadas</span>
+                    <span class="stat-icon">📊</span>
+                </div>
+                <div class="stat-value" id="totalAssessments">0</div>
+                <span class="stat-change up">↑ 23% este mês</span>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">Relatórios Gerados</span>
+                    <span class="stat-icon">📄</span>
+                </div>
+                <div class="stat-value" id="totalReports">0</div>
+                <span class="stat-change up">↑ 18% este mês</span>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-label">Faturamento</span>
+                    <span class="stat-icon">💰</span>
+                </div>
+                <div class="stat-value" id="totalRevenue">R$ 0</div>
+                <span class="stat-change up">↑ 8% este mês</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h3>📈 Progresso dos Clientes</h3>
+                    <a href="clientes/" class="action">Ver todos →</a>
+                </div>
+                <div class="chart-container">
+                    <canvas id="progressChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>⚡ Ações Rápidas</h3>
+                </div>
+                <div class="quick-actions">
+                    <a href="clientes/novo.html" class="quick-action">
+                        <span class="icon">👥</span>
+                        <span class="label">Novo Cliente</span>
+                    </a>
+                    <a href="avaliacoes/" class="quick-action">
+                        <span class="icon">📊</span>
+                        <span class="label">Nova Avaliação</span>
+                    </a>
+                    <a href="relatorios/" class="quick-action">
+                        <span class="icon">📄</span>
+                        <span class="label">Gerar Relatório</span>
+                    </a>
+                    <a href="laudos/" class="quick-action">
+                        <span class="icon">📋</span>
+                        <span class="label">Gerar Laudo</span>
+                    </a>
+                    <a href="creditos/" class="quick-action">
+                        <span class="icon">💳</span>
+                        <span class="label">Ver Créditos</span>
+                    </a>
+                    <a href="agenda/" class="quick-action">
+                        <span class="icon">📅</span>
+                        <span class="label">Agenda</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Últimos Clientes -->
+        <div class="table-card">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Empresa</th>
+                            <th>Avaliações</th>
+                            <th>Status</th>
+                            <th>Última Atividade</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientsTable">
+                        <!-- Carregado via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../middleware/auth-guard.js"></script>
+
+    <script>
+        'use strict';
+
+        // ============================================
+        // TOGGLE SIDEBAR
+        // ============================================
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // ============================================
+        // LOGOUT
+        // ============================================
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                window.VigorreAuth.logout();
+            }
+        }
+
+        // ============================================
+        // DATA
+        // ============================================
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric'
+        });
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📊 Dashboard Consultor - VIGORRE ONE™');
+
+            const isAuth = window.VigorreAuth.isAuthenticated();
+            if (!isAuth) {
+                window.location.href = '../login.html';
+                return;
+            }
+
+            const user = window.VigorreAuth.getCurrentUser();
+            if (!user || (user.role !== 'consultant' && user.role !== 'recruiter' && user.role !== 'admin' && user.role !==
+                    'master')) {
+                alert('⚠️ Acesso restrito a consultores.');
+                window.VigorreAuth.logout();
+                return;
+            }
+
+            document.getElementById('userName').textContent = user.name || 'Consultor';
+            document.getElementById('headerUserName').textContent = user.name || 'Consultor';
+
+            const credits = user.credits || {};
+            document.getElementById('credDisc').textContent = credits.DISC || 0;
+            document.getElementById('credIE').textContent = credits.IE || 0;
+            document.getElementById('credValores').textContent = credits.Valores || 0;
+
+            loadIAContent();
+            loadStats();
+            loadClients();
+            renderChart();
+        });
+
+        // ============================================
+        // IA CONTENT
+        // ============================================
+        function loadIAContent() {
+            const container = document.getElementById('iaContent');
+
+            const recommendations = [
+                { icon: '👥', title: 'Novos Clientes', desc: '2 clientes aguardando avaliação' },
+                { icon: '📊', title: 'Análise DISC', desc: '3 avaliações pendentes de análise' },
+                { icon: '📋', title: 'Laudos Disponíveis', desc: '1 laudo completo pronto para entrega' }
+            ];
+
+            container.innerHTML = recommendations.map(item => `
+                    <div class="ia-item" onclick="handleIAClick('${item.title}')">
+                        <div class="ia-item-icon">${item.icon}</div>
+                        <div class="ia-item-title">${item.title}</div>
+                        <div class="ia-item-desc">${item.desc}</div>
+                    </div>
+                `).join('');
+        }
+
+        function handleIAClick(title) {
+            alert(`🤖 IA: ${title}\n\nClique para mais detalhes.`);
+        }
+
+        // ============================================
+        // LOAD STATS
+        // ============================================
+        function loadStats() {
+            try {
+                const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                const reports = JSON.parse(localStorage.getItem('vigorre_reports') || '[]');
+                const user = window.VigorreAuth.getCurrentUser();
+
+                // Clientes (participantes vinculados ao consultor)
+                const clients = participants.filter(p => p.consultantId === user.id || p.recruiterId === user.id);
+
+                // Avaliações realizadas
+                const assessments = clients.filter(p => p.status === 'completed' || p.status === 'in_progress');
+
+                // Relatórios gerados
+                const clientIds = clients.map(c => c.id);
+                const clientReports = reports.filter(r => clientIds.includes(r.participantId));
+
+                document.getElementById('totalClients').textContent = clients.length;
+                document.getElementById('totalAssessments').textContent = assessments.length;
+                document.getElementById('totalReports').textContent = clientReports.length;
+
+                // Faturamento (simulado)
+                const revenue = clients.length * 150 + clientReports.length * 50;
+                document.getElementById('totalRevenue').textContent = 'R$ ' + revenue.toLocaleString('pt-BR');
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar stats:', error);
+            }
+        }
+
+        // ============================================
+        // LOAD CLIENTS
+        // ============================================
+        function loadClients() {
+            try {
+                const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                const user = window.VigorreAuth.getCurrentUser();
+
+                const clients = participants.filter(p => p.consultantId === user.id || p.recruiterId === user.id);
+
+                const tbody = document.getElementById('clientsTable');
+
+                if (clients.length === 0) {
+                    tbody.innerHTML =
+                        '<tr><td colspan="5" style="text-align:center;color:var(--gray-400);padding:40px;">Nenhum cliente encontrado</td></tr>';
+                    return;
+                }
+
+                const statusMap = {
+                    completed: '✅ Concluído',
+                    in_progress: '🔄 Em andamento',
+                    pending: '⏳ Pendente'
+                };
+
+                tbody.innerHTML = clients.slice(0, 10).map(p => {
+                    const tests = (p.tests || []).length;
+                    const completed = (p.completedTests || []).length;
+                    const statusClass = p.status || 'pending';
+
+                    return `
+                            <tr>
+                                <td><strong>${p.name || 'Sem nome'}</strong></td>
+                                <td>${p.companyName || 'Autônomo'}</td>
+                                <td>${completed}/${tests}</td>
+                                <td><span class="badge-status ${statusClass}">${statusMap[statusClass] || 'Pendente'}</span></td>
+                                <td>${p.created_at ? new Date(p.created_at).toLocaleDateString('pt-BR') : '-'}</td>
+                            </tr>
+                        `;
+                }).join('');
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar clientes:', error);
+            }
+        }
+
+        // ============================================
+        // RENDER CHART
+        // ============================================
+        function renderChart() {
+            try {
+                const ctx = document.getElementById('progressChart').getContext('2d');
+
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Concluídos', 'Em Andamento', 'Pendentes'],
+                        datasets: [{
+                            data: [35, 25, 40],
+                            backgroundColor: ['#10B981', '#3B82F6', '#F59E0B'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#64748B',
+                                    font: { size: 12 },
+                                    usePointStyle: true,
+                                    pointStyle: 'circle',
+                                    padding: 12
+                                }
+                            }
+                        },
+                        cutout: '70%'
+                    }
+                });
+
+                console.log('📊 Gráfico do consultor renderizado');
+
+            } catch (error) {
+                console.error('❌ Erro ao renderizar gráfico:', error);
+            }
+        }
+
+        console.log('✅ Dashboard Consultor carregado com sucesso!');
+    </script>
+
+</body>
+</html>
