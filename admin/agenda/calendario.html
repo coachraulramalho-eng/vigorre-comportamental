@@ -11,7 +11,7 @@
 
     <style>
         /* ============================================
-           VIGORRE ONE™ - ADMIN AGENDA
+           VIGORRE ONE™ - ADMIN AGENDA (MELHORADA)
            ============================================ */
 
         * {
@@ -252,6 +252,9 @@
             gap: 12px;
         }
 
+        /* ============================================
+           BOTÕES
+           ============================================ */
         .btn-primary {
             padding: 10px 24px;
             background: linear-gradient(135deg, var(--blue), var(--cyan));
@@ -295,6 +298,55 @@
             background: var(--gray-200);
         }
 
+        .btn-success {
+            padding: 10px 24px;
+            background: #10B981;
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
+        }
+
+        /* ============================================
+           FILTROS (NOVO)
+           ============================================ */
+        .filters-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 10px 16px;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            background: white;
+            min-width: 160px;
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+
         /* ============================================
            CALENDAR NAV
            ============================================ */
@@ -312,6 +364,13 @@
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--gray-900);
+        }
+
+        .calendar-nav .month-year .today-count {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--gray-400);
+            font-family: 'Inter', sans-serif;
         }
 
         .calendar-nav .nav-buttons {
@@ -482,6 +541,7 @@
             padding: 16px 20px;
             border-top: 1px solid var(--gray-100);
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .legend .legend-item {
@@ -512,6 +572,10 @@
         }
         .legend .legend-item .dot.other {
             background: #BE185D;
+        }
+
+        .legend .legend-export {
+            margin-left: auto;
         }
 
         /* ============================================
@@ -696,6 +760,22 @@
             padding: 8px;
         }
 
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 37, 64, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
         /* ============================================
            RESPONSIVO
            ============================================ */
@@ -718,24 +798,18 @@
                 display: block;
             }
 
-            .mobile-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(10, 37, 64, 0.4);
-                backdrop-filter: blur(4px);
-                z-index: 99;
-            }
-
             .mobile-overlay.active {
                 display: block;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
+            }
+            .filters-bar {
+                flex-direction: column;
+            }
+            .filter-select {
+                width: 100%;
             }
         }
 
@@ -768,6 +842,14 @@
             .legend .legend-item {
                 font-size: 0.6rem;
             }
+            .legend .legend-export {
+                margin-left: 0;
+                width: 100%;
+            }
+            .legend .legend-export button {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         .sidebar::-webkit-scrollbar {
@@ -798,6 +880,12 @@
                 display: none !important;
             }
             .calendar-nav .nav-buttons {
+                display: none !important;
+            }
+            .filters-bar {
+                display: none !important;
+            }
+            .legend .legend-export {
                 display: none !important;
             }
         }
@@ -865,16 +953,36 @@
                     <a href="../dashboard.html">Dashboard</a> / Agenda
                 </div>
                 <h1>📅 Agenda</h1>
-                <p style="color: var(--gray-500); font-size: 0.9rem;">Gerencie seus compromissos e eventos</p>
+                <p style="color: var(--gray-500); font-size: 0.9rem;">Gerencie seus compromissos, entrevistas e tarefas</p>
             </div>
             <div class="actions">
                 <button class="btn-primary" onclick="openModal()">➕ Novo Evento</button>
             </div>
         </div>
 
+        <!-- Filtros (NOVO) -->
+        <div class="filters-bar">
+            <select class="filter-select" id="typeFilter" onchange="applyFilters()">
+                <option value="">Todos os tipos</option>
+                <option value="meeting">📋 Reunião</option>
+                <option value="interview">🎯 Entrevista</option>
+                <option value="task">✅ Tarefa</option>
+                <option value="reminder">🔔 Lembrete</option>
+                <option value="other">📌 Outro</option>
+            </select>
+            <select class="filter-select" id="viewFilter" onchange="applyFilters()">
+                <option value="all">Todos os eventos</option>
+                <option value="today">📅 Hoje</option>
+                <option value="week">📆 Esta semana</option>
+            </select>
+        </div>
+
         <!-- Calendar Navigation -->
         <div class="calendar-nav">
-            <div class="month-year" id="monthYear">Janeiro 2024</div>
+            <div class="month-year">
+                <span id="monthYear">Janeiro 2024</span>
+                <span class="today-count" id="todayCount"></span>
+            </div>
             <div class="nav-buttons">
                 <button onclick="changeMonth(-1)">◀</button>
                 <button onclick="goToday()">Hoje</button>
@@ -902,6 +1010,9 @@
                 <span class="legend-item"><span class="dot task"></span> Tarefa</span>
                 <span class="legend-item"><span class="dot reminder"></span> Lembrete</span>
                 <span class="legend-item"><span class="dot other"></span> Outro</span>
+                <span class="legend-export">
+                    <button class="btn-success" onclick="exportarAgenda()" style="padding:6px 16px;font-size:0.75rem;">📥 Exportar</button>
+                </span>
             </div>
         </div>
     </main>
@@ -929,11 +1040,11 @@
                     <div class="form-group">
                         <label>Tipo *</label>
                         <select id="eventType" required>
-                            <option value="meeting">Reunião</option>
-                            <option value="interview">Entrevista</option>
-                            <option value="task">Tarefa</option>
-                            <option value="reminder">Lembrete</option>
-                            <option value="other">Outro</option>
+                            <option value="meeting">📋 Reunião</option>
+                            <option value="interview">🎯 Entrevista</option>
+                            <option value="task">✅ Tarefa</option>
+                            <option value="reminder">🔔 Lembrete</option>
+                            <option value="other">📌 Outro</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -977,6 +1088,7 @@
         let currentMonth = currentDate.getMonth();
         let currentYear = currentDate.getFullYear();
         let events = [];
+        let filteredEvents = [];
 
         // ============================================
         // TOGGLE SIDEBAR
@@ -1056,10 +1168,66 @@
                 } else {
                     events = stored;
                 }
+
+                filteredEvents = [...events];
+                updateTodayCount();
             } catch (error) {
                 console.error('❌ Erro ao carregar eventos:', error);
                 events = [];
+                filteredEvents = [];
             }
+        }
+
+        // ============================================
+        // ATUALIZAR CONTADOR DE HOJE (NOVO)
+        // ============================================
+        function updateTodayCount() {
+            const today = new Date();
+            const todayStr =
+                `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+
+            const todayEvents = events.filter(e => e.date === todayStr);
+            const count = todayEvents.length;
+
+            document.getElementById('todayCount').textContent = count > 0 ? `🔔 ${count} evento(s) hoje` : '';
+        }
+
+        // ============================================
+        // APLICAR FILTROS (NOVO)
+        // ============================================
+        function applyFilters() {
+            const type = document.getElementById('typeFilter').value;
+            const view = document.getElementById('viewFilter').value;
+
+            let filtered = [...events];
+
+            if (type) {
+                filtered = filtered.filter(e => e.type === type);
+            }
+
+            if (view === 'today') {
+                const today = new Date();
+                const todayStr =
+                    `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+                filtered = filtered.filter(e => e.date === todayStr);
+            } else if (view === 'week') {
+                const today = new Date();
+                const dayOfWeek = today.getDay();
+                const startOfWeek = new Date(today);
+                startOfWeek.setDate(today.getDate() - dayOfWeek);
+                const endOfWeek = new Date(startOfWeek);
+                endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+                const startStr =
+                    `${startOfWeek.getFullYear()}-${String(startOfWeek.getMonth()+1).padStart(2,'0')}-${String(startOfWeek.getDate()).padStart(2,'0')}`;
+                const endStr =
+                    `${endOfWeek.getFullYear()}-${String(endOfWeek.getMonth()+1).padStart(2,'0')}-${String(endOfWeek.getDate()).padStart(2,'0')}`;
+
+                filtered = filtered.filter(e => e.date >= startStr && e.date <= endStr);
+            }
+
+            filteredEvents = filtered;
+            renderCalendar();
         }
 
         // ============================================
@@ -1081,6 +1249,9 @@
             const todayMonth = today.getMonth();
             const todayYear = today.getFullYear();
 
+            // Usar filteredEvents para renderizar
+            const eventsToShow = filteredEvents.length > 0 ? filteredEvents : events;
+
             let html = '';
 
             for (let i = firstDay - 1; i >= 0; i--) {
@@ -1098,7 +1269,7 @@
                     `${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
                 const isToday = d === todayDate && currentMonth === todayMonth && currentYear === todayYear;
 
-                const dayEvents = events.filter(e => e.date === dateStr);
+                const dayEvents = eventsToShow.filter(e => e.date === dateStr);
 
                 let eventsHtml = '';
                 let moreCount = 0;
@@ -1221,6 +1392,8 @@
 
                 localStorage.setItem('vigorre_events', JSON.stringify(all));
                 events = all;
+                filteredEvents = [...events];
+                updateTodayCount();
                 renderCalendar();
 
                 showToast('✅ Evento salvo com sucesso!', 'success');
@@ -1270,6 +1443,25 @@
             });
 
             alert(msg);
+        }
+
+        // ============================================
+        // EXPORTAR AGENDA (NOVO)
+        // ============================================
+        function exportarAgenda() {
+            const dataStr = JSON.stringify(events, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `agenda_vigorre_${new Date().toISOString().slice(0,10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast('📥 Agenda exportada com sucesso!', 'success');
         }
 
         // ============================================
