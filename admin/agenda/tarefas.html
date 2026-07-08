@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarefas | Admin VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0A2540; --blue: #1D4ED8; --blue-light: #3B82F6;
+            --cyan: #06B6D4; --gold: #D97706; --green: #10B981;
+            --red: #EF4444; --white: #FFFFFF; --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9; --gray-200: #E2E8F0; --gray-300: #CBD5E1;
+            --gray-400: #94A3B8; --gray-500: #64748B; --gray-600: #475569;
+            --gray-700: #334155; --gray-800: #1E293B; --gray-900: #0F172A;
+            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10,37,64,0.06);
+            --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
+            --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+        .sidebar { position: fixed; top: 0; left: 0; width: 260px; height: 100vh; background: var(--navy); color: white; padding: 24px 20px; display: flex; flex-direction: column; z-index: 100; transition: var(--transition); overflow-y: auto; }
+        .sidebar .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .sidebar .logo .logo-img { height: 36px; width: auto; display: block; }
+        .sidebar .logo .logo-text .name { font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white; }
+        .sidebar .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
+        .sidebar .logo .logo-text .sub { font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; }
+        .sidebar .user-info { padding: 16px 12px; background: rgba(255,255,255,0.04); border-radius: var(--radius-sm); margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.04); }
+        .sidebar .user-info .name { font-weight: 600; font-size: 0.9rem; color: white; }
+        .sidebar .user-info .role { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; }
+        .sidebar .user-info .role .badge { display: inline-block; padding: 2px 10px; background: rgba(59,130,246,0.15); color: var(--blue-light); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600; }
+        .sidebar .nav { list-style: none; flex: 1; }
+        .sidebar .nav li { margin-bottom: 2px; }
+        .sidebar .nav a { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: var(--radius-sm); color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
+        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
+        .sidebar .nav a.active { background: rgba(59,130,246,0.15); color: white; border-left: 3px solid var(--blue-light); }
+        .sidebar .nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; }
+        .sidebar .nav .divider { height: 1px; background: rgba(255,255,255,0.04); margin: 12px 0; }
+        .sidebar .logout { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .sidebar .logout a { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: var(--radius-sm); color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
+        .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
+        .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
+        .main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+        .main-header .breadcrumb { font-size: 0.85rem; color: var(--gray-500); }
+        .main-header .breadcrumb a { color: var(--blue); text-decoration: none; }
+        .main-header .breadcrumb a:hover { color: var(--cyan); }
+        .main-header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--gray-900); margin-top: 4px; }
+        .btn-primary { padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan)); color: white; border: none; border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
+        .btn-secondary { padding: 10px 24px; background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-secondary:hover { background: var(--gray-200); }
+        .btn-success { padding: 10px 24px; background: var(--green); color: white; border: none; border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.25); }
+        .btn-danger { padding: 10px 24px; background: var(--red); color: white; border: none; border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(239,68,68,0.25); }
+        .search-input { flex: 1; min-width: 250px; position: relative; }
+        .search-input input { width: 100%; padding: 10px 16px 10px 40px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: var(--transition); background: white; }
+        .search-input input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(29,78,216,0.08); }
+        .search-input .icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray-400); }
+        .filter-select { padding: 10px 16px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-size: 0.9rem; background: white; min-width: 160px; cursor: pointer; }
+        .filter-select:focus { outline: none; border-color: var(--blue); }
+        .table-card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04); overflow: hidden; }
+        .table-container { overflow-x: auto; }
+        .table-container table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        .table-container th { text-align: left; padding: 14px 18px; background: var(--gray-50); font-weight: 600; color: var(--gray-500); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--gray-200); }
+        .table-container td { padding: 14px 18px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
+        .table-container tr:last-child td { border-bottom: none; }
+        .table-container tr:hover td { background: var(--gray-50); }
+        .badge-status { display: inline-block; padding: 3px 14px; border-radius: var(--radius-full); font-size: 0.7rem; font-weight: 600; }
+        .badge-status.pendente { background: #FEF3C7; color: #92400E; }
+        .badge-status.em_andamento { background: #DBEAFE; color: #1E40AF; }
+        .badge-status.concluida { background: #D1FAE5; color: #065F46; }
+        .badge-status.cancelada { background: #FEE2E2; color: #991B1B; }
+        .actions-cell { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn-action { padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; display: inline-flex; align-items: center; gap: 4px; }
+        .btn-action.view { background: #DBEAFE; color: #1E40AF; }
+        .btn-action.edit { background: #FEF3C7; color: #92400E; }
+        .btn-action.delete { background: #FEE2E2; color: #991B1B; }
+        .btn-action:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+        .pagination { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; border-top: 1px solid var(--gray-100); }
+        .pagination .info { font-size: 0.85rem; color: var(--gray-500); }
+        .pagination .buttons { display: flex; gap: 4px; }
+        .pagination .buttons button { padding: 6px 14px; border: 1px solid var(--gray-200); border-radius: 6px; background: white; color: var(--gray-700); font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; transition: var(--transition); }
+        .pagination .buttons button:hover { background: var(--gray-50); border-color: var(--blue); }
+        .pagination .buttons button.active { background: var(--blue); color: white; border-color: var(--blue); }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,37,64,0.6); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 200; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: white; border-radius: var(--radius); padding: 32px; max-width: 560px; width: 90%; max-height: 90vh; overflow-y: auto; animation: fadeUp 0.3s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-100); }
+        .modal-header h2 { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--gray-900); }
+        .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-400); transition: var(--transition); }
+        .modal-close:hover { color: var(--gray-700); transform: rotate(90deg); }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--gray-700); margin-bottom: 4px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: var(--transition); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(29,78,216,0.08); }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--gray-100); }
+        .toast { position: fixed; top: 24px; right: 24px; background: white; padding: 14px 24px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); display: none; align-items: center; gap: 12px; font-weight: 600; font-size: 0.875rem; z-index: 300; border-left: 4px solid var(--blue); animation: slideIn 0.3s ease; }
+        .toast.show { display: flex; }
+        .toast.error { border-left-color: #EF4444; }
+        .toast.success { border-left-color: #10B981; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(120%); } to { opacity: 1; transform: translateX(0); } }
+        .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
+        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99; }
+        .mobile-overlay.active { display: block; }
+        @media (max-width: 992px) { .sidebar { transform: translateX(-100%); width: 280px; } .sidebar.open { transform: translateX(0); } .main { margin-left: 0; padding: 16px; } .mobile-toggle { display: block; } .mobile-overlay.active { display: block; } .form-row { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .main-header { flex-direction: column; align-items: flex-start; } .modal-content { padding: 20px; } }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+        @media print { .sidebar { display: none !important; } .main { margin-left: 0 !important; } .mobile-toggle { display: none !important; } .logo-img { height: 36px !important; } .actions-cell { display: none !important; } .btn-primary { display: none !important; } }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <a href="../dashboard.html" class="logo">
+            <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Analytics Enterprise</span>
+            </div>
+        </a>
+
+        <div class="user-info">
+            <div class="name" id="userName">Administrador</div>
+            <div class="role">
+                <span class="badge">👑 Master</span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="../dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="../empresas/"><span class="icon">🏢</span> Empresas</a></li>
+            <li><a href="../recrutadores/"><span class="icon">👤</span> Recrutadores</a></li>
+            <li><a href="../participantes/"><span class="icon">👥</span> Participantes</a></li>
+            <li><a href="../creditos/"><span class="icon">💳</span> Créditos</a></li>
+            <li><a href="../relatorios/"><span class="icon">📄</span> Relatórios</a></li>
+            <div class="divider"></div>
+            <li><a href="calendario.html"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="tarefas.html" class="active"><span class="icon">✅</span> Tarefas</a></li>
+            <li><a href="lembretes.html"><span class="icon">🔔</span> Lembretes</a></li>
+            <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
+            <li><a href="../bi/dashboard.html"><span class="icon">📈</span> BI Analytics</a></li>
+        </ul>
+
+        <div class="logout">
+            <a href="#" onclick="logout()">
+                <span class="icon">🚪</span> Sair
+            </a>
+        </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <main class="main">
+        <div class="main-header">
+            <div>
+                <div class="breadcrumb">
+                    <a href="calendario.html">Agenda</a> / Tarefas
+                </div>
+                <h1>✅ Tarefas</h1>
+                <p style="color: var(--gray-500); font-size: 0.9rem;">Gerencie todas as tarefas administrativas</p>
+            </div>
+            <div class="actions" style="display:flex;gap:12px;">
+                <button class="btn-primary" onclick="openModal()">➕ Nova Tarefa</button>
+            </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;align-items:center;">
+            <div class="search-input">
+                <span class="icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Buscar tarefas..." oninput="filterTable()" />
+            </div>
+            <select class="filter-select" id="statusFilter" onchange="filterTable()">
+                <option value="">Todos os status</option>
+                <option value="pendente">Pendente</option>
+                <option value="em_andamento">Em andamento</option>
+                <option value="concluida">Concluída</option>
+                <option value="cancelada">Cancelada</option>
+            </select>
+        </div>
+
+        <div class="table-card">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tarefa</th>
+                            <th>Prioridade</th>
+                            <th>Responsável</th>
+                            <th>Prazo</th>
+                            <th>Status</th>
+                            <th style="text-align:center;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr>
+                            <td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400);">
+                                Carregando tarefas...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination">
+                <span class="info" id="paginationInfo">Mostrando 0 de 0 tarefas</span>
+                <div class="buttons">
+                    <button onclick="prevPage()" id="prevBtn">Anterior</button>
+                    <button class="active" id="pageIndicator">1</button>
+                    <button onclick="nextPage()" id="nextBtn">Próximo</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="tarefaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nova Tarefa</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+
+            <form id="tarefaForm" onsubmit="saveTarefa(event)">
+                <input type="hidden" id="tarefaId" />
+
+                <div class="form-group">
+                    <label>Título *</label>
+                    <input type="text" id="tituloTarefa" placeholder="Título da tarefa" required />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Prioridade</label>
+                        <select id="prioridadeTarefa">
+                            <option value="baixa">🟢 Baixa</option>
+                            <option value="media" selected>🟡 Média</option>
+                            <option value="alta">🔴 Alta</option>
+                            <option value="urgente">🟠 Urgente</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Responsável</label>
+                        <input type="text" id="responsavelTarefa" placeholder="Nome do responsável" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Prazo</label>
+                        <input type="date" id="prazoTarefa" />
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="statusTarefa">
+                            <option value="pendente">Pendente</option>
+                            <option value="em_andamento">Em andamento</option>
+                            <option value="concluida">Concluída</option>
+                            <option value="cancelada">Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="descricaoTarefa" placeholder="Descrição detalhada da tarefa..."></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">💾 Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../supabase-config.js"></script>
+    <script src="../../auth.js"></script>
+    <script src="../../middleware/auth-guard.js"></script>
+
+    <script>
+        'use strict';
+
+        let tarefas = [];
+        let filteredTarefas = [];
+        let currentPage = 1;
+        const pageSize = 10;
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                window.VigorreAuth.logout();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Tarefas - VIGORRE ONE™');
+
+            const isAuth = window.VigorreAuth.isAuthenticated();
+            if (!isAuth) { window.location.href = '../../login.html'; return; }
+
+            const user = window.VigorreAuth.getCurrentUser();
+            if (!user || (user.role !== 'admin' && user.role !== 'master')) {
+                alert('⚠️ Acesso restrito a administradores.');
+                window.VigorreAuth.logout();
+                return;
+            }
+
+            document.getElementById('userName').textContent = user.name || 'Administrador';
+
+            loadTarefas();
+        });
+
+        function loadTarefas() {
+            try {
+                const stored = JSON.parse(localStorage.getItem('vigorre_admin_tarefas') || '[]');
+
+                if (stored.length === 0) {
+                    const today = new Date();
+                    const year = today.getFullYear();
+                    const month = String(today.getMonth()+1).padStart(2,'0');
+                    const day = String(today.getDate()+2).padStart(2,'0');
+
+                    tarefas = [
+                        { id: 't1', titulo: 'Revisar relatórios mensais', prioridade: 'alta', responsavel: 'João Silva',
+                            prazo: year + '-' + month + '-' + day, status: 'pendente',
+                            descricao: 'Revisar todos os relatórios do mês' },
+                        { id: 't2', titulo: 'Atualizar créditos dos recrutadores', prioridade: 'media', responsavel: 'Maria Santos',
+                            prazo: year + '-' + month + '-' + String(parseInt(day)+3).padStart(2,'0'), status: 'em_andamento',
+                            descricao: 'Atualizar créditos dos recrutadores ativos' }
+                    ];
+                    localStorage.setItem('vigorre_admin_tarefas', JSON.stringify(tarefas));
+                } else {
+                    tarefas = stored;
+                }
+
+                filteredTarefas = [...tarefas];
+                renderTable();
+            } catch (error) {
+                console.error('❌ Erro ao carregar tarefas:', error);
+                tarefas = [];
+                filteredTarefas = [];
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+
+            if (filteredTarefas.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400);">📭 Nenhuma tarefa encontrada</td></tr>';
+                document.getElementById('paginationInfo').textContent = 'Mostrando 0 de 0 tarefas';
+                return;
+            }
+
+            const start = (currentPage - 1) * pageSize;
+            const end = Math.min(start + pageSize, filteredTarefas.length);
+            const pageItems = filteredTarefas.slice(start, end);
+
+            const prioridadeMap = {
+                baixa: '🟢 Baixa',
+                media: '🟡 Média',
+                alta: '🔴 Alta',
+                urgente: '🟠 Urgente'
+            };
+
+            const statusMap = {
+                pendente: 'Pendente',
+                em_andamento: 'Em andamento',
+                concluida: 'Concluída',
+                cancelada: 'Cancelada'
+            };
+
+            tbody.innerHTML = pageItems.map(t => `
+                    <tr>
+                        <td><strong>${t.titulo}</strong></td>
+                        <td>${prioridadeMap[t.prioridade] || t.prioridade}</td>
+                        <td>${t.responsavel || '-'}</td>
+                        <td style="font-size:0.8rem;">${t.prazo || '-'}</td>
+                        <td><span class="badge-status ${t.status}">${statusMap[t.status] || t.status}</span></td>
+                        <td style="text-align:center;">
+                            <div class="actions-cell" style="justify-content:center;">
+                                <button class="btn-action view" onclick="viewTarefa('${t.id}')">👁️</button>
+                                <button class="btn-action edit" onclick="editTarefa('${t.id}')">✏️</button>
+                                <button class="btn-action delete" onclick="deleteTarefa('${t.id}')">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+
+            const total = filteredTarefas.length;
+            document.getElementById('paginationInfo').textContent = 'Mostrando ' + (start + 1) + '-' + end + ' de ' + total + ' tarefas';
+            document.getElementById('pageIndicator').textContent = currentPage;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = end >= total;
+        }
+
+        function filterTable() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('statusFilter').value;
+
+            filteredTarefas = tarefas.filter(t => {
+                const matchSearch = t.titulo.toLowerCase().includes(search) ||
+                    (t.responsavel || '').toLowerCase().includes(search);
+                const matchStatus = !status || t.status === status;
+                return matchSearch && matchStatus;
+            });
+
+            currentPage = 1;
+            renderTable();
+        }
+
+        function prevPage() {
+            if (currentPage > 1) { currentPage--; renderTable(); }
+        }
+
+        function nextPage() {
+            const totalPages = Math.ceil(filteredTarefas.length / pageSize);
+            if (currentPage < totalPages) { currentPage++; renderTable(); }
+        }
+
+        function openModal() {
+            document.getElementById('modalTitle').textContent = 'Nova Tarefa';
+            document.getElementById('tarefaForm').reset();
+            document.getElementById('tarefaId').value = '';
+            document.getElementById('tarefaModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('tarefaModal').classList.remove('active');
+        }
+
+        function editTarefa(id) {
+            const t = tarefas.find(t => t.id === id);
+            if (!t) return;
+
+            document.getElementById('modalTitle').textContent = 'Editar Tarefa';
+            document.getElementById('tarefaId').value = t.id;
+            document.getElementById('tituloTarefa').value = t.titulo;
+            document.getElementById('prioridadeTarefa').value = t.prioridade;
+            document.getElementById('responsavelTarefa').value = t.responsavel || '';
+            document.getElementById('prazoTarefa').value = t.prazo || '';
+            document.getElementById('statusTarefa').value = t.status;
+            document.getElementById('descricaoTarefa').value = t.descricao || '';
+
+            document.getElementById('tarefaModal').classList.add('active');
+        }
+
+        function saveTarefa(e) {
+            e.preventDefault();
+
+            const id = document.getElementById('tarefaId').value || Date.now().toString();
+
+            const tarefa = {
+                id: id,
+                titulo: document.getElementById('tituloTarefa').value,
+                prioridade: document.getElementById('prioridadeTarefa').value,
+                responsavel: document.getElementById('responsavelTarefa').value,
+                prazo: document.getElementById('prazoTarefa').value,
+                status: document.getElementById('statusTarefa').value,
+                descricao: document.getElementById('descricaoTarefa').value
+            };
+
+            try {
+                const all = JSON.parse(localStorage.getItem('vigorre_admin_tarefas') || '[]');
+                const idx = all.findIndex(t => t.id === id);
+                if (idx > -1) { all[idx] = { ...all[idx], ...tarefa }; } else { all.push(tarefa); }
+                localStorage.setItem('vigorre_admin_tarefas', JSON.stringify(all));
+                tarefas = all;
+                filteredTarefas = [...tarefas];
+                renderTable();
+                showToast('✅ Tarefa salva com sucesso!', 'success');
+                closeModal();
+            } catch (error) {
+                console.error('❌ Erro ao salvar:', error);
+                showToast('Erro ao salvar tarefa', 'error');
+            }
+        }
+
+        function viewTarefa(id) {
+            const t = tarefas.find(t => t.id === id);
+            if (!t) return;
+            const prioridadeMap = { baixa: '🟢 Baixa', media: '🟡 Média', alta: '🔴 Alta', urgente: '🟠 Urgente' };
+            const statusMap = { pendente: 'Pendente', em_andamento: 'Em andamento', concluida: 'Concluída', cancelada: 'Cancelada' };
+            alert('✅ ' + t.titulo + '\n\n📊 Prioridade: ' + (prioridadeMap[t.prioridade] || t.prioridade) + '\n👤 Responsável: ' + (t.responsavel || '-') + '\n📅 Prazo: ' + (t.prazo || '-') + '\n📌 Status: ' + (statusMap[t.status] || t.status) + '\n📝 Descrição: ' + (t.descricao || 'Nenhuma'));
+        }
+
+        function deleteTarefa(id) {
+            if (!confirm('Tem certeza que deseja excluir esta tarefa?')) return;
+            try {
+                const all = JSON.parse(localStorage.getItem('vigorre_admin_tarefas') || '[]');
+                const filtered = all.filter(t => t.id !== id);
+                localStorage.setItem('vigorre_admin_tarefas', JSON.stringify(filtered));
+                tarefas = filtered;
+                filteredTarefas = [...tarefas];
+                renderTable();
+                showToast('🗑️ Tarefa excluída com sucesso!', 'success');
+            } catch (error) {
+                console.error('❌ Erro ao excluir:', error);
+                showToast('Erro ao excluir tarefa', 'error');
+            }
+        }
+
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+            if (type === 'error') { icon.textContent = '❌'; } else { icon.textContent = '✅'; }
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() { toast.classList.remove('show'); }, 4000);
+        }
+
+        document.getElementById('tarefaModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        console.log('✅ Tarefas carregado com sucesso!');
+    </script>
+
+</body>
+</html>
