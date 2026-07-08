@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendário | Recrutador VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0A2540; --blue: #1D4ED8; --blue-light: #3B82F6;
+            --cyan: #06B6D4; --gold: #D97706; --green: #10B981;
+            --red: #EF4444; --white: #FFFFFF; --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9; --gray-200: #E2E8F0; --gray-300: #CBD5E1;
+            --gray-400: #94A3B8; --gray-500: #64748B; --gray-600: #475569;
+            --gray-700: #334155; --gray-800: #1E293B; --gray-900: #0F172A;
+            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10,37,64,0.06);
+            --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
+            --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+        .sidebar { position: fixed; top: 0; left: 0; width: 260px; height: 100vh; background: var(--navy); color: white; padding: 24px 20px; display: flex; flex-direction: column; z-index: 100; transition: var(--transition); overflow-y: auto; }
+        .sidebar .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .sidebar .logo .logo-img { height: 36px; width: auto; display: block; }
+        .sidebar .logo .logo-text .name { font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white; }
+        .sidebar .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
+        .sidebar .logo .logo-text .sub { font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; }
+        .sidebar .user-info { padding: 16px 12px; background: rgba(255,255,255,0.04); border-radius: var(--radius-sm); margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.04); }
+        .sidebar .user-info .name { font-weight: 600; font-size: 0.9rem; color: white; }
+        .sidebar .user-info .role { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; }
+        .sidebar .user-info .role .badge { display: inline-block; padding: 2px 10px; background: rgba(6,182,212,0.15); color: var(--cyan); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600; }
+        .sidebar .user-info .credits { margin-top: 8px; display: flex; gap: 12px; flex-wrap: wrap; }
+        .sidebar .user-info .credits .credit-item { background: rgba(255,255,255,0.04); padding: 4px 10px; border-radius: var(--radius-sm); font-size: 0.7rem; color: rgba(255,255,255,0.6); }
+        .sidebar .user-info .credits .credit-item strong { color: white; }
+        .sidebar .nav { list-style: none; flex: 1; }
+        .sidebar .nav li { margin-bottom: 2px; }
+        .sidebar .nav a { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: var(--radius-sm); color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
+        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
+        .sidebar .nav a.active { background: rgba(6,182,212,0.12); color: white; border-left: 3px solid var(--cyan); }
+        .sidebar .nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; }
+        .sidebar .nav .divider { height: 1px; background: rgba(255,255,255,0.04); margin: 12px 0; }
+        .sidebar .logout { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .sidebar .logout a { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: var(--radius-sm); color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
+        .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
+        .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
+        .main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+        .main-header .breadcrumb { font-size: 0.85rem; color: var(--gray-500); }
+        .main-header .breadcrumb a { color: var(--blue); text-decoration: none; }
+        .main-header .breadcrumb a:hover { color: var(--cyan); }
+        .main-header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--gray-900); margin-top: 4px; }
+        .btn-primary { padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan)); color: white; border: none; border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
+        .btn-secondary { padding: 10px 24px; background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-secondary:hover { background: var(--gray-200); }
+        .btn-success { padding: 10px 24px; background: var(--green); color: white; border: none; border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.25); }
+        .filters-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+        .filter-select { padding: 10px 16px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-size: 0.9rem; background: white; min-width: 160px; cursor: pointer; }
+        .filter-select:focus { outline: none; border-color: var(--blue); }
+        .calendar-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+        .calendar-nav .month-year { font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--gray-900); }
+        .calendar-nav .month-year .today-count { font-size: 0.8rem; font-weight: 400; color: var(--gray-400); font-family: 'Inter', sans-serif; }
+        .calendar-nav .nav-buttons { display: flex; gap: 8px; }
+        .calendar-nav .nav-buttons button { padding: 8px 20px; border: 1px solid var(--gray-200); border-radius: var(--radius-sm); background: white; color: var(--gray-700); font-family: 'Inter', sans-serif; font-size: 0.85rem; cursor: pointer; transition: var(--transition); }
+        .calendar-nav .nav-buttons button:hover { background: var(--gray-50); border-color: var(--blue); }
+        .calendar-grid { background: white; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04); overflow: hidden; }
+        .calendar-grid .weekdays { display: grid; grid-template-columns: repeat(7,1fr); background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
+        .calendar-grid .weekdays div { padding: 12px 16px; font-size: 0.75rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; text-align: center; }
+        .calendar-grid .days { display: grid; grid-template-columns: repeat(7,1fr); }
+        .calendar-grid .day { min-height: 100px; padding: 8px 10px; border-right: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); cursor: pointer; transition: var(--transition); position: relative; }
+        .calendar-grid .day:nth-child(7n) { border-right: none; }
+        .calendar-grid .day:hover { background: var(--gray-50); }
+        .calendar-grid .day .day-number { font-size: 0.85rem; font-weight: 600; color: var(--gray-700); }
+        .calendar-grid .day .day-number.today { display: inline-block; background: var(--blue); color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; }
+        .calendar-grid .day .day-number.other-month { color: var(--gray-300); }
+        .calendar-grid .day .events { margin-top: 4px; display: flex; flex-direction: column; gap: 2px; }
+        .calendar-grid .day .event-item { font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; transition: var(--transition); }
+        .calendar-grid .day .event-item:hover { transform: scale(1.02); }
+        .calendar-grid .day .event-item.meeting { background: #DBEAFE; color: #1E40AF; }
+        .calendar-grid .day .event-item.interview { background: #D1FAE5; color: #065F46; }
+        .calendar-grid .day .event-item.task { background: #FEF3C7; color: #92400E; }
+        .calendar-grid .day .event-item.reminder { background: #EDE9FE; color: #5B21B6; }
+        .calendar-grid .day .event-item.other { background: #FCE7F3; color: #BE185D; }
+        .calendar-grid .day .more-events { font-size: 0.6rem; color: var(--gray-400); margin-top: 2px; cursor: pointer; }
+        .calendar-grid .day .more-events:hover { color: var(--blue); }
+        .legend { display: flex; gap: 16px; padding: 16px 20px; border-top: 1px solid var(--gray-100); flex-wrap: wrap; align-items: center; }
+        .legend .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--gray-600); }
+        .legend .legend-item .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .legend .legend-item .dot.meeting { background: #1E40AF; }
+        .legend .legend-item .dot.interview { background: #065F46; }
+        .legend .legend-item .dot.task { background: #92400E; }
+        .legend .legend-item .dot.reminder { background: #5B21B6; }
+        .legend .legend-item .dot.other { background: #BE185D; }
+        .legend .legend-export { margin-left: auto; }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,37,64,0.6); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 200; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: white; border-radius: var(--radius); padding: 32px; max-width: 560px; width: 90%; max-height: 90vh; overflow-y: auto; animation: fadeUp 0.3s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-100); }
+        .modal-header h2 { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--gray-900); }
+        .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-400); transition: var(--transition); }
+        .modal-close:hover { color: var(--gray-700); transform: rotate(90deg); }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--gray-700); margin-bottom: 4px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: var(--transition); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(29,78,216,0.08); }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--gray-100); }
+        .toast { position: fixed; top: 24px; right: 24px; background: white; padding: 14px 24px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); display: none; align-items: center; gap: 12px; font-weight: 600; font-size: 0.875rem; z-index: 300; border-left: 4px solid var(--blue); animation: slideIn 0.3s ease; }
+        .toast.show { display: flex; }
+        .toast.error { border-left-color: #EF4444; }
+        .toast.success { border-left-color: #10B981; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(120%); } to { opacity: 1; transform: translateX(0); } }
+        .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
+        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99; }
+        .mobile-overlay.active { display: block; }
+        @media (max-width: 992px) { .sidebar { transform: translateX(-100%); width: 280px; } .sidebar.open { transform: translateX(0); } .main { margin-left: 0; padding: 16px; } .mobile-toggle { display: block; } .mobile-overlay.active { display: block; } .form-row { grid-template-columns: 1fr; } .filters-bar { flex-direction: column; } .filter-select { width: 100%; } }
+        @media (max-width: 768px) { .main-header { flex-direction: column; align-items: flex-start; } .calendar-nav { flex-direction: column; align-items: center; } .calendar-grid .day { min-height: 60px; padding: 4px 6px; } .calendar-grid .day .day-number { font-size: 0.7rem; } .calendar-grid .day .event-item { font-size: 0.5rem; padding: 1px 4px; } .calendar-grid .day .more-events { font-size: 0.5rem; } .legend { gap: 8px; } .legend .legend-item { font-size: 0.6rem; } .legend .legend-export { margin-left: 0; width: 100%; } .legend .legend-export button { width: 100%; justify-content: center; } }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+        @media print { .sidebar { display: none !important; } .main { margin-left: 0 !important; } .mobile-toggle { display: none !important; } .logo-img { height: 36px !important; } .btn-primary { display: none !important; } .calendar-nav .nav-buttons { display: none !important; } .filters-bar { display: none !important; } .legend .legend-export { display: none !important; } }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <a href="../dashboard.html" class="logo">
+            <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Analytics Enterprise</span>
+            </div>
+        </a>
+
+        <div class="user-info">
+            <div class="name" id="userName">Recrutador</div>
+            <div class="role">
+                <span class="badge">🎯 Recrutador</span>
+            </div>
+            <div class="credits" id="creditsDisplay">
+                <span class="credit-item">📊 DISC: <strong id="credDisc">0</strong></span>
+                <span class="credit-item">🧠 IE: <strong id="credIE">0</strong></span>
+                <span class="credit-item">💎 Valores: <strong id="credValores">0</strong></span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="../dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="../empresas/"><span class="icon">🏢</span> Minhas Empresas</a></li>
+            <li><a href="../participantes/"><span class="icon">👥</span> Participantes</a></li>
+            <li><a href="../creditos/"><span class="icon">💳</span> Créditos</a></li>
+            <li><a href="../relatorios/"><span class="icon">📄</span> Relatórios</a></li>
+            <div class="divider"></div>
+            <li><a href="calendario.html" class="active"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="entrevistas.html"><span class="icon">🎯</span> Entrevistas</a></li>
+            <li><a href="tarefas.html"><span class="icon">✅</span> Tarefas</a></li>
+            <li><a href="lembretes.html"><span class="icon">🔔</span> Lembretes</a></li>
+            <div class="divider"></div>
+            <li><a href="../backup/meu-backup.html"><span class="icon">💾</span> Meu Backup</a></li>
+        </ul>
+
+        <div class="logout">
+            <a href="#" onclick="logout()">
+                <span class="icon">🚪</span> Sair
+            </a>
+        </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <main class="main">
+        <div class="main-header">
+            <div>
+                <div class="breadcrumb">
+                    <a href="../dashboard.html">Dashboard</a> / Agenda
+                </div>
+                <h1>📅 Agenda</h1>
+                <p style="color: var(--gray-500); font-size: 0.9rem;">Gerencie seus compromissos, entrevistas e tarefas</p>
+            </div>
+            <div class="actions" style="display:flex;gap:12px;">
+                <button class="btn-primary" onclick="openModal()">➕ Novo Evento</button>
+            </div>
+        </div>
+
+        <div class="filters-bar">
+            <select class="filter-select" id="typeFilter" onchange="applyFilters()">
+                <option value="">Todos os tipos</option>
+                <option value="meeting">📋 Reunião</option>
+                <option value="interview">🎯 Entrevista</option>
+                <option value="task">✅ Tarefa</option>
+                <option value="reminder">🔔 Lembrete</option>
+                <option value="other">📌 Outro</option>
+            </select>
+            <select class="filter-select" id="viewFilter" onchange="applyFilters()">
+                <option value="all">Todos os eventos</option>
+                <option value="today">📅 Hoje</option>
+                <option value="week">📆 Esta semana</option>
+            </select>
+        </div>
+
+        <div class="calendar-nav">
+            <div class="month-year">
+                <span id="monthYear">Janeiro 2024</span>
+                <span class="today-count" id="todayCount"></span>
+            </div>
+            <div class="nav-buttons">
+                <button onclick="changeMonth(-1)">◀</button>
+                <button onclick="goToday()">Hoje</button>
+                <button onclick="changeMonth(1)">▶</button>
+            </div>
+        </div>
+
+        <div class="calendar-grid">
+            <div class="weekdays">
+                <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+            </div>
+            <div class="days" id="calendarDays"></div>
+            <div class="legend">
+                <span class="legend-item"><span class="dot meeting"></span> Reunião</span>
+                <span class="legend-item"><span class="dot interview"></span> Entrevista</span>
+                <span class="legend-item"><span class="dot task"></span> Tarefa</span>
+                <span class="legend-item"><span class="dot reminder"></span> Lembrete</span>
+                <span class="legend-item"><span class="dot other"></span> Outro</span>
+                <span class="legend-export">
+                    <button class="btn-success" onclick="exportarAgenda()" style="padding:6px 16px;font-size:0.75rem;">📥 Exportar</button>
+                </span>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="eventModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Novo Evento</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+
+            <form id="eventForm" onsubmit="saveEvent(event)">
+                <input type="hidden" id="eventId" />
+                <input type="hidden" id="eventDate" />
+
+                <div class="form-group">
+                    <label>Título *</label>
+                    <input type="text" id="eventTitle" placeholder="Título do evento" required />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tipo *</label>
+                        <select id="eventType" required>
+                            <option value="meeting">📋 Reunião</option>
+                            <option value="interview">🎯 Entrevista</option>
+                            <option value="task">✅ Tarefa</option>
+                            <option value="reminder">🔔 Lembrete</option>
+                            <option value="other">📌 Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Horário</label>
+                        <input type="time" id="eventTime" value="09:00" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="eventDescription" placeholder="Descrição do evento..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Link (opcional)</label>
+                    <input type="url" id="eventLink" placeholder="https://..." />
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">💾 Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../supabase-config.js"></script>
+    <script src="../../auth.js"></script>
+    <script src="../../middleware/auth-guard.js"></script>
+    <script src="../../middleware/recruiter-guard.js"></script>
+
+    <script>
+        'use strict';
+
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+        let events = [];
+        let filteredEvents = [];
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                window.VigorreAuth.logout();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📅 Recrutador Agenda - VIGORRE ONE™');
+
+            const isAuth = window.VigorreAuth.isAuthenticated();
+            if (!isAuth) { window.location.href = '../../login.html'; return; }
+
+            const user = window.VigorreAuth.getCurrentUser();
+            if (!user || (user.role !== 'recruiter' && user.role !== 'admin' && user.role !== 'master')) {
+                alert('⚠️ Acesso restrito a recrutadores.');
+                window.VigorreAuth.logout();
+                return;
+            }
+
+            document.getElementById('userName').textContent = user.name || 'Recrutador';
+
+            const credits = user.credits || {};
+            document.getElementById('credDisc').textContent = credits.DISC || 0;
+            document.getElementById('credIE').textContent = credits.IE || 0;
+            document.getElementById('credValores').textContent = credits.Valores || 0;
+
+            loadEvents();
+        });
+
+        function loadEvents() {
+            try {
+                const stored = JSON.parse(localStorage.getItem('vigorre_recruiter_events') || '[]');
+
+                if (stored.length === 0) {
+                    const today = new Date();
+                    const year = today.getFullYear();
+                    const month = today.getMonth();
+                    const day = today.getDate();
+
+                    events = [
+                        { id: 'ev1', title: 'Reunião com cliente', type: 'meeting',
+                            date: year + '-' + String(month+1).padStart(2,'0') + '-' + String(day+2).padStart(2,'0'),
+                            time: '10:00', description: 'Alinhamento sobre novas vagas', link: '' },
+                        { id: 'ev2', title: 'Entrevista - João Silva', type: 'interview',
+                            date: year + '-' + String(month+1).padStart(2,'0') + '-' + String(day+5).padStart(2,'0'),
+                            time: '14:30', description: 'Entrevista para vaga de desenvolvedor', link: '' },
+                        { id: 'ev3', title: 'Revisão de currículos', type: 'task',
+                            date: year + '-' + String(month+1).padStart(2,'0') + '-' + String(day+1).padStart(2,'0'),
+                            time: '09:00', description: 'Revisar currículos recebidos', link: '' },
+                        { id: 'ev4', title: 'Lembrete: Enviar propostas', type: 'reminder',
+                            date: year + '-' + String(month+1).padStart(2,'0') + '-' + String(day+3).padStart(2,'0'),
+                            time: '16:00', description: 'Enviar propostas para os clientes', link: '' }
+                    ];
+                    localStorage.setItem('vigorre_recruiter_events', JSON.stringify(events));
+                } else {
+                    events = stored;
+                }
+
+                filteredEvents = [...events];
+                updateTodayCount();
+                renderCalendar();
+            } catch (error) {
+                console.error('❌ Erro ao carregar eventos:', error);
+                events = [];
+                filteredEvents = [];
+            }
+        }
+
+        function updateTodayCount() {
+            const today = new Date();
+            const todayStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+            const todayEvents = events.filter(e => e.date === todayStr);
+            document.getElementById('todayCount').textContent = todayEvents.length > 0 ? '🔔 ' + todayEvents.length + ' evento(s) hoje' : '';
+        }
+
+        function applyFilters() {
+            const type = document.getElementById('typeFilter').value;
+            const view = document.getElementById('viewFilter').value;
+            let filtered = [...events];
+
+            if (type) filtered = filtered.filter(e => e.type === type);
+
+            if (view === 'today') {
+                const today = new Date();
+                const todayStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+                filtered = filtered.filter(e => e.date === todayStr);
+            } else if (view === 'week') {
+                const today = new Date();
+                const dayOfWeek = today.getDay();
+                const startOfWeek = new Date(today);
+                startOfWeek.setDate(today.getDate() - dayOfWeek);
+                const endOfWeek = new Date(startOfWeek);
+                endOfWeek.setDate(startOfWeek.getDate() + 6);
+                const startStr = startOfWeek.getFullYear() + '-' + String(startOfWeek.getMonth()+1).padStart(2,'0') + '-' + String(startOfWeek.getDate()).padStart(2,'0');
+                const endStr = endOfWeek.getFullYear() + '-' + String(endOfWeek.getMonth()+1).padStart(2,'0') + '-' + String(endOfWeek.getDate()).padStart(2,'0');
+                filtered = filtered.filter(e => e.date >= startStr && e.date <= endStr);
+            }
+
+            filteredEvents = filtered;
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            const monthNames = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+            document.getElementById('monthYear').textContent = monthNames[currentMonth] + ' ' + currentYear;
+
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+            const today = new Date();
+            const todayDate = today.getDate();
+            const todayMonth = today.getMonth();
+            const todayYear = today.getFullYear();
+
+            const eventsToShow = filteredEvents.length > 0 ? filteredEvents : events;
+            let html = '';
+
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = daysInPrevMonth - i;
+                html += '<div class="day"><div class="day-number other-month">' + day + '</div><div class="events"></div></div>';
+            }
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dateStr = currentYear + '-' + String(currentMonth+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+                const isToday = d === todayDate && currentMonth === todayMonth && currentYear === todayYear;
+                const dayEvents = eventsToShow.filter(e => e.date === dateStr);
+
+                let eventsHtml = '';
+                let moreCount = 0;
+
+                dayEvents.slice(0, 2).forEach(e => {
+                    const typeClass = e.type || 'other';
+                    const time = e.time ? e.time + ' - ' : '';
+                    eventsHtml += '<div class="event-item ' + typeClass + '" onclick="viewEvent(\'' + e.id + '\')">' + time + e.title + '</div>';
+                });
+
+                if (dayEvents.length > 2) {
+                    moreCount = dayEvents.length - 2;
+                    eventsHtml += '<div class="more-events" onclick="showDayEvents(\'' + dateStr + '\')">+ ' + moreCount + ' mais</div>';
+                }
+
+                const dayClass = isToday ? 'today' : '';
+                html += '<div class="day" onclick="openModalForDay(\'' + dateStr + '\')"><div class="day-number ' + dayClass + '">' + d + '</div><div class="events">' + eventsHtml + '</div></div>';
+            }
+
+            const totalDays = firstDay + daysInMonth;
+            const remainingDays = (7 - (totalDays % 7)) % 7;
+            for (let d = 1; d <= remainingDays; d++) {
+                html += '<div class="day"><div class="day-number other-month">' + d + '</div><div class="events"></div></div>';
+            }
+
+            document.getElementById('calendarDays').innerHTML = html;
+        }
+
+        function changeMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+            else if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+            renderCalendar();
+        }
+
+        function goToday() {
+            const today = new Date();
+            currentMonth = today.getMonth();
+            currentYear = today.getFullYear();
+            renderCalendar();
+        }
+
+        function openModal() {
+            document.getElementById('modalTitle').textContent = 'Novo Evento';
+            document.getElementById('eventForm').reset();
+            document.getElementById('eventId').value = '';
+            document.getElementById('eventDate').value = '';
+            document.getElementById('eventModal').classList.add('active');
+        }
+
+        function openModalForDay(dateStr) {
+            document.getElementById('modalTitle').textContent = 'Novo Evento';
+            document.getElementById('eventForm').reset();
+            document.getElementById('eventId').value = '';
+            document.getElementById('eventDate').value = dateStr;
+            document.getElementById('eventModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('eventModal').classList.remove('active');
+        }
+
+        function saveEvent(e) {
+            e.preventDefault();
+            const id = document.getElementById('eventId').value || Date.now().toString();
+            const date = document.getElementById('eventDate').value;
+
+            let eventDate = date;
+            if (!eventDate) {
+                const today = new Date();
+                eventDate = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+            }
+
+            const event = {
+                id: id,
+                title: document.getElementById('eventTitle').value,
+                type: document.getElementById('eventType').value,
+                date: eventDate,
+                time: document.getElementById('eventTime').value || '09:00',
+                description: document.getElementById('eventDescription').value,
+                link: document.getElementById('eventLink').value
+            };
+
+            try {
+                const all = JSON.parse(localStorage.getItem('vigorre_recruiter_events') || '[]');
+                const idx = all.findIndex(e => e.id === id);
+                if (idx > -1) { all[idx] = { ...all[idx], ...event }; } else { all.push(event); }
+                localStorage.setItem('vigorre_recruiter_events', JSON.stringify(all));
+                events = all;
+                filteredEvents = [...events];
+                updateTodayCount();
+                renderCalendar();
+                showToast('✅ Evento salvo com sucesso!', 'success');
+                closeModal();
+            } catch (error) {
+                console.error('❌ Erro ao salvar evento:', error);
+                showToast('Erro ao salvar evento', 'error');
+            }
+        }
+
+        function viewEvent(id) {
+            const event = events.find(e => e.id === id);
+            if (!event) return;
+            const typeMap = { meeting: '📋 Reunião', interview: '🎯 Entrevista', task: '✅ Tarefa', reminder: '🔔 Lembrete', other: '📌 Outro' };
+            alert('📅 ' + event.title + '\n\n📊 Tipo: ' + (typeMap[event.type] || event.type) + '\n📆 Data: ' + event.date + '\n⏰ Horário: ' + (event.time || '--') + '\n📝 Descrição: ' + (event.description || 'Nenhuma') + '\n🔗 Link: ' + (event.link || 'Nenhum'));
+        }
+
+        function showDayEvents(dateStr) {
+            const dayEvents = events.filter(e => e.date === dateStr);
+            if (dayEvents.length === 0) { showToast('Nenhum evento neste dia', 'info'); return; }
+            const typeMap = { meeting: 'Reunião', interview: 'Entrevista', task: 'Tarefa', reminder: 'Lembrete', other: 'Outro' };
+            let msg = '📅 Eventos do dia ' + dateStr + ':\n\n';
+            dayEvents.forEach(e => { msg += '• ' + (e.time || '--') + ' - ' + e.title + ' (' + (typeMap[e.type] || e.type) + ')\n'; });
+            alert(msg);
+        }
+
+        function exportarAgenda() {
+            const dataStr = JSON.stringify(events, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'agenda_recrutador_' + new Date().toISOString().slice(0,10) + '.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('📥 Agenda exportada com sucesso!', 'success');
+        }
+
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+            if (type === 'error') { icon.textContent = '❌'; } else if (type === 'info') { icon.textContent = 'ℹ️'; } else { icon.textContent = '✅'; }
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() { toast.classList.remove('show'); }, 4000);
+        }
+
+        document.getElementById('eventModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        console.log('✅ Recrutador Agenda carregado com sucesso!');
+    </script>
+
+</body>
+</html>
