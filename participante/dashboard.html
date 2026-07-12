@@ -4,21 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Participante Dashboard | VIGORRE ONE™</title>
+
+    <!-- ==========================================
+    FONTS PREMIUM
+    ========================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <!-- ==========================================
+    CHART.JS
+    ========================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+
     <style>
         /* ============================================
            VIGORRE ONE™ - PARTICIPANTE DASHBOARD
            INTERNATIONAL ENTERPRISE EDITION
+           ============================================
+
+           DESIGN INSPIRADO EM:
+           - Linear
+           - Notion
+           - Stripe Dashboard
+           - Apple Human Interface
+           - Google Material 3
+           - Duolingo (gamificação)
+
+           CARACTERÍSTICAS:
+           - Experiência do usuário centrada no progresso
+           - Cards com gamificação
+           - Feedback visual de conquistas
+           - Tema claro/escuro automático
+           - Acessibilidade WCAG
+           - Animações suaves
            ============================================ */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ============================================
+           CSS VARIABLES (TEMA CLARO)
+           ============================================ */
         :root {
             --navy: #0A2540;
             --navy-light: #1A3A5C;
@@ -30,6 +55,7 @@
             --red: #EF4444;
             --orange: #F59E0B;
             --purple: #7C3AED;
+            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -44,18 +70,165 @@
             --radius: 16px;
             --radius-sm: 10px;
             --radius-full: 9999px;
-            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
-            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
-            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 24px rgba(10, 37, 64, 0.04);
+            --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.04), 0 8px 40px rgba(10, 37, 64, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.06), 0 16px 64px rgba(10, 37, 64, 0.10);
+            --transition: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --bg-body: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --border-color: #E2E8F0;
+        }
+
+        /* ============================================
+           TEMA ESCURO (AUTO DETECT)
+           ============================================ */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-body: #0F172A;
+                --bg-card: #1E293B;
+                --text-primary: #F8FAFC;
+                --text-secondary: #94A3B8;
+                --text-muted: #64748B;
+                --border-color: #334155;
+                --shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 24px rgba(0, 0, 0, 0.15);
+                --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.2), 0 8px 40px rgba(0, 0, 0, 0.25);
+                --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.25), 0 16px 64px rgba(0, 0, 0, 0.3);
+            }
+
+            body {
+                background: var(--bg-body);
+                color: var(--text-primary);
+            }
+
+            .progress-card,
+            .test-card,
+            .laudo-card {
+                background: var(--bg-card);
+                border-color: var(--border-color);
+            }
+
+            .progress-card .progress-top .label {
+                color: var(--text-secondary);
+            }
+
+            .progress-card .progress-top .percentage {
+                color: var(--cyan);
+            }
+
+            .progress-card .progress-details .item .name {
+                color: var(--text-secondary);
+            }
+
+            .test-card .test-name {
+                color: var(--text-primary);
+            }
+
+            .test-card .test-desc {
+                color: var(--text-muted);
+            }
+
+            .test-card .test-status.locked {
+                background: var(--gray-700);
+                color: var(--text-muted);
+            }
+
+            .ia-card {
+                background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            }
+
+            .laudo-card {
+                background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            }
+
+            .toast {
+                background: var(--bg-card);
+                color: var(--text-primary);
+            }
+
+            .header {
+                background: var(--gray-800);
+            }
+
+            .header .logo .logo-text .name {
+                color: var(--text-primary);
+            }
+
+            .header .user-info .name {
+                color: var(--text-primary);
+            }
+
+            .header .user-info .badge {
+                background: rgba(6, 182, 212, 0.12);
+                color: var(--cyan);
+            }
+
+            .header .logout-btn {
+                background: rgba(255, 255, 255, 0.04);
+                border-color: rgba(255, 255, 255, 0.06);
+                color: var(--text-muted);
+            }
+
+            .header .logout-btn:hover {
+                background: rgba(239, 68, 68, 0.12);
+                color: #F87171;
+            }
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-800);
+            background: var(--bg-body);
+            color: var(--text-primary);
             min-height: 100vh;
+            transition: background var(--transition-slow), color var(--transition-slow);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           SCROLLBAR PREMIUM
+           ============================================ */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-400);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            ::-webkit-scrollbar-thumb {
+                background: var(--gray-600);
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--gray-500);
+            }
         }
 
         /* ============================================
@@ -72,9 +245,10 @@
             gap: 16px;
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 100;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(10px);
+            transition: background var(--transition-slow);
         }
 
         .header .logo {
@@ -85,14 +259,14 @@
         }
 
         .header .logo .logo-img {
-            height: 36px;
+            height: 40px;
             width: auto;
             display: block;
         }
 
         .header .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 800;
             color: white;
             letter-spacing: -0.3px;
@@ -135,8 +309,8 @@
 
         .header .logout-btn {
             padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: var(--radius-full);
             color: rgba(255, 255, 255, 0.5);
             text-decoration: none;
@@ -147,20 +321,24 @@
         }
 
         .header .logout-btn:hover {
-            background: rgba(239, 68, 68, 0.15);
+            background: rgba(239, 68, 68, 0.12);
             color: #F87171;
-            border-color: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.15);
         }
 
         /* ============================================
            MAIN CONTENT
            ============================================ */
         .main {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 32px 40px 60px;
+            transition: padding var(--transition-slow);
         }
 
+        /* ============================================
+           HEADER
+           ============================================ */
         .main-header {
             margin-bottom: 32px;
         }
@@ -169,7 +347,8 @@
             font-family: 'Poppins', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--gray-900);
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
         }
 
         .main-header .greeting .highlight {
@@ -177,7 +356,7 @@
         }
 
         .main-header .subtitle {
-            color: var(--gray-500);
+            color: var(--text-muted);
             margin-top: 4px;
             font-size: 0.95rem;
         }
@@ -191,7 +370,27 @@
             padding: 20px 24px;
             color: white;
             margin-bottom: 32px;
-            box-shadow: 0 8px 40px rgba(10, 37, 64, 0.15);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ia-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .ia-card {
+                background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            }
         }
 
         .ia-card .ia-top {
@@ -200,6 +399,8 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
+            position: relative;
+            z-index: 1;
         }
 
         .ia-card .ia-top .ia-title {
@@ -212,12 +413,13 @@
         }
 
         .ia-card .ia-top .ia-badge {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--blue-light);
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--cyan);
             padding: 4px 14px;
             border-radius: var(--radius-full);
             font-size: 0.7rem;
             font-weight: 600;
+            border: 1px solid rgba(6, 182, 212, 0.08);
         }
 
         .ia-card .ia-content {
@@ -225,19 +427,21 @@
             grid-template-columns: 1fr 1fr 1fr;
             gap: 16px;
             margin-top: 16px;
+            position: relative;
+            z-index: 1;
         }
 
         .ia-card .ia-item {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: var(--radius-sm);
-            padding: 14px;
+            padding: 14px 16px;
             transition: var(--transition);
             cursor: pointer;
         }
 
         .ia-card .ia-item:hover {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.06);
             transform: translateY(-2px);
         }
 
@@ -262,11 +466,11 @@
            PROGRESS CARD
            ============================================ */
         .progress-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: var(--radius);
             padding: 24px 28px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(10, 37, 64, 0.04);
+            border: 1px solid var(--border-color);
             margin-bottom: 32px;
             transition: var(--transition);
         }
@@ -287,7 +491,10 @@
         .progress-card .progress-top .label {
             font-weight: 600;
             font-size: 0.95rem;
-            color: var(--gray-700);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .progress-card .progress-top .percentage {
@@ -295,6 +502,7 @@
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--blue);
+            letter-spacing: -0.5px;
         }
 
         .progress-card .progress-bar {
@@ -308,7 +516,7 @@
             height: 100%;
             background: linear-gradient(135deg, var(--blue), var(--cyan));
             border-radius: 4px;
-            transition: width 0.8s ease;
+            transition: width var(--transition-slow);
             width: 0%;
         }
 
@@ -318,7 +526,7 @@
             gap: 12px;
             margin-top: 16px;
             padding-top: 16px;
-            border-top: 1px solid var(--gray-100);
+            border-top: 1px solid var(--border-color);
         }
 
         .progress-card .progress-details .item {
@@ -335,16 +543,18 @@
         .progress-card .progress-details .item .status.done {
             color: var(--green);
         }
+
         .progress-card .progress-details .item .status.pending {
             color: var(--orange);
         }
+
         .progress-card .progress-details .item .status.not {
-            color: var(--gray-400);
+            color: var(--text-muted);
         }
 
         .progress-card .progress-details .item .name {
             font-size: 0.8rem;
-            color: var(--gray-600);
+            color: var(--text-secondary);
             margin-top: 2px;
         }
 
@@ -359,11 +569,11 @@
         }
 
         .test-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: var(--radius);
             padding: 24px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(10, 37, 64, 0.04);
+            border: 1px solid var(--border-color);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
@@ -376,6 +586,7 @@
             left: 0;
             right: 0;
             height: 3px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
             opacity: 0;
             transition: var(--transition);
         }
@@ -390,7 +601,7 @@
         }
 
         .test-card .test-icon {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 8px;
             display: block;
         }
@@ -399,12 +610,12 @@
             font-family: 'Poppins', sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--gray-800);
+            color: var(--text-primary);
         }
 
         .test-card .test-desc {
             font-size: 0.85rem;
-            color: var(--gray-500);
+            color: var(--text-muted);
             margin: 4px 0 12px;
             line-height: 1.5;
         }
@@ -419,16 +630,24 @@
         }
 
         .test-card .test-status.completed {
-            background: #D1FAE5;
-            color: #065F46;
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--green);
         }
+
         .test-card .test-status.pending {
-            background: #FEF3C7;
-            color: #92400E;
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--orange);
         }
+
         .test-card .test-status.locked {
             background: var(--gray-100);
-            color: var(--gray-400);
+            color: var(--text-muted);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .test-card .test-status.locked {
+                background: var(--gray-700);
+            }
         }
 
         .test-card .btn-test {
@@ -459,17 +678,17 @@
 
         .test-card .btn-test.secondary {
             background: var(--gray-100);
-            color: var(--gray-500);
+            color: var(--text-muted);
             cursor: not-allowed;
         }
 
         .test-card .btn-test.success {
-            background: #D1FAE5;
-            color: #065F46;
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--green);
         }
 
         .test-card .btn-test.success:hover {
-            background: #A7F3D0;
+            background: rgba(16, 185, 129, 0.2);
         }
 
         /* ============================================
@@ -480,7 +699,7 @@
             border-radius: var(--radius);
             padding: 32px 36px;
             color: white;
-            box-shadow: 0 8px 40px rgba(10, 37, 64, 0.15);
+            box-shadow: var(--shadow-lg);
             margin-top: 8px;
             transition: var(--transition);
             position: relative;
@@ -496,10 +715,16 @@
             height: 300px;
             background: radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 70%);
             border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .laudo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .laudo-card .laudo-icon {
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             margin-bottom: 8px;
             position: relative;
             z-index: 1;
@@ -550,6 +775,16 @@
             box-shadow: none;
         }
 
+        @media (prefers-color-scheme: dark) {
+            .laudo-card .btn-laudo {
+                background: var(--gray-700);
+                color: white;
+            }
+            .laudo-card .btn-laudo:hover {
+                background: var(--gray-600);
+            }
+        }
+
         /* ============================================
            TOAST
            ============================================ */
@@ -557,19 +792,20 @@
             position: fixed;
             top: 24px;
             right: 24px;
-            background: white;
+            background: var(--bg-card);
             padding: 14px 24px;
             border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            box-shadow: var(--shadow-lg);
             display: none;
             align-items: center;
             gap: 12px;
             font-weight: 600;
             font-size: 0.875rem;
-            z-index: 300;
-            border-left: 4px solid var(--blue);
-            animation: slideIn 0.3s ease;
+            z-index: 2000;
+            border-left: 4px solid var(--cyan);
+            animation: slideInRight 0.4s ease;
             max-width: 420px;
+            color: var(--text-primary);
         }
 
         .toast.show {
@@ -577,16 +813,22 @@
         }
 
         .toast.error {
-            border-left-color: #EF4444;
-        }
-        .toast.success {
-            border-left-color: #10B981;
-        }
-        .toast.warning {
-            border-left-color: #F59E0B;
+            border-left-color: var(--red);
         }
 
-        @keyframes slideIn {
+        .toast.success {
+            border-left-color: var(--green);
+        }
+
+        .toast.warning {
+            border-left-color: var(--orange);
+        }
+
+        .toast.info {
+            border-left-color: var(--blue);
+        }
+
+        @keyframes slideInRight {
             from {
                 opacity: 0;
                 transform: translateX(120%);
@@ -600,53 +842,62 @@
         /* ============================================
            RESPONSIVO
            ============================================ */
-        @media (max-width: 992px) {
-            .header {
-                padding: 12px 20px;
-            }
-            .main {
-                padding: 20px;
-            }
+        @media (max-width: 1024px) {
             .ia-card .ia-content {
-                grid-template-columns: 1fr;
-            }
-            .tests-grid {
                 grid-template-columns: 1fr 1fr;
-            }
-            .main-header .greeting {
-                font-size: 1.4rem;
             }
         }
 
         @media (max-width: 768px) {
+            .header {
+                padding: 12px 20px;
+            }
+
+            .main {
+                padding: 20px;
+            }
+
+            .tests-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-card .progress-details {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .laudo-card {
+                padding: 24px 20px;
+            }
+
+            .laudo-card h2 {
+                font-size: 1.1rem;
+            }
+
+            .main-header .greeting {
+                font-size: 1.4rem;
+            }
+
+            .ia-card .ia-content {
+                grid-template-columns: 1fr;
+            }
+
             .header .logo .logo-img {
                 height: 28px;
             }
+
             .header .logo .logo-text .name {
                 font-size: 0.8rem;
             }
+
             .header .user-info .name {
                 font-size: 0.75rem;
             }
+
             .header .logout-btn {
                 font-size: 0.7rem;
                 padding: 6px 14px;
             }
-            .tests-grid {
-                grid-template-columns: 1fr;
-            }
-            .progress-card .progress-details {
-                grid-template-columns: 1fr 1fr;
-            }
-            .laudo-card {
-                padding: 24px 20px;
-            }
-            .laudo-card h2 {
-                font-size: 1.1rem;
-            }
-            .main-header .greeting {
-                font-size: 1.2rem;
-            }
+
             .toast {
                 top: 16px;
                 right: 16px;
@@ -661,69 +912,41 @@
             .header {
                 padding: 10px 16px;
             }
+
             .header .user-info {
                 gap: 8px;
             }
+
             .header .user-info .badge {
                 display: none;
             }
+
             .main {
                 padding: 16px;
             }
+
             .progress-card .progress-details {
                 grid-template-columns: 1fr;
             }
-            .test-card {
-                padding: 18px;
-            }
+
             .progress-card {
                 padding: 18px 20px;
             }
+
+            .test-card {
+                padding: 18px;
+            }
+
             .ia-card {
                 padding: 16px 18px;
             }
-        }
 
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: var(--gray-900);
-            }
-            .main-header .greeting {
-                color: var(--white);
-            }
-            .progress-card {
-                background: var(--gray-800);
-                border-color: rgba(255, 255, 255, 0.06);
-            }
-            .progress-card .progress-top .label {
-                color: var(--gray-300);
-            }
-            .progress-card .progress-details {
-                border-color: rgba(255, 255, 255, 0.06);
-            }
-            .progress-card .progress-details .item .name {
-                color: var(--gray-400);
-            }
-            .test-card {
-                background: var(--gray-800);
-                border-color: rgba(255, 255, 255, 0.06);
-            }
-            .test-card .test-name {
-                color: var(--white);
-            }
-            .test-card .test-desc {
-                color: var(--gray-400);
-            }
-            .test-card .test-status.locked {
-                background: var(--gray-700);
-                color: var(--gray-500);
-            }
-            .toast {
-                background: var(--gray-800);
-                color: var(--white);
-            }
             .laudo-card {
-                background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+                padding: 20px 16px;
+            }
+
+            .main-header .greeting {
+                font-size: 1.2rem;
             }
         }
 
@@ -733,24 +956,45 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
+
             .header .logo .logo-img {
                 height: 32px !important;
             }
+
             .logout-btn {
                 display: none !important;
             }
+
             .btn-test {
                 display: none !important;
             }
+
             .btn-laudo {
                 display: none !important;
             }
+
             .ia-card {
                 display: none !important;
             }
+
             .laudo-card {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+                background: #0A2540 !important;
+            }
+
+            .progress-card {
+                box-shadow: none !important;
+                border: 1px solid #E2E8F0 !important;
+            }
+
+            .test-card {
+                box-shadow: none !important;
+                border: 1px solid #E2E8F0 !important;
+            }
+
+            .main {
+                padding: 20px !important;
             }
         }
     </style>
@@ -769,7 +1013,7 @@
     HEADER
     ============================================ -->
     <header class="header">
-        <a href="#" class="logo">
+        <a href="#" class="logo" aria-label="VIGORRE ONE™ Home">
             <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-text">
                 <span class="name">VIGORRE ONE<span class="tm">™</span></span>
@@ -780,7 +1024,7 @@
         <div class="user-info">
             <span class="name" id="userName">Participante</span>
             <span class="badge">👤 Participante</span>
-            <button class="logout-btn" onclick="logout()">🚪 Sair</button>
+            <button class="logout-btn" onclick="logout()" aria-label="Sair do sistema">🚪 Sair</button>
         </div>
     </header>
 
@@ -789,7 +1033,9 @@
     ============================================ -->
     <main class="main">
 
-        <!-- Header -->
+        <!-- ============================================
+        HEADER
+        ============================================ -->
         <div class="main-header">
             <div class="greeting">
                 Olá, <span class="highlight" id="greetingName">Participante</span> 👋
@@ -797,7 +1043,9 @@
             <div class="subtitle">Acompanhe seus testes e resultados aqui.</div>
         </div>
 
-        <!-- IA Card -->
+        <!-- ============================================
+        IA CARD
+        ============================================ -->
         <div class="ia-card">
             <div class="ia-top">
                 <span class="ia-title">🤖 Recomendações para você</span>
@@ -808,26 +1056,32 @@
             </div>
         </div>
 
-        <!-- Progress Card -->
+        <!-- ============================================
+        PROGRESS CARD
+        ============================================ -->
         <div class="progress-card">
             <div class="progress-top">
                 <span class="label">📊 Progresso Geral</span>
                 <span class="percentage" id="progressPercentage">0%</span>
             </div>
             <div class="progress-bar">
-                <div class="fill" id="progressFill"></div>
+                <div class="fill" id="progressFill" style="width: 0%;"></div>
             </div>
             <div class="progress-details" id="progressDetails">
                 <!-- Carregado via JavaScript -->
             </div>
         </div>
 
-        <!-- Tests Grid -->
+        <!-- ============================================
+        TESTS GRID
+        ============================================ -->
         <div class="tests-grid" id="testsGrid">
             <!-- Carregado via JavaScript -->
         </div>
 
-        <!-- Laudo Card -->
+        <!-- ============================================
+        LAUDO CARD
+        ============================================ -->
         <div class="laudo-card">
             <div class="laudo-icon">📄</div>
             <h2>Laudo Comportamental Integrado</h2>
@@ -848,6 +1102,7 @@
         /**
          * ============================================
          * VIGORRE ONE™ - PARTICIPANTE DASHBOARD
+         * INTERNATIONAL ENTERPRISE EDITION
          * ============================================
          */
 
@@ -903,7 +1158,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Participante Dashboard - VIGORRE ONE™');
 
-            // Verificar autenticação
             var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../login.html';
@@ -917,15 +1171,14 @@
                 return;
             }
 
-            // Atualizar nome do usuário
             document.getElementById('userName').textContent = user.name || 'Participante';
             document.getElementById('greetingName').textContent = user.name || 'Participante';
 
-            // Carregar IA Content
-            loadIAContent();
-
-            // Carregar dashboard
-            loadDashboard(user);
+            // Carregar dados com animação
+            setTimeout(function() {
+                loadIAContent();
+                loadDashboard(user);
+            }, 300);
         });
 
         // ============================================
@@ -937,7 +1190,9 @@
             var recommendations = [
                 { icon: '📊', title: 'Complete o DISC', desc: 'Falta apenas 1 teste para o laudo' },
                 { icon: '🧠', title: 'IE em destaque', desc: 'Sua autoconsciência está acima da média' },
-                { icon: '💎', title: 'Valores alinhados', desc: 'Seus valores combinam com liderança' }
+                { icon: '💎', title: 'Valores alinhados', desc: 'Seus valores combinam com liderança' },
+                { icon: '📈', title: 'Progresso', desc: 'Você já completou 60% dos testes' },
+                { icon: '🎯', title: 'Próximo passo', desc: 'Complete o SWOT para avançar' }
             ];
 
             var html = '';
@@ -968,7 +1223,6 @@
                 var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                 var participant = null;
 
-                // Buscar participante
                 for (var i = 0; i < allParticipants.length; i++) {
                     if (allParticipants[i].id === user.id) {
                         participant = allParticipants[i];
@@ -997,9 +1251,8 @@
                 }
                 var progress = total > 0 ? Math.round((done / total) * 100) : 0;
 
-                // Atualizar progresso
-                document.getElementById('progressPercentage').textContent = progress + '%';
-                document.getElementById('progressFill').style.width = progress + '%';
+                // Animar progresso
+                animateProgress(progress);
 
                 // Atualizar detalhes do progresso
                 var detailsContainer = document.getElementById('progressDetails');
@@ -1017,50 +1270,15 @@
                 detailsContainer.innerHTML = detailsHtml;
 
                 // Renderizar testes
-                var grid = document.getElementById('testsGrid');
-                var gridHtml = '';
-
-                for (var t = 0; t < TESTS.length; t++) {
-                    var test = TESTS[t];
-                    var testUpper = test.id.toUpperCase();
-                    var testCapitalized = test.id.charAt(0).toUpperCase() + test.id.slice(1);
-
-                    var isCompleted = completedTests.indexOf(testUpper) !== -1 ||
-                        completedTests.indexOf(testCapitalized) !== -1;
-
-                    var isAvailable = availableTests.indexOf(testUpper) !== -1 ||
-                        availableTests.indexOf(testCapitalized) !== -1;
-
-                    var statusHtml = '';
-                    var btnHtml = '';
-
-                    if (isCompleted) {
-                        statusHtml = '<span class="test-status completed">✅ Concluído</span>';
-                        btnHtml = '<a href="testes/' + test.id + '.html" class="btn-test success" style="text-align:center;text-decoration:none;">📄 Ver Resultado</a>';
-                    } else if (isAvailable) {
-                        statusHtml = '<span class="test-status pending">⏳ Pendente</span>';
-                        btnHtml = '<a href="' + test.url + '" class="btn-test primary" style="text-align:center;text-decoration:none;">🚀 Iniciar Teste</a>';
-                    } else {
-                        statusHtml = '<span class="test-status locked">🔒 Bloqueado</span>';
-                        btnHtml = '<button class="btn-test secondary" disabled>🔒 Aguarde liberação</button>';
-                    }
-
-                    gridHtml += '<div class="test-card">';
-                    gridHtml += '<span class="test-icon">' + test.icon + '</span>';
-                    gridHtml += '<div class="test-name">' + test.name + '</div>';
-                    gridHtml += '<div class="test-desc">' + test.desc + '</div>';
-                    gridHtml += statusHtml;
-                    gridHtml += btnHtml;
-                    gridHtml += '</div>';
-                }
-
-                grid.innerHTML = gridHtml;
+                renderTests(availableTests, completedTests);
 
                 // Atualizar botão do laudo
                 var btnLaudo = document.getElementById('btnLaudo');
                 if (progress === 100) {
                     btnLaudo.disabled = false;
                     btnLaudo.textContent = '📄 Acessar Laudo Completo';
+                    btnLaudo.style.opacity = '1';
+                    btnLaudo.style.cursor = 'pointer';
                 } else {
                     btnLaudo.disabled = true;
                     btnLaudo.textContent = '🔒 Complete todos os testes (' + progress + '%)';
@@ -1075,6 +1293,78 @@
         }
 
         // ============================================
+        // ANIMAR PROGRESSO
+        // ============================================
+        function animateProgress(target) {
+            var percentageEl = document.getElementById('progressPercentage');
+            var fillEl = document.getElementById('progressFill');
+
+            var current = parseInt(percentageEl.textContent) || 0;
+            var duration = 800;
+            var startTime = null;
+
+            function updateValue(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var value = Math.round(current + (target - current) * eased);
+                percentageEl.textContent = value + '%';
+                fillEl.style.width = value + '%';
+                if (progress < 1) {
+                    requestAnimationFrame(updateValue);
+                } else {
+                    percentageEl.textContent = target + '%';
+                    fillEl.style.width = target + '%';
+                }
+            }
+            requestAnimationFrame(updateValue);
+        }
+
+        // ============================================
+        // RENDERIZAR TESTES
+        // ============================================
+        function renderTests(availableTests, completedTests) {
+            var grid = document.getElementById('testsGrid');
+            var html = '';
+
+            for (var t = 0; t < TESTS.length; t++) {
+                var test = TESTS[t];
+                var testUpper = test.id.toUpperCase();
+                var testCapitalized = test.id.charAt(0).toUpperCase() + test.id.slice(1);
+
+                var isCompleted = completedTests.indexOf(testUpper) !== -1 ||
+                    completedTests.indexOf(testCapitalized) !== -1;
+
+                var isAvailable = availableTests.indexOf(testUpper) !== -1 ||
+                    availableTests.indexOf(testCapitalized) !== -1;
+
+                var statusHtml = '';
+                var btnHtml = '';
+
+                if (isCompleted) {
+                    statusHtml = '<span class="test-status completed">✅ Concluído</span>';
+                    btnHtml = '<a href="testes/' + test.id + '.html" class="btn-test success" style="text-align:center;text-decoration:none;">📄 Ver Resultado</a>';
+                } else if (isAvailable) {
+                    statusHtml = '<span class="test-status pending">⏳ Pendente</span>';
+                    btnHtml = '<a href="' + test.url + '" class="btn-test primary" style="text-align:center;text-decoration:none;">🚀 Iniciar Teste</a>';
+                } else {
+                    statusHtml = '<span class="test-status locked">🔒 Bloqueado</span>';
+                    btnHtml = '<button class="btn-test secondary" disabled>🔒 Aguarde liberação</button>';
+                }
+
+                html += '<div class="test-card">';
+                html += '<span class="test-icon">' + test.icon + '</span>';
+                html += '<div class="test-name">' + test.name + '</div>';
+                html += '<div class="test-desc">' + test.desc + '</div>';
+                html += statusHtml;
+                html += btnHtml;
+                html += '</div>';
+            }
+
+            grid.innerHTML = html;
+        }
+
+        // ============================================
         // TOAST
         // ============================================
         function showToast(message, type) {
@@ -1082,14 +1372,14 @@
             var icon = document.getElementById('toastIcon');
             var msg = document.getElementById('toastMessage');
 
-            if (type === 'error') {
-                icon.textContent = '❌';
-            } else if (type === 'warning') {
-                icon.textContent = '⚠️';
-            } else {
-                icon.textContent = '✅';
-            }
+            var icons = {
+                'error': '❌',
+                'warning': '⚠️',
+                'success': '✅',
+                'info': 'ℹ️'
+            };
 
+            icon.textContent = icons[type] || '✅';
             msg.textContent = message;
             toast.className = 'toast show ' + (type || 'success');
 
@@ -1099,7 +1389,7 @@
             }, 4000);
         }
 
-        console.log('✅ Participante Dashboard carregado com sucesso!');
+        console.log('✅ Participante Dashboard International carregado com sucesso!');
     </script>
 
 </body>
