@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Auditoria Financeira | Centro Financeiro VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
         * {
             margin: 0;
@@ -18,6 +16,7 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
@@ -25,6 +24,8 @@
             --green: #10B981;
             --red: #EF4444;
             --orange: #F59E0B;
+            --purple: #7C3AED;
+            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -41,7 +42,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -240,6 +243,11 @@
             margin-top: 4px;
         }
 
+        .main-header .actions {
+            display: flex;
+            gap: 12px;
+        }
+
         .btn-primary {
             padding: 10px 24px;
             background: linear-gradient(135deg, var(--blue), var(--cyan));
@@ -434,57 +442,24 @@
             font-weight: 600;
         }
 
-        .badge-type.critico {
-            background: #FEE2E2;
-            color: #991B1B;
-        }
-
-        .badge-type.alto {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-
-        .badge-type.medio {
-            background: #DBEAFE;
-            color: #1E40AF;
-        }
-
-        .badge-type.baixo {
+        .badge-type.entrada {
             background: #D1FAE5;
             color: #065F46;
         }
 
-        .badge-type.sem_risco {
-            background: #EDE9FE;
-            color: #5B21B6;
+        .badge-type.saida {
+            background: #FEE2E2;
+            color: #991B1B;
         }
 
-        .badge-status {
-            display: inline-block;
-            padding: 3px 14px;
-            border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        .badge-status.concluido {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-
-        .badge-status.pendente {
+        .badge-type.ajuste {
             background: #FEF3C7;
             color: #92400E;
         }
 
-        .badge-status.em_andamento {
+        .badge-type.auditoria {
             background: #DBEAFE;
             color: #1E40AF;
-        }
-
-        .badge-status.bloqueado {
-            background: #FEE2E2;
-            color: #991B1B;
         }
 
         .actions-cell {
@@ -509,16 +484,6 @@
         .btn-action.view {
             background: #DBEAFE;
             color: #1E40AF;
-        }
-
-        .btn-action.edit {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-
-        .btn-action.delete {
-            background: #FEE2E2;
-            color: #991B1B;
         }
 
         .btn-action:hover {
@@ -567,132 +532,6 @@
             border-color: var(--blue);
         }
 
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(10, 37, 64, 0.6);
-            backdrop-filter: blur(4px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 200;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: var(--radius);
-            padding: 32px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: fadeUp 0.3s ease;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--gray-100);
-        }
-
-        .modal-header h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--gray-900);
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-400);
-            transition: var(--transition);
-        }
-
-        .modal-close:hover {
-            color: var(--gray-700);
-            transform: rotate(90deg);
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--gray-700);
-            margin-bottom: 4px;
-        }
-
-        .form-group label .required {
-            color: #EF4444;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1.5px solid var(--gray-200);
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--blue);
-            box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.08);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 24px;
-            padding-top: 16px;
-            border-top: 1px solid var(--gray-100);
-        }
-
         .toast {
             position: fixed;
             top: 24px;
@@ -707,8 +546,9 @@
             font-weight: 600;
             font-size: 0.875rem;
             z-index: 300;
-            border-left: 4px solid var(--blue);
+            border-left: 4px solid var(--gold);
             animation: slideIn 0.3s ease;
+            max-width: 420px;
         }
 
         .toast.show {
@@ -718,11 +558,9 @@
         .toast.error {
             border-left-color: #EF4444;
         }
-
         .toast.success {
             border-left-color: #10B981;
         }
-
         .toast.warning {
             border-left-color: #F59E0B;
         }
@@ -764,6 +602,12 @@
             display: block;
         }
 
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -786,10 +630,6 @@
             .mobile-overlay.active {
                 display: block;
             }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 768px) {
@@ -806,8 +646,25 @@
             .filter-select {
                 width: 100%;
             }
-            .modal-content {
-                padding: 20px;
+            .toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                max-width: none;
+                font-size: 0.8rem;
+                padding: 12px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-header {
+                padding: 10px 16px;
+            }
+            .main {
+                padding: 16px;
+            }
+            .sidebar .logo .logo-img {
+                height: 28px;
             }
         }
 
@@ -820,6 +677,29 @@
         .sidebar::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--gray-900);
+            }
+            .main-header h1 {
+                color: var(--white);
+            }
+            .table-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .table-container td {
+                color: var(--gray-300);
+            }
+            .table-container th {
+                color: var(--gray-400);
+            }
+            .toast {
+                background: var(--gray-800);
+                color: var(--white);
+            }
         }
 
         @media print {
@@ -841,53 +721,25 @@
             .btn-primary {
                 display: none !important;
             }
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 28px;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 16px 20px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(10, 37, 64, 0.04);
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
-        }
-
-        .stat-card .stat-label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--gray-500);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .stat-card .stat-value {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin: 4px 0;
-        }
-
-        .stat-card .stat-sub {
-            font-size: 0.7rem;
-            color: var(--gray-400);
+            .filters-bar {
+                display: none !important;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- ============================================
+    TOAST
+    ============================================ -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <!-- ============================================
+    SIDEBAR
+    ============================================ -->
     <aside class="sidebar" id="sidebar">
         <a href="../dashboard.html" class="logo">
             <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
@@ -910,7 +762,6 @@
             <li><a href="../recrutadores/"><span class="icon">👤</span> Recrutadores</a></li>
             <li><a href="../participantes/"><span class="icon">👥</span> Participantes</a></li>
             <li><a href="index.html"><span class="icon">💰</span> Centro Financeiro</a></li>
-            <li><a href="carteiras.html"><span class="icon">💼</span> Carteiras</a></li>
             <li><a href="creditos.html"><span class="icon">💳</span> Créditos</a></li>
             <li><a href="extratos.html"><span class="icon">📋</span> Extratos</a></li>
             <li><a href="precos.html"><span class="icon">🏷️</span> Preços</a></li>
@@ -927,8 +778,12 @@
         </div>
     </aside>
 
+    <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
 
+    <!-- ============================================
+    MAIN CONTENT
+    ============================================ -->
     <main class="main">
         <div class="main-header">
             <div>
@@ -936,37 +791,15 @@
                     <a href="index.html">Centro Financeiro</a> / Auditoria
                 </div>
                 <h1>🔍 Auditoria Financeira</h1>
-                <p style="color: var(--gray-500); font-size: 0.9rem;">Histórico completo de todas as ações financeiras do sistema</p>
+                <p style="color: var(--gray-500); font-size: 0.9rem;">Histórico completo de todas as ações financeiras</p>
             </div>
-            <div class="actions" style="display:flex;gap:12px;">
-                <button class="btn-success" onclick="exportarAuditoria()">📥 Exportar Auditoria</button>
-                <button class="btn-secondary" onclick="limparFiltros()">🔄 Limpar Filtros</button>
-            </div>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-label">Total de Ações</div>
-                <div class="stat-value" id="totalAcoes">1.247</div>
-                <div class="stat-sub">Últimos 30 dias</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Alertas Críticos</div>
-                <div class="stat-value" style="color:var(--red);" id="alertasCriticos">12</div>
-                <div class="stat-sub">↑ 3 este mês</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Ações Suspeitas</div>
-                <div class="stat-value" style="color:var(--orange);" id="acoesSuspeitas">8</div>
-                <div class="stat-sub">Em análise</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Taxa de Conformidade</div>
-                <div class="stat-value" style="color:var(--green);" id="taxaConformidade">98.7%</div>
-                <div class="stat-sub">↑ 0.3% este mês</div>
+            <div class="actions">
+                <button class="btn-success" onclick="exportarExcel()">📊 Exportar</button>
+                <button class="btn-secondary" onclick="window.location.href='extratos.html'">📋 Extratos</button>
             </div>
         </div>
 
+        <!-- Filters -->
         <div class="filters-bar">
             <div class="search-input">
                 <span class="icon">🔍</span>
@@ -974,25 +807,14 @@
             </div>
             <select class="filter-select" id="typeFilter" onchange="filterTable()">
                 <option value="">Todos os tipos</option>
-                <option value="criacao">Criação</option>
-                <option value="edicao">Edição</option>
-                <option value="exclusao">Exclusão</option>
-                <option value="liberacao">Liberação</option>
-                <option value="bloqueio">Bloqueio</option>
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
                 <option value="ajuste">Ajuste</option>
-                <option value="login">Login</option>
-                <option value="logout">Logout</option>
-            </select>
-            <select class="filter-select" id="riskFilter" onchange="filterTable()">
-                <option value="">Todos os riscos</option>
-                <option value="critico">🔴 Crítico</option>
-                <option value="alto">🟠 Alto</option>
-                <option value="medio">🟡 Médio</option>
-                <option value="baixo">🟢 Baixo</option>
-                <option value="sem_risco">⚪ Sem Risco</option>
+                <option value="auditoria">Auditoria</option>
             </select>
         </div>
 
+        <!-- Table -->
         <div class="table-card">
             <div class="table-container">
                 <table>
@@ -1000,18 +822,17 @@
                         <tr>
                             <th>Data/Hora</th>
                             <th>Usuário</th>
-                            <th>Ação</th>
-                            <th>Descrição</th>
                             <th>IP</th>
-                            <th>Risco</th>
-                            <th>Status</th>
+                            <th>Ação</th>
+                            <th>Detalhes</th>
+                            <th>Tipo</th>
                             <th style="text-align:center;">Ações</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
                         <tr>
-                            <td colspan="8" style="text-align:center;padding:40px;color:var(--gray-400);">
-                                Carregando logs de auditoria...
+                            <td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">
+                                Carregando auditoria...
                             </td>
                         </tr>
                     </tbody>
@@ -1028,57 +849,59 @@
         </div>
     </main>
 
-    <!-- Modal Visualizar -->
-    <div class="modal-overlay" id="viewModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🔍 Detalhes da Auditoria</h2>
-                <button class="modal-close" onclick="closeViewModal()">&times;</button>
-            </div>
-            <div id="viewContent">
-                <p style="color:var(--gray-500);">Carregando detalhes...</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-secondary" onclick="closeViewModal()">Fechar</button>
-            </div>
-        </div>
-    </div>
-
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script src="../../middleware/auth-guard.js"></script>
 
     <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - AUDITORIA FINANCEIRA
+         * ============================================
+         */
+
         'use strict';
 
-        let logs = [];
-        let filteredLogs = [];
-        let currentPage = 1;
-        const pageSize = 10;
+        var logs = [];
+        var filteredLogs = [];
+        var currentPage = 1;
+        var pageSize = 10;
 
+        // ============================================
+        // TOGGLE SIDEBAR
+        // ============================================
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobileOverlay');
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('mobileOverlay');
             sidebar.classList.toggle('open');
             overlay.classList.toggle('active');
         }
 
+        // ============================================
+        // LOGOUT
+        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.VigorreAuth.logout();
             }
         }
 
+        // ============================================
+        // INICIALIZAR
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🔍 Auditoria Financeira - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../../login.html';
                 return;
             }
 
-            const user = window.VigorreAuth.getCurrentUser();
+            var user = window.VigorreAuth.getCurrentUser();
             if (!user || (user.role !== 'admin' && user.role !== 'master')) {
                 alert('⚠️ Acesso restrito a administradores.');
                 window.VigorreAuth.logout();
@@ -1090,174 +913,119 @@
             loadLogs();
         });
 
+        // ============================================
+        // CARREGAR LOGS
+        // ============================================
         function loadLogs() {
             logs = [
-                {
-                    id: 'l1',
-                    date: '2024-06-07 14:32',
-                    user: 'João Silva',
-                    action: 'criacao',
-                    desc: 'Criou novo preço para Laudo Vigorre',
-                    ip: '192.168.1.100',
-                    risk: 'baixo',
-                    status: 'concluido'
-                },
-                {
-                    id: 'l2',
-                    date: '2024-06-07 11:20',
-                    user: 'Maria Santos',
-                    action: 'edicao',
-                    desc: 'Editou créditos da TechCorp Solutions',
-                    ip: '192.168.1.101',
-                    risk: 'medio',
-                    status: 'concluido'
-                },
-                {
-                    id: 'l3',
-                    date: '2024-06-06 16:45',
-                    user: 'Carlos Souza',
-                    action: 'liberacao',
-                    desc: 'Liberou créditos promocionais para InovaLab',
-                    ip: '192.168.1.102',
-                    risk: 'alto',
-                    status: 'pendente'
-                },
-                {
-                    id: 'l4',
-                    date: '2024-06-06 09:15',
-                    user: 'Ana Silva',
-                    action: 'login',
-                    desc: 'Acesso ao Centro Financeiro',
-                    ip: '192.168.1.103',
-                    risk: 'sem_risco',
-                    status: 'concluido'
-                },
-                {
-                    id: 'l5',
-                    date: '2024-06-05 22:30',
-                    user: 'Pedro Lima',
-                    action: 'exclusao',
-                    desc: 'Excluiu transação T-0045',
-                    ip: '192.168.1.104',
-                    risk: 'critico',
-                    status: 'bloqueado'
-                },
-                {
-                    id: 'l6',
-                    date: '2024-06-05 14:00',
-                    user: 'João Silva',
-                    action: 'ajuste',
-                    desc: 'Ajustou saldo da carteira de StartUpX',
-                    ip: '192.168.1.100',
-                    risk: 'medio',
-                    status: 'concluido'
-                },
-                {
-                    id: 'l7',
-                    date: '2024-06-04 10:30',
-                    user: 'Maria Santos',
-                    action: 'bloqueio',
-                    desc: 'Bloqueou créditos suspeitos de FinCorp',
-                    ip: '192.168.1.101',
-                    risk: 'critico',
-                    status: 'concluido'
-                },
-                {
-                    id: 'l8',
-                    date: '2024-06-04 08:00',
-                    user: 'Carlos Souza',
-                    action: 'logout',
-                    desc: 'Saiu do sistema financeiro',
-                    ip: '192.168.1.102',
-                    risk: 'sem_risco',
-                    status: 'concluido'
-                }
+                { id: 'l1', date: '2024-06-10 10:30:15', user: 'João Silva', ip: '186.xxx.xxx.001',
+                    action: 'Adicionou créditos', details: 'TechCorp Solutions +10 DISC', type: 'entrada' },
+                { id: 'l2', date: '2024-06-10 11:45:22', user: 'Maria Santos', ip: '186.xxx.xxx.002',
+                    action: 'Removeu créditos', details: 'InovaLab Brasil -5 IE', type: 'saida' },
+                { id: 'l3', date: '2024-06-10 14:20:08', user: 'Carlos Souza', ip: '186.xxx.xxx.003',
+                    action: 'Ajuste manual', details: 'StartupX Ventures +3 Valores', type: 'ajuste' },
+                { id: 'l4', date: '2024-06-10 16:10:45', user: 'Ana Oliveira', ip: '186.xxx.xxx.004',
+                    action: 'Auditoria', details: 'Verificação de créditos expirados', type: 'auditoria' },
+                { id: 'l5', date: '2024-06-11 09:15:30', user: 'João Silva', ip: '186.xxx.xxx.001',
+                    action: 'Adicionou créditos', details: 'FinCorp Holdings +20 Laudo', type: 'entrada' }
             ];
 
-            filteredLogs = [...logs];
+            filteredLogs = logs.slice();
             renderTable();
         }
 
+        // ============================================
+        // RENDERIZAR TABELA
+        // ============================================
         function renderTable() {
-            const tbody = document.getElementById('tableBody');
+            var tbody = document.getElementById('tableBody');
 
             if (filteredLogs.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--gray-400);">📭 Nenhum log encontrado</td></tr>';
+                tbody.innerHTML =
+                    '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">📭 Nenhum registro de auditoria encontrado</td></tr>';
                 document.getElementById('paginationInfo').textContent = 'Mostrando 0 de 0 registros';
                 return;
             }
 
-            const start = (currentPage - 1) * pageSize;
-            const end = Math.min(start + pageSize, filteredLogs.length);
-            const pageItems = filteredLogs.slice(start, end);
+            var start = (currentPage - 1) * pageSize;
+            var end = Math.min(start + pageSize, filteredLogs.length);
+            var pageItems = filteredLogs.slice(start, end);
 
-            const actionMap = {
-                criacao: '➕ Criação',
-                edicao: '✏️ Edição',
-                exclusao: '🗑️ Exclusão',
-                liberacao: '🔓 Liberação',
-                bloqueio: '🔒 Bloqueio',
-                ajuste: '🔄 Ajuste',
-                login: '🔐 Login',
-                logout: '🚪 Logout'
+            var typeMap = {
+                'entrada': 'Entrada',
+                'saida': 'Saída',
+                'ajuste': 'Ajuste',
+                'auditoria': 'Auditoria'
+            };
+            var typeClass = {
+                'entrada': 'entrada',
+                'saida': 'saida',
+                'ajuste': 'ajuste',
+                'auditoria': 'auditoria'
+            };
+            var iconMap = {
+                'entrada': '➕',
+                'saida': '➖',
+                'ajuste': '🔄',
+                'auditoria': '🔍'
             };
 
-            const riskMap = {
-                critico: '🔴 Crítico',
-                alto: '🟠 Alto',
-                medio: '🟡 Médio',
-                baixo: '🟢 Baixo',
-                sem_risco: '⚪ Sem Risco'
-            };
+            var html = '';
+            for (var i = 0; i < pageItems.length; i++) {
+                var l = pageItems[i];
+                var type = l.type || 'auditoria';
+                html += '<tr>';
+                html += '<td style="font-size:0.8rem;color:var(--gray-500);">' + l.date + '</td>';
+                html += '<td><strong>' + l.user + '</strong></td>';
+                html += '<td style="font-size:0.8rem;color:var(--gray-500);">' + l.ip + '</td>';
+                html += '<td>' + l.action + '</td>';
+                html += '<td style="font-size:0.85rem;">' + l.details + '</td>';
+                html += '<td><span class="badge-type ' + (typeClass[type] || 'auditoria') + '">' + (iconMap[type] ||
+                    '🔍') + ' ' + (typeMap[type] || 'Auditoria') + '</span></td>';
+                html += '<td style="text-align:center;">';
+                html += '<div class="actions-cell" style="justify-content:center;">';
+                html += '<button class="btn-action view" onclick="viewLog(\'' + l.id + '\')">👁️</button>';
+                html += '</div>';
+                html += '</td>';
+                html += '</tr>';
+            }
 
-            const statusMap = {
-                concluido: '✅ Concluído',
-                pendente: '⏳ Pendente',
-                em_andamento: '🔄 Em andamento',
-                bloqueado: '🔒 Bloqueado'
-            };
+            tbody.innerHTML = html;
 
-            tbody.innerHTML = pageItems.map(l => `
-                    <tr>
-                        <td style="font-size:0.8rem;color:var(--gray-500);">${l.date}</td>
-                        <td><strong>${l.user}</strong></td>
-                        <td>${actionMap[l.action] || l.action}</td>
-                        <td>${l.desc}</td>
-                        <td style="font-family:monospace;font-size:0.8rem;color:var(--gray-500);">${l.ip}</td>
-                        <td><span class="badge-type ${l.risk}">${riskMap[l.risk]}</span></td>
-                        <td><span class="badge-status ${l.status}">${statusMap[l.status]}</span></td>
-                        <td style="text-align:center;">
-                            <div class="actions-cell" style="justify-content:center;">
-                                <button class="btn-action view" onclick="viewLog('${l.id}')">👁️</button>
-                            </div>
-                        </td>
-                    </tr>
-                `).join('');
-
-            const total = filteredLogs.length;
-            document.getElementById('paginationInfo').textContent = `Mostrando ${start + 1}-${end} de ${total} registros`;
+            var total = filteredLogs.length;
+            document.getElementById('paginationInfo').textContent = 'Mostrando ' + (start + 1) + '-' + end + ' de ' + total +
+                ' registros';
             document.getElementById('pageIndicator').textContent = currentPage;
             document.getElementById('prevBtn').disabled = currentPage === 1;
             document.getElementById('nextBtn').disabled = end >= total;
         }
 
+        // ============================================
+        // FILTRAR
+        // ============================================
         function filterTable() {
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            const type = document.getElementById('typeFilter').value;
-            const risk = document.getElementById('riskFilter').value;
+            var search = document.getElementById('searchInput').value.toLowerCase();
+            var type = document.getElementById('typeFilter').value;
 
-            filteredLogs = logs.filter(l => {
-                const matchSearch = l.user.toLowerCase().includes(search) ||
-                    l.desc.toLowerCase().includes(search);
-                const matchType = !type || l.action === type;
-                const matchRisk = !risk || l.risk === risk;
-                return matchSearch && matchType && matchRisk;
-            });
+            filteredLogs = [];
+            for (var i = 0; i < logs.length; i++) {
+                var l = logs[i];
+                var matchSearch = l.user.toLowerCase().indexOf(search) !== -1 ||
+                    l.action.toLowerCase().indexOf(search) !== -1 ||
+                    l.details.toLowerCase().indexOf(search) !== -1;
+                var matchType = !type || l.type === type;
+                if (matchSearch && matchType) {
+                    filteredLogs.push(l);
+                }
+            }
 
             currentPage = 1;
             renderTable();
         }
 
+        // ============================================
+        // PAGINAÇÃO
+        // ============================================
         function prevPage() {
             if (currentPage > 1) {
                 currentPage--;
@@ -1266,95 +1034,57 @@
         }
 
         function nextPage() {
-            const totalPages = Math.ceil(filteredLogs.length / pageSize);
+            var totalPages = Math.ceil(filteredLogs.length / pageSize);
             if (currentPage < totalPages) {
                 currentPage++;
                 renderTable();
             }
         }
 
+        // ============================================
+        // VISUALIZAR LOG
+        // ============================================
         function viewLog(id) {
-            const log = logs.find(l => l.id === id);
-            if (!log) return;
+            var l = null;
+            for (var i = 0; i < logs.length; i++) {
+                if (logs[i].id === id) {
+                    l = logs[i];
+                    break;
+                }
+            }
+            if (!l) return;
 
-            const actionMap = {
-                criacao: '➕ Criação',
-                edicao: '✏️ Edição',
-                exclusao: '🗑️ Exclusão',
-                liberacao: '🔓 Liberação',
-                bloqueio: '🔒 Bloqueio',
-                ajuste: '🔄 Ajuste',
-                login: '🔐 Login',
-                logout: '🚪 Logout'
+            var typeMap = {
+                'entrada': 'Entrada',
+                'saida': 'Saída',
+                'ajuste': 'Ajuste',
+                'auditoria': 'Auditoria'
             };
 
-            const riskMap = {
-                critico: '🔴 Crítico',
-                alto: '🟠 Alto',
-                medio: '🟡 Médio',
-                baixo: '🟢 Baixo',
-                sem_risco: '⚪ Sem Risco'
-            };
-
-            const statusMap = {
-                concluido: '✅ Concluído',
-                pendente: '⏳ Pendente',
-                em_andamento: '🔄 Em andamento',
-                bloqueado: '🔒 Bloqueado'
-            };
-
-            document.getElementById('viewContent').innerHTML = `
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-                        <div>
-                            <strong>📅 Data/Hora:</strong><br>${log.date}
-                        </div>
-                        <div>
-                            <strong>👤 Usuário:</strong><br>${log.user}
-                        </div>
-                        <div>
-                            <strong>🎯 Ação:</strong><br>${actionMap[log.action] || log.action}
-                        </div>
-                        <div>
-                            <strong>📌 Risco:</strong><br><span class="badge-type ${log.risk}">${riskMap[log.risk]}</span>
-                        </div>
-                        <div style="grid-column:span 2;">
-                            <strong>📝 Descrição:</strong><br>${log.desc}
-                        </div>
-                        <div>
-                            <strong>🌐 IP:</strong><br>${log.ip}
-                        </div>
-                        <div>
-                            <strong>📊 Status:</strong><br><span class="badge-status ${log.status}">${statusMap[log.status]}</span>
-                        </div>
-                    </div>
-                `;
-
-            document.getElementById('viewModal').classList.add('active');
+            alert(
+                '🔍 Log de Auditoria\n\n📅 Data: ' + l.date + '\n👤 Usuário: ' + l.user + '\n📌 IP: ' + l.ip +
+                '\n📋 Ação: ' + l.action + '\n📝 Detalhes: ' + l.details + '\n📊 Tipo: ' + (typeMap[l.type] ||
+                    'Auditoria')
+            );
         }
 
-        function closeViewModal() {
-            document.getElementById('viewModal').classList.remove('active');
+        // ============================================
+        // EXPORTAR
+        // ============================================
+        function exportarExcel() {
+            showToast('📊 Exportando dados...', 'success');
+            setTimeout(function() {
+                showToast('✅ Exportado com sucesso!', 'success');
+            }, 1500);
         }
 
-        function exportarAuditoria() {
-            showToast('📥 Exportando auditoria...', 'success');
-            setTimeout(() => showToast('✅ Auditoria exportada com sucesso!', 'success'), 1500);
-        }
-
-        function limparFiltros() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('typeFilter').value = '';
-            document.getElementById('riskFilter').value = '';
-            filteredLogs = [...logs];
-            currentPage = 1;
-            renderTable();
-            showToast('🔄 Filtros limpos!', 'success');
-        }
-
+        // ============================================
+        // TOAST
+        // ============================================
         function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
 
             if (type === 'error') {
                 icon.textContent = '❌';
@@ -1365,19 +1095,15 @@
             }
 
             msg.textContent = message;
-            toast.className = `toast show ${type || 'success'}`;
+            toast.className = 'toast show ' + (type || 'success');
 
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
+            toast._timeout = setTimeout(function() {
                 toast.classList.remove('show');
             }, 4000);
         }
 
-        document.getElementById('viewModal').addEventListener('click', function(e) {
-            if (e.target === this) closeViewModal();
-        });
-
-        console.log('✅ Auditoria Financeira carregado com sucesso!');
+        console.log('✅ Auditoria Financeira carregada com sucesso!');
     </script>
 
 </body>
