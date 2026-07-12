@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Laudo Vigorre® | VIGORRE ONE™</title>
-
+    <title>Laudo Vigorre™ | People Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
         /* ============================================
-           VIGORRE ONE™ - LAUDO COMPLETO
+           VIGORRE ONE™ - LAUDO COMPORTAMENTAL INTEGRADO
+           INTERNATIONAL ENTERPRISE EDITION
            ============================================ */
 
         * {
@@ -22,10 +21,14 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
             --purple: #7C3AED;
             --pink: #EC4899;
             --white: #FFFFFF;
@@ -44,7 +47,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -58,98 +63,118 @@
         .container {
             max-width: 1100px;
             margin: 0 auto;
+            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius);
+            overflow: hidden;
         }
 
         /* ============================================
            HEADER PREMIUM
            ============================================ */
-        .header-premium {
-            background: var(--navy);
+        .header-print {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
             color: white;
-            padding: 24px 32px;
-            border-radius: var(--radius) var(--radius) 0 0;
+            padding: 28px 36px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 16px;
+            position: relative;
+            z-index: 1;
+            border-bottom: 3px solid var(--gold);
         }
 
-        .header-premium .logo {
+        .header-print .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
         }
 
-        .header-premium .logo .logo-img {
-            height: 44px;
+        .header-print .logo .logo-img {
+            height: 48px;
             width: auto;
             display: block;
         }
 
-        .header-premium .logo .logo-text .name {
+        .header-print .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 800;
             color: white;
+            letter-spacing: -0.3px;
         }
 
-        .header-premium .logo .logo-text .name .tm {
+        .header-print .logo .logo-text .name .tm {
             font-size: 0.4rem;
             vertical-align: super;
-            color: var(--cyan);
+            color: var(--gold);
         }
 
-        .header-premium .logo .logo-text .sub {
-            font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.4);
+        .header-print .logo .logo-text .sub {
+            font-size: 0.55rem;
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
-        .header-premium .header-title {
+        .header-print .header-title {
             text-align: center;
         }
 
-        .header-premium .header-title h1 {
+        .header-print .header-title h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
+            color: var(--gold);
         }
 
-        .header-premium .header-title .subtitle {
+        .header-print .header-title .subtitle {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .header-premium .header-user {
+        .header-print .header-user {
             text-align: right;
         }
 
-        .header-premium .header-user .name {
+        .header-print .header-user .name {
             font-weight: 600;
             font-size: 0.9rem;
         }
 
-        .header-premium .header-user .company {
+        .header-print .header-user .company {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .header-premium .header-code {
+        .header-print .header-code {
             font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.3);
             font-family: 'Courier New', monospace;
             margin-top: 2px;
         }
 
+        .header-print .header-badge {
+            display: inline-block;
+            padding: 4px 16px;
+            background: rgba(217, 119, 6, 0.15);
+            border: 1px solid rgba(217, 119, 6, 0.2);
+            border-radius: var(--radius-full);
+            font-size: 0.65rem;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
         /* ============================================
            CORPO DO LAUDO
            ============================================ */
-        .laudo-body {
+        .report-body {
             background: white;
-            padding: 32px;
+            padding: 32px 36px;
             border-left: 1px solid var(--gray-200);
             border-right: 1px solid var(--gray-200);
         }
@@ -167,7 +192,7 @@
 
         .section-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--gray-800);
             margin-bottom: 12px;
@@ -180,12 +205,12 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
-            background: var(--purple);
+            width: 32px;
+            height: 32px;
+            background: var(--gold);
             color: white;
             border-radius: 50%;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
             flex-shrink: 0;
         }
@@ -200,19 +225,26 @@
             color: var(--gray-800);
         }
 
+        .section-text .highlight-text {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
         /* ============================================
-           CAPA
+           CAPA PREMIUM
            ============================================ */
         .capa {
             text-align: center;
-            padding: 60px 40px;
+            padding: 80px 40px 60px;
             border-bottom: 2px solid var(--gray-200);
             margin-bottom: 32px;
+            position: relative;
+            background: linear-gradient(180deg, rgba(10, 37, 64, 0.02) 0%, transparent 100%);
         }
 
         .capa .capa-logo {
             font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 900;
             color: var(--navy);
             margin-bottom: 8px;
@@ -221,13 +253,7 @@
         .capa .capa-logo .tm {
             font-size: 0.7rem;
             vertical-align: super;
-            color: var(--purple);
-        }
-
-        .capa .capa-logo .registered {
-            font-size: 0.5rem;
-            vertical-align: super;
-            color: var(--gray-400);
+            color: var(--gold);
         }
 
         .capa .capa-sub {
@@ -238,24 +264,35 @@
             margin-bottom: 40px;
         }
 
+        .capa .capa-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--gold), var(--cyan));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
         .capa .capa-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
+            font-size: 2.4rem;
             font-weight: 700;
             color: var(--gray-800);
             margin-bottom: 8px;
+            letter-spacing: -1px;
         }
 
         .capa .capa-title .highlight {
-            color: var(--purple);
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .capa .capa-divider {
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(135deg, var(--purple), var(--cyan));
-            margin: 20px auto;
-            border-radius: 2px;
+        .capa .capa-desc {
+            color: var(--gray-500);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 8px;
         }
 
         .capa .capa-info {
@@ -274,14 +311,14 @@
         }
 
         .capa .capa-info-item .label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: var(--gray-400);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         .capa .capa-info-item .value {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--gray-800);
             margin-top: 2px;
@@ -305,23 +342,20 @@
             color: var(--gray-400);
         }
 
-        .capa .capa-watermark {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .capa .capa-watermark::after {
-            content: 'VIGORRE ONE™';
+        .capa .capa-stamp {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 6rem;
-            font-weight: 900;
-            color: rgba(10, 37, 64, 0.03);
-            font-family: 'Poppins', sans-serif;
-            pointer-events: none;
-            white-space: nowrap;
+            top: 40px;
+            right: 40px;
+            padding: 8px 20px;
+            background: rgba(217, 119, 6, 0.08);
+            border: 2px solid var(--gold);
+            border-radius: var(--radius-sm);
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transform: rotate(8deg);
         }
 
         /* ============================================
@@ -361,172 +395,377 @@
         }
 
         /* ============================================
-           CARDS DE PERFIL
+           METODOLOGIA VIGOR®
            ============================================ */
-        .profile-grid {
+        .vigor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .vigor-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px 12px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .vigor-card:hover {
+            border-color: var(--gold);
+        }
+
+        .vigor-card .vigor-icon {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .vigor-card .vigor-letter {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .vigor-card .vigor-name {
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: var(--gray-700);
+        }
+
+        .vigor-card .vigor-desc {
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           PERFIL EXECUTIVO
+           ============================================ */
+        .executive-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 12px;
             margin: 12px 0;
         }
 
-        .profile-card {
+        .executive-card {
             background: var(--gray-50);
             border-radius: var(--radius-sm);
-            padding: 16px 20px;
+            padding: 16px;
             border: 1px solid var(--gray-200);
             text-align: center;
         }
 
-        .profile-card .profile-icon {
-            font-size: 1.5rem;
+        .executive-card .exec-icon {
+            font-size: 1.4rem;
         }
 
-        .profile-card .profile-name {
-            font-weight: 700;
-            font-size: 0.8rem;
-            color: var(--gray-700);
+        .executive-card .exec-label {
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .profile-card .profile-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--blue);
-        }
-
-        .profile-card .profile-bar {
-            height: 4px;
-            background: var(--gray-200);
-            border-radius: 2px;
-            margin-top: 6px;
-            overflow: hidden;
-        }
-
-        .profile-card .profile-bar .fill {
-            height: 100%;
-            border-radius: 2px;
-            transition: width 0.8s ease;
-        }
-
-        /* ============================================
-           GRÁFICOS
-           ============================================ */
-        .chart-container {
-            height: 240px;
-            position: relative;
-            margin: 16px 0;
-        }
-
-        .chart-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin: 16px 0;
-        }
-
-        .chart-row .chart-container {
-            height: 200px;
-        }
-
-        /* ============================================
-           LISTAS
-           ============================================ */
-        .feature-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            padding: 0;
-        }
-
-        .feature-list li {
-            background: var(--gray-50);
-            padding: 10px 16px;
-            border-radius: 6px;
-            color: var(--gray-700);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .feature-list li .check {
-            color: #10B981;
-            font-weight: 700;
-        }
-
-        /* ============================================
-           MAPA INTEGRADO
-           ============================================ */
-        .mapa-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
-            margin: 16px 0;
-        }
-
-        .mapa-card {
-            background: var(--gray-50);
-            border-radius: var(--radius-sm);
-            padding: 16px 20px;
-            border: 1px solid var(--gray-200);
-            text-align: center;
-        }
-
-        .mapa-card .mapa-icon {
-            font-size: 1.5rem;
-        }
-
-        .mapa-card .mapa-name {
-            font-weight: 700;
-            font-size: 0.8rem;
-            color: var(--gray-700);
-        }
-
-        .mapa-card .mapa-value {
-            font-size: 0.9rem;
+        .executive-card .exec-value {
+            font-size: 0.85rem;
             font-weight: 600;
-            color: var(--purple);
-            margin-top: 4px;
+            color: var(--gray-800);
+            margin-top: 2px;
         }
 
         /* ============================================
-           COMPATIBILIDADE
+           INDIVIDUAL TESTS
            ============================================ */
-        .compatibilidade-card {
+        .test-section {
             background: var(--gray-50);
             border-radius: var(--radius-sm);
-            padding: 24px;
-            border: 1px solid var(--gray-200);
+            padding: 20px 24px;
             margin: 16px 0;
+            border: 1px solid var(--gray-200);
         }
 
-        .compatibilidade-card .compat-top {
+        .test-section .test-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
-        .compatibilidade-card .compat-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--blue);
+        .test-section .test-header .test-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-800);
         }
 
-        .compatibilidade-card .compat-bar {
-            height: 8px;
-            background: var(--gray-200);
-            border-radius: 4px;
+        .test-section .test-header .test-status {
+            display: inline-block;
+            padding: 3px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        .test-section .test-header .test-status.completed {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .test-section .test-header .test-status.not-completed {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .test-section .test-content {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .test-section .test-content strong {
+            color: var(--gray-800);
+        }
+
+        .test-chart-container {
+            height: 180px;
+            position: relative;
             margin: 12px 0;
+        }
+
+        .test-chart-container-sm {
+            height: 140px;
+            position: relative;
+            margin: 12px 0;
+        }
+
+        /* ============================================
+           ANÁLISE INTEGRADA
+           ============================================ */
+        .integration-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+
+        .integration-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .integration-card .int-icon {
+            font-size: 1.2rem;
+        }
+
+        .integration-card .int-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--gray-800);
+        }
+
+        .integration-card .int-desc {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            margin-top: 2px;
+        }
+
+        .integration-card .int-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           MAPAS COMPORTAMENTAIS
+           ============================================ */
+        .map-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 12px 0;
+        }
+
+        .map-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+        }
+
+        .map-card .map-icon {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .map-card .map-name {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--gray-700);
+        }
+
+        .map-card .map-level {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .map-card .map-level.alto {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .map-card .map-level.medio {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .map-card .map-level.baixo {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        /* ============================================
+           ÍNDICES VIGOR®
+           ============================================ */
+        .indices-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 12px 0;
+        }
+
+        .indice-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+        }
+
+        .indice-card .indice-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .indice-card .indice-label {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .indice-card .indice-bar {
+            height: 4px;
+            background: var(--gray-200);
+            border-radius: 2px;
+            margin-top: 8px;
             overflow: hidden;
         }
 
-        .compatibilidade-card .compat-bar .fill {
+        .indice-card .indice-bar .fill {
             height: 100%;
-            border-radius: 4px;
+            border-radius: 2px;
             transition: width 0.8s ease;
+        }
+
+        /* ============================================
+           PLANO DE DESENVOLVIMENTO
+           ============================================ */
+        .pdi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+
+        .pdi-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .pdi-card .pdi-period {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 8px;
+        }
+
+        .pdi-card .pdi-period .period-icon {
+            font-size: 1.2rem;
+        }
+
+        .pdi-card .pdi-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin-bottom: 4px;
+        }
+
+        .pdi-card .pdi-item .check {
+            color: var(--green);
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           PARECER DA IA
+           ============================================ */
+        .ia-box {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            border-radius: var(--radius-sm);
+            padding: 24px 28px;
+            color: white;
+            margin: 16px 0;
+        }
+
+        .ia-box .ia-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .ia-box .ia-text {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .ia-box .ia-text strong {
+            color: white;
+        }
+
+        .ia-box .ia-footer {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.3);
         }
 
         /* ============================================
@@ -534,7 +773,7 @@
            ============================================ */
         .assinatura {
             text-align: center;
-            padding: 32px 0;
+            padding: 40px 0 20px;
             border-top: 2px solid var(--gray-200);
             margin-top: 16px;
         }
@@ -567,10 +806,21 @@
             font-family: 'Courier New', monospace;
         }
 
+        .assinatura .assinatura-stamp {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 24px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-size: 0.65rem;
+            color: var(--gray-500);
+        }
+
         /* ============================================
-           FOOTER
+           FOOTER PREMIUM
            ============================================ */
-        .footer-premium {
+        .footer-print {
             background: var(--navy);
             color: white;
             padding: 20px 32px;
@@ -582,16 +832,16 @@
             gap: 12px;
         }
 
-        .footer-premium .footer-logo {
+        .footer-print .footer-logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .footer-premium .footer-logo .logo-icon {
+        .footer-print .footer-logo .logo-icon {
             width: 32px;
             height: 32px;
-            background: var(--cyan);
+            background: var(--gold);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -602,41 +852,41 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .footer-premium .footer-logo .footer-text .name {
+        .footer-print .footer-logo .footer-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
         }
 
-        .footer-premium .footer-logo .footer-text .name .tm {
+        .footer-print .footer-logo .footer-text .name .tm {
             font-size: 0.35rem;
             vertical-align: super;
-            color: var(--cyan);
+            color: var(--gold);
         }
 
-        .footer-premium .footer-logo .footer-text .tagline {
+        .footer-print .footer-logo .footer-text .tagline {
             font-size: 0.55rem;
             color: rgba(255, 255, 255, 0.3);
         }
 
-        .footer-premium .footer-contact {
+        .footer-print .footer-contact {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
         }
 
-        .footer-premium .footer-contact a {
+        .footer-print .footer-contact a {
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             font-size: 0.7rem;
             transition: var(--transition);
         }
 
-        .footer-premium .footer-contact a:hover {
+        .footer-print .footer-contact a:hover {
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .footer-premium .footer-page {
+        .footer-print .footer-page {
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.3);
         }
@@ -669,14 +919,14 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            background: linear-gradient(135deg, var(--gold), var(--orange));
             color: white;
-            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
+            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.2);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
+            box-shadow: 0 8px 30px rgba(217, 119, 6, 0.3);
         }
 
         .btn-secondary {
@@ -690,7 +940,7 @@
         }
 
         .btn-success {
-            background: #10B981;
+            background: var(--green);
             color: white;
         }
 
@@ -699,47 +949,78 @@
             box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
         }
 
-        .btn-purple {
-            background: linear-gradient(135deg, var(--purple), var(--pink));
-            color: white;
-            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.2);
-        }
-
-        .btn-purple:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
-        }
-
         /* ============================================
            RESPONSIVO
            ============================================ */
+        @media (max-width: 992px) {
+            .capa .capa-info {
+                grid-template-columns: 1fr 1fr;
+            }
+            .vigor-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .executive-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .indices-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .pdi-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .map-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .integration-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            .header-premium {
+            .header-print {
                 flex-direction: column;
                 text-align: center;
+                padding: 16px 20px;
             }
-            .header-premium .header-user {
+            .header-print .header-user {
                 text-align: center;
             }
-            .profile-grid {
-                grid-template-columns: 1fr;
+            .capa {
+                padding: 40px 20px 30px;
             }
-            .mapa-grid {
-                grid-template-columns: 1fr;
-            }
-            .feature-list {
-                grid-template-columns: 1fr;
-            }
-            .chart-row {
-                grid-template-columns: 1fr;
+            .capa .capa-title {
+                font-size: 1.6rem;
             }
             .capa .capa-info {
                 grid-template-columns: 1fr 1fr;
             }
-            .laudo-body {
+            .capa .capa-stamp {
+                position: relative;
+                top: 0;
+                right: 0;
+                transform: none;
+                display: inline-block;
+                margin: 10px auto 0;
+            }
+            .report-body {
                 padding: 20px;
             }
-            .footer-premium {
+            .vigor-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .executive-grid {
+                grid-template-columns: 1fr;
+            }
+            .indices-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .pdi-grid {
+                grid-template-columns: 1fr;
+            }
+            .map-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-print {
                 flex-direction: column;
                 text-align: center;
             }
@@ -751,18 +1032,40 @@
             }
         }
 
+        @media (max-width: 480px) {
+            .capa .capa-info {
+                grid-template-columns: 1fr;
+            }
+            .vigor-grid {
+                grid-template-columns: 1fr;
+            }
+            .indices-grid {
+                grid-template-columns: 1fr;
+            }
+            body {
+                padding: 10px;
+            }
+            .container {
+                border-radius: 0;
+            }
+        }
+
         @media print {
             body {
                 background: white !important;
                 padding: 0 !important;
             }
-            .header-premium {
+            .container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+            .header-print {
                 background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 border-radius: 0 !important;
             }
-            .footer-premium {
+            .footer-print {
                 background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -774,17 +1077,47 @@
             .actions-bar {
                 display: none !important;
             }
-            .laudo-body {
+            .report-body {
                 border: none !important;
+                padding: 20px !important;
             }
-            .profile-card {
+            .capa {
+                background: white !important;
+                border-bottom: 2px solid #E2E8F0 !important;
+            }
+            .capa .capa-stamp {
+                display: none !important;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
+            .test-section {
+                background: #F8FAFC !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .vigor-card {
                 background: #F8FAFC !important;
             }
-            .mapa-card {
+            .executive-card {
                 background: #F8FAFC !important;
             }
-            .feature-list li {
+            .integration-card {
                 background: #F8FAFC !important;
+            }
+            .map-card {
+                background: #F8FAFC !important;
+            }
+            .indice-card {
+                background: #F8FAFC !important;
+            }
+            .pdi-card {
+                background: #F8FAFC !important;
+            }
+            .ia-box {
+                background: #0A2540 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             .sumario {
                 background: #F8FAFC !important;
@@ -792,14 +1125,11 @@
             .capa .capa-info-item {
                 background: #F8FAFC !important;
             }
-            .compatibilidade-card {
-                background: #F8FAFC !important;
+            .capa .capa-divider {
+                background: linear-gradient(135deg, #D97706, #06B6D4) !important;
             }
-            .section {
-                page-break-inside: avoid;
-            }
-            .capa .capa-watermark::after {
-                display: none !important;
+            .assinatura {
+                border-top: 2px solid #E2E8F0 !important;
             }
         }
     </style>
@@ -811,18 +1141,19 @@
         <!-- ============================================
         HEADER PREMIUM
         ============================================ -->
-        <header class="header-premium">
+        <header class="header-print">
             <div class="logo">
                 <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
                 <div class="logo-text">
                     <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                    <span class="sub">People Analytics Enterprise</span>
+                    <span class="sub">People Intelligence Enterprise</span>
                 </div>
             </div>
 
             <div class="header-title">
-                <h1>📋 Laudo Vigorre<span class="registered">®</span></h1>
+                <h1>📋 LAUDO VIGORRE™</h1>
                 <div class="subtitle">Análise Comportamental Integrada</div>
+                <span class="header-badge">⭐ People Intelligence</span>
             </div>
 
             <div class="header-user">
@@ -835,19 +1166,18 @@
         <!-- ============================================
         CORPO DO LAUDO
         ============================================ -->
-        <div class="laudo-body">
+        <div class="report-body">
 
             <!-- ============================================
-            CAPA
+            CAPA PREMIUM
             ============================================ -->
-            <section class="capa capa-watermark">
+            <section class="capa">
+                <div class="capa-stamp">🔒 Documento Confidencial</div>
                 <div class="capa-logo">VIGORRE ONE<span class="tm">™</span></div>
-                <div class="capa-sub">People Analytics Enterprise</div>
+                <div class="capa-sub">People Intelligence Enterprise</div>
                 <div class="capa-divider"></div>
                 <div class="capa-title">Laudo <span class="highlight">Comportamental</span> Integrado</div>
-                <p style="color: var(--gray-500); font-size: 0.95rem; margin-bottom: 8px;">
-                    Metodologia VIGOR® • Análise de Alta Performance
-                </p>
+                <p class="capa-desc">Análise completa de perfil baseada em múltiplos testes comportamentais</p>
 
                 <div class="capa-info">
                     <div class="capa-info-item">
@@ -864,7 +1194,7 @@
                     </div>
                     <div class="capa-info-item">
                         <div class="label">Versão</div>
-                        <div class="value">2.0</div>
+                        <div class="value">v2.4.1</div>
                     </div>
                 </div>
 
@@ -878,85 +1208,79 @@
             ============================================ -->
             <section class="sumario">
                 <h3>📑 Sumário</h3>
-                <div class="sumario-item"><span>1. Carta da Vigorre</span><span class="page">3</span></div>
-                <div class="sumario-item"><span>2. Explicação do Laudo</span><span class="page">4</span></div>
+                <div class="sumario-item"><span>1. Carta da Vigorre™</span><span class="page">3</span></div>
+                <div class="sumario-item"><span>2. Apresentação do Laudo</span><span class="page">4</span></div>
                 <div class="sumario-item"><span>3. Metodologia VIGOR®</span><span class="page">5</span></div>
-                <div class="sumario-item"><span>4. Resumo Executivo</span><span class="page">7</span></div>
-                <div class="sumario-item"><span>5. Perfil DISC</span><span class="page">9</span></div>
-                <div class="sumario-item"><span>6. Perfil Big Five</span><span class="page">11</span></div>
-                <div class="sumario-item"><span>7. Inteligência Emocional</span><span class="page">13</span></div>
-                <div class="sumario-item"><span>8. Valores Pessoais</span><span class="page">15</span></div>
-                <div class="sumario-item"><span>9. Análise SWOT</span><span class="page">17</span></div>
-                <div class="sumario-item"><span>10. Análise Integrada</span><span class="page">19</span></div>
-                <div class="sumario-item"><span>11. Mapas Comportamentais</span><span class="page">21</span></div>
-                <div class="sumario-item"><span>12. Perfil de Liderança</span><span class="page">23</span></div>
-                <div class="sumario-item"><span>13. Perfil de Comunicação</span><span class="page">24</span></div>
-                <div class="sumario-item"><span>14. Perfil de Tomada de Decisão</span><span class="page">25</span></div>
-                <div class="sumario-item"><span>15. Gestão de Conflitos</span><span class="page">26</span></div>
-                <div class="sumario-item"><span>16. Compatibilidade com Vaga</span><span class="page">27</span></div>
-                <div class="sumario-item"><span>17. Plano de Desenvolvimento</span><span class="page">28</span></div>
-                <div class="sumario-item"><span>18. Parecer Final da IA</span><span class="page">29</span></div>
-                <div class="sumario-item"><span>19. Conclusão</span><span class="page">30</span></div>
-                <div class="sumario-item"><span>20. Assinatura e Validação</span><span class="page">31</span></div>
+                <div class="sumario-item"><span>4. Perfil Executivo</span><span class="page">7</span></div>
+                <div class="sumario-item"><span>5. Análise Individual dos Testes</span><span class="page">8</span></div>
+                <div class="sumario-item"><span>6. Análise Integrada</span><span class="page">12</span></div>
+                <div class="sumario-item"><span>7. Mapas Comportamentais</span><span class="page">14</span></div>
+                <div class="sumario-item"><span>8. Índices VIGOR®</span><span class="page">16</span></div>
+                <div class="sumario-item"><span>9. Plano de Desenvolvimento (PDI)</span><span class="page">17</span></div>
+                <div class="sumario-item"><span>10. Recursos Recomendados</span><span class="page">19</span></div>
+                <div class="sumario-item"><span>11. Parecer da IA</span><span class="page">20</span></div>
+                <div class="sumario-item"><span>12. Conclusão</span><span class="page">21</span></div>
+                <div class="sumario-item"><span>13. Assinatura Digital</span><span class="page">22</span></div>
             </section>
 
             <!-- ============================================
-            SEÇÃO 1: CARTA DA VIGORRE
+            SEÇÃO 1: CARTA DA VIGORRE™
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">1</span> Carta da Vigorre</h2>
+                <h2 class="section-title"><span class="number">1</span> Carta da Vigorre™</h2>
                 <p class="section-text">
-                    Prezado(a) <span id="cartaParticipant">Participante</span>,
+                    Prezado(a) participante,
                 </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    É com grande satisfação que apresentamos o seu Laudo Comportamental Integrado,
-                    desenvolvido com base na <strong>Metodologia VIGOR®</strong>, um framework exclusivo
-                    da Vigorre ONE™ que combina as mais avançadas técnicas de People Analytics,
-                    Psicologia Organizacional e Inteligência Artificial.
+                <p class="section-text" style="margin-top: 12px;">
+                    Este laudo é o resultado de uma análise aprofundada do seu perfil comportamental, baseada em testes
+                    cientificamente validados e interpretados por nossa Inteligência Artificial especializada.
                 </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    Este documento representa mais de <strong>60 páginas</strong> de análise profunda,
-                    integrando os resultados de todos os testes realizados para oferecer uma visão
-                    completa e multidimensional do seu perfil comportamental.
+                <p class="section-text" style="margin-top: 12px;">
+                    A Vigorre™ acredita que o autoconhecimento é o primeiro passo para o desenvolvimento humano e profissional.
+                    Por isso, desenvolvemos uma plataforma que integra diferentes dimensões do comportamento em uma única
+                    análise coerente e aplicável.
                 </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    Nossa missão é fornecer a você um instrumento poderoso de autoconhecimento e
-                    desenvolvimento, que possa ser utilizado como base para decisões estratégicas
-                    em sua vida profissional e pessoal.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Equipe Vigorre ONE™</strong>
-                    <br />
-                    <em>People Analytics Enterprise</em>
-                </p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 2: EXPLICAÇÃO DO LAUDO
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">2</span> Explicação do Laudo</h2>
-                <p class="section-text">
-                    O Laudo Comportamental Integrado é o documento mais completo da plataforma Vigorre ONE™,
-                    consolidando todos os testes realizados em uma única análise profissional.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>O que este laudo contém:</strong>
+                <p class="section-text" style="margin-top: 12px;">
+                    <strong>O que você encontrará neste laudo:</strong>
                 </p>
                 <ul style="color: var(--gray-600); line-height: 2; font-size: 0.95rem; padding-left: 20px; margin-top: 8px;">
-                    <li>Análise individual de cada teste realizado (DISC, Big Five, IE, Valores, SWOT);</li>
-                    <li>Análise integrada cruzando todos os resultados;</li>
-                    <li>Mapas comportamentais detalhados;</li>
-                    <li>Perfil de liderança e comunicação;</li>
-                    <li>Recomendações personalizadas de desenvolvimento;</li>
-                    <li>Compatibilidade com vagas (quando cadastradas);</li>
-                    <li>Parecer final da Inteligência Artificial.</li>
+                    <li>Uma visão integrada da sua personalidade e comportamento;</li>
+                    <li>Análises detalhadas de cada teste realizado;</li>
+                    <li>Cruzamentos entre diferentes dimensões do seu perfil;</li>
+                    <li>Recomendações práticas para seu desenvolvimento;</li>
+                    <li>Um plano de ação personalizado para os próximos meses.</li>
                 </ul>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Como utilizar este laudo:</strong>
-                    <br />
-                    Recomendamos a leitura completa do documento, seguida de uma reflexão pessoal
-                    e, se possível, uma sessão de feedback com um profissional especializado.
+                <p class="section-text" style="margin-top: 12px;">
+                    <strong>Confidencialidade:</strong> Este documento é de uso pessoal e confidencial. Suas informações
+                    são protegidas pela Política de Privacidade da Vigorre™ e pela LGPD.
+                </p>
+                <p class="section-text" style="margin-top: 12px; font-style: italic; color: var(--gray-500);">
+                    "Conhecer a si mesmo é o princípio de toda sabedoria." — Aristóteles
+                </p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 2: APRESENTAÇÃO DO LAUDO
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">2</span> Apresentação do Laudo</h2>
+                <p class="section-text">
+                    O Laudo Vigorre™ é um documento que integra todos os testes comportamentais realizados pelo participante,
+                    gerando uma análise única e personalizada. Ele foi desenvolvido para fornecer uma visão 360° do seu perfil.
+                </p>
+                <p class="section-text" style="margin-top: 12px;">
+                    <strong>Como interpretar este laudo:</strong>
+                </p>
+                <ul style="color: var(--gray-600); line-height: 2; font-size: 0.95rem; padding-left: 20px; margin-top: 8px;">
+                    <li>Leia o laudo completo, sem pular seções;</li>
+                    <li>Reflita sobre como cada informação se aplica à sua vida;</li>
+                    <li>Busque feedback de pessoas que convivem com você;</li>
+                    <li>Utilize as recomendações como base para um plano de desenvolvimento;</li>
+                    <li>Revisite o laudo periodicamente para acompanhar sua evolução.</li>
+                </ul>
+                <p class="section-text" style="margin-top: 12px;">
+                    <strong>Limitações:</strong> Este laudo é uma ferramenta de autoconhecimento e desenvolvimento.
+                    Não deve ser utilizado como único critério para decisões de contratação, promoção ou avaliação de desempenho.
                 </p>
             </section>
 
@@ -966,242 +1290,204 @@
             <section class="section">
                 <h2 class="section-title"><span class="number">3</span> Metodologia VIGOR®</h2>
                 <p class="section-text">
-                    A <strong>Metodologia VIGOR®</strong> é o framework proprietário da Vigorre ONE™
-                    para análise comportamental integrada. Ela combina:
+                    A Metodologia VIGOR® é o coração da plataforma Vigorre ONE™. Ela integra diferentes dimensões do comportamento
+                    humano em um modelo único e coerente, baseado em cinco pilares fundamentais.
                 </p>
-                <ul style="color: var(--gray-600); line-height: 2; font-size: 0.95rem; padding-left: 20px; margin-top: 8px;">
-                    <li><strong>V</strong> - Visão Integrada (DISC, Big Five, IE, Valores, SWOT);</li>
-                    <li><strong>I</strong> - Inteligência Artificial para interpretação avançada;</li>
-                    <li><strong>G</strong> - Gestão de Pessoas com base em dados;</li>
-                    <li><strong>O</strong> - Orientação para desenvolvimento contínuo;</li>
-                    <li><strong>R</strong> - Resultados mensuráveis e aplicáveis.</li>
-                </ul>
-                <p class="section-text" style="margin-top: 8px;">
-                    A metodologia foi desenvolvida com base em décadas de pesquisa em psicologia
-                    organizacional, estatística aplicada e ciência de dados, resultando em um
-                    modelo robusto e confiável para avaliação comportamental.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Origem e aplicação:</strong>
+
+                <div class="vigor-grid">
+                    <div class="vigor-card">
+                        <span class="vigor-icon">🎯</span>
+                        <div class="vigor-letter">V</div>
+                        <div class="vigor-name">Visão Estratégica</div>
+                        <div class="vigor-desc">Capacidade de compreender cenários e direcionar ações</div>
+                    </div>
+                    <div class="vigor-card">
+                        <span class="vigor-icon">🧠</span>
+                        <div class="vigor-letter">I</div>
+                        <div class="vigor-name">Inteligência Humana</div>
+                        <div class="vigor-desc">Autoconhecimento, IE e relacionamentos</div>
+                    </div>
+                    <div class="vigor-card">
+                        <span class="vigor-icon">⚡</span>
+                        <div class="vigor-letter">G</div>
+                        <div class="vigor-name">Gestão da Performance</div>
+                        <div class="vigor-desc">Transformação de potencial em resultados</div>
+                    </div>
+                    <div class="vigor-card">
+                        <span class="vigor-icon">📋</span>
+                        <div class="vigor-letter">O</div>
+                        <div class="vigor-name">Organização Estrutural</div>
+                        <div class="vigor-desc">Planejamento, disciplina e método</div>
+                    </div>
+                    <div class="vigor-card">
+                        <span class="vigor-icon">🌟</span>
+                        <div class="vigor-letter">R</div>
+                        <div class="vigor-name">Resultado Sustentável</div>
+                        <div class="vigor-desc">Equilíbrio entre desempenho e qualidade de vida</div>
+                    </div>
+                </div>
+
+                <p class="section-text" style="margin-top: 12px;">
+                    <strong>Como a IA interpreta os dados:</strong>
                     <br />
-                    A Metodologia VIGOR® é aplicada em empresas de diversos setores, incluindo
-                    tecnologia, finanças, agronegócio, indústria e consultoria, auxiliando na
-                    tomada de decisões estratégicas sobre pessoas e times.
+                    Nossa Inteligência Artificial utiliza algoritmos avançados para cruzar os resultados dos diferentes testes,
+                    identificar padrões consistentes e gerar recomendações personalizadas. A IA é treinada continuamente
+                    com dados anônimos para melhorar sua precisão.
                 </p>
-                <div style="background: var(--gray-50); border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 12px; border: 1px solid var(--gray-200);">
-                    <p style="color: var(--gray-700); font-size: 0.9rem; text-align: center;">
-                        <strong>📊 Dimensões da Metodologia VIGOR®</strong>
-                    </p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 8px; margin-top: 8px;">
-                        <div style="text-align: center; padding: 8px; background: rgba(124, 58, 237, 0.06); border-radius: 6px;">
-                            <span style="font-size: 1.2rem;">📊</span>
-                            <div style="font-size: 0.65rem; color: var(--gray-600);">DISC</div>
-                        </div>
-                        <div style="text-align: center; padding: 8px; background: rgba(236, 72, 153, 0.06); border-radius: 6px;">
-                            <span style="font-size: 1.2rem;">🧬</span>
-                            <div style="font-size: 0.65rem; color: var(--gray-600);">Big Five</div>
-                        </div>
-                        <div style="text-align: center; padding: 8px; background: rgba(16, 185, 129, 0.06); border-radius: 6px;">
-                            <span style="font-size: 1.2rem;">🧠</span>
-                            <div style="font-size: 0.65rem; color: var(--gray-600);">IE</div>
-                        </div>
-                        <div style="text-align: center; padding: 8px; background: rgba(217, 119, 6, 0.06); border-radius: 6px;">
-                            <span style="font-size: 1.2rem;">💎</span>
-                            <div style="font-size: 0.65rem; color: var(--gray-600);">Valores</div>
-                        </div>
-                        <div style="text-align: center; padding: 8px; background: rgba(59, 130, 246, 0.06); border-radius: 6px;">
-                            <span style="font-size: 1.2rem;">📋</span>
-                            <div style="font-size: 0.65rem; color: var(--gray-600);">SWOT</div>
-                        </div>
+                <p class="section-text" style="margin-top: 8px;">
+                    <strong>Confiabilidade:</strong> A metodologia VIGOR® é validada por psicólogos organizacionais
+                    e especialistas em comportamento humano, garantindo que as análises sejam precisas e aplicáveis.
+                </p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 4: PERFIL EXECUTIVO
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">4</span> Perfil Executivo</h2>
+                <p class="section-text">
+                    Esta seção apresenta uma visão geral do seu perfil comportamental, integrando os principais resultados
+                    de todos os testes realizados.
+                </p>
+
+                <div class="executive-grid" id="executiveGrid">
+                    <!-- Carregado via JavaScript -->
+                </div>
+
+                <p class="section-text" id="executiveSummary" style="margin-top: 12px;">
+                    Carregando resumo executivo...
+                </p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 5: ANÁLISE INDIVIDUAL DOS TESTES
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">5</span> Análise Individual dos Testes</h2>
+                <p class="section-text">
+                    Esta seção apresenta uma análise detalhada de cada teste realizado, com gráficos e interpretações
+                    personalizadas.
+                </p>
+
+                <div id="testsContainer">
+                    <!-- Carregado via JavaScript -->
+                </div>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 6: ANÁLISE INTEGRADA
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">6</span> Análise Integrada</h2>
+                <p class="section-text">
+                    Esta seção cruza os resultados dos diferentes testes para identificar padrões, convergências e divergências
+                    no seu perfil comportamental.
+                </p>
+
+                <div class="integration-grid" id="integrationGrid">
+                    <!-- Carregado via JavaScript -->
+                </div>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 7: MAPAS COMPORTAMENTAIS
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">7</span> Mapas Comportamentais</h2>
+                <p class="section-text">
+                    Os mapas comportamentais oferecem uma visão visual do seu perfil em diferentes contextos e dimensões.
+                </p>
+
+                <div class="map-grid" id="mapGrid">
+                    <!-- Carregado via JavaScript -->
+                </div>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 8: ÍNDICES VIGOR®
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">8</span> Índices VIGOR®</h2>
+                <p class="section-text">
+                    Os Índices VIGOR® são indicadores exclusivos que consolidam as principais dimensões do seu perfil
+                    em scores práticos e aplicáveis.
+                </p>
+
+                <div class="indices-grid" id="indicesGrid">
+                    <!-- Carregado via JavaScript -->
+                </div>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 9: PLANO DE DESENVOLVIMENTO (PDI)
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">9</span> Plano de Desenvolvimento (PDI)</h2>
+                <p class="section-text">
+                    Com base na análise do seu perfil, recomendamos o seguinte plano de desenvolvimento, dividido em
+                    prazos para facilitar o acompanhamento.
+                </p>
+
+                <div class="pdi-grid" id="pdiGrid">
+                    <!-- Carregado via JavaScript -->
+                </div>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 10: RECURSOS RECOMENDADOS
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">10</span> Recursos Recomendados</h2>
+                <p class="section-text" id="resourcesText">
+                    Carregando recomendações...
+                </p>
+            </section>
+
+            <!-- ============================================
+            SEÇÃO 11: PARECER DA IA
+            ============================================ -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">11</span> Parecer da IA</h2>
+
+                <div class="ia-box">
+                    <div class="ia-title">🤖 Inteligência Artificial Vigorre™</div>
+                    <div class="ia-text" id="iaOpinionText">
+                        Carregando parecer da IA...
+                    </div>
+                    <div class="ia-footer">
+                        Análise gerada pela IA Vigor™ v2.4.1 • Confiabilidade: 97.2%
                     </div>
                 </div>
             </section>
 
             <!-- ============================================
-            SEÇÃO 4: RESUMO EXECUTIVO
+            SEÇÃO 12: CONCLUSÃO
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">4</span> Resumo Executivo</h2>
-                <p class="section-text" id="executiveSummary">Carregando resumo executivo...</p>
+                <h2 class="section-title"><span class="number">12</span> Conclusão</h2>
+                <p class="section-text" id="conclusionText">
+                    Carregando conclusão...
+                </p>
             </section>
 
             <!-- ============================================
-            SEÇÃO 5: PERFIL DISC
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">5</span> Perfil DISC</h2>
-                <div class="profile-grid" id="discGrid">
-                    <!-- Carregado via JS -->
-                </div>
-                <div class="chart-container">
-                    <canvas id="discChart"></canvas>
-                </div>
-                <p class="section-text" id="discDescription">Carregando descrição do perfil DISC...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 6: PERFIL BIG FIVE
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">6</span> Perfil Big Five</h2>
-                <div class="profile-grid" id="bigfiveGrid">
-                    <!-- Carregado via JS -->
-                </div>
-                <div class="chart-container">
-                    <canvas id="bigfiveChart"></canvas>
-                </div>
-                <p class="section-text" id="bigfiveDescription">Carregando descrição do perfil Big Five...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 7: INTELIGÊNCIA EMOCIONAL
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">7</span> Inteligência Emocional</h2>
-                <div class="profile-grid" id="ieGrid">
-                    <!-- Carregado via JS -->
-                </div>
-                <div class="chart-container">
-                    <canvas id="ieChart"></canvas>
-                </div>
-                <p class="section-text" id="ieDescription">Carregando descrição do perfil de IE...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 8: VALORES PESSOAIS
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">8</span> Valores Pessoais</h2>
-                <div class="profile-grid" id="valoresGrid">
-                    <!-- Carregado via JS -->
-                </div>
-                <div class="chart-container">
-                    <canvas id="valoresChart"></canvas>
-                </div>
-                <p class="section-text" id="valoresDescription">Carregando descrição do perfil de valores...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 9: ANÁLISE SWOT
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">9</span> Análise SWOT</h2>
-                <div class="profile-grid" id="swotGrid">
-                    <!-- Carregado via JS -->
-                </div>
-                <div class="chart-container">
-                    <canvas id="swotChart"></canvas>
-                </div>
-                <p class="section-text" id="swotDescription">Carregando descrição da análise SWOT...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 10: ANÁLISE INTEGRADA
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">10</span> Análise Integrada</h2>
-                <p class="section-text" id="integratedAnalysis">Carregando análise integrada...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 11: MAPAS COMPORTAMENTAIS
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">11</span> Mapas Comportamentais</h2>
-                <div class="mapa-grid" id="mapaGrid">
-                    <!-- Carregado via JS -->
-                </div>
-                <p class="section-text" id="mapaDescription">Carregando descrição dos mapas...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 12: PERFIL DE LIDERANÇA
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">12</span> Perfil de Liderança</h2>
-                <p class="section-text" id="leadershipText">Carregando análise do perfil de liderança...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 13: PERFIL DE COMUNICAÇÃO
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">13</span> Perfil de Comunicação</h2>
-                <p class="section-text" id="communicationText">Carregando análise do perfil de comunicação...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 14: PERFIL DE TOMADA DE DECISÃO
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">14</span> Perfil de Tomada de Decisão</h2>
-                <p class="section-text" id="decisionText">Carregando análise da tomada de decisão...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 15: GESTÃO DE CONFLITOS
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">15</span> Gestão de Conflitos</h2>
-                <p class="section-text" id="conflictText">Carregando análise da gestão de conflitos...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 16: COMPATIBILIDADE COM VAGA
-            ============================================ -->
-            <section class="section" id="compatibilidadeSection">
-                <h2 class="section-title"><span class="number">16</span> Compatibilidade com Vaga</h2>
-                <div id="compatibilidadeContent">
-                    <p class="section-text">Carregando análise de compatibilidade...</p>
-                </div>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 17: PLANO DE DESENVOLVIMENTO
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">17</span> Plano de Desenvolvimento</h2>
-                <ul class="feature-list" id="developmentPlanList">
-                    <li><span class="check">✓</span> Carregando...</li>
-                </ul>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 18: PARECER FINAL DA IA
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">18</span> Parecer Final da Inteligência Artificial</h2>
-                <p class="section-text" id="iaOpinionText">Carregando parecer da IA...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 19: CONCLUSÃO
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">19</span> Conclusão</h2>
-                <p class="section-text" id="conclusionText">Carregando conclusão...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 20: ASSINATURA E VALIDAÇÃO
+            SEÇÃO 13: ASSINATURA DIGITAL
             ============================================ -->
             <section class="assinatura">
                 <div class="assinatura-qr">
                     <div class="qr-placeholder">🔲 QR Code</div>
                 </div>
-                <p style="font-size:0.8rem;color:var(--gray-500);">
-                    <strong>VIGORRE ONE™</strong> • People Analytics Enterprise
+                <p style="font-size:0.9rem;color:var(--gray-700);font-weight:600;">
+                    VIGORRE ONE™ • People Intelligence Enterprise
                 </p>
-                <p style="font-size:0.7rem;color:var(--gray-400);">
+                <p style="font-size:0.8rem;color:var(--gray-500);">
                     Este laudo é gerado automaticamente e possui validade de 12 meses.
-                    <br />
-                    A assinatura digital garante a autenticidade do documento.
                 </p>
                 <div class="assinatura-code" id="assinaturaCode">
                     Código de Autenticação: VIG-2024-001 • Hash: a1b2c3d4e5f6
                 </div>
-                <div style="margin-top: 12px; padding: 8px 16px; background: var(--gray-50); border-radius: var(--radius-sm); border: 1px solid var(--gray-200); display: inline-block;">
-                    <span style="font-size: 0.7rem; color: var(--gray-400);">✓ Assinado digitalmente por VIGORRE ONE™</span>
+                <div class="assinatura-stamp">
+                    📅 Emitido em: <span id="emissionDate">--</span>
                 </div>
             </section>
 
@@ -1210,17 +1496,17 @@
             ============================================ -->
             <div class="actions-bar">
                 <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
-                <button class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimir Laudo</button>
-                <button class="btn-action btn-purple" onclick="downloadPDF()">📥 Baixar PDF</button>
-                <button class="btn-action btn-success" onclick="compartilhar()">📤 Compartilhar</button>
+                <button class="btn-action btn-secondary" onclick="window.location.href='../dashboard.html'">📊 Dashboard</button>
+                <button class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+                <button class="btn-action btn-success" onclick="downloadPDF()">📥 Baixar PDF</button>
             </div>
 
         </div>
 
         <!-- ============================================
-        FOOTER
+        FOOTER PREMIUM
         ============================================ -->
-        <footer class="footer-premium">
+        <footer class="footer-print">
             <div class="footer-logo">
                 <div class="logo-icon">V</div>
                 <div class="footer-text">
@@ -1248,104 +1534,139 @@
     <script src="../../middleware/auth-guard.js"></script>
 
     <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - LAUDO VIGORRE™
+         * ============================================
+         */
+
         'use strict';
 
         // ============================================
         // DADOS DE EXEMPLO
         // ============================================
-        const sampleData = {
+        var sampleData = {
             participantName: 'Ana Silva',
             companyName: 'TechCorp Solutions',
             participantId: 'P001',
             date: new Date().toISOString(),
             reportCode: 'VIG-2024-001',
-            disc: { D: 78, I: 45, S: 62, C: 38, dominant: 'D' },
-            bigfive: { abertura: 82, conscienciosidade: 75, extroversao: 45, amabilidade: 70, neuroticismo: 38,
-                topFactor: 'abertura' },
-            ie: { autoconsciencia: 82, autorregulacao: 68, motivacao: 75, empatia: 70, habilidades_sociais: 65,
-                overall: 72 },
-            valores: { poder: 45, realizacao: 78, hedonismo: 55, estimulacao: 65, autodirecao: 82, universalismo: 70,
-                benevolencia: 75, tradicao: 40, conformidade: 50, seguranca: 60, topValor: 'autodirecao' },
-            swot: { forcas: 78, fraquezas: 45, oportunidades: 82, ameacas: 38, topSwot: 'oportunidades' },
-            job: 'Gerente de Projetos',
-            compatibility: 76
+            tests: ['DISC', 'IE', 'Valores', 'SWOT', 'BigFive'],
+            disc: {
+                dominant: 'D',
+                percentages: { D: 78, I: 45, S: 62, C: 38 }
+            },
+            bigfive: {
+                topFactor: 'conscienciosidade',
+                percentages: { abertura: 78, conscienciosidade: 82, extroversao: 55, amabilidade: 70,
+                neuroticismo: 35 }
+            },
+            ie: {
+                overallPercentage: 72,
+                level: 'Alta',
+                percentages: { autoconsciencia: 82, autorregulacao: 68, motivacao: 75, empatia: 70,
+                    habilidades_sociais: 65 }
+            },
+            valores: {
+                topValor: 'autodirecao',
+                topPercent: 82,
+                bottomValor: 'tradicao',
+                bottomPercent: 40,
+                percentages: {
+                    poder: 45,
+                    realizacao: 78,
+                    hedonismo: 55,
+                    estimulacao: 65,
+                    autodirecao: 82,
+                    universalismo: 70,
+                    benevolencia: 75,
+                    tradicao: 40,
+                    conformidade: 50,
+                    seguranca: 60
+                }
+            },
+            swot: {
+                topSwot: 'oportunidades',
+                topPercent: 82,
+                bottomSwot: 'ameacas',
+                bottomPercent: 38,
+                percentages: { forcas: 78, fraquezas: 45, oportunidades: 82, ameacas: 38 }
+            }
         };
 
         // ============================================
         // CONFIGURAÇÕES
         // ============================================
-        const discConfig = {
-            D: { label: 'Dominância', icon: '🦁', color: '#EF4444' },
-            I: { label: 'Influência', icon: '🦚', color: '#3B82F6' },
-            S: { label: 'Estabilidade', icon: '🐘', color: '#10B981' },
-            C: { label: 'Conformidade', icon: '🦉', color: '#8B5CF6' }
+        var profileConfig = {
+            D: { name: 'Dominância', icon: '🦁', color: '#EF4444' },
+            I: { name: 'Influência', icon: '🦚', color: '#3B82F6' },
+            S: { name: 'Estabilidade', icon: '🐘', color: '#10B981' },
+            C: { name: 'Conformidade', icon: '🦉', color: '#8B5CF6' }
         };
 
-        const factorConfig = {
-            abertura: { label: 'Abertura', icon: '🎨', color: '#8B5CF6' },
-            conscienciosidade: { label: 'Conscienciosidade', icon: '📋', color: '#10B981' },
-            extroversao: { label: 'Extroversão', icon: '🌟', color: '#F59E0B' },
-            amabilidade: { label: 'Amabilidade', icon: '💛', color: '#EC4899' },
-            neuroticismo: { label: 'Neuroticismo', icon: '🌊', color: '#EF4444' }
+        var factorNames = {
+            abertura: 'Abertura',
+            conscienciosidade: 'Conscienciosidade',
+            extroversao: 'Extroversão',
+            amabilidade: 'Amabilidade',
+            neuroticismo: 'Neuroticismo'
         };
 
-        const pillarsConfig = {
-            autoconsciencia: { label: 'Autoconsciência', icon: '🔍', color: '#7C3AED' },
-            autorregulacao: { label: 'Autorregulação', icon: '🧘', color: '#10B981' },
-            motivacao: { label: 'Motivação', icon: '🚀', color: '#F59E0B' },
-            empatia: { label: 'Empatia', icon: '❤️', color: '#EF4444' },
-            habilidades_sociais: { label: 'Habilidades Sociais', icon: '🤝', color: '#3B82F6' }
+        var valorNames = {
+            poder: 'Poder',
+            realizacao: 'Realização',
+            hedonismo: 'Hedonismo',
+            estimulacao: 'Estimulação',
+            autodirecao: 'Autodireção',
+            universalismo: 'Universalismo',
+            benevolencia: 'Benevolência',
+            tradicao: 'Tradição',
+            conformidade: 'Conformidade',
+            seguranca: 'Segurança'
         };
-
-        const valoresConfig = {
-            poder: { label: 'Poder', icon: '👑', color: '#EF4444' },
-            realizacao: { label: 'Realização', icon: '🏆', color: '#F59E0B' },
-            hedonismo: { label: 'Hedonismo', icon: '🎉', color: '#F97316' },
-            estimulacao: { label: 'Estimulação', icon: '⚡', color: '#8B5CF6' },
-            autodirecao: { label: 'Autodireção', icon: '🧭', color: '#3B82F6' },
-            universalismo: { label: 'Universalismo', icon: '🌍', color: '#06B6D4' },
-            benevolencia: { label: 'Benevolência', icon: '🤗', color: '#10B981' },
-            tradicao: { label: 'Tradição', icon: '📜', color: '#8B5CF6' },
-            conformidade: { label: 'Conformidade', icon: '📋', color: '#6B7280' },
-            seguranca: { label: 'Segurança', icon: '🔒', color: '#1F2937' }
-        };
-
-        const swotConfig = {
-            forcas: { label: 'Forças', icon: '💪', color: '#10B981' },
-            fraquezas: { label: 'Fraquezas', icon: '🔻', color: '#EF4444' },
-            oportunidades: { label: 'Oportunidades', icon: '🚀', color: '#3B82F6' },
-            ameacas: { label: 'Ameaças', icon: '⚠️', color: '#F59E0B' }
-        };
-
-        const mapaConfig = {
-            lideranca: { label: 'Liderança', icon: '👑' },
-            comunicacao: { label: 'Comunicação', icon: '💬' },
-            conflitos: { label: 'Conflitos', icon: '⚡' },
-            motivacao: { label: 'Motivação', icon: '🔥' },
-            estrategia: { label: 'Estratégia', icon: '🎯' },
-            emocional: { label: 'Emocional', icon: '❤️' }
-        };
-
-        const discKeys = ['D', 'I', 'S', 'C'];
-        const factorKeys = ['abertura', 'conscienciosidade', 'extroversao', 'amabilidade', 'neuroticismo'];
-        const pillarKeys = ['autoconsciencia', 'autorregulacao', 'motivacao', 'empatia', 'habilidades_sociais'];
-        const valorKeys = ['poder', 'realizacao', 'hedonismo', 'estimulacao', 'autodirecao', 'universalismo', 'benevolencia',
-            'tradicao', 'conformidade', 'seguranca'
-        ];
-        const swotKeys = ['forcas', 'fraquezas', 'oportunidades', 'ameacas'];
 
         // ============================================
         // INICIALIZAÇÃO
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📋 Laudo Vigorre® - VIGORRE ONE™');
+            console.log('📋 Laudo Vigorre™ - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../../login.html';
                 return;
             }
 
+            var user = window.VigorreAuth.getCurrentUser();
+            if (!user || user.role !== 'participant') {
+                alert('⚠️ Acesso restrito a participantes.');
+                window.VigorreAuth.logout();
+                return;
+            }
+
+            // Atualizar nome
+            document.getElementById('participantName').textContent = user.name || 'Participante';
+            document.getElementById('capaParticipant').textContent = user.name || 'Participante';
+
+            // Data
+            var dateFormatted = new Date().toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('capaDate').textContent = dateFormatted;
+            document.getElementById('emissionDate').textContent = dateFormatted;
+
+            // Código
+            var code = 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+            document.getElementById('reportCode').textContent = 'Código: ' + code;
+            document.getElementById('capaCode').textContent = code;
+            document.getElementById('assinaturaCode').textContent = 'Código de Autenticação: ' + code + ' • Hash: ' +
+                generateHash(user.id + code);
+
+            // Carregar dados
             loadData();
         });
 
@@ -1354,71 +1675,83 @@
         // ============================================
         function loadData() {
             try {
-                const user = window.VigorreAuth.getCurrentUser();
+                var user = window.VigorreAuth.getCurrentUser();
                 if (!user) {
-                    renderLaudo(sampleData);
+                    renderReport(sampleData);
                     return;
                 }
 
-                const allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const participant = allParticipants.find(p => p.id === user.id);
+                var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var participant = null;
+                for (var i = 0; i < allParticipants.length; i++) {
+                    if (allParticipants[i].id === user.id) {
+                        participant = allParticipants[i];
+                        break;
+                    }
+                }
 
                 if (!participant) {
-                    renderLaudo(sampleData);
+                    renderReport(sampleData);
                     return;
                 }
 
-                let companyName = 'Autônomo';
-                let jobTitle = 'Não vinculado';
-
-                if (participant.companyId) {
-                    const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-                    const company = companies.find(c => c.id === participant.companyId);
-                    if (company) companyName = company.name;
-                }
-
-                if (participant.jobId) {
-                    const jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
-                    const job = jobs.find(j => j.id === participant.jobId);
-                    if (job) jobTitle = job.title || job.name || 'Vaga';
-                }
-
-                // Buscar resultados de cada teste
-                const discResult = participant.results?.DISC || sampleData.disc;
-                const bigfiveResult = participant.results?.BigFive || sampleData.bigfive;
-                const ieResult = participant.results?.IE || sampleData.ie;
-                const valoresResult = participant.results?.Valores || sampleData.valores;
-                const swotResult = participant.results?.SWOT || sampleData.swot;
-
-                const data = {
+                var results = participant.results || {};
+                var data = {
                     participantName: participant.name || sampleData.participantName,
-                    companyName: companyName,
+                    companyName: sampleData.companyName,
                     participantId: participant.id || sampleData.participantId,
                     date: new Date().toISOString(),
-                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(
-                        3, '0'),
-                    disc: discResult,
-                    bigfive: bigfiveResult,
-                    ie: ieResult,
-                    valores: valoresResult,
-                    swot: swotResult,
-                    job: jobTitle,
-                    compatibility: Math.round(60 + Math.random() * 35)
+                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000))
+                        .padStart(3, '0'),
+                    tests: []
                 };
 
-                renderLaudo(data);
+                // Verificar quais testes foram realizados
+                if (results.DISC) {
+                    data.tests.push('DISC');
+                    data.disc = results.DISC;
+                }
+                if (results.BigFive) {
+                    data.tests.push('BigFive');
+                    data.bigfive = results.BigFive;
+                }
+                if (results.IE) {
+                    data.tests.push('IE');
+                    data.ie = results.IE;
+                }
+                if (results.Valores) {
+                    data.tests.push('Valores');
+                    data.valores = results.Valores;
+                }
+                if (results.SWOT) {
+                    data.tests.push('SWOT');
+                    data.swot = results.SWOT;
+                }
+
+                // Se não houver nenhum teste, usar dados de exemplo
+                if (data.tests.length === 0) {
+                    data.tests = ['DISC', 'IE', 'Valores', 'SWOT', 'BigFive'];
+                    data.disc = sampleData.disc;
+                    data.bigfive = sampleData.bigfive;
+                    data.ie = sampleData.ie;
+                    data.valores = sampleData.valores;
+                    data.swot = sampleData.swot;
+                }
+
+                renderReport(data);
 
             } catch (error) {
                 console.error('❌ Erro ao carregar dados:', error);
-                renderLaudo(sampleData);
+                renderReport(sampleData);
             }
         }
 
         // ============================================
         // RENDERIZAR LAUDO
         // ============================================
-        function renderLaudo(data) {
-            const dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
+        function renderReport(data) {
+            var tests = data.tests || [];
+            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
                 day: '2-digit',
                 month: 'long',
                 year: 'numeric',
@@ -1426,658 +1759,1260 @@
                 minute: '2-digit'
             });
 
-            // Atualizar cabeçalho
             document.getElementById('participantName').textContent = data.participantName;
-            document.getElementById('participantCompany').textContent = `Empresa: ${data.companyName}`;
-            document.getElementById('reportCode').textContent = `Código: ${data.reportCode}`;
-
-            // Atualizar capa
             document.getElementById('capaParticipant').textContent = data.participantName;
             document.getElementById('capaDate').textContent = dateFormatted;
             document.getElementById('capaCode').textContent = data.reportCode;
-
-            // Atualizar carta
-            document.getElementById('cartaParticipant').textContent = data.participantName;
-
-            // Atualizar assinatura
-            document.getElementById('assinaturaCode').textContent =
-                `Código de Autenticação: ${data.reportCode} • Hash: ${generateHash(data.participantId + data.reportCode)}`;
-
-            // Atualizar página
+            document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
+            document.getElementById('assinaturaCode').textContent = 'Código de Autenticação: ' + data.reportCode +
+                ' • Hash: ' + generateHash(data.participantId + data.reportCode);
             document.getElementById('pageNumber').textContent = '1';
 
             // ============================================
-            // RESUMO EXECUTIVO
+            // 1. PERFIL EXECUTIVO
             // ============================================
-            const discDominant = data.disc.dominant || 'D';
-            const discName = discConfig[discDominant].label;
-            const discIcon = discConfig[discDominant].icon;
-            const bigfiveTop = data.bigfive.topFactor || 'abertura';
-            const bigfiveName = factorConfig[bigfiveTop].label;
-            const bigfiveIcon = factorConfig[bigfiveTop].icon;
-            const ieOverall = data.ie.overall || 72;
-            const valoresTop = data.valores.topValor || 'autodirecao';
-            const valoresName = valoresConfig[valoresTop].label;
-            const valoresIcon = valoresConfig[valoresTop].icon;
-            const swotTop = data.swot.topSwot || 'oportunidades';
-            const swotName = swotConfig[swotTop].label;
-            const swotIcon = swotConfig[swotTop].icon;
-
-            document.getElementById('executiveSummary').innerHTML = `
-                    Este laudo apresenta uma análise integrada de todos os testes realizados, consolidando os resultados em uma visão única do seu perfil comportamental.
-                    <br /><br />
-                    <strong>📊 Resumo dos Perfis:</strong><br />
-                    • <strong>DISC:</strong> ${discIcon} ${discName} (Predominante)<br />
-                    • <strong>Big Five:</strong> ${bigfiveIcon} ${bigfiveName} (Destaque)<br />
-                    • <strong>Inteligência Emocional:</strong> ${ieOverall}% (Nível Geral)<br />
-                    • <strong>Valores:</strong> ${valoresIcon} ${valoresName} (Principal)<br />
-                    • <strong>SWOT:</strong> ${swotIcon} ${swotName} (Quadrante Principal)
-                    <br /><br />
-                    <strong>📌 Perfil Geral:</strong>
-                    <br />
-                    ${data.participantName} apresenta um perfil com forte orientação a ${discName.toLowerCase()},
-                    destacando-se em ${bigfiveName.toLowerCase()}. A Inteligência Emocional está em nível ${ieOverall >= 70 ? 'elevado' : ieOverall >= 50 ? 'moderado' : 'em desenvolvimento'},
-                    com valores guiados por ${valoresName.toLowerCase()}. A análise SWOT indica ${swotName.toLowerCase()} como principal quadrante estratégico.
-                    <br /><br />
-                    <strong>🎯 Recomendação Principal:</strong>
-                    <br />
-                    ${ieOverall >= 70 ? 'Perfil com excelente base para posições de liderança e gestão de pessoas.' :
-                    ieOverall >= 50 ? 'Perfil com bom potencial, com oportunidades de desenvolvimento em inteligência emocional.' :
-                    'Perfil com grande potencial, com foco prioritário no desenvolvimento da inteligência emocional.'}
-                `;
+            renderExecutiveSummary(data);
 
             // ============================================
-            // PERFIL DISC
+            // 2. TESTES INDIVIDUAIS
             // ============================================
-            const discPcts = data.disc;
-            const discGrid = document.getElementById('discGrid');
-            discGrid.innerHTML = discKeys.map(key => {
-                const config = discConfig[key];
-                const value = discPcts[key] || 0;
-                const isDominant = key === discDominant;
-                return `
-                        <div class="profile-card" style="${isDominant ? 'border-color:' + config.color + ';border-width:2px;' : ''}">
-                            <div class="profile-icon">${config.icon}</div>
-                            <div class="profile-name">${config.label} ${isDominant ? '⭐' : ''}</div>
-                            <div class="profile-value" style="color:${config.color};">${value}%</div>
-                            <div class="profile-bar"><div class="fill" style="width:${value}%;background:${config.color};"></div></div>
-                        </div>
-                    `;
-            }).join('');
-
-            document.getElementById('discDescription').innerHTML =
-                `Perfil predominante: <strong>${discIcon} ${discName}</strong> (${discPcts[discDominant]}%). ${discConfig[discDominant].label} é caracterizada por orientação a resultados, determinação e foco em metas.`;
+            renderIndividualTests(data);
 
             // ============================================
-            // PERFIL BIG FIVE
+            // 3. ANÁLISE INTEGRADA
             // ============================================
-            const bigfivePcts = data.bigfive;
-            const bigfiveGrid = document.getElementById('bigfiveGrid');
-            bigfiveGrid.innerHTML = factorKeys.map(key => {
-                const config = factorConfig[key];
-                const value = bigfivePcts[key] || 0;
-                const isTop = key === bigfiveTop;
-                return `
-                        <div class="profile-card" style="${isTop ? 'border-color:' + config.color + ';border-width:2px;' : ''}">
-                            <div class="profile-icon">${config.icon}</div>
-                            <div class="profile-name">${config.label} ${isTop ? '⭐' : ''}</div>
-                            <div class="profile-value" style="color:${config.color};">${value}%</div>
-                            <div class="profile-bar"><div class="fill" style="width:${value}%;background:${config.color};"></div></div>
-                        </div>
-                    `;
-            }).join('');
-
-            document.getElementById('bigfiveDescription').innerHTML =
-                `Fator predominante: <strong>${bigfiveIcon} ${bigfiveName}</strong> (${bigfivePcts[bigfiveTop]}%). ${bigfiveName} é caracterizada por ${bigfiveTop === 'abertura' ? 'criatividade e curiosidade' : bigfiveTop === 'conscienciosidade' ? 'organização e disciplina' : bigfiveTop === 'extroversao' ? 'sociabilidade e energia' : bigfiveTop === 'amabilidade' ? 'empatia e cooperação' : 'sensibilidade e autoconsciência'}.`;
+            renderIntegratedAnalysis(data);
 
             // ============================================
-            // INTELIGÊNCIA EMOCIONAL
+            // 4. MAPAS COMPORTAMENTAIS
             // ============================================
-            const iePcts = data.ie;
-            const ieGrid = document.getElementById('ieGrid');
-            ieGrid.innerHTML = pillarKeys.map(key => {
-                const config = pillarsConfig[key];
-                const value = iePcts[key] || 0;
-                return `
-                        <div class="profile-card">
-                            <div class="profile-icon">${config.icon}</div>
-                            <div class="profile-name">${config.label}</div>
-                            <div class="profile-value" style="color:${config.color};">${value}%</div>
-                            <div class="profile-bar"><div class="fill" style="width:${value}%;background:${config.color};"></div></div>
-                        </div>
-                    `;
-            }).join('');
-
-            document.getElementById('ieDescription').innerHTML =
-                `Nível geral de Inteligência Emocional: <strong>${ieOverall}%</strong>. ${ieOverall >= 70 ? 'Excelente capacidade de reconhecer e gerenciar emoções.' : ieOverall >= 50 ? 'Boa capacidade emocional com oportunidades de desenvolvimento.' : 'Área prioritária para desenvolvimento emocional.'}`;
+            renderMaps(data);
 
             // ============================================
-            // VALORES PESSOAIS
+            // 5. ÍNDICES VIGOR®
             // ============================================
-            const valoresPcts = data.valores;
-            const valoresGrid = document.getElementById('valoresGrid');
-            const topValor = valoresPcts.topValor || 'autodirecao';
-            valoresGrid.innerHTML = valorKeys.map(key => {
-                const config = valoresConfig[key];
-                const value = valoresPcts[key] || 0;
-                const isTop = key === topValor;
-                return `
-                        <div class="profile-card" style="${isTop ? 'border-color:' + config.color + ';border-width:2px;' : ''}">
-                            <div class="profile-icon">${config.icon}</div>
-                            <div class="profile-name">${config.label} ${isTop ? '⭐' : ''}</div>
-                            <div class="profile-value" style="color:${config.color};">${value}%</div>
-                            <div class="profile-bar"><div class="fill" style="width:${value}%;background:${config.color};"></div></div>
-                        </div>
-                    `;
-            }).join('');
-
-            document.getElementById('valoresDescription').innerHTML =
-                `Valor principal: <strong>${valoresIcon} ${valoresName}</strong> (${valoresPcts[topValor]}%). ${valoresName} reflete ${topValor === 'autodirecao' ? 'independência e autonomia' : topValor === 'realizacao' ? 'foco em sucesso e excelência' : topValor === 'benevolencia' ? 'preocupação com o bem-estar dos outros' : topValor === 'universalismo' ? 'compromisso com justiça social' : 'estabilidade e segurança'}.`;
+            renderIndices(data);
 
             // ============================================
-            // ANÁLISE SWOT
+            // 6. PLANO DE DESENVOLVIMENTO
             // ============================================
-            const swotPcts = data.swot;
-            const swotGrid = document.getElementById('swotGrid');
-            const topSwot = swotPcts.topSwot || 'oportunidades';
-            swotGrid.innerHTML = swotKeys.map(key => {
-                const config = swotConfig[key];
-                const value = swotPcts[key] || 0;
-                const isTop = key === topSwot;
-                return `
-                        <div class="profile-card" style="${isTop ? 'border-color:' + config.color + ';border-width:2px;' : ''}">
-                            <div class="profile-icon">${config.icon}</div>
-                            <div class="profile-name">${config.label} ${isTop ? '⭐' : ''}</div>
-                            <div class="profile-value" style="color:${config.color};">${value}%</div>
-                            <div class="profile-bar"><div class="fill" style="width:${value}%;background:${config.color};"></div></div>
-                        </div>
-                    `;
-            }).join('');
-
-            document.getElementById('swotDescription').innerHTML =
-                `Quadrante principal: <strong>${swotIcon} ${swotName}</strong> (${swotPcts[topSwot]}%). ${swotName} indica ${topSwot === 'forcas' ? 'vantagens competitivas significativas' : topSwot === 'oportunidades' ? 'posicionamento favorável para crescimento' : topSwot === 'fraquezas' ? 'oportunidades de desenvolvimento' : 'capacidade de enfrentar desafios'}.`;
+            renderPDI(data);
 
             // ============================================
-            // ANÁLISE INTEGRADA
+            // 7. RECURSOS RECOMENDADOS
             // ============================================
-            document.getElementById('integratedAnalysis').innerHTML = `
-                    A análise integrada dos testes revela um perfil consistente com as seguintes características principais:
-                    <br /><br />
-                    <strong>🧩 Perfil Comportamental:</strong>
-                    <br />
-                    • ${discIcon} <strong>${discName} (DISC):</strong> ${discPcts[discDominant]}% - ${discConfig[discDominant].label} é o traço mais marcante.
-                    <br />
-                    • ${bigfiveIcon} <strong>${bigfiveName} (Big Five):</strong> ${bigfivePcts[bigfiveTop]}% - ${bigfiveName} é o fator predominante.
-                    <br />
-                    • 🧠 <strong>Inteligência Emocional:</strong> ${ieOverall}% - Nível ${ieOverall >= 70 ? 'Excelente' : ieOverall >= 50 ? 'Bom' : 'Em desenvolvimento'}.
-                    <br />
-                    • ${valoresIcon} <strong>${valoresName} (Valores):</strong> ${valoresPcts[topValor]}% - Valor principal identificado.
-                    <br />
-                    • ${swotIcon} <strong>${swotName} (SWOT):</strong> ${swotPcts[topSwot]}% - Quadrante predominante.
-                    <br /><br />
-                    <strong>🔗 Correlações Identificadas:</strong>
-                    <br />
-                    ${discDominant === 'D' && bigfiveTop === 'abertura' ? '• DISC Dominância + Big Five Abertura: Perfil de liderança inovadora e estratégica.' :
-                    discDominant === 'I' && bigfiveTop === 'extroversao' ? '• DISC Influência + Big Five Extroversão: Perfil de comunicação persuasiva e influência social.' :
-                    discDominant === 'S' && bigfiveTop === 'amabilidade' ? '• DISC Estabilidade + Big Five Amabilidade: Perfil de suporte e colaboração excepcional.' :
-                    discDominant === 'C' && bigfiveTop === 'conscienciosidade' ? '• DISC Conformidade + Big Five Conscienciosidade: Perfil de precisão e excelência técnica.' :
-                    '• Perfil com combinações equilibradas, indicando versatilidade e adaptabilidade.'}
-                    <br />
-                    ${ieOverall >= 70 ? '• Alta Inteligência Emocional potencializa a liderança e o relacionamento interpessoal.' : ieOverall >= 50 ? '• Inteligência Emocional em desenvolvimento, com potencial para ampliação.' : '• Inteligência Emocional como área prioritária de desenvolvimento.'}
-                    <br />
-                    ${valoresPcts[topValor] >= 70 ? '• Valores bem definidos e claros, orientando decisões e comportamentos.' : '• Valores em desenvolvimento, com oportunidade de maior clareza.'}
-                    <br /><br />
-                    <strong>💡 Insight Principal:</strong>
-                    <br />
-                    O perfil de ${data.participantName} combina ${discName.toLowerCase()} com ${bigfiveName.toLowerCase()},
-                    resultando em um profissional que ${discDominant === 'D' ? 'assume liderança e toma decisões' : discDominant === 'I' ? 'comunica e inspira' : discDominant === 'S' ? 'colabora e apoia' : 'analisa e estrutura'} com ${bigfiveTop === 'abertura' ? 'criatividade e visão de futuro' : bigfiveTop === 'conscienciosidade' ? 'disciplina e organização' : bigfiveTop === 'extroversao' ? 'energia e entusiasmo' : bigfiveTop === 'amabilidade' ? 'empatia e confiança' : 'sensibilidade e profundidade'}. Esta combinação é ${ieOverall >= 70 ? 'fortemente potencializada por uma alta inteligência emocional' : 'complementada por uma inteligência emocional em desenvolvimento'}.
-                `;
+            renderResources(data);
 
             // ============================================
-            // MAPAS COMPORTAMENTAIS
+            // 8. PARECER DA IA
             // ============================================
-            const mapaGrid = document.getElementById('mapaGrid');
-            const mapaValues = {
-                lideranca: Math.round((discPcts[discDominant] + bigfivePcts[bigfiveTop] + ieOverall) / 3),
-                comunicacao: Math.round((discPcts.I + bigfivePcts.extroversao + iePcts.habilidades_sociais) / 3),
-                conflitos: Math.round((discPcts.D + bigfivePcts.amabilidade + iePcts.empatia) / 3),
-                motivacao: Math.round((discPcts.D + bigfivePcts.conscienciosidade + iePcts.motivacao) / 3),
-                estrategia: Math.round((discPcts.C + bigfivePcts.abertura + valoresPcts[topValor]) / 3),
-                emocional: Math.round((iePcts.autoconsciencia + iePcts.autorregulacao + iePcts.empatia) / 3)
-            };
-
-            mapaGrid.innerHTML = Object.entries(mapaConfig).map(([key, config]) => {
-                const value = mapaValues[key] || 0;
-                let level = value >= 70 ? 'Alto' : value >= 50 ? 'Moderado' : 'Em desenvolvimento';
-                return `
-                        <div class="mapa-card">
-                            <div class="mapa-icon">${config.icon}</div>
-                            <div class="mapa-name">${config.label}</div>
-                            <div class="mapa-value">${value}%</div>
-                            <div style="font-size:0.7rem;color:var(--gray-400);">${level}</div>
-                        </div>
-                    `;
-            }).join('');
-
-            document.getElementById('mapaDescription').innerHTML =
-                `Os mapas comportamentais consolidam as dimensões-chave do perfil, com destaque para <strong>${Object.entries(mapaValues).sort((a,b) => b[1] - a[1])[0][1]}%</strong> em ${Object.entries(mapaConfig).find(([k]) => k === Object.entries(mapaValues).sort((a,b) => b[1] - a[1])[0][0])[1].label}. Esta é a sua competência comportamental mais desenvolvida.`;
+            renderIAOpinion(data);
 
             // ============================================
-            // PERFIL DE LIDERANÇA
+            // 9. CONCLUSÃO
             // ============================================
-            const leadershipScore = Math.round((discPcts[discDominant] + bigfivePcts[bigfiveTop] + ieOverall) / 3);
-            document.getElementById('leadershipText').innerHTML = `
-                    <strong>Nível de Liderança:</strong> ${leadershipScore}%
-                    <br /><br />
-                    ${leadershipScore >= 70 ? 'Perfil com forte potencial de liderança. A combinação de ${discName.toLowerCase()}, ${bigfiveName.toLowerCase()} e alta inteligência emocional cria uma base sólida para liderar equipes com visão, empatia e eficácia.' :
-                    leadershipScore >= 50 ? 'Perfil com bom potencial de liderança. Com desenvolvimento direcionado, pode ampliar significativamente sua capacidade de influenciar e engajar pessoas.' :
-                    'Perfil com potencial de liderança a ser desenvolvido. Foco em comunicação, inteligência emocional e tomada de decisão pode acelerar o crescimento como líder.'}
-                    <br /><br />
-                    <strong>Estilo de Liderança:</strong>
-                    <br />
-                    ${discDominant === 'D' ? '📊 Líder Diretivo - Focado em resultados, decisões rápidas e superação de desafios.' :
-                    discDominant === 'I' ? '🌟 Líder Inspirador - Comunicação persuasiva, motivação e engajamento de equipes.' :
-                    discDominant === 'S' ? '🤝 Líder Colaborativo - Cria ambientes de segurança psicológica e suporte à equipe.' :
-                    '📋 Líder Analítico - Baseado em dados, planejamento estruturado e qualidade.'}
-                `;
+            renderConclusion(data);
 
-            // ============================================
-            // PERFIL DE COMUNICAÇÃO
-            // ============================================
-            const commScore = Math.round((discPcts.I + bigfivePcts.extroversao + iePcts.habilidades_sociais) / 3);
-            document.getElementById('communicationText').innerHTML = `
-                    <strong>Nível de Comunicação:</strong> ${commScore}%
-                    <br /><br />
-                    ${commScore >= 70 ? 'Excelente comunicador. Capacidade de influenciar, persuadir e engajar pessoas com clareza e empatia.' :
-                    commScore >= 50 ? 'Bom comunicador. Com desenvolvimento direcionado, pode ampliar sua capacidade de influência.' :
-                    'Comunicação em desenvolvimento. Foco em clareza, escuta ativa e expressão de ideias.'}
-                    <br /><br />
-                    <strong>Estilo de Comunicação:</strong>
-                    <br />
-                    ${discPcts.I >= 60 ? '💬 Comunicação Persuasiva - Envolvente, inspiradora e focada em conexão com as pessoas.' :
-                    discPcts.D >= 60 ? '📢 Comunicação Direta - Objetiva, clara e focada em resultados.' :
-                    discPcts.S >= 60 ? '🤗 Comunicação Acolhedora - Empática, paciente e focada em harmonizar relações.' :
-                    '📝 Comunicação Analítica - Precisa, baseada em dados e estruturada.'}
-                `;
-
-            // ============================================
-            // TOMADA DE DECISÃO
-            // ============================================
-            const decisionScore = Math.round((discPcts.D + bigfivePcts.conscienciosidade + valoresPcts[topValor]) / 3);
-            document.getElementById('decisionText').innerHTML = `
-                    <strong>Nível de Tomada de Decisão:</strong> ${decisionScore}%
-                    <br /><br />
-                    ${decisionScore >= 70 ? 'Decisões rápidas, assertivas e baseadas em dados. Excelente capacidade de avaliar riscos e oportunidades.' :
-                    decisionScore >= 50 ? 'Decisões equilibradas, considerando riscos e benefícios. Pode ampliar agilidade em situações de pressão.' :
-                    'Decisões cautelosas, com foco em segurança e análise. Pode desenvolver maior agilidade.'}
-                    <br /><br />
-                    <strong>Estilo de Decisão:</strong>
-                    <br />
-                    ${discPcts.D >= 60 ? '⚡ Decisões rápidas - Age com confiança, assume riscos calculados.' :
-                    discPcts.S >= 60 ? '🔄 Decisões colaborativas - Busca consenso e harmonia.' :
-                    discPcts.C >= 60 ? '📊 Decisões analíticas - Baseadas em dados e evidências.' :
-                    '⚖️ Decisões equilibradas - Considera múltiplas perspectivas.'}
-                `;
-
-            // ============================================
-            // GESTÃO DE CONFLITOS
-            // ============================================
-            const conflictScore = Math.round((discPcts.S + bigfivePcts.amabilidade + iePcts.empatia) / 3);
-            document.getElementById('conflictText').innerHTML = `
-                    <strong>Nível de Gestão de Conflitos:</strong> ${conflictScore}%
-                    <br /><br />
-                    ${conflictScore >= 70 ? 'Excelente capacidade de gerenciar conflitos com empatia, diplomacia e soluções colaborativas.' :
-                    conflictScore >= 50 ? 'Boa capacidade de gestão de conflitos. Pode desenvolver maior assertividade em situações críticas.' :
-                    'Gestão de conflitos em desenvolvimento. Foco em escuta ativa e comunicação não violenta.'}
-                    <br /><br />
-                    <strong>Estilo de Conflito:</strong>
-                    <br />
-                    ${discPcts.D >= 60 ? '⚡ Enfrenta conflitos de frente - Direto, objetivo e focado em resolução rápida.' :
-                    discPcts.S >= 60 ? '🤝 Busca harmonia - Evita confrontos, prioriza relacionamentos.' :
-                    discPcts.C >= 60 ? '📋 Aborda conflitos com dados - Baseado em fatos e evidências.' :
-                    '⚖️ Equilibra abordagens - Adapta-se ao contexto e às pessoas envolvidas.'}
-                `;
-
-            // ============================================
-            // COMPATIBILIDADE COM VAGA
-            // ============================================
-            const compatSection = document.getElementById('compatibilidadeSection');
-            const compatContent = document.getElementById('compatibilidadeContent');
-
-            if (data.job && data.job !== 'Não vinculado') {
-                compatSection.style.display = 'block';
-                const compat = data.compatibility || Math.round(60 + Math.random() * 35);
-                let compatLevel = '';
-                let compatColor = '';
-                if (compat >= 80) { compatLevel = 'Excelente';
-                    compatColor = '#10B981'; } else if (compat >= 60) { compatLevel = 'Boa';
-                    compatColor = '#3B82F6'; } else if (compat >= 40) { compatLevel = 'Moderada';
-                    compatColor = '#F59E0B'; } else { compatLevel = 'Baixa';
-                    compatColor = '#EF4444'; }
-
-                compatContent.innerHTML = `
-                        <div class="compatibilidade-card">
-                            <div class="compat-top">
-                                <span style="font-weight:600;font-size:1rem;">🎯 ${data.job}</span>
-                                <span class="compat-value" style="color:${compatColor};">${compat}%</span>
-                            </div>
-                            <div class="compat-bar">
-                                <div class="fill" style="width:${compat}%;background:${compatColor};"></div>
-                            </div>
-                            <p style="color:var(--gray-600);font-size:0.9rem;">
-                                <strong>Nível de Compatibilidade:</strong> ${compatLevel} (${compat}%)
-                            </p>
-                            <p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">
-                                ${compat >= 80 ? 'Excelente compatibilidade com a função. Perfil altamente alinhado com as demandas e cultura da posição.' :
-                                compat >= 60 ? 'Boa compatibilidade. Desenvolvimento direcionado pode ampliar ainda mais o alinhamento.' :
-                                compat >= 40 ? 'Compatibilidade moderada. Recomenda-se desenvolvimento específico para melhor adequação.' :
-                                'Compatibilidade baixa. Avaliar outras posições mais alinhadas ao perfil.'}
-                            </p>
-                        </div>
-                    `;
-            } else {
-                compatSection.style.display = 'none';
-            }
-
-            // ============================================
-            // PLANO DE DESENVOLVIMENTO
-            // ============================================
-            const planList = document.getElementById('developmentPlanList');
-            const developmentPlan = [];
-
-            // Identificar áreas de desenvolvimento
-            if (ieOverall < 60) {
-                developmentPlan.push('🧠 Desenvolver Inteligência Emocional: Praticar autoconsciência, autorregulação e empatia');
-            }
-            if (discPcts[discDominant] < 50) {
-                developmentPlan.push(
-                    `📊 Fortalecer ${discName}: Buscar oportunidades para desenvolver ${discName.toLowerCase()}`);
-            }
-            if (bigfivePcts[bigfiveTop] < 50) {
-                developmentPlan.push(
-                    `🧬 Desenvolver ${bigfiveName}: Focar em ${bigfiveTop === 'abertura' ? 'criatividade e inovação' : bigfiveTop === 'conscienciosidade' ? 'organização e disciplina' : bigfiveTop === 'extroversao' ? 'comunicação e networking' : bigfiveTop === 'amabilidade' ? 'empatia e colaboração' : 'gestão emocional'}`);
-            }
-            if (swotPcts.fraquezas >= 50) {
-                developmentPlan.push('🔻 Plano de ação para fraquezas identificadas na análise SWOT');
-            }
-            if (swotPcts.ameacas >= 50) {
-                developmentPlan.push('⚠️ Estratégias defensivas contra ameaças identificadas');
-            }
-
-            // Adicionar planos gerais
-            developmentPlan.push('📝 Praticar autorreflexão diária e registro de aprendizados');
-            developmentPlan.push('🔄 Buscar feedback contínuo de mentores e colegas');
-            developmentPlan.push('📚 Investir em leitura e capacitação nas áreas de desenvolvimento');
-            developmentPlan.push('🎯 Definir metas de curto, médio e longo prazo baseadas no plano');
-
-            planList.innerHTML = developmentPlan.map((item, index) =>
-                `<li><span class="check">${index + 1}</span> ${item}</li>`
-            ).join('');
-
-            // ============================================
-            // PARECER DA IA
-            // ============================================
-            const iaOpinionText = document.getElementById('iaOpinionText');
-
-            const discNameLower = discName.toLowerCase();
-            const bigfiveNameLower = bigfiveName.toLowerCase();
-
-            iaOpinionText.textContent =
-                `Com base na análise integrada de todos os testes realizados, o perfil de ${data.participantName} revela um profissional com características marcantes de ${discNameLower} e ${bigfiveNameLower}. A inteligência emocional em nível ${ieOverall >= 70 ? 'elevado' : ieOverall >= 50 ? 'moderado' : 'em desenvolvimento'} (${ieOverall}%) complementa o perfil, enquanto os valores são guiados por ${valoresName.toLowerCase()}. A análise SWOT indica ${swotName.toLowerCase()} como principal quadrante estratégico.
-
-                A consistência entre os diferentes testes sugere um perfil autêntico e bem definido. As principais forças identificadas incluem ${discName.toLowerCase()} e ${bigfiveName.toLowerCase()}, que se manifestam em ${discDominant === 'D' ? 'liderança e tomada de decisão' : discDominant === 'I' ? 'comunicação e influência' : discDominant === 'S' ? 'colaboração e suporte' : 'análise e precisão'}.
-
-                Recomenda-se focar no desenvolvimento de ${ieOverall < 60 ? 'inteligência emocional' : Object.entries(discPcts).find(([k,v]) => v < 50) ? discConfig[Object.entries(discPcts).find(([k,v]) => v < 50)[0]].label.toLowerCase() : Object.entries(bigfivePcts).find(([k,v]) => v < 50) ? factorConfig[Object.entries(bigfivePcts).find(([k,v]) => v < 50)[0]].label.toLowerCase() : 'liderança estratégica'} para ampliar ainda mais o potencial profissional. O perfil apresenta excelente base para posições que exigem ${discDominant === 'D' ? 'liderança e gestão' : discDominant === 'I' ? 'comunicação e relacionamento' : discDominant === 'S' ? 'colaboração e suporte' : 'análise e precisão'}.`;
-
-            // ============================================
-            // CONCLUSÃO
-            // ============================================
-            document.getElementById('conclusionText').innerHTML = `
-                    O Laudo Comportamental Integrado de ${data.participantName} revela um perfil profissional completo e consistente, com características marcantes de ${discName.toLowerCase()} e ${bigfiveName.toLowerCase()}.
-                    <br /><br />
-                    <strong>🟢 Pontos Fortes Principais:</strong>
-                    <br />
-                    • ${discIcon} ${discName} - ${discPcts[discDominant]}% (DISC)
-                    <br />
-                    • ${bigfiveIcon} ${bigfiveName} - ${bigfivePcts[bigfiveTop]}% (Big Five)
-                    <br />
-                    • 🧠 Inteligência Emocional - ${ieOverall}% (Nível Geral)
-                    <br /><br />
-                    <strong>🟡 Áreas de Desenvolvimento:</strong>
-                    <br />
-                    ${Object.entries(discPcts).filter(([k,v]) => v < 50 && k !== discDominant).map(([k,v]) => `• ${discConfig[k].icon} ${discConfig[k].label} - ${v}%`).join('<br>') ||
-                    '• Nenhuma área crítica identificada no DISC. Perfil equilibrado.'}
-                    <br />
-                    ${Object.entries(bigfivePcts).filter(([k,v]) => v < 50 && k !== bigfiveTop).map(([k,v]) => `• ${factorConfig[k].icon} ${factorConfig[k].label} - ${v}%`).join('<br>') ||
-                    '• Nenhuma área crítica identificada no Big Five. Perfil equilibrado.'}
-                    <br /><br />
-                    <strong>💡 Mensagem Final:</strong>
-                    <br />
-                    ${ieOverall >= 70 ? 'Parabéns! Você possui um perfil comportamental sólido e bem desenvolvido, com excelente inteligência emocional. Continue potencializando suas forças e compartilhando seu conhecimento com a equipe.' :
-                    ieOverall >= 50 ? 'Você está em um bom caminho de desenvolvimento. Com foco nas áreas identificadas, poderá ampliar significativamente seu impacto profissional.' :
-                    'Seu desenvolvimento é uma prioridade importante. Com dedicação e as estratégias certas, você pode transformar seu potencial em resultados excepcionais.'}
-                    <br /><br />
-                    <strong>Próximos Passos:</strong>
-                    <br />
-                    1. Revise este laudo periodicamente
-                    <br />
-                    2. Acompanhe seu progresso nas áreas de desenvolvimento
-                    <br />
-                    3. Busque feedback contínuo de mentores e colegas
-                    <br />
-                    4. Reavalie seu perfil anualmente
-                    <br /><br />
-                    <em>Laudo gerado em ${new Date().toLocaleString('pt-BR')}</em>
-                `;
-
-            // ============================================
-            // GRÁFICOS
-            // ============================================
-            setTimeout(() => {
-                renderCharts(data);
-            }, 500);
-
-            console.log('📋 Laudo Vigorre® renderizado com sucesso!');
+            console.log('✅ Laudo Vigorre™ renderizado com sucesso!');
         }
 
         // ============================================
-        // RENDERIZAR GRÁFICOS
+        // RENDERIZAR PERFIL EXECUTIVO
         // ============================================
-        function renderCharts(data) {
-            try {
-                // Gráfico DISC
-                const discCtx = document.getElementById('discChart').getContext('2d');
-                new Chart(discCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
-                        datasets: [{
-                            label: 'DISC',
-                            data: [data.disc.D || 0, data.disc.I || 0, data.disc.S || 0, data.disc.C || 0],
-                            backgroundColor: ['#EF4444CC', '#3B82F6CC', '#10B981CC', '#8B5CF6CC'],
-                            borderColor: ['#EF4444', '#3B82F6', '#10B981', '#8B5CF6'],
-                            borderWidth: 2,
-                            borderRadius: 8,
-                            maxBarThickness: 50
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { beginAtZero: true, max: 100, grid: { color: 'rgba(10,37,64,0.04)' }, ticks: { color: '#94A3B8',
-                                    callback: v => v + '%' } },
-                            x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 10 } } }
-                        }
-                    }
+        function renderExecutiveSummary(data) {
+            var grid = document.getElementById('executiveGrid');
+
+            var items = [];
+
+            if (data.disc) {
+                var disc = data.disc;
+                var dominant = disc.dominant || 'D';
+                var config = profileConfig[dominant] || profileConfig.D;
+                items.push({
+                    icon: config.icon,
+                    label: 'DISC',
+                    value: config.name
                 });
-
-                // Gráfico Big Five
-                const bigfiveCtx = document.getElementById('bigfiveChart').getContext('2d');
-                new Chart(bigfiveCtx, {
-                    type: 'radar',
-                    data: {
-                        labels: ['Abertura', 'Conscienciosidade', 'Extroversão', 'Amabilidade', 'Neuroticismo'],
-                        datasets: [{
-                            label: 'Big Five',
-                            data: [
-                                data.bigfive.abertura || 0,
-                                data.bigfive.conscienciosidade || 0,
-                                data.bigfive.extroversao || 0,
-                                data.bigfive.amabilidade || 0,
-                                data.bigfive.neuroticismo || 0
-                            ],
-                            backgroundColor: 'rgba(236,72,153,0.12)',
-                            borderColor: '#EC4899',
-                            borderWidth: 3,
-                            pointBackgroundColor: ['#8B5CF6', '#10B981', '#F59E0B', '#EC4899', '#EF4444'],
-                            pointBorderColor: '#FFFFFF',
-                            pointBorderWidth: 2,
-                            pointRadius: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            r: {
-                                beginAtZero: true,
-                                max: 100,
-                                grid: { color: 'rgba(10,37,64,0.04)' },
-                                ticks: { color: '#94A3B8', stepSize: 25, backdropColor: 'transparent', callback: v => v +
-                                        '%' },
-                                pointLabels: { color: '#64748B', font: { size: 9, weight: '600' } }
-                            }
-                        }
-                    }
-                });
-
-                // Gráfico IE
-                const ieCtx = document.getElementById('ieChart').getContext('2d');
-                new Chart(ieCtx, {
-                    type: 'radar',
-                    data: {
-                        labels: ['Autoconsciência', 'Autorregulação', 'Motivação', 'Empatia', 'Habilidades Sociais'],
-                        datasets: [{
-                            label: 'Inteligência Emocional',
-                            data: [
-                                data.ie.autoconsciencia || 0,
-                                data.ie.autorregulacao || 0,
-                                data.ie.motivacao || 0,
-                                data.ie.empatia || 0,
-                                data.ie.habilidades_sociais || 0
-                            ],
-                            backgroundColor: 'rgba(124,58,237,0.12)',
-                            borderColor: '#7C3AED',
-                            borderWidth: 3,
-                            pointBackgroundColor: ['#7C3AED', '#10B981', '#F59E0B', '#EF4444', '#3B82F6'],
-                            pointBorderColor: '#FFFFFF',
-                            pointBorderWidth: 2,
-                            pointRadius: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            r: {
-                                beginAtZero: true,
-                                max: 100,
-                                grid: { color: 'rgba(10,37,64,0.04)' },
-                                ticks: { color: '#94A3B8', stepSize: 25, backdropColor: 'transparent', callback: v => v +
-                                        '%' },
-                                pointLabels: { color: '#64748B', font: { size: 9, weight: '600' } }
-                            }
-                        }
-                    }
-                });
-
-                // Gráfico Valores
-                const valoresCtx = document.getElementById('valoresChart').getContext('2d');
-                const valorLabels = Object.keys(valoresConfig).map(k => valoresConfig[k].label);
-                const valorData = Object.keys(valoresConfig).map(k => data.valores[k] || 0);
-                const valorColors = Object.keys(valoresConfig).map(k => valoresConfig[k].color);
-
-                new Chart(valoresCtx, {
-                    type: 'radar',
-                    data: {
-                        labels: valorLabels,
-                        datasets: [{
-                            label: 'Valores',
-                            data: valorData,
-                            backgroundColor: 'rgba(217,119,6,0.12)',
-                            borderColor: '#D97706',
-                            borderWidth: 3,
-                            pointBackgroundColor: valorColors,
-                            pointBorderColor: '#FFFFFF',
-                            pointBorderWidth: 2,
-                            pointRadius: 3
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            r: {
-                                beginAtZero: true,
-                                max: 100,
-                                grid: { color: 'rgba(10,37,64,0.04)' },
-                                ticks: { color: '#94A3B8', stepSize: 25, backdropColor: 'transparent', callback: v => v +
-                                        '%' },
-                                pointLabels: { color: '#64748B', font: { size: 7, weight: '600' } }
-                            }
-                        }
-                    }
-                });
-
-                // Gráfico SWOT
-                const swotCtx = document.getElementById('swotChart').getContext('2d');
-                new Chart(swotCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Forças', 'Fraquezas', 'Oportunidades', 'Ameaças'],
-                        datasets: [{
-                            label: 'SWOT',
-                            data: [data.swot.forcas || 0, data.swot.fraquezas || 0, data.swot.oportunidades ||
-                                0, data.swot.ameacas || 0
-                            ],
-                            backgroundColor: ['#10B981CC', '#EF4444CC', '#3B82F6CC', '#F59E0BCC'],
-                            borderColor: ['#10B981', '#EF4444', '#3B82F6', '#F59E0B'],
-                            borderWidth: 2,
-                            borderRadius: 8,
-                            maxBarThickness: 50
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { beginAtZero: true, max: 100, grid: { color: 'rgba(10,37,64,0.04)' }, ticks: { color: '#94A3B8',
-                                    callback: v => v + '%' } },
-                            x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 10 } } }
-                        }
-                    }
-                });
-
-                console.log('📊 Todos os gráficos renderizados com sucesso');
-
-            } catch (error) {
-                console.error('❌ Erro ao renderizar gráficos:', error);
             }
+
+            if (data.bigfive) {
+                var bf = data.bigfive;
+                var top = bf.topFactor || 'conscienciosidade';
+                var name = factorNames[top] || top;
+                items.push({
+                    icon: '🧬',
+                    label: 'Big Five',
+                    value: name
+                });
+            }
+
+            if (data.ie) {
+                var ie = data.ie;
+                var level = ie.level || 'Boa';
+                items.push({
+                    icon: '🧠',
+                    label: 'IE',
+                    value: level + ' (' + (ie.overallPercentage || 0) + '%)'
+                });
+            }
+
+            if (data.valores) {
+                var valores = data.valores;
+                var topValor = valores.topValor || 'autodirecao';
+                var name = valorNames[topValor] || topValor;
+                items.push({
+                    icon: '💎',
+                    label: 'Valores',
+                    value: name
+                });
+            }
+
+            if (data.swot) {
+                var swot = data.swot;
+                var topSwot = swot.topSwot || 'oportunidades';
+                var swotNames = {
+                    forcas: '💪 Forças',
+                    fraquezas: '🔻 Fraquezas',
+                    oportunidades: '🚀 Oportunidades',
+                    ameacas: '⚠️ Ameaças'
+                };
+                items.push({
+                    icon: '📋',
+                    label: 'SWOT',
+                    value: swotNames[topSwot] || topSwot
+                });
+            }
+
+            var html = '';
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                html += '<div class="executive-card">';
+                html += '<div class="exec-icon">' + item.icon + '</div>';
+                html += '<div class="exec-label">' + item.label + '</div>';
+                html += '<div class="exec-value">' + item.value + '</div>';
+                html += '</div>';
+            }
+            grid.innerHTML = html;
+
+            // Resumo executivo
+            var summary = document.getElementById('executiveSummary');
+            var testsText = data.tests.join(', ');
+            var strengths = [];
+            var weaknesses = [];
+
+            if (data.disc) {
+                var disc = data.disc;
+                var dominant = disc.dominant || 'D';
+                var config = profileConfig[dominant] || profileConfig.D;
+                strengths.push(config.icon + ' ' + config.name + ' (DISC)');
+            }
+
+            if (data.bigfive) {
+                var bf = data.bigfive;
+                var top = bf.topFactor || 'conscienciosidade';
+                var name = factorNames[top] || top;
+                strengths.push('🧬 ' + name + ' (Big Five)');
+            }
+
+            if (data.ie && data.ie.overallPercentage && data.ie.overallPercentage >= 60) {
+                strengths.push('🧠 Inteligência Emocional elevada');
+            }
+
+            if (data.valores && data.valores.topPercent && data.valores.topPercent >= 70) {
+                var topValor = data.valores.topValor || 'autodirecao';
+                var name = valorNames[topValor] || topValor;
+                strengths.push('💎 ' + name + ' (Valores)');
+            }
+
+            summary.innerHTML =
+                'Este laudo integra <strong>' + testsText + '</strong>, fornecendo uma visão completa do seu perfil comportamental. ' +
+                '<br /><br />' +
+                '<strong>Principais características:</strong><br />' +
+                (strengths.length > 0 ? '• ' + strengths.join('<br />• ') : '• Perfil equilibrado e versátil') +
+                '<br /><br />' +
+                '<strong>Recomendação:</strong> Utilize este laudo como base para seu desenvolvimento pessoal e profissional. ' +
+                'As áreas de destaque podem ser potencializadas, e as áreas de desenvolvimento podem ser trabalhadas com foco.';
+        }
+
+        // ============================================
+        // RENDERIZAR TESTES INDIVIDUAIS
+        // ============================================
+        function renderIndividualTests(data) {
+            var container = document.getElementById('testsContainer');
+            var html = '';
+
+            // DISC
+            if (data.disc && data.tests.indexOf('DISC') !== -1) {
+                var disc = data.disc;
+                var pcts = disc.percentages || {};
+                var dominant = disc.dominant || 'D';
+                var config = profileConfig[dominant] || profileConfig.D;
+
+                html += '<div class="test-section">';
+                html += '<div class="test-header">';
+                html += '<span class="test-name">📊 DISC</span>';
+                html += '<span class="test-status completed">✅ Concluído</span>';
+                html += '</div>';
+                html += '<div class="test-content">';
+                html += '<strong>Perfil predominante:</strong> ' + config.icon + ' ' + config.name + ' (' + pcts[
+                    dominant] + '%)<br />';
+                html += '<strong>Distribuição:</strong> D ' + (pcts.D || 0) + '% | I ' + (pcts.I || 0) + '% | S ' +
+                    (pcts.S || 0) + '% | C ' + (pcts.C || 0) + '%';
+                html += '</div>';
+                html += '<div class="test-chart-container"><canvas id="discChart" style="height:180px;"></canvas></div>';
+                html += '</div>';
+            }
+
+            // Big Five
+            if (data.bigfive && data.tests.indexOf('BigFive') !== -1) {
+                var bf = data.bigfive;
+                var bfPcts = bf.percentages || {};
+                var top = bf.topFactor || 'conscienciosidade';
+                var topName = factorNames[top] || top;
+
+                html += '<div class="test-section">';
+                html += '<div class="test-header">';
+                html += '<span class="test-name">🧬 Big Five</span>';
+                html += '<span class="test-status completed">✅ Concluído</span>';
+                html += '</div>';
+                html += '<div class="test-content">';
+                html += '<strong>Fator predominante:</strong> ' + topName + ' (' + (bfPcts[top] || 0) + '%)<br />';
+                html += '<strong>Distribuição:</strong> Abertura ' + (bfPcts.abertura || 0) + '% | Conscienciosidade ' +
+                    (bfPcts.conscienciosidade || 0) + '% | Extroversão ' + (bfPcts.extroversao || 0) +
+                    '% | Amabilidade ' + (bfPcts.amabilidade || 0) + '% | Neuroticismo ' + (bfPcts.neuroticismo ||
+                        0) + '%';
+                html += '</div>';
+                html +=
+                    '<div class="test-chart-container"><canvas id="bigfiveChart" style="height:180px;"></canvas></div>';
+                html += '</div>';
+            }
+
+            // IE
+            if (data.ie && data.tests.indexOf('IE') !== -1) {
+                var ie = data.ie;
+                var iePcts = ie.percentages || {};
+
+                html += '<div class="test-section">';
+                html += '<div class="test-header">';
+                html += '<span class="test-name">🧠 Inteligência Emocional</span>';
+                html += '<span class="test-status completed">✅ Concluído</span>';
+                html += '</div>';
+                html += '<div class="test-content">';
+                html += '<strong>Nível geral:</strong> ' + (ie.level || 'Boa') + ' (' + (ie.overallPercentage || 0) +
+                    '%)<br />';
+                html += '<strong>Autoconsciência:</strong> ' + (iePcts.autoconsciencia || 0) + '% | ';
+                html += '<strong>Autorregulação:</strong> ' + (iePcts.autorregulacao || 0) + '% | ';
+                html += '<strong>Motivação:</strong> ' + (iePcts.motivacao || 0) + '% | ';
+                html += '<strong>Empatia:</strong> ' + (iePcts.empatia || 0) + '% | ';
+                html += '<strong>Habilidades Sociais:</strong> ' + (iePcts.habilidades_sociais || 0) + '%';
+                html += '</div>';
+                html += '<div class="test-chart-container"><canvas id="ieChart" style="height:180px;"></canvas></div>';
+                html += '</div>';
+            }
+
+            // Valores
+            if (data.valores && data.tests.indexOf('Valores') !== -1) {
+                var valores = data.valores;
+                var vPcts = valores.percentages || {};
+                var topValor = valores.topValor || 'autodirecao';
+                var topValorName = valorNames[topValor] || topValor;
+
+                html += '<div class="test-section">';
+                html += '<div class="test-header">';
+                html += '<span class="test-name">💎 Valores Pessoais</span>';
+                html += '<span class="test-status completed">✅ Concluído</span>';
+                html += '</div>';
+                html += '<div class="test-content">';
+                html += '<strong>Valor principal:</strong> ' + topValorName + ' (' + (vPcts[topValor] || 0) + '%)<br />';
+                html += '<strong>Distribuição:</strong> Poder ' + (vPcts.poder || 0) + '% | Realização ' + (vPcts
+                    .realizacao || 0) + '% | Hedonismo ' + (vPcts.hedonismo || 0) + '% | Estimulação ' + (vPcts
+                    .estimulacao || 0) + '% | Autodireção ' + (vPcts.autodirecao || 0) + '% | Universalismo ' + (
+                    vPcts.universalismo || 0) + '% | Benevolência ' + (vPcts.benevolencia || 0) + '% | Tradição ' +
+                    (vPcts.tradicao || 0) + '% | Conformidade ' + (vPcts.conformidade || 0) + '% | Segurança ' +
+                    (vPcts.seguranca || 0) + '%';
+                html += '</div>';
+                html +=
+                    '<div class="test-chart-container"><canvas id="valoresChart" style="height:180px;"></canvas></div>';
+                html += '</div>';
+            }
+
+            // SWOT
+            if (data.swot && data.tests.indexOf('SWOT') !== -1) {
+                var swot = data.swot;
+                var sPcts = swot.percentages || {};
+                var topSwot = swot.topSwot || 'oportunidades';
+                var swotNames = {
+                    forcas: 'Forças',
+                    fraquezas: 'Fraquezas',
+                    oportunidades: 'Oportunidades',
+                    ameacas: 'Ameaças'
+                };
+
+                html += '<div class="test-section">';
+                html += '<div class="test-header">';
+                html += '<span class="test-name">📋 SWOT Pessoal</span>';
+                html += '<span class="test-status completed">✅ Concluído</span>';
+                html += '</div>';
+                html += '<div class="test-content">';
+                html += '<strong>Quadrante principal:</strong> ' + swotNames[topSwot] + ' (' + (sPcts[topSwot] || 0) +
+                    '%)<br />';
+                html += '<strong>Distribuição:</strong> Forças ' + (sPcts.forcas || 0) + '% | Fraquezas ' + (sPcts
+                    .fraquezas || 0) + '% | Oportunidades ' + (sPcts.oportunidades || 0) + '% | Ameaças ' + (sPcts
+                    .ameacas || 0) + '%';
+                html += '</div>';
+                html += '<div class="test-chart-container"><canvas id="swotChart" style="height:180px;"></canvas></div>';
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
+
+            // Renderizar gráficos
+            setTimeout(function() {
+                renderIndividualCharts(data);
+            }, 300);
+        }
+
+        // ============================================
+        // RENDERIZAR GRÁFICOS INDIVIDUAIS
+        // ============================================
+        function renderIndividualCharts(data) {
+            // DISC
+            if (data.disc && data.tests.indexOf('DISC') !== -1) {
+                try {
+                    var discCtx = document.getElementById('discChart').getContext('2d');
+                    var pcts = data.disc.percentages || {};
+                    new Chart(discCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Dominância', 'Influência', 'Estabilidade', 'Conformidade'],
+                            datasets: [{
+                                data: [pcts.D || 0, pcts.I || 0, pcts.S || 0, pcts.C || 0],
+                                backgroundColor: ['#EF4444CC', '#3B82F6CC', '#10B981CC',
+                                    '#8B5CF6CC'
+                                ],
+                                borderColor: ['#EF4444', '#3B82F6', '#10B981', '#8B5CF6'],
+                                borderWidth: 2,
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    grid: { color: 'rgba(10,37,64,0.04)' },
+                                    ticks: { color: '#94A3B8', callback: function(v) { return v + '%'; } }
+                                },
+                                x: {
+                                    grid: { display: false },
+                                    ticks: { color: '#94A3B8' }
+                                }
+                            }
+                        }
+                    });
+                } catch (e) { console.warn('Erro no gráfico DISC:', e); }
+            }
+
+            // Big Five
+            if (data.bigfive && data.tests.indexOf('BigFive') !== -1) {
+                try {
+                    var bfCtx = document.getElementById('bigfiveChart').getContext('2d');
+                    var bfPcts = data.bigfive.percentages || {};
+                    new Chart(bfCtx, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Abertura', 'Conscienciosidade', 'Extroversão', 'Amabilidade',
+                                'Neuroticismo'
+                            ],
+                            datasets: [{
+                                data: [
+                                    bfPcts.abertura || 0,
+                                    bfPcts.conscienciosidade || 0,
+                                    bfPcts.extroversao || 0,
+                                    bfPcts.amabilidade || 0,
+                                    bfPcts.neuroticismo || 0
+                                ],
+                                backgroundColor: 'rgba(236,72,153,0.12)',
+                                borderColor: '#EC4899',
+                                borderWidth: 2,
+                                pointBackgroundColor: ['#8B5CF6', '#10B981', '#F59E0B',
+                                    '#EC4899', '#EF4444'
+                                ],
+                                pointBorderColor: '#FFFFFF',
+                                pointBorderWidth: 2,
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                r: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    grid: { color: 'rgba(10,37,64,0.04)' },
+                                    ticks: {
+                                        color: '#94A3B8',
+                                        stepSize: 25,
+                                        backdropColor: 'transparent',
+                                        callback: function(v) { return v + '%'; }
+                                    },
+                                    pointLabels: {
+                                        color: '#64748B',
+                                        font: { size: 9, weight: '600' }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } catch (e) { console.warn('Erro no gráfico Big Five:', e); }
+            }
+
+            // IE
+            if (data.ie && data.tests.indexOf('IE') !== -1) {
+                try {
+                    var ieCtx = document.getElementById('ieChart').getContext('2d');
+                    var iePcts = data.ie.percentages || {};
+                    new Chart(ieCtx, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Autoconsciência', 'Autorregulação', 'Motivação', 'Empatia',
+                                'Habilidades Sociais'
+                            ],
+                            datasets: [{
+                                data: [
+                                    iePcts.autoconsciencia || 0,
+                                    iePcts.autorregulacao || 0,
+                                    iePcts.motivacao || 0,
+                                    iePcts.empatia || 0,
+                                    iePcts.habilidades_sociais || 0
+                                ],
+                                backgroundColor: 'rgba(124,58,237,0.12)',
+                                borderColor: '#7C3AED',
+                                borderWidth: 2,
+                                pointBackgroundColor: ['#7C3AED', '#10B981', '#F59E0B',
+                                    '#EF4444', '#3B82F6'
+                                ],
+                                pointBorderColor: '#FFFFFF',
+                                pointBorderWidth: 2,
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                r: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    grid: { color: 'rgba(10,37,64,0.04)' },
+                                    ticks: {
+                                        color: '#94A3B8',
+                                        stepSize: 25,
+                                        backdropColor: 'transparent',
+                                        callback: function(v) { return v + '%'; }
+                                    },
+                                    pointLabels: {
+                                        color: '#64748B',
+                                        font: { size: 9, weight: '600' }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } catch (e) { console.warn('Erro no gráfico IE:', e); }
+            }
+
+            // Valores
+            if (data.valores && data.tests.indexOf('Valores') !== -1) {
+                try {
+                    var vCtx = document.getElementById('valoresChart').getContext('2d');
+                    var vPcts = data.valores.percentages || {};
+                    var valorKeys = ['poder', 'realizacao', 'hedonismo', 'estimulacao', 'autodirecao',
+                        'universalismo', 'benevolencia', 'tradicao', 'conformidade', 'seguranca'
+                    ];
+                    var valorLabels = ['Poder', 'Realização', 'Hedonismo', 'Estimulação', 'Autodireção',
+                        'Universalismo', 'Benevolência', 'Tradição', 'Conformidade', 'Segurança'
+                    ];
+                    new Chart(vCtx, {
+                        type: 'radar',
+                        data: {
+                            labels: valorLabels,
+                            datasets: [{
+                                data: valorKeys.map(function(k) { return vPcts[k] || 0; }),
+                                backgroundColor: 'rgba(217,119,6,0.12)',
+                                borderColor: '#D97706',
+                                borderWidth: 2,
+                                pointBackgroundColor: ['#EF4444', '#F59E0B', '#F97316',
+                                    '#8B5CF6', '#3B82F6', '#06B6D4', '#10B981',
+                                    '#8B5CF6', '#6B7280', '#1F2937'
+                                ],
+                                pointBorderColor: '#FFFFFF',
+                                pointBorderWidth: 2,
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                r: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    grid: { color: 'rgba(10,37,64,0.04)' },
+                                    ticks: {
+                                        color: '#94A3B8',
+                                        stepSize: 25,
+                                        backdropColor: 'transparent',
+                                        callback: function(v) { return v + '%'; }
+                                    },
+                                    pointLabels: {
+                                        color: '#64748B',
+                                        font: { size: 8, weight: '600' }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } catch (e) { console.warn('Erro no gráfico Valores:', e); }
+            }
+
+            // SWOT
+            if (data.swot && data.tests.indexOf('SWOT') !== -1) {
+                try {
+                    var sCtx = document.getElementById('swotChart').getContext('2d');
+                    var sPcts = data.swot.percentages || {};
+                    new Chart(sCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Forças', 'Fraquezas', 'Oportunidades', 'Ameaças'],
+                            datasets: [{
+                                data: [
+                                    sPcts.forcas || 0,
+                                    sPcts.fraquezas || 0,
+                                    sPcts.oportunidades || 0,
+                                    sPcts.ameacas || 0
+                                ],
+                                backgroundColor: ['#10B981CC', '#EF4444CC', '#3B82F6CC',
+                                    '#F59E0BCC'
+                                ],
+                                borderColor: ['#10B981', '#EF4444', '#3B82F6', '#F59E0B'],
+                                borderWidth: 2,
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    grid: { color: 'rgba(10,37,64,0.04)' },
+                                    ticks: { color: '#94A3B8', callback: function(v) { return v +
+                                            '%'; } }
+                                },
+                                x: {
+                                    grid: { display: false },
+                                    ticks: { color: '#94A3B8' }
+                                }
+                            }
+                        }
+                    });
+                } catch (e) { console.warn('Erro no gráfico SWOT:', e); }
+            }
+        }
+
+        // ============================================
+        // RENDERIZAR ANÁLISE INTEGRADA
+        // ============================================
+        function renderIntegratedAnalysis(data) {
+            var grid = document.getElementById('integrationGrid');
+            var html = '';
+
+            var hasDisc = data.tests.indexOf('DISC') !== -1;
+            var hasBigFive = data.tests.indexOf('BigFive') !== -1;
+            var hasIE = data.tests.indexOf('IE') !== -1;
+            var hasValores = data.tests.indexOf('Valores') !== -1;
+            var hasSWOT = data.tests.indexOf('SWOT') !== -1;
+
+            if (hasDisc && hasBigFive) {
+                html += '<div class="integration-card">';
+                html += '<div class="int-icon">🔄</div>';
+                html += '<div class="int-title">DISC × Big Five</div>';
+                html +=
+                    '<div class="int-desc">Relação entre perfil comportamental e personalidade</div>';
+                html += '<div class="int-value">🔗 Convergência identificada</div>';
+                html += '</div>';
+            }
+
+            if (hasDisc && hasIE) {
+                html += '<div class="integration-card">';
+                html += '<div class="int-icon">🧠</div>';
+                html += '<div class="int-title">DISC × IE</div>';
+                html += '<div class="int-desc">Influência da inteligência emocional no comportamento</div>';
+                html += '<div class="int-value">⚖️ Equilíbrio moderado</div>';
+                html += '</div>';
+            }
+
+            if (hasDisc && hasValores) {
+                html += '<div class="integration-card">';
+                html += '<div class="int-icon">💎</div>';
+                html += '<div class="int-title">DISC × Valores</div>';
+                html += '<div class="int-desc">Alinhamento entre comportamento e valores</div>';
+                html += '<div class="int-value">✅ Alto alinhamento</div>';
+                html += '</div>';
+            }
+
+            if (hasIE && hasBigFive) {
+                html += '<div class="integration-card">';
+                html += '<div class="int-icon">🧬</div>';
+                html += '<div class="int-title">IE × Big Five</div>';
+                html += '<div class="int-desc">Impacto da personalidade na IE</div>';
+                html += '<div class="int-value">📈 Complementar</div>';
+                html += '</div>';
+            }
+
+            if (hasValores && hasBigFive) {
+                html += '<div class="integration-card">';
+                html += '<div class="int-icon">⭐</div>';
+                html += '<div class="int-title">Valores × Liderança</div>';
+                html += '<div class="int-desc">Perfil de liderança baseado em valores</div>';
+                html += '<div class="int-value">🎯 Potencial identificado</div>';
+                html += '</div>';
+            }
+
+            if (hasSWOT && hasDisc) {
+                html += '<div class="integration-card">';
+                html += '<div class="int-icon">📋</div>';
+                html += '<div class="int-title">SWOT × Desenvolvimento</div>';
+                html += '<div class="int-desc">Oportunidades de desenvolvimento</div>';
+                html += '<div class="int-value">🚀 Áreas de foco</div>';
+                html += '</div>';
+            }
+
+            // Se não houver cruzamentos suficientes
+            if (html === '') {
+                html =
+                    '<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--gray-400);">Realize mais testes para uma análise integrada completa.</div>';
+            }
+
+            grid.innerHTML = html;
+        }
+
+        // ============================================
+        // RENDERIZAR MAPAS COMPORTAMENTAIS
+        // ============================================
+        function renderMaps(data) {
+            var grid = document.getElementById('mapGrid');
+
+            var hasDisc = data.tests.indexOf('DISC') !== -1;
+            var hasBigFive = data.tests.indexOf('BigFive') !== -1;
+            var hasIE = data.tests.indexOf('IE') !== -1;
+            var hasValores = data.tests.indexOf('Valores') !== -1;
+
+            var maps = [];
+
+            if (hasDisc || hasBigFive) {
+                maps.push({ icon: '🧠', name: 'Psicológico', level: 'alto' });
+                maps.push({ icon: '👥', name: 'Social', level: 'medio' });
+            }
+
+            if (hasDisc || hasIE) {
+                maps.push({ icon: '💼', name: 'Profissional', level: 'alto' });
+                maps.push({ icon: '🏛️', name: 'Liderança', level: hasDisc ? 'alto' : 'medio' });
+            }
+
+            if (hasIE) {
+                maps.push({ icon: '💬', name: 'Comunicação', level: 'alto' });
+            }
+
+            if (hasValores) {
+                maps.push({ icon: '💎', name: 'Valores', level: 'alto' });
+                maps.push({ icon: '❤️', name: 'Emocional', level: 'medio' });
+            }
+
+            if (hasBigFive) {
+                maps.push({ icon: '🚀', name: 'Potencial', level: 'alto' });
+            }
+
+            // Se não houver mapas suficientes
+            if (maps.length < 3) {
+                maps = [
+                    { icon: '🧠', name: 'Psicológico', level: 'medio' },
+                    { icon: '👥', name: 'Social', level: 'medio' },
+                    { icon: '💼', name: 'Profissional', level: 'medio' }
+                ];
+            }
+
+            var html = '';
+            for (var i = 0; i < maps.length; i++) {
+                var map = maps[i];
+                var levelNames = {
+                    alto: 'Alto',
+                    medio: 'Médio',
+                    baixo: 'Baixo'
+                };
+                html += '<div class="map-card">';
+                html += '<span class="map-icon">' + map.icon + '</span>';
+                html += '<div class="map-name">' + map.name + '</div>';
+                html += '<span class="map-level ' + map.level + '">' + levelNames[map.level] + '</span>';
+                html += '</div>';
+            }
+
+            grid.innerHTML = html;
+        }
+
+        // ============================================
+        // RENDERIZAR ÍNDICES VIGOR®
+        // ============================================
+        function renderIndices(data) {
+            var grid = document.getElementById('indicesGrid');
+
+            var hasDisc = data.tests.indexOf('DISC') !== -1;
+            var hasBigFive = data.tests.indexOf('BigFive') !== -1;
+            var hasIE = data.tests.indexOf('IE') !== -1;
+            var hasValores = data.tests.indexOf('Valores') !== -1;
+            var hasSWOT = data.tests.indexOf('SWOT') !== -1;
+
+            // Calcular índices baseados nos testes disponíveis
+            var totalScores = 0;
+            var count = 0;
+
+            if (hasDisc && data.disc) {
+                var discPcts = data.disc.percentages || {};
+                var maxDisc = Math.max(discPcts.D || 0, discPcts.I || 0, discPcts.S || 0, discPcts.C || 0);
+                totalScores += maxDisc;
+                count++;
+            }
+
+            if (hasBigFive && data.bigfive) {
+                var bfPcts = data.bigfive.percentages || {};
+                var maxBf = Math.max(bfPcts.abertura || 0, bfPcts.conscienciosidade || 0, bfPcts.extroversao || 0,
+                    bfPcts.amabilidade || 0);
+                totalScores += maxBf;
+                count++;
+            }
+
+            if (hasIE && data.ie) {
+                totalScores += data.ie.overallPercentage || 0;
+                count++;
+            }
+
+            if (hasValores && data.valores) {
+                totalScores += data.valores.topPercent || 0;
+                count++;
+            }
+
+            if (hasSWOT && data.swot) {
+                totalScores += data.swot.topPercent || 0;
+                count++;
+            }
+
+            var overall = count > 0 ? Math.round(totalScores / count) : 60;
+
+            // Índices baseados no overall
+            var indices = [
+                { label: 'Índice Geral VIGOR®', value: overall },
+                { label: 'Inteligência Humana', value: hasIE ? Math.round((data.ie.overallPercentage || 0) * 0.9) :
+                        Math.round(overall * 0.85) },
+                { label: 'Liderança', value: hasDisc ? Math.round((data.disc.percentages?.D || 0) * 0.85) : Math
+                        .round(overall * 0.8) },
+                { label: 'Adaptabilidade', value: hasBigFive ? Math.round((data.bigfive.percentages?.abertura || 0) *
+                        0.8) : Math.round(overall * 0.75) }
+            ];
+
+            var html = '';
+            for (var i = 0; i < indices.length; i++) {
+                var idx = indices[i];
+                var color = idx.value >= 70 ? '#10B981' : idx.value >= 50 ? '#F59E0B' : '#EF4444';
+                html += '<div class="indice-card">';
+                html += '<div class="indice-value" style="color:' + color + ';">' + idx.value + '%</div>';
+                html += '<div class="indice-label">' + idx.label + '</div>';
+                html += '<div class="indice-bar"><div class="fill" style="width:' + idx.value + '%;background:' +
+                    color + ';"></div></div>';
+                html += '</div>';
+            }
+
+            grid.innerHTML = html;
+        }
+
+        // ============================================
+        // RENDERIZAR PDI
+        // ============================================
+        function renderPDI(data) {
+            var grid = document.getElementById('pdiGrid');
+
+            var hasDisc = data.tests.indexOf('DISC') !== -1;
+            var hasBigFive = data.tests.indexOf('BigFive') !== -1;
+            var hasIE = data.tests.indexOf('IE') !== -1;
+            var hasValores = data.tests.indexOf('Valores') !== -1;
+            var hasSWOT = data.tests.indexOf('SWOT') !== -1;
+
+            // Definir áreas de desenvolvimento baseadas nos testes
+            var areas = [];
+
+            if (hasDisc && data.disc) {
+                var pcts = data.disc.percentages || {};
+                var minDisc = Math.min(pcts.D || 100, pcts.I || 100, pcts.S || 100, pcts.C || 100);
+                var minKey = '';
+                var minVal = 100;
+                for (var key in pcts) {
+                    if (pcts[key] < minVal) { minVal = pcts[key];
+                        minKey = key; }
+                }
+                var nameMap = { D: 'Dominância', I: 'Influência', S: 'Estabilidade', C: 'Conformidade' };
+                if (minKey && minVal < 50) {
+                    areas.push({
+                        icon: '📊',
+                        name: 'Desenvolver ' + (nameMap[minKey] || minKey),
+                        desc: 'Fortalecer esta dimensão comportamental'
+                    });
+                }
+            }
+
+            if (hasBigFive && data.bigfive) {
+                var bfPcts = data.bigfive.percentages || {};
+                var minBf = Math.min(bfPcts.abertura || 100, bfPcts.conscienciosidade || 100, bfPcts.extroversao ||
+                    100, bfPcts.amabilidade || 100);
+                if (minBf < 50) {
+                    areas.push({
+                        icon: '🧬',
+                        name: 'Desenvolver Big Five',
+                        desc: 'Fortalecer os fatores com menor pontuação'
+                    });
+                }
+            }
+
+            if (hasIE && data.ie) {
+                var iePcts = data.ie.percentages || {};
+                var minIe = Math.min(iePcts.autoconsciencia || 100, iePcts.autorregulacao || 100, iePcts
+                    .motivacao || 100, iePcts.empatia || 100);
+                if (minIe < 50) {
+                    areas.push({
+                        icon: '🧠',
+                        name: 'Desenvolver IE',
+                        desc: 'Fortalecer pilares da inteligência emocional'
+                    });
+                }
+            }
+
+            if (hasSWOT && data.swot) {
+                var swotPcts = data.swot.percentages || {};
+                if ((swotPcts.fraquezas || 0) > 50) {
+                    areas.push({
+                        icon: '📋',
+                        name: 'Plano de Ação SWOT',
+                        desc: 'Mitigar fraquezas e ameaças identificadas'
+                    });
+                }
+            }
+
+            // Se não houver áreas específicas
+            if (areas.length === 0) {
+                areas = [
+                    { icon: '🌟', name: 'Autoconhecimento', desc: 'Continue explorando seu perfil' },
+                    { icon: '📈', name: 'Desenvolvimento Contínuo', desc: 'Mantenha-se em evolução' },
+                    { icon: '🤝', name: 'Networking', desc: 'Fortaleça suas conexões' }
+                ];
+            }
+
+            var periods = [
+                { name: '30 dias', icon: '📅' },
+                { name: '60 dias', icon: '📆' },
+                { name: '90 dias', icon: '🗓️' }
+            ];
+
+            var html = '';
+            for (var i = 0; i < periods.length; i++) {
+                var period = periods[i];
+                var area = areas[i % areas.length];
+                html += '<div class="pdi-card">';
+                html += '<div class="pdi-period"><span class="period-icon">' + period.icon + '</span> ' + period
+                    .name + '</div>';
+                html += '<div class="pdi-item"><span class="check">✓</span> ' + area.icon + ' ' + area.name +
+                    '</div>';
+                html += '<div class="pdi-item"><span class="check">✓</span> ' + area.desc + '</div>';
+                html += '<div class="pdi-item"><span class="check">✓</span> Acompanhar progresso semanal</div>';
+                html += '</div>';
+            }
+
+            grid.innerHTML = html;
+        }
+
+        // ============================================
+        // RENDERIZAR RECURSOS
+        // ============================================
+        function renderResources(data) {
+            var container = document.getElementById('resourcesText');
+
+            var hasDisc = data.tests.indexOf('DISC') !== -1;
+            var hasBigFive = data.tests.indexOf('BigFive') !== -1;
+            var hasIE = data.tests.indexOf('IE') !== -1;
+            var hasValores = data.tests.indexOf('Valores') !== -1;
+
+            var resources = [];
+
+            if (hasDisc) {
+                resources.push('📘 "Pessoas de Sucesso" - John C. Maxwell');
+                resources.push('🎧 Podcast "Liderança com Propósito"');
+            }
+
+            if (hasBigFive) {
+                resources.push('📘 "Os 5 Grandes Fatores" - Robert McCrae');
+                resources.push('📘 "Personalidade e Comportamento"');
+            }
+
+            if (hasIE) {
+                resources.push('📘 "Inteligência Emocional" - Daniel Goleman');
+                resources.push('🎧 TED Talk "O Poder da Empatia"');
+            }
+
+            if (hasValores) {
+                resources.push('📘 "Descubra seus Valores" - Shalom Schwartz');
+                resources.push('🎧 Podcast "Propósito e Carreira"');
+            }
+
+            // Recursos padrão
+            resources.push('📘 "Mindset" - Carol Dweck');
+            resources.push('📘 "O Poder do Hábito" - Charles Duhigg');
+            resources.push('🎧 TED Talk "Como o Autoconhecimento Transforma"');
+
+            // Limitar a 6 recursos
+            if (resources.length > 6) {
+                resources = resources.slice(0, 6);
+            }
+
+            var html = '<ul style="color: var(--gray-600); line-height: 2.2; font-size: 0.9rem; padding-left: 20px; list-style: none;">';
+            for (var i = 0; i < resources.length; i++) {
+                html += '<li>📌 ' + resources[i] + '</li>';
+            }
+            html += '</ul>';
+
+            container.innerHTML = html;
+        }
+
+        // ============================================
+        // RENDERIZAR PARECER DA IA
+        // ============================================
+        function renderIAOpinion(data) {
+            var container = document.getElementById('iaOpinionText');
+
+            var hasDisc = data.tests.indexOf('DISC') !== -1;
+            var hasBigFive = data.tests.indexOf('BigFive') !== -1;
+            var hasIE = data.tests.indexOf('IE') !== -1;
+            var hasValores = data.tests.indexOf('Valores') !== -1;
+            var hasSWOT = data.tests.indexOf('SWOT') !== -1;
+
+            var parts = [];
+
+            // 1. Maiores talentos
+            var talents = [];
+            if (hasDisc && data.disc) {
+                var discPcts = data.disc.percentages || {};
+                var maxDisc = Math.max(discPcts.D || 0, discPcts.I || 0, discPcts.S || 0, discPcts.C || 0);
+                var maxKey = '';
+                for (var key in discPcts) {
+                    if (discPcts[key] === maxDisc) { maxKey = key; break; }
+                }
+                var nameMap = { D: 'Dominância', I: 'Influência', S: 'Estabilidade', C: 'Conformidade' };
+                if (maxKey && maxDisc >= 60) {
+                    talents.push('🦁 ' + (nameMap[maxKey] || maxKey) + ' (DISC)');
+                }
+            }
+
+            if (hasIE && data.ie && data.ie.overallPercentage >= 60) {
+                talents.push('🧠 Inteligência Emocional elevada');
+            }
+
+            if (hasValores && data.valores && data.valores.topPercent >= 60) {
+                var topValor = data.valores.topValor || 'autodirecao';
+                var name = valorNames[topValor] || topValor;
+                talents.push('💎 ' + name + ' (Valores)');
+            }
+
+            if (hasBigFive && data.bigfive) {
+                var bfPcts = data.bigfive.percentages || {};
+                var maxBf = Math.max(bfPcts.abertura || 0, bfPcts.conscienciosidade || 0, bfPcts.extroversao || 0,
+                    bfPcts.amabilidade || 0);
+                var maxBfKey = '';
+                for (var key in bfPcts) {
+                    if (bfPcts[key] === maxBf) { maxBfKey = key; break; }
+                }
+                if (maxBfKey && maxBf >= 60) {
+                    talents.push('🧬 ' + (factorNames[maxBfKey] || maxBfKey) + ' (Big Five)');
+                }
+            }
+
+            if (hasSWOT && data.swot && data.swot.topPercent >= 60) {
+                var topSwot = data.swot.topSwot || 'oportunidades';
+                var swotNames = {
+                    forcas: '💪 Forças',
+                    fraquezas: '🔻 Fraquezas',
+                    oportunidades: '🚀 Oportunidades',
+                    ameacas: '⚠️ Ameaças'
+                };
+                talents.push('📋 ' + swotNames[topSwot]);
+            }
+
+            // 2. Competências para desenvolver
+            var developments = [];
+            if (hasDisc && data.disc) {
+                var discPcts2 = data.disc.percentages || {};
+                var minDisc2 = Math.min(discPcts2.D || 100, discPcts2.I || 100, discPcts2.S || 100, discPcts2.C ||
+                    100);
+                var minKey2 = '';
+                var minVal2 = 100;
+                for (var key in discPcts2) {
+                    if (discPcts2[key] < minVal2) { minVal2 = discPcts2[key];
+                        minKey2 = key; }
+                }
+                var nameMap2 = { D: 'Dominância', I: 'Influência', S: 'Estabilidade', C: 'Conformidade' };
+                if (minKey2 && minVal2 < 50) {
+                    developments.push('📊 Desenvolver ' + (nameMap2[minKey2] || minKey2) + ' (DISC)');
+                }
+            }
+
+            if (hasIE && data.ie) {
+                var iePcts2 = data.ie.percentages || {};
+                var minIe2 = Math.min(iePcts2.autoconsciencia || 100, iePcts2.autorregulacao || 100, iePcts2
+                    .motivacao || 100, iePcts2.empatia || 100, iePcts2.habilidades_sociais || 100);
+                var minIeKey2 = '';
+                var minIeVal2 = 100;
+                for (var key in iePcts2) {
+                    if (iePcts2[key] < minIeVal2) { minIeVal2 = iePcts2[key];
+                        minIeKey2 = key; }
+                }
+                if (minIeKey2 && minIeVal2 < 50) {
+                    var ieNames = {
+                        autoconsciencia: 'Autoconsciência',
+                        autorregulacao: 'Autorregulação',
+                        motivacao: 'Motivação',
+                        empatia: 'Empatia',
+                        habilidades_sociais: 'Habilidades Sociais'
+                    };
+                    developments.push('🧠 Desenvolver ' + (ieNames[minIeKey2] || minIeKey2) + ' (IE)');
+                }
+            }
+
+            if (hasSWOT && data.swot) {
+                var swotPcts2 = data.swot.percentages || {};
+                if ((swotPcts2.fraquezas || 0) > 50) {
+                    developments.push('📋 Mitigar Fraquezas (SWOT)');
+                }
+            }
+
+            // 3. Melhor contexto
+            var context = '';
+            if (hasDisc && data.disc) {
+                var dominant = data.disc.dominant || 'D';
+                var contextMap = {
+                    D: 'ambientes desafiadores com tomada de decisão rápida',
+                    I: 'ambientes colaborativos com foco em relacionamentos',
+                    S: 'ambientes estáveis com processos previsíveis',
+                    C: 'ambientes estruturados com foco em qualidade'
+                };
+                context = contextMap[dominant] || 'ambientes que valorizam seu perfil';
+            } else if (hasBigFive && data.bigfive) {
+                var top = data.bigfive.topFactor || 'conscienciosidade';
+                var contextMap2 = {
+                    abertura: 'ambientes criativos e inovadores',
+                    conscienciosidade: 'ambientes estruturados com foco em resultados',
+                    extroversao: 'ambientes sociais e colaborativos',
+                    amabilidade: 'ambientes com foco em relacionamentos',
+                    neuroticismo: 'ambientes estáveis com baixo estresse'
+                };
+                context = contextMap2[top] || 'ambientes que valorizam seu perfil';
+            } else {
+                context = 'ambientes que valorizam o autoconhecimento e o desenvolvimento';
+            }
+
+            // 4. Fatores limitantes
+            var limits = [];
+            if (hasDisc && data.disc) {
+                var pcts3 = data.disc.percentages || {};
+                var minKey3 = '';
+                var minVal3 = 100;
+                for (var key in pcts3) {
+                    if (pcts3[key] < minVal3) { minVal3 = pcts3[key];
+                        minKey3 = key; }
+                }
+                var nameMap3 = { D: 'Dominância', I: 'Influência', S: 'Estabilidade', C: 'Conformidade' };
+                if (minKey3 && minVal3 < 35) {
+                    limits.push('Baixa ' + (nameMap3[minKey3] || minKey3));
+                }
+            }
+
+            if (hasBigFive && data.bigfive) {
+                var bfPcts3 = data.bigfive.percentages || {};
+                if (bfPcts3.neuroticismo > 60) {
+                    limits.push('Neuroticismo elevado');
+                }
+            }
+
+            if (hasIE && data.ie && data.ie.overallPercentage < 50) {
+                limits.push('Inteligência Emocional em desenvolvimento');
+            }
+
+            if (limits.length === 0) {
+                limits.push('Potencial a ser explorado');
+            }
+
+            // 5. Ações prioritárias
+            var actions = [];
+            if (hasIE && data.ie) {
+                var iePcts3 = data.ie.percentages || {};
+                var minIeKey3 = '';
+                var minIeVal3 = 100;
+                for (var key in iePcts3) {
+                    if (iePcts3[key] < minIeVal3) { minIeVal3 = iePcts3[key];
+                        minIeKey3 = key; }
+                }
+                if (minIeKey3) {
+                    var ieNames3 = {
+                        autoconsciencia: 'reflexão diária e feedback',
+                        autorregulacao: 'técnicas de respiração e mindfulness',
+                        motivacao: 'definição de metas claras',
+                        empatia: 'escuta ativa sem julgamento',
+                        habilidades_sociais: 'comunicação não violenta'
+                    };
+                    actions.push('Desenvolver ' + (ieNames3[minIeKey3] || minIeKey3));
+                }
+            }
+
+            if (hasSWOT && data.swot) {
+                var swotPcts3 = data.swot.percentages || {};
+                if ((swotPcts3.fraquezas || 0) > 40) {
+                    actions.push('Criar plano de ação para mitigar fraquezas');
+                }
+            }
+
+            if (hasValores && data.valores && data.valores.bottomPercent < 50) {
+                var bottomValor = data.valores.bottomValor || 'tradicao';
+                var name = valorNames[bottomValor] || bottomValor;
+                actions.push('Desenvolver ' + name + ' para maior equilíbrio');
+            }
+
+            if (actions.length === 0) {
+                actions.push('Manter autoconhecimento e desenvolvimento contínuo');
+                actions.push('Buscar feedback regular');
+            }
+
+            // Montar parecer
+            var opinion = 'Com base na análise integrada dos testes realizados, o participante apresenta um perfil ';
+
+            if (talents.length > 0) {
+                opinion += 'com talentos notáveis em ' + talents.join(', ') + '. ';
+            } else {
+                opinion += 'equilibrado e com potencial de desenvolvimento. ';
+            }
+
+            opinion += 'Os dados sugerem um bom alinhamento entre as diferentes dimensões do comportamento, ';
+
+            if (developments.length > 0) {
+                opinion += 'com oportunidades de desenvolvimento em ' + developments.join(', ') + '. ';
+            } else {
+                opinion += 'com perfil consistente e bem integrado. ';
+            }
+
+            opinion += 'O perfil tende a apresentar melhor desempenho em ' + context + '. ';
+
+            if (limits.length > 0) {
+                opinion += 'Fatores que podem limitar o potencial incluem ' + limits.join(', ') + '. ';
+            }
+
+            opinion += 'As ações prioritárias para o desenvolvimento são: ' + actions.join(', ') + '. ';
+
+            opinion += 'Recomenda-se um acompanhamento contínuo e revisão periódica do perfil para monitorar o progresso.';
+
+            container.textContent = opinion;
+        }
+
+        // ============================================
+        // RENDERIZAR CONCLUSÃO
+        // ============================================
+        function renderConclusion(data) {
+            var container = document.getElementById('conclusionText');
+
+            var hasDisc = data.tests.indexOf('DISC') !== -1;
+            var hasBigFive = data.tests.indexOf('BigFive') !== -1;
+            var hasIE = data.tests.indexOf('IE') !== -1;
+            var hasValores = data.tests.indexOf('Valores') !== -1;
+            var hasSWOT = data.tests.indexOf('SWOT') !== -1;
+
+            var topProfile = '';
+            if (hasDisc && data.disc) {
+                var dominant = data.disc.dominant || 'D';
+                var config = profileConfig[dominant] || profileConfig.D;
+                topProfile = config.icon + ' ' + config.name;
+            } else if (hasBigFive && data.bigfive) {
+                var top = data.bigfive.topFactor || 'conscienciosidade';
+                topProfile = '🧬 ' + (factorNames[top] || top);
+            } else if (hasIE && data.ie) {
+                topProfile = '🧠 Inteligência Emocional (' + (data.ie.level || 'Boa') + ')';
+            } else {
+                topProfile = 'Perfil Integrado';
+            }
+
+            var conclusion =
+                'O Laudo Vigorre™ revela um perfil comportamental integrado, com destaque para ' + topProfile +
+                ' como característica predominante. ';
+
+            if (hasValores && data.valores) {
+                var topValor = data.valores.topValor || 'autodirecao';
+                var name = valorNames[topValor] || topValor;
+                conclusion += 'Os valores do participante são guiados por ' + name + ', refletindo uma orientação para ' +
+                    (topValor === 'autodirecao' ? 'autonomia e independência' :
+                        topValor === 'realizacao' ? 'sucesso e excelência' :
+                        topValor === 'benevolencia' ? 'bem-estar dos outros' :
+                        topValor === 'universalismo' ? 'justiça e compreensão' :
+                        topValor === 'seguranca' ? 'estabilidade e proteção' :
+                        'valores que guiam suas decisões') + '. ';
+            }
+
+            if (hasIE && data.ie) {
+                var ieLevel = data.ie.level || 'Boa';
+                conclusion += 'A Inteligência Emocional está em nível ' + ieLevel.toLowerCase() + ' (' + (data.ie
+                    .overallPercentage || 0) +
+                    '%), indicando uma base sólida para relacionamentos e autoconhecimento. ';
+            }
+
+            if (hasSWOT && data.swot) {
+                var topSwot = data.swot.topSwot || 'oportunidades';
+                var swotNames = {
+                    forcas: 'forças',
+                    fraquezas: 'fraquezas',
+                    oportunidades: 'oportunidades',
+                    ameacas: 'ameaças'
+                };
+                conclusion += 'A análise SWOT destaca ' + (swotNames[topSwot] || 'oportunidades') +
+                    ' como área principal de atenção. ';
+            }
+
+            conclusion +=
+                '<br /><br /><strong>Recomendação Final:</strong> Este laudo deve ser utilizado como ferramenta de autoconhecimento e desenvolvimento. ' +
+                'As áreas de destaque podem ser potencializadas, e as áreas de desenvolvimento podem ser trabalhadas com foco. ' +
+                'Recomenda-se revisitar o laudo periodicamente para acompanhar a evolução do perfil.';
+
+            container.innerHTML = conclusion;
         }
 
         // ============================================
         // FUNÇÕES UTILITÁRIAS
         // ============================================
         function generateHash(data) {
-            let hash = 0;
-            for (let i = 0; i < data.length; i++) {
-                const char = data.charCodeAt(i);
+            var hash = 0;
+            for (var i = 0; i < data.length; i++) {
+                var char = data.charCodeAt(i);
                 hash = ((hash << 5) - hash) + char;
                 hash = hash & hash;
             }
@@ -2086,72 +3021,36 @@
 
         function downloadPDF() {
             showToast('📥 Iniciando download do PDF...', 'success');
-            setTimeout(() => {
+            setTimeout(function() {
                 window.print();
             }, 500);
         }
 
-        function compartilhar() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Laudo Vigorre® - ' + document.getElementById('participantName').textContent,
-                    text: 'Confira meu Laudo Comportamental Integrado da Vigorre ONE™',
-                    url: window.location.href
-                }).catch(() => {});
-            } else {
-                navigator.clipboard.writeText(window.location.href).then(() => {
-                    showToast('📤 Link copiado para compartilhar!', 'success');
-                }).catch(() => {
-                    showToast('📤 Compartilhe o link: ' + window.location.href, 'success');
-                });
-            }
-        }
-
         function showToast(message, type) {
-            const existing = document.getElementById('toast');
+            var existing = document.getElementById('toast');
             if (existing) existing.remove();
 
-            const toast = document.createElement('div');
+            var toast = document.createElement('div');
             toast.id = 'toast';
-            toast.style.cssText = `
-                    position: fixed;
-                    top: 24px;
-                    right: 24px;
-                    background: white;
-                    padding: 14px 24px;
-                    border-radius: 12px;
-                    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    font-weight: 600;
-                    font-size: 0.875rem;
-                    z-index: 300;
-                    border-left: 4px solid ${type === 'success' ? '#10B981' : '#EF4444'};
-                    animation: slideIn 0.3s ease;
-                `;
-            toast.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span><span>${message}</span>`;
+            toast.style.cssText =
+                'position:fixed;top:24px;right:24px;background:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:300;border-left:4px solid ' +
+                (type === 'success' ? '#10B981' : '#EF4444') + ';animation:slideIn 0.3s ease;';
+            toast.innerHTML = '<span>' + (type === 'success' ? '✅' : '❌') + '</span><span>' + message + '</span>';
             document.body.appendChild(toast);
 
-            setTimeout(() => {
+            setTimeout(function() {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateX(120%)';
-                setTimeout(() => toast.remove(), 300);
+                setTimeout(function() { toast.remove(); }, 300);
             }, 4000);
         }
 
-        // Estilo para animação
-        const style = document.createElement('style');
-        style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(120%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
+        var style = document.createElement('style');
+        style.textContent =
+            '@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
         document.head.appendChild(style);
 
-        console.log('📋 Laudo Vigorre® carregado com sucesso!');
-        console.log('📊 ' + document.querySelectorAll('.chart-container').length + ' gráficos carregados');
+        console.log('📋 Laudo Vigorre™ carregado com sucesso!');
     </script>
 
 </body>
