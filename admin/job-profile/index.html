@@ -4,16 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Profile | Admin VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
-        /* ============================================
-           VIGORRE ONE™ - JOB PROFILE
-           ============================================ */
-
         * {
             margin: 0;
             padding: 0;
@@ -22,10 +16,14 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
             --purple: #7C3AED;
             --pink: #EC4899;
             --white: #FFFFFF;
@@ -44,7 +42,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -54,9 +54,6 @@
             min-height: 100vh;
         }
 
-        /* ============================================
-           SIDEBAR
-           ============================================ */
         .sidebar {
             position: fixed;
             top: 0;
@@ -209,9 +206,6 @@
             color: #F87171;
         }
 
-        /* ============================================
-           MAIN CONTENT
-           ============================================ */
         .main {
             margin-left: 260px;
             padding: 24px 32px 40px;
@@ -299,7 +293,7 @@
 
         .btn-success {
             padding: 10px 24px;
-            background: #10B981;
+            background: var(--green);
             color: white;
             border: none;
             border-radius: var(--radius-sm);
@@ -321,7 +315,7 @@
 
         .btn-danger {
             padding: 10px 24px;
-            background: #EF4444;
+            background: var(--red);
             color: white;
             border: none;
             border-radius: var(--radius-sm);
@@ -341,9 +335,6 @@
             box-shadow: 0 8px 30px rgba(239, 68, 68, 0.25);
         }
 
-        /* ============================================
-           TOOLTIP
-           ============================================ */
         [data-tooltip] {
             position: relative;
             cursor: pointer;
@@ -374,9 +365,6 @@
             transform: translateX(-50%) translateY(-4px);
         }
 
-        /* ============================================
-           FILTERS
-           ============================================ */
         .filters-bar {
             display: flex;
             gap: 12px;
@@ -432,9 +420,6 @@
             border-color: var(--blue);
         }
 
-        /* ============================================
-           TABLE
-           ============================================ */
         .table-card {
             background: white;
             border-radius: var(--radius);
@@ -557,9 +542,6 @@
             box-shadow: var(--shadow-sm);
         }
 
-        /* ============================================
-           PAGINATION
-           ============================================ */
         .pagination {
             display: flex;
             justify-content: space-between;
@@ -601,144 +583,6 @@
             border-color: var(--blue);
         }
 
-        /* ============================================
-           MODAL
-           ============================================ */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(10, 37, 64, 0.6);
-            backdrop-filter: blur(4px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 200;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: var(--radius);
-            padding: 32px;
-            max-width: 720px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: fadeUp 0.3s ease;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--gray-100);
-        }
-
-        .modal-header h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--gray-900);
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-400);
-            transition: var(--transition);
-        }
-
-        .modal-close:hover {
-            color: var(--gray-700);
-            transform: rotate(90deg);
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--gray-700);
-            margin-bottom: 4px;
-        }
-
-        .form-group label .required {
-            color: #EF4444;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1.5px solid var(--gray-200);
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--blue);
-            box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.08);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .form-row-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 16px;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 24px;
-            padding-top: 16px;
-            border-top: 1px solid var(--gray-100);
-        }
-
-        /* ============================================
-           TOAST
-           ============================================ */
         .toast {
             position: fixed;
             top: 24px;
@@ -755,6 +599,7 @@
             z-index: 300;
             border-left: 4px solid var(--blue);
             animation: slideIn 0.3s ease;
+            max-width: 420px;
         }
 
         .toast.show {
@@ -764,11 +609,9 @@
         .toast.error {
             border-left-color: #EF4444;
         }
-
         .toast.success {
             border-left-color: #10B981;
         }
-
         .toast.warning {
             border-left-color: #F59E0B;
         }
@@ -784,9 +627,6 @@
             }
         }
 
-        /* ============================================
-           MOBILE TOGGLE
-           ============================================ */
         .mobile-toggle {
             display: none;
             background: none;
@@ -797,9 +637,22 @@
             padding: 8px;
         }
 
-        /* ============================================
-           RESPONSIVO
-           ============================================ */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 37, 64, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -819,28 +672,8 @@
                 display: block;
             }
 
-            .mobile-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(10, 37, 64, 0.4);
-                backdrop-filter: blur(4px);
-                z-index: 99;
-            }
-
             .mobile-overlay.active {
                 display: block;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row-3 {
-                grid-template-columns: 1fr;
             }
         }
 
@@ -861,8 +694,25 @@
             .actions-cell {
                 flex-wrap: wrap;
             }
-            .modal-content {
-                padding: 20px;
+            .toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                max-width: none;
+                font-size: 0.8rem;
+                padding: 12px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-header {
+                padding: 10px 16px;
+            }
+            .main {
+                padding: 16px;
+            }
+            .sidebar .logo .logo-img {
+                height: 28px;
             }
         }
 
@@ -875,6 +725,29 @@
         .sidebar::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--gray-900);
+            }
+            .main-header h1 {
+                color: var(--white);
+            }
+            .table-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .table-container td {
+                color: var(--gray-300);
+            }
+            .table-container th {
+                color: var(--gray-400);
+            }
+            .toast {
+                background: var(--gray-800);
+                color: var(--white);
+            }
         }
 
         @media print {
@@ -894,6 +767,9 @@
                 display: none !important;
             }
             .btn-primary {
+                display: none !important;
+            }
+            .filters-bar {
                 display: none !important;
             }
         }
@@ -940,6 +816,8 @@
             <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
             <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
             <li><a href="../bi/dashboard.html"><span class="icon">📈</span> BI Analytics</a></li>
+            <li><a href="../financeiro/"><span class="icon">💰</span> Centro Financeiro</a></li>
+            <li><a href="../usuarios/"><span class="icon">👤</span> Usuários</a></li>
         </ul>
 
         <div class="logout">
@@ -1031,47 +909,35 @@
     <script>
         'use strict';
 
-        // ============================================
-        // DADOS
-        // ============================================
-        let profiles = [];
-        let filteredProfiles = [];
-        let companies = [];
-        let currentPage = 1;
-        const pageSize = 10;
+        var profiles = [];
+        var filteredProfiles = [];
+        var companies = [];
+        var currentPage = 1;
+        var pageSize = 10;
 
-        // ============================================
-        // TOGGLE SIDEBAR
-        // ============================================
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobileOverlay');
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('mobileOverlay');
             sidebar.classList.toggle('open');
             overlay.classList.toggle('active');
         }
 
-        // ============================================
-        // LOGOUT
-        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.VigorreAuth.logout();
             }
         }
 
-        // ============================================
-        // INICIALIZAR
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🎯 Admin Job Profile - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../../login.html';
                 return;
             }
 
-            const user = window.VigorreAuth.getCurrentUser();
+            var user = window.VigorreAuth.getCurrentUser();
             if (!user || (user.role !== 'admin' && user.role !== 'master')) {
                 alert('⚠️ Acesso restrito a administradores.');
                 window.VigorreAuth.logout();
@@ -1084,31 +950,25 @@
             loadProfiles();
         });
 
-        // ============================================
-        // CARREGAR EMPRESAS
-        // ============================================
         function loadCompanies() {
             try {
                 companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-
-                const filterSelect = document.getElementById('companyFilter');
-                filterSelect.innerHTML = '<option value="">Todas as empresas</option>' +
-                    companies.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
-
+                var filterSelect = document.getElementById('companyFilter');
+                var html = '<option value="">Todas as empresas</option>';
+                for (var i = 0; i < companies.length; i++) {
+                    html += '<option value="' + companies[i].id + '">' + companies[i].name + '</option>';
+                }
+                filterSelect.innerHTML = html;
             } catch (error) {
                 console.error('❌ Erro ao carregar empresas:', error);
             }
         }
 
-        // ============================================
-        // CARREGAR PERFIS
-        // ============================================
         function loadProfiles() {
             try {
-                const stored = JSON.parse(localStorage.getItem('vigorre_job_profiles') || '[]');
+                var stored = JSON.parse(localStorage.getItem('vigorre_job_profiles') || '[]');
 
                 if (stored.length === 0) {
-                    // Dados de exemplo
                     profiles = [
                         { id: 'prof1', title: 'Gerente de Projetos', companyId: 'emp1', disc: { D: 80, I: 50, S: 60,
                                 C: 70 }, ieMin: 65, bigfive: { abertura: 70, conscienciosidade: 80, extroversao: 50,
@@ -1118,119 +978,109 @@
                                 amabilidade: 55, neuroticismo: 35 }, status: 'active', createdAt: '2024-01-15' },
                         { id: 'prof3', title: 'Analista de RH', companyId: 'emp2', disc: { D: 40, I: 65, S: 80, C: 55 },
                             ieMin: 70, bigfive: { abertura: 60, conscienciosidade: 65, extroversao: 60, amabilidade: 80,
-                                neuroticismo: 45 }, status: 'active', createdAt: '2024-02-01' },
-                        { id: 'prof4', title: 'Diretor Comercial', companyId: 'emp1', disc: { D: 85, I: 80, S: 40,
-                                C: 45 }, ieMin: 60, bigfive: { abertura: 65, conscienciosidade: 70, extroversao: 85,
-                                amabilidade: 50, neuroticismo: 50 }, status: 'pending', createdAt: '2024-02-15' },
-                        { id: 'prof5', title: 'Coordenador de Marketing', companyId: 'emp3', disc: { D: 55, I: 85,
-                                S: 50, C: 50 }, ieMin: 60, bigfive: { abertura: 80, conscienciosidade: 60, extroversao: 80,
-                                amabilidade: 65, neuroticismo: 45 }, status: 'inactive', createdAt: '2024-03-01' }
+                                neuroticismo: 45 }, status: 'active', createdAt: '2024-02-01' }
                     ];
                     localStorage.setItem('vigorre_job_profiles', JSON.stringify(profiles));
                 } else {
                     profiles = stored;
                 }
 
-                filteredProfiles = [...profiles];
+                filteredProfiles = profiles.slice();
                 renderTable();
-
             } catch (error) {
                 console.error('❌ Erro ao carregar perfis:', error);
                 showToast('Erro ao carregar perfis', 'error');
             }
         }
 
-        // ============================================
-        // RENDERIZAR TABELA
-        // ============================================
         function renderTable() {
-            const tbody = document.getElementById('tableBody');
+            var tbody = document.getElementById('tableBody');
 
             if (filteredProfiles.length === 0) {
-                tbody.innerHTML = `
-                        <tr>
-                            <td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400);">
-                                📭 Nenhum perfil encontrado
-                            </td>
-                        </tr>
-                    `;
+                tbody.innerHTML =
+                    '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400);">📭 Nenhum perfil encontrado</td></tr>';
                 document.getElementById('paginationInfo').textContent = 'Mostrando 0 de 0 perfis';
                 return;
             }
 
-            const start = (currentPage - 1) * pageSize;
-            const end = Math.min(start + pageSize, filteredProfiles.length);
-            const pageItems = filteredProfiles.slice(start, end);
+            var start = (currentPage - 1) * pageSize;
+            var end = Math.min(start + pageSize, filteredProfiles.length);
+            var pageItems = filteredProfiles.slice(start, end);
 
-            const statusMap = {
-                active: 'Ativo',
-                inactive: 'Inativo',
-                pending: 'Pendente'
-            };
+            var statusMap = { active: 'Ativo', inactive: 'Inativo', pending: 'Pendente' };
 
-            tbody.innerHTML = pageItems.map(p => {
-                const companyName = companies.find(c => c.id === p.companyId)?.name || '--';
+            var html = '';
+            for (var i = 0; i < pageItems.length; i++) {
+                var p = pageItems[i];
+                var companyName = '--';
+                for (var j = 0; j < companies.length; j++) {
+                    if (companies[j].id === p.companyId) {
+                        companyName = companies[j].name;
+                        break;
+                    }
+                }
 
-                // Determinar perfil DISC dominante
-                const discPcts = p.disc || {};
-                const dominant = Object.entries(discPcts).sort((a, b) => b[1] - a[1])[0]?.[0] || 'D';
-                const dominantName = { D: 'Dominância', I: 'Influência', S: 'Estabilidade', C: 'Conformidade' } [
+                var discPcts = p.disc || {};
+                var dominant = 'D';
+                var maxVal = 0;
+                for (var key in discPcts) {
+                    if (discPcts[key] > maxVal) {
+                        maxVal = discPcts[key];
+                        dominant = key;
+                    }
+                }
+                var dominantName = { D: 'Dominância', I: 'Influência', S: 'Estabilidade', C: 'Conformidade' } [
                 dominant] || '--';
 
-                // Badges dos fatores
-                const discBadge = `<span class="badge-profile">${dominantName}</span>`;
+                html += '<tr>';
+                html += '<td><strong>' + p.title + '</strong></td>';
+                html += '<td>' + companyName + '</td>';
+                html += '<td><span class="badge-profile">' + dominantName + '</span></td>';
+                html += '<td style="text-align:center;">' + (p.ieMin || 0) + '%</td>';
+                html += '<td><span class="badge-status ' + p.status + '">' + (statusMap[p.status] || 'Pendente') +
+                    '</span></td>';
+                html += '<td style="text-align:center;">';
+                html += '<div class="actions-cell" style="justify-content:center;">';
+                html += '<button class="btn-action view" onclick="viewProfile(\'' + p.id + '\')">👁️</button>';
+                html += '<button class="btn-action edit" onclick="editProfile(\'' + p.id + '\')">✏️</button>';
+                html += '<button class="btn-action compat" onclick="compatibilidadeProfile(\'' + p.id +
+                '\')">📊</button>';
+                html += '<button class="btn-action delete" onclick="deleteProfile(\'' + p.id + '\')">🗑️</button>';
+                html += '</div>';
+                html += '</td>';
+                html += '</tr>';
+            }
 
-                return `
-                        <tr>
-                            <td>
-                                <strong>${p.title || 'Sem título'}</strong>
-                                <br /><span style="font-size:0.75rem;color:var(--gray-400);">${p.id || '--'}</span>
-                            </td>
-                            <td>${companyName}</td>
-                            <td>${discBadge}</td>
-                            <td style="text-align:center;">${p.ieMin || 0}%</td>
-                            <td><span class="badge-status ${p.status || 'pending'}">${statusMap[p.status] || 'Pendente'}</span></td>
-                            <td style="text-align:center;">
-                                <div class="actions-cell" style="justify-content:center;">
-                                    <button class="btn-action view" onclick="viewProfile('${p.id}')" data-tooltip="Visualizar perfil">👁️</button>
-                                    <button class="btn-action edit" onclick="editProfile('${p.id}')" data-tooltip="Editar perfil">✏️</button>
-                                    <button class="btn-action compat" onclick="compatibilidadeProfile('${p.id}')" data-tooltip="Ver compatibilidade">📊</button>
-                                    <button class="btn-action delete" onclick="deleteProfile('${p.id}')" data-tooltip="Excluir perfil">🗑️</button>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-            }).join('');
+            tbody.innerHTML = html;
 
-            const total = filteredProfiles.length;
-            document.getElementById('paginationInfo').textContent = `Mostrando ${start + 1}-${end} de ${total} perfis`;
+            var total = filteredProfiles.length;
+            document.getElementById('paginationInfo').textContent = 'Mostrando ' + (start + 1) + '-' + end + ' de ' + total +
+                ' perfis';
             document.getElementById('pageIndicator').textContent = currentPage;
             document.getElementById('prevBtn').disabled = currentPage === 1;
             document.getElementById('nextBtn').disabled = end >= total;
         }
 
-        // ============================================
-        // FILTRAR
-        // ============================================
         function filterTable() {
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            const status = document.getElementById('statusFilter').value;
-            const company = document.getElementById('companyFilter').value;
+            var search = document.getElementById('searchInput').value.toLowerCase();
+            var status = document.getElementById('statusFilter').value;
+            var company = document.getElementById('companyFilter').value;
 
-            filteredProfiles = profiles.filter(p => {
-                const matchSearch = (p.title || '').toLowerCase().includes(search);
-                const matchStatus = !status || p.status === status;
-                const matchCompany = !company || p.companyId === company;
-                return matchSearch && matchStatus && matchCompany;
-            });
+            filteredProfiles = [];
+            for (var i = 0; i < profiles.length; i++) {
+                var p = profiles[i];
+                var matchSearch = p.title.toLowerCase().indexOf(search) !== -1;
+                var matchStatus = !status || p.status === status;
+                var matchCompany = !company || p.companyId === company;
+                if (matchSearch && matchStatus && matchCompany) {
+                    filteredProfiles.push(p);
+                }
+            }
 
             currentPage = 1;
             renderTable();
         }
 
-        // ============================================
-        // PAGINAÇÃO
-        // ============================================
         function prevPage() {
             if (currentPage > 1) {
                 currentPage--;
@@ -1239,77 +1089,79 @@
         }
 
         function nextPage() {
-            const totalPages = Math.ceil(filteredProfiles.length / pageSize);
+            var totalPages = Math.ceil(filteredProfiles.length / pageSize);
             if (currentPage < totalPages) {
                 currentPage++;
                 renderTable();
             }
         }
 
-        // ============================================
-        // VISUALIZAR PERFIL
-        // ============================================
         function viewProfile(id) {
-            const profile = profiles.find(p => p.id === id);
+            var profile = null;
+            for (var i = 0; i < profiles.length; i++) {
+                if (profiles[i].id === id) {
+                    profile = profiles[i];
+                    break;
+                }
+            }
             if (!profile) return;
 
-            const companyName = companies.find(c => c.id === profile.companyId)?.name || '--';
-            const discPcts = profile.disc || {};
-            const discText = Object.entries(discPcts).map(([k, v]) =>
-                `${k}: ${v}%`
-            ).join(' | ');
+            var companyName = '--';
+            for (var j = 0; j < companies.length; j++) {
+                if (companies[j].id === profile.companyId) {
+                    companyName = companies[j].name;
+                    break;
+                }
+            }
 
-            const bfPcts = profile.bigfive || {};
-            const bfText = Object.entries(bfPcts).map(([k, v]) =>
-                `${k}: ${v}%`
-            ).join(' | ');
+            var discPcts = profile.disc || {};
+            var discText = '';
+            for (var key in discPcts) {
+                discText += key + ': ' + discPcts[key] + '% | ';
+            }
+
+            var bfPcts = profile.bigfive || {};
+            var bfText = '';
+            for (var key in bfPcts) {
+                bfText += key + ': ' + bfPcts[key] + '% | ';
+            }
 
             alert(
-                `🎯 ${profile.title}\n\n📌 ID: ${profile.id}\n🏢 Empresa: ${companyName}\n📊 Status: ${profile.status || 'Pendente'}\n\n📈 Perfil DISC:\n${discText}\n\n🧠 IE Mínima: ${profile.ieMin || 0}%\n\n🧬 Big Five:\n${bfText}\n\n📅 Criado em: ${profile.createdAt ? new Date(profile.createdAt).toLocaleDateString('pt-BR') : '--'}`
-                );
+                '🎯 ' + profile.title + '\n\n📌 ID: ' + profile.id + '\n🏢 Empresa: ' + companyName +
+                '\n📊 Status: ' + profile.status + '\n\n📈 Perfil DISC:\n' + discText + '\n\n🧠 IE Mínima: ' + (
+                    profile.ieMin || 0) + '%\n\n🧬 Big Five:\n' + bfText + '\n\n📅 Criado em: ' + new Date(profile
+                    .createdAt).toLocaleDateString('pt-BR')
+            );
         }
 
-        // ============================================
-        // EDITAR PERFIL
-        // ============================================
         function editProfile(id) {
-            window.location.href = `editar.html?id=${id}`;
+            window.location.href = 'editar.html?id=' + id;
         }
 
-        // ============================================
-        // COMPATIBILIDADE
-        // ============================================
         function compatibilidadeProfile(id) {
-            window.location.href = `compatibilidade.html?id=${id}`;
+            window.location.href = 'compatibilidade.html?id=' + id;
         }
 
-        // ============================================
-        // DELETAR PERFIL
-        // ============================================
         function deleteProfile(id) {
-            if (!confirm('⚠️ Tem certeza que deseja excluir este perfil ideal? Esta ação não pode ser desfeita.')) return;
+            if (!confirm('⚠️ Tem certeza que deseja excluir este perfil ideal? Esta ação não pode ser desfeita.'))
+                return;
 
-            try {
-                const all = JSON.parse(localStorage.getItem('vigorre_job_profiles') || '[]');
-                const filtered = all.filter(p => p.id !== id);
-                localStorage.setItem('vigorre_job_profiles', JSON.stringify(filtered));
-                profiles = filtered;
-                filteredProfiles = [...profiles];
-                renderTable();
-                showToast('✅ Perfil excluído com sucesso!', 'success');
-            } catch (error) {
-                console.error('❌ Erro ao excluir:', error);
-                showToast('Erro ao excluir perfil', 'error');
+            var newProfiles = [];
+            for (var i = 0; i < profiles.length; i++) {
+                if (profiles[i].id !== id) {
+                    newProfiles.push(profiles[i]);
+                }
             }
+            profiles = newProfiles;
+            filteredProfiles = profiles.slice();
+            renderTable();
+            showToast('✅ Perfil excluído com sucesso!', 'success');
         }
 
-        // ============================================
-        // TOAST
-        // ============================================
         function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
 
             if (type === 'error') {
                 icon.textContent = '❌';
@@ -1320,10 +1172,10 @@
             }
 
             msg.textContent = message;
-            toast.className = `toast show ${type || 'success'}`;
+            toast.className = 'toast show ' + (type || 'success');
 
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
+            toast._timeout = setTimeout(function() {
                 toast.classList.remove('show');
             }, 4000);
         }
