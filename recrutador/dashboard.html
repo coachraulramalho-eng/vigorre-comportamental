@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recrutador Dashboard | VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
         /* ============================================
            VIGORRE ONE™ - RECRUTADOR DASHBOARD
@@ -26,6 +24,10 @@
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
+            --purple: #7C3AED;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -319,14 +321,14 @@
         }
 
         .stat-card .stat-change.up {
-            color: #10B981;
+            color: var(--green);
         }
         .stat-card .stat-change.down {
-            color: #EF4444;
+            color: var(--red);
         }
 
         /* ============================================
-           IA CARD (NOVO)
+           IA CARD
            ============================================ */
         .ia-card {
             background: linear-gradient(135deg, var(--navy), var(--gray-800));
@@ -453,6 +455,14 @@
         /* ============================================
            TABLE
            ============================================ */
+        .table-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10, 37, 64, 0.04);
+            overflow: hidden;
+        }
+
         .table-container {
             overflow-x: auto;
         }
@@ -465,7 +475,8 @@
 
         .table-container th {
             text-align: left;
-            padding: 10px 12px;
+            padding: 12px 16px;
+            background: var(--gray-50);
             font-weight: 600;
             color: var(--gray-500);
             font-size: 0.7rem;
@@ -475,7 +486,7 @@
         }
 
         .table-container td {
-            padding: 10px 12px;
+            padding: 12px 16px;
             border-bottom: 1px solid var(--gray-100);
             color: var(--gray-700);
         }
@@ -555,6 +566,68 @@
             padding: 8px;
         }
 
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 37, 64, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 300;
+            border-left: 4px solid var(--cyan);
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.error {
+            border-left-color: var(--red);
+        }
+        .toast.success {
+            border-left-color: var(--green);
+        }
+        .toast.warning {
+            border-left-color: var(--orange);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         /* ============================================
            RESPONSIVO
            ============================================ */
@@ -584,17 +657,6 @@
             }
             .mobile-toggle {
                 display: block;
-            }
-            .mobile-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(10, 37, 64, 0.4);
-                backdrop-filter: blur(4px);
-                z-index: 99;
             }
             .mobile-overlay.active {
                 display: block;
@@ -643,10 +705,31 @@
             .logo-img {
                 height: 36px !important;
             }
+            .quick-actions {
+                display: none !important;
+            }
+            .btn-primary {
+                display: none !important;
+            }
+            .stats-grid {
+                display: none !important;
+            }
+            .ia-card {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ============================================
+    TOAST
+    ============================================ -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
 
     <!-- ============================================
     SIDEBAR
@@ -680,7 +763,7 @@
             <li><a href="relatorios/"><span class="icon">📄</span> Relatórios</a></li>
             <div class="divider"></div>
             <li><a href="agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
-            <li><a href="backup/meu-backup.html"><span class="icon">💾</span> Meu Backup</a></li>
+            <li><a href="backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
         </ul>
 
         <div class="logout">
@@ -690,6 +773,7 @@
         </div>
     </aside>
 
+    <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
 
     <!-- ============================================
@@ -732,14 +816,14 @@
             </div>
         </div>
 
-        <!-- IA Recomendações (NOVO) -->
+        <!-- IA Card -->
         <div class="ia-card">
             <div class="ia-top">
                 <span class="ia-title">🤖 Recomendações da IA</span>
                 <span class="ia-badge">Atualizado agora</span>
             </div>
             <div class="ia-content" id="iaContent">
-                <!-- Carregado via JS -->
+                <!-- Carregado via JavaScript -->
             </div>
         </div>
 
@@ -779,12 +863,8 @@
             </div>
         </div>
 
-        <!-- Participantes -->
-        <div class="card">
-            <div class="card-header">
-                <h3>📋 Meus Participantes</h3>
-                <a href="participantes/" class="action">Ver todos →</a>
-            </div>
+        <!-- Participantes Table -->
+        <div class="table-card">
             <div class="table-container">
                 <table>
                     <thead>
@@ -796,6 +876,7 @@
                         </tr>
                     </thead>
                     <tbody id="participantsTable">
+                        <!-- Carregado via JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -813,14 +894,20 @@
     <script src="../middleware/recruiter-guard.js"></script>
 
     <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - RECRUTADOR DASHBOARD
+         * ============================================
+         */
+
         'use strict';
 
         // ============================================
         // TOGGLE SIDEBAR
         // ============================================
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobileOverlay');
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('mobileOverlay');
             sidebar.classList.toggle('open');
             overlay.classList.toggle('active');
         }
@@ -844,93 +931,140 @@
         });
 
         // ============================================
-        // IA RECOMENDAÇÕES
-        // ============================================
-        function loadIAContent() {
-            const container = document.getElementById('iaContent');
-
-            const recommendations = [
-                { icon: '👥', title: 'Novos Participantes', desc: '3 participantes aguardando avaliação' },
-                { icon: '📊', title: 'Testes DISC', desc: '2 testes pendentes para liberar' },
-                { icon: '🎯', title: 'Perfil Ideal', desc: 'Sugestão de perfil para vaga em aberto' }
-            ];
-
-            container.innerHTML = recommendations.map(item => `
-                    <div class="ia-item" onclick="handleIAClick('${item.title}')">
-                        <div class="ia-item-icon">${item.icon}</div>
-                        <div class="ia-item-title">${item.title}</div>
-                        <div class="ia-item-desc">${item.desc}</div>
-                    </div>
-                `).join('');
-        }
-
-        function handleIAClick(title) {
-            alert(`🤖 IA: ${title}\n\nClique para mais detalhes.`);
-        }
-
-        // ============================================
         // INICIALIZAR
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Recrutador Dashboard - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            // Verificar autenticação
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../login.html';
                 return;
             }
 
-            const user = window.VigorreAuth.getCurrentUser();
+            var user = window.VigorreAuth.getCurrentUser();
             if (!user || (user.role !== 'recruiter' && user.role !== 'admin' && user.role !== 'master')) {
                 alert('⚠️ Acesso restrito a recrutadores.');
                 window.VigorreAuth.logout();
                 return;
             }
 
+            // Atualizar nome do usuário
             document.getElementById('userName').textContent = user.name || 'Recrutador';
 
-            const credits = user.credits || {};
+            // Atualizar créditos
+            var credits = user.credits || {};
             document.getElementById('credDisc').textContent = credits.DISC || 0;
             document.getElementById('credIE').textContent = credits.IE || 0;
             document.getElementById('credValores').textContent = credits.Valores || 0;
 
+            // Carregar IA Content
             loadIAContent();
+
+            // Carregar dados
             loadData();
+
+            // Renderizar gráfico
             renderChart();
         });
+
+        // ============================================
+        // CARREGAR IA CONTENT
+        // ============================================
+        function loadIAContent() {
+            var container = document.getElementById('iaContent');
+
+            var recommendations = [
+                { icon: '👥', title: 'Novos Participantes', desc: '3 participantes aguardando avaliação' },
+                { icon: '📊', title: 'Testes DISC', desc: '2 testes pendentes para liberar' },
+                { icon: '🎯', title: 'Perfil Ideal', desc: 'Sugestão de perfil para vaga em aberto' },
+                { icon: '💳', title: 'Créditos', desc: 'Você tem 50 créditos disponíveis' }
+            ];
+
+            var html = '';
+            for (var i = 0; i < recommendations.length; i++) {
+                var item = recommendations[i];
+                html += '<div class="ia-item" onclick="handleIAClick(\'' + item.title + '\')">';
+                html += '<div class="ia-item-icon">' + item.icon + '</div>';
+                html += '<div class="ia-item-title">' + item.title + '</div>';
+                html += '<div class="ia-item-desc">' + item.desc + '</div>';
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ============================================
+        // HANDLE IA CLICK
+        // ============================================
+        function handleIAClick(title) {
+            alert('🤖 IA: ' + title + '\n\nClique para mais detalhes.');
+        }
 
         // ============================================
         // CARREGAR DADOS
         // ============================================
         function loadData() {
             try {
-                const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const scope = JSON.parse(localStorage.getItem('vigorre_scope') || '{}');
-                const companyIds = scope.companyIds || [];
+                var participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var scope = JSON.parse(localStorage.getItem('vigorre_scope') || '{}');
+                var companyIds = scope.companyIds || [];
 
-                const filtered = companyIds.length > 0 ?
-                    participants.filter(p => companyIds.includes(p.companyId)) :
-                    participants;
+                // Filtrar participantes do recrutador
+                var filtered = [];
+                if (companyIds.length > 0) {
+                    for (var i = 0; i < participants.length; i++) {
+                        if (companyIds.indexOf(participants[i].companyId) !== -1) {
+                            filtered.push(participants[i]);
+                        }
+                    }
+                } else {
+                    filtered = participants;
+                }
 
-                const total = filtered.length;
-                const completed = filtered.filter(p => p.status === 'completed').length;
-                const pending = filtered.filter(p => p.status !== 'completed').length;
+                // Atualizar estatísticas
+                var total = filtered.length;
+                var completed = 0;
+                var pending = 0;
+
+                for (var j = 0; j < filtered.length; j++) {
+                    if (filtered[j].status === 'completed') {
+                        completed++;
+                    } else {
+                        pending++;
+                    }
+                }
 
                 document.getElementById('totalParticipants').textContent = total;
                 document.getElementById('totalCompleted').textContent = completed;
                 document.getElementById('totalPending').textContent = pending;
 
-                const tbody = document.getElementById('participantsTable');
-                tbody.innerHTML = filtered.slice(0, 5).map(p => `
-                        <tr>
-                            <td><strong>${p.name || 'Sem nome'}</strong></td>
-                            <td>${p.companyName || '-'}</td>
-                            <td>${(p.tests || []).join(', ') || '-'}</td>
-                            <td><span class="badge-status ${p.status === 'completed' ? 'completed' : p.status === 'in_progress' ? 'in_progress' : 'pending'}">
-                                ${p.status === 'completed' ? '✅ Concluído' : p.status === 'in_progress' ? '🔄 Em andamento' : '⏳ Pendente'}
-                            </span></td>
-                        </tr>
-                    `).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--gray-400);">Nenhum participante encontrado</td></tr>';
+                // Renderizar tabela
+                var tbody = document.getElementById('participantsTable');
+
+                if (filtered.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:40px;color:var(--gray-400);">Nenhum participante encontrado</td></tr>';
+                    return;
+                }
+
+                var html = '';
+                var limit = Math.min(filtered.length, 5);
+
+                for (var k = 0; k < limit; k++) {
+                    var p = filtered[k];
+                    var statusClass = p.status === 'completed' ? 'completed' : p.status === 'in_progress' ? 'in_progress' : 'pending';
+                    var statusText = p.status === 'completed' ? '✅ Concluído' : p.status === 'in_progress' ? '🔄 Em andamento' : '⏳ Pendente';
+
+                    html += '<tr>';
+                    html += '<td><strong>' + (p.name || 'Sem nome') + '</strong></td>';
+                    html += '<td>' + (p.companyName || '-') + '</td>';
+                    html += '<td>' + ((p.tests || []).join(', ') || '-') + '</td>';
+                    html += '<td><span class="badge-status ' + statusClass + '">' + statusText + '</span></td>';
+                    html += '</tr>';
+                }
+
+                tbody.innerHTML = html;
 
             } catch (error) {
                 console.error('❌ Erro ao carregar dados:', error);
@@ -942,7 +1076,7 @@
         // ============================================
         function renderChart() {
             try {
-                const ctx = document.getElementById('progressChart').getContext('2d');
+                var ctx = document.getElementById('progressChart').getContext('2d');
 
                 new Chart(ctx, {
                     type: 'doughnut',
@@ -964,7 +1098,8 @@
                                     color: '#64748B',
                                     font: { size: 12 },
                                     usePointStyle: true,
-                                    pointStyle: 'circle'
+                                    pointStyle: 'circle',
+                                    padding: 12
                                 }
                             }
                         },
