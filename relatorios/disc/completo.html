@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Relatório Completo DISC | VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
         /* ============================================
            VIGORRE ONE™ - RELATÓRIO COMPLETO DISC
+           INTERNATIONAL ENTERPRISE EDITION
            ============================================ */
 
         * {
@@ -22,11 +21,16 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
             --purple: #7C3AED;
+            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -43,7 +47,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -54,15 +60,18 @@
             padding: 20px;
         }
 
+        /* ============================================
+           CONTAINER
+           ============================================ */
         .container {
             max-width: 1100px;
             margin: 0 auto;
         }
 
         /* ============================================
-           HEADER PREMIUM
+           HEADER PREMIUM (IMPRESSÃO)
            ============================================ */
-        .header-premium {
+        .header-print {
             background: var(--navy);
             color: white;
             padding: 24px 32px;
@@ -72,71 +81,74 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 16px;
+            position: relative;
+            z-index: 1;
         }
 
-        .header-premium .logo {
+        .header-print .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
         }
 
-        .header-premium .logo .logo-img {
+        .header-print .logo .logo-img {
             height: 44px;
             width: auto;
             display: block;
         }
 
-        .header-premium .logo .logo-text .name {
+        .header-print .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             font-weight: 800;
             color: white;
+            letter-spacing: -0.3px;
         }
 
-        .header-premium .logo .logo-text .name .tm {
+        .header-print .logo .logo-text .name .tm {
             font-size: 0.4rem;
             vertical-align: super;
             color: var(--cyan);
         }
 
-        .header-premium .logo .logo-text .sub {
+        .header-print .logo .logo-text .sub {
             font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
-        .header-premium .header-title {
+        .header-print .header-title {
             text-align: center;
         }
 
-        .header-premium .header-title h1 {
+        .header-print .header-title h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
         }
 
-        .header-premium .header-title .subtitle {
+        .header-print .header-title .subtitle {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .header-premium .header-user {
+        .header-print .header-user {
             text-align: right;
         }
 
-        .header-premium .header-user .name {
+        .header-print .header-user .name {
             font-weight: 600;
             font-size: 0.9rem;
         }
 
-        .header-premium .header-user .company {
+        .header-print .header-user .company {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .header-premium .header-code {
+        .header-print .header-code {
             font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.3);
             font-family: 'Courier New', monospace;
@@ -207,6 +219,7 @@
             padding: 60px 40px;
             border-bottom: 2px solid var(--gray-200);
             margin-bottom: 32px;
+            position: relative;
         }
 
         .capa .capa-logo {
@@ -335,7 +348,7 @@
         }
 
         /* ============================================
-           CARDS DE PERFIL
+           PROFILE GRID
            ============================================ */
         .profile-grid {
             display: grid;
@@ -382,13 +395,21 @@
             transition: width 0.8s ease;
         }
 
-        .profile-card.disc-d .profile-bar .fill { background: #EF4444; }
-        .profile-card.disc-i .profile-bar .fill { background: #3B82F6; }
-        .profile-card.disc-s .profile-bar .fill { background: #10B981; }
-        .profile-card.disc-c .profile-bar .fill { background: #8B5CF6; }
+        .profile-card.disc-d .profile-bar .fill {
+            background: #EF4444;
+        }
+        .profile-card.disc-i .profile-bar .fill {
+            background: #3B82F6;
+        }
+        .profile-card.disc-s .profile-bar .fill {
+            background: #10B981;
+        }
+        .profile-card.disc-c .profile-bar .fill {
+            background: #8B5CF6;
+        }
 
         /* ============================================
-           GRÁFICOS
+           CHARTS
            ============================================ */
         .chart-container {
             height: 240px;
@@ -396,19 +417,13 @@
             margin: 16px 0;
         }
 
-        .chart-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin: 16px 0;
-        }
-
-        .chart-row .chart-container {
-            height: 200px;
+        .chart-container-sm {
+            height: 180px;
+            position: relative;
         }
 
         /* ============================================
-           LISTAS
+           FEATURE LIST
            ============================================ */
         .feature-list {
             list-style: none;
@@ -435,7 +450,7 @@
         }
 
         /* ============================================
-           COMPATIBILIDADE COM VAGA
+           COMPATIBILIDADE
            ============================================ */
         .compatibilidade-card {
             background: var(--gray-50);
@@ -512,9 +527,9 @@
         }
 
         /* ============================================
-           FOOTER
+           FOOTER PREMIUM (IMPRESSÃO)
            ============================================ */
-        .footer-premium {
+        .footer-print {
             background: var(--navy);
             color: white;
             padding: 20px 32px;
@@ -526,13 +541,13 @@
             gap: 12px;
         }
 
-        .footer-premium .footer-logo {
+        .footer-print .footer-logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .footer-premium .footer-logo .logo-icon {
+        .footer-print .footer-logo .logo-icon {
             width: 32px;
             height: 32px;
             background: var(--cyan);
@@ -546,41 +561,41 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .footer-premium .footer-logo .footer-text .name {
+        .footer-print .footer-logo .footer-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
         }
 
-        .footer-premium .footer-logo .footer-text .name .tm {
+        .footer-print .footer-logo .footer-text .name .tm {
             font-size: 0.35rem;
             vertical-align: super;
             color: var(--cyan);
         }
 
-        .footer-premium .footer-logo .footer-text .tagline {
+        .footer-print .footer-logo .footer-text .tagline {
             font-size: 0.55rem;
             color: rgba(255, 255, 255, 0.3);
         }
 
-        .footer-premium .footer-contact {
+        .footer-print .footer-contact {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
         }
 
-        .footer-premium .footer-contact a {
+        .footer-print .footer-contact a {
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             font-size: 0.7rem;
             transition: var(--transition);
         }
 
-        .footer-premium .footer-contact a:hover {
+        .footer-print .footer-contact a:hover {
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .footer-premium .footer-page {
+        .footer-print .footer-page {
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.3);
         }
@@ -634,7 +649,7 @@
         }
 
         .btn-success {
-            background: #10B981;
+            background: var(--green);
             color: white;
         }
 
@@ -647,11 +662,12 @@
            RESPONSIVO
            ============================================ */
         @media (max-width: 768px) {
-            .header-premium {
+            .header-print {
                 flex-direction: column;
                 text-align: center;
+                padding: 16px 20px;
             }
-            .header-premium .header-user {
+            .header-print .header-user {
                 text-align: center;
             }
             .profile-grid {
@@ -660,16 +676,13 @@
             .feature-list {
                 grid-template-columns: 1fr;
             }
-            .chart-row {
-                grid-template-columns: 1fr;
-            }
             .capa .capa-info {
                 grid-template-columns: 1fr;
             }
             .report-body {
                 padding: 20px;
             }
-            .footer-premium {
+            .footer-print {
                 flex-direction: column;
                 text-align: center;
             }
@@ -681,18 +694,36 @@
             }
         }
 
+        @media (max-width: 480px) {
+            .capa {
+                padding: 30px 20px;
+            }
+            .capa .capa-title {
+                font-size: 1.4rem;
+            }
+            .capa .capa-logo {
+                font-size: 1.8rem;
+            }
+            .container {
+                padding: 0;
+            }
+            body {
+                padding: 10px;
+            }
+        }
+
         @media print {
             body {
                 background: white !important;
                 padding: 0 !important;
             }
-            .header-premium {
+            .header-print {
                 background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 border-radius: 0 !important;
             }
-            .footer-premium {
+            .footer-print {
                 background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -706,9 +737,12 @@
             }
             .report-body {
                 border: none !important;
+                padding: 20px !important;
             }
             .profile-card {
                 background: #F8FAFC !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             .feature-list li {
                 background: #F8FAFC !important;
@@ -725,6 +759,9 @@
             .section {
                 page-break-inside: avoid;
             }
+            .capa {
+                border-bottom: 2px solid #E2E8F0 !important;
+            }
         }
     </style>
 </head>
@@ -735,7 +772,7 @@
         <!-- ============================================
         HEADER PREMIUM
         ============================================ -->
-        <header class="header-premium">
+        <header class="header-print">
             <div class="logo">
                 <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
                 <div class="logo-text">
@@ -812,6 +849,7 @@
                 <div class="sumario-item"><span>14. Plano de Desenvolvimento</span><span class="page">18</span></div>
                 <div class="sumario-item"><span>15. Parecer da IA</span><span class="page">19</span></div>
                 <div class="sumario-item"><span>16. Conclusão</span><span class="page">20</span></div>
+                <div class="sumario-item"><span>17. Assinatura Digital</span><span class="page">21</span></div>
             </section>
 
             <!-- ============================================
@@ -898,7 +936,7 @@
             <section class="section">
                 <h2 class="section-title"><span class="number">4</span> Perfil DISC</h2>
                 <div class="profile-grid" id="profileGrid">
-                    <!-- Carregado via JS -->
+                    <!-- Carregado via JavaScript -->
                 </div>
                 <div class="chart-container">
                     <canvas id="discChart"></canvas>
@@ -1021,7 +1059,7 @@
             </section>
 
             <!-- ============================================
-            ASSINATURA
+            SEÇÃO 17: ASSINATURA DIGITAL
             ============================================ -->
             <section class="assinatura">
                 <div class="assinatura-qr">
@@ -1051,9 +1089,9 @@
         </div>
 
         <!-- ============================================
-        FOOTER
+        FOOTER PREMIUM
         ============================================ -->
-        <footer class="footer-premium">
+        <footer class="footer-print">
             <div class="footer-logo">
                 <div class="logo-icon">V</div>
                 <div class="footer-text">
@@ -1081,12 +1119,18 @@
     <script src="../../middleware/auth-guard.js"></script>
 
     <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - RELATÓRIO COMPLETO DISC
+         * ============================================
+         */
+
         'use strict';
 
         // ============================================
         // DADOS DE EXEMPLO
         // ============================================
-        const sampleData = {
+        var sampleData = {
             participantName: 'Ana Silva',
             companyName: 'TechCorp Solutions',
             participantId: 'P001',
@@ -1101,7 +1145,7 @@
         // ============================================
         // CONFIGURAÇÃO DOS PERFIS
         // ============================================
-        const profileConfig = {
+        var profileConfig = {
             D: {
                 name: 'Dominância',
                 icon: '🦁',
@@ -1202,7 +1246,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📄 Relatório Completo DISC - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../../login.html';
                 return;
@@ -1216,42 +1260,57 @@
         // ============================================
         function loadData() {
             try {
-                const user = window.VigorreAuth.getCurrentUser();
+                var user = window.VigorreAuth.getCurrentUser();
                 if (!user) {
                     renderReport(sampleData);
                     return;
                 }
 
-                const allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const participant = allParticipants.find(p => p.id === user.id);
+                var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var participant = null;
+                for (var i = 0; i < allParticipants.length; i++) {
+                    if (allParticipants[i].id === user.id) {
+                        participant = allParticipants[i];
+                        break;
+                    }
+                }
 
-                if (!participant || !participant.results?.DISC) {
+                if (!participant || !participant.results || !participant.results.DISC) {
                     renderReport(sampleData);
                     return;
                 }
 
-                const discResult = participant.results.DISC;
-                let companyName = 'Autônomo';
-                let jobTitle = 'Não vinculado';
+                var discResult = participant.results.DISC;
+                var companyName = 'Autônomo';
+                var jobTitle = 'Não vinculado';
 
                 if (participant.companyId) {
-                    const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-                    const company = companies.find(c => c.id === participant.companyId);
-                    if (company) companyName = company.name;
+                    var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                    for (var j = 0; j < companies.length; j++) {
+                        if (companies[j].id === participant.companyId) {
+                            companyName = companies[j].name;
+                            break;
+                        }
+                    }
                 }
 
                 if (participant.jobId) {
-                    const jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
-                    const job = jobs.find(j => j.id === participant.jobId);
-                    if (job) jobTitle = job.title || job.name || 'Vaga';
+                    var jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
+                    for (var k = 0; k < jobs.length; k++) {
+                        if (jobs[k].id === participant.jobId) {
+                            jobTitle = jobs[k].title || jobs[k].name || 'Vaga';
+                            break;
+                        }
+                    }
                 }
 
-                const data = {
+                var data = {
                     participantName: participant.name || sampleData.participantName,
                     companyName: companyName,
                     participantId: participant.id || sampleData.participantId,
                     date: new Date().toISOString(),
-                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0'),
+                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000))
+                        .padStart(3, '0'),
                     percentages: discResult.percentages || sampleData.percentages,
                     dominant: discResult.dominant || sampleData.dominant,
                     job: jobTitle,
@@ -1270,9 +1329,9 @@
         // RENDERIZAR RELATÓRIO
         // ============================================
         function renderReport(data) {
-            const pcts = data.percentages;
-            const profile = profileConfig[data.dominant];
-            const dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
+            var pcts = data.percentages;
+            var profile = profileConfig[data.dominant];
+            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
                 day: '2-digit',
                 month: 'long',
                 year: 'numeric',
@@ -1282,8 +1341,8 @@
 
             // Atualizar cabeçalho
             document.getElementById('participantName').textContent = data.participantName;
-            document.getElementById('participantCompany').textContent = `Empresa: ${data.companyName}`;
-            document.getElementById('reportCode').textContent = `Código: ${data.reportCode}`;
+            document.getElementById('participantCompany').textContent = 'Empresa: ' + data.companyName;
+            document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
 
             // Atualizar capa
             document.getElementById('capaParticipant').textContent = data.participantName;
@@ -1297,7 +1356,8 @@
 
             // Atualizar assinatura
             document.getElementById('assinaturaCode').textContent =
-                `Código de Autenticação: ${data.reportCode} • Hash: ${generateHash(data.participantId + data.reportCode)}`;
+                'Código de Autenticação: ' + data.reportCode + ' • Hash: ' + generateHash(data.participantId + data
+                    .reportCode);
 
             // Atualizar página
             document.getElementById('pageNumber').textContent = '1';
@@ -1305,78 +1365,79 @@
             // ============================================
             // 1. PERFIL DISC - GRID
             // ============================================
-            const grid = document.getElementById('profileGrid');
-            const items = [
+            var grid = document.getElementById('profileGrid');
+            var items = [
                 { key: 'D', label: 'Dominância', icon: '🦁', color: '#EF4444' },
                 { key: 'I', label: 'Influência', icon: '🦚', color: '#3B82F6' },
                 { key: 'S', label: 'Estabilidade', icon: '🐘', color: '#10B981' },
                 { key: 'C', label: 'Conformidade', icon: '🦉', color: '#8B5CF6' }
             ];
 
-            grid.innerHTML = items.map(item => {
-                const value = pcts[item.key] || 0;
-                const isDominant = item.key === data.dominant;
-                return `
-                        <div class="profile-card disc-${item.key.toLowerCase()}" style="${isDominant ? 'border-color:' + item.color + ';border-width:2px;' : ''}">
-                            <div class="profile-icon">${item.icon}</div>
-                            <div class="profile-name">${item.label} ${isDominant ? '⭐' : ''}</div>
-                            <div class="profile-value">${value}%</div>
-                            <div class="profile-bar"><div class="fill" style="width:${value}%;background:${item.color};"></div></div>
-                        </div>
-                    `;
-            }).join('');
+            var gridHtml = '';
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                var value = pcts[item.key] || 0;
+                var isDominant = item.key === data.dominant;
+                gridHtml += '<div class="profile-card disc-' + item.key.toLowerCase() + '" style="' + (isDominant ?
+                    'border-color:' + item.color + ';border-width:2px;' : '') + '">';
+                gridHtml += '<div class="profile-icon">' + item.icon + '</div>';
+                gridHtml += '<div class="profile-name">' + item.label + (isDominant ? ' ⭐' : '') + '</div>';
+                gridHtml += '<div class="profile-value">' + value + '%</div>';
+                gridHtml += '<div class="profile-bar"><div class="fill" style="width:' + value + '%;background:' + item
+                    .color + ';"></div></div>';
+                gridHtml += '</div>';
+            }
+            grid.innerHTML = gridHtml;
 
             // ============================================
             // 2. DESCRIÇÃO DO PERFIL
             // ============================================
-            document.getElementById('profileDescription').innerHTML = `
-                    <strong>Perfil ${profile.icon} ${profile.name}:</strong> ${profile.description}
-                    <br /><br />
-                    <strong>Percentual de ${profile.name}:</strong> ${pcts[data.dominant]}%
-                    <br />
-                    <strong>Distribuição completa:</strong> D ${pcts.D}% | I ${pcts.I}% | S ${pcts.S}% | C ${pcts.C}%
-                `;
+            document.getElementById('profileDescription').innerHTML =
+                '<strong>Perfil ' + profile.icon + ' ' + profile.name + ':</strong> ' + profile.description +
+                '<br /><br /><strong>Percentual de ' + profile.name + ':</strong> ' + pcts[data.dominant] +
+                '%<br /><strong>Distribuição completa:</strong> D ' + pcts.D + '% | I ' + pcts.I + '% | S ' + pcts
+                .S + '% | C ' + pcts.C + '%';
 
             // ============================================
             // 3. ANÁLISE DOS FATORES
             // ============================================
-            document.getElementById('factorsAnalysis').innerHTML = `
-                    <strong>Dominância (D) - ${pcts.D}%:</strong> 
-                    ${pcts.D >= 70 ? 'Muito alta. Você é uma pessoa orientada a resultados, competitiva e determinada.' :
+            document.getElementById('factorsAnalysis').innerHTML =
+                '<strong>Dominância (D) - ' + pcts.D + '%:</strong> ' + (pcts.D >= 70 ?
+                    'Muito alta. Você é uma pessoa orientada a resultados, competitiva e determinada.' :
                     pcts.D >= 50 ? 'Moderada. Você equilibra assertividade com cooperação.' :
-                    'Baixa. Você prefere colaborar e evitar confrontos.'}
-                    <br /><br />
-                    <strong>Influência (I) - ${pcts.I}%:</strong>
-                    ${pcts.I >= 70 ? 'Muito alta. Você é comunicativo, persuasivo e sociável.' :
+                    'Baixa. Você prefere colaborar e evitar confrontos.') +
+                '<br /><br /><strong>Influência (I) - ' + pcts.I + '%:</strong> ' + (pcts.I >= 70 ?
+                    'Muito alta. Você é comunicativo, persuasivo e sociável.' :
                     pcts.I >= 50 ? 'Moderada. Você se comunica bem, mas valoriza momentos de introspecção.' :
-                    'Baixa. Você prefere ouvir e observar antes de se expressar.'}
-                    <br /><br />
-                    <strong>Estabilidade (S) - ${pcts.S}%:</strong>
-                    ${pcts.S >= 70 ? 'Muito alta. Você é paciente, confiável e valoriza a harmonia.' :
+                    'Baixa. Você prefere ouvir e observar antes de se expressar.') +
+                '<br /><br /><strong>Estabilidade (S) - ' + pcts.S + '%:</strong> ' + (pcts.S >= 70 ?
+                    'Muito alta. Você é paciente, confiável e valoriza a harmonia.' :
                     pcts.S >= 50 ? 'Moderada. Você equilibra estabilidade com disposição para mudanças.' :
-                    'Baixa. Você prefere ambientes dinâmicos e mudanças constantes.'}
-                    <br /><br />
-                    <strong>Conformidade (C) - ${pcts.C}%:</strong>
-                    ${pcts.C >= 70 ? 'Muito alta. Você é analítico, detalhista e valoriza a precisão.' :
+                    'Baixa. Você prefere ambientes dinâmicos e mudanças constantes.') +
+                '<br /><br /><strong>Conformidade (C) - ' + pcts.C + '%:</strong> ' + (pcts.C >= 70 ?
+                    'Muito alta. Você é analítico, detalhista e valoriza a precisão.' :
                     pcts.C >= 50 ? 'Moderada. Você equilibra análise com flexibilidade.' :
-                    'Baixa. Você prefere visão geral em vez de detalhes minuciosos.'}
-                `;
+                    'Baixa. Você prefere visão geral em vez de detalhes minuciosos.');
 
             // ============================================
             // 4. FORÇAS
             // ============================================
-            const strengthsList = document.getElementById('strengthsList');
-            strengthsList.innerHTML = profile.strengths.map(s =>
-                `<li><span class="check">✓</span> ${s}</li>`
-            ).join('');
+            var strengthsList = document.getElementById('strengthsList');
+            var strengthsHtml = '';
+            for (var s = 0; s < profile.strengths.length; s++) {
+                strengthsHtml += '<li><span class="check">✓</span> ' + profile.strengths[s] + '</li>';
+            }
+            strengthsList.innerHTML = strengthsHtml;
 
             // ============================================
             // 5. ÁREAS DE DESENVOLVIMENTO
             // ============================================
-            const devList = document.getElementById('developmentList');
-            devList.innerHTML = profile.development.map(d =>
-                `<li><span class="check">✓</span> ${d}</li>`
-            ).join('');
+            var devList = document.getElementById('developmentList');
+            var devHtml = '';
+            for (var d = 0; d < profile.development.length; d++) {
+                devHtml += '<li><span class="check">✓</span> ' + profile.development[d] + '</li>';
+            }
+            devList.innerHTML = devHtml;
 
             // ============================================
             // 6. COMUNICAÇÃO
@@ -1401,56 +1462,57 @@
             // ============================================
             // 10. CARREIRAS
             // ============================================
-            const careersList = document.getElementById('careersList');
-            careersList.innerHTML = profile.careers.map(c =>
-                `<li><span class="check">✓</span> ${c}</li>`
-            ).join('');
+            var careersList = document.getElementById('careersList');
+            var careersHtml = '';
+            for (var c = 0; c < profile.careers.length; c++) {
+                careersHtml += '<li><span class="check">✓</span> ' + profile.careers[c] + '</li>';
+            }
+            careersList.innerHTML = careersHtml;
 
             // ============================================
             // 11. AMBIENTES
             // ============================================
-            const envList = document.getElementById('environmentsList');
-            envList.innerHTML = profile.environments.map(e =>
-                `<li><span class="check">✓</span> ${e}</li>`
-            ).join('');
+            var envList = document.getElementById('environmentsList');
+            var envHtml = '';
+            for (var e = 0; e < profile.environments.length; e++) {
+                envHtml += '<li><span class="check">✓</span> ' + profile.environments[e] + '</li>';
+            }
+            envList.innerHTML = envHtml;
 
             // ============================================
             // 12. COMPATIBILIDADE COM VAGA
             // ============================================
-            const compatSection = document.getElementById('compatibilidadeSection');
-            const compatContent = document.getElementById('compatibilidadeContent');
+            var compatSection = document.getElementById('compatibilidadeSection');
+            var compatContent = document.getElementById('compatibilidadeContent');
 
             if (data.job && data.job !== 'Não vinculado') {
                 compatSection.style.display = 'block';
-                const compat = data.compatibility || Math.round(60 + Math.random() * 35);
-                let compatLevel = '';
-                let compatColor = '';
+                var compat = data.compatibility || Math.round(60 + Math.random() * 35);
+                var compatLevel = '';
+                var compatColor = '';
                 if (compat >= 80) { compatLevel = 'Excelente';
                     compatColor = '#10B981'; } else if (compat >= 60) { compatLevel = 'Boa';
                     compatColor = '#3B82F6'; } else if (compat >= 40) { compatLevel = 'Moderada';
                     compatColor = '#F59E0B'; } else { compatLevel = 'Baixa';
                     compatColor = '#EF4444'; }
 
-                compatContent.innerHTML = `
-                        <div class="compatibilidade-card">
-                            <div class="compat-top">
-                                <span style="font-weight:600;font-size:1rem;">🎯 ${data.job}</span>
-                                <span class="compat-value" style="color:${compatColor};">${compat}%</span>
-                            </div>
-                            <div class="compat-bar">
-                                <div class="fill" style="width:${compat}%;background:${compatColor};"></div>
-                            </div>
-                            <p style="color:var(--gray-600);font-size:0.9rem;">
-                                <strong>Nível de Compatibilidade:</strong> ${compatLevel} (${compat}%)
-                            </p>
-                            <p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">
-                                ${compat >= 80 ? 'Este perfil está altamente alinhado com as demandas da função. Você possui as características comportamentais ideais para esta posição.' :
-                                compat >= 60 ? 'Este perfil tem boa aderência à função. Com desenvolvimento direcionado, pode alcançar excelente desempenho.' :
-                                compat >= 40 ? 'Este perfil tem aderência moderada. Recomenda-se desenvolvimento específico para a função.' :
-                                'Este perfil tem baixa aderência à função. Avaliar outras posições mais alinhadas ao seu perfil.'}
-                            </p>
-                        </div>
-                    `;
+                compatContent.innerHTML =
+                    '<div class="compatibilidade-card"><div class="compat-top"><span style="font-weight:600;font-size:1rem;">🎯 ' +
+                    data.job +
+                    '</span><span class="compat-value" style="color:' + compatColor + ';">' + compat +
+                    '%</span></div><div class="compat-bar"><div class="fill" style="width:' + compat +
+                    '%;background:' + compatColor +
+                    ';"></div></div><p style="color:var(--gray-600);font-size:0.9rem;"><strong>Nível de Compatibilidade:</strong> ' +
+                    compatLevel + ' (' + compat +
+                    '%)</p><p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">' + (compat >= 80 ?
+                        'Este perfil está altamente alinhado com as demandas da função. Você possui as características comportamentais ideais para esta posição.' :
+                        compat >= 60 ?
+                        'Este perfil tem boa aderência à função. Com desenvolvimento direcionado, pode alcançar excelente desempenho.' :
+                        compat >= 40 ?
+                        'Este perfil tem aderência moderada. Recomenda-se desenvolvimento específico para a função.' :
+                        'Este perfil tem baixa aderência à função. Avaliar outras posições mais alinhadas ao seu perfil.'
+                        ) +
+                    '</p></div>';
             } else {
                 compatSection.style.display = 'none';
             }
@@ -1458,10 +1520,12 @@
             // ============================================
             // 13. PLANO DE DESENVOLVIMENTO
             // ============================================
-            const planList = document.getElementById('developmentPlanList');
-            planList.innerHTML = profile.developmentPlan.map((item, index) =>
-                `<li><span class="check">${index + 1}</span> ${item}</li>`
-            ).join('');
+            var planList = document.getElementById('developmentPlanList');
+            var planHtml = '';
+            for (var p = 0; p < profile.developmentPlan.length; p++) {
+                planHtml += '<li><span class="check">' + (p + 1) + '</span> ' + profile.developmentPlan[p] + '</li>';
+            }
+            planList.innerHTML = planHtml;
 
             // ============================================
             // 14. PARECER DA IA
@@ -1471,19 +1535,17 @@
             // ============================================
             // 15. CONCLUSÃO
             // ============================================
-            document.getElementById('conclusionText').innerHTML = `
-                    ${profile.conclusion}
-                    <br /><br />
-                    <strong>Recomendação Final:</strong> Este perfil é ideal para ${profile.careers.slice(0, 3).join(', ')}.
-                    O desenvolvimento das áreas apontadas potencializará ainda mais o desempenho e os resultados.
-                    <br /><br />
-                    <em>Relatório gerado em ${new Date().toLocaleString('pt-BR')}</em>
-                `;
+            document.getElementById('conclusionText').innerHTML =
+                profile.conclusion +
+                '<br /><br /><strong>Recomendação Final:</strong> Este perfil é ideal para ' + profile.careers.slice(0, 3)
+                .join(', ') +
+                '. O desenvolvimento das áreas apontadas potencializará ainda mais o desempenho e os resultados.' +
+                '<br /><br /><em>Relatório gerado em ' + new Date().toLocaleString('pt-BR') + '</em>';
 
             // ============================================
             // 16. GRÁFICOS
             // ============================================
-            setTimeout(() => {
+            setTimeout(function() {
                 renderCharts(pcts);
             }, 300);
 
@@ -1495,16 +1557,16 @@
         // ============================================
         function renderCharts(percentages) {
             try {
-                // Gráfico de barras
-                const ctx = document.getElementById('discChart').getContext('2d');
-
+                var ctx = document.getElementById('discChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
                         datasets: [{
                             label: 'Percentual',
-                            data: [percentages.D || 0, percentages.I || 0, percentages.S || 0, percentages.C || 0],
+                            data: [percentages.D || 0, percentages.I || 0, percentages.S || 0, percentages
+                                .C || 0
+                            ],
                             backgroundColor: ['#EF4444CC', '#3B82F6CC', '#10B981CC', '#8B5CF6CC'],
                             borderColor: ['#EF4444', '#3B82F6', '#10B981', '#8B5CF6'],
                             borderWidth: 2,
@@ -1523,7 +1585,7 @@
                                 beginAtZero: true,
                                 max: 100,
                                 grid: { color: 'rgba(10, 37, 64, 0.04)' },
-                                ticks: { color: '#94A3B8', callback: v => v + '%' }
+                                ticks: { color: '#94A3B8', callback: function(v) { return v + '%'; } }
                             },
                             x: {
                                 grid: { display: false },
@@ -1532,9 +1594,7 @@
                         }
                     }
                 });
-
                 console.log('📊 Gráficos renderizados com sucesso');
-
             } catch (error) {
                 console.error('❌ Erro ao renderizar gráficos:', error);
             }
@@ -1544,9 +1604,9 @@
         // FUNÇÕES UTILITÁRIAS
         // ============================================
         function generateHash(data) {
-            let hash = 0;
-            for (let i = 0; i < data.length; i++) {
-                const char = data.charCodeAt(i);
+            var hash = 0;
+            for (var i = 0; i < data.length; i++) {
+                var char = data.charCodeAt(i);
                 hash = ((hash << 5) - hash) + char;
                 hash = hash & hash;
             }
@@ -1555,52 +1615,33 @@
 
         function downloadPDF() {
             showToast('📥 Iniciando download do PDF...', 'success');
-            setTimeout(() => {
+            setTimeout(function() {
                 window.print();
             }, 500);
         }
 
         function showToast(message, type) {
-            const existing = document.getElementById('toast');
+            var existing = document.getElementById('toast');
             if (existing) existing.remove();
 
-            const toast = document.createElement('div');
+            var toast = document.createElement('div');
             toast.id = 'toast';
-            toast.style.cssText = `
-                    position: fixed;
-                    top: 24px;
-                    right: 24px;
-                    background: white;
-                    padding: 14px 24px;
-                    border-radius: 12px;
-                    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    font-weight: 600;
-                    font-size: 0.875rem;
-                    z-index: 300;
-                    border-left: 4px solid ${type === 'success' ? '#10B981' : '#EF4444'};
-                    animation: slideIn 0.3s ease;
-                `;
-            toast.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span><span>${message}</span>`;
+            toast.style.cssText =
+                'position:fixed;top:24px;right:24px;background:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:300;border-left:4px solid ' +
+                (type === 'success' ? '#10B981' : '#EF4444') + ';animation:slideIn 0.3s ease;';
+            toast.innerHTML = '<span>' + (type === 'success' ? '✅' : '❌') + '</span><span>' + message + '</span>';
             document.body.appendChild(toast);
 
-            setTimeout(() => {
+            setTimeout(function() {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateX(120%)';
-                setTimeout(() => toast.remove(), 300);
+                setTimeout(function() { toast.remove(); }, 300);
             }, 4000);
         }
 
-        // Estilo para animação
-        const style = document.createElement('style');
-        style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(120%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
+        var style = document.createElement('style');
+        style.textContent =
+            '@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
         document.head.appendChild(style);
 
         console.log('📄 Relatório Completo DISC carregado com sucesso!');
