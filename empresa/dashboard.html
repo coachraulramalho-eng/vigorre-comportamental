@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Empresa | VIGORRE ONE™</title>
-
+    <title>Empresa Dashboard | VIGORRE ONE™</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
         /* ============================================
-           VIGORRE ONE™ - DASHBOARD EMPRESA
+           VIGORRE ONE™ - EMPRESA DASHBOARD
+           INTERNATIONAL ENTERPRISE EDITION
            ============================================ */
 
         * {
@@ -22,10 +21,14 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
             --purple: #7C3AED;
             --pink: #EC4899;
             --white: #FFFFFF;
@@ -44,7 +47,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -60,7 +65,7 @@
         .header {
             background: var(--navy);
             color: white;
-            padding: 16px 32px;
+            padding: 16px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -69,6 +74,8 @@
             position: sticky;
             top: 0;
             z-index: 50;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
         }
 
         .header .logo {
@@ -89,6 +96,7 @@
             font-size: 0.95rem;
             font-weight: 800;
             color: white;
+            letter-spacing: -0.3px;
         }
 
         .header .logo .logo-text .name .tm {
@@ -99,9 +107,9 @@
 
         .header .logo .logo-text .sub {
             font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
         .header .user-info {
@@ -113,23 +121,25 @@
         .header .user-info .name {
             font-weight: 600;
             font-size: 0.9rem;
+            color: white;
         }
 
         .header .user-info .badge {
             padding: 4px 14px;
-            background: rgba(59, 130, 246, 0.15);
+            background: rgba(217, 119, 6, 0.12);
             border-radius: var(--radius-full);
             font-size: 0.65rem;
-            color: var(--blue-light);
+            color: var(--gold);
             font-weight: 600;
+            border: 1px solid rgba(217, 119, 6, 0.08);
         }
 
         .header .logout-btn {
             padding: 8px 20px;
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--radius-full);
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             text-decoration: none;
             font-size: 0.8rem;
             font-weight: 500;
@@ -144,36 +154,113 @@
         }
 
         /* ============================================
-           MAIN
+           MAIN CONTENT
            ============================================ */
         .main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 32px 24px 40px;
+            padding: 32px 40px 60px;
         }
 
         .main-header {
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
 
-        .main-header h1 {
+        .main-header .greeting {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--gray-900);
         }
 
-        .main-header h1 .highlight {
-            color: var(--cyan);
+        .main-header .greeting .highlight {
+            color: var(--gold);
         }
 
-        .main-header p {
+        .main-header .subtitle {
             color: var(--gray-500);
             margin-top: 4px;
+            font-size: 0.95rem;
         }
 
         /* ============================================
-           STATS CARDS
+           IA CARD
+           ============================================ */
+        .ia-card {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            color: white;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 40px rgba(10, 37, 64, 0.15);
+        }
+
+        .ia-card .ia-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .ia-card .ia-top .ia-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ia-card .ia-top .ia-badge {
+            background: rgba(217, 119, 6, 0.15);
+            color: var(--gold);
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .ia-card .ia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .ia-card .ia-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .ia-card .ia-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .ia-card .ia-item .ia-item-icon {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .ia-card .ia-item .ia-item-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: white;
+        }
+
+        .ia-card .ia-item .ia-item-desc {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           STATS GRID
            ============================================ */
         .stats-grid {
             display: grid;
@@ -231,10 +318,10 @@
         }
 
         .stat-card .stat-change.up {
-            color: #10B981;
+            color: var(--green);
         }
         .stat-card .stat-change.down {
-            color: #EF4444;
+            color: var(--red);
         }
 
         /* ============================================
@@ -271,7 +358,7 @@
 
         .chart-card .chart-header .action {
             font-size: 0.75rem;
-            color: var(--blue);
+            color: var(--gold);
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
@@ -286,80 +373,9 @@
             position: relative;
         }
 
-        /* ============================================
-           ALERTAS IA
-           ============================================ */
-        .ia-card {
-            background: linear-gradient(135deg, var(--navy), var(--gray-800));
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            color: white;
-            margin-bottom: 32px;
-            box-shadow: 0 8px 40px rgba(10, 37, 64, 0.15);
-        }
-
-        .ia-card .ia-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .ia-card .ia-top .ia-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .ia-card .ia-top .ia-badge {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--blue-light);
-            padding: 4px 14px;
-            border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        .ia-card .ia-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .ia-card .ia-item {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: var(--radius-sm);
-            padding: 14px;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .ia-card .ia-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
-        }
-
-        .ia-card .ia-item .ia-item-icon {
-            font-size: 1.2rem;
-            margin-bottom: 4px;
-        }
-
-        .ia-card .ia-item .ia-item-title {
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: white;
-        }
-
-        .ia-card .ia-item .ia-item-desc {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 2px;
+        .chart-container-sm {
+            height: 180px;
+            position: relative;
         }
 
         /* ============================================
@@ -371,6 +387,30 @@
             box-shadow: var(--shadow);
             border: 1px solid rgba(10, 37, 64, 0.04);
             overflow: hidden;
+            margin-top: 32px;
+        }
+
+        .table-card .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .table-card .table-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .table-card .table-header .action {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
         }
 
         .table-container {
@@ -427,12 +467,60 @@
         }
 
         /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 300;
+            border-left: 4px solid var(--gold);
+            animation: slideIn 0.3s ease;
+            max-width: 420px;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.error {
+            border-left-color: #EF4444;
+        }
+        .toast.success {
+            border-left-color: #10B981;
+        }
+        .toast.warning {
+            border-left-color: #F59E0B;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ============================================
            QUICK ACTIONS
            ============================================ */
         .quick-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
+            margin-top: 16px;
         }
 
         .quick-action {
@@ -448,7 +536,7 @@
 
         .quick-action:hover {
             background: white;
-            border-color: var(--blue);
+            border-color: var(--gold);
             box-shadow: var(--shadow);
         }
 
@@ -478,12 +566,34 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .header {
-                padding: 12px 16px;
+                padding: 12px 20px;
             }
             .main {
-                padding: 20px 16px;
+                padding: 20px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .main-header .greeting {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header .logo .logo-img {
+                height: 28px;
+            }
+            .header .logo .logo-text .name {
+                font-size: 0.8rem;
+            }
+            .header .user-info .name {
+                font-size: 0.75rem;
+            }
+            .header .logout-btn {
+                font-size: 0.7rem;
+                padding: 6px 14px;
             }
             .stats-grid {
                 grid-template-columns: 1fr;
@@ -491,8 +601,87 @@
             .quick-actions {
                 grid-template-columns: 1fr;
             }
-            .header .logo .logo-img {
-                height: 28px;
+            .main-header .greeting {
+                font-size: 1.2rem;
+            }
+            .toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                max-width: none;
+                font-size: 0.8rem;
+                padding: 12px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px 16px;
+            }
+            .header .user-info {
+                gap: 8px;
+            }
+            .header .user-info .badge {
+                display: none;
+            }
+            .main {
+                padding: 16px;
+            }
+            .ia-card {
+                padding: 16px 18px;
+            }
+            .stat-card {
+                padding: 16px 18px;
+            }
+            .stat-card .stat-value {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--gray-900);
+            }
+            .main-header .greeting {
+                color: var(--white);
+            }
+            .stat-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .stat-card .stat-value {
+                color: var(--white);
+            }
+            .chart-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .chart-card .chart-header h3 {
+                color: var(--white);
+            }
+            .table-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .table-card .table-header h3 {
+                color: var(--white);
+            }
+            .table-container td {
+                color: var(--gray-300);
+            }
+            .table-container th {
+                color: var(--gray-400);
+            }
+            .quick-action {
+                background: var(--gray-700);
+                color: var(--gray-300);
+            }
+            .quick-action:hover {
+                background: var(--gray-600);
+            }
+            .toast {
+                background: var(--gray-800);
+                color: var(--white);
             }
         }
 
@@ -508,17 +697,33 @@
             .logout-btn {
                 display: none !important;
             }
+            .ia-card {
+                display: none !important;
+            }
             .stats-grid {
                 display: none !important;
             }
-            .ia-card {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+            .charts-grid {
+                display: none !important;
+            }
+            .quick-actions {
+                display: none !important;
+            }
+            .table-card .table-header .action {
+                display: none !important;
             }
         }
     </style>
 </head>
 <body>
+
+    <!-- ============================================
+    TOAST
+    ============================================ -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
 
     <!-- ============================================
     HEADER
@@ -544,19 +749,22 @@
     ============================================ -->
     <main class="main">
 
+        <!-- Header -->
         <div class="main-header">
-            <h1>📊 Dashboard <span class="highlight">Empresa</span></h1>
-            <p>Visão completa do People Analytics da sua organização</p>
+            <div class="greeting">
+                📊 Dashboard <span class="highlight">Empresa</span>
+            </div>
+            <div class="subtitle">Visão completa do People Analytics da sua organização</div>
         </div>
 
-        <!-- IA Alerts -->
+        <!-- IA Card -->
         <div class="ia-card">
             <div class="ia-top">
                 <span class="ia-title">🤖 Alertas da IA</span>
                 <span class="ia-badge">Atualizado agora</span>
             </div>
             <div class="ia-content" id="iaContent">
-                <!-- Carregado via JS -->
+                <!-- Carregado via JavaScript -->
             </div>
         </div>
 
@@ -612,7 +820,7 @@
                 <div class="chart-header">
                     <h3>🎯 Distribuição Big Five</h3>
                 </div>
-                <div class="chart-container">
+                <div class="chart-container-sm">
                     <canvas id="bigfiveChart"></canvas>
                 </div>
             </div>
@@ -623,14 +831,14 @@
                 <div class="chart-header">
                     <h3>🧠 Inteligência Emocional</h3>
                 </div>
-                <div class="chart-container">
+                <div class="chart-container-sm">
                     <canvas id="ieChart"></canvas>
                 </div>
             </div>
 
             <div class="chart-card">
                 <div class="chart-header">
-                    <h3>⚡ Quick Actions</h3>
+                    <h3>⚡ Ações Rápidas</h3>
                 </div>
                 <div class="quick-actions">
                     <a href="colaboradores/" class="quick-action">
@@ -653,8 +861,12 @@
             </div>
         </div>
 
-        <!-- Table -->
+        <!-- Colaboradores Table -->
         <div class="table-card">
+            <div class="table-header">
+                <h3>📋 Colaboradores</h3>
+                <a href="#" class="action">Ver todos →</a>
+            </div>
             <div class="table-container">
                 <table>
                     <thead>
@@ -667,7 +879,7 @@
                         </tr>
                     </thead>
                     <tbody id="employeesTable">
-                        <!-- Carregado via JS -->
+                        <!-- Carregado via JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -685,6 +897,12 @@
     <script src="../middleware/auth-guard.js"></script>
 
     <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - EMPRESA DASHBOARD
+         * ============================================
+         */
+
         'use strict';
 
         // ============================================
@@ -702,13 +920,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Dashboard Empresa - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../login.html';
                 return;
             }
 
-            const user = window.VigorreAuth.getCurrentUser();
+            var user = window.VigorreAuth.getCurrentUser();
             if (!user || user.role !== 'company') {
                 alert('⚠️ Acesso restrito a empresas.');
                 window.VigorreAuth.logout();
@@ -724,50 +942,70 @@
         });
 
         // ============================================
-        // IA CONTENT
+        // CARREGAR IA CONTENT
         // ============================================
         function loadIAContent() {
-            const container = document.getElementById('iaContent');
+            var container = document.getElementById('iaContent');
 
-            const alerts = [
+            var alerts = [
                 { icon: '⚠️', title: 'Risco de Turnover', desc: '2 colaboradores com alto risco identificados' },
                 { icon: '📈', title: 'Potencial de Liderança', desc: '3 colaboradores com perfil de liderança' },
                 { icon: '🎯', title: 'Job Profile', desc: '1 vaga com alta compatibilidade encontrada' }
             ];
 
-            container.innerHTML = alerts.map(item => `
-                    <div class="ia-item" onclick="handleIAClick('${item.title}')">
-                        <div class="ia-item-icon">${item.icon}</div>
-                        <div class="ia-item-title">${item.title}</div>
-                        <div class="ia-item-desc">${item.desc}</div>
-                    </div>
-                `).join('');
-        }
+            var html = '';
+            for (var i = 0; i < alerts.length; i++) {
+                var item = alerts[i];
+                html += '<div class="ia-item" onclick="handleIAClick(\'' + item.title + '\')">';
+                html += '<div class="ia-item-icon">' + item.icon + '</div>';
+                html += '<div class="ia-item-title">' + item.title + '</div>';
+                html += '<div class="ia-item-desc">' + item.desc + '</div>';
+                html += '</div>';
+            }
 
-        function handleIAClick(title) {
-            alert(`🤖 IA: ${title}\n\nClique para mais detalhes.`);
+            container.innerHTML = html;
         }
 
         // ============================================
-        // LOAD STATS
+        // HANDLE IA CLICK
+        // ============================================
+        function handleIAClick(title) {
+            showToast('🤖 IA: ' + title, 'info');
+        }
+
+        // ============================================
+        // CARREGAR STATS
         // ============================================
         function loadStats() {
             try {
-                const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const user = window.VigorreAuth.getCurrentUser();
+                var participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var user = window.VigorreAuth.getCurrentUser();
 
                 // Filtrar participantes da empresa
-                const companyParticipants = participants.filter(p => p.companyId === user.id);
+                var companyParticipants = [];
+                for (var i = 0; i < participants.length; i++) {
+                    if (participants[i].companyId === user.id) {
+                        companyParticipants.push(participants[i]);
+                    }
+                }
 
-                const total = companyParticipants.length;
-                const completed = companyParticipants.filter(p => p.status === 'completed').length;
-                const pending = companyParticipants.filter(p => p.status !== 'completed').length;
+                var total = companyParticipants.length;
+                var completed = 0;
+                var pending = 0;
+
+                for (var j = 0; j < companyParticipants.length; j++) {
+                    if (companyParticipants[j].status === 'completed') {
+                        completed++;
+                    } else {
+                        pending++;
+                    }
+                }
 
                 document.getElementById('totalEmployees').textContent = total;
                 document.getElementById('totalAssessments').textContent = completed;
                 document.getElementById('totalPending').textContent = pending;
 
-                const engagement = total > 0 ? Math.round((completed / total) * 100) : 0;
+                var engagement = total > 0 ? Math.round((completed / total) * 100) : 0;
                 document.getElementById('engagementRate').textContent = engagement + '%';
 
             } catch (error) {
@@ -776,16 +1014,21 @@
         }
 
         // ============================================
-        // LOAD EMPLOYEES
+        // CARREGAR COLABORADORES
         // ============================================
         function loadEmployees() {
             try {
-                const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const user = window.VigorreAuth.getCurrentUser();
+                var participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var user = window.VigorreAuth.getCurrentUser();
 
-                const companyParticipants = participants.filter(p => p.companyId === user.id);
+                var companyParticipants = [];
+                for (var i = 0; i < participants.length; i++) {
+                    if (participants[i].companyId === user.id) {
+                        companyParticipants.push(participants[i]);
+                    }
+                }
 
-                const tbody = document.getElementById('employeesTable');
+                var tbody = document.getElementById('employeesTable');
 
                 if (companyParticipants.length === 0) {
                     tbody.innerHTML =
@@ -793,30 +1036,44 @@
                     return;
                 }
 
-                tbody.innerHTML = companyParticipants.slice(0, 10).map(p => {
-                    const discResult = p.results?.DISC || {};
-                    const dominant = discResult.dominant || 'D';
-                    const dominantName = { D: 'Dominância', I: 'Influência', S: 'Estabilidade', C: 'Conformidade' } [
-                    dominant] || '--';
-                    const ieResult = p.results?.IE || {};
-                    const ieOverall = ieResult.overallPercentage || 0;
-                    const statusMap = {
-                        completed: '✅ Concluído',
-                        in_progress: '🔄 Em andamento',
-                        pending: '⏳ Pendente'
-                    };
-                    const statusClass = p.status || 'pending';
+                var html = '';
+                var limit = Math.min(companyParticipants.length, 10);
 
-                    return `
-                            <tr>
-                                <td><strong>${p.name || 'Sem nome'}</strong></td>
-                                <td>${dominantName}</td>
-                                <td>${ieOverall}%</td>
-                                <td><span class="badge-status ${statusClass}">${statusMap[statusClass] || 'Pendente'}</span></td>
-                                <td>${p.created_at ? new Date(p.created_at).toLocaleDateString('pt-BR') : '-'}</td>
-                            </tr>
-                        `;
-                }).join('');
+                for (var j = 0; j < limit; j++) {
+                    var p = companyParticipants[j];
+                    var discResult = p.results && p.results.DISC ? p.results.DISC : {};
+                    var dominant = discResult.dominant || 'D';
+                    var dominantNames = {
+                        'D': 'Dominância',
+                        'I': 'Influência',
+                        'S': 'Estabilidade',
+                        'C': 'Conformidade'
+                    };
+                    var dominantName = dominantNames[dominant] || '--';
+
+                    var ieResult = p.results && p.results.IE ? p.results.IE : {};
+                    var ieOverall = ieResult.overallPercentage || 0;
+
+                    var statusMap = {
+                        'completed': '✅ Concluído',
+                        'in_progress': '🔄 Em andamento',
+                        'pending': '⏳ Pendente'
+                    };
+                    var statusClass = p.status || 'pending';
+
+                    var date = p.created_at ? new Date(p.created_at).toLocaleDateString('pt-BR') : '-';
+
+                    html += '<tr>';
+                    html += '<td><strong>' + (p.name || 'Sem nome') + '</strong></td>';
+                    html += '<td>' + dominantName + '</td>';
+                    html += '<td>' + ieOverall + '%</td>';
+                    html += '<td><span class="badge-status ' + statusClass + '">' + (statusMap[statusClass] ||
+                        'Pendente') + '</span></td>';
+                    html += '<td>' + date + '</td>';
+                    html += '</tr>';
+                }
+
+                tbody.innerHTML = html;
 
             } catch (error) {
                 console.error('❌ Erro ao carregar colaboradores:', error);
@@ -824,12 +1081,12 @@
         }
 
         // ============================================
-        // RENDER CHARTS
+        // RENDERIZAR GRÁFICOS
         // ============================================
         function renderCharts() {
             try {
                 // Gráfico DISC
-                const discCtx = document.getElementById('discChart').getContext('2d');
+                var discCtx = document.getElementById('discChart').getContext('2d');
                 new Chart(discCtx, {
                     type: 'doughnut',
                     data: {
@@ -861,7 +1118,7 @@
                 });
 
                 // Gráfico Big Five
-                const bigfiveCtx = document.getElementById('bigfiveChart').getContext('2d');
+                var bigfiveCtx = document.getElementById('bigfiveChart').getContext('2d');
                 new Chart(bigfiveCtx, {
                     type: 'radar',
                     data: {
@@ -869,7 +1126,7 @@
                         datasets: [{
                             label: 'Média da Empresa',
                             data: [68, 72, 55, 70, 45],
-                            backgroundColor: 'rgba(236,72,153,0.12)',
+                            backgroundColor: 'rgba(236, 72, 153, 0.12)',
                             borderColor: '#EC4899',
                             borderWidth: 3,
                             pointBackgroundColor: ['#8B5CF6', '#10B981', '#F59E0B', '#EC4899', '#EF4444'],
@@ -896,17 +1153,24 @@
                             r: {
                                 beginAtZero: true,
                                 max: 100,
-                                grid: { color: 'rgba(10,37,64,0.04)' },
-                                ticks: { color: '#94A3B8', stepSize: 25, backdropColor: 'transparent', callback: v => v +
-                                        '%' },
-                                pointLabels: { color: '#64748B', font: { size: 9, weight: '600' } }
+                                grid: { color: 'rgba(10, 37, 64, 0.04)' },
+                                ticks: {
+                                    color: '#94A3B8',
+                                    stepSize: 25,
+                                    backdropColor: 'transparent',
+                                    callback: function(v) { return v + '%'; }
+                                },
+                                pointLabels: {
+                                    color: '#64748B',
+                                    font: { size: 9, weight: '600' }
+                                }
                             }
                         }
                     }
                 });
 
                 // Gráfico IE
-                const ieCtx = document.getElementById('ieChart').getContext('2d');
+                var ieCtx = document.getElementById('ieChart').getContext('2d');
                 new Chart(ieCtx, {
                     type: 'radar',
                     data: {
@@ -914,7 +1178,7 @@
                         datasets: [{
                             label: 'Média da Empresa',
                             data: [70, 65, 75, 68, 60],
-                            backgroundColor: 'rgba(124,58,237,0.12)',
+                            backgroundColor: 'rgba(124, 58, 237, 0.12)',
                             borderColor: '#7C3AED',
                             borderWidth: 3,
                             pointBackgroundColor: ['#7C3AED', '#10B981', '#F59E0B', '#EF4444', '#3B82F6'],
@@ -941,10 +1205,17 @@
                             r: {
                                 beginAtZero: true,
                                 max: 100,
-                                grid: { color: 'rgba(10,37,64,0.04)' },
-                                ticks: { color: '#94A3B8', stepSize: 25, backdropColor: 'transparent', callback: v => v +
-                                        '%' },
-                                pointLabels: { color: '#64748B', font: { size: 9, weight: '600' } }
+                                grid: { color: 'rgba(10, 37, 64, 0.04)' },
+                                ticks: {
+                                    color: '#94A3B8',
+                                    stepSize: 25,
+                                    backdropColor: 'transparent',
+                                    callback: function(v) { return v + '%'; }
+                                },
+                                pointLabels: {
+                                    color: '#64748B',
+                                    font: { size: 9, weight: '600' }
+                                }
                             }
                         }
                     }
@@ -955,6 +1226,31 @@
             } catch (error) {
                 console.error('❌ Erro ao renderizar gráficos:', error);
             }
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+
+            if (type === 'error') {
+                icon.textContent = '❌';
+            } else if (type === 'warning') {
+                icon.textContent = '⚠️';
+            } else {
+                icon.textContent = '✅';
+            }
+
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
         }
 
         console.log('✅ Dashboard Empresa carregado com sucesso!');
