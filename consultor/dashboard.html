@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Consultor Dashboard | VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
         /* ============================================
-           VIGORRE ONE™ - DASHBOARD CONSULTOR
+           VIGORRE ONE™ - CONSULTOR DASHBOARD
+           INTERNATIONAL ENTERPRISE EDITION
            ============================================ */
 
         * {
@@ -22,10 +21,14 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
             --purple: #7C3AED;
             --pink: #EC4899;
             --white: #FFFFFF;
@@ -44,7 +47,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -60,7 +65,7 @@
         .header {
             background: var(--navy);
             color: white;
-            padding: 16px 32px;
+            padding: 16px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -69,6 +74,8 @@
             position: sticky;
             top: 0;
             z-index: 50;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
         }
 
         .header .logo {
@@ -89,6 +96,7 @@
             font-size: 0.95rem;
             font-weight: 800;
             color: white;
+            letter-spacing: -0.3px;
         }
 
         .header .logo .logo-text .name .tm {
@@ -99,9 +107,9 @@
 
         .header .logo .logo-text .sub {
             font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
         .header .user-info {
@@ -113,23 +121,25 @@
         .header .user-info .name {
             font-weight: 600;
             font-size: 0.9rem;
+            color: white;
         }
 
         .header .user-info .badge {
             padding: 4px 14px;
-            background: rgba(124, 58, 237, 0.15);
+            background: rgba(124, 58, 237, 0.12);
             border-radius: var(--radius-full);
             font-size: 0.65rem;
             color: var(--purple);
             font-weight: 600;
+            border: 1px solid rgba(124, 58, 237, 0.08);
         }
 
         .header .logout-btn {
             padding: 8px 20px;
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--radius-full);
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             text-decoration: none;
             font-size: 0.8rem;
             font-weight: 500;
@@ -317,34 +327,8 @@
             color: #F87171;
         }
 
-        .mobile-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(10, 37, 64, 0.4);
-            backdrop-filter: blur(4px);
-            z-index: 99;
-        }
-
-        .mobile-overlay.active {
-            display: block;
-        }
-
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-700);
-            padding: 8px;
-        }
-
         /* ============================================
-           MAIN
+           MAIN CONTENT
            ============================================ */
         .main {
             margin-left: 260px;
@@ -436,10 +420,10 @@
         }
 
         .stat-card .stat-change.up {
-            color: #10B981;
+            color: var(--green);
         }
         .stat-card .stat-change.down {
-            color: #EF4444;
+            color: var(--red);
         }
 
         /* ============================================
@@ -519,56 +503,45 @@
         }
 
         /* ============================================
-           CHARTS
+           QUICK ACTIONS
            ============================================ */
-        .dashboard-grid {
+        .quick-actions {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 24px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             margin-bottom: 32px;
         }
 
-        .card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(10, 37, 64, 0.04);
-        }
-
-        .card .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .card .card-header h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--gray-800);
-        }
-
-        .card .card-header .action {
-            font-size: 0.75rem;
-            color: var(--purple);
+        .quick-action {
+            padding: 16px;
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            text-align: center;
             text-decoration: none;
-            font-weight: 600;
+            color: var(--gray-700);
             transition: var(--transition);
+            border: 1px solid transparent;
         }
 
-        .card .card-header .action:hover {
-            color: var(--cyan);
+        .quick-action:hover {
+            background: white;
+            border-color: var(--purple);
+            box-shadow: var(--shadow);
         }
 
-        .chart-container {
-            height: 200px;
-            position: relative;
+        .quick-action .icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .quick-action .label {
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
         /* ============================================
-           TABLE
+           CLIENTS TABLE
            ============================================ */
         .table-card {
             background: white;
@@ -576,6 +549,29 @@
             box-shadow: var(--shadow);
             border: 1px solid rgba(10, 37, 64, 0.04);
             overflow: hidden;
+        }
+
+        .table-card .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .table-card .table-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .table-card .table-header .action {
+            font-size: 0.75rem;
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
         }
 
         .table-container {
@@ -632,54 +628,115 @@
         }
 
         /* ============================================
-           QUICK ACTIONS
+           CHART
            ============================================ */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .quick-action {
-            padding: 16px;
-            background: var(--gray-50);
-            border-radius: var(--radius-sm);
-            text-align: center;
-            text-decoration: none;
-            color: var(--gray-700);
-            transition: var(--transition);
-            border: 1px solid transparent;
-        }
-
-        .quick-action:hover {
+        .chart-card {
             background: white;
-            border-color: var(--purple);
+            border-radius: var(--radius);
+            padding: 24px;
             box-shadow: var(--shadow);
+            border: 1px solid rgba(10, 37, 64, 0.04);
+            margin-bottom: 32px;
         }
 
-        .quick-action .icon {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 4px;
+        .chart-card .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
         }
 
-        .quick-action .label {
-            font-size: 0.75rem;
+        .chart-card .chart-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
             font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .chart-container {
+            height: 200px;
+            position: relative;
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 300;
+            border-left: 4px solid var(--purple);
+            animation: slideIn 0.3s ease;
+            max-width: 420px;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.error {
+            border-left-color: #EF4444;
+        }
+        .toast.success {
+            border-left-color: #10B981;
+        }
+        .toast.warning {
+            border-left-color: #F59E0B;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         /* ============================================
            RESPONSIVO
            ============================================ */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-700);
+            padding: 8px;
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 37, 64, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
         @media (max-width: 1200px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            .ia-card .ia-content {
-                grid-template-columns: 1fr;
             }
         }
 
@@ -711,7 +768,23 @@
             }
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 20px;
+            }
+            .header .logo .logo-img {
+                height: 28px;
+            }
+            .header .logo .logo-text .name {
+                font-size: 0.8rem;
+            }
+            .header .user-info .name {
+                font-size: 0.75rem;
+            }
+            .header .logout-btn {
+                font-size: 0.7rem;
+                padding: 6px 14px;
+            }
             .stats-grid {
                 grid-template-columns: 1fr;
             }
@@ -721,11 +794,78 @@
             .main-header h1 {
                 font-size: 1.2rem;
             }
+            .toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                max-width: none;
+                font-size: 0.8rem;
+                padding: 12px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px 16px;
+            }
+            .header .user-info {
+                gap: 8px;
+            }
+            .header .user-info .badge {
+                display: none;
+            }
+            .main {
+                padding: 16px;
+            }
             .sidebar .logo .logo-img {
                 height: 28px;
             }
-            .header .logo .logo-img {
-                height: 24px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--gray-900);
+            }
+            .main-header h1 {
+                color: var(--white);
+            }
+            .stat-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .stat-card .stat-value {
+                color: var(--white);
+            }
+            .chart-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .chart-card .chart-header h3 {
+                color: var(--white);
+            }
+            .table-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .table-card .table-header h3 {
+                color: var(--white);
+            }
+            .table-container td {
+                color: var(--gray-300);
+            }
+            .table-container th {
+                color: var(--gray-400);
+            }
+            .quick-action {
+                background: var(--gray-700);
+                color: var(--gray-300);
+            }
+            .quick-action:hover {
+                background: var(--gray-600);
+            }
+            .toast {
+                background: var(--gray-800);
+                color: var(--white);
             }
         }
 
@@ -750,20 +890,41 @@
             .mobile-toggle {
                 display: none !important;
             }
-            .logo-img {
+            .header {
+                background: #0A2540 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .header .logo .logo-img {
                 height: 32px !important;
+            }
+            .logout-btn {
+                display: none !important;
+            }
+            .ia-card {
+                display: none !important;
             }
             .stats-grid {
                 display: none !important;
             }
-            .ia-card {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+            .quick-actions {
+                display: none !important;
+            }
+            .chart-card {
+                display: none !important;
             }
         }
     </style>
 </head>
 <body>
+
+    <!-- ============================================
+    TOAST
+    ============================================ -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
 
     <!-- ============================================
     SIDEBAR
@@ -842,14 +1003,14 @@
             <div class="date" id="currentDate"></div>
         </div>
 
-        <!-- IA Recomendações -->
+        <!-- IA Card -->
         <div class="ia-card">
             <div class="ia-top">
                 <span class="ia-title">🤖 Recomendações da IA</span>
                 <span class="ia-badge">Atualizado agora</span>
             </div>
             <div class="ia-content" id="iaContent">
-                <!-- Carregado via JS -->
+                <!-- Carregado via JavaScript -->
             </div>
         </div>
 
@@ -889,53 +1050,51 @@
             </div>
         </div>
 
-        <!-- Dashboard Grid -->
-        <div class="dashboard-grid">
-            <div class="card">
-                <div class="card-header">
-                    <h3>📈 Progresso dos Clientes</h3>
-                    <a href="clientes/" class="action">Ver todos →</a>
-                </div>
-                <div class="chart-container">
-                    <canvas id="progressChart"></canvas>
-                </div>
+        <!-- Chart -->
+        <div class="chart-card">
+            <div class="chart-header">
+                <h3>📈 Progresso dos Clientes</h3>
+                <a href="clientes/" class="action" style="color:var(--purple);text-decoration:none;font-size:0.75rem;font-weight:600;">Ver todos →</a>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3>⚡ Ações Rápidas</h3>
-                </div>
-                <div class="quick-actions">
-                    <a href="clientes/novo.html" class="quick-action">
-                        <span class="icon">👥</span>
-                        <span class="label">Novo Cliente</span>
-                    </a>
-                    <a href="avaliacoes/" class="quick-action">
-                        <span class="icon">📊</span>
-                        <span class="label">Nova Avaliação</span>
-                    </a>
-                    <a href="relatorios/" class="quick-action">
-                        <span class="icon">📄</span>
-                        <span class="label">Gerar Relatório</span>
-                    </a>
-                    <a href="laudos/" class="quick-action">
-                        <span class="icon">📋</span>
-                        <span class="label">Gerar Laudo</span>
-                    </a>
-                    <a href="creditos/" class="quick-action">
-                        <span class="icon">💳</span>
-                        <span class="label">Ver Créditos</span>
-                    </a>
-                    <a href="agenda/" class="quick-action">
-                        <span class="icon">📅</span>
-                        <span class="label">Agenda</span>
-                    </a>
-                </div>
+            <div class="chart-container">
+                <canvas id="progressChart"></canvas>
             </div>
         </div>
 
-        <!-- Últimos Clientes -->
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="clientes/novo.html" class="quick-action">
+                <span class="icon">👥</span>
+                <span class="label">Novo Cliente</span>
+            </a>
+            <a href="avaliacoes/" class="quick-action">
+                <span class="icon">📊</span>
+                <span class="label">Nova Avaliação</span>
+            </a>
+            <a href="relatorios/" class="quick-action">
+                <span class="icon">📄</span>
+                <span class="label">Gerar Relatório</span>
+            </a>
+            <a href="laudos/" class="quick-action">
+                <span class="icon">📋</span>
+                <span class="label">Gerar Laudo</span>
+            </a>
+            <a href="creditos/" class="quick-action">
+                <span class="icon">💳</span>
+                <span class="label">Ver Créditos</span>
+            </a>
+            <a href="agenda/" class="quick-action">
+                <span class="icon">📅</span>
+                <span class="label">Agenda</span>
+            </a>
+        </div>
+
+        <!-- Clients Table -->
         <div class="table-card">
+            <div class="table-header">
+                <h3>📋 Meus Clientes</h3>
+                <a href="clientes/" class="action">Ver todos →</a>
+            </div>
             <div class="table-container">
                 <table>
                     <thead>
@@ -948,11 +1107,12 @@
                         </tr>
                     </thead>
                     <tbody id="clientsTable">
-                        <!-- Carregado via JS -->
+                        <!-- Carregado via JavaScript -->
                     </tbody>
                 </table>
             </div>
         </div>
+
     </main>
 
     <!-- ============================================
@@ -965,14 +1125,20 @@
     <script src="../middleware/auth-guard.js"></script>
 
     <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - CONSULTOR DASHBOARD
+         * ============================================
+         */
+
         'use strict';
 
         // ============================================
         // TOGGLE SIDEBAR
         // ============================================
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobileOverlay');
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('mobileOverlay');
             sidebar.classList.toggle('open');
             overlay.classList.toggle('active');
         }
@@ -1001,13 +1167,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Dashboard Consultor - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../login.html';
                 return;
             }
 
-            const user = window.VigorreAuth.getCurrentUser();
+            var user = window.VigorreAuth.getCurrentUser();
             if (!user || (user.role !== 'consultant' && user.role !== 'recruiter' && user.role !== 'admin' && user.role !==
                     'master')) {
                 alert('⚠️ Acesso restrito a consultores.');
@@ -1018,7 +1184,7 @@
             document.getElementById('userName').textContent = user.name || 'Consultor';
             document.getElementById('headerUserName').textContent = user.name || 'Consultor';
 
-            const credits = user.credits || {};
+            var credits = user.credits || {};
             document.getElementById('credDisc').textContent = credits.DISC || 0;
             document.getElementById('credIE').textContent = credits.IE || 0;
             document.getElementById('credValores').textContent = credits.Valores || 0;
@@ -1030,55 +1196,84 @@
         });
 
         // ============================================
-        // IA CONTENT
+        // CARREGAR IA CONTENT
         // ============================================
         function loadIAContent() {
-            const container = document.getElementById('iaContent');
+            var container = document.getElementById('iaContent');
 
-            const recommendations = [
+            var recommendations = [
                 { icon: '👥', title: 'Novos Clientes', desc: '2 clientes aguardando avaliação' },
                 { icon: '📊', title: 'Análise DISC', desc: '3 avaliações pendentes de análise' },
                 { icon: '📋', title: 'Laudos Disponíveis', desc: '1 laudo completo pronto para entrega' }
             ];
 
-            container.innerHTML = recommendations.map(item => `
-                    <div class="ia-item" onclick="handleIAClick('${item.title}')">
-                        <div class="ia-item-icon">${item.icon}</div>
-                        <div class="ia-item-title">${item.title}</div>
-                        <div class="ia-item-desc">${item.desc}</div>
-                    </div>
-                `).join('');
-        }
+            var html = '';
+            for (var i = 0; i < recommendations.length; i++) {
+                var item = recommendations[i];
+                html += '<div class="ia-item" onclick="handleIAClick(\'' + item.title + '\')">';
+                html += '<div class="ia-item-icon">' + item.icon + '</div>';
+                html += '<div class="ia-item-title">' + item.title + '</div>';
+                html += '<div class="ia-item-desc">' + item.desc + '</div>';
+                html += '</div>';
+            }
 
-        function handleIAClick(title) {
-            alert(`🤖 IA: ${title}\n\nClique para mais detalhes.`);
+            container.innerHTML = html;
         }
 
         // ============================================
-        // LOAD STATS
+        // HANDLE IA CLICK
+        // ============================================
+        function handleIAClick(title) {
+            showToast('🤖 IA: ' + title, 'info');
+        }
+
+        // ============================================
+        // CARREGAR STATS
         // ============================================
         function loadStats() {
             try {
-                const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const reports = JSON.parse(localStorage.getItem('vigorre_reports') || '[]');
-                const user = window.VigorreAuth.getCurrentUser();
+                var participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var reports = JSON.parse(localStorage.getItem('vigorre_reports') || '[]');
+                var user = window.VigorreAuth.getCurrentUser();
 
-                // Clientes (participantes vinculados ao consultor)
-                const clients = participants.filter(p => p.consultantId === user.id || p.recruiterId === user.id);
+                // Filtrar clientes do consultor
+                var clients = [];
+                for (var i = 0; i < participants.length; i++) {
+                    if (participants[i].consultantId === user.id || participants[i].recruiterId === user.id) {
+                        clients.push(participants[i]);
+                    }
+                }
 
                 // Avaliações realizadas
-                const assessments = clients.filter(p => p.status === 'completed' || p.status === 'in_progress');
+                var assessments = [];
+                for (var j = 0; j < clients.length; j++) {
+                    if (clients[j].status === 'completed' || clients[j].status === 'in_progress') {
+                        assessments.push(clients[j]);
+                    }
+                }
 
                 // Relatórios gerados
-                const clientIds = clients.map(c => c.id);
-                const clientReports = reports.filter(r => clientIds.includes(r.participantId));
+                var clientIds = [];
+                for (var k = 0; k < clients.length; k++) {
+                    clientIds.push(clients[k].id);
+                }
+
+                var clientReports = [];
+                for (var l = 0; l < reports.length; l++) {
+                    for (var m = 0; m < clientIds.length; m++) {
+                        if (reports[l].participantId === clientIds[m]) {
+                            clientReports.push(reports[l]);
+                            break;
+                        }
+                    }
+                }
 
                 document.getElementById('totalClients').textContent = clients.length;
                 document.getElementById('totalAssessments').textContent = assessments.length;
                 document.getElementById('totalReports').textContent = clientReports.length;
 
                 // Faturamento (simulado)
-                const revenue = clients.length * 150 + clientReports.length * 50;
+                var revenue = clients.length * 150 + clientReports.length * 50;
                 document.getElementById('totalRevenue').textContent = 'R$ ' + revenue.toLocaleString('pt-BR');
 
             } catch (error) {
@@ -1087,16 +1282,21 @@
         }
 
         // ============================================
-        // LOAD CLIENTS
+        // CARREGAR CLIENTES
         // ============================================
         function loadClients() {
             try {
-                const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const user = window.VigorreAuth.getCurrentUser();
+                var participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var user = window.VigorreAuth.getCurrentUser();
 
-                const clients = participants.filter(p => p.consultantId === user.id || p.recruiterId === user.id);
+                var clients = [];
+                for (var i = 0; i < participants.length; i++) {
+                    if (participants[i].consultantId === user.id || participants[i].recruiterId === user.id) {
+                        clients.push(participants[i]);
+                    }
+                }
 
-                const tbody = document.getElementById('clientsTable');
+                var tbody = document.getElementById('clientsTable');
 
                 if (clients.length === 0) {
                     tbody.innerHTML =
@@ -1104,27 +1304,34 @@
                     return;
                 }
 
-                const statusMap = {
-                    completed: '✅ Concluído',
-                    in_progress: '🔄 Em andamento',
-                    pending: '⏳ Pendente'
+                var statusMap = {
+                    'completed': '✅ Concluído',
+                    'in_progress': '🔄 Em andamento',
+                    'pending': '⏳ Pendente'
                 };
 
-                tbody.innerHTML = clients.slice(0, 10).map(p => {
-                    const tests = (p.tests || []).length;
-                    const completed = (p.completedTests || []).length;
-                    const statusClass = p.status || 'pending';
+                var html = '';
+                var limit = Math.min(clients.length, 10);
 
-                    return `
-                            <tr>
-                                <td><strong>${p.name || 'Sem nome'}</strong></td>
-                                <td>${p.companyName || 'Autônomo'}</td>
-                                <td>${completed}/${tests}</td>
-                                <td><span class="badge-status ${statusClass}">${statusMap[statusClass] || 'Pendente'}</span></td>
-                                <td>${p.created_at ? new Date(p.created_at).toLocaleDateString('pt-BR') : '-'}</td>
-                            </tr>
-                        `;
-                }).join('');
+                for (var j = 0; j < limit; j++) {
+                    var p = clients[j];
+                    var tests = (p.tests || []).length;
+                    var completed = (p.completedTests || []).length;
+                    var statusClass = p.status || 'pending';
+
+                    var date = p.created_at ? new Date(p.created_at).toLocaleDateString('pt-BR') : '-';
+
+                    html += '<tr>';
+                    html += '<td><strong>' + (p.name || 'Sem nome') + '</strong></td>';
+                    html += '<td>' + (p.companyName || 'Autônomo') + '</td>';
+                    html += '<td>' + completed + '/' + tests + '</td>';
+                    html += '<td><span class="badge-status ' + statusClass + '">' + (statusMap[statusClass] ||
+                        'Pendente') + '</span></td>';
+                    html += '<td>' + date + '</td>';
+                    html += '</tr>';
+                }
+
+                tbody.innerHTML = html;
 
             } catch (error) {
                 console.error('❌ Erro ao carregar clientes:', error);
@@ -1132,11 +1339,11 @@
         }
 
         // ============================================
-        // RENDER CHART
+        // RENDERIZAR GRÁFICO
         // ============================================
         function renderChart() {
             try {
-                const ctx = document.getElementById('progressChart').getContext('2d');
+                var ctx = document.getElementById('progressChart').getContext('2d');
 
                 new Chart(ctx, {
                     type: 'doughnut',
@@ -1172,6 +1379,31 @@
             } catch (error) {
                 console.error('❌ Erro ao renderizar gráfico:', error);
             }
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+
+            if (type === 'error') {
+                icon.textContent = '❌';
+            } else if (type === 'warning') {
+                icon.textContent = '⚠️';
+            } else {
+                icon.textContent = '✅';
+            }
+
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
         }
 
         console.log('✅ Dashboard Consultor carregado com sucesso!');
