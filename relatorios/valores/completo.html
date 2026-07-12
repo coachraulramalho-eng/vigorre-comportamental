@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Relatório Completo Valores | VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
         /* ============================================
            VIGORRE ONE™ - RELATÓRIO COMPLETO VALORES
+           INTERNATIONAL ENTERPRISE EDITION
            ============================================ */
 
         * {
@@ -22,11 +21,16 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
             --purple: #7C3AED;
+            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -43,7 +47,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -62,7 +68,7 @@
         /* ============================================
            HEADER PREMIUM
            ============================================ */
-        .header-premium {
+        .header-print {
             background: var(--navy);
             color: white;
             padding: 24px 32px;
@@ -72,71 +78,74 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 16px;
+            position: relative;
+            z-index: 1;
         }
 
-        .header-premium .logo {
+        .header-print .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
         }
 
-        .header-premium .logo .logo-img {
+        .header-print .logo .logo-img {
             height: 44px;
             width: auto;
             display: block;
         }
 
-        .header-premium .logo .logo-text .name {
+        .header-print .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             font-weight: 800;
             color: white;
+            letter-spacing: -0.3px;
         }
 
-        .header-premium .logo .logo-text .name .tm {
+        .header-print .logo .logo-text .name .tm {
             font-size: 0.4rem;
             vertical-align: super;
             color: var(--cyan);
         }
 
-        .header-premium .logo .logo-text .sub {
+        .header-print .logo .logo-text .sub {
             font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
-        .header-premium .header-title {
+        .header-print .header-title {
             text-align: center;
         }
 
-        .header-premium .header-title h1 {
+        .header-print .header-title h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
         }
 
-        .header-premium .header-title .subtitle {
+        .header-print .header-title .subtitle {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .header-premium .header-user {
+        .header-print .header-user {
             text-align: right;
         }
 
-        .header-premium .header-user .name {
+        .header-print .header-user .name {
             font-weight: 600;
             font-size: 0.9rem;
         }
 
-        .header-premium .header-user .company {
+        .header-print .header-user .company {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .header-premium .header-code {
+        .header-print .header-code {
             font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.3);
             font-family: 'Courier New', monospace;
@@ -207,6 +216,7 @@
             padding: 60px 40px;
             border-bottom: 2px solid var(--gray-200);
             margin-bottom: 32px;
+            position: relative;
         }
 
         .capa .capa-logo {
@@ -385,16 +395,7 @@
         }
 
         /* ============================================
-           GRÁFICOS
-           ============================================ */
-        .chart-container {
-            height: 240px;
-            position: relative;
-            margin: 16px 0;
-        }
-
-        /* ============================================
-           CATEGORIAS
+           CATEGORIAS GRID
            ============================================ */
         .categorias-grid {
             display: grid;
@@ -432,7 +433,16 @@
         }
 
         /* ============================================
-           LISTAS
+           CHARTS
+           ============================================ */
+        .chart-container {
+            height: 240px;
+            position: relative;
+            margin: 16px 0;
+        }
+
+        /* ============================================
+           FEATURE LIST
            ============================================ */
         .feature-list {
             list-style: none;
@@ -480,7 +490,7 @@
         .compatibilidade-card .compat-value {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--blue);
+            color: var(--gold);
         }
 
         .compatibilidade-card .compat-bar {
@@ -536,9 +546,9 @@
         }
 
         /* ============================================
-           FOOTER
+           FOOTER PREMIUM
            ============================================ */
-        .footer-premium {
+        .footer-print {
             background: var(--navy);
             color: white;
             padding: 20px 32px;
@@ -550,13 +560,13 @@
             gap: 12px;
         }
 
-        .footer-premium .footer-logo {
+        .footer-print .footer-logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .footer-premium .footer-logo .logo-icon {
+        .footer-print .footer-logo .logo-icon {
             width: 32px;
             height: 32px;
             background: var(--cyan);
@@ -570,41 +580,41 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .footer-premium .footer-logo .footer-text .name {
+        .footer-print .footer-logo .footer-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
         }
 
-        .footer-premium .footer-logo .footer-text .name .tm {
+        .footer-print .footer-logo .footer-text .name .tm {
             font-size: 0.35rem;
             vertical-align: super;
             color: var(--cyan);
         }
 
-        .footer-premium .footer-logo .footer-text .tagline {
+        .footer-print .footer-logo .footer-text .tagline {
             font-size: 0.55rem;
             color: rgba(255, 255, 255, 0.3);
         }
 
-        .footer-premium .footer-contact {
+        .footer-print .footer-contact {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
         }
 
-        .footer-premium .footer-contact a {
+        .footer-print .footer-contact a {
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             font-size: 0.7rem;
             transition: var(--transition);
         }
 
-        .footer-premium .footer-contact a:hover {
+        .footer-print .footer-contact a:hover {
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .footer-premium .footer-page {
+        .footer-print .footer-page {
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.3);
         }
@@ -658,7 +668,7 @@
         }
 
         .btn-success {
-            background: #10B981;
+            background: var(--green);
             color: white;
         }
 
@@ -671,11 +681,12 @@
            RESPONSIVO
            ============================================ */
         @media (max-width: 768px) {
-            .header-premium {
+            .header-print {
                 flex-direction: column;
                 text-align: center;
+                padding: 16px 20px;
             }
-            .header-premium .header-user {
+            .header-print .header-user {
                 text-align: center;
             }
             .valores-grid {
@@ -693,7 +704,7 @@
             .report-body {
                 padding: 20px;
             }
-            .footer-premium {
+            .footer-print {
                 flex-direction: column;
                 text-align: center;
             }
@@ -709,6 +720,18 @@
             .valores-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            .capa {
+                padding: 30px 20px;
+            }
+            .capa .capa-title {
+                font-size: 1.4rem;
+            }
+            .capa .capa-logo {
+                font-size: 1.8rem;
+            }
+            body {
+                padding: 10px;
+            }
         }
 
         @media print {
@@ -716,13 +739,13 @@
                 background: white !important;
                 padding: 0 !important;
             }
-            .header-premium {
+            .header-print {
                 background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 border-radius: 0 !important;
             }
-            .footer-premium {
+            .footer-print {
                 background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -736,9 +759,12 @@
             }
             .report-body {
                 border: none !important;
+                padding: 20px !important;
             }
             .valor-card {
                 background: #F8FAFC !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             .categoria-card {
                 background: #F8FAFC !important;
@@ -758,6 +784,9 @@
             .section {
                 page-break-inside: avoid;
             }
+            .capa {
+                border-bottom: 2px solid #E2E8F0 !important;
+            }
         }
     </style>
 </head>
@@ -768,7 +797,7 @@
         <!-- ============================================
         HEADER PREMIUM
         ============================================ -->
-        <header class="header-premium">
+        <header class="header-print">
             <div class="logo">
                 <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
                 <div class="logo-text">
@@ -833,16 +862,16 @@
                 <div class="sumario-item"><span>2. Como Interpretar Este Relatório</span><span class="page">4</span></div>
                 <div class="sumario-item"><span>3. Metodologia e Confiabilidade</span><span class="page">5</span></div>
                 <div class="sumario-item"><span>4. Perfil de Valores</span><span class="page">6</span></div>
-                <div class="sumario-item"><span>5. Análise dos Valores</span><span class="page">8</span></div>
-                <div class="sumario-item"><span>6. Categorias de Valores</span><span class="page">10</span></div>
-                <div class="sumario-item"><span>7. Alinhamento com Cultura Organizacional</span><span class="page">11</span></div>
-                <div class="sumario-item"><span>8. Recomendações de Carreira</span><span class="page">12</span></div>
-                <div class="sumario-item"><span>9. Tomada de Decisão Baseada em Valores</span><span class="page">13</span></div>
-                <div class="sumario-item"><span>10. Motivação e Propósito</span><span class="page">14</span></div>
-                <div class="sumario-item"><span>11. Compatibilidade com Vaga</span><span class="page">15</span></div>
-                <div class="sumario-item"><span>12. Plano de Desenvolvimento</span><span class="page">16</span></div>
-                <div class="sumario-item"><span>13. Parecer da IA</span><span class="page">17</span></div>
-                <div class="sumario-item"><span>14. Conclusão</span><span class="page">18</span></div>
+                <div class="sumario-item"><span>5. Categorias de Valores</span><span class="page">8</span></div>
+                <div class="sumario-item"><span>6. Alinhamento com Cultura Organizacional</span><span class="page">10</span></div>
+                <div class="sumario-item"><span>7. Recomendações de Carreira</span><span class="page">11</span></div>
+                <div class="sumario-item"><span>8. Tomada de Decisão Baseada em Valores</span><span class="page">12</span></div>
+                <div class="sumario-item"><span>9. Motivação e Propósito</span><span class="page">13</span></div>
+                <div class="sumario-item"><span>10. Compatibilidade com Vaga</span><span class="page">14</span></div>
+                <div class="sumario-item"><span>11. Plano de Desenvolvimento</span><span class="page">15</span></div>
+                <div class="sumario-item"><span>12. Parecer da IA</span><span class="page">16</span></div>
+                <div class="sumario-item"><span>13. Conclusão</span><span class="page">17</span></div>
+                <div class="sumario-item"><span>14. Assinatura Digital</span><span class="page">18</span></div>
             </section>
 
             <!-- ============================================
@@ -851,14 +880,8 @@
             <section class="section">
                 <h2 class="section-title"><span class="number">1</span> Apresentação</h2>
                 <p class="section-text">
-                    Este relatório apresenta uma análise completa dos valores pessoais baseada na Teoria de Schwartz,
-                    desenvolvida pelo psicólogo Shalom Schwartz. A teoria identifica 10 valores universais que orientam
-                    o comportamento humano em diferentes culturas e contextos.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    Os valores são princípios fundamentais que guiam nossas escolhas, comportamentos e decisões.
-                    Compreender seus valores é essencial para o autoconhecimento, o desenvolvimento profissional
-                    e a construção de uma carreira alinhada com suas crenças e prioridades.
+                    Este relatório apresenta uma análise completa dos valores pessoais baseada na Teoria de Schwartz.
+                    A teoria identifica 10 valores universais que orientam o comportamento humano e as decisões.
                 </p>
                 <p class="section-text" style="margin-top: 8px;">
                     <strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br />
@@ -874,19 +897,8 @@
             <section class="section">
                 <h2 class="section-title"><span class="number">2</span> Como Interpretar Este Relatório</h2>
                 <p class="section-text">
-                    Para obter o máximo proveito deste relatório, recomendamos que você:
-                </p>
-                <ul style="color: var(--gray-600); line-height: 2; font-size: 0.95rem; padding-left: 20px; margin-top: 8px;">
-                    <li>Leia o relatório completo, sem pular seções;</li>
-                    <li>Reflita sobre como cada valor se manifesta no seu dia a dia;</li>
-                    <li>Identifique quais valores são mais importantes para você;</li>
-                    <li>Busque feedback de pessoas que convivem com você profissionalmente;</li>
-                    <li>Utilize as recomendações como base para um plano de desenvolvimento;</li>
-                    <li>Revisite o relatório periodicamente para acompanhar sua evolução.</li>
-                </ul>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Importante:</strong> Este relatório é uma ferramenta de autoconhecimento e desenvolvimento.
-                    Não deve ser utilizado como único critério para decisões de contratação, promoção ou avaliação de desempenho.
+                    Os valores são princípios que guiam suas escolhas e comportamentos. Este relatório ajuda a identificar
+                    quais valores são mais importantes para você e como eles influenciam sua vida profissional e pessoal.
                 </p>
             </section>
 
@@ -898,30 +910,14 @@
                 <p class="section-text">
                     <strong>Como os resultados são calculados</strong>
                     <br />
-                    O teste de Valores é composto por 20 questões que avaliam os 10 valores da Teoria de Schwartz.
-                    Cada valor é medido por duas perguntas, garantindo maior precisão e consistência na avaliação.
-                    As respostas são pontuadas em uma escala de 1 a 4, onde 1 significa "Não Importante" e 4 significa "Muito Importante".
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Consistência dos resultados</strong>
-                    <br />
-                    O sistema utiliza um algoritmo determinístico: se você responder exatamente as mesmas respostas,
-                    o resultado será exatamente o mesmo. Isso garante que a interpretação seja baseada exclusivamente
-                    nas suas respostas, sem variações aleatórias.
+                    O teste de Valores é baseado na Teoria de Schwartz, que identifica 10 valores universais.
+                    Cada valor é avaliado por meio de questões que medem sua importância para o participante.
                 </p>
                 <p class="section-text" style="margin-top: 8px;">
                     <strong>Confiabilidade</strong>
                     <br />
-                    A Teoria de Schwartz é uma das mais validadas na psicologia transcultural, com estudos em mais de 80 países
-                    e comprovada consistência interna. Os resultados são calculados com base em médias ponderadas e
-                    normalizadas para garantir precisão.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Limitações</strong>
-                    <br />
-                    Como toda avaliação comportamental, este relatório deve ser interpretado considerando o contexto
-                    e a honestidade das respostas. Recomenda-se uma reflexão pessoal e, se possível, uma sessão de
-                    feedback com um profissional especializado.
+                    A Teoria de Schwartz é amplamente validada em estudos transculturais e utilizada em pesquisas acadêmicas
+                    e organizacionais em todo o mundo.
                 </p>
             </section>
 
@@ -931,115 +927,96 @@
             <section class="section">
                 <h2 class="section-title"><span class="number">4</span> Perfil de Valores</h2>
                 <div class="valores-grid" id="valoresGrid">
-                    <!-- Carregado via JS -->
+                    <!-- Carregado via JavaScript -->
                 </div>
                 <div class="chart-container">
                     <canvas id="valoresChart"></canvas>
                 </div>
-                <p class="section-text" id="profileDescription">Carregando descrição do perfil...</p>
+                <p class="section-text" id="profileDescription">Carregando descrição...</p>
             </section>
 
             <!-- ============================================
-            SEÇÃO 5: ANÁLISE DOS VALORES
+            SEÇÃO 5: CATEGORIAS DE VALORES
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">5</span> Análise dos Valores</h2>
-                <p class="section-text" id="valuesAnalysis">Carregando análise detalhada dos valores...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 6: CATEGORIAS DE VALORES
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">6</span> Categorias de Valores</h2>
-                <p class="section-text" style="margin-bottom: 12px;">
-                    Os 10 valores de Schwartz podem ser agrupados em 4 categorias principais, que representam
-                    dimensões mais amplas da motivação humana:
-                </p>
+                <h2 class="section-title"><span class="number">5</span> Categorias de Valores</h2>
                 <div class="categorias-grid" id="categoriasGrid">
-                    <!-- Carregado via JS -->
+                    <!-- Carregado via JavaScript -->
                 </div>
             </section>
 
             <!-- ============================================
-            SEÇÃO 7: ALINHAMENTO COM CULTURA ORGANIZACIONAL
+            SEÇÃO 6: ALINHAMENTO COM CULTURA
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">7</span> Alinhamento com Cultura Organizacional</h2>
-                <p class="section-text" id="cultureText">Carregando análise de alinhamento cultural...</p>
+                <h2 class="section-title"><span class="number">6</span> Alinhamento com Cultura Organizacional</h2>
+                <p class="section-text" id="cultureText">Carregando...</p>
             </section>
 
             <!-- ============================================
-            SEÇÃO 8: RECOMENDAÇÕES DE CARREIRA
+            SEÇÃO 7: RECOMENDAÇÕES DE CARREIRA
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">8</span> Recomendações de Carreira</h2>
-                <p class="section-text" style="margin-bottom: 12px;">
-                    Com base nos seus valores predominantes, as seguintes carreiras e áreas de atuação
-                    tendem a oferecer maior alinhamento e satisfação profissional:
-                </p>
+                <h2 class="section-title"><span class="number">7</span> Recomendações de Carreira</h2>
                 <ul class="feature-list" id="careersList">
                     <li><span class="check">✓</span> Carregando...</li>
                 </ul>
             </section>
 
             <!-- ============================================
-            SEÇÃO 9: TOMADA DE DECISÃO BASEADA EM VALORES
+            SEÇÃO 8: TOMADA DE DECISÃO
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">9</span> Tomada de Decisão Baseada em Valores</h2>
-                <p class="section-text" id="decisionText">Carregando análise da tomada de decisão...</p>
+                <h2 class="section-title"><span class="number">8</span> Tomada de Decisão Baseada em Valores</h2>
+                <p class="section-text" id="decisionText">Carregando...</p>
             </section>
 
             <!-- ============================================
-            SEÇÃO 10: MOTIVAÇÃO E PROPÓSITO
+            SEÇÃO 9: MOTIVAÇÃO E PROPÓSITO
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">10</span> Motivação e Propósito</h2>
-                <p class="section-text" id="purposeText">Carregando análise de motivação e propósito...</p>
+                <h2 class="section-title"><span class="number">9</span> Motivação e Propósito</h2>
+                <p class="section-text" id="purposeText">Carregando...</p>
             </section>
 
             <!-- ============================================
-            SEÇÃO 11: COMPATIBILIDADE COM VAGA
+            SEÇÃO 10: COMPATIBILIDADE COM VAGA
             ============================================ -->
             <section class="section" id="compatibilidadeSection">
-                <h2 class="section-title"><span class="number">11</span> Compatibilidade com Vaga</h2>
+                <h2 class="section-title"><span class="number">10</span> Compatibilidade com Vaga</h2>
                 <div id="compatibilidadeContent">
                     <p class="section-text">Carregando análise de compatibilidade...</p>
                 </div>
             </section>
 
             <!-- ============================================
-            SEÇÃO 12: PLANO DE DESENVOLVIMENTO
+            SEÇÃO 11: PLANO DE DESENVOLVIMENTO
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">12</span> Plano de Desenvolvimento</h2>
-                <p class="section-text" style="margin-bottom: 12px;">
-                    Com base no seu perfil de valores, recomendamos o seguinte plano de desenvolvimento:
-                </p>
+                <h2 class="section-title"><span class="number">11</span> Plano de Desenvolvimento</h2>
                 <ul class="feature-list" id="developmentPlanList">
                     <li><span class="check">✓</span> Carregando...</li>
                 </ul>
             </section>
 
             <!-- ============================================
-            SEÇÃO 13: PARECER DA IA
+            SEÇÃO 12: PARECER DA IA
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">13</span> Parecer da Inteligência Artificial</h2>
+                <h2 class="section-title"><span class="number">12</span> Parecer da IA</h2>
                 <p class="section-text" id="iaOpinionText">Carregando parecer da IA...</p>
             </section>
 
             <!-- ============================================
-            SEÇÃO 14: CONCLUSÃO
+            SEÇÃO 13: CONCLUSÃO
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">14</span> Conclusão</h2>
+                <h2 class="section-title"><span class="number">13</span> Conclusão</h2>
                 <p class="section-text" id="conclusionText">Carregando conclusão...</p>
             </section>
 
             <!-- ============================================
-            ASSINATURA
+            SEÇÃO 14: ASSINATURA
             ============================================ -->
             <section class="assinatura">
                 <div class="assinatura-qr">
@@ -1069,9 +1046,9 @@
         </div>
 
         <!-- ============================================
-        FOOTER
+        FOOTER PREMIUM
         ============================================ -->
-        <footer class="footer-premium">
+        <footer class="footer-print">
             <div class="footer-logo">
                 <div class="logo-icon">V</div>
                 <div class="footer-text">
@@ -1099,12 +1076,18 @@
     <script src="../../middleware/auth-guard.js"></script>
 
     <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - RELATÓRIO COMPLETO VALORES
+         * ============================================
+         */
+
         'use strict';
 
         // ============================================
         // DADOS DE EXEMPLO
         // ============================================
-        const sampleData = {
+        var sampleData = {
             participantName: 'Ana Silva',
             companyName: 'TechCorp Solutions',
             participantId: 'P001',
@@ -1133,109 +1116,49 @@
         // ============================================
         // CONFIGURAÇÃO DOS VALORES
         // ============================================
-        const valoresConfig = {
-            poder: {
-                label: 'Poder',
-                icon: '👑',
-                color: '#EF4444',
-                desc: 'Busca por status, prestígio e controle sobre recursos e pessoas. Desejo de influência e autoridade.',
-                careers: ['Gestão Executiva', 'Política', 'Administração', 'Liderança', 'Empreendedorismo']
-            },
-            realizacao: {
-                label: 'Realização',
-                icon: '🏆',
-                color: '#F59E0B',
-                desc: 'Foco em sucesso, competência e superação de desafios. Busca por excelência e reconhecimento.',
-                careers: ['Empreendedorismo', 'Vendas', 'Marketing', 'Gestão de Projetos', 'Esportes']
-            },
-            hedonismo: {
-                label: 'Hedonismo',
-                icon: '🎉',
-                color: '#F97316',
-                desc: 'Busca por prazer, gratificação e satisfação pessoal. Valorização do bem-estar e da diversão.',
-                careers: ['Entretenimento', 'Artes', 'Gastronomia', 'Lazer', 'Turismo']
-            },
-            estimulacao: {
-                label: 'Estimulação',
-                icon: '⚡',
-                color: '#8B5CF6',
-                desc: 'Busca por novidades, aventura e experiências emocionantes. Valorização da mudança e da inovação.',
-                careers: ['Inovação', 'Startups', 'Pesquisa', 'Criatividade', 'Tecnologia']
-            },
-            autodirecao: {
-                label: 'Autodireção',
-                icon: '🧭',
-                color: '#3B82F6',
-                desc: 'Valoriza independência, autonomia e liberdade de pensamento. Busca por autenticidade e criatividade.',
-                careers: ['Pesquisa', 'Consultoria', 'Freelancer', 'Empreendedorismo', 'Ciência']
-            },
-            universalismo: {
-                label: 'Universalismo',
-                icon: '🌍',
-                color: '#06B6D4',
-                desc: 'Compromisso com justiça social, tolerância e compreensão. Valorização da diversidade e da igualdade.',
-                careers: ['ONGs', 'Responsabilidade Social', 'Educação', 'Meio Ambiente', 'Direitos Humanos']
-            },
-            benevolencia: {
-                label: 'Benevolência',
-                icon: '🤗',
-                color: '#10B981',
-                desc: 'Preocupação com o bem-estar e a felicidade dos outros. Valorização da empatia e da solidariedade.',
-                careers: ['Saúde', 'Educação', 'Recursos Humanos', 'Trabalho Social', 'Psicologia']
-            },
-            tradicao: {
-                label: 'Tradição',
-                icon: '📜',
-                color: '#8B5CF6',
-                desc: 'Respeito por costumes, religião e valores culturais. Valorização da continuidade e da herança.',
-                careers: ['História', 'Cultura', 'Educação', 'Religião', 'Patrimônio']
-            },
-            conformidade: {
-                label: 'Conformidade',
-                icon: '📋',
-                color: '#6B7280',
-                desc: 'Valoriza obediência, autocontrole e harmonia social. Busca por ordem e estabilidade.',
-                careers: ['Administração', 'Contabilidade', 'Processos', 'Qualidade', 'Auditoria']
-            },
-            seguranca: {
-                label: 'Segurança',
-                icon: '🔒',
-                color: '#1F2937',
-                desc: 'Busca por estabilidade, segurança física e emocional. Valorização da previsibilidade e da proteção.',
-                careers: ['Finanças', 'Segurança', 'Administração', 'Planejamento', 'Previdência']
-            }
+        var valoresConfig = {
+            poder: { label: 'Poder', icon: '👑', color: '#EF4444' },
+            realizacao: { label: 'Realização', icon: '🏆', color: '#F59E0B' },
+            hedonismo: { label: 'Hedonismo', icon: '🎉', color: '#F97316' },
+            estimulacao: { label: 'Estimulação', icon: '⚡', color: '#8B5CF6' },
+            autodirecao: { label: 'Autodireção', icon: '🧭', color: '#3B82F6' },
+            universalismo: { label: 'Universalismo', icon: '🌍', color: '#06B6D4' },
+            benevolencia: { label: 'Benevolência', icon: '🤗', color: '#10B981' },
+            tradicao: { label: 'Tradição', icon: '📜', color: '#8B5CF6' },
+            conformidade: { label: 'Conformidade', icon: '📋', color: '#6B7280' },
+            seguranca: { label: 'Segurança', icon: '🔒', color: '#1F2937' }
         };
 
-        const valorKeys = ['poder', 'realizacao', 'hedonismo', 'estimulacao', 'autodirecao', 'universalismo', 'benevolencia',
+        var valorKeys = ['poder', 'realizacao', 'hedonismo', 'estimulacao', 'autodirecao', 'universalismo', 'benevolencia',
             'tradicao', 'conformidade', 'seguranca'
         ];
 
         // ============================================
-        // CATEGORIAS DE VALORES
+        // CATEGORIAS
         // ============================================
-        const categorias = {
+        var categorias = {
             autotranscendencia: {
                 label: 'Autotranscendência',
                 icon: '🌍',
-                desc: 'Preocupação com o bem-estar dos outros e da sociedade. Valores: Universalismo e Benevolência.',
+                description: 'Preocupação com o bem-estar dos outros',
                 values: ['universalismo', 'benevolencia']
             },
             autopromocao: {
                 label: 'Autopromoção',
                 icon: '⭐',
-                desc: 'Busca por sucesso pessoal, poder e reconhecimento. Valores: Poder, Realização e Hedonismo.',
+                description: 'Busca por sucesso pessoal e poder',
                 values: ['poder', 'realizacao', 'hedonismo']
             },
             abertura_mudanca: {
                 label: 'Abertura à Mudança',
                 icon: '🚀',
-                desc: 'Valorização da independência, novidade e crescimento. Valores: Estimulação e Autodireção.',
+                description: 'Valorização da independência e novidade',
                 values: ['estimulacao', 'autodirecao']
             },
             conservacao: {
                 label: 'Conservação',
                 icon: '🏛️',
-                desc: 'Respeito por tradições, estabilidade e segurança. Valores: Tradição, Conformidade e Segurança.',
+                description: 'Respeito por tradições e estabilidade',
                 values: ['tradicao', 'conformidade', 'seguranca']
             }
         };
@@ -1246,7 +1169,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📄 Relatório Completo Valores - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../../login.html';
                 return;
@@ -1260,43 +1183,57 @@
         // ============================================
         function loadData() {
             try {
-                const user = window.VigorreAuth.getCurrentUser();
+                var user = window.VigorreAuth.getCurrentUser();
                 if (!user) {
                     renderReport(sampleData);
                     return;
                 }
 
-                const allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const participant = allParticipants.find(p => p.id === user.id);
+                var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var participant = null;
+                for (var i = 0; i < allParticipants.length; i++) {
+                    if (allParticipants[i].id === user.id) {
+                        participant = allParticipants[i];
+                        break;
+                    }
+                }
 
-                if (!participant || !participant.results?.Valores) {
+                if (!participant || !participant.results || !participant.results.Valores) {
                     renderReport(sampleData);
                     return;
                 }
 
-                const valoresResult = participant.results.Valores;
-                let companyName = 'Autônomo';
-                let jobTitle = 'Não vinculado';
+                var valoresResult = participant.results.Valores;
+                var companyName = 'Autônomo';
+                var jobTitle = 'Não vinculado';
 
                 if (participant.companyId) {
-                    const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-                    const company = companies.find(c => c.id === participant.companyId);
-                    if (company) companyName = company.name;
+                    var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                    for (var j = 0; j < companies.length; j++) {
+                        if (companies[j].id === participant.companyId) {
+                            companyName = companies[j].name;
+                            break;
+                        }
+                    }
                 }
 
                 if (participant.jobId) {
-                    const jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
-                    const job = jobs.find(j => j.id === participant.jobId);
-                    if (job) jobTitle = job.title || job.name || 'Vaga';
+                    var jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
+                    for (var k = 0; k < jobs.length; k++) {
+                        if (jobs[k].id === participant.jobId) {
+                            jobTitle = jobs[k].title || jobs[k].name || 'Vaga';
+                            break;
+                        }
+                    }
                 }
 
-                const data = {
+                var data = {
                     participantName: participant.name || sampleData.participantName,
                     companyName: companyName,
                     participantId: participant.id || sampleData.participantId,
                     date: new Date().toISOString(),
-                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(
-                        3, '0'),
+                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000))
+                        .padStart(3, '0'),
                     percentages: valoresResult.percentages || sampleData.percentages,
                     topValor: valoresResult.topValor || sampleData.topValor,
                     topPercent: valoresResult.topPercent || sampleData.topPercent,
@@ -1318,8 +1255,8 @@
         // RENDERIZAR RELATÓRIO
         // ============================================
         function renderReport(data) {
-            const pcts = data.percentages;
-            const dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
+            var pcts = data.percentages;
+            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
                 day: '2-digit',
                 month: 'long',
                 year: 'numeric',
@@ -1329,8 +1266,8 @@
 
             // Atualizar cabeçalho
             document.getElementById('participantName').textContent = data.participantName;
-            document.getElementById('participantCompany').textContent = `Empresa: ${data.companyName}`;
-            document.getElementById('reportCode').textContent = `Código: ${data.reportCode}`;
+            document.getElementById('participantCompany').textContent = 'Empresa: ' + data.companyName;
+            document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
 
             // Atualizar capa
             document.getElementById('capaParticipant').textContent = data.participantName;
@@ -1344,295 +1281,333 @@
 
             // Atualizar assinatura
             document.getElementById('assinaturaCode').textContent =
-                `Código de Autenticação: ${data.reportCode} • Hash: ${generateHash(data.participantId + data.reportCode)}`;
+                'Código de Autenticação: ' + data.reportCode + ' • Hash: ' + generateHash(data.participantId + data
+                    .reportCode);
 
             // Atualizar página
             document.getElementById('pageNumber').textContent = '1';
 
-            const topConfig = valoresConfig[data.topValor];
-            const bottomConfig = valoresConfig[data.bottomValor];
-
             // ============================================
-            // 1. VALORES - GRID
+            // 1. VALORES GRID
             // ============================================
-            const grid = document.getElementById('valoresGrid');
-            grid.innerHTML = valorKeys.map(key => {
-                const config = valoresConfig[key];
-                const value = pcts[key] || 0;
-                return `
-                        <div class="valor-card">
-                            <div class="valor-icon">${config.icon}</div>
-                            <div class="valor-name">${config.label}</div>
-                            <div class="valor-value">${value}%</div>
-                            <div class="valor-bar">
-                                <div class="fill" style="width:${value}%;background:${config.color};"></div>
-                            </div>
-                        </div>
-                    `;
-            }).join('');
+            var grid = document.getElementById('valoresGrid');
+            var gridHtml = '';
+            for (var i = 0; i < valorKeys.length; i++) {
+                var key = valorKeys[i];
+                var config = valoresConfig[key];
+                var value = pcts[key] || 0;
+                gridHtml += '<div class="valor-card">';
+                gridHtml += '<div class="valor-icon">' + config.icon + '</div>';
+                gridHtml += '<div class="valor-name">' + config.label + '</div>';
+                gridHtml += '<div class="valor-value">' + value + '%</div>';
+                gridHtml += '<div class="valor-bar"><div class="fill" style="width:' + value + '%;background:' + config
+                    .color + ';"></div></div>';
+                gridHtml += '</div>';
+            }
+            grid.innerHTML = gridHtml;
 
             // ============================================
             // 2. DESCRIÇÃO DO PERFIL
             // ============================================
-            document.getElementById('profileDescription').innerHTML = `
-                    <strong>Valor Principal:</strong> ${topConfig.icon} ${topConfig.label} (${data.topPercent}%)
-                    <br />
-                    ${topConfig.desc}
-                    <br /><br />
-                    <strong>Valor Secundário (menor pontuação):</strong> ${bottomConfig.icon} ${bottomConfig.label} (${data.bottomPercent}%)
-                    <br />
-                    ${bottomConfig.desc}
-                    <br /><br />
-                    <strong>Distribuição dos Valores:</strong><br />
-                    👑 Poder: ${pcts.poder || 0}% &nbsp;|&nbsp;
-                    🏆 Realização: ${pcts.realizacao || 0}% &nbsp;|&nbsp;
-                    🎉 Hedonismo: ${pcts.hedonismo || 0}% &nbsp;|&nbsp;
-                    ⚡ Estimulação: ${pcts.estimulacao || 0}% &nbsp;|&nbsp;
-                    🧭 Autodireção: ${pcts.autodirecao || 0}% &nbsp;|&nbsp;
-                    🌍 Universalismo: ${pcts.universalismo || 0}% &nbsp;|&nbsp;
-                    🤗 Benevolência: ${pcts.benevolencia || 0}% &nbsp;|&nbsp;
-                    📜 Tradição: ${pcts.tradicao || 0}% &nbsp;|&nbsp;
-                    📋 Conformidade: ${pcts.conformidade || 0}% &nbsp;|&nbsp;
-                    🔒 Segurança: ${pcts.seguranca || 0}%
-                `;
+            var topConfig = valoresConfig[data.topValor];
+            var bottomConfig = valoresConfig[data.bottomValor];
+
+            document.getElementById('profileDescription').innerHTML =
+                '<strong>Valor Principal:</strong> ' + topConfig.icon + ' ' + topConfig.label + ' (' + data.topPercent +
+                '%)<br />' +
+                '<strong>Valor com menor pontuação:</strong> ' + bottomConfig.icon + ' ' + bottomConfig.label +
+                ' (' + data.bottomPercent + '%)';
 
             // ============================================
-            // 3. ANÁLISE DOS VALORES
+            // 3. CATEGORIAS
             // ============================================
-            document.getElementById('valuesAnalysis').innerHTML = valorKeys.map(key => {
-                const config = valoresConfig[key];
-                const value = pcts[key] || 0;
-                let level = '';
-                if (value >= 75) level = 'Alta prioridade';
-                else if (value >= 50) level = 'Moderado';
-                else level = 'Baixa prioridade';
-
-                return `
-                        <strong>${config.icon} ${config.label} (${value}%):</strong> ${level}
-                        <br />
-                        ${config.desc}
-                        <br /><br />
-                    `;
-            }).join('');
-
-            // ============================================
-            // 4. CATEGORIAS DE VALORES
-            // ============================================
-            const catGrid = document.getElementById('categoriasGrid');
-            catGrid.innerHTML = '';
-
-            for (const [key, cat] of Object.entries(categorias)) {
-                let total = 0;
-                let count = 0;
-                for (const v of cat.values) {
+            var catGrid = document.getElementById('categoriasGrid');
+            var catHtml = '';
+            for (var key in categorias) {
+                var cat = categorias[key];
+                var total = 0;
+                var count = 0;
+                for (var i = 0; i < cat.values.length; i++) {
+                    var v = cat.values[i];
                     if (pcts[v] !== undefined) {
                         total += pcts[v];
                         count++;
                     }
                 }
-                const avg = count > 0 ? Math.round(total / count) : 0;
-
-                let level = '';
-                let color = '';
+                var avg = count > 0 ? Math.round(total / count) : 0;
+                var level = '';
+                var color = '';
                 if (avg >= 70) { level = 'Alta';
                     color = '#10B981'; } else if (avg >= 50) { level = 'Moderada';
                     color = '#F59E0B'; } else { level = 'Baixa';
                     color = '#EF4444'; }
 
-                catGrid.innerHTML += `
-                        <div class="categoria-card">
-                            <div class="categoria-icon">${cat.icon}</div>
-                            <div class="categoria-name">${cat.label}</div>
-                            <div class="categoria-value" style="color:${color};">${avg}%</div>
-                            <div class="categoria-desc">
-                                ${cat.desc}
-                                <br />
-                                <span style="color:${color};font-weight:600;">Nível: ${level}</span>
-                            </div>
-                        </div>
-                    `;
+                catHtml += '<div class="categoria-card">';
+                catHtml += '<div class="categoria-icon">' + cat.icon + '</div>';
+                catHtml += '<div class="categoria-name">' + cat.label + '</div>';
+                catHtml += '<div class="categoria-value" style="color:' + color + ';">' + avg + '%</div>';
+                catHtml += '<div class="categoria-desc">' + cat.description + ' <br /> <span style="color:' + color +
+                    ';font-weight:600;">Nível: ' + level + '</span></div>';
+                catHtml += '</div>';
+            }
+            catGrid.innerHTML = catHtml;
+
+            // ============================================
+            // 4. ALINHAMENTO COM CULTURA
+            // ============================================
+            var sorted = [];
+            for (var key in pcts) {
+                sorted.push([key, pcts[key]]);
+            }
+            sorted.sort(function(a, b) { return b[1] - a[1]; });
+            var top3 = sorted.slice(0, 3);
+            var top3Text = '';
+            for (var i = 0; i < top3.length; i++) {
+                var config = valoresConfig[top3[i][0]];
+                top3Text += config.icon + ' ' + config.label + ' (' + top3[i][1] + '%)';
+                if (i < top3.length - 1) top3Text += ', ';
             }
 
-            // ============================================
-            // 5. ALINHAMENTO COM CULTURA
-            // ============================================
-            const topValues = Object.entries(pcts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+            var cultureText =
+                'Seus valores principais são <strong>' + top3Text + '</strong>.' +
+                '<br /><br /><strong>Alinhamento com cultura organizacional:</strong><br />';
 
-            document.getElementById('cultureText').innerHTML = `
-                    Seus valores principais são <strong>${topValues.map(([key, val]) => `${valoresConfig[key].icon} ${valoresConfig[key].label} (${val}%)`).join(', ')}</strong>.
-                    <br /><br />
-                    <strong>Alinhamento com cultura organizacional:</strong>
-                    <br />
-                    ${topValues.map(([key, val], idx) => 
-                        `• ${valoresConfig[key].icon} ${valoresConfig[key].label}: ${val >= 70 ? 'Alto alinhamento com culturas inovadoras e autônomas.' : val >= 50 ? 'Alinhamento moderado. Pode buscar ambientes mais alinhados com seus valores.' : 'Área de oportunidade para desenvolvimento.'}`
-                    ).join('<br />')}
-                    <br /><br />
-                    <strong>Recomendação:</strong>
-                    ${topValues[0] && topValues[0][1] >= 70 ? 'Seus valores estão bem alinhados com culturas organizacionais que valorizam autonomia, inovação e propósito.' :
-                    'Busque organizações que valorizem seus valores principais para maior realização profissional.'}
-                `;
+            for (var i = 0; i < top3.length; i++) {
+                var key = top3[i][0];
+                var val = top3[i][1];
+                var config = valoresConfig[key];
+                var text = val >= 70 ?
+                    config.icon + ' ' + config.label +
+                    ': Alto alinhamento com culturas inovadoras e autônomas.' :
+                    val >= 50 ?
+                    config.icon + ' ' + config.label +
+                    ': Alinhamento moderado. Pode buscar ambientes mais alinhados com seus valores.' :
+                    config.icon + ' ' + config.label +
+                    ': Área de oportunidade para desenvolvimento.';
+                cultureText += '• ' + text + '<br />';
+            }
 
-            // ============================================
-            // 6. RECOMENDAÇÕES DE CARREIRA
-            // ============================================
-            const careersList = document.getElementById('careersList');
-            const top3 = Object.entries(pcts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+            var hasHigh = false;
+            for (var key in pcts) {
+                if (pcts[key] >= 70) { hasHigh = true; break; }
+            }
 
-            careersList.innerHTML = top3.map(([key, value]) => {
-                const config = valoresConfig[key];
-                return `<li><span class="check">✓</span> ${config.icon} ${config.label} (${value}%): ${config.careers.slice(0, 3).join(', ')}</li>`;
-            }).join('');
+            cultureText += '<br /><strong>Recomendação:</strong> ' +
+                (hasHigh ?
+                    'Seus valores estão bem alinhados com culturas organizacionais que valorizam autonomia, inovação e propósito.' :
+                    'Busque organizações que valorizem seus valores principais para maior realização profissional.');
 
-            // ============================================
-            // 7. TOMADA DE DECISÃO
-            // ============================================
-            document.getElementById('decisionText').innerHTML = `
-                    Com base no seu perfil de valores, sua tomada de decisão é influenciada principalmente por:
-                    <br /><br />
-                    <strong>${topConfig.icon} ${topConfig.label}:</strong> 
-                    ${topConfig.label === 'Autodireção' ? 'Você tende a tomar decisões autônomas, valorizando a liberdade e a independência. Prefere escolhas que reflitam sua individualidade.' :
-                    topConfig.label === 'Realização' ? 'Você toma decisões orientadas por metas, buscando excelência e superação de desafios.' :
-                    topConfig.label === 'Benevolência' ? 'Suas decisões são guiadas pelo bem-estar dos outros e pela harmonia nas relações.' :
-                    topConfig.label === 'Universalismo' ? 'Você considera o impacto social e a justiça em suas decisões.' :
-                    topConfig.label === 'Segurança' ? 'Você prioriza decisões que garantam estabilidade e previsibilidade.' :
-                    'Suas decisões refletem seus valores principais, buscando coerência entre escolhas e princípios.'}
-                    <br /><br />
-                    <strong>Recomendação:</strong> Alinhe suas decisões profissionais com seus valores principais para maior satisfação e coerência.
-                `;
+            document.getElementById('cultureText').innerHTML = cultureText;
 
             // ============================================
-            // 8. MOTIVAÇÃO E PROPÓSITO
+            // 5. CARREIRAS
             // ============================================
-            document.getElementById('purposeText').innerHTML = `
-                    <strong>O que te motiva no trabalho?</strong>
-                    <br />
-                    ${topConfig.label === 'Autodireção' ? 'A liberdade para criar, inovar e fazer escolhas autônomas.' :
-                    topConfig.label === 'Realização' ? 'A superação de metas desafiadoras e o reconhecimento pelo sucesso.' :
-                    topConfig.label === 'Benevolência' ? 'O impacto positivo na vida das pessoas e a construção de relacionamentos significativos.' :
-                    topConfig.label === 'Universalismo' ? 'A contribuição para um mundo mais justo e sustentável.' :
-                    topConfig.label === 'Segurança' ? 'A estabilidade, a previsibilidade e a sensação de proteção.' :
-                    'A conexão com seus valores principais e a expressão autêntica de quem você é.'}
-                    <br /><br />
-                    <strong>Propósito profissional:</strong>
-                    <br />
-                    ${topConfig.label === 'Autodireção' ? 'Ser autônomo, inovador e livre para criar seu próprio caminho.' :
-                    topConfig.label === 'Realização' ? 'Alcançar altos padrões de excelência e inspirar outros com seu sucesso.' :
-                    topConfig.label === 'Benevolência' ? 'Fazer a diferença na vida das pessoas e promover bem-estar.' :
-                    topConfig.label === 'Universalismo' ? 'Contribuir para transformações sociais positivas.' :
-                    topConfig.label === 'Segurança' ? 'Construir uma base sólida e estável para si e para os outros.' :
-                    'Viver e trabalhar de acordo com seus valores mais profundos.'}
-                `;
+            var careersMap = {
+                poder: ['Gestão Executiva', 'Política', 'Administração', 'Liderança'],
+                realizacao: ['Empreendedorismo', 'Vendas', 'Marketing', 'Desafios'],
+                hedonismo: ['Entretenimento', 'Artes', 'Gastronomia', 'Lazer'],
+                estimulacao: ['Inovação', 'Startups', 'Aventura', 'Criatividade'],
+                autodirecao: ['Pesquisa', 'Consultoria', 'Freelancer', 'Autonomia'],
+                universalismo: ['ONGs', 'Responsabilidade Social', 'Educação', 'Meio Ambiente'],
+                benevolencia: ['Saúde', 'Educação', 'RH', 'Trabalho Social'],
+                tradicao: ['História', 'Cultura', 'Educação', 'Religião'],
+                conformidade: ['Administração', 'Contabilidade', 'Processos', 'Qualidade'],
+                seguranca: ['Finanças', 'Segurança', 'Administração', 'Estabilidade']
+            };
+
+            var careersList = document.getElementById('careersList');
+            var careersHtml = '';
+            for (var i = 0; i < top3.length; i++) {
+                var key = top3[i][0];
+                var val = top3[i][1];
+                var config = valoresConfig[key];
+                var careerItems = careersMap[key] || ['Desenvolvimento'];
+                careersHtml += '<li><span class="check">✓</span> ' + config.icon + ' ' + config.label + ' (' + val +
+                    '%): ' + careerItems.slice(0, 3).join(', ') + '</li>';
+            }
+            careersList.innerHTML = careersHtml;
 
             // ============================================
-            // 9. COMPATIBILIDADE COM VAGA
+            // 6. TOMADA DE DECISÃO
             // ============================================
-            const compatSection = document.getElementById('compatibilidadeSection');
-            const compatContent = document.getElementById('compatibilidadeContent');
+            var topConfig2 = valoresConfig[data.topValor];
+            var decisionText =
+                'Com base no seu perfil de valores, sua tomada de decisão é influenciada principalmente por:' +
+                '<br /><br />' +
+                '<strong>' + topConfig2.icon + ' ' + topConfig2.label + ':</strong> ' +
+                (topConfig2.label === 'Autodireção' ?
+                    'Você tende a tomar decisões autônomas, valorizando a liberdade e a independência. Prefere escolhas que reflitam sua individualidade.' :
+                    topConfig2.label === 'Realização' ?
+                    'Você toma decisões orientadas por metas, buscando excelência e superação de desafios.' :
+                    topConfig2.label === 'Benevolência' ?
+                    'Suas decisões são guiadas pelo bem-estar dos outros e pela harmonia nas relações.' :
+                    topConfig2.label === 'Universalismo' ?
+                    'Você considera o impacto social e a justiça em suas decisões.' :
+                    topConfig2.label === 'Segurança' ?
+                    'Você prioriza decisões que garantam estabilidade e previsibilidade.' :
+                    'Suas decisões refletem seus valores principais, buscando coerência entre escolhas e princípios.') +
+                '<br /><br /><strong>Recomendação:</strong> Alinhe suas decisões profissionais com seus valores principais para maior satisfação e coerência.';
+
+            document.getElementById('decisionText').innerHTML = decisionText;
+
+            // ============================================
+            // 7. MOTIVAÇÃO E PROPÓSITO
+            // ============================================
+            var purposeText =
+                '<strong>O que te motiva no trabalho?</strong><br />' +
+                (topConfig2.label === 'Autodireção' ?
+                    'A liberdade para criar, inovar e fazer escolhas autônomas.' :
+                    topConfig2.label === 'Realização' ?
+                    'A superação de metas desafiadoras e o reconhecimento pelo sucesso.' :
+                    topConfig2.label === 'Benevolência' ?
+                    'O impacto positivo na vida das pessoas e a construção de relacionamentos significativos.' :
+                    topConfig2.label === 'Universalismo' ?
+                    'A contribuição para um mundo mais justo e sustentável.' :
+                    topConfig2.label === 'Segurança' ?
+                    'A estabilidade, a previsibilidade e a sensação de proteção.' :
+                    'A conexão com seus valores principais e a expressão autêntica de quem você é.') +
+                '<br /><br /><strong>Propósito profissional:</strong><br />' +
+                (topConfig2.label === 'Autodireção' ?
+                    'Ser autônomo, inovador e livre para criar seu próprio caminho.' :
+                    topConfig2.label === 'Realização' ?
+                    'Alcançar altos padrões de excelência e inspirar outros com seu sucesso.' :
+                    topConfig2.label === 'Benevolência' ?
+                    'Fazer a diferença na vida das pessoas e promover bem-estar.' :
+                    topConfig2.label === 'Universalismo' ?
+                    'Contribuir para transformações sociais positivas.' :
+                    topConfig2.label === 'Segurança' ?
+                    'Construir uma base sólida e estável para si e para os outros.' :
+                    'Viver e trabalhar de acordo com seus valores mais profundos.');
+
+            document.getElementById('purposeText').innerHTML = purposeText;
+
+            // ============================================
+            // 8. COMPATIBILIDADE COM VAGA
+            // ============================================
+            var compatSection = document.getElementById('compatibilidadeSection');
+            var compatContent = document.getElementById('compatibilidadeContent');
 
             if (data.job && data.job !== 'Não vinculado') {
                 compatSection.style.display = 'block';
-                const compat = data.compatibility || Math.round(60 + Math.random() * 35);
-                let compatLevel = '';
-                let compatColor = '';
+                var compat = data.compatibility || Math.round(60 + Math.random() * 35);
+                var compatLevel = '';
+                var compatColor = '';
                 if (compat >= 80) { compatLevel = 'Excelente';
                     compatColor = '#10B981'; } else if (compat >= 60) { compatLevel = 'Boa';
                     compatColor = '#3B82F6'; } else if (compat >= 40) { compatLevel = 'Moderada';
                     compatColor = '#F59E0B'; } else { compatLevel = 'Baixa';
                     compatColor = '#EF4444'; }
 
-                compatContent.innerHTML = `
-                        <div class="compatibilidade-card">
-                            <div class="compat-top">
-                                <span style="font-weight:600;font-size:1rem;">🎯 ${data.job}</span>
-                                <span class="compat-value" style="color:${compatColor};">${compat}%</span>
-                            </div>
-                            <div class="compat-bar">
-                                <div class="fill" style="width:${compat}%;background:${compatColor};"></div>
-                            </div>
-                            <p style="color:var(--gray-600);font-size:0.9rem;">
-                                <strong>Nível de Compatibilidade:</strong> ${compatLevel} (${compat}%)
-                            </p>
-                            <p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">
-                                ${compat >= 80 ? 'Excelente alinhamento de valores com a função. Este perfil está altamente compatível com as demandas e a cultura da posição.' :
-                                compat >= 60 ? 'Bom alinhamento de valores. Com desenvolvimento direcionado, pode alcançar excelente adequação à função.' :
-                                compat >= 40 ? 'Alinhamento moderado. Recomenda-se desenvolvimento específico para melhor adequação.' :
-                                'Baixo alinhamento. Avaliar outras posições mais alinhadas aos seus valores.'}
-                            </p>
-                        </div>
-                    `;
+                compatContent.innerHTML =
+                    '<div class="compatibilidade-card"><div class="compat-top"><span style="font-weight:600;font-size:1rem;">🎯 ' +
+                    data.job +
+                    '</span><span class="compat-value" style="color:' + compatColor + ';">' + compat +
+                    '%</span></div><div class="compat-bar"><div class="fill" style="width:' + compat +
+                    '%;background:' + compatColor +
+                    ';"></div></div><p style="color:var(--gray-600);font-size:0.9rem;"><strong>Nível de Compatibilidade:</strong> ' +
+                    compatLevel + ' (' + compat +
+                    '%)</p><p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">' + (compat >= 80 ?
+                        'Valores altamente alinhados com a função. Excelente adequação cultural.' :
+                        compat >= 60 ?
+                        'Boa compatibilidade de valores. Pode se adaptar bem à cultura da função.' :
+                        compat >= 40 ?
+                        'Compatibilidade moderada. Pode haver desafios de alinhamento cultural.' :
+                        'Compatibilidade baixa. Avaliar outras posições mais alinhadas aos seus valores.') +
+                    '</p></div>';
             } else {
                 compatSection.style.display = 'none';
             }
 
             // ============================================
-            // 10. PLANO DE DESENVOLVIMENTO
+            // 9. PLANO DE DESENVOLVIMENTO
             // ============================================
-            const planList = document.getElementById('developmentPlanList');
-            const developmentPlan = [];
-            const weakValues = Object.entries(pcts).filter(([key, value]) => value < 50);
-
-            if (weakValues.length > 0) {
-                weakValues.forEach(([key, value]) => {
-                    const config = valoresConfig[key];
-                    developmentPlan.push(
-                        `${config.icon} Desenvolver ${config.label}: Buscar oportunidades que valorizem este aspecto (atualmente ${value}%)`
-                        );
-                });
+            var weakValues = [];
+            for (var key in pcts) {
+                if (pcts[key] < 50) {
+                    weakValues.push(key);
+                }
             }
 
+            var developmentPlan = [];
+            if (weakValues.length > 0) {
+                for (var i = 0; i < weakValues.length; i++) {
+                    var key = weakValues[i];
+                    var config = valoresConfig[key];
+                    developmentPlan.push(config.icon + ' Desenvolver ' + config.label +
+                        ': Buscar oportunidades que valorizem este aspecto (atualmente ' + pcts[key] + '%)');
+                }
+            }
             developmentPlan.push('📝 Praticar autorreflexão sobre seus valores diariamente');
             developmentPlan.push('🔄 Buscar feedback sobre como seus valores se manifestam no trabalho');
             developmentPlan.push('🎯 Definir metas alinhadas com seus valores principais');
             developmentPlan.push('🤝 Conectar-se com pessoas que compartilham valores semelhantes');
             developmentPlan.push('📚 Ler sobre desenvolvimento de valores e propósito profissional');
 
-            planList.innerHTML = developmentPlan.map((item, index) =>
-                `<li><span class="check">${index + 1}</span> ${item}</li>`
-            ).join('');
+            var planList = document.getElementById('developmentPlanList');
+            var planHtml = '';
+            for (var i = 0; i < developmentPlan.length; i++) {
+                planHtml += '<li><span class="check">' + (i + 1) + '</span> ' + developmentPlan[i] + '</li>';
+            }
+            planList.innerHTML = planHtml;
 
             // ============================================
-            // 11. PARECER DA IA
+            // 10. PARECER DA IA
             // ============================================
-            const iaOpinionText = document.getElementById('iaOpinionText');
-
-            iaOpinionText.textContent =
-                `Com base na análise de valores, o participante tem como valor principal ${topConfig.icon} ${topConfig.label} (${data.topPercent}%), refletindo uma prioridade em ${topConfig.label === 'Autodireção' ? 'autonomia e independência' : topConfig.label === 'Realização' ? 'sucesso e excelência' : topConfig.label === 'Benevolência' ? 'bem-estar dos outros' : topConfig.label === 'Universalismo' ? 'justiça e compreensão' : topConfig.label === 'Segurança' ? 'estabilidade e proteção' : 'seus valores mais profundos'}. O valor com menor pontuação é ${bottomConfig.icon} ${bottomConfig.label} (${data.bottomPercent}%), indicando uma área que pode ser desenvolvida para maior equilíbrio e realização pessoal. Recomenda-se buscar ambientes, oportunidades e desafios que estejam alinhados com ${topConfig.label} para maior satisfação profissional e pessoal. O desenvolvimento dos valores com menor pontuação pode ampliar a flexibilidade e a capacidade de adaptação em diferentes contextos.`;
-
-            // ============================================
-            // 12. CONCLUSÃO
-            // ============================================
-            document.getElementById('conclusionText').innerHTML = `
-                    Seu perfil de valores é guiado principalmente por <strong>${topConfig.icon} ${topConfig.label}</strong> (${data.topPercent}%),
-                    refletindo uma prioridade em ${topConfig.label === 'Autodireção' ? 'autonomia e independência' :
-                    topConfig.label === 'Realização' ? 'sucesso e excelência' :
-                    topConfig.label === 'Benevolência' ? 'bem-estar dos outros' :
-                    topConfig.label === 'Universalismo' ? 'justiça e compreensão' :
-                    topConfig.label === 'Segurança' ? 'estabilidade e proteção' :
-                    'seus valores mais profundos'}.
-                    <br /><br />
-                    <strong>Mensagem Final:</strong>
-                    <br />
-                    ${data.topPercent >= 70 ? 'Parabéns! Você tem clareza sobre seus valores principais, o que é fundamental para tomar decisões alinhadas e construir uma carreira significativa.' :
-                    data.topPercent >= 50 ? 'Você está em um bom caminho de autoconhecimento. Continue explorando e refinando seus valores para maior alinhamento e realização.' :
-                    'Este é um momento importante para aprofundar seu autoconhecimento e identificar o que realmente importa para você em sua vida profissional e pessoal.'}
-                    <br /><br />
-                    <strong>Próximos Passos:</strong>
-                    <br />
-                    1. Priorize decisões alinhadas com ${topConfig.label}
-                    <br />
-                    2. Busque ambientes que valorizem ${topConfig.label}
-                    <br />
-                    3. Desenvolva os valores com menor pontuação para maior equilíbrio
-                    <br />
-                    4. Revise seus valores periodicamente
-                    <br /><br />
-                    <em>Relatório gerado em ${new Date().toLocaleString('pt-BR')}</em>
-                `;
+            document.getElementById('iaOpinionText').textContent =
+                'Com base na análise de valores, o participante tem como valor principal ' + topConfig.icon + ' ' +
+                topConfig.label + ' (' + data.topPercent +
+                '%), indicando uma forte orientação para ' +
+                (topConfig.label === 'Autodireção' ?
+                    'autonomia e independência' :
+                    topConfig.label === 'Realização' ?
+                    'sucesso e excelência' :
+                    topConfig.label === 'Benevolência' ?
+                    'bem-estar dos outros' :
+                    topConfig.label === 'Universalismo' ?
+                    'justiça e compreensão' :
+                    topConfig.label === 'Segurança' ?
+                    'estabilidade e proteção' :
+                    'seus valores mais profundos') +
+                '. O valor com menor pontuação é ' + bottomConfig.icon + ' ' + bottomConfig.label + ' (' + data
+                .bottomPercent +
+                '%), sugerindo uma área de desenvolvimento para maior equilíbrio. Recomenda-se buscar ambientes e oportunidades que valorizem ' +
+                topConfig.label + ' e desenvolver gradualmente ' + bottomConfig.label +
+                ' para ampliar a flexibilidade e adaptabilidade. O alinhamento entre valores e ações é fundamental para a realização profissional e pessoal.';
 
             // ============================================
-            // 13. GRÁFICOS
+            // 11. CONCLUSÃO
             // ============================================
-            setTimeout(() => {
+            document.getElementById('conclusionText').innerHTML =
+                'Seu perfil de valores é guiado principalmente por <strong>' + topConfig.icon + ' ' + topConfig
+                .label + '</strong> (' + data.topPercent +
+                '%), refletindo uma prioridade em ' +
+                (topConfig.label === 'Autodireção' ?
+                    'autonomia e independência' :
+                    topConfig.label === 'Realização' ?
+                    'sucesso e excelência' :
+                    topConfig.label === 'Benevolência' ?
+                    'bem-estar dos outros' :
+                    topConfig.label === 'Universalismo' ?
+                    'justiça e compreensão' :
+                    topConfig.label === 'Segurança' ?
+                    'estabilidade e proteção' :
+                    'seus valores mais profundos') +
+                '.<br /><br /><strong>Mensagem Final:</strong><br />' +
+                (data.topPercent >= 70 ?
+                    'Parabéns! Você tem clareza sobre seus valores principais, o que é fundamental para tomar decisões alinhadas e construir uma carreira significativa.' :
+                    data.topPercent >= 50 ?
+                    'Você está em um bom caminho de autoconhecimento. Continue explorando e refinando seus valores.' :
+                    'Este é um momento importante para aprofundar seu autoconhecimento e identificar o que realmente importa para você.') +
+                '<br /><br /><strong>Próximos Passos:</strong><br />' +
+                '1. Priorize decisões alinhadas com ' + topConfig.label + '<br />' +
+                '2. Busque ambientes que valorizem ' + topConfig.label + '<br />' +
+                '3. Desenvolva os valores com menor pontuação para maior equilíbrio<br />' +
+                '4. Revise seus valores periodicamente';
+
+            // ============================================
+            // 12. GRÁFICOS
+            // ============================================
+            setTimeout(function() {
                 renderChart(pcts);
             }, 300);
 
@@ -1644,37 +1619,29 @@
         // ============================================
         function renderChart(percentages) {
             try {
-                const ctx = document.getElementById('valoresChart').getContext('2d');
-
+                var ctx = document.getElementById('valoresChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'radar',
                     data: {
-                        labels: valorKeys.map(key => valoresConfig[key].label),
+                        labels: valorKeys.map(function(key) { return valoresConfig[key].label; }),
                         datasets: [{
                             label: 'Valores',
-                            data: valorKeys.map(key => percentages[key] || 0),
+                            data: valorKeys.map(function(key) { return percentages[key] || 0; }),
                             backgroundColor: 'rgba(217, 119, 6, 0.12)',
                             borderColor: '#D97706',
                             borderWidth: 3,
-                            pointBackgroundColor: valorKeys.map(key => valoresConfig[key].color),
+                            pointBackgroundColor: valorKeys.map(function(key) { return valoresConfig[
+                                    key].color; }),
                             pointBorderColor: '#FFFFFF',
                             pointBorderWidth: 2,
-                            pointRadius: 4,
-                            pointHoverRadius: 6
+                            pointRadius: 4
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.parsed.r + '%';
-                                    }
-                                }
-                            }
+                            legend: { display: false }
                         },
                         scales: {
                             r: {
@@ -1685,24 +1652,16 @@
                                     color: '#94A3B8',
                                     stepSize: 25,
                                     backdropColor: 'transparent',
-                                    callback: function(value) {
-                                        return value + '%';
-                                    }
+                                    callback: function(v) { return v + '%'; }
                                 },
                                 pointLabels: {
                                     color: '#64748B',
-                                    font: {
-                                        size: 8,
-                                        weight: '600'
-                                    }
+                                    font: { size: 8, weight: '600' }
                                 }
                             }
                         }
                     }
                 });
-
-                console.log('📊 Gráfico Valores renderizado com sucesso');
-
             } catch (error) {
                 console.error('❌ Erro ao renderizar gráfico:', error);
             }
@@ -1712,9 +1671,9 @@
         // FUNÇÕES UTILITÁRIAS
         // ============================================
         function generateHash(data) {
-            let hash = 0;
-            for (let i = 0; i < data.length; i++) {
-                const char = data.charCodeAt(i);
+            var hash = 0;
+            for (var i = 0; i < data.length; i++) {
+                var char = data.charCodeAt(i);
                 hash = ((hash << 5) - hash) + char;
                 hash = hash & hash;
             }
@@ -1723,52 +1682,33 @@
 
         function downloadPDF() {
             showToast('📥 Iniciando download do PDF...', 'success');
-            setTimeout(() => {
+            setTimeout(function() {
                 window.print();
             }, 500);
         }
 
         function showToast(message, type) {
-            const existing = document.getElementById('toast');
+            var existing = document.getElementById('toast');
             if (existing) existing.remove();
 
-            const toast = document.createElement('div');
+            var toast = document.createElement('div');
             toast.id = 'toast';
-            toast.style.cssText = `
-                    position: fixed;
-                    top: 24px;
-                    right: 24px;
-                    background: white;
-                    padding: 14px 24px;
-                    border-radius: 12px;
-                    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    font-weight: 600;
-                    font-size: 0.875rem;
-                    z-index: 300;
-                    border-left: 4px solid ${type === 'success' ? '#10B981' : '#EF4444'};
-                    animation: slideIn 0.3s ease;
-                `;
-            toast.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span><span>${message}</span>`;
+            toast.style.cssText =
+                'position:fixed;top:24px;right:24px;background:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:300;border-left:4px solid ' +
+                (type === 'success' ? '#10B981' : '#EF4444') + ';animation:slideIn 0.3s ease;';
+            toast.innerHTML = '<span>' + (type === 'success' ? '✅' : '❌') + '</span><span>' + message + '</span>';
             document.body.appendChild(toast);
 
-            setTimeout(() => {
+            setTimeout(function() {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateX(120%)';
-                setTimeout(() => toast.remove(), 300);
+                setTimeout(function() { toast.remove(); }, 300);
             }, 4000);
         }
 
-        // Estilo para animação
-        const style = document.createElement('style');
-        style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(120%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
+        var style = document.createElement('style');
+        style.textContent =
+            '@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
         document.head.appendChild(style);
 
         console.log('📄 Relatório Completo Valores carregado com sucesso!');
