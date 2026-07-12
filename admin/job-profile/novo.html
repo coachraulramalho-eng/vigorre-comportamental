@@ -4,18 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Novo Job Profile | Admin VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
-    <link rel="stylesheet" href="../../assets/css/globals.css" />
-
     <style>
-        /* ============================================
-           VIGORRE ONE™ - NOVO JOB PROFILE
-           ============================================ */
-
         * {
             margin: 0;
             padding: 0;
@@ -24,10 +16,14 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
             --purple: #7C3AED;
             --pink: #EC4899;
             --white: #FFFFFF;
@@ -46,7 +42,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -56,9 +54,6 @@
             min-height: 100vh;
         }
 
-        /* ============================================
-           SIDEBAR
-           ============================================ */
         .sidebar {
             position: fixed;
             top: 0;
@@ -211,9 +206,6 @@
             color: #F87171;
         }
 
-        /* ============================================
-           MAIN CONTENT
-           ============================================ */
         .main {
             margin-left: 260px;
             padding: 24px 32px 40px;
@@ -251,9 +243,101 @@
             margin-top: 4px;
         }
 
-        /* ============================================
-           FORM
-           ============================================ */
+        .btn-primary {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.25);
+        }
+
+        .btn-secondary {
+            padding: 10px 24px;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+        }
+
+        .btn-success {
+            padding: 10px 24px;
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
+        }
+
+        [data-tooltip] {
+            position: relative;
+            cursor: pointer;
+        }
+
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            padding: 6px 14px;
+            background: var(--navy);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 500;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            z-index: 100;
+        }
+
+        [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px);
+        }
+
         .form-card {
             background: white;
             border-radius: var(--radius);
@@ -401,74 +485,6 @@
             border-top: 1px solid var(--gray-200);
         }
 
-        .btn-primary {
-            padding: 12px 32px;
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.25);
-        }
-
-        .btn-secondary {
-            padding: 12px 32px;
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .btn-secondary:hover {
-            background: var(--gray-200);
-        }
-
-        .btn-success {
-            padding: 12px 32px;
-            background: #10B981;
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
-        }
-
-        /* ============================================
-           TOAST
-           ============================================ */
         .toast {
             position: fixed;
             top: 24px;
@@ -485,6 +501,7 @@
             z-index: 300;
             border-left: 4px solid var(--blue);
             animation: slideIn 0.3s ease;
+            max-width: 420px;
         }
 
         .toast.show {
@@ -494,11 +511,9 @@
         .toast.error {
             border-left-color: #EF4444;
         }
-
         .toast.success {
             border-left-color: #10B981;
         }
-
         .toast.warning {
             border-left-color: #F59E0B;
         }
@@ -514,9 +529,6 @@
             }
         }
 
-        /* ============================================
-           MOBILE TOGGLE
-           ============================================ */
         .mobile-toggle {
             display: none;
             background: none;
@@ -527,9 +539,22 @@
             padding: 8px;
         }
 
-        /* ============================================
-           RESPONSIVO
-           ============================================ */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 37, 64, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -549,18 +574,6 @@
                 display: block;
             }
 
-            .mobile-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(10, 37, 64, 0.4);
-                backdrop-filter: blur(4px);
-                z-index: 99;
-            }
-
             .mobile-overlay.active {
                 display: block;
             }
@@ -568,7 +581,6 @@
             .form-row {
                 grid-template-columns: 1fr;
             }
-
             .form-row-3 {
                 grid-template-columns: 1fr;
             }
@@ -588,6 +600,26 @@
             .form-actions button {
                 justify-content: center;
             }
+            .toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                max-width: none;
+                font-size: 0.8rem;
+                padding: 12px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-header {
+                padding: 10px 16px;
+            }
+            .main {
+                padding: 16px;
+            }
+            .sidebar .logo .logo-img {
+                height: 28px;
+            }
         }
 
         .sidebar::-webkit-scrollbar {
@@ -599,6 +631,44 @@
         .sidebar::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--gray-900);
+            }
+            .main-header h1 {
+                color: var(--white);
+            }
+            .form-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .form-group label {
+                color: var(--gray-300);
+            }
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                background: var(--gray-700);
+                border-color: var(--gray-600);
+                color: var(--white);
+            }
+            .form-group input:focus {
+                border-color: var(--blue-light);
+                box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            }
+            .form-section-title {
+                color: var(--white);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .checkbox-group label {
+                color: var(--gray-300);
+            }
+            .toast {
+                background: var(--gray-800);
+                color: var(--white);
+            }
         }
 
         @media print {
@@ -661,6 +731,8 @@
             <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
             <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
             <li><a href="../bi/dashboard.html"><span class="icon">📈</span> BI Analytics</a></li>
+            <li><a href="../financeiro/"><span class="icon">💰</span> Centro Financeiro</a></li>
+            <li><a href="../usuarios/"><span class="icon">👤</span> Usuários</a></li>
         </ul>
 
         <div class="logout">
@@ -882,60 +954,47 @@
     <script>
         'use strict';
 
-        // ============================================
-        // TOGGLE SIDEBAR
-        // ============================================
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobileOverlay');
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('mobileOverlay');
             sidebar.classList.toggle('open');
             overlay.classList.toggle('active');
         }
 
-        // ============================================
-        // LOGOUT
-        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.VigorreAuth.logout();
             }
         }
 
-        // ============================================
-        // UPDATE SLIDER
-        // ============================================
         function updateSlider(inputId, displayId) {
-            const input = document.getElementById(inputId);
-            const display = document.getElementById(displayId);
+            var input = document.getElementById(inputId);
+            var display = document.getElementById(displayId);
             display.textContent = input.value + '%';
         }
 
-        // ============================================
-        // CARREGAR EMPRESAS
-        // ============================================
         function loadCompanies() {
             try {
-                const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-                const select = document.getElementById('profileCompany');
-                select.innerHTML = '<option value="">Selecione uma empresa</option>' +
-                    companies.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+                var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                var select = document.getElementById('profileCompany');
+                var html = '<option value="">Selecione uma empresa</option>';
+                for (var i = 0; i < companies.length; i++) {
+                    html += '<option value="' + companies[i].id + '">' + companies[i].name + '</option>';
+                }
+                select.innerHTML = html;
             } catch (error) {
                 console.error('❌ Erro ao carregar empresas:', error);
             }
         }
 
-        // ============================================
-        // SALVAR PERFIL
-        // ============================================
         function saveProfile(event) {
             event.preventDefault();
 
-            // Dados básicos
-            const title = document.getElementById('profileTitle').value.trim();
-            const companyId = document.getElementById('profileCompany').value;
-            const status = document.getElementById('profileStatus').value;
-            const level = document.getElementById('profileLevel').value;
-            const description = document.getElementById('profileDescription').value.trim();
+            var title = document.getElementById('profileTitle').value.trim();
+            var companyId = document.getElementById('profileCompany').value;
+            var status = document.getElementById('profileStatus').value;
+            var level = document.getElementById('profileLevel').value;
+            var description = document.getElementById('profileDescription').value.trim();
 
             if (!title) {
                 showToast('Digite o nome do cargo/função', 'error');
@@ -947,16 +1006,14 @@
                 return;
             }
 
-            // Perfil DISC
-            const disc = {
+            var disc = {
                 D: parseInt(document.getElementById('discD').value) || 0,
                 I: parseInt(document.getElementById('discI').value) || 0,
                 S: parseInt(document.getElementById('discS').value) || 0,
                 C: parseInt(document.getElementById('discC').value) || 0
             };
 
-            // Big Five
-            const bigfive = {
+            var bigfive = {
                 abertura: parseInt(document.getElementById('bfAbertura').value) || 0,
                 conscienciosidade: parseInt(document.getElementById('bfConscienciosidade').value) || 0,
                 extroversao: parseInt(document.getElementById('bfExtroversao').value) || 0,
@@ -964,16 +1021,17 @@
                 neuroticismo: parseInt(document.getElementById('bfNeuroticismo').value) || 0
             };
 
-            // IE Mínima
-            const ieMin = parseInt(document.getElementById('ieMin').value) || 0;
+            var ieMin = parseInt(document.getElementById('ieMin').value) || 0;
 
-            // Valores
-            const checkboxes = document.querySelectorAll('#valoresGroup input[type="checkbox"]');
-            const valores = Array.from(checkboxes)
-                .filter(cb => cb.checked)
-                .map(cb => cb.value);
+            var checkboxes = document.querySelectorAll('#valoresGroup input[type="checkbox"]');
+            var valores = [];
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    valores.push(checkboxes[i].value);
+                }
+            }
 
-            const profile = {
+            var profile = {
                 id: 'prof_' + Date.now(),
                 title: title,
                 companyId: companyId,
@@ -988,29 +1046,25 @@
             };
 
             try {
-                const all = JSON.parse(localStorage.getItem('vigorre_job_profiles') || '[]');
+                var all = JSON.parse(localStorage.getItem('vigorre_job_profiles') || '[]');
                 all.push(profile);
                 localStorage.setItem('vigorre_job_profiles', JSON.stringify(all));
 
-                showToast(`✅ Perfil "${title}" criado com sucesso!`, 'success');
+                showToast('✅ Perfil "' + title + '" criado com sucesso!', 'success');
 
-                setTimeout(() => {
+                setTimeout(function() {
                     window.location.href = 'index.html';
                 }, 1500);
-
             } catch (error) {
                 console.error('❌ Erro ao salvar:', error);
                 showToast('Erro ao salvar perfil', 'error');
             }
         }
 
-        // ============================================
-        // TOAST
-        // ============================================
         function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
 
             if (type === 'error') {
                 icon.textContent = '❌';
@@ -1021,27 +1075,24 @@
             }
 
             msg.textContent = message;
-            toast.className = `toast show ${type || 'success'}`;
+            toast.className = 'toast show ' + (type || 'success');
 
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
+            toast._timeout = setTimeout(function() {
                 toast.classList.remove('show');
             }, 4000);
         }
 
-        // ============================================
-        // INICIALIZAR
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('➕ Novo Job Profile - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../../login.html';
                 return;
             }
 
-            const user = window.VigorreAuth.getCurrentUser();
+            var user = window.VigorreAuth.getCurrentUser();
             if (!user || (user.role !== 'admin' && user.role !== 'master')) {
                 alert('⚠️ Acesso restrito a administradores.');
                 window.VigorreAuth.logout();
