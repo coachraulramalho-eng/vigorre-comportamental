@@ -7,10 +7,7 @@
  * ============================================
  */
 
-// ============================================
-// CONFIGURAÇÕES
-// ============================================
-const SUPABASE_CONFIG = {
+var SUPABASE_CONFIG = {
     url: 'https://dfthdcnaqmqswidwgezj.supabase.co',
     anonKey: 'sb_publishable_bcLZGSu_wLmhcNOQmY3TLQ_yp3CHiZo',
     bucket: 'vigorre-files',
@@ -29,10 +26,7 @@ const SUPABASE_CONFIG = {
     }
 };
 
-// ============================================
-// INICIALIZAR SUPABASE
-// ============================================
-let supabaseInstance = null;
+var supabaseInstance = null;
 
 function initSupabase() {
     if (typeof supabase !== 'undefined') {
@@ -48,15 +42,13 @@ function initSupabase() {
     }
 }
 
-// ============================================
-// STORAGE LOCAL (FALLBACK)
-// ============================================
-const VigorreDB = {
+var VigorreDB = {
     _data: {},
 
-    get: function(key, defaultValue = []) {
+    get: function(key, defaultValue) {
+        defaultValue = defaultValue || [];
         try {
-            const data = localStorage.getItem('vigorre_' + key);
+            var data = localStorage.getItem('vigorre_' + key);
             return data ? JSON.parse(data) : defaultValue;
         } catch (e) {
             return defaultValue;
@@ -72,19 +64,22 @@ const VigorreDB = {
         }
     },
 
-    // ============================================
-    // TABELAS
-    // ============================================
     users: {
         get: function() { return VigorreDB.get('users', []); },
         set: function(data) { return VigorreDB.set('users', data); },
         find: function(id) {
-            const users = this.get();
-            return users.find(u => u.id === id) || null;
+            var users = this.get();
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].id === id) return users[i];
+            }
+            return null;
         },
         findByEmail: function(email) {
-            const users = this.get();
-            return users.find(u => u.email === email) || null;
+            var users = this.get();
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].email === email) return users[i];
+            }
+            return null;
         }
     },
 
@@ -92,8 +87,11 @@ const VigorreDB = {
         get: function() { return VigorreDB.get('companies', []); },
         set: function(data) { return VigorreDB.set('companies', data); },
         find: function(id) {
-            const companies = this.get();
-            return companies.find(c => c.id === id) || null;
+            var companies = this.get();
+            for (var i = 0; i < companies.length; i++) {
+                if (companies[i].id === id) return companies[i];
+            }
+            return null;
         }
     },
 
@@ -101,8 +99,11 @@ const VigorreDB = {
         get: function() { return VigorreDB.get('participants', []); },
         set: function(data) { return VigorreDB.set('participants', data); },
         find: function(id) {
-            const participants = this.get();
-            return participants.find(p => p.id === id) || null;
+            var participants = this.get();
+            for (var i = 0; i < participants.length; i++) {
+                if (participants[i].id === id) return participants[i];
+            }
+            return null;
         }
     },
 
@@ -110,8 +111,11 @@ const VigorreDB = {
         get: function() { return VigorreDB.get('reports', []); },
         set: function(data) { return VigorreDB.set('reports', data); },
         find: function(id) {
-            const reports = this.get();
-            return reports.find(r => r.id === id) || null;
+            var reports = this.get();
+            for (var i = 0; i < reports.length; i++) {
+                if (reports[i].id === id) return reports[i];
+            }
+            return null;
         }
     },
 
@@ -119,8 +123,11 @@ const VigorreDB = {
         get: function() { return VigorreDB.get('laudos', []); },
         set: function(data) { return VigorreDB.set('laudos', data); },
         find: function(id) {
-            const laudos = this.get();
-            return laudos.find(l => l.id === id) || null;
+            var laudos = this.get();
+            for (var i = 0; i < laudos.length; i++) {
+                if (laudos[i].id === id) return laudos[i];
+            }
+            return null;
         }
     },
 
@@ -128,8 +135,11 @@ const VigorreDB = {
         get: function() { return VigorreDB.get('credits', []); },
         set: function(data) { return VigorreDB.set('credits', data); },
         find: function(id) {
-            const credits = this.get();
-            return credits.find(c => c.id === id) || null;
+            var credits = this.get();
+            for (var i = 0; i < credits.length; i++) {
+                if (credits[i].id === id) return credits[i];
+            }
+            return null;
         }
     },
 
@@ -137,8 +147,11 @@ const VigorreDB = {
         get: function() { return VigorreDB.get('transactions', []); },
         set: function(data) { return VigorreDB.set('transactions', data); },
         find: function(id) {
-            const transactions = this.get();
-            return transactions.find(t => t.id === id) || null;
+            var transactions = this.get();
+            for (var i = 0; i < transactions.length; i++) {
+                if (transactions[i].id === id) return transactions[i];
+            }
+            return null;
         }
     },
 
@@ -146,12 +159,17 @@ const VigorreDB = {
         get: function() { return VigorreDB.get('audit_logs', []); },
         set: function(data) { return VigorreDB.set('audit_logs', data); },
         add: function(entry) {
-            const logs = this.get();
-            logs.push({
-                ...entry,
+            var logs = this.get();
+            var newEntry = {
                 id: 'aud_' + Date.now(),
                 timestamp: new Date().toISOString()
-            });
+            };
+            for (var key in entry) {
+                if (entry.hasOwnProperty(key)) {
+                    newEntry[key] = entry[key];
+                }
+            }
+            logs.push(newEntry);
             this.set(logs);
             return logs;
         }
@@ -161,21 +179,18 @@ const VigorreDB = {
         get: function() { return VigorreDB.get('job_profiles', []); },
         set: function(data) { return VigorreDB.set('job_profiles', data); },
         find: function(id) {
-            const profiles = this.get();
-            return profiles.find(p => p.id === id) || null;
+            var profiles = this.get();
+            for (var i = 0; i < profiles.length; i++) {
+                if (profiles[i].id === id) return profiles[i];
+            }
+            return null;
         }
     },
 
-    // ============================================
-    // INICIALIZAR DADOS DE EXEMPLO
-    // ============================================
     initSampleData: function() {
-        // Verificar se já existe
-        const users = this.users.get();
+        var users = this.users.get();
         if (users.length === 0) {
             console.log('📦 Inicializando dados de exemplo...');
-            
-            // Usuários
             this.users.set([
                 {
                     id: 'usr_001',
@@ -234,8 +249,6 @@ const VigorreDB = {
                     updatedAt: '2024-03-01T00:00:00Z'
                 }
             ]);
-
-            // Empresas
             this.companies.set([
                 {
                     id: 'comp_001',
@@ -254,8 +267,6 @@ const VigorreDB = {
                     createdAt: '2024-01-15T00:00:00Z'
                 }
             ]);
-
-            // Participantes
             this.participants.set([
                 {
                     id: 'part_001',
@@ -278,8 +289,6 @@ const VigorreDB = {
                     createdAt: '2024-03-10T00:00:00Z'
                 }
             ]);
-
-            // Créditos
             this.credits.set([
                 {
                     id: 'crd_001',
@@ -293,28 +302,21 @@ const VigorreDB = {
                     createdAt: '2024-01-01T00:00:00Z'
                 }
             ]);
-
             console.log('✅ Dados de exemplo inicializados com sucesso!');
         }
     }
 };
 
-// ============================================
-// EXPORTAÇÃO
-// ============================================
-// Inicializar Supabase
-const supabaseClient = initSupabase();
+var supabaseClient = initSupabase();
 
-// Inicializar dados de exemplo
 VigorreDB.initSampleData();
 
-// Expor globalmente
 window.VigorreDB = VigorreDB;
 window.SUPABASE_CONFIG = SUPABASE_CONFIG;
 window.supabaseClient = supabaseClient;
 
 console.log('📦 VigorreDB carregado com sucesso!');
-console.log(`👤 Usuários: ${VigorreDB.users.get().length}`);
-console.log(`🏢 Empresas: ${VigorreDB.companies.get().length}`);
-console.log(`👥 Participantes: ${VigorreDB.participants.get().length}`);
-console.log(`💳 Créditos: ${VigorreDB.credits.get().length}`);
+console.log('👤 Usuários: ' + VigorreDB.users.get().length);
+console.log('🏢 Empresas: ' + VigorreDB.companies.get().length);
+console.log('👥 Participantes: ' + VigorreDB.participants.get().length);
+console.log('💳 Créditos: ' + VigorreDB.credits.get().length);
