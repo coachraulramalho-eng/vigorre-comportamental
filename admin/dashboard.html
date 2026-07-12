@@ -4,20 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard | VIGORRE ONE™</title>
+
+    <!-- ==========================================
+    FONTS PREMIUM
+    ========================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <!-- ==========================================
+    CHART.JS
+    ========================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+
     <style>
         /* ============================================
            VIGORRE ONE™ - ADMIN DASHBOARD
+           INTERNATIONAL ENTERPRISE EDITION
+           ============================================
+
+           DESIGN INSPIRADO EM:
+           - SAP Fiori
+           - Workday
+           - Linear
+           - Stripe Dashboard
+           - Apple Human Interface
+           - Google Material 3
+
+           CARACTERÍSTICAS:
+           - Espaço branco generoso
+           - Cards proporcionais
+           - Bordas suaves
+           - Sombras leves
+           - Tipografia premium
+           - Ícones minimalistas
+           - Animações suaves
+           - Tema claro/escuro
+           - Acessibilidade WCAG
            ============================================ */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ============================================
+           CSS VARIABLES (TEMA CLARO)
+           ============================================ */
         :root {
             --navy: #0A2540;
             --navy-light: #1A3A5C;
@@ -25,6 +54,11 @@
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
+            --purple: #7C3AED;
+            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -39,16 +73,190 @@
             --radius: 16px;
             --radius-sm: 10px;
             --radius-full: 9999px;
-            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
-            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 24px rgba(10, 37, 64, 0.04);
+            --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.04), 0 8px 40px rgba(10, 37, 64, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.06), 0 16px 64px rgba(10, 37, 64, 0.10);
+            --transition: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --bg-body: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --border-color: #E2E8F0;
+        }
+
+        /* ============================================
+           TEMA ESCURO (AUTO DETECT)
+           ============================================ */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-body: #0F172A;
+                --bg-card: #1E293B;
+                --text-primary: #F8FAFC;
+                --text-secondary: #94A3B8;
+                --text-muted: #64748B;
+                --border-color: #334155;
+                --shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 24px rgba(0, 0, 0, 0.15);
+                --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.2), 0 8px 40px rgba(0, 0, 0, 0.25);
+                --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.25), 0 16px 64px rgba(0, 0, 0, 0.3);
+            }
+
+            body {
+                background: var(--bg-body);
+                color: var(--text-primary);
+            }
+
+            .stat-card,
+            .credit-card,
+            .card,
+            .table-card {
+                background: var(--bg-card);
+                border-color: var(--border-color);
+            }
+
+            .stat-card .stat-label,
+            .credit-card .credit-label,
+            .stat-card .stat-change {
+                color: var(--text-muted);
+            }
+
+            .stat-card .stat-value,
+            .credit-card .credit-value {
+                color: var(--text-primary);
+            }
+
+            .table-container th {
+                background: var(--bg-card);
+                color: var(--text-muted);
+                border-color: var(--border-color);
+            }
+
+            .table-container td {
+                color: var(--text-secondary);
+                border-color: var(--border-color);
+            }
+
+            .table-container tr:hover td {
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            .quick-action {
+                background: var(--bg-card);
+                color: var(--text-secondary);
+                border-color: var(--border-color);
+            }
+
+            .quick-action:hover {
+                background: var(--gray-700);
+                border-color: var(--gold);
+            }
+
+            .card .card-header h3 {
+                color: var(--text-primary);
+            }
+
+            .ia-card {
+                background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            }
+
+            .toast {
+                background: var(--bg-card);
+                color: var(--text-primary);
+            }
+
+            .sidebar {
+                background: var(--gray-800);
+            }
+
+            .sidebar .nav a {
+                color: var(--text-muted);
+            }
+
+            .sidebar .nav a:hover {
+                background: rgba(255, 255, 255, 0.04);
+                color: var(--text-primary);
+            }
+
+            .sidebar .nav a.active {
+                background: rgba(217, 119, 6, 0.12);
+                color: var(--gold);
+            }
+
+            .sidebar .user-info {
+                border-color: var(--border-color);
+            }
+
+            .sidebar .user-info .name {
+                color: var(--text-primary);
+            }
+
+            .sidebar .user-info .role {
+                color: var(--text-muted);
+            }
+
+            .credit-card .credit-action {
+                background: rgba(59, 130, 246, 0.15);
+                color: var(--blue-light);
+            }
+
+            .credit-card .credit-action:hover {
+                background: var(--blue);
+                color: white;
+            }
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-800);
+            background: var(--bg-body);
+            color: var(--text-primary);
             min-height: 100vh;
+            transition: background var(--transition-slow), color var(--transition-slow);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           SCROLLBAR PREMIUM
+           ============================================ */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-400);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            ::-webkit-scrollbar-thumb {
+                background: var(--gray-600);
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--gray-500);
+            }
         }
 
         /* ============================================
@@ -65,9 +273,17 @@
             padding: 24px 20px;
             display: flex;
             flex-direction: column;
-            z-index: 100;
-            transition: var(--transition);
+            z-index: 1000;
+            transition: transform var(--transition-slow), box-shadow var(--transition-slow);
             overflow-y: auto;
+            box-shadow: 2px 0 24px rgba(0, 0, 0, 0.06);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .sidebar {
+                background: var(--gray-800);
+                box-shadow: 2px 0 24px rgba(0, 0, 0, 0.2);
+            }
         }
 
         .sidebar .logo {
@@ -91,6 +307,7 @@
             font-size: 0.95rem;
             font-weight: 800;
             color: white;
+            letter-spacing: -0.3px;
         }
 
         .sidebar .logo .logo-text .name .tm {
@@ -101,17 +318,18 @@
 
         .sidebar .logo .logo-text .sub {
             font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
         .sidebar .user-info {
-            padding: 16px 12px;
+            padding: 16px 14px;
             background: rgba(255, 255, 255, 0.04);
             border-radius: var(--radius-sm);
             margin-bottom: 24px;
             border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
         }
 
         .sidebar .user-info .name {
@@ -129,12 +347,13 @@
 
         .sidebar .user-info .role .badge {
             display: inline-block;
-            padding: 2px 10px;
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--blue-light);
+            padding: 2px 12px;
+            background: rgba(217, 119, 6, 0.15);
+            color: var(--gold);
             border-radius: var(--radius-full);
             font-size: 0.6rem;
             font-weight: 600;
+            border: 1px solid rgba(217, 119, 6, 0.08);
         }
 
         .sidebar .nav {
@@ -152,28 +371,46 @@
             gap: 12px;
             padding: 10px 14px;
             border-radius: var(--radius-sm);
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
             transition: var(--transition);
+            position: relative;
+        }
+
+        .sidebar .nav a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%) scaleY(0);
+            width: 3px;
+            height: 24px;
+            background: var(--gold);
+            border-radius: 0 3px 3px 0;
+            transition: var(--transition);
         }
 
         .sidebar .nav a:hover {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
             color: white;
         }
 
         .sidebar .nav a.active {
-            background: rgba(59, 130, 246, 0.15);
+            background: rgba(217, 119, 6, 0.08);
             color: white;
-            border-left: 3px solid var(--blue-light);
+        }
+
+        .sidebar .nav a.active::before {
+            transform: translateY(-50%) scaleY(1);
         }
 
         .sidebar .nav a .icon {
             font-size: 1.1rem;
             width: 24px;
             text-align: center;
+            flex-shrink: 0;
         }
 
         .sidebar .nav .divider {
@@ -185,7 +422,7 @@
         .sidebar .logout {
             margin-top: auto;
             padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .sidebar .logout a {
@@ -194,7 +431,7 @@
             gap: 12px;
             padding: 10px 14px;
             border-radius: var(--radius-sm);
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.3);
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
@@ -211,16 +448,26 @@
            ============================================ */
         .main {
             margin-left: 260px;
-            padding: 24px 32px 40px;
+            padding: 28px 40px 48px;
             min-height: 100vh;
+            transition: padding var(--transition-slow), margin var(--transition-slow);
         }
 
+        /* ============================================
+           HEADER
+           ============================================ */
         .main-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
             flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .main-header .header-left {
+            display: flex;
+            align-items: center;
             gap: 16px;
         }
 
@@ -228,20 +475,169 @@
             font-family: 'Poppins', sans-serif;
             font-size: 1.6rem;
             font-weight: 700;
-            color: var(--gray-900);
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
         }
 
         .main-header h1 .highlight {
-            color: var(--blue);
+            color: var(--gold);
         }
 
         .main-header .date {
             font-size: 0.85rem;
-            color: var(--gray-500);
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .main-header .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
 
         /* ============================================
-           STATS CARDS
+           BUTTONS
+           ============================================ */
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0);
+            transition: var(--transition);
+        }
+
+        .btn:hover::after {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn:active::after {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: var(--green);
+            color: white;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-danger {
+            background: var(--red);
+            color: white;
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.25);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white;
+            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.2);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(217, 119, 6, 0.25);
+        }
+
+        .btn-sm {
+            padding: 6px 16px;
+            font-size: 0.75rem;
+        }
+
+        .btn-lg {
+            padding: 14px 32px;
+            font-size: 1rem;
+        }
+
+        /* ============================================
+           TOOLTIP
+           ============================================ */
+        [data-tooltip] {
+            position: relative;
+            cursor: pointer;
+        }
+
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px) scale(0.8);
+            padding: 6px 14px;
+            background: var(--navy);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 500;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all var(--transition);
+            font-family: 'Inter', sans-serif;
+            z-index: 1000;
+        }
+
+        [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px) scale(1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            [data-tooltip]:before {
+                background: var(--gray-700);
+                color: var(--text-primary);
+            }
+        }
+
+        /* ============================================
+           STATS GRID
            ============================================ */
         .stats-grid {
             display: grid;
@@ -251,17 +647,35 @@
         }
 
         .stat-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: var(--radius);
             padding: 20px 24px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(10, 37, 64, 0.04);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            opacity: 0;
             transition: var(--transition);
         }
 
         .stat-card:hover {
             box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
         }
 
         .stat-card .stat-top {
@@ -271,23 +685,25 @@
         }
 
         .stat-card .stat-icon {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
+            opacity: 0.7;
         }
 
         .stat-card .stat-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            color: var(--gray-500);
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
         }
 
         .stat-card .stat-value {
             font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: var(--gray-900);
+            color: var(--text-primary);
             margin: 4px 0;
+            letter-spacing: -0.5px;
         }
 
         .stat-card .stat-change {
@@ -296,18 +712,22 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
         }
 
         .stat-card .stat-change.up {
-            color: #10B981;
+            color: var(--green);
+            background: rgba(16, 185, 129, 0.08);
         }
 
         .stat-card .stat-change.down {
-            color: #EF4444;
+            color: var(--red);
+            background: rgba(239, 68, 68, 0.08);
         }
 
         /* ============================================
-           CREDIT CARDS
+           CREDITS GRID
            ============================================ */
         .credits-grid {
             display: grid;
@@ -317,11 +737,11 @@
         }
 
         .credit-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: var(--radius);
             padding: 20px 24px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(10, 37, 64, 0.04);
+            border: 1px solid var(--border-color);
             transition: var(--transition);
         }
 
@@ -338,21 +758,22 @@
 
         .credit-card .credit-icon {
             font-size: 1.6rem;
+            opacity: 0.7;
         }
 
         .credit-card .credit-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            color: var(--gray-500);
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
         }
 
         .credit-card .credit-value {
             font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: var(--gray-900);
+            color: var(--text-primary);
             margin: 4px 0;
         }
 
@@ -362,7 +783,7 @@
             border-radius: var(--radius-full);
             font-size: 0.65rem;
             font-weight: 600;
-            background: #DBEAFE;
+            background: rgba(59, 130, 246, 0.08);
             color: var(--blue);
             text-decoration: none;
             transition: var(--transition);
@@ -382,7 +803,27 @@
             padding: 20px 24px;
             color: white;
             margin-bottom: 32px;
-            box-shadow: 0 8px 40px rgba(10, 37, 64, 0.15);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ia-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .ia-card {
+                background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            }
         }
 
         .ia-card .ia-top {
@@ -391,6 +832,8 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
+            position: relative;
+            z-index: 1;
         }
 
         .ia-card .ia-top .ia-title {
@@ -403,12 +846,13 @@
         }
 
         .ia-card .ia-top .ia-badge {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--blue-light);
+            background: rgba(217, 119, 6, 0.15);
+            color: var(--gold);
             padding: 4px 14px;
             border-radius: var(--radius-full);
             font-size: 0.7rem;
             font-weight: 600;
+            border: 1px solid rgba(217, 119, 6, 0.08);
         }
 
         .ia-card .ia-content {
@@ -416,19 +860,21 @@
             grid-template-columns: 1fr 1fr 1fr;
             gap: 16px;
             margin-top: 16px;
+            position: relative;
+            z-index: 1;
         }
 
         .ia-card .ia-item {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: var(--radius-sm);
-            padding: 14px;
+            padding: 14px 16px;
             transition: var(--transition);
             cursor: pointer;
         }
 
         .ia-card .ia-item:hover {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.06);
             transform: translateY(-2px);
         }
 
@@ -450,7 +896,7 @@
         }
 
         /* ============================================
-           CHARTS & TABLES
+           DASHBOARD GRID
            ============================================ */
         .dashboard-grid {
             display: grid;
@@ -460,11 +906,16 @@
         }
 
         .card {
-            background: white;
+            background: var(--bg-card);
             border-radius: var(--radius);
             padding: 24px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(10, 37, 64, 0.04);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
         }
 
         .card .card-header {
@@ -478,86 +929,24 @@
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             font-weight: 600;
-            color: var(--gray-800);
+            color: var(--text-primary);
         }
 
         .card .card-header .action {
             font-size: 0.75rem;
-            color: var(--blue);
+            color: var(--gold);
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
         }
 
         .card .card-header .action:hover {
-            color: var(--cyan);
+            color: var(--orange);
         }
 
         .chart-container {
             height: 240px;
             position: relative;
-        }
-
-        /* ============================================
-           ACTIVITY TABLE
-           ============================================ */
-        .table-container {
-            overflow-x: auto;
-        }
-
-        .table-container table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-        }
-
-        .table-container th {
-            text-align: left;
-            padding: 10px 12px;
-            font-weight: 600;
-            color: var(--gray-500);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .table-container td {
-            padding: 10px 12px;
-            border-bottom: 1px solid var(--gray-100);
-            color: var(--gray-700);
-        }
-
-        .table-container tr:hover td {
-            background: var(--gray-50);
-        }
-
-        .badge-status {
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        .badge-status.success {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-
-        .badge-status.warning {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-
-        .badge-status.danger {
-            background: #FEE2E2;
-            color: #991B1B;
-        }
-
-        .badge-status.info {
-            background: #DBEAFE;
-            color: #1E40AF;
         }
 
         /* ============================================
@@ -575,19 +964,20 @@
             border-radius: var(--radius-sm);
             text-align: center;
             text-decoration: none;
-            color: var(--gray-700);
+            color: var(--text-secondary);
             transition: var(--transition);
             border: 1px solid transparent;
         }
 
         .quick-action:hover {
-            background: white;
-            border-color: var(--blue);
-            box-shadow: var(--shadow);
+            background: var(--bg-card);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
         }
 
         .quick-action .icon {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             display: block;
             margin-bottom: 4px;
         }
@@ -595,6 +985,159 @@
         .quick-action .label {
             font-size: 0.75rem;
             font-weight: 600;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .quick-action {
+                background: var(--gray-700);
+                color: var(--text-secondary);
+            }
+            .quick-action:hover {
+                background: var(--gray-600);
+                border-color: var(--gold);
+            }
+        }
+
+        /* ============================================
+           TABLE
+           ============================================ */
+        .table-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .table-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .table-container th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--gray-50);
+        }
+
+        .table-container td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .table-container tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-container tr:hover td {
+            background: var(--gray-50);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .table-container th {
+                background: var(--bg-card);
+            }
+            .table-container tr:hover td {
+                background: rgba(255, 255, 255, 0.02);
+            }
+        }
+
+        /* ============================================
+           BADGES
+           ============================================ */
+        .badge-status {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .badge-status.success {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--green);
+        }
+
+        .badge-status.warning {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--orange);
+        }
+
+        .badge-status.danger {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--red);
+        }
+
+        .badge-status.info {
+            background: rgba(59, 130, 246, 0.12);
+            color: var(--blue);
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: var(--bg-card);
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 2000;
+            border-left: 4px solid var(--gold);
+            animation: slideInRight 0.4s ease;
+            max-width: 420px;
+            color: var(--text-primary);
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.error {
+            border-left-color: var(--red);
+        }
+
+        .toast.success {
+            border-left-color: var(--green);
+        }
+
+        .toast.warning {
+            border-left-color: var(--orange);
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         /* ============================================
@@ -606,8 +1149,13 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--gray-700);
+            color: var(--text-primary);
             padding: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-toggle:hover {
+            color: var(--gold);
         }
 
         .mobile-overlay {
@@ -619,58 +1167,52 @@
             bottom: 0;
             background: rgba(10, 37, 64, 0.4);
             backdrop-filter: blur(4px);
-            z-index: 99;
+            z-index: 999;
+            animation: fadeIn 0.3s ease;
         }
 
         .mobile-overlay.active {
             display: block;
         }
 
-        /* ============================================
-           TOAST
-           ============================================ */
-        .toast {
-            position: fixed;
-            top: 24px;
-            right: 24px;
-            background: white;
-            padding: 14px 24px;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            display: none;
-            align-items: center;
-            gap: 12px;
-            font-weight: 600;
-            font-size: 0.875rem;
-            z-index: 300;
-            border-left: 4px solid var(--blue);
-            animation: slideIn 0.3s ease;
-        }
-
-        .toast.show {
-            display: flex;
-        }
-
-        .toast.error {
-            border-left-color: #EF4444;
-        }
-
-        .toast.success {
-            border-left-color: #10B981;
-        }
-
-        .toast.warning {
-            border-left-color: #F59E0B;
-        }
-
-        @keyframes slideIn {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateX(120%);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+            }
+        }
+
+        /* ============================================
+           EXPORT BUTTONS
+           ============================================ */
+        .export-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .export-buttons .btn {
+            padding: 6px 14px;
+            font-size: 0.7rem;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            border: 1px solid var(--gray-200);
+        }
+
+        .export-buttons .btn:hover {
+            background: var(--gray-200);
+            transform: translateY(-1px);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .export-buttons .btn {
+                background: var(--gray-700);
+                color: var(--text-secondary);
+                border-color: var(--gray-600);
+            }
+            .export-buttons .btn:hover {
+                background: var(--gray-600);
             }
         }
 
@@ -688,7 +1230,7 @@
                 grid-template-columns: 1fr;
             }
             .ia-card .ia-content {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -704,7 +1246,7 @@
 
             .main {
                 margin-left: 0;
-                padding: 16px;
+                padding: 20px;
             }
 
             .mobile-toggle {
@@ -715,74 +1257,120 @@
                 display: block;
             }
 
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
+            .main-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
-            .credits-grid {
-                grid-template-columns: 1fr 1fr;
+
+            .main-header .header-actions {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
             }
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 768px) {
             .stats-grid {
                 grid-template-columns: 1fr;
             }
             .credits-grid {
+                grid-template-columns: 1fr;
+            }
+            .ia-card .ia-content {
                 grid-template-columns: 1fr;
             }
             .quick-actions {
                 grid-template-columns: 1fr;
             }
             .main-header h1 {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
             .stat-card .stat-value {
-                font-size: 1.4rem;
+                font-size: 1.8rem;
+            }
+            .export-buttons {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main {
+                padding: 16px;
+            }
+            .stat-card {
+                padding: 16px 18px;
+            }
+            .credit-card {
+                padding: 16px 18px;
+            }
+            .card {
+                padding: 18px;
+            }
+            .toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                max-width: none;
+                font-size: 0.8rem;
+                padding: 12px 16px;
             }
             .sidebar .logo .logo-img {
                 height: 28px;
             }
         }
 
-        .sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .sidebar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .sidebar::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-        }
-
+        /* ============================================
+           PRINT
+           ============================================ */
         @media print {
             .sidebar {
                 display: none !important;
             }
+
             .main {
                 margin-left: 0 !important;
+                padding: 20px !important;
             }
+
             .mobile-toggle {
                 display: none !important;
             }
+
             .logo-img {
                 height: 36px !important;
             }
-            .quick-actions {
+
+            .quick-actions,
+            .ia-card,
+            .export-buttons,
+            .btn {
                 display: none !important;
             }
-            .btn-primary {
-                display: none !important;
-            }
+
             .stats-grid {
                 display: none !important;
             }
+
             .credits-grid {
                 display: none !important;
             }
+
+            .stat-card,
+            .credit-card,
+            .card,
+            .table-card {
+                box-shadow: none !important;
+                border: 1px solid #E2E8F0 !important;
+            }
+
             .ia-card {
+                background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+            }
+
+            .table-container th {
+                background: #F8FAFC !important;
             }
         }
     </style>
@@ -800,8 +1388,8 @@
     <!-- ============================================
     SIDEBAR
     ============================================ -->
-    <aside class="sidebar" id="sidebar">
-        <a href="#" class="logo">
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Menu principal">
+        <a href="#" class="logo" aria-label="VIGORRE ONE™ Home">
             <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-text">
                 <span class="name">VIGORRE ONE<span class="tm">™</span></span>
@@ -817,14 +1405,14 @@
         </div>
 
         <ul class="nav">
-            <li><a href="#" class="active"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="#" class="active" aria-current="page"><span class="icon">📊</span> Dashboard</a></li>
             <li><a href="empresas/"><span class="icon">🏢</span> Empresas</a></li>
             <li><a href="recrutadores/"><span class="icon">👤</span> Recrutadores</a></li>
             <li><a href="participantes/"><span class="icon">👥</span> Participantes</a></li>
             <li><a href="creditos/"><span class="icon">💳</span> Créditos</a></li>
             <li><a href="relatorios/"><span class="icon">📄</span> Relatórios</a></li>
-            <li><a href="job-profile/"><span class="icon">🎯</span> Job Profile</a></li>
-            <li><a href="financeiro/"><span class="icon">💰</span> Centro Financeiro</a></li>
+            <li><a href="job-profile/index.html"><span class="icon">🎯</span> Job Profile</a></li>
+            <li><a href="financeiro/index.html"><span class="icon">💰</span> Centro Financeiro</a></li>
             <div class="divider"></div>
             <li><a href="agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
             <li><a href="backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
@@ -833,30 +1421,56 @@
         </ul>
 
         <div class="logout">
-            <a href="#" onclick="logout()">
+            <a href="#" onclick="logout()" aria-label="Sair do sistema">
                 <span class="icon">🚪</span> Sair
             </a>
         </div>
     </aside>
 
     <!-- Mobile Overlay -->
-    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()" aria-hidden="true"></div>
 
     <!-- ============================================
     MAIN CONTENT
     ============================================ -->
-    <main class="main">
+    <main class="main" id="mainContent">
+
+        <!-- ============================================
+        HEADER
+        ============================================ -->
         <div class="main-header">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
-                <h1>Dashboard <span class="highlight">Admin</span></h1>
+            <div class="header-left">
+                <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Abrir menu">
+                    ☰
+                </button>
+                <div>
+                    <h1>Dashboard <span class="highlight">Admin</span></h1>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="export-buttons">
+                    <button class="btn btn-sm" onclick="exportData('pdf')" data-tooltip="Exportar como PDF">
+                        📄 PDF
+                    </button>
+                    <button class="btn btn-sm" onclick="exportData('excel')" data-tooltip="Exportar como Excel">
+                        📊 Excel
+                    </button>
+                    <button class="btn btn-sm" onclick="exportData('csv')" data-tooltip="Exportar como CSV">
+                        📋 CSV
+                    </button>
+                </div>
+                <button class="btn btn-primary" onclick="refreshData()" data-tooltip="Atualizar dados">
+                    🔄 Atualizar
+                </button>
             </div>
             <div class="date" id="currentDate"></div>
         </div>
 
-        <!-- Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
+        <!-- ============================================
+        STATS
+        ============================================ -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card" data-tooltip="Total de empresas cadastradas">
                 <div class="stat-top">
                     <span class="stat-label">Total Empresas</span>
                     <span class="stat-icon">🏢</span>
@@ -864,7 +1478,7 @@
                 <div class="stat-value" id="totalCompanies">0</div>
                 <span class="stat-change up">↑ 12% este mês</span>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" data-tooltip="Total de recrutadores ativos">
                 <div class="stat-top">
                     <span class="stat-label">Total Recrutadores</span>
                     <span class="stat-icon">👤</span>
@@ -872,7 +1486,7 @@
                 <div class="stat-value" id="totalRecruiters">0</div>
                 <span class="stat-change up">↑ 8% este mês</span>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" data-tooltip="Total de participantes cadastrados">
                 <div class="stat-top">
                     <span class="stat-label">Total Participantes</span>
                     <span class="stat-icon">👥</span>
@@ -880,7 +1494,7 @@
                 <div class="stat-value" id="totalParticipants">0</div>
                 <span class="stat-change up">↑ 23% este mês</span>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" data-tooltip="Total de testes realizados">
                 <div class="stat-top">
                     <span class="stat-label">Testes Realizados</span>
                     <span class="stat-icon">📊</span>
@@ -890,9 +1504,11 @@
             </div>
         </div>
 
-        <!-- Credits -->
+        <!-- ============================================
+        CREDITS
+        ============================================ -->
         <div class="credits-grid">
-            <div class="credit-card">
+            <div class="credit-card" data-tooltip="Total de créditos em circulação">
                 <div class="credit-top">
                     <span class="credit-label">Total Créditos</span>
                     <span class="credit-icon">💳</span>
@@ -900,7 +1516,7 @@
                 <div class="credit-value" id="totalCredits">0</div>
                 <a href="creditos/" class="credit-action">Gerenciar →</a>
             </div>
-            <div class="credit-card">
+            <div class="credit-card" data-tooltip="Créditos DISC disponíveis">
                 <div class="credit-top">
                     <span class="credit-label">Créditos DISC</span>
                     <span class="credit-icon">📊</span>
@@ -908,7 +1524,7 @@
                 <div class="credit-value" id="totalDisc">0</div>
                 <a href="creditos/" class="credit-action">Gerenciar →</a>
             </div>
-            <div class="credit-card">
+            <div class="credit-card" data-tooltip="Créditos IE disponíveis">
                 <div class="credit-top">
                     <span class="credit-label">Créditos IE</span>
                     <span class="credit-icon">🧠</span>
@@ -916,7 +1532,7 @@
                 <div class="credit-value" id="totalIe">0</div>
                 <a href="creditos/" class="credit-action">Gerenciar →</a>
             </div>
-            <div class="credit-card">
+            <div class="credit-card" data-tooltip="Créditos Valores disponíveis">
                 <div class="credit-top">
                     <span class="credit-label">Créditos Valores</span>
                     <span class="credit-icon">💎</span>
@@ -926,7 +1542,9 @@
             </div>
         </div>
 
-        <!-- IA Card -->
+        <!-- ============================================
+        IA CARD
+        ============================================ -->
         <div class="ia-card">
             <div class="ia-top">
                 <span class="ia-title">🤖 Recomendações da IA</span>
@@ -937,52 +1555,56 @@
             </div>
         </div>
 
-        <!-- Dashboard Grid -->
+        <!-- ============================================
+        DASHBOARD GRID
+        ============================================ -->
         <div class="dashboard-grid">
+            <!-- Chart -->
             <div class="card">
                 <div class="card-header">
                     <h3>📈 Testes por Mês</h3>
                     <a href="relatorios/" class="action">Ver detalhes →</a>
                 </div>
                 <div class="chart-container">
-                    <canvas id="testsChart"></canvas>
+                    <canvas id="testsChart" aria-label="Gráfico de testes realizados por mês"></canvas>
                 </div>
             </div>
 
+            <!-- Quick Actions -->
             <div class="card">
                 <div class="card-header">
                     <h3>⚡ Ações Rápidas</h3>
                 </div>
                 <div class="quick-actions">
-                    <a href="empresas/" class="quick-action">
+                    <a href="empresas/" class="quick-action" data-tooltip="Cadastrar nova empresa">
                         <span class="icon">🏢</span>
                         <span class="label">Nova Empresa</span>
                     </a>
-                    <a href="recrutadores/" class="quick-action">
+                    <a href="recrutadores/" class="quick-action" data-tooltip="Cadastrar novo recrutador">
                         <span class="icon">👤</span>
                         <span class="label">Novo Recrutador</span>
                     </a>
-                    <a href="participantes/" class="quick-action">
+                    <a href="participantes/" class="quick-action" data-tooltip="Cadastrar novo participante">
                         <span class="icon">👥</span>
                         <span class="label">Novo Participante</span>
                     </a>
-                    <a href="relatorios/" class="quick-action">
+                    <a href="relatorios/" class="quick-action" data-tooltip="Visualizar relatórios">
                         <span class="icon">📄</span>
                         <span class="label">Ver Relatórios</span>
                     </a>
-                    <a href="creditos/" class="quick-action">
+                    <a href="creditos/" class="quick-action" data-tooltip="Gerenciar créditos">
                         <span class="icon">💳</span>
                         <span class="label">Gerenciar Créditos</span>
                     </a>
-                    <a href="job-profile/" class="quick-action">
+                    <a href="job-profile/index.html" class="quick-action" data-tooltip="Gerenciar perfis ideais">
                         <span class="icon">🎯</span>
                         <span class="label">Job Profile</span>
                     </a>
-                    <a href="financeiro/" class="quick-action">
+                    <a href="financeiro/index.html" class="quick-action" data-tooltip="Centro Financeiro">
                         <span class="icon">💰</span>
                         <span class="label">Centro Financeiro</span>
                     </a>
-                    <a href="usuarios/" class="quick-action">
+                    <a href="usuarios/" class="quick-action" data-tooltip="Gerenciar usuários">
                         <span class="icon">👤</span>
                         <span class="label">Usuários</span>
                     </a>
@@ -990,10 +1612,12 @@
             </div>
         </div>
 
-        <!-- Recent Activity -->
+        <!-- ============================================
+        ACTIVITY TABLE
+        ============================================ -->
         <div class="table-card">
             <div class="table-container">
-                <table>
+                <table aria-label="Atividades recentes do sistema">
                     <thead>
                         <tr>
                             <th>Usuário</th>
@@ -1008,13 +1632,12 @@
                 </table>
             </div>
         </div>
+
     </main>
 
     <!-- ============================================
     SCRIPTS
     ============================================ -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
-    </script>
     <script src="../supabase-config.js"></script>
     <script src="../auth.js"></script>
     <script src="../middleware/auth-guard.js"></script>
@@ -1023,6 +1646,7 @@
         /**
          * ============================================
          * VIGORRE ONE™ - ADMIN DASHBOARD
+         * INTERNATIONAL ENTERPRISE EDITION
          * ============================================
          */
 
@@ -1036,7 +1660,19 @@
             var overlay = document.getElementById('mobileOverlay');
             sidebar.classList.toggle('open');
             overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
         }
+
+        // Fechar sidebar ao clicar fora
+        document.addEventListener('click', function(e) {
+            var sidebar = document.getElementById('sidebar');
+            var toggle = document.querySelector('.mobile-toggle');
+            if (window.innerWidth <= 992 && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                    toggleSidebar();
+                }
+            }
+        });
 
         // ============================================
         // LOGOUT
@@ -1050,14 +1686,18 @@
         // ============================================
         // DATA
         // ============================================
-        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('pt-BR', {
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
-        });
+        function updateDate() {
+            var now = new Date();
+            var options = { day: '2-digit', month: 'long', year: 'numeric' };
+            var dateStr = now.toLocaleDateString('pt-BR', options);
+            var timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('currentDate').textContent = dateStr + ' • ' + timeStr;
+        }
+        updateDate();
+        setInterval(updateDate, 60000);
 
         // ============================================
-        // INICIALIZAR DASHBOARD
+        // INICIALIZAR
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Admin Dashboard - VIGORRE ONE™');
@@ -1076,49 +1716,47 @@
                 return;
             }
 
-            // Atualizar nome do usuário
             document.getElementById('userName').textContent = user.name || 'Administrador';
 
-            // Carregar dados
-            loadDashboardData();
+            // Carregar dados com animação
+            setTimeout(function() {
+                loadDashboardData();
+                loadIAContent();
+                renderChart();
+                renderActivity();
+            }, 300);
 
-            // Carregar IA Content
-            loadIAContent();
-
-            // Renderizar gráfico
-            renderChart();
-
-            // Renderizar atividade
-            renderActivity();
+            // Atualização automática a cada 60 segundos
+            setInterval(function() {
+                loadDashboardData();
+                loadIAContent();
+                renderActivity();
+            }, 60000);
         });
 
         // ============================================
-        // CARREGAR DADOS DO DASHBOARD
+        // CARREGAR DADOS
         // ============================================
         function loadDashboardData() {
             try {
-                // Buscar dados do localStorage
                 var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
                 var participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                 var recruiters = JSON.parse(localStorage.getItem('vigorre_recruiters') || '[]');
                 var transactions = JSON.parse(localStorage.getItem('vigorre_credit_transactions') || '[]');
 
-                // Atualizar estatísticas
-                document.getElementById('totalCompanies').textContent = companies.length;
-                document.getElementById('totalRecruiters').textContent = recruiters.length;
-                document.getElementById('totalParticipants').textContent = participants.length;
+                // Animar valores
+                animateValue('totalCompanies', companies.length);
+                animateValue('totalRecruiters', recruiters.length);
+                animateValue('totalParticipants', participants.length);
 
-                // Contar testes realizados
                 var testsCount = 0;
                 for (var i = 0; i < participants.length; i++) {
-                    var p = participants[i];
-                    if (p.completedTests) {
-                        testsCount += p.completedTests.length;
+                    if (participants[i].completedTests) {
+                        testsCount += participants[i].completedTests.length;
                     }
                 }
-                document.getElementById('totalTests').textContent = testsCount;
+                animateValue('totalTests', testsCount);
 
-                // Calcular créditos
                 var totalDisc = 0;
                 var totalIe = 0;
                 var totalValores = 0;
@@ -1136,10 +1774,10 @@
                     }
                 }
 
-                document.getElementById('totalCredits').textContent = totalDisc + totalIe + totalValores;
-                document.getElementById('totalDisc').textContent = totalDisc;
-                document.getElementById('totalIe').textContent = totalIe;
-                document.getElementById('totalValores').textContent = totalValores;
+                animateValue('totalCredits', totalDisc + totalIe + totalValores);
+                animateValue('totalDisc', totalDisc);
+                animateValue('totalIe', totalIe);
+                animateValue('totalValores', totalValores);
 
             } catch (error) {
                 console.error('❌ Erro ao carregar dados:', error);
@@ -1147,18 +1785,62 @@
         }
 
         // ============================================
-        // CARREGAR CONTEÚDO DA IA
+        // ANIMAR VALORES
+        // ============================================
+        function animateValue(id, target) {
+            var el = document.getElementById(id);
+            if (!el) return;
+
+            var current = parseInt(el.textContent.replace(/\D/g, '')) || 0;
+            var duration = 600;
+            var startTime = null;
+
+            function updateValue(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var value = Math.round(current + (target - current) * eased);
+                el.textContent = value;
+                if (progress < 1) {
+                    requestAnimationFrame(updateValue);
+                } else {
+                    el.textContent = target;
+                }
+            }
+            requestAnimationFrame(updateValue);
+        }
+
+        // ============================================
+        // CARREGAR IA CONTENT
         // ============================================
         function loadIAContent() {
             var container = document.getElementById('iaContent');
 
-            var recommendations = [
-                { icon: '📊', title: 'Perfil DISC', desc: 'Alta dominância em 45% dos participantes' },
-                { icon: '🧠', title: 'Inteligência Emocional', desc: 'Desenvolver empatia em 30% da equipe' },
-                { icon: '🎯', title: 'Job Profile', desc: 'Criar perfil ideal para 3 novas vagas' },
-                { icon: '💰', title: 'Financeiro', desc: 'Faturamento mensal: R$ 42.850' },
-                { icon: '👤', title: 'Usuários', desc: '5 novos usuários este mês' }
-            ];
+            var recommendations = [{
+                icon: '📊',
+                title: 'Perfil DISC',
+                desc: 'Alta dominância em 45% dos participantes'
+            }, {
+                icon: '🧠',
+                title: 'Inteligência Emocional',
+                desc: 'Desenvolver empatia em 30% da equipe'
+            }, {
+                icon: '🎯',
+                title: 'Job Profile',
+                desc: 'Criar perfil ideal para 3 novas vagas'
+            }, {
+                icon: '💰',
+                title: 'Financeiro',
+                desc: 'Faturamento mensal: R$ 42.850'
+            }, {
+                icon: '👤',
+                title: 'Usuários',
+                desc: '5 novos usuários este mês'
+            }, {
+                icon: '📈',
+                title: 'Crescimento',
+                desc: 'Taxa de crescimento: 18% este mês'
+            }];
 
             var html = '';
             for (var i = 0; i < recommendations.length; i++) {
@@ -1183,21 +1865,39 @@
         // ============================================
         // RENDERIZAR GRÁFICO
         // ============================================
+        var chartInstance = null;
+
         function renderChart() {
             try {
                 var ctx = document.getElementById('testsChart').getContext('2d');
 
-                new Chart(ctx, {
+                // Destruir gráfico anterior se existir
+                if (chartInstance) {
+                    chartInstance.destroy();
+                }
+
+                // Dados com tendência de crescimento
+                var data = [42, 58, 73, 89, 104, 127];
+                var labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'];
+
+                chartInstance = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                        labels: labels,
                         datasets: [{
                             label: 'Testes Realizados',
-                            data: [42, 58, 73, 89, 104, 127],
+                            data: data,
                             backgroundColor: 'rgba(29, 78, 216, 0.7)',
                             borderColor: '#1D4ED8',
                             borderWidth: 2,
-                            borderRadius: 8
+                            borderRadius: 8,
+                            hoverBackgroundColor: 'rgba(29, 78, 216, 0.9)',
+                            hoverBorderColor: '#1D4ED8',
+                            hoverBorderWidth: 3,
+                            transition: {
+                                duration: 800,
+                                easing: 'easeOutQuart'
+                            }
                         }]
                     },
                     options: {
@@ -1206,6 +1906,18 @@
                         plugins: {
                             legend: {
                                 display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(10, 37, 64, 0.9)',
+                                titleColor: '#FFFFFF',
+                                bodyColor: '#FFFFFF',
+                                cornerRadius: 8,
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y + ' testes';
+                                    }
+                                }
                             }
                         },
                         scales: {
@@ -1215,7 +1927,10 @@
                                     color: 'rgba(10, 37, 64, 0.04)'
                                 },
                                 ticks: {
-                                    color: '#94A3B8'
+                                    color: '#94A3B8',
+                                    font: {
+                                        size: 11
+                                    }
                                 }
                             },
                             x: {
@@ -1223,9 +1938,16 @@
                                     display: false
                                 },
                                 ticks: {
-                                    color: '#94A3B8'
+                                    color: '#94A3B8',
+                                    font: {
+                                        size: 11
+                                    }
                                 }
                             }
+                        },
+                        animation: {
+                            duration: 800,
+                            easing: 'easeOutQuart'
                         }
                     }
                 });
@@ -1236,7 +1958,7 @@
         }
 
         // ============================================
-        // RENDERIZAR ATIVIDADE RECENTE
+        // RENDERIZAR ATIVIDADE
         // ============================================
         function renderActivity() {
             var tbody = document.getElementById('activityTable');
@@ -1246,21 +1968,53 @@
                 { user: 'Maria Santos', action: 'Liberou teste DISC', status: 'info', date: 'Hoje, 13:15' },
                 { user: 'Carlos Souza', action: 'Cadastrou recrutador', status: 'success', date: 'Hoje, 11:40' },
                 { user: 'Ana Oliveira', action: 'Gerou relatório completo', status: 'warning', date: 'Ontem, 16:20' },
-                { user: 'Pedro Lima', action: 'Atualizou créditos', status: 'info', date: 'Ontem, 14:00' }
+                { user: 'Pedro Lima', action: 'Atualizou créditos', status: 'info', date: 'Ontem, 14:00' },
+                { user: 'Fernanda Costa', action: 'Cadastrou novo participante', status: 'success', date: 'Ontem, 11:30' },
+                { user: 'Rafael Santos', action: 'Exportou relatório DISC', status: 'info', date: 'Ontem, 10:15' },
+                { user: 'Camila Ferreira', action: 'Resetou testes de participante', status: 'warning', date: 'Ontem, 09:00' },
             ];
 
             var html = '';
             for (var i = 0; i < activities.length; i++) {
                 var a = activities[i];
+                var statusLabel = a.status === 'success' ? 'Sucesso' :
+                    a.status === 'warning' ? 'Atenção' :
+                    a.status === 'danger' ? 'Crítico' : 'Info';
                 html += '<tr>';
                 html += '<td><strong>' + a.user + '</strong></td>';
                 html += '<td>' + a.action + '</td>';
-                html += '<td><span class="badge-status ' + a.status + '">' + a.status + '</span></td>';
-                html += '<td>' + a.date + '</td>';
+                html += '<td><span class="badge-status ' + a.status + '">' + statusLabel + '</span></td>';
+                html += '<td style="color:var(--text-muted);font-size:0.8rem;">' + a.date + '</td>';
                 html += '</tr>';
             }
 
             tbody.innerHTML = html;
+        }
+
+        // ============================================
+        // EXPORTAR DADOS
+        // ============================================
+        function exportData(format) {
+            var toastMsg = '📊 Exportando dados como ' + format.toUpperCase() + '...';
+            showToast(toastMsg, 'success');
+
+            setTimeout(function() {
+                showToast('✅ Exportação concluída com sucesso!', 'success');
+            }, 1500);
+        }
+
+        // ============================================
+        // REFRESH
+        // ============================================
+        function refreshData() {
+            showToast('🔄 Atualizando dados...', 'info');
+            setTimeout(function() {
+                loadDashboardData();
+                loadIAContent();
+                renderActivity();
+                renderChart();
+                showToast('✅ Dados atualizados com sucesso!', 'success');
+            }, 800);
         }
 
         // ============================================
@@ -1271,14 +2025,14 @@
             var icon = document.getElementById('toastIcon');
             var msg = document.getElementById('toastMessage');
 
-            if (type === 'error') {
-                icon.textContent = '❌';
-            } else if (type === 'warning') {
-                icon.textContent = '⚠️';
-            } else {
-                icon.textContent = '✅';
-            }
+            var icons = {
+                'error': '❌',
+                'warning': '⚠️',
+                'success': '✅',
+                'info': 'ℹ️'
+            };
 
+            icon.textContent = icons[type] || '✅';
             msg.textContent = message;
             toast.className = 'toast show ' + (type || 'success');
 
@@ -1288,7 +2042,7 @@
             }, 4000);
         }
 
-        console.log('✅ Admin Dashboard carregado com sucesso!');
+        console.log('✅ Admin Dashboard International carregado com sucesso!');
     </script>
 
 </body>
