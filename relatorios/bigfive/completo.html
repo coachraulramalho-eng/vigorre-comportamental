@@ -4,16 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Relatório Completo Big Five | VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
-        /* ============================================
-           VIGORRE ONE™ - RELATÓRIO COMPLETO BIG FIVE
-           ============================================ */
-
         * {
             margin: 0;
             padding: 0;
@@ -22,10 +16,14 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
             --purple: #7C3AED;
             --pink: #EC4899;
             --white: #FFFFFF;
@@ -44,7 +42,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -60,10 +60,7 @@
             margin: 0 auto;
         }
 
-        /* ============================================
-           HEADER PREMIUM
-           ============================================ */
-        .header-premium {
+        .header-print {
             background: var(--navy);
             color: white;
             padding: 24px 32px;
@@ -73,80 +70,80 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 16px;
+            position: relative;
+            z-index: 1;
         }
 
-        .header-premium .logo {
+        .header-print .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
         }
 
-        .header-premium .logo .logo-img {
+        .header-print .logo .logo-img {
             height: 44px;
             width: auto;
             display: block;
         }
 
-        .header-premium .logo .logo-text .name {
+        .header-print .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             font-weight: 800;
             color: white;
+            letter-spacing: -0.3px;
         }
 
-        .header-premium .logo .logo-text .name .tm {
+        .header-print .logo .logo-text .name .tm {
             font-size: 0.4rem;
             vertical-align: super;
             color: var(--cyan);
         }
 
-        .header-premium .logo .logo-text .sub {
+        .header-print .logo .logo-text .sub {
             font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
-        .header-premium .header-title {
+        .header-print .header-title {
             text-align: center;
         }
 
-        .header-premium .header-title h1 {
+        .header-print .header-title h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
         }
 
-        .header-premium .header-title .subtitle {
+        .header-print .header-title .subtitle {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .header-premium .header-user {
+        .header-print .header-user {
             text-align: right;
         }
 
-        .header-premium .header-user .name {
+        .header-print .header-user .name {
             font-weight: 600;
             font-size: 0.9rem;
         }
 
-        .header-premium .header-user .company {
+        .header-print .header-user .company {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .header-premium .header-code {
+        .header-print .header-code {
             font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.3);
             font-family: 'Courier New', monospace;
             margin-top: 2px;
         }
 
-        /* ============================================
-           CORPO DO RELATÓRIO
-           ============================================ */
         .report-body {
             background: white;
             padding: 32px;
@@ -200,14 +197,12 @@
             color: var(--gray-800);
         }
 
-        /* ============================================
-           CAPA
-           ============================================ */
         .capa {
             text-align: center;
             padding: 60px 40px;
             border-bottom: 2px solid var(--gray-200);
             margin-bottom: 32px;
+            position: relative;
         }
 
         .capa .capa-logo {
@@ -299,9 +294,6 @@
             color: var(--gray-400);
         }
 
-        /* ============================================
-           SUMÁRIO
-           ============================================ */
         .sumario {
             background: var(--gray-50);
             border-radius: var(--radius-sm);
@@ -335,47 +327,42 @@
             color: var(--gray-400);
         }
 
-        /* ============================================
-           FACTORS GRID
-           ============================================ */
         .factors-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-            gap: 8px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
             margin: 12px 0;
         }
 
         .factor-card {
             background: var(--gray-50);
             border-radius: var(--radius-sm);
-            padding: 12px 8px;
+            padding: 16px 20px;
             border: 1px solid var(--gray-200);
             text-align: center;
         }
 
         .factor-card .factor-icon {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
         }
 
         .factor-card .factor-name {
             font-weight: 700;
-            font-size: 0.6rem;
-            color: var(--gray-600);
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
+            font-size: 0.8rem;
+            color: var(--gray-700);
         }
 
         .factor-card .factor-value {
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--pink);
         }
 
         .factor-card .factor-bar {
-            height: 3px;
+            height: 4px;
             background: var(--gray-200);
             border-radius: 2px;
-            margin-top: 4px;
+            margin-top: 6px;
             overflow: hidden;
         }
 
@@ -385,18 +372,12 @@
             transition: width 0.8s ease;
         }
 
-        /* ============================================
-           GRÁFICOS
-           ============================================ */
         .chart-container {
             height: 240px;
             position: relative;
             margin: 16px 0;
         }
 
-        /* ============================================
-           LISTAS
-           ============================================ */
         .feature-list {
             list-style: none;
             display: grid;
@@ -421,9 +402,34 @@
             font-weight: 700;
         }
 
-        /* ============================================
-           COMPATIBILIDADE
-           ============================================ */
+        .badge-level {
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-level.muito_alta {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .badge-level.alta {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .badge-level.moderada {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .badge-level.baixa {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
         .compatibilidade-card {
             background: var(--gray-50);
             border-radius: var(--radius-sm);
@@ -443,7 +449,7 @@
         .compatibilidade-card .compat-value {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--blue);
+            color: var(--pink);
         }
 
         .compatibilidade-card .compat-bar {
@@ -460,9 +466,6 @@
             transition: width 0.8s ease;
         }
 
-        /* ============================================
-           ASSINATURA
-           ============================================ */
         .assinatura {
             text-align: center;
             padding: 32px 0;
@@ -498,10 +501,7 @@
             font-family: 'Courier New', monospace;
         }
 
-        /* ============================================
-           FOOTER
-           ============================================ */
-        .footer-premium {
+        .footer-print {
             background: var(--navy);
             color: white;
             padding: 20px 32px;
@@ -513,13 +513,13 @@
             gap: 12px;
         }
 
-        .footer-premium .footer-logo {
+        .footer-print .footer-logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .footer-premium .footer-logo .logo-icon {
+        .footer-print .footer-logo .logo-icon {
             width: 32px;
             height: 32px;
             background: var(--cyan);
@@ -533,48 +533,45 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .footer-premium .footer-logo .footer-text .name {
+        .footer-print .footer-logo .footer-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
         }
 
-        .footer-premium .footer-logo .footer-text .name .tm {
+        .footer-print .footer-logo .footer-text .name .tm {
             font-size: 0.35rem;
             vertical-align: super;
             color: var(--cyan);
         }
 
-        .footer-premium .footer-logo .footer-text .tagline {
+        .footer-print .footer-logo .footer-text .tagline {
             font-size: 0.55rem;
             color: rgba(255, 255, 255, 0.3);
         }
 
-        .footer-premium .footer-contact {
+        .footer-print .footer-contact {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
         }
 
-        .footer-premium .footer-contact a {
+        .footer-print .footer-contact a {
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             font-size: 0.7rem;
             transition: var(--transition);
         }
 
-        .footer-premium .footer-contact a:hover {
+        .footer-print .footer-contact a:hover {
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .footer-premium .footer-page {
+        .footer-print .footer-page {
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.3);
         }
 
-        /* ============================================
-           ACTIONS
-           ============================================ */
         .actions-bar {
             display: flex;
             justify-content: flex-end;
@@ -621,7 +618,7 @@
         }
 
         .btn-success {
-            background: #10B981;
+            background: var(--green);
             color: white;
         }
 
@@ -630,19 +627,17 @@
             box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
         }
 
-        /* ============================================
-           RESPONSIVO
-           ============================================ */
         @media (max-width: 768px) {
-            .header-premium {
+            .header-print {
                 flex-direction: column;
                 text-align: center;
+                padding: 16px 20px;
             }
-            .header-premium .header-user {
+            .header-print .header-user {
                 text-align: center;
             }
             .factors-grid {
-                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-columns: 1fr 1fr;
             }
             .feature-list {
                 grid-template-columns: 1fr;
@@ -653,7 +648,7 @@
             .report-body {
                 padding: 20px;
             }
-            .footer-premium {
+            .footer-print {
                 flex-direction: column;
                 text-align: center;
             }
@@ -667,7 +662,19 @@
 
         @media (max-width: 480px) {
             .factors-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
+            }
+            .capa {
+                padding: 30px 20px;
+            }
+            .capa .capa-title {
+                font-size: 1.4rem;
+            }
+            .capa .capa-logo {
+                font-size: 1.8rem;
+            }
+            body {
+                padding: 10px;
             }
         }
 
@@ -676,13 +683,13 @@
                 background: white !important;
                 padding: 0 !important;
             }
-            .header-premium {
+            .header-print {
                 background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 border-radius: 0 !important;
             }
-            .footer-premium {
+            .footer-print {
                 background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -696,9 +703,12 @@
             }
             .report-body {
                 border: none !important;
+                padding: 20px !important;
             }
             .factor-card {
                 background: #F8FAFC !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             .feature-list li {
                 background: #F8FAFC !important;
@@ -715,6 +725,9 @@
             .section {
                 page-break-inside: avoid;
             }
+            .capa {
+                border-bottom: 2px solid #E2E8F0 !important;
+            }
         }
     </style>
 </head>
@@ -722,10 +735,7 @@
 
     <div class="container">
 
-        <!-- ============================================
-        HEADER PREMIUM
-        ============================================ -->
-        <header class="header-premium">
+        <header class="header-print">
             <div class="logo">
                 <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
                 <div class="logo-text">
@@ -746,20 +756,14 @@
             </div>
         </header>
 
-        <!-- ============================================
-        CORPO DO RELATÓRIO
-        ============================================ -->
         <div class="report-body">
 
-            <!-- ============================================
-            CAPA
-            ============================================ -->
             <section class="capa">
                 <div class="capa-logo">VIGORRE ONE<span class="tm">™</span></div>
                 <div class="capa-sub">People Analytics Enterprise</div>
                 <div class="capa-divider"></div>
                 <div class="capa-title">Relatório <span class="highlight">Completo</span> Big Five</div>
-                <p style="color: var(--gray-500); font-size: 0.95rem; margin-bottom: 8px;">Os 5 Grandes Fatores da Personalidade</p>
+                <p style="color: var(--gray-500); font-size: 0.95rem; margin-bottom: 8px;">Análise de Personalidade • Modelo dos 5 Fatores</p>
 
                 <div class="capa-info">
                     <div class="capa-info-item">
@@ -781,43 +785,29 @@
                 </div>
             </section>
 
-            <!-- ============================================
-            SUMÁRIO
-            ============================================ -->
             <section class="sumario">
                 <h3>📑 Sumário</h3>
                 <div class="sumario-item"><span>1. Apresentação</span><span class="page">3</span></div>
                 <div class="sumario-item"><span>2. Como Interpretar Este Relatório</span><span class="page">4</span></div>
                 <div class="sumario-item"><span>3. Metodologia e Confiabilidade</span><span class="page">5</span></div>
-                <div class="sumario-item"><span>4. Perfil Big Five</span><span class="page">6</span></div>
+                <div class="sumario-item"><span>4. Os 5 Fatores</span><span class="page">6</span></div>
                 <div class="sumario-item"><span>5. Análise dos Fatores</span><span class="page">8</span></div>
                 <div class="sumario-item"><span>6. Pontos Fortes</span><span class="page">10</span></div>
                 <div class="sumario-item"><span>7. Áreas de Desenvolvimento</span><span class="page">11</span></div>
-                <div class="sumario-item"><span>8. Perfil de Comunicação</span><span class="page">12</span></div>
-                <div class="sumario-item"><span>9. Perfil de Liderança</span><span class="page">13</span></div>
-                <div class="sumario-item"><span>10. Tomada de Decisão</span><span class="page">14</span></div>
-                <div class="sumario-item"><span>11. Gestão de Estresse</span><span class="page">15</span></div>
-                <div class="sumario-item"><span>12. Recomendações de Carreira</span><span class="page">16</span></div>
-                <div class="sumario-item"><span>13. Compatibilidade com Vaga</span><span class="page">17</span></div>
-                <div class="sumario-item"><span>14. Plano de Desenvolvimento</span><span class="page">18</span></div>
-                <div class="sumario-item"><span>15. Parecer da IA</span><span class="page">19</span></div>
-                <div class="sumario-item"><span>16. Conclusão</span><span class="page">20</span></div>
+                <div class="sumario-item"><span>8. Perfil de Personalidade</span><span class="page">12</span></div>
+                <div class="sumario-item"><span>9. Compatibilidade com Vaga</span><span class="page">13</span></div>
+                <div class="sumario-item"><span>10. Plano de Desenvolvimento</span><span class="page">14</span></div>
+                <div class="sumario-item"><span>11. Parecer da IA</span><span class="page">15</span></div>
+                <div class="sumario-item"><span>12. Conclusão</span><span class="page">16</span></div>
+                <div class="sumario-item"><span>13. Assinatura Digital</span><span class="page">17</span></div>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 1: APRESENTAÇÃO
-            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">1</span> Apresentação</h2>
                 <p class="section-text">
-                    Este relatório apresenta uma análise completa da personalidade baseada no modelo Big Five (Cinco Grandes Fatores),
-                    também conhecido como Modelo OCEAN. O modelo avalia cinco dimensões principais da personalidade:
-                    <strong>Abertura</strong>, <strong>Conscienciosidade</strong>, <strong>Extroversão</strong>,
-                    <strong>Amabilidade</strong> e <strong>Neuroticismo</strong>.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    O Big Five é um dos modelos mais robustos e validados cientificamente para a avaliação da personalidade,
-                    com ampla aplicação em psicologia organizacional, desenvolvimento de carreira e autoconhecimento.
+                    Este relatório apresenta uma análise completa da personalidade baseada no modelo dos 5 Grandes Fatores (Big Five).
+                    O modelo avalia cinco dimensões principais: <strong>Abertura</strong>, <strong>Conscienciosidade</strong>,
+                    <strong>Extroversão</strong>, <strong>Amabilidade</strong> e <strong>Neuroticismo</strong>.
                 </p>
                 <p class="section-text" style="margin-top: 8px;">
                     <strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br />
@@ -827,70 +817,38 @@
                 </p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 2: COMO INTERPRETAR
-            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">2</span> Como Interpretar Este Relatório</h2>
                 <p class="section-text">
-                    Para obter o máximo proveito deste relatório, recomendamos que você:
+                    O modelo Big Five é um dos mais robustos e validados da psicologia da personalidade. Ele descreve
+                    a personalidade em cinco dimensões contínuas, onde cada pessoa se situa em um espectro.
                 </p>
-                <ul style="color: var(--gray-600); line-height: 2; font-size: 0.95rem; padding-left: 20px; margin-top: 8px;">
-                    <li>Leia o relatório completo, sem pular seções;</li>
-                    <li>Reflita sobre como cada fator se manifesta no seu dia a dia;</li>
-                    <li>Identifique quais são seus fatores predominantes;</li>
-                    <li>Busque feedback de pessoas que convivem com você profissionalmente;</li>
-                    <li>Utilize as recomendações como base para um plano de desenvolvimento;</li>
-                    <li>Revisite o relatório periodicamente para acompanhar sua evolução.</li>
-                </ul>
                 <p class="section-text" style="margin-top: 8px;">
                     <strong>Importante:</strong> Este relatório é uma ferramenta de autoconhecimento e desenvolvimento.
                     Não deve ser utilizado como único critério para decisões de contratação, promoção ou avaliação de desempenho.
                 </p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 3: METODOLOGIA E CONFIABILIDADE
-            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">3</span> Metodologia e Confiabilidade</h2>
                 <p class="section-text">
                     <strong>Como os resultados são calculados</strong>
                     <br />
-                    O teste Big Five é composto por 25 questões que avaliam os cinco fatores da personalidade.
-                    Cada fator é medido por cinco perguntas, garantindo maior precisão e consistência na avaliação.
-                    As respostas são pontuadas em uma escala de 1 a 5, onde 1 significa "Discordo Totalmente" e 5 significa "Concordo Totalmente".
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Consistência dos resultados</strong>
-                    <br />
-                    O sistema utiliza um algoritmo determinístico: se você responder exatamente as mesmas respostas,
-                    o resultado será exatamente o mesmo. Isso garante que a interpretação seja baseada exclusivamente
-                    nas suas respostas, sem variações aleatórias.
+                    O teste Big Five é composto por 44 questões que avaliam os cinco fatores da personalidade.
+                    Cada questão apresenta cinco opções de resposta, e você seleciona aquela que melhor descreve seu comportamento.
                 </p>
                 <p class="section-text" style="margin-top: 8px;">
                     <strong>Confiabilidade</strong>
                     <br />
-                    O modelo Big Five é um dos mais validados na psicologia da personalidade, com décadas de pesquisa
-                    e aplicação em diferentes culturas. A consistência dos resultados é monitorada por meio de índices
-                    de confiabilidade que garantem a precisão da análise.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Limitações</strong>
-                    <br />
-                    Como toda avaliação de personalidade, este relatório deve ser interpretado considerando o contexto
-                    e a honestidade das respostas. Recomenda-se uma reflexão pessoal e, se possível, uma sessão de
-                    feedback com um profissional especializado.
+                    O modelo Big Five é amplamente validado na psicologia e utilizado em pesquisas acadêmicas
+                    e organizacionais em todo o mundo.
                 </p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 4: PERFIL BIG FIVE
-            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">4</span> Perfil Big Five</h2>
+                <h2 class="section-title"><span class="number">4</span> Os 5 Fatores</h2>
                 <div class="factors-grid" id="factorsGrid">
-                    <!-- Carregado via JS -->
+                    <!-- Carregado via JavaScript -->
                 </div>
                 <div class="chart-container">
                     <canvas id="bigfiveChart"></canvas>
@@ -898,17 +856,11 @@
                 <p class="section-text" id="profileDescription">Carregando descrição do perfil...</p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 5: ANÁLISE DOS FATORES
-            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">5</span> Análise dos Fatores</h2>
                 <p class="section-text" id="factorsAnalysis">Carregando análise detalhada dos fatores...</p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 6: PONTOS FORTES
-            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">6</span> Pontos Fortes</h2>
                 <ul class="feature-list" id="strengthsList">
@@ -916,9 +868,6 @@
                 </ul>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 7: ÁREAS DE DESENVOLVIMENTO
-            ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">7</span> Áreas de Desenvolvimento</h2>
                 <ul class="feature-list" id="developmentList">
@@ -926,87 +875,35 @@
                 </ul>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 8: PERFIL DE COMUNICAÇÃO
-            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">8</span> Perfil de Comunicação</h2>
-                <p class="section-text" id="communicationText">Carregando análise do perfil de comunicação...</p>
+                <h2 class="section-title"><span class="number">8</span> Perfil de Personalidade</h2>
+                <p class="section-text" id="personalityText">Carregando perfil de personalidade...</p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 9: PERFIL DE LIDERANÇA
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">9</span> Perfil de Liderança</h2>
-                <p class="section-text" id="leadershipText">Carregando análise do perfil de liderança...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 10: TOMADA DE DECISÃO
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">10</span> Tomada de Decisão</h2>
-                <p class="section-text" id="decisionText">Carregando análise da tomada de decisão...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 11: GESTÃO DE ESTRESSE
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">11</span> Gestão de Estresse</h2>
-                <p class="section-text" id="stressText">Carregando análise da gestão de estresse...</p>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 12: RECOMENDAÇÕES DE CARREIRA
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">12</span> Recomendações de Carreira</h2>
-                <ul class="feature-list" id="careersList">
-                    <li><span class="check">✓</span> Carregando...</li>
-                </ul>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 13: COMPATIBILIDADE COM VAGA
-            ============================================ -->
             <section class="section" id="compatibilidadeSection">
-                <h2 class="section-title"><span class="number">13</span> Compatibilidade com Vaga</h2>
+                <h2 class="section-title"><span class="number">9</span> Compatibilidade com Vaga</h2>
                 <div id="compatibilidadeContent">
                     <p class="section-text">Carregando análise de compatibilidade...</p>
                 </div>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 14: PLANO DE DESENVOLVIMENTO
-            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">14</span> Plano de Desenvolvimento</h2>
+                <h2 class="section-title"><span class="number">10</span> Plano de Desenvolvimento</h2>
                 <ul class="feature-list" id="developmentPlanList">
                     <li><span class="check">✓</span> Carregando...</li>
                 </ul>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 15: PARECER DA IA
-            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">15</span> Parecer da Inteligência Artificial</h2>
+                <h2 class="section-title"><span class="number">11</span> Parecer da IA</h2>
                 <p class="section-text" id="iaOpinionText">Carregando parecer da IA...</p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 16: CONCLUSÃO
-            ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">16</span> Conclusão</h2>
+                <h2 class="section-title"><span class="number">12</span> Conclusão</h2>
                 <p class="section-text" id="conclusionText">Carregando conclusão...</p>
             </section>
 
-            <!-- ============================================
-            ASSINATURA
-            ============================================ -->
             <section class="assinatura">
                 <div class="assinatura-qr">
                     <div class="qr-placeholder">🔲 QR Code</div>
@@ -1022,9 +919,6 @@
                 </div>
             </section>
 
-            <!-- ============================================
-            AÇÕES
-            ============================================ -->
             <div class="actions-bar">
                 <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
                 <a href="index.html" class="btn-action btn-secondary">📄 Versão Simples</a>
@@ -1034,10 +928,7 @@
 
         </div>
 
-        <!-- ============================================
-        FOOTER
-        ============================================ -->
-        <footer class="footer-premium">
+        <footer class="footer-print">
             <div class="footer-logo">
                 <div class="logo-icon">V</div>
                 <div class="footer-text">
@@ -1055,9 +946,6 @@
 
     </div>
 
-    <!-- ============================================
-    SCRIPTS
-    ============================================ -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
     </script>
     <script src="../../supabase-config.js"></script>
@@ -1067,110 +955,40 @@
     <script>
         'use strict';
 
-        // ============================================
-        // DADOS DE EXEMPLO
-        // ============================================
-        const sampleData = {
+        var sampleData = {
             participantName: 'Ana Silva',
             companyName: 'TechCorp Solutions',
             participantId: 'P001',
             date: new Date().toISOString(),
             reportCode: 'VIG-2024-001',
-            percentages: {
-                abertura: 82,
-                conscienciosidade: 75,
-                extroversao: 45,
-                amabilidade: 70,
-                neuroticismo: 38
-            },
-            topFactor: 'abertura',
+            percentages: { abertura: 78, conscienciosidade: 82, extroversao: 55, amabilidade: 70, neuroticismo: 35 },
+            topFactor: 'conscienciosidade',
             topPercent: 82,
             bottomFactor: 'neuroticismo',
-            bottomPercent: 38,
+            bottomPercent: 35,
             job: 'Gerente de Projetos',
-            compatibility: 72
+            compatibility: 80
         };
 
-        // ============================================
-        // CONFIGURAÇÃO DOS FATORES
-        // ============================================
-        const factorConfig = {
-            abertura: {
-                label: 'Abertura',
-                icon: '🎨',
-                color: '#8B5CF6',
-                desc: 'Criatividade, curiosidade, apreço por novas experiências e ideias.',
-                strengths: ['Criatividade e inovação', 'Curiosidade intelectual', 'Abertura a novas ideias'],
-                development: ['Foco em execução', 'Aplicação prática do conhecimento', 'Disciplina criativa'],
-                communication: 'Comunicação criativa e inspiradora. Gosta de explorar novas ideias.',
-                leadership: 'Líder visionário e inovador. Inspira equipes com criatividade.',
-                decision: 'Toma decisões baseadas em intuição e visão de futuro.',
-                stress: 'Baixa vulnerabilidade ao estresse. Resiliência em momentos de mudança.',
-                careers: ['Artes', 'Inovação', 'Pesquisa', 'Empreendedorismo', 'Design']
-            },
-            conscienciosidade: {
-                label: 'Conscienciosidade',
-                icon: '📋',
-                color: '#10B981',
-                desc: 'Organização, disciplina, persistência e orientação a metas.',
-                strengths: ['Organização e planejamento', 'Disciplina e persistência', 'Orientação a resultados'],
-                development: ['Flexibilidade em processos', 'Adaptação a mudanças', 'Delegação de tarefas'],
-                communication: 'Comunicação clara, estruturada e baseada em fatos.',
-                leadership: 'Líder organizado e disciplinado. Traz estrutura e processos.',
-                decision: 'Toma decisões baseadas em análise cuidadosa e planejamento.',
-                stress: 'Média vulnerabilidade ao estresse. Lida bem com pressão.',
-                careers: ['Administração', 'Finanças', 'Gestão de Projetos', 'Qualidade', 'Planejamento']
-            },
-            extroversao: {
-                label: 'Extroversão',
-                icon: '🌟',
-                color: '#F59E0B',
-                desc: 'Sociabilidade, energia, assertividade e busca por estímulos.',
-                strengths: ['Sociabilidade e networking', 'Energia e entusiasmo', 'Assertividade'],
-                development: ['Escuta ativa', 'Paciência em processos', 'Foco em detalhes'],
-                communication: 'Comunicação energética, persuasiva e envolvente.',
-                leadership: 'Líder carismático e inspirador. Motiva equipes com entusiasmo.',
-                decision: 'Toma decisões rápidas baseadas em intuição social.',
-                stress: 'Alta vulnerabilidade ao estresse. Busca por estímulos constantes.',
-                careers: ['Vendas', 'Marketing', 'Relações Públicas', 'Eventos', 'Liderança']
-            },
-            amabilidade: {
-                label: 'Amabilidade',
-                icon: '💛',
-                color: '#EC4899',
-                desc: 'Confiança, altruísmo, cooperação e empatia.',
-                strengths: ['Empatia e compaixão', 'Cooperação e trabalho em equipe', 'Confiança nos outros'],
-                development: ['Assertividade em conflitos', 'Tomada de decisão firme', 'Defesa de interesses'],
-                communication: 'Comunicação acolhedora, empática e colaborativa.',
-                leadership: 'Líder humanizado, cria ambientes de segurança psicológica.',
-                decision: 'Toma decisões considerando o impacto nas pessoas.',
-                stress: 'Baixa vulnerabilidade ao estresse. Busca harmonia.',
-                careers: ['RH', 'Atendimento', 'Saúde', 'Educação', 'Trabalho Social']
-            },
-            neuroticismo: {
-                label: 'Neuroticismo',
-                icon: '🌊',
-                color: '#EF4444',
-                desc: 'Estabilidade emocional, ansiedade e vulnerabilidade ao estresse.',
-                strengths: ['Sensibilidade emocional', 'Consciência de riscos', 'Autoconsciência'],
-                development: ['Gestão de ansiedade', 'Regulação emocional', 'Resiliência'],
-                communication: 'Comunicação cuidadosa, pode ser influenciada pelo estado emocional.',
-                leadership: 'Líder que precisa desenvolver estabilidade emocional.',
-                decision: 'Pode ser influenciado pela ansiedade. Busca segurança.',
-                stress: 'Alta vulnerabilidade ao estresse. Necessita de estratégias de gestão.',
-                careers: ['Áreas com baixo estresse', 'Ambientes estruturados', 'Suporte emocional']
-            }
+        var factorsConfig = {
+            abertura: { label: 'Abertura', icon: '🎨', color: '#8B5CF6',
+                desc: 'Curiosidade, criatividade e disposição para novas experiências.' },
+            conscienciosidade: { label: 'Conscienciosidade', icon: '📋', color: '#10B981',
+                desc: 'Organização, disciplina e orientação a objetivos.' },
+            extroversao: { label: 'Extroversão', icon: '🌟', color: '#F59E0B',
+                desc: 'Sociabilidade, energia e busca por estímulos sociais.' },
+            amabilidade: { label: 'Amabilidade', icon: '💛', color: '#EC4899',
+                desc: 'Cooperação, empatia e preocupação com o bem-estar dos outros.' },
+            neuroticismo: { label: 'Neuroticismo', icon: '🌊', color: '#EF4444',
+                desc: 'Sensibilidade a emoções negativas e vulnerabilidade ao estresse.' }
         };
 
-        const factorKeys = ['abertura', 'conscienciosidade', 'extroversao', 'amabilidade', 'neuroticismo'];
+        var factorKeys = ['abertura', 'conscienciosidade', 'extroversao', 'amabilidade', 'neuroticismo'];
 
-        // ============================================
-        // INICIALIZAÇÃO
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🧬 Relatório Completo Big Five - VIGORRE ONE™');
+            console.log('📄 Relatório Completo Big Five - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../../login.html';
                 return;
@@ -1179,48 +997,59 @@
             loadData();
         });
 
-        // ============================================
-        // CARREGAR DADOS
-        // ============================================
         function loadData() {
             try {
-                const user = window.VigorreAuth.getCurrentUser();
+                var user = window.VigorreAuth.getCurrentUser();
                 if (!user) {
                     renderReport(sampleData);
                     return;
                 }
 
-                const allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const participant = allParticipants.find(p => p.id === user.id);
+                var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var participant = null;
+                for (var i = 0; i < allParticipants.length; i++) {
+                    if (allParticipants[i].id === user.id) {
+                        participant = allParticipants[i];
+                        break;
+                    }
+                }
 
-                if (!participant || !participant.results?.BigFive) {
+                if (!participant || !participant.results || !participant.results.BigFive) {
                     renderReport(sampleData);
                     return;
                 }
 
-                const bigfiveResult = participant.results.BigFive;
-                let companyName = 'Autônomo';
-                let jobTitle = 'Não vinculado';
+                var bigfiveResult = participant.results.BigFive;
+                var companyName = 'Autônomo';
+                var jobTitle = 'Não vinculado';
 
                 if (participant.companyId) {
-                    const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-                    const company = companies.find(c => c.id === participant.companyId);
-                    if (company) companyName = company.name;
+                    var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                    for (var j = 0; j < companies.length; j++) {
+                        if (companies[j].id === participant.companyId) {
+                            companyName = companies[j].name;
+                            break;
+                        }
+                    }
                 }
 
                 if (participant.jobId) {
-                    const jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
-                    const job = jobs.find(j => j.id === participant.jobId);
-                    if (job) jobTitle = job.title || job.name || 'Vaga';
+                    var jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
+                    for (var k = 0; k < jobs.length; k++) {
+                        if (jobs[k].id === participant.jobId) {
+                            jobTitle = jobs[k].title || jobs[k].name || 'Vaga';
+                            break;
+                        }
+                    }
                 }
 
-                const data = {
+                var data = {
                     participantName: participant.name || sampleData.participantName,
                     companyName: companyName,
                     participantId: participant.id || sampleData.participantId,
                     date: new Date().toISOString(),
-                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(
-                        3, '0'),
+                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000))
+                        .padStart(3, '0'),
                     percentages: bigfiveResult.percentages || sampleData.percentages,
                     topFactor: bigfiveResult.topFactor || sampleData.topFactor,
                     topPercent: bigfiveResult.topPercent || sampleData.topPercent,
@@ -1238,12 +1067,9 @@
             }
         }
 
-        // ============================================
-        // RENDERIZAR RELATÓRIO
-        // ============================================
         function renderReport(data) {
-            const pcts = data.percentages;
-            const dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
+            var pcts = data.percentages;
+            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
                 day: '2-digit',
                 month: 'long',
                 year: 'numeric',
@@ -1251,278 +1077,270 @@
                 minute: '2-digit'
             });
 
-            // Atualizar cabeçalho
             document.getElementById('participantName').textContent = data.participantName;
-            document.getElementById('participantCompany').textContent = `Empresa: ${data.companyName}`;
-            document.getElementById('reportCode').textContent = `Código: ${data.reportCode}`;
+            document.getElementById('participantCompany').textContent = 'Empresa: ' + data.companyName;
+            document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
 
-            // Atualizar capa
             document.getElementById('capaParticipant').textContent = data.participantName;
             document.getElementById('capaDate').textContent = dateFormatted;
             document.getElementById('capaCode').textContent = data.reportCode;
 
-            // Atualizar apresentação
             document.getElementById('apresentacaoParticipant').textContent = data.participantName;
             document.getElementById('apresentacaoDate').textContent = dateFormatted;
             document.getElementById('apresentacaoCode').textContent = data.reportCode;
 
-            // Atualizar assinatura
             document.getElementById('assinaturaCode').textContent =
-                `Código de Autenticação: ${data.reportCode} • Hash: ${generateHash(data.participantId + data.reportCode)}`;
+                'Código de Autenticação: ' + data.reportCode + ' • Hash: ' + generateHash(data.participantId + data
+                    .reportCode);
 
-            // Atualizar página
             document.getElementById('pageNumber').textContent = '1';
 
-            const topConfig = factorConfig[data.topFactor];
-            const bottomConfig = factorConfig[data.bottomFactor];
+            var grid = document.getElementById('factorsGrid');
+            var gridHtml = '';
+            for (var i = 0; i < factorKeys.length; i++) {
+                var key = factorKeys[i];
+                var config = factorsConfig[key];
+                var value = pcts[key] || 0;
+                gridHtml += '<div class="factor-card">';
+                gridHtml += '<div class="factor-icon">' + config.icon + '</div>';
+                gridHtml += '<div class="factor-name">' + config.label + '</div>';
+                gridHtml += '<div class="factor-value" style="color:' + config.color + ';">' + value + '%</div>';
+                gridHtml += '<div class="factor-bar"><div class="fill" style="width:' + value + '%;background:' + config
+                    .color + ';"></div></div>';
+                gridHtml += '</div>';
+            }
+            grid.innerHTML = gridHtml;
 
-            // ============================================
-            // 1. FACTORS GRID
-            // ============================================
-            const grid = document.getElementById('factorsGrid');
-            grid.innerHTML = factorKeys.map(key => {
-                const config = factorConfig[key];
-                const value = pcts[key] || 0;
-                return `
-                        <div class="factor-card">
-                            <div class="factor-icon">${config.icon}</div>
-                            <div class="factor-name">${config.label}</div>
-                            <div class="factor-value">${value}%</div>
-                            <div class="factor-bar">
-                                <div class="fill" style="width:${value}%;background:${config.color};"></div>
-                            </div>
-                        </div>
-                    `;
-            }).join('');
+            var topConfig = factorsConfig[data.topFactor];
+            var bottomConfig = factorsConfig[data.bottomFactor];
 
-            // ============================================
-            // 2. DESCRIÇÃO DO PERFIL
-            // ============================================
-            document.getElementById('profileDescription').innerHTML = `
-                    <strong>Fator Principal:</strong> ${topConfig.icon} ${topConfig.label} (${data.topPercent}%)
-                    <br />
-                    ${topConfig.desc}
-                    <br /><br />
-                    <strong>Fator com menor pontuação:</strong> ${bottomConfig.icon} ${bottomConfig.label} (${data.bottomPercent}%)
-                    <br />
-                    ${bottomConfig.desc}
-                    <br /><br />
-                    <strong>Distribuição dos Fatores:</strong><br />
-                    🎨 Abertura: ${pcts.abertura || 0}% &nbsp;|&nbsp;
-                    📋 Conscienciosidade: ${pcts.conscienciosidade || 0}% &nbsp;|&nbsp;
-                    🌟 Extroversão: ${pcts.extroversao || 0}% &nbsp;|&nbsp;
-                    💛 Amabilidade: ${pcts.amabilidade || 0}% &nbsp;|&nbsp;
-                    🌊 Neuroticismo: ${pcts.neuroticismo || 0}%
-                `;
+            var levelMap = {
+                'Muito Alta': 'muito_alta',
+                'Alta': 'alta',
+                'Moderada': 'moderada',
+                'Baixa': 'baixa'
+            };
 
-            // ============================================
-            // 3. ANÁLISE DOS FATORES
-            // ============================================
-            document.getElementById('factorsAnalysis').innerHTML = factorKeys.map(key => {
-                const config = factorConfig[key];
-                const value = pcts[key] || 0;
-                let level = '';
-                if (value >= 75) level = 'Muito Alto';
-                else if (value >= 55) level = 'Moderado';
-                else if (value >= 35) level = 'Baixo';
-                else level = 'Muito Baixo';
+            document.getElementById('profileDescription').innerHTML =
+                '<strong>Fator Principal:</strong> ' + topConfig.icon + ' ' + topConfig.label + ' (' + data.topPercent +
+                '%)<br />' +
+                '<strong>Fator com menor pontuação:</strong> ' + bottomConfig.icon + ' ' + bottomConfig.label +
+                ' (' + data.bottomPercent + '%)';
 
-                return `
-                        <strong>${config.icon} ${config.label} (${value}%):</strong> ${level}
-                        <br />
-                        ${config.desc}
-                        <br /><br />
-                    `;
-            }).join('');
+            var factorsHtml = '';
+            for (var i = 0; i < factorKeys.length; i++) {
+                var key = factorKeys[i];
+                var config = factorsConfig[key];
+                var value = pcts[key] || 0;
+                var level = '';
+                if (value >= 80) level = 'Muito Alta';
+                else if (value >= 60) level = 'Alta';
+                else if (value >= 40) level = 'Moderada';
+                else level = 'Baixa';
+                factorsHtml += '<strong>' + config.icon + ' ' + config.label + ' (' + value + '%):</strong> ' +
+                    (value >= 70 ? 'Excelente. ' + config.desc :
+                        value >= 50 ? 'Bom. ' + config.desc :
+                        'Em desenvolvimento. ' + config.desc) +
+                    ' <span class="badge-level ' + (levelMap[level] || 'moderada') + '">' + level + '</span><br><br>';
+            }
+            document.getElementById('factorsAnalysis').innerHTML = factorsHtml;
 
-            // ============================================
-            // 4. PONTOS FORTES
-            // ============================================
-            const strengthsList = document.getElementById('strengthsList');
-            const allStrengths = [];
-            factorKeys.forEach(key => {
+            var allStrengths = [];
+            for (var i = 0; i < factorKeys.length; i++) {
+                var key = factorKeys[i];
                 if (pcts[key] >= 60) {
-                    const config = factorConfig[key];
-                    allStrengths.push(`${config.icon} ${config.label}: ${config.strengths.slice(0, 2).join(', ')}`);
+                    var config = factorsConfig[key];
+                    var desc = '';
+                    if (key === 'abertura') desc = 'Criatividade e curiosidade intelectual';
+                    else if (key === 'conscienciosidade') desc = 'Disciplina e organização';
+                    else if (key === 'extroversao') desc = 'Energia e sociabilidade';
+                    else if (key === 'amabilidade') desc = 'Empatia e cooperação';
+                    else if (key === 'neuroticismo') desc = 'Estabilidade emocional';
+                    allStrengths.push(config.icon + ' ' + config.label + ': ' + desc);
                 }
-            });
-            strengthsList.innerHTML = allStrengths.length > 0 ?
-                allStrengths.map(s => `<li><span class="check">✓</span> ${s}</li>`).join('') :
-                '<li><span class="check">✓</span> Continue desenvolvendo todos os fatores da personalidade</li>';
+            }
+            var strengthsList = document.getElementById('strengthsList');
+            if (allStrengths.length > 0) {
+                var strengthsHtml = '';
+                for (var i = 0; i < allStrengths.length; i++) {
+                    strengthsHtml += '<li><span class="check">✓</span> ' + allStrengths[i] + '</li>';
+                }
+                strengthsList.innerHTML = strengthsHtml;
+            } else {
+                strengthsList.innerHTML = '<li><span class="check">✓</span> Desenvolver autoconhecimento para identificar pontos fortes</li>';
+            }
 
-            // ============================================
-            // 5. ÁREAS DE DESENVOLVIMENTO
-            // ============================================
-            const devList = document.getElementById('developmentList');
-            const allDevelopment = [];
-            factorKeys.forEach(key => {
+            var allDevelopment = [];
+            for (var i = 0; i < factorKeys.length; i++) {
+                var key = factorKeys[i];
                 if (pcts[key] < 50) {
-                    const config = factorConfig[key];
-                    allDevelopment.push(`${config.icon} ${config.label}: ${config.development.slice(0, 2).join(', ')}`);
+                    var config = factorsConfig[key];
+                    var desc = '';
+                    if (key === 'abertura') desc = 'Buscar novas experiências e aprendizados';
+                    else if (key === 'conscienciosidade') desc = 'Desenvolver rotinas e disciplina';
+                    else if (key === 'extroversao') desc = 'Praticar habilidades sociais';
+                    else if (key === 'amabilidade') desc = 'Desenvolver empatia e escuta ativa';
+                    else if (key === 'neuroticismo') desc = 'Praticar técnicas de regulação emocional';
+                    allDevelopment.push(config.icon + ' ' + config.label + ': ' + desc);
                 }
-            });
-            devList.innerHTML = allDevelopment.length > 0 ?
-                allDevelopment.map(d => `<li><span class="check">✓</span> ${d}</li>`).join('') :
-                '<li><span class="check">✓</span> Continue desenvolvendo todos os fatores da personalidade</li>';
+            }
+            var devList = document.getElementById('developmentList');
+            if (allDevelopment.length > 0) {
+                var devHtml = '';
+                for (var i = 0; i < allDevelopment.length; i++) {
+                    devHtml += '<li><span class="check">✓</span> ' + allDevelopment[i] + '</li>';
+                }
+                devList.innerHTML = devHtml;
+            } else {
+                devList.innerHTML = '<li><span class="check">✓</span> Continue desenvolvendo todos os fatores da personalidade</li>';
+            }
 
-            // ============================================
-            // 6. COMUNICAÇÃO
-            // ============================================
-            document.getElementById('communicationText').textContent = topConfig.communication;
+            document.getElementById('personalityText').innerHTML =
+                'Com base no modelo Big Five, sua personalidade é caracterizada por <strong>' + topConfig.icon +
+                ' ' + topConfig.label + '</strong> como fator predominante (' + data.topPercent +
+                '%). Isso indica que você é uma pessoa ' +
+                (data.topFactor === 'abertura' ?
+                    'curiosa, criativa e aberta a novas experiências' :
+                    data.topFactor === 'conscienciosidade' ?
+                    'organizada, disciplinada e orientada a objetivos' :
+                    data.topFactor === 'extroversao' ?
+                    'sociável, enérgica e comunicativa' :
+                    data.topFactor === 'amabilidade' ?
+                    'empática, cooperativa e preocupada com os outros' :
+                    'emocionalmente estável e resiliente') +
+                '. O fator com menor pontuação é ' + bottomConfig.icon + ' ' + bottomConfig.label + ' (' + data
+                .bottomPercent +
+                '%), sugerindo uma oportunidade de desenvolvimento para maior equilíbrio pessoal.';
 
-            // ============================================
-            // 7. LIDERANÇA
-            // ============================================
-            document.getElementById('leadershipText').textContent = topConfig.leadership;
-
-            // ============================================
-            // 8. TOMADA DE DECISÃO
-            // ============================================
-            document.getElementById('decisionText').textContent = topConfig.decision;
-
-            // ============================================
-            // 9. GESTÃO DE ESTRESSE
-            // ============================================
-            document.getElementById('stressText').innerHTML = `
-                    ${topConfig.stress}
-                    <br /><br />
-                    ${pcts.neuroticismo >= 60 ? 'Recomenda-se desenvolver técnicas de regulação emocional para lidar com o estresse.' :
-                    pcts.neuroticismo >= 40 ? 'Boa capacidade de lidar com o estresse. Pode aprimorar com práticas de mindfulness.' :
-                    'Excelente capacidade de gerenciar o estresse. Continue praticando o autocuidado.'}
-                `;
-
-            // ============================================
-            // 10. RECOMENDAÇÕES DE CARREIRA
-            // ============================================
-            const careersList = document.getElementById('careersList');
-            const top3 = Object.entries(pcts).sort((a, b) => b[1] - a[1]).slice(0, 3);
-
-            careersList.innerHTML = top3.map(([key, value]) => {
-                const config = factorConfig[key];
-                return `<li><span class="check">✓</span> ${config.icon} ${config.label} (${value}%): ${config.careers.slice(0, 3).join(', ')}</li>`;
-            }).join('');
-
-            // ============================================
-            // 11. COMPATIBILIDADE COM VAGA
-            // ============================================
-            const compatSection = document.getElementById('compatibilidadeSection');
-            const compatContent = document.getElementById('compatibilidadeContent');
+            var compatSection = document.getElementById('compatibilidadeSection');
+            var compatContent = document.getElementById('compatibilidadeContent');
 
             if (data.job && data.job !== 'Não vinculado') {
                 compatSection.style.display = 'block';
-                const compat = data.compatibility || Math.round(60 + Math.random() * 35);
-                let compatLevel = '';
-                let compatColor = '';
+                var compat = data.compatibility || Math.round(60 + Math.random() * 35);
+                var compatLevel = '';
+                var compatColor = '';
                 if (compat >= 80) { compatLevel = 'Excelente';
                     compatColor = '#10B981'; } else if (compat >= 60) { compatLevel = 'Boa';
                     compatColor = '#3B82F6'; } else if (compat >= 40) { compatLevel = 'Moderada';
                     compatColor = '#F59E0B'; } else { compatLevel = 'Baixa';
                     compatColor = '#EF4444'; }
 
-                compatContent.innerHTML = `
-                        <div class="compatibilidade-card">
-                            <div class="compat-top">
-                                <span style="font-weight:600;font-size:1rem;">🎯 ${data.job}</span>
-                                <span class="compat-value" style="color:${compatColor};">${compat}%</span>
-                            </div>
-                            <div class="compat-bar">
-                                <div class="fill" style="width:${compat}%;background:${compatColor};"></div>
-                            </div>
-                            <p style="color:var(--gray-600);font-size:0.9rem;">
-                                <strong>Nível de Compatibilidade:</strong> ${compatLevel} (${compat}%)
-                            </p>
-                            <p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">
-                                ${compat >= 80 ? 'Excelente compatibilidade de personalidade com a função. Perfil altamente alinhado.' :
-                                compat >= 60 ? 'Boa compatibilidade. Desenvolvimento direcionado pode ampliar a adequação.' :
-                                compat >= 40 ? 'Compatibilidade moderada. Recomenda-se desenvolvimento específico.' :
-                                'Compatibilidade baixa. Avaliar outras posições mais alinhadas.'}
-                            </p>
-                        </div>
-                    `;
+                compatContent.innerHTML =
+                    '<div class="compatibilidade-card"><div class="compat-top"><span style="font-weight:600;font-size:1rem;">🎯 ' +
+                    data.job +
+                    '</span><span class="compat-value" style="color:' + compatColor + ';">' + compat +
+                    '%</span></div><div class="compat-bar"><div class="fill" style="width:' + compat +
+                    '%;background:' + compatColor +
+                    ';"></div></div><p style="color:var(--gray-600);font-size:0.9rem;"><strong>Nível de Compatibilidade:</strong> ' +
+                    compatLevel + ' (' + compat +
+                    '%)</p><p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">' + (compat >= 80 ?
+                        'Perfil de personalidade altamente alinhado com a função.' :
+                        compat >= 60 ?
+                        'Boa compatibilidade. Desenvolvimento direcionado pode ampliar o alinhamento.' :
+                        compat >= 40 ?
+                        'Compatibilidade moderada. Recomenda-se desenvolvimento específico.' :
+                        'Compatibilidade baixa. Avaliar outras posições mais alinhadas.') +
+                    '</p></div>';
             } else {
                 compatSection.style.display = 'none';
             }
 
-            // ============================================
-            // 12. PLANO DE DESENVOLVIMENTO
-            // ============================================
-            const planList = document.getElementById('developmentPlanList');
-            const developmentPlan = [];
-            const weakFactors = Object.entries(pcts).filter(([key, value]) => value < 50);
-
-            if (weakFactors.length > 0) {
-                weakFactors.forEach(([key, value]) => {
-                    const config = factorConfig[key];
-                    developmentPlan.push(
-                        `${config.icon} Desenvolver ${config.label}: ${config.development.slice(0, 2).join(', ')}`
-                        );
-                });
+            var weakFactors = [];
+            for (var key in pcts) {
+                if (pcts[key] < 50) {
+                    weakFactors.push(key);
+                }
             }
 
-            developmentPlan.push('📝 Praticar autoconhecimento e reflexão diária');
-            developmentPlan.push('🔄 Buscar feedback sobre sua personalidade no trabalho');
-            developmentPlan.push('📚 Ler sobre desenvolvimento pessoal e inteligência emocional');
-            developmentPlan.push('🎯 Definir metas de desenvolvimento baseadas nos fatores identificados');
+            var developmentPlan = [];
+            if (weakFactors.length > 0) {
+                for (var i = 0; i < weakFactors.length; i++) {
+                    var key = weakFactors[i];
+                    var config = factorsConfig[key];
+                    var desc = '';
+                    if (key === 'abertura') desc = 'Buscar novas experiências e sair da zona de conforto';
+                    else if (key === 'conscienciosidade') desc = 'Desenvolver rotinas diárias e disciplina';
+                    else if (key === 'extroversao') desc = 'Participar de atividades sociais e networking';
+                    else if (key === 'amabilidade') desc = 'Praticar escuta ativa e empatia';
+                    else if (key === 'neuroticismo') desc = 'Praticar mindfulness e técnicas de relaxamento';
+                    developmentPlan.push(config.icon + ' Desenvolver ' + config.label + ': ' + desc);
+                }
+            } else {
+                developmentPlan.push('🌟 Manter e aprofundar todos os fatores da personalidade');
+                developmentPlan.push('📈 Buscar certificações e treinamentos avançados');
+                developmentPlan.push('🤝 Tornar-se mentor para desenvolvimento de outros');
+            }
+            developmentPlan.push('📝 Praticar autoavaliação regular');
+            developmentPlan.push('🔄 Buscar feedback contínuo sobre comportamento');
 
-            planList.innerHTML = developmentPlan.map((item, index) =>
-                `<li><span class="check">${index + 1}</span> ${item}</li>`
-            ).join('');
+            var planList = document.getElementById('developmentPlanList');
+            var planHtml = '';
+            for (var i = 0; i < developmentPlan.length; i++) {
+                planHtml += '<li><span class="check">' + (i + 1) + '</span> ' + developmentPlan[i] + '</li>';
+            }
+            planList.innerHTML = planHtml;
 
-            // ============================================
-            // 13. PARECER DA IA
-            // ============================================
-            const iaOpinionText = document.getElementById('iaOpinionText');
+            document.getElementById('iaOpinionText').textContent =
+                'Com base na análise Big Five, o participante apresenta como fator predominante ' + topConfig.icon +
+                ' ' + topConfig.label + ' (' + data.topPercent +
+                '%), indicando uma personalidade com forte orientação para ' +
+                (data.topFactor === 'abertura' ?
+                    'criatividade e inovação' :
+                    data.topFactor === 'conscienciosidade' ?
+                    'organização e disciplina' :
+                    data.topFactor === 'extroversao' ?
+                    'sociabilidade e comunicação' :
+                    data.topFactor === 'amabilidade' ?
+                    'cooperação e empatia' :
+                    'estabilidade e resiliência') +
+                '. O fator com menor pontuação é ' + bottomConfig.icon + ' ' + bottomConfig.label + ' (' + data
+                .bottomPercent +
+                '%), sugerindo uma área de desenvolvimento para maior equilíbrio. Recomenda-se investir em práticas que desenvolvam ' +
+                bottomConfig.label +
+                ' e continuar potencializando ' + topConfig.label +
+                '. Este perfil é especialmente adequado para ambientes que valorizam ' +
+                (data.topFactor === 'abertura' ? 'inovação e criatividade' :
+                    data.topFactor === 'conscienciosidade' ? 'estrutura e qualidade' :
+                    data.topFactor === 'extroversao' ? 'colaboração e networking' :
+                    data.topFactor === 'amabilidade' ? 'trabalho em equipe e relacionamentos' :
+                    'estabilidade e consistência');
 
-            iaOpinionText.textContent =
-                `Com base na análise Big Five, o participante apresenta um perfil de personalidade com destaque para ${topConfig.icon} ${topConfig.label} (${data.topPercent}%), caracterizado por ${topConfig.desc.toLowerCase()}. Este fator sugere que o participante tem grande potencial para ${data.topFactor === 'abertura' ? 'inovação e criatividade, com capacidade de gerar ideias originais e se adaptar a mudanças' : data.topFactor === 'conscienciosidade' ? 'organização e disciplina, com alta capacidade de planejamento e execução' : data.topFactor === 'extroversao' ? 'liderança e comunicação, com energia para inspirar e engajar pessoas' : data.topFactor === 'amabilidade' ? 'relacionamento e colaboração, com capacidade de criar ambientes de confiança' : 'sensibilidade emocional e autoconsciência, com capacidade de compreender nuances emocionais'}. O fator com menor pontuação é ${bottomConfig.icon} ${bottomConfig.label} (${data.bottomPercent}%), indicando uma área que pode ser desenvolvida para maior equilíbrio e adaptabilidade. Recomenda-se focar em ${data.bottomFactor === 'neuroticismo' ? 'desenvolver estratégias de regulação emocional e resiliência' : data.bottomFactor === 'extroversao' ? 'expandir habilidades de comunicação e networking' : data.bottomFactor === 'abertura' ? 'ampliar a exposição a novas ideias e experiências' : data.bottomFactor === 'conscienciosidade' ? 'desenvolver maior organização e disciplina' : 'fortalecer habilidades de empatia e cooperação'}. O equilíbrio entre os cinco fatores é fundamental para uma personalidade adaptativa e resiliente.`;
+            document.getElementById('conclusionText').innerHTML =
+                'Sua personalidade, baseada no modelo Big Five, é caracterizada por <strong>' + topConfig.icon +
+                ' ' + topConfig.label + '</strong> como fator predominante (' + data.topPercent +
+                '%), refletindo uma orientação para ' +
+                (data.topFactor === 'abertura' ?
+                    'criatividade, inovação e novas experiências' :
+                    data.topFactor === 'conscienciosidade' ?
+                    'organização, disciplina e excelência' :
+                    data.topFactor === 'extroversao' ?
+                    'sociabilidade, comunicação e energia' :
+                    data.topFactor === 'amabilidade' ?
+                    'empatia, cooperação e relacionamentos' :
+                    'estabilidade emocional e resiliência') +
+                '.<br /><br /><strong>Mensagem Final:</strong><br />' +
+                (data.topPercent >= 70 ?
+                    'Parabéns! Você possui uma base de personalidade sólida que o prepara para desafios e relacionamentos interpessoais.' :
+                    data.topPercent >= 50 ?
+                    'Você está em um bom caminho de autoconhecimento. Com foco nas áreas identificadas, poderá ampliar significativamente seu desenvolvimento.' :
+                    'Este é um momento importante para aprofundar seu autoconhecimento e identificar suas características principais.') +
+                '<br /><br /><strong>Próximos Passos:</strong><br />' +
+                '1. Continue desenvolvendo ' + topConfig.label + '<br />' +
+                '2. Invista no desenvolvimento de ' + bottomConfig.label + '<br />' +
+                '3. Busque ambientes que valorizem suas características principais<br />' +
+                '4. Revise seu perfil periodicamente';
 
-            // ============================================
-            // 14. CONCLUSÃO
-            // ============================================
-            document.getElementById('conclusionText').innerHTML = `
-                    Seu perfil Big Five é guiado principalmente por <strong>${topConfig.icon} ${topConfig.label}</strong> (${data.topPercent}%),
-                    refletindo uma personalidade com ${data.topFactor === 'abertura' ? 'alta criatividade e curiosidade' :
-                    data.topFactor === 'conscienciosidade' ? 'alta organização e disciplina' :
-                    data.topFactor === 'extroversao' ? 'alta sociabilidade e energia' :
-                    data.topFactor === 'amabilidade' ? 'alta empatia e cooperação' :
-                    'alta sensibilidade e autoconsciência'}.
-                    <br /><br />
-                    <strong>Mensagem Final:</strong>
-                    <br />
-                    ${data.topPercent >= 70 ? 'Parabéns! Você tem um perfil de personalidade bem definido, com características que podem ser grandes diferenciais em sua carreira.' :
-                    data.topPercent >= 50 ? 'Você está em um bom caminho de autoconhecimento. Continue explorando e desenvolvendo sua personalidade.' :
-                    'Este é um momento importante para aprofundar seu autoconhecimento e desenvolver sua personalidade de forma mais equilibrada.'}
-                    <br /><br />
-                    <strong>Próximos Passos:</strong>
-                    <br />
-                    1. Continue desenvolvendo seus fatores predominantes
-                    <br />
-                    2. Trabalhe nos fatores com menor pontuação para maior equilíbrio
-                    <br />
-                    3. Busque ambientes que valorizem seus pontos fortes
-                    <br />
-                    4. Revisite este relatório periodicamente
-                    <br /><br />
-                    <em>Relatório gerado em ${new Date().toLocaleString('pt-BR')}</em>
-                `;
-
-            // ============================================
-            // 15. GRÁFICOS
-            // ============================================
-            setTimeout(() => {
+            setTimeout(function() {
                 renderChart(pcts);
             }, 300);
 
             console.log('✅ Relatório Big Five completo renderizado com sucesso!');
         }
 
-        // ============================================
-        // RENDERIZAR GRÁFICO
-        // ============================================
         function renderChart(percentages) {
             try {
-                const ctx = document.getElementById('bigfiveChart').getContext('2d');
-
+                var ctx = document.getElementById('bigfiveChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'radar',
                     data: {
@@ -1542,22 +1360,14 @@
                             pointBackgroundColor: ['#8B5CF6', '#10B981', '#F59E0B', '#EC4899', '#EF4444'],
                             pointBorderColor: '#FFFFFF',
                             pointBorderWidth: 2,
-                            pointRadius: 4,
-                            pointHoverRadius: 6
+                            pointRadius: 6
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.parsed.r + '%';
-                                    }
-                                }
-                            }
+                            legend: { display: false }
                         },
                         scales: {
                             r: {
@@ -1568,36 +1378,25 @@
                                     color: '#94A3B8',
                                     stepSize: 25,
                                     backdropColor: 'transparent',
-                                    callback: function(value) {
-                                        return value + '%';
-                                    }
+                                    callback: function(v) { return v + '%'; }
                                 },
                                 pointLabels: {
                                     color: '#64748B',
-                                    font: {
-                                        size: 10,
-                                        weight: '600'
-                                    }
+                                    font: { size: 10, weight: '600' }
                                 }
                             }
                         }
                     }
                 });
-
-                console.log('📊 Gráfico Big Five renderizado com sucesso');
-
             } catch (error) {
                 console.error('❌ Erro ao renderizar gráfico:', error);
             }
         }
 
-        // ============================================
-        // FUNÇÕES UTILITÁRIAS
-        // ============================================
         function generateHash(data) {
-            let hash = 0;
-            for (let i = 0; i < data.length; i++) {
-                const char = data.charCodeAt(i);
+            var hash = 0;
+            for (var i = 0; i < data.length; i++) {
+                var char = data.charCodeAt(i);
                 hash = ((hash << 5) - hash) + char;
                 hash = hash & hash;
             }
@@ -1606,55 +1405,36 @@
 
         function downloadPDF() {
             showToast('📥 Iniciando download do PDF...', 'success');
-            setTimeout(() => {
+            setTimeout(function() {
                 window.print();
             }, 500);
         }
 
         function showToast(message, type) {
-            const existing = document.getElementById('toast');
+            var existing = document.getElementById('toast');
             if (existing) existing.remove();
 
-            const toast = document.createElement('div');
+            var toast = document.createElement('div');
             toast.id = 'toast';
-            toast.style.cssText = `
-                    position: fixed;
-                    top: 24px;
-                    right: 24px;
-                    background: white;
-                    padding: 14px 24px;
-                    border-radius: 12px;
-                    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    font-weight: 600;
-                    font-size: 0.875rem;
-                    z-index: 300;
-                    border-left: 4px solid ${type === 'success' ? '#10B981' : '#EF4444'};
-                    animation: slideIn 0.3s ease;
-                `;
-            toast.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span><span>${message}</span>`;
+            toast.style.cssText =
+                'position:fixed;top:24px;right:24px;background:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:300;border-left:4px solid ' +
+                (type === 'success' ? '#10B981' : '#EF4444') + ';animation:slideIn 0.3s ease;';
+            toast.innerHTML = '<span>' + (type === 'success' ? '✅' : '❌') + '</span><span>' + message + '</span>';
             document.body.appendChild(toast);
 
-            setTimeout(() => {
+            setTimeout(function() {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateX(120%)';
-                setTimeout(() => toast.remove(), 300);
+                setTimeout(function() { toast.remove(); }, 300);
             }, 4000);
         }
 
-        // Estilo para animação
-        const style = document.createElement('style');
-        style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(120%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
+        var style = document.createElement('style');
+        style.textContent =
+            '@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
         document.head.appendChild(style);
 
-        console.log('🧬 Relatório Completo Big Five carregado com sucesso!');
+        console.log('📄 Relatório Completo Big Five carregado com sucesso!');
     </script>
 
 </body>
