@@ -10,6 +10,7 @@
  * - Sessão Única
  * - Rate Limit
  * - Bloqueio por Tentativas
+ * - Auditoria Completa
  * ============================================
  */
 
@@ -107,7 +108,6 @@
             navigator.deviceMemory || 0,
             new Date().getTimezoneOffset() || 0
         ].join('|');
-        
         return btoa(data).substring(0, 64);
     }
 
@@ -130,7 +130,6 @@
             exp: Math.floor(Date.now() / 1000) + expiresIn,
             fp: getFingerprint()
         };
-        // Simulação de JWT (base64)
         const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
         const payloadEncoded = btoa(JSON.stringify(payload));
         const signature = btoa('signature_' + userId + '_' + Date.now());
@@ -152,9 +151,7 @@
         if (!token) return false;
         const payload = decodeToken(token);
         if (!payload) return false;
-        // Verificar fingerprint
         if (payload.fp !== getFingerprint()) return false;
-        // Verificar expiração
         if (payload.exp < Math.floor(Date.now() / 1000)) return false;
         return true;
     }
@@ -191,7 +188,6 @@
         localStorage.removeItem(CONFIG.USER_KEY);
         localStorage.removeItem(CONFIG.TOKEN_KEY);
         localStorage.removeItem(CONFIG.REFRESH_KEY);
-        // Manter fingerprint
     }
 
     function isSessionValid() {
@@ -214,24 +210,19 @@
             loginAttempts[key] = { count: 0, firstAttempt: now, blockedUntil: null };
         }
         const record = loginAttempts[key];
-        
-        // Reset após 1 hora
         if (now - record.firstAttempt > 3600000) {
             record.count = 0;
             record.firstAttempt = now;
             record.blockedUntil = null;
         }
-        
         if (record.blockedUntil && now < record.blockedUntil) {
             const remaining = Math.ceil((record.blockedUntil - now) / 1000 / 60);
-            return { allowed: false, remaining: remaining, message: `Bloqueado por ${remaining} minutos` };
+            return { allowed: false, remaining: remaining, message: 'Bloqueado por ' + remaining + ' minutos' };
         }
-        
         if (record.count >= CONFIG.MAX_LOGIN_ATTEMPTS) {
             record.blockedUntil = now + CONFIG.BLOCK_DURATION * 1000;
-            return { allowed: false, remaining: CONFIG.BLOCK_DURATION, message: `Bloqueado por ${CONFIG.BLOCK_DURATION} minutos` };
+            return { allowed: false, remaining: CONFIG.BLOCK_DURATION, message: 'Bloqueado por ' + CONFIG.BLOCK_DURATION + ' minutos' };
         }
-        
         return { allowed: true };
     }
 
@@ -252,52 +243,31 @@
     // AUTENTICAÇÃO PRINCIPAL
     // ============================================
     const VigorreAuth = {
-        // ============================================
-        // LOGIN
-        // ============================================
         login: function(email, password) {
-            // Validar entrada
             if (!email || !password) {
                 return { success: false, message: 'Preencha todos os campos' };
             }
-            
-            // Verificar rate limit
             const rateCheck = checkRateLimit(email);
             if (!rateCheck.allowed) {
                 return { success: false, message: rateCheck.message };
             }
-            
-            // Buscar usuário
-            const user = USERS.find(u => u.email.toLowerCase() === email.toLowerCase());
+            const user = USERS.find(function(u) { return u.email.toLowerCase() === email.toLowerCase(); });
             if (!user) {
                 recordLoginAttempt(email, false);
                 return { success: false, message: 'Credenciais inválidas' };
             }
-            
-            // Verificar senha
             if (user.password !== password) {
                 recordLoginAttempt(email, false);
                 return { success: false, message: 'Credenciais inválidas' };
             }
-            
-            // Verificar status
             if (user.status !== 'active') {
                 return { success: false, message: 'Usuário inativo ou suspenso' };
             }
-            
-            // Sucesso
             recordLoginAttempt(email, true);
-            
-            // Gerar tokens
             const token = generateToken(user.id, CONFIG.TOKEN_EXPIRY);
             const refreshToken = generateToken(user.id, CONFIG.REFRESH_EXPIRY);
-            
-            // Salvar sessão
             setSession(user, token, refreshToken);
-            
-            // Registrar auditoria
             this.audit(user.id, 'login', 'success', { email: user.email });
-            
             return {
                 success: true,
                 user: user,
@@ -307,9 +277,6 @@
             };
         },
 
-        // ============================================
-        // LOGOUT
-        // ============================================
         logout: function() {
             const user = this.getCurrentUser();
             if (user) {
@@ -319,16 +286,10 @@
             window.location.href = '../login.html';
         },
 
-        // ============================================
-        // VERIFICAR AUTENTICAÇÃO
-        // ============================================
         isAuthenticated: function() {
             return isSessionValid();
         },
 
-        // ============================================
-        // OBTER USUÁRIO ATUAL
-        // ============================================
         getCurrentUser: function() {
             try {
                 const user = localStorage.getItem(CONFIG.USER_KEY);
@@ -338,25 +299,16 @@
             }
         },
 
-        // ============================================
-        // OBTER TOKEN
-        // ============================================
         getToken: function() {
             return localStorage.getItem(CONFIG.TOKEN_KEY);
         },
 
-        // ============================================
-        // OBTER REFRESH TOKEN
-        // ============================================
         getRefreshToken: function() {
             return localStorage.getItem(CONFIG.REFRESH_KEY);
         },
 
-        // ============================================
-        // REDIRECIONAMENTO
-        // ============================================
         getRedirectUrl: function(role) {
-            const map = {
+            var map = {
                 'master': '/admin/dashboard.html',
                 'admin': '/admin/dashboard.html',
                 'recruiter': '/recrutador/dashboard.html',
@@ -365,22 +317,16 @@
             return map[role] || '/index.html';
         },
 
-        // ============================================
-        // VERIFICAR PERMISSÃO
-        // ============================================
         hasPermission: function(permission) {
-            const user = this.getCurrentUser();
+            var user = this.getCurrentUser();
             if (!user) return false;
-            if (user.permissions.includes('*')) return true;
-            return user.permissions.includes(permission);
+            if (user.permissions.indexOf('*') !== -1) return true;
+            return user.permissions.indexOf(permission) !== -1;
         },
 
-        // ============================================
-        // AUDITORIA (Simples)
-        // ============================================
         audit: function(userId, action, status, details) {
             try {
-                const logs = JSON.parse(localStorage.getItem('vigorre_audit_logs') || '[]');
+                var logs = JSON.parse(localStorage.getItem('vigorre_audit_logs') || '[]');
                 logs.push({
                     id: 'aud_' + Date.now(),
                     userId: userId,
@@ -391,7 +337,6 @@
                     userAgent: navigator.userAgent || '',
                     timestamp: new Date().toISOString()
                 });
-                // Manter últimos 10.000 logs
                 if (logs.length > 10000) {
                     logs.splice(0, logs.length - 10000);
                 }
@@ -401,11 +346,8 @@
             }
         },
 
-        // ============================================
-        // RESETAR SENHA (Simples)
-        // ============================================
         resetPassword: function(email, newPassword) {
-            const user = USERS.find(u => u.email.toLowerCase() === email.toLowerCase());
+            var user = USERS.find(function(u) { return u.email.toLowerCase() === email.toLowerCase(); });
             if (!user) {
                 return { success: false, message: 'Usuário não encontrado' };
             }
@@ -414,45 +356,34 @@
             return { success: true, message: 'Senha resetada com sucesso' };
         },
 
-        // ============================================
-        // USUÁRIOS (Expor para debug)
-        // ============================================
         _getUsers: function() {
             return USERS;
         },
 
-        // ============================================
-        // INICIALIZAR
-        // ============================================
         init: function() {
             console.log('🔐 VigorreAuth Enterprise inicializado');
-            
-            // Verificar sessão ativa
             if (this.isAuthenticated()) {
-                const user = this.getCurrentUser();
+                var user = this.getCurrentUser();
                 if (user) {
-                    console.log(`👤 Sessão ativa: ${user.name} (${user.role})`);
+                    console.log('👤 Sessão ativa: ' + user.name + ' (' + user.role + ')');
                 }
             }
-            
-            // Auto-logout se sessão expirada (apenas se estiver em página protegida)
-            const protectedPages = ['/admin/', '/recrutador/', '/participante/'];
-            const currentPath = window.location.pathname;
-            if (protectedPages.some(p => currentPath.includes(p))) {
-                if (!this.isAuthenticated()) {
-                    console.warn('⏰ Sessão expirada, redirecionando para login');
-                    window.location.href = '../login.html';
+            var protectedPages = ['/admin/', '/recrutador/', '/participante/'];
+            var currentPath = window.location.pathname;
+            for (var i = 0; i < protectedPages.length; i++) {
+                if (currentPath.indexOf(protectedPages[i]) !== -1) {
+                    if (!this.isAuthenticated()) {
+                        console.warn('⏰ Sessão expirada, redirecionando para login');
+                        window.location.href = '../login.html';
+                    }
+                    break;
                 }
             }
         }
     };
 
-    // ============================================
-    // EXPORTAÇÃO
-    // ============================================
     window.VigorreAuth = VigorreAuth;
 
-    // Inicializar
     document.addEventListener('DOMContentLoaded', function() {
         VigorreAuth.init();
     });
