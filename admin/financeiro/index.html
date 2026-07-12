@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Centro Financeiro | Admin VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
         /* ============================================
            VIGORRE ONE™ - CENTRO FINANCEIRO
+           INTERNATIONAL ENTERPRISE EDITION
            ============================================ */
 
         * {
@@ -22,15 +21,16 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
-            --purple: #7C3AED;
-            --pink: #EC4899;
             --green: #10B981;
             --red: #EF4444;
             --orange: #F59E0B;
+            --purple: #7C3AED;
+            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -47,7 +47,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -252,6 +254,98 @@
             margin-top: 4px;
         }
 
+        .main-header .actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.25);
+        }
+
+        .btn-secondary {
+            padding: 10px 24px;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+        }
+
+        .btn-success {
+            padding: 10px 24px;
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-danger {
+            padding: 10px 24px;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.25);
+        }
+
         /* ============================================
            KPI CARDS
            ============================================ */
@@ -317,37 +411,8 @@
             color: var(--red);
         }
 
-        .kpi-card .kpi-sub {
-            font-size: 0.7rem;
-            color: var(--gray-400);
-        }
-
         /* ============================================
-           HEALTH BADGE
-           ============================================ */
-        .health-badge {
-            display: inline-block;
-            padding: 3px 14px;
-            border-radius: var(--radius-full);
-            font-size: 0.65rem;
-            font-weight: 600;
-        }
-
-        .health-badge.excelente {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-        .health-badge.atencao {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-        .health-badge.critico {
-            background: #FEE2E2;
-            color: #991B1B;
-        }
-
-        /* ============================================
-           CHARTS GRID
+           CHARTS
            ============================================ */
         .charts-grid {
             display: grid;
@@ -442,9 +507,10 @@
 
         .table-card .table-header .action {
             font-size: 0.75rem;
-            color: var(--blue);
+            color: var(--gold);
             text-decoration: none;
             font-weight: 600;
+            transition: var(--transition);
         }
 
         .table-container {
@@ -479,8 +545,31 @@
             background: var(--gray-50);
         }
 
+        .badge-health {
+            display: inline-block;
+            padding: 3px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        .badge-health.excelente {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .badge-health.atencao {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .badge-health.critico {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
         /* ============================================
-           ALERTAS IA
+           IA ALERTS
            ============================================ */
         .ia-card {
             background: linear-gradient(135deg, var(--navy), var(--gray-800));
@@ -556,6 +645,53 @@
         }
 
         /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 300;
+            border-left: 4px solid var(--gold);
+            animation: slideIn 0.3s ease;
+            max-width: 420px;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.error {
+            border-left-color: #EF4444;
+        }
+        .toast.success {
+            border-left-color: #10B981;
+        }
+        .toast.warning {
+            border-left-color: #F59E0B;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ============================================
            MOBILE TOGGLE
            ============================================ */
         .mobile-toggle {
@@ -621,17 +757,51 @@
             .mobile-overlay.active {
                 display: block;
             }
+
+            .kpi-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
             .kpi-grid {
                 grid-template-columns: 1fr;
             }
-            .main-header h1 {
-                font-size: 1.2rem;
-            }
             .kpi-card .kpi-value {
                 font-size: 1.4rem;
+            }
+            .chart-container {
+                height: 180px;
+            }
+            .chart-container-sm {
+                height: 160px;
+            }
+            .toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                max-width: none;
+                font-size: 0.8rem;
+                padding: 12px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-header {
+                padding: 10px 16px;
+            }
+            .main {
+                padding: 16px;
+            }
+            .ia-card {
+                padding: 16px 18px;
+            }
+            .sidebar .logo .logo-img {
+                height: 28px;
             }
         }
 
@@ -644,6 +814,46 @@
         .sidebar::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--gray-900);
+            }
+            .main-header h1 {
+                color: var(--white);
+            }
+            .kpi-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .kpi-card .kpi-value {
+                color: var(--white);
+            }
+            .chart-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .chart-card .chart-header h3 {
+                color: var(--white);
+            }
+            .table-card {
+                background: var(--gray-800);
+                border-color: rgba(255, 255, 255, 0.06);
+            }
+            .table-card .table-header h3 {
+                color: var(--white);
+            }
+            .table-container td {
+                color: var(--gray-300);
+            }
+            .table-container th {
+                color: var(--gray-400);
+            }
+            .toast {
+                background: var(--gray-800);
+                color: var(--white);
+            }
         }
 
         @media print {
@@ -660,8 +870,16 @@
                 height: 36px !important;
             }
             .ia-card {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+                display: none !important;
+            }
+            .kpi-grid {
+                display: none !important;
+            }
+            .charts-grid {
+                display: none !important;
+            }
+            .table-card .table-header .action {
+                display: none !important;
             }
         }
     </style>
@@ -669,10 +887,18 @@
 <body>
 
     <!-- ============================================
+    TOAST
+    ============================================ -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <!-- ============================================
     SIDEBAR
     ============================================ -->
     <aside class="sidebar" id="sidebar">
-        <a href="../dashboard.html" class="logo">
+        <a href="#" class="logo">
             <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-text">
                 <span class="name">VIGORRE ONE<span class="tm">™</span></span>
@@ -696,6 +922,7 @@
             <li><a href="../creditos/"><span class="icon">💳</span> Créditos</a></li>
             <div class="divider"></div>
             <li><a href="carteiras.html"><span class="icon">💼</span> Carteiras</a></li>
+            <li><a href="creditos.html"><span class="icon">💳</span> Créditos</a></li>
             <li><a href="extratos.html"><span class="icon">📋</span> Extratos</a></li>
             <li><a href="precos.html"><span class="icon">🏷️</span> Preços</a></li>
             <li><a href="auditoria.html"><span class="icon">🔍</span> Auditoria</a></li>
@@ -727,7 +954,7 @@
                 <h1>💰 Centro Financeiro <span style="font-size:0.8rem;color:var(--gray-400);">Inteligente</span></h1>
                 <p style="color: var(--gray-500); font-size: 0.9rem;">Visão executiva do faturamento, créditos e saúde financeira</p>
             </div>
-            <div style="display:flex;gap:12px;">
+            <div class="actions">
                 <button class="btn-primary" onclick="window.location.href='carteiras.html'">💼 Carteiras</button>
                 <button class="btn-secondary" onclick="window.location.href='creditos.html'">💳 Créditos</button>
             </div>
@@ -740,12 +967,12 @@
                 <span class="ia-badge">Atualizado agora</span>
             </div>
             <div class="ia-content" id="iaContent">
-                <!-- Carregado via JS -->
+                <!-- Carregado via JavaScript -->
             </div>
         </div>
 
         <!-- KPI Cards -->
-        <div class="kpi-grid" id="kpiGrid">
+        <div class="kpi-grid">
             <div class="kpi-card">
                 <div class="kpi-top">
                     <span class="kpi-label">Faturamento Hoje</span>
@@ -827,7 +1054,7 @@
                         </tr>
                     </thead>
                     <tbody id="rankingTable">
-                        <!-- Carregado via JS -->
+                        <!-- Carregado via JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -851,7 +1078,7 @@
                         </tr>
                     </thead>
                     <tbody id="consumoTable">
-                        <!-- Carregado via JS -->
+                        <!-- Carregado via JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -869,12 +1096,37 @@
     <script src="../../middleware/auth-guard.js"></script>
 
     <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - CENTRO FINANCEIRO
+         * ============================================
+         */
+
         'use strict';
+
+        // ============================================
+        // TOGGLE SIDEBAR
+        // ============================================
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('mobileOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // ============================================
+        // LOGOUT
+        // ============================================
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                window.VigorreAuth.logout();
+            }
+        }
 
         // ============================================
         // DADOS DE EXEMPLO
         // ============================================
-        const sampleData = {
+        var sampleData = {
             clients: [
                 { id: 'c1', name: 'TechCorp Solutions', credits: 1250, reports: 45, laudos: 12, value: 8750,
                     health: 'excelente' },
@@ -897,37 +1149,18 @@
         };
 
         // ============================================
-        // TOGGLE SIDEBAR
-        // ============================================
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobileOverlay');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('active');
-        }
-
-        // ============================================
-        // LOGOUT
-        // ============================================
-        function logout() {
-            if (confirm('Deseja realmente sair?')) {
-                window.VigorreAuth.logout();
-            }
-        }
-
-        // ============================================
         // INICIALIZAR
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('💰 Centro Financeiro - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../../login.html';
                 return;
             }
 
-            const user = window.VigorreAuth.getCurrentUser();
+            var user = window.VigorreAuth.getCurrentUser();
             if (!user || (user.role !== 'admin' && user.role !== 'master')) {
                 alert('⚠️ Acesso restrito a administradores.');
                 window.VigorreAuth.logout();
@@ -943,162 +1176,221 @@
         });
 
         // ============================================
-        // IA CONTENT
+        // CARREGAR IA CONTENT
         // ============================================
         function loadIAContent() {
-            const container = document.getElementById('iaContent');
+            var container = document.getElementById('iaContent');
 
-            const alerts = [
+            var alerts = [
                 { icon: '⚠️', title: 'Empresa em risco', desc: 'AgroTech tem saldo para apenas 12 dias' },
                 { icon: '📈', title: 'Consultor em alta', desc: 'João aumentou consumo em 45%' },
                 { icon: '🏢', title: 'Empresas inativas', desc: '3 empresas sem uso há 90+ dias' }
             ];
 
-            container.innerHTML = alerts.map(item => `
-                    <div class="ia-item" onclick="handleIAClick('${item.title}')">
-                        <div class="ia-item-icon">${item.icon}</div>
-                        <div class="ia-item-title">${item.title}</div>
-                        <div class="ia-item-desc">${item.desc}</div>
-                    </div>
-                `).join('');
-        }
+            var html = '';
+            for (var i = 0; i < alerts.length; i++) {
+                var item = alerts[i];
+                html += '<div class="ia-item" onclick="handleIAClick(\'' + item.title + '\')">';
+                html += '<div class="ia-item-icon">' + item.icon + '</div>';
+                html += '<div class="ia-item-title">' + item.title + '</div>';
+                html += '<div class="ia-item-desc">' + item.desc + '</div>';
+                html += '</div>';
+            }
 
-        function handleIAClick(title) {
-            alert(`🤖 IA Financeira: ${title}\n\nClique para mais detalhes.`);
+            container.innerHTML = html;
         }
 
         // ============================================
-        // LOAD RANKING
+        // HANDLE IA CLICK
+        // ============================================
+        function handleIAClick(title) {
+            showToast('🤖 IA Financeira: ' + title, 'info');
+        }
+
+        // ============================================
+        // CARREGAR RANKING
         // ============================================
         function loadRanking() {
-            const tbody = document.getElementById('rankingTable');
+            var tbody = document.getElementById('rankingTable');
 
-            const healthMap = {
-                excelente: '🟢 Excelente',
-                atencao: '🟡 Atenção',
-                critico: '🔴 Crítico'
+            var healthMap = {
+                'excelente': '🟢 Excelente',
+                'atencao': '🟡 Atenção',
+                'critico': '🔴 Crítico'
             };
 
-            tbody.innerHTML = sampleData.clients.map((c, i) => `
-                    <tr>
-                        <td>${i + 1}</td>
-                        <td><strong>${c.name}</strong></td>
-                        <td>${c.credits}</td>
-                        <td>${c.reports}</td>
-                        <td>${c.laudos}</td>
-                        <td>R$ ${c.value}</td>
-                        <td><span class="health-badge ${c.health}">${healthMap[c.health]}</span></td>
-                    </tr>
-                `).join('');
+            var html = '';
+            for (var i = 0; i < sampleData.clients.length; i++) {
+                var c = sampleData.clients[i];
+                html += '<tr>';
+                html += '<td>' + (i + 1) + '</td>';
+                html += '<td><strong>' + c.name + '</strong></td>';
+                html += '<td>' + c.credits + '</td>';
+                html += '<td>' + c.reports + '</td>';
+                html += '<td>' + c.laudos + '</td>';
+                html += '<td>R$ ' + c.value + '</td>';
+                html += '<td><span class="badge-health ' + c.health + '">' + healthMap[c.health] + '</span></td>';
+                html += '</tr>';
+            }
+
+            tbody.innerHTML = html;
         }
 
         // ============================================
-        // LOAD CONSUMO
+        // CARREGAR CONSUMO
         // ============================================
         function loadConsumo() {
-            const tbody = document.getElementById('consumoTable');
+            var tbody = document.getElementById('consumoTable');
 
-            tbody.innerHTML = sampleData.consumo.map(c => `
-                    <tr>
-                        <td><strong>${c.name}</strong></td>
-                        <td>${c.saldo}</td>
-                        <td>${c.consumidos}</td>
-                        <td>${c.restantes}</td>
-                        <td>⏳ ${c.previsao}</td>
-                    </tr>
-                `).join('');
+            var html = '';
+            for (var i = 0; i < sampleData.consumo.length; i++) {
+                var c = sampleData.consumo[i];
+                html += '<tr>';
+                html += '<td><strong>' + c.name + '</strong></td>';
+                html += '<td>' + c.saldo + '</td>';
+                html += '<td>' + c.consumidos + '</td>';
+                html += '<td>' + c.restantes + '</td>';
+                html += '<td>⏳ ' + c.previsao + '</td>';
+                html += '</tr>';
+            }
+
+            tbody.innerHTML = html;
         }
 
         // ============================================
-        // RENDER CHARTS
+        // RENDERIZAR GRÁFICOS
         // ============================================
         function renderCharts() {
-            // Fluxo Financeiro
-            const fluxoCtx = document.getElementById('fluxoChart').getContext('2d');
-            new Chart(fluxoCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                    datasets: [{
-                        label: 'Entradas',
-                        data: [8500, 9200, 10100, 11200, 9800, 12500, 13800, 14200, 15100, 16800, 17500,
-                            19200
-                        ],
-                        borderColor: '#10B981',
-                        backgroundColor: 'rgba(16, 185, 129, 0.08)',
-                        fill: true,
-                        tension: 0.4
-                    }, {
-                        label: 'Saídas',
-                        data: [3200, 3800, 4100, 4500, 3900, 4800, 5200, 5500, 5800, 6200, 6500, 6800],
-                        borderColor: '#EF4444',
-                        backgroundColor: 'rgba(239, 68, 68, 0.08)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { color: '#64748B', font: { size: 11 }, usePointStyle: true }
-                        }
+            try {
+                // Fluxo Financeiro
+                var fluxoCtx = document.getElementById('fluxoChart').getContext('2d');
+                new Chart(fluxoCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                        datasets: [{
+                            label: 'Entradas',
+                            data: [8500, 9200, 10100, 11200, 9800, 12500, 13800, 14200, 15100, 16800, 17500,
+                                19200
+                            ],
+                            borderColor: '#10B981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.08)',
+                            fill: true,
+                            tension: 0.4
+                        }, {
+                            label: 'Saídas',
+                            data: [3200, 3800, 4100, 4500, 3900, 4800, 5200, 5500, 5800, 6200, 6500, 6800],
+                            borderColor: '#EF4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.08)',
+                            fill: true,
+                            tension: 0.4
+                        }]
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: 'rgba(10, 37, 64, 0.04)' },
-                            ticks: { color: '#94A3B8', callback: v => 'R$ ' + v }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#64748B',
+                                    font: { size: 11 },
+                                    usePointStyle: true
+                                }
+                            }
                         },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#94A3B8' }
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(10, 37, 64, 0.04)' },
+                                ticks: { color: '#94A3B8', callback: function(v) { return 'R$ ' + v; } }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: '#94A3B8' }
+                            }
                         }
                     }
-                }
-            });
+                });
 
-            // Receita por Produto
-            const produtoCtx = document.getElementById('produtoChart').getContext('2d');
-            new Chart(produtoCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Relatórios', 'Laudos', 'Créditos', 'Consultorias', 'Assinaturas'],
-                    datasets: [{
-                        data: [35, 25, 20, 12, 8],
-                        backgroundColor: ['#3B82F6CC', '#7C3AEDCC', '#10B981CC', '#F59E0BCC', '#EC4899CC'],
-                        borderColor: ['#3B82F6', '#7C3AED', '#10B981', '#F59E0B', '#EC4899'],
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { color: '#64748B', font: { size: 10 }, usePointStyle: true, padding: 12 }
-                        }
+                // Receita por Produto
+                var produtoCtx = document.getElementById('produtoChart').getContext('2d');
+                new Chart(produtoCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Relatórios', 'Laudos', 'Créditos', 'Consultorias', 'Assinaturas'],
+                        datasets: [{
+                            data: [35, 25, 20, 12, 8],
+                            backgroundColor: ['#3B82F6CC', '#7C3AEDCC', '#10B981CC', '#F59E0BCC', '#EC4899CC'],
+                            borderColor: ['#3B82F6', '#7C3AED', '#10B981', '#F59E0B', '#EC4899'],
+                            borderWidth: 2
+                        }]
                     },
-                    cutout: '65%'
-                }
-            });
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#64748B',
+                                    font: { size: 10 },
+                                    usePointStyle: true,
+                                    padding: 12
+                                }
+                            }
+                        },
+                        cutout: '65%'
+                    }
+                });
+
+                console.log('📊 Gráficos do Centro Financeiro renderizados');
+
+            } catch (error) {
+                console.error('❌ Erro ao renderizar gráficos:', error);
+            }
         }
 
         // ============================================
         // SET CHART PERIOD
         // ============================================
         function setChartPeriod(days) {
-            document.querySelectorAll('.period button').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.period button').forEach(btn => {
-                if (btn.textContent === days + 'd' || (days === '365' && btn.textContent === '1a')) {
-                    btn.classList.add('active');
+            var buttons = document.querySelectorAll('.period button');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            for (var j = 0; j < buttons.length; j++) {
+                var label = days === 365 ? '1a' : days + 'd';
+                if (buttons[j].textContent === label) {
+                    buttons[j].classList.add('active');
                 }
-            });
-            // Re-renderizar gráfico com novo período
+            }
             renderCharts();
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+
+            if (type === 'error') {
+                icon.textContent = '❌';
+            } else if (type === 'warning') {
+                icon.textContent = '⚠️';
+            } else {
+                icon.textContent = '✅';
+            }
+
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
         }
 
         console.log('✅ Centro Financeiro carregado com sucesso!');
