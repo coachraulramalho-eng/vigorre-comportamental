@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Relatório Completo SWOT | VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
         /* ============================================
            VIGORRE ONE™ - RELATÓRIO COMPLETO SWOT
+           INTERNATIONAL ENTERPRISE EDITION
            ============================================ */
 
         * {
@@ -22,11 +21,16 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
             --purple: #7C3AED;
+            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -43,7 +47,9 @@
             --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
             --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -62,7 +68,7 @@
         /* ============================================
            HEADER PREMIUM
            ============================================ */
-        .header-premium {
+        .header-print {
             background: var(--navy);
             color: white;
             padding: 24px 32px;
@@ -72,71 +78,74 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 16px;
+            position: relative;
+            z-index: 1;
         }
 
-        .header-premium .logo {
+        .header-print .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
         }
 
-        .header-premium .logo .logo-img {
+        .header-print .logo .logo-img {
             height: 44px;
             width: auto;
             display: block;
         }
 
-        .header-premium .logo .logo-text .name {
+        .header-print .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             font-weight: 800;
             color: white;
+            letter-spacing: -0.3px;
         }
 
-        .header-premium .logo .logo-text .name .tm {
+        .header-print .logo .logo-text .name .tm {
             font-size: 0.4rem;
             vertical-align: super;
             color: var(--cyan);
         }
 
-        .header-premium .logo .logo-text .sub {
+        .header-print .logo .logo-text .sub {
             font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
-        .header-premium .header-title {
+        .header-print .header-title {
             text-align: center;
         }
 
-        .header-premium .header-title h1 {
+        .header-print .header-title h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
         }
 
-        .header-premium .header-title .subtitle {
+        .header-print .header-title .subtitle {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .header-premium .header-user {
+        .header-print .header-user {
             text-align: right;
         }
 
-        .header-premium .header-user .name {
+        .header-print .header-user .name {
             font-weight: 600;
             font-size: 0.9rem;
         }
 
-        .header-premium .header-user .company {
+        .header-print .header-user .company {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        .header-premium .header-code {
+        .header-print .header-code {
             font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.3);
             font-family: 'Courier New', monospace;
@@ -207,6 +216,7 @@
             padding: 60px 40px;
             border-bottom: 2px solid var(--gray-200);
             margin-bottom: 32px;
+            position: relative;
         }
 
         .capa .capa-logo {
@@ -388,17 +398,33 @@
             margin-top: 8px;
         }
 
-        .swot-card.swot-forcas .swot-value { color: #10B981; }
-        .swot-card.swot-forcas .swot-bar .fill { background: #10B981; }
-        .swot-card.swot-fraquezas .swot-value { color: #EF4444; }
-        .swot-card.swot-fraquezas .swot-bar .fill { background: #EF4444; }
-        .swot-card.swot-oportunidades .swot-value { color: #3B82F6; }
-        .swot-card.swot-oportunidades .swot-bar .fill { background: #3B82F6; }
-        .swot-card.swot-ameacas .swot-value { color: #F59E0B; }
-        .swot-card.swot-ameacas .swot-bar .fill { background: #F59E0B; }
+        .swot-card.swot-forcas .swot-value {
+            color: #10B981;
+        }
+        .swot-card.swot-forcas .swot-bar .fill {
+            background: #10B981;
+        }
+        .swot-card.swot-fraquezas .swot-value {
+            color: #EF4444;
+        }
+        .swot-card.swot-fraquezas .swot-bar .fill {
+            background: #EF4444;
+        }
+        .swot-card.swot-oportunidades .swot-value {
+            color: #3B82F6;
+        }
+        .swot-card.swot-oportunidades .swot-bar .fill {
+            background: #3B82F6;
+        }
+        .swot-card.swot-ameacas .swot-value {
+            color: #F59E0B;
+        }
+        .swot-card.swot-ameacas .swot-bar .fill {
+            background: #F59E0B;
+        }
 
         /* ============================================
-           GRÁFICOS
+           CHARTS
            ============================================ */
         .chart-container {
             height: 240px;
@@ -407,7 +433,7 @@
         }
 
         /* ============================================
-           LISTAS
+           FEATURE LIST
            ============================================ */
         .feature-list {
             list-style: none;
@@ -455,7 +481,7 @@
         .compatibilidade-card .compat-value {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--blue);
+            color: var(--purple);
         }
 
         .compatibilidade-card .compat-bar {
@@ -511,9 +537,9 @@
         }
 
         /* ============================================
-           FOOTER
+           FOOTER PREMIUM
            ============================================ */
-        .footer-premium {
+        .footer-print {
             background: var(--navy);
             color: white;
             padding: 20px 32px;
@@ -525,13 +551,13 @@
             gap: 12px;
         }
 
-        .footer-premium .footer-logo {
+        .footer-print .footer-logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .footer-premium .footer-logo .logo-icon {
+        .footer-print .footer-logo .logo-icon {
             width: 32px;
             height: 32px;
             background: var(--cyan);
@@ -545,41 +571,41 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .footer-premium .footer-logo .footer-text .name {
+        .footer-print .footer-logo .footer-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
         }
 
-        .footer-premium .footer-logo .footer-text .name .tm {
+        .footer-print .footer-logo .footer-text .name .tm {
             font-size: 0.35rem;
             vertical-align: super;
             color: var(--cyan);
         }
 
-        .footer-premium .footer-logo .footer-text .tagline {
+        .footer-print .footer-logo .footer-text .tagline {
             font-size: 0.55rem;
             color: rgba(255, 255, 255, 0.3);
         }
 
-        .footer-premium .footer-contact {
+        .footer-print .footer-contact {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
         }
 
-        .footer-premium .footer-contact a {
+        .footer-print .footer-contact a {
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             font-size: 0.7rem;
             transition: var(--transition);
         }
 
-        .footer-premium .footer-contact a:hover {
+        .footer-print .footer-contact a:hover {
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .footer-premium .footer-page {
+        .footer-print .footer-page {
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.3);
         }
@@ -633,7 +659,7 @@
         }
 
         .btn-success {
-            background: #10B981;
+            background: var(--green);
             color: white;
         }
 
@@ -646,11 +672,12 @@
            RESPONSIVO
            ============================================ */
         @media (max-width: 768px) {
-            .header-premium {
+            .header-print {
                 flex-direction: column;
                 text-align: center;
+                padding: 16px 20px;
             }
-            .header-premium .header-user {
+            .header-print .header-user {
                 text-align: center;
             }
             .swot-grid {
@@ -665,7 +692,7 @@
             .report-body {
                 padding: 20px;
             }
-            .footer-premium {
+            .footer-print {
                 flex-direction: column;
                 text-align: center;
             }
@@ -677,18 +704,33 @@
             }
         }
 
+        @media (max-width: 480px) {
+            .capa {
+                padding: 30px 20px;
+            }
+            .capa .capa-title {
+                font-size: 1.4rem;
+            }
+            .capa .capa-logo {
+                font-size: 1.8rem;
+            }
+            body {
+                padding: 10px;
+            }
+        }
+
         @media print {
             body {
                 background: white !important;
                 padding: 0 !important;
             }
-            .header-premium {
+            .header-print {
                 background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 border-radius: 0 !important;
             }
-            .footer-premium {
+            .footer-print {
                 background: #0A2540 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -702,9 +744,12 @@
             }
             .report-body {
                 border: none !important;
+                padding: 20px !important;
             }
             .swot-card {
                 background: #F8FAFC !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             .feature-list li {
                 background: #F8FAFC !important;
@@ -721,6 +766,9 @@
             .section {
                 page-break-inside: avoid;
             }
+            .capa {
+                border-bottom: 2px solid #E2E8F0 !important;
+            }
         }
     </style>
 </head>
@@ -731,7 +779,7 @@
         <!-- ============================================
         HEADER PREMIUM
         ============================================ -->
-        <header class="header-premium">
+        <header class="header-print">
             <div class="logo">
                 <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
                 <div class="logo-text">
@@ -796,13 +844,13 @@
                 <div class="sumario-item"><span>2. Como Interpretar Este Relatório</span><span class="page">4</span></div>
                 <div class="sumario-item"><span>3. Metodologia e Confiabilidade</span><span class="page">5</span></div>
                 <div class="sumario-item"><span>4. Matriz SWOT</span><span class="page">6</span></div>
-                <div class="sumario-item"><span>5. Análise Detalhada dos Quadrantes</span><span class="page">8</span></div>
+                <div class="sumario-item"><span>5. Análise Detalhada</span><span class="page">8</span></div>
                 <div class="sumario-item"><span>6. Estratégia Recomendada</span><span class="page">10</span></div>
                 <div class="sumario-item"><span>7. Plano de Ação Estratégico</span><span class="page">11</span></div>
                 <div class="sumario-item"><span>8. Compatibilidade com Vaga</span><span class="page">12</span></div>
-                <div class="sumario-item"><span>9. Plano de Desenvolvimento</span><span class="page">13</span></div>
-                <div class="sumario-item"><span>10. Parecer da IA</span><span class="page">14</span></div>
-                <div class="sumario-item"><span>11. Conclusão</span><span class="page">15</span></div>
+                <div class="sumario-item"><span>9. Parecer da IA</span><span class="page">13</span></div>
+                <div class="sumario-item"><span>10. Conclusão</span><span class="page">14</span></div>
+                <div class="sumario-item"><span>11. Assinatura Digital</span><span class="page">15</span></div>
             </section>
 
             <!-- ============================================
@@ -811,14 +859,9 @@
             <section class="section">
                 <h2 class="section-title"><span class="number">1</span> Apresentação</h2>
                 <p class="section-text">
-                    Este relatório apresenta uma análise estratégica completa baseada na matriz SWOT (Strengths, Weaknesses, Opportunities, Threats).
-                    A análise SWOT é uma ferramenta amplamente utilizada no planejamento estratégico, no desenvolvimento de carreira
-                    e na avaliação de posicionamento profissional.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    A matriz SWOT permite uma visão integrada do seu posicionamento estratégico, identificando fatores internos
-                    (forças e fraquezas) e externos (oportunidades e ameaças) que influenciam seu desenvolvimento profissional
-                    e pessoal. Esta análise é fundamental para a tomada de decisões estratégicas e para o planejamento de carreira.
+                    Este relatório apresenta uma análise estratégica completa baseada na matriz SWOT (Forças, Fraquezas, Oportunidades e Ameaças).
+                    A análise SWOT é uma ferramenta de planejamento estratégico que ajuda a identificar fatores internos e externos
+                    que podem impactar seu desenvolvimento pessoal e profissional.
                 </p>
                 <p class="section-text" style="margin-top: 8px;">
                     <strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br />
@@ -834,20 +877,9 @@
             <section class="section">
                 <h2 class="section-title"><span class="number">2</span> Como Interpretar Este Relatório</h2>
                 <p class="section-text">
-                    Para obter o máximo proveito deste relatório, recomendamos que você:
-                </p>
-                <ul style="color: var(--gray-600); line-height: 2; font-size: 0.95rem; padding-left: 20px; margin-top: 8px;">
-                    <li>Leia o relatório completo, sem pular seções;</li>
-                    <li>Reflita sobre como cada quadrante se manifesta no seu dia a dia;</li>
-                    <li>Identifique quais são suas principais forças e como potencializá-las;</li>
-                    <li>Reconheça suas fraquezas e crie planos para superá-las;</li>
-                    <li>Busque feedback de pessoas que convivem com você profissionalmente;</li>
-                    <li>Utilize as recomendações como base para um plano de desenvolvimento;</li>
-                    <li>Revisite o relatório periodicamente para acompanhar sua evolução.</li>
-                </ul>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Importante:</strong> Este relatório é uma ferramenta de autoconhecimento e desenvolvimento.
-                    Não deve ser utilizado como único critério para decisões de contratação, promoção ou avaliação de desempenho.
+                    A análise SWOT é uma ferramenta poderosa para autoconhecimento e planejamento estratégico.
+                    Este relatório ajuda a identificar seus pontos fortes e fracos, além das oportunidades e ameaças
+                    no ambiente externo, para que você possa tomar decisões mais assertivas.
                 </p>
             </section>
 
@@ -859,30 +891,14 @@
                 <p class="section-text">
                     <strong>Como os resultados são calculados</strong>
                     <br />
-                    O teste SWOT é composto por 20 questões que avaliam os quatro quadrantes da matriz: Forças, Fraquezas,
-                    Oportunidades e Ameaças. Cada quadrante é medido por cinco perguntas específicas, garantindo uma análise
-                    equilibrada e abrangente do seu posicionamento estratégico.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Consistência dos resultados</strong>
-                    <br />
-                    O sistema utiliza um algoritmo determinístico: se você responder exatamente as mesmas respostas,
-                    o resultado será exatamente o mesmo. Isso garante que a interpretação seja baseada exclusivamente
-                    nas suas respostas, sem variações aleatórias.
+                    O teste SWOT Pessoal avalia quatro dimensões: Forças, Fraquezas, Oportunidades e Ameaças.
+                    Cada dimensão é avaliada por meio de questões que medem sua percepção sobre cada área.
                 </p>
                 <p class="section-text" style="margin-top: 8px;">
                     <strong>Confiabilidade</strong>
                     <br />
-                    A análise SWOT é uma ferramenta amplamente utilizada no planejamento estratégico e no desenvolvimento
-                    de carreira, com aplicação em empresas, consultorias e organizações em todo o mundo. A consistência
-                    dos resultados é monitorada por meio de índices de confiabilidade.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Limitações</strong>
-                    <br />
-                    Como toda avaliação estratégica, este relatório deve ser interpretado considerando o contexto
-                    e a honestidade das respostas. Recomenda-se uma reflexão pessoal e, se possível, uma sessão de
-                    feedback com um profissional especializado.
+                    A análise SWOT é amplamente utilizada em planejamento estratégico e desenvolvimento pessoal,
+                    sendo uma ferramenta reconhecida internacionalmente.
                 </p>
             </section>
 
@@ -892,35 +908,31 @@
             <section class="section">
                 <h2 class="section-title"><span class="number">4</span> Matriz SWOT</h2>
                 <div class="swot-grid" id="swotGrid">
-                    <!-- Carregado via JS -->
+                    <!-- Carregado via JavaScript -->
                 </div>
                 <div class="chart-container">
                     <canvas id="swotChart"></canvas>
                 </div>
-                <p class="section-text" id="profileDescription">Carregando descrição do perfil...</p>
+                <p class="section-text" id="profileDescription">Carregando descrição...</p>
             </section>
 
             <!-- ============================================
-            SEÇÃO 5: ANÁLISE DETALHADA DOS QUADRANTES
+            SEÇÃO 5: ANÁLISE DETALHADA
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">5</span> Análise Detalhada dos Quadrantes</h2>
-
+                <h2 class="section-title"><span class="number">5</span> Análise Detalhada</h2>
                 <h3 style="font-size:0.9rem;color:var(--gray-700);margin-bottom:8px;">💪 Forças</h3>
                 <ul class="feature-list" id="strengthsList">
                     <li><span class="check">✓</span> Carregando...</li>
                 </ul>
-
                 <h3 style="font-size:0.9rem;color:var(--gray-700);margin:16px 0 8px;">🔻 Fraquezas</h3>
                 <ul class="feature-list" id="weaknessesList">
                     <li><span class="check">✓</span> Carregando...</li>
                 </ul>
-
                 <h3 style="font-size:0.9rem;color:var(--gray-700);margin:16px 0 8px;">🚀 Oportunidades</h3>
                 <ul class="feature-list" id="opportunitiesList">
                     <li><span class="check">✓</span> Carregando...</li>
                 </ul>
-
                 <h3 style="font-size:0.9rem;color:var(--gray-700);margin:16px 0 8px;">⚠️ Ameaças</h3>
                 <ul class="feature-list" id="threatsList">
                     <li><span class="check">✓</span> Carregando...</li>
@@ -936,7 +948,7 @@
             </section>
 
             <!-- ============================================
-            SEÇÃO 7: PLANO DE AÇÃO ESTRATÉGICO
+            SEÇÃO 7: PLANO DE AÇÃO
             ============================================ -->
             <section class="section">
                 <h2 class="section-title"><span class="number">7</span> Plano de Ação Estratégico</h2>
@@ -956,33 +968,23 @@
             </section>
 
             <!-- ============================================
-            SEÇÃO 9: PLANO DE DESENVOLVIMENTO
+            SEÇÃO 9: PARECER DA IA
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">9</span> Plano de Desenvolvimento</h2>
-                <ul class="feature-list" id="developmentPlanList">
-                    <li><span class="check">✓</span> Carregando...</li>
-                </ul>
-            </section>
-
-            <!-- ============================================
-            SEÇÃO 10: PARECER DA IA
-            ============================================ -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">10</span> Parecer da Inteligência Artificial</h2>
+                <h2 class="section-title"><span class="number">9</span> Parecer da IA</h2>
                 <p class="section-text" id="iaOpinionText">Carregando parecer da IA...</p>
             </section>
 
             <!-- ============================================
-            SEÇÃO 11: CONCLUSÃO
+            SEÇÃO 10: CONCLUSÃO
             ============================================ -->
             <section class="section">
-                <h2 class="section-title"><span class="number">11</span> Conclusão</h2>
+                <h2 class="section-title"><span class="number">10</span> Conclusão</h2>
                 <p class="section-text" id="conclusionText">Carregando conclusão...</p>
             </section>
 
             <!-- ============================================
-            ASSINATURA
+            SEÇÃO 11: ASSINATURA
             ============================================ -->
             <section class="assinatura">
                 <div class="assinatura-qr">
@@ -1012,9 +1014,9 @@
         </div>
 
         <!-- ============================================
-        FOOTER
+        FOOTER PREMIUM
         ============================================ -->
-        <footer class="footer-premium">
+        <footer class="footer-print">
             <div class="footer-logo">
                 <div class="logo-icon">V</div>
                 <div class="footer-text">
@@ -1042,12 +1044,18 @@
     <script src="../../middleware/auth-guard.js"></script>
 
     <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - RELATÓRIO COMPLETO SWOT
+         * ============================================
+         */
+
         'use strict';
 
         // ============================================
         // DADOS DE EXEMPLO
         // ============================================
-        const sampleData = {
+        var sampleData = {
             participantName: 'Ana Silva',
             companyName: 'TechCorp Solutions',
             participantId: 'P001',
@@ -1065,110 +1073,40 @@
         // ============================================
         // CONFIGURAÇÃO SWOT
         // ============================================
-        const swotConfig = {
-            forcas: {
-                label: 'Forças',
-                icon: '💪',
-                color: '#10B981',
-                desc: 'Vantagens competitivas e pontos fortes que você possui.'
-            },
-            fraquezas: {
-                label: 'Fraquezas',
-                icon: '🔻',
-                color: '#EF4444',
-                desc: 'Áreas que necessitam desenvolvimento e melhoria.'
-            },
-            oportunidades: {
-                label: 'Oportunidades',
-                icon: '🚀',
-                color: '#3B82F6',
-                desc: 'Fatores externos que podem ser aproveitados para crescimento.'
-            },
-            ameacas: {
-                label: 'Ameaças',
-                icon: '⚠️',
-                color: '#F59E0B',
-                desc: 'Fatores externos que representam riscos ou desafios.'
-            }
+        var swotConfig = {
+            forcas: { label: 'Forças', icon: '💪', color: '#10B981' },
+            fraquezas: { label: 'Fraquezas', icon: '🔻', color: '#EF4444' },
+            oportunidades: { label: 'Oportunidades', icon: '🚀', color: '#3B82F6' },
+            ameacas: { label: 'Ameaças', icon: '⚠️', color: '#F59E0B' }
         };
 
-        const swotKeys = ['forcas', 'fraquezas', 'oportunidades', 'ameacas'];
+        var swotKeys = ['forcas', 'fraquezas', 'oportunidades', 'ameacas'];
 
         // ============================================
-        // DETALHES DOS QUADRANTES
+        // DETALHES SWOT
         // ============================================
-        const swotDetails = {
+        var swotDetails = {
             forcas: {
-                items: [
-                    'Liderança e tomada de decisão',
-                    'Comunicação eficaz e persuasiva',
-                    'Resiliência e adaptabilidade',
-                    'Capacidade analítica e estratégica',
-                    'Visão de futuro e inovação'
-                ]
+                items: ['Liderança e tomada de decisão', 'Comunicação eficaz', 'Resiliência e adaptabilidade',
+                    'Capacidade analítica'
+                ],
+                desc: 'Suas forças são os pilares que sustentam seu desempenho e diferenciais competitivos.'
             },
             fraquezas: {
-                items: [
-                    'Gestão do tempo e prioridades',
-                    'Delegação de tarefas e confiança na equipe',
-                    'Controle emocional em situações de crise',
-                    'Paciência processual e burocrática',
-                    'Foco excessivo em detalhes'
-                ]
+                items: ['Gestão do tempo', 'Delegação de tarefas', 'Controle emocional em crises', 'Paciência processual'],
+                desc: 'Suas fraquezas são áreas que, se desenvolvidas, podem ampliar significativamente seu potencial.'
             },
             oportunidades: {
-                items: [
-                    'Novas tecnologias e tendências de mercado',
-                    'Networking e expansão de relacionamentos',
-                    'Desenvolvimento de liderança e gestão',
-                    'Expansão de habilidades e competências',
-                    'Crescimento e demanda do mercado'
-                ]
+                items: ['Novas tecnologias no mercado', 'Networking e relacionamentos', 'Desenvolvimento de liderança',
+                    'Expansão de habilidades'
+                ],
+                desc: 'As oportunidades representam caminhos para crescimento e evolução profissional.'
             },
             ameacas: {
-                items: [
-                    'Concorrência acirrada e competitividade',
-                    'Mudanças tecnológicas rápidas e disruptivas',
-                    'Instabilidade econômica e incertezas',
-                    'Alta carga de trabalho e estresse',
-                    'Pressão por resultados e metas'
-                ]
-            }
-        };
-
-        // ============================================
-        // ESTRATÉGIAS
-        // ============================================
-        const strategies = {
-            forcas: 'Use suas forças para aproveitar oportunidades e mitigar ameaças. Invista em desenvolvimento contínuo e potencialize seus diferenciais competitivos.',
-            fraquezas: 'Desenvolva planos estruturados para superar suas fraquezas. Busque mentoria, capacitação e feedback para transformar pontos fracos em oportunidades.',
-            oportunidades: 'Aproveite as oportunidades usando suas forças e melhorando fraquezas. Seja proativo, inovador e esteja atento às tendências do mercado.',
-            ameacas: 'Crie estratégias defensivas robustas para reduzir o impacto das ameaças. Mantenha-se atualizado, diversifique riscos e desenvolva planos de contingência.'
-        };
-
-        // ============================================
-        // PERFIS ESTRATÉGICOS
-        // ============================================
-        const perfisEstrategicos = {
-            forcas: {
-                titulo: 'Perfil de Força',
-                emoji: '💪',
-                desc: 'Você possui vantagens competitivas significativas que podem ser potencializadas para alcançar resultados excepcionais.'
-            },
-            oportunidades: {
-                titulo: 'Perfil de Oportunidade',
-                emoji: '🚀',
-                desc: 'Você está bem posicionado para aproveitar as oportunidades do mercado e impulsionar seu crescimento profissional.'
-            },
-            fraquezas: {
-                titulo: 'Perfil de Desenvolvimento',
-                emoji: '📈',
-                desc: 'Foco em desenvolver pontos fracos para se tornar mais competitivo e ampliar suas capacidades.'
-            },
-            ameacas: {
-                titulo: 'Perfil de Resiliência',
-                emoji: '🛡️',
-                desc: 'Capacidade de enfrentar e superar desafios e ameaças com estratégias defensivas eficazes.'
+                items: ['Concorrência acirrada', 'Mudanças tecnológicas rápidas', 'Instabilidade econômica',
+                    'Alta carga de trabalho'
+                ],
+                desc: 'As ameaças exigem atenção e estratégias defensivas para minimizar impactos.'
             }
         };
 
@@ -1178,7 +1116,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📄 Relatório Completo SWOT - VIGORRE ONE™');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
+            var isAuth = window.VigorreAuth.isAuthenticated();
             if (!isAuth) {
                 window.location.href = '../../login.html';
                 return;
@@ -1192,43 +1130,57 @@
         // ============================================
         function loadData() {
             try {
-                const user = window.VigorreAuth.getCurrentUser();
+                var user = window.VigorreAuth.getCurrentUser();
                 if (!user) {
                     renderReport(sampleData);
                     return;
                 }
 
-                const allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const participant = allParticipants.find(p => p.id === user.id);
+                var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var participant = null;
+                for (var i = 0; i < allParticipants.length; i++) {
+                    if (allParticipants[i].id === user.id) {
+                        participant = allParticipants[i];
+                        break;
+                    }
+                }
 
-                if (!participant || !participant.results?.SWOT) {
+                if (!participant || !participant.results || !participant.results.SWOT) {
                     renderReport(sampleData);
                     return;
                 }
 
-                const swotResult = participant.results.SWOT;
-                let companyName = 'Autônomo';
-                let jobTitle = 'Não vinculado';
+                var swotResult = participant.results.SWOT;
+                var companyName = 'Autônomo';
+                var jobTitle = 'Não vinculado';
 
                 if (participant.companyId) {
-                    const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-                    const company = companies.find(c => c.id === participant.companyId);
-                    if (company) companyName = company.name;
+                    var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                    for (var j = 0; j < companies.length; j++) {
+                        if (companies[j].id === participant.companyId) {
+                            companyName = companies[j].name;
+                            break;
+                        }
+                    }
                 }
 
                 if (participant.jobId) {
-                    const jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
-                    const job = jobs.find(j => j.id === participant.jobId);
-                    if (job) jobTitle = job.title || job.name || 'Vaga';
+                    var jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
+                    for (var k = 0; k < jobs.length; k++) {
+                        if (jobs[k].id === participant.jobId) {
+                            jobTitle = jobs[k].title || jobs[k].name || 'Vaga';
+                            break;
+                        }
+                    }
                 }
 
-                const data = {
+                var data = {
                     participantName: participant.name || sampleData.participantName,
                     companyName: companyName,
                     participantId: participant.id || sampleData.participantId,
                     date: new Date().toISOString(),
-                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(
-                        3, '0'),
+                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000))
+                        .padStart(3, '0'),
                     percentages: swotResult.percentages || sampleData.percentages,
                     topSwot: swotResult.topSwot || sampleData.topSwot,
                     topPercent: swotResult.topPercent || sampleData.topPercent,
@@ -1250,8 +1202,8 @@
         // RENDERIZAR RELATÓRIO
         // ============================================
         function renderReport(data) {
-            const pcts = data.percentages;
-            const dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
+            var pcts = data.percentages;
+            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
                 day: '2-digit',
                 month: 'long',
                 year: 'numeric',
@@ -1261,8 +1213,8 @@
 
             // Atualizar cabeçalho
             document.getElementById('participantName').textContent = data.participantName;
-            document.getElementById('participantCompany').textContent = `Empresa: ${data.companyName}`;
-            document.getElementById('reportCode').textContent = `Código: ${data.reportCode}`;
+            document.getElementById('participantCompany').textContent = 'Empresa: ' + data.companyName;
+            document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
 
             // Atualizar capa
             document.getElementById('capaParticipant').textContent = data.participantName;
@@ -1276,102 +1228,119 @@
 
             // Atualizar assinatura
             document.getElementById('assinaturaCode').textContent =
-                `Código de Autenticação: ${data.reportCode} • Hash: ${generateHash(data.participantId + data.reportCode)}`;
+                'Código de Autenticação: ' + data.reportCode + ' • Hash: ' + generateHash(data.participantId + data
+                    .reportCode);
 
             // Atualizar página
             document.getElementById('pageNumber').textContent = '1';
 
-            const topConfig = swotConfig[data.topSwot];
-            const bottomConfig = swotConfig[data.bottomSwot];
-            const perfil = perfisEstrategicos[data.topSwot];
-
             // ============================================
             // 1. SWOT GRID
             // ============================================
-            const grid = document.getElementById('swotGrid');
-            grid.innerHTML = swotKeys.map(key => {
-                const config = swotConfig[key];
-                const value = pcts[key] || 0;
-                const className = `swot-card swot-${key}`;
-                let desc = '';
-                if (value >= 75) desc = `${config.icon} ${config.label} muito forte. Excelente vantagem.`;
-                else if (value >= 50) desc = `${config.icon} ${config.label} em bom nível.`;
-                else if (value >= 25) desc = `${config.icon} ${config.label} em desenvolvimento.`;
-                else desc = `${config.icon} ${config.label} requer atenção prioritária.`;
+            var grid = document.getElementById('swotGrid');
+            var gridHtml = '';
+            for (var i = 0; i < swotKeys.length; i++) {
+                var key = swotKeys[i];
+                var config = swotConfig[key];
+                var value = pcts[key] || 0;
+                var className = 'swot-card swot-' + key;
+                var desc = '';
+                if (value >= 75) desc = config.icon + ' ' + config.label + ' muito forte. Excelente vantagem.';
+                else if (value >= 50) desc = config.icon + ' ' + config.label + ' em bom nível.';
+                else if (value >= 25) desc = config.icon + ' ' + config.label + ' em desenvolvimento.';
+                else desc = config.icon + ' ' + config.label + ' requer atenção prioritária.';
 
-                return `
-                        <div class="${className}">
-                            <div class="swot-icon">${config.icon}</div>
-                            <div class="swot-name">${config.label}</div>
-                            <div class="swot-value">${value}%</div>
-                            <div class="swot-bar">
-                                <div class="fill" style="width:${value}%;"></div>
-                            </div>
-                            <div class="swot-desc">${desc}</div>
-                        </div>
-                    `;
-            }).join('');
+                gridHtml += '<div class="' + className + '">';
+                gridHtml += '<div class="swot-icon">' + config.icon + '</div>';
+                gridHtml += '<div class="swot-name">' + config.label + '</div>';
+                gridHtml += '<div class="swot-value">' + value + '%</div>';
+                gridHtml += '<div class="swot-bar"><div class="fill" style="width:' + value + '%;"></div></div>';
+                gridHtml += '<div class="swot-desc">' + desc + '</div>';
+                gridHtml += '</div>';
+            }
+            grid.innerHTML = gridHtml;
 
             // ============================================
             // 2. DESCRIÇÃO DO PERFIL
             // ============================================
-            document.getElementById('profileDescription').innerHTML = `
-                    <strong>Quadrante Principal:</strong> ${topConfig.icon} ${topConfig.label} (${data.topPercent}%)
-                    <br />
-                    ${perfil.emoji} <strong>${perfil.titulo}</strong>
-                    <br />
-                    ${perfil.desc}
-                    <br /><br />
-                    <strong>Quadrante Secundário (menor pontuação):</strong> ${bottomConfig.icon} ${bottomConfig.label} (${data.bottomPercent}%)
-                    <br />
-                    ${bottomConfig.desc}
-                    <br /><br />
-                    <strong>Distribuição SWOT:</strong><br />
-                    💪 Forças: ${pcts.forcas || 0}% &nbsp;|&nbsp;
-                    🔻 Fraquezas: ${pcts.fraquezas || 0}% &nbsp;|&nbsp;
-                    🚀 Oportunidades: ${pcts.oportunidades || 0}% &nbsp;|&nbsp;
-                    ⚠️ Ameaças: ${pcts.ameacas || 0}%
-                `;
+            var topConfig = swotConfig[data.topSwot];
+            var bottomConfig = swotConfig[data.bottomSwot];
+
+            document.getElementById('profileDescription').innerHTML =
+                '<strong>Quadrante Principal:</strong> ' + topConfig.icon + ' ' + topConfig.label + ' (' + data
+                .topPercent + '%)<br />' +
+                '<strong>Quadrante Secundário:</strong> ' + bottomConfig.icon + ' ' + bottomConfig.label + ' (' +
+                data.bottomPercent + '%)<br /><br />' +
+                (data.topSwot === 'forcas' ?
+                    'Você possui vantagens competitivas significativas que podem ser potencializadas.' :
+                    data.topSwot === 'oportunidades' ?
+                    'Você está bem posicionado para aproveitar as oportunidades do mercado.' :
+                    data.topSwot === 'fraquezas' ?
+                    'Foco em desenvolver pontos fracos para se tornar mais competitivo.' :
+                    'Capacidade de enfrentar e superar desafios e ameaças.');
 
             // ============================================
-            // 3. ANÁLISE DETALHADA DOS QUADRANTES
+            // 3. ANÁLISE DETALHADA
             // ============================================
-            swotKeys.forEach(key => {
-                const listId = key === 'forcas' ? 'strengthsList' :
-                    key === 'fraquezas' ? 'weaknessesList' :
-                    key === 'oportunidades' ? 'opportunitiesList' : 'threatsList';
-                const list = document.getElementById(listId);
-                const details = swotDetails[key];
-                const items = details.items.map(item =>
-                    `<li><span class="check">✓</span> ${item}</li>`
-                ).join('');
-                list.innerHTML = items;
-            });
+            var strengthItems = swotDetails.forcas.items;
+            var strengthsList = document.getElementById('strengthsList');
+            var strengthsHtml = '';
+            for (var i = 0; i < strengthItems.length; i++) {
+                strengthsHtml += '<li><span class="check">✓</span> ' + strengthItems[i] + '</li>';
+            }
+            strengthsList.innerHTML = strengthsHtml;
+
+            var weaknessItems = swotDetails.fraquezas.items;
+            var weaknessesList = document.getElementById('weaknessesList');
+            var weaknessesHtml = '';
+            for (var i = 0; i < weaknessItems.length; i++) {
+                weaknessesHtml += '<li><span class="check">✓</span> ' + weaknessItems[i] + '</li>';
+            }
+            weaknessesList.innerHTML = weaknessesHtml;
+
+            var opportunityItems = swotDetails.oportunidades.items;
+            var opportunitiesList = document.getElementById('opportunitiesList');
+            var opportunitiesHtml = '';
+            for (var i = 0; i < opportunityItems.length; i++) {
+                opportunitiesHtml += '<li><span class="check">✓</span> ' + opportunityItems[i] + '</li>';
+            }
+            opportunitiesList.innerHTML = opportunitiesHtml;
+
+            var threatItems = swotDetails.ameacas.items;
+            var threatsList = document.getElementById('threatsList');
+            var threatsHtml = '';
+            for (var i = 0; i < threatItems.length; i++) {
+                threatsHtml += '<li><span class="check">✓</span> ' + threatItems[i] + '</li>';
+            }
+            threatsList.innerHTML = threatsHtml;
 
             // ============================================
             // 4. ESTRATÉGIA RECOMENDADA
             // ============================================
-            document.getElementById('strategyText').innerHTML = `
-                    <strong>Estratégia Recomendada:</strong> ${strategies[data.topSwot] || 'Desenvolva um plano estratégico equilibrado.'}
-                    <br /><br />
-                    <strong>Perfil Estratégico:</strong> 
-                    ${perfil.emoji} ${perfil.titulo}
-                    <br />
-                    ${perfil.desc}
-                    <br /><br />
-                    <strong>Recomendação Específica:</strong>
-                    ${data.topSwot === 'forcas' ? 'Continue potencializando suas forças e use-as como alavanca para aproveitar oportunidades e superar ameaças.' :
-                    data.topSwot === 'oportunidades' ? 'Aja agora para aproveitar as oportunidades identificadas. O momento é favorável para crescimento e expansão.' :
-                    data.topSwot === 'fraquezas' ? 'Invista em autodesenvolvimento e capacitação para transformar fraquezas em pontos fortes.' :
-                    'Desenvolva estratégias defensivas e planos de contingência para reduzir o impacto das ameaças.'}
-                `;
+            var strategies = {
+                forcas: 'Use suas forças para aproveitar oportunidades e mitigar ameaças. Invista em desenvolvimento contínuo.',
+                fraquezas: 'Desenvolva planos estruturados para superar suas fraquezas. Busque mentoria e capacitação.',
+                oportunidades: 'Aproveite as oportunidades usando suas forças e melhorando fraquezas. Seja proativo.',
+                ameacas: 'Crie estratégias defensivas robustas para reduzir o impacto das ameaças. Mantenha-se atualizado.'
+            };
+
+            document.getElementById('strategyText').innerHTML =
+                '<strong>Estratégia Recomendada:</strong> ' + (strategies[data.topSwot] ||
+                    'Desenvolva um plano estratégico equilibrado.') +
+                '<br /><br /><strong>Perfil Estratégico:</strong> ' +
+                (data.topSwot === 'forcas' ?
+                    '💪 Perfil de Força - Você possui vantagens competitivas significativas. Continue potencializando seus pontos fortes.' :
+                    data.topSwot === 'oportunidades' ?
+                    '🚀 Perfil de Oportunidade - Você está bem posicionado para aproveitar o mercado. Agora é o momento de agir.' :
+                    data.topSwot === 'fraquezas' ?
+                    '📈 Perfil de Desenvolvimento - Foco em melhorar pontos fracos. Invista em autodesenvolvimento.' :
+                    '🛡️ Perfil de Resiliência - Capacidade de enfrentar desafios. Fortaleça suas estratégias defensivas.');
 
             // ============================================
-            // 5. PLANO DE AÇÃO ESTRATÉGICO
+            // 5. PLANO DE AÇÃO
             // ============================================
-            const planList = document.getElementById('actionPlanList');
-            const actionPlans = [
-                '📌 Definir metas claras e mensuráveis com base na análise SWOT',
+            var actionPlans = [
+                '📌 Definir metas claras com base na análise SWOT',
                 '🎯 Priorizar ações que aproveitem forças e oportunidades',
                 '🛠️ Desenvolver plano de mitigação para fraquezas e ameaças',
                 '📊 Monitorar progresso e ajustar estratégias periodicamente',
@@ -1383,121 +1352,100 @@
             if (pcts.fraquezas >= 50) actionPlans.unshift('🔻 Desenvolver plano para reduzir impacto das fraquezas');
             if (pcts.ameacas >= 50) actionPlans.unshift('⚠️ Criar estratégias defensivas contra ameaças');
 
-            planList.innerHTML = actionPlans.map((item, index) =>
-                `<li><span class="check">${index + 1}</span> ${item}</li>`
-            ).join('');
+            var planList = document.getElementById('actionPlanList');
+            var planHtml = '';
+            for (var i = 0; i < actionPlans.length; i++) {
+                planHtml += '<li><span class="check">' + (i + 1) + '</span> ' + actionPlans[i] + '</li>';
+            }
+            planList.innerHTML = planHtml;
 
             // ============================================
             // 6. COMPATIBILIDADE COM VAGA
             // ============================================
-            const compatSection = document.getElementById('compatibilidadeSection');
-            const compatContent = document.getElementById('compatibilidadeContent');
+            var compatSection = document.getElementById('compatibilidadeSection');
+            var compatContent = document.getElementById('compatibilidadeContent');
 
             if (data.job && data.job !== 'Não vinculado') {
                 compatSection.style.display = 'block';
-                const compat = data.compatibility || Math.round(60 + Math.random() * 35);
-                let compatLevel = '';
-                let compatColor = '';
+                var compat = data.compatibility || Math.round(60 + Math.random() * 35);
+                var compatLevel = '';
+                var compatColor = '';
                 if (compat >= 80) { compatLevel = 'Excelente';
                     compatColor = '#10B981'; } else if (compat >= 60) { compatLevel = 'Boa';
                     compatColor = '#3B82F6'; } else if (compat >= 40) { compatLevel = 'Moderada';
                     compatColor = '#F59E0B'; } else { compatLevel = 'Baixa';
                     compatColor = '#EF4444'; }
 
-                compatContent.innerHTML = `
-                        <div class="compatibilidade-card">
-                            <div class="compat-top">
-                                <span style="font-weight:600;font-size:1rem;">🎯 ${data.job}</span>
-                                <span class="compat-value" style="color:${compatColor};">${compat}%</span>
-                            </div>
-                            <div class="compat-bar">
-                                <div class="fill" style="width:${compat}%;background:${compatColor};"></div>
-                            </div>
-                            <p style="color:var(--gray-600);font-size:0.9rem;">
-                                <strong>Nível de Compatibilidade:</strong> ${compatLevel} (${compat}%)
-                            </p>
-                            <p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">
-                                ${compat >= 80 ? 'Excelente alinhamento estratégico com a função. Perfil altamente compatível com as demandas da posição.' :
-                                compat >= 60 ? 'Bom alinhamento estratégico. Desenvolvimento direcionado pode ampliar a aderência à função.' :
-                                compat >= 40 ? 'Alinhamento moderado. Recomenda-se desenvolvimento específico para melhor adequação.' :
-                                'Baixo alinhamento estratégico. Avaliar outras posições mais alinhadas ao perfil.'}
-                            </p>
-                        </div>
-                    `;
+                compatContent.innerHTML =
+                    '<div class="compatibilidade-card"><div class="compat-top"><span style="font-weight:600;font-size:1rem;">🎯 ' +
+                    data.job +
+                    '</span><span class="compat-value" style="color:' + compatColor + ';">' + compat +
+                    '%</span></div><div class="compat-bar"><div class="fill" style="width:' + compat +
+                    '%;background:' + compatColor +
+                    ';"></div></div><p style="color:var(--gray-600);font-size:0.9rem;"><strong>Nível de Compatibilidade:</strong> ' +
+                    compatLevel + ' (' + compat +
+                    '%)</p><p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">' + (compat >= 80 ?
+                        'Perfil estratégico altamente alinhado com a função.' :
+                        compat >= 60 ?
+                        'Boa compatibilidade estratégica. Desenvolvimento direcionado pode ampliar o alinhamento.' :
+                        compat >= 40 ?
+                        'Compatibilidade moderada. Recomenda-se desenvolvimento específico.' :
+                        'Compatibilidade baixa. Avaliar outras posições mais alinhadas.') +
+                    '</p></div>';
             } else {
                 compatSection.style.display = 'none';
             }
 
             // ============================================
-            // 7. PLANO DE DESENVOLVIMENTO
+            // 7. PARECER DA IA
             // ============================================
-            const devPlanList = document.getElementById('developmentPlanList');
-            const devPlans = [];
-
-            // Adicionar planos baseados nos quadrantes fracos
-            if (pcts.fraquezas >= 50) {
-                devPlans.push('🔻 Desenvolver plano de melhoria para fraquezas identificadas');
-            }
-            if (pcts.ameacas >= 50) {
-                devPlans.push('⚠️ Criar estratégias defensivas contra ameaças');
-            }
-            if (pcts.oportunidades >= 60) {
-                devPlans.push('🚀 Aproveitar oportunidades com plano de ação estruturado');
-            }
-            if (pcts.forcas >= 60) {
-                devPlans.push('💪 Potencializar forças para criar vantagens competitivas');
-            }
-
-            devPlans.push('📌 Reavaliar análise SWOT trimestralmente');
-            devPlans.push('📊 Monitorar progresso com indicadores de desempenho');
-            devPlans.push('🔄 Ajustar estratégias conforme mudanças no ambiente');
-            devPlans.push('📚 Buscar capacitação nas áreas de desenvolvimento identificadas');
-
-            devPlanList.innerHTML = devPlans.map((item, index) =>
-                `<li><span class="check">${index + 1}</span> ${item}</li>`
-            ).join('');
+            document.getElementById('iaOpinionText').textContent =
+                'Com base na análise SWOT, o participante apresenta um perfil estratégico com destaque para ' +
+                topConfig.icon + ' ' + topConfig.label + ' (' + data.topPercent +
+                '%). Esta é uma área de grande potencial que deve ser explorada. O quadrante com menor pontuação é ' +
+                bottomConfig.icon + ' ' + bottomConfig.label + ' (' + data.bottomPercent +
+                '%), indicando uma oportunidade de desenvolvimento estratégico. Recomenda-se um plano de ação que potencialize as ' +
+                (data.topSwot === 'forcas' ? 'forças identificadas' : data.topSwot === 'oportunidades' ?
+                    'oportunidades disponíveis' : data.topSwot === 'fraquezas' ? 'áreas de desenvolvimento' :
+                    'capacidade de resiliência') +
+                ' e mitigue os riscos associados às ' +
+                (data.bottomSwot === 'ameacas' ? 'ameaças' : data.bottomSwot === 'fraquezas' ? 'fraquezas' :
+                    'áreas de atenção') +
+                '. O momento é favorável para ' +
+                (data.topSwot === 'oportunidades' ? 'ações proativas e de expansão.' :
+                    data.topSwot === 'forcas' ? 'consolidar posições e ampliar vantagens.' :
+                    'desenvolvimento e fortalecimento interno.');
 
             // ============================================
-            // 8. PARECER DA IA
+            // 8. CONCLUSÃO
             // ============================================
-            const iaOpinionText = document.getElementById('iaOpinionText');
-
-            iaOpinionText.textContent =
-                `Com base na análise SWOT, o participante apresenta um perfil estratégico com ${topConfig.icon} ${topConfig.label} (${data.topPercent}%) como área predominante. Isso indica que ${data.topSwot === 'forcas' ? 'possui vantagens competitivas sólidas que podem ser potencializadas para alcançar resultados excepcionais' : data.topSwot === 'oportunidades' ? 'o momento é favorável para crescimento e expansão, com várias oportunidades disponíveis' : data.topSwot === 'fraquezas' ? 'há oportunidades significativas de desenvolvimento pessoal que podem ser transformadas em pontos fortes' : 'tem capacidade de enfrentar desafios e adversidades com resiliência e estratégia'}. O quadrante com menor pontuação é ${bottomConfig.icon} ${bottomConfig.label} (${data.bottomPercent}%), indicando uma área que requer atenção e desenvolvimento estratégico. Recomenda-se focar em ${data.topSwot === 'forcas' ? 'potencializar ainda mais as forças identificadas e usá-las como alavanca' : data.topSwot === 'oportunidades' ? 'aproveitar as oportunidades com um plano de ação estruturado e proativo' : data.topSwot === 'fraquezas' ? 'desenvolver um plano de melhoria contínua e buscar capacitação' : 'fortalecer estratégias defensivas e criar planos de contingência'}. O desenvolvimento equilibrado dos quatro quadrantes da matriz SWOT é fundamental para uma atuação estratégica consistente e de alto impacto.`;
-
-            // ============================================
-            // 9. CONCLUSÃO
-            // ============================================
-            document.getElementById('conclusionText').innerHTML = `
-                    Sua análise SWOT revela um perfil estratégico com <strong>${topConfig.icon} ${topConfig.label}</strong> como área predominante (${data.topPercent}%),
-                    indicando que ${data.topSwot === 'forcas' ? 'você possui vantagens competitivas sólidas' :
-                    data.topSwot === 'oportunidades' ? 'o momento é favorável para crescimento e expansão' :
-                    data.topSwot === 'fraquezas' ? 'há oportunidades significativas de desenvolvimento pessoal' :
-                    'você tem capacidade de enfrentar desafios e adversidades'}.
-                    <br /><br />
-                    <strong>Mensagem Final:</strong>
-                    <br />
-                    ${data.topPercent >= 70 ? 'Parabéns! Sua análise SWOT indica um posicionamento estratégico favorável. Continue potencializando suas forças e aproveitando as oportunidades.' :
-                    data.topPercent >= 50 ? 'Você está em um bom caminho. Com foco nas áreas identificadas, poderá ampliar significativamente seu impacto estratégico.' :
-                    'Este é um momento importante para reavaliar sua posição estratégica e desenvolver um plano de ação consistente.'}
-                    <br /><br />
-                    <strong>Próximos Passos:</strong>
-                    <br />
-                    1. Revise sua análise SWOT periodicamente
-                    <br />
-                    2. Acompanhe o progresso das ações planejadas
-                    <br />
-                    3. Ajuste estratégias conforme mudanças no ambiente
-                    <br />
-                    4. Busque feedback para validação da análise
-                    <br /><br />
-                    <em>Relatório gerado em ${new Date().toLocaleString('pt-BR')}</em>
-                `;
+            document.getElementById('conclusionText').innerHTML =
+                'Sua análise SWOT revela um perfil estratégico com <strong>' + topConfig.icon + ' ' + topConfig
+                .label + '</strong> como área predominante (' + data.topPercent +
+                '%), indicando que ' +
+                (data.topSwot === 'forcas' ?
+                    'você possui vantagens competitivas sólidas' :
+                    data.topSwot === 'oportunidades' ?
+                    'o momento é favorável para crescimento e expansão' :
+                    data.topSwot === 'fraquezas' ?
+                    'há oportunidades significativas de desenvolvimento pessoal' :
+                    'você tem capacidade de enfrentar desafios e adversidades') +
+                '.<br /><br /><strong>Mensagem Final:</strong><br />' +
+                (data.topPercent >= 70 ?
+                    'Parabéns! Sua análise SWOT indica um posicionamento estratégico favorável. Continue potencializando suas forças e aproveitando as oportunidades.' :
+                    data.topPercent >= 50 ?
+                    'Você está em um bom caminho. Com foco nas áreas identificadas, poderá ampliar significativamente seu impacto estratégico.' :
+                    'Este é um momento importante para reavaliar sua posição estratégica e desenvolver um plano de ação consistente.') +
+                '<br /><br /><strong>Próximos Passos:</strong><br />' +
+                '1. Revise sua análise SWOT periodicamente<br />' +
+                '2. Acompanhe o progresso das ações planejadas<br />' +
+                '3. Ajuste estratégias conforme mudanças no ambiente<br />' +
+                '4. Busque feedback para validação da análise';
 
             // ============================================
-            // 10. GRÁFICOS
+            // 9. GRÁFICOS
             // ============================================
-            setTimeout(() => {
+            setTimeout(function() {
                 renderChart(pcts);
             }, 300);
 
@@ -1509,8 +1457,7 @@
         // ============================================
         function renderChart(percentages) {
             try {
-                const ctx = document.getElementById('swotChart').getContext('2d');
-
+                var ctx = document.getElementById('swotChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -1534,40 +1481,22 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.parsed.y + '%';
-                                    }
-                                }
-                            }
+                            legend: { display: false }
                         },
                         scales: {
                             y: {
                                 beginAtZero: true,
                                 max: 100,
                                 grid: { color: 'rgba(10, 37, 64, 0.04)' },
-                                ticks: {
-                                    color: '#94A3B8',
-                                    callback: function(value) {
-                                        return value + '%';
-                                    }
-                                }
+                                ticks: { color: '#94A3B8', callback: function(v) { return v + '%'; } }
                             },
                             x: {
                                 grid: { display: false },
-                                ticks: {
-                                    color: '#94A3B8',
-                                    font: { size: 11 }
-                                }
+                                ticks: { color: '#94A3B8', font: { size: 11 } }
                             }
                         }
                     }
                 });
-
-                console.log('📊 Gráfico SWOT renderizado com sucesso');
-
             } catch (error) {
                 console.error('❌ Erro ao renderizar gráfico:', error);
             }
@@ -1577,9 +1506,9 @@
         // FUNÇÕES UTILITÁRIAS
         // ============================================
         function generateHash(data) {
-            let hash = 0;
-            for (let i = 0; i < data.length; i++) {
-                const char = data.charCodeAt(i);
+            var hash = 0;
+            for (var i = 0; i < data.length; i++) {
+                var char = data.charCodeAt(i);
                 hash = ((hash << 5) - hash) + char;
                 hash = hash & hash;
             }
@@ -1588,52 +1517,33 @@
 
         function downloadPDF() {
             showToast('📥 Iniciando download do PDF...', 'success');
-            setTimeout(() => {
+            setTimeout(function() {
                 window.print();
             }, 500);
         }
 
         function showToast(message, type) {
-            const existing = document.getElementById('toast');
+            var existing = document.getElementById('toast');
             if (existing) existing.remove();
 
-            const toast = document.createElement('div');
+            var toast = document.createElement('div');
             toast.id = 'toast';
-            toast.style.cssText = `
-                    position: fixed;
-                    top: 24px;
-                    right: 24px;
-                    background: white;
-                    padding: 14px 24px;
-                    border-radius: 12px;
-                    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    font-weight: 600;
-                    font-size: 0.875rem;
-                    z-index: 300;
-                    border-left: 4px solid ${type === 'success' ? '#10B981' : '#EF4444'};
-                    animation: slideIn 0.3s ease;
-                `;
-            toast.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span><span>${message}</span>`;
+            toast.style.cssText =
+                'position:fixed;top:24px;right:24px;background:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:300;border-left:4px solid ' +
+                (type === 'success' ? '#10B981' : '#EF4444') + ';animation:slideIn 0.3s ease;';
+            toast.innerHTML = '<span>' + (type === 'success' ? '✅' : '❌') + '</span><span>' + message + '</span>';
             document.body.appendChild(toast);
 
-            setTimeout(() => {
+            setTimeout(function() {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateX(120%)';
-                setTimeout(() => toast.remove(), 300);
+                setTimeout(function() { toast.remove(); }, 300);
             }, 4000);
         }
 
-        // Estilo para animação
-        const style = document.createElement('style');
-        style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(120%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
+        var style = document.createElement('style');
+        style.textContent =
+            '@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
         document.head.appendChild(style);
 
         console.log('📄 Relatório Completo SWOT carregado com sucesso!');
