@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carteiras | Centro Financeiro VIGORRE ONE™</title>
+    <title>Carteiras | Centro Financeiro | VIGORRE ONE™</title>
 
     <!-- ==========================================
     FONTS PREMIUM
@@ -25,12 +25,9 @@
            - Linear
            ============================================ */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ============================================
+           CSS VARIABLES (TEMA CLARO)
+           ============================================ */
         :root {
             --navy: #0A2540;
             --navy-light: #1A3A5C;
@@ -91,17 +88,17 @@
                 color: var(--text-primary);
             }
 
-            .stat-box,
+            .wallet-card,
             .table-card {
                 background: var(--bg-card);
                 border-color: var(--border-color);
             }
 
-            .stat-box .stat-label {
+            .wallet-card .wallet-label {
                 color: var(--text-muted);
             }
 
-            .stat-box .stat-value {
+            .wallet-card .wallet-value {
                 color: var(--text-primary);
             }
 
@@ -118,6 +115,10 @@
 
             .table-container tr:hover td {
                 background: rgba(255, 255, 255, 0.02);
+            }
+
+            .ia-card {
+                background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
             }
 
             .toast {
@@ -155,32 +156,19 @@
                 color: var(--text-muted);
             }
 
-            .modal-content {
-                background: var(--bg-card);
-                color: var(--text-primary);
+            .badge-status.ativa {
+                background: rgba(16, 185, 129, 0.15);
+                color: var(--green);
             }
 
-            .modal-header h2 {
-                color: var(--text-primary);
+            .badge-status.inativa {
+                background: rgba(239, 68, 68, 0.15);
+                color: var(--red);
             }
 
-            .form-group label {
-                color: var(--text-secondary);
-            }
-
-            .form-group input,
-            .form-group select,
-            .form-group textarea {
-                background: var(--gray-700);
-                border-color: var(--gray-600);
-                color: var(--white);
-            }
-
-            .form-group input:focus,
-            .form-group select:focus,
-            .form-group textarea:focus {
-                border-color: var(--blue-light);
-                box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            .badge-status.suspensa {
+                background: rgba(245, 158, 11, 0.15);
+                color: var(--orange);
             }
         }
 
@@ -547,6 +535,17 @@
             box-shadow: 0 8px 30px rgba(239, 68, 68, 0.25);
         }
 
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white;
+            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.2);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(217, 119, 6, 0.25);
+        }
+
         .btn-sm {
             padding: 6px 16px;
             font-size: 0.75rem;
@@ -593,101 +592,194 @@
         }
 
         /* ============================================
-           STATS
+           WALLET CARDS
            ============================================ */
-        .stats-grid {
+        .wallet-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin-bottom: 28px;
         }
 
-        .stat-box {
+        .wallet-card {
             background: var(--bg-card);
             border-radius: var(--radius);
-            padding: 16px 20px;
+            padding: 20px 24px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
-        .stat-box:hover {
+        .wallet-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .wallet-card:hover {
             box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
-        .stat-box .stat-label {
+        .wallet-card:hover::before {
+            opacity: 1;
+        }
+
+        .wallet-card .wallet-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .wallet-card .wallet-icon {
+            font-size: 1.8rem;
+            opacity: 0.7;
+        }
+
+        .wallet-card .wallet-label {
             font-size: 0.7rem;
+            font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.06em;
         }
 
-        .stat-box .stat-value {
+        .wallet-card .wallet-value {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--text-primary);
+            margin: 4px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .wallet-card .wallet-change {
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 10px;
+            border-radius: var(--radius-full);
+        }
+
+        .wallet-card .wallet-change.up {
+            color: var(--green);
+            background: rgba(16, 185, 129, 0.08);
+        }
+
+        .wallet-card .wallet-change.down {
+            color: var(--red);
+            background: rgba(239, 68, 68, 0.08);
         }
 
         /* ============================================
-           FILTERS
+           IA CARD
            ============================================ */
-        .filters-bar {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .search-input {
-            flex: 1;
-            min-width: 250px;
+        .ia-card {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            color: white;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-lg);
             position: relative;
+            overflow: hidden;
         }
 
-        .search-input input {
-            width: 100%;
-            padding: 10px 16px 10px 40px;
-            border: 1.5px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            background: var(--bg-card);
-            color: var(--text-primary);
-        }
-
-        .search-input input:focus {
-            outline: none;
-            border-color: var(--blue);
-            box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.08);
-        }
-
-        .search-input .icon {
+        .ia-card::after {
+            content: '';
             position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
-        .filter-select {
-            padding: 10px 16px;
-            border: 1.5px solid var(--border-color);
+        @media (prefers-color-scheme: dark) {
+            .ia-card {
+                background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            }
+        }
+
+        .ia-card .ia-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ia-card .ia-top .ia-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ia-card .ia-top .ia-badge {
+            background: rgba(217, 119, 6, 0.15);
+            color: var(--gold);
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid rgba(217, 119, 6, 0.08);
+        }
+
+        .ia-card .ia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ia-card .ia-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            min-width: 160px;
+            padding: 14px 16px;
+            transition: var(--transition);
             cursor: pointer;
         }
 
-        .filter-select:focus {
-            outline: none;
-            border-color: var(--blue);
+        .ia-card .ia-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .ia-card .ia-item .ia-item-icon {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .ia-card .ia-item .ia-item-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: white;
+        }
+
+        .ia-card .ia-item .ia-item-desc {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
         }
 
         /* ============================================
@@ -699,11 +791,39 @@
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
             overflow: hidden;
+            margin-bottom: 28px;
             transition: var(--transition);
         }
 
         .table-card:hover {
             box-shadow: var(--shadow-hover);
+        }
+
+        .table-card .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table-card .table-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .table-card .table-header .action {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .table-card .table-header .action:hover {
+            color: var(--orange);
         }
 
         .table-container {
@@ -713,23 +833,23 @@
         .table-container table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
         }
 
         .table-container th {
             text-align: left;
-            padding: 14px 18px;
-            background: var(--gray-50);
+            padding: 12px 16px;
             font-weight: 600;
             color: var(--text-muted);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
             border-bottom: 1px solid var(--border-color);
+            background: var(--gray-50);
         }
 
         .table-container td {
-            padding: 14px 18px;
+            padding: 12px 16px;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-secondary);
         }
@@ -751,247 +871,30 @@
             }
         }
 
+        /* ============================================
+           BADGE STATUS
+           ============================================ */
         .badge-status {
             display: inline-block;
             padding: 3px 14px;
             border-radius: var(--radius-full);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
         }
 
-        .badge-status.active {
+        .badge-status.ativa {
             background: rgba(16, 185, 129, 0.12);
             color: var(--green);
         }
 
-        .badge-status.inactive {
+        .badge-status.inativa {
             background: rgba(239, 68, 68, 0.12);
             color: var(--red);
         }
 
-        .badge-status.suspended {
+        .badge-status.suspensa {
             background: rgba(245, 158, 11, 0.12);
             color: var(--orange);
-        }
-
-        .actions-cell {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .btn-action {
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .btn-action.view {
-            background: rgba(59, 130, 246, 0.12);
-            color: var(--blue);
-        }
-
-        .btn-action.edit {
-            background: rgba(245, 158, 11, 0.12);
-            color: var(--orange);
-        }
-
-        .btn-action.delete {
-            background: rgba(239, 68, 68, 0.12);
-            color: var(--red);
-        }
-
-        .btn-action:hover {
-            transform: translateY(-1px);
-        }
-
-        /* ============================================
-           PAGINATION
-           ============================================ */
-        .pagination {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 18px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .pagination .info {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .pagination .buttons {
-            display: flex;
-            gap: 4px;
-        }
-
-        .pagination .buttons button {
-            padding: 6px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background: var(--bg-card);
-            color: var(--text-secondary);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .pagination .buttons button:hover {
-            background: var(--gray-50);
-            border-color: var(--blue);
-        }
-
-        .pagination .buttons button.active {
-            background: var(--blue);
-            color: white;
-            border-color: var(--blue);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .pagination .buttons button:hover {
-                background: var(--gray-700);
-            }
-        }
-
-        /* ============================================
-           MODAL
-           ============================================ */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(10, 37, 64, 0.6);
-            backdrop-filter: blur(4px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 32px;
-            max-width: 560px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: fadeUp 0.3s ease;
-            color: var(--text-primary);
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .modal-header h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-
-        .modal-close:hover {
-            color: var(--text-primary);
-            transform: rotate(90deg);
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-        }
-
-        .form-group label .required {
-            color: var(--red);
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1.5px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            background: var(--bg-card);
-            color: var(--text-primary);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--blue);
-            box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.08);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 24px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-color);
         }
 
         /* ============================================
@@ -1010,7 +913,7 @@
             gap: 12px;
             font-weight: 600;
             font-size: 0.875rem;
-            z-index: 3000;
+            z-index: 2000;
             border-left: 4px solid var(--gold);
             animation: slideInRight 0.4s ease;
             max-width: 420px;
@@ -1045,7 +948,7 @@
         }
 
         /* ============================================
-           RESPONSIVO
+           MOBILE TOGGLE
            ============================================ */
         .mobile-toggle {
             display: none;
@@ -1088,9 +991,15 @@
             }
         }
 
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
         @media (max-width: 1200px) {
-            .stats-grid {
+            .wallet-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .ia-card .ia-content {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -1106,7 +1015,7 @@
 
             .main {
                 margin-left: 0;
-                padding: 16px;
+                padding: 20px;
             }
 
             .mobile-toggle {
@@ -1117,12 +1026,12 @@
                 display: block;
             }
 
-            .form-row {
-                grid-template-columns: 1fr;
+            .wallet-grid {
+                grid-template-columns: 1fr 1fr;
             }
 
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
+            .ia-card .ia-content {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1132,24 +1041,12 @@
                 align-items: flex-start;
             }
 
-            .filters-bar {
-                flex-direction: column;
+            .wallet-grid {
+                grid-template-columns: 1fr;
             }
 
-            .search-input {
-                min-width: 100%;
-            }
-
-            .filter-select {
-                width: 100%;
-            }
-
-            .actions-cell {
-                flex-wrap: wrap;
-            }
-
-            .modal-content {
-                padding: 20px;
+            .wallet-card .wallet-value {
+                font-size: 1.6rem;
             }
 
             .toast {
@@ -1160,27 +1057,23 @@
                 font-size: 0.8rem;
                 padding: 12px 16px;
             }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 480px) {
-            .main-header {
-                padding: 10px 16px;
-            }
-
             .main {
                 padding: 16px;
             }
 
-            .sidebar .logo .logo-img {
-                height: 28px;
+            .wallet-card {
+                padding: 16px 18px;
             }
 
-            .stat-box .stat-value {
-                font-size: 1.4rem;
+            .ia-card {
+                padding: 16px 18px;
+            }
+
+            .sidebar .logo .logo-img {
+                height: 28px;
             }
         }
 
@@ -1213,26 +1106,26 @@
                 height: 36px !important;
             }
 
-            .actions-cell {
+            .ia-card {
                 display: none !important;
             }
 
-            .btn-primary {
+            .wallet-grid {
                 display: none !important;
             }
 
-            .modal-overlay {
+            .table-card .table-header .action {
                 display: none !important;
             }
 
-            .stat-box {
-                box-shadow: none !important;
-                border: 1px solid #E2E8F0 !important;
-            }
-
+            .wallet-card,
             .table-card {
                 box-shadow: none !important;
                 border: 1px solid #E2E8F0 !important;
+            }
+
+            .table-container th {
+                background: #F8FAFC !important;
             }
         }
     </style>
@@ -1251,7 +1144,7 @@
     SIDEBAR
     ============================================ -->
     <aside class="sidebar" id="sidebar" role="navigation" aria-label="Menu principal">
-        <a href="../dashboard.html" class="logo" aria-label="VIGORRE ONE™ Home">
+        <a href="#" class="logo" aria-label="VIGORRE ONE™ Home">
             <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-text">
                 <span class="name">VIGORRE ONE<span class="tm">™</span></span>
@@ -1262,24 +1155,34 @@
         <div class="user-info">
             <div class="name" id="userName">Administrador</div>
             <div class="role">
-                <span class="badge">💰 Master Financeiro</span>
+                <span class="badge">👑 Master</span>
             </div>
         </div>
 
+        <!-- ============================================
+        MENU CORRIGIDO - TODOS OS ITENS FIXOS
+        ============================================ -->
         <ul class="nav">
             <li><a href="../dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
             <li><a href="../empresas/"><span class="icon">🏢</span> Empresas</a></li>
             <li><a href="../recrutadores/"><span class="icon">👤</span> Recrutadores</a></li>
             <li><a href="../participantes/"><span class="icon">👥</span> Participantes</a></li>
-            <li><a href="index.html"><span class="icon">💰</span> Centro Financeiro</a></li>
-            <li><a href="carteiras.html" class="active"><span class="icon">💼</span> Carteiras</a></li>
+            <li><a href="../creditos/"><span class="icon">💳</span> Créditos</a></li>
+            <li><a href="../relatorios/"><span class="icon">📄</span> Relatórios</a></li>
+            <!-- ITENS FIXOS - NUNCA SOMEM -->
+            <li><a href="../job-profile/index.html"><span class="icon">🎯</span> Job Profile</a></li>
+            <li><a href="index.html" class="active" aria-current="page"><span class="icon">💰</span> Centro Financeiro</a></li>
             <div class="divider"></div>
+            <li><a href="carteiras.html" class="active"><span class="icon">💼</span> Carteiras</a></li>
             <li><a href="creditos.html"><span class="icon">💳</span> Créditos</a></li>
             <li><a href="extratos.html"><span class="icon">📋</span> Extratos</a></li>
             <li><a href="precos.html"><span class="icon">🏷️</span> Preços</a></li>
             <li><a href="auditoria.html"><span class="icon">🔍</span> Auditoria</a></li>
+            <div class="divider"></div>
             <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
             <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
+            <li><a href="../bi/dashboard.html"><span class="icon">📈</span> BI Analytics</a></li>
+            <li><a href="../usuarios/"><span class="icon">👤</span> Usuários</a></li>
         </ul>
 
         <div class="logout">
@@ -1303,160 +1206,100 @@
         <div class="main-header">
             <div>
                 <div class="breadcrumb">
-                    <a href="index.html">Centro Financeiro</a> / Carteiras
+                    <a href="../dashboard.html">Dashboard</a> / <a href="index.html">Centro Financeiro</a> / <span>Carteiras</span>
                 </div>
-                <h1>💼 Carteira Vigorre</h1>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Gerencie o saldo, créditos e histórico de todos os usuários</p>
+                <h1>💼 Carteiras</h1>
             </div>
             <div class="actions">
-                <button class="btn-primary" onclick="openModal()" data-tooltip="Adicionar créditos a uma carteira">➕ Adicionar Créditos</button>
-                <button class="btn-secondary" onclick="window.location.href='extratos.html'" data-tooltip="Ver extratos completos">📋 Extratos</button>
+                <button class="btn btn-primary" onclick="openNewWallet()" data-tooltip="Criar nova carteira">
+                    ➕ Nova Carteira
+                </button>
+                <button class="btn btn-success" onclick="refreshData()" data-tooltip="Atualizar dados">
+                    🔄 Atualizar
+                </button>
             </div>
         </div>
 
         <!-- ============================================
-        STATS
+        IA CARD
         ============================================ -->
-        <div class="stats-grid">
-            <div class="stat-box" data-tooltip="Saldo total em todas as carteiras">
-                <div class="stat-label">Saldo Total</div>
-                <div class="stat-value">R$ 284.500</div>
+        <div class="ia-card">
+            <div class="ia-top">
+                <span class="ia-title">🤖 Insights das Carteiras</span>
+                <span class="ia-badge">Atualizado agora</span>
             </div>
-            <div class="stat-box" data-tooltip="Créditos em circulação">
-                <div class="stat-label">Créditos em Circulação</div>
-                <div class="stat-value">125.000</div>
-            </div>
-            <div class="stat-box" data-tooltip="Créditos já utilizados">
-                <div class="stat-label">Créditos Utilizados</div>
-                <div class="stat-value">42.800</div>
-            </div>
-            <div class="stat-box" data-tooltip="Créditos promocionais ativos">
-                <div class="stat-label">Créditos Promocionais</div>
-                <div class="stat-value">12.500</div>
+            <div class="ia-content" id="iaContent">
+                <!-- Carregado via JavaScript -->
             </div>
         </div>
 
         <!-- ============================================
-        FILTERS
+        WALLET GRID
         ============================================ -->
-        <div class="filters-bar">
-            <div class="search-input">
-                <span class="icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Buscar usuário, empresa ou consultor..." oninput="filterTable()" />
+        <div class="wallet-grid" id="walletGrid">
+            <div class="wallet-card" data-tooltip="Saldo total de todas as carteiras">
+                <div class="wallet-top">
+                    <span class="wallet-label">Saldo Total</span>
+                    <span class="wallet-icon">💰</span>
+                </div>
+                <div class="wallet-value" id="totalBalance">R$ 0</div>
+                <span class="wallet-change up">↑ 12% este mês</span>
             </div>
-            <select class="filter-select" id="typeFilter" onchange="filterTable()">
-                <option value="">Todos os tipos</option>
-                <option value="empresa">Empresa</option>
-                <option value="consultor">Consultor</option>
-                <option value="pessoa">Pessoa Física</option>
-            </select>
+            <div class="wallet-card" data-tooltip="Número total de carteiras">
+                <div class="wallet-top">
+                    <span class="wallet-label">Total Carteiras</span>
+                    <span class="wallet-icon">💼</span>
+                </div>
+                <div class="wallet-value" id="totalWallets">0</div>
+                <span class="wallet-change up">↑ 3 este mês</span>
+            </div>
+            <div class="wallet-card" data-tooltip="Carteiras ativas">
+                <div class="wallet-top">
+                    <span class="wallet-label">Carteiras Ativas</span>
+                    <span class="wallet-icon">✅</span>
+                </div>
+                <div class="wallet-value" id="activeWallets">0</div>
+                <span class="wallet-change up">↑ 2 este mês</span>
+            </div>
+            <div class="wallet-card" data-tooltip="Movimentação total do mês">
+                <div class="wallet-top">
+                    <span class="wallet-label">Movimentação Mês</span>
+                    <span class="wallet-icon">📊</span>
+                </div>
+                <div class="wallet-value" id="monthlyMovement">R$ 0</div>
+                <span class="wallet-change up">↑ 8% este mês</span>
+            </div>
         </div>
 
         <!-- ============================================
-        TABLE
+        WALLETS TABLE
         ============================================ -->
         <div class="table-card">
+            <div class="table-header">
+                <h3>📋 Lista de Carteiras</h3>
+                <a href="#" class="action" onclick="openNewWallet()">+ Nova Carteira</a>
+            </div>
             <div class="table-container">
                 <table aria-label="Lista de carteiras">
                     <thead>
                         <tr>
-                            <th>Usuário</th>
-                            <th>Tipo</th>
-                            <th>Saldo Disponível</th>
-                            <th>Saldo Reservado</th>
-                            <th>Créditos Bônus</th>
-                            <th>Validade</th>
-                            <th style="text-align:center;">Ações</th>
+                            <th>ID</th>
+                            <th>Empresa / Usuário</th>
+                            <th>Saldo</th>
+                            <th>Créditos</th>
+                            <th>Status</th>
+                            <th>Última Movimentação</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="tableBody">
-                        <tr>
-                            <td colspan="7" style="text-align:center;padding:40px;color:var(--text-muted);">
-                                Carregando carteiras...
-                            </td>
-                        </tr>
+                    <tbody id="walletsTable">
+                        <!-- Carregado via JavaScript -->
                     </tbody>
                 </table>
-            </div>
-            <div class="pagination">
-                <span class="info" id="paginationInfo">Mostrando 0 de 0 carteiras</span>
-                <div class="buttons">
-                    <button onclick="prevPage()" id="prevBtn" data-tooltip="Página anterior">Anterior</button>
-                    <button class="active" id="pageIndicator">1</button>
-                    <button onclick="nextPage()" id="nextBtn" data-tooltip="Próxima página">Próximo</button>
-                </div>
             </div>
         </div>
 
     </main>
-
-    <!-- ============================================
-    MODAL
-    ============================================ -->
-    <div class="modal-overlay" id="creditsModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Adicionar Créditos</h2>
-                <button class="modal-close" onclick="closeModal()" aria-label="Fechar modal">&times;</button>
-            </div>
-
-            <form id="creditsForm" onsubmit="saveCredits(event)">
-                <div class="form-group">
-                    <label>Destinatário <span class="required">*</span></label>
-                    <select id="recipient" required>
-                        <option value="">Selecione um usuário</option>
-                        <option value="techcorp">🏢 TechCorp Solutions</option>
-                        <option value="inovalab">🏢 InovaLab Brasil</option>
-                        <option value="startupx">🏢 StartupX Ventures</option>
-                        <option value="joao">👤 João Silva (Consultor)</option>
-                        <option value="maria">👤 Maria Santos (Consultor)</option>
-                    </select>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Quantidade <span class="required">*</span></label>
-                        <input type="number" id="quantidade" value="10" min="1" required />
-                    </div>
-                    <div class="form-group">
-                        <label>Tipo</label>
-                        <select id="tipoCredito">
-                            <option value="normal">Normal</option>
-                            <option value="bonus">Bônus</option>
-                            <option value="promocional">Promocional</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Motivo <span class="required">*</span></label>
-                    <select id="motivo" required>
-                        <option value="">Selecione um motivo</option>
-                        <option value="compra">Compra de créditos</option>
-                        <option value="bonus">Bônus promocional</option>
-                        <option value="cortesia">Cortesia</option>
-                        <option value="ajuste">Ajuste manual</option>
-                        <option value="recarga">Recarga automática</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Observação</label>
-                    <textarea id="observacao" placeholder="Detalhes adicionais sobre esta transação..."></textarea>
-                </div>
-
-                <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;">
-                    <input type="checkbox" id="notificar" checked />
-                    <label for="notificar" style="font-weight:400;font-size:0.85rem;color:var(--text-secondary);">Enviar notificação automática</label>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
-                    <button type="submit" class="btn-success">💾 Adicionar Créditos</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <!-- ============================================
     SCRIPTS
@@ -1474,11 +1317,6 @@
          */
 
         'use strict';
-
-        var wallets = [];
-        var filteredWallets = [];
-        var currentPage = 1;
-        var pageSize = 10;
 
         // ============================================
         // TOGGLE SIDEBAR
@@ -1531,187 +1369,235 @@
 
             document.getElementById('userName').textContent = user.name || 'Administrador';
 
-            loadWallets();
+            setTimeout(function() {
+                loadIAContent();
+                loadWalletStats();
+                loadWallets();
+            }, 300);
+
+            setInterval(function() {
+                loadWalletStats();
+                loadWallets();
+            }, 60000);
         });
 
         // ============================================
-        // CARREGAR CARTEIRAS
+        // CARREGAR IA CONTENT
         // ============================================
-        function loadWallets() {
-            wallets = [
-                { id: 'w1', name: 'TechCorp Solutions', type: 'empresa', saldo: 1250, reservado: 200, bonus: 50,
-                    validade: '2024-12-31' },
-                { id: 'w2', name: 'InovaLab Brasil', type: 'empresa', saldo: 820, reservado: 100, bonus: 30,
-                    validade: '2024-11-30' },
-                { id: 'w3', name: 'João Silva', type: 'consultor', saldo: 450, reservado: 50, bonus: 20,
-                    validade: '2024-10-15' },
-                { id: 'w4', name: 'Maria Santos', type: 'consultor', saldo: 280, reservado: 30, bonus: 10,
-                    validade: '2024-09-30' },
-                { id: 'w5', name: 'Carlos Souza', type: 'pessoa', saldo: 150, reservado: 20, bonus: 5,
-                validade: '2024-08-15' }
+        function loadIAContent() {
+            var container = document.getElementById('iaContent');
+
+            var insights = [
+                { icon: '💰', title: 'Saldo Total', desc: 'Saldo consolidado: R$ 42.850' },
+                { icon: '⚠️', title: 'Alertas', desc: '2 carteiras com saldo baixo' },
+                { icon: '📈', title: 'Crescimento', desc: 'Carteiras cresceram 12% este mês' },
+                { icon: '💼', title: 'Nova Carteira', desc: 'Criar carteira para nova empresa' },
+                { icon: '🔄', title: 'Movimentações', desc: '15 movimentações este mês' }
             ];
 
-            filteredWallets = wallets.slice();
-            renderTable();
-        }
-
-        // ============================================
-        // RENDERIZAR TABELA
-        // ============================================
-        function renderTable() {
-            var tbody = document.getElementById('tableBody');
-
-            if (filteredWallets.length === 0) {
-                tbody.innerHTML =
-                    '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-muted);">📭 Nenhuma carteira encontrada</td></tr>';
-                document.getElementById('paginationInfo').textContent = 'Mostrando 0 de 0 carteiras';
-                return;
-            }
-
-            var start = (currentPage - 1) * pageSize;
-            var end = Math.min(start + pageSize, filteredWallets.length);
-            var pageItems = filteredWallets.slice(start, end);
-
-            var typeMap = {
-                'empresa': '🏢 Empresa',
-                'consultor': '👤 Consultor',
-                'pessoa': '👤 Pessoa Física'
-            };
-
             var html = '';
-            for (var i = 0; i < pageItems.length; i++) {
-                var w = pageItems[i];
-                html += '<tr>';
-                html += '<td><strong>' + w.name + '</strong></td>';
-                html += '<td>' + (typeMap[w.type] || '--') + '</td>';
-                html += '<td><span style="font-weight:700;color:var(--green);">' + w.saldo + '</span></td>';
-                html += '<td>' + w.reservado + '</td>';
-                html += '<td>' + w.bonus + '</td>';
-                html += '<td style="font-size:0.8rem;color:var(--text-muted);">' + new Date(w.validade)
-                    .toLocaleDateString('pt-BR') + '</td>';
-                html += '<td style="text-align:center;">';
-                html += '<div class="actions-cell" style="justify-content:center;">';
-                html += '<button class="btn-action view" onclick="viewWallet(\'' + w.id + '\')" data-tooltip="Visualizar carteira">👁️</button>';
-                html += '<button class="btn-action edit" onclick="openModal(\'' + w.id + '\')" data-tooltip="Editar carteira">✏️</button>';
-                html += '<button class="btn-action delete" onclick="deleteWallet(\'' + w.id + '\')" data-tooltip="Excluir carteira">🗑️</button>';
+            for (var i = 0; i < insights.length; i++) {
+                var item = insights[i];
+                html += '<div class="ia-item" onclick="handleIAClick(\'' + item.title + '\')">';
+                html += '<div class="ia-item-icon">' + item.icon + '</div>';
+                html += '<div class="ia-item-title">' + item.title + '</div>';
+                html += '<div class="ia-item-desc">' + item.desc + '</div>';
                 html += '</div>';
-                html += '</td>';
-                html += '</tr>';
             }
 
-            tbody.innerHTML = html;
-
-            var total = filteredWallets.length;
-            document.getElementById('paginationInfo').textContent = 'Mostrando ' + (start + 1) + '-' + end + ' de ' + total +
-                ' carteiras';
-            document.getElementById('pageIndicator').textContent = currentPage;
-            document.getElementById('prevBtn').disabled = currentPage === 1;
-            document.getElementById('nextBtn').disabled = end >= total;
+            container.innerHTML = html;
         }
 
         // ============================================
-        // FILTRAR
+        // HANDLE IA CLICK
         // ============================================
-        function filterTable() {
-            var search = document.getElementById('searchInput').value.toLowerCase();
-            var type = document.getElementById('typeFilter').value;
-
-            filteredWallets = [];
-            for (var i = 0; i < wallets.length; i++) {
-                var w = wallets[i];
-                var matchSearch = w.name.toLowerCase().indexOf(search) !== -1;
-                var matchType = !type || w.type === type;
-                if (matchSearch && matchType) {
-                    filteredWallets.push(w);
-                }
-            }
-
-            currentPage = 1;
-            renderTable();
+        function handleIAClick(title) {
+            showToast('🤖 IA: ' + title, 'info');
         }
 
         // ============================================
-        // PAGINAÇÃO
+        // CARREGAR WALLET STATS
         // ============================================
-        function prevPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                renderTable();
-            }
-        }
+        function loadWalletStats() {
+            try {
+                var wallets = JSON.parse(localStorage.getItem('vigorre_wallets') || '[]');
+                var transactions = JSON.parse(localStorage.getItem('vigorre_credit_transactions') || '[]');
 
-        function nextPage() {
-            var totalPages = Math.ceil(filteredWallets.length / pageSize);
-            if (currentPage < totalPages) {
-                currentPage++;
-                renderTable();
-            }
-        }
+                var totalBalance = 0;
+                var activeCount = 0;
+                var monthlyMovement = 0;
 
-        // ============================================
-        // MODAL
-        // ============================================
-        function openModal(id) {
-            document.getElementById('creditsModal').classList.add('active');
-            if (id) {
                 for (var i = 0; i < wallets.length; i++) {
-                    if (wallets[i].id === id) {
-                        document.getElementById('recipient').value = id;
-                        break;
+                    totalBalance += wallets[i].balance || 0;
+                    if (wallets[i].status === 'ativa') {
+                        activeCount++;
                     }
                 }
+
+                var now = new Date();
+                var currentMonth = now.getMonth();
+                var currentYear = now.getFullYear();
+
+                for (var j = 0; j < transactions.length; j++) {
+                    var t = transactions[j];
+                    if (t.date) {
+                        var date = new Date(t.date);
+                        if (date.getMonth() === currentMonth && date.getFullYear() === currentYear) {
+                            monthlyMovement += t.amount || 0;
+                        }
+                    }
+                }
+
+                var formattedTotal = 'R$ ' + totalBalance.toLocaleString('pt-BR');
+                var formattedMovement = 'R$ ' + monthlyMovement.toLocaleString('pt-BR');
+
+                document.getElementById('totalBalance').textContent = formattedTotal;
+                document.getElementById('totalWallets').textContent = wallets.length;
+                document.getElementById('activeWallets').textContent = activeCount;
+                document.getElementById('monthlyMovement').textContent = formattedMovement;
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar estatísticas das carteiras:', error);
             }
         }
 
-        function closeModal() {
-            document.getElementById('creditsModal').classList.remove('active');
+        // ============================================
+        // CARREGAR WALLETS
+        // ============================================
+        function loadWallets() {
+            try {
+                var wallets = JSON.parse(localStorage.getItem('vigorre_wallets') || '[]');
+                var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+
+                var tbody = document.getElementById('walletsTable');
+
+                if (wallets.length === 0) {
+                    tbody.innerHTML =
+                        '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-muted);">Nenhuma carteira encontrada</td></tr>';
+                    return;
+                }
+
+                var html = '';
+                var limit = Math.min(wallets.length, 20);
+
+                for (var i = 0; i < limit; i++) {
+                    var w = wallets[i];
+
+                    var companyName = '--';
+                    for (var j = 0; j < companies.length; j++) {
+                        if (companies[j].id === w.companyId) {
+                            companyName = companies[j].name || 'Empresa';
+                            break;
+                        }
+                    }
+
+                    var statusClass = w.status === 'ativa' ? 'ativa' :
+                        w.status === 'suspensa' ? 'suspensa' : 'inativa';
+                    var statusText = w.status === 'ativa' ? '✅ Ativa' :
+                        w.status === 'suspensa' ? '⚠️ Suspensa' : '❌ Inativa';
+
+                    var formattedBalance = 'R$ ' + (w.balance || 0).toLocaleString('pt-BR');
+                    var credits = w.credits || {};
+
+                    var totalCredits = (credits.DISC || 0) + (credits.IE || 0) + (credits.Valores || 0);
+
+                    var lastMovement = w.lastMovement ? new Date(w.lastMovement).toLocaleDateString('pt-BR') : '--';
+
+                    var walletId = w.id || (w._id || 'C' + (i + 1).toString().padStart(4, '0'));
+
+                    html += '<tr>';
+                    html += '<td><span style="font-family:monospace;font-size:0.8rem;color:var(--text-muted);">#' + walletId +
+                        '</span></td>';
+                    html += '<td><strong>' + companyName + '</strong></td>';
+                    html += '<td style="font-weight:600;color:var(--text-primary);">' + formattedBalance + '</td>';
+                    html += '<td>' + totalCredits + '</td>';
+                    html += '<td><span class="badge-status ' + statusClass + '">' + statusText + '</span></td>';
+                    html += '<td style="font-size:0.8rem;color:var(--text-muted);">' + lastMovement + '</td>';
+                    html += '<td>';
+                    html +=
+                        '<button class="btn btn-sm btn-secondary" onclick="viewWallet(\'' + w.id +
+                        '\')" data-tooltip="Ver detalhes" style="margin-right:4px;">👁️</button>';
+                    html +=
+                        '<button class="btn btn-sm btn-primary" onclick="editWallet(\'' + w.id +
+                        '\')" data-tooltip="Editar" style="margin-right:4px;">✏️</button>';
+                    html +=
+                        '<button class="btn btn-sm btn-danger" onclick="deleteWallet(\'' + w.id +
+                        '\')" data-tooltip="Excluir">🗑️</button>';
+                    html += '</td>';
+                    html += '</tr>';
+                }
+
+                tbody.innerHTML = html;
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar carteiras:', error);
+            }
         }
 
         // ============================================
-        // SALVAR CRÉDITOS
+        // OPEN NEW WALLET
         // ============================================
-        function saveCredits(e) {
-            e.preventDefault();
-            showToast('✅ Créditos adicionados com sucesso!', 'success');
-            closeModal();
+        function openNewWallet() {
+            showToast('➕ Abrindo formulário de nova carteira...', 'info');
+            setTimeout(function() {
+                window.location.href = 'nova-carteira.html';
+            }, 500);
         }
 
         // ============================================
-        // VISUALIZAR CARTEIRA
+        // VIEW WALLET
         // ============================================
         function viewWallet(id) {
-            var wallet = null;
-            for (var i = 0; i < wallets.length; i++) {
-                if (wallets[i].id === id) {
-                    wallet = wallets[i];
-                    break;
-                }
-            }
-            if (!wallet) return;
-
-            alert(
-                '💼 ' + wallet.name + '\n\n📊 Saldo Disponível: ' + wallet.saldo + '\n📌 Saldo Reservado: ' + wallet
-                .reservado + '\n🎁 Créditos Bônus: ' + wallet.bonus + '\n📅 Validade: ' + new Date(wallet.validade)
-                .toLocaleDateString('pt-BR')
-            );
+            showToast('👁️ Visualizando carteira ' + id, 'info');
+            setTimeout(function() {
+                window.location.href = 'carteira-detalhe.html?id=' + id;
+            }, 500);
         }
 
         // ============================================
-        // DELETAR CARTEIRA
+        // EDIT WALLET
+        // ============================================
+        function editWallet(id) {
+            showToast('✏️ Editando carteira ' + id, 'info');
+            setTimeout(function() {
+                window.location.href = 'editar-carteira.html?id=' + id;
+            }, 500);
+        }
+
+        // ============================================
+        // DELETE WALLET
         // ============================================
         function deleteWallet(id) {
-            if (!confirm('Tem certeza que deseja excluir esta carteira?')) return;
-
-            var newWallets = [];
-            for (var i = 0; i < wallets.length; i++) {
-                if (wallets[i].id !== id) {
-                    newWallets.push(wallets[i]);
+            if (confirm('Deseja realmente excluir esta carteira?')) {
+                try {
+                    var wallets = JSON.parse(localStorage.getItem('vigorre_wallets') || '[]');
+                    var updated = [];
+                    for (var i = 0; i < wallets.length; i++) {
+                        if (wallets[i].id !== id && wallets[i]._id !== id) {
+                            updated.push(wallets[i]);
+                        }
+                    }
+                    localStorage.setItem('vigorre_wallets', JSON.stringify(updated));
+                    showToast('🗑️ Carteira excluída com sucesso!', 'success');
+                    loadWallets();
+                    loadWalletStats();
+                } catch (error) {
+                    showToast('❌ Erro ao excluir carteira', 'error');
                 }
             }
-            wallets = newWallets;
-            filteredWallets = wallets.slice();
-            renderTable();
-            showToast('Carteira excluída com sucesso!', 'success');
+        }
+
+        // ============================================
+        // REFRESH DATA
+        // ============================================
+        function refreshData() {
+            showToast('🔄 Atualizando dados...', 'info');
+            setTimeout(function() {
+                loadWallets();
+                loadWalletStats();
+                loadIAContent();
+                showToast('✅ Dados atualizados com sucesso!', 'success');
+            }, 800);
         }
 
         // ============================================
@@ -1739,12 +1625,7 @@
             }, 4000);
         }
 
-        // Fechar modal ao clicar fora
-        document.getElementById('creditsModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-
-        console.log('✅ Carteiras carregado com sucesso!');
+        console.log('✅ Carteiras International carregado com sucesso!');
     </script>
 
 </body>
