@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes do Plano | Centro Financeiro | VIGORRE ONE™</title>
+
+    <!-- ==========================================
+    FONTS PREMIUM
+    ========================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ============================================
+           VIGORRE ONE™ - PLANO DETALHE
+           INTERNATIONAL ENTERPRISE EDITION
+           ============================================ */
+
+        /* ============================================
+           CSS VARIABLES (TEMA CLARO)
+           ============================================ */
+        :root {
+            --navy: #0A2540;
+            --navy-light: #1A3A5C;
+            --blue: #1D4ED8;
+            --blue-light: #3B82F6;
+            --cyan: #06B6D4;
+            --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
+            --purple: #7C3AED;
+            --pink: #EC4899;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 24px rgba(10, 37, 64, 0.04);
+            --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.04), 0 8px 40px rgba(10, 37, 64, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.06), 0 16px 64px rgba(10, 37, 64, 0.10);
+            --transition: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --bg-body: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --border-color: #E2E8F0;
+        }
+
+        /* ============================================
+           TEMA ESCURO (AUTO DETECT)
+           ============================================ */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-body: #0F172A;
+                --bg-card: #1E293B;
+                --text-primary: #F8FAFC;
+                --text-secondary: #94A3B8;
+                --text-muted: #64748B;
+                --border-color: #334155;
+                --shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 24px rgba(0, 0, 0, 0.15);
+                --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.2), 0 8px 40px rgba(0, 0, 0, 0.25);
+                --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.25), 0 16px 64px rgba(0, 0, 0, 0.3);
+            }
+
+            body {
+                background: var(--bg-body);
+                color: var(--text-primary);
+            }
+
+            .detail-card,
+            .stat-card,
+            .table-card {
+                background: var(--bg-card);
+                border-color: var(--border-color);
+            }
+
+            .detail-card .detail-label {
+                color: var(--text-muted);
+            }
+
+            .detail-card .detail-value {
+                color: var(--text-primary);
+            }
+
+            .stat-card .stat-label {
+                color: var(--text-muted);
+            }
+
+            .stat-card .stat-value {
+                color: var(--text-primary);
+            }
+
+            .table-container th {
+                background: var(--bg-card);
+                color: var(--text-muted);
+                border-color: var(--border-color);
+            }
+
+            .table-container td {
+                color: var(--text-secondary);
+                border-color: var(--border-color);
+            }
+
+            .table-container tr:hover td {
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            .ia-card {
+                background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            }
+
+            .toast {
+                background: var(--bg-card);
+                color: var(--text-primary);
+            }
+
+            .sidebar {
+                background: var(--gray-800);
+            }
+
+            .sidebar .nav a {
+                color: var(--text-muted);
+            }
+
+            .sidebar .nav a:hover {
+                background: rgba(255, 255, 255, 0.04);
+                color: var(--text-primary);
+            }
+
+            .sidebar .nav a.active {
+                background: rgba(217, 119, 6, 0.12);
+                color: var(--gold);
+            }
+
+            .sidebar .user-info {
+                border-color: var(--border-color);
+            }
+
+            .sidebar .user-info .name {
+                color: var(--text-primary);
+            }
+
+            .sidebar .user-info .role {
+                color: var(--text-muted);
+            }
+
+            .badge-status.ativo {
+                background: rgba(16, 185, 129, 0.15);
+                color: var(--green);
+            }
+
+            .badge-status.inativo {
+                background: rgba(239, 68, 68, 0.15);
+                color: var(--red);
+            }
+
+            .badge-popular {
+                background: var(--gold);
+                color: var(--navy);
+            }
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background var(--transition-slow), color var(--transition-slow);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           SCROLLBAR PREMIUM
+           ============================================ */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-400);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            ::-webkit-scrollbar-thumb {
+                background: var(--gray-600);
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--gray-500);
+            }
+        }
+
+        /* ============================================
+           SIDEBAR
+           ============================================ */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--navy);
+            color: white;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+            overflow-y: auto;
+            box-shadow: 2px 0 24px rgba(0, 0, 0, 0.06);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .sidebar {
+                background: var(--gray-800);
+                box-shadow: 2px 0 24px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        .sidebar .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sidebar .logo .logo-img {
+            height: 36px;
+            width: auto;
+            display: block;
+        }
+
+        .sidebar .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.3px;
+        }
+
+        .sidebar .logo .logo-text .name .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
+
+        .sidebar .logo .logo-text .sub {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .sidebar .user-info {
+            padding: 16px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-sm);
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+        }
+
+        .sidebar .user-info .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .sidebar .user-info .role {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar .user-info .role .badge {
+            display: inline-block;
+            padding: 2px 12px;
+            background: rgba(217, 119, 6, 0.15);
+            color: var(--gold);
+            border-radius: var(--radius-full);
+            font-size: 0.6rem;
+            font-weight: 600;
+            border: 1px solid rgba(217, 119, 6, 0.08);
+        }
+
+        .sidebar .nav {
+            list-style: none;
+            flex: 1;
+        }
+
+        .sidebar .nav li {
+            margin-bottom: 2px;
+        }
+
+        .sidebar .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .sidebar .nav a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%) scaleY(0);
+            width: 3px;
+            height: 24px;
+            background: var(--gold);
+            border-radius: 0 3px 3px 0;
+            transition: var(--transition);
+        }
+
+        .sidebar .nav a:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: white;
+        }
+
+        .sidebar .nav a.active {
+            background: rgba(217, 119, 6, 0.08);
+            color: white;
+        }
+
+        .sidebar .nav a.active::before {
+            transform: translateY(-50%) scaleY(1);
+        }
+
+        .sidebar .nav a .icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar .nav .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.04);
+            margin: 12px 0;
+        }
+
+        .sidebar .logout {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .sidebar .logout a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .sidebar .logout a:hover {
+            background: rgba(239, 68, 68, 0.12);
+            color: #F87171;
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .main {
+            margin-left: 260px;
+            padding: 28px 40px 48px;
+            min-height: 100vh;
+            transition: padding var(--transition-slow), margin var(--transition-slow);
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .main-header .breadcrumb {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .main-header .breadcrumb a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        .main-header .breadcrumb a:hover {
+            color: var(--cyan);
+        }
+
+        .main-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            margin-top: 4px;
+        }
+
+        .main-header .actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0);
+            transition: var(--transition);
+        }
+
+        .btn:hover::after {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: var(--green);
+            color: white;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-danger {
+            background: var(--red);
+            color: white;
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.25);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white;
+            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.2);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(217, 119, 6, 0.25);
+        }
+
+        .btn-sm {
+            padding: 6px 16px;
+            font-size: 0.75rem;
+        }
+
+        /* ============================================
+           TOOLTIP
+           ============================================ */
+        [data-tooltip] {
+            position: relative;
+            cursor: pointer;
+        }
+
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px) scale(0.8);
+            padding: 6px 14px;
+            background: var(--navy);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 500;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all var(--transition);
+            font-family: 'Inter', sans-serif;
+            z-index: 1000;
+        }
+
+        [data-tooltip]:hover:before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px) scale(1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            [data-tooltip]:before {
+                background: var(--gray-700);
+                color: var(--text-primary);
+            }
+        }
+
+        /* ============================================
+           DETAIL CARDS
+           ============================================ */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .detail-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .detail-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .detail-card:hover::before {
+            opacity: 1;
+        }
+
+        .detail-card .detail-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .detail-card .detail-icon {
+            font-size: 1.8rem;
+            opacity: 0.7;
+        }
+
+        .detail-card .detail-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .detail-card .detail-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 4px 0;
+        }
+
+        .detail-card .detail-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ============================================
+           STAT CARDS
+           ============================================ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .stat-card .stat-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           FEATURES LIST
+           ============================================ */
+        .features-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 28px;
+            transition: var(--transition);
+        }
+
+        .features-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .features-card .features-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .features-card .features-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .features-card .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            border-color: var(--gold);
+            background: var(--gray-100);
+        }
+
+        .feature-item .check {
+            color: var(--green);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .feature-item .feature-name {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .feature-item {
+                background: var(--gray-700);
+                border-color: var(--gray-600);
+            }
+
+            .feature-item:hover {
+                border-color: var(--gold);
+                background: var(--gray-600);
+            }
+
+            .feature-item .feature-name {
+                color: var(--text-secondary);
+            }
+        }
+
+        /* ============================================
+           IA CARD
+           ============================================ */
+        .ia-card {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            color: white;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ia-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .ia-card {
+                background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            }
+        }
+
+        .ia-card .ia-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ia-card .ia-top .ia-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ia-card .ia-top .ia-badge {
+            background: rgba(217, 119, 6, 0.15);
+            color: var(--gold);
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid rgba(217, 119, 6, 0.08);
+        }
+
+        .ia-card .ia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ia-card .ia-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .ia-card .ia-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .ia-card .ia-item .ia-item-icon {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .ia-card .ia-item .ia-item-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: white;
+        }
+
+        .ia-card .ia-item .ia-item-desc {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           TABLE
+           ============================================ */
+        .table-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin-top: 28px;
+            transition: var(--transition);
+        }
+
+        .table-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .table-card .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table-card .table-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .table-card .table-header .action {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .table-card .table-header .action:hover {
+            color: var(--orange);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .table-container th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--gray-50);
+        }
+
+        .table-container td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .table-container tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-container tr:hover td {
+            background: var(--gray-50);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .table-container th {
+                background: var(--bg-card);
+            }
+            .table-container tr:hover td {
+                background: rgba(255, 255, 255, 0.02);
+            }
+        }
+
+        /* ============================================
+           BADGE
+           ============================================ */
+        .badge-status {
+            display: inline-block;
+            padding: 3px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        .badge-status.ativo {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--green);
+        }
+
+        .badge-status.inativo {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--red);
+        }
+
+        .badge-popular {
+            display: inline-block;
+            padding: 3px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.65rem;
+            font-weight: 600;
+            background: var(--gold);
+            color: white;
+            margin-left: 8px;
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: var(--bg-card);
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 2000;
+            border-left: 4px solid var(--gold);
+            animation: slideInRight 0.4s ease;
+            max-width: 420px;
+            color: var(--text-primary);
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.error {
+            border-left-color: var(--red);
+        }
+
+        .toast.success {
+            border-left-color: var(--green);
+        }
+
+        .toast.warning {
+            border-left-color: var(--orange);
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ============================================
+           MOBILE TOGGLE
+           ============================================ */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-toggle:hover {
+            color: var(--gold);
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 37, 64, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
+        @media (max-width: 1200px) {
+            .detail-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .features-card .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .ia-card .ia-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .mobile-overlay.active {
+                display: block;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .features-card .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ia-card .ia-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-card .detail-value {
+                font-size: 1.2rem;
+            }
+
+            .toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                max-width: none;
+                font-size: 0.8rem;
+                padding: 12px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main {
+                padding: 16px;
+            }
+
+            .detail-card {
+                padding: 16px 18px;
+            }
+
+            .stat-card {
+                padding: 16px 18px;
+            }
+
+            .features-card {
+                padding: 18px;
+            }
+
+            .ia-card {
+                padding: 16px 18px;
+            }
+
+            .sidebar .logo .logo-img {
+                height: 28px;
+            }
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+
+        @media print {
+            .sidebar {
+                display: none !important;
+            }
+
+            .main {
+                margin-left: 0 !important;
+                padding: 20px !important;
+            }
+
+            .mobile-toggle {
+                display: none !important;
+            }
+
+            .logo-img {
+                height: 36px !important;
+            }
+
+            .ia-card {
+                display: none !important;
+            }
+
+            .detail-grid {
+                display: none !important;
+            }
+
+            .stats-grid {
+                display: none !important;
+            }
+
+            .features-card {
+                box-shadow: none !important;
+                border: 1px solid #E2E8F0 !important;
+            }
+
+            .table-card .table-header .action {
+                display: none !important;
+            }
+
+            .detail-card,
+            .stat-card,
+            .table-card {
+                box-shadow: none !important;
+                border: 1px solid #E2E8F0 !important;
+            }
+
+            .table-container th {
+                background: #F8FAFC !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+    TOAST
+    ============================================ -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <!-- ============================================
+    SIDEBAR
+    ============================================ -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Menu principal">
+        <a href="#" class="logo" aria-label="VIGORRE ONE™ Home">
+            <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Analytics Enterprise</span>
+            </div>
+        </a>
+
+        <div class="user-info">
+            <div class="name" id="userName">Administrador</div>
+            <div class="role">
+                <span class="badge">👑 Master</span>
+            </div>
+        </div>
+
+        <!-- ============================================
+        MENU CORRIGIDO - TODOS OS ITENS FIXOS
+        ============================================ -->
+        <ul class="nav">
+            <li><a href="../dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="../empresas/"><span class="icon">🏢</span> Empresas</a></li>
+            <li><a href="../recrutadores/"><span class="icon">👤</span> Recrutadores</a></li>
+            <li><a href="../participantes/"><span class="icon">👥</span> Participantes</a></li>
+            <li><a href="../creditos/"><span class="icon">💳</span> Créditos</a></li>
+            <li><a href="../relatorios/"><span class="icon">📄</span> Relatórios</a></li>
+            <!-- ITENS FIXOS - NUNCA SOMEM -->
+            <li><a href="../job-profile/index.html"><span class="icon">🎯</span> Job Profile</a></li>
+            <li><a href="index.html" class="active" aria-current="page"><span class="icon">💰</span> Centro Financeiro</a></li>
+            <div class="divider"></div>
+            <li><a href="carteiras.html"><span class="icon">💼</span> Carteiras</a></li>
+            <li><a href="creditos.html"><span class="icon">💳</span> Créditos</a></li>
+            <li><a href="extratos.html"><span class="icon">📋</span> Extratos</a></li>
+            <li><a href="precos.html"><span class="icon">🏷️</span> Preços</a></li>
+            <li><a href="auditoria.html"><span class="icon">🔍</span> Auditoria</a></li>
+            <div class="divider"></div>
+            <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
+            <li><a href="../bi/dashboard.html"><span class="icon">📈</span> BI Analytics</a></li>
+            <li><a href="../usuarios/"><span class="icon">👤</span> Usuários</a></li>
+        </ul>
+
+        <div class="logout">
+            <a href="#" onclick="logout()" aria-label="Sair do sistema">
+                <span class="icon">🚪</span> Sair
+            </a>
+        </div>
+    </aside>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()" aria-hidden="true"></div>
+
+    <!-- ============================================
+    MAIN CONTENT
+    ============================================ -->
+    <main class="main" id="mainContent">
+
+        <!-- ============================================
+        HEADER
+        ============================================ -->
+        <div class="main-header">
+            <div>
+                <div class="breadcrumb">
+                    <a href="../dashboard.html">Dashboard</a> / <a href="index.html">Centro Financeiro</a> / <a href="precos.html">Preços</a> / <span>Detalhes do Plano</span>
+                </div>
+                <h1>🏷️ Detalhes do Plano</h1>
+            </div>
+            <div class="actions">
+                <a href="editar-plano.html?id=" class="btn btn-primary" id="editBtn">
+                    ✏️ Editar
+                </a>
+                <a href="precos.html" class="btn btn-secondary">
+                    ⬅️ Voltar
+                </a>
+            </div>
+        </div>
+
+        <!-- ============================================
+        DETAIL GRID
+        ============================================ -->
+        <div class="detail-grid">
+            <div class="detail-card" data-tooltip="ID único do plano">
+                <div class="detail-top">
+                    <span class="detail-label">ID do Plano</span>
+                    <span class="detail-icon">🆔</span>
+                </div>
+                <div class="detail-value" id="planId">--</div>
+                <div class="detail-sub">Identificador único</div>
+            </div>
+            <div class="detail-card" data-tooltip="Nome do plano">
+                <div class="detail-top">
+                    <span class="detail-label">Nome</span>
+                    <span class="detail-icon" id="planIconDisplay">📈</span>
+                </div>
+                <div class="detail-value" id="planName">--</div>
+                <div class="detail-sub" id="planPopular"></div>
+            </div>
+            <div class="detail-card" data-tooltip="Preço do plano">
+                <div class="detail-top">
+                    <span class="detail-label">Preço</span>
+                    <span class="detail-icon">💰</span>
+                </div>
+                <div class="detail-value" id="planPrice">--</div>
+                <div class="detail-sub" id="planPeriod">--</div>
+            </div>
+            <div class="detail-card" data-tooltip="Status do plano">
+                <div class="detail-top">
+                    <span class="detail-label">Status</span>
+                    <span class="detail-icon">📊</span>
+                </div>
+                <div class="detail-value" id="planStatus">--</div>
+                <div class="detail-sub" id="planCreated">--</div>
+            </div>
+        </div>
+
+        <!-- ============================================
+        STATS GRID
+        ============================================ -->
+        <div class="stats-grid">
+            <div class="stat-card" data-tooltip="Número de funcionalidades">
+                <span class="stat-icon">📋</span>
+                <div class="stat-value" id="statFeatures">0</div>
+                <div class="stat-label">Funcionalidades</div>
+            </div>
+            <div class="stat-card" data-tooltip="Clientes usando este plano">
+                <span class="stat-icon">👥</span>
+                <div class="stat-value" id="statClients">0</div>
+                <div class="stat-label">Clientes</div>
+            </div>
+            <div class="stat-card" data-tooltip="Receita gerada por este plano">
+                <span class="stat-icon">💰</span>
+                <div class="stat-value" id="statRevenue">R$ 0</div>
+                <div class="stat-label">Receita Gerada</div>
+            </div>
+        </div>
+
+        <!-- ============================================
+        IA CARD
+        ============================================ -->
+        <div class="ia-card">
+            <div class="ia-top">
+                <span class="ia-title">🤖 Insights do Plano</span>
+                <span class="ia-badge">Atualizado agora</span>
+            </div>
+            <div class="ia-content" id="iaContent">
+                <!-- Carregado via JavaScript -->
+            </div>
+        </div>
+
+        <!-- ============================================
+        FEATURES CARD
+        ============================================ -->
+        <div class="features-card">
+            <div class="features-header">
+                <h3>📋 Funcionalidades do Plano</h3>
+                <span class="action" style="font-size:0.75rem;color:var(--text-muted);" id="featuresCount">0 funcionalidades</span>
+            </div>
+            <div class="features-grid" id="featuresGrid">
+                <!-- Carregado via JavaScript -->
+            </div>
+        </div>
+
+        <!-- ============================================
+        CLIENTS TABLE
+        ============================================ -->
+        <div class="table-card">
+            <div class="table-header">
+                <h3>👥 Empresas com este Plano</h3>
+                <a href="../empresas/" class="action">Ver todas →</a>
+            </div>
+            <div class="table-container">
+                <table aria-label="Empresas que utilizam este plano">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Empresa</th>
+                            <th>Plano</th>
+                            <th>Status</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientsTable">
+                        <!-- Carregado via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
+    <script src="../../supabase-config.js"></script>
+    <script src="../../auth.js"></script>
+    <script src="../../middleware/auth-guard.js"></script>
+
+    <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - PLANO DETALHE
+         * INTERNATIONAL ENTERPRISE EDITION
+         * ============================================
+         */
+
+        'use strict';
+
+        var currentPlanId = null;
+
+        // ============================================
+        // TOGGLE SIDEBAR
+        // ============================================
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('mobileOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+        }
+
+        document.addEventListener('click', function(e) {
+            var sidebar = document.getElementById('sidebar');
+            var toggle = document.querySelector('.mobile-toggle');
+            if (window.innerWidth <= 992 && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                    toggleSidebar();
+                }
+            }
+        });
+
+        // ============================================
+        // LOGOUT
+        // ============================================
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                window.VigorreAuth.logout();
+            }
+        }
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🏷️ Plano Detalhe - VIGORRE ONE™');
+
+            var isAuth = window.VigorreAuth.isAuthenticated();
+            if (!isAuth) {
+                window.location.href = '../../login.html';
+                return;
+            }
+
+            var user = window.VigorreAuth.getCurrentUser();
+            if (!user || (user.role !== 'admin' && user.role !== 'master')) {
+                alert('⚠️ Acesso restrito a administradores.');
+                window.VigorreAuth.logout();
+                return;
+            }
+
+            document.getElementById('userName').textContent = user.name || 'Administrador';
+
+            // Obter ID da URL
+            var urlParams = new URLSearchParams(window.location.search);
+            currentPlanId = urlParams.get('id');
+
+            if (!currentPlanId) {
+                showToast('⚠️ Nenhum plano selecionado', 'warning');
+                setTimeout(function() {
+                    window.location.href = 'precos.html';
+                }, 1500);
+                return;
+            }
+
+            // Atualizar link de edição
+            document.getElementById('editBtn').href = 'editar-plano.html?id=' + currentPlanId;
+
+            loadPlanData();
+        });
+
+        // ============================================
+        // CARREGAR DADOS DO PLANO
+        // ============================================
+        function loadPlanData() {
+            try {
+                var plans = JSON.parse(localStorage.getItem('vigorre_prices') || '[]');
+                var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+
+                var plan = null;
+                for (var i = 0; i < plans.length; i++) {
+                    if (plans[i].id === currentPlanId) {
+                        plan = plans[i];
+                        break;
+                    }
+                }
+
+                if (!plan) {
+                    showToast('⚠️ Plano não encontrado', 'error');
+                    setTimeout(function() {
+                        window.location.href = 'precos.html';
+                    }, 1500);
+                    return;
+                }
+
+                // Preencher detalhes
+                document.getElementById('planId').textContent = plan.id || '--';
+                document.getElementById('planIconDisplay').textContent = plan.icon || '📈';
+                document.getElementById('planName').textContent = plan.name || '--';
+
+                if (plan.isPopular) {
+                    document.getElementById('planPopular').innerHTML = '<span class="badge-popular">⭐ Mais Popular</span>';
+                } else {
+                    document.getElementById('planPopular').textContent = '';
+                }
+
+                document.getElementById('planPrice').textContent = plan.price || '--';
+                document.getElementById('planPeriod').textContent = plan.period || '--';
+
+                var statusText = plan.status === 'ativo' ? '✅ Ativo' : '❌ Inativo';
+                var statusClass = plan.status === 'ativo' ? 'ativo' : 'inativo';
+                document.getElementById('planStatus').innerHTML = '<span class="badge-status ' + statusClass + '">' +
+                    statusText + '</span>';
+
+                document.getElementById('planCreated').textContent = plan.createdAt ? 'Criado em: ' + new Date(plan
+                    .createdAt).toLocaleDateString('pt-BR') : '--';
+
+                // Features
+                var features = plan.features || [];
+                document.getElementById('statFeatures').textContent = features.length;
+                document.getElementById('featuresCount').textContent = features.length + ' funcionalidades';
+
+                renderFeatures(features);
+
+                // IA Insights
+                loadIAContent(plan);
+
+                // Clientes
+                loadClients(plan, companies);
+
+                // Estatísticas
+                loadStats(plan, companies);
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados do plano:', error);
+                showToast('❌ Erro ao carregar dados', 'error');
+            }
+        }
+
+        // ============================================
+        // RENDER FEATURES
+        // ============================================
+        function renderFeatures(features) {
+            var container = document.getElementById('featuresGrid');
+
+            if (features.length === 0) {
+                container.innerHTML =
+                    '<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--text-muted);">Nenhuma funcionalidade configurada</div>';
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < features.length; i++) {
+                html += '<div class="feature-item">';
+                html += '<span class="check">✅</span>';
+                html += '<span class="feature-name">' + features[i] + '</span>';
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ============================================
+        // CARREGAR IA CONTENT
+        // ============================================
+        function loadIAContent(plan) {
+            var container = document.getElementById('iaContent');
+
+            var insights = [
+                { icon: '🏷️', title: 'Plano', desc: plan.name || '--' },
+                { icon: '💰', title: 'Preço', desc: plan.price || '--' },
+                { icon: '📋', title: 'Funcionalidades', desc: (plan.features || []).length + ' funcionalidades' },
+                { icon: '📊', title: 'Status', desc: plan.status === 'ativo' ? 'Plano ativo' : 'Plano inativo' },
+                { icon: '⭐', title: 'Popular', desc: plan.isPopular ? 'Plano mais popular' : 'Plano regular' }
+            ];
+
+            var html = '';
+            for (var i = 0; i < insights.length; i++) {
+                var item = insights[i];
+                html += '<div class="ia-item" onclick="handleIAClick(\'' + item.title + '\')">';
+                html += '<div class="ia-item-icon">' + item.icon + '</div>';
+                html += '<div class="ia-item-title">' + item.title + '</div>';
+                html += '<div class="ia-item-desc">' + item.desc + '</div>';
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ============================================
+        // HANDLE IA CLICK
+        // ============================================
+        function handleIAClick(title) {
+            showToast('🤖 IA: ' + title, 'info');
+        }
+
+        // ============================================
+        // CARREGAR CLIENTES
+        // ============================================
+        function loadClients(plan, companies) {
+            var tbody = document.getElementById('clientsTable');
+
+            // Simular clientes com este plano
+            var clients = [];
+            for (var i = 0; i < companies.length; i++) {
+                if (i % 3 === 0) {
+                    clients.push(companies[i]);
+                }
+            }
+
+            if (clients.length === 0) {
+                tbody.innerHTML =
+                    '<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--text-muted);">Nenhuma empresa utilizando este plano</td></tr>';
+                return;
+            }
+
+            var html = '';
+            var limit = Math.min(clients.length, 10);
+
+            for (var j = 0; j < limit; j++) {
+                var c = clients[j];
+                var statusClass = c.status === 'ativa' ? 'ativo' : 'inativo';
+                var statusText = c.status === 'ativa' ? '✅ Ativa' : '❌ Inativa';
+
+                html += '<tr>';
+                html += '<td><span style="font-family:monospace;font-size:0.8rem;color:var(--text-muted);">' + (c.id || 'C' +
+                    (j + 1).toString().padStart(4, '0')) + '</span></td>';
+                html += '<td><strong>' + (c.name || 'Empresa ' + (j + 1)) + '</strong></td>';
+                html += '<td>' + (plan.name || '--') + '</td>';
+                html += '<td><span class="badge-status ' + statusClass + '">' + statusText + '</span></td>';
+                html += '<td style="font-size:0.8rem;color:var(--text-muted);">' + (c.createdAt ? new Date(c.createdAt)
+                    .toLocaleDateString('pt-BR') : '--') + '</td>';
+                html += '</tr>';
+            }
+
+            tbody.innerHTML = html;
+        }
+
+        // ============================================
+        // CARREGAR STATS
+        // ============================================
+        function loadStats(plan, companies) {
+            try {
+                var transactions = JSON.parse(localStorage.getItem('vigorre_credit_transactions') || '[]');
+
+                var clientCount = 0;
+                var revenue = 0;
+
+                for (var i = 0; i < companies.length; i++) {
+                    if (i % 3 === 0) {
+                        clientCount++;
+                    }
+                }
+
+                // Calcular receita (simulada)
+                var priceValue = parseFloat(plan.price?.replace('R$', '').replace(',', '.').trim()) || 0;
+                revenue = clientCount * priceValue;
+
+                document.getElementById('statClients').textContent = clientCount;
+                document.getElementById('statRevenue').textContent = 'R$ ' + revenue.toFixed(2);
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar estatísticas:', error);
+            }
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+
+            var icons = {
+                'error': '❌',
+                'warning': '⚠️',
+                'success': '✅',
+                'info': 'ℹ️'
+            };
+
+            icon.textContent = icons[type] || '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        console.log('✅ Plano Detalhe International carregado com sucesso!');
+    </script>
+
+</body>
+</html>
