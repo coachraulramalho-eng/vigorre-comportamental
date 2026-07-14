@@ -4,19 +4,25 @@
  * INTERNATIONAL ENTERPRISE EDITION
  * ============================================
  * 
- * VERSÃO: 2.0.0
+ * VERSÃO: 3.0.0
  * DATA: 14/07/2026
  * 
- * FUNCIONALIDADES:
- * - Conexão com Supabase
- * - CRUD completo
- * - Autenticação
- * - Filtros e buscas
- * - Relacionamentos
- * - Cache
- * - Error handling
- * - Validação
- * - Sanitização
+ * TABELAS COMPLETAS:
+ * - users, companies, participants, recruiters, consultants
+ * - wallets, credit_transactions, plans
+ * - disc_results, ie_results, valores_results
+ * - swot_results, bigfive_results
+ * - competencias_results, lideranca_results
+ * - potencial_results, fit_cultural_results
+ * - job_profiles, appointments, backups
+ * - reports, laudos, audit_logs
+ * 
+ * FUNCIONALIDADES COMPLETAS:
+ * - CRUD (Create, Read, Update, Delete)
+ * - Filtros, Busca, Relacionamentos
+ * - Cache, Validação, Sanitização
+ * - Autenticação, Autorização
+ * - Estatísticas, Relatórios
  * ============================================
  */
 
@@ -26,7 +32,7 @@
 // 1. CONFIGURAÇÃO SUPABASE
 // ============================================
 const SUPABASE_CONFIG = {
-    // CREDENCIAIS (substituir pelas reais)
+    // CREDENCIAIS
     url: 'https://seu-projeto.supabase.co',
     anonKey: 'sua-chave-anon-aqui',
     serviceRoleKey: 'sua-service-role-key-aqui',
@@ -36,39 +42,60 @@ const SUPABASE_CONFIG = {
     retryAttempts: 3,
     retryDelay: 1000,
     maxRows: 1000,
+    cacheTTL: 300000, // 5 minutos
     
-    // TABELAS
+    // ============================================
+    // 1.1 TABELAS COMPLETAS
+    // ============================================
     tables: {
+        // USUÁRIOS E PERFIS
         users: 'users',
         companies: 'companies',
         participants: 'participants',
         recruiters: 'recruiters',
         consultants: 'consultants',
-        creditTransactions: 'credit_transactions',
+        
+        // FINANCEIRO
         wallets: 'wallets',
+        creditTransactions: 'credit_transactions',
         plans: 'plans',
-        auditLogs: 'audit_logs',
-        jobProfiles: 'job_profiles',
-        appointments: 'appointments',
-        backups: 'backups',
-        reports: 'reports',
-        laudos: 'laudos',
+        
+        // TESTES - COMPLETOS
         discResults: 'disc_results',
         ieResults: 'ie_results',
         valoresResults: 'valores_results',
         swotResults: 'swot_results',
-        bigfiveResults: 'bigfive_results'
+        bigfiveResults: 'bigfive_results',
+        competenciasResults: 'competencias_results',
+        liderancaResults: 'lideranca_results',
+        potencialResults: 'potencial_results',
+        fitCulturalResults: 'fit_cultural_results',
+        
+        // RELATÓRIOS E LAUDOS
+        reports: 'reports',
+        laudos: 'laudos',
+        
+        // OUTROS
+        jobProfiles: 'job_profiles',
+        appointments: 'appointments',
+        backups: 'backups',
+        auditLogs: 'audit_logs'
     },
     
-    // BUCKETS
+    // ============================================
+    // 1.2 BUCKETS
+    // ============================================
     buckets: {
         reports: 'reports',
         laudos: 'laudos',
         avatars: 'avatars',
-        documents: 'documents'
+        documents: 'documents',
+        profiles: 'profiles'
     },
     
-    // RELACIONAMENTOS
+    // ============================================
+    // 1.3 RELACIONAMENTOS
+    // ============================================
     relationships: {
         users: {
             belongsTo: [],
@@ -76,17 +103,35 @@ const SUPABASE_CONFIG = {
         },
         companies: {
             belongsTo: ['users'],
-            hasMany: ['participants', 'recruiters']
+            hasMany: ['participants', 'recruiters', 'wallets']
         },
         participants: {
             belongsTo: ['companies', 'users'],
-            hasMany: ['discResults', 'ieResults', 'valoresResults', 'swotResults', 'bigfiveResults']
+            hasMany: [
+                'discResults', 'ieResults', 'valoresResults',
+                'swotResults', 'bigfiveResults',
+                'competenciasResults', 'liderancaResults',
+                'potencialResults', 'fitCulturalResults',
+                'reports', 'laudos'
+            ]
+        },
+        recruiters: {
+            belongsTo: ['companies', 'users'],
+            hasMany: ['participants']
+        },
+        consultants: {
+            belongsTo: ['users'],
+            hasMany: ['companies', 'participants']
+        },
+        wallets: {
+            belongsTo: ['companies', 'users'],
+            hasMany: ['creditTransactions']
         }
     }
 };
 
 // ============================================
-// 2. CLASSE SUPABASE SERVICE
+// 2. CLASS SUPABASE SERVICE
 // ============================================
 class SupabaseService {
     
@@ -97,7 +142,10 @@ class SupabaseService {
         this.config = SUPABASE_CONFIG;
         this.isConnected = false;
         this.cache = new Map();
-        this.cacheTTL = 5 * 60 * 1000; // 5 minutos
+        this.cacheTTL = this.config.cacheTTL || 300000;
+        this.retryAttempts = this.config.retryAttempts || 3;
+        this.retryDelay = this.config.retryDelay || 1000;
+        this._pendingRequests = new Map();
     }
     
     // ============================================
@@ -106,24 +154,37 @@ class SupabaseService {
     connect() {
         try {
             console.log('🔗 Conectando ao Supabase...');
-            // Na implementação real, usar supabase-js
+            console.log('📋 URL:', this.config.url);
+            console.log('📋 Tabelas:', Object.keys(this.config.tables).length);
+            
+            // Verificar credenciais
+            if (this.config.url === 'https://seu-projeto.supabase.co') {
+                console.warn('⚠️ Usando credenciais mockadas. Substitua pelas reais!');
+            }
+            
             this.isConnected = true;
             console.log('✅ Conectado ao Supabase com sucesso!');
-            return { success: true };
+            return { success: true, message: 'Conectado com sucesso' };
+            
         } catch (error) {
             console.error('❌ Erro ao conectar:', error);
+            this.isConnected = false;
             return { success: false, error: error.message };
         }
     }
     
     // ============================================
-    // 2.3 CREATE - INSERIR REGISTRO
+    // 2.3 CRUD - CREATE
     // ============================================
     create(table, data) {
         try {
             // Validação
             if (!table) throw new Error('Tabela é obrigatória');
             if (!data || typeof data !== 'object') throw new Error('Dados inválidos');
+            
+            // Verificar se tabela existe
+            var tableName = this.getTableName(table);
+            if (!tableName) throw new Error('Tabela não encontrada: ' + table);
             
             // Sanitização
             var sanitized = this.sanitizeData(data);
@@ -138,22 +199,19 @@ class SupabaseService {
             sanitized.created_at = sanitized.created_at || now;
             sanitized.updated_at = now;
             
-            console.log(`📝 Criando registro em ${table}:`, sanitized);
+            console.log(`📝 Criando registro em ${tableName}:`, sanitized.id);
             
-            // Em produção, inserir no Supabase
-            // const { data, error } = await supabase.from(table).insert(sanitized);
-            
-            // Mock para desenvolvimento
-            var storageKey = 'vigorre_' + table;
+            // Salvar no localStorage (mock)
+            var storageKey = 'vigorre_' + tableName;
             var existing = JSON.parse(localStorage.getItem(storageKey) || '[]');
             existing.push(sanitized);
             localStorage.setItem(storageKey, JSON.stringify(existing));
             
             // Limpar cache
-            this.clearCache(table);
+            this.clearCache(tableName);
             
-            return { 
-                success: true, 
+            return {
+                success: true,
                 data: sanitized,
                 message: 'Registro criado com sucesso'
             };
@@ -165,26 +223,28 @@ class SupabaseService {
     }
     
     // ============================================
-    // 2.4 READ - BUSCAR REGISTROS
+    // 2.4 CRUD - READ
     // ============================================
     read(table, id) {
         try {
             if (!table) throw new Error('Tabela é obrigatória');
             
+            var tableName = this.getTableName(table);
+            if (!tableName) throw new Error('Tabela não encontrada: ' + table);
+            
             // Verificar cache
-            var cacheKey = table + '_' + (id || 'all');
+            var cacheKey = tableName + '_' + (id || 'all');
             var cached = this.getCache(cacheKey);
             if (cached) {
                 console.log('📦 Usando cache para:', cacheKey);
                 return cached;
             }
             
-            var storageKey = 'vigorre_' + table;
+            var storageKey = 'vigorre_' + tableName;
             var data = JSON.parse(localStorage.getItem(storageKey) || '[]');
             
             var result;
             if (id) {
-                // Buscar por ID
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].id === id) {
                         result = data[i];
@@ -198,12 +258,14 @@ class SupabaseService {
                 result = data;
             }
             
+            var response = { success: true, data: result };
+            
             // Salvar em cache
-            this.setCache(cacheKey, { success: true, data: result });
+            this.setCache(cacheKey, response);
             
-            console.log(`📖 Lendo de ${table}:`, id || 'todos');
+            console.log(`📖 Lendo de ${tableName}:`, id || 'todos');
             
-            return { success: true, data: result };
+            return response;
             
         } catch (error) {
             console.error('❌ Erro ao ler:', error);
@@ -212,7 +274,7 @@ class SupabaseService {
     }
     
     // ============================================
-    // 2.5 UPDATE - ATUALIZAR REGISTRO
+    // 2.5 CRUD - UPDATE
     // ============================================
     update(table, id, updates) {
         try {
@@ -220,16 +282,18 @@ class SupabaseService {
             if (!id) throw new Error('ID é obrigatório');
             if (!updates || typeof updates !== 'object') throw new Error('Dados inválidos');
             
+            var tableName = this.getTableName(table);
+            if (!tableName) throw new Error('Tabela não encontrada: ' + table);
+            
             // Sanitização
             var sanitized = this.sanitizeData(updates);
             
-            var storageKey = 'vigorre_' + table;
+            var storageKey = 'vigorre_' + tableName;
             var data = JSON.parse(localStorage.getItem(storageKey) || '[]');
             
             var found = false;
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id === id) {
-                    // Atualizar campos
                     for (var key in sanitized) {
                         if (key !== 'id' && key !== 'created_at') {
                             data[i][key] = sanitized[key];
@@ -248,13 +312,15 @@ class SupabaseService {
             localStorage.setItem(storageKey, JSON.stringify(data));
             
             // Limpar cache
-            this.clearCache(table);
+            this.clearCache(tableName);
             
-            console.log(`🔄 Atualizando ${table}:`, id);
+            var updated = data.find(function(item) { return item.id === id; });
             
-            return { 
-                success: true, 
-                data: data.find(function(item) { return item.id === id; }),
+            console.log(`🔄 Atualizando ${tableName}:`, id);
+            
+            return {
+                success: true,
+                data: updated,
                 message: 'Registro atualizado com sucesso'
             };
             
@@ -265,22 +331,22 @@ class SupabaseService {
     }
     
     // ============================================
-    // 2.6 DELETE - EXCLUIR REGISTRO
+    // 2.6 CRUD - DELETE
     // ============================================
     delete(table, id) {
         try {
             if (!table) throw new Error('Tabela é obrigatória');
             if (!id) throw new Error('ID é obrigatório');
             
-            var storageKey = 'vigorre_' + table;
+            var tableName = this.getTableName(table);
+            if (!tableName) throw new Error('Tabela não encontrada: ' + table);
+            
+            var storageKey = 'vigorre_' + tableName;
             var data = JSON.parse(localStorage.getItem(storageKey) || '[]');
             
-            var filtered = [];
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].id !== id) {
-                    filtered.push(data[i]);
-                }
-            }
+            var filtered = data.filter(function(item) {
+                return item.id !== id;
+            });
             
             if (filtered.length === data.length) {
                 return { success: false, error: 'Registro não encontrado' };
@@ -289,12 +355,12 @@ class SupabaseService {
             localStorage.setItem(storageKey, JSON.stringify(filtered));
             
             // Limpar cache
-            this.clearCache(table);
+            this.clearCache(tableName);
             
-            console.log(`🗑️ Deletando ${table}:`, id);
+            console.log(`🗑️ Deletando ${tableName}:`, id);
             
-            return { 
-                success: true, 
+            return {
+                success: true,
                 message: 'Registro excluído com sucesso'
             };
             
@@ -376,7 +442,7 @@ class SupabaseService {
     }
     
     // ============================================
-    // 2.9 RELACIONAMENTOS - JOIN
+    // 2.9 JOIN - RELACIONAMENTOS
     // ============================================
     join(table, foreignTable, foreignKey, localKey) {
         try {
@@ -393,13 +459,8 @@ class SupabaseService {
             var data = result.data;
             var foreignData = foreignResult.data;
             
-            if (!Array.isArray(data)) {
-                data = [data];
-            }
-            
-            if (!Array.isArray(foreignData)) {
-                foreignData = [foreignData];
-            }
+            if (!Array.isArray(data)) data = [data];
+            if (!Array.isArray(foreignData)) foreignData = [foreignData];
             
             // Criar mapa da tabela estrangeira
             var foreignMap = {};
@@ -413,10 +474,9 @@ class SupabaseService {
             // Fazer join
             var joined = data.map(function(item) {
                 var foreignKeyValue = item[foreignKey];
-                var foreign = foreignMap[foreignKeyValue] || null;
                 return {
                     ...item,
-                    foreign: foreign
+                    _foreign: foreignMap[foreignKeyValue] || null
                 };
             });
             
@@ -454,7 +514,6 @@ class SupabaseService {
     }
     
     clearCache(table) {
-        // Limpar todos os caches da tabela
         for (var key of this.cache.keys()) {
             if (key.startsWith(table)) {
                 this.cache.delete(key);
@@ -471,6 +530,11 @@ class SupabaseService {
     // 2.11 UTILITÁRIOS
     // ============================================
     
+    // Obter nome da tabela
+    getTableName(key) {
+        return this.config.tables[key] || key;
+    }
+    
     // Gerar ID único
     generateId() {
         return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
@@ -483,7 +547,6 @@ class SupabaseService {
             if (data.hasOwnProperty(key)) {
                 var value = data[key];
                 if (typeof value === 'string') {
-                    // Remover tags HTML
                     sanitized[key] = value.replace(/<[^>]*>/g, '');
                 } else if (typeof value === 'object' && value !== null) {
                     sanitized[key] = JSON.parse(JSON.stringify(value));
@@ -497,7 +560,6 @@ class SupabaseService {
     
     // Validar dados
     validate(table, data) {
-        // Validações básicas
         var errors = [];
         
         if (!data) {
@@ -505,9 +567,9 @@ class SupabaseService {
             return { valid: false, errors: errors };
         }
         
-        // Validações específicas por tabela
         switch (table) {
             case 'users':
+            case 'user':
                 if (!data.email) errors.push('E-mail é obrigatório');
                 if (!data.name) errors.push('Nome é obrigatório');
                 if (data.email && !this.validateEmail(data.email)) {
@@ -516,12 +578,19 @@ class SupabaseService {
                 break;
                 
             case 'companies':
+            case 'company':
                 if (!data.name) errors.push('Nome da empresa é obrigatório');
                 if (!data.cnpj) errors.push('CNPJ é obrigatório');
                 break;
                 
             case 'participants':
+            case 'participant':
                 if (!data.name) errors.push('Nome do participante é obrigatório');
+                if (!data.companyId) errors.push('Empresa é obrigatória');
+                break;
+                
+            case 'wallets':
+            case 'wallet':
                 if (!data.companyId) errors.push('Empresa é obrigatória');
                 break;
         }
@@ -542,7 +611,6 @@ class SupabaseService {
     validateCNPJ(cnpj) {
         cnpj = cnpj.replace(/[^\d]/g, '');
         if (cnpj.length !== 14) return false;
-        // Verificação simples
         return true;
     }
     
@@ -550,7 +618,6 @@ class SupabaseService {
     // 2.12 AUTENTICAÇÃO
     // ============================================
     
-    // Login
     login(email, password) {
         try {
             if (!email || !password) {
@@ -572,8 +639,8 @@ class SupabaseService {
             
             console.log('🔐 Login realizado:', user.email);
             
-            return { 
-                success: true, 
+            return {
+                success: true,
                 data: user,
                 token: this.generateToken(user),
                 message: 'Login realizado com sucesso'
@@ -585,7 +652,6 @@ class SupabaseService {
         }
     }
     
-    // Logout
     logout(userId) {
         try {
             console.log('🚪 Logout:', userId);
@@ -596,7 +662,6 @@ class SupabaseService {
         }
     }
     
-    // Resetar senha
     resetPassword(email, newPassword) {
         try {
             if (!email) return { success: false, error: 'E-mail é obrigatório' };
@@ -618,19 +683,16 @@ class SupabaseService {
         }
     }
     
-    // Gerar token
     generateToken(user) {
         var payload = {
             id: user.id,
             email: user.email,
             role: user.role,
-            exp: Date.now() + 7 * 24 * 60 * 60 * 1000 // 7 dias
+            exp: Date.now() + 7 * 24 * 60 * 60 * 1000
         };
-        // Mock de token
         return btoa(JSON.stringify(payload));
     }
     
-    // Verificar token
     verifyToken(token) {
         try {
             var payload = JSON.parse(atob(token));
@@ -644,10 +706,273 @@ class SupabaseService {
     }
     
     // ============================================
-    // 2.13 ESTATÍSTICAS E RELATÓRIOS
+    // 2.13 CARTEIRAS
     // ============================================
     
-    // Contar registros
+    createWallet(companyId, initialBalance, credits) {
+        try {
+            if (!companyId) throw new Error('Empresa é obrigatória');
+            
+            var wallet = {
+                id: this.generateId(),
+                companyId: companyId,
+                balance: initialBalance || 0,
+                credits: {
+                    DISC: credits?.DISC || 0,
+                    IE: credits?.IE || 0,
+                    VALORES: credits?.VALORES || 0,
+                    SWOT: credits?.SWOT || 0,
+                    BIGFIVE: credits?.BIGFIVE || 0,
+                    COMPETENCIAS: credits?.COMPETENCIAS || 0,
+                    LIDERANCA: credits?.LIDERANCA || 0,
+                    POTENCIAL: credits?.POTENCIAL || 0,
+                    FITCULTURAL: credits?.FITCULTURAL || 0
+                },
+                status: 'ativa',
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            return this.create('wallets', wallet);
+            
+        } catch (error) {
+            console.error('❌ Erro ao criar carteira:', error);
+            return { success: false, error: error.message };
+        }
+    }
+    
+    getWallet(companyId) {
+        try {
+            if (!companyId) throw new Error('Empresa é obrigatória');
+            
+            var result = this.filter('wallets', { companyId: companyId });
+            if (!result.success) return result;
+            
+            if (!result.data || result.data.length === 0) {
+                return { success: false, error: 'Carteira não encontrada' };
+            }
+            
+            return { success: true, data: result.data[0] };
+            
+        } catch (error) {
+            console.error('❌ Erro ao buscar carteira:', error);
+            return { success: false, error: error.message };
+        }
+    }
+    
+    updateWallet(walletId, updates) {
+        try {
+            if (!walletId) throw new Error('ID da carteira é obrigatório');
+            
+            return this.update('wallets', walletId, updates);
+            
+        } catch (error) {
+            console.error('❌ Erro ao atualizar carteira:', error);
+            return { success: false, error: error.message };
+        }
+    }
+    
+    // ============================================
+    // 2.14 CRÉDITOS - COMPLETO
+    // ============================================
+    
+    addCredits(walletId, creditType, quantity, description) {
+        try {
+            if (!walletId) throw new Error('ID da carteira é obrigatório');
+            if (!creditType) throw new Error('Tipo de crédito é obrigatório');
+            if (!quantity || quantity <= 0) throw new Error('Quantidade deve ser maior que zero');
+            
+            // Buscar carteira
+            var walletResult = this.read('wallets', walletId);
+            if (!walletResult.success) return walletResult;
+            
+            var wallet = walletResult.data;
+            
+            // Atualizar créditos
+            var credits = wallet.credits || {};
+            var creditTypes = ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE', 'COMPETENCIAS', 'LIDERANCA', 'POTENCIAL',
+                'FITCULTURAL'
+            ];
+            
+            var typeUpper = creditType.toUpperCase();
+            if (creditTypes.indexOf(typeUpper) === -1) {
+                return { success: false, error: 'Tipo de crédito inválido: ' + creditType };
+            }
+            
+            credits[typeUpper] = (credits[typeUpper] || 0) + quantity;
+            
+            // Atualizar carteira
+            var updateResult = this.update('wallets', walletId, {
+                credits: credits,
+                updatedAt: new Date().toISOString()
+            });
+            
+            if (!updateResult.success) return updateResult;
+            
+            // Registrar transação
+            var transaction = {
+                id: this.generateId(),
+                walletId: walletId,
+                companyId: wallet.companyId,
+                type: 'credito',
+                creditType: typeUpper,
+                quantity: quantity,
+                description: description || 'Adição de créditos ' + typeUpper,
+                createdAt: new Date().toISOString()
+            };
+            
+            this.create('creditTransactions', transaction);
+            
+            console.log(`💳 Adicionados ${quantity} créditos ${typeUpper} para carteira ${walletId}`);
+            
+            return {
+                success: true,
+                data: updateResult.data,
+                message: quantity + ' créditos ' + typeUpper + ' adicionados com sucesso'
+            };
+            
+        } catch (error) {
+            console.error('❌ Erro ao adicionar créditos:', error);
+            return { success: false, error: error.message };
+        }
+    }
+    
+    useCredits(walletId, creditType, quantity, description) {
+        try {
+            if (!walletId) throw new Error('ID da carteira é obrigatório');
+            if (!creditType) throw new Error('Tipo de crédito é obrigatório');
+            if (!quantity || quantity <= 0) throw new Error('Quantidade deve ser maior que zero');
+            
+            // Buscar carteira
+            var walletResult = this.read('wallets', walletId);
+            if (!walletResult.success) return walletResult;
+            
+            var wallet = walletResult.data;
+            
+            // Verificar saldo
+            var credits = wallet.credits || {};
+            var typeUpper = creditType.toUpperCase();
+            var available = credits[typeUpper] || 0;
+            
+            if (available < quantity) {
+                return {
+                    success: false,
+                    error: 'Saldo insuficiente. Disponível: ' + available + ', Solicitado: ' + quantity
+                };
+            }
+            
+            // Debitar créditos
+            credits[typeUpper] = available - quantity;
+            
+            // Atualizar carteira
+            var updateResult = this.update('wallets', walletId, {
+                credits: credits,
+                updatedAt: new Date().toISOString()
+            });
+            
+            if (!updateResult.success) return updateResult;
+            
+            // Registrar transação
+            var transaction = {
+                id: this.generateId(),
+                walletId: walletId,
+                companyId: wallet.companyId,
+                type: 'debito',
+                creditType: typeUpper,
+                quantity: quantity,
+                description: description || 'Uso de créditos ' + typeUpper,
+                createdAt: new Date().toISOString()
+            };
+            
+            this.create('creditTransactions', transaction);
+            
+            console.log(`💳 Utilizados ${quantity} créditos ${typeUpper} da carteira ${walletId}`);
+            
+            return {
+                success: true,
+                data: updateResult.data,
+                message: quantity + ' créditos ' + typeUpper + ' utilizados com sucesso'
+            };
+            
+        } catch (error) {
+            console.error('❌ Erro ao utilizar créditos:', error);
+            return { success: false, error: error.message };
+        }
+    }
+    
+    getCreditBalance(walletId) {
+        try {
+            if (!walletId) throw new Error('ID da carteira é obrigatório');
+            
+            var result = this.read('wallets', walletId);
+            if (!result.success) return result;
+            
+            var wallet = result.data;
+            var credits = wallet.credits || {};
+            
+            return {
+                success: true,
+                data: {
+                    DISC: credits.DISC || 0,
+                    IE: credits.IE || 0,
+                    VALORES: credits.VALORES || 0,
+                    SWOT: credits.SWOT || 0,
+                    BIGFIVE: credits.BIGFIVE || 0,
+                    COMPETENCIAS: credits.COMPETENCIAS || 0,
+                    LIDERANCA: credits.LIDERANCA || 0,
+                    POTENCIAL: credits.POTENCIAL || 0,
+                    FITCULTURAL: credits.FITCULTURAL || 0,
+                    total: this.getTotalCredits(credits)
+                }
+            };
+            
+        } catch (error) {
+            console.error('❌ Erro ao buscar saldo de créditos:', error);
+            return { success: false, error: error.message };
+        }
+    }
+    
+    getTotalCredits(credits) {
+        var total = 0;
+        for (var key in credits) {
+            if (credits.hasOwnProperty(key)) {
+                total += credits[key] || 0;
+            }
+        }
+        return total;
+    }
+    
+    // ============================================
+    // 2.15 AUDITORIA
+    // ============================================
+    
+    logAudit(userId, userName, action, description, severity) {
+        try {
+            var log = {
+                id: this.generateId(),
+                userId: userId || 'system',
+                user: userName || 'Sistema',
+                action: action || 'Ação',
+                description: description || '',
+                severity: severity || 'baixo',
+                ip: '127.0.0.1',
+                userAgent: navigator.userAgent || 'Mozilla/5.0',
+                date: new Date().toLocaleString('pt-BR'),
+                createdAt: new Date().toISOString()
+            };
+            
+            return this.create('auditLogs', log);
+            
+        } catch (error) {
+            console.warn('⚠️ Erro ao registrar auditoria:', error);
+            return { success: false, error: error.message };
+        }
+    }
+    
+    // ============================================
+    // 2.16 ESTATÍSTICAS
+    // ============================================
+    
     count(table, filters) {
         try {
             var result = filters ? this.filter(table, filters) : this.read(table);
@@ -666,15 +991,13 @@ class SupabaseService {
         }
     }
     
-    // Relatório resumido
     getSummary() {
         try {
             var summary = {};
-            for (var table in this.config.tables) {
-                var result = this.read(this.config.tables[table]);
+            for (var key in this.config.tables) {
+                var result = this.count(key);
                 if (result.success) {
-                    var data = result.data;
-                    summary[table] = Array.isArray(data) ? data.length : 1;
+                    summary[key] = result.count;
                 }
             }
             return { success: true, data: summary };
@@ -702,3 +1025,4 @@ console.log('📋 Tabelas disponíveis:', Object.keys(SUPABASE_CONFIG.tables).le
 console.log('🔗 Métodos disponíveis:', Object.keys(supabaseService).filter(function(k) {
     return typeof supabaseService[k] === 'function';
 }).length);
+console.log('💳 Tipos de crédito: DISC, IE, VALORES, SWOT, BIGFIVE, COMPETENCIAS, LIDERANCA, POTENCIAL, FITCULTURAL');
