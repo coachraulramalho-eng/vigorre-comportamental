@@ -1,0 +1,379 @@
+/**
+ * ============================================
+ * VIGORRE ONE™ - LANDING ULTRA CSS
+ * INTERNATIONAL ENTERPRISE EDITION
+ * ============================================
+ * 
+ * EXTENSÕES PARA A LANDING PAGE QUE VENDE
+ * - Efeitos de vidro
+ * - Animações avançadas
+ * - Cards interativos
+ * - Botões com efeito
+ * - Gradientes premium
+ * ============================================
+ */
+
+/* ============================================
+   GLASSMORPHISM
+   ============================================ */
+.glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-dark {
+    background: rgba(10, 37, 64, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   ANIMAÇÕES AVANÇADAS
+   ============================================ */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes float-slow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(217, 119, 6, 0.1); }
+    50% { box-shadow: 0 0 40px rgba(217, 119, 6, 0.2); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes scale-in {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide-up {
+    0% { transform: translateY(40px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-in-left {
+    0% { transform: translateX(-60px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-in-right {
+    0% { transform: translateX(60px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+.float { animation: float 3s ease-in-out infinite; }
+.float-slow { animation: float-slow 4s ease-in-out infinite; }
+.pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+/* ============================================
+   CARDS INTERATIVOS
+   ============================================ */
+.card-interactive {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-interactive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.card-interactive:hover::before {
+    opacity: 1;
+}
+
+.card-interactive:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: var(--shadow-xl);
+}
+
+.card-interactive .card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(217, 119, 6, 0.05), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+}
+
+.card-interactive:hover .card-glow {
+    opacity: 1;
+}
+
+/* ============================================
+   BOTÕES COM EFEITO
+   ============================================ */
+.btn-shimmer {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+    color: var(--white);
+    border: none;
+}
+
+.btn-shimmer:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 40px rgba(217, 119, 6, 0.4);
+}
+
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple-anim 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-anim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.btn-3d {
+    transform: perspective(800px) rotateX(0deg);
+    transition: all 0.3s ease;
+}
+
+.btn-3d:hover {
+    transform: perspective(800px) rotateX(5deg) translateY(-4px);
+    box-shadow: 0 12px 40px rgba(29, 78, 216, 0.3);
+}
+
+/* ============================================
+   GRADIENTES PREMIUM
+   ============================================ */
+.gradient-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+}
+
+.gradient-blue {
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+}
+
+.gradient-dark {
+    background: linear-gradient(135deg, var(--navy), var(--gray-800));
+}
+
+.gradient-radial {
+    background: radial-gradient(ellipse at center, var(--navy), var(--gray-900));
+}
+
+/* ============================================
+   BADGES PREMIUM
+   ============================================ */
+.badge-premium {
+    display: inline-block;
+    padding: 4px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--white);
+    box-shadow: 0 2px 12px rgba(217, 119, 6, 0.2);
+}
+
+.badge-premium-dark {
+    display: inline-block;
+    padding: 4px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--gray-300);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.badge-urgency {
+    display: inline-block;
+    padding: 4px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(239, 68, 68, 0.12);
+    color: var(--red);
+    border: 1px solid rgba(239, 68, 68, 0.08);
+    animation: pulse-urgency 2s infinite;
+}
+
+@keyframes pulse-urgency {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* ============================================
+   SEPARADORES
+   ============================================ */
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 32px 0;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gray-200), transparent);
+}
+
+.separator .icon {
+    font-size: 1.2rem;
+    color: var(--gray-400);
+}
+
+/* ============================================
+   TOOLTIP PREMIUM
+   ============================================ */
+.tooltip-premium {
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip-premium::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px) scale(0.8);
+    padding: 8px 16px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.7rem;
+    font-weight: 500;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    box-shadow: var(--shadow-lg);
+}
+
+.tooltip-premium:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px) scale(1);
+}
+
+/* ============================================
+   SCROLL INDICATOR
+   ============================================ */
+.scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--gray-400);
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    animation: float 2s ease-in-out infinite;
+}
+
+.scroll-indicator .arrow {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid var(--gray-400);
+    border-bottom: 2px solid var(--gray-400);
+    transform: rotate(45deg);
+    animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+    0%, 100% { transform: rotate(45deg) translate(0, 0); }
+    50% { transform: rotate(45deg) translate(4px, 4px); }
+}
+
+/* ============================================
+   COUNTER ANIMATION
+   ============================================ */
+.counter {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.counter .suffix {
+    font-size: 0.6em;
+    color: var(--gray-400);
+}
+
+/* ============================================
+   RESPONSIVE EXTENSIONS
+   ============================================ */
+@media (max-width: 768px) {
+    .glass {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .glass-dark {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .card-interactive:hover {
+        transform: translateY(-4px) scale(1);
+    }
+}
+
+/* ============================================
+   DARK MODE EXTENSIONS
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    .separator::before,
+    .separator::after {
+        background: linear-gradient(90deg, transparent, var(--gray-700), transparent);
+    }
+    
+    .tooltip-premium::after {
+        background: var(--gray-700);
+        color: var(--white);
+    }
+    
+    .counter {
+        color: var(--white);
+    }
+}
