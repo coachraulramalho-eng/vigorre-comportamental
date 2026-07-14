@@ -4,12 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | VIGORRE ONE™</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    
     <style>
         /* ============================================
            VIGORRE ONE™ - LOGIN ENTERPRISE
+           IDENTIDADE SAP/WORKDAY/LINEAR
            ============================================ */
 
         * {
@@ -25,6 +28,9 @@
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -51,6 +57,7 @@
             color: var(--gray-800);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
@@ -61,24 +68,25 @@
         .container {
             max-width: 440px;
             width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        /* ============================================
-           LOGO
-           ============================================ */
         .logo {
             text-align: center;
             margin-bottom: 40px;
         }
 
-        .logo .logo-img {
+        .logo-img {
             height: 52px;
             width: auto;
             display: inline-block;
             margin-bottom: 8px;
         }
 
-        .logo .logo-name {
+        .logo-name {
             font-family: 'Poppins', sans-serif;
             font-size: 1.5rem;
             font-weight: 800;
@@ -86,13 +94,13 @@
             letter-spacing: -0.5px;
         }
 
-        .logo .logo-name .tm {
+        .logo-name .tm {
             font-size: 0.45rem;
             vertical-align: super;
             color: var(--cyan);
         }
 
-        .logo .logo-sub {
+        .logo-sub {
             font-size: 0.7rem;
             color: var(--gray-400);
             text-transform: uppercase;
@@ -100,9 +108,6 @@
             margin-top: 2px;
         }
 
-        /* ============================================
-           CARD
-           ============================================ */
         .card {
             background: var(--white);
             border-radius: var(--radius);
@@ -131,9 +136,6 @@
             line-height: 1.5;
         }
 
-        /* ============================================
-           FORM
-           ============================================ */
         .form-group {
             margin-bottom: 18px;
         }
@@ -172,14 +174,6 @@
             color: var(--gray-400);
         }
 
-        .form-group input:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* ============================================
-           PASSWORD TOGGLE
-           ============================================ */
         .password-wrapper {
             position: relative;
         }
@@ -208,9 +202,6 @@
             color: var(--gray-700);
         }
 
-        /* ============================================
-           OPTIONS
-           ============================================ */
         .form-options {
             display: flex;
             justify-content: space-between;
@@ -246,9 +237,6 @@
             color: var(--cyan);
         }
 
-        /* ============================================
-           BUTTONS
-           ============================================ */
         .btn-login {
             width: 100%;
             padding: 14px;
@@ -300,9 +288,6 @@
             }
         }
 
-        /* ============================================
-           LINKS
-           ============================================ */
         .form-footer {
             text-align: center;
             margin-top: 18px;
@@ -330,9 +315,6 @@
             color: var(--gray-700);
         }
 
-        /* ============================================
-           MENSAGENS
-           ============================================ */
         .message {
             padding: 12px 16px;
             border-radius: var(--radius-sm);
@@ -389,9 +371,6 @@
             }
         }
 
-        /* ============================================
-           DEMO CREDENTIALS
-           ============================================ */
         .demo-credentials {
             margin-top: 24px;
             padding: 18px 20px;
@@ -446,6 +425,32 @@
         }
 
         /* ============================================
+           FOOTER DO LOGIN
+           ============================================ */
+        .login-footer {
+            margin-top: 32px;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .login-footer p {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            margin-bottom: 2px;
+            line-height: 1.6;
+        }
+
+        .login-footer strong {
+            color: var(--gray-500);
+        }
+
+        .login-footer .footer-brand {
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        /* ============================================
            RESPONSIVO
            ============================================ */
         @media (max-width: 480px) {
@@ -468,11 +473,11 @@
                 margin-top: 4px;
             }
 
-            .logo .logo-img {
+            .logo-img {
                 height: 40px;
             }
 
-            .logo .logo-name {
+            .logo-name {
                 font-size: 1.2rem;
             }
 
@@ -486,99 +491,135 @@
             }
         }
 
-        @media (max-width: 360px) {
-            .card {
-                padding: 20px 16px;
-            }
-            .form-group input {
-                padding: 10px 14px;
-                font-size: 0.85rem;
-            }
-        }
-
+        /* ============================================
+           DARK MODE
+           ============================================ */
         @media (prefers-color-scheme: dark) {
             body {
                 background: var(--gray-900);
+                background-image: radial-gradient(ellipse at 10% 20%, rgba(29, 78, 216, 0.05) 0%, transparent 50%),
+                    radial-gradient(ellipse at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
             }
+
             .card {
                 background: var(--gray-800);
                 border-color: rgba(255, 255, 255, 0.06);
             }
+
             .card h2 {
                 color: var(--white);
             }
+
             .card .subtitle {
                 color: var(--gray-400);
             }
+
             .form-group label {
                 color: var(--gray-300);
             }
+
             .form-group input {
                 background: var(--gray-700);
                 border-color: var(--gray-600);
                 color: var(--white);
             }
+
             .form-group input:focus {
                 border-color: var(--blue-light);
                 box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
             }
+
             .form-group input::placeholder {
                 color: var(--gray-500);
             }
+
             .form-options .remember {
                 color: var(--gray-400);
             }
+
             .form-footer {
                 color: var(--gray-400);
             }
+
             .demo-credentials {
                 background: var(--gray-700);
                 border-color: var(--gray-600);
             }
+
             .demo-credentials .demo-title {
                 color: var(--gray-400);
             }
+
             .demo-credentials .demo-grid .role {
                 color: var(--gray-300);
             }
+
             .demo-credentials .demo-grid .email {
                 color: var(--gray-400);
             }
+
             .demo-credentials .demo-copy {
                 border-color: var(--gray-600);
                 color: var(--gray-500);
             }
-            .logo .logo-name {
+
+            .logo-name {
                 color: var(--white);
             }
+
             .password-toggle {
                 color: var(--gray-500);
             }
+
             .password-toggle:hover {
+                color: var(--gray-300);
+            }
+
+            .login-footer {
+                border-color: var(--gray-700);
+            }
+
+            .login-footer p {
+                color: var(--gray-500);
+            }
+
+            .login-footer strong {
+                color: var(--gray-400);
+            }
+
+            .login-footer .footer-brand {
                 color: var(--gray-300);
             }
         }
 
+        /* ============================================
+           PRINT
+           ============================================ */
         @media print {
             body {
                 background: white !important;
                 padding: 0 !important;
             }
+
             .card {
                 box-shadow: none !important;
                 border: 1px solid #E2E8F0 !important;
                 padding: 20px !important;
             }
+
             .btn-login {
                 display: none !important;
             }
+
             .demo-credentials {
                 display: none !important;
             }
+
             .form-options .forgot-link {
                 display: none !important;
             }
-            .logo .logo-img {
+
+            .logo-img {
                 height: 36px !important;
             }
         }
@@ -588,9 +629,6 @@
 
     <div class="container">
 
-        <!-- ============================================
-        LOGO
-        ============================================ -->
         <div class="logo">
             <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-name">
@@ -599,36 +637,27 @@
             <div class="logo-sub">People Intelligence Enterprise</div>
         </div>
 
-        <!-- ============================================
-        CARD
-        ============================================ -->
         <div class="card">
 
             <h2>Bem-vindo 👋</h2>
             <div class="subtitle">Entre com suas credenciais para acessar a plataforma</div>
 
-            <!-- ============================================
-            MENSAGEM
-            ============================================ -->
             <div class="message" id="message">
                 <span class="msg-icon">✅</span>
                 <span id="messageText">Mensagem</span>
             </div>
 
-            <!-- ============================================
-            FORM
-            ============================================ -->
             <form id="loginForm" onsubmit="handleLogin(event)">
 
                 <div class="form-group">
                     <label>E-mail <span class="required">*</span></label>
-                    <input type="email" id="email" placeholder="seu@email.com" value="master@vigorre.com" required autofocus />
+                    <input type="email" id="email" placeholder="seu@email.com" required autofocus />
                 </div>
 
                 <div class="form-group">
                     <label>Senha <span class="required">*</span></label>
                     <div class="password-wrapper">
-                        <input type="password" id="password" placeholder="••••••••" value="adminvigor10" required />
+                        <input type="password" id="password" placeholder="••••••••" required />
                         <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Mostrar/Ocultar senha">👁️</button>
                     </div>
                 </div>
@@ -645,16 +674,10 @@
 
             </form>
 
-            <!-- ============================================
-            FOOTER
-            ============================================ -->
             <div class="form-footer">
                 <a href="index.html" class="back-link">← Voltar para Home</a>
             </div>
 
-            <!-- ============================================
-            DEMO CREDENTIALS
-            ============================================ -->
             <div class="demo-credentials">
                 <div class="demo-title">🔐 Credenciais de Teste</div>
                 <div class="demo-grid">
@@ -664,18 +687,29 @@
                     <span class="email">admin@vigorre.com / adminvigor10</span>
                     <span class="role">🎯 Recrutador</span>
                     <span class="email">recrutador@teste.com / rec123</span>
-                    <span class="role">👥 Participante</span>
+                    <span class="role">👤 Participante</span>
                     <span class="email">participante@teste.com / part123</span>
+                    <span class="role">🏢 Empresa</span>
+                    <span class="email">empresa@teste.com / emp123</span>
+                    <span class="role">📊 Consultor</span>
+                    <span class="email">consultor@teste.com / cons123</span>
                 </div>
                 <div class="demo-copy">Clique nos campos para preencher automaticamente</div>
             </div>
 
         </div>
+
+        <!-- ============================================
+        RODAPÉ DO LOGIN
+        ============================================ -->
+        <div class="login-footer">
+            <p>© 2026 Vigorre. Todos os direitos reservados.</p>
+            <p>Desenvolvido pela <strong>Vigorre Tech®</strong></p>
+            <p class="footer-brand">Tecnologia, Inteligência Artificial e Soluções Digitais para Gestão Estratégica.</p>
+        </div>
+
     </div>
 
-    <!-- ============================================
-    SCRIPTS
-    ============================================ -->
     <script src="supabase-config.js"></script>
     <script src="auth.js"></script>
 
@@ -683,14 +717,12 @@
         /**
          * ============================================
          * VIGORRE ONE™ - LOGIN SCRIPT
+         * INTERNATIONAL ENTERPRISE EDITION
          * ============================================
          */
 
         'use strict';
 
-        // ============================================
-        // DOM REFS
-        // ============================================
         var emailInput = document.getElementById('email');
         var passwordInput = document.getElementById('password');
         var loginBtn = document.getElementById('loginBtn');
@@ -698,9 +730,6 @@
         var messageText = document.getElementById('messageText');
         var rememberMe = document.getElementById('rememberMe');
 
-        // ============================================
-        // TOGGLE PASSWORD
-        // ============================================
         function togglePassword() {
             var input = document.getElementById('password');
             var btn = document.querySelector('.password-toggle');
@@ -713,23 +742,16 @@
             }
         }
 
-        // ============================================
-        // SHOW MESSAGE
-        // ============================================
         function showMessage(text, type) {
             messageEl.className = 'message show ' + (type || 'info');
             messageText.textContent = text;
 
-            // Auto-hide após 5 segundos
             clearTimeout(messageEl._hideTimeout);
             messageEl._hideTimeout = setTimeout(function() {
                 messageEl.classList.remove('show');
             }, 5000);
         }
 
-        // ============================================
-        // RESET PASSWORD
-        // ============================================
         function resetPassword() {
             var email = prompt('Digite seu e-mail para redefinir a senha:');
             if (email && window.VigorreAuth) {
@@ -742,9 +764,6 @@
             }
         }
 
-        // ============================================
-        // AUTO-FILL DEMO (clique no card)
-        // ============================================
         document.querySelector('.demo-credentials').addEventListener('click', function(e) {
             var target = e.target.closest('.email');
             if (target) {
@@ -759,16 +778,12 @@
             }
         });
 
-        // ============================================
-        // HANDLE LOGIN
-        // ============================================
         async function handleLogin(event) {
             event.preventDefault();
 
             var email = emailInput.value.trim();
             var password = passwordInput.value;
 
-            // Validar campos
             if (!email) {
                 showMessage('Por favor, digite seu e-mail', 'error');
                 emailInput.focus();
@@ -781,7 +796,6 @@
                 return;
             }
 
-            // Validar formato do e-mail
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showMessage('Por favor, digite um e-mail válido', 'error');
@@ -789,7 +803,6 @@
                 return;
             }
 
-            // Desabilitar botão
             loginBtn.disabled = true;
             loginBtn.innerHTML = '<span class="spinner"></span> Entrando...';
 
@@ -798,7 +811,6 @@
                     var result = window.VigorreAuth.login(email, password);
 
                     if (result.success) {
-                        // Salvar "Lembrar de mim"
                         if (rememberMe.checked) {
                             localStorage.setItem('vigorre_remember_email', email);
                         } else {
@@ -807,7 +819,6 @@
 
                         showMessage('✅ Login realizado com sucesso!', 'success');
 
-                        // Redirecionar
                         setTimeout(function() {
                             window.location.href = result.redirect;
                         }, 800);
@@ -829,13 +840,9 @@
             }
         }
 
-        // ============================================
-        // INICIALIZAR
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🔐 Tela de Login - VIGORRE ONE™');
 
-            // Verificar se já está logado
             if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
                 var user = window.VigorreAuth.getCurrentUser();
                 if (user) {
@@ -845,19 +852,16 @@
                 }
             }
 
-            // Restaurar "Lembrar de mim"
             var savedEmail = localStorage.getItem('vigorre_remember_email');
             if (savedEmail) {
                 emailInput.value = savedEmail;
                 rememberMe.checked = true;
             }
 
-            // Foco no campo email
             setTimeout(function() {
                 emailInput.focus();
             }, 100);
 
-            // Enter para submit
             passwordInput.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
                     document.getElementById('loginForm').dispatchEvent(new Event('submit'));
