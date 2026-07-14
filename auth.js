@@ -1,393 +1,635 @@
 /**
  * ============================================
- * VIGORRE ONE™ - AUTH SYSTEM ENTERPRISE
+ * VIGORRE ONE™ - AUTH CENTRAL
+ * INTERNATIONAL ENTERPRISE EDITION
  * ============================================
  * 
- * Sistema de Autenticação com:
- * - JWT + Refresh Token
- * - 2FA Opcional
- * - Fingerprint
- * - Sessão Única
- * - Rate Limit
- * - Bloqueio por Tentativas
- * - Auditoria Completa
+ * VERSÃO: 2.0.0
+ * DATA: 14/07/2026
+ * 
+ * FUNCIONALIDADES:
+ * - Login/Logout
+ * - Papéis (roles) - MASTER, ADMIN, RECRUITER, PARTICIPANT, COMPANY, CONSULTANT
+ * - Redirecionamentos
+ * - Reset de senha
+ * - Sessão com token
+ * - Auditoria
+ * - Créditos dos usuários (TODOS OS TIPOS)
+ * - Gerenciamento de usuários
  * ============================================
  */
 
-(function() {
-    'use strict';
+'use strict';
 
-    // ============================================
-    // CONFIGURAÇÕES
-    // ============================================
-    const CONFIG = {
-        TOKEN_EXPIRY: 3600, // 1 hora
-        REFRESH_EXPIRY: 604800, // 7 dias
-        MAX_LOGIN_ATTEMPTS: 5,
-        BLOCK_DURATION: 900, // 15 minutos
-        SESSION_KEY: 'vigorre_session',
-        USER_KEY: 'vigorre_user',
-        TOKEN_KEY: 'vigorre_token',
-        REFRESH_KEY: 'vigorre_refresh',
-        FINGERPRINT_KEY: 'vigorre_fingerprint'
-    };
-
-    // ============================================
-    // USUÁRIOS (Dados de Exemplo)
-    // ============================================
-    const USERS = [
-        {
-            id: 'usr_001',
-            name: 'Administrador Master',
-            email: 'master@vigorre.com',
-            password: 'adminvigor10',
-            role: 'master',
-            status: 'active',
-            phone: '(34) 99185-0735',
-            companyId: null,
-            credits: { DISC: 9999, IE: 9999, Valores: 9999, SWOT: 9999, BigFive: 9999, Laudo: 9999 },
-            permissions: ['*'],
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z'
+// ============================================
+// CONFIGURAÇÃO DE AUTENTICAÇÃO
+// ============================================
+const AUTH_CONFIG = {
+    // Papéis e rotas
+    roles: {
+        'master': {
+            name: 'Master Admin',
+            redirect: '/admin/dashboard.html',
+            label: '👑 Master',
+            level: 5,
+            permissions: ['*']
         },
-        {
-            id: 'usr_002',
-            name: 'Admin Staff',
-            email: 'admin@vigorre.com',
-            password: 'adminvigor10',
-            role: 'admin',
-            status: 'active',
-            phone: '(34) 99185-0736',
-            companyId: null,
-            credits: { DISC: 500, IE: 500, Valores: 500, SWOT: 500, BigFive: 500, Laudo: 100 },
-            permissions: ['admin.dashboard', 'admin.empresas', 'admin.recrutadores', 'admin.participantes'],
-            createdAt: '2024-01-15T00:00:00Z',
-            updatedAt: '2024-01-15T00:00:00Z'
+        'admin': {
+            name: 'Administrador',
+            redirect: '/admin/dashboard.html',
+            label: '👤 Admin',
+            level: 4,
+            permissions: ['users', 'companies', 'participants', 'recruiters', 'consultants', 'wallets', 'credits',
+                'reports', 'laudos', 'audit'
+            ]
         },
-        {
-            id: 'usr_003',
-            name: 'João Silva',
-            email: 'recrutador@teste.com',
-            password: 'rec123',
-            role: 'recruiter',
-            status: 'active',
-            phone: '(11) 99999-9999',
-            companyId: 'comp_001',
-            credits: { DISC: 50, IE: 30, Valores: 20, SWOT: 15, BigFive: 10, Laudo: 5 },
-            permissions: ['recruiter.dashboard', 'recruiter.participantes', 'recruiter.creditos', 'recruiter.relatorios'],
-            createdAt: '2024-02-01T00:00:00Z',
-            updatedAt: '2024-02-01T00:00:00Z'
+        'consultant': {
+            name: 'Consultor',
+            redirect: '/consultor/dashboard.html',
+            label: '📊 Consultor',
+            level: 3,
+            permissions: ['participants', 'reports', 'laudos', 'clients']
         },
-        {
-            id: 'usr_004',
-            name: 'Ana Silva',
-            email: 'participante@teste.com',
-            password: 'part123',
-            role: 'participant',
-            status: 'active',
-            phone: '(11) 88888-8888',
-            companyId: 'comp_001',
-            credits: { DISC: 0, IE: 0, Valores: 0, SWOT: 0, BigFive: 0, Laudo: 0 },
-            permissions: ['participant.dashboard', 'participant.testes', 'participant.resultados'],
-            createdAt: '2024-03-01T00:00:00Z',
-            updatedAt: '2024-03-01T00:00:00Z'
+        'recruiter': {
+            name: 'Recrutador',
+            redirect: '/recrutador/dashboard.html',
+            label: '🎯 Recrutador',
+            level: 2,
+            permissions: ['participants', 'tests', 'reports']
+        },
+        'company': {
+            name: 'Empresa',
+            redirect: '/empresa/dashboard.html',
+            label: '🏢 Empresa',
+            level: 2,
+            permissions: ['participants', 'tests', 'reports', 'wallets']
+        },
+        'participant': {
+            name: 'Participante',
+            redirect: '/participante/dashboard.html',
+            label: '👤 Participante',
+            level: 1,
+            permissions: ['tests', 'results', 'laudo']
         }
-    ];
+    },
+
+    // Usuários mockados para teste
+    mockUsers: [{
+        id: '1',
+        email: 'master@vigorre.com',
+        password: 'adminvigor10',
+        name: 'Master Admin',
+        role: 'master',
+        avatar: '👑',
+        credits: { DISC: 1000, IE: 1000, VALORES: 1000, SWOT: 1000, BIGFIVE: 1000, COMPETENCIAS: 1000, LIDERANCA: 1000,
+            POTENCIAL: 1000, FITCULTURAL: 1000 }
+    }, {
+        id: '2',
+        email: 'admin@vigorre.com',
+        password: 'adminvigor10',
+        name: 'Administrador',
+        role: 'admin',
+        avatar: '👤',
+        credits: { DISC: 500, IE: 500, VALORES: 500, SWOT: 500, BIGFIVE: 500, COMPETENCIAS: 500, LIDERANCA: 500,
+            POTENCIAL: 500, FITCULTURAL: 500 }
+    }, {
+        id: '3',
+        email: 'recrutador@teste.com',
+        password: 'rec123',
+        name: 'João Recrutador',
+        role: 'recruiter',
+        avatar: '🎯',
+        credits: { DISC: 50, IE: 30, VALORES: 20, SWOT: 10, BIGFIVE: 10, COMPETENCIAS: 5, LIDERANCA: 5, POTENCIAL: 5,
+            FITCULTURAL: 5 },
+        companyId: 'comp_001'
+    }, {
+        id: '4',
+        email: 'participante@teste.com',
+        password: 'part123',
+        name: 'Ana Participante',
+        role: 'participant',
+        avatar: '👤',
+        credits: { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0, COMPETENCIAS: 0, LIDERANCA: 0, POTENCIAL: 0,
+            FITCULTURAL: 0 },
+        companyId: 'comp_001',
+        tests: ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE'],
+        completedTests: ['DISC']
+    }, {
+        id: '5',
+        email: 'empresa@teste.com',
+        password: 'emp123',
+        name: 'TechCorp Solutions',
+        role: 'company',
+        avatar: '🏢',
+        credits: { DISC: 100, IE: 80, VALORES: 60, SWOT: 40, BIGFIVE: 30, COMPETENCIAS: 20, LIDERANCA: 20, POTENCIAL: 15,
+            FITCULTURAL: 10 }
+    }, {
+        id: '6',
+        email: 'consultor@teste.com',
+        password: 'cons123',
+        name: 'Maria Consultora',
+        role: 'consultant',
+        avatar: '📊',
+        credits: { DISC: 200, IE: 150, VALORES: 100, SWOT: 80, BIGFIVE: 60, COMPETENCIAS: 50, LIDERANCA: 40,
+            POTENCIAL: 30, FITCULTURAL: 20 },
+        clients: ['comp_001', 'comp_002', 'comp_003']
+    }],
+
+    // Configuração de token
+    tokenExpiry: 24 * 60 * 60 * 1000, // 24 horas
+    refreshTokenExpiry: 7 * 24 * 60 * 60 * 1000 // 7 dias
+};
+
+// ============================================
+// CLASSE DE AUTENTICAÇÃO
+// ============================================
+class VigorreAuth {
 
     // ============================================
-    // FINGERPRINT
+    // LOGIN
     // ============================================
-    function generateFingerprint() {
-        const data = [
-            navigator.userAgent || '',
-            navigator.language || '',
-            screen.width || 0,
-            screen.height || 0,
-            screen.colorDepth || 0,
-            navigator.hardwareConcurrency || 0,
-            navigator.deviceMemory || 0,
-            new Date().getTimezoneOffset() || 0
-        ].join('|');
-        return btoa(data).substring(0, 64);
-    }
-
-    function getFingerprint() {
-        let fp = localStorage.getItem(CONFIG.FINGERPRINT_KEY);
-        if (!fp) {
-            fp = generateFingerprint();
-            localStorage.setItem(CONFIG.FINGERPRINT_KEY, fp);
-        }
-        return fp;
-    }
-
-    // ============================================
-    // JWT SIMULADO
-    // ============================================
-    function generateToken(userId, expiresIn) {
-        const payload = {
-            sub: userId,
-            iat: Math.floor(Date.now() / 1000),
-            exp: Math.floor(Date.now() / 1000) + expiresIn,
-            fp: getFingerprint()
-        };
-        const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
-        const payloadEncoded = btoa(JSON.stringify(payload));
-        const signature = btoa('signature_' + userId + '_' + Date.now());
-        return header + '.' + payloadEncoded + '.' + signature;
-    }
-
-    function decodeToken(token) {
+    static login(email, password) {
         try {
-            const parts = token.split('.');
-            if (parts.length !== 3) return null;
-            const payload = JSON.parse(atob(parts[1]));
-            return payload;
-        } catch (e) {
-            return null;
-        }
-    }
-
-    function isTokenValid(token) {
-        if (!token) return false;
-        const payload = decodeToken(token);
-        if (!payload) return false;
-        if (payload.fp !== getFingerprint()) return false;
-        if (payload.exp < Math.floor(Date.now() / 1000)) return false;
-        return true;
-    }
-
-    // ============================================
-    // SESSÃO
-    // ============================================
-    function getSession() {
-        try {
-            const session = localStorage.getItem(CONFIG.SESSION_KEY);
-            return session ? JSON.parse(session) : null;
-        } catch (e) {
-            return null;
-        }
-    }
-
-    function setSession(user, token, refreshToken) {
-        const session = {
-            user: user,
-            token: token,
-            refreshToken: refreshToken,
-            loginAt: new Date().toISOString(),
-            expiresAt: new Date(Date.now() + CONFIG.TOKEN_EXPIRY * 1000).toISOString(),
-            fingerprint: getFingerprint()
-        };
-        localStorage.setItem(CONFIG.SESSION_KEY, JSON.stringify(session));
-        localStorage.setItem(CONFIG.USER_KEY, JSON.stringify(user));
-        localStorage.setItem(CONFIG.TOKEN_KEY, token);
-        localStorage.setItem(CONFIG.REFRESH_KEY, refreshToken);
-    }
-
-    function clearSession() {
-        localStorage.removeItem(CONFIG.SESSION_KEY);
-        localStorage.removeItem(CONFIG.USER_KEY);
-        localStorage.removeItem(CONFIG.TOKEN_KEY);
-        localStorage.removeItem(CONFIG.REFRESH_KEY);
-    }
-
-    function isSessionValid() {
-        const session = getSession();
-        if (!session) return false;
-        if (session.fingerprint !== getFingerprint()) return false;
-        if (new Date(session.expiresAt) < new Date()) return false;
-        return isTokenValid(session.token);
-    }
-
-    // ============================================
-    // RATE LIMIT
-    // ============================================
-    const loginAttempts = {};
-
-    function checkRateLimit(email) {
-        const key = 'login_' + email;
-        const now = Date.now();
-        if (!loginAttempts[key]) {
-            loginAttempts[key] = { count: 0, firstAttempt: now, blockedUntil: null };
-        }
-        const record = loginAttempts[key];
-        if (now - record.firstAttempt > 3600000) {
-            record.count = 0;
-            record.firstAttempt = now;
-            record.blockedUntil = null;
-        }
-        if (record.blockedUntil && now < record.blockedUntil) {
-            const remaining = Math.ceil((record.blockedUntil - now) / 1000 / 60);
-            return { allowed: false, remaining: remaining, message: 'Bloqueado por ' + remaining + ' minutos' };
-        }
-        if (record.count >= CONFIG.MAX_LOGIN_ATTEMPTS) {
-            record.blockedUntil = now + CONFIG.BLOCK_DURATION * 1000;
-            return { allowed: false, remaining: CONFIG.BLOCK_DURATION, message: 'Bloqueado por ' + CONFIG.BLOCK_DURATION + ' minutos' };
-        }
-        return { allowed: true };
-    }
-
-    function recordLoginAttempt(email, success) {
-        const key = 'login_' + email;
-        if (!loginAttempts[key]) {
-            loginAttempts[key] = { count: 0, firstAttempt: Date.now(), blockedUntil: null };
-        }
-        if (!success) {
-            loginAttempts[key].count++;
-        } else {
-            loginAttempts[key].count = 0;
-            loginAttempts[key].blockedUntil = null;
-        }
-    }
-
-    // ============================================
-    // AUTENTICAÇÃO PRINCIPAL
-    // ============================================
-    const VigorreAuth = {
-        login: function(email, password) {
             if (!email || !password) {
-                return { success: false, message: 'Preencha todos os campos' };
+                return { success: false, message: '❌ Preencha todos os campos' };
             }
-            const rateCheck = checkRateLimit(email);
-            if (!rateCheck.allowed) {
-                return { success: false, message: rateCheck.message };
-            }
-            const user = USERS.find(function(u) { return u.email.toLowerCase() === email.toLowerCase(); });
-            if (!user) {
-                recordLoginAttempt(email, false);
-                return { success: false, message: 'Credenciais inválidas' };
-            }
-            if (user.password !== password) {
-                recordLoginAttempt(email, false);
-                return { success: false, message: 'Credenciais inválidas' };
-            }
-            if (user.status !== 'active') {
-                return { success: false, message: 'Usuário inativo ou suspenso' };
-            }
-            recordLoginAttempt(email, true);
-            const token = generateToken(user.id, CONFIG.TOKEN_EXPIRY);
-            const refreshToken = generateToken(user.id, CONFIG.REFRESH_EXPIRY);
-            setSession(user, token, refreshToken);
-            this.audit(user.id, 'login', 'success', { email: user.email });
-            return {
-                success: true,
-                user: user,
-                token: token,
-                refreshToken: refreshToken,
-                redirect: this.getRedirectUrl(user.role)
-            };
-        },
 
-        logout: function() {
-            const user = this.getCurrentUser();
-            if (user) {
-                this.audit(user.id, 'logout', 'success', { email: user.email });
-            }
-            clearSession();
-            window.location.href = '../login.html';
-        },
-
-        isAuthenticated: function() {
-            return isSessionValid();
-        },
-
-        getCurrentUser: function() {
-            try {
-                const user = localStorage.getItem(CONFIG.USER_KEY);
-                return user ? JSON.parse(user) : null;
-            } catch (e) {
-                return null;
-            }
-        },
-
-        getToken: function() {
-            return localStorage.getItem(CONFIG.TOKEN_KEY);
-        },
-
-        getRefreshToken: function() {
-            return localStorage.getItem(CONFIG.REFRESH_KEY);
-        },
-
-        getRedirectUrl: function(role) {
-            var map = {
-                'master': '/admin/dashboard.html',
-                'admin': '/admin/dashboard.html',
-                'recruiter': '/recrutador/dashboard.html',
-                'participant': '/participante/dashboard.html'
-            };
-            return map[role] || '/index.html';
-        },
-
-        hasPermission: function(permission) {
-            var user = this.getCurrentUser();
-            if (!user) return false;
-            if (user.permissions.indexOf('*') !== -1) return true;
-            return user.permissions.indexOf(permission) !== -1;
-        },
-
-        audit: function(userId, action, status, details) {
-            try {
-                var logs = JSON.parse(localStorage.getItem('vigorre_audit_logs') || '[]');
-                logs.push({
-                    id: 'aud_' + Date.now(),
-                    userId: userId,
-                    action: action,
-                    status: status,
-                    details: details || {},
-                    ip: 'local',
-                    userAgent: navigator.userAgent || '',
-                    timestamp: new Date().toISOString()
-                });
-                if (logs.length > 10000) {
-                    logs.splice(0, logs.length - 10000);
-                }
-                localStorage.setItem('vigorre_audit_logs', JSON.stringify(logs));
-            } catch (e) {
-                console.warn('Erro ao registrar auditoria:', e);
-            }
-        },
-
-        resetPassword: function(email, newPassword) {
-            var user = USERS.find(function(u) { return u.email.toLowerCase() === email.toLowerCase(); });
-            if (!user) {
-                return { success: false, message: 'Usuário não encontrado' };
-            }
-            user.password = newPassword;
-            this.audit(user.id, 'password_reset', 'success', { email: user.email });
-            return { success: true, message: 'Senha resetada com sucesso' };
-        },
-
-        _getUsers: function() {
-            return USERS;
-        },
-
-        init: function() {
-            console.log('🔐 VigorreAuth Enterprise inicializado');
-            if (this.isAuthenticated()) {
-                var user = this.getCurrentUser();
-                if (user) {
-                    console.log('👤 Sessão ativa: ' + user.name + ' (' + user.role + ')');
-                }
-            }
-            var protectedPages = ['/admin/', '/recrutador/', '/participante/'];
-            var currentPath = window.location.pathname;
-            for (var i = 0; i < protectedPages.length; i++) {
-                if (currentPath.indexOf(protectedPages[i]) !== -1) {
-                    if (!this.isAuthenticated()) {
-                        console.warn('⏰ Sessão expirada, redirecionando para login');
-                        window.location.href = '../login.html';
-                    }
+            var user = null;
+            for (var i = 0; i < AUTH_CONFIG.mockUsers.length; i++) {
+                if (AUTH_CONFIG.mockUsers[i].email === email &&
+                    AUTH_CONFIG.mockUsers[i].password === password) {
+                    user = AUTH_CONFIG.mockUsers[i];
                     break;
                 }
             }
+
+            if (!user) {
+                var emailExists = false;
+                for (var j = 0; j < AUTH_CONFIG.mockUsers.length; j++) {
+                    if (AUTH_CONFIG.mockUsers[j].email === email) {
+                        emailExists = true;
+                        break;
+                    }
+                }
+
+                if (emailExists) {
+                    return { success: false, message: '❌ Senha incorreta' };
+                }
+
+                return { success: false, message: '❌ Usuário não encontrado' };
+            }
+
+            // Salvar sessão
+            var token = 'mock_token_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+            var refreshToken = 'refresh_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+
+            localStorage.setItem('vigorre_user', JSON.stringify(user));
+            localStorage.setItem('vigorre_token', token);
+            localStorage.setItem('vigorre_refresh_token', refreshToken);
+            localStorage.setItem('vigorre_login_time', new Date().toISOString());
+            localStorage.setItem('vigorre_token_expiry', new Date(Date.now() + AUTH_CONFIG.tokenExpiry).toISOString());
+
+            this.logAudit(user.id, user.name, 'Login', 'Login no sistema', 'baixo');
+
+            var redirect = this.getRedirectUrl(user.role);
+
+            return {
+                success: true,
+                user: user,
+                redirect: redirect,
+                message: '✅ Login realizado com sucesso!'
+            };
+
+        } catch (error) {
+            console.error('❌ Erro no login:', error);
+            return { success: false, message: '❌ Erro interno no login' };
         }
-    };
+    }
 
-    window.VigorreAuth = VigorreAuth;
+    // ============================================
+    // LOGOUT
+    // ============================================
+    static logout() {
+        try {
+            var user = this.getCurrentUser();
+            if (user) {
+                this.logAudit(user.id, user.name, 'Logout', 'Logout do sistema', 'baixo');
+            }
+        } catch (error) {
+            console.warn('⚠️ Erro ao registrar logout:', error);
+        }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        VigorreAuth.init();
-    });
+        localStorage.removeItem('vigorre_user');
+        localStorage.removeItem('vigorre_token');
+        localStorage.removeItem('vigorre_refresh_token');
+        localStorage.removeItem('vigorre_login_time');
+        localStorage.removeItem('vigorre_token_expiry');
 
-    console.log('🔐 Auth System Enterprise carregado com sucesso!');
+        window.location.href = '/login.html';
+    }
 
-})();
+    // ============================================
+    // VERIFICAR AUTENTICAÇÃO
+    // ============================================
+    static isAuthenticated() {
+        try {
+            var token = localStorage.getItem('vigorre_token');
+            var user = this.getCurrentUser();
+            var expiry = localStorage.getItem('vigorre_token_expiry');
+
+            if (!token || !user) {
+                return false;
+            }
+
+            if (expiry) {
+                var now = new Date();
+                var expiryDate = new Date(expiry);
+                if (now > expiryDate) {
+                    this.refreshToken();
+                    return true;
+                }
+            }
+
+            return true;
+
+        } catch (error) {
+            console.error('❌ Erro ao verificar autenticação:', error);
+            return false;
+        }
+    }
+
+    // ============================================
+    // RENOVAR TOKEN
+    // ============================================
+    static refreshToken() {
+        try {
+            var refreshToken = localStorage.getItem('vigorre_refresh_token');
+            if (!refreshToken) {
+                this.logout();
+                return false;
+            }
+
+            var user = this.getCurrentUser();
+            if (!user) {
+                this.logout();
+                return false;
+            }
+
+            var newToken = 'mock_token_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+            localStorage.setItem('vigorre_token', newToken);
+            localStorage.setItem('vigorre_token_expiry', new Date(Date.now() + AUTH_CONFIG.tokenExpiry).toISOString());
+
+            this.logAudit(user.id, user.name, 'Refresh Token', 'Token renovado', 'baixo');
+
+            return true;
+
+        } catch (error) {
+            console.error('❌ Erro ao renovar token:', error);
+            return false;
+        }
+    }
+
+    // ============================================
+    // USUÁRIO ATUAL
+    // ============================================
+    static getCurrentUser() {
+        try {
+            var userData = localStorage.getItem('vigorre_user');
+            if (!userData) {
+                return null;
+            }
+
+            var user = JSON.parse(userData);
+
+            if (user && user.id) {
+                user.credits = this.getUserCredits(user.id);
+                user.roleLabel = this.getRoleLabel(user.role);
+                user.roleName = this.getRoleName(user.role);
+                user.permissions = this.getUserPermissions(user.role);
+            }
+
+            return user;
+
+        } catch (error) {
+            console.error('❌ Erro ao obter usuário atual:', error);
+            return null;
+        }
+    }
+
+    // ============================================
+    // CRÉDITOS DO USUÁRIO (TODOS OS TIPOS)
+    // ============================================
+    static getUserCredits(userId) {
+        try {
+            var transactions = JSON.parse(localStorage.getItem('vigorre_credit_transactions') || '[]');
+            var credits = {
+                DISC: 0,
+                IE: 0,
+                VALORES: 0,
+                SWOT: 0,
+                BIGFIVE: 0,
+                COMPETENCIAS: 0,
+                LIDERANCA: 0,
+                POTENCIAL: 0,
+                FITCULTURAL: 0
+            };
+
+            var creditTypes = ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE', 'COMPETENCIAS', 'LIDERANCA', 'POTENCIAL',
+                'FITCULTURAL'
+            ];
+
+            for (var i = 0; i < transactions.length; i++) {
+                var t = transactions[i];
+                if (t.userId === userId || t.recruiterId === userId || t.companyId === userId) {
+                    for (var j = 0; j < creditTypes.length; j++) {
+                        var type = creditTypes[j];
+                        if (t.type === 'credito' || t.type === 'ajuste') {
+                            credits[type] += t[type] || 0;
+                        } else if (t.type === 'debito') {
+                            credits[type] -= t[type] || 0;
+                        }
+                    }
+                }
+            }
+
+            // Se não houver transações, buscar dos mockUsers
+            var hasCredits = false;
+            for (var key in credits) {
+                if (credits[key] > 0) {
+                    hasCredits = true;
+                    break;
+                }
+            }
+
+            if (!hasCredits) {
+                for (var k = 0; k < AUTH_CONFIG.mockUsers.length; k++) {
+                    if (AUTH_CONFIG.mockUsers[k].id === userId) {
+                        var mockCredits = AUTH_CONFIG.mockUsers[k].credits || {};
+                        for (var key2 in credits) {
+                            credits[key2] = mockCredits[key2] || 0;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            return credits;
+
+        } catch (error) {
+            console.warn('⚠️ Erro ao buscar créditos:', error);
+            return { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0, COMPETENCIAS: 0, LIDERANCA: 0, POTENCIAL: 0,
+                FITCULTURAL: 0 };
+        }
+    }
+
+    // ============================================
+    // PERMISSÕES DO USUÁRIO
+    // ============================================
+    static getUserPermissions(role) {
+        var config = AUTH_CONFIG.roles[role];
+        return config ? config.permissions || [] : [];
+    }
+
+    // ============================================
+    // VERIFICAR PERMISSÃO
+    // ============================================
+    static hasPermission(permission) {
+        var user = this.getCurrentUser();
+        if (!user) return false;
+
+        var permissions = this.getUserPermissions(user.role);
+        if (permissions.indexOf('*') !== -1) return true;
+
+        return permissions.indexOf(permission) !== -1;
+    }
+
+    // ============================================
+    // RESET DE SENHA
+    // ============================================
+    static resetPassword(email, newPassword) {
+        try {
+            if (!email) {
+                return { success: false, message: '❌ Informe um e-mail' };
+            }
+
+            if (!newPassword || newPassword.length < 6) {
+                return { success: false, message: '❌ A nova senha deve ter pelo menos 6 caracteres' };
+            }
+
+            var userFound = false;
+            for (var i = 0; i < AUTH_CONFIG.mockUsers.length; i++) {
+                if (AUTH_CONFIG.mockUsers[i].email === email) {
+                    AUTH_CONFIG.mockUsers[i].password = newPassword;
+                    userFound = true;
+                    this.logAudit('system', 'Sistema', 'Reset Senha', 'Senha redefinida para: ' + email, 'medio');
+                    break;
+                }
+            }
+
+            if (!userFound) {
+                return { success: false, message: '❌ E-mail não encontrado' };
+            }
+
+            return { success: true, message: '✅ Senha redefinida com sucesso!' };
+
+        } catch (error) {
+            console.error('❌ Erro ao redefinir senha:', error);
+            return { success: false, message: '❌ Erro ao redefinir senha' };
+        }
+    }
+
+    // ============================================
+    // AUDITORIA
+    // ============================================
+    static logAudit(userId, userName, action, description, severity) {
+        try {
+            var logs = JSON.parse(localStorage.getItem('vigorre_audit_logs') || '[]');
+
+            var id = 'A' + Date.now().toString().slice(-6) +
+                Math.random().toString(36).slice(2, 5).toUpperCase();
+
+            logs.push({
+                id: id,
+                userId: userId || 'system',
+                user: userName || 'Sistema',
+                action: action || 'Ação',
+                description: description || '',
+                severity: severity || 'baixo',
+                ip: '127.0.0.1',
+                userAgent: navigator.userAgent,
+                date: new Date().toLocaleString('pt-BR'),
+                timestamp: new Date().toISOString()
+            });
+
+            if (logs.length > 1000) {
+                logs = logs.slice(-1000);
+            }
+
+            localStorage.setItem('vigorre_audit_logs', JSON.stringify(logs));
+
+        } catch (error) {
+            console.warn('⚠️ Erro ao registrar auditoria:', error);
+        }
+    }
+
+    // ============================================
+    // VERIFICAR PAPEL
+    // ============================================
+    static hasRole(role) {
+        var user = this.getCurrentUser();
+        if (!user) return false;
+
+        if (Array.isArray(role)) {
+            return role.indexOf(user.role) !== -1;
+        }
+
+        return user.role === role;
+    }
+
+    // ============================================
+    // VERIFICAR NÍVEL DE ACESSO
+    // ============================================
+    static hasAccessLevel(minLevel) {
+        var user = this.getCurrentUser();
+        if (!user) return false;
+
+        var roleConfig = AUTH_CONFIG.roles[user.role];
+        if (!roleConfig) return false;
+
+        return roleConfig.level >= minLevel;
+    }
+
+    // ============================================
+    // OBTER REDIRECT
+    // ============================================
+    static getRedirectUrl(role) {
+        var config = AUTH_CONFIG.roles[role];
+        return config ? config.redirect : '/login.html';
+    }
+
+    // ============================================
+    // OBTER LABEL DO PAPEL
+    // ============================================
+    static getRoleLabel(role) {
+        var config = AUTH_CONFIG.roles[role];
+        return config ? config.label : '👤 Usuário';
+    }
+
+    // ============================================
+    // OBTER NOME DO PAPEL
+    // ============================================
+    static getRoleName(role) {
+        var config = AUTH_CONFIG.roles[role];
+        return config ? config.name : 'Usuário';
+    }
+
+    // ============================================
+    // LISTAR USUÁRIOS
+    // ============================================
+    static listUsers() {
+        return AUTH_CONFIG.mockUsers.map(function(user) {
+            return {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                roleLabel: this.getRoleLabel(user.role),
+                avatar: user.avatar || '👤'
+            };
+        }.bind(this));
+    }
+
+    // ============================================
+    // ATUALIZAR USUÁRIO
+    // ============================================
+    static updateUser(userId, updates) {
+        try {
+            for (var i = 0; i < AUTH_CONFIG.mockUsers.length; i++) {
+                if (AUTH_CONFIG.mockUsers[i].id === userId) {
+                    if (updates.name) AUTH_CONFIG.mockUsers[i].name = updates.name;
+                    if (updates.role) AUTH_CONFIG.mockUsers[i].role = updates.role;
+                    if (updates.avatar) AUTH_CONFIG.mockUsers[i].avatar = updates.avatar;
+                    if (updates.password) AUTH_CONFIG.mockUsers[i].password = updates.password;
+                    if (updates.credits) AUTH_CONFIG.mockUsers[i].credits = updates.credits;
+
+                    var currentUser = this.getCurrentUser();
+                    if (currentUser && currentUser.id === userId) {
+                        localStorage.setItem('vigorre_user', JSON.stringify(AUTH_CONFIG.mockUsers[i]));
+                    }
+
+                    this.logAudit('system', 'Sistema', 'Update User', 'Usuário atualizado: ' + userId, 'medio');
+
+                    return { success: true, message: '✅ Usuário atualizado com sucesso!' };
+                }
+            }
+
+            return { success: false, message: '❌ Usuário não encontrado' };
+
+        } catch (error) {
+            console.error('❌ Erro ao atualizar usuário:', error);
+            return { success: false, message: '❌ Erro ao atualizar usuário' };
+        }
+    }
+
+    // ============================================
+    // CRIAR USUÁRIO
+    // ============================================
+    static createUser(userData) {
+        try {
+            if (!userData.email || !userData.password || !userData.name) {
+                return { success: false, message: '❌ E-mail, senha e nome são obrigatórios' };
+            }
+
+            // Verificar se email já existe
+            for (var i = 0; i < AUTH_CONFIG.mockUsers.length; i++) {
+                if (AUTH_CONFIG.mockUsers[i].email === userData.email) {
+                    return { success: false, message: '❌ E-mail já cadastrado' };
+                }
+            }
+
+            var newUser = {
+                id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+                email: userData.email,
+                password: userData.password,
+                name: userData.name,
+                role: userData.role || 'participant',
+                avatar: userData.avatar || '👤',
+                credits: userData.credits || {
+                    DISC: 0,
+                    IE: 0,
+                    VALORES: 0,
+                    SWOT: 0,
+                    BIGFIVE: 0,
+                    COMPETENCIAS: 0,
+                    LIDERANCA: 0,
+                    POTENCIAL: 0,
+                    FITCULTURAL: 0
+                },
+                createdAt: new Date().toISOString()
+            };
+
+            AUTH_CONFIG.mockUsers.push(newUser);
+
+            this.logAudit('system', 'Sistema', 'Create User', 'Novo usuário criado: ' + newUser.email, 'medio');
+
+            return {
+                success: true,
+                data: newUser,
+                message: '✅ Usuário criado com sucesso!'
+            };
+
+        } catch (error) {
+            console.error('❌ Erro ao criar usuário:', error);
+            return { success: false, message: '❌ Erro ao criar usuário' };
+        }
+    }
+}
+
+// ============================================
+// EXPORTAR
+// ============================================
+window.VigorreAuth = VigorreAuth;
+
+console.log('✅ VIGORRE ONE™ - Auth carregado com sucesso!');
+console.log('📋 Usuários disponíveis:', AUTH_CONFIG.mockUsers.length);
+console.log('💳 Tipos de crédito: DISC, IE, VALORES, SWOT, BIGFIVE, COMPETENCIAS, LIDERANCA, POTENCIAL, FITCULTURAL');
