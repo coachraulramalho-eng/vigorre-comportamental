@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Erro | VIGORRE ONE™</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F8FAFC;
+            color: #0F172A;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            padding: 48px 32px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
+            border: 1px solid #E2E8F0;
+        }
+        
+        .error-icon {
+            font-size: 72px;
+            margin-bottom: 16px;
+            display: block;
+        }
+        
+        .error-code {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #0A2540;
+            margin-bottom: 4px;
+        }
+        
+        .error-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #0A2540;
+            margin-bottom: 8px;
+        }
+        
+        .error-description {
+            font-size: 16px;
+            color: #64748B;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1D4ED8, #06B6D4);
+            color: #FFFFFF;
+            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #F1F5F9;
+            color: #334155;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .btn-secondary:hover {
+            background: #E2E8F0;
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 480px) {
+            .container { padding: 32px 20px; }
+            .error-code { font-size: 28px; }
+            .error-icon { font-size: 56px; }
+            .error-actions { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <span class="error-icon">🚀</span>
+        <div class="error-code" id="errorCode">404</div>
+        <h1 class="error-title" id="errorTitle">Página não encontrada</h1>
+        <p class="error-description" id="errorDescription">
+            A página que você está procurando pode ter sido removida, 
+            renomeada ou está temporariamente indisponível.
+        </p>
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary">🏠 Voltar para Home</a>
+            <a href="/contato.html" class="btn btn-secondary">📧 Contato</a>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - ERROR PAGE
+         * INTERNATIONAL ENTERPRISE EDITION
+         * ============================================
+         */
+        
+        (function() {
+            // Determinar tipo de erro pela URL
+            var path = window.location.pathname;
+            var code = 404;
+            var title = 'Página não encontrada';
+            var description = 'A página que você está procurando pode ter sido removida, renomeada ou está temporariamente indisponível.';
+            var icon = '🔍';
+            
+            if (path.indexOf('500') !== -1) {
+                code = 500;
+                title = 'Erro interno do servidor';
+                description = 'Ocorreu um erro inesperado. Nossa equipe já foi notificada e está trabalhando para resolver o problema.';
+                icon = '⚙️';
+            } else if (path.indexOf('403') !== -1) {
+                code = 403;
+                title = 'Acesso negado';
+                description = 'Você não tem permissão para acessar esta página.';
+                icon = '🔒';
+            } else if (path.indexOf('401') !== -1) {
+                code = 401;
+                title = 'Não autorizado';
+                description = 'Você precisa estar autenticado para acessar esta página.';
+                icon = '🔐';
+            } else if (path.indexOf('400') !== -1) {
+                code = 400;
+                title = 'Requisição inválida';
+                description = 'A requisição enviada não é válida.';
+                icon = '❌';
+            }
+            
+            // Atualizar elementos
+            document.getElementById('errorCode').textContent = code;
+            document.getElementById('errorTitle').textContent = title;
+            document.getElementById('errorDescription').textContent = description;
+            document.querySelector('.error-icon').textContent = icon;
+            
+            console.log('🚀 Página de erro carregada:', code, title);
+        })();
+    </script>
+
+</body>
+</html>
