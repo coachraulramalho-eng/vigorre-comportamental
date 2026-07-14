@@ -3,892 +3,637 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VIGORRE ONE™ | People Intelligence Enterprise</title>
+    <title>VIGORRE ONE™ - People Intelligence Enterprise</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="VIGORRE ONE™ - Plataforma de People Analytics com Inteligência Artificial para avaliação comportamental, recrutamento e gestão de talentos." />
+    <meta name="keywords" content="people analytics, inteligência artificial, avaliação comportamental, DISC, recrutamento, gestão de talentos, RH" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="VIGORRE ONE™ - People Intelligence Enterprise" />
+    <meta property="og:description" content="Transforme decisões sobre pessoas em vantagem competitiva com People Analytics e IA." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vigorre.com" />
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-    <style>
-        /* ============================================
-           VIGORRE ONE™ - PÁGINA INICIAL ENTERPRISE
-           ============================================ */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --navy: #0A2540;
-            --navy-light: #1A3A5C;
-            --blue: #1D4ED8;
-            --blue-light: #3B82F6;
-            --cyan: #06B6D4;
-            --gold: #D97706;
-            --green: #10B981;
-            --red: #EF4444;
-            --orange: #F59E0B;
-            --purple: #7C3AED;
-            --white: #FFFFFF;
-            --gray-50: #F8FAFC;
-            --gray-100: #F1F5F9;
-            --gray-200: #E2E8F0;
-            --gray-300: #CBD5E1;
-            --gray-400: #94A3B8;
-            --gray-500: #64748B;
-            --gray-600: #475569;
-            --gray-700: #334155;
-            --gray-800: #1E293B;
-            --gray-900: #0F172A;
-            --radius: 16px;
-            --radius-sm: 10px;
-            --radius-full: 9999px;
-            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
-            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
-            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-800);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* ============================================
-           SCROLLBAR
-           ============================================ */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--gray-100);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--gray-300);
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gray-400);
-        }
-
-        /* ============================================
-           HEADER
-           ============================================ */
-        .header {
-            background: var(--navy);
-            color: white;
-            padding: 16px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(10px);
-        }
-
-        .header .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .header .logo .logo-img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        .header .logo .logo-text .name {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-
-        .header .logo .logo-text .name .tm {
-            font-size: 0.4rem;
-            vertical-align: super;
-            color: var(--cyan);
-        }
-
-        .header .logo .logo-text .sub {
-            font-size: 0.55rem;
-            color: rgba(255, 255, 255, 0.35);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .header .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
-
-        .header .nav-links a {
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .header .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--cyan);
-            transition: var(--transition);
-        }
-
-        .header .nav-links a:hover {
-            color: white;
-        }
-
-        .header .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .header .nav-links .btn-login {
-            padding: 10px 28px;
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
-        }
-
-        .header .nav-links .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
-        }
-
-        .header .nav-links .btn-login::after {
-            display: none;
-        }
-
-        .header .nav-links .btn-dashboard {
-            padding: 10px 28px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: var(--radius-full);
-            color: white;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .header .nav-links .btn-dashboard:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        /* ============================================
-           HERO
-           ============================================ */
-        .hero {
-            padding: 120px 40px 80px;
-            text-align: center;
-            max-width: 960px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .hero .hero-badge {
-            display: inline-block;
-            padding: 6px 24px;
-            background: rgba(6, 182, 212, 0.08);
-            color: var(--cyan);
-            border-radius: var(--radius-full);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 24px;
-            border: 1px solid rgba(6, 182, 212, 0.12);
-        }
-
-        .hero h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3.6rem;
-            font-weight: 800;
-            color: var(--gray-900);
-            line-height: 1.08;
-            letter-spacing: -1.5px;
-        }
-
-        .hero h1 .highlight {
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--gray-500);
-            max-width: 640px;
-            margin: 24px auto;
-            line-height: 1.8;
-        }
-
-        .hero .hero-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 36px;
-        }
-
-        .hero .btn-hero-primary {
-            padding: 16px 44px;
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            box-shadow: 0 4px 20px rgba(29, 78, 216, 0.25);
-        }
-
-        .hero .btn-hero-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 40px rgba(29, 78, 216, 0.35);
-        }
-
-        .hero .btn-hero-secondary {
-            padding: 16px 44px;
-            background: transparent;
-            color: var(--gray-700);
-            border: 2px solid var(--gray-200);
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-        }
-
-        .hero .btn-hero-secondary:hover {
-            border-color: var(--blue);
-            color: var(--blue);
-            transform: translateY(-3px);
-        }
-
-        /* ============================================
-           TESTES SECTION
-           ============================================ */
-        .tests-section {
-            padding: 80px 40px 100px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .tests-section .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .tests-section .section-header h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--gray-900);
-        }
-
-        .tests-section .section-header h2 .highlight {
-            color: var(--blue);
-        }
-
-        .tests-section .section-header p {
-            color: var(--gray-500);
-            font-size: 1.05rem;
-            max-width: 560px;
-            margin: 8px auto 0;
-        }
-
-        .tests-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-        }
-
-        .test-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 28px 24px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(10, 37, 64, 0.04);
-            transition: var(--transition);
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--gray-800);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .test-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .test-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--blue-light);
-        }
-
-        .test-card:hover::before {
-            opacity: 1;
-        }
-
-        .test-card .test-icon {
-            font-size: 2.6rem;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .test-card .test-name {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-        }
-
-        .test-card .test-desc {
-            font-size: 0.82rem;
-            color: var(--gray-500);
-            margin-top: 4px;
-            line-height: 1.5;
-        }
-
-        .test-card .test-tag {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 3px 14px;
-            background: var(--gray-100);
-            border-radius: var(--radius-full);
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--gray-500);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-
-        /* ============================================
-           FEATURES SECTION
-           ============================================ */
-        .features-section {
-            padding: 80px 40px;
-            background: var(--white);
-            border-top: 1px solid var(--gray-100);
-            border-bottom: 1px solid var(--gray-100);
-        }
-
-        .features-section .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .features-section .feature-item {
-            text-align: center;
-        }
-
-        .features-section .feature-item .feature-icon {
-            font-size: 2.4rem;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .features-section .feature-item h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--gray-800);
-        }
-
-        .features-section .feature-item p {
-            font-size: 0.9rem;
-            color: var(--gray-500);
-            line-height: 1.6;
-            margin-top: 4px;
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-        .footer {
-            background: var(--navy);
-            color: white;
-            padding: 48px 40px 32px;
-            text-align: center;
-        }
-
-        .footer .footer-logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .footer .footer-logo .tm {
-            font-size: 0.5rem;
-            vertical-align: super;
-            color: var(--cyan);
-        }
-
-        .footer .footer-text {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.85rem;
-        }
-
-        .footer .footer-links {
-            display: flex;
-            gap: 24px;
-            justify-content: center;
-            margin-top: 16px;
-            flex-wrap: wrap;
-        }
-
-        .footer .footer-links a {
-            color: rgba(255, 255, 255, 0.35);
-            text-decoration: none;
-            font-size: 0.8rem;
-            transition: var(--transition);
-        }
-
-        .footer .footer-links a:hover {
-            color: white;
-        }
-
-        .footer .footer-divider {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.06);
-            margin: 24px auto 16px;
-            max-width: 600px;
-        }
-
-        .footer .footer-copy {
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* ============================================
-           TOAST
-           ============================================ */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--navy);
-            color: white;
-            padding: 14px 24px;
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow-lg);
-            display: none;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-            font-size: 0.875rem;
-            z-index: 200;
-            border-left: 4px solid var(--cyan);
-            animation: slideUp 0.3s ease;
-            max-width: 400px;
-        }
-
-        .toast.show {
-            display: flex;
-        }
-
-        .toast .toast-icon {
-            font-size: 1.2rem;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ============================================
-           RESPONSIVO
-           ============================================ */
-        @media (max-width: 1024px) {
-            .features-section .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 12px 20px;
-            }
-
-            .hero {
-                padding: 80px 20px 60px;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-                letter-spacing: -0.5px;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .hero .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .hero .btn-hero-primary,
-            .hero .btn-hero-secondary {
-                width: 100%;
-                max-width: 320px;
-                text-align: center;
-                justify-content: center;
-                padding: 14px 24px;
-                font-size: 0.9rem;
-            }
-
-            .tests-section {
-                padding: 60px 20px 80px;
-            }
-
-            .tests-section .section-header h2 {
-                font-size: 1.6rem;
-            }
-
-            .tests-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
-
-            .test-card {
-                padding: 20px 16px;
-            }
-
-            .test-card .test-icon {
-                font-size: 2rem;
-            }
-
-            .test-card .test-name {
-                font-size: 0.9rem;
-            }
-
-            .features-section {
-                padding: 60px 20px;
-            }
-
-            .features-section .features-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .footer {
-                padding: 32px 20px 24px;
-            }
-
-            .footer .footer-links {
-                gap: 16px;
-            }
-
-            .header .nav-links a:not(.btn-login):not(.btn-dashboard) {
-                display: none;
-            }
-
-            .header .nav-links {
-                gap: 12px;
-            }
-
-            .header .logo .logo-img {
-                height: 32px;
-            }
-
-            .header .logo .logo-text .name {
-                font-size: 0.9rem;
-            }
-
-            .header .logo .logo-text .sub {
-                font-size: 0.45rem;
-            }
-
-            .header .nav-links .btn-login {
-                padding: 8px 20px;
-                font-size: 0.75rem;
-            }
-
-            .header .nav-links .btn-dashboard {
-                padding: 8px 20px;
-                font-size: 0.75rem;
-            }
-
-            .toast {
-                bottom: 16px;
-                right: 16px;
-                left: 16px;
-                max-width: none;
-                padding: 12px 18px;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .tests-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero .hero-badge {
-                font-size: 0.65rem;
-                padding: 4px 16px;
-            }
-
-            .header .logo .logo-img {
-                height: 28px;
-            }
-
-            .header .logo .logo-text .name {
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: var(--gray-900);
-            }
-            .hero h1 {
-                color: var(--white);
-            }
-            .hero p {
-                color: var(--gray-400);
-            }
-            .hero .btn-hero-secondary {
-                color: var(--gray-300);
-                border-color: var(--gray-600);
-            }
-            .hero .btn-hero-secondary:hover {
-                border-color: var(--blue-light);
-                color: var(--blue-light);
-            }
-            .tests-section .section-header h2 {
-                color: var(--white);
-            }
-            .test-card {
-                background: var(--gray-800);
-                border-color: rgba(255, 255, 255, 0.06);
-            }
-            .test-card .test-name {
-                color: var(--white);
-            }
-            .test-card .test-desc {
-                color: var(--gray-400);
-            }
-            .test-card .test-tag {
-                background: var(--gray-700);
-                color: var(--gray-400);
-            }
-            .features-section {
-                background: var(--gray-800);
-                border-color: rgba(255, 255, 255, 0.06);
-            }
-            .features-section .feature-item h3 {
-                color: var(--white);
-            }
-            .features-section .feature-item p {
-                color: var(--gray-400);
-            }
-            .toast {
-                background: var(--gray-800);
-                border-left-color: var(--cyan);
-            }
-        }
-
-        @media print {
-            .header {
-                background: #0A2540 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            .btn-login {
-                display: none !important;
-            }
-            .btn-dashboard {
-                display: none !important;
-            }
-            .hero .hero-buttons {
-                display: none !important;
-            }
-            .tests-section {
-                display: none !important;
-            }
-            .features-section {
-                display: none !important;
-            }
-            .footer {
-                background: #0A2540 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-        }
-    </style>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/landing.css" />
 </head>
 <body>
 
     <!-- ============================================
-    HEADER
+    HEADER FIXO
     ============================================ -->
-    <header class="header">
-        <a href="#" class="logo">
-            <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
-            <div class="logo-text">
-                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                <span class="sub">People Intelligence Enterprise</span>
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo" aria-label="VIGORRE ONE™">
+                    <div class="logo-icon">⚡</div>
+                    <div class="logo-text">
+                        <span class="logo-name">VIGORRE <span class="logo-tm">ONE</span><sup>™</sup></span>
+                        <span class="logo-sub">People Intelligence Enterprise</span>
+                    </div>
+                </a>
+                
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="#hero" class="nav-link active">Home</a></li>
+                        <li><a href="#testes" class="nav-link">Testes</a></li>
+                        <li><a href="#relatorios" class="nav-link">Relatórios</a></li>
+                        <li><a href="#laudo" class="nav-link">Laudo</a></li>
+                        <li><a href="#precos" class="nav-link">Preços</a></li>
+                        <li><a href="#contato" class="nav-link">Contato</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Entrar</a>
+                    <a href="#demonstracao" class="btn btn-primary">Solicitar Demonstração</a>
+                    <button class="mobile-toggle" onclick="toggleMenu()" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
             </div>
-        </a>
-
-        <div class="nav-links">
-            <a href="#testes">Testes</a>
-            <a href="#features">Recursos</a>
-            <a href="#contato">Contato</a>
-            <a href="login.html" class="btn-login">🚪 Entrar</a>
         </div>
     </header>
 
     <!-- ============================================
-    HERO
+    HERO SECTION
     ============================================ -->
     <section class="hero" id="hero">
-        <div class="hero-badge">🌟 People Intelligence Platform</div>
-        <h1>
-            Conheça o <span class="highlight">seu potencial</span> humano
-        </h1>
-        <p>
-            A plataforma de inteligência comportamental que transforma dados
-            em decisões estratégicas para pessoas e empresas.
-        </p>
-        <div class="hero-buttons">
-            <a href="login.html" class="btn-hero-primary">🚀 Começar Agora</a>
-            <a href="#testes" class="btn-hero-secondary">📊 Conhecer os Testes</a>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        People Analytics · IA · Gestão Estratégica
+                    </div>
+                    <h1 class="hero-title">
+                        Transforme decisões sobre pessoas em <span class="highlight">vantagem competitiva</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        A Vigorre One™ integra People Analytics, Inteligência Artificial, 
+                        Avaliações Comportamentais e Laudos Estratégicos para apoiar decisões 
+                        mais consistentes em recrutamento, desenvolvimento e gestão de talentos.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#testes" class="btn btn-primary btn-lg">Conhecer Avaliações</a>
+                        <a href="#demonstracao" class="btn btn-outline btn-lg">Solicitar Demonstração</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="500">0</span>
+                            <span class="stat-label">Empresas atendidas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="15000">0</span>
+                            <span class="stat-label">Avaliações realizadas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="8000">0</span>
+                            <span class="stat-label">Relatórios emitidos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="24">0</span>
+                            <span class="stat-label">Tempo médio de resposta</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <div class="hero-card-header">
+                            <span class="hero-card-title">Dashboard Executive</span>
+                            <span class="hero-card-badge">AI Powered</span>
+                        </div>
+                        <div class="hero-card-chart">
+                            <div class="chart-bar" style="height: 70%;"><span>D</span></div>
+                            <div class="chart-bar" style="height: 45%;"><span>I</span></div>
+                            <div class="chart-bar" style="height: 85%;"><span>S</span></div>
+                            <div class="chart-bar" style="height: 30%;"><span>C</span></div>
+                        </div>
+                        <div class="hero-card-stats">
+                            <div class="mini-stat">
+                                <span class="mini-stat-value">87%</span>
+                                <span class="mini-stat-label">Engajamento</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-stat-value">4.2</span>
+                                <span class="mini-stat-label">Fit Cultural</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-stat-value">92%</span>
+                                <span class="mini-stat-label">Retenção</span>
+                            </div>
+                        </div>
+                        <div class="hero-card-footer">
+                            <span class="hero-card-footer-text">Atualizado em tempo real</span>
+                            <span class="hero-card-footer-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    POR QUE AVALIAR PESSOAS?
+    ============================================ -->
+    <section class="section" id="por-que">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Por que avaliar?</span>
+                <h2 class="section-title">Decisões mais consistentes começam com <span class="highlight">dados estruturados</span></h2>
+                <p class="section-subtitle">
+                    Avaliações comportamentais e People Analytics fortalecem decisões de 
+                    contratação, promoção e desenvolvimento de talentos.
+                </p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Redução de riscos</h3>
+                    <p>Contratações mais assertivas baseadas em dados comportamentais.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3>Maior aderência ao cargo</h3>
+                    <p>Identifique o perfil ideal para cada posição e equipe.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌱</div>
+                    <h3>Desenvolvimento individual</h3>
+                    <p>Planos de desenvolvimento personalizados com base em dados.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💡</div>
+                    <h3>Identificação de potencial</h3>
+                    <p>Descubra talentos ocultos e planeje sucessão.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">👥</div>
+                    <h3>Apoio à liderança</h3>
+                    <p>Ferramentas para líderes tomarem decisões mais informadas.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔄</div>
+                    <h3>Retenção e PDI</h3>
+                    <p>Estratégias para reter talentos e desenvolver carreiras.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- ============================================
     TESTES SECTION
     ============================================ -->
-    <section class="tests-section" id="testes">
-        <div class="section-header">
-            <h2>📊 Avaliações <span class="highlight">Comportamentais</span></h2>
-            <p>Descubra seu perfil com testes validados cientificamente</p>
-        </div>
-
-        <div class="tests-grid">
-            <a href="login.html" class="test-card">
-                <span class="test-icon">📊</span>
-                <span class="test-name">DISC</span>
-                <span class="test-desc">Perfil comportamental baseado em 4 dimensões</span>
-                <span class="test-tag">24 questões</span>
-            </a>
-            <a href="login.html" class="test-card">
-                <span class="test-icon">🧬</span>
-                <span class="test-name">Big Five</span>
-                <span class="test-desc">Os 5 grandes fatores da personalidade</span>
-                <span class="test-tag">44 questões</span>
-            </a>
-            <a href="login.html" class="test-card">
-                <span class="test-icon">🧠</span>
-                <span class="test-name">Inteligência Emocional</span>
-                <span class="test-desc">Autoconsciência, autorregulação, empatia e mais</span>
-                <span class="test-tag">25 questões</span>
-            </a>
-            <a href="login.html" class="test-card">
-                <span class="test-icon">💎</span>
-                <span class="test-name">Valores Pessoais</span>
-                <span class="test-desc">Teoria de Schwartz • 10 dimensões</span>
-                <span class="test-tag">20 questões</span>
-            </a>
-            <a href="login.html" class="test-card">
-                <span class="test-icon">📋</span>
-                <span class="test-name">SWOT Pessoal</span>
-                <span class="test-desc">Análise estratégica • 4 quadrantes</span>
-                <span class="test-tag">16 questões</span>
-            </a>
-            <a href="login.html" class="test-card">
-                <span class="test-icon">🎯</span>
-                <span class="test-name">Metodologia VIGOR®</span>
-                <span class="test-desc">People Intelligence • 5 dimensões</span>
-                <span class="test-tag">Exclusiva</span>
-            </a>
+    <section class="section section-dark" id="testes">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Avaliações</span>
+                <h2 class="section-title">Conheça nossos <span class="highlight">testes comportamentais</span></h2>
+                <p class="section-subtitle">
+                    Cada avaliação foi desenvolvida com base em décadas de pesquisa científica 
+                    e validada para o mercado brasileiro.
+                </p>
+            </div>
+            <div class="tests-grid">
+                <div class="test-card">
+                    <div class="test-icon">📊</div>
+                    <h3>DISC</h3>
+                    <p>Avalie perfis comportamentais: Dominância, Influência, Estabilidade e Conformidade.</p>
+                    <div class="test-meta">
+                        <span class="test-time">⏱️ 15 min</span>
+                        <a href="#" class="test-link">Conhecer →</a>
+                    </div>
+                </div>
+                <div class="test-card">
+                    <div class="test-icon">🧠</div>
+                    <h3>Inteligência Emocional</h3>
+                    <p>Descubra competências emocionais: autoconsciência, autorregulação, motivação, empatia.</p>
+                    <div class="test-meta">
+                        <span class="test-time">⏱️ 20 min</span>
+                        <a href="#" class="test-link">Conhecer →</a>
+                    </div>
+                </div>
+                <div class="test-card">
+                    <div class="test-icon">💎</div>
+                    <h3>Valores Pessoais</h3>
+                    <p>Identifique valores fundamentais baseados na teoria de Schwartz.</p>
+                    <div class="test-meta">
+                        <span class="test-time">⏱️ 12 min</span>
+                        <a href="#" class="test-link">Conhecer →</a>
+                    </div>
+                </div>
+                <div class="test-card">
+                    <div class="test-icon">📋</div>
+                    <h3>SWOT Pessoal</h3>
+                    <p>Análise estratégica: Forças, Fraquezas, Oportunidades e Ameaças.</p>
+                    <div class="test-meta">
+                        <span class="test-time">⏱️ 10 min</span>
+                        <a href="#" class="test-link">Conhecer →</a>
+                    </div>
+                </div>
+                <div class="test-card">
+                    <div class="test-icon">🧬</div>
+                    <h3>Big Five</h3>
+                    <p>Os 5 grandes fatores da personalidade: Abertura, Conscienciosidade, Extroversão, Amabilidade, Neuroticismo.</p>
+                    <div class="test-meta">
+                        <span class="test-time">⏱️ 18 min</span>
+                        <a href="#" class="test-link">Conhecer →</a>
+                    </div>
+                </div>
+                <div class="test-card">
+                    <div class="test-icon">🎯</div>
+                    <h3>Competências</h3>
+                    <p>Avaliação completa de competências técnicas e comportamentais.</p>
+                    <div class="test-meta">
+                        <span class="test-time">⏱️ 25 min</span>
+                        <a href="#" class="test-link">Conhecer →</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- ============================================
-    FEATURES SECTION
+    RELATÓRIOS SECTION
     ============================================ -->
-    <section class="features-section" id="features">
-        <div class="features-grid">
-            <div class="feature-item">
-                <span class="feature-icon">🧠</span>
-                <h3>Inteligência Artificial</h3>
-                <p>Análise aprofundada com IA generativa para interpretar seus resultados com precisão.</p>
+    <section class="section" id="relatorios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Relatórios</span>
+                <h2 class="section-title">Informação que <span class="highlight">gera ação</span></h2>
+                <p class="section-subtitle">
+                    Relatórios claros, objetivos e acionáveis para todos os níveis da organização.
+                </p>
             </div>
-            <div class="feature-item">
-                <span class="feature-icon">📊</span>
-                <h3>Relatórios Premium</h3>
-                <p>Relatórios completos com gráficos, análises e recomendações personalizadas.</p>
+            <div class="reports-grid">
+                <div class="report-card">
+                    <div class="report-icon">📄</div>
+                    <h3>Relatório Individual</h3>
+                    <p>Análise detalhada do perfil comportamental do colaborador.</p>
+                    <ul class="report-features">
+                        <li>✅ Perfil DISC completo</li>
+                        <li>✅ Inteligência Emocional</li>
+                        <li>✅ Valores Pessoais</li>
+                        <li>✅ Recomendações de desenvolvimento</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Saiba mais</a>
+                </div>
+                <div class="report-card report-card-highlight">
+                    <div class="report-icon">📊</div>
+                    <h3>Relatório Executivo</h3>
+                    <p>Visão estratégica para tomada de decisão em nível de liderança.</p>
+                    <ul class="report-features">
+                        <li>✅ Panorama da equipe</li>
+                        <li>✅ Talentos em destaque</li>
+                        <li>✅ Gaps de competências</li>
+                        <li>✅ Plano de ação estratégico</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Saiba mais</a>
+                </div>
+                <div class="report-card report-card-premium">
+                    <span class="report-badge">⭐ Mais Completo</span>
+                    <div class="report-icon">📋</div>
+                    <h3>Laudo Comportamental Vigorre™</h3>
+                    <p>Documento técnico completo para seleção, desenvolvimento e liderança.</p>
+                    <ul class="report-features">
+                        <li>✅ Todos os testes integrados</li>
+                        <li>✅ Análise de compatibilidade</li>
+                        <li>✅ Plano de desenvolvimento individual</li>
+                        <li>✅ Insights estratégicos com IA</li>
+                        <li>✅ QR Code de validação</li>
+                    </ul>
+                    <a href="#laudo" class="btn btn-gold">Conhecer Laudo</a>
+                </div>
             </div>
-            <div class="feature-item">
-                <span class="feature-icon">🔒</span>
-                <h3>Segurança e Privacidade</h3>
-                <p>LGPD compliance, criptografia de dados e proteção total das suas informações.</p>
+        </div>
+    </section>
+
+    <!-- ============================================
+    LAUDO ESPECIAL SECTION
+    ============================================ -->
+    <section class="section section-dark" id="laudo">
+        <div class="container">
+            <div class="laudo-grid">
+                <div class="laudo-content">
+                    <span class="section-tag">O Poder do Laudo</span>
+                    <h2 class="section-title">Laudo Comportamental <span class="highlight">Vigorre™</span></h2>
+                    <p class="section-subtitle">
+                        O laudo reúne resultados das avaliações em um documento técnico, 
+                        organizado e de fácil interpretação para apoiar decisões relacionadas 
+                        à seleção, desenvolvimento, liderança e gestão de talentos.
+                    </p>
+                    <div class="laudo-features">
+                        <div class="laudo-feature">
+                            <span class="laudo-feature-icon">📊</span>
+                            <div>
+                                <h4>Gráficos e Perfil</h4>
+                                <p>Visualização clara do perfil comportamental.</p>
+                            </div>
+                        </div>
+                        <div class="laudo-feature">
+                            <span class="laudo-feature-icon">🎯</span>
+                            <div>
+                                <h4>Compatibilidade</h4>
+                                <p>Análise de aderência a cargos e equipes.</p>
+                            </div>
+                        </div>
+                        <div class="laudo-feature">
+                            <span class="laudo-feature-icon">📈</span>
+                            <div>
+                                <h4>PDI Personalizado</h4>
+                                <p>Plano de desenvolvimento individual integrado.</p>
+                            </div>
+                        </div>
+                        <div class="laudo-feature">
+                            <span class="laudo-feature-icon">🤖</span>
+                            <div>
+                                <h4>Insights de IA</h4>
+                                <p>Recomendações estratégicas baseadas em dados.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#demonstracao" class="btn btn-gold btn-lg">Solicitar Demonstração</a>
+                </div>
+                <div class="laudo-visual">
+                    <div class="laudo-preview">
+                        <div class="laudo-preview-header">
+                            <span class="laudo-preview-title">Laudo Comportamental</span>
+                            <span class="laudo-preview-badge">VIGORRE®</span>
+                        </div>
+                        <div class="laudo-preview-body">
+                            <div class="laudo-preview-profile">
+                                <div class="profile-bar">
+                                    <span>D</span>
+                                    <div class="profile-fill" style="width:75%"></div>
+                                </div>
+                                <div class="profile-bar">
+                                    <span>I</span>
+                                    <div class="profile-fill" style="width:45%"></div>
+                                </div>
+                                <div class="profile-bar">
+                                    <span>S</span>
+                                    <div class="profile-fill" style="width:85%"></div>
+                                </div>
+                                <div class="profile-bar">
+                                    <span>C</span>
+                                    <div class="profile-fill" style="width:30%"></div>
+                                </div>
+                            </div>
+                            <div class="laudo-preview-qr">
+                                <span>🔲 QR Code</span>
+                                <small>Validação digital</small>
+                            </div>
+                        </div>
+                        <div class="laudo-preview-footer">
+                            <span>Código: VIG-2026-XXXX</span>
+                            <span>Versão 1.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    BENEFÍCIOS POR PERFIL
+    ============================================ -->
+    <section class="section" id="beneficios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Para quem é</span>
+                <h2 class="section-title">Soluções para <span class="highlight">cada perfil</span></h2>
+                <p class="section-subtitle">
+                    A Vigorre One™ atende diferentes necessidades com uma única plataforma integrada.
+                </p>
+            </div>
+            <div class="profiles-grid">
+                <div class="profile-card">
+                    <div class="profile-icon">👑</div>
+                    <h3>CEO & Diretores</h3>
+                    <p>Visão estratégica de talentos, planejamento sucessório e decisões baseadas em dados.</p>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">👤</div>
+                    <h3>RH & Gestores</h3>
+                    <p>Ferramentas para recrutamento, desenvolvimento e gestão de equipes de alto desempenho.</p>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">📊</div>
+                    <h3>Consultorias</h3>
+                    <p>Plataforma para atender múltiplos clientes com laudos e relatórios personalizados.</p>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">🏢</div>
+                    <h3>Agronegócio</h3>
+                    <p>Avaliações adaptadas para o perfil do setor agro, com foco em liderança e retenção.</p>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">🏭</div>
+                    <h3>Indústria</h3>
+                    <p>Análise de perfis para operações, gestão e desenvolvimento de lideranças industriais.</p>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-icon">🏗️</div>
+                    <h3>Construção Civil</h3>
+                    <p>Avaliações comportamentais para obras, equipes técnicas e gestão de projetos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    COMO FUNCIONA
+    ============================================ -->
+    <section class="section section-dark" id="como-funciona">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Como funciona</span>
+                <h2 class="section-title">Da avaliação à <span class="highlight">decisão estratégica</span></h2>
+                <p class="section-subtitle">
+                    Um fluxo simples e integrado para transformar dados em ação.
+                </p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📝</div>
+                    <h3>Cadastro</h3>
+                    <p>Empresa e participantes são cadastrados na plataforma.</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">📊</div>
+                    <h3>Avaliação</h3>
+                    <p>Participantes realizam os testes comportamentais.</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🤖</div>
+                    <h3>IA</h3>
+                    <p>Inteligência Artificial analisa e interpreta os resultados.</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">📄</div>
+                    <h3>Relatórios</h3>
+                    <p>Relatórios completos são gerados automaticamente.</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-icon">📋</div>
+                    <h3>Laudos</h3>
+                    <p>Laudos estratégicos para decisões de alto nível.</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-icon">🎯</div>
+                    <h3>Decisão</h3>
+                    <p>Dados transformados em ações estratégicas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    PREÇOS
+    ============================================ -->
+    <section class="section" id="precos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Preços</span>
+                <h2 class="section-title">Planos para <span class="highlight">cada necessidade</span></h2>
+                <p class="section-subtitle">
+                    Escolha o plano que melhor atende sua organização. Todos com 7 dias de teste grátis.
+                </p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-icon">📊</div>
+                    <h3>Básico</h3>
+                    <div class="pricing-price">R$ 29<small>,90</small></div>
+                    <span class="pricing-period">por mês</span>
+                    <ul class="pricing-features">
+                        <li>✅ 1 empresa</li>
+                        <li>✅ 10 participantes</li>
+                        <li>✅ DISC básico</li>
+                        <li>❌ IE avançado</li>
+                        <li>❌ Valores</li>
+                        <li>❌ Suporte prioritário</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Começar</a>
+                </div>
+                <div class="pricing-card pricing-card-popular">
+                    <span class="pricing-badge">⭐ Mais Popular</span>
+                    <div class="pricing-icon">📈</div>
+                    <h3>Profissional</h3>
+                    <div class="pricing-price">R$ 79<small>,90</small></div>
+                    <span class="pricing-period">por mês</span>
+                    <ul class="pricing-features">
+                        <li>✅ 5 empresas</li>
+                        <li>✅ 50 participantes</li>
+                        <li>✅ DISC completo</li>
+                        <li>✅ IE avançado</li>
+                        <li>✅ Valores</li>
+                        <li>✅ Suporte prioritário</li>
+                    </ul>
+                    <a href="#" class="btn btn-gold">Começar</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-icon">🏢</div>
+                    <h3>Empresarial</h3>
+                    <div class="pricing-price">R$ 199<small>,90</small></div>
+                    <span class="pricing-period">por mês</span>
+                    <ul class="pricing-features">
+                        <li>✅ 20 empresas</li>
+                        <li>✅ 200 participantes</li>
+                        <li>✅ Todos os testes</li>
+                        <li>✅ Todos os módulos</li>
+                        <li>✅ Suporte 24/7</li>
+                        <li>✅ Personalizado</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Começar</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-icon">👑</div>
+                    <h3>Enterprise</h3>
+                    <div class="pricing-price">Sob Consulta</div>
+                    <span class="pricing-period">personalizado</span>
+                    <ul class="pricing-features">
+                        <li>✅ Ilimitado</li>
+                        <li>✅ Ilimitado</li>
+                        <li>✅ Todos os testes</li>
+                        <li>✅ Todos os módulos</li>
+                        <li>✅ Suporte 24/7</li>
+                        <li>✅ Personalizado</li>
+                    </ul>
+                    <a href="#contato" class="btn btn-outline">Solicitar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    CONTATO / DEMONSTRAÇÃO
+    ============================================ -->
+    <section class="section section-dark" id="contato">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-content">
+                    <span class="section-tag">Solicite uma demonstração</span>
+                    <h2 class="section-title">Pronto para <span class="highlight">transformar sua gestão de pessoas?</span></h2>
+                    <p class="section-subtitle">
+                        Agende uma demonstração personalizada e descubra como a Vigorre One™ 
+                        pode apoiar suas decisões estratégicas.
+                    </p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <span>contato@vigorre.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <span>(11) 99999-9999</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>São Paulo, SP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form" id="demonstracao">
+                    <form onsubmit="handleContact(event)">
+                        <div class="form-group">
+                            <label>Nome completo</label>
+                            <input type="text" id="contactName" placeholder="Seu nome" required />
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="email" id="contactEmail" placeholder="seu@email.com" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Empresa</label>
+                            <input type="text" id="contactCompany" placeholder="Nome da empresa" />
+                        </div>
+                        <div class="form-group">
+                            <label>Mensagem</label>
+                            <textarea id="contactMessage" rows="4" placeholder="Como podemos ajudar?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold btn-lg btn-block">Solicitar Demonstração</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -896,104 +641,196 @@
     <!-- ============================================
     FOOTER
     ============================================ -->
-    <footer class="footer" id="contato">
-        <div class="footer-logo">
-            VIGORRE ONE<span class="tm">™</span>
-        </div>
-        <div class="footer-text">
-            People Intelligence Enterprise • Assessment & Development
-        </div>
-        <div class="footer-links">
-            <a href="#">Sobre</a>
-            <a href="#">Política de Privacidade</a>
-            <a href="#">Termos de Uso</a>
-            <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
-            <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
-        </div>
-        <div class="footer-divider"></div>
-        <div class="footer-copy">
-            © 2024 VIGORRE ONE™ - Todos os direitos reservados
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">⚡</div>
+                        <div class="logo-text">
+                            <span class="logo-name">VIGORRE <span class="logo-tm">ONE</span><sup>™</sup></span>
+                            <span class="logo-sub">People Intelligence Enterprise</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Plataforma de People Analytics com Inteligência Artificial para avaliação 
+                        comportamental, recrutamento e gestão de talentos.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h4>Produtos</h4>
+                    <ul>
+                        <li><a href="#">Vigorre One™</a></li>
+                        <li><a href="#">Vigorre Hire™</a></li>
+                        <li><a href="#">Instituto Vigorre</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#">Quem Somos</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">LGPD</a></li>
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="LinkedIn">🔗</a>
+                        <a href="#" aria-label="Instagram">📸</a>
+                        <a href="#" aria-label="YouTube">▶️</a>
+                        <a href="#" aria-label="WhatsApp">💬</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Vigorre. Todos os direitos reservados.</p>
+                <p>Desenvolvido pela <strong>Vigorre Tech®</strong></p>
+                <p>Tecnologia, Inteligência Artificial e Soluções Digitais para Gestão Estratégica.</p>
+            </div>
         </div>
     </footer>
 
     <!-- ============================================
-    TOAST
-    ============================================ -->
-    <div class="toast" id="toast">
-        <span class="toast-icon">✅</span>
-        <span id="toastMessage">Mensagem</span>
-    </div>
-
-    <!-- ============================================
     SCRIPTS
     ============================================ -->
-    <script src="supabase-config.js"></script>
-    <script src="auth.js"></script>
+    <script src="assets/js/landing.js"></script>
+    <script src="assets/js/scroll-reveal.js"></script>
 
     <script>
         /**
          * ============================================
-         * VIGORRE ONE™ - PÁGINA INICIAL
+         * VIGORRE ONE™ - LANDING PAGE
+         * INTERNATIONAL ENTERPRISE EDITION
          * ============================================
          */
 
         'use strict';
 
         // ============================================
-        // TOAST
+        // MENU MOBILE
         // ============================================
-        function showToast(message, type) {
-            var toast = document.getElementById('toast');
-            var msg = document.getElementById('toastMessage');
-            var icon = toast.querySelector('.toast-icon');
+        function toggleMenu() {
+            var nav = document.getElementById('nav');
+            nav.classList.toggle('active');
+        }
 
-            if (type === 'error') {
-                icon.textContent = '❌';
-            } else if (type === 'warning') {
-                icon.textContent = '⚠️';
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('nav').classList.remove('active');
+            });
+        });
+
+        // ============================================
+        // HEADER SCROLL
+        // ============================================
+        var header = document.getElementById('header');
+        var lastScroll = 0;
+
+        window.addEventListener('scroll', function() {
+            var currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.classList.add('scrolled');
             } else {
-                icon.textContent = '✅';
+                header.classList.remove('scrolled');
             }
+            
+            lastScroll = currentScroll;
+        });
 
-            msg.textContent = message;
-            toast.className = 'toast show';
-
-            clearTimeout(toast._hideTimeout);
-            toast._hideTimeout = setTimeout(function() {
-                toast.classList.remove('show');
-            }, 4000);
+        // ============================================
+        // ANIMAÇÃO DOS NÚMEROS (STATS)
+        // ============================================
+        function animateNumbers() {
+            var statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(function(el) {
+                var target = parseInt(el.getAttribute('data-count'));
+                var current = 0;
+                var increment = Math.ceil(target / 60);
+                var duration = 2000;
+                var stepTime = duration / 60;
+                
+                var interval = setInterval(function() {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(interval);
+                    }
+                    el.textContent = current;
+                }, stepTime);
+            });
         }
 
         // ============================================
-        // VERIFICAR SESSÃO
+        // SCROLL REVEAL (Fallback)
         // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 VIGORRE ONE™ - Página Inicial');
-
-            if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
-                var user = window.VigorreAuth.getCurrentUser();
-                if (user) {
-                    console.log('👤 Usuário logado: ' + user.name + ' (' + user.role + ')');
-
-                    // Adicionar botão "Ir para Dashboard"
-                    var navLinks = document.querySelector('.header .nav-links');
-                    if (navLinks) {
-                        var dashboardLink = document.createElement('a');
-                        dashboardLink.href = window.VigorreAuth.getRedirectUrl(user.role);
-                        dashboardLink.className = 'btn-dashboard';
-                        dashboardLink.textContent = '📊 Dashboard';
-                        navLinks.appendChild(dashboardLink);
+        function revealOnScroll() {
+            var elements = document.querySelectorAll('.benefit-card, .test-card, .report-card, .profile-card, .pricing-card, .step');
+            
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
                     }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            elements.forEach(function(el) {
+                observer.observe(el);
+            });
+        }
 
-                    // Mostrar toast de boas-vindas
-                    setTimeout(function() {
-                        showToast('👋 Olá ' + user.name + ', bem-vindo(a) de volta!', 'success');
-                    }, 500);
+        // ============================================
+        // CONTACT FORM
+        // ============================================
+        function handleContact(event) {
+            event.preventDefault();
+            
+            var name = document.getElementById('contactName').value;
+            var email = document.getElementById('contactEmail').value;
+            
+            alert('✅ Obrigado ' + name + '! Entraremos em contato em breve no e-mail ' + email + '.');
+            
+            document.getElementById('contactName').value = '';
+            document.getElementById('contactEmail').value = '';
+            document.getElementById('contactCompany').value = '';
+            document.getElementById('contactMessage').value = '';
+        }
+
+        // ============================================
+        // SMOOTH SCROLL
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            }
+            });
         });
 
-        console.log('✅ Página Inicial carregada com sucesso!');
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 VIGORRE ONE™ - Landing Page carregada');
+            
+            // Animar números após 1 segundo
+            setTimeout(animateNumbers, 1000);
+            
+            // Scroll Reveal
+            revealOnScroll();
+        });
+
+        console.log('✅ VIGORRE ONE™ - Landing Page International carregada com sucesso!');
     </script>
 
 </body>
