@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | VIGORRE ONE™</title>
     
+    <!-- ============================================
+    FONTS PREMIUM (MESMAS DO INDEX)
+    ============================================ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
@@ -12,15 +15,12 @@
     <style>
         /* ============================================
            VIGORRE ONE™ - LOGIN ENTERPRISE
-           IDENTIDADE SAP/WORKDAY/LINEAR
+           IDÊNTICO AO INDEX
            ============================================ */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ============================================
+           CSS VARIABLES (MESMAS DO INDEX)
+           ============================================ */
         :root {
             --navy: #0A2540;
             --navy-light: #1A3A5C;
@@ -28,9 +28,9 @@
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --gold-light: #F59E0B;
             --green: #10B981;
             --red: #EF4444;
-            --orange: #F59E0B;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -45,16 +45,24 @@
             --radius: 16px;
             --radius-sm: 10px;
             --radius-full: 9999px;
-            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
-            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
-            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
+            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
+            --shadow-hover: 0 4px 16px rgba(0,0,0,0.04), 0 8px 40px rgba(10,37,64,0.08);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.06), 0 16px 64px rgba(10,37,64,0.10);
+            --shadow-xl: 0 12px 48px rgba(0,0,0,0.08), 0 24px 80px rgba(10,37,64,0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Poppins', 'Inter', sans-serif;
         }
 
+        /* ============================================
+           RESET & BASE (MESMO DO INDEX)
+           ============================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: var(--font-primary);
             background: var(--gray-50);
-            color: var(--gray-800);
+            color: var(--gray-900);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -65,15 +73,16 @@
                 radial-gradient(ellipse at 90% 80%, rgba(6, 182, 212, 0.03) 0%, transparent 50%);
         }
 
-        .container {
-            max-width: 440px;
-            width: 100%;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 10px; transition: var(--transition); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
 
+        .container { max-width: 440px; width: 100%; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+        /* ============================================
+           LOGO (MESMO DO INDEX)
+           ============================================ */
         .logo {
             text-align: center;
             margin-bottom: 40px;
@@ -87,17 +96,17 @@
         }
 
         .logo-name {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-display);
             font-size: 1.5rem;
             font-weight: 800;
             color: var(--navy);
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
         }
 
         .logo-name .tm {
             font-size: 0.45rem;
             vertical-align: super;
-            color: var(--cyan);
+            color: var(--gold);
         }
 
         .logo-sub {
@@ -106,36 +115,48 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             margin-top: 2px;
+            font-weight: 500;
         }
 
+        @media (max-width: 480px) {
+            .logo-img { height: 40px; }
+            .logo-name { font-size: 1.2rem; }
+        }
+
+        /* ============================================
+           CARD (MESMO ESTILO DO INDEX)
+           ============================================ */
         .card {
             background: var(--white);
             border-radius: var(--radius);
             padding: 40px 36px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(10, 37, 64, 0.04);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--gray-200);
             transition: var(--transition);
         }
 
         .card:hover {
-            box-shadow: 0 16px 64px rgba(10, 37, 64, 0.14);
+            box-shadow: var(--shadow-xl);
         }
 
         .card h2 {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-display);
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--gray-900);
+            color: var(--navy);
             margin-bottom: 4px;
         }
 
         .card .subtitle {
             color: var(--gray-500);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-bottom: 28px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
+        /* ============================================
+           FORMULÁRIO (MESMO DO INDEX)
+           ============================================ */
         .form-group {
             margin-bottom: 18px;
         }
@@ -149,7 +170,7 @@
         }
 
         .form-group label .required {
-            color: #EF4444;
+            color: var(--red);
         }
 
         .form-group input {
@@ -157,7 +178,7 @@
             padding: 12px 16px;
             border: 1.5px solid var(--gray-200);
             border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-primary);
             font-size: 0.95rem;
             transition: var(--transition);
             background: var(--white);
@@ -202,6 +223,9 @@
             color: var(--gray-700);
         }
 
+        /* ============================================
+           FORM OPTIONS (MESMO DO INDEX)
+           ============================================ */
         .form-options {
             display: flex;
             justify-content: space-between;
@@ -237,14 +261,17 @@
             color: var(--cyan);
         }
 
+        /* ============================================
+           BOTÃO (MESMO DO INDEX)
+           ============================================ */
         .btn-login {
             width: 100%;
             padding: 14px;
             background: linear-gradient(135deg, var(--blue), var(--cyan));
-            color: white;
+            color: var(--white);
             border: none;
             border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-primary);
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
@@ -252,11 +279,12 @@
             margin-top: 4px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.25);
         }
 
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
+            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.35);
         }
 
         .btn-login:active {
@@ -283,11 +311,12 @@
         }
 
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
 
+        /* ============================================
+           FORM FOOTER (MESMO DO INDEX)
+           ============================================ */
         .form-footer {
             text-align: center;
             margin-top: 18px;
@@ -315,6 +344,9 @@
             color: var(--gray-700);
         }
 
+        /* ============================================
+           MESSAGE (MESMO DO INDEX)
+           ============================================ */
         .message {
             padding: 12px 16px;
             border-radius: var(--radius-sm);
@@ -326,51 +358,37 @@
             animation: fadeIn 0.3s ease;
         }
 
-        .message.show {
-            display: flex;
-        }
+        .message.show { display: flex; }
 
         .message.error {
             background: #FEE2E2;
             color: #991B1B;
             border: 1px solid #FECACA;
         }
-
-        .message.error .msg-icon {
-            color: #EF4444;
-        }
+        .message.error .msg-icon { color: var(--red); }
 
         .message.success {
             background: #D1FAE5;
             color: #065F46;
             border: 1px solid #A7F3D0;
         }
-
-        .message.success .msg-icon {
-            color: #10B981;
-        }
+        .message.success .msg-icon { color: var(--green); }
 
         .message.info {
             background: #DBEAFE;
             color: #1E40AF;
             border: 1px solid #BFDBFE;
         }
-
-        .message.info .msg-icon {
-            color: #3B82F6;
-        }
+        .message.info .msg-icon { color: var(--blue); }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-8px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* ============================================
+           DEMO CREDENTIALS (MESMO DO INDEX)
+           ============================================ */
         .demo-credentials {
             margin-top: 24px;
             padding: 18px 20px;
@@ -425,7 +443,7 @@
         }
 
         /* ============================================
-           FOOTER DO LOGIN
+           FOOTER DO LOGIN (MESMO DO INDEX)
            ============================================ */
         .login-footer {
             margin-top: 32px;
@@ -451,48 +469,7 @@
         }
 
         /* ============================================
-           RESPONSIVO
-           ============================================ */
-        @media (max-width: 480px) {
-            .card {
-                padding: 28px 20px;
-            }
-
-            .form-options {
-                flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
-            }
-
-            .demo-credentials .demo-grid {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .demo-credentials .demo-grid .role {
-                margin-top: 4px;
-            }
-
-            .logo-img {
-                height: 40px;
-            }
-
-            .logo-name {
-                font-size: 1.2rem;
-            }
-
-            .card h2 {
-                font-size: 1.2rem;
-            }
-
-            .btn-login {
-                padding: 12px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* ============================================
-           DARK MODE
+           DARK MODE (MESMO DO INDEX)
            ============================================ */
         @media (prefers-color-scheme: dark) {
             body {
@@ -593,6 +570,47 @@
         }
 
         /* ============================================
+           RESPONSIVO (MESMO DO INDEX)
+           ============================================ */
+        @media (max-width: 480px) {
+            .card {
+                padding: 28px 20px;
+            }
+
+            .form-options {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .demo-credentials .demo-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .demo-credentials .demo-grid .role {
+                margin-top: 4px;
+            }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .logo-name {
+                font-size: 1.2rem;
+            }
+
+            .card h2 {
+                font-size: 1.2rem;
+            }
+
+            .btn-login {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ============================================
            PRINT
            ============================================ */
         @media print {
@@ -629,6 +647,9 @@
 
     <div class="container">
 
+        <!-- ============================================
+        LOGO (MESMO DO INDEX)
+        ============================================ -->
         <div class="logo">
             <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-name">
@@ -637,6 +658,9 @@
             <div class="logo-sub">People Intelligence Enterprise</div>
         </div>
 
+        <!-- ============================================
+        CARD
+        ============================================ -->
         <div class="card">
 
             <h2>Bem-vindo 👋</h2>
@@ -700,7 +724,7 @@
         </div>
 
         <!-- ============================================
-        RODAPÉ DO LOGIN
+        FOOTER DO LOGIN (MESMO DO INDEX)
         ============================================ -->
         <div class="login-footer">
             <p>© 2026 Vigorre. Todos os direitos reservados.</p>
@@ -710,6 +734,9 @@
 
     </div>
 
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
     <script src="supabase-config.js"></script>
     <script src="auth.js"></script>
 
