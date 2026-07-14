@@ -1,81 +1,174 @@
-// ============================================
-// VIGORRE ONE™ - GUARD DE RECRUTADOR
-// ============================================
+/**
+ * ============================================
+ * VIGORRE ONE™ - RECRUITER GUARD
+ * INTERNATIONAL ENTERPRISE EDITION
+ * ============================================
+ * 
+ * VERSÃO: 1.0.0
+ * DATA: 14/07/2026
+ * 
+ * FUNCIONALIDADES:
+ * - Proteção específica para recrutadores
+ * - Verificação de empresa vinculada
+ * - Verificação de permissões de recrutador
+ * ============================================
+ */
 
-function initRecruiterGuard(redirectToLogin = true) {
-  console.log('🛡️ Verificando acesso de recrutador...');
-  
-  const isAuth = window.VigorreAuth.isAuthenticated();
-  if (!isAuth) {
-    if (redirectToLogin) window.location.href = '/login.html';
-    return false;
-  }
-  
-  const user = window.VigorreAuth.getCurrentUser();
-  const isRecruiter = user && (user.role === 'recruiter' || user.role === 'admin' || user.role === 'master');
-  
-  if (!isRecruiter) {
-    alert('⚠️ Acesso restrito a recrutadores.');
-    window.VigorreAuth.logout();
-    return false;
-  }
-  
-  // Configura escopo do recrutador
-  window.recruiterScope = {
-    userId: user.id,
-    companyIds: user.companyIds || [],
-    credits: user.credits || { DISC: 0, IE: 0, Valores: 0 }
-  };
-  
-  localStorage.setItem('vigorre_scope', JSON.stringify(window.recruiterScope));
-  
-  console.log('✅ Recrutador autenticado:', user.name);
-  return true;
+'use strict';
+
+// ============================================
+// RECRUITER GUARD
+// ============================================
+function requireRecruiterGuard() {
+    var route = window.location.pathname;
+
+    // Verificar autenticação
+    if (!window.VigorreAuth) {
+        console.error('❌ Auth não carregado');
+        window.location.href = '/login.html';
+        return false;
+    }
+
+    if (!window.VigorreAuth.isAuthenticated()) {
+        window.location.href = '/login.html';
+        return false;
+    }
+
+    var user = window.VigorreAuth.getCurrentUser();
+    if (!user) {
+        window.location.href = '/login.html';
+        return false;
+    }
+
+    // Verificar papel
+    if (user.role !== 'recruiter' && user.role !== 'admin' && user.role !== 'master') {
+        alert('⚠️ Acesso restrito a recrutadores.');
+        window.VigorreAuth.logout();
+        return false;
+    }
+
+    // Verificar se recrutador tem empresa vinculada
+    if (user.role === 'recruiter' && !user.companyId) {
+        alert('⚠️ Recrutador não vinculado a nenhuma empresa.');
+        window.VigorreAuth.logout();
+        return false;
+    }
+
+    // Verificar se tem permissão para acessar a rota
+    var recruiterRoutes = [
+        '/recrutador/dashboard.html',
+        '/recrutador/participantes/',
+        '/recrutador/creditos/',
+        '/recrutador/relatorios/',
+        '/recrutador/agenda/'
+    ];
+
+    var isRecruiterRoute = false;
+    for (var i = 0; i < recruiterRoutes.length; i++) {
+        if (route.indexOf(recruiterRoutes[i]) !== -1) {
+            isRecruiterRoute = true;
+            break;
+        }
+    }
+
+    // Se for rota de recrutador, verificar permissão
+    if (isRecruiterRoute) {
+        // Verificar se tem créditos suficientes (opcional)
+        var credits = user.credits || {};
+        var hasCredits = (credits.DISC || 0) > 0 || (credits.IE || 0) > 0 || (credits.VALORES || 0) > 0;
+
+        // Se não tiver créditos, mostrar aviso (mas não bloquear)
+        if (!hasCredits) {
+            console.warn('⚠️ Recrutador sem créditos disponíveis');
+        }
+    }
+
+    // Registrar acesso
+    try {
+        var logs = JSON.parse(localStorage.getItem('vigorre_audit_logs') || '[]');
+        logs.push({
+            id: 'R' + Date.now().toString().slice(-6) + Math.random().toString(36).slice(2, 5).toUpperCase(),
+            userId: user.id,
+            user: user.name,
+            action: 'Acesso Recrutador',
+            description: 'Recrutador acessou: ' + route,
+            severity: 'baixo',
+            ip: '127.0.0.1',
+            date: new Date().toLocaleString('pt-BR'),
+            timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('vigorre_audit_logs', JSON.stringify(logs));
+    } catch (error) {
+        console.warn('⚠️ Erro ao registrar acesso:', error);
+    }
+
+    return true;
 }
 
 // ============================================
-// FILTRO POR ESCOPO
+// VERIFICAR ACESSO A PARTICIPANTE
 // ============================================
-function filterByRecruiterScope(items, companyIdField = 'companyId') {
-  const scope = JSON.parse(localStorage.getItem('vigorre_scope') || '{}');
-  const companyIds = scope.companyIds || [];
-  
-  if (companyIds.length === 0) return items;
-  
-  return items.filter(item => {
-    const id = item[companyIdField] || item.company_id;
-    return companyIds.includes(id);
-  });
+function canAccessParticipant(participantId) {
+    try {
+        var user = window.VigorreAuth.getCurrentUser();
+        if (!user) return false;
+
+        // Admin e Master têm acesso total
+        if (user.role === 'admin' || user.role === 'master') {
+            return true;
+        }
+
+        // Recrutador só tem acesso a participantes da sua empresa
+        if (user.role === 'recruiter') {
+            var participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+            for (var i = 0; i < participants.length; i++) {
+                if (participants[i].id === participantId) {
+                    return participants[i].companyId === user.companyId;
+                }
+            }
+        }
+
+        return false;
+
+    } catch (error) {
+        console.error('❌ Erro ao verificar acesso ao participante:', error);
+        return false;
+    }
 }
 
 // ============================================
-// CONSUMIR CRÉDITO
+// VERIFICAR CRÉDITOS DO RECRUTADOR
 // ============================================
-function consumeRecruiterCredit(testType) {
-  const scope = JSON.parse(localStorage.getItem('vigorre_scope') || '{}');
-  const credits = scope.credits || {};
-  
-  if (!credits[testType] || credits[testType] <= 0) {
-    console.warn('⚠️ Créditos insuficientes para:', testType);
-    return false;
-  }
-  
-  credits[testType]--;
-  scope.credits = credits;
-  localStorage.setItem('vigorre_scope', JSON.stringify(scope));
-  
-  const user = window.VigorreAuth.getCurrentUser();
-  if (user) {
-    user.credits = credits;
-    localStorage.setItem('vigorre_current_user', JSON.stringify(user));
-  }
-  
-  console.log(`✅ Crédito consumido: ${testType}, restam: ${credits[testType]}`);
-  return true;
+function getRecruiterCredits() {
+    try {
+        var user = window.VigorreAuth.getCurrentUser();
+        if (!user) return null;
+
+        // Buscar créditos do recrutador
+        var credits = user.credits || {};
+        var total = 0;
+        var types = ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE', 'COMPETENCIAS', 'LIDERANCA', 'POTENCIAL', 'FITCULTURAL'];
+
+        for (var i = 0; i < types.length; i++) {
+            total += credits[types[i]] || 0;
+        }
+
+        return {
+            total: total,
+            details: credits
+        };
+
+    } catch (error) {
+        console.error('❌ Erro ao buscar créditos do recrutador:', error);
+        return null;
+    }
 }
 
-window.initRecruiterGuard = initRecruiterGuard;
-window.filterByRecruiterScope = filterByRecruiterScope;
-window.consumeRecruiterCredit = consumeRecruiterCredit;
+// ============================================
+// EXPORTAR
+// ============================================
+window.requireRecruiterGuard = requireRecruiterGuard;
+window.canAccessParticipant = canAccessParticipant;
+window.getRecruiterCredits = getRecruiterCredits;
 
-console.log('🛡️ Guard de recrutador inicializado');
+console.log('✅ VIGORRE ONE™ - Recruiter Guard carregado com sucesso!');
