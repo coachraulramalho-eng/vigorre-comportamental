@@ -22,31 +22,8 @@
         /* ============================================
            VIGORRE ONE™ - ADMIN DASHBOARD
            INTERNATIONAL ENTERPRISE EDITION
-           ============================================
-
-           DESIGN INSPIRADO EM:
-           - SAP Fiori
-           - Workday
-           - Linear
-           - Stripe Dashboard
-           - Apple Human Interface
-           - Google Material 3
-
-           CARACTERÍSTICAS:
-           - Espaço branco generoso
-           - Cards proporcionais
-           - Bordas suaves
-           - Sombras leves
-           - Tipografia premium
-           - Ícones minimalistas
-           - Animações suaves
-           - Tema claro/escuro
-           - Acessibilidade WCAG
            ============================================ */
 
-        /* ============================================
-           CSS VARIABLES (TEMA CLARO)
-           ============================================ */
         :root {
             --navy: #0A2540;
             --navy-light: #1A3A5C;
@@ -86,9 +63,6 @@
             --border-color: #E2E8F0;
         }
 
-        /* ============================================
-           TEMA ESCURO (AUTO DETECT)
-           ============================================ */
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-body: #0F172A;
@@ -206,9 +180,6 @@
             }
         }
 
-        /* ============================================
-           RESET & BASE
-           ============================================ */
         * {
             margin: 0;
             padding: 0;
@@ -228,9 +199,6 @@
             line-height: 1.5;
         }
 
-        /* ============================================
-           SCROLLBAR PREMIUM
-           ============================================ */
         ::-webkit-scrollbar {
             width: 5px;
             height: 5px;
@@ -259,9 +227,6 @@
             }
         }
 
-        /* ============================================
-           SIDEBAR
-           ============================================ */
         .sidebar {
             position: fixed;
             top: 0;
@@ -443,9 +408,6 @@
             color: #F87171;
         }
 
-        /* ============================================
-           MAIN CONTENT
-           ============================================ */
         .main {
             margin-left: 260px;
             padding: 28px 40px 48px;
@@ -453,9 +415,6 @@
             transition: padding var(--transition-slow), margin var(--transition-slow);
         }
 
-        /* ============================================
-           HEADER
-           ============================================ */
         .main-header {
             display: flex;
             justify-content: space-between;
@@ -495,9 +454,6 @@
             align-items: center;
         }
 
-        /* ============================================
-           BUTTONS
-           ============================================ */
         .btn {
             padding: 10px 24px;
             border: none;
@@ -596,9 +552,6 @@
             font-size: 1rem;
         }
 
-        /* ============================================
-           TOOLTIP
-           ============================================ */
         [data-tooltip] {
             position: relative;
             cursor: pointer;
@@ -636,9 +589,6 @@
             }
         }
 
-        /* ============================================
-           STATS GRID
-           ============================================ */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -726,9 +676,6 @@
             background: rgba(239, 68, 68, 0.08);
         }
 
-        /* ============================================
-           CREDITS GRID
-           ============================================ */
         .credits-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -794,9 +741,6 @@
             color: white;
         }
 
-        /* ============================================
-           IA CARD
-           ============================================ */
         .ia-card {
             background: linear-gradient(135deg, var(--navy), var(--gray-800));
             border-radius: var(--radius);
@@ -895,9 +839,6 @@
             margin-top: 2px;
         }
 
-        /* ============================================
-           DASHBOARD GRID
-           ============================================ */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -949,9 +890,6 @@
             position: relative;
         }
 
-        /* ============================================
-           QUICK ACTIONS
-           ============================================ */
         .quick-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -998,9 +936,6 @@
             }
         }
 
-        /* ============================================
-           TABLE
-           ============================================ */
         .table-card {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -1059,9 +994,6 @@
             }
         }
 
-        /* ============================================
-           BADGES
-           ============================================ */
         .badge-status {
             display: inline-block;
             padding: 2px 12px;
@@ -1090,9 +1022,6 @@
             color: var(--blue);
         }
 
-        /* ============================================
-           TOAST
-           ============================================ */
         .toast {
             position: fixed;
             top: 24px;
@@ -1140,9 +1069,6 @@
             }
         }
 
-        /* ============================================
-           MOBILE TOGGLE
-           ============================================ */
         .mobile-toggle {
             display: none;
             background: none;
@@ -1184,9 +1110,6 @@
             }
         }
 
-        /* ============================================
-           EXPORT BUTTONS
-           ============================================ */
         .export-buttons {
             display: flex;
             gap: 8px;
@@ -1216,9 +1139,6 @@
             }
         }
 
-        /* ============================================
-           RESPONSIVO
-           ============================================ */
         @media (max-width: 1200px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1319,9 +1239,6 @@
             }
         }
 
-        /* ============================================
-           PRINT
-           ============================================ */
         @media print {
             .sidebar {
                 display: none !important;
@@ -1405,7 +1322,7 @@
         </div>
 
         <!-- ============================================
-        MENU CORRIGIDO - TODOS OS ITENS FIXOS
+        MENU FIXO - TODOS OS ITENS NUNCA SOMEM
         ============================================ -->
         <ul class="nav">
             <li><a href="#" class="active" aria-current="page"><span class="icon">📊</span> Dashboard</a></li>
@@ -1667,7 +1584,6 @@
             document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
         }
 
-        // Fechar sidebar ao clicar fora
         document.addEventListener('click', function(e) {
             var sidebar = document.getElementById('sidebar');
             var toggle = document.querySelector('.mobile-toggle');
@@ -1683,7 +1599,11 @@
         // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
-                window.VigorreAuth.logout();
+                if (window.VigorreAuth) {
+                    window.VigorreAuth.logout();
+                } else {
+                    window.location.href = '../login.html';
+                }
             }
         }
 
@@ -1709,20 +1629,23 @@
             console.log('📊 Admin Dashboard - VIGORRE ONE™');
 
             // Verificar autenticação
-            var isAuth = window.VigorreAuth.isAuthenticated();
-            if (!isAuth) {
-                window.location.href = '../login.html';
-                return;
+            if (window.requireAdmin) {
+                if (!window.requireAdmin()) {
+                    return;
+                }
+            } else if (window.VigorreAuth) {
+                if (!window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../login.html';
+                    return;
+                }
+                var user = window.VigorreAuth.getCurrentUser();
+                if (!user || (user.role !== 'admin' && user.role !== 'master')) {
+                    alert('⚠️ Acesso restrito a administradores.');
+                    window.VigorreAuth.logout();
+                    return;
+                }
+                document.getElementById('userName').textContent = user.name || 'Administrador';
             }
-
-            var user = window.VigorreAuth.getCurrentUser();
-            if (!user || (user.role !== 'admin' && user.role !== 'master')) {
-                alert('⚠️ Acesso restrito a administradores.');
-                window.VigorreAuth.logout();
-                return;
-            }
-
-            document.getElementById('userName').textContent = user.name || 'Administrador';
 
             // Carregar dados com animação
             setTimeout(function() {
@@ -1770,13 +1693,13 @@
                 for (var j = 0; j < transactions.length; j++) {
                     var t = transactions[j];
                     if (t.type === 'credito' || t.type === 'ajuste') {
-                        totalDisc += t.disc || 0;
-                        totalIe += t.ie || 0;
-                        totalValores += t.valores || 0;
+                        totalDisc += t.DISC || 0;
+                        totalIe += t.IE || 0;
+                        totalValores += t.VALORES || 0;
                     } else if (t.type === 'debito') {
-                        totalDisc -= t.disc || 0;
-                        totalIe -= t.ie || 0;
-                        totalValores -= t.valores || 0;
+                        totalDisc -= t.DISC || 0;
+                        totalIe -= t.IE || 0;
+                        totalValores -= t.VALORES || 0;
                     }
                 }
 
