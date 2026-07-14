@@ -1,0 +1,125 @@
+# ============================================
+# VIGORRE ONE™ - .HTACCESS
+# INTERNATIONAL ENTERPRISE EDITION
+# ============================================
+# 
+# CONFIGURAÇÕES:
+# - URL amigáveis
+# - Redirecionamentos
+# - Segurança
+# - Cache
+# - Compressão
+# - CORS
+# ============================================
+
+# ============================================
+# REWRITE ENGINE
+# ============================================
+RewriteEngine On
+RewriteBase /
+
+# ============================================
+# URL AMIGÁVEIS
+# ============================================
+RewriteRule ^login$ /login.html [L]
+RewriteRule ^dashboard$ /admin/dashboard.html [L]
+RewriteRule ^recrutador$ /recrutador/dashboard.html [L]
+RewriteRule ^participante$ /participante/dashboard.html [L]
+RewriteRule ^empresa$ /empresa/dashboard.html [L]
+RewriteRule ^consultor$ /consultor/dashboard.html [L]
+
+# ============================================
+# REDIRECIONAMENTOS 301 (SEO)
+# ============================================
+Redirect 301 /antiga-home / 
+Redirect 301 /old-about /sobre.html
+
+# ============================================
+# SEGURANÇA
+# ============================================
+
+# Bloquear acesso a arquivos sensíveis
+<FilesMatch "\.(env|json|config|log|sql|key|pem|lock)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Bloquear listagem de diretórios
+Options -Indexes
+
+# Prevenir acesso a .htaccess
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Proteger contra XSS
+Header set X-XSS-Protection "1; mode=block"
+
+# Proteger contra MIME sniffing
+Header set X-Content-Type-Options "nosniff"
+
+# Prevenir clickjacking
+Header set X-Frame-Options "SAMEORIGIN"
+
+# Política de segurança de conteúdo (CSP)
+Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://fonts.googleapis.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co;"
+
+# Política de referrer
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Política de cache
+Header set Cache-Control "public, max-age=31536000, immutable"
+
+# ============================================
+# CACHE E COMPRESSÃO
+# ============================================
+
+# Compressão Gzip
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml text/javascript application/javascript application/json application/xml application/rss+xml image/svg+xml
+</IfModule>
+
+# Cache de arquivos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType text/html "access plus 1 day"
+</IfModule>
+
+# ============================================
+# CORS
+# ============================================
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# ============================================
+# ERROS PERSONALIZADOS
+# ============================================
+ErrorDocument 400 /error.html
+ErrorDocument 401 /error.html
+ErrorDocument 403 /error.html
+ErrorDocument 404 /error.html
+ErrorDocument 500 /error.html
+
+# ============================================
+# REDIRECIONAR PARA HTTPS
+# ============================================
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# ============================================
+# REDIRECIONAR WWW PARA NÃO-WWW
+# ============================================
+RewriteCond %{HTTP_HOST} ^www\.vigorre\.com [NC]
+RewriteRule ^(.*)$ https://vigorre.com/$1 [R=301,L]
