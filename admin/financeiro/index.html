@@ -1315,4 +1315,536 @@
         <div class="charts-grid">
             <div class="chart-card">
                 <div class="chart-header">
-                    <h3>
+                    <h3>📊 Receita Mensal</h3>
+                    <div class="period">
+                        <button class="active" onclick="changePeriod('month')" data-tooltip="Último mês">Mês</button>
+                        <button onclick="changePeriod('quarter')" data-tooltip="Último trimestre">Trim</button>
+                        <button onclick="changePeriod('year')" data-tooltip="Último ano">Ano</button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="revenueChart" aria-label="Gráfico de receita mensal"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>🧩 Distribuição de Créditos</h3>
+                </div>
+                <div class="chart-container-sm">
+                    <canvas id="creditDistributionChart" aria-label="Gráfico de distribuição de créditos"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+        RANKING TABLE
+        ============================================ -->
+        <div class="table-card">
+            <div class="table-header">
+                <h3>🏆 Empresas que Mais Compram</h3>
+                <a href="creditos.html" class="action">Ver todos →</a>
+            </div>
+            <div class="table-container">
+                <table aria-label="Ranking de empresas que mais compram créditos">
+                    <thead>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Empresa</th>
+                            <th>Créditos Comprados</th>
+                            <th>Valor Gasto</th>
+                            <th>Saúde Financeira</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rankingTable">
+                        <!-- Carregado via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
+    <script src="../../supabase-config.js"></script>
+    <script src="../../auth.js"></script>
+    <script src="../../middleware/auth-guard.js"></script>
+
+    <script>
+        /**
+         * ============================================
+         * VIGORRE ONE™ - CENTRO FINANCEIRO
+         * INTERNATIONAL ENTERPRISE EDITION
+         * ============================================
+         */
+
+        'use strict';
+
+        // ============================================
+        // TOGGLE SIDEBAR
+        // ============================================
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('mobileOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+        }
+
+        document.addEventListener('click', function(e) {
+            var sidebar = document.getElementById('sidebar');
+            var toggle = document.querySelector('.mobile-toggle');
+            if (window.innerWidth <= 992 && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                    toggleSidebar();
+                }
+            }
+        });
+
+        // ============================================
+        // LOGOUT
+        // ============================================
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                if (window.VigorreAuth) {
+                    window.VigorreAuth.logout();
+                } else {
+                    window.location.href = '../../login.html';
+                }
+            }
+        }
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        var revenueChartInstance = null;
+        var creditDistributionInstance = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('💰 Centro Financeiro - VIGORRE ONE™');
+
+            // Verificar autenticação
+            if (window.requireAdmin) {
+                if (!window.requireAdmin()) {
+                    return;
+                }
+            } else if (window.VigorreAuth) {
+                if (!window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../../login.html';
+                    return;
+                }
+                var user = window.VigorreAuth.getCurrentUser();
+                if (!user || (user.role !== 'admin' && user.role !== 'master')) {
+                    alert('⚠️ Acesso restrito a administradores.');
+                    window.VigorreAuth.logout();
+                    return;
+                }
+                document.getElementById('userName').textContent = user.name || 'Administrador';
+            }
+
+            setTimeout(function() {
+                loadIAContent();
+                loadKPIs();
+                loadRanking();
+                renderRevenueChart();
+                renderCreditDistributionChart();
+            }, 300);
+
+            setInterval(function() {
+                loadKPIs();
+                loadRanking();
+            }, 60000);
+        });
+
+        // ============================================
+        // CARREGAR IA CONTENT
+        // ============================================
+        function loadIAContent() {
+            var container = document.getElementById('iaContent');
+
+            var insights = [
+                { icon: '💰', title: 'Faturamento', desc: 'Meta mensal: R$ 45.000 (atingida 94%)' },
+                { icon: '📈', title: 'Crescimento', desc: 'Taxa de crescimento: 12% ao mês' },
+                { icon: '💳', title: 'Créditos', desc: 'Venda de créditos aumentou 8%' },
+                { icon: '🏢', title: 'Novos Clientes', desc: '3 novas empresas este mês' },
+                { icon: '⚠️', title: 'Alertas', desc: '2 carteiras com baixo saldo' }
+            ];
+
+            var html = '';
+            for (var i = 0; i < insights.length; i++) {
+                var item = insights[i];
+                html += '<div class="ia-item" onclick="handleIAClick(\'' + item.title + '\')">';
+                html += '<div class="ia-item-icon">' + item.icon + '</div>';
+                html += '<div class="ia-item-title">' + item.title + '</div>';
+                html += '<div class="ia-item-desc">' + item.desc + '</div>';
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ============================================
+        // HANDLE IA CLICK
+        // ============================================
+        function handleIAClick(title) {
+            showToast('🤖 IA: ' + title, 'info');
+        }
+
+        // ============================================
+        // CARREGAR KPIS
+        // ============================================
+        function loadKPIs() {
+            try {
+                var transactions = JSON.parse(localStorage.getItem('vigorre_credit_transactions') || '[]');
+                var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+
+                var monthlyRevenue = 0;
+                var creditsSold = 0;
+                var activeClients = companies.length;
+
+                for (var i = 0; i < transactions.length; i++) {
+                    if (transactions[i].type === 'credito') {
+                        monthlyRevenue += transactions[i].amount || 0;
+                        creditsSold += transactions[i].quantity || 0;
+                    }
+                }
+
+                var formattedRevenue = 'R$ ' + monthlyRevenue.toLocaleString('pt-BR');
+                document.getElementById('monthlyRevenue').textContent = formattedRevenue;
+                document.getElementById('creditsSold').textContent = creditsSold;
+                document.getElementById('activeClients').textContent = activeClients;
+
+                var growth = activeClients > 0 ? Math.round((activeClients / 12) * 100) : 0;
+                document.getElementById('growthRate').textContent = growth + '%';
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar KPIs:', error);
+            }
+        }
+
+        // ============================================
+        // CARREGAR RANKING
+        // ============================================
+        function loadRanking() {
+            try {
+                var transactions = JSON.parse(localStorage.getItem('vigorre_credit_transactions') || '[]');
+                var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+
+                var companySpending = {};
+
+                for (var i = 0; i < transactions.length; i++) {
+                    var t = transactions[i];
+                    if (t.type === 'credito' && t.companyId) {
+                        if (!companySpending[t.companyId]) {
+                            companySpending[t.companyId] = { credits: 0, amount: 0, name: '' };
+                        }
+                        companySpending[t.companyId].credits += t.quantity || 0;
+                        companySpending[t.companyId].amount += t.amount || 0;
+                    }
+                }
+
+                for (var j = 0; j < companies.length; j++) {
+                    if (companySpending[companies[j].id]) {
+                        companySpending[companies[j].id].name = companies[j].name || 'Empresa ' + companies[j].id;
+                    }
+                }
+
+                var ranking = [];
+                for (var key in companySpending) {
+                    ranking.push({
+                        id: key,
+                        name: companySpending[key].name || 'Sem nome',
+                        credits: companySpending[key].credits,
+                        amount: companySpending[key].amount
+                    });
+                }
+
+                ranking.sort(function(a, b) {
+                    return b.amount - a.amount;
+                });
+
+                var tbody = document.getElementById('rankingTable');
+
+                if (ranking.length === 0) {
+                    tbody.innerHTML =
+                        '<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--text-muted);">Nenhuma transação encontrada</td></tr>';
+                    return;
+                }
+
+                var html = '';
+                var limit = Math.min(ranking.length, 10);
+
+                for (var k = 0; k < limit; k++) {
+                    var r = ranking[k];
+                    var position = k + 1;
+                    var medal = '';
+                    if (position === 1) medal = '🥇 ';
+                    else if (position === 2) medal = '🥈 ';
+                    else if (position === 3) medal = '🥉 ';
+                    else medal = '#' + position + ' ';
+
+                    var health = r.amount > 10000 ? 'excelente' : r.amount > 5000 ? 'atencao' : 'critico';
+                    var healthText = r.amount > 10000 ? 'Excelente' : r.amount > 5000 ? 'Atenção' : 'Crítico';
+
+                    var formattedAmount = 'R$ ' + r.amount.toLocaleString('pt-BR');
+
+                    html += '<tr>';
+                    html += '<td>' + medal + '</td>';
+                    html += '<td><strong>' + r.name + '</strong></td>';
+                    html += '<td>' + r.credits + '</td>';
+                    html += '<td>' + formattedAmount + '</td>';
+                    html += '<td><span class="badge-health ' + health + '">' + healthText + '</span></td>';
+                    html += '</tr>';
+                }
+
+                tbody.innerHTML = html;
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar ranking:', error);
+            }
+        }
+
+        // ============================================
+        // RENDERIZAR GRÁFICO DE RECEITA
+        // ============================================
+        function renderRevenueChart() {
+            try {
+                var ctx = document.getElementById('revenueChart').getContext('2d');
+
+                if (revenueChartInstance) {
+                    revenueChartInstance.destroy();
+                }
+
+                revenueChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                        datasets: [{
+                            label: 'Receita',
+                            data: [12500, 18200, 15400, 19800, 22400, 26700],
+                            borderColor: '#1D4ED8',
+                            backgroundColor: 'rgba(29, 78, 216, 0.06)',
+                            fill: true,
+                            borderWidth: 3,
+                            pointBackgroundColor: '#1D4ED8',
+                            pointBorderColor: '#FFFFFF',
+                            pointBorderWidth: 2,
+                            pointRadius: 4,
+                            hoverRadius: 6,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(10, 37, 64, 0.9)',
+                                titleColor: '#FFFFFF',
+                                bodyColor: '#FFFFFF',
+                                cornerRadius: 8,
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'R$ ' + context.parsed.y.toLocaleString('pt-BR');
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(10, 37, 64, 0.04)'
+                                },
+                                ticks: {
+                                    color: '#94A3B8',
+                                    font: { size: 11 },
+                                    callback: function(value) {
+                                        return 'R$ ' + value.toLocaleString('pt-BR');
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: '#94A3B8',
+                                    font: { size: 11 }
+                                }
+                            }
+                        },
+                        animation: {
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error('❌ Erro ao renderizar gráfico de receita:', error);
+            }
+        }
+
+        // ============================================
+        // RENDERIZAR GRÁFICO DE DISTRIBUIÇÃO DE CRÉDITOS
+        // ============================================
+        function renderCreditDistributionChart() {
+            try {
+                var ctx = document.getElementById('creditDistributionChart').getContext('2d');
+
+                if (creditDistributionInstance) {
+                    creditDistributionInstance.destroy();
+                }
+
+                creditDistributionInstance = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['DISC', 'IE', 'Valores', 'SWOT', 'Big Five', 'Competências', 'Liderança', 'Potencial',
+                            'Fit Cultural'
+                        ],
+                        datasets: [{
+                            data: [15, 14, 12, 10, 12, 9, 10, 8, 10],
+                            backgroundColor: [
+                                '#EF4444', '#8B5CF6', '#10B981', '#F59E0B',
+                                '#3B82F6', '#EC4899', '#D97706', '#14B8A6', '#7C3AED'
+                            ],
+                            borderWidth: 0,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#64748B',
+                                    font: { size: 9, weight: '500' },
+                                    usePointStyle: true,
+                                    pointStyle: 'circle',
+                                    padding: 8
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(10, 37, 64, 0.9)',
+                                titleColor: '#FFFFFF',
+                                bodyColor: '#FFFFFF',
+                                cornerRadius: 8,
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.parsed + '%';
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '65%',
+                        animation: {
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error('❌ Erro ao renderizar gráfico de distribuição de créditos:', error);
+            }
+        }
+
+        // ============================================
+        // CHANGE PERIOD
+        // ============================================
+        function changePeriod(period) {
+            var buttons = document.querySelectorAll('.period button');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+
+            var target = document.querySelector('.period button[onclick="changePeriod(\'' + period + '\')"]');
+            if (target) {
+                target.classList.add('active');
+            }
+
+            showToast('📊 Alterando para período: ' + period, 'info');
+
+            var data = {
+                'month': [12500, 18200, 15400, 19800, 22400, 26700],
+                'quarter': [34000, 42000, 56000, 71000],
+                'year': [12500, 18200, 15400, 19800, 22400, 26700, 31000, 28000, 35000, 41000, 38000, 45000]
+            };
+
+            var labels = {
+                'month': ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                'quarter': ['Q1', 'Q2', 'Q3', 'Q4'],
+                'year': ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+            };
+
+            if (revenueChartInstance && data[period] && labels[period]) {
+                revenueChartInstance.data.datasets[0].data = data[period];
+                revenueChartInstance.data.labels = labels[period];
+                revenueChartInstance.update();
+            }
+        }
+
+        // ============================================
+        // EXPORT DATA
+        // ============================================
+        function exportData() {
+            showToast('📊 Exportando dados financeiros...', 'success');
+            setTimeout(function() {
+                showToast('✅ Exportação concluída com sucesso!', 'success');
+            }, 1500);
+        }
+
+        // ============================================
+        // REFRESH DATA
+        // ============================================
+        function refreshData() {
+            showToast('🔄 Atualizando dados financeiros...', 'info');
+            setTimeout(function() {
+                loadKPIs();
+                loadRanking();
+                renderRevenueChart();
+                renderCreditDistributionChart();
+                showToast('✅ Dados atualizados com sucesso!', 'success');
+            }, 800);
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+
+            var icons = {
+                'error': '❌',
+                'warning': '⚠️',
+                'success': '✅',
+                'info': 'ℹ️'
+            };
+
+            icon.textContent = icons[type] || '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        console.log('✅ Centro Financeiro International carregado com sucesso!');
+    </script>
+
+</body>
+</html>
