@@ -6,7 +6,7 @@
     <title>Login | VIGORRE ONE™</title>
     
     <!-- ============================================
-    FONTS PREMIUM (MESMAS DO INDEX)
+    FONTS PREMIUM
     ============================================ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,12 +14,12 @@
     
     <style>
         /* ============================================
-           VIGORRE ONE™ - LOGIN ENTERPRISE
-           IDÊNTICO AO INDEX
+           VIGORRE ONE™ - LOGIN UNIFICADO
+           INTERNATIONAL ENTERPRISE EDITION
            ============================================ */
 
         /* ============================================
-           CSS VARIABLES (MESMAS DO INDEX)
+           CSS VARIABLES
            ============================================ */
         :root {
             --navy: #0A2540;
@@ -55,7 +55,7 @@
         }
 
         /* ============================================
-           RESET & BASE (MESMO DO INDEX)
+           RESET & BASE
            ============================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
@@ -81,7 +81,7 @@
         .container { max-width: 440px; width: 100%; flex: 1; display: flex; flex-direction: column; justify-content: center; }
 
         /* ============================================
-           LOGO (MESMO DO INDEX)
+           LOGO
            ============================================ */
         .logo {
             text-align: center;
@@ -124,7 +124,7 @@
         }
 
         /* ============================================
-           CARD (MESMO ESTILO DO INDEX)
+           CARD
            ============================================ */
         .card {
             background: var(--white);
@@ -155,7 +155,7 @@
         }
 
         /* ============================================
-           FORMULÁRIO (MESMO DO INDEX)
+           FORMULÁRIO
            ============================================ */
         .form-group {
             margin-bottom: 18px;
@@ -224,7 +224,7 @@
         }
 
         /* ============================================
-           FORM OPTIONS (MESMO DO INDEX)
+           FORM OPTIONS
            ============================================ */
         .form-options {
             display: flex;
@@ -262,7 +262,7 @@
         }
 
         /* ============================================
-           BOTÃO (MESMO DO INDEX)
+           BOTÃO LOGIN
            ============================================ */
         .btn-login {
             width: 100%;
@@ -315,7 +315,7 @@
         }
 
         /* ============================================
-           FORM FOOTER (MESMO DO INDEX)
+           FORM FOOTER
            ============================================ */
         .form-footer {
             text-align: center;
@@ -345,7 +345,7 @@
         }
 
         /* ============================================
-           MESSAGE (MESMO DO INDEX)
+           MESSAGE
            ============================================ */
         .message {
             padding: 12px 16px;
@@ -387,7 +387,7 @@
         }
 
         /* ============================================
-           DEMO CREDENTIALS (MESMO DO INDEX)
+           DEMO CREDENTIALS
            ============================================ */
         .demo-credentials {
             margin-top: 24px;
@@ -443,7 +443,7 @@
         }
 
         /* ============================================
-           FOOTER DO LOGIN (MESMO DO INDEX)
+           FOOTER
            ============================================ */
         .login-footer {
             margin-top: 32px;
@@ -469,7 +469,7 @@
         }
 
         /* ============================================
-           DARK MODE (MESMO DO INDEX)
+           DARK MODE
            ============================================ */
         @media (prefers-color-scheme: dark) {
             body {
@@ -570,7 +570,7 @@
         }
 
         /* ============================================
-           RESPONSIVO (MESMO DO INDEX)
+           RESPONSIVO
            ============================================ */
         @media (max-width: 480px) {
             .card {
@@ -648,7 +648,7 @@
     <div class="container">
 
         <!-- ============================================
-        LOGO (MESMO DO INDEX)
+        LOGO
         ============================================ -->
         <div class="logo">
             <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
@@ -702,6 +702,9 @@
                 <a href="index.html" class="back-link">← Voltar para Home</a>
             </div>
 
+            <!-- ============================================
+            DEMO CREDENTIALS - TODOS OS PAPÉIS
+            ============================================ -->
             <div class="demo-credentials">
                 <div class="demo-title">🔐 Credenciais de Teste</div>
                 <div class="demo-grid">
@@ -724,7 +727,7 @@
         </div>
 
         <!-- ============================================
-        FOOTER DO LOGIN (MESMO DO INDEX)
+        FOOTER
         ============================================ -->
         <div class="login-footer">
             <p>© 2026 Vigorre. Todos os direitos reservados.</p>
@@ -743,13 +746,24 @@
     <script>
         /**
          * ============================================
-         * VIGORRE ONE™ - LOGIN SCRIPT
+         * VIGORRE ONE™ - LOGIN UNIFICADO
          * INTERNATIONAL ENTERPRISE EDITION
+         * ============================================
+         * 
+         * FUNCIONALIDADES:
+         * - Login único para todos os papéis
+         * - Redirecionamento automático
+         * - Lembrar credenciais
+         * - Reset de senha
+         * - Demo credentials com autopreenchimento
          * ============================================
          */
 
         'use strict';
 
+        // ============================================
+        // ELEMENTOS
+        // ============================================
         var emailInput = document.getElementById('email');
         var passwordInput = document.getElementById('password');
         var loginBtn = document.getElementById('loginBtn');
@@ -757,6 +771,9 @@
         var messageText = document.getElementById('messageText');
         var rememberMe = document.getElementById('rememberMe');
 
+        // ============================================
+        // TOGGLE PASSWORD
+        // ============================================
         function togglePassword() {
             var input = document.getElementById('password');
             var btn = document.querySelector('.password-toggle');
@@ -769,6 +786,9 @@
             }
         }
 
+        // ============================================
+        // SHOW MESSAGE
+        // ============================================
         function showMessage(text, type) {
             messageEl.className = 'message show ' + (type || 'info');
             messageText.textContent = text;
@@ -779,6 +799,9 @@
             }, 5000);
         }
 
+        // ============================================
+        // RESET PASSWORD
+        // ============================================
         function resetPassword() {
             var email = prompt('Digite seu e-mail para redefinir a senha:');
             if (email && window.VigorreAuth) {
@@ -791,6 +814,9 @@
             }
         }
 
+        // ============================================
+        // AUTO-PREENCHIMENTO DEMO
+        // ============================================
         document.querySelector('.demo-credentials').addEventListener('click', function(e) {
             var target = e.target.closest('.email');
             if (target) {
@@ -805,12 +831,16 @@
             }
         });
 
+        // ============================================
+        // HANDLE LOGIN
+        // ============================================
         async function handleLogin(event) {
             event.preventDefault();
 
             var email = emailInput.value.trim();
             var password = passwordInput.value;
 
+            // Validações
             if (!email) {
                 showMessage('Por favor, digite seu e-mail', 'error');
                 emailInput.focus();
@@ -830,6 +860,7 @@
                 return;
             }
 
+            // Desabilitar botão
             loginBtn.disabled = true;
             loginBtn.innerHTML = '<span class="spinner"></span> Entrando...';
 
@@ -838,6 +869,7 @@
                     var result = window.VigorreAuth.login(email, password);
 
                     if (result.success) {
+                        // Salvar "Lembrar de mim"
                         if (rememberMe.checked) {
                             localStorage.setItem('vigorre_remember_email', email);
                         } else {
@@ -846,6 +878,7 @@
 
                         showMessage('✅ Login realizado com sucesso!', 'success');
 
+                        // Redirecionar
                         setTimeout(function() {
                             window.location.href = result.redirect;
                         }, 800);
@@ -867,9 +900,13 @@
             }
         }
 
+        // ============================================
+        // INICIALIZAR
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🔐 Tela de Login - VIGORRE ONE™');
+            console.log('🔐 Tela de Login Unificada - VIGORRE ONE™');
 
+            // Verificar se já está logado
             if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
                 var user = window.VigorreAuth.getCurrentUser();
                 if (user) {
@@ -879,22 +916,26 @@
                 }
             }
 
+            // Carregar "Lembrar de mim"
             var savedEmail = localStorage.getItem('vigorre_remember_email');
             if (savedEmail) {
                 emailInput.value = savedEmail;
                 rememberMe.checked = true;
             }
 
+            // Focar no email
             setTimeout(function() {
                 emailInput.focus();
             }, 100);
 
+            // Enter no campo de senha
             passwordInput.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
                     document.getElementById('loginForm').dispatchEvent(new Event('submit'));
                 }
             });
 
+            // Enter no campo de email
             emailInput.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
                     passwordInput.focus();
@@ -902,7 +943,8 @@
             });
         });
 
-        console.log('✅ Tela de Login carregada com sucesso!');
+        console.log('✅ Tela de Login Unificada carregada com sucesso!');
+        console.log('📋 Papéis disponíveis: Master, Admin, Recrutador, Participante, Empresa, Consultor');
     </script>
 
 </body>
