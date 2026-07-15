@@ -5,17 +5,7 @@
  * ============================================
  * 
  * VERSÃO: 2.0.0
- * DATA: 14/07/2026
- * 
- * FUNCIONALIDADES:
- * - Login/Logout
- * - Papéis (roles) - MASTER, ADMIN, RECRUITER, PARTICIPANT, COMPANY, CONSULTANT
- * - Redirecionamentos
- * - Reset de senha
- * - Sessão com token
- * - Auditoria
- * - Créditos dos usuários (TODOS OS TIPOS)
- * - Gerenciamento de usuários
+ * DATA: 15/07/2026
  * ============================================
  */
 
@@ -25,119 +15,110 @@
 // CONFIGURAÇÃO DE AUTENTICAÇÃO
 // ============================================
 const AUTH_CONFIG = {
-    // Papéis e rotas
     roles: {
         'master': {
             name: 'Master Admin',
             redirect: '/admin/dashboard.html',
             label: '👑 Master',
-            level: 5,
-            permissions: ['*']
+            level: 5
         },
         'admin': {
             name: 'Administrador',
             redirect: '/admin/dashboard.html',
             label: '👤 Admin',
-            level: 4,
-            permissions: ['users', 'companies', 'participants', 'recruiters', 'consultants', 'wallets', 'credits',
-                'reports', 'laudos', 'audit'
-            ]
+            level: 4
         },
         'consultant': {
             name: 'Consultor',
             redirect: '/consultor/dashboard.html',
             label: '📊 Consultor',
-            level: 3,
-            permissions: ['participants', 'reports', 'laudos', 'clients']
+            level: 3
         },
         'recruiter': {
             name: 'Recrutador',
             redirect: '/recrutador/dashboard.html',
             label: '🎯 Recrutador',
-            level: 2,
-            permissions: ['participants', 'tests', 'reports']
+            level: 2
         },
         'company': {
             name: 'Empresa',
             redirect: '/empresa/dashboard.html',
             label: '🏢 Empresa',
-            level: 2,
-            permissions: ['participants', 'tests', 'reports', 'wallets']
+            level: 2
         },
         'participant': {
             name: 'Participante',
             redirect: '/participante/dashboard.html',
             label: '👤 Participante',
-            level: 1,
-            permissions: ['tests', 'results', 'laudo']
+            level: 1
         }
     },
 
     // Usuários mockados para teste
-    mockUsers: [{
-        id: '1',
-        email: 'master@vigorre.com',
-        password: 'adminvigor10',
-        name: 'Master Admin',
-        role: 'master',
-        avatar: '👑',
-        credits: { DISC: 1000, IE: 1000, VALORES: 1000, SWOT: 1000, BIGFIVE: 1000, COMPETENCIAS: 1000, LIDERANCA: 1000,
-            POTENCIAL: 1000, FITCULTURAL: 1000 }
-    }, {
-        id: '2',
-        email: 'admin@vigorre.com',
-        password: 'adminvigor10',
-        name: 'Administrador',
-        role: 'admin',
-        avatar: '👤',
-        credits: { DISC: 500, IE: 500, VALORES: 500, SWOT: 500, BIGFIVE: 500, COMPETENCIAS: 500, LIDERANCA: 500,
-            POTENCIAL: 500, FITCULTURAL: 500 }
-    }, {
-        id: '3',
-        email: 'recrutador@teste.com',
-        password: 'rec123',
-        name: 'João Recrutador',
-        role: 'recruiter',
-        avatar: '🎯',
-        credits: { DISC: 50, IE: 30, VALORES: 20, SWOT: 10, BIGFIVE: 10, COMPETENCIAS: 5, LIDERANCA: 5, POTENCIAL: 5,
-            FITCULTURAL: 5 },
-        companyId: 'comp_001'
-    }, {
-        id: '4',
-        email: 'participante@teste.com',
-        password: 'part123',
-        name: 'Ana Participante',
-        role: 'participant',
-        avatar: '👤',
-        credits: { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0, COMPETENCIAS: 0, LIDERANCA: 0, POTENCIAL: 0,
-            FITCULTURAL: 0 },
-        companyId: 'comp_001',
-        tests: ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE'],
-        completedTests: ['DISC']
-    }, {
-        id: '5',
-        email: 'empresa@teste.com',
-        password: 'emp123',
-        name: 'TechCorp Solutions',
-        role: 'company',
-        avatar: '🏢',
-        credits: { DISC: 100, IE: 80, VALORES: 60, SWOT: 40, BIGFIVE: 30, COMPETENCIAS: 20, LIDERANCA: 20, POTENCIAL: 15,
-            FITCULTURAL: 10 }
-    }, {
-        id: '6',
-        email: 'consultor@teste.com',
-        password: 'cons123',
-        name: 'Maria Consultora',
-        role: 'consultant',
-        avatar: '📊',
-        credits: { DISC: 200, IE: 150, VALORES: 100, SWOT: 80, BIGFIVE: 60, COMPETENCIAS: 50, LIDERANCA: 40,
-            POTENCIAL: 30, FITCULTURAL: 20 },
-        clients: ['comp_001', 'comp_002', 'comp_003']
-    }],
+    mockUsers: [
+        {
+            id: '1',
+            email: 'master@vigorre.com',
+            password: 'adminvigor10',
+            name: 'Master Admin',
+            role: 'master',
+            avatar: '👑',
+            credits: { DISC: 1000, IE: 1000, VALORES: 1000, SWOT: 1000, BIGFIVE: 1000, COMPETENCIAS: 1000, LIDERANCA: 1000, POTENCIAL: 1000, FITCULTURAL: 1000 }
+        },
+        {
+            id: '2',
+            email: 'admin@vigorre.com',
+            password: 'adminvigor10',
+            name: 'Administrador',
+            role: 'admin',
+            avatar: '👤',
+            credits: { DISC: 500, IE: 500, VALORES: 500, SWOT: 500, BIGFIVE: 500, COMPETENCIAS: 500, LIDERANCA: 500, POTENCIAL: 500, FITCULTURAL: 500 }
+        },
+        {
+            id: '3',
+            email: 'recrutador@teste.com',
+            password: 'rec123',
+            name: 'João Recrutador',
+            role: 'recruiter',
+            avatar: '🎯',
+            credits: { DISC: 50, IE: 30, VALORES: 20, SWOT: 10, BIGFIVE: 10, COMPETENCIAS: 5, LIDERANCA: 5, POTENCIAL: 5, FITCULTURAL: 5 },
+            companyId: 'comp_001'
+        },
+        {
+            id: '4',
+            email: 'participante@teste.com',
+            password: 'part123',
+            name: 'Ana Participante',
+            role: 'participant',
+            avatar: '👤',
+            credits: { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0, COMPETENCIAS: 0, LIDERANCA: 0, POTENCIAL: 0, FITCULTURAL: 0 },
+            companyId: 'comp_001',
+            tests: ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE'],
+            completedTests: ['DISC']
+        },
+        {
+            id: '5',
+            email: 'empresa@teste.com',
+            password: 'emp123',
+            name: 'TechCorp Solutions',
+            role: 'company',
+            avatar: '🏢',
+            credits: { DISC: 100, IE: 80, VALORES: 60, SWOT: 40, BIGFIVE: 30, COMPETENCIAS: 20, LIDERANCA: 20, POTENCIAL: 15, FITCULTURAL: 10 }
+        },
+        {
+            id: '6',
+            email: 'consultor@teste.com',
+            password: 'cons123',
+            name: 'Maria Consultora',
+            role: 'consultant',
+            avatar: '📊',
+            credits: { DISC: 200, IE: 150, VALORES: 100, SWOT: 80, BIGFIVE: 60, COMPETENCIAS: 50, LIDERANCA: 40, POTENCIAL: 30, FITCULTURAL: 20 },
+            clients: ['comp_001', 'comp_002', 'comp_003']
+        }
+    ],
 
-    // Configuração de token
-    tokenExpiry: 24 * 60 * 60 * 1000, // 24 horas
-    refreshTokenExpiry: 7 * 24 * 60 * 60 * 1000 // 7 dias
+    tokenExpiry: 24 * 60 * 60 * 1000,
+    refreshTokenExpiry: 7 * 24 * 60 * 60 * 1000
 };
 
 // ============================================
@@ -191,7 +172,12 @@ class VigorreAuth {
 
             this.logAudit(user.id, user.name, 'Login', 'Login no sistema', 'baixo');
 
+            // ============================================
+            // REDIRECIONAMENTO - CORRIGIDO
+            // ============================================
             var redirect = this.getRedirectUrl(user.role);
+            
+            console.log('🔐 Login bem-sucedido! Redirecionando para:', redirect);
 
             return {
                 success: true,
@@ -305,7 +291,6 @@ class VigorreAuth {
                 user.credits = this.getUserCredits(user.id);
                 user.roleLabel = this.getRoleLabel(user.role);
                 user.roleName = this.getRoleName(user.role);
-                user.permissions = this.getUserPermissions(user.role);
             }
 
             return user;
@@ -317,7 +302,7 @@ class VigorreAuth {
     }
 
     // ============================================
-    // CRÉDITOS DO USUÁRIO (TODOS OS TIPOS)
+    // CRÉDITOS DO USUÁRIO
     // ============================================
     static getUserCredits(userId) {
         try {
@@ -334,9 +319,7 @@ class VigorreAuth {
                 FITCULTURAL: 0
             };
 
-            var creditTypes = ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE', 'COMPETENCIAS', 'LIDERANCA', 'POTENCIAL',
-                'FITCULTURAL'
-            ];
+            var creditTypes = ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE', 'COMPETENCIAS', 'LIDERANCA', 'POTENCIAL', 'FITCULTURAL'];
 
             for (var i = 0; i < transactions.length; i++) {
                 var t = transactions[i];
@@ -377,30 +360,8 @@ class VigorreAuth {
 
         } catch (error) {
             console.warn('⚠️ Erro ao buscar créditos:', error);
-            return { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0, COMPETENCIAS: 0, LIDERANCA: 0, POTENCIAL: 0,
-                FITCULTURAL: 0 };
+            return { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0, COMPETENCIAS: 0, LIDERANCA: 0, POTENCIAL: 0, FITCULTURAL: 0 };
         }
-    }
-
-    // ============================================
-    // PERMISSÕES DO USUÁRIO
-    // ============================================
-    static getUserPermissions(role) {
-        var config = AUTH_CONFIG.roles[role];
-        return config ? config.permissions || [] : [];
-    }
-
-    // ============================================
-    // VERIFICAR PERMISSÃO
-    // ============================================
-    static hasPermission(permission) {
-        var user = this.getCurrentUser();
-        if (!user) return false;
-
-        var permissions = this.getUserPermissions(user.role);
-        if (permissions.indexOf('*') !== -1) return true;
-
-        return permissions.indexOf(permission) !== -1;
     }
 
     // ============================================
@@ -487,24 +448,15 @@ class VigorreAuth {
     }
 
     // ============================================
-    // VERIFICAR NÍVEL DE ACESSO
-    // ============================================
-    static hasAccessLevel(minLevel) {
-        var user = this.getCurrentUser();
-        if (!user) return false;
-
-        var roleConfig = AUTH_CONFIG.roles[user.role];
-        if (!roleConfig) return false;
-
-        return roleConfig.level >= minLevel;
-    }
-
-    // ============================================
     // OBTER REDIRECT
     // ============================================
     static getRedirectUrl(role) {
         var config = AUTH_CONFIG.roles[role];
-        return config ? config.redirect : '/login.html';
+        if (!config) {
+            console.warn('⚠️ Papel não encontrado:', role);
+            return '/login.html';
+        }
+        return config.redirect;
     }
 
     // ============================================
@@ -570,59 +522,6 @@ class VigorreAuth {
             return { success: false, message: '❌ Erro ao atualizar usuário' };
         }
     }
-
-    // ============================================
-    // CRIAR USUÁRIO
-    // ============================================
-    static createUser(userData) {
-        try {
-            if (!userData.email || !userData.password || !userData.name) {
-                return { success: false, message: '❌ E-mail, senha e nome são obrigatórios' };
-            }
-
-            // Verificar se email já existe
-            for (var i = 0; i < AUTH_CONFIG.mockUsers.length; i++) {
-                if (AUTH_CONFIG.mockUsers[i].email === userData.email) {
-                    return { success: false, message: '❌ E-mail já cadastrado' };
-                }
-            }
-
-            var newUser = {
-                id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-                email: userData.email,
-                password: userData.password,
-                name: userData.name,
-                role: userData.role || 'participant',
-                avatar: userData.avatar || '👤',
-                credits: userData.credits || {
-                    DISC: 0,
-                    IE: 0,
-                    VALORES: 0,
-                    SWOT: 0,
-                    BIGFIVE: 0,
-                    COMPETENCIAS: 0,
-                    LIDERANCA: 0,
-                    POTENCIAL: 0,
-                    FITCULTURAL: 0
-                },
-                createdAt: new Date().toISOString()
-            };
-
-            AUTH_CONFIG.mockUsers.push(newUser);
-
-            this.logAudit('system', 'Sistema', 'Create User', 'Novo usuário criado: ' + newUser.email, 'medio');
-
-            return {
-                success: true,
-                data: newUser,
-                message: '✅ Usuário criado com sucesso!'
-            };
-
-        } catch (error) {
-            console.error('❌ Erro ao criar usuário:', error);
-            return { success: false, message: '❌ Erro ao criar usuário' };
-        }
-    }
 }
 
 // ============================================
@@ -632,4 +531,4 @@ window.VigorreAuth = VigorreAuth;
 
 console.log('✅ VIGORRE ONE™ - Auth carregado com sucesso!');
 console.log('📋 Usuários disponíveis:', AUTH_CONFIG.mockUsers.length);
-console.log('💳 Tipos de crédito: DISC, IE, VALORES, SWOT, BIGFIVE, COMPETENCIAS, LIDERANCA, POTENCIAL, FITCULTURAL');
+console.log('📋 Rotas configuradas:', Object.keys(AUTH_CONFIG.roles).length);
