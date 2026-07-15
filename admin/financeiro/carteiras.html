@@ -5,29 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carteiras | Centro Financeiro | VIGORRE ONE™</title>
 
-    <!-- ==========================================
-    FONTS PREMIUM
-    ========================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 
     <style>
-        /* ============================================
-           VIGORRE ONE™ - CARTEIRAS
-           INTERNATIONAL ENTERPRISE EDITION
-           ============================================
-
-           DESIGN INSPIRADO EM:
-           - SAP Fiori Finance
-           - Stripe Dashboard
-           - Workday Financial Management
-           - Linear
-           ============================================ */
-
-        /* ============================================
-           CSS VARIABLES (TEMA CLARO)
-           ============================================ */
         :root {
             --navy: #0A2540;
             --navy-light: #1A3A5C;
@@ -67,9 +49,6 @@
             --border-color: #E2E8F0;
         }
 
-        /* ============================================
-           TEMA ESCURO (AUTO DETECT)
-           ============================================ */
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-body: #0F172A;
@@ -82,109 +61,85 @@
                 --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.2), 0 8px 40px rgba(0, 0, 0, 0.25);
                 --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.25), 0 16px 64px rgba(0, 0, 0, 0.3);
             }
-
             body {
                 background: var(--bg-body);
                 color: var(--text-primary);
             }
-
             .wallet-card,
             .table-card {
                 background: var(--bg-card);
                 border-color: var(--border-color);
             }
-
             .wallet-card .wallet-label {
                 color: var(--text-muted);
             }
-
             .wallet-card .wallet-value {
                 color: var(--text-primary);
             }
-
             .table-container th {
                 background: var(--bg-card);
                 color: var(--text-muted);
                 border-color: var(--border-color);
             }
-
             .table-container td {
                 color: var(--text-secondary);
                 border-color: var(--border-color);
             }
-
             .table-container tr:hover td {
                 background: rgba(255, 255, 255, 0.02);
             }
-
             .ia-card {
                 background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
             }
-
             .toast {
                 background: var(--bg-card);
                 color: var(--text-primary);
             }
-
             .sidebar {
                 background: var(--gray-800);
             }
-
             .sidebar .nav a {
                 color: var(--text-muted);
             }
-
             .sidebar .nav a:hover {
                 background: rgba(255, 255, 255, 0.04);
                 color: var(--text-primary);
             }
-
             .sidebar .nav a.active {
                 background: rgba(217, 119, 6, 0.12);
                 color: var(--gold);
             }
-
             .sidebar .user-info {
                 border-color: var(--border-color);
             }
-
             .sidebar .user-info .name {
                 color: var(--text-primary);
             }
-
             .sidebar .user-info .role {
                 color: var(--text-muted);
             }
-
             .badge-status.ativa {
                 background: rgba(16, 185, 129, 0.15);
                 color: var(--green);
             }
-
             .badge-status.inativa {
                 background: rgba(239, 68, 68, 0.15);
                 color: var(--red);
             }
-
             .badge-status.suspensa {
                 background: rgba(245, 158, 11, 0.15);
                 color: var(--orange);
             }
         }
 
-        /* ============================================
-           RESET & BASE
-           ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-body);
@@ -194,28 +149,21 @@
             line-height: 1.5;
         }
 
-        /* ============================================
-           SCROLLBAR PREMIUM
-           ============================================ */
         ::-webkit-scrollbar {
             width: 5px;
             height: 5px;
         }
-
         ::-webkit-scrollbar-track {
             background: transparent;
         }
-
         ::-webkit-scrollbar-thumb {
             background: var(--gray-300);
             border-radius: 10px;
             transition: var(--transition);
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: var(--gray-400);
         }
-
         @media (prefers-color-scheme: dark) {
             ::-webkit-scrollbar-thumb {
                 background: var(--gray-600);
@@ -225,9 +173,6 @@
             }
         }
 
-        /* ============================================
-           SIDEBAR
-           ============================================ */
         .sidebar {
             position: fixed;
             top: 0;
@@ -244,7 +189,6 @@
             overflow-y: auto;
             box-shadow: 2px 0 24px rgba(0, 0, 0, 0.06);
         }
-
         @media (prefers-color-scheme: dark) {
             .sidebar {
                 background: var(--gray-800);
@@ -261,13 +205,11 @@
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
-
         .sidebar .logo .logo-img {
             height: 36px;
             width: auto;
             display: block;
         }
-
         .sidebar .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 0.95rem;
@@ -275,13 +217,11 @@
             color: white;
             letter-spacing: -0.3px;
         }
-
         .sidebar .logo .logo-text .name .tm {
             font-size: 0.4rem;
             vertical-align: super;
             color: var(--cyan);
         }
-
         .sidebar .logo .logo-text .sub {
             font-size: 0.5rem;
             color: rgba(255, 255, 255, 0.35);
@@ -297,20 +237,17 @@
             border: 1px solid rgba(255, 255, 255, 0.04);
             transition: var(--transition);
         }
-
         .sidebar .user-info .name {
             font-weight: 600;
             font-size: 0.9rem;
             color: white;
         }
-
         .sidebar .user-info .role {
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.4);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-
         .sidebar .user-info .role .badge {
             display: inline-block;
             padding: 2px 12px;
@@ -326,11 +263,9 @@
             list-style: none;
             flex: 1;
         }
-
         .sidebar .nav li {
             margin-bottom: 2px;
         }
-
         .sidebar .nav a {
             display: flex;
             align-items: center;
@@ -344,7 +279,6 @@
             transition: var(--transition);
             position: relative;
         }
-
         .sidebar .nav a::before {
             content: '';
             position: absolute;
@@ -357,40 +291,33 @@
             border-radius: 0 3px 3px 0;
             transition: var(--transition);
         }
-
         .sidebar .nav a:hover {
             background: rgba(255, 255, 255, 0.04);
             color: white;
         }
-
         .sidebar .nav a.active {
             background: rgba(217, 119, 6, 0.08);
             color: white;
         }
-
         .sidebar .nav a.active::before {
             transform: translateY(-50%) scaleY(1);
         }
-
         .sidebar .nav a .icon {
             font-size: 1.1rem;
             width: 24px;
             text-align: center;
             flex-shrink: 0;
         }
-
         .sidebar .nav .divider {
             height: 1px;
             background: rgba(255, 255, 255, 0.04);
             margin: 12px 0;
         }
-
         .sidebar .logout {
             margin-top: auto;
             padding-top: 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
         }
-
         .sidebar .logout a {
             display: flex;
             align-items: center;
@@ -403,15 +330,11 @@
             font-weight: 500;
             transition: var(--transition);
         }
-
         .sidebar .logout a:hover {
             background: rgba(239, 68, 68, 0.12);
             color: #F87171;
         }
 
-        /* ============================================
-           MAIN CONTENT
-           ============================================ */
         .main {
             margin-left: 260px;
             padding: 28px 40px 48px;
@@ -419,9 +342,6 @@
             transition: padding var(--transition-slow), margin var(--transition-slow);
         }
 
-        /* ============================================
-           HEADER
-           ============================================ */
         .main-header {
             display: flex;
             justify-content: space-between;
@@ -430,21 +350,17 @@
             flex-wrap: wrap;
             gap: 16px;
         }
-
         .main-header .breadcrumb {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
-
         .main-header .breadcrumb a {
             color: var(--blue);
             text-decoration: none;
         }
-
         .main-header .breadcrumb a:hover {
             color: var(--cyan);
         }
-
         .main-header h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 1.6rem;
@@ -453,15 +369,11 @@
             letter-spacing: -0.5px;
             margin-top: 4px;
         }
-
         .main-header .actions {
             display: flex;
             gap: 12px;
         }
 
-        /* ============================================
-           BUTTONS
-           ============================================ */
         .btn {
             padding: 10px 24px;
             border: none;
@@ -478,7 +390,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .btn::after {
             content: '';
             position: absolute;
@@ -486,79 +397,63 @@
             background: rgba(255, 255, 255, 0);
             transition: var(--transition);
         }
-
         .btn:hover::after {
             background: rgba(255, 255, 255, 0.08);
         }
-
         .btn-primary {
             background: linear-gradient(135deg, var(--blue), var(--cyan));
             color: white;
             box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
         }
-
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
         }
-
         .btn-secondary {
             background: var(--gray-100);
             color: var(--gray-700);
             border: 1px solid var(--gray-200);
         }
-
         .btn-secondary:hover {
             background: var(--gray-200);
             transform: translateY(-1px);
         }
-
         .btn-success {
             background: var(--green);
             color: white;
             box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
         }
-
         .btn-success:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
         }
-
         .btn-danger {
             background: var(--red);
             color: white;
             box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);
         }
-
         .btn-danger:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(239, 68, 68, 0.25);
         }
-
         .btn-gold {
             background: linear-gradient(135deg, var(--gold), var(--orange));
             color: white;
             box-shadow: 0 4px 16px rgba(217, 119, 6, 0.2);
         }
-
         .btn-gold:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(217, 119, 6, 0.25);
         }
-
         .btn-sm {
             padding: 6px 16px;
             font-size: 0.75rem;
         }
 
-        /* ============================================
-           TOOLTIP
-           ============================================ */
         [data-tooltip] {
             position: relative;
             cursor: pointer;
         }
-
         [data-tooltip]:before {
             content: attr(data-tooltip);
             position: absolute;
@@ -578,12 +473,10 @@
             font-family: 'Inter', sans-serif;
             z-index: 1000;
         }
-
         [data-tooltip]:hover:before {
             opacity: 1;
             transform: translateX(-50%) translateY(-4px) scale(1);
         }
-
         @media (prefers-color-scheme: dark) {
             [data-tooltip]:before {
                 background: var(--gray-700);
@@ -591,16 +484,12 @@
             }
         }
 
-        /* ============================================
-           WALLET CARDS
-           ============================================ */
         .wallet-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin-bottom: 28px;
         }
-
         .wallet-card {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -611,7 +500,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .wallet-card::before {
             content: '';
             position: absolute;
@@ -623,27 +511,22 @@
             opacity: 0;
             transition: var(--transition);
         }
-
         .wallet-card:hover {
             box-shadow: var(--shadow-hover);
             transform: translateY(-3px);
         }
-
         .wallet-card:hover::before {
             opacity: 1;
         }
-
         .wallet-card .wallet-top {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
         }
-
         .wallet-card .wallet-icon {
             font-size: 1.8rem;
             opacity: 0.7;
         }
-
         .wallet-card .wallet-label {
             font-size: 0.7rem;
             font-weight: 600;
@@ -651,7 +534,6 @@
             text-transform: uppercase;
             letter-spacing: 0.06em;
         }
-
         .wallet-card .wallet-value {
             font-family: 'Poppins', sans-serif;
             font-size: 2rem;
@@ -660,7 +542,6 @@
             margin: 4px 0;
             letter-spacing: -0.5px;
         }
-
         .wallet-card .wallet-change {
             font-size: 0.7rem;
             font-weight: 600;
@@ -670,20 +551,15 @@
             padding: 2px 10px;
             border-radius: var(--radius-full);
         }
-
         .wallet-card .wallet-change.up {
             color: var(--green);
             background: rgba(16, 185, 129, 0.08);
         }
-
         .wallet-card .wallet-change.down {
             color: var(--red);
             background: rgba(239, 68, 68, 0.08);
         }
 
-        /* ============================================
-           IA CARD
-           ============================================ */
         .ia-card {
             background: linear-gradient(135deg, var(--navy), var(--gray-800));
             border-radius: var(--radius);
@@ -694,7 +570,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .ia-card::after {
             content: '';
             position: absolute;
@@ -706,13 +581,11 @@
             border-radius: 50%;
             pointer-events: none;
         }
-
         @media (prefers-color-scheme: dark) {
             .ia-card {
                 background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
             }
         }
-
         .ia-card .ia-top {
             display: flex;
             justify-content: space-between;
@@ -722,7 +595,6 @@
             position: relative;
             z-index: 1;
         }
-
         .ia-card .ia-top .ia-title {
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
@@ -731,7 +603,6 @@
             align-items: center;
             gap: 8px;
         }
-
         .ia-card .ia-top .ia-badge {
             background: rgba(217, 119, 6, 0.15);
             color: var(--gold);
@@ -741,7 +612,6 @@
             font-weight: 600;
             border: 1px solid rgba(217, 119, 6, 0.08);
         }
-
         .ia-card .ia-content {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -750,7 +620,6 @@
             position: relative;
             z-index: 1;
         }
-
         .ia-card .ia-item {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -759,32 +628,25 @@
             transition: var(--transition);
             cursor: pointer;
         }
-
         .ia-card .ia-item:hover {
             background: rgba(255, 255, 255, 0.06);
             transform: translateY(-2px);
         }
-
         .ia-card .ia-item .ia-item-icon {
             font-size: 1.2rem;
             margin-bottom: 4px;
         }
-
         .ia-card .ia-item .ia-item-title {
             font-weight: 600;
             font-size: 0.85rem;
             color: white;
         }
-
         .ia-card .ia-item .ia-item-desc {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.5);
             margin-top: 2px;
         }
 
-        /* ============================================
-           TABLE
-           ============================================ */
         .table-card {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -794,11 +656,9 @@
             margin-bottom: 28px;
             transition: var(--transition);
         }
-
         .table-card:hover {
             box-shadow: var(--shadow-hover);
         }
-
         .table-card .table-header {
             display: flex;
             justify-content: space-between;
@@ -806,14 +666,12 @@
             padding: 16px 20px;
             border-bottom: 1px solid var(--border-color);
         }
-
         .table-card .table-header h3 {
             font-family: 'Poppins', sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--text-primary);
         }
-
         .table-card .table-header .action {
             font-size: 0.75rem;
             color: var(--gold);
@@ -821,21 +679,17 @@
             font-weight: 600;
             transition: var(--transition);
         }
-
         .table-card .table-header .action:hover {
             color: var(--orange);
         }
-
         .table-container {
             overflow-x: auto;
         }
-
         .table-container table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.85rem;
         }
-
         .table-container th {
             text-align: left;
             padding: 12px 16px;
@@ -847,21 +701,17 @@
             border-bottom: 1px solid var(--border-color);
             background: var(--gray-50);
         }
-
         .table-container td {
             padding: 12px 16px;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-secondary);
         }
-
         .table-container tr:last-child td {
             border-bottom: none;
         }
-
         .table-container tr:hover td {
             background: var(--gray-50);
         }
-
         @media (prefers-color-scheme: dark) {
             .table-container th {
                 background: var(--bg-card);
@@ -871,9 +721,6 @@
             }
         }
 
-        /* ============================================
-           BADGE STATUS
-           ============================================ */
         .badge-status {
             display: inline-block;
             padding: 3px 14px;
@@ -881,25 +728,19 @@
             font-size: 0.65rem;
             font-weight: 600;
         }
-
         .badge-status.ativa {
             background: rgba(16, 185, 129, 0.12);
             color: var(--green);
         }
-
         .badge-status.inativa {
             background: rgba(239, 68, 68, 0.12);
             color: var(--red);
         }
-
         .badge-status.suspensa {
             background: rgba(245, 158, 11, 0.12);
             color: var(--orange);
         }
 
-        /* ============================================
-           TOAST
-           ============================================ */
         .toast {
             position: fixed;
             top: 24px;
@@ -919,23 +760,18 @@
             max-width: 420px;
             color: var(--text-primary);
         }
-
         .toast.show {
             display: flex;
         }
-
         .toast.error {
             border-left-color: var(--red);
         }
-
         .toast.success {
             border-left-color: var(--green);
         }
-
         .toast.warning {
             border-left-color: var(--orange);
         }
-
         @keyframes slideInRight {
             from {
                 opacity: 0;
@@ -947,9 +783,6 @@
             }
         }
 
-        /* ============================================
-           MOBILE TOGGLE
-           ============================================ */
         .mobile-toggle {
             display: none;
             background: none;
@@ -960,11 +793,9 @@
             padding: 8px;
             transition: var(--transition);
         }
-
         .mobile-toggle:hover {
             color: var(--gold);
         }
-
         .mobile-overlay {
             display: none;
             position: fixed;
@@ -977,11 +808,9 @@
             z-index: 999;
             animation: fadeIn 0.3s ease;
         }
-
         .mobile-overlay.active {
             display: block;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -991,9 +820,6 @@
             }
         }
 
-        /* ============================================
-           RESPONSIVO
-           ============================================ */
         @media (max-width: 1200px) {
             .wallet-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1002,53 +828,42 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
-
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-100%);
                 width: 280px;
             }
-
             .sidebar.open {
                 transform: translateX(0);
             }
-
             .main {
                 margin-left: 0;
                 padding: 20px;
             }
-
             .mobile-toggle {
                 display: block;
             }
-
             .mobile-overlay.active {
                 display: block;
             }
-
             .wallet-grid {
                 grid-template-columns: 1fr 1fr;
             }
-
             .ia-card .ia-content {
                 grid-template-columns: 1fr;
             }
         }
-
         @media (max-width: 768px) {
             .main-header {
                 flex-direction: column;
                 align-items: flex-start;
             }
-
             .wallet-grid {
                 grid-template-columns: 1fr;
             }
-
             .wallet-card .wallet-value {
                 font-size: 1.6rem;
             }
-
             .toast {
                 top: 16px;
                 right: 16px;
@@ -1058,20 +873,16 @@
                 padding: 12px 16px;
             }
         }
-
         @media (max-width: 480px) {
             .main {
                 padding: 16px;
             }
-
             .wallet-card {
                 padding: 16px 18px;
             }
-
             .ia-card {
                 padding: 16px 18px;
             }
-
             .sidebar .logo .logo-img {
                 height: 28px;
             }
@@ -1092,38 +903,30 @@
             .sidebar {
                 display: none !important;
             }
-
             .main {
                 margin-left: 0 !important;
                 padding: 20px !important;
             }
-
             .mobile-toggle {
                 display: none !important;
             }
-
             .logo-img {
                 height: 36px !important;
             }
-
             .ia-card {
                 display: none !important;
             }
-
             .wallet-grid {
                 display: none !important;
             }
-
             .table-card .table-header .action {
                 display: none !important;
             }
-
             .wallet-card,
             .table-card {
                 box-shadow: none !important;
                 border: 1px solid #E2E8F0 !important;
             }
-
             .table-container th {
                 background: #F8FAFC !important;
             }
@@ -1132,17 +935,11 @@
 </head>
 <body>
 
-    <!-- ============================================
-    TOAST
-    ============================================ -->
     <div class="toast" id="toast">
         <span id="toastIcon">✅</span>
         <span id="toastMessage">Mensagem</span>
     </div>
 
-    <!-- ============================================
-    SIDEBAR
-    ============================================ -->
     <aside class="sidebar" id="sidebar" role="navigation" aria-label="Menu principal">
         <a href="#" class="logo" aria-label="VIGORRE ONE™ Home">
             <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
@@ -1159,9 +956,7 @@
             </div>
         </div>
 
-        <!-- ============================================
-        MENU CORRIGIDO - TODOS OS ITENS FIXOS
-        ============================================ -->
+        <!-- MENU FIXO -->
         <ul class="nav">
             <li><a href="../dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
             <li><a href="../empresas/"><span class="icon">🏢</span> Empresas</a></li>
@@ -1169,9 +964,8 @@
             <li><a href="../participantes/"><span class="icon">👥</span> Participantes</a></li>
             <li><a href="../creditos/"><span class="icon">💳</span> Créditos</a></li>
             <li><a href="../relatorios/"><span class="icon">📄</span> Relatórios</a></li>
-            <!-- ITENS FIXOS - NUNCA SOMEM -->
             <li><a href="../job-profile/index.html"><span class="icon">🎯</span> Job Profile</a></li>
-            <li><a href="index.html" class="active" aria-current="page"><span class="icon">💰</span> Centro Financeiro</a></li>
+            <li><a href="index.html" class="active"><span class="icon">💰</span> Centro Financeiro</a></li>
             <div class="divider"></div>
             <li><a href="carteiras.html" class="active"><span class="icon">💼</span> Carteiras</a></li>
             <li><a href="creditos.html"><span class="icon">💳</span> Créditos</a></li>
@@ -1192,17 +986,10 @@
         </div>
     </aside>
 
-    <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()" aria-hidden="true"></div>
 
-    <!-- ============================================
-    MAIN CONTENT
-    ============================================ -->
     <main class="main" id="mainContent">
 
-        <!-- ============================================
-        HEADER
-        ============================================ -->
         <div class="main-header">
             <div>
                 <div class="breadcrumb">
@@ -1220,22 +1007,14 @@
             </div>
         </div>
 
-        <!-- ============================================
-        IA CARD
-        ============================================ -->
         <div class="ia-card">
             <div class="ia-top">
                 <span class="ia-title">🤖 Insights das Carteiras</span>
                 <span class="ia-badge">Atualizado agora</span>
             </div>
-            <div class="ia-content" id="iaContent">
-                <!-- Carregado via JavaScript -->
-            </div>
+            <div class="ia-content" id="iaContent"></div>
         </div>
 
-        <!-- ============================================
-        WALLET GRID
-        ============================================ -->
         <div class="wallet-grid" id="walletGrid">
             <div class="wallet-card" data-tooltip="Saldo total de todas as carteiras">
                 <div class="wallet-top">
@@ -1271,9 +1050,6 @@
             </div>
         </div>
 
-        <!-- ============================================
-        WALLETS TABLE
-        ============================================ -->
         <div class="table-card">
             <div class="table-header">
                 <h3>📋 Lista de Carteiras</h3>
@@ -1292,35 +1068,20 @@
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="walletsTable">
-                        <!-- Carregado via JavaScript -->
-                    </tbody>
+                    <tbody id="walletsTable"></tbody>
                 </table>
             </div>
         </div>
 
     </main>
 
-    <!-- ============================================
-    SCRIPTS
-    ============================================ -->
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script src="../../middleware/auth-guard.js"></script>
 
     <script>
-        /**
-         * ============================================
-         * VIGORRE ONE™ - CARTEIRAS
-         * INTERNATIONAL ENTERPRISE EDITION
-         * ============================================
-         */
-
         'use strict';
 
-        // ============================================
-        // TOGGLE SIDEBAR
-        // ============================================
         function toggleSidebar() {
             var sidebar = document.getElementById('sidebar');
             var overlay = document.getElementById('mobileOverlay');
@@ -1339,54 +1100,46 @@
             }
         });
 
-        // ============================================
-        // LOGOUT
-        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
-                window.VigorreAuth.logout();
+                if (window.VigorreAuth) {
+                    window.VigorreAuth.logout();
+                } else {
+                    window.location.href = '../../login.html';
+                }
             }
         }
 
-        // ============================================
-        // INICIALIZAR
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('💼 Carteiras - VIGORRE ONE™');
-
-            var isAuth = window.VigorreAuth.isAuthenticated();
-            if (!isAuth) {
-                window.location.href = '../../login.html';
-                return;
+            if (window.requireAdmin) {
+                if (!window.requireAdmin()) { return; }
+            } else if (window.VigorreAuth) {
+                if (!window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../../login.html';
+                    return;
+                }
+                var user = window.VigorreAuth.getCurrentUser();
+                if (!user || (user.role !== 'admin' && user.role !== 'master')) {
+                    alert('⚠️ Acesso restrito a administradores.');
+                    window.VigorreAuth.logout();
+                    return;
+                }
+                document.getElementById('userName').textContent = user.name || 'Administrador';
             }
-
-            var user = window.VigorreAuth.getCurrentUser();
-            if (!user || (user.role !== 'admin' && user.role !== 'master')) {
-                alert('⚠️ Acesso restrito a administradores.');
-                window.VigorreAuth.logout();
-                return;
-            }
-
-            document.getElementById('userName').textContent = user.name || 'Administrador';
-
             setTimeout(function() {
                 loadIAContent();
                 loadWalletStats();
                 loadWallets();
             }, 300);
-
             setInterval(function() {
                 loadWalletStats();
                 loadWallets();
             }, 60000);
         });
 
-        // ============================================
-        // CARREGAR IA CONTENT
-        // ============================================
         function loadIAContent() {
             var container = document.getElementById('iaContent');
-
             var insights = [
                 { icon: '💰', title: 'Saldo Total', desc: 'Saldo consolidado: R$ 42.850' },
                 { icon: '⚠️', title: 'Alertas', desc: '2 carteiras com saldo baixo' },
@@ -1394,7 +1147,6 @@
                 { icon: '💼', title: 'Nova Carteira', desc: 'Criar carteira para nova empresa' },
                 { icon: '🔄', title: 'Movimentações', desc: '15 movimentações este mês' }
             ];
-
             var html = '';
             for (var i = 0; i < insights.length; i++) {
                 var item = insights[i];
@@ -1404,40 +1156,27 @@
                 html += '<div class="ia-item-desc">' + item.desc + '</div>';
                 html += '</div>';
             }
-
             container.innerHTML = html;
         }
 
-        // ============================================
-        // HANDLE IA CLICK
-        // ============================================
         function handleIAClick(title) {
             showToast('🤖 IA: ' + title, 'info');
         }
 
-        // ============================================
-        // CARREGAR WALLET STATS
-        // ============================================
         function loadWalletStats() {
             try {
                 var wallets = JSON.parse(localStorage.getItem('vigorre_wallets') || '[]');
                 var transactions = JSON.parse(localStorage.getItem('vigorre_credit_transactions') || '[]');
-
-                var totalBalance = 0;
-                var activeCount = 0;
-                var monthlyMovement = 0;
-
+                var totalBalance = 0,
+                    activeCount = 0,
+                    monthlyMovement = 0;
                 for (var i = 0; i < wallets.length; i++) {
                     totalBalance += wallets[i].balance || 0;
-                    if (wallets[i].status === 'ativa') {
-                        activeCount++;
-                    }
+                    if (wallets[i].status === 'ativa') { activeCount++; }
                 }
-
                 var now = new Date();
                 var currentMonth = now.getMonth();
                 var currentYear = now.getFullYear();
-
                 for (var j = 0; j < transactions.length; j++) {
                     var t = transactions[j];
                     if (t.date) {
@@ -1447,42 +1186,29 @@
                         }
                     }
                 }
-
-                var formattedTotal = 'R$ ' + totalBalance.toLocaleString('pt-BR');
-                var formattedMovement = 'R$ ' + monthlyMovement.toLocaleString('pt-BR');
-
-                document.getElementById('totalBalance').textContent = formattedTotal;
+                document.getElementById('totalBalance').textContent = 'R$ ' + totalBalance.toLocaleString('pt-BR');
                 document.getElementById('totalWallets').textContent = wallets.length;
                 document.getElementById('activeWallets').textContent = activeCount;
-                document.getElementById('monthlyMovement').textContent = formattedMovement;
-
+                document.getElementById('monthlyMovement').textContent = 'R$ ' + monthlyMovement.toLocaleString('pt-BR');
             } catch (error) {
                 console.error('❌ Erro ao carregar estatísticas das carteiras:', error);
             }
         }
 
-        // ============================================
-        // CARREGAR WALLETS
-        // ============================================
         function loadWallets() {
             try {
                 var wallets = JSON.parse(localStorage.getItem('vigorre_wallets') || '[]');
                 var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-
                 var tbody = document.getElementById('walletsTable');
-
                 if (wallets.length === 0) {
                     tbody.innerHTML =
                         '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-muted);">Nenhuma carteira encontrada</td></tr>';
                     return;
                 }
-
                 var html = '';
                 var limit = Math.min(wallets.length, 20);
-
                 for (var i = 0; i < limit; i++) {
                     var w = wallets[i];
-
                     var companyName = '--';
                     for (var j = 0; j < companies.length; j++) {
                         if (companies[j].id === w.companyId) {
@@ -1490,24 +1216,19 @@
                             break;
                         }
                     }
-
-                    var statusClass = w.status === 'ativa' ? 'ativa' :
-                        w.status === 'suspensa' ? 'suspensa' : 'inativa';
-                    var statusText = w.status === 'ativa' ? '✅ Ativa' :
-                        w.status === 'suspensa' ? '⚠️ Suspensa' : '❌ Inativa';
-
+                    var statusClass = w.status === 'ativa' ? 'ativa' : w.status === 'suspensa' ? 'suspensa' : 'inativa';
+                    var statusText = w.status === 'ativa' ? '✅ Ativa' : w.status === 'suspensa' ? '⚠️ Suspensa' :
+                        '❌ Inativa';
                     var formattedBalance = 'R$ ' + (w.balance || 0).toLocaleString('pt-BR');
                     var credits = w.credits || {};
-
-                    var totalCredits = (credits.DISC || 0) + (credits.IE || 0) + (credits.Valores || 0);
-
+                    var totalCredits = (credits.DISC || 0) + (credits.IE || 0) + (credits.Valores || 0) + (credits
+                        .SWOT || 0) + (credits.BIGFIVE || 0) + (credits.COMPETENCIAS || 0) + (credits.LIDERANCA ||
+                        0) + (credits.POTENCIAL || 0) + (credits.FITCULTURAL || 0);
                     var lastMovement = w.lastMovement ? new Date(w.lastMovement).toLocaleDateString('pt-BR') : '--';
-
                     var walletId = w.id || (w._id || 'C' + (i + 1).toString().padStart(4, '0'));
-
                     html += '<tr>';
-                    html += '<td><span style="font-family:monospace;font-size:0.8rem;color:var(--text-muted);">#' + walletId +
-                        '</span></td>';
+                    html += '<td><span style="font-family:monospace;font-size:0.8rem;color:var(--text-muted);">#' +
+                        walletId + '</span></td>';
                     html += '<td><strong>' + companyName + '</strong></td>';
                     html += '<td style="font-weight:600;color:var(--text-primary);">' + formattedBalance + '</td>';
                     html += '<td>' + totalCredits + '</td>';
@@ -1526,47 +1247,27 @@
                     html += '</td>';
                     html += '</tr>';
                 }
-
                 tbody.innerHTML = html;
-
             } catch (error) {
                 console.error('❌ Erro ao carregar carteiras:', error);
             }
         }
 
-        // ============================================
-        // OPEN NEW WALLET
-        // ============================================
         function openNewWallet() {
-            showToast('➕ Abrindo formulário de nova carteira...', 'info');
-            setTimeout(function() {
-                window.location.href = 'nova-carteira.html';
-            }, 500);
+            showToast('➕ Abrindo formulário para nova carteira...', 'info');
+            setTimeout(function() { window.location.href = 'nova-carteira.html'; }, 500);
         }
 
-        // ============================================
-        // VIEW WALLET
-        // ============================================
         function viewWallet(id) {
             showToast('👁️ Visualizando carteira ' + id, 'info');
-            setTimeout(function() {
-                window.location.href = 'carteira-detalhe.html?id=' + id;
-            }, 500);
+            setTimeout(function() { window.location.href = 'carteira-detalhe.html?id=' + id; }, 500);
         }
 
-        // ============================================
-        // EDIT WALLET
-        // ============================================
         function editWallet(id) {
             showToast('✏️ Editando carteira ' + id, 'info');
-            setTimeout(function() {
-                window.location.href = 'editar-carteira.html?id=' + id;
-            }, 500);
+            setTimeout(function() { window.location.href = 'editar-carteira.html?id=' + id; }, 500);
         }
 
-        // ============================================
-        // DELETE WALLET
-        // ============================================
         function deleteWallet(id) {
             if (confirm('Deseja realmente excluir esta carteira?')) {
                 try {
@@ -1587,9 +1288,6 @@
             }
         }
 
-        // ============================================
-        // REFRESH DATA
-        // ============================================
         function refreshData() {
             showToast('🔄 Atualizando dados...', 'info');
             setTimeout(function() {
@@ -1600,29 +1298,16 @@
             }, 800);
         }
 
-        // ============================================
-        // TOAST
-        // ============================================
         function showToast(message, type) {
             var toast = document.getElementById('toast');
             var icon = document.getElementById('toastIcon');
             var msg = document.getElementById('toastMessage');
-
-            var icons = {
-                'error': '❌',
-                'warning': '⚠️',
-                'success': '✅',
-                'info': 'ℹ️'
-            };
-
+            var icons = { 'error': '❌', 'warning': '⚠️', 'success': '✅', 'info': 'ℹ️' };
             icon.textContent = icons[type] || '✅';
             msg.textContent = message;
             toast.className = 'toast show ' + (type || 'success');
-
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(function() {
-                toast.classList.remove('show');
-            }, 4000);
+            toast._timeout = setTimeout(function() { toast.classList.remove('show'); }, 4000);
         }
 
         console.log('✅ Carteiras International carregado com sucesso!');
