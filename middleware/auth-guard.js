@@ -4,322 +4,205 @@
  * INTERNATIONAL ENTERPRISE EDITION
  * ============================================
  * 
- * VERSÃO: 2.0.0
+ * VERSÃO: 2.1.0
  * DATA: 15/07/2026
- * 
- * FUNCIONALIDADES:
- * - Proteção de rotas por papel
- * - Proteção de rotas por nível
- * - Proteção de rotas por permissão
- * - Redirecionamento automático
- * - Auditoria de acessos
  * ============================================
  */
 
 'use strict';
 
-// ============================================
-// LOG DE ACESSO
-// ============================================
-function logAccessAttempt(user, route, allowed) {
-    try {
-        var logs = JSON.parse(localStorage.getItem('vigorre_audit_logs') || '[]');
-        logs.push({
-            id: 'G' + Date.now().toString().slice(-6) + Math.random().toString(36).slice(2, 5).toUpperCase(),
-            userId: user ? user.id : 'anonymous',
-            user: user ? user.name : 'Anônimo',
-            action: 'Acesso à rota',
-            description: 'Tentativa de acesso a: ' + route + ' - ' + (allowed ? '✅ Permitido' : '⛔ Negado'),
-            severity: allowed ? 'baixo' : 'alto',
-            ip: '127.0.0.1',
-            date: new Date().toLocaleString('pt-BR'),
-            timestamp: new Date().toISOString()
-        });
-        localStorage.setItem('vigorre_audit_logs', JSON.stringify(logs));
-    } catch (error) {
-        console.warn('⚠️ Erro ao registrar acesso:', error);
+(function() {
+    'use strict';
+
+    console.log('🛡️ VIGORRE ONE™ - Auth Guard carregado');
+
+    function getCurrentUser() {
+        try {
+            var userData = localStorage.getItem('vigorre_user');
+            if (!userData) return null;
+            return JSON.parse(userData);
+        } catch (e) {
+            return null;
+        }
     }
-}
 
-// ============================================
-// GUARD - ADMIN
-// ============================================
-function requireAdmin() {
-    var route = window.location.pathname;
-
-    if (!window.VigorreAuth) {
-        console.error('❌ Auth não carregado');
-        logAccessAttempt(null, route, false);
+    function redirectToLogin() {
+        console.warn('⚠️ Acesso não autorizado - Redirecionando para login');
         window.location.href = '/login.html';
         return false;
     }
 
-    if (!window.VigorreAuth.isAuthenticated()) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
+    // ============================================
+    // GUARD - EMPRESA
+    // ============================================
+    window.requireCompany = function() {
+        console.log('🔐 Verificando acesso: Empresa');
+        
+        if (typeof window.VigorreAuth !== 'undefined' && window.VigorreAuth.isAuthenticated()) {
+            var user = window.VigorreAuth.getCurrentUser();
+            if (user && (user.role === 'company' || user.role === 'admin' || user.role === 'master')) {
+                console.log('✅ Acesso permitido para empresa:', user.name);
+                return true;
+            }
+        }
+
+        var user = getCurrentUser();
+        if (user && (user.role === 'company' || user.role === 'admin' || user.role === 'master')) {
+            console.log('✅ Acesso permitido para empresa (fallback):', user.name);
+            return true;
+        }
+
+        alert('⚠️ Acesso restrito a empresas. Você será redirecionado para o login.');
+        return redirectToLogin();
+    };
+
+    // ============================================
+    // GUARD - CONSULTOR
+    // ============================================
+    window.requireConsultant = function() {
+        console.log('🔐 Verificando acesso: Consultor');
+        
+        if (typeof window.VigorreAuth !== 'undefined' && window.VigorreAuth.isAuthenticated()) {
+            var user = window.VigorreAuth.getCurrentUser();
+            if (user && (user.role === 'consultant' || user.role === 'admin' || user.role === 'master')) {
+                console.log('✅ Acesso permitido para consultor:', user.name);
+                return true;
+            }
+        }
+
+        var user = getCurrentUser();
+        if (user && (user.role === 'consultant' || user.role === 'admin' || user.role === 'master')) {
+            console.log('✅ Acesso permitido para consultor (fallback):', user.name);
+            return true;
+        }
+
+        alert('⚠️ Acesso restrito a consultores. Você será redirecionado para o login.');
+        return redirectToLogin();
+    };
+
+    // ============================================
+    // GUARD - ADMIN
+    // ============================================
+    window.requireAdmin = function() {
+        console.log('🔐 Verificando acesso: Admin');
+        
+        if (typeof window.VigorreAuth !== 'undefined' && window.VigorreAuth.isAuthenticated()) {
+            var user = window.VigorreAuth.getCurrentUser();
+            if (user && (user.role === 'admin' || user.role === 'master')) {
+                console.log('✅ Acesso permitido para admin:', user.name);
+                return true;
+            }
+        }
+
+        var user = getCurrentUser();
+        if (user && (user.role === 'admin' || user.role === 'master')) {
+            console.log('✅ Acesso permitido para admin (fallback):', user.name);
+            return true;
+        }
+
+        alert('⚠️ Acesso restrito a administradores. Você será redirecionado para o login.');
+        return redirectToLogin();
+    };
+
+    // ============================================
+    // GUARD - MASTER
+    // ============================================
+    window.requireMaster = function() {
+        console.log('🔐 Verificando acesso: Master');
+        
+        if (typeof window.VigorreAuth !== 'undefined' && window.VigorreAuth.isAuthenticated()) {
+            var user = window.VigorreAuth.getCurrentUser();
+            if (user && user.role === 'master') {
+                console.log('✅ Acesso permitido para master:', user.name);
+                return true;
+            }
+        }
+
+        var user = getCurrentUser();
+        if (user && user.role === 'master') {
+            console.log('✅ Acesso permitido para master (fallback):', user.name);
+            return true;
+        }
+
+        alert('⚠️ Acesso restrito a master. Você será redirecionado para o login.');
+        return redirectToLogin();
+    };
+
+    // ============================================
+    // GUARD - RECRUTADOR
+    // ============================================
+    window.requireRecruiter = function() {
+        console.log('🔐 Verificando acesso: Recrutador');
+        
+        if (typeof window.VigorreAuth !== 'undefined' && window.VigorreAuth.isAuthenticated()) {
+            var user = window.VigorreAuth.getCurrentUser();
+            if (user && (user.role === 'recruiter' || user.role === 'admin' || user.role === 'master')) {
+                console.log('✅ Acesso permitido para recrutador:', user.name);
+                return true;
+            }
+        }
+
+        var user = getCurrentUser();
+        if (user && (user.role === 'recruiter' || user.role === 'admin' || user.role === 'master')) {
+            console.log('✅ Acesso permitido para recrutador (fallback):', user.name);
+            return true;
+        }
+
+        alert('⚠️ Acesso restrito a recrutadores. Você será redirecionado para o login.');
+        return redirectToLogin();
+    };
+
+    // ============================================
+    // GUARD - PARTICIPANTE
+    // ============================================
+    window.requireParticipant = function() {
+        console.log('🔐 Verificando acesso: Participante');
+        
+        if (typeof window.VigorreAuth !== 'undefined' && window.VigorreAuth.isAuthenticated()) {
+            var user = window.VigorreAuth.getCurrentUser();
+            if (user && (user.role === 'participant' || user.role === 'admin' || user.role === 'master')) {
+                console.log('✅ Acesso permitido para participante:', user.name);
+                return true;
+            }
+        }
+
+        var user = getCurrentUser();
+        if (user && (user.role === 'participant' || user.role === 'admin' || user.role === 'master')) {
+            console.log('✅ Acesso permitido para participante (fallback):', user.name);
+            return true;
+        }
+
+        alert('⚠️ Acesso restrito a participantes. Você será redirecionado para o login.');
+        return redirectToLogin();
+    };
+
+    // ============================================
+    // INICIALIZAÇÃO - REDIRECIONA SE NÃO AUTENTICADO
+    // ============================================
+    function initGuard() {
+        if (typeof window.VigorreAuth !== 'undefined') {
+            if (!window.VigorreAuth.isAuthenticated()) {
+                var currentPath = window.location.pathname;
+                var protectedPaths = ['/admin/', '/empresa/', '/consultor/', '/recrutador/', '/participante/'];
+                
+                var isProtected = protectedPaths.some(function(path) {
+                    return currentPath.includes(path);
+                });
+
+                if (isProtected && !currentPath.includes('login.html')) {
+                    console.warn('⚠️ Protegido - Redirecionando para login');
+                    window.location.href = '/login.html';
+                }
+            }
+        }
     }
 
-    var user = window.VigorreAuth.getCurrentUser();
-    if (!user) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGuard);
+    } else {
+        initGuard();
     }
 
-    if (user.role !== 'admin' && user.role !== 'master') {
-        logAccessAttempt(user, route, false);
-        alert('⚠️ Acesso restrito a administradores.');
-        window.VigorreAuth.logout();
-        return false;
-    }
+    console.log('✅ VIGORRE ONE™ - Auth Guard inicializado com sucesso!');
 
-    logAccessAttempt(user, route, true);
-    return true;
-}
-
-// ============================================
-// GUARD - RECRUTADOR
-// ============================================
-function requireRecruiter() {
-    var route = window.location.pathname;
-
-    if (!window.VigorreAuth) {
-        console.error('❌ Auth não carregado');
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (!window.VigorreAuth.isAuthenticated()) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    var user = window.VigorreAuth.getCurrentUser();
-    if (!user) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (user.role !== 'recruiter' && user.role !== 'admin' && user.role !== 'master') {
-        logAccessAttempt(user, route, false);
-        alert('⚠️ Acesso restrito a recrutadores.');
-        window.VigorreAuth.logout();
-        return false;
-    }
-
-    logAccessAttempt(user, route, true);
-    return true;
-}
-
-// ============================================
-// GUARD - PARTICIPANTE
-// ============================================
-function requireParticipant() {
-    var route = window.location.pathname;
-
-    if (!window.VigorreAuth) {
-        console.error('❌ Auth não carregado');
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (!window.VigorreAuth.isAuthenticated()) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    var user = window.VigorreAuth.getCurrentUser();
-    if (!user) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (user.role !== 'participant') {
-        logAccessAttempt(user, route, false);
-        alert('⚠️ Acesso restrito a participantes.');
-        window.VigorreAuth.logout();
-        return false;
-    }
-
-    logAccessAttempt(user, route, true);
-    return true;
-}
-
-// ============================================
-// GUARD - EMPRESA
-// ============================================
-function requireCompany() {
-    var route = window.location.pathname;
-
-    if (!window.VigorreAuth) {
-        console.error('❌ Auth não carregado');
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (!window.VigorreAuth.isAuthenticated()) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    var user = window.VigorreAuth.getCurrentUser();
-    if (!user) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (user.role !== 'company' && user.role !== 'admin' && user.role !== 'master') {
-        logAccessAttempt(user, route, false);
-        alert('⚠️ Acesso restrito a empresas.');
-        window.VigorreAuth.logout();
-        return false;
-    }
-
-    logAccessAttempt(user, route, true);
-    return true;
-}
-
-// ============================================
-// GUARD - CONSULTOR
-// ============================================
-function requireConsultant() {
-    var route = window.location.pathname;
-
-    if (!window.VigorreAuth) {
-        console.error('❌ Auth não carregado');
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (!window.VigorreAuth.isAuthenticated()) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    var user = window.VigorreAuth.getCurrentUser();
-    if (!user) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (user.role !== 'consultant' && user.role !== 'admin' && user.role !== 'master') {
-        logAccessAttempt(user, route, false);
-        alert('⚠️ Acesso restrito a consultores.');
-        window.VigorreAuth.logout();
-        return false;
-    }
-
-    logAccessAttempt(user, route, true);
-    return true;
-}
-
-// ============================================
-// GUARD - MESTRE
-// ============================================
-function requireMaster() {
-    var route = window.location.pathname;
-
-    if (!window.VigorreAuth) {
-        console.error('❌ Auth não carregado');
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (!window.VigorreAuth.isAuthenticated()) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    var user = window.VigorreAuth.getCurrentUser();
-    if (!user) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (user.role !== 'master') {
-        logAccessAttempt(user, route, false);
-        alert('⚠️ Acesso restrito a Master Admin.');
-        window.VigorreAuth.logout();
-        return false;
-    }
-
-    logAccessAttempt(user, route, true);
-    return true;
-}
-
-// ============================================
-// GUARD - QUALQUER USUÁRIO AUTENTICADO
-// ============================================
-function requireAuth() {
-    var route = window.location.pathname;
-
-    if (!window.VigorreAuth) {
-        console.error('❌ Auth não carregado');
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    if (!window.VigorreAuth.isAuthenticated()) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    var user = window.VigorreAuth.getCurrentUser();
-    if (!user) {
-        logAccessAttempt(null, route, false);
-        window.location.href = '/login.html';
-        return false;
-    }
-
-    logAccessAttempt(user, route, true);
-    return true;
-}
-
-// ============================================
-// REDIRECIONAR POR PAPEL
-// ============================================
-function redirectByRole() {
-    var user = window.VigorreAuth.getCurrentUser();
-    if (!user) {
-        window.location.href = '/login.html';
-        return;
-    }
-
-    var redirect = window.VigorreAuth.getRedirectUrl(user.role);
-    if (redirect && window.location.pathname !== redirect) {
-        window.location.href = redirect;
-    }
-}
-
-// ============================================
-// EXPORTAR
-// ============================================
-window.requireAdmin = requireAdmin;
-window.requireRecruiter = requireRecruiter;
-window.requireParticipant = requireParticipant;
-window.requireCompany = requireCompany;
-window.requireConsultant = requireConsultant;
-window.requireMaster = requireMaster;
-window.requireAuth = requireAuth;
-window.redirectByRole = redirectByRole;
-
-console.log('✅ VIGORRE ONE™ - Auth Guards carregados com sucesso!');
-console.log('🛡️ Guards disponíveis: Admin, Recruiter, Participant, Company, Consultant, Master, Auth');
+})();
