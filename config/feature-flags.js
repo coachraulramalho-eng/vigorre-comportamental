@@ -5,7 +5,7 @@
  * ============================================
  * 
  * VERSÃO: 1.0.0
- * DATA: 14/07/2026
+ * DATA: 15/07/2026
  * 
  * FEATURE FLAGS:
  * - Ativação/desativação de funcionalidades
@@ -301,7 +301,6 @@ class FeatureFlags {
     // OBTER AMBIENTE
     // ============================================
     _getEnv() {
-        // Detectar ambiente
         var hostname = window.location.hostname;
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
             return 'development';
@@ -326,9 +325,7 @@ class FeatureFlags {
             current = current[parts[i]];
         }
         
-        // Verificar se é um objeto com 'enabled'
         if (current && typeof current === 'object' && 'enabled' in current) {
-            // Verificar rollout
             if (current.rollout !== undefined) {
                 var random = Math.random() * 100;
                 if (random > current.rollout) {
