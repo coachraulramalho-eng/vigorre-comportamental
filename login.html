@@ -4,423 +4,109 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | VIGORRE ONE™</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-    
     <style>
-        :root {
-            --navy: #0A2540;
-            --navy-light: #1A3A5C;
-            --blue: #1D4ED8;
-            --blue-light: #3B82F6;
-            --cyan: #06B6D4;
-            --gold: #D97706;
-            --gold-light: #F59E0B;
-            --green: #10B981;
-            --red: #EF4444;
-            --white: #FFFFFF;
-            --gray-50: #F8FAFC;
-            --gray-100: #F1F5F9;
-            --gray-200: #E2E8F0;
-            --gray-300: #CBD5E1;
-            --gray-400: #94A3B8;
-            --gray-500: #64748B;
-            --gray-600: #475569;
-            --gray-700: #334155;
-            --gray-800: #1E293B;
-            --gray-900: #0F172A;
-            --radius: 16px;
-            --radius-sm: 10px;
-            --radius-full: 9999px;
-            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
-            --shadow-hover: 0 4px 16px rgba(0,0,0,0.04), 0 8px 40px rgba(10,37,64,0.08);
-            --shadow-lg: 0 8px 32px rgba(0,0,0,0.06), 0 16px 64px rgba(10,37,64,0.10);
-            --shadow-xl: 0 12px 48px rgba(0,0,0,0.08), 0 24px 80px rgba(10,37,64,0.12);
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Poppins', 'Inter', sans-serif;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-        body {
-            font-family: var(--font-primary);
-            background: var(--gray-50);
-            color: var(--gray-900);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background-image: radial-gradient(ellipse at 10% 20%, rgba(29,78,216,0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 90% 80%, rgba(6,182,212,0.03) 0%, transparent 50%);
-        }
-
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 10px; transition: var(--transition); }
-        ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
-
-        .container { max-width: 440px; width: 100%; flex: 1; display: flex; flex-direction: column; justify-content: center; }
-
-        .logo { text-align: center; margin-bottom: 40px; }
-        .logo-img { height: 52px; width: auto; display: inline-block; margin-bottom: 8px; }
-        .logo-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--navy); letter-spacing: -0.3px; }
-        .logo-name .tm { font-size: 0.45rem; vertical-align: super; color: var(--gold); }
-        .logo-sub { font-size: 0.7rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; font-weight: 500; }
-
-        @media (max-width:480px) { .logo-img { height: 40px; } .logo-name { font-size: 1.2rem; } }
-
-        .card { background: var(--white); border-radius: var(--radius); padding: 40px 36px; box-shadow: var(--shadow-xl); border: 1px solid var(--gray-200); transition: var(--transition); }
-        .card:hover { box-shadow: var(--shadow-xl); }
-        .card h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-        .card .subtitle { color: var(--gray-500); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.6; }
-
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; }
-        .form-group label .required { color: var(--red); }
-        .form-group input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-family: var(--font-primary); font-size: 0.95rem; transition: var(--transition); background: var(--white); color: var(--gray-800); }
-        .form-group input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(29,78,216,0.08); }
-        .form-group input::placeholder { color: var(--gray-400); }
-
-        .password-wrapper { position: relative; }
-        .password-wrapper input { width: 100%; padding-right: 48px; }
-        .password-toggle { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--gray-400); transition: var(--transition); padding: 4px; line-height: 1; }
-        .password-toggle:hover { color: var(--gray-700); }
-
-        .form-options { display: flex; justify-content: space-between; align-items: center; margin: 8px 0 20px; }
-        .form-options .remember { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--gray-600); cursor: pointer; }
-        .form-options .remember input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--blue); cursor: pointer; }
-        .form-options .forgot-link { font-size: 0.85rem; color: var(--blue); text-decoration: none; font-weight: 500; transition: var(--transition); }
-        .form-options .forgot-link:hover { color: var(--cyan); }
-
-        .btn-login { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--blue), var(--cyan)); color: var(--white); border: none; border-radius: var(--radius-sm); font-family: var(--font-primary); font-weight: 600; font-size: 1rem; cursor: pointer; transition: var(--transition); margin-top: 4px; position: relative; overflow: hidden; box-shadow: 0 4px 16px rgba(29,78,216,0.25); }
-        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.35); }
-        .btn-login:active { transform: translateY(0); }
-        .btn-login:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-        .btn-login .spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.2); border-top: 2px solid var(--white); border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 10px; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .form-footer { text-align: center; margin-top: 18px; font-size: 0.85rem; color: var(--gray-500); }
-        .form-footer a { color: var(--blue); text-decoration: none; font-weight: 500; transition: var(--transition); }
-        .form-footer a:hover { color: var(--cyan); }
-        .form-footer .back-link { color: var(--gray-500); font-weight: 400; }
-        .form-footer .back-link:hover { color: var(--gray-700); }
-
-        .message { padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.9rem; margin-bottom: 16px; display: none; align-items: center; gap: 10px; animation: fadeIn 0.3s ease; }
-        .message.show { display: flex; }
-        .message.error { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
-        .message.error .msg-icon { color: var(--red); }
-        .message.success { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
-        .message.success .msg-icon { color: var(--green); }
-        .message.info { background: #DBEAFE; color: #1E40AF; border: 1px solid #BFDBFE; }
-        .message.info .msg-icon { color: var(--blue); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-
-        .demo-credentials { margin-top: 24px; padding: 18px 20px; background: var(--gray-50); border-radius: var(--radius-sm); border: 1px solid var(--gray-200); transition: var(--transition); }
-        .demo-credentials:hover { border-color: var(--gray-300); }
-        .demo-credentials .demo-title { font-size: 0.7rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .demo-credentials .demo-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2px 12px; font-size: 0.8rem; color: var(--gray-600); }
-        .demo-credentials .demo-grid .role { font-weight: 600; color: var(--gray-700); }
-        .demo-credentials .demo-grid .email { color: var(--gray-500); font-family: 'Courier New', monospace; font-size: 0.75rem; }
-        .demo-credentials .demo-copy { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--gray-200); font-size: 0.7rem; color: var(--gray-400); text-align: center; }
-
-        .login-footer { margin-top: 32px; text-align: center; padding-top: 16px; border-top: 1px solid var(--gray-200); }
-        .login-footer p { font-size: 0.7rem; color: var(--gray-400); margin-bottom: 2px; line-height: 1.6; }
-        .login-footer strong { color: var(--gray-500); }
-        .login-footer .footer-brand { font-weight: 600; color: var(--navy); }
-
-        @media (prefers-color-scheme: dark) {
-            body { background: var(--gray-900); background-image: radial-gradient(ellipse at 10% 20%, rgba(29,78,216,0.05) 0%, transparent 50%), radial-gradient(ellipse at 90% 80%, rgba(6,182,212,0.05) 0%, transparent 50%); }
-            .card { background: var(--gray-800); border-color: rgba(255,255,255,0.06); }
-            .card h2 { color: var(--white); }
-            .card .subtitle { color: var(--gray-400); }
-            .form-group label { color: var(--gray-300); }
-            .form-group input { background: var(--gray-700); border-color: var(--gray-600); color: var(--white); }
-            .form-group input:focus { border-color: var(--blue-light); box-shadow: 0 0 0 4px rgba(59,130,246,0.15); }
-            .form-group input::placeholder { color: var(--gray-500); }
-            .form-options .remember { color: var(--gray-400); }
-            .form-footer { color: var(--gray-400); }
-            .demo-credentials { background: var(--gray-700); border-color: var(--gray-600); }
-            .demo-credentials .demo-title { color: var(--gray-400); }
-            .demo-credentials .demo-grid .role { color: var(--gray-300); }
-            .demo-credentials .demo-grid .email { color: var(--gray-400); }
-            .demo-credentials .demo-copy { border-color: var(--gray-600); color: var(--gray-500); }
-            .logo-name { color: var(--white); }
-            .password-toggle { color: var(--gray-500); }
-            .password-toggle:hover { color: var(--gray-300); }
-            .login-footer { border-color: var(--gray-700); }
-            .login-footer p { color: var(--gray-500); }
-            .login-footer strong { color: var(--gray-400); }
-            .login-footer .footer-brand { color: var(--gray-300); }
-        }
-
-        @media (max-width:480px) {
-            .card { padding: 28px 20px; }
-            .form-options { flex-direction: column; gap: 10px; align-items: flex-start; }
-            .demo-credentials .demo-grid { grid-template-columns: 1fr; gap: 0; }
-            .demo-credentials .demo-grid .role { margin-top: 4px; }
-            .logo-img { height: 40px; }
-            .logo-name { font-size: 1.2rem; }
-            .card h2 { font-size: 1.2rem; }
-            .btn-login { padding: 12px; font-size: 0.9rem; }
-        }
-
-        @media print {
-            body { background: white !important; padding: 0 !important; }
-            .card { box-shadow: none !important; border: 1px solid #E2E8F0 !important; padding: 20px !important; }
-            .btn-login { display: none !important; }
-            .demo-credentials { display: none !important; }
-            .form-options .forgot-link { display: none !important; }
-            .logo-img { height: 36px !important; }
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A2540,#1A3A5C);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+        .login-card{background:#fff;border-radius:16px;padding:40px 32px;width:100%;max-width:400px;box-shadow:0 8px 32px rgba(0,0,0,0.15)}
+        .logo{text-align:center;margin-bottom:32px}
+        .logo img{height:48px;margin-bottom:8px}
+        .logo h1{font-family:'Poppins',sans-serif;font-size:1.2rem;font-weight:800;color:#0A2540}
+        .logo p{font-size:0.7rem;color:#94A3B8;letter-spacing:0.05em;text-transform:uppercase}
+        .form-group{margin-bottom:16px}
+        .form-group label{display:block;font-size:0.75rem;font-weight:600;color:#475569;margin-bottom:4px}
+        .form-group input{width:100%;padding:12px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:0.9rem;transition:all .25s;background:#F8FAFC}
+        .form-group input:focus{outline:none;border-color:#1D4ED8;background:#fff;box-shadow:0 0 0 3px rgba(29,78,216,0.08)}
+        .btn-login{width:100%;padding:14px;background:linear-gradient(135deg,#1D4ED8,#3B82F6);color:#fff;border:none;border-radius:10px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all .25s;margin-top:8px}
+        .btn-login:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(29,78,216,0.25)}
+        .btn-login:active{transform:translateY(0)}
+        .error-message{display:none;padding:10px 14px;border-radius:8px;font-size:0.85rem;font-weight:500;margin-top:12px;background:#FEF2F2;color:#EF4444;border:1px solid #FECACA}
+        .footer{display:flex;justify-content:center;gap:12px;margin-top:24px;padding-top:16px;border-top:1px solid #E2E8F0;font-size:0.65rem;color:#94A3B8}
+        @media(max-width:480px){.login-card{padding:28px 20px}}
+        @media(prefers-color-scheme:dark){.login-card{background:#1E293B}.logo h1{color:#F8FAFC}.form-group label{color:#94A3B8}.form-group input{background:#0F172A;border-color:#334155;color:#F8FAFC}.form-group input:focus{background:#1E293B;border-color:#3B82F6}.footer{border-color:#334155;color:#64748B}}
     </style>
 </head>
 <body>
 
-    <div class="container">
-
-        <div class="logo">
-            <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
-            <div class="logo-name">
-                VIGORRE ONE<span class="tm">™</span>
-            </div>
-            <div class="logo-sub">People Intelligence Enterprise</div>
-        </div>
-
-        <div class="card">
-
-            <h2>Bem-vindo 👋</h2>
-            <div class="subtitle">Entre com suas credenciais para acessar a plataforma</div>
-
-            <div class="message" id="message">
-                <span class="msg-icon">✅</span>
-                <span id="messageText">Mensagem</span>
-            </div>
-
-            <form id="loginForm" onsubmit="handleLogin(event)">
-
-                <div class="form-group">
-                    <label>E-mail <span class="required">*</span></label>
-                    <input type="email" id="email" placeholder="seu@email.com" required autofocus />
-                </div>
-
-                <div class="form-group">
-                    <label>Senha <span class="required">*</span></label>
-                    <div class="password-wrapper">
-                        <input type="password" id="password" placeholder="••••••••" required />
-                        <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Mostrar/Ocultar senha">👁️</button>
-                    </div>
-                </div>
-
-                <div class="form-options">
-                    <label class="remember">
-                        <input type="checkbox" id="rememberMe" checked />
-                        Lembrar de mim
-                    </label>
-                    <a href="#" class="forgot-link" onclick="resetPassword()">Esqueceu a senha?</a>
-                </div>
-
-                <button type="submit" class="btn-login" id="loginBtn">🚀 Entrar</button>
-
-            </form>
-
-            <div class="form-footer">
-                <a href="index.html" class="back-link">← Voltar para Home</a>
-            </div>
-
-            <div class="demo-credentials">
-                <div class="demo-title">🔐 Credenciais de Teste</div>
-                <div class="demo-grid">
-                    <span class="role">👑 Master</span>
-                    <span class="email">master@vigorre.com / adminvigor10</span>
-                    <span class="role">👤 Admin</span>
-                    <span class="email">admin@vigorre.com / adminvigor10</span>
-                    <span class="role">🎯 Recrutador</span>
-                    <span class="email">recrutador@teste.com / rec123</span>
-                    <span class="role">👤 Participante</span>
-                    <span class="email">participante@teste.com / part123</span>
-                    <span class="role">🏢 Empresa</span>
-                    <span class="email">empresa@teste.com / emp123</span>
-                    <span class="role">📊 Consultor</span>
-                    <span class="email">consultor@teste.com / cons123</span>
-                </div>
-                <div class="demo-copy">Clique nos campos para preencher automaticamente</div>
-            </div>
-
-        </div>
-
-        <div class="login-footer">
-            <p>© 2026 Vigorre. Todos os direitos reservados.</p>
-            <p>Desenvolvido pela <strong>Vigorre Tech®</strong></p>
-            <p class="footer-brand">Tecnologia, Inteligência Artificial e Soluções Digitais para Gestão Estratégica.</p>
-        </div>
-
+<div class="login-card">
+    <div class="logo">
+        <img src="/assets/images/logo-vigorre.png" alt="VIGORRE ONE™" />
+        <h1>VIGORRE ONE™</h1>
+        <p>People Analytics Enterprise</p>
     </div>
 
-    <script src="supabase-config.js"></script>
-    <script src="auth.js"></script>
+    <form id="loginForm" autocomplete="off">
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="seu@email.com" autocomplete="off" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" id="password" placeholder="••••••••" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly')" required />
+        </div>
+        <button type="submit" class="btn-login">🔐 Entrar</button>
+        <div id="loginError" class="error-message"></div>
+    </form>
 
-    <script>
-        'use strict';
+    <div class="footer">
+        <span>🔒 Sessão segura</span>
+        <span>|</span>
+        <span>© 2026 VIGORRE ONE™</span>
+    </div>
+</div>
 
-        var emailInput = document.getElementById('email');
-        var passwordInput = document.getElementById('password');
-        var loginBtn = document.getElementById('loginBtn');
-        var messageEl = document.getElementById('message');
-        var messageText = document.getElementById('messageText');
-        var rememberMe = document.getElementById('rememberMe');
+<script src="/auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
+        var user = window.VigorreAuth.getCurrentUser();
+        if (user) {
+            window.location.href = window.VigorreAuth.getRedirectUrl(user.role);
+            return;
+        }
+    }
 
-        function togglePassword() {
-            var input = document.getElementById('password');
-            var btn = document.querySelector('.password-toggle');
-            if (input.type === 'password') {
-                input.type = 'text';
-                btn.textContent = '🙈';
-            } else {
-                input.type = 'password';
-                btn.textContent = '👁️';
-            }
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value.trim();
+        var errorEl = document.getElementById('loginError');
+        errorEl.style.display = 'none';
+
+        if (!email || !password) {
+            errorEl.textContent = '❌ Preencha todos os campos';
+            errorEl.style.display = 'block';
+            return;
         }
 
-        function showMessage(text, type) {
-            messageEl.className = 'message show ' + (type || 'info');
-            messageText.textContent = text;
-            clearTimeout(messageEl._hideTimeout);
-            messageEl._hideTimeout = setTimeout(function() {
-                messageEl.classList.remove('show');
-            }, 5000);
-        }
-
-        function resetPassword() {
-            var email = prompt('Digite seu e-mail para redefinir a senha:');
-            if (email && window.VigorreAuth) {
-                var result = window.VigorreAuth.resetPassword(email, 'nova123');
-                if (result.success) {
-                    showMessage(result.message, 'success');
-                } else {
-                    showMessage(result.message, 'error');
-                }
-            }
-        }
-
-        document.querySelector('.demo-credentials').addEventListener('click', function(e) {
-            var target = e.target.closest('.email');
-            if (target) {
-                var parts = target.textContent.split(' / ');
-                var email = parts[0].trim();
-                var password = parts[1] ? parts[1].trim() : '';
-                if (email) {
-                    emailInput.value = email;
-                    passwordInput.value = password;
-                    showMessage('🔑 Credenciais preenchidas!', 'info');
-                }
-            }
-        });
-
-        async function handleLogin(event) {
-            event.preventDefault();
-
-            var email = emailInput.value.trim();
-            var password = passwordInput.value;
-
-            if (!email) {
-                showMessage('Por favor, digite seu e-mail', 'error');
-                emailInput.focus();
-                return;
-            }
-
-            if (!password) {
-                showMessage('Por favor, digite sua senha', 'error');
-                passwordInput.focus();
-                return;
-            }
-
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showMessage('Por favor, digite um e-mail válido', 'error');
-                emailInput.focus();
-                return;
-            }
-
-            loginBtn.disabled = true;
-            loginBtn.innerHTML = '<span class="spinner"></span> Entrando...';
-
-            try {
-                if (window.VigorreAuth) {
-                    var result = window.VigorreAuth.login(email, password);
-
-                    if (result.success) {
-                        if (rememberMe.checked) {
-                            localStorage.setItem('vigorre_remember_email', email);
-                        } else {
-                            localStorage.removeItem('vigorre_remember_email');
-                        }
-
-                        showMessage('✅ Login realizado com sucesso!', 'success');
-
-                        setTimeout(function() {
-                            window.location.href = result.redirect;
-                        }, 800);
-                    } else {
-                        showMessage(result.message || 'Credenciais inválidas', 'error');
-                        loginBtn.disabled = false;
-                        loginBtn.innerHTML = '🚀 Entrar';
-                    }
-                } else {
-                    showMessage('⚠️ Sistema de autenticação não disponível', 'error');
-                    loginBtn.disabled = false;
-                    loginBtn.innerHTML = '🚀 Entrar';
-                }
-            } catch (error) {
-                console.error('❌ Erro no login:', error);
-                showMessage('Erro ao realizar login. Tente novamente.', 'error');
-                loginBtn.disabled = false;
-                loginBtn.innerHTML = '🚀 Entrar';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🔐 Tela de Login - VIGORRE ONE™');
-
-            if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
-                var user = window.VigorreAuth.getCurrentUser();
-                if (user) {
-                    var redirect = window.VigorreAuth.getRedirectUrl(user.role);
-                    window.location.href = redirect;
-                    return;
-                }
-            }
-
-            var savedEmail = localStorage.getItem('vigorre_remember_email');
-            if (savedEmail) {
-                emailInput.value = savedEmail;
-                rememberMe.checked = true;
-            }
-
+        var result = window.VigorreAuth.login(email, password);
+        if (result.success) {
+            errorEl.style.background = '#ECFDF5';
+            errorEl.style.color = '#10B981';
+            errorEl.style.borderColor = '#A7F3D0';
+            errorEl.textContent = '✅ ' + result.message;
+            errorEl.style.display = 'block';
             setTimeout(function() {
-                emailInput.focus();
-            }, 100);
+                window.location.href = result.redirect || '/dashboard.html';
+            }, 600);
+        } else {
+            errorEl.style.background = '#FEF2F2';
+            errorEl.style.color = '#EF4444';
+            errorEl.style.borderColor = '#FECACA';
+            errorEl.textContent = result.message;
+            errorEl.style.display = 'block';
+            document.getElementById('password').value = '';
+            document.getElementById('password').setAttribute('readonly', 'readonly');
+        }
+    });
+});
 
-            passwordInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    document.getElementById('loginForm').dispatchEvent(new Event('submit'));
-                }
-            });
-
-            emailInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    passwordInput.focus();
-                }
-            });
-        });
-
-        console.log('✅ Tela de Login carregada com sucesso!');
-    </script>
-
+// Bloquear tecla Enter
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && e.target.closest('form')) {
+        e.preventDefault();
+        e.target.closest('form').dispatchEvent(new Event('submit'));
+    }
+});
+</script>
 </body>
 </html>
