@@ -4,7 +4,7 @@
  * INTERNATIONAL ENTERPRISE EDITION
  * ============================================
  * 
- * VERSÃO: 2.0.0
+ * VERSÃO: 2.1.0
  * DATA: 15/07/2026
  * ============================================
  */
@@ -54,7 +54,6 @@ const AUTH_CONFIG = {
         }
     },
 
-    // Usuários mockados para teste
     mockUsers: [
         {
             id: '1',
@@ -81,8 +80,7 @@ const AUTH_CONFIG = {
             name: 'João Recrutador',
             role: 'recruiter',
             avatar: '🎯',
-            credits: { DISC: 50, IE: 30, VALORES: 20, SWOT: 10, BIGFIVE: 10, COMPETENCIAS: 5, LIDERANCA: 5, POTENCIAL: 5, FITCULTURAL: 5 },
-            companyId: 'comp_001'
+            credits: { DISC: 50, IE: 30, VALORES: 20, SWOT: 10, BIGFIVE: 10, COMPETENCIAS: 5, LIDERANCA: 5, POTENCIAL: 5, FITCULTURAL: 5 }
         },
         {
             id: '4',
@@ -91,10 +89,7 @@ const AUTH_CONFIG = {
             name: 'Ana Participante',
             role: 'participant',
             avatar: '👤',
-            credits: { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0, COMPETENCIAS: 0, LIDERANCA: 0, POTENCIAL: 0, FITCULTURAL: 0 },
-            companyId: 'comp_001',
-            tests: ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE'],
-            completedTests: ['DISC']
+            credits: { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0, COMPETENCIAS: 0, LIDERANCA: 0, POTENCIAL: 0, FITCULTURAL: 0 }
         },
         {
             id: '5',
@@ -112,8 +107,7 @@ const AUTH_CONFIG = {
             name: 'Maria Consultora',
             role: 'consultant',
             avatar: '📊',
-            credits: { DISC: 200, IE: 150, VALORES: 100, SWOT: 80, BIGFIVE: 60, COMPETENCIAS: 50, LIDERANCA: 40, POTENCIAL: 30, FITCULTURAL: 20 },
-            clients: ['comp_001', 'comp_002', 'comp_003']
+            credits: { DISC: 200, IE: 150, VALORES: 100, SWOT: 80, BIGFIVE: 60, COMPETENCIAS: 50, LIDERANCA: 40, POTENCIAL: 30, FITCULTURAL: 20 }
         }
     ],
 
@@ -126,9 +120,6 @@ const AUTH_CONFIG = {
 // ============================================
 class VigorreAuth {
 
-    // ============================================
-    // LOGIN
-    // ============================================
     static login(email, password) {
         try {
             if (!email || !password) {
@@ -160,7 +151,6 @@ class VigorreAuth {
                 return { success: false, message: '❌ Usuário não encontrado' };
             }
 
-            // Salvar sessão
             var token = 'mock_token_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
             var refreshToken = 'refresh_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
 
@@ -172,11 +162,8 @@ class VigorreAuth {
 
             this.logAudit(user.id, user.name, 'Login', 'Login no sistema', 'baixo');
 
-            // ============================================
-            // REDIRECIONAMENTO - CORRIGIDO
-            // ============================================
             var redirect = this.getRedirectUrl(user.role);
-            
+
             console.log('🔐 Login bem-sucedido! Redirecionando para:', redirect);
 
             return {
@@ -192,9 +179,6 @@ class VigorreAuth {
         }
     }
 
-    // ============================================
-    // LOGOUT
-    // ============================================
     static logout() {
         try {
             var user = this.getCurrentUser();
@@ -214,9 +198,6 @@ class VigorreAuth {
         window.location.href = '/login.html';
     }
 
-    // ============================================
-    // VERIFICAR AUTENTICAÇÃO
-    // ============================================
     static isAuthenticated() {
         try {
             var token = localStorage.getItem('vigorre_token');
@@ -244,9 +225,6 @@ class VigorreAuth {
         }
     }
 
-    // ============================================
-    // RENOVAR TOKEN
-    // ============================================
     static refreshToken() {
         try {
             var refreshToken = localStorage.getItem('vigorre_refresh_token');
@@ -275,9 +253,6 @@ class VigorreAuth {
         }
     }
 
-    // ============================================
-    // USUÁRIO ATUAL
-    // ============================================
     static getCurrentUser() {
         try {
             var userData = localStorage.getItem('vigorre_user');
@@ -301,9 +276,6 @@ class VigorreAuth {
         }
     }
 
-    // ============================================
-    // CRÉDITOS DO USUÁRIO
-    // ============================================
     static getUserCredits(userId) {
         try {
             var transactions = JSON.parse(localStorage.getItem('vigorre_credit_transactions') || '[]');
@@ -335,7 +307,6 @@ class VigorreAuth {
                 }
             }
 
-            // Se não houver transações, buscar dos mockUsers
             var hasCredits = false;
             for (var key in credits) {
                 if (credits[key] > 0) {
@@ -364,9 +335,6 @@ class VigorreAuth {
         }
     }
 
-    // ============================================
-    // RESET DE SENHA
-    // ============================================
     static resetPassword(email, newPassword) {
         try {
             if (!email) {
@@ -399,9 +367,6 @@ class VigorreAuth {
         }
     }
 
-    // ============================================
-    // AUDITORIA
-    // ============================================
     static logAudit(userId, userName, action, description, severity) {
         try {
             var logs = JSON.parse(localStorage.getItem('vigorre_audit_logs') || '[]');
@@ -433,9 +398,6 @@ class VigorreAuth {
         }
     }
 
-    // ============================================
-    // VERIFICAR PAPEL
-    // ============================================
     static hasRole(role) {
         var user = this.getCurrentUser();
         if (!user) return false;
@@ -447,9 +409,6 @@ class VigorreAuth {
         return user.role === role;
     }
 
-    // ============================================
-    // OBTER REDIRECT
-    // ============================================
     static getRedirectUrl(role) {
         var config = AUTH_CONFIG.roles[role];
         if (!config) {
@@ -459,25 +418,16 @@ class VigorreAuth {
         return config.redirect;
     }
 
-    // ============================================
-    // OBTER LABEL DO PAPEL
-    // ============================================
     static getRoleLabel(role) {
         var config = AUTH_CONFIG.roles[role];
         return config ? config.label : '👤 Usuário';
     }
 
-    // ============================================
-    // OBTER NOME DO PAPEL
-    // ============================================
     static getRoleName(role) {
         var config = AUTH_CONFIG.roles[role];
         return config ? config.name : 'Usuário';
     }
 
-    // ============================================
-    // LISTAR USUÁRIOS
-    // ============================================
     static listUsers() {
         return AUTH_CONFIG.mockUsers.map(function(user) {
             return {
@@ -491,9 +441,6 @@ class VigorreAuth {
         }.bind(this));
     }
 
-    // ============================================
-    // ATUALIZAR USUÁRIO
-    // ============================================
     static updateUser(userId, updates) {
         try {
             for (var i = 0; i < AUTH_CONFIG.mockUsers.length; i++) {
@@ -524,9 +471,6 @@ class VigorreAuth {
     }
 }
 
-// ============================================
-// EXPORTAR
-// ============================================
 window.VigorreAuth = VigorreAuth;
 
 console.log('✅ VIGORRE ONE™ - Auth carregado com sucesso!');
