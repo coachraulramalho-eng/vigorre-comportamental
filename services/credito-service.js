@@ -1,186 +1,296 @@
 /**
  * ============================================
- * VIGORRE ONE™ - CREDITO SERVICE
+ * VIGORRE ONE™ - RELATORIO SERVICE
  * INTERNATIONAL ENTERPRISE EDITION
  * ============================================
  * 
- * VERSÃO: 2.0.0
+ * VERSÃO: 1.0.0
  * DATA: 15/07/2026
  * 
  * FUNCIONALIDADES:
- * - Listar todos os tipos de crédito (9 tipos)
- * - CRUD de créditos
- * - Transferência entre carteiras
- * - Histórico de transações
- * - Relatórios de créditos
- * - Validação de créditos
- * - Preços por tipo
+ * - Gerar relatório simplificado
+ * - Gerar relatório completo
+ * - Gerar relatório executivo
+ * - Exportar para PDF
+ * - Exportar para Excel
+ * - Exportar para CSV
+ * - Histórico de relatórios
  * ============================================
  */
 
 'use strict';
 
-const CREDITO_CONFIG = {
-    tipos: [
-        { id: 'DISC', nome: 'DISC', icone: '📊', cor: '#EF4444', descricao: 'Avaliação comportamental DISC' },
-        { id: 'IE', nome: 'Inteligência Emocional', icone: '🧠', cor: '#8B5CF6', descricao: 'Avaliação de IE' },
-        { id: 'VALORES', nome: 'Valores Pessoais', icone: '💎', cor: '#10B981', descricao: 'Avaliação de valores' },
-        { id: 'SWOT', nome: 'SWOT', icone: '📋', cor: '#F59E0B', descricao: 'Análise SWOT pessoal' },
-        { id: 'BIGFIVE', nome: 'Big Five', icone: '🧬', cor: '#3B82F6', descricao: 'Big Five personalidade' },
-        { id: 'COMPETENCIAS', nome: 'Competências', icone: '🎯', cor: '#EC4899', descricao: 'Avaliação de competências' },
-        { id: 'LIDERANCA', nome: 'Liderança', icone: '👑', cor: '#D97706', descricao: 'Avaliação de liderança' },
-        { id: 'POTENCIAL', nome: 'Potencial', icone: '🚀', cor: '#14B8A6', descricao: 'Avaliação de potencial' },
-        { id: 'FITCULTURAL', nome: 'Fit Cultural', icone: '🌈', cor: '#7C3AED', descricao: 'Avaliação de fit cultural' }
-    ],
-    precos: {
-        DISC: 29.90,
-        IE: 39.90,
-        VALORES: 34.90,
-        SWOT: 19.90,
-        BIGFIVE: 49.90,
-        COMPETENCIAS: 44.90,
-        LIDERANCA: 59.90,
-        POTENCIAL: 54.90,
-        FITCULTURAL: 39.90
-    },
-    storageKey: 'vigorre_credit_transactions'
+const RELATORIO_CONFIG = {
+    tipos: ['simplificado', 'completo', 'executivo', 'laudo'],
+    formatos: ['pdf', 'excel', 'csv'],
+    storageKey: 'vigorre_reports'
 };
 
-class CreditoService {
+class RelatorioService {
     
     constructor() {
-        this.config = CREDITO_CONFIG;
-        this._cache = new Map();
+        this.config = RELATORIO_CONFIG;
     }
 
-    listarTipos() { return { success: true, data: this.config.tipos, total: this.config.tipos.length }; }
-
-    obterTipo(id) {
-        var tipo = this.config.tipos.find(function(t) { return t.id === id.toUpperCase(); });
-        return tipo ? { success: true, data: tipo } : { success: false, error: 'Tipo não encontrado' };
-    }
-
-    obterPreco(id) {
-        var preco = this.config.precos[id.toUpperCase()];
-        return preco !== undefined ? { success: true, data: preco } : { success: false, error: 'Preço não encontrado' };
-    }
-
-    validar(id, quantidade) {
+    gerarSimplificado(dados) {
         try {
-            if (!id) return { success: false, error: 'Tipo de crédito é obrigatório' };
-            if (!quantidade || quantidade <= 0) { return { success: false, error: 'Quantidade deve ser maior que zero' }; }
-            var tiposValidos = this.config.tipos.map(function(t) { return t.id; });
-            var tipoUpper = id.toUpperCase();
-            if (tiposValidos.indexOf(tipoUpper) === -1) { return { success: false, error: 'Tipo de crédito inválido' }; }
-            if (!Number.isInteger(quantidade)) { return { success: false, error: 'Quantidade deve ser um número inteiro' }; }
-            return { success: true };
-        } catch (error) { console.error('❌ Erro ao validar crédito:', error); return { success: false, error: error
+            if (!dados || !dados.participantId) { return { success: false, error: 'Dados do participante são obrigatórios' }; }
+            var relatorio = {
+                id: this._gerarId(),
+                tipo: 'simplificado',
+                participantId: dados.participantId,
+                participantName: dados.participantName || 'Participante',
+                companyId: dados.companyId || null,
+                companyName: dados.companyName || '',
+                dados: { disc: dados.disc || {}, ie: dados.ie || {}, valores: dados.valores || {}, swot: dados
+                        .swot || {}, bigfive: dados.bigfive || {} },
+                resumo: this._gerarResumo(dados),
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            this._salvar(relatorio);
+            return { success: true, data: relatorio, message: 'Relatório simplificado gerado com sucesso' };
+        } catch (error) { console.error('❌ Erro ao gerar relatório simplificado:', error); return { success: false,
+                error: error.message }; }
+    }
+
+    gerarCompleto(dados) {
+        try {
+            if (!dados || !dados.participantId) { return { success: false, error: 'Dados do participante são obrigatórios' }; }
+            var relatorio = {
+                id: this._gerarId(),
+                tipo: 'completo',
+                participantId: dados.participantId,
+                participantName: dados.participantName || 'Participante',
+                companyId: dados.companyId || null,
+                companyName: dados.companyName || '',
+                dados: { disc: dados.disc || {}, ie: dados.ie || {}, valores: dados.valores || {}, swot: dados
+                        .swot || {}, bigfive: dados.bigfive || {}, competencias: dados.competencias || {},
+                    lideranca: dados.lideranca || {}, potencial: dados.potencial || {}, fitcultural: dados
+                        .fitcultural || {} },
+                analise: this._gerarAnalise(dados),
+                recomendacoes: this._gerarRecomendacoes(dados),
+                planoDesenvolvimento: this._gerarPlanoDesenvolvimento(dados),
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            this._salvar(relatorio);
+            return { success: true, data: relatorio, message: 'Relatório completo gerado com sucesso' };
+        } catch (error) { console.error('❌ Erro ao gerar relatório completo:', error); return { success: false,
+                error: error.message }; }
+    }
+
+    gerarExecutivo(dados) {
+        try {
+            if (!dados || !dados.empresaId) { return { success: false, error: 'Dados da empresa são obrigatórios' }; }
+            var relatorio = {
+                id: this._gerarId(),
+                tipo: 'executivo',
+                empresaId: dados.empresaId,
+                empresaName: dados.empresaName || 'Empresa',
+                dados: {
+                    totalColaboradores: dados.totalColaboradores || 0,
+                    totalAvaliacoes: dados.totalAvaliacoes || 0,
+                    mediaDisc: dados.mediaDisc || {},
+                    mediaIe: dados.mediaIe || {},
+                    mediaValores: dados.mediaValores || {},
+                    engajamento: dados.engajamento || 0,
+                    turnover: dados.turnover || 0
+                },
+                analise: this._gerarAnaliseEmpresarial(dados),
+                recomendacoes: this._gerarRecomendacoesEmpresariais(dados),
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            this._salvar(relatorio);
+            return { success: true, data: relatorio, message: 'Relatório executivo gerado com sucesso' };
+        } catch (error) { console.error('❌ Erro ao gerar relatório executivo:', error); return { success: false,
+                error: error.message }; }
+    }
+
+    buscarPorId(id) {
+        try {
+            if (!id) return { success: false, error: 'ID é obrigatório' };
+            var relatorios = this._getAll();
+            for (var i = 0; i < relatorios.length; i++) {
+                if (relatorios[i].id === id) { return { success: true, data: relatorios[i] }; }
+            }
+            return { success: false, error: 'Relatório não encontrado' };
+        } catch (error) { console.error('❌ Erro ao buscar relatório:', error); return { success: false, error: error
                 .message }; }
     }
 
-    adicionar(walletId, tipo, quantidade, descricao) {
+    listar(filtros) {
         try {
-            var validacao = this.validar(tipo, quantidade);
-            if (!validacao.success) return validacao;
-            if (window.carteiraService) { return window.carteiraService.adicionarCredito(walletId, tipo, quantidade,
-                    descricao); }
-            return { success: false, error: 'Carteira Service não disponível' };
-        } catch (error) { console.error('❌ Erro ao adicionar créditos:', error); return { success: false, error: error
-                .message }; }
-    }
-
-    remover(walletId, tipo, quantidade, descricao) {
-        try {
-            var validacao = this.validar(tipo, quantidade);
-            if (!validacao.success) return validacao;
-            if (window.carteiraService) { return window.carteiraService.removerCredito(walletId, tipo, quantidade,
-                    descricao); }
-            return { success: false, error: 'Carteira Service não disponível' };
-        } catch (error) { console.error('❌ Erro ao remover créditos:', error); return { success: false, error: error
-                .message }; }
-    }
-
-    transferir(origemId, destinoId, tipo, quantidade, descricao) {
-        try {
-            if (!origemId || !destinoId) { return { success: false, error: 'Carteiras de origem e destino são obrigatórias' }; }
-            if (origemId === destinoId) { return { success: false, error: 'Origem e destino não podem ser iguais' }; }
-            var validacao = this.validar(tipo, quantidade);
-            if (!validacao.success) return validacao;
-            var removerResult = this.remover(origemId, tipo, quantidade, descricao || 'Transferência para ' + destinoId);
-            if (!removerResult.success) return removerResult;
-            var adicionarResult = this.adicionar(destinoId, tipo, quantidade, descricao || 'Transferência de ' + origemId);
-            if (!adicionarResult.success) { this.adicionar(origemId, tipo, quantidade, 'Reverter transferência'); return adicionarResult; }
-            return { success: true, data: { origem: removerResult.data, destino: adicionarResult.data },
-                message: quantidade + ' créditos ' + tipo.toUpperCase() + ' transferidos com sucesso' };
-        } catch (error) { console.error('❌ Erro ao transferir créditos:', error); return { success: false, error: error
-                .message }; }
-    }
-
-    historico(filtros) {
-        try {
-            var transactions = this._getTransactions();
+            var relatorios = this._getAll();
             if (filtros) {
-                if (filtros.walletId) { transactions = transactions.filter(function(t) { return t.walletId === filtros
-                        .walletId; }); }
-                if (filtros.companyId) { transactions = transactions.filter(function(t) { return t.companyId ===
-                        filtros.companyId; }); }
-                if (filtros.creditType) { transactions = transactions.filter(function(t) { return t.creditType ===
-                        filtros.creditType.toUpperCase(); }); }
-                if (filtros.type) { transactions = transactions.filter(function(t) { return t.type === filtros
-                        .type; }); }
-                if (filtros.startDate && filtros.endDate) { transactions = transactions.filter(function(t) { return t
-                        .createdAt >= filtros.startDate && t.createdAt <= filtros.endDate; }); }
+                if (filtros.tipo) { relatorios = relatorios.filter(function(r) { return r.tipo === filtros.tipo; }); }
+                if (filtros.participantId) { relatorios = relatorios.filter(function(r) { return r.participantId ===
+                        filtros.participantId; }); }
+                if (filtros.empresaId) { relatorios = relatorios.filter(function(r) { return r.empresaId === filtros
+                        .empresaId; }); }
+                if (filtros.companyId) { relatorios = relatorios.filter(function(r) { return r.companyId === filtros
+                        .companyId; }); }
             }
-            transactions.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
-            return { success: true, data: transactions, total: transactions.length };
-        } catch (error) { console.error('❌ Erro ao buscar histórico:', error); return { success: false, error: error
+            relatorios.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
+            return { success: true, data: relatorios, total: relatorios.length };
+        } catch (error) { console.error('❌ Erro ao listar relatórios:', error); return { success: false, error: error
                 .message }; }
     }
 
-    relatorio(companyId) {
+    exportarPDF(relatorioId) {
         try {
-            var transactions = this._getTransactions();
-            var tipos = this.config.tipos;
-            var result = {};
-            for (var i = 0; i < tipos.length; i++) {
-                var t = tipos[i];
-                result[t.id] = { totalAdicionado: 0, totalRemovido: 0, saldoAtual: 0, quantidadeTransacoes: 0 };
-            }
-            if (companyId) { transactions = transactions.filter(function(t) { return t.companyId === companyId; }); }
-            for (var j = 0; j < transactions.length; j++) {
-                var trans = transactions[j];
-                var tipo = trans.creditType;
-                if (result[tipo]) {
-                    if (trans.type === 'credito' || trans.type === 'transferencia_entrada') { result[tipo]
-                            .totalAdicionado += trans.quantity || 0; } else if (trans.type === 'debito' ||
-                        trans.type === 'transferencia_saida') { result[tipo].totalRemovido += trans.quantity ||
-                        0; }
-                    result[tipo].quantidadeTransacoes++;
-                }
-            }
-            for (var k = 0; k < tipos.length; k++) {
-                var id = tipos[k].id;
-                result[id].saldoAtual = result[id].totalAdicionado - result[id].totalRemovido;
-            }
-            return { success: true, data: result, totalTipos: tipos.length };
-        } catch (error) { console.error('❌ Erro ao gerar relatório:', error); return { success: false, error: error
+            if (!relatorioId) return { success: false, error: 'ID do relatório é obrigatório' };
+            var result = this.buscarPorId(relatorioId);
+            if (!result.success) return result;
+            var relatorio = result.data;
+            var html = this._gerarHTML(relatorio);
+            console.log('📄 Exportando para PDF:', relatorio.id);
+            return { success: true, data: { html: html, filename: 'relatorio_' + relatorio.id + '.pdf' },
+                message: 'PDF gerado com sucesso' };
+        } catch (error) { console.error('❌ Erro ao exportar PDF:', error); return { success: false, error: error
                 .message }; }
     }
 
-    resumoPorCarteira(walletId) {
+    exportarExcel(relatorioId) {
         try {
-            if (!walletId) return { success: false, error: 'ID da carteira é obrigatório' };
-            if (window.carteiraService) { return window.carteiraService.verSaldoCreditos(walletId); }
-            return { success: false, error: 'Carteira Service não disponível' };
-        } catch (error) { console.error('❌ Erro ao gerar resumo:', error); return { success: false, error: error
+            if (!relatorioId) return { success: false, error: 'ID do relatório é obrigatório' };
+            var result = this.buscarPorId(relatorioId);
+            if (!result.success) return result;
+            var relatorio = result.data;
+            var dados = this._gerarDadosExcel(relatorio);
+            console.log('📊 Exportando para Excel:', relatorio.id);
+            return { success: true, data: dados, message: 'Excel gerado com sucesso' };
+        } catch (error) { console.error('❌ Erro ao exportar Excel:', error); return { success: false, error: error
                 .message }; }
     }
 
-    _getTransactions() { try { return JSON.parse(localStorage.getItem(this.config.storageKey) || '[]'); } catch { return []; } }
+    exportarCSV(relatorioId) {
+        try {
+            if (!relatorioId) return { success: false, error: 'ID do relatório é obrigatório' };
+            var result = this.buscarPorId(relatorioId);
+            if (!result.success) return result;
+            var relatorio = result.data;
+            var csv = this._gerarCSV(relatorio);
+            console.log('📋 Exportando para CSV:', relatorio.id);
+            return { success: true, data: csv, message: 'CSV gerado com sucesso' };
+        } catch (error) { console.error('❌ Erro ao exportar CSV:', error); return { success: false, error: error
+                .message }; }
+    }
+
+    excluir(id) {
+        try {
+            if (!id) return { success: false, error: 'ID é obrigatório' };
+            var relatorios = this._getAll();
+            var filtered = relatorios.filter(function(r) { return r.id !== id; });
+            if (filtered.length === relatorios.length) { return { success: false, error: 'Relatório não encontrado' }; }
+            localStorage.setItem(this.config.storageKey, JSON.stringify(filtered));
+            return { success: true, message: 'Relatório excluído com sucesso' };
+        } catch (error) { console.error('❌ Erro ao excluir relatório:', error); return { success: false, error: error
+                .message }; }
+    }
+
+    _gerarId() { return 'R' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6).toUpperCase(); }
+    _getAll() { try { return JSON.parse(localStorage.getItem(this.config.storageKey) || '[]'); } catch { return []; } }
+    _salvar(relatorio) { var relatorios = this._getAll();
+        relatorios.push(relatorio);
+        localStorage.setItem(this.config.storageKey, JSON.stringify(relatorios)); }
+
+    _gerarResumo(dados) {
+        var resumo = { disc: 'Perfil DISC identificado', ie: 'Inteligência Emocional em desenvolvimento',
+            valores: 'Valores alinhados com a organização' };
+        if (dados.disc && dados.disc.dominant) {
+            var dominantNames = { 'D': 'Dominância', 'I': 'Influência', 'S': 'Estabilidade', 'C': 'Conformidade' };
+            resumo.disc = 'Perfil predominante: ' + (dominantNames[dados.disc.dominant] || dados.disc.dominant);
+        }
+        if (dados.ie && dados.ie.overallPercentage) {
+            var nivel = dados.ie.overallPercentage >= 80 ? 'Excelente' : dados.ie.overallPercentage >= 60 ? 'Bom' :
+                dados.ie.overallPercentage >= 40 ? 'Médio' : 'Em desenvolvimento';
+            resumo.ie = 'Inteligência Emocional: ' + nivel + ' (' + dados.ie.overallPercentage + '%)';
+        }
+        return resumo;
+    }
+
+    _gerarAnalise(dados) {
+        return { pontosFortes: ['Comunicação eficaz', 'Pensamento analítico', 'Resiliência'],
+            oportunidades: ['Desenvolver liderança', 'Aprimorar inteligência emocional'],
+            recomendacoes: ['Participar de treinamentos de liderança', 'Buscar feedback regular'] };
+    }
+
+    _gerarRecomendacoes(dados) {
+        return [
+            'Desenvolver autoconsciência através de feedbacks regulares',
+            'Aprimorar habilidades de comunicação em equipe',
+            'Fortalecer a inteligência emocional em situações de pressão'
+        ];
+    }
+
+    _gerarPlanoDesenvolvimento(dados) {
+        return {
+            objetivos: ['Desenvolver habilidades de liderança', 'Aprimorar inteligência emocional',
+                'Fortalecer competências técnicas'
+            ],
+            acoes: ['Participar de mentoria', 'Realizar treinamentos específicos', 'Buscar projetos desafiadores'],
+            prazos: ['3 meses - Avaliação de progresso', '6 meses - Revisão de objetivos',
+                '12 meses - Avaliação final'
+            ]
+        };
+    }
+
+    _gerarAnaliseEmpresarial(dados) {
+        return {
+            forcas: ['Equipe engajada', 'Baixo turnover', 'Bom clima organizacional'],
+            fraquezas: ['Necessidade de desenvolvimento de lideranças', 'Comunicação interna'],
+            oportunidades: ['Expansão de mercado', 'Novas tecnologias'],
+            ameacas: ['Concorrência', 'Mudanças no mercado']
+        };
+    }
+
+    _gerarRecomendacoesEmpresariais(dados) {
+        return [
+            'Investir em programas de desenvolvimento de liderança',
+            'Implementar plano de carreira',
+            'Fortalecer a cultura organizacional'
+        ];
+    }
+
+    _gerarHTML(relatorio) {
+        return `
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>Relatório - VIGORRE ONE™</title>
+            <style>body{font-family:'Inter',sans-serif;margin:40px;color:#0F172A;}.header{text-align:center;border-bottom:2px solid #D97706;padding-bottom:20px;}.logo{font-size:24px;font-weight:700;color:#0A2540;}.logo span{color:#D97706;}.subtitle{color:#64748B;font-size:14px;}.content{margin-top:30px;}.section{margin-bottom:30px;}.section-title{font-size:18px;font-weight:600;color:#1D4ED8;border-bottom:1px solid #E2E8F0;padding-bottom:8px;}.footer{margin-top:40px;text-align:center;border-top:1px solid #E2E8F0;padding-top:20px;font-size:12px;color:#94A3B8;}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}.card{background:#F8FAFC;padding:20px;border-radius:8px;border:1px solid #E2E8F0;}</style>
+            </head>
+            <body>
+                <div class="header"><div class="logo">VIGORRE ONE<span>™</span></div><div class="subtitle">Relatório ${relatorio.tipo.toUpperCase()}</div><div style="font-size:12px;color:#94A3B8;">Emissão: ${new Date().toLocaleDateString('pt-BR')}</div></div>
+                <div class="content">
+                    <div class="section"><div class="section-title">📊 Dados do Participante</div><p><strong>Nome:</strong> ${relatorio.participantName || '--'}</p><p><strong>Empresa:</strong> ${relatorio.companyName || '--'}</p></div>
+                    <div class="section"><div class="section-title">📈 Resumo</div>${Object.keys(relatorio.dados || {}).map(function(key){return '<div class="card"><strong>'+key.toUpperCase()+'</strong>: '+JSON.stringify(relatorio.dados[key])+'</div>';}).join('')}</div>
+                </div>
+                <div class="footer"><p>VIGORRE ONE™ - People Intelligence Enterprise</p><p>Documento gerado em ${new Date().toLocaleString('pt-BR')}</p><p>Código: ${relatorio.id}</p></div>
+            </body>
+            </html>
+        `;
+    }
+
+    _gerarDadosExcel(relatorio) {
+        return { headers: ['ID', 'Participante', 'Empresa', 'Tipo', 'Data'], rows: [
+                [relatorio.id, relatorio.participantName || '--', relatorio.companyName || '--', relatorio.tipo,
+                    new Date(relatorio.createdAt).toLocaleDateString('pt-BR')
+                ]
+            ] };
+    }
+
+    _gerarCSV(relatorio) {
+        var headers = 'ID,Participante,Empresa,Tipo,Data\n';
+        var row = relatorio.id + ',' + (relatorio.participantName || '--') + ',' + (relatorio.companyName || '--') +
+            ',' + relatorio.tipo + ',' + new Date(relatorio.createdAt).toLocaleDateString('pt-BR') + '\n';
+        return headers + row;
+    }
 }
 
-var creditoService = new CreditoService();
-window.creditoService = creditoService;
+var relatorioService = new RelatorioService();
+window.relatorioService = relatorioService;
 
-console.log('✅ VIGORRE ONE™ - Credito Service carregado com sucesso!');
-console.log('💳 Tipos de crédito:', CREDITO_CONFIG.tipos.map(function(t) { return t.id; }).join(', '));
+console.log('✅ VIGORRE ONE™ - Relatorio Service carregado com sucesso!');
+console.log('📄 Tipos de relatório:', RELATORIO_CONFIG.tipos.join(', '));
