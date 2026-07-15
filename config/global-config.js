@@ -5,7 +5,7 @@
  * ============================================
  * 
  * VERSÃO: 2.0.0
- * DATA: 14/07/2026
+ * DATA: 15/07/2026
  * 
  * CONFIGURAÇÕES GLOBAIS:
  * - Ambiente
@@ -38,7 +38,7 @@ const GLOBAL_CONFIG = {
     versions: {
         app: '2.0.0',
         api: '1.5.0',
-        build: '2026.07.14',
+        build: '2026.07.15',
         compatibility: '>=1.0.0'
     },
 
