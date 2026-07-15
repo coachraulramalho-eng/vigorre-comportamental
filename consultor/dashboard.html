@@ -406,11 +406,11 @@
     </main>
 
     <!-- ============================================
-    SCRIPTS - CAMINHOS CORRIGIDOS
+    SCRIPTS - CAMINHOS ABSOLUTOS
     ============================================ -->
-    <script src="../supabase-config.js"></script>
-    <script src="../auth.js"></script>
-    <script src="../middleware/auth-guard.js"></script>
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
 
     <script>
         'use strict';
@@ -440,7 +440,7 @@
                 if (window.VigorreAuth) {
                     window.VigorreAuth.logout();
                 } else {
-                    window.location.href = '../login.html';
+                    window.location.href = '/login.html';
                 }
             }
         }
@@ -459,13 +459,13 @@
             console.log('📊 Dashboard Consultor - VIGORRE ONE™');
             
             // ============================================
-            // VERIFICAÇÃO DE AUTENTICAÇÃO - CORRIGIDA
+            // VERIFICAÇÃO DE AUTENTICAÇÃO
             // ============================================
             if (window.requireConsultant) {
                 if (!window.requireConsultant()) { return; }
             } else if (window.VigorreAuth) {
                 if (!window.VigorreAuth.isAuthenticated()) {
-                    window.location.href = '../login.html';
+                    window.location.href = '/login.html';
                     return;
                 }
                 var user = window.VigorreAuth.getCurrentUser();
