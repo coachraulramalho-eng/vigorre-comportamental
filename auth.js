@@ -4,8 +4,14 @@
  * INTERNATIONAL ENTERPRISE EDITION
  * ============================================
  * 
- * VERSÃO: 2.1.0
+ * VERSÃO: 3.0.0 (SECURE)
  * DATA: 15/07/2026
+ * 
+ * SEGURANÇA:
+ * - Sessão com expiração (15 minutos)
+ * - Bloqueio de navegação via histórico
+ * - Proteção contra gravação de senha
+ * - Logout automático em inatividade
  * ============================================
  */
 
@@ -15,6 +21,10 @@
 // CONFIGURAÇÃO DE AUTENTICAÇÃO
 // ============================================
 const AUTH_CONFIG = {
+    // Tempo de expiração da sessão (em milissegundos)
+    sessionTimeout: 15 * 60 * 1000, // 15 minutos
+    
+    // Papéis e rotas
     roles: {
         'master': {
             name: 'Master Admin',
@@ -54,6 +64,7 @@ const AUTH_CONFIG = {
         }
     },
 
+    // Usuários mockados (em produção, usar banco de dados)
     mockUsers: [
         {
             id: '1',
@@ -62,7 +73,7 @@ const AUTH_CONFIG = {
             name: 'Master Admin',
             role: 'master',
             avatar: '👑',
-            credits: { DISC: 1000, IE: 1000, VALORES: 1000, SWOT: 1000, BIGFIVE: 1000, COMPETENCIAS: 1000, LIDERANCA: 1000, POTENCIAL: 1000, FITCULTURAL: 1000 }
+            credits: { DISC: 1000, IE: 1000, VALORES: 1000, SWOT: 1000, BIGFIVE: 1000 }
         },
         {
             id: '2',
@@ -71,7 +82,7 @@ const AUTH_CONFIG = {
             name: 'Administrador',
             role: 'admin',
             avatar: '👤',
-            credits: { DISC: 500, IE: 500, VALORES: 500, SWOT: 500, BIGFIVE: 500, COMPETENCIAS: 500, LIDERANCA: 500, POTENCIAL: 500, FITCULTURAL: 500 }
+            credits: { DISC: 500, IE: 500, VALORES: 500, SWOT: 500, BIGFIVE: 500 }
         },
         {
             id: '3',
@@ -80,7 +91,7 @@ const AUTH_CONFIG = {
             name: 'João Recrutador',
             role: 'recruiter',
             avatar: '🎯',
-            credits: { DISC: 50, IE: 30, VALORES: 20, SWOT: 10, BIGFIVE: 10, COMPETENCIAS: 5, LIDERANCA: 5, POTENCIAL: 5, FITCULTURAL: 5 }
+            credits: { DISC: 50, IE: 30, VALORES: 20, SWOT: 10, BIGFIVE: 10 }
         },
         {
             id: '4',
@@ -89,7 +100,7 @@ const AUTH_CONFIG = {
             name: 'Ana Participante',
             role: 'participant',
             avatar: '👤',
-            credits: { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0, COMPETENCIAS: 0, LIDERANCA: 0, POTENCIAL: 0, FITCULTURAL: 0 }
+            credits: { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0 }
         },
         {
             id: '5',
@@ -98,7 +109,7 @@ const AUTH_CONFIG = {
             name: 'TechCorp Solutions',
             role: 'company',
             avatar: '🏢',
-            credits: { DISC: 100, IE: 80, VALORES: 60, SWOT: 40, BIGFIVE: 30, COMPETENCIAS: 20, LIDERANCA: 20, POTENCIAL: 15, FITCULTURAL: 10 }
+            credits: { DISC: 100, IE: 80, VALORES: 60, SWOT: 40, BIGFIVE: 30 }
         },
         {
             id: '6',
@@ -107,12 +118,13 @@ const AUTH_CONFIG = {
             name: 'Maria Consultora',
             role: 'consultant',
             avatar: '📊',
-            credits: { DISC: 200, IE: 150, VALORES: 100, SWOT: 80, BIGFIVE: 60, COMPETENCIAS: 50, LIDERANCA: 40, POTENCIAL: 30, FITCULTURAL: 20 }
+            credits: { DISC: 200, IE: 150, VALORES: 100, SWOT: 80, BIGFIVE: 60 }
         }
     ],
 
-    tokenExpiry: 24 * 60 * 60 * 1000,
-    refreshTokenExpiry: 7 * 24 * 60 * 60 * 1000
+    // Tokens (em produção, usar JWT)
+    tokenExpiry: 15 * 60 * 1000, // 15 minutos
+    refreshTokenExpiry: 7 * 24 * 60 * 60 * 1000 // 7 dias
 };
 
 // ============================================
@@ -120,6 +132,138 @@ const AUTH_CONFIG = {
 // ============================================
 class VigorreAuth {
 
+    // ============================================
+    // INICIALIZAR - BLOQUEIO DE NAVEGAÇÃO
+    // ============================================
+    static init() {
+        console.log('🔐 Inicializando sistema de segurança...');
+        
+        // Bloquear navegação via histórico (botão voltar)
+        this.blockHistoryNavigation();
+        
+        // Verificar sessão em todas as páginas
+        this.checkSessionOnLoad();
+        
+        // Detectar inatividade
+        this.setupInactivityDetection();
+        
+        // Prevenir gravação de senha
+        this.preventPasswordSaving();
+        
+        console.log('✅ Sistema de segurança inicializado');
+    }
+
+    // ============================================
+    // BLOQUEAR NAVEGAÇÃO VIA HISTÓRICO
+    // ============================================
+    static blockHistoryNavigation() {
+        // Prevenir que o usuário volte após logout
+        window.addEventListener('popstate', function(event) {
+            if (!VigorreAuth.isAuthenticated()) {
+                console.warn('⛔ Bloqueando navegação via histórico (não autenticado)');
+                window.location.href = '/login.html';
+                return false;
+            }
+            // Se estiver autenticado, permite
+        });
+
+        // Substituir o histórico para que o botão voltar não funcione após logout
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, null, window.location.href);
+            window.addEventListener('popstate', function() {
+                if (!VigorreAuth.isAuthenticated()) {
+                    window.location.href = '/login.html';
+                } else {
+                    window.history.pushState(null, null, window.location.href);
+                }
+            });
+        }
+    }
+
+    // ============================================
+    // VERIFICAR SESSÃO AO CARREGAR
+    // ============================================
+    static checkSessionOnLoad() {
+        var protectedPages = [
+            '/admin/',
+            '/empresa/',
+            '/consultor/',
+            '/recrutador/',
+            '/participante/'
+        ];
+
+        var currentPath = window.location.pathname;
+        var isProtected = protectedPages.some(function(path) {
+            return currentPath.includes(path);
+        });
+
+        // Se for página protegida e não estiver autenticado
+        if (isProtected && !this.isAuthenticated()) {
+            console.warn('⛔ Página protegida - Redirecionando para login');
+            window.location.href = '/login.html';
+            return;
+        }
+
+        // Se estiver autenticado, renovar token
+        if (this.isAuthenticated()) {
+            this.refreshToken();
+        }
+    }
+
+    // ============================================
+    // DETECTAR INATIVIDADE
+    // ============================================
+    static setupInactivityDetection() {
+        var timeoutId = null;
+        var timeout = 15 * 60 * 1000; // 15 minutos
+
+        function resetTimer() {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            timeoutId = setTimeout(function() {
+                if (VigorreAuth.isAuthenticated()) {
+                    console.warn('⏰ Sessão expirada por inatividade');
+                    VigorreAuth.logout();
+                }
+            }, timeout);
+        }
+
+        // Eventos que reiniciam o timer
+        var events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+        for (var i = 0; i < events.length; i++) {
+            document.addEventListener(events[i], resetTimer);
+        }
+
+        // Iniciar timer
+        resetTimer();
+    }
+
+    // ============================================
+    // PREVENIR GRAVAÇÃO DE SENHA
+    // ============================================
+    static preventPasswordSaving() {
+        // Adicionar atributos a todos os inputs de senha
+        var passwordInputs = document.querySelectorAll('input[type="password"]');
+        for (var i = 0; i < passwordInputs.length; i++) {
+            passwordInputs[i].setAttribute('autocomplete', 'off');
+            passwordInputs[i].setAttribute('autocomplete', 'new-password');
+            passwordInputs[i].setAttribute('readonly', 'readonly');
+            passwordInputs[i].addEventListener('focus', function() {
+                this.removeAttribute('readonly');
+            });
+        }
+
+        // Prevenir que o navegador salve senhas
+        var forms = document.querySelectorAll('form');
+        for (var j = 0; j < forms.length; j++) {
+            forms[j].setAttribute('autocomplete', 'off');
+        }
+    }
+
+    // ============================================
+    // LOGIN
+    // ============================================
     static login(email, password) {
         try {
             if (!email || !password) {
@@ -151,10 +295,22 @@ class VigorreAuth {
                 return { success: false, message: '❌ Usuário não encontrado' };
             }
 
-            var token = 'mock_token_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+            // Criar token de sessão
+            var token = 'session_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
             var refreshToken = 'refresh_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
 
-            localStorage.setItem('vigorre_user', JSON.stringify(user));
+            // Salvar sessão (sem a senha!)
+            var sessionUser = {
+                id: user.id,
+                email: user.email,
+                name: user.name,
+                role: user.role,
+                avatar: user.avatar,
+                credits: user.credits,
+                loginTime: new Date().toISOString()
+            };
+
+            localStorage.setItem('vigorre_user', JSON.stringify(sessionUser));
             localStorage.setItem('vigorre_token', token);
             localStorage.setItem('vigorre_refresh_token', refreshToken);
             localStorage.setItem('vigorre_login_time', new Date().toISOString());
@@ -162,13 +318,14 @@ class VigorreAuth {
 
             this.logAudit(user.id, user.name, 'Login', 'Login no sistema', 'baixo');
 
+            // OBTER REDIRECT CORRETO
             var redirect = this.getRedirectUrl(user.role);
 
             console.log('🔐 Login bem-sucedido! Redirecionando para:', redirect);
 
             return {
                 success: true,
-                user: user,
+                user: sessionUser,
                 redirect: redirect,
                 message: '✅ Login realizado com sucesso!'
             };
@@ -179,6 +336,9 @@ class VigorreAuth {
         }
     }
 
+    // ============================================
+    // LOGOUT COM BLOQUEIO DE HISTÓRICO
+    // ============================================
     static logout() {
         try {
             var user = this.getCurrentUser();
@@ -189,15 +349,25 @@ class VigorreAuth {
             console.warn('⚠️ Erro ao registrar logout:', error);
         }
 
+        // Limpar todos os dados da sessão
         localStorage.removeItem('vigorre_user');
         localStorage.removeItem('vigorre_token');
         localStorage.removeItem('vigorre_refresh_token');
         localStorage.removeItem('vigorre_login_time');
         localStorage.removeItem('vigorre_token_expiry');
 
-        window.location.href = '/login.html';
+        // Limpar o histórico para impedir volta
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, null, '/login.html');
+        }
+
+        // Redirecionar para login
+        window.location.replace('/login.html');
     }
 
+    // ============================================
+    // VERIFICAR AUTENTICAÇÃO
+    // ============================================
     static isAuthenticated() {
         try {
             var token = localStorage.getItem('vigorre_token');
@@ -208,12 +378,14 @@ class VigorreAuth {
                 return false;
             }
 
+            // Verificar expiração
             if (expiry) {
                 var now = new Date();
                 var expiryDate = new Date(expiry);
                 if (now > expiryDate) {
-                    this.refreshToken();
-                    return true;
+                    console.warn('⏰ Token expirado');
+                    this.logout();
+                    return false;
                 }
             }
 
@@ -225,6 +397,9 @@ class VigorreAuth {
         }
     }
 
+    // ============================================
+    // RENOVAR TOKEN
+    // ============================================
     static refreshToken() {
         try {
             var refreshToken = localStorage.getItem('vigorre_refresh_token');
@@ -239,7 +414,7 @@ class VigorreAuth {
                 return false;
             }
 
-            var newToken = 'mock_token_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+            var newToken = 'session_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
             localStorage.setItem('vigorre_token', newToken);
             localStorage.setItem('vigorre_token_expiry', new Date(Date.now() + AUTH_CONFIG.tokenExpiry).toISOString());
 
@@ -253,6 +428,9 @@ class VigorreAuth {
         }
     }
 
+    // ============================================
+    // USUÁRIO ATUAL
+    // ============================================
     static getCurrentUser() {
         try {
             var userData = localStorage.getItem('vigorre_user');
@@ -276,6 +454,9 @@ class VigorreAuth {
         }
     }
 
+    // ============================================
+    // CRÉDITOS DO USUÁRIO
+    // ============================================
     static getUserCredits(userId) {
         try {
             var transactions = JSON.parse(localStorage.getItem('vigorre_credit_transactions') || '[]');
@@ -284,14 +465,10 @@ class VigorreAuth {
                 IE: 0,
                 VALORES: 0,
                 SWOT: 0,
-                BIGFIVE: 0,
-                COMPETENCIAS: 0,
-                LIDERANCA: 0,
-                POTENCIAL: 0,
-                FITCULTURAL: 0
+                BIGFIVE: 0
             };
 
-            var creditTypes = ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE', 'COMPETENCIAS', 'LIDERANCA', 'POTENCIAL', 'FITCULTURAL'];
+            var creditTypes = ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE'];
 
             for (var i = 0; i < transactions.length; i++) {
                 var t = transactions[i];
@@ -331,10 +508,89 @@ class VigorreAuth {
 
         } catch (error) {
             console.warn('⚠️ Erro ao buscar créditos:', error);
-            return { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0, COMPETENCIAS: 0, LIDERANCA: 0, POTENCIAL: 0, FITCULTURAL: 0 };
+            return { DISC: 0, IE: 0, VALORES: 0, SWOT: 0, BIGFIVE: 0 };
         }
     }
 
+    // ============================================
+    // AUDITORIA
+    // ============================================
+    static logAudit(userId, userName, action, description, severity) {
+        try {
+            var logs = JSON.parse(localStorage.getItem('vigorre_audit_logs') || '[]');
+
+            var id = 'A' + Date.now().toString().slice(-6) +
+                Math.random().toString(36).slice(2, 5).toUpperCase();
+
+            logs.push({
+                id: id,
+                userId: userId || 'system',
+                user: userName || 'Sistema',
+                action: action || 'Ação',
+                description: description || '',
+                severity: severity || 'baixo',
+                ip: '127.0.0.1',
+                userAgent: navigator.userAgent,
+                date: new Date().toLocaleString('pt-BR'),
+                timestamp: new Date().toISOString()
+            });
+
+            if (logs.length > 1000) {
+                logs = logs.slice(-1000);
+            }
+
+            localStorage.setItem('vigorre_audit_logs', JSON.stringify(logs));
+
+        } catch (error) {
+            console.warn('⚠️ Erro ao registrar auditoria:', error);
+        }
+    }
+
+    // ============================================
+    // VERIFICAR PAPEL
+    // ============================================
+    static hasRole(role) {
+        var user = this.getCurrentUser();
+        if (!user) return false;
+
+        if (Array.isArray(role)) {
+            return role.indexOf(user.role) !== -1;
+        }
+
+        return user.role === role;
+    }
+
+    // ============================================
+    // OBTER REDIRECT
+    // ============================================
+    static getRedirectUrl(role) {
+        var config = AUTH_CONFIG.roles[role];
+        if (!config) {
+            console.warn('⚠️ Papel não encontrado:', role);
+            return '/login.html';
+        }
+        return config.redirect;
+    }
+
+    // ============================================
+    // OBTER LABEL DO PAPEL
+    // ============================================
+    static getRoleLabel(role) {
+        var config = AUTH_CONFIG.roles[role];
+        return config ? config.label : '👤 Usuário';
+    }
+
+    // ============================================
+    // OBTER NOME DO PAPEL
+    // ============================================
+    static getRoleName(role) {
+        var config = AUTH_CONFIG.roles[role];
+        return config ? config.name : 'Usuário';
+    }
+
+    // ============================================
+    // RESET DE SENHA
+    // ============================================
     static resetPassword(email, newPassword) {
         try {
             if (!email) {
@@ -367,67 +623,9 @@ class VigorreAuth {
         }
     }
 
-    static logAudit(userId, userName, action, description, severity) {
-        try {
-            var logs = JSON.parse(localStorage.getItem('vigorre_audit_logs') || '[]');
-
-            var id = 'A' + Date.now().toString().slice(-6) +
-                Math.random().toString(36).slice(2, 5).toUpperCase();
-
-            logs.push({
-                id: id,
-                userId: userId || 'system',
-                user: userName || 'Sistema',
-                action: action || 'Ação',
-                description: description || '',
-                severity: severity || 'baixo',
-                ip: '127.0.0.1',
-                userAgent: navigator.userAgent,
-                date: new Date().toLocaleString('pt-BR'),
-                timestamp: new Date().toISOString()
-            });
-
-            if (logs.length > 1000) {
-                logs = logs.slice(-1000);
-            }
-
-            localStorage.setItem('vigorre_audit_logs', JSON.stringify(logs));
-
-        } catch (error) {
-            console.warn('⚠️ Erro ao registrar auditoria:', error);
-        }
-    }
-
-    static hasRole(role) {
-        var user = this.getCurrentUser();
-        if (!user) return false;
-
-        if (Array.isArray(role)) {
-            return role.indexOf(user.role) !== -1;
-        }
-
-        return user.role === role;
-    }
-
-    static getRedirectUrl(role) {
-        var config = AUTH_CONFIG.roles[role];
-        if (!config) {
-            console.warn('⚠️ Papel não encontrado:', role);
-            return '/login.html';
-        }
-        return config.redirect;
-    }
-
-    static getRoleLabel(role) {
-        var config = AUTH_CONFIG.roles[role];
-        return config ? config.label : '👤 Usuário';
-    }
-
-    static getRoleName(role) {
-        var config = AUTH_CONFIG.roles[role];
-        return config ? config.name : 'Usuário';
-    }
-
+    // ============================================
+    // LISTAR USUÁRIOS
+    // ============================================
     static listUsers() {
         return AUTH_CONFIG.mockUsers.map(function(user) {
             return {
@@ -441,6 +639,9 @@ class VigorreAuth {
         }.bind(this));
     }
 
+    // ============================================
+    // ATUALIZAR USUÁRIO
+    // ============================================
     static updateUser(userId, updates) {
         try {
             for (var i = 0; i < AUTH_CONFIG.mockUsers.length; i++) {
@@ -453,7 +654,16 @@ class VigorreAuth {
 
                     var currentUser = this.getCurrentUser();
                     if (currentUser && currentUser.id === userId) {
-                        localStorage.setItem('vigorre_user', JSON.stringify(AUTH_CONFIG.mockUsers[i]));
+                        var sessionUser = {
+                            id: AUTH_CONFIG.mockUsers[i].id,
+                            email: AUTH_CONFIG.mockUsers[i].email,
+                            name: AUTH_CONFIG.mockUsers[i].name,
+                            role: AUTH_CONFIG.mockUsers[i].role,
+                            avatar: AUTH_CONFIG.mockUsers[i].avatar,
+                            credits: AUTH_CONFIG.mockUsers[i].credits,
+                            loginTime: new Date().toISOString()
+                        };
+                        localStorage.setItem('vigorre_user', JSON.stringify(sessionUser));
                     }
 
                     this.logAudit('system', 'Sistema', 'Update User', 'Usuário atualizado: ' + userId, 'medio');
@@ -471,8 +681,20 @@ class VigorreAuth {
     }
 }
 
+// ============================================
+// EXPORTAR E INICIALIZAR
+// ============================================
 window.VigorreAuth = VigorreAuth;
 
-console.log('✅ VIGORRE ONE™ - Auth carregado com sucesso!');
+// Inicializar sistema de segurança quando a página carregar
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        VigorreAuth.init();
+    });
+} else {
+    VigorreAuth.init();
+}
+
+console.log('✅ VIGORRE ONE™ - Auth SECURE carregado com sucesso!');
+console.log('🔐 Sessão expira em:', AUTH_CONFIG.sessionTimeout / 60000, 'minutos');
 console.log('📋 Usuários disponíveis:', AUTH_CONFIG.mockUsers.length);
-console.log('📋 Rotas configuradas:', Object.keys(AUTH_CONFIG.roles).length);
