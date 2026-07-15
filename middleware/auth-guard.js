@@ -5,7 +5,7 @@
  * ============================================
  * 
  * VERSÃO: 2.0.0
- * DATA: 14/07/2026
+ * DATA: 15/07/2026
  * 
  * FUNCIONALIDADES:
  * - Proteção de rotas por papel
