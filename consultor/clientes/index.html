@@ -4,131 +4,117 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clientes | VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
-        :root {
-            --navy: #0A2540;
-            --gold: #D97706;
-            --gray-50: #F8FAFC;
-            --gray-200: #E2E8F0;
-            --gray-400: #94A3B8;
-            --gray-600: #475569;
-            --gray-800: #1E293B;
-            --gray-900: #0F172A;
-            --white: #FFFFFF;
-            --radius: 16px;
-            --radius-sm: 10px;
-            --font-primary: 'Inter', sans-serif;
-            --font-display: 'Poppins', sans-serif;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: var(--font-primary);
-            background: var(--gray-50);
-            color: var(--gray-600);
-            min-height: 100vh;
-            padding: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 40px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
-            border: 1px solid var(--gray-200);
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .header h1 {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--navy);
-        }
-        .header h1 .highlight { color: var(--gold); }
-        .btn-back {
-            padding: 8px 20px;
-            background: var(--navy);
-            color: white;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: 0.3s;
-        }
-        .btn-back:hover { background: var(--gold); transform: translateY(-2px); }
-        .btn-add {
-            padding: 8px 20px;
-            background: var(--gold);
-            color: white;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: 0.3s;
-        }
-        .btn-add:hover { background: var(--navy); transform: translateY(-2px); }
-        .subtitle { color: var(--gray-400); margin-bottom: 24px; font-size: 0.95rem; }
-        .placeholder {
-            text-align: center;
-            padding: 80px 20px;
-            color: var(--gray-400);
-        }
-        .placeholder .icon { font-size: 4rem; display: block; margin-bottom: 16px; }
-        .placeholder h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--gray-600); margin-bottom: 8px; }
-        .footer {
-            margin-top: 32px;
-            padding-top: 16px;
-            border-top: 1px solid var(--gray-200);
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--gray-400);
-        }
-        @media (prefers-color-scheme: dark) {
-            body { background: var(--gray-900); }
-            .container { background: var(--gray-800); border-color: var(--gray-700); }
-            .header h1 { color: var(--white); }
-            .placeholder h3 { color: var(--gray-300); }
-            .footer { border-color: var(--gray-700); }
-        }
+        :root{--navy:#0A2540;--gold:#D97706;--green:#10B981;--blue:#3B82F6;--gray-50:#F8FAFC;--gray-200:#E2E8F0;--gray-400:#94A3B8;--gray-600:#475569;--gray-800:#1E293B;--gray-900:#0F172A;--white:#FFFFFF;--radius:16px;--radius-sm:10px;--font-primary:'Inter',sans-serif;--font-display:'Poppins',sans-serif}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:var(--font-primary);background:var(--gray-50);color:var(--gray-600);min-height:100vh;padding:40px;display:flex;justify-content:center;align-items:flex-start}
+        .container{max-width:1200px;width:100%;background:var(--white);border-radius:var(--radius);padding:40px;box-shadow:0 4px 24px rgba(0,0,0,0.04);border:1px solid var(--gray-200)}
+        .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+        .header h1{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--navy)}
+        .header h1 .highlight{color:var(--gold)}
+        .btn-back{padding:8px 20px;background:var(--navy);color:white;border-radius:var(--radius-sm);text-decoration:none;font-weight:600;font-size:0.85rem;transition:0.3s}
+        .btn-back:hover{background:var(--gold);transform:translateY(-2px)}
+        .btn-add{padding:8px 20px;background:var(--gold);color:white;border-radius:var(--radius-sm);text-decoration:none;font-weight:600;font-size:0.85rem;transition:0.3s}
+        .btn-add:hover{background:var(--navy);transform:translateY(-2px)}
+        .subtitle{color:var(--gray-400);margin-bottom:20px;font-size:0.9rem}
+        .clients-grid{display:grid;gap:12px}
+        .client-card{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--gray-50);border-radius:var(--radius-sm);border:1px solid var(--gray-200);transition:0.3s;cursor:pointer}
+        .client-card:hover{border-color:var(--gold);transform:translateX(4px)}
+        .client-card .left{display:flex;align-items:center;gap:14px}
+        .client-card .left .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1rem;flex-shrink:0}
+        .client-card .left .info .name{font-weight:600;color:var(--navy);font-size:0.95rem}
+        .client-card .left .info .company{font-size:0.8rem;color:var(--gray-400)}
+        .client-card .right{display:flex;align-items:center;gap:12px}
+        .client-card .right .status{padding:3px 12px;border-radius:var(--radius-full);font-size:0.65rem;font-weight:600}
+        .client-card .right .status.completed{background:rgba(16,185,129,0.12);color:var(--green)}
+        .client-card .right .status.pending{background:rgba(245,158,11,0.12);color:#F59E0B}
+        .client-card .right .status.in_progress{background:rgba(59,130,246,0.12);color:var(--blue)}
+        .client-card .right .btn-sm{padding:4px 14px;font-size:0.7rem;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:0.3s;text-decoration:none;display:inline-block}
+        .client-card .right .btn-sm-gold{background:var(--gold);color:white}
+        .client-card .right .btn-sm-gold:hover{background:var(--navy)}
+        .client-card .right .btn-sm-outline{background:transparent;color:var(--gray-600);border:1px solid var(--gray-200)}
+        .client-card .right .btn-sm-outline:hover{background:var(--gray-50)}
+        .empty-state{text-align:center;padding:60px 20px;color:var(--gray-400)}
+        .empty-state .icon{font-size:4rem;display:block;margin-bottom:16px}
+        .empty-state h3{font-family:var(--font-display);font-size:1.2rem;color:var(--gray-600);margin-bottom:8px}
+        .footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--gray-200);text-align:center;font-size:0.7rem;color:var(--gray-400)}
+        @media(max-width:768px){.client-card{flex-wrap:wrap;gap:12px}.client-card .right{margin-left:auto}}
+        @media(prefers-color-scheme:dark){body{background:var(--gray-900)}.container{background:var(--gray-800);border-color:var(--gray-700)}.header h1{color:var(--white)}.client-card{background:var(--gray-900);border-color:var(--gray-700)}.client-card .left .info .name{color:var(--white)}.empty-state h3{color:var(--gray-300)}.footer{border-color:var(--gray-700)}}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>👥 <span class="highlight">Clientes</span></h1>
-            <div style="display:flex; gap:12px;">
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
                 <a href="novo.html" class="btn-add">+ Novo Cliente</a>
                 <a href="../dashboard.html" class="btn-back">← Voltar</a>
             </div>
         </div>
         <p class="subtitle">Gerencie seus clientes e acompanhe o progresso</p>
-        <div class="placeholder">
-            <span class="icon">👥</span>
-            <h3>Nenhum cliente cadastrado</h3>
-            <p>Clique em "Novo Cliente" para começar a cadastrar.</p>
+        <div class="clients-grid" id="clientsList">
+            <div class="empty-state"><span class="icon">👥</span><h3>Nenhum cliente cadastrado</h3><p>Clique em "Novo Cliente" para começar.</p></div>
         </div>
         <div class="footer">© 2026 VIGORRE ONE™ · People Analytics Enterprise</div>
     </div>
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script>
-        if (window.VigorreAuth && !window.VigorreAuth.isAuthenticated()) {
-            window.location.href = '../../login.html';
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.VigorreAuth && !window.VigorreAuth.isAuthenticated()) {
+                window.location.href = '../../login.html';
+                return;
+            }
+
+            var user = window.VigorreAuth.getCurrentUser();
+            if (!user || user.role !== 'consultant') {
+                alert('⚠️ Acesso restrito a consultores.');
+                window.location.href = '../../login.html';
+                return;
+            }
+
+            carregarClientes(user.id);
+        });
+
+        function carregarClientes(consultantId) {
+            try {
+                var participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var clients = [];
+                for (var i = 0; i < participants.length; i++) {
+                    if (participants[i].consultantId === consultantId || participants[i].recruiterId === consultantId) {
+                        clients.push(participants[i]);
+                    }
+                }
+
+                var list = document.getElementById('clientsList');
+                if (clients.length === 0) {
+                    list.innerHTML = '<div class="empty-state"><span class="icon">👥</span><h3>Nenhum cliente cadastrado</h3><p>Clique em "Novo Cliente" para começar.</p></div>';
+                    return;
+                }
+
+                var statusMap = { 'completed': '✅ Concluído', 'in_progress': '🔄 Em andamento', 'pending': '⏳ Pendente' };
+                var statusClassMap = { 'completed': 'completed', 'in_progress': 'in_progress', 'pending': 'pending' };
+
+                var html = '';
+                for (var j = 0; j < clients.length; j++) {
+                    var c = clients[j];
+                    var initial = (c.name || '?')[0].toUpperCase();
+                    html += '<div class="client-card" onclick="window.location.href=\'detalhes.html?id=' + c.id + '\'">';
+                    html += '<div class="left"><div class="avatar">' + initial + '</div>';
+                    html += '<div class="info"><div class="name">' + (c.name || 'Sem nome') + '</div>';
+                    html += '<div class="company">' + (c.companyName || 'Autônomo') + '</div></div></div>';
+                    html += '<div class="right"><span class="status ' + (statusClassMap[c.status] || 'pending') + '">' + (statusMap[c.status] || '⏳ Pendente') + '</span>';
+                    html += '<a href="gerar-relatorio.html?id=' + c.id + '" class="btn-sm btn-sm-gold" onclick="event.stopPropagation()">📄 Relatório</a></div>';
+                    html += '</div>';
+                }
+                list.innerHTML = html;
+
+            } catch (error) {
+                console.error('❌ Erro:', error);
+            }
         }
     </script>
 </body>
