@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerar Relatório | VIGORRE ONE™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <style>
+        :root{--navy:#0A2540;--gold:#D97706;--gold-light:#F59E0B;--green:#10B981;--red:#EF4444;--blue:#3B82F6;--gray-50:#F8FAFC;--gray-200:#E2E8F0;--gray-400:#94A3B8;--gray-600:#475569;--gray-800:#1E293B;--gray-900:#0F172A;--white:#FFFFFF;--radius:16px;--radius-sm:10px;--font-primary:'Inter',sans-serif;--font-display:'Poppins',sans-serif}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:var(--font-primary);background:var(--gray-50);color:var(--gray-600);min-height:100vh;padding:40px;display:flex;justify-content:center;align-items:flex-start}
+        .container{max-width:900px;width:100%;background:var(--white);border-radius:var(--radius);padding:40px;box-shadow:0 4px 24px rgba(0,0,0,0.04);border:1px solid var(--gray-200)}
+        .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+        .header h1{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--navy)}
+        .header h1 .highlight{color:var(--gold)}
+        .btn-back{padding:8px 20px;background:var(--navy);color:white;border-radius:var(--radius-sm);text-decoration:none;font-weight:600;font-size:0.85rem;transition:0.3s}
+        .btn-back:hover{background:var(--gold);transform:translateY(-2px)}
+        .subtitle{color:var(--gray-400);margin-bottom:16px;font-size:0.9rem}
+        .participant-info{background:var(--gray-50);padding:16px 20px;border-radius:var(--radius-sm);margin-bottom:24px;border:1px solid var(--gray-200)}
+        .participant-info .name{font-weight:600;color:var(--navy);font-size:1.1rem}
+        .participant-info .company{color:var(--gray-400);font-size:0.85rem}
+        .credits-summary{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px}
+        .credit-badge{background:var(--gray-50);padding:10px;border-radius:var(--radius-sm);text-align:center;border:1px solid var(--gray-200)}
+        .credit-badge .icon{font-size:1.2rem}
+        .credit-badge .value{font-weight:700;font-size:1.1rem;color:var(--navy)}
+        .credit-badge .label{font-size:0.6rem;color:var(--gray-400)}
+        .report-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px}
+        .report-card{padding:20px;border:2px solid var(--gray-200);border-radius:var(--radius-sm);text-align:center;cursor:pointer;transition:0.3s}
+        .report-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+        .report-card.selected{border-color:var(--gold);background:rgba(217,119,6,0.04)}
+        .report-card .icon{font-size:2rem;display:block;margin-bottom:8px}
+        .report-card h4{font-family:var(--font-display);font-size:0.9rem;color:var(--navy)}
+        .report-card .cost{font-size:0.75rem;color:var(--gray-400)}
+        .report-card .badge{display:inline-block;padding:2px 10px;border-radius:var(--radius-full);font-size:0.6rem;font-weight:600;margin-top:4px}
+        .report-card .badge.available{background:rgba(16,185,129,0.12);color:var(--green)}
+        .report-card .badge.insufficient{background:rgba(239,68,68,0.12);color:var(--red)}
+        .btn-generate{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:white;border:none;border-radius:var(--radius-sm);font-size:1rem;font-weight:600;cursor:pointer;transition:0.3s}
+        .btn-generate:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(217,119,6,0.3)}
+        .btn-generate:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+        .toast{position:fixed;top:24px;right:24px;background:var(--white);padding:14px 24px;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.12);display:none;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:2000;border-left:4px solid var(--gold);max-width:420px}
+        .toast.show{display:flex}
+        .toast.success{border-left-color:var(--green)}
+        .toast.error{border-left-color:var(--red)}
+        .footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--gray-200);text-align:center;font-size:0.7rem;color:var(--gray-400)}
+        @media(max-width:768px){.credits-summary{grid-template-columns:repeat(3,1fr)}.report-options{grid-template-columns:1fr}}
+        @media(prefers-color-scheme:dark){body{background:var(--gray-900)}.container{background:var(--gray-800);border-color:var(--gray-700)}.header h1{color:var(--white)}.participant-info{background:var(--gray-900);border-color:var(--gray-700)}.participant-info .name{color:var(--white)}.credit-badge{background:var(--gray-900);border-color:var(--gray-700)}.credit-badge .value{color:var(--white)}.report-card{background:var(--gray-900);border-color:var(--gray-700)}.report-card h4{color:var(--white)}.report-card.selected{background:rgba(217,119,6,0.08)}.footer{border-color:var(--gray-700)}.toast{background:var(--gray-800);color:var(--white)}}
+    </style>
+</head>
+<body>
+
+    <div class="toast" id="toast"><span id="toastIcon">✅</span><span id="toastMessage">Mensagem</span></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>📄 <span class="highlight">Gerar Relatório</span></h1>
+            <a href="javascript:history.back()" class="btn-back">← Voltar</a>
+        </div>
+
+        <div class="participant-info" id="participantInfo">
+            <div class="name" id="participantName">Carregando...</div>
+            <div class="company" id="participantCompany">-</div>
+            <div style="font-size:0.8rem;color:var(--gray-400);margin-top:4px" id="participantStatus">Status: Pendente</div>
+        </div>
+
+        <p class="subtitle">💳 Seus créditos disponíveis</p>
+        <div class="credits-summary" id="creditsSummary">
+            <div class="credit-badge"><div class="icon">📊</div><div class="value" id="credDisc">0</div><div class="label">DISC</div></div>
+            <div class="credit-badge"><div class="icon">🧠</div><div class="value" id="credIE">0</div><div class="label">IE</div></div>
+            <div class="credit-badge"><div class="icon">💎</div><div class="value" id="credValores">0</div><div class="label">Valores</div></div>
+            <div class="credit-badge"><div class="icon">📋</div><div class="value" id="credSwot">0</div><div class="label">SWOT</div></div>
+            <div class="credit-badge"><div class="icon">🧬</div><div class="value" id="credBigfive">0</div><div class="label">Big Five</div></div>
+        </div>
+
+        <p class="subtitle">📋 Selecione o tipo de relatório</p>
+        <div class="report-options" id="reportOptions">
+            <div class="report-card" data-type="DISC" data-cost="1" onclick="selectReport(this)">
+                <span class="icon">📊</span>
+                <h4>DISC</h4>
+                <span class="cost">1 crédito</span>
+                <span class="badge available" id="badgeDisc">Disponível</span>
+            </div>
+            <div class="report-card" data-type="IE" data-cost="1" onclick="selectReport(this)">
+                <span class="icon">🧠</span>
+                <h4>IE</h4>
+                <span class="cost">1 crédito</span>
+                <span class="badge available" id="badgeIE">Disponível</span>
+            </div>
+            <div class="report-card" data-type="COMPLETO" data-cost="3" onclick="selectReport(this)">
+                <span class="icon">📦</span>
+                <h4>Completo</h4>
+                <span class="cost">3 créditos</span>
+                <span class="badge available" id="badgeCompleto">Disponível</span>
+            </div>
+        </div>
+
+        <button class="btn-generate" id="btnGenerate" onclick="gerarRelatorio()" disabled>
+            🔒 Selecione um relatório
+        </button>
+
+        <div class="footer">© 2026 VIGORRE ONE™ · People Analytics Enterprise</div>
+    </div>
+
+    <script src="../../supabase-config.js"></script>
+    <script src="../../auth.js"></script>
+    <script>
+        'use strict';
+
+        var selectedReport = null;
+        var participantId = null;
+        var userCredits = {};
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.VigorreAuth && !window.VigorreAuth.isAuthenticated()) {
+                window.location.href = '../../login.html';
+                return;
+            }
+
+            var user = window.VigorreAuth.getCurrentUser();
+            if (!user || user.role !== 'consultant') {
+                alert('⚠️ Acesso restrito a consultores.');
+                window.location.href = '../../login.html';
+                return;
+            }
+
+            userCredits = user.credits || {};
+            document.getElementById('credDisc').textContent = userCredits.DISC || 0;
+            document.getElementById('credIE').textContent = userCredits.IE || 0;
+            document.getElementById('credValores').textContent = userCredits.VALORES || 0;
+            document.getElementById('credSwot').textContent = userCredits.SWOT || 0;
+            document.getElementById('credBigfive').textContent = userCredits.BIGFIVE || 0;
+
+            var params = new URLSearchParams(window.location.search);
+            participantId = params.get('id');
+
+            if (participantId) {
+                carregarParticipante(participantId);
+            } else {
+                document.getElementById('participantName').textContent = 'João Silva';
+                document.getElementById('participantCompany').textContent = 'TechCorp Solutions';
+                document.getElementById('participantStatus').textContent = 'Status: Pendente';
+            }
+
+            atualizarBadges();
+        });
+
+        function carregarParticipante(id) {
+            try {
+                var participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var participant = null;
+                for (var i = 0; i < participants.length; i++) {
+                    if (participants[i].id === id) {
+                        participant = participants[i];
+                        break;
+                    }
+                }
+
+                if (participant) {
+                    document.getElementById('participantName').textContent = participant.name || 'Sem nome';
+                    document.getElementById('participantCompany').textContent = participant.companyName || 'Autônomo';
+                    var statusMap = { 'completed': '✅ Concluído', 'in_progress': '🔄 Em andamento', 'pending': '⏳ Pendente' };
+                    document.getElementById('participantStatus').textContent = 'Status: ' + (statusMap[participant.status] || 'Pendente');
+                }
+            } catch (error) {
+                console.error('❌ Erro:', error);
+            }
+        }
+
+        function atualizarBadges() {
+            var tipos = ['DISC', 'IE', 'COMPLETO'];
+            var custos = { 'DISC': 1, 'IE': 1, 'COMPLETO': 3 };
+
+            for (var i = 0; i < tipos.length; i++) {
+                var tipo = tipos[i];
+                var cost = custos[tipo];
+                var badgeId = 'badge' + tipo;
+                var badge = document.getElementById(badgeId);
+
+                if (badge) {
+                    var temCredito = false;
+                    if (tipo === 'COMPLETO') {
+                        temCredito = (userCredits.DISC || 0) >= 1 &&
+                                    (userCredits.IE || 0) >= 1 &&
+                                    (userCredits.VALORES || 0) >= 1;
+                    } else {
+                        temCredito = (userCredits[tipo] || 0) >= cost;
+                    }
+
+                    badge.textContent = temCredito ? '✅ Disponível' : '❌ Insuficiente';
+                    badge.className = 'badge ' + (temCredito ? 'available' : 'insufficient');
+                }
+            }
+        }
+
+        function selectReport(el) {
+            var cards = document.querySelectorAll('.report-card');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].classList.remove('selected');
+            }
+            el.classList.add('selected');
+
+            selectedReport = {
+                type: el.dataset.type,
+                cost: parseInt(el.dataset.cost)
+            };
+
+            var btn = document.getElementById('btnGenerate');
+            btn.disabled = false;
+            btn.textContent = '🚀 Gerar Relatório ' + el.dataset.type + ' (' + el.dataset.cost + ' crédito)';
+        }
+
+        function gerarRelatorio() {
+            if (!selectedReport) {
+                showToast('❌ Selecione um tipo de relatório', 'error');
+                return;
