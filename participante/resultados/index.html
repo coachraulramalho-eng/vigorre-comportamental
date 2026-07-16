@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resultados | VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --navy: #0A2540;
+            --gold: #D97706;
+            --gold-light: #F59E0B;
+            --gold-gradient: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
+            --cyan: #06B6D4;
+            --green: #10B981;
+            --red: #EF4444;
+            --purple: #7C3AED;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.04), 0 8px 32px rgba(10,37,64,0.06);
+            --font-primary: 'Inter', sans-serif;
+            --font-display: 'Poppins', sans-serif;
+            --sidebar-width: 260px;
+            --header-height: 72px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--gray-50);
+            color: var(--gray-900);
+            min-height: 100vh;
+            display: flex;
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: var(--radius-full); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+
+        /* ===== SIDEBAR (mesmo padrão) ===== */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--navy);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            padding: 28px 20px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            border-right: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .sidebar .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            margin-bottom: 36px;
+        }
+
+        .sidebar .logo .logo-img { height: 36px; width: auto; filter: brightness(0) invert(1); }
+
+        .sidebar .logo .logo-text .name {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.3px;
+            line-height: 1.1;
+        }
+
+        .sidebar .logo .logo-text .name .one { color: var(--gold); }
+        .sidebar .logo .logo-text .name .tm { font-size: 0.45rem; vertical-align: super; color: var(--gray-400); }
+        .sidebar .logo .logo-text .sub { font-size: 0.45rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.12em; display: block; }
+
+        .sidebar .nav { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+        .sidebar .nav .nav-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.15); padding: 16px 8px 6px; font-weight: 700; }
+
+        .sidebar .nav a {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .sidebar .nav a:hover { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.8); }
+        .sidebar .nav a.active { background: rgba(217,119,6,0.12); color: var(--gold); box-shadow: inset 3px 0 0 var(--gold); }
+        .sidebar .nav a .icon { font-size: 1.2rem; width: 28px; text-align: center; }
+        .sidebar .nav a .badge { margin-left: auto; background: var(--gold-gradient); color: white; font-size: 0.55rem; padding: 2px 10px; border-radius: var(--radius-full); font-weight: 700; }
+        .sidebar .nav a .badge.cyan { background: var(--cyan); color: var(--navy); }
+
+        .sidebar .footer-sidebar { padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 8px; }
+        .sidebar .footer-sidebar .user { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02); }
+        .sidebar .footer-sidebar .user .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--gold-gradient); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: white; flex-shrink: 0; }
+        .sidebar .footer-sidebar .user .info .name { font-size: 0.85rem; font-weight: 600; color: white; }
+        .sidebar .footer-sidebar .user .info .role { font-size: 0.6rem; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.08em; }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content { margin-left: var(--sidebar-width); flex: 1; min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* ===== HEADER ===== */
+        .header {
+            height: var(--header-height);
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header .left { display: flex; align-items: center; gap: 16px; }
+        .header .hamburger { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 4px; }
+        .header .hamburger span { display: block; width: 24px; height: 2px; background: var(--gray-900); border-radius: 2px; transition: 0.3s; }
+        .header .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+        .header .hamburger.open span:nth-child(2) { opacity: 0; }
+        .header .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+        .header .page-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--gray-900); letter-spacing: -0.3px; }
+        .header .page-title .highlight { color: var(--gold); }
+
+        .header .right { display: flex; align-items: center; gap: 20px; }
+        .header .right .btn-logout { padding: 8px 24px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-full); color: var(--gray-600); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: var(--font-primary); }
+        .header .right .btn-logout:hover { background: rgba(239,68,68,0.06); color: var(--red); border-color: rgba(239,68,68,0.15); transform: translateY(-1px); }
+
+        /* ===== CONTENT ===== */
+        .content { padding: 32px 40px 60px; flex: 1; }
+
+        /* ===== WELCOME BANNER ===== */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--navy) 0%, #1A3A5C 100%);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            color: white;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before { content: '📊'; position: absolute; top: -20px; right: 40px; font-size: 6rem; opacity: 0.04; pointer-events: none; }
+
+        .welcome-banner .greeting { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; }
+        .welcome-banner .greeting .highlight { color: var(--gold); }
+        .welcome-banner .subtitle { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 4px; }
+
+        /* ===== RESULTADOS LIST ===== */
+        .resultados-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .resultado-item {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            transition: 0.3s;
+        }
+
+        .resultado-item:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(217,119,6,0.1);
+        }
+
+        .resultado-item .info { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 200px; }
+        .resultado-item .info .icon { font-size: 2rem; }
+        .resultado-item .info .text h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--gray-900); }
+        .resultado-item .info .text .desc { font-size: 0.8rem; color: var(--gray-400); }
+
+        .resultado-item .meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .resultado-item .meta .score { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--gold); }
+        .resultado-item .meta .date { font-size: 0.75rem; color: var(--gray-400); }
+
+        .resultado-item .badge-status {
+            display: inline-block;
+            padding: 3px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .resultado-item .badge-status.completed { background: rgba(16,185,129,0.1); color: var(--green); }
+
+        .resultado-item .btn-action {
+            padding: 8px 20px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .resultado-item .btn-action.primary { background: var(--gold-gradient); color: white; }
+        .resultado-item .btn-action.primary:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(217,119,6,0.3); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .header .hamburger { display: flex; }
+            .header { padding: 0 20px; }
+            .content { padding: 24px 20px 40px; }
+        }
+        @media (max-width: 768px) {
+            .resultado-item { flex-direction: column; align-items: stretch; }
+            .resultado-item .meta { justify-content: flex-start; }
+            .header .page-title { font-size: 1rem; }
+            .header { padding: 0 16px; }
+            .content { padding: 16px 16px 32px; }
+            .welcome-banner { padding: 20px; }
+            .welcome-banner .greeting { font-size: 1.2rem; }
+        }
+        @media (max-width: 480px) {
+            .header .right .btn-logout span { display: none; }
+            .header .right .btn-logout .icon { margin-right: 0; }
+        }
+
+        /* ===== DARK MODE ===== */
+        @media (prefers-color-scheme: dark) {
+            body { background: var(--gray-900); }
+            .header { background: rgba(30,41,59,0.92); border-color: var(--gray-700); }
+            .header .page-title { color: var(--white); }
+            .header .right .btn-logout { background: var(--gray-800); border-color: var(--gray-700); color: var(--gray-400); }
+            .header .right .btn-logout:hover { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.2); color: var(--red-light); }
+            .header .hamburger span { background: var(--white); }
+            .resultado-item { background: var(--gray-800); border-color: var(--gray-700); }
+            .resultado-item .info .text h3 { color: var(--white); }
+            .resultado-item .info .text .desc { color: var(--gray-400); }
+            .resultado-item .meta .date { color: var(--gray-500); }
+            .welcome-banner { background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%); border: 1px solid var(--gray-700); }
+            .welcome-banner .greeting { color: var(--white); }
+            .welcome-banner .subtitle { color: var(--gray-400); }
+            .sidebar { background: var(--gray-800); border-right-color: var(--gray-700); }
+            .sidebar .logo .logo-text .name { color: var(--white); }
+            .sidebar .logo .logo-text .sub { color: var(--gray-500); }
+            .sidebar .nav a { color: var(--gray-400); }
+            .sidebar .nav a:hover { background: rgba(255,255,255,0.04); color: var(--white); }
+            .sidebar .nav a.active { background: rgba(217,119,6,0.12); color: var(--gold); }
+            .sidebar .footer-sidebar { border-color: var(--gray-700); }
+            .sidebar .footer-sidebar .user { background: rgba(255,255,255,0.02); }
+            .sidebar .footer-sidebar .user .info .name { color: var(--white); }
+            .sidebar .footer-sidebar .user .info .role { color: var(--gray-500); }
+            .sidebar .nav .nav-label { color: var(--gray-500); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .resultado-item { animation: fadeInUp 0.5s ease forwards; }
+        .resultado-item:nth-child(1) { animation-delay: 0.05s; }
+        .resultado-item:nth-child(2) { animation-delay: 0.1s; }
+        .resultado-item:nth-child(3) { animation-delay: 0.15s; }
+        .resultado-item:nth-child(4) { animation-delay: 0.2s; }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <a href="/participante/dashboard.html" class="logo">
+            <img src="/assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+            <div class="logo-text">
+                <span class="name">VIGORRE <span class="one">ONE</span><span class="tm">™</span></span>
+                <span class="sub">People Intelligence Enterprise</span>
+            </div>
+        </a>
+
+        <nav class="nav">
+            <span class="nav-label">Jornada</span>
+            <a href="/participante/dashboard.html">
+                <span class="icon">🧠</span> Autoconhecimento
+            </a>
+            <a href="/participante/testes/index.html">
+                <span class="icon">📝</span> Avaliações
+                <span class="badge cyan">3</span>
+            </a>
+            <a href="/participante/resultados/index.html" class="active">
+                <span class="icon">📊</span> Resultados
+                <span class="badge">2</span>
+            </a>
+
+            <span class="nav-label">Desenvolvimento</span>
+            <a href="/participante/relatorios/index.html">
+                <span class="icon">📄</span> Relatórios
+            </a>
+            <a href="/participante/laudos/index.html">
+                <span class="icon">📋</span> Laudos Premium
+                <span class="badge">⭐</span>
+            </a>
+
+            <span class="nav-label">Perfil</span>
+            <a href="/participante/perfil/index.html">
+                <span class="icon">👤</span> Meu Perfil
+            </a>
+            <a href="/participante/configuracoes/index.html">
+                <span class="icon">⚙️</span> Configurações
+            </a>
+        </nav>
+
+        <div class="footer-sidebar">
+            <div class="user">
+                <div class="avatar" id="userAvatar">P</div>
+                <div class="info">
+                    <div class="name" id="userName">Participante</div>
+                    <div class="role">Em Desenvolvimento</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- HEADER -->
+        <header class="header">
+            <div class="left">
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="page-title">📊 <span class="highlight">Meus Resultados</span></div>
+            </div>
+            <div class="right">
+                <button class="btn-logout" onclick="logout()">
+                    <span class="icon">🚪</span>
+                    <span>Sair</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <!-- WELCOME BANNER -->
+            <div class="welcome-banner">
+                <div class="greeting">📊 <span class="highlight">Meus Resultados</span></div>
+                <div class="subtitle">Acompanhe sua evolução e descubra insights poderosos sobre seu desenvolvimento</div>
+            </div>
+
+            <!-- RESULTADOS LIST -->
+            <div class="resultados-list">
+                <div class="resultado-item">
+                    <div class="info">
+                        <span class="icon">🎯</span>
+                        <div class="text">
+                            <h3>Perfil de Liderança</h3>
+                            <div class="desc">Coaching · Identifique seu estilo de liderança</div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <span class="score">85%</span>
+                        <span class="date">15/01/2026</span>
+                        <span class="badge-status completed">✅ Concluído</span>
+                    </div>
+                    <a href="/participante/resultados/detalhes.html?teste=lideranca" class="btn-action primary">📊 Ver Detalhes</a>
+                </div>
+
+                <div class="resultado-item">
+                    <div class="info">
+                        <span class="icon">💰</span>
+                        <div class="text">
+                            <h3>Mentalidade Financeira</h3>
+                            <div class="desc">Coaching · Avalie sua relação com o dinheiro</div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <span class="score">72%</span>
+                        <span class="date">10/01/2026</span>
+                        <span class="badge-status completed">✅ Concluído</span>
+                    </div>
+                    <a href="/participante/resultados/detalhes.html?teste=financas" class="btn-action primary">📊 Ver Detalhes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
+
+    <script>
+        function logout() {
+            if (confirm('Deseja realmente sair da plataforma?')) {
+                if (window.VigorreAuth) {
+                    window.VigorreAuth.logout();
+                } else {
+                    window.location.href = '/login.html';
+                }
+            }
+        }
+
+        document.getElementById('hamburger').addEventListener('click', function() {
+            this.classList.toggle('open');
+            document.getElementById('sidebar').classList.toggle('open');
+        });
+
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sidebar');
+            const hamburger = document.getElementById('hamburger');
+            if (window.innerWidth <= 992) {
+                if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                    hamburger.classList.remove('open');
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.VigorreAuth) {
+                const user = window.VigorreAuth.getCurrentUser();
+                if (user) {
+                    const name = user.name || 'Participante';
+                    document.getElementById('userName').textContent = name;
+                    document.getElementById('userAvatar').textContent = name[0].toUpperCase();
+                }
+            }
+            console.log('📊 VIGORRE ONE™ - Página de Resultados carregada!');
+        });
+    </script>
+
+</body>
+</html>
