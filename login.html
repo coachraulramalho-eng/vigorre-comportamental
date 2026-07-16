@@ -4,109 +4,644 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0A2540,#1A3A5C);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-        .login-card{background:#fff;border-radius:16px;padding:40px 32px;width:100%;max-width:400px;box-shadow:0 8px 32px rgba(0,0,0,0.15)}
-        .logo{text-align:center;margin-bottom:32px}
-        .logo img{height:48px;margin-bottom:8px}
-        .logo h1{font-family:'Poppins',sans-serif;font-size:1.2rem;font-weight:800;color:#0A2540}
-        .logo p{font-size:0.7rem;color:#94A3B8;letter-spacing:0.05em;text-transform:uppercase}
-        .form-group{margin-bottom:16px}
-        .form-group label{display:block;font-size:0.75rem;font-weight:600;color:#475569;margin-bottom:4px}
-        .form-group input{width:100%;padding:12px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:0.9rem;transition:all .25s;background:#F8FAFC}
-        .form-group input:focus{outline:none;border-color:#1D4ED8;background:#fff;box-shadow:0 0 0 3px rgba(29,78,216,0.08)}
-        .btn-login{width:100%;padding:14px;background:linear-gradient(135deg,#1D4ED8,#3B82F6);color:#fff;border:none;border-radius:10px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all .25s;margin-top:8px}
-        .btn-login:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(29,78,216,0.25)}
-        .btn-login:active{transform:translateY(0)}
-        .error-message{display:none;padding:10px 14px;border-radius:8px;font-size:0.85rem;font-weight:500;margin-top:12px;background:#FEF2F2;color:#EF4444;border:1px solid #FECACA}
-        .footer{display:flex;justify-content:center;gap:12px;margin-top:24px;padding-top:16px;border-top:1px solid #E2E8F0;font-size:0.65rem;color:#94A3B8}
-        @media(max-width:480px){.login-card{padding:28px 20px}}
-        @media(prefers-color-scheme:dark){.login-card{background:#1E293B}.logo h1{color:#F8FAFC}.form-group label{color:#94A3B8}.form-group input{background:#0F172A;border-color:#334155;color:#F8FAFC}.form-group input:focus{background:#1E293B;border-color:#3B82F6}.footer{border-color:#334155;color:#64748B}}
+        /* ============================================
+           VIGORRE ONE™ - LOGIN ENTERPRISE
+           DESIGN SAP / WORKDAY / ORACLE
+           ============================================ */
+
+        :root {
+            --navy: #0A2540;
+            --navy-light: #1A3A5C;
+            --blue: #1D4ED8;
+            --blue-light: #3B82F6;
+            --cyan: #06B6D4;
+            --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
+            --purple: #7C3AED;
+            --pink: #EC4899;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.06), 0 16px 64px rgba(10,37,64,0.10);
+            --transition: 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, #0F2A44 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ===== BACKGROUND DECORATIVO ===== */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* ===== LOGIN CARD ===== */
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .login-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 48px 40px 40px;
+            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ===== BORDA DECORATIVA SUPERIOR ===== */
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan), var(--purple));
+            opacity: 0.6;
+        }
+
+        /* ===== DARK MODE ===== */
+        @media (prefers-color-scheme: dark) {
+            .login-card {
+                background: var(--gray-800);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            }
+            .login-card::before {
+                opacity: 0.8;
+            }
+        }
+
+        /* ===== LOGO ===== */
+        .logo {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .logo-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.15);
+            transition: var(--transition);
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px rgba(29, 78, 216, 0.2);
+        }
+
+        .logo-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        .logo h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            letter-spacing: -0.5px;
+            margin-bottom: 2px;
+        }
+
+        .logo h1 .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: var(--cyan);
+            font-weight: 600;
+        }
+
+        .logo .subtitle {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 500;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .logo h1 {
+                color: var(--white);
+            }
+            .logo .subtitle {
+                color: var(--gray-500);
+            }
+        }
+
+        /* ===== FORM ===== */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+            transition: var(--transition);
+        }
+
+        .form-group .label-hint {
+            float: right;
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: var(--gray-400);
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--gray-900);
+            background: var(--gray-50);
+            transition: var(--transition);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--blue);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.08);
+        }
+
+        .form-group input::placeholder {
+            color: var(--gray-400);
+            font-weight: 400;
+        }
+
+        .form-group input:read-only {
+            background: var(--gray-50);
+            cursor: default;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .form-group label {
+                color: var(--gray-400);
+            }
+            .form-group input {
+                background: var(--gray-900);
+                border-color: var(--gray-700);
+                color: var(--white);
+            }
+            .form-group input:focus {
+                background: var(--gray-800);
+                border-color: var(--blue-light);
+                box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+            }
+            .form-group input::placeholder {
+                color: var(--gray-600);
+            }
+            .form-group input:read-only {
+                background: var(--gray-900);
+            }
+        }
+
+        /* ===== BOTÃO ===== */
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--blue), var(--blue-light));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
+        }
+
+        .btn-login::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(29, 78, 216, 0.3);
+        }
+
+        .btn-login:hover::after {
+            opacity: 1;
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .btn-login .btn-icon {
+            margin-right: 8px;
+        }
+
+        /* ===== MENSAGEM DE ERRO ===== */
+        .error-message {
+            display: none;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 16px;
+            background: #FEF2F2;
+            color: var(--red);
+            border: 1px solid #FECACA;
+            animation: shake 0.4s ease;
+        }
+
+        .error-message.success {
+            background: #ECFDF5;
+            color: var(--green);
+            border-color: #A7F3D0;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-200);
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            letter-spacing: 0.02em;
+        }
+
+        .footer .divider {
+            color: var(--gray-300);
+        }
+
+        .footer .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+
+        .footer .security-badge .lock {
+            font-size: 0.8rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .footer {
+                border-top-color: var(--gray-700);
+                color: var(--gray-600);
+            }
+            .footer .divider {
+                color: var(--gray-700);
+            }
+            .footer .security-badge {
+                color: var(--gray-600);
+            }
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 32px 24px 28px;
+            }
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+            .logo-icon {
+                width: 48px;
+                height: 48px;
+            }
+            .logo-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+            .form-group input {
+                padding: 12px 14px;
+                font-size: 0.9rem;
+            }
+            .btn-login {
+                padding: 14px;
+                font-size: 0.9rem;
+            }
+            .footer {
+                flex-wrap: wrap;
+                gap: 8px;
+                font-size: 0.6rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .login-card {
+                padding: 24px 16px 20px;
+            }
+            .logo h1 {
+                font-size: 1rem;
+            }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            body {
+                background: white !important;
+            }
+            .login-card {
+                box-shadow: none !important;
+                border: 1px solid #E2E8F0 !important;
+            }
+            .login-card::before {
+                display: none !important;
+            }
+            .btn-login {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="login-card">
-    <div class="logo">
-        <img src="/assets/images/logo-vigorre.png" alt="VIGORRE ONE™" />
-        <h1>VIGORRE ONE™</h1>
-        <p>People Analytics Enterprise</p>
+    <div class="login-container">
+        <div class="login-card">
+
+            <!-- ===== LOGO ===== -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" opacity="0.4"/>
+                    </svg>
+                </div>
+                <h1>VIGORRE ONE<span class="tm">™</span></h1>
+                <p class="subtitle">People Analytics Enterprise</p>
+            </div>
+
+            <!-- ===== FORM ===== -->
+            <form id="loginForm" autocomplete="off" novalidate>
+                <div class="form-group">
+                    <label for="email">
+                        E-mail
+                        <span class="label-hint">obrigatório</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="seu@email.com"
+                        autocomplete="off"
+                        required
+                        aria-required="true"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        Senha
+                        <span class="label-hint">mín. 6 caracteres</span>
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="••••••••"
+                        autocomplete="new-password"
+                        readonly
+                        onfocus="this.removeAttribute('readonly')"
+                        required
+                        aria-required="true"
+                    />
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <span class="btn-icon">🔐</span>
+                    Entrar no Sistema
+                </button>
+
+                <div id="loginError" class="error-message" role="alert"></div>
+            </form>
+
+            <!-- ===== FOOTER ===== -->
+            <div class="footer">
+                <span class="security-badge">
+                    <span class="lock">🔒</span>
+                    Sessão segura
+                </span>
+                <span class="divider">|</span>
+                <span>© 2026 VIGORRE ONE™</span>
+                <span class="divider">|</span>
+                <span>v3.1.0</span>
+            </div>
+
+        </div>
     </div>
 
-    <form id="loginForm" autocomplete="off">
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" placeholder="seu@email.com" autocomplete="off" required />
-        </div>
-        <div class="form-group">
-            <label for="password">Senha</label>
-            <input type="password" id="password" placeholder="••••••••" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly')" required />
-        </div>
-        <button type="submit" class="btn-login">🔐 Entrar</button>
-        <div id="loginError" class="error-message"></div>
-    </form>
+    <!-- ============================================
+    SCRIPTS - CAMINHOS ABSOLUTOS
+    ============================================ -->
+    <script src="/auth.js"></script>
 
-    <div class="footer">
-        <span>🔒 Sessão segura</span>
-        <span>|</span>
-        <span>© 2026 VIGORRE ONE™</span>
-    </div>
-</div>
+    <script>
+        'use strict';
 
-<script src="/auth.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
-        var user = window.VigorreAuth.getCurrentUser();
-        if (user) {
-            window.location.href = window.VigorreAuth.getRedirectUrl(user.role);
-            return;
-        }
-    }
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔐 VIGORRE ONE™ - Login Enterprise');
 
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        var email = document.getElementById('email').value.trim();
-        var password = document.getElementById('password').value.trim();
-        var errorEl = document.getElementById('loginError');
-        errorEl.style.display = 'none';
+            // ============================================
+            // PREVENIR REDIRECIONAMENTO AUTOMÁTICO
+            // Só redireciona se o usuário clicar em "Entrar"
+            // ============================================
 
-        if (!email || !password) {
-            errorEl.textContent = '❌ Preencha todos os campos';
-            errorEl.style.display = 'block';
-            return;
-        }
+            // Prevenir gravação de senha
+            var passwordInput = document.getElementById('password');
+            if (passwordInput) {
+                passwordInput.addEventListener('focus', function() {
+                    this.removeAttribute('readonly');
+                });
+                passwordInput.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.setAttribute('readonly', 'readonly');
+                    }
+                });
+            }
 
-        var result = window.VigorreAuth.login(email, password);
-        if (result.success) {
-            errorEl.style.background = '#ECFDF5';
-            errorEl.style.color = '#10B981';
-            errorEl.style.borderColor = '#A7F3D0';
-            errorEl.textContent = '✅ ' + result.message;
-            errorEl.style.display = 'block';
-            setTimeout(function() {
-                window.location.href = result.redirect || '/dashboard.html';
-            }, 600);
-        } else {
-            errorEl.style.background = '#FEF2F2';
-            errorEl.style.color = '#EF4444';
-            errorEl.style.borderColor = '#FECACA';
-            errorEl.textContent = result.message;
-            errorEl.style.display = 'block';
-            document.getElementById('password').value = '';
-            document.getElementById('password').setAttribute('readonly', 'readonly');
-        }
-    });
-});
+            // ============================================
+            // SUBMIT DO LOGIN
+            // ============================================
+            var loginForm = document.getElementById('loginForm');
+            var errorEl = document.getElementById('loginError');
 
-// Bloquear tecla Enter
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && e.target.closest('form')) {
-        e.preventDefault();
-        e.target.closest('form').dispatchEvent(new Event('submit'));
-    }
-});
-</script>
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                var email = document.getElementById('email').value.trim();
+                var password = document.getElementById('password').value.trim();
+
+                // Reset error
+                errorEl.className = 'error-message';
+                errorEl.textContent = '';
+                errorEl.style.display = 'none';
+
+                // Validação
+                if (!email || !password) {
+                    errorEl.textContent = '❌ Preencha todos os campos';
+                    errorEl.style.display = 'block';
+                    return;
+                }
+
+                if (password.length < 6) {
+                    errorEl.textContent = '❌ A senha deve ter pelo menos 6 caracteres';
+                    errorEl.style.display = 'block';
+                    return;
+                }
+
+                // Tentar login
+                var result = window.VigorreAuth.login(email, password);
+
+                if (result.success) {
+                    errorEl.className = 'error-message success';
+                    errorEl.textContent = '✅ ' + result.message;
+                    errorEl.style.display = 'block';
+
+                    // Desabilitar botão para evitar múltiplos cliques
+                    var btn = loginForm.querySelector('.btn-login');
+                    btn.disabled = true;
+                    btn.innerHTML = '⏳ Redirecionando...';
+
+                    setTimeout(function() {
+                        if (result.redirect) {
+                            window.location.href = result.redirect;
+                        } else {
+                            window.location.href = '/dashboard.html';
+                        }
+                    }, 600);
+                } else {
+                    errorEl.textContent = result.message;
+                    errorEl.style.display = 'block';
+
+                    // Limpar campo de senha
+                    document.getElementById('password').value = '';
+                    document.getElementById('password').setAttribute('readonly', 'readonly');
+
+                    // Focar no email
+                    document.getElementById('email').focus();
+                }
+            });
+
+            // ============================================
+            // BLOQUEAR TECLA ENTER (prevenir duplo submit)
+            // ============================================
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && e.target.closest('form')) {
+                    var form = e.target.closest('form');
+                    var btn = form.querySelector('.btn-login');
+                    if (btn && !btn.disabled) {
+                        e.preventDefault();
+                        form.dispatchEvent(new Event('submit'));
+                    }
+                }
+            });
+
+            // ============================================
+            // AUTO-FOCUS NO CAMPO DE EMAIL
+            // ============================================
+            document.getElementById('email').focus();
+
+            console.log('✅ Login Enterprise carregado com sucesso!');
+        });
+    </script>
+
 </body>
 </html>
