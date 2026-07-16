@@ -250,6 +250,12 @@
             display: block;
         }
 
+        .header .logo .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
         .header .logo .logo-text .name {
             font-family: var(--font-display);
             font-size: 1.1rem;
@@ -266,9 +272,11 @@
 
         .header .logo .logo-text .sub {
             font-size: 0.55rem;
-            color: rgba(255, 255, 255, 0.35);
+            color: rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
             letter-spacing: 0.08em;
+            font-weight: 400;
+            margin-top: -2px;
         }
 
         .header .user-info {
@@ -595,7 +603,7 @@
         }
 
         /* ============================================
-           QUICK ACTIONS (BOTÕES CORRIGIDOS)
+           QUICK ACTIONS
            ============================================ */
         .quick-actions {
             display: grid;
@@ -819,81 +827,153 @@
         }
 
         /* ============================================
-           FOOTER (MESMO DO INDEX)
+           FOOTER (MESMO DO INDEX - COMPLETO)
            ============================================ */
         .footer {
             margin-top: 48px;
-            padding-top: 24px;
-            padding-bottom: 24px;
+            padding: 32px 0 24px;
             border-top: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .footer .footer-brand .logo {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
             gap: 12px;
-            font-size: 0.75rem;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+
+        .footer .footer-brand .logo .logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .footer .footer-brand .logo .logo-text .name {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+        }
+
+        .footer .footer-brand .logo .logo-text .name .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
+
+        .footer .footer-brand .logo .logo-text .sub {
+            font-size: 0.5rem;
             color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
 
-        .footer .footer-copy {
-            font-size: 0.7rem;
+        .footer .footer-brand p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 320px;
         }
 
-        .footer .footer-copy strong {
-            color: var(--gold);
+        .footer .footer-links h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
         }
 
-        .footer .footer-links {
-            display: flex;
-            gap: 20px;
+        .footer .footer-links ul {
+            list-style: none;
+        }
+
+        .footer .footer-links li {
+            margin-bottom: 6px;
         }
 
         .footer .footer-links a {
+            font-size: 0.85rem;
             color: var(--text-muted);
             text-decoration: none;
             transition: var(--transition);
-            font-size: 0.75rem;
         }
 
         .footer .footer-links a:hover {
             color: var(--gold);
         }
 
-        .footer .footer-social {
+        .footer .footer-social h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .footer .footer-social .social-icons {
             display: flex;
             gap: 12px;
         }
 
-        .footer .footer-social a {
+        .footer .footer-social .social-icons a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: var(--radius-sm);
             background: var(--gray-50);
             color: var(--text-muted);
             text-decoration: none;
             transition: var(--transition);
             border: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            font-size: 1.2rem;
         }
 
-        .footer .footer-social a:hover {
+        .footer .footer-social .social-icons a:hover {
             background: var(--gold);
             color: white;
             border-color: var(--gold);
             transform: translateY(-2px);
         }
 
+        .footer .footer-bottom {
+            grid-column: 1 / -1;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .footer .footer-bottom p {
+            margin-bottom: 4px;
+        }
+
+        .footer .footer-bottom strong {
+            color: var(--gold);
+        }
+
+        @media (max-width: 992px) {
+            .footer {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+        }
+
         @media (max-width: 768px) {
             .footer {
-                flex-direction: column;
+                grid-template-columns: 1fr;
+                gap: 24px;
                 text-align: center;
-                gap: 12px;
             }
-            .footer .footer-links {
-                flex-wrap: wrap;
+            .footer .footer-brand p {
+                max-width: 100%;
+            }
+            .footer .footer-social .social-icons {
                 justify-content: center;
             }
         }
@@ -1057,7 +1137,7 @@
             <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-text">
                 <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                <span class="sub">People Analytics Enterprise</span>
+                <span class="sub">People Intelligence Enterprise</span>
             </div>
         </a>
         <div class="user-info">
@@ -1208,22 +1288,45 @@
     </main>
 
     <!-- ============================================
-    FOOTER (MESMO DO INDEX)
+    FOOTER (MESMO DO INDEX - COMPLETO)
     ============================================ -->
     <footer class="footer">
-        <div class="footer-copy">
-            © 2026 <strong>VIGORRE ONE™</strong> · People Analytics Enterprise
+        <div class="footer-brand">
+            <div class="logo">
+                <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <div class="logo-text">
+                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                    <span class="sub">People Intelligence Enterprise</span>
+                </div>
+            </div>
+            <p>Plataforma de People Analytics com Inteligência Artificial para avaliação comportamental, recrutamento e gestão de talentos.</p>
         </div>
+
         <div class="footer-links">
-            <a href="#">Privacidade</a>
-            <a href="#">Termos</a>
-            <a href="#">Suporte</a>
-            <a href="#">Sobre</a>
+            <h4>Empresa</h4>
+            <ul>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">LGPD</a></li>
+                <li><a href="#">Política de Privacidade</a></li>
+                <li><a href="#">Termos de Uso</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
         </div>
+
         <div class="footer-social">
-            <a href="#" aria-label="LinkedIn">🔗</a>
-            <a href="#" aria-label="Instagram">📸</a>
-            <a href="#" aria-label="YouTube">▶️</a>
+            <h4>Redes Sociais</h4>
+            <div class="social-icons">
+                <a href="#" aria-label="LinkedIn">🔗</a>
+                <a href="#" aria-label="Instagram">📸</a>
+                <a href="#" aria-label="YouTube">▶️</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Vigorre. Todos os direitos reservados.</p>
+            <p>Desenvolvido pela <strong>Vigorre Tech®</strong></p>
+            <p>Tecnologia, Inteligência Artificial e Soluções Digitais para Gestão Estratégica.</p>
         </div>
     </footer>
 
