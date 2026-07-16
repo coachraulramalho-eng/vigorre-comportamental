@@ -4,857 +4,383 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
     <style>
-        /* ============================================
-           VIGORRE ONE™ - LOGIN ENTERPRISE
-           MESMA IDENTIDADE DO INDEX
-           ============================================ */
-
         :root {
             --navy: #0A2540;
-            --navy-light: #1A3A5C;
-            --blue: #1D4ED8;
-            --blue-light: #3B82F6;
-            --cyan: #06B6D4;
             --gold: #D97706;
             --gold-light: #F59E0B;
-            --green: #10B981;
-            --red: #EF4444;
+            --cyan: #06B6D4;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
-            --gray-100: #F1F5F9;
             --gray-200: #E2E8F0;
-            --gray-300: #CBD5E1;
             --gray-400: #94A3B8;
             --gray-500: #64748B;
-            --gray-600: #475569;
             --gray-700: #334155;
             --gray-800: #1E293B;
             --gray-900: #0F172A;
             --radius: 16px;
-            --radius-sm: 10px;
-            --radius-full: 9999px;
-            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
-            --shadow-lg: 0 8px 32px rgba(0,0,0,0.06), 0 16px 64px rgba(10,37,64,0.10);
-            --shadow-xl: 0 12px 48px rgba(0,0,0,0.08), 0 24px 80px rgba(10,37,64,0.12);
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Poppins', 'Inter', sans-serif;
+            --font-primary: 'Inter', sans-serif;
+            --font-display: 'Poppins', sans-serif;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: var(--font-primary);
-            background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
+            background: var(--gray-900);
+            color: var(--white);
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 24px;
-            position: relative;
-            overflow: hidden;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(ellipse at 20% 50%, rgba(217,119,6,0.05) 0%, transparent 60%),
+                              radial-gradient(ellipse at 80% 50%, rgba(6,182,212,0.03) 0%, transparent 60%);
         }
-
-        /* ===== BACKGROUND DECORATIVO (IGUAL INDEX) ===== */
-        body::before {
-            content: '';
-            position: absolute;
-            top: -40%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(217,119,6,0.03) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        body::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(6,182,212,0.03) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        /* ============================================
-           LOGIN CARD
-           ============================================ */
-        .login-container {
-            width: 100%;
-            max-width: 440px;
-            position: relative;
-            z-index: 1;
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px) scale(0.96); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .login-card {
-            background: var(--white);
+        .card {
+            background: var(--gray-800);
             border-radius: var(--radius);
-            padding: 48px 40px 40px;
-            box-shadow: var(--shadow-xl);
-            border: 1px solid var(--gray-200);
-            transition: var(--transition);
+            padding: 48px 40px;
+            max-width: 420px;
+            width: 100%;
+            border: 1px solid var(--gray-700);
+            box-shadow: 0 8px 48px rgba(0,0,0,0.4);
             position: relative;
             overflow: hidden;
         }
-
-        /* ===== BORDA DECORATIVA SUPERIOR (IGUAL INDEX) ===== */
-        .login-card::before {
+        .card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--cyan));
-            opacity: 0.8;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--cyan));
+            opacity: 0.6;
         }
-
-        /* ===== DARK MODE (IGUAL INDEX) ===== */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: var(--gray-900);
-            }
-            body::before {
-                background: radial-gradient(circle, rgba(217,119,6,0.06) 0%, transparent 70%);
-            }
-            body::after {
-                background: radial-gradient(circle, rgba(6,182,212,0.04) 0%, transparent 70%);
-            }
-            .login-card {
-                background: var(--gray-800);
-                border-color: var(--gray-700);
-                box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            }
-            .login-card::before {
-                opacity: 0.9;
-            }
-        }
-
-        /* ============================================
-           LOGO (MESMA DO INDEX)
-           ============================================ */
         .logo {
             text-align: center;
-            margin-bottom: 36px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
+            margin-bottom: 32px;
         }
-
-        .logo-img {
-            height: 48px;
-            width: auto;
-            display: block;
-            transition: var(--transition);
-        }
-
-        .logo-img:hover {
-            transform: scale(1.02);
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .logo-name {
+        .logo .name {
             font-family: var(--font-display);
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            color: var(--navy);
-            letter-spacing: -0.3px;
+            letter-spacing: -0.5px;
         }
-
-        .logo-tm {
+        .logo .name .one {
             color: var(--gold);
         }
-
-        .logo-name sup {
+        .logo .name .tm {
             font-size: 0.5rem;
+            color: var(--gray-500);
             vertical-align: super;
-            color: var(--gray-400);
         }
-
-        .logo-sub {
+        .logo .sub {
             font-size: 0.6rem;
-            color: var(--gray-400);
+            color: var(--gray-500);
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-weight: 500;
+            letter-spacing: 0.12em;
+            display: block;
             margin-top: -2px;
         }
-
-        @media (prefers-color-scheme: dark) {
-            .logo-name {
-                color: var(--white);
-            }
-            .logo-sub {
-                color: var(--gray-500);
-            }
+        .card h1 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
-
-        @media (max-width: 480px) {
-            .logo-img {
-                height: 36px;
-            }
-            .logo-name {
-                font-size: 1rem;
-            }
-            .logo-sub {
-                font-size: 0.5rem;
-            }
+        .card .desc {
+            color: var(--gray-500);
+            font-size: 0.85rem;
+            margin-bottom: 24px;
         }
-
-        /* ============================================
-           FORM
-           ============================================ */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
-
         .form-group label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            color: var(--gray-600);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 6px;
-            transition: var(--transition);
-        }
-
-        .form-group .label-hint {
-            float: right;
-            font-size: 0.65rem;
-            font-weight: 400;
             color: var(--gray-400);
-            text-transform: none;
-            letter-spacing: 0;
+            margin-bottom: 4px;
         }
-
-        .form-group input {
+        .form-group input,
+        .form-group select {
             width: 100%;
-            padding: 14px 16px;
-            border: 1.5px solid var(--gray-200);
-            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-700);
+            border-radius: 10px;
+            color: var(--white);
             font-size: 0.95rem;
+            transition: 0.3s;
             font-family: var(--font-primary);
-            color: var(--gray-900);
-            background: var(--gray-50);
-            transition: var(--transition);
+        }
+        .form-group input:focus,
+        .form-group select:focus {
             outline: none;
-            -webkit-appearance: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(217,119,6,0.05);
         }
-
-        .form-group input:focus {
-            border-color: var(--blue);
-            background: var(--white);
-            box-shadow: 0 0 0 4px rgba(29,78,216,0.08);
+        .form-group select option {
+            background: var(--gray-800);
         }
-
-        .form-group input::placeholder {
+        .lgpd-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 16px 0;
+            font-size: 0.75rem;
             color: var(--gray-400);
-            font-weight: 400;
+            line-height: 1.5;
         }
-
-        .form-group input:read-only {
-            background: var(--gray-50);
-            cursor: default;
+        .lgpd-check input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: var(--gold);
+            cursor: pointer;
+            flex-shrink: 0;
         }
-
-        @media (prefers-color-scheme: dark) {
-            .form-group label {
-                color: var(--gray-400);
-            }
-            .form-group input {
-                background: var(--gray-900);
-                border-color: var(--gray-700);
-                color: var(--white);
-            }
-            .form-group input:focus {
-                background: var(--gray-800);
-                border-color: var(--blue-light);
-                box-shadow: 0 0 0 4px rgba(59,130,246,0.12);
-            }
-            .form-group input::placeholder {
-                color: var(--gray-600);
-            }
-            .form-group input:read-only {
-                background: var(--gray-900);
-            }
+        .lgpd-check a {
+            color: var(--gold);
+            text-decoration: underline;
         }
-
-        /* ============================================
-           BOTÃO (MESMO ESTILO DO INDEX)
-           ============================================ */
         .btn-login {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            color: var(--white);
             border: none;
-            border-radius: var(--radius-sm);
-            font-size: 0.95rem;
+            border-radius: 10px;
+            color: var(--white);
+            font-size: 1rem;
             font-weight: 600;
-            font-family: var(--font-primary);
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.3s;
             margin-top: 8px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(217,119,6,0.25);
+            font-family: var(--font-primary);
         }
-
-        .btn-login::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(217,119,6,0.35);
+            box-shadow: 0 4px 24px rgba(217,119,6,0.3);
         }
-
-        .btn-login:hover::after {
-            opacity: 1;
+        .btn-login:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
-
-        .btn-login:active {
-            transform: translateY(0);
-        }
-
-        .btn-login .btn-icon {
-            margin-right: 8px;
-        }
-
-        /* ============================================
-           MENSAGEM DE ERRO
-           ============================================ */
-        .error-message {
+        .error {
+            color: #EF4444;
+            font-size: 0.8rem;
+            margin-top: 8px;
             display: none;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-top: 16px;
-            background: #FEF2F2;
-            color: var(--red);
-            border: 1px solid #FECACA;
-            animation: shake 0.4s ease;
         }
-
-        .error-message.success {
-            background: #ECFDF5;
-            color: var(--green);
-            border-color: #A7F3D0;
+        .error.show {
+            display: block;
         }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
+        .success {
+            color: #10B981;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            display: none;
         }
-
-        /* ============================================
-           CREDENCIAIS PROVISÓRIAS (VISÍVEIS)
-           ============================================ */
-        .credentials-box {
+        .success.show {
+            display: block;
+        }
+        .demo-info {
             margin-top: 20px;
-            padding: 16px 20px;
-            background: var(--gray-50);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--gray-200);
-            transition: var(--transition);
-        }
-
-        .credentials-box:hover {
-            border-color: var(--gold);
-            box-shadow: 0 4px 12px rgba(217,119,6,0.04);
-        }
-
-        .credentials-box .title {
+            padding: 12px 16px;
+            background: rgba(217,119,6,0.04);
+            border: 1px solid rgba(217,119,6,0.06);
+            border-radius: 10px;
             font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
             color: var(--gray-400);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            line-height: 1.6;
         }
-
-        .credentials-box .title .lock {
-            font-size: 0.8rem;
-        }
-
-        .credentials-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .credential-item {
-            display: flex;
-            flex-direction: column;
-            padding: 6px 10px;
-            background: var(--white);
-            border-radius: 6px;
-            border: 1px solid var(--gray-100);
-            transition: var(--transition);
-        }
-
-        .credential-item:hover {
-            border-color: var(--gray-300);
-        }
-
-        .credential-item .role {
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: var(--gray-400);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-
-        .credential-item .email {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--gray-700);
-        }
-
-        .credential-item .password {
-            font-size: 0.7rem;
-            color: var(--gray-500);
-            font-family: 'Courier New', monospace;
-        }
-
-        .credential-item .badge {
-            display: inline-block;
-            font-size: 0.55rem;
-            font-weight: 600;
-            padding: 1px 10px;
-            border-radius: var(--radius-full);
-            background: rgba(217,119,6,0.12);
+        .demo-info strong {
             color: var(--gold);
-            margin-top: 2px;
-            align-self: flex-start;
         }
-
-        .credential-item .badge.company {
-            background: rgba(29,78,216,0.12);
-            color: var(--blue);
-        }
-
-        .credential-item .badge.consultant {
-            background: rgba(124,58,237,0.12);
-            color: #7C3AED;
-        }
-
-        .credential-item .badge.admin {
-            background: rgba(239,68,68,0.12);
-            color: var(--red);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .credentials-box {
-                background: var(--gray-900);
-                border-color: var(--gray-700);
-            }
-            .credentials-box .title {
-                color: var(--gray-500);
-            }
-            .credential-item {
-                background: var(--gray-800);
-                border-color: var(--gray-700);
-            }
-            .credential-item .email {
-                color: var(--gray-300);
-            }
-            .credential-item .password {
-                color: var(--gray-500);
-            }
-            .credential-item:hover {
-                border-color: var(--gray-600);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .credentials-grid {
-                grid-template-columns: 1fr;
-                gap: 6px;
-            }
-        }
-
-        /* ============================================
-           FOOTER (MESMO DO INDEX)
-           ============================================ */
-        .footer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px 20px;
-            margin-top: 28px;
-            padding-top: 20px;
-            border-top: 1px solid var(--gray-200);
-            font-size: 0.65rem;
-            color: var(--gray-400);
-            letter-spacing: 0.02em;
-        }
-
-        .footer .divider {
+        .demo-info .code {
+            background: var(--gray-900);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.7rem;
             color: var(--gray-300);
         }
-
-        .footer .security-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            color: var(--gray-400);
-            font-weight: 500;
+        .footer {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-700);
+            text-align: center;
+            font-size: 0.65rem;
+            color: var(--gray-500);
         }
-
-        .footer .security-badge .lock {
-            font-size: 0.8rem;
-        }
-
-        .footer a {
-            color: var(--gray-400);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer a:hover {
-            color: var(--gold);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .footer {
-                border-top-color: var(--gray-700);
-                color: var(--gray-600);
-            }
-            .footer .divider {
-                color: var(--gray-700);
-            }
-            .footer .security-badge {
-                color: var(--gray-600);
-            }
-            .footer a {
-                color: var(--gray-600);
-            }
-            .footer a:hover {
-                color: var(--gold-light);
-            }
-        }
-
-        /* ============================================
-           RESPONSIVIDADE
-           ============================================ */
         @media (max-width: 480px) {
-            .login-card {
-                padding: 32px 24px 28px;
-            }
-            .form-group input {
-                padding: 12px 14px;
-                font-size: 0.9rem;
-            }
-            .btn-login {
-                padding: 14px;
-                font-size: 0.9rem;
-            }
-            .footer {
-                font-size: 0.6rem;
-                gap: 8px 12px;
-            }
-            .credentials-box {
-                padding: 12px 16px;
-            }
-            .credentials-box .title {
-                font-size: 0.6rem;
-            }
+            .card { padding: 32px 20px; }
+            .logo .name { font-size: 1.3rem; }
+            .lgpd-check { font-size: 0.7rem; }
         }
-
-        @media (max-width: 360px) {
-            .login-card {
-                padding: 24px 16px 20px;
-            }
-            .logo-img {
-                height: 28px;
-            }
-        }
-
-        /* ============================================
-           PRINT
-           ============================================ */
-        @media print {
+        @media (prefers-color-scheme: light) {
             body {
-                background: white !important;
+                background: #F8FAFC;
             }
-            .login-card {
-                box-shadow: none !important;
-                border: 1px solid #E2E8F0 !important;
+            .card {
+                background: #FFFFFF;
+                border-color: #E2E8F0;
             }
-            .login-card::before {
-                display: none !important;
+            .card .desc { color: #64748B; }
+            .form-group input,
+            .form-group select {
+                background: #F8FAFC;
+                border-color: #E2E8F0;
+                color: #0F172A;
             }
-            .btn-login {
-                display: none !important;
+            .form-group input:focus {
+                border-color: var(--gold);
             }
-            .credentials-box {
-                display: none !important;
-            }
+            .form-group label { color: #475569; }
+            .demo-info { border-color: rgba(217,119,6,0.1); }
+            .demo-info .code { background: #F1F5F9; color: #475569; }
+            .footer { border-color: #E2E8F0; color: #94A3B8; }
+            .lgpd-check { color: #64748B; }
+            .logo .sub { color: #94A3B8; }
+            .logo .name .tm { color: #94A3B8; }
         }
     </style>
 </head>
 <body>
-
-    <div class="login-container">
-        <div class="login-card">
-
-            <!-- ===== LOGO (MESMA DO INDEX) ===== -->
-            <div class="logo">
-                <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
-                <div class="logo-text">
-                    <span class="logo-name">VIGORRE <span class="logo-tm">ONE</span><sup>™</sup></span>
-                    <span class="logo-sub">People Intelligence Enterprise</span>
-                </div>
-            </div>
-
-            <!-- ===== FORM ===== -->
-            <form id="loginForm" autocomplete="off" novalidate>
-                <div class="form-group">
-                    <label for="email">
-                        E-mail
-                        <span class="label-hint">obrigatório</span>
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="seu@email.com"
-                        autocomplete="off"
-                        required
-                        aria-required="true"
-                    />
-                </div>
-
-                <div class="form-group">
-                    <label for="password">
-                        Senha
-                        <span class="label-hint">mín. 6 caracteres</span>
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="••••••••"
-                        autocomplete="new-password"
-                        readonly
-                        onfocus="this.removeAttribute('readonly')"
-                        required
-                        aria-required="true"
-                    />
-                </div>
-
-                <button type="submit" class="btn-login">
-                    <span class="btn-icon">🔐</span>
-                    Entrar no Sistema
-                </button>
-
-                <div id="loginError" class="error-message" role="alert"></div>
-            </form>
-
-            <!-- ===== CREDENCIAIS PROVISÓRIAS (VISÍVEIS) ===== -->
-            <div class="credentials-box">
-                <div class="title">
-                    <span class="lock">🔑</span>
-                    Credenciais de Teste
-                </div>
-                <div class="credentials-grid">
-                    <div class="credential-item">
-                        <span class="role">🏢 Empresa</span>
-                        <span class="email">empresa@teste.com</span>
-                        <span class="password">senha: emp123</span>
-                        <span class="badge company">Company</span>
-                    </div>
-                    <div class="credential-item">
-                        <span class="role">📊 Consultor</span>
-                        <span class="email">consultor@teste.com</span>
-                        <span class="password">senha: cons123</span>
-                        <span class="badge consultant">Consultor</span>
-                    </div>
-                    <div class="credential-item">
-                        <span class="role">🎯 Recrutador</span>
-                        <span class="email">recrutador@teste.com</span>
-                        <span class="password">senha: rec123</span>
-                        <span class="badge">Recrutador</span>
-                    </div>
-                    <div class="credential-item">
-                        <span class="role">👤 Participante</span>
-                        <span class="email">participante@teste.com</span>
-                        <span class="password">senha: part123</span>
-                        <span class="badge">Participante</span>
-                    </div>
-                    <div class="credential-item" style="grid-column: span 2;">
-                        <span class="role">👑 Master Admin</span>
-                        <span class="email">master@vigorre.com</span>
-                        <span class="password">senha: adminvigor10</span>
-                        <span class="badge admin">Master</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== FOOTER (MESMO DO INDEX) ===== -->
-            <div class="footer">
-                <span class="security-badge">
-                    <span class="lock">🔒</span>
-                    Sessão segura
-                </span>
-                <span class="divider">|</span>
-                <span>© 2026 <a href="#">VIGORRE ONE™</a></span>
-                <span class="divider">|</span>
-                <span>v3.1.0</span>
-                <span class="divider">|</span>
-                <a href="/">Voltar para Home</a>
-            </div>
-
+    <div class="card">
+        <div class="logo">
+            <span class="name">VIGORRE <span class="one">ONE</span><span class="tm">™</span></span>
+            <span class="sub">People Intelligence Enterprise</span>
         </div>
+
+        <h1>Bem-vindo 👋</h1>
+        <p class="desc">Acesse sua conta para continuar</p>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="seu@email.com" required autocomplete="email" />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password" />
+            </div>
+
+            <div class="form-group">
+                <label for="role">Perfil de Acesso</label>
+                <select id="role">
+                    <option value="admin">Administrador</option>
+                    <option value="organizacao" selected>Organização</option>
+                    <option value="participante">Participante</option>
+                </select>
+            </div>
+
+            <!-- LGPD Consentimento -->
+            <div class="lgpd-check">
+                <input type="checkbox" id="lgpdConsent" required />
+                <label for="lgpdConsent">
+                    🔒 Concordo com a <a href="#" onclick="alert('Política de Privacidade VIGORRE ONE™ - Seus dados são protegidos conforme LGPD.')">Política de Privacidade</a> e com o tratamento dos meus dados conforme a LGPD.
+                </label>
+            </div>
+
+            <div id="error" class="error"></div>
+            <div id="success" class="success"></div>
+
+            <button type="submit" class="btn-login" id="loginBtn">Entrar</button>
+        </form>
+
+        <div class="demo-info">
+            <strong>🔑 Contas de Demonstração:</strong><br />
+            <span class="code">admin@vigorre.com</span> · <span class="code">empresa@vigorre.com</span> · <span class="code">participante@vigorre.com</span><br />
+            <span style="color:var(--gray-500);">(qualquer senha funciona)</span>
+        </div>
+
+        <div class="footer">© 2026 VIGORRE ONE™ · People Analytics Enterprise · <a href="#" style="color:var(--gold);text-decoration:none;" onclick="alert('🔒 LGPD - Política de Privacidade VIGORRE ONE™')">LGPD</a></div>
     </div>
 
-    <!-- ============================================
-    SCRIPTS
-    ============================================ -->
+    <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
-
     <script>
-        'use strict';
+        // ============================================
+        // HANDLE LOGIN
+        // ============================================
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const role = document.getElementById('role').value;
+            const lgpdConsent = document.getElementById('lgpdConsent').checked;
+            const errorEl = document.getElementById('error');
+            const successEl = document.getElementById('success');
+            const btn = document.getElementById('loginBtn');
 
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🔐 VIGORRE ONE™ - Login Enterprise');
+            // Reset messages
+            errorEl.classList.remove('show');
+            successEl.classList.remove('show');
 
-            // ============================================
-            // PREVENIR REDIRECIONAMENTO AUTOMÁTICO
-            // ============================================
-
-            // Prevenir gravação de senha
-            var passwordInput = document.getElementById('password');
-            if (passwordInput) {
-                passwordInput.addEventListener('focus', function() {
-                    this.removeAttribute('readonly');
-                });
-                passwordInput.addEventListener('blur', function() {
-                    if (!this.value) {
-                        this.setAttribute('readonly', 'readonly');
-                    }
-                });
+            // Validar campos
+            if (!email || !password) {
+                errorEl.textContent = 'Preencha todos os campos.';
+                errorEl.classList.add('show');
+                return;
             }
 
-            // ============================================
-            // SUBMIT DO LOGIN
-            // ============================================
-            var loginForm = document.getElementById('loginForm');
-            var errorEl = document.getElementById('loginError');
+            // Validar LGPD
+            if (!lgpdConsent) {
+                errorEl.textContent = '🔒 Você precisa concordar com a Política de Privacidade (LGPD) para acessar.';
+                errorEl.classList.add('show');
+                return;
+            }
 
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+            btn.disabled = true;
+            btn.textContent = '🔄 Entrando...';
 
-                var email = document.getElementById('email').value.trim();
-                var password = document.getElementById('password').value.trim();
-
-                // Reset error
-                errorEl.className = 'error-message';
-                errorEl.textContent = '';
-                errorEl.style.display = 'none';
-
-                // Validação
-                if (!email || !password) {
-                    errorEl.textContent = '❌ Preencha todos os campos';
-                    errorEl.style.display = 'block';
-                    return;
-                }
-
-                if (password.length < 6) {
-                    errorEl.textContent = '❌ A senha deve ter pelo menos 6 caracteres';
-                    errorEl.style.display = 'block';
-                    return;
-                }
-
-                // Tentar login
-                var result = window.VigorreAuth.login(email, password);
-
-                if (result.success) {
-                    errorEl.className = 'error-message success';
-                    errorEl.textContent = '✅ ' + result.message;
-                    errorEl.style.display = 'block';
-
-                    // Desabilitar botão para evitar múltiplos cliques
-                    var btn = loginForm.querySelector('.btn-login');
-                    btn.disabled = true;
-                    btn.innerHTML = '⏳ Redirecionando...';
-
-                    setTimeout(function() {
-                        if (result.redirect) {
-                            window.location.href = result.redirect;
-                        } else {
-                            window.location.href = '/dashboard.html';
-                        }
-                    }, 600);
+            try {
+                if (window.VigorreAuth) {
+                    // Tentar login com consentimento
+                    window.VigorreAuth.login(email, password, role, true);
                 } else {
-                    errorEl.textContent = result.message;
-                    errorEl.style.display = 'block';
-
-                    // Limpar campo de senha
-                    document.getElementById('password').value = '';
-                    document.getElementById('password').setAttribute('readonly', 'readonly');
-
-                    // Focar no email
-                    document.getElementById('email').focus();
+                    throw new Error('Sistema de autenticação não disponível.');
                 }
-            });
+            } catch (err) {
+                errorEl.textContent = err.message || 'Erro ao fazer login.';
+                errorEl.classList.add('show');
+                btn.disabled = false;
+                btn.textContent = 'Entrar';
+            }
+        }
 
-            // ============================================
-            // BLOQUEAR TECLA ENTER
-            // ============================================
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && e.target.closest('form')) {
-                    var form = e.target.closest('form');
-                    var btn = form.querySelector('.btn-login');
-                    if (btn && !btn.disabled) {
-                        e.preventDefault();
-                        form.dispatchEvent(new Event('submit'));
-                    }
-                }
-            });
+        // ============================================
+        // REDIRECIONAR SE JÁ LOGADO
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar mensagem na URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const message = urlParams.get('message');
+            if (message) {
+                const successEl = document.getElementById('success');
+                successEl.textContent = 'ℹ️ ' + decodeURIComponent(message);
+                successEl.classList.add('show');
+            }
 
-            // ============================================
-            // AUTO-FOCUS
-            // ============================================
-            document.getElementById('email').focus();
-
-            console.log('✅ Login Enterprise carregado com sucesso!');
-            console.log('📋 Credenciais de teste disponíveis na tela');
+            if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
+                const user = window.VigorreAuth.getCurrentUser();
+                const redirects = {
+                    'admin': '/admin/dashboard.html',
+                    'organizacao': '/organizacao/dashboard.html',
+                    'participante': '/participante/dashboard.html'
+                };
+                window.location.href = redirects[user.role] || '/';
+            }
         });
-    </script>
 
+        console.log('✅ Página de Login com LGPD carregada com sucesso!');
+    </script>
 </body>
 </html>
