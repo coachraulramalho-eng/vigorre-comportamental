@@ -12,7 +12,7 @@
     <style>
         /* ============================================
            VIGORRE ONE™ - LOGIN ENTERPRISE
-           DESIGN SAP / WORKDAY / ORACLE
+           MESMA IDENTIDADE DO INDEX
            ============================================ */
 
         :root {
@@ -22,11 +22,9 @@
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --gold-light: #F59E0B;
             --green: #10B981;
             --red: #EF4444;
-            --orange: #F59E0B;
-            --purple: #7C3AED;
-            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -43,18 +41,17 @@
             --radius-full: 9999px;
             --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
             --shadow-lg: 0 8px 32px rgba(0,0,0,0.06), 0 16px 64px rgba(10,37,64,0.10);
-            --transition: 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
+            --shadow-xl: 0 12px 48px rgba(0,0,0,0.08), 0 24px 80px rgba(10,37,64,0.12);
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Poppins', 'Inter', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, #0F2A44 100%);
+            font-family: var(--font-primary);
+            background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -64,7 +61,7 @@
             overflow: hidden;
         }
 
-        /* ===== BACKGROUND DECORATIVO ===== */
+        /* ===== BACKGROUND DECORATIVO (IGUAL INDEX) ===== */
         body::before {
             content: '';
             position: absolute;
@@ -72,7 +69,7 @@
             right: -20%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(217,119,6,0.03) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
@@ -84,12 +81,14 @@
             left: -10%;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.04) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(6,182,212,0.03) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
 
-        /* ===== LOGIN CARD ===== */
+        /* ============================================
+           LOGIN CARD
+           ============================================ */
         .login-container {
             width: 100%;
             max-width: 440px;
@@ -99,27 +98,22 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px) scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(40px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .login-card {
             background: var(--white);
             border-radius: var(--radius);
             padding: 48px 40px 40px;
-            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--gray-200);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
         }
 
-        /* ===== BORDA DECORATIVA SUPERIOR ===== */
+        /* ===== BORDA DECORATIVA SUPERIOR (IGUAL INDEX) ===== */
         .login-card::before {
             content: '';
             position: absolute;
@@ -127,85 +121,111 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(135deg, var(--blue), var(--cyan), var(--purple));
-            opacity: 0.6;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--cyan));
+            opacity: 0.8;
         }
 
-        /* ===== DARK MODE ===== */
+        /* ===== DARK MODE (IGUAL INDEX) ===== */
         @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--gray-900);
+            }
+            body::before {
+                background: radial-gradient(circle, rgba(217,119,6,0.06) 0%, transparent 70%);
+            }
+            body::after {
+                background: radial-gradient(circle, rgba(6,182,212,0.04) 0%, transparent 70%);
+            }
             .login-card {
                 background: var(--gray-800);
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
+                border-color: var(--gray-700);
+                box-shadow: 0 8px 32px rgba(0,0,0,0.4);
             }
             .login-card::before {
-                opacity: 0.8;
+                opacity: 0.9;
             }
         }
 
-        /* ===== LOGO ===== */
+        /* ============================================
+           LOGO (MESMA DO INDEX)
+           ============================================ */
         .logo {
             text-align: center;
             margin-bottom: 36px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
         }
 
-        .logo-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            border-radius: var(--radius-sm);
-            margin-bottom: 16px;
-            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.15);
+        .logo-img {
+            height: 48px;
+            width: auto;
+            display: block;
             transition: var(--transition);
         }
 
-        .logo-icon:hover {
+        .logo-img:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 32px rgba(29, 78, 216, 0.2);
         }
 
-        .logo-icon svg {
-            width: 32px;
-            height: 32px;
-            fill: white;
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
         }
 
-        .logo h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.4rem;
+        .logo-name {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
             font-weight: 800;
-            color: var(--gray-900);
-            letter-spacing: -0.5px;
-            margin-bottom: 2px;
+            color: var(--navy);
+            letter-spacing: -0.3px;
         }
 
-        .logo h1 .tm {
-            font-size: 0.4rem;
+        .logo-tm {
+            color: var(--gold);
+        }
+
+        .logo-name sup {
+            font-size: 0.5rem;
             vertical-align: super;
-            color: var(--cyan);
-            font-weight: 600;
+            color: var(--gray-400);
         }
 
-        .logo .subtitle {
-            font-size: 0.7rem;
+        .logo-sub {
+            font-size: 0.6rem;
             color: var(--gray-400);
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.08em;
             font-weight: 500;
+            margin-top: -2px;
         }
 
         @media (prefers-color-scheme: dark) {
-            .logo h1 {
+            .logo-name {
                 color: var(--white);
             }
-            .logo .subtitle {
+            .logo-sub {
                 color: var(--gray-500);
             }
         }
 
-        /* ===== FORM ===== */
+        @media (max-width: 480px) {
+            .logo-img {
+                height: 36px;
+            }
+            .logo-name {
+                font-size: 1rem;
+            }
+            .logo-sub {
+                font-size: 0.5rem;
+            }
+        }
+
+        /* ============================================
+           FORM
+           ============================================ */
         .form-group {
             margin-bottom: 20px;
         }
@@ -236,7 +256,7 @@
             border: 1.5px solid var(--gray-200);
             border-radius: var(--radius-sm);
             font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-primary);
             color: var(--gray-900);
             background: var(--gray-50);
             transition: var(--transition);
@@ -247,7 +267,7 @@
         .form-group input:focus {
             border-color: var(--blue);
             background: var(--white);
-            box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.08);
+            box-shadow: 0 0 0 4px rgba(29,78,216,0.08);
         }
 
         .form-group input::placeholder {
@@ -272,7 +292,7 @@
             .form-group input:focus {
                 background: var(--gray-800);
                 border-color: var(--blue-light);
-                box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+                box-shadow: 0 0 0 4px rgba(59,130,246,0.12);
             }
             .form-group input::placeholder {
                 color: var(--gray-600);
@@ -282,37 +302,39 @@
             }
         }
 
-        /* ===== BOTÃO ===== */
+        /* ============================================
+           BOTÃO (MESMO ESTILO DO INDEX)
+           ============================================ */
         .btn-login {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, var(--blue), var(--blue-light));
-            color: white;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--white);
             border: none;
             border-radius: var(--radius-sm);
             font-size: 0.95rem;
             font-weight: 600;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-primary);
             cursor: pointer;
             transition: var(--transition);
             margin-top: 8px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
+            box-shadow: 0 4px 16px rgba(217,119,6,0.25);
         }
 
         .btn-login::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent);
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
             opacity: 0;
             transition: var(--transition);
         }
 
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(29, 78, 216, 0.3);
+            box-shadow: 0 8px 30px rgba(217,119,6,0.35);
         }
 
         .btn-login:hover::after {
@@ -327,7 +349,9 @@
             margin-right: 8px;
         }
 
-        /* ===== MENSAGEM DE ERRO ===== */
+        /* ============================================
+           MENSAGEM DE ERRO
+           ============================================ */
         .error-message {
             display: none;
             padding: 12px 16px;
@@ -353,12 +377,145 @@
             75% { transform: translateX(8px); }
         }
 
-        /* ===== FOOTER ===== */
+        /* ============================================
+           CREDENCIAIS PROVISÓRIAS (VISÍVEIS)
+           ============================================ */
+        .credentials-box {
+            margin-top: 20px;
+            padding: 16px 20px;
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .credentials-box:hover {
+            border-color: var(--gold);
+            box-shadow: 0 4px 12px rgba(217,119,6,0.04);
+        }
+
+        .credentials-box .title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .credentials-box .title .lock {
+            font-size: 0.8rem;
+        }
+
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .credential-item {
+            display: flex;
+            flex-direction: column;
+            padding: 6px 10px;
+            background: var(--white);
+            border-radius: 6px;
+            border: 1px solid var(--gray-100);
+            transition: var(--transition);
+        }
+
+        .credential-item:hover {
+            border-color: var(--gray-300);
+        }
+
+        .credential-item .role {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .credential-item .email {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .credential-item .password {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            font-family: 'Courier New', monospace;
+        }
+
+        .credential-item .badge {
+            display: inline-block;
+            font-size: 0.55rem;
+            font-weight: 600;
+            padding: 1px 10px;
+            border-radius: var(--radius-full);
+            background: rgba(217,119,6,0.12);
+            color: var(--gold);
+            margin-top: 2px;
+            align-self: flex-start;
+        }
+
+        .credential-item .badge.company {
+            background: rgba(29,78,216,0.12);
+            color: var(--blue);
+        }
+
+        .credential-item .badge.consultant {
+            background: rgba(124,58,237,0.12);
+            color: #7C3AED;
+        }
+
+        .credential-item .badge.admin {
+            background: rgba(239,68,68,0.12);
+            color: var(--red);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .credentials-box {
+                background: var(--gray-900);
+                border-color: var(--gray-700);
+            }
+            .credentials-box .title {
+                color: var(--gray-500);
+            }
+            .credential-item {
+                background: var(--gray-800);
+                border-color: var(--gray-700);
+            }
+            .credential-item .email {
+                color: var(--gray-300);
+            }
+            .credential-item .password {
+                color: var(--gray-500);
+            }
+            .credential-item:hover {
+                border-color: var(--gray-600);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .credentials-grid {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+        }
+
+        /* ============================================
+           FOOTER (MESMO DO INDEX)
+           ============================================ */
         .footer {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 16px;
+            flex-wrap: wrap;
+            gap: 12px 20px;
             margin-top: 28px;
             padding-top: 20px;
             border-top: 1px solid var(--gray-200);
@@ -383,6 +540,16 @@
             font-size: 0.8rem;
         }
 
+        .footer a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer a:hover {
+            color: var(--gold);
+        }
+
         @media (prefers-color-scheme: dark) {
             .footer {
                 border-top-color: var(--gray-700);
@@ -394,23 +561,20 @@
             .footer .security-badge {
                 color: var(--gray-600);
             }
+            .footer a {
+                color: var(--gray-600);
+            }
+            .footer a:hover {
+                color: var(--gold-light);
+            }
         }
 
-        /* ===== RESPONSIVIDADE ===== */
+        /* ============================================
+           RESPONSIVIDADE
+           ============================================ */
         @media (max-width: 480px) {
             .login-card {
                 padding: 32px 24px 28px;
-            }
-            .logo h1 {
-                font-size: 1.2rem;
-            }
-            .logo-icon {
-                width: 48px;
-                height: 48px;
-            }
-            .logo-icon svg {
-                width: 24px;
-                height: 24px;
             }
             .form-group input {
                 padding: 12px 14px;
@@ -421,8 +585,13 @@
                 font-size: 0.9rem;
             }
             .footer {
-                flex-wrap: wrap;
-                gap: 8px;
+                font-size: 0.6rem;
+                gap: 8px 12px;
+            }
+            .credentials-box {
+                padding: 12px 16px;
+            }
+            .credentials-box .title {
                 font-size: 0.6rem;
             }
         }
@@ -431,12 +600,14 @@
             .login-card {
                 padding: 24px 16px 20px;
             }
-            .logo h1 {
-                font-size: 1rem;
+            .logo-img {
+                height: 28px;
             }
         }
 
-        /* ===== PRINT ===== */
+        /* ============================================
+           PRINT
+           ============================================ */
         @media print {
             body {
                 background: white !important;
@@ -451,6 +622,9 @@
             .btn-login {
                 display: none !important;
             }
+            .credentials-box {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -459,16 +633,13 @@
     <div class="login-container">
         <div class="login-card">
 
-            <!-- ===== LOGO ===== -->
+            <!-- ===== LOGO (MESMA DO INDEX) ===== -->
             <div class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" opacity="0.4"/>
-                    </svg>
+                <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <div class="logo-text">
+                    <span class="logo-name">VIGORRE <span class="logo-tm">ONE</span><sup>™</sup></span>
+                    <span class="logo-sub">People Intelligence Enterprise</span>
                 </div>
-                <h1>VIGORRE ONE<span class="tm">™</span></h1>
-                <p class="subtitle">People Analytics Enterprise</p>
             </div>
 
             <!-- ===== FORM ===== -->
@@ -513,23 +684,65 @@
                 <div id="loginError" class="error-message" role="alert"></div>
             </form>
 
-            <!-- ===== FOOTER ===== -->
+            <!-- ===== CREDENCIAIS PROVISÓRIAS (VISÍVEIS) ===== -->
+            <div class="credentials-box">
+                <div class="title">
+                    <span class="lock">🔑</span>
+                    Credenciais de Teste
+                </div>
+                <div class="credentials-grid">
+                    <div class="credential-item">
+                        <span class="role">🏢 Empresa</span>
+                        <span class="email">empresa@teste.com</span>
+                        <span class="password">senha: emp123</span>
+                        <span class="badge company">Company</span>
+                    </div>
+                    <div class="credential-item">
+                        <span class="role">📊 Consultor</span>
+                        <span class="email">consultor@teste.com</span>
+                        <span class="password">senha: cons123</span>
+                        <span class="badge consultant">Consultor</span>
+                    </div>
+                    <div class="credential-item">
+                        <span class="role">🎯 Recrutador</span>
+                        <span class="email">recrutador@teste.com</span>
+                        <span class="password">senha: rec123</span>
+                        <span class="badge">Recrutador</span>
+                    </div>
+                    <div class="credential-item">
+                        <span class="role">👤 Participante</span>
+                        <span class="email">participante@teste.com</span>
+                        <span class="password">senha: part123</span>
+                        <span class="badge">Participante</span>
+                    </div>
+                    <div class="credential-item" style="grid-column: span 2;">
+                        <span class="role">👑 Master Admin</span>
+                        <span class="email">master@vigorre.com</span>
+                        <span class="password">senha: adminvigor10</span>
+                        <span class="badge admin">Master</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== FOOTER (MESMO DO INDEX) ===== -->
             <div class="footer">
                 <span class="security-badge">
                     <span class="lock">🔒</span>
                     Sessão segura
                 </span>
                 <span class="divider">|</span>
-                <span>© 2026 VIGORRE ONE™</span>
+                <span>© 2026 <a href="#">VIGORRE ONE™</a></span>
                 <span class="divider">|</span>
                 <span>v3.1.0</span>
+                <span class="divider">|</span>
+                <a href="/">Voltar para Home</a>
             </div>
 
         </div>
     </div>
 
     <!-- ============================================
-    SCRIPTS - CAMINHOS ABSOLUTOS
+    SCRIPTS
     ============================================ -->
     <script src="/auth.js"></script>
 
@@ -541,7 +754,6 @@
 
             // ============================================
             // PREVENIR REDIRECIONAMENTO AUTOMÁTICO
-            // Só redireciona se o usuário clicar em "Entrar"
             // ============================================
 
             // Prevenir gravação de senha
@@ -621,7 +833,7 @@
             });
 
             // ============================================
-            // BLOQUEAR TECLA ENTER (prevenir duplo submit)
+            // BLOQUEAR TECLA ENTER
             // ============================================
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' && e.target.closest('form')) {
@@ -635,11 +847,12 @@
             });
 
             // ============================================
-            // AUTO-FOCUS NO CAMPO DE EMAIL
+            // AUTO-FOCUS
             // ============================================
             document.getElementById('email').focus();
 
             console.log('✅ Login Enterprise carregado com sucesso!');
+            console.log('📋 Credenciais de teste disponíveis na tela');
         });
     </script>
 
