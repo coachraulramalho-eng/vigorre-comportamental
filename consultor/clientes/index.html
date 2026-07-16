@@ -4,94 +4,129 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clientes | VIGORRE ONE™</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
     <style>
-        /* CSS simplificado para página de clientes */
+        :root {
+            --navy: #0A2540;
+            --gold: #D97706;
+            --gray-50: #F8FAFC;
+            --gray-200: #E2E8F0;
+            --gray-400: #94A3B8;
+            --gray-600: #475569;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --white: #FFFFFF;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --font-primary: 'Inter', sans-serif;
+            --font-display: 'Poppins', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
-            background: #F8FAFC;
-            color: #0F172A;
+            font-family: var(--font-primary);
+            background: var(--gray-50);
+            color: var(--gray-600);
+            min-height: 100vh;
             padding: 40px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            align-items: flex-start;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             width: 100%;
-            background: white;
-            border-radius: 16px;
+            background: var(--white);
+            border-radius: var(--radius);
             padding: 40px;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
-            border: 1px solid #E2E8F0;
+            border: 1px solid var(--gray-200);
         }
-        h1 {
-            font-family: 'Poppins', sans-serif;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .header h1 {
+            font-family: var(--font-display);
             font-size: 1.8rem;
             font-weight: 700;
-            color: #0A2540;
-            margin-bottom: 8px;
+            color: var(--navy);
         }
-        .subtitle {
-            color: #94A3B8;
-            margin-bottom: 24px;
-        }
+        .header h1 .highlight { color: var(--gold); }
         .btn-back {
-            display: inline-block;
             padding: 8px 20px;
-            background: #1D4ED8;
+            background: var(--navy);
             color: white;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.85rem;
             transition: 0.3s;
         }
-        .btn-back:hover {
-            background: #1A3A5C;
-            transform: translateY(-2px);
+        .btn-back:hover { background: var(--gold); transform: translateY(-2px); }
+        .btn-add {
+            padding: 8px 20px;
+            background: var(--gold);
+            color: white;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
         }
+        .btn-add:hover { background: var(--navy); transform: translateY(-2px); }
+        .subtitle { color: var(--gray-400); margin-bottom: 24px; font-size: 0.95rem; }
         .placeholder {
             text-align: center;
-            padding: 60px 20px;
-            color: #94A3B8;
+            padding: 80px 20px;
+            color: var(--gray-400);
         }
-        .placeholder .icon {
-            font-size: 4rem;
-            display: block;
-            margin-bottom: 16px;
+        .placeholder .icon { font-size: 4rem; display: block; margin-bottom: 16px; }
+        .placeholder h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--gray-600); margin-bottom: 8px; }
+        .footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-200);
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--gray-400);
         }
         @media (prefers-color-scheme: dark) {
-            body {
-                background: #0F172A;
-            }
-            .container {
-                background: #1E293B;
-                border-color: #334155;
-            }
-            h1 {
-                color: #F8FAFC;
-            }
+            body { background: var(--gray-900); }
+            .container { background: var(--gray-800); border-color: var(--gray-700); }
+            .header h1 { color: var(--white); }
+            .placeholder h3 { color: var(--gray-300); }
+            .footer { border-color: var(--gray-700); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../dashboard.html" class="btn-back">← Voltar ao Dashboard</a>
-        <h1>👥 Meus Clientes</h1>
-        <p class="subtitle">Lista de clientes gerenciados por você</p>
-        <div class="placeholder">
-            <span class="icon">📋</span>
-            <h3>Nenhum cliente cadastrado ainda</h3>
-            <p>Os clientes aparecerão aqui após serem adicionados.</p>
+        <div class="header">
+            <h1>👥 <span class="highlight">Clientes</span></h1>
+            <div style="display:flex; gap:12px;">
+                <a href="novo.html" class="btn-add">+ Novo Cliente</a>
+                <a href="../dashboard.html" class="btn-back">← Voltar</a>
+            </div>
         </div>
+        <p class="subtitle">Gerencie seus clientes e acompanhe o progresso</p>
+        <div class="placeholder">
+            <span class="icon">👥</span>
+            <h3>Nenhum cliente cadastrado</h3>
+            <p>Clique em "Novo Cliente" para começar a cadastrar.</p>
+        </div>
+        <div class="footer">© 2026 VIGORRE ONE™ · People Analytics Enterprise</div>
     </div>
+    <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script>
-        // Verificação de autenticação
         if (window.VigorreAuth && !window.VigorreAuth.isAuthenticated()) {
             window.location.href = '../../login.html';
         }
