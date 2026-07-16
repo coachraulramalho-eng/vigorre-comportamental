@@ -15,6 +15,7 @@
     <style>
         /* ============================================
            VIGORRE ONE™ - EMPRESA DASHBOARD
+           MESMA IDENTIDADE DO INDEX
            ============================================ */
 
         :root {
@@ -217,7 +218,7 @@
         }
 
         /* ============================================
-           HEADER (ONE NA COR CYAN)
+           HEADER (ONE NA COR GOLD - IGUAL INDEX)
            ============================================ */
         .header {
             background: var(--navy);
@@ -264,7 +265,7 @@
         }
 
         .header .logo .logo-text .name .one {
-            color: var(--cyan);
+            color: var(--gold);
         }
 
         .header .logo .logo-text .name .tm {
@@ -606,7 +607,7 @@
         }
 
         /* ============================================
-           QUICK ACTIONS (BOTÕES QUE ABREM)
+           QUICK ACTIONS
            ============================================ */
         .quick-actions {
             display: grid;
@@ -830,7 +831,7 @@
         }
 
         /* ============================================
-           FOOTER (TEXTO MENOR E LIMPO)
+           FOOTER
            ============================================ */
         .footer {
             margin-top: 48px;
@@ -866,7 +867,7 @@
         }
 
         .footer .footer-brand .logo-text .name .one {
-            color: var(--cyan);
+            color: var(--gold);
         }
 
         .footer .footer-brand .logo-text .sub {
@@ -1080,7 +1081,7 @@
     </div>
 
     <!-- ============================================
-    HEADER (ONE NA COR CYAN)
+    HEADER (ONE NA COR GOLD - IGUAL INDEX)
     ============================================ -->
     <header class="header">
         <a href="#" class="logo" aria-label="VIGORRE ONE™ Home">
@@ -1186,30 +1187,30 @@
                     <h3>⚡ Ações Rápidas</h3>
                 </div>
                 <div class="quick-actions">
-                    <button class="quick-action" onclick="abrirPagina('colaboradores')">
+                    <a href="colaboradores.html" class="quick-action">
                         <span class="icon">👥</span>
                         <span class="label">Ver Colaboradores</span>
-                    </button>
-                    <button class="quick-action" onclick="abrirPagina('avaliacoes')">
+                    </a>
+                    <a href="avaliacoes.html" class="quick-action">
                         <span class="icon">📊</span>
                         <span class="label">Ver Avaliações</span>
-                    </button>
-                    <button class="quick-action" onclick="abrirPagina('relatorios')">
+                    </a>
+                    <a href="relatorios.html" class="quick-action">
                         <span class="icon">📄</span>
                         <span class="label">Relatórios</span>
-                    </button>
-                    <button class="quick-action" onclick="abrirPagina('job-profile')">
+                    </a>
+                    <a href="job-profile.html" class="quick-action">
                         <span class="icon">🎯</span>
                         <span class="label">Perfis Ideais</span>
-                    </button>
-                    <button class="quick-action" onclick="abrirPagina('comprar-creditos')">
+                    </a>
+                    <a href="comprar-creditos.html" class="quick-action">
                         <span class="icon">💳</span>
                         <span class="label">Comprar Créditos</span>
-                    </button>
-                    <button class="quick-action" onclick="abrirPagina('configuracoes')">
+                    </a>
+                    <a href="configuracoes.html" class="quick-action">
                         <span class="icon">⚙️</span>
                         <span class="label">Configurações</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1218,7 +1219,7 @@
         <div class="table-card">
             <div class="table-header">
                 <h3>📋 Colaboradores</h3>
-                <button class="action" onclick="abrirPagina('colaboradores')">Ver todos →</button>
+                <a href="colaboradores.html" class="action">Ver todos →</a>
             </div>
             <div class="table-container">
                 <table aria-label="Lista de colaboradores">
@@ -1238,7 +1239,7 @@
     </main>
 
     <!-- ============================================
-    FOOTER (TEXTO MENOR E LIMPO)
+    FOOTER
     ============================================ -->
     <footer class="footer">
         <div class="footer-content">
@@ -1273,16 +1274,6 @@
         var discChartInstance = null;
         var bigfiveChartInstance = null;
         var ieChartInstance = null;
-
-        // ============================================
-        // FUNÇÃO PARA ABRIR PÁGINAS
-        // ============================================
-        function abrirPagina(pagina) {
-            var url = pagina + '.html';
-            showToast('📂 Abrindo: ' + pagina, 'info');
-            // Tenta abrir a página
-            window.location.href = url;
-        }
 
         // ============================================
         // LOGOUT
