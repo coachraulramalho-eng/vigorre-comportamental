@@ -15,7 +15,7 @@
     <style>
         /* ============================================
            VIGORRE ONE™ - CONSULTOR DASHBOARD
-           MESMA IDENTIDADE DO INDEX
+           NOVA IDENTIDADE (SAP/WORKDAY)
            ============================================ */
 
         :root {
@@ -163,6 +163,24 @@
                 background: rgba(59, 130, 246, 0.15);
                 color: var(--blue);
             }
+            .footer {
+                border-color: var(--border-color);
+                color: var(--text-muted);
+            }
+            .footer a {
+                color: var(--text-muted);
+            }
+            .footer a:hover {
+                color: var(--gold);
+            }
+            .footer .footer-social a {
+                background: var(--gray-800);
+                border-color: var(--gray-700);
+            }
+            .footer .footer-social a:hover {
+                background: var(--gold);
+                border-color: var(--gold);
+            }
         }
 
         * {
@@ -253,6 +271,9 @@
             color: white;
             letter-spacing: -0.3px;
         }
+        .sidebar .logo .logo-text .name .one {
+            color: var(--gold);
+        }
         .sidebar .logo .logo-text .name .tm {
             font-size: 0.4rem;
             vertical-align: super;
@@ -340,7 +361,7 @@
             transform: translateY(-50%) scaleY(0);
             width: 3px;
             height: 24px;
-            background: var(--purple);
+            background: var(--gold);
             border-radius: 0 3px 3px 0;
             transition: var(--transition);
         }
@@ -349,7 +370,7 @@
             color: white;
         }
         .sidebar .nav a.active {
-            background: rgba(124, 58, 237, 0.08);
+            background: rgba(217, 119, 6, 0.08);
             color: white;
         }
         .sidebar .nav a.active::before {
@@ -420,7 +441,7 @@
             letter-spacing: -0.5px;
         }
         .main-header h1 .highlight {
-            color: var(--purple);
+            color: var(--gold);
         }
         .main-header .date {
             font-size: 0.85rem;
@@ -532,7 +553,7 @@
             right: -20%;
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.03) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
@@ -554,13 +575,13 @@
             gap: 8px;
         }
         .ia-card .ia-top .ia-badge {
-            background: rgba(124, 58, 237, 0.15);
-            color: var(--purple);
+            background: rgba(217, 119, 6, 0.15);
+            color: var(--gold);
             padding: 4px 14px;
             border-radius: var(--radius-full);
             font-size: 0.7rem;
             font-weight: 600;
-            border: 1px solid rgba(124, 58, 237, 0.08);
+            border: 1px solid rgba(217, 119, 6, 0.08);
         }
         .ia-card .ia-content {
             display: grid;
@@ -626,13 +647,13 @@
         }
         .card .card-header .action {
             font-size: 0.75rem;
-            color: var(--purple);
+            color: var(--gold);
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
         }
         .card .card-header .action:hover {
-            color: var(--cyan);
+            color: var(--orange);
         }
         .chart-container {
             height: 200px;
@@ -657,17 +678,19 @@
             color: var(--text-secondary);
             transition: var(--transition);
             border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
         .quick-action:hover {
             background: var(--bg-card);
-            border-color: var(--purple);
+            border-color: var(--gold);
             box-shadow: var(--shadow-hover);
             transform: translateY(-2px);
         }
         .quick-action .icon {
             font-size: 1.6rem;
-            display: block;
-            margin-bottom: 4px;
         }
         .quick-action .label {
             font-size: 0.75rem;
@@ -680,7 +703,7 @@
             }
             .quick-action:hover {
                 background: var(--gray-600);
-                border-color: var(--purple);
+                border-color: var(--gold);
             }
         }
 
@@ -714,7 +737,7 @@
         }
         .table-card .table-header .action {
             font-size: 0.75rem;
-            color: var(--purple);
+            color: var(--gold);
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
@@ -798,7 +821,7 @@
             font-weight: 600;
             font-size: 0.875rem;
             z-index: 2000;
-            border-left: 4px solid var(--purple);
+            border-left: 4px solid var(--gold);
             animation: slideInRight 0.4s ease;
             max-width: 420px;
             color: var(--text-primary);
@@ -843,7 +866,7 @@
             transition: var(--transition);
         }
         .mobile-toggle:hover {
-            color: var(--purple);
+            color: var(--gold);
         }
         .mobile-overlay {
             display: none;
@@ -866,6 +889,93 @@
             }
             to {
                 opacity: 1;
+            }
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            margin-left: 260px;
+            padding: 16px 40px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .footer .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer .footer-brand .logo-img {
+            height: 24px;
+            width: auto;
+        }
+
+        .footer .footer-brand .logo-text .name {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .footer .footer-brand .logo-text .name .one {
+            color: var(--gold);
+        }
+
+        .footer .footer-brand .logo-text .sub {
+            font-size: 0.4rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .footer .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-sm);
+            background: var(--gray-50);
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            font-size: 0.8rem;
+        }
+
+        .footer .footer-social a:hover {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 992px) {
+            .footer {
+                margin-left: 0;
+                padding: 16px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer .footer-brand {
+                flex-direction: column;
+            }
+            .footer .footer-social {
+                justify-content: center;
             }
         }
 
@@ -971,15 +1081,14 @@
                 margin-left: 0 !important;
                 padding: 20px !important;
             }
+            .footer {
+                margin-left: 0 !important;
+            }
             .mobile-toggle {
                 display: none !important;
             }
-            .logo-img {
-                height: 36px !important;
-            }
             .quick-actions,
-            .ia-card,
-            .btn {
+            .ia-card {
                 display: none !important;
             }
             .stats-grid {
@@ -990,11 +1099,6 @@
             .table-card {
                 box-shadow: none !important;
                 border: 1px solid #E2E8F0 !important;
-            }
-            .ia-card {
-                background: #0A2540 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
             }
             .table-container th {
                 background: #F8FAFC !important;
@@ -1016,8 +1120,8 @@
         <a href="#" class="logo" aria-label="VIGORRE ONE™ Home">
             <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-text">
-                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                <span class="sub">People Analytics Enterprise</span>
+                <span class="name">VIGORRE <span class="one">ONE</span><span class="tm">™</span></span>
+                <span class="sub">People Intelligence Enterprise</span>
             </div>
         </a>
 
@@ -1123,7 +1227,7 @@
         <div class="card">
             <div class="card-header">
                 <h3>📈 Progresso dos Clientes</h3>
-                <a href="clientes/" class="action" style="color:var(--purple);text-decoration:none;font-size:0.75rem;font-weight:600;">Ver todos →</a>
+                <a href="clientes/" class="action">Ver todos →</a>
             </div>
             <div class="chart-container">
                 <canvas id="progressChart" aria-label="Gráfico de progresso dos clientes"></canvas>
@@ -1136,15 +1240,15 @@
                 <span class="icon">👥</span>
                 <span class="label">Novo Cliente</span>
             </a>
-            <a href="avaliacoes/" class="quick-action" data-tooltip="Nova avaliação">
+            <a href="avaliacoes/nova.html" class="quick-action" data-tooltip="Nova avaliação">
                 <span class="icon">📊</span>
                 <span class="label">Nova Avaliação</span>
             </a>
-            <a href="relatorios/" class="quick-action" data-tooltip="Gerar relatório">
+            <a href="relatorios/novo.html" class="quick-action" data-tooltip="Gerar relatório">
                 <span class="icon">📄</span>
                 <span class="label">Gerar Relatório</span>
             </a>
-            <a href="laudos/" class="quick-action" data-tooltip="Gerar laudo">
+            <a href="laudos/novo.html" class="quick-action" data-tooltip="Gerar laudo">
                 <span class="icon">📋</span>
                 <span class="label">Gerar Laudo</span>
             </a>
@@ -1182,7 +1286,25 @@
     </main>
 
     <!-- ============================================
-    SCRIPTS - CAMINHOS RELATIVOS
+    FOOTER
+    ============================================ -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+            <div class="logo-text">
+                <span class="name">VIGORRE <span class="one">ONE</span><span class="tm">™</span></span>
+                <span class="sub">People Intelligence Enterprise</span>
+            </div>
+        </div>
+        <div class="footer-social">
+            <a href="#" aria-label="LinkedIn">🔗</a>
+            <a href="#" aria-label="Instagram">📸</a>
+            <a href="#" aria-label="YouTube">▶️</a>
+        </div>
+    </footer>
+
+    <!-- ============================================
+    SCRIPTS
     ============================================ -->
     <script src="../supabase-config.js"></script>
     <script src="../auth.js"></script>
@@ -1246,9 +1368,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Dashboard Consultor - VIGORRE ONE™');
 
-            // ============================================
-            // VERIFICAÇÃO DE AUTENTICAÇÃO
-            // ============================================
             if (window.requireConsultant) {
                 if (!window.requireConsultant()) { return; }
             } else if (window.VigorreAuth) {
@@ -1474,7 +1593,7 @@
             toast._timeout = setTimeout(function() { toast.classList.remove('show'); }, 4000);
         }
 
-        console.log('✅ Dashboard Consultor recriado do zero com sucesso!');
+        console.log('✅ Dashboard Consultor International carregado com sucesso!');
     </script>
 
 </body>
