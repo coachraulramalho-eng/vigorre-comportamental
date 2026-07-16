@@ -214,3 +214,115 @@
             if (!selectedReport) {
                 showToast('❌ Selecione um tipo de relatório', 'error');
                 return;
+            }
+
+            var btn = document.getElementById('btnGenerate');
+            btn.disabled = true;
+            btn.textContent = '⏳ Processando...';
+
+            var tipo = selectedReport.type;
+            var cost = selectedReport.cost;
+            var creditosUsados = {};
+
+            if (tipo === 'COMPLETO') {
+                if ((userCredits.DISC || 0) >= 1 && (userCredits.IE || 0) >= 1 && (userCredits.VALORES || 0) >= 1) {
+                    creditosUsados = { DISC: 1, IE: 1, VALORES: 1 };
+                } else {
+                    showToast('❌ Créditos insuficientes', 'error');
+                    btn.disabled = false;
+                    btn.textContent = '🚀 Gerar Relatório';
+                    return;
+                }
+            } else {
+                if ((userCredits[tipo] || 0) >= cost) {
+                    creditosUsados[tipo] = cost;
+                } else {
+                    showToast('❌ Créditos insuficientes para ' + tipo, 'error');
+                    btn.disabled = false;
+                    btn.textContent = '🚀 Gerar Relatório';
+                    return;
+                }
+            }
+
+            var user = window.VigorreAuth.getCurrentUser();
+            var transaction = {
+                id: 'T' + Date.now().toString().slice(-6) + Math.random().toString(36).slice(2, 5).toUpperCase(),
+                userId: user.id,
+                userName: user.name,
+                type: 'debito',
+                participantId: participantId,
+                reportType: tipo,
+                credits: creditosUsados,
+                date: new Date().toISOString(),
+                description: 'Relatório ' + tipo + ' para ' + document.getElementById('participantName').textContent
+            };
+
+            var transactions = JSON.parse(localStorage.getItem('vigorre_credit_transactions') || '[]');
+            transactions.push(transaction);
+            localStorage.setItem('vigorre_credit_transactions', JSON.stringify(transactions));
+
+            for (var key in creditosUsados) {
+                userCredits[key] = (userCredits[key] || 0) - creditosUsados[key];
+            }
+
+            var report = {
+                id: 'R' + Date.now().toString().slice(-6) + Math.random().toString(36).slice(2, 5).toUpperCase(),
+                participantId: participantId,
+                participantName: document.getElementById('participantName').textContent,
+                consultantId: user.id,
+                consultantName: user.name,
+                type: tipo,
+                creditsUsed: creditosUsados,
+                generatedAt: new Date().toISOString(),
+                status: 'generated'
+            };
+
+            var reports = JSON.parse(localStorage.getItem('vigorre_reports') || '[]');
+            reports.push(report);
+            localStorage.setItem('vigorre_reports', JSON.stringify(reports));
+
+            if (participantId) {
+                var participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                for (var i = 0; i < participants.length; i++) {
+                    if (participants[i].id === participantId) {
+                        participants[i].status = 'completed';
+                        if (!participants[i].reports) participants[i].reports = [];
+                        participants[i].reports.push(report.id);
+                        participants[i].updatedAt = new Date().toISOString();
+                        break;
+                    }
+                }
+                localStorage.setItem('vigorre_participants', JSON.stringify(participants));
+            }
+
+            document.getElementById('credDisc').textContent = userCredits.DISC || 0;
+            document.getElementById('credIE').textContent = userCredits.IE || 0;
+            document.getElementById('credValores').textContent = userCredits.VALORES || 0;
+            document.getElementById('credSwot').textContent = userCredits.SWOT || 0;
+            document.getElementById('credBigfive').textContent = userCredits.BIGFIVE || 0;
+
+            atualizarBadges();
+            showToast('✅ Relatório ' + tipo + ' gerado com sucesso!', 'success');
+
+            btn.textContent = '✅ Relatório Gerado!';
+            btn.style.background = 'var(--green)';
+
+            setTimeout(function() {
+                window.location.href = 'detalhes.html?id=' + participantId;
+            }, 1500);
+        }
+
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+            var icons = { 'error': '❌', 'warning': '⚠️', 'success': '✅', 'info': 'ℹ️' };
+            icon.textContent = icons[type] || '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() { toast.classList.remove('show'); }, 4000);
+        }
+    </script>
+</body>
+</html>
