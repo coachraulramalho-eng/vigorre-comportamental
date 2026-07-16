@@ -15,7 +15,6 @@
     <style>
         /* ============================================
            VIGORRE ONE™ - EMPRESA DASHBOARD
-           MESMA IDENTIDADE DO INDEX
            ============================================ */
 
         :root {
@@ -218,7 +217,7 @@
         }
 
         /* ============================================
-           HEADER (COM CORES VIGORRE)
+           HEADER (ONE NA COR CYAN)
            ============================================ */
         .header {
             background: var(--navy);
@@ -264,10 +263,14 @@
             letter-spacing: -0.3px;
         }
 
+        .header .logo .logo-text .name .one {
+            color: var(--cyan);
+        }
+
         .header .logo .logo-text .name .tm {
             font-size: 0.4rem;
             vertical-align: super;
-            color: var(--cyan);
+            color: var(--gray-400);
         }
 
         .header .logo .logo-text .sub {
@@ -603,7 +606,7 @@
         }
 
         /* ============================================
-           QUICK ACTIONS (BOTÕES QUE ABREM PÁGINAS)
+           QUICK ACTIONS (BOTÕES QUE ABREM)
            ============================================ */
         .quick-actions {
             display: grid;
@@ -827,91 +830,73 @@
         }
 
         /* ============================================
-           FOOTER (SIMPLIFICADO - SEM MENUS)
+           FOOTER (TEXTO MENOR E LIMPO)
            ============================================ */
         .footer {
             margin-top: 48px;
-            padding: 32px 0 24px;
+            padding: 24px 0 16px;
             border-top: 1px solid var(--border-color);
         }
 
         .footer .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
-            align-items: start;
-            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 16px;
         }
 
-        .footer .footer-brand .logo {
+        .footer .footer-brand {
             display: flex;
             align-items: center;
             gap: 12px;
-            text-decoration: none;
-            margin-bottom: 12px;
         }
 
-        .footer .footer-brand .logo .logo-img {
-            height: 32px;
+        .footer .footer-brand .logo-img {
+            height: 28px;
             width: auto;
         }
 
-        .footer .footer-brand .logo .logo-text .name {
+        .footer .footer-brand .logo-text .name {
             font-family: var(--font-display);
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 800;
             color: var(--text-primary);
-            letter-spacing: -0.3px;
         }
 
-        .footer .footer-brand .logo .logo-text .name .tm {
-            font-size: 0.4rem;
-            vertical-align: super;
+        .footer .footer-brand .logo-text .name .one {
             color: var(--cyan);
         }
 
-        .footer .footer-brand .logo .logo-text .sub {
-            font-size: 0.5rem;
+        .footer .footer-brand .logo-text .sub {
+            font-size: 0.45rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.08em;
         }
 
-        .footer .footer-brand p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            max-width: 320px;
-        }
-
-        .footer .footer-social h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-        }
-
-        .footer .footer-social .social-icons {
+        .footer .footer-social {
             display: flex;
             gap: 12px;
         }
 
-        .footer .footer-social .social-icons a {
+        .footer .footer-social a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: var(--radius-sm);
             background: var(--gray-50);
             color: var(--text-muted);
             text-decoration: none;
             transition: var(--transition);
             border: 1px solid var(--border-color);
-            font-size: 1.2rem;
+            font-size: 0.9rem;
         }
 
-        .footer .footer-social .social-icons a:hover {
+        .footer .footer-social a:hover {
             background: var(--gold);
             color: white;
             border-color: var(--gold);
@@ -919,15 +904,11 @@
         }
 
         .footer .footer-bottom {
-            padding-top: 24px;
-            border-top: 1px solid var(--border-color);
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
-        }
-
-        .footer .footer-bottom p {
-            margin-bottom: 4px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
         }
 
         .footer .footer-bottom strong {
@@ -936,14 +917,13 @@
 
         @media (max-width: 768px) {
             .footer .footer-content {
-                grid-template-columns: 1fr;
-                gap: 24px;
+                flex-direction: column;
                 text-align: center;
             }
-            .footer .footer-brand p {
-                max-width: 100%;
+            .footer .footer-brand {
+                flex-direction: column;
             }
-            .footer .footer-social .social-icons {
+            .footer .footer-social {
                 justify-content: center;
             }
         }
@@ -1100,13 +1080,13 @@
     </div>
 
     <!-- ============================================
-    HEADER (COM CORES VIGORRE)
+    HEADER (ONE NA COR CYAN)
     ============================================ -->
     <header class="header">
         <a href="#" class="logo" aria-label="VIGORRE ONE™ Home">
             <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
             <div class="logo-text">
-                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="name">VIGORRE <span class="one">ONE</span><span class="tm">™</span></span>
                 <span class="sub">People Intelligence Enterprise</span>
             </div>
         </a>
@@ -1206,30 +1186,30 @@
                     <h3>⚡ Ações Rápidas</h3>
                 </div>
                 <div class="quick-actions">
-                    <a href="colaboradores.html" class="quick-action">
+                    <button class="quick-action" onclick="abrirPagina('colaboradores')">
                         <span class="icon">👥</span>
                         <span class="label">Ver Colaboradores</span>
-                    </a>
-                    <a href="avaliacoes.html" class="quick-action">
+                    </button>
+                    <button class="quick-action" onclick="abrirPagina('avaliacoes')">
                         <span class="icon">📊</span>
                         <span class="label">Ver Avaliações</span>
-                    </a>
-                    <a href="relatorios.html" class="quick-action">
+                    </button>
+                    <button class="quick-action" onclick="abrirPagina('relatorios')">
                         <span class="icon">📄</span>
                         <span class="label">Relatórios</span>
-                    </a>
-                    <a href="job-profile.html" class="quick-action">
+                    </button>
+                    <button class="quick-action" onclick="abrirPagina('job-profile')">
                         <span class="icon">🎯</span>
                         <span class="label">Perfis Ideais</span>
-                    </a>
-                    <a href="comprar-creditos.html" class="quick-action">
+                    </button>
+                    <button class="quick-action" onclick="abrirPagina('comprar-creditos')">
                         <span class="icon">💳</span>
                         <span class="label">Comprar Créditos</span>
-                    </a>
-                    <a href="configuracoes.html" class="quick-action">
+                    </button>
+                    <button class="quick-action" onclick="abrirPagina('configuracoes')">
                         <span class="icon">⚙️</span>
                         <span class="label">Configurações</span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1238,7 +1218,7 @@
         <div class="table-card">
             <div class="table-header">
                 <h3>📋 Colaboradores</h3>
-                <a href="colaboradores.html" class="action">Ver todos →</a>
+                <button class="action" onclick="abrirPagina('colaboradores')">Ver todos →</button>
             </div>
             <div class="table-container">
                 <table aria-label="Lista de colaboradores">
@@ -1258,40 +1238,30 @@
     </main>
 
     <!-- ============================================
-    FOOTER (SIMPLIFICADO - SEM MENUS)
+    FOOTER (TEXTO MENOR E LIMPO)
     ============================================ -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <div class="logo">
-                    <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
-                    <div class="logo-text">
-                        <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                        <span class="sub">People Intelligence Enterprise</span>
-                    </div>
+                <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <div class="logo-text">
+                    <span class="name">VIGORRE <span class="one">ONE</span><span class="tm">™</span></span>
+                    <span class="sub">People Intelligence Enterprise</span>
                 </div>
-                <p>Plataforma de People Analytics com Inteligência Artificial para avaliação comportamental, recrutamento e gestão de talentos.</p>
             </div>
-
             <div class="footer-social">
-                <h4>Redes Sociais</h4>
-                <div class="social-icons">
-                    <a href="#" aria-label="LinkedIn">🔗</a>
-                    <a href="#" aria-label="Instagram">📸</a>
-                    <a href="#" aria-label="YouTube">▶️</a>
-                </div>
+                <a href="#" aria-label="LinkedIn">🔗</a>
+                <a href="#" aria-label="Instagram">📸</a>
+                <a href="#" aria-label="YouTube">▶️</a>
             </div>
         </div>
-
         <div class="footer-bottom">
-            <p>© 2026 Vigorre. Todos os direitos reservados.</p>
-            <p>Desenvolvido pela <strong>Vigorre Tech®</strong></p>
-            <p>Tecnologia, Inteligência Artificial e Soluções Digitais para Gestão Estratégica.</p>
+            © 2026 <strong>VIGORRE ONE™</strong> · People Analytics Enterprise
         </div>
     </footer>
 
     <!-- ============================================
-    SCRIPTS - CAMINHOS RELATIVOS
+    SCRIPTS
     ============================================ -->
     <script src="../supabase-config.js"></script>
     <script src="../auth.js"></script>
@@ -1303,6 +1273,16 @@
         var discChartInstance = null;
         var bigfiveChartInstance = null;
         var ieChartInstance = null;
+
+        // ============================================
+        // FUNÇÃO PARA ABRIR PÁGINAS
+        // ============================================
+        function abrirPagina(pagina) {
+            var url = pagina + '.html';
+            showToast('📂 Abrindo: ' + pagina, 'info');
+            // Tenta abrir a página
+            window.location.href = url;
+        }
 
         // ============================================
         // LOGOUT
