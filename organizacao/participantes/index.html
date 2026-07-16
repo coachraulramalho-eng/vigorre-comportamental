@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Participantes | VIGORRE ONE™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F8FAFC;
+            color: #0F172A;
+            min-height: 100vh;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
+            border: 1px solid #E2E8F0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0A2540;
+        }
+        .header h1 .highlight { color: #D97706; }
+        .btn-back {
+            padding: 8px 20px;
+            background: #0A2540;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .btn-back:hover { background: #D97706; transform: translateY(-2px); }
+        .btn-add {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-add:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(217,119,6,0.3); }
+        .table-container { overflow-x: auto; margin-top: 16px; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: #64748B;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border-bottom: 2px solid #E2E8F0;
+            background: #F8FAFC;
+        }
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #E2E8F0;
+            color: #475569;
+        }
+        tr:hover td { background: #F8FAFC; }
+        .badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge.completed { background: rgba(16,185,129,0.12); color: #10B981; }
+        .badge.pending { background: rgba(245,158,11,0.12); color: #F59E0B; }
+        .badge.in_progress { background: rgba(59,130,246,0.12); color: #3B82F6; }
+        .footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #E2E8F0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #94A3B8;
+        }
+        @media (prefers-color-scheme: dark) {
+            body { background: #0F172A; }
+            .container { background: #1E293B; border-color: #334155; }
+            .header h1 { color: #FFFFFF; }
+            th { background: #0F172A; color: #94A3B8; border-color: #334155; }
+            td { color: #CBD5E1; border-color: #334155; }
+            tr:hover td { background: rgba(255,255,255,0.02); }
+            .footer { border-color: #334155; color: #64748B; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👥 <span class="highlight">Participantes</span></h1>
+            <div style="display:flex;gap:12px;">
+                <a href="/organizacao/dashboard.html" class="btn-back">← Voltar</a>
+                <button class="btn-add" onclick="showToast('📝 Novo participante em breve!')">+ Novo</button>
+            </div>
+        </div>
+        <p style="color:#94A3B8;margin-bottom:16px;font-size:0.95rem;">Gerencie os participantes da sua organização</p>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Nome</th><th>Email</th><th>Perfil DISC</th><th>Status</th><th>Ações</th></tr>
+                </thead>
+                <tbody id="participantsList">
+                    <tr><td colspan="5" style="text-align:center;padding:40px;color:#94A3B8;">Nenhum participante encontrado</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer">© 2026 VIGORRE ONE™ · People Analytics Enterprise</div>
+    </div>
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
+    <script>
+        function showToast(msg) { alert(msg); }
+        document.addEventListener('DOMContentLoaded', function() {
+            const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+            const tbody = document.getElementById('participantsList');
+            if (participants.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px;color:#94A3B8;">Nenhum participante encontrado</td></tr>';
+                return;
+            }
+            const statusMap = { 'completed': '✅ Concluído', 'in_progress': '🔄 Em andamento', 'pending': '⏳ Pendente' };
+            let html = '';
+            participants.slice(0, 20).forEach(p => {
+                const disc = p.results?.DISC?.dominant || 'D';
+                const discNames = { 'D': 'Dominância', 'I': 'Influência', 'S': 'Estabilidade', 'C': 'Conformidade' };
+                html += `<tr>
+                    <td><strong>${p.name || 'Sem nome'}</strong></td>
+                    <td>${p.email || '-'}</td>
+                    <td>${discNames[disc] || disc}</td>
+                    <td><span class="badge ${p.status || 'pending'}">${statusMap[p.status] || 'Pendente'}</span></td>
+                    <td><a href="#" style="color:#D97706;text-decoration:none;" onclick="showToast('📋 Detalhes em breve')">Ver</a></td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+        });
+    </script>
+</body>
+</html>
