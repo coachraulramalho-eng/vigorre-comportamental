@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Participante Dashboard | VIGORRE ONE™</title>
+    <title>Jornada do Autoconhecimento | VIGORRE ONE™</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,20 +14,17 @@
 
     <style>
         /* ============================================
-           VIGORRE ONE™ - PARTICIPANTE DASHBOARD
-           DESIGN SYSTEM ULTRA PREMIUM
+           VIGORRE ONE™ - JORNADA DO AUTOCONHECIMENTO
+           NEUROCIÊNCIA · PSICOLOGIA · PSICANÁLISE · COACHING
            ============================================ */
 
         :root {
-            /* Cores Principais - Navy & Gold (Index) */
             --navy: #0A2540;
             --navy-dark: #06182A;
             --navy-light: #1A3A5C;
             --gold: #D97706;
             --gold-light: #F59E0B;
             --gold-gradient: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
-            
-            /* Cores de Apoio */
             --cyan: #06B6D4;
             --cyan-light: #22D3EE;
             --green: #10B981;
@@ -37,9 +34,8 @@
             --purple: #7C3AED;
             --purple-light: #A78BFA;
             --pink: #EC4899;
+            --pink-light: #F472B6;
             --orange: #F59E0B;
-            
-            /* Neutros */
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -51,8 +47,6 @@
             --gray-700: #334155;
             --gray-800: #1E293B;
             --gray-900: #0F172A;
-            
-            /* Efeitos */
             --radius: 16px;
             --radius-sm: 10px;
             --radius-full: 9999px;
@@ -60,12 +54,9 @@
             --shadow-md: 0 4px 6px rgba(0,0,0,0.04), 0 8px 32px rgba(10,37,64,0.06);
             --shadow-lg: 0 8px 32px rgba(0,0,0,0.06), 0 16px 64px rgba(10,37,64,0.08);
             --shadow-gold: 0 4px 24px rgba(217,119,6,0.15);
-            
-            /* Tipografia */
+            --shadow-purple: 0 4px 24px rgba(124,58,237,0.15);
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-display: 'Poppins', 'Inter', sans-serif;
-            
-            /* Layout */
             --sidebar-width: 260px;
             --header-height: 72px;
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -99,14 +90,13 @@
         ::-webkit-scrollbar-thumb {
             background: var(--gray-300);
             border-radius: var(--radius-full);
-            transition: var(--transition);
         }
         ::-webkit-scrollbar-thumb:hover {
             background: var(--gray-400);
         }
 
         /* ============================================
-           SIDEBAR - PARTICIPANTE
+           SIDEBAR
            ============================================ */
         .sidebar {
             width: var(--sidebar-width);
@@ -132,7 +122,6 @@
             text-decoration: none;
             margin-bottom: 36px;
             padding: 0 4px;
-            transition: var(--transition);
         }
 
         .sidebar .logo:hover {
@@ -202,7 +191,6 @@
             font-size: 0.85rem;
             font-weight: 500;
             transition: var(--transition);
-            position: relative;
         }
 
         .sidebar .nav a:hover {
@@ -231,7 +219,6 @@
             padding: 2px 10px;
             border-radius: var(--radius-full);
             font-weight: 700;
-            letter-spacing: 0.02em;
         }
 
         .sidebar .nav a .badge.cyan {
@@ -275,18 +262,10 @@
             box-shadow: 0 2px 12px rgba(217, 119, 6, 0.2);
         }
 
-        .sidebar .footer-sidebar .user .info {
-            flex: 1;
-            min-width: 0;
-        }
-
         .sidebar .footer-sidebar .user .info .name {
             font-size: 0.85rem;
             font-weight: 600;
             color: white;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .sidebar .footer-sidebar .user .info .role {
@@ -314,7 +293,6 @@
             height: var(--header-height);
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--gray-200);
             padding: 0 40px;
             display: flex;
@@ -323,7 +301,6 @@
             position: sticky;
             top: 0;
             z-index: 50;
-            transition: var(--transition);
         }
 
         .header .left {
@@ -340,7 +317,6 @@
             border: none;
             cursor: pointer;
             padding: 4px;
-            transition: var(--transition);
         }
 
         .header .hamburger span {
@@ -355,11 +331,9 @@
         .header .hamburger.open span:nth-child(1) {
             transform: rotate(45deg) translate(4px, 4px);
         }
-
         .header .hamburger.open span:nth-child(2) {
             opacity: 0;
         }
-
         .header .hamburger.open span:nth-child(3) {
             transform: rotate(-45deg) translate(4px, -4px);
         }
@@ -374,62 +348,12 @@
 
         .header .page-title .highlight {
             color: var(--gold);
-            position: relative;
-        }
-
-        .header .page-title .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--gold-gradient);
-            border-radius: var(--radius-full);
-            opacity: 0.3;
         }
 
         .header .right {
             display: flex;
             align-items: center;
             gap: 20px;
-        }
-
-        .header .right .search-wrapper {
-            position: relative;
-        }
-
-        .header .right .search-wrapper .search-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray-400);
-            font-size: 0.9rem;
-        }
-
-        .header .right .search {
-            padding: 9px 16px 9px 40px;
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius-full);
-            font-size: 0.85rem;
-            background: var(--gray-50);
-            color: var(--gray-700);
-            width: 220px;
-            transition: var(--transition);
-            font-family: var(--font-primary);
-        }
-
-        .header .right .search:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.05);
-            width: 280px;
-            background: white;
-        }
-
-        .header .right .search::placeholder {
-            color: var(--gray-400);
         }
 
         .header .right .btn-logout {
@@ -465,7 +389,7 @@
         }
 
         /* ============================================
-           WELCOME BANNER - PARTICIPANTE
+           WELCOME BANNER
            ============================================ */
         .welcome-banner {
             background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
@@ -479,14 +403,12 @@
         }
 
         .welcome-banner::before {
-            content: '';
+            content: '🧠';
             position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(217, 119, 6, 0.04) 0%, transparent 70%);
-            border-radius: 50%;
+            top: -20px;
+            right: 40px;
+            font-size: 8rem;
+            opacity: 0.04;
             pointer-events: none;
         }
 
@@ -600,12 +522,17 @@
             color: var(--orange);
         }
 
+        .profile-card .info .status.in_progress {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3B82F6;
+        }
+
         /* ============================================
            STATS GRID
            ============================================ */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             margin-bottom: 32px;
         }
@@ -619,6 +546,7 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            cursor: default;
         }
 
         .stat-card::before {
@@ -678,50 +606,303 @@
             line-height: 1.2;
         }
 
-        /* ============================================
-           QUICK ACTIONS
-           ============================================ */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .quick-action {
-            background: white;
-            border-radius: var(--radius);
-            padding: 24px 20px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--gray-700);
-            border: 1px solid var(--gray-200);
-            transition: var(--transition);
-            cursor: pointer;
-            box-shadow: var(--shadow);
-        }
-
-        .quick-action:hover {
-            transform: translateY(-4px);
-            border-color: var(--gold);
-            box-shadow: var(--shadow-gold);
-        }
-
-        .quick-action .icon {
-            font-size: 2.4rem;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .quick-action .label {
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .quick-action .desc {
+        .stat-card .stat-desc {
             font-size: 0.7rem;
             color: var(--gray-400);
             margin-top: 2px;
+        }
+
+        /* ============================================
+           JOURNEY CARDS - Neurociência
+           ============================================ */
+        .journey-section {
+            margin-bottom: 32px;
+        }
+
+        .journey-section .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .journey-section .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .journey-section .section-header .sub {
+            font-size: 0.8rem;
+            color: var(--gray-400);
+        }
+
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .journey-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .journey-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+            border-color: rgba(217, 119, 6, 0.1);
+        }
+
+        .journey-card .icon {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .journey-card h3 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .journey-card .desc {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .journey-card .progress {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .journey-card .progress .bar {
+            flex: 1;
+            height: 6px;
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .journey-card .progress .bar .fill {
+            height: 100%;
+            border-radius: var(--radius-full);
+            transition: width 1s ease;
+        }
+
+        .journey-card .progress .bar .fill.gold {
+            background: var(--gold-gradient);
+        }
+
+        .journey-card .progress .bar .fill.cyan {
+            background: linear-gradient(90deg, var(--cyan), var(--cyan-light));
+        }
+
+        .journey-card .progress .bar .fill.purple {
+            background: linear-gradient(90deg, var(--purple), var(--purple-light));
+        }
+
+        .journey-card .progress .bar .fill.pink {
+            background: linear-gradient(90deg, var(--pink), var(--pink-light));
+        }
+
+        .journey-card .progress .percent {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            min-width: 40px;
+            text-align: right;
+        }
+
+        .journey-card .btn-action {
+            margin-top: 12px;
+            padding: 8px 20px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .journey-card .btn-action.primary {
+            background: var(--gold-gradient);
+            color: white;
+        }
+
+        .journey-card .btn-action.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .journey-card .btn-action.secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .journey-card .btn-action.secondary:hover {
+            background: var(--gray-200);
+        }
+
+        /* ============================================
+           SELLING CARDS - Relatórios e Laudos
+           ============================================ */
+        .selling-section {
+            margin-bottom: 32px;
+        }
+
+        .selling-section .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .selling-section .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .selling-section .section-header .sub {
+            font-size: 0.8rem;
+            color: var(--gray-400);
+        }
+
+        .selling-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .selling-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .selling-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .selling-card.premium {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.02), rgba(245, 158, 11, 0.02));
+        }
+
+        .selling-card .badge-premium {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--gold-gradient);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .selling-card .icon {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .selling-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .selling-card .desc {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            line-height: 1.5;
+            margin: 4px 0 8px;
+        }
+
+        .selling-card .features {
+            list-style: none;
+            margin: 8px 0 16px;
+        }
+
+        .selling-card .features li {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            padding: 3px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .selling-card .features li .check {
+            color: var(--green);
+        }
+
+        .selling-card .price {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin: 8px 0;
+        }
+
+        .selling-card .price small {
+            font-size: 1rem;
+            color: var(--gray-400);
+            font-weight: 400;
+        }
+
+        .selling-card .btn-buy {
+            padding: 10px 32px;
+            background: var(--gold-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .selling-card .btn-buy:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .selling-card .btn-buy.secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .selling-card .btn-buy.secondary:hover {
+            background: var(--gray-200);
+            box-shadow: none;
         }
 
         /* ============================================
@@ -774,8 +955,11 @@
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .quick-actions {
+            .journey-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .selling-grid {
+                grid-template-columns: 1fr;
             }
             .charts-grid {
                 grid-template-columns: 1fr;
@@ -795,12 +979,6 @@
             .header .hamburger {
                 display: flex;
             }
-            .header .right .search {
-                width: 160px;
-            }
-            .header .right .search:focus {
-                width: 200px;
-            }
             .header {
                 padding: 0 20px;
             }
@@ -813,11 +991,8 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            .quick-actions {
-                grid-template-columns: 1fr 1fr;
-            }
-            .header .right .search {
-                display: none;
+            .journey-grid {
+                grid-template-columns: 1fr;
             }
             .header .page-title {
                 font-size: 1rem;
@@ -862,9 +1037,6 @@
             .header .right .btn-logout .icon {
                 margin-right: 0;
             }
-            .quick-actions {
-                grid-template-columns: 1fr;
-            }
             .stat-card {
                 padding: 16px 18px;
             }
@@ -872,6 +1044,12 @@
                 font-size: 1.6rem;
             }
             .chart-card {
+                padding: 18px;
+            }
+            .journey-card {
+                padding: 18px;
+            }
+            .selling-card {
                 padding: 18px;
             }
         }
@@ -891,21 +1069,6 @@
 
             .header .page-title {
                 color: var(--white);
-            }
-
-            .header .right .search {
-                background: var(--gray-800);
-                border-color: var(--gray-700);
-                color: var(--gray-300);
-            }
-
-            .header .right .search:focus {
-                background: var(--gray-800);
-                border-color: var(--gold);
-            }
-
-            .header .right .search-wrapper .search-icon {
-                color: var(--gray-500);
             }
 
             .header .right .btn-logout {
@@ -937,6 +1100,10 @@
                 color: var(--gray-500);
             }
 
+            .stat-card .stat-desc {
+                color: var(--gray-500);
+            }
+
             .chart-card {
                 background: var(--gray-800);
                 border-color: var(--gray-700);
@@ -959,18 +1126,61 @@
                 color: var(--gray-400);
             }
 
-            .quick-action {
+            .journey-card {
                 background: var(--gray-800);
                 border-color: var(--gray-700);
+            }
+
+            .journey-card h3 {
+                color: var(--white);
+            }
+
+            .journey-card .desc {
+                color: var(--gray-400);
+            }
+
+            .journey-card .progress .percent {
                 color: var(--gray-300);
             }
 
-            .quick-action:hover {
-                border-color: var(--gold);
+            .journey-card .btn-action.secondary {
+                background: var(--gray-700);
+                color: var(--gray-300);
             }
 
-            .quick-action .desc {
-                color: var(--gray-500);
+            .journey-card .btn-action.secondary:hover {
+                background: var(--gray-600);
+            }
+
+            .selling-card {
+                background: var(--gray-800);
+                border-color: var(--gray-700);
+            }
+
+            .selling-card.premium {
+                border-color: var(--gold);
+                background: linear-gradient(135deg, rgba(217, 119, 6, 0.05), rgba(245, 158, 11, 0.02));
+            }
+
+            .selling-card h3 {
+                color: var(--white);
+            }
+
+            .selling-card .desc {
+                color: var(--gray-400);
+            }
+
+            .selling-card .features li {
+                color: var(--gray-300);
+            }
+
+            .selling-card .btn-buy.secondary {
+                background: var(--gray-700);
+                color: var(--gray-300);
+            }
+
+            .selling-card .btn-buy.secondary:hover {
+                background: var(--gray-600);
             }
 
             .welcome-banner {
@@ -1036,6 +1246,14 @@
             .sidebar .nav .nav-label {
                 color: var(--gray-500);
             }
+
+            .journey-section .section-header h2 {
+                color: var(--white);
+            }
+
+            .selling-section .section-header h2 {
+                color: var(--white);
+            }
         }
 
         /* ============================================
@@ -1055,7 +1273,6 @@
         .stat-card {
             animation: fadeInUp 0.5s ease forwards;
         }
-
         .stat-card:nth-child(1) {
             animation-delay: 0.05s;
         }
@@ -1065,28 +1282,36 @@
         .stat-card:nth-child(3) {
             animation-delay: 0.15s;
         }
-
-        .quick-action {
-            animation: fadeInUp 0.5s ease forwards;
-        }
-
-        .quick-action:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-        .quick-action:nth-child(2) {
-            animation-delay: 0.15s;
-        }
-        .quick-action:nth-child(3) {
+        .stat-card:nth-child(4) {
             animation-delay: 0.2s;
         }
-        .quick-action:nth-child(4) {
+
+        .journey-card {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .journey-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        .journey-card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+        .journey-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .selling-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        .selling-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        .selling-card:nth-child(2) {
             animation-delay: 0.25s;
         }
 
         .chart-card {
             animation: fadeInUp 0.6s ease forwards;
         }
-
         .chart-card:nth-child(1) {
             animation-delay: 0.2s;
         }
@@ -1098,7 +1323,6 @@
             animation: fadeInUp 0.5s ease forwards;
             animation-delay: 0s;
         }
-
         .profile-card {
             animation: fadeInUp 0.5s ease forwards;
             animation-delay: 0.05s;
@@ -1108,7 +1332,7 @@
 <body>
 
     <!-- ============================================
-    SIDEBAR - PARTICIPANTE
+    SIDEBAR
     ============================================ -->
     <aside class="sidebar" id="sidebar">
         <a href="/participante/dashboard.html" class="logo">
@@ -1120,18 +1344,27 @@
         </a>
 
         <nav class="nav">
-            <span class="nav-label">Principal</span>
+            <span class="nav-label">Jornada</span>
             <a href="/participante/dashboard.html" class="active">
-                <span class="icon">📊</span> Dashboard
+                <span class="icon">🧠</span> Autoconhecimento
                 <span class="badge">Live</span>
             </a>
             <a href="/participante/testes/index.html">
-                <span class="icon">📝</span> Meus Testes
+                <span class="icon">📝</span> Avaliações
                 <span class="badge cyan">3</span>
             </a>
             <a href="/participante/resultados/index.html">
-                <span class="icon">📋</span> Meus Resultados
+                <span class="icon">📊</span> Resultados
                 <span class="badge">2</span>
+            </a>
+
+            <span class="nav-label">Desenvolvimento</span>
+            <a href="/participante/relatorios/index.html">
+                <span class="icon">📄</span> Relatórios
+            </a>
+            <a href="/participante/laudos/index.html">
+                <span class="icon">📋</span> Laudos Premium
+                <span class="badge">⭐</span>
             </a>
 
             <span class="nav-label">Perfil</span>
@@ -1148,7 +1381,7 @@
                 <div class="avatar" id="userAvatar">P</div>
                 <div class="info">
                     <div class="name" id="userName">Participante</div>
-                    <div class="role">Candidato</div>
+                    <div class="role">Em Desenvolvimento</div>
                 </div>
             </div>
         </div>
@@ -1167,14 +1400,10 @@
                     <span></span>
                 </button>
                 <div class="page-title">
-                    📊 <span class="highlight">Dashboard</span> Participante
+                    🧠 <span class="highlight">Jornada do Autoconhecimento</span>
                 </div>
             </div>
             <div class="right">
-                <div class="search-wrapper">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="search" placeholder="Buscar testes, resultados..." />
-                </div>
                 <button class="btn-logout" onclick="logout()">
                     <span class="icon">🚪</span>
                     <span>Sair</span>
@@ -1189,19 +1418,26 @@
                 <div class="greeting">
                     👋 Olá, <span class="highlight" id="welcomeName">Participante</span>
                 </div>
-                <div class="subtitle">People Intelligence Enterprise · Sua jornada de desenvolvimento</div>
+                <div class="subtitle">
+                    🌟 Sua jornada de autoconhecimento começa aqui · 
+                    Neurociência · Psicologia · Psicanálise · Coaching
+                </div>
                 <div class="stats-mini">
                     <div class="item">
                         <div class="number" id="miniTests">0</div>
-                        <div class="label">Testes Realizados</div>
+                        <div class="label">Avaliações Realizadas</div>
                     </div>
                     <div class="item">
                         <div class="number" id="miniCompleted">0</div>
-                        <div class="label">Concluídos</div>
+                        <div class="label">Concluídas</div>
                     </div>
                     <div class="item">
                         <div class="number" id="miniPending">0</div>
                         <div class="label">Pendentes</div>
+                    </div>
+                    <div class="item">
+                        <div class="number" id="miniInsights">0</div>
+                        <div class="label">Insights Gerados</div>
                     </div>
                 </div>
             </div>
@@ -1213,6 +1449,9 @@
                     <h2 id="profileName">Participante</h2>
                     <div class="email" id="profileEmail">participante@email.com</div>
                     <span class="status pending" id="profileStatus">⏳ Pendente</span>
+                    <div style="margin-top:8px;font-size:0.8rem;color:var(--gray-400);">
+                        🧠 Nível de Autoconhecimento: <strong id="selfAwarenessLevel" style="color:var(--gold);">Em Desenvolvimento</strong>
+                    </div>
                 </div>
             </div>
 
@@ -1220,56 +1459,126 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-top">
-                        <span class="stat-label">Testes Realizados</span>
-                        <span class="stat-icon">📝</span>
+                        <span class="stat-label">🧠 Neuroplasticidade</span>
+                        <span class="stat-icon">🧠</span>
                     </div>
-                    <div class="stat-value" id="totalTests">0</div>
+                    <div class="stat-value" id="neuroplasticity">72%</div>
+                    <div class="stat-desc">Capacidade de adaptação e aprendizado</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-top">
-                        <span class="stat-label">Concluídos</span>
-                        <span class="stat-icon">✅</span>
+                        <span class="stat-label">❤️ Inteligência Emocional</span>
+                        <span class="stat-icon">❤️</span>
                     </div>
-                    <div class="stat-value" id="totalCompleted">0</div>
+                    <div class="stat-value" id="emotionalIQ">68%</div>
+                    <div class="stat-desc">Autoconsciência e empatia</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-top">
-                        <span class="stat-label">Pendentes</span>
-                        <span class="stat-icon">⏳</span>
+                        <span class="stat-label">🎯 Potencial de Liderança</span>
+                        <span class="stat-icon">🎯</span>
                     </div>
-                    <div class="stat-value" id="totalPending">0</div>
+                    <div class="stat-value" id="leadership">55%</div>
+                    <div class="stat-desc">Capacidade de influenciar e inspirar</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">💰 Mentalidade Financeira</span>
+                        <span class="stat-icon">💰</span>
+                    </div>
+                    <div class="stat-value" id="financialMindset">48%</div>
+                    <div class="stat-desc">Inteligência financeira e prosperidade</div>
                 </div>
             </div>
 
-            <!-- QUICK ACTIONS -->
-            <div class="quick-actions">
-                <a href="/participante/testes/index.html" class="quick-action">
-                    <span class="icon">📝</span>
-                    <span class="label">Realizar Teste</span>
-                    <span class="desc">Inicie uma nova avaliação</span>
-                </a>
-                <a href="/participante/testes/index.html" class="quick-action">
-                    <span class="icon">📋</span>
-                    <span class="label">Ver Resultados</span>
-                    <span class="desc">Consulte seus resultados</span>
-                </a>
-                <a href="/participante/perfil/index.html" class="quick-action">
-                    <span class="icon">👤</span>
-                    <span class="label">Meu Perfil</span>
-                    <span class="desc">Atualize seus dados</span>
-                </a>
-                <a href="/participante/configuracoes/index.html" class="quick-action">
-                    <span class="icon">⚙️</span>
-                    <span class="label">Configurações</span>
-                    <span class="desc">Preferências da conta</span>
-                </a>
+            <!-- JOURNEY CARDS - Neurociência -->
+            <div class="journey-section">
+                <div class="section-header">
+                    <h2>🌟 Pilares do Desenvolvimento</h2>
+                    <span class="sub">Baseado em Neurociência e Psicologia</span>
+                </div>
+                <div class="journey-grid">
+                    <div class="journey-card">
+                        <span class="icon">🧠</span>
+                        <h3>Neurociência</h3>
+                        <div class="desc">Entenda como seu cérebro funciona, como aprende e como pode reprogramar padrões para alcançar seus objetivos.</div>
+                        <div class="progress">
+                            <div class="bar"><div class="fill gold" style="width:72%"></div></div>
+                            <span class="percent">72%</span>
+                        </div>
+                        <a href="/participante/testes/index.html" class="btn-action primary">📝 Avaliar Agora</a>
+                    </div>
+                    <div class="journey-card">
+                        <span class="icon">❤️</span>
+                        <h3>Psicologia & Psicanálise</h3>
+                        <div class="desc">Explore suas motivações profundas, padrões de comportamento e como sua história molda suas decisões atuais.</div>
+                        <div class="progress">
+                            <div class="bar"><div class="fill cyan" style="width:68%"></div></div>
+                            <span class="percent">68%</span>
+                        </div>
+                        <a href="/participante/testes/index.html" class="btn-action primary">📝 Avaliar Agora</a>
+                    </div>
+                    <div class="journey-card">
+                        <span class="icon">🚀</span>
+                        <h3>Coaching & Performance</h3>
+                        <div class="desc">Desenvolva habilidades de liderança, comunicação, vendas e finanças para alcançar o próximo nível profissional.</div>
+                        <div class="progress">
+                            <div class="bar"><div class="fill purple" style="width:55%"></div></div>
+                            <span class="percent">55%</span>
+                        </div>
+                        <a href="/participante/testes/index.html" class="btn-action primary">📝 Avaliar Agora</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SELLING CARDS - Relatórios e Laudos -->
+            <div class="selling-section">
+                <div class="section-header">
+                    <h2>📋 Relatórios & Laudos Premium</h2>
+                    <span class="sub">Invista no seu desenvolvimento profissional</span>
+                </div>
+                <div class="selling-grid">
+                    <div class="selling-card">
+                        <span class="icon">📄</span>
+                        <h3>Relatório de Autoconhecimento</h3>
+                        <div class="desc">Análise completa do seu perfil comportamental, pontos fortes e áreas de desenvolvimento com base em neurociência.</div>
+                        <ul class="features">
+                            <li><span class="check">✅</span> Análise DISC detalhada</li>
+                            <li><span class="check">✅</span> Inteligência Emocional</li>
+                            <li><span class="check">✅</span> Perfil de liderança</li>
+                            <li><span class="check">✅</span> Recomendações personalizadas</li>
+                        </ul>
+                        <div class="price">R$ 49<small>,90</small></div>
+                        <button class="btn-buy" onclick="showToast('📄 Relatório de Autoconhecimento adquirido com sucesso!')">
+                            🛒 Adquirir Relatório
+                        </button>
+                    </div>
+                    <div class="selling-card premium">
+                        <span class="badge-premium">⭐ Premium</span>
+                        <span class="icon">📋</span>
+                        <h3>Laudo Premium + Coaching</h3>
+                        <div class="desc">Laudo completo com análise aprofundada de neurociência, psicologia e plano de desenvolvimento personalizado.</div>
+                        <ul class="features">
+                            <li><span class="check">✅</span> 60+ páginas de análise</li>
+                            <li><span class="check">✅</span> Plano de desenvolvimento</li>
+                            <li><span class="check">✅</span> 1 sessão de coaching</li>
+                            <li><span class="check">✅</span> Acompanhamento 30 dias</li>
+                            <li><span class="check">✅</span> Certificado de conclusão</li>
+                        </ul>
+                        <div class="price">R$ 149<small>,90</small></div>
+                        <button class="btn-buy" onclick="showToast('📋 Laudo Premium adquirido com sucesso! Em breve você receberá seu material.')">
+                            🛒 Adquirir Laudo Premium
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- CHARTS -->
             <div class="charts-grid">
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>📊 Perfil Comportamental</h3>
+                        <h3>📊 Perfil Comportamental DISC</h3>
+                        <span style="font-size:0.7rem;color:var(--gray-400);">Baseado em Neurociência</span>
                     </div>
                     <div class="chart-container">
                         <canvas id="discChart"></canvas>
@@ -1278,6 +1587,7 @@
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3>🧠 Inteligência Emocional</h3>
+                        <span style="font-size:0.7rem;color:var(--gray-400);">5 Pilares da IE</span>
                     </div>
                     <div class="chart-container">
                         <canvas id="ieChart"></canvas>
@@ -1314,16 +1624,20 @@
         }
 
         // ============================================
-        // HAMBURGER (mobile)
+        // TOAST
+        // ============================================
+        function showToast(message) {
+            alert('🎉 ' + message);
+        }
+
+        // ============================================
+        // HAMBURGER
         // ============================================
         document.getElementById('hamburger').addEventListener('click', function() {
             this.classList.toggle('open');
             document.getElementById('sidebar').classList.toggle('open');
         });
 
-        // ============================================
-        // FECHAR SIDEBAR AO CLICAR FORA (mobile)
-        // ============================================
         document.addEventListener('click', function(e) {
             const sidebar = document.getElementById('sidebar');
             const hamburger = document.getElementById('hamburger');
@@ -1339,7 +1653,7 @@
         // INICIALIZAÇÃO
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📊 VIGORRE ONE™ - Dashboard Participante');
+            console.log('🧠 VIGORRE ONE™ - Jornada do Autoconhecimento');
 
             if (window.VigorreAuth) {
                 const user = window.VigorreAuth.getCurrentUser();
@@ -1358,8 +1672,8 @@
 
             setTimeout(() => {
                 loadStats();
-                renderCharts();
                 loadProfileStatus();
+                renderCharts();
             }, 300);
 
             setInterval(() => {
@@ -1387,10 +1701,15 @@
                         };
                         statusEl.textContent = statusMap[status] || '⏳ Pendente';
                         statusEl.className = 'status ' + status;
+
+                        // Nível de autoconhecimento
+                        const levels = ['Iniciante', 'Em Desenvolvimento', 'Intermediário', 'Avançado', 'Master'];
+                        const levelIndex = Math.min(Math.floor(Math.random() * 5), 4);
+                        document.getElementById('selfAwarenessLevel').textContent = levels[levelIndex];
                     }
                 }
             } catch (e) {
-                console.error('❌ Erro ao carregar status do perfil:', e);
+                console.error('❌ Erro ao carregar status:', e);
             }
         }
 
@@ -1410,14 +1729,24 @@
                 const total = userTests.length || Math.floor(Math.random() * 5) + 2;
                 const completed = userTests.filter(p => p.status === 'completed').length || Math.floor(Math.random() * 2) + 1;
                 const pending = total - completed;
+                const insights = Math.floor(Math.random() * 10) + 5;
 
                 animateValue('totalTests', total);
                 animateValue('totalCompleted', completed);
                 animateValue('totalPending', pending);
+                animateValue('totalInsights', insights);
 
                 document.getElementById('miniTests').textContent = total;
                 document.getElementById('miniCompleted').textContent = completed;
                 document.getElementById('miniPending').textContent = pending;
+                document.getElementById('miniInsights').textContent = insights;
+
+                // Stats cards com valores dinâmicos
+                document.getElementById('neuroplasticity').textContent = Math.floor(Math.random() * 30) + 60 + '%';
+                document.getElementById('emotionalIQ').textContent = Math.floor(Math.random() * 30) + 55 + '%';
+                document.getElementById('leadership').textContent = Math.floor(Math.random() * 30) + 45 + '%';
+                document.getElementById('financialMindset').textContent = Math.floor(Math.random() * 30) + 35 + '%';
+
             } catch (e) {
                 console.error('❌ Erro ao carregar stats:', e);
             }
@@ -1441,11 +1770,11 @@
         }
 
         // ============================================
-        // CHARTS - PARTICIPANTE
+        // CHARTS
         // ============================================
         function renderCharts() {
             try {
-                // DISC Chart - Radar
+                // DISC Chart
                 const discCtx = document.getElementById('discChart').getContext('2d');
                 if (discChartInstance) discChartInstance.destroy();
                 discChartInstance = new Chart(discCtx, {
@@ -1495,9 +1824,7 @@
                             r: {
                                 beginAtZero: true,
                                 max: 100,
-                                grid: {
-                                    color: 'rgba(10, 37, 64, 0.06)'
-                                },
+                                grid: { color: 'rgba(10, 37, 64, 0.06)' },
                                 ticks: {
                                     color: '#94A3B8',
                                     stepSize: 25,
@@ -1510,14 +1837,11 @@
                                 }
                             }
                         },
-                        animation: {
-                            duration: 1000,
-                            easing: 'easeOutQuart'
-                        }
+                        animation: { duration: 1000, easing: 'easeOutQuart' }
                     }
                 });
 
-                // IE Chart - Radar
+                // IE Chart
                 const ieCtx = document.getElementById('ieChart').getContext('2d');
                 if (ieChartInstance) ieChartInstance.destroy();
                 ieChartInstance = new Chart(ieCtx, {
@@ -1567,9 +1891,7 @@
                             r: {
                                 beginAtZero: true,
                                 max: 100,
-                                grid: {
-                                    color: 'rgba(10, 37, 64, 0.06)'
-                                },
+                                grid: { color: 'rgba(10, 37, 64, 0.06)' },
                                 ticks: {
                                     color: '#94A3B8',
                                     stepSize: 25,
@@ -1582,10 +1904,7 @@
                                 }
                             }
                         },
-                        animation: {
-                            duration: 1000,
-                            easing: 'easeOutQuart'
-                        }
+                        animation: { duration: 1000, easing: 'easeOutQuart' }
                     }
                 });
             } catch (e) {
@@ -1593,7 +1912,7 @@
             }
         }
 
-        console.log('✅ VIGORRE ONE™ - Dashboard Participante carregado com sucesso!');
+        console.log('🧠 VIGORRE ONE™ - Jornada do Autoconhecimento carregada com sucesso!');
     </script>
 
 </body>
