@@ -156,6 +156,16 @@
                 background: rgba(59, 130, 246, 0.15);
                 color: var(--blue);
             }
+            .footer {
+                border-color: var(--border-color);
+                color: var(--text-muted);
+            }
+            .footer a {
+                color: var(--text-muted);
+            }
+            .footer a:hover {
+                color: var(--gold);
+            }
         }
 
         * {
@@ -200,7 +210,7 @@
         }
 
         /* ============================================
-           HEADER
+           HEADER (NOVO PADRÃO SAP/WORKDAY)
            ============================================ */
         .header {
             background: var(--navy);
@@ -577,7 +587,7 @@
         }
 
         /* ============================================
-           QUICK ACTIONS
+           QUICK ACTIONS (BOTÕES CORRIGIDOS)
            ============================================ */
         .quick-actions {
             display: grid;
@@ -594,6 +604,7 @@
             color: var(--text-secondary);
             transition: var(--transition);
             border: 1px solid transparent;
+            cursor: pointer;
         }
 
         .quick-action:hover {
@@ -791,6 +802,91 @@
         }
 
         /* ============================================
+           FOOTER (NOVO PADRÃO SAP/WORKDAY)
+           ============================================ */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            padding-bottom: 24px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .footer .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            background: var(--gray-50);
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .footer .footer-social a:hover {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .footer .footer-copy {
+            font-size: 0.7rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .footer .footer-social a {
+                background: var(--gray-800);
+                border-color: var(--gray-700);
+            }
+            .footer .footer-social a:hover {
+                background: var(--gold);
+                border-color: var(--gold);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+            .footer .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* ============================================
            RESPONSIVE
            ============================================ */
         @media (max-width: 1200px) {
@@ -928,6 +1024,9 @@
             .main {
                 padding: 20px !important;
             }
+            .footer {
+                border-top: 1px solid #E2E8F0 !important;
+            }
         }
     </style>
 </head>
@@ -939,7 +1038,7 @@
     </div>
 
     <!-- ============================================
-    HEADER
+    HEADER (NOVO PADRÃO)
     ============================================ -->
     <header class="header">
         <a href="#" class="logo" aria-label="VIGORRE ONE™ Home">
@@ -1045,31 +1144,31 @@
                     <h3>⚡ Ações Rápidas</h3>
                 </div>
                 <div class="quick-actions">
-                    <!-- ===== BOTÕES CORRIGIDOS ===== -->
-                    <a href="colaboradores.html" class="quick-action" data-tooltip="Visualizar colaboradores">
+                    <!-- ===== BOTÕES CORRIGIDOS (COM JAVASCRIPT) ===== -->
+                    <button class="quick-action" onclick="showToast('📋 Colaboradores - Em breve!', 'info')">
                         <span class="icon">👥</span>
                         <span class="label">Ver Colaboradores</span>
-                    </a>
-                    <a href="avaliacoes.html" class="quick-action" data-tooltip="Visualizar avaliações">
+                    </button>
+                    <button class="quick-action" onclick="showToast('📊 Avaliações - Em breve!', 'info')">
                         <span class="icon">📊</span>
                         <span class="label">Ver Avaliações</span>
-                    </a>
-                    <a href="relatorios.html" class="quick-action" data-tooltip="Visualizar relatórios">
+                    </button>
+                    <button class="quick-action" onclick="showToast('📄 Relatórios - Em breve!', 'info')">
                         <span class="icon">📄</span>
                         <span class="label">Relatórios</span>
-                    </a>
-                    <a href="job-profile.html" class="quick-action" data-tooltip="Gerenciar perfis ideais">
+                    </button>
+                    <button class="quick-action" onclick="showToast('🎯 Perfis Ideais - Em breve!', 'info')">
                         <span class="icon">🎯</span>
                         <span class="label">Perfis Ideais</span>
-                    </a>
-                    <a href="comprar-creditos.html" class="quick-action" data-tooltip="Comprar créditos">
+                    </button>
+                    <button class="quick-action" onclick="showToast('💳 Comprar Créditos - Em breve!', 'info')">
                         <span class="icon">💳</span>
                         <span class="label">Comprar Créditos</span>
-                    </a>
-                    <a href="configuracoes.html" class="quick-action" data-tooltip="Configurações da empresa">
+                    </button>
+                    <button class="quick-action" onclick="showToast('⚙️ Configurações - Em breve!', 'info')">
                         <span class="icon">⚙️</span>
                         <span class="label">Configurações</span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1078,7 +1177,7 @@
         <div class="table-card">
             <div class="table-header">
                 <h3>📋 Colaboradores</h3>
-                <a href="colaboradores.html" class="action">Ver todos →</a>
+                <button class="action" onclick="showToast('📋 Lista completa - Em breve!', 'info')" style="background:none;border:none;cursor:pointer;font-size:0.75rem;color:var(--gold);font-weight:600;">Ver todos →</button>
             </div>
             <div class="table-container">
                 <table aria-label="Lista de colaboradores">
@@ -1096,6 +1195,26 @@
             </div>
         </div>
     </main>
+
+    <!-- ============================================
+    FOOTER (NOVO PADRÃO)
+    ============================================ -->
+    <footer class="footer">
+        <div class="footer-copy">
+            © 2026 <strong>VIGORRE ONE™</strong> · People Analytics Enterprise
+        </div>
+        <div class="footer-links">
+            <a href="#" onclick="showToast('📋 Política de Privacidade', 'info')">Privacidade</a>
+            <a href="#" onclick="showToast('📋 Termos de Uso', 'info')">Termos</a>
+            <a href="#" onclick="showToast('📋 Suporte', 'info')">Suporte</a>
+            <a href="#" onclick="showToast('📋 Sobre', 'info')">Sobre</a>
+        </div>
+        <div class="footer-social">
+            <a href="#" onclick="showToast('🔗 LinkedIn', 'info')" aria-label="LinkedIn">🔗</a>
+            <a href="#" onclick="showToast('📸 Instagram', 'info')" aria-label="Instagram">📸</a>
+            <a href="#" onclick="showToast('▶️ YouTube', 'info')" aria-label="YouTube">▶️</a>
+        </div>
+    </footer>
 
     <!-- ============================================
     SCRIPTS - CAMINHOS RELATIVOS
