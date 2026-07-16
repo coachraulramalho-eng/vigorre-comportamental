@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Créditos | VIGORRE ONE™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F8FAFC;
+            color: #0F172A;
+            min-height: 100vh;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
+            border: 1px solid #E2E8F0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0A2540;
+        }
+        .header h1 .highlight { color: #D97706; }
+        .btn-back {
+            padding: 8px 20px;
+            background: #0A2540;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .btn-back:hover { background: #D97706; transform: translateY(-2px); }
+        .btn-comprar {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-comprar:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(217,119,6,0.3); }
+        .credits-display {
+            background: linear-gradient(135deg, #0A2540, #1A3A5C);
+            border-radius: 16px;
+            padding: 32px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .credits-display .number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #F59E0B;
+        }
+        .credits-display .label { font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+        .grid-planos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 16px;
+        }
+        .card-plano {
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #E2E8F0;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .card-plano:hover { border-color: #D97706; transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+        .card-plano h3 { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; color: #0A2540; }
+        .card-plano .price { font-size: 1.8rem; font-weight: 700; color: #D97706; margin: 8px 0; }
+        .card-plano .price small { font-size: 1rem; color: #94A3B8; }
+        .card-plano .desc { font-size: 0.85rem; color: #64748B; margin-bottom: 16px; }
+        .btn-plano {
+            padding: 10px 32px;
+            background: #0A2540;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-plano:hover { background: #D97706; transform: translateY(-2px); }
+        .footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #E2E8F0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #94A3B8;
+        }
+        @media (prefers-color-scheme: dark) {
+            body { background: #0F172A; }
+            .container { background: #1E293B; border-color: #334155; }
+            .header h1 { color: #FFFFFF; }
+            .card-plano { background: #0F172A; border-color: #334155; }
+            .card-plano h3 { color: #FFFFFF; }
+            .footer { border-color: #334155; color: #64748B; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💳 <span class="highlight">Créditos</span></h1>
+            <div style="display:flex;gap:12px;">
+                <a href="/organizacao/dashboard.html" class="btn-back">← Voltar</a>
+                <button class="btn-comprar" onclick="showToast('💳 Compra de créditos em breve!')">+ Comprar</button>
+            </div>
+        </div>
+        <p style="color:#94A3B8;margin-bottom:16px;font-size:0.95rem;">Gerencie seus créditos para avaliações</p>
+
+        <div class="credits-display">
+            <div>
+                <div class="label">Créditos Disponíveis</div>
+                <div class="number" id="totalCredits">42</div>
+            </div>
+            <div style="text-align:right;">
+                <div class="label">Créditos Utilizados</div>
+                <div style="font-size:1.4rem;font-weight:600;color:white;">18</div>
+            </div>
+        </div>
+
+        <div class="grid-planos">
+            <div class="card-plano">
+                <h3>📊 Standard</h3>
+                <div class="price">R$ 30<small>,00</small></div>
+                <div class="desc">1 crédito · 1 avaliação</div>
+                <button class="btn-plano" onclick="showToast('💳 Compra em desenvolvimento')">Comprar</button>
+            </div>
+            <div class="card-plano" style="border-color:#D97706;">
+                <h3>📦 Assessment</h3>
+                <div class="price">R$ 80<small>,00</small></div>
+                <div class="desc">3 créditos · 3 avaliações</div>
+                <button class="btn-plano" style="background:#D97706;" onclick="showToast('💳 Compra em desenvolvimento')">Comprar</button>
+            </div>
+            <div class="card-plano">
+                <h3>👑 Premium</h3>
+                <div class="price">R$ 120<small>,00</small></div>
+                <div class="desc">1 crédito Premium + Laudo</div>
+                <button class="btn-plano" onclick="showToast('💳 Compra em desenvolvimento')">Comprar</button>
+            </div>
+        </div>
+
+        <div class="footer">© 2026 VIGORRE ONE™ · People Analytics Enterprise</div>
+    </div>
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
+    <script>
+        function showToast(msg) { alert(msg); }
+        document.addEventListener('DOMContentLoaded', function() {
+            const credits = Math.floor(Math.random() * 50) + 20;
+            document.getElementById('totalCredits').textContent = credits;
+        });
+    </script>
+</body>
+</html>
