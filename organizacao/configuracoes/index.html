@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configurações | VIGORRE ONE™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F8FAFC;
+            color: #0F172A;
+            min-height: 100vh;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
+            border: 1px solid #E2E8F0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0A2540;
+        }
+        .header h1 .highlight { color: #D97706; }
+        .btn-back {
+            padding: 8px 20px;
+            background: #0A2540;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .btn-back:hover { background: #D97706; transform: translateY(-2px); }
+        .config-group {
+            margin-top: 24px;
+        }
+        .config-group h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0A2540;
+            margin-bottom: 12px;
+        }
+        .config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #E2E8F0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .config-item .label { font-size: 0.9rem; color: #475569; }
+        .config-item .value { font-size: 0.85rem; color: #0A2540; font-weight: 500; }
+        .btn-edit {
+            padding: 4px 16px;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            color: #64748B;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-edit:hover { border-color: #D97706; color: #D97706; }
+        .btn-save {
+            padding: 10px 32px;
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 16px;
+        }
+        .btn-save:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(217,119,6,0.3); }
+        .footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #E2E8F0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #94A3B8;
+        }
+        @media (prefers-color-scheme: dark) {
+            body { background: #0F172A; }
+            .container { background: #1E293B; border-color: #334155; }
+            .header h1 { color: #FFFFFF; }
+            .config-group h3 { color: #FFFFFF; }
+            .config-item { border-color: #334155; }
+            .config-item .value { color: #FFFFFF; }
+            .btn-edit { background: #0F172A; border-color: #334155; color: #94A3B8; }
+            .footer { border-color: #334155; color: #64748B; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚙️ <span class="highlight">Configurações</span></h1>
+            <a href="/organizacao/dashboard.html" class="btn-back">← Voltar</a>
+        </div>
+        <p style="color:#94A3B8;margin-bottom:16px;font-size:0.95rem;">Configurações da sua organização</p>
+
+        <div class="config-group">
+            <h3>🏢 Dados da Organização</h3>
+            <div class="config-item">
+                <span class="label">Nome da Empresa</span>
+                <span class="value" id="companyName">Minha Empresa</span>
+                <button class="btn-edit" onclick="showToast('✏️ Editar nome em breve')">Editar</button>
+            </div>
+            <div class="config-item">
+                <span class="label">CNPJ</span>
+                <span class="value">12.345.678/0001-99</span>
+                <button class="btn-edit" onclick="showToast('✏️ Editar CNPJ em breve')">Editar</button>
+            </div>
+            <div class="config-item">
+                <span class="label">Setor</span>
+                <span class="value">Tecnologia</span>
+                <button class="btn-edit" onclick="showToast('✏️ Editar setor em breve')">Editar</button>
+            </div>
+        </div>
+
+        <div class="config-group">
+            <h3>🔐 Segurança</h3>
+            <div class="config-item">
+                <span class="label">Alterar Senha</span>
+                <span class="value">••••••••</span>
+                <button class="btn-edit" onclick="showToast('🔐 Alterar senha em breve')">Alterar</button>
+            </div>
+            <div class="config-item">
+                <span class="label">Autenticação em 2 Fatores</span>
+                <span class="value">Desativado</span>
+                <button class="btn-edit" onclick="showToast('🔐 Ativar 2FA em breve')">Ativar</button>
+            </div>
+        </div>
+
+        <button class="btn-save" onclick="showToast('💾 Configurações salvas!')">💾 Salvar Configurações</button>
+
+        <div class="footer">© 2026 VIGORRE ONE™ · People Analytics Enterprise</div>
+    </div>
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
+    <script>
+        function showToast(msg) { alert(msg); }
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.VigorreAuth) {
+                const user = window.VigorreAuth.getCurrentUser();
+                if (user && user.companyName) {
+                    document.getElementById('companyName').textContent = user.companyName;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
