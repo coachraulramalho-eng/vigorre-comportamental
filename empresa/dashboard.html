@@ -15,7 +15,7 @@
     <style>
         /* ============================================
            VIGORRE ONE™ - EMPRESA DASHBOARD
-           PADRÃO SAP / WORKDAY / ORACLE
+           MESMA IDENTIDADE DO INDEX
            ============================================ */
 
         :root {
@@ -166,6 +166,14 @@
             .footer a:hover {
                 color: var(--gold);
             }
+            .footer .footer-social a {
+                background: var(--gray-800);
+                border-color: var(--gray-700);
+            }
+            .footer .footer-social a:hover {
+                background: var(--gold);
+                border-color: var(--gold);
+            }
         }
 
         * {
@@ -210,7 +218,7 @@
         }
 
         /* ============================================
-           HEADER (NOVO PADRÃO SAP/WORKDAY)
+           HEADER (MESMO DO INDEX)
            ============================================ */
         .header {
             background: var(--navy);
@@ -244,7 +252,7 @@
 
         .header .logo .logo-text .name {
             font-family: var(--font-display);
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 800;
             color: white;
             letter-spacing: -0.3px;
@@ -257,7 +265,7 @@
         }
 
         .header .logo .logo-text .sub {
-            font-size: 0.5rem;
+            font-size: 0.55rem;
             color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
             letter-spacing: 0.08em;
@@ -605,6 +613,10 @@
             transition: var(--transition);
             border: 1px solid transparent;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
         .quick-action:hover {
@@ -616,8 +628,6 @@
 
         .quick-action .icon {
             font-size: 1.6rem;
-            display: block;
-            margin-bottom: 4px;
         }
 
         .quick-action .label {
@@ -674,6 +684,13 @@
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .table-card .table-header .action:hover {
+            color: var(--orange);
         }
 
         .table-container {
@@ -802,7 +819,7 @@
         }
 
         /* ============================================
-           FOOTER (NOVO PADRÃO SAP/WORKDAY)
+           FOOTER (MESMO DO INDEX)
            ============================================ */
         .footer {
             margin-top: 48px;
@@ -818,6 +835,14 @@
             color: var(--text-muted);
         }
 
+        .footer .footer-copy {
+            font-size: 0.7rem;
+        }
+
+        .footer .footer-copy strong {
+            color: var(--gold);
+        }
+
         .footer .footer-links {
             display: flex;
             gap: 20px;
@@ -827,6 +852,7 @@
             color: var(--text-muted);
             text-decoration: none;
             transition: var(--transition);
+            font-size: 0.75rem;
         }
 
         .footer .footer-links a:hover {
@@ -850,6 +876,7 @@
             text-decoration: none;
             transition: var(--transition);
             border: 1px solid var(--border-color);
+            font-size: 0.9rem;
         }
 
         .footer .footer-social a:hover {
@@ -857,21 +884,6 @@
             color: white;
             border-color: var(--gold);
             transform: translateY(-2px);
-        }
-
-        .footer .footer-copy {
-            font-size: 0.7rem;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .footer .footer-social a {
-                background: var(--gray-800);
-                border-color: var(--gray-700);
-            }
-            .footer .footer-social a:hover {
-                background: var(--gold);
-                border-color: var(--gold);
-            }
         }
 
         @media (max-width: 768px) {
@@ -1038,7 +1050,7 @@
     </div>
 
     <!-- ============================================
-    HEADER (NOVO PADRÃO)
+    HEADER (MESMO DO INDEX)
     ============================================ -->
     <header class="header">
         <a href="#" class="logo" aria-label="VIGORRE ONE™ Home">
@@ -1144,31 +1156,30 @@
                     <h3>⚡ Ações Rápidas</h3>
                 </div>
                 <div class="quick-actions">
-                    <!-- ===== BOTÕES CORRIGIDOS (COM JAVASCRIPT) ===== -->
-                    <button class="quick-action" onclick="showToast('📋 Colaboradores - Em breve!', 'info')">
+                    <a href="colaboradores.html" class="quick-action">
                         <span class="icon">👥</span>
                         <span class="label">Ver Colaboradores</span>
-                    </button>
-                    <button class="quick-action" onclick="showToast('📊 Avaliações - Em breve!', 'info')">
+                    </a>
+                    <a href="avaliacoes.html" class="quick-action">
                         <span class="icon">📊</span>
                         <span class="label">Ver Avaliações</span>
-                    </button>
-                    <button class="quick-action" onclick="showToast('📄 Relatórios - Em breve!', 'info')">
+                    </a>
+                    <a href="relatorios.html" class="quick-action">
                         <span class="icon">📄</span>
                         <span class="label">Relatórios</span>
-                    </button>
-                    <button class="quick-action" onclick="showToast('🎯 Perfis Ideais - Em breve!', 'info')">
+                    </a>
+                    <a href="job-profile.html" class="quick-action">
                         <span class="icon">🎯</span>
                         <span class="label">Perfis Ideais</span>
-                    </button>
-                    <button class="quick-action" onclick="showToast('💳 Comprar Créditos - Em breve!', 'info')">
+                    </a>
+                    <a href="comprar-creditos.html" class="quick-action">
                         <span class="icon">💳</span>
                         <span class="label">Comprar Créditos</span>
-                    </button>
-                    <button class="quick-action" onclick="showToast('⚙️ Configurações - Em breve!', 'info')">
+                    </a>
+                    <a href="configuracoes.html" class="quick-action">
                         <span class="icon">⚙️</span>
                         <span class="label">Configurações</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1177,7 +1188,7 @@
         <div class="table-card">
             <div class="table-header">
                 <h3>📋 Colaboradores</h3>
-                <button class="action" onclick="showToast('📋 Lista completa - Em breve!', 'info')" style="background:none;border:none;cursor:pointer;font-size:0.75rem;color:var(--gold);font-weight:600;">Ver todos →</button>
+                <a href="colaboradores.html" class="action">Ver todos →</a>
             </div>
             <div class="table-container">
                 <table aria-label="Lista de colaboradores">
@@ -1197,22 +1208,22 @@
     </main>
 
     <!-- ============================================
-    FOOTER (NOVO PADRÃO)
+    FOOTER (MESMO DO INDEX)
     ============================================ -->
     <footer class="footer">
         <div class="footer-copy">
             © 2026 <strong>VIGORRE ONE™</strong> · People Analytics Enterprise
         </div>
         <div class="footer-links">
-            <a href="#" onclick="showToast('📋 Política de Privacidade', 'info')">Privacidade</a>
-            <a href="#" onclick="showToast('📋 Termos de Uso', 'info')">Termos</a>
-            <a href="#" onclick="showToast('📋 Suporte', 'info')">Suporte</a>
-            <a href="#" onclick="showToast('📋 Sobre', 'info')">Sobre</a>
+            <a href="#">Privacidade</a>
+            <a href="#">Termos</a>
+            <a href="#">Suporte</a>
+            <a href="#">Sobre</a>
         </div>
         <div class="footer-social">
-            <a href="#" onclick="showToast('🔗 LinkedIn', 'info')" aria-label="LinkedIn">🔗</a>
-            <a href="#" onclick="showToast('📸 Instagram', 'info')" aria-label="Instagram">📸</a>
-            <a href="#" onclick="showToast('▶️ YouTube', 'info')" aria-label="YouTube">▶️</a>
+            <a href="#" aria-label="LinkedIn">🔗</a>
+            <a href="#" aria-label="Instagram">📸</a>
+            <a href="#" aria-label="YouTube">▶️</a>
         </div>
     </footer>
 
