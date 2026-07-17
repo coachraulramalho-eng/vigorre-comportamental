@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laudo VIGOR® - Vigorre One™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/globals.css" />
+    <link rel="icon" href="../assets/images/logo-vigorre.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0A2540;
+            --gold: #D97706;
+            --cyan: #06B6D4;
+            --green: #10B981;
+            --purple: #7C3AED;
+            --pink: #EC4899;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ===== HEADER ===== */
+        .laudo-header {
+            background: var(--navy);
+            color: white;
+            padding: 24px 32px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .laudo-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .laudo-header .logo .logo-img {
+            height: 44px;
+            width: auto;
+            display: block;
+        }
+
+        .laudo-header .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.3px;
+        }
+
+        .laudo-header .logo .logo-text .name .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
+
+        .laudo-header .logo .logo-text .sub {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .laudo-header .header-title {
+            text-align: center;
+        }
+
+        .laudo-header .header-title h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .laudo-header .header-title .subtitle {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .laudo-header .header-user {
+            text-align: right;
+        }
+
+        .laudo-header .header-user .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .laudo-header .header-user .company {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ===== BODY ===== */
+        .laudo-body {
+            background: white;
+            padding: 40px;
+            border-left: 1px solid var(--gray-200);
+            border-right: 1px solid var(--gray-200);
+        }
+
+        /* ===== HERO ===== */
+        .laudo-hero {
+            text-align: center;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #F8FAFC, #FEF3C7);
+            border-radius: var(--radius);
+            margin-bottom: 32px;
+            border: 2px solid var(--gold);
+        }
+
+        .laudo-hero .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 4px 20px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .laudo-hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin: 16px 0 8px;
+        }
+
+        .laudo-hero h1 .highlight {
+            color: var(--gold);
+        }
+
+        .laudo-hero p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .laudo-hero .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 24px;
+        }
+
+        .laudo-hero .stats .stat-item {
+            text-align: center;
+        }
+
+        .laudo-hero .stats .stat-item .number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .laudo-hero .stats .stat-item .label {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+
+        /* ===== GRID DE BLOCOS ===== */
+        .laudo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .laudo-card {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .laudo-card:hover {
+            border-color: var(--gold);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .laudo-card .card-icon {
+            font-size: 1.8rem;
+        }
+
+        .laudo-card .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin: 4px 0;
+        }
+
+        .laudo-card .card-desc {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            line-height: 1.4;
+        }
+
+        .laudo-card .card-pages {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            background: var(--gray-100);
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
+        }
+
+        /* ===== SEÇÃO DE AÇÃO ===== */
+        .laudo-action {
+            background: var(--navy);
+            border-radius: var(--radius);
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin-top: 24px;
+        }
+
+        .laudo-action h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .laudo-action p {
+            color: rgba(255, 255, 255, 0.6);
+            margin: 8px 0 20px;
+        }
+
+        .laudo-action .btn-primary {
+            display: inline-block;
+            padding: 14px 40px;
+            background: linear-gradient(135deg, var(--gold), #F59E0B);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(217, 119, 6, 0.3);
+        }
+
+        .laudo-action .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(217, 119, 6, 0.4);
+        }
+
+        .laudo-action .btn-secondary {
+            display: inline-block;
+            padding: 14px 40px;
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-full);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            margin-left: 12px;
+        }
+
+        .laudo-action .btn-secondary:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* ===== FOOTER ===== */
+        .laudo-footer {
+            background: var(--navy);
+            color: white;
+            padding: 20px 32px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .laudo-footer .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .laudo-footer .footer-logo .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--cyan);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.8rem;
+            color: var(--navy);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .laudo-footer .footer-logo .footer-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .laudo-footer .footer-logo .footer-text .name .tm {
+            font-size: 0.35rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
+
+        .laudo-footer .footer-logo .footer-text .tagline {
+            font-size: 0.55rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .laudo-footer .footer-contact {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .laudo-footer .footer-contact a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+
+        .laudo-footer .footer-contact a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ===== RESPONSIVO ===== */
+        @media (max-width: 1024px) {
+            .laudo-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .laudo-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .laudo-header .header-user {
+                text-align: center;
+            }
+            .laudo-body {
+                padding: 20px;
+            }
+            .laudo-hero {
+                padding: 30px 20px;
+            }
+            .laudo-hero h1 {
+                font-size: 1.6rem;
+            }
+            .laudo-hero .stats {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .laudo-grid {
+                grid-template-columns: 1fr;
+            }
+            .laudo-action {
+                padding: 24px;
+            }
+            .laudo-action .btn-primary,
+            .laudo-action .btn-secondary {
+                display: block;
+                width: 100%;
+                margin: 8px 0;
+            }
+            .laudo-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media print {
+            .laudo-header {
+                background: #0A2540 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                border-radius: 0 !important;
+            }
+            .laudo-footer {
+                background: #0A2540 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                border-radius: 0 !important;
+            }
+            .laudo-action {
+                display: none !important;
+            }
+            .laudo-body {
+                border: none !important;
+            }
+            .laudo-hero {
+                background: #F8FAFC !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <header class="laudo-header">
+            <div class="logo">
+                <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <div class="logo-text">
+                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                    <span class="sub">People Analytics Enterprise</span>
+                </div>
+            </div>
+
+            <div class="header-title">
+                <h1>📋 Laudo VIGOR®</h1>
+                <div class="subtitle">Análise Comportamental Integrada</div>
+            </div>
+
+            <div class="header-user">
+                <div class="name" id="participantName">Carregando...</div>
+                <div class="company" id="participantCompany">Empresa: --</div>
+            </div>
+        </header>
+
+        <!-- ===== BODY ===== -->
+        <div class="laudo-body">
+
+            <!-- ===== HERO ===== -->
+            <section class="laudo-hero">
+                <span class="badge">⭐ Premium</span>
+                <h1>Laudo <span class="highlight">VIGOR®</span></h1>
+                <p>O mais alto nível de análise comportamental integrando todos os seus testes em um único documento estratégico.</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="number">80-100</div>
+                        <div class="label">Páginas de Análise</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="number">5</div>
+                        <div class="label">Testes Integrados</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="number">⭐</div>
+                        <div class="label">Metodologia VIGOR®</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== BLOCOS DO LAUDO ===== -->
+            <h2 style="font-family:'Poppins',sans-serif;font-size:1.2rem;color:var(--gray-800);margin-bottom:16px;">
+                📑 Estrutura do Laudo
+            </h2>
+
+            <div class="laudo-grid">
+                <!-- Bloco 1 -->
+                <div class="laudo-card">
+                    <div class="card-icon">📄</div>
+                    <div class="card-title">Bloco 1 - Identificação</div>
+                    <div class="card-desc">Capa Premium, Índice Inteligente, Apresentação, Como interpretar</div>
+                    <span class="card-pages">4 páginas</span>
+                </div>
+
+                <!-- Bloco 2 -->
+                <div class="laudo-card">
+                    <div class="card-icon">📖</div>
+                    <div class="card-title">Bloco 2 - Metodologia VIGOR®</div>
+                    <div class="card-desc">Origem, Fundamentos científicos, Os 5 pilares, Como a IA interpreta</div>
+                    <span class="card-pages">6 páginas</span>
+                </div>
+
+                <!-- Bloco 3 -->
+                <div class="laudo-card">
+                    <div class="card-icon">🧬</div>
+                    <div class="card-title">Bloco 3 - Perfil Geral</div>
+                    <div class="card-desc">Perfil predominante, Profissional, Pessoal, Social, Familiar</div>
+                    <span class="card-pages">10 páginas</span>
+                </div>
+
+                <!-- Bloco 4 -->
+                <div class="laudo-card">
+                    <div class="card-icon">🧠</div>
+                    <div class="card-title">Bloco 4 - Personalidade</div>
+                    <div class="card-desc">Tomada de decisão, Pressão, Mudanças, Aprendizagem, Conflitos</div>
+                    <span class="card-pages">12 páginas</span>
+                </div>
+
+                <!-- Bloco 5 -->
+                <div class="laudo-card">
+                    <div class="card-icon">💬</div>
+                    <div class="card-title">Bloco 5 - Comunicação</div>
+                    <div class="card-desc">Verbal, Escrita, Escuta ativa, Persuasão, Negociação, Influência</div>
+                    <span class="card-pages">8 páginas</span>
+                </div>
+
+                <!-- Bloco 6 -->
+                <div class="laudo-card">
+                    <div class="card-icon">👔</div>
+                    <div class="card-title">Bloco 6 - Liderança</div>
+                    <div class="card-desc">Potencial, Estilo predominante, Delegação, Feedback, Gestão de conflitos</div>
+                    <span class="card-pages">10 páginas</span>
+                </div>
+
+                <!-- Bloco 7 -->
+                <div class="laudo-card">
+                    <div class="card-icon">🚀</div>
+                    <div class="card-title">Bloco 7 - Carreira</div>
+                    <div class="card-desc">Potencial de crescimento, Perfil para promoção, Ambientes compatíveis</div>
+                    <span class="card-pages">8 páginas</span>
+                </div>
+
+                <!-- Bloco 8 -->
+                <div class="laudo-card">
+                    <div class="card-icon">❤️</div>
+                    <div class="card-title">Bloco 8 - Saúde Emocional</div>
+                    <div class="card-desc">Estado emocional, Resiliência, Estresse, Burnout, Vida pessoal</div>
+                    <span class="card-pages">10 páginas</span>
+                </div>
+
+                <!-- Bloco 9 -->
+                <div class="laudo-card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Bloco 9 - Mapa de Competências</div>
+                    <div class="card-desc">Técnicas, Soft Skills, Futuras, Críticas, Comparativo Mercado</div>
+                    <span class="card-pages">10 páginas</span>
+                </div>
+
+                <!-- Bloco 10 -->
+                <div class="laudo-card">
+                    <div class="card-icon">⚠️</div>
+                    <div class="card-title">Bloco 10 - Mapa de Riscos</div>
+                    <div class="card-desc">15 riscos identificados, Probabilidade, Impacto, Heat Map</div>
+                    <span class="card-pages">8 páginas</span>
+                </div>
+
+                <!-- Bloco 11 -->
+                <div class="laudo-card">
+                    <div class="card-icon">💎</div>
+                    <div class="card-title">Bloco 11 - Mapa de Potenciais</div>
+                    <div class="card-desc">14 potenciais, Como desenvolver, Treinamentos, Projetos</div>
+                    <span class="card-pages">8 páginas</span>
+                </div>
+
+                <!-- Bloco 12 -->
+                <div class="laudo-card">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">PDI - Plano de Desenvolvimento</div>
+                    <div class="card-desc">Diagnóstico, Objetivos, Competências, Plano diário/semanal/mensal</div>
+                    <span class="card-pages">12 páginas</span>
+                </div>
+            </div>
+
+            <!-- ===== SEÇÃO DE AÇÃO ===== -->
+            <section class="laudo-action">
+                <h2>📋 Gerar seu Laudo VIGOR®</h2>
+                <p>Integre todos os seus testes em uma análise estratégica completa de 80 a 100 páginas.</p>
+                <div>
+                    <a href="completo.html" class="btn-primary">🔍 Visualizar Laudo</a>
+                    <a href="../dashboard.html" class="btn-secondary">📊 Voltar ao Dashboard</a>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="laudo-footer">
+            <div class="footer-logo">
+                <div class="logo-icon">V</div>
+                <div class="footer-text">
+                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                    <span class="tagline">People Analytics • Assessment Intelligence</span>
+                </div>
+            </div>
+            <div class="footer-contact">
+                <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+                <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+                <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
+            </div>
+            <div class="footer-page">© 2026 Vigorre One™</div>
+        </footer>
+
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📋 Laudo VIGOR® - Vigorre One™');
+
+            const isAuth = window.VigorreAuth.isAuthenticated();
+            if (!isAuth) {
+                window.location.href = '../login.html';
+                return;
+            }
+
+            const user = window.VigorreAuth.getCurrentUser();
+            if (user) {
+                document.getElementById('participantName').textContent = user.name || 'Participante';
+                document.getElementById('participantCompany').textContent = 'Empresa: ' + (user.companyName || '--');
+            }
+        });
+    </script>
+
+</body>
+</html>
