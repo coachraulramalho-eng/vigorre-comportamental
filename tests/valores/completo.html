@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resultado Valores - Vigorre One™</title>
+    <link rel="stylesheet" href="/assets/css/globals.css" />
+    <link rel="icon" href="/assets/images/logo-vigorre.png" />
+    <style>
+        body {
+            background: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #E2E8F0;
+            margin-bottom: 32px;
+        }
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #0A2540;
+        }
+        .logo .highlight { color: #D97706; }
+        .logo sup { font-size: 0.5rem; color: #94A3B8; }
+        .badge {
+            background: #FEF3C7;
+            color: #D97706;
+            padding: 4px 16px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            color: #0A2540;
+            margin-bottom: 8px;
+        }
+        .subtitulo {
+            color: #64748B;
+            margin-bottom: 32px;
+        }
+        .top-values {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+        .top-value-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 24px;
+            border-radius: 16px;
+            min-width: 100px;
+            background: #F8FAFC;
+            border: 2px solid #E2E8F0;
+            transition: transform 0.2s ease;
+        }
+        .top-value-item:hover {
+            transform: translateY(-4px);
+        }
+        .top-value-item .posicao {
+            font-size: 0.7rem;
+            color: #94A3B8;
+            font-weight: 600;
+        }
+        .top-value-item .icone {
+            font-size: 2rem;
+        }
+        .top-value-item .nome {
+            font-weight: 700;
+            color: #0A2540;
+            font-size: 1rem;
+        }
+        .top-value-item .score {
+            font-size: 0.85rem;
+            color: #64748B;
+        }
+        .top-value-item.top1 { border-color: #D97706; background: #FEF3C7; }
+        .top-value-item.top2 { border-color: #94A3B8; background: #F1F5F9; }
+        .top-value-item.top3 { border-color: #CD7F32; background: #FEF3C7; }
+
+        .ranking {
+            margin: 24px 0;
+        }
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 10px 16px;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .ranking-item .pos {
+            font-weight: 700;
+            color: #94A3B8;
+            width: 30px;
+        }
+        .ranking-item .barra {
+            flex: 1;
+            height: 8px;
+            background: #E2E8F0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .ranking-item .barra .fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 1s ease;
+        }
+        .ranking-item .nome-valor {
+            font-weight: 500;
+            color: #0A2540;
+            width: 140px;
+        }
+        .ranking-item .score-valor {
+            font-weight: 600;
+            color: #0A2540;
+            width: 50px;
+            text-align: right;
+        }
+
+        .secao {
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 12px 0;
+        }
+        .secao h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: #0A2540;
+            margin-bottom: 8px;
+        }
+        .secao ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .secao ul li {
+            padding: 4px 0;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .btn-primary, .btn-secondary {
+            padding: 14px 32px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            color: #FFFFFF;
+            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.25);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(217, 119, 6, 0.35);
+        }
+        .btn-secondary {
+            background: #E2E8F0;
+            color: #0A2540;
+        }
+        .btn-secondary:hover {
+            background: #CBD5E1;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 24px; }
+            h1 { font-size: 1.5rem; }
+            .top-value-item { min-width: 70px; padding: 12px 16px; }
+            .ranking-item .nome-valor { width: 100px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                VIGORRE <span class="highlight">ONE</span><sup>™</sup>
+            </div>
+            <span class="badge">⭐ Resultado Valores</span>
+        </div>
+
+        <h1>Seus Valores Pessoais</h1>
+        <p class="subtitulo">O que realmente importa para você na vida e no trabalho</p>
+
+        <!-- Top 5 Valores -->
+        <div class="top-values" id="top-values">
+            <!-- Renderizado via JS -->
+        </div>
+
+        <!-- Ranking Completo -->
+        <div class="ranking" id="ranking-completo">
+            <h3 style="font-family:'Poppins',sans-serif; font-size:1rem; color:#0A2540; margin-bottom:12px;">📊 Ranking de Valores</h3>
+            <!-- Renderizado via JS -->
+        </div>
+
+        <!-- Seções -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+            <div class="secao">
+                <h3>💡 O que isso significa?</h3>
+                <ul id="significado">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+            <div class="secao">
+                <h3>🎯 Como aplicar</h3>
+                <ul id="aplicacao">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="botoes">
+            <button class="btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+            <button class="btn-secondary" onclick="window.location.href='/dashboard.html'">📊 Voltar ao Dashboard</button>
+            <button class="btn-primary" onclick="window.location.href='/relatorios/valores'">📄 Ver Relatório Completo</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const resultado = localStorage.getItem('resultado_valores');
+            if (!resultado) {
+                document.querySelector('.container').innerHTML = `
+                    <div style="text-align:center; padding:60px 0;">
+                        <div style="font-size:4rem;">⭐</div>
+                        <h2>Nenhum resultado encontrado</h2>
+                        <p style="color:#64748B;">Faça o teste de Valores para ver seu resultado.</p>
+                        <a href="/tests/valores/" class="btn-primary" style="display:inline-block; margin-top:16px; padding:14px 32px; border-radius:9999px; text-decoration:none; color:#fff; background:linear-gradient(135deg,#D97706,#F59E0B);">Iniciar Teste</a>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const data = JSON.parse(resultado);
+                const ranking = data.ranking || [];
+                const top5 = data.top5 || [];
+                const top1 = data.top1 || null;
+
+                const cores = {
+                    realizacao: '#EF4444',
+                    reconhecimento: '#F59E0B',
+                    seguranca: '#10B981',
+                    autonomia: '#3B82F6',
+                    aprendizado: '#8B5CF6',
+                    colaboracao: '#EC4899',
+                    estabilidade: '#6366F1',
+                    inovacao: '#14B8A6',
+                    proposito: '#F472B6',
+                    etica: '#22D3EE',
+                    qualidade_vida: '#A3E635',
+                    resultado: '#FB923C'
+                };
+
+                const icones = {
+                    realizacao: '🏆',
+                    reconhecimento: '👏',
+                    seguranca: '🛡️',
+                    autonomia: '🚀',
+                    aprendizado: '📚',
+                    colaboracao: '🤝',
+                    estabilidade: '📋',
+                    inovacao: '💡',
+                    proposito: '🎯',
+                    etica: '⚖️',
+                    qualidade_vida: '🌿',
+                    resultado: '📈'
+                };
+
+                // Top 5
+                const topContainer = document.getElementById('top-values');
+                if (top5.length) {
+                    topContainer.innerHTML = top5.map((v, i) => `
+                        <div class="top-value-item top${i+1}">
+                            <div class="posicao">#${i+1}</div>
+                            <div class="icone">${icones[v.key] || '⭐'}</div>
+                            <div class="nome">${v.name}</div>
+                            <div class="score">${v.score}%</div>
+                        </div>
+                    `).join('');
+                } else {
+                    topContainer.innerHTML = '<p style="color:#94A3B8;">Nenhum valor identificado</p>';
+                }
+
+                // Ranking completo
+                const rankingContainer = document.getElementById('ranking-completo');
+                if (ranking.length) {
+                    rankingContainer.innerHTML += ranking.map((v, i) => `
+                        <div class="ranking-item">
+                            <span class="pos">#${i+1}</span>
+                            <span class="nome-valor">${icones[v.key] || '📌'} ${v.name}</span>
+                            <div class="barra">
+                                <div class="fill" style="width:${v.score}%; background:${cores[v.key] || '#94A3B8'};"></div>
+                            </div>
+                            <span class="score-valor">${v.score}%</span>
+                        </div>
+                    `).join('');
+                }
+
+                // Significado
+                const significado = document.getElementById('significado');
+                if (top1) {
+                    const descricoes = {
+                        realizacao: 'Você busca conquistas e metas desafiadoras',
+                        reconhecimento: 'Você valoriza ser visto e reconhecido pelo seu trabalho',
+                        seguranca: 'Você busca estabilidade e previsibilidade',
+                        autonomia: 'Você valoriza liberdade e independência',
+                        aprendizado: 'Você busca conhecimento e desenvolvimento contínuo',
+                        colaboracao: 'Você valoriza trabalho em equipe e cooperação',
+                        estabilidade: 'Você prefere ambientes estruturados e previsíveis',
+                        inovacao: 'Você busca criar e inovar',
+                        proposito: 'Você busca fazer a diferença no mundo',
+                        etica: 'Você valoriza integridade e transparência',
+                        qualidade_vida: 'Você busca equilíbrio entre vida pessoal e profissional',
+                        resultado: 'Você foca em entregas e desempenho'
+                    };
+                    significado.innerHTML = `
+                        <li>✅ <strong>Valor principal:</strong> ${top1.name}</li>
+                        <li>📌 ${descricoes[top1.key] || 'Valor identificado'}</li>
+                    `;
+                } else {
+                    significado.innerHTML = '<li>Nenhum valor principal identificado</li>';
+                }
+
+                // Aplicação
+                const aplicacao = document.getElementById('aplicacao');
+                const dicas = {
+                    realizacao: 'Busque posições com metas desafiadoras',
+                    reconhecimento: 'Procure ambientes que valorizam feedback',
+                    seguranca: 'Busque empresas estáveis e consolidadas',
+                    autonomia: 'Procure posições com liberdade de ação',
+                    aprendizado: 'Invista em cursos e certificações',
+                    colaboracao: 'Procure ambientes colaborativos',
+                    estabilidade: 'Busque processos claros e definidos',
+                    inovacao: 'Procure ambientes que incentivam criatividade',
+                    proposito: 'Busque empresas com propósito social',
+                    etica: 'Procure ambientes com integridade',
+                    qualidade_vida: 'Busque equilíbrio vida-trabalho',
+                    resultado: 'Procure ambientes orientados a resultados'
+                };
+                if (top1) {
+                    aplicacao.innerHTML = `
+                        <li>💡 ${dicas[top1.key] || 'Alinhe sua carreira com seus valores'}</li>
+                        <li>🎯 Use seus valores para guiar suas decisões profissionais</li>
+                    `;
+                } else {
+                    aplicacao.innerHTML = '<li>Reflita sobre o que realmente importa para você</li>';
+                }
+
+            } catch (error) {
+                console.error('Erro ao carregar resultado:', error);
+            }
+        })();
+    </script>
+</body>
+</html>
