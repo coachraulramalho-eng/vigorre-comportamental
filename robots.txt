@@ -1,66 +1,28 @@
 # ============================================
-# VIGORRE ONE™ - ROBOTS.TXT
-# INTERNATIONAL ENTERPRISE EDITION
-# ============================================
-# 
-# INSTRUÇÕES PARA ROBÔS DE BUSCA
-# - Permite indexação de todas as páginas
-# - Bloqueia áreas administrativas
-# - Indica sitemap
+# ROBOTS.TXT - VIGORRE ONE™
+# Configuração para mecanismos de busca
 # ============================================
 
 User-agent: *
 Allow: /
 
-# Bloquear áreas administrativas
+# ============================================
+# SITEMAP
+# ============================================
+Sitemap: https://vigorre.com.br/sitemap.xml
+
+# ============================================
+# BLOCOS DE ÁREAS RESTRITAS
+# ============================================
 Disallow: /admin/
+Disallow: /organizacao/
+Disallow: /participante/
 Disallow: /api/
-Disallow: /assets/
-Disallow: /backup/
 Disallow: /bi/
-Disallow: /financeiro/
-Disallow: /middleware/
+Disallow: /components/
 Disallow: /services/
 
-# Bloquear arquivos sensíveis
-Disallow: /*.json$
-Disallow: /*.env$
-Disallow: /*.config$
-Disallow: /*.log$
-Disallow: /*.sql$
-Disallow: /*.key$
-Disallow: /*.pem$
-
-# Bloquear parâmetros de busca
-Disallow: /*?*
-Disallow: /*&*
-
-# Sitemap
-Sitemap: https://vigorre.com/sitemap.xml
-
-# Crawl-delay para evitar sobrecarga
-Crawl-delay: 1
-
 # ============================================
-# ROBÔS ESPECÍFICOS
+# TEMPO DE CRAWL
 # ============================================
-
-# Googlebot
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0.5
-
-# Bingbot
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-# Yandex
-User-agent: Yandex
-Allow: /
-Crawl-delay: 1
-
-# DuckDuckBot
-User-agent: DuckDuckBot
-Allow: /
-Crawl-delay: 1
+Crawl-delay: 2
