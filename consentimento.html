@@ -1,57 +1,193 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Consentimento LGPD - Vigorre One™</title>
-    <link rel="stylesheet" href="/assets/css/globals.css">
+    <link rel="stylesheet" href="assets/css/globals.css" />
+    <link rel="stylesheet" href="assets/css/consentimento.css" />
+    <link rel="icon" href="assets/images/logo-vigorre.png" />
 </head>
 <body>
-    <div class="container consentimento-container">
+    <div class="consentimento-container">
         <div class="consentimento-card">
-            <h1>🔒 Consentimento LGPD</h1>
-            <p>Para continuar utilizando a plataforma Vigorre One™, precisamos do seu consentimento para o tratamento de dados pessoais.</p>
-            
-            <div class="consentimento-texto">
-                <h3>O que você precisa saber:</h3>
-                <ul>
-                    <li>Seus dados serão utilizados exclusivamente para autoconhecimento e desenvolvimento profissional</li>
-                    <li>Você pode solicitar acesso, correção ou exclusão dos seus dados a qualquer momento</li>
-                    <li>Seus dados não serão compartilhados com terceiros sem sua autorização</li>
-                    <li>Os dados serão mantidos pelo período de 180 a 365 dias</li>
-                </ul>
+            <!-- Logo -->
+            <div class="consentimento-logo">
+                <img src="assets/images/logo-vigorre.png" alt="Vigorre One™" />
+                <span>VIGORRE <span class="highlight">ONE</span><sup>™</sup></span>
             </div>
 
-            <label class="checkbox-label">
-                <input type="checkbox" id="consentimento" required>
-                Li e concordo com os termos da <a href="/politica-privacidade">Política de Privacidade</a>
-            </label>
+            <!-- Título -->
+            <h1>🔒 Consentimento LGPD</h1>
+            <p class="subtitulo">
+                Para continuar utilizando a plataforma Vigorre One™, precisamos do seu 
+                <strong>consentimento expresso</strong> para o tratamento de dados pessoais.
+            </p>
 
-            <button id="btn-consentir" class="btn-primary" disabled>
-                🔄 Continuar
-            </button>
+            <!-- Texto completo -->
+            <div class="consentimento-texto">
+                <h3>📋 O que você precisa saber:</h3>
+                
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-icon">✅</span>
+                        <div>
+                            <strong>Finalidade</strong>
+                            <p>Seus dados serão utilizados exclusivamente para autoconhecimento, desenvolvimento profissional e gestão de talentos.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🔍</span>
+                        <div>
+                            <strong>Transparência</strong>
+                            <p>Você pode solicitar acesso, correção ou exclusão dos seus dados a qualquer momento.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🔒</span>
+                        <div>
+                            <strong>Segurança</strong>
+                            <p>Seus dados são protegidos com criptografia e não serão compartilhados com terceiros sem sua autorização.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">⏱️</span>
+                        <div>
+                            <strong>Retenção</strong>
+                            <p>Os dados serão mantidos pelo período de <strong>180 a 365 dias</strong>, conforme configuração da plataforma.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">📊</span>
+                        <div>
+                            <strong>Anonimização</strong>
+                            <p>Dados utilizados em relatórios estatísticos serão sempre anonimizados.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">📝</span>
+                        <div>
+                            <strong>Logs</strong>
+                            <p>Todas as ações de consentimento são registradas com data, hora e IP.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="termos-destaque">
+                    <h4>📄 Termos de Uso</h4>
+                    <p>Ao aceitar, você concorda com nossa <a href="/politica-privacidade" target="_blank">Política de Privacidade</a> e com os <a href="/termos-uso" target="_blank">Termos de Uso</a> da plataforma.</p>
+                    <p><strong>Versão do termo:</strong> 3.0 (Julho/2026)</p>
+                </div>
+            </div>
+
+            <!-- Checkbox de consentimento -->
+            <div class="consentimento-checkbox">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="consentimento-check" required />
+                    <span class="checkmark"></span>
+                    Li, entendi e concordo com os termos da <a href="/politica-privacidade" target="_blank">Política de Privacidade</a> e com o tratamento dos meus dados conforme descrito acima.
+                </label>
+            </div>
+
+            <!-- Botões -->
+            <div class="consentimento-botoes">
+                <button id="btn-consentir" class="btn-primary" disabled>
+                    ✅ ACEITAR E CONTINUAR
+                </button>
+                <button id="btn-recusar" class="btn-outline">
+                    ❌ RECUSAR
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="consentimento-footer">
+                <p>© 2026 Vigorre One™ · People Intelligence Enterprise</p>
+                <p>
+                    <a href="/politica-privacidade">Política de Privacidade</a> · 
+                    <a href="/termos-uso">Termos de Uso</a> · 
+                    <a href="/contato">Contato</a>
+                </p>
+            </div>
         </div>
     </div>
 
+    <!-- ===== SCRIPTS ===== -->
+    <script src="supabase-config.js"></script>
+    <script src="auth.js"></script>
+
     <script>
-        document.getElementById('consentimento').addEventListener('change', function() {
-            document.getElementById('btn-consentir').disabled = !this.checked;
-        });
+        (function() {
+            'use strict';
 
-        document.getElementById('btn-consentir').addEventListener('click', async function() {
-            const { data, error } = await supabase
-                .from('participantes')
-                .update({
-                    consentimento: true,
-                    consentimento_data: new Date().toISOString(),
-                    termo_versao: '3.0'
-                })
-                .eq('id', window.participanteId);
+            const checkbox = document.getElementById('consentimento-check');
+            const btnConsentir = document.getElementById('btn-consentir');
+            const btnRecusar = document.getElementById('btn-recusar');
 
-            if (!error) {
-                window.location.href = '/dashboard';
+            // Habilita botão quando checkbox é marcado
+            checkbox.addEventListener('change', function() {
+                btnConsentir.disabled = !this.checked;
+            });
+
+            // ACEITAR
+            btnConsentir.addEventListener('click', function() {
+                const pendingUser = localStorage.getItem('pending_user');
+                
+                if (pendingUser) {
+                    try {
+                        const userData = JSON.parse(pendingUser);
+                        
+                        // Registrar consentimento
+                        const consentimento = VigorreAuth.registrarConsentimento(userData.userData.id);
+                        
+                        // Limpar pending
+                        localStorage.removeItem('pending_user');
+                        
+                        // Fazer login com consentimento
+                        VigorreAuth.login(
+                            userData.email,
+                            userData.userData.password,
+                            userData.role,
+                            true // consentimento já foi dado
+                        );
+                        
+                    } catch (error) {
+                        console.error('Erro ao processar consentimento:', error);
+                        alert('❌ Erro ao processar consentimento. Tente novamente.');
+                    }
+                } else {
+                    // Se não veio de login, redirecionar para login
+                    alert('✅ Consentimento registrado com sucesso! Faça login para continuar.');
+                    window.location.href = '/login.html';
+                }
+            });
+
+            // RECUSAR
+            btnRecusar.addEventListener('click', function() {
+                if (confirm('⚠️ Você está recusando o consentimento LGPD. Isso impedirá o uso da plataforma. Deseja continuar?')) {
+                    localStorage.removeItem('pending_user');
+                    window.location.href = '/login.html?message=Consentimento%20LGPD%20recusado.';
+                }
+            });
+
+            // Verifica se veio de login
+            const pendingUser = localStorage.getItem('pending_user');
+            if (!pendingUser) {
+                // Não veio de login, mas pode estar logado sem consentimento
+                const user = VigorreAuth.getCurrentUser();
+                if (user && !VigorreAuth.verificarConsentimento(user.id)) {
+                    // Usuário logado sem consentimento - forçar consentimento
+                    console.log('⚠️ Usuário logado sem consentimento. Forçando consentimento.');
+                } else if (user && VigorreAuth.verificarConsentimento(user.id)) {
+                    // Usuário já tem consentimento - redirecionar
+                    window.location.href = '/dashboard.html';
+                }
             }
-        });
+
+            console.log('📋 Página de Consentimento LGPD carregada');
+            console.log('📌 Versão do termo:', VigorreAuth._consentimentoVersao);
+
+        })();
     </script>
+
 </body>
 </html>
