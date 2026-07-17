@@ -1,0 +1,52 @@
+const IE_QUESTIONS = [
+  { id: 1, dimension: 'self_awareness' },
+  { id: 2, dimension: 'self_regulation' },
+  { id: 3, dimension: 'motivation' },
+  { id: 4, dimension: 'empathy' },
+  { id: 5, dimension: 'social_skills' },
+  { id: 6, dimension: 'self_awareness' },
+  { id: 7, dimension: 'self_regulation' },
+  { id: 8, dimension: 'motivation' },
+  { id: 9, dimension: 'empathy' },
+  { id: 10, dimension: 'social_skills' },
+  { id: 11, dimension: 'self_awareness' },
+  { id: 12, dimension: 'self_regulation' },
+  { id: 13, dimension: 'motivation' },
+  { id: 14, dimension: 'empathy' },
+  { id: 15, dimension: 'social_skills' },
+  { id: 16, dimension: 'self_awareness' },
+  { id: 17, dimension: 'self_regulation' },
+  { id: 18, dimension: 'motivation' },
+  { id: 19, dimension: 'empathy' },
+  { id: 20, dimension: 'social_skills' },
+  { id: 21, dimension: 'self_awareness' },
+  { id: 22, dimension: 'self_regulation' },
+  { id: 23, dimension: 'motivation' },
+  { id: 24, dimension: 'empathy' },
+  { id: 25, dimension: 'social_skills' },
+  { id: 26, dimension: 'self_awareness' },
+  { id: 27, dimension: 'self_regulation' },
+  { id: 28, dimension: 'motivation' },
+  { id: 29, dimension: 'empathy' },
+  { id: 30, dimension: 'social_skills' },
+  { id: 31, dimension: 'self_awareness' },
+  { id: 32, dimension: 'self_regulation' },
+  { id: 33, dimension: 'motivation' },
+  { id: 34, dimension: 'empathy' },
+  { id: 35, dimension: 'social_skills' },
+  { id: 36, dimension: 'self_awareness' },
+  { id: 37, dimension: 'self_regulation' },
+  { id: 38, dimension: 'motivation' },
+  { id: 39, dimension: 'empathy' },
+  { id: 40, dimension: 'social_skills' }
+];
+
+const IE_DIMENSIONS = {
+  self_awareness: { name: 'Autoconsciência', color: '#8B5CF6' },
+  self_regulation: { name: 'Autorregulação', color: '#3B82F6' },
+  motivation: { name: 'Motivação', color: '#10B981' },
+  empathy: { name: 'Empatia', color: '#EC4899' },
+  social_skills: { name: 'Habilidades Sociais', color: '#F59E0B' }
+};
+
+module.exports = { IE_QUESTIONS, IE_DIMENSIONS };
