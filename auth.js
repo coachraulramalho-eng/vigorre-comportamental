@@ -224,7 +224,7 @@ const VigorreAuth = {
 
         const userData = mockUsers[email];
         if (!userData) {
-            throw new Error('Usuário não encontrado.');
+            throw new Error('Usuário não encontrado. Use: admin@vigorre.com, empresa@vigorre.com ou participante@vigorre.com');
         }
 
         if (userData.password !== password) {
@@ -273,10 +273,25 @@ const VigorreAuth = {
         localStorage.setItem('vigorre_session', JSON.stringify(session));
         this._logAccess(user);
 
-        const redirectUrl = REDIRECTS[finalRole] || '/';
-        window.location.href = redirectUrl;
+        // Redirecionar usando a função centralizada
+        this._redirecionarDashboard(user);
 
         return user;
+    },
+
+    // ============================================
+    // REDIRECIONAMENTO DE DASHBOARD
+    // ============================================
+    _redirecionarDashboard(user) {
+        const redirects = {
+            [ROLES.ADMIN]: '/admin/dashboard.html',
+            [ROLES.ORGANIZACAO]: '/organizacao/dashboard.html',
+            [ROLES.PARTICIPANTE]: '/participante/dashboard.html'
+        };
+
+        const url = redirects[user.role] || '/dashboard.html';
+        console.log('🔀 Redirecionando para:', url);
+        window.location.href = url;
     },
 
     // ============================================
