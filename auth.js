@@ -25,7 +25,7 @@ const VigorreAuth = {
     _sessionTimeout: 30 * 60 * 1000, // 30 minutos
     _lastActivity: Date.now(),
     _consentimentoVersao: '3.0',
-    _testeAtivo: false, // Controle de sessão única
+    _testeAtivo: false,
 
     // ============================================
     // INICIALIZAÇÃO
@@ -111,10 +111,7 @@ const VigorreAuth = {
             userAgent: navigator.userAgent
         };
         localStorage.setItem(`consentimento_${participanteId}`, JSON.stringify(data));
-        
-        // Log de consentimento (LGPD)
         this._logConsentimento(participanteId, data);
-        
         return data;
     },
 
@@ -151,7 +148,6 @@ const VigorreAuth = {
             throw new Error('Você precisa estar logado.');
         }
         const user = this._currentUser;
-        // Em produção: buscar dados do Supabase
         const dados = {
             usuario: user,
             consentimentos: localStorage.getItem(`consentimento_${user.id}`) || null,
@@ -165,7 +161,6 @@ const VigorreAuth = {
         if (!this.isAuthenticated()) {
             throw new Error('Você precisa estar logado.');
         }
-        // Em produção: enviar para API
         alert('📩 Solicitação de correção enviada. Você receberá um e-mail em até 48 horas.');
         return true;
     },
@@ -176,9 +171,7 @@ const VigorreAuth = {
         }
         const user = this._currentUser;
         if (confirm('🔒 LGPD: Esta ação irá solicitar a EXCLUSÃO PERMANENTE de todos os seus dados. Tem certeza?')) {
-            // Revoga consentimento
             this.revogarConsentimento(user.id);
-            // Em produção: enviar para API
             alert('📩 Solicitação de exclusão enviada. Você receberá um e-mail em até 48 horas.');
             this.logout('Solicitação de exclusão de dados recebida.');
         }
@@ -189,7 +182,6 @@ const VigorreAuth = {
             throw new Error('Você precisa estar logado.');
         }
         const dados = this.solicitarAcessoDados();
-        // Em produção: gerar arquivo JSON/CSV
         const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -208,9 +200,7 @@ const VigorreAuth = {
             throw new Error('Email e senha são obrigatórios.');
         }
 
-        // ============================================
         // MOCK DE USUÁRIOS (SUBSTITUIR POR SUPABASE)
-        // ============================================
         const mockUsers = {
             'admin@vigorre.com': { 
                 name: 'Administrador', 
@@ -237,7 +227,6 @@ const VigorreAuth = {
             throw new Error('Usuário não encontrado.');
         }
 
-        // Verificar senha
         if (userData.password !== password) {
             throw new Error('Senha inválida.');
         }
@@ -246,7 +235,6 @@ const VigorreAuth = {
         if (!consent) {
             const consentimento = this.verificarConsentimento(userData.id);
             if (!consentimento) {
-                // Redirecionar para página de consentimento
                 localStorage.setItem('pending_user', JSON.stringify({ email, role, userData }));
                 window.location.href = '/consentimento.html';
                 return;
@@ -274,7 +262,6 @@ const VigorreAuth = {
             })
         };
 
-        // Salvar sessão
         const session = {
             user: user,
             timestamp: Date.now(),
@@ -284,11 +271,8 @@ const VigorreAuth = {
         this._currentUser = user;
         this._lastActivity = Date.now();
         localStorage.setItem('vigorre_session', JSON.stringify(session));
-
-        // Log de acesso (LGPD)
         this._logAccess(user);
 
-        // Redirecionar
         const redirectUrl = REDIRECTS[finalRole] || '/';
         window.location.href = redirectUrl;
 
@@ -353,17 +337,14 @@ const VigorreAuth = {
     // SESSÃO ÚNICA - CONTROLE DE TESTE
     // ============================================
     iniciarTeste(participanteId, testeId) {
-        // Verifica se já tem teste ativo
         if (this._testeAtivo) {
             throw new Error('⚠️ Você já possui um teste em andamento. Termine antes de iniciar outro.');
         }
 
-        // Verifica consentimento
         if (!this.verificarConsentimento(participanteId)) {
             throw new Error('⚠️ Consentimento LGPD não confirmado. Aceite os termos antes de iniciar o teste.');
         }
 
-        // Cria sessão do teste
         const testeSession = {
             participanteId,
             testeId,
@@ -373,7 +354,6 @@ const VigorreAuth = {
 
         localStorage.setItem(`teste_session_${participanteId}`, JSON.stringify(testeSession));
         this._testeAtivo = true;
-        
         return testeSession;
     },
 
@@ -388,7 +368,6 @@ const VigorreAuth = {
         
         try {
             const data = JSON.parse(session);
-            // Verifica se passou 30 minutos (tempo máximo)
             if (Date.now() - data.inicio > 30 * 60 * 1000) {
                 localStorage.removeItem(`teste_session_${participanteId}`);
                 this._testeAtivo = false;
@@ -397,6 +376,80 @@ const VigorreAuth = {
             return data;
         } catch {
             return null;
+        }
+    },
+
+    // ============================================
+    // POLÍTICA DE SENHA
+    // ============================================
+    validarSenha(senha) {
+        const requisitos = {
+            min: 8,
+            maiuscula: /[A-Z]/.test(senha),
+            minuscula: /[a-z]/.test(senha),
+            numero: /[0-9]/.test(senha),
+            especial: /[!@#$%^&*(),.?":{}|<>]/.test(senha)
+        };
+
+        const valida = 
+            senha.length >= requisitos.min &&
+            requisitos.maiuscula &&
+            requisitos.minuscula &&
+            requisitos.numero &&
+            requisitos.especial;
+
+        return {
+            valida,
+            requisitos,
+            mensagem: valida ? 'Senha válida' : 
+                'Senha deve ter: 8 caracteres, maiúscula, minúscula, número e caractere especial'
+        };
+    },
+
+    // ============================================
+    // AUDITORIA - LOG DE AÇÕES
+    // ============================================
+    logAcao(usuarioId, acao, dados) {
+        try {
+            const logs = JSON.parse(localStorage.getItem('vigorre_auditoria_logs') || '[]');
+            logs.push({
+                usuarioId,
+                acao,
+                dados: dados || {},
+                timestamp: new Date().toISOString(),
+                ip: '0.0.0.0',
+                userAgent: navigator.userAgent
+            });
+            if (logs.length > 5000) {
+                logs.splice(0, logs.length - 5000);
+            }
+            localStorage.setItem('vigorre_auditoria_logs', JSON.stringify(logs));
+        } catch (e) {
+            console.warn('⚠️ Não foi possível registrar log de auditoria');
+        }
+    },
+
+    // ============================================
+    // ANONIMIZAÇÃO DE DADOS (LGPD)
+    // ============================================
+    anonimizarDados(participanteId) {
+        const dados = {
+            participanteId,
+            anonimizado: true,
+            data: new Date().toISOString()
+        };
+        localStorage.setItem(`anonimizado_${participanteId}`, JSON.stringify(dados));
+        this.logAcao(participanteId, 'anonimizacao', dados);
+        return dados;
+    },
+
+    isAnonimizado(participanteId) {
+        const data = localStorage.getItem(`anonimizado_${participanteId}`);
+        if (!data) return false;
+        try {
+            return JSON.parse(data).anonimizado;
+        } catch {
+            return false;
         }
     },
 
@@ -456,81 +509,6 @@ const VigorreAuth = {
             return false;
         }
         return true;
-    },
-
-    // ============================================
-    // POLÍTICA DE SENHA
-    // ============================================
-    validarSenha(senha) {
-        const requisitos = {
-            min: 8,
-            maiuscula: /[A-Z]/.test(senha),
-            minuscula: /[a-z]/.test(senha),
-            numero: /[0-9]/.test(senha),
-            especial: /[!@#$%^&*(),.?":{}|<>]/.test(senha)
-        };
-
-        const valida = 
-            senha.length >= requisitos.min &&
-            requisitos.maiuscula &&
-            requisitos.minuscula &&
-            requisitos.numero &&
-            requisitos.especial;
-
-        return {
-            valida,
-            requisitos,
-            mensagem: valida ? 'Senha válida' : 
-                'Senha deve ter: 8 caracteres, maiúscula, minúscula, número e caractere especial'
-        };
-    },
-
-    // ============================================
-    // AUDITORIA - LOG DE AÇÕES
-    // ============================================
-    logAcao(usuarioId, acao, dados) {
-        try {
-            const logs = JSON.parse(localStorage.getItem('vigorre_auditoria_logs') || '[]');
-            logs.push({
-                usuarioId,
-                acao,
-                dados: dados || {},
-                timestamp: new Date().toISOString(),
-                ip: '0.0.0.0',
-                userAgent: navigator.userAgent
-            });
-            if (logs.length > 5000) {
-                logs.splice(0, logs.length - 5000);
-            }
-            localStorage.setItem('vigorre_auditoria_logs', JSON.stringify(logs));
-        } catch (e) {
-            console.warn('⚠️ Não foi possível registrar log de auditoria');
-        }
-    },
-
-    // ============================================
-    // ANONIMIZAÇÃO DE DADOS (LGPD)
-    // ============================================
-    anonimizarDados(participanteId) {
-        // Em produção: chamar API para anonimizar
-        const dados = {
-            participanteId,
-            anonimizado: true,
-            data: new Date().toISOString()
-        };
-        localStorage.setItem(`anonimizado_${participanteId}`, JSON.stringify(dados));
-        this.logAcao(participanteId, 'anonimizacao', dados);
-        return dados;
-    },
-
-    isAnonimizado(participanteId) {
-        const data = localStorage.getItem(`anonimizado_${participanteId}`);
-        if (!data) return false;
-        try {
-            return JSON.parse(data).anonimizado;
-        } catch {
-            return false;
-        }
     }
 };
 
@@ -550,7 +528,6 @@ const VigorreAuth = {
         }
     });
 
-    // Detectar inatividade
     let inactivityTimer;
     function resetInactivityTimer() {
         clearTimeout(inactivityTimer);
