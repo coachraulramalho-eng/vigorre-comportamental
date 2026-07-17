@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assessment DISC - Vigorre One™</title>
-    <link rel="stylesheet" href="/assets/css/globals.css">
-    <link rel="stylesheet" href="/assets/css/teste.css">
+    <link rel="stylesheet" href="/assets/css/globals.css" />
+    <link rel="stylesheet" href="/assets/css/teste.css" />
+    <link rel="icon" href="/assets/images/logo-vigorre.png" />
 </head>
 <body>
 
-    <!-- HEADER -->
+    <!-- ===== HEADER ===== -->
     <header class="teste-header">
         <div class="container">
             <div class="logo">
-                <span>VIGORRE <span class="highlight">ONE</span>™</span>
+                <img src="/assets/images/logo-vigorre.png" alt="Vigorre One™" />
+                <span>VIGORRE <span class="highlight">ONE</span><sup>™</sup></span>
             </div>
             <div class="teste-info">
                 <span>⏱️ <span id="teste-timer">05:00</span></span>
                 <span>📊 <span id="teste-progresso">0%</span></span>
+                <span class="teste-nome">DISC</span>
             </div>
         </div>
     </header>
 
-    <!-- TELA DE INTRODUÇÃO -->
+    <!-- ===== TELA DE INTRODUÇÃO ===== -->
     <section id="teste-intro" class="teste-intro">
         <div class="container">
             <div class="intro-card">
                 <span class="badge">🧠 Assessment DISC Vigorre™</span>
                 <h1>Descubra seu Perfil Comportamental</h1>
-                
+                <p class="intro-desc">Identifique como você toma decisões, se comunica e reage à pressão.</p>
+
                 <div class="intro-info">
                     <div class="info-item">
                         <span class="icon">⏱️</span>
@@ -44,15 +48,31 @@
                     </div>
                 </div>
 
-                <div class="intro-descricao">
-                    <p>Este teste identifica seu estilo comportamental predominante relacionado a:</p>
-                    <ul>
-                        <li>Como você toma decisões</li>
-                        <li>Como se comunica</li>
-                        <li>Como reage à pressão</li>
-                        <li>Como resolve conflitos</li>
-                        <li>Como trabalha em equipe</li>
-                    </ul>
+                <!-- Dimensões -->
+                <div class="intro-dimensoes">
+                    <h4>📐 O que será avaliado:</h4>
+                    <div class="dimensao-grid">
+                        <div class="dimensao-item" style="border-color: #EF4444;">
+                            <span class="dim-label" style="color: #EF4444;">D</span>
+                            <span class="dim-name">Dominância</span>
+                            <span class="dim-desc">Orientado a resultados</span>
+                        </div>
+                        <div class="dimensao-item" style="border-color: #F59E0B;">
+                            <span class="dim-label" style="color: #F59E0B;">I</span>
+                            <span class="dim-name">Influência</span>
+                            <span class="dim-desc">Comunicativo e persuasivo</span>
+                        </div>
+                        <div class="dimensao-item" style="border-color: #10B981;">
+                            <span class="dim-label" style="color: #10B981;">S</span>
+                            <span class="dim-name">Estabilidade</span>
+                            <span class="dim-desc">Paciente e colaborativo</span>
+                        </div>
+                        <div class="dimensao-item" style="border-color: #3B82F6;">
+                            <span class="dim-label" style="color: #3B82F6;">C</span>
+                            <span class="dim-name">Conformidade</span>
+                            <span class="dim-desc">Detalhista e analítico</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- EXEMPLO PRÁTICO -->
@@ -84,13 +104,14 @@
                     </div>
                 </div>
 
-                <!-- ALERTA LGPD -->
+                <!-- LGPD -->
                 <div class="intro-lgpd">
                     <h4>🔒 LGPD - Proteção de Dados</h4>
                     <p>Ao realizar este teste, você concorda com nossa <a href="/politica-privacidade">Política de Privacidade</a>.</p>
                     <p>Seus dados serão utilizados exclusivamente para autoconhecimento e desenvolvimento profissional.</p>
                     <label class="checkbox-label">
-                        <input type="checkbox" id="consentimento-lgpd" required>
+                        <input type="checkbox" id="consentimento-lgpd" required />
+                        <span class="checkmark"></span>
                         Li e concordo com os termos LGPD
                     </label>
                 </div>
@@ -117,20 +138,17 @@
         </div>
     </section>
 
-    <!-- TELA DO TESTE -->
+    <!-- ===== TELA DO TESTE ===== -->
     <section id="teste-questoes" class="teste-questoes" style="display:none;">
         <div class="container">
-            <!-- Barra de progresso -->
             <div class="progress-bar">
                 <div id="progresso-bar" style="width:0%;"></div>
             </div>
 
-            <!-- Frase motivacional -->
             <div id="frase-motivacional" class="frase-motivacional">
                 "Respire fundo. Você tem todo o tempo do mundo."
             </div>
 
-            <!-- Pergunta -->
             <div class="questao-card">
                 <div class="questao-header">
                     <span class="questao-numero">Pergunta <span id="questao-atual">1</span> de 28</span>
@@ -152,68 +170,108 @@
         </div>
     </section>
 
-    <!-- TELA DE CONCLUSÃO -->
+    <!-- ===== TELA DE CONCLUSÃO ===== -->
     <section id="teste-conclusao" class="teste-conclusao" style="display:none;">
         <div class="container">
             <div class="conclusao-card">
                 <div class="conclusao-icon">🎉</div>
                 <h1>Teste Concluído com Sucesso!</h1>
                 <p>Seu resultado foi processado pela nossa IA e já está disponível.</p>
-                
+
+                <div class="conclusao-resultado" id="resultado-simples">
+                    <!-- Resultado será inserido aqui -->
+                </div>
+
                 <div class="conclusao-opcoes">
                     <div class="opcao-relatorio">
                         <h3>📄 Relatório Executivo</h3>
                         <p>20-30 páginas com análise completa</p>
                         <span class="preco">1 crédito</span>
-                        <button class="btn-secondary" onclick="gerarRelatorio()">Gerar Relatório</button>
+                        <button class="btn-secondary" onclick="window.gerarRelatorio()">Gerar Relatório</button>
                     </div>
                     <div class="opcao-laudo">
                         <h3>📋 Laudo VIGOR®</h3>
                         <p>80-100 páginas com análise integrada</p>
                         <span class="preco">1 crédito premium</span>
-                        <button class="btn-primary" onclick="gerarLaudo()">Gerar Laudo</button>
+                        <button class="btn-primary" onclick="window.gerarLaudo()">Gerar Laudo</button>
                     </div>
                 </div>
 
-                <div class="conclusao-resultado">
-                    <h3>📊 Seu Perfil Predominante</h3>
-                    <div id="resultado-simples" class="resultado-simples">
-                        <!-- Resultado será inserido aqui -->
-                    </div>
-                </div>
-
-                <button class="btn-outline" onclick="window.location.href='/dashboard'">
+                <button class="btn-outline" onclick="window.location.href='/dashboard.html'">
                     📊 Ir para Dashboard
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- SCRIPTS -->
-    <script type="module">
-        import TesteController from '/js/teste-controller.js';
-        import { perguntasDISC } from '/data/perguntas-disc.js';
+    <!-- ===== SCRIPTS ===== -->
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/data/perguntas-disc.js"></script>
+    <script src="/js/teste-controller.js"></script>
 
-        // Inicializa o controller
-        const controller = new TesteController({
-            tipo: 'disc',
-            perguntas: perguntasDISC,
-            totalPerguntas: 28,
-            tempoLimite: 5, // minutos
-        });
+    <script>
+        (function() {
+            'use strict';
 
-        // Habilita botão após consentimento
-        document.getElementById('consentimento-lgpd').addEventListener('change', function() {
-            document.getElementById('btn-iniciar').disabled = !this.checked;
-        });
+            // Verifica autenticação
+            if (!VigorreAuth.requireAuth()) {
+                return;
+            }
 
-        // Inicia teste
-        document.getElementById('btn-iniciar').addEventListener('click', () => {
-            controller.iniciar();
-        });
+            const user = VigorreAuth.getCurrentUser();
+            if (!user || !user.participantId) {
+                alert('⚠️ Participante não identificado. Faça login novamente.');
+                window.location.href = '/login.html';
+                return;
+            }
 
-        window.gerarRelatorio = () => controller.gerarRelatorio();
-        window.gerarLaudo = () => controller.gerarLaudo();
+            // Verifica consentimento LGPD
+            if (!VigorreAuth.verificarConsentimento(user.participantId)) {
+                if (confirm('🔒 Para realizar o teste, você precisa aceitar os termos LGPD. Deseja ir para a página de consentimento?')) {
+                    window.location.href = '/consentimento.html';
+                }
+                return;
+            }
+
+            // Inicializa controller
+            const controller = new TesteController({
+                tipo: 'disc',
+                perguntas: perguntasDISC,
+                totalPerguntas: 28,
+                tempoLimite: 5,
+                participanteId: user.participantId
+            });
+
+            window.controller = controller;
+
+            // Habilita botão após consentimento
+            document.getElementById('consentimento-lgpd').addEventListener('change', function() {
+                document.getElementById('btn-iniciar').disabled = !this.checked;
+            });
+
+            // Inicia teste
+            document.getElementById('btn-iniciar').addEventListener('click', function() {
+                try {
+                    controller.iniciar();
+                } catch (error) {
+                    alert(error.message);
+                }
+            });
+
+            // Funções globais para os botões
+            window.gerarRelatorio = function() {
+                controller.gerarRelatorio();
+            };
+
+            window.gerarLaudo = function() {
+                controller.gerarLaudo();
+            };
+
+            console.log('📋 Teste DISC carregado com sucesso!');
+            console.log('👤 Participante:', user.name);
+
+        })();
     </script>
 
 </body>
