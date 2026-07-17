@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resultado DISC - Vigorre One™</title>
+    <link rel="stylesheet" href="/assets/css/globals.css" />
+    <link rel="icon" href="/assets/images/logo-vigorre.png" />
+    <style>
+        body {
+            background: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #E2E8F0;
+            margin-bottom: 32px;
+        }
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #0A2540;
+        }
+        .logo .highlight { color: #D97706; }
+        .logo sup { font-size: 0.5rem; color: #94A3B8; }
+        .badge {
+            background: #FEF3C7;
+            color: #D97706;
+            padding: 4px 16px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            color: #0A2540;
+            margin-bottom: 8px;
+        }
+        .subtitulo {
+            color: #64748B;
+            margin-bottom: 32px;
+        }
+        .perfil-principal {
+            text-align: center;
+            padding: 32px;
+            background: linear-gradient(135deg, #F8FAFC, #FEF3C7);
+            border-radius: 16px;
+            margin-bottom: 32px;
+        }
+        .perfil-principal .emoji { font-size: 4rem; }
+        .perfil-principal .nome {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0A2540;
+        }
+        .perfil-principal .descricao {
+            color: #64748B;
+            font-size: 1rem;
+        }
+        .scores {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .score-item {
+            text-align: center;
+            padding: 16px;
+            background: #F8FAFC;
+            border-radius: 12px;
+        }
+        .score-item .label {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .score-item .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .score-item .bar {
+            width: 100%;
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 999px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .score-item .bar .fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 1s ease;
+        }
+        .secoes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 24px 0;
+        }
+        .secao {
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .secao h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: #0A2540;
+            margin-bottom: 8px;
+        }
+        .secao ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .secao ul li {
+            padding: 4px 0;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+        .botoes {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .btn-primary, .btn-secondary {
+            padding: 14px 32px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            color: #FFFFFF;
+            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.25);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(217, 119, 6, 0.35);
+        }
+        .btn-secondary {
+            background: #E2E8F0;
+            color: #0A2540;
+        }
+        .btn-secondary:hover {
+            background: #CBD5E1;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 24px; }
+            .scores { grid-template-columns: 1fr 1fr; }
+            .secoes { grid-template-columns: 1fr; }
+            h1 { font-size: 1.5rem; }
+            .perfil-principal .nome { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                VIGORRE <span class="highlight">ONE</span><sup>™</sup>
+            </div>
+            <span class="badge">📊 Resultado DISC</span>
+        </div>
+
+        <h1>Seu Perfil Comportamental</h1>
+        <p class="subtitulo">Análise completa do seu perfil DISC com recomendações personalizadas</p>
+
+        <!-- Perfil Principal -->
+        <div class="perfil-principal">
+            <div class="emoji" id="perfil-emoji">🔴</div>
+            <div class="nome" id="perfil-nome">Dominância</div>
+            <div class="descricao" id="perfil-descricao">Orientado a resultados, direto, competitivo e decidido</div>
+        </div>
+
+        <!-- Scores -->
+        <div class="scores">
+            <div class="score-item" style="border-top: 4px solid #EF4444;">
+                <div class="label" style="color: #EF4444;">D</div>
+                <div class="value" id="score-D">0%</div>
+                <div class="bar"><div class="fill" id="bar-D" style="width:0%; background:#EF4444;"></div></div>
+            </div>
+            <div class="score-item" style="border-top: 4px solid #F59E0B;">
+                <div class="label" style="color: #F59E0B;">I</div>
+                <div class="value" id="score-I">0%</div>
+                <div class="bar"><div class="fill" id="bar-I" style="width:0%; background:#F59E0B;"></div></div>
+            </div>
+            <div class="score-item" style="border-top: 4px solid #10B981;">
+                <div class="label" style="color: #10B981;">S</div>
+                <div class="value" id="score-S">0%</div>
+                <div class="bar"><div class="fill" id="bar-S" style="width:0%; background:#10B981;"></div></div>
+            </div>
+            <div class="score-item" style="border-top: 4px solid #3B82F6;">
+                <div class="label" style="color: #3B82F6;">C</div>
+                <div class="value" id="score-C">0%</div>
+                <div class="bar"><div class="fill" id="bar-C" style="width:0%; background:#3B82F6;"></div></div>
+            </div>
+        </div>
+
+        <!-- Seções -->
+        <div class="secoes">
+            <div class="secao">
+                <h3>💪 Pontos Fortes</h3>
+                <ul id="pontos-fortes">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+            <div class="secao">
+                <h3>📈 Pontos de Desenvolvimento</h3>
+                <ul id="pontos-desenvolvimento">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="secoes">
+            <div class="secao">
+                <h3>🎯 Recomendações</h3>
+                <ul id="recomendacoes">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+            <div class="secao">
+                <h3>🏢 Ambientes Ideais</h3>
+                <ul id="ambientes">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="botoes">
+            <button class="btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+            <button class="btn-secondary" onclick="window.location.href='/dashboard.html'">📊 Voltar ao Dashboard</button>
+            <button class="btn-primary" onclick="window.location.href='/relatorios/disc'">📄 Ver Relatório Completo</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CARREGAR RESULTADO DO LOCALSTORAGE
+        // ============================================
+
+        (function() {
+            const resultado = localStorage.getItem('resultado_disc');
+            if (!resultado) {
+                document.querySelector('.container').innerHTML = `
+                    <div style="text-align:center; padding:60px 0;">
+                        <div style="font-size:4rem;">📊</div>
+                        <h2>Nenhum resultado encontrado</h2>
+                        <p style="color:#64748B;">Faça o teste DISC para ver seu resultado.</p>
+                        <a href="/tests/disc/" class="btn-primary" style="display:inline-block; margin-top:16px; padding:14px 32px; border-radius:9999px; text-decoration:none; color:#fff; background:linear-gradient(135deg,#D97706,#F59E0B);">Iniciar Teste</a>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const data = JSON.parse(resultado);
+                const normalized = data.normalized || {};
+                const profile = data.profile || {};
+
+                const cores = {
+                    D: '#EF4444',
+                    I: '#F59E0B',
+                    S: '#10B981',
+                    C: '#3B82F6'
+                };
+
+                const emojis = {
+                    D: '🔴',
+                    I: '🟡',
+                    S: '🟢',
+                    C: '🔵'
+                };
+
+                const descricoes = {
+                    D: 'Orientado a resultados, direto, competitivo e decidido',
+                    I: 'Comunicativo, persuasivo, otimista e entusiasta',
+                    S: 'Paciente, confiável, colaborativo e previsível',
+                    C: 'Detalhista, preciso, analítico e sistemático'
+                };
+
+                const pontosFortes = {
+                    D: ['Tomada de decisão rápida', 'Foco em resultados', 'Liderança natural', 'Iniciativa'],
+                    I: ['Comunicação eficaz', 'Networking', 'Capacidade de persuasão', 'Entusiasmo'],
+                    S: ['Confiabilidade', 'Trabalho em equipe', 'Paciência', 'Estabilidade'],
+                    C: ['Atenção aos detalhes', 'Análise criteriosa', 'Precisão', 'Sistemática']
+                };
+
+                const pontosDesenv = {
+                    D: ['Impaciência', 'Dificuldade com processos', 'Pode ser visto como agressivo'],
+                    I: ['Falta de organização', 'Dificuldade com detalhes', 'Pode ser visto como superficial'],
+                    S: ['Resistência a mudanças', 'Dificuldade com decisões rápidas'],
+                    C: ['Excesso de análise', 'Dificuldade com mudanças', 'Pode ser visto como rígido']
+                };
+
+                const recomendacoes = {
+                    D: 'Pratique paciência e escuta ativa, desenvolva empatia',
+                    I: 'Melhore organização e follow-up, pratique objetividade',
+                    S: 'Fortaleça tomada de decisão, seja mais assertivo',
+                    C: 'Desenvolva flexibilidade, confie mais na intuição'
+                };
+
+                const ambientes = {
+                    D: 'Vendas, gestão, empreendedorismo, liderança',
+                    I: 'Marketing, relações públicas, treinamento, consultoria',
+                    S: 'Suporte, atendimento, operações, administração',
+                    C: 'Controle de qualidade, auditoria, pesquisa, engenharia'
+                };
+
+                const primary = profile.primary || 'D';
+                const primaryName = profile.primaryName || 'Dominância';
+
+                // Preenche perfil
+                document.getElementById('perfil-emoji').textContent = emojis[primary] || '📊';
+                document.getElementById('perfil-nome').textContent = primaryName;
+                document.getElementById('perfil-descricao').textContent = descricoes[primary] || 'Perfil comportamental';
+
+                // Preenche scores
+                ['D', 'I', 'S', 'C'].forEach(dim => {
+                    const score = normalized[dim] || 0;
+                    document.getElementById(`score-${dim}`).textContent = `${score}%`;
+                    document.getElementById(`bar-${dim}`).style.width = `${score}%`;
+                });
+
+                // Preenche pontos fortes
+                const fortes = pontosFortes[primary] || ['Adaptabilidade', 'Versatilidade'];
+                document.getElementById('pontos-fortes').innerHTML = fortes.map(f => `<li>${f}</li>`).join('');
+
+                // Preenche pontos de desenvolvimento
+                const desenv = pontosDesenv[primary] || ['Em desenvolvimento', 'Áreas a melhorar'];
+                document.getElementById('pontos-desenvolvimento').innerHTML = desenv.map(f => `<li>${f}</li>`).join('');
+
+                // Preenche recomendações
+                document.getElementById('recomendacoes').innerHTML = `<li>${recomendacoes[primary] || 'Continue desenvolvendo todos os aspectos do seu perfil'}</li>`;
+
+                // Preenche ambientes
+                document.getElementById('ambientes').innerHTML = `<li>${ambientes[primary] || 'Ambientes colaborativos e desafiadores'}</li>`;
+
+            } catch (error) {
+                console.error('Erro ao carregar resultado:', error);
+            }
+
+        })();
+    </script>
+</body>
+</html>
