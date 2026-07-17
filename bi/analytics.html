@@ -77,4 +77,424 @@
             display: block;
         }
         .header-print .logo .logo-text .name {
-            font-family:
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.3px;
+        }
+        .header-print .logo .logo-text .name .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
+        .header-print .logo .logo-text .sub {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .header-print .header-title {
+            text-align: center;
+        }
+        .header-print .header-title h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .header-print .header-title .subtitle {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .header-print .header-user {
+            text-align: right;
+        }
+        .header-print .header-user .name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .header-print .header-user .company {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .header-print .header-user .logout {
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+        .header-print .header-user .logout:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .analytics-body {
+            background: white;
+            padding: 32px;
+            border-left: 1px solid var(--gray-200);
+            border-right: 1px solid var(--gray-200);
+        }
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 16px 0;
+        }
+        .analytics-card {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+        }
+        .analytics-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+        .chart-container {
+            height: 200px;
+            position: relative;
+        }
+        .analytics-card .insight {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #FEF3C7;
+            border-left: 4px solid var(--gold);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+        .analytics-card .insight strong {
+            color: var(--gray-800);
+        }
+        .indicators-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .indicator-item {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            text-align: center;
+        }
+        .indicator-item .indicator-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        .indicator-item .indicator-label {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+        }
+        .indicator-item .indicator-change {
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .indicator-item .indicator-change.positive {
+            color: var(--green);
+        }
+        .indicator-item .indicator-change.negative {
+            color: var(--red);
+        }
+        .footer-print {
+            background: var(--navy);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-print .footer-text {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .footer-print .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-print .footer-links a {
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+        .footer-print .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        @media (max-width: 1024px) {
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+            .indicators-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .header-print {
+                flex-direction: column;
+                text-align: center;
+                padding: 16px 20px;
+            }
+            .header-print .header-user {
+                text-align: center;
+            }
+            .analytics-body {
+                padding: 20px;
+            }
+            .indicators-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-print {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .indicators-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header-print">
+            <div class="logo">
+                <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <div class="logo-text">
+                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                    <span class="sub">People Analytics Enterprise</span>
+                </div>
+            </div>
+            <div class="header-title">
+                <h1>📊 People Analytics</h1>
+                <div class="subtitle">Indicadores Organizacionais</div>
+            </div>
+            <div class="header-user">
+                <div class="name" id="userName">Carregando...</div>
+                <div class="company" id="companyName">Empresa: --</div>
+                <a href="#" class="logout" onclick="logout()">Sair</a>
+            </div>
+        </header>
+
+        <div class="analytics-body">
+
+            <!-- ===== INDICADORES ===== -->
+            <div class="indicators-grid">
+                <div class="indicator-item">
+                    <div class="indicator-value" id="indiceDesenvolvimento">0%</div>
+                    <div class="indicator-label">Índice de Desenvolvimento</div>
+                    <div class="indicator-change positive">+5%</div>
+                </div>
+                <div class="indicator-item">
+                    <div class="indicator-value" id="indiceLideranca">0%</div>
+                    <div class="indicator-label">Índice de Liderança</div>
+                    <div class="indicator-change positive">+3%</div>
+                </div>
+                <div class="indicator-item">
+                    <div class="indicator-value" id="indiceEngajamento">0%</div>
+                    <div class="indicator-label">Índice de Engajamento</div>
+                    <div class="indicator-change positive">+7%</div>
+                </div>
+                <div class="indicator-item">
+                    <div class="indicator-value" id="indiceTalento">0%</div>
+                    <div class="indicator-label">Índice de Potencial</div>
+                    <div class="indicator-change positive">+2%</div>
+                </div>
+            </div>
+
+            <!-- ===== GRÁFICOS ===== -->
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>📊 Distribuição DISC</h3>
+                    <div class="chart-container">
+                        <canvas id="discChart"></canvas>
+                    </div>
+                    <div class="insight">
+                        💡 <strong>Insight:</strong> O setor Comercial apresenta elevado potencial de influência,
+                        porém baixa organização, indicando necessidade de treinamento em planejamento comercial.
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>🧠 Inteligência Emocional</h3>
+                    <div class="chart-container">
+                        <canvas id="ieChart"></canvas>
+                    </div>
+                    <div class="insight">
+                        💡 <strong>Insight:</strong> A equipe apresenta elevado índice de Inteligência Emocional,
+                        fator que tende a reduzir conflitos internos e melhorar a colaboração.
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>📋 Distribuição Big Five</h3>
+                    <div class="chart-container">
+                        <canvas id="bigfiveChart"></canvas>
+                    </div>
+                    <div class="insight">
+                        💡 <strong>Insight:</strong> Alta Conscienciosidade indica equipe organizada e disciplinada.
+                        Baixa Extroversão sugere necessidade de incentivar comunicação e colaboração.
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>💎 Valores Organizacionais</h3>
+                    <div class="chart-container">
+                        <canvas id="valoresChart"></canvas>
+                    </div>
+                    <div class="insight">
+                        💡 <strong>Insight:</strong> Valores de Realização e Autonomia são predominantes,
+                        indicando perfil empreendedor. Oportunidade de reforçar colaboração e propósito.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="footer-print">
+            <div class="footer-text">© 2026 VIGORRE ONE™ - Todos os direitos reservados</div>
+            <div class="footer-links">
+                <a href="../politica-privacidade.html">Privacidade</a>
+                <a href="../termos-uso.html">Termos</a>
+                <a href="../contato.html">Contato</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!VigorreAuth.requireAuth()) { window.location.href = '../login.html'; return; }
+            const user = VigorreAuth.getCurrentUser();
+            if (user) {
+                document.getElementById('userName').textContent = user.name || 'Analista';
+                document.getElementById('companyName').textContent = 'Empresa: ' + (user.companyName || '--');
+            }
+            carregarDados();
+            renderizarGraficos();
+        });
+
+        function carregarDados() {
+            // Simulação de dados
+            document.getElementById('indiceDesenvolvimento').textContent = Math.round(65 + Math.random() * 20) + '%';
+            document.getElementById('indiceLideranca').textContent = Math.round(55 + Math.random() * 25) + '%';
+            document.getElementById('indiceEngajamento').textContent = Math.round(60 + Math.random() * 25) + '%';
+            document.getElementById('indiceTalento').textContent = Math.round(50 + Math.random() * 30) + '%';
+        }
+
+        function renderizarGraficos() {
+            // DISC
+            const discCtx = document.getElementById('discChart').getContext('2d');
+            new Chart(discCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Dominância', 'Influência', 'Estabilidade', 'Conformidade'],
+                    datasets: [{
+                        label: 'Percentual',
+                        data: [68, 45, 72, 38],
+                        backgroundColor: ['#EF4444CC', '#3B82F6CC', '#10B981CC', '#8B5CF6CC'],
+                        borderColor: ['#EF4444', '#3B82F6', '#10B981', '#8B5CF6'],
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' } }, x: { ticks: { color: '#94A3B8',
+                                font: { size: 9 } } } }
+                }
+            });
+
+            // IE
+            const ieCtx = document.getElementById('ieChart').getContext('2d');
+            new Chart(ieCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Autoconsciência', 'Autorregulação', 'Motivação', 'Empatia', 'Habilidades Sociais'],
+                    datasets: [{
+                        label: 'IE',
+                        data: [78, 65, 82, 70, 58],
+                        backgroundColor: 'rgba(124,58,237,0.15)',
+                        borderColor: '#7C3AED',
+                        borderWidth: 2,
+                        pointBackgroundColor: ['#7C3AED', '#10B981', '#F59E0B', '#EF4444', '#3B82F6'],
+                        pointBorderColor: '#FFFFFF',
+                        pointBorderWidth: 2,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { r: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8', stepSize: 25,
+                                backdropColor: 'transparent' }, pointLabels: { color: '#64748B', font: { size: 8,
+                                    weight: '600' } } } }
+                }
+            });
+
+            // Big Five
+            const bfCtx = document.getElementById('bigfiveChart').getContext('2d');
+            new Chart(bfCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Abertura', 'Conscienciosidade', 'Extroversão', 'Amabilidade', 'Neuroticismo'],
+                    datasets: [{
+                        label: 'Percentual',
+                        data: [65, 82, 48, 72, 35],
+                        backgroundColor: ['#8B5CF6CC', '#10B981CC', '#F59E0BCC', '#EC4899CC', '#EF4444CC'],
+                        borderColor: ['#8B5CF6', '#10B981', '#F59E0B', '#EC4899', '#EF4444'],
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' } }, x: { ticks: { color: '#94A3B8',
+                                font: { size: 8 } } } }
+                }
+            });
+
+            // Valores
+            const valCtx = document.getElementById('valoresChart').getContext('2d');
+            new Chart(valCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Realização', 'Autonomia', 'Colaboração', 'Propósito', 'Segurança', 'Reconhecimento'],
+                    datasets: [{
+                        label: 'Percentual',
+                        data: [85, 78, 45, 72, 55, 60],
+                        backgroundColor: ['#EF4444CC', '#3B82F6CC', '#EC4899CC', '#F472B6CC', '#10B981CC', '#F59E0BCC'],
+                        borderColor: ['#EF4444', '#3B82F6', '#EC4899', '#F472B6', '#10B981', '#F59E0B'],
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, max: 100, ticks: { color: '#94A3B8' } }, x: { ticks: { color: '#94A3B8',
+                                font: { size: 8 } } } }
+                }
+            });
+        }
+
+        function logout() { VigorreAuth.logout(); }
+    </script>
+</body>
+</html>
