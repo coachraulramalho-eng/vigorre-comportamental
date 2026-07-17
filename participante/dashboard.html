@@ -3,39 +3,27 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jornada do Autoconhecimento | VIGORRE ONE™</title>
-
+    <title>Dashboard Participante | VIGORRE ONE™</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
-    </script>
-
+    <link rel="stylesheet" href="../assets/css/globals.css" />
+    <link rel="icon" href="../assets/images/logo-vigorre.png" />
     <style>
-        /* ============================================
-           VIGORRE ONE™ - JORNADA DO AUTOCONHECIMENTO
-           NEUROCIÊNCIA · PSICOLOGIA · PSICANÁLISE · COACHING
-           ============================================ */
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         :root {
             --navy: #0A2540;
-            --navy-dark: #06182A;
-            --navy-light: #1A3A5C;
             --gold: #D97706;
-            --gold-light: #F59E0B;
-            --gold-gradient: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
             --cyan: #06B6D4;
-            --cyan-light: #22D3EE;
             --green: #10B981;
-            --green-light: #34D399;
             --red: #EF4444;
-            --red-light: #F87171;
-            --purple: #7C3AED;
-            --purple-light: #A78BFA;
-            --pink: #EC4899;
-            --pink-light: #F472B6;
             --orange: #F59E0B;
+            --purple: #7C3AED;
+            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -50,1869 +38,626 @@
             --radius: 16px;
             --radius-sm: 10px;
             --radius-full: 9999px;
-            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(10,37,64,0.04);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.04), 0 8px 32px rgba(10,37,64,0.06);
-            --shadow-lg: 0 8px 32px rgba(0,0,0,0.06), 0 16px 64px rgba(10,37,64,0.08);
-            --shadow-gold: 0 4px 24px rgba(217,119,6,0.15);
-            --shadow-purple: 0 4px 24px rgba(124,58,237,0.15);
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Poppins', 'Inter', sans-serif;
-            --sidebar-width: 260px;
-            --header-height: 72px;
+            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
+            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: var(--font-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--gray-50);
-            color: var(--gray-900);
+            color: var(--gray-800);
             min-height: 100vh;
-            display: flex;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--gray-300);
-            border-radius: var(--radius-full);
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gray-400);
-        }
-
-        /* ============================================
-           SIDEBAR
-           ============================================ */
-        .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
+        /* ===== HEADER ===== */
+        .dashboard-header {
             background: var(--navy);
             color: white;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            padding: 28px 20px;
+            padding: 20px 32px;
+            border-radius: var(--radius) var(--radius) 0 0;
             display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            transition: transform var(--transition-slow);
-            border-right: 1px solid rgba(255, 255, 255, 0.04);
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
         }
-
-        .sidebar .logo {
+        .dashboard-header .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            margin-bottom: 36px;
-            padding: 0 4px;
         }
-
-        .sidebar .logo:hover {
-            opacity: 0.85;
-        }
-
-        .sidebar .logo .logo-img {
-            height: 36px;
+        .dashboard-header .logo .logo-img {
+            height: 40px;
             width: auto;
-            filter: brightness(0) invert(1);
+            display: block;
         }
-
-        .sidebar .logo .logo-text .name {
-            font-family: var(--font-display);
+        .dashboard-header .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             font-weight: 800;
             color: white;
             letter-spacing: -0.3px;
-            line-height: 1.1;
         }
-
-        .sidebar .logo .logo-text .name .one {
-            color: var(--gold);
-        }
-
-        .sidebar .logo .logo-text .name .tm {
-            font-size: 0.45rem;
+        .dashboard-header .logo .logo-text .name .tm {
+            font-size: 0.4rem;
             vertical-align: super;
-            color: var(--gray-400);
-            margin-left: 2px;
+            color: var(--cyan);
         }
-
-        .sidebar .logo .logo-text .sub {
-            font-size: 0.45rem;
-            color: rgba(255, 255, 255, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            display: block;
-            font-weight: 400;
-            margin-top: -2px;
-        }
-
-        .sidebar .nav {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .sidebar .nav .nav-label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: rgba(255, 255, 255, 0.15);
-            padding: 16px 8px 6px;
-            font-weight: 700;
-        }
-
-        .sidebar .nav a {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 10px 14px;
-            border-radius: var(--radius-sm);
-            color: rgba(255, 255, 255, 0.4);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .sidebar .nav a:hover {
-            background: rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .sidebar .nav a.active {
-            background: rgba(217, 119, 6, 0.12);
-            color: var(--gold);
-            box-shadow: inset 3px 0 0 var(--gold);
-        }
-
-        .sidebar .nav a .icon {
-            font-size: 1.2rem;
-            width: 28px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .sidebar .nav a .badge {
-            margin-left: auto;
-            background: var(--gold-gradient);
-            color: white;
-            font-size: 0.55rem;
-            padding: 2px 10px;
-            border-radius: var(--radius-full);
-            font-weight: 700;
-        }
-
-        .sidebar .nav a .badge.cyan {
-            background: var(--cyan);
-            color: var(--navy);
-        }
-
-        .sidebar .footer-sidebar {
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            margin-top: 8px;
-        }
-
-        .sidebar .footer-sidebar .user {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
-            border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.02);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .sidebar .footer-sidebar .user:hover {
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .sidebar .footer-sidebar .user .avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--gold-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: white;
-            flex-shrink: 0;
-            box-shadow: 0 2px 12px rgba(217, 119, 6, 0.2);
-        }
-
-        .sidebar .footer-sidebar .user .info .name {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: white;
-        }
-
-        .sidebar .footer-sidebar .user .info .role {
-            font-size: 0.6rem;
-            color: rgba(255, 255, 255, 0.25);
+        .dashboard-header .logo .logo-text .sub {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
             letter-spacing: 0.08em;
         }
-
-        /* ============================================
-           MAIN CONTENT
-           ============================================ */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            flex: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* ============================================
-           HEADER
-           ============================================ */
-        .header {
-            height: var(--header-height);
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--gray-200);
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        .header .left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .header .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-        }
-
-        .header .hamburger span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--gray-900);
-            border-radius: 2px;
-            transition: var(--transition);
-        }
-
-        .header .hamburger.open span:nth-child(1) {
-            transform: rotate(45deg) translate(4px, 4px);
-        }
-        .header .hamburger.open span:nth-child(2) {
-            opacity: 0;
-        }
-        .header .hamburger.open span:nth-child(3) {
-            transform: rotate(-45deg) translate(4px, -4px);
-        }
-
-        .header .page-title {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--gray-900);
-            letter-spacing: -0.3px;
-        }
-
-        .header .page-title .highlight {
-            color: var(--gold);
-        }
-
-        .header .right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .header .right .btn-logout {
-            padding: 8px 24px;
-            background: var(--gray-50);
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius-full);
-            color: var(--gray-600);
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: var(--font-primary);
-        }
-
-        .header .right .btn-logout:hover {
-            background: rgba(239, 68, 68, 0.06);
-            color: var(--red);
-            border-color: rgba(239, 68, 68, 0.15);
-            transform: translateY(-1px);
-        }
-
-        .header .right .btn-logout .icon {
-            margin-right: 6px;
-        }
-
-        /* ============================================
-           CONTENT
-           ============================================ */
-        .content {
-            padding: 32px 40px 60px;
-            flex: 1;
-        }
-
-        /* ============================================
-           WELCOME BANNER
-           ============================================ */
-        .welcome-banner {
-            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-            border-radius: var(--radius);
-            padding: 32px 36px;
-            color: white;
-            margin-bottom: 32px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .welcome-banner::before {
-            content: '🧠';
-            position: absolute;
-            top: -20px;
-            right: 40px;
-            font-size: 8rem;
-            opacity: 0.04;
-            pointer-events: none;
-        }
-
-        .welcome-banner .greeting {
-            font-family: var(--font-display);
-            font-size: 1.6rem;
-            font-weight: 700;
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome-banner .greeting .highlight {
-            color: var(--gold);
-        }
-
-        .welcome-banner .subtitle {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.95rem;
-            margin-top: 4px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome-banner .stats-mini {
-            display: flex;
-            gap: 40px;
-            margin-top: 16px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome-banner .stats-mini .item .number {
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .welcome-banner .stats-mini .item .label {
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-
-        /* ============================================
-           PROFILE CARD
-           ============================================ */
-        .profile-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-200);
-            margin-bottom: 32px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            flex-wrap: wrap;
-            transition: var(--transition);
-        }
-
-        .profile-card:hover {
-            box-shadow: var(--shadow-md);
-            border-color: rgba(217, 119, 6, 0.1);
-        }
-
-        .profile-card .avatar-large {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--gold-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 2rem;
-            color: white;
-            flex-shrink: 0;
-            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.2);
-        }
-
-        .profile-card .info h2 {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--gray-900);
-        }
-
-        .profile-card .info .email {
-            color: var(--gray-500);
-            font-size: 0.9rem;
-        }
-
-        .profile-card .info .status {
-            display: inline-block;
-            padding: 4px 16px;
-            border-radius: var(--radius-full);
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-top: 4px;
-        }
-
-        .profile-card .info .status.completed {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--green);
-        }
-
-        .profile-card .info .status.pending {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--orange);
-        }
-
-        .profile-card .info .status.in_progress {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3B82F6;
-        }
-
-        /* ============================================
-           STATS GRID
-           ============================================ */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-200);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            cursor: default;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gold-gradient);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-4px);
-            border-color: rgba(217, 119, 6, 0.1);
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-card .stat-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .stat-card .stat-icon {
-            font-size: 2rem;
-            opacity: 0.6;
-            transition: var(--transition);
-        }
-
-        .stat-card:hover .stat-icon {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        .stat-card .stat-label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--gray-400);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .stat-card .stat-value {
-            font-family: var(--font-display);
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin: 2px 0;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-        }
-
-        .stat-card .stat-desc {
-            font-size: 0.7rem;
-            color: var(--gray-400);
-            margin-top: 2px;
-        }
-
-        /* ============================================
-           JOURNEY CARDS - Neurociência
-           ============================================ */
-        .journey-section {
-            margin-bottom: 32px;
-        }
-
-        .journey-section .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .journey-section .section-header h2 {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--gray-900);
-        }
-
-        .journey-section .section-header .sub {
-            font-size: 0.8rem;
-            color: var(--gray-400);
-        }
-
-        .journey-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .journey-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-200);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .journey-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-4px);
-            border-color: rgba(217, 119, 6, 0.1);
-        }
-
-        .journey-card .icon {
-            font-size: 2.4rem;
-            display: block;
-            margin-bottom: 12px;
-        }
-
-        .journey-card h3 {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--gray-900);
-            margin-bottom: 4px;
-        }
-
-        .journey-card .desc {
-            font-size: 0.85rem;
-            color: var(--gray-500);
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .journey-card .progress {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .journey-card .progress .bar {
-            flex: 1;
-            height: 6px;
-            background: var(--gray-200);
-            border-radius: var(--radius-full);
-            overflow: hidden;
-        }
-
-        .journey-card .progress .bar .fill {
-            height: 100%;
-            border-radius: var(--radius-full);
-            transition: width 1s ease;
-        }
-
-        .journey-card .progress .bar .fill.gold {
-            background: var(--gold-gradient);
-        }
-
-        .journey-card .progress .bar .fill.cyan {
-            background: linear-gradient(90deg, var(--cyan), var(--cyan-light));
-        }
-
-        .journey-card .progress .bar .fill.purple {
-            background: linear-gradient(90deg, var(--purple), var(--purple-light));
-        }
-
-        .journey-card .progress .bar .fill.pink {
-            background: linear-gradient(90deg, var(--pink), var(--pink-light));
-        }
-
-        .journey-card .progress .percent {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--gray-700);
-            min-width: 40px;
+        .dashboard-header .header-user {
             text-align: right;
         }
-
-        .journey-card .btn-action {
-            margin-top: 12px;
-            padding: 8px 20px;
-            border: none;
-            border-radius: var(--radius-sm);
+        .dashboard-header .header-user .name {
             font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-block;
+            font-size: 0.95rem;
+        }
+        .dashboard-header .header-user .greeting {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .dashboard-header .header-user .logout {
+            color: rgba(255, 255, 255, 0.3);
             text-decoration: none;
-        }
-
-        .journey-card .btn-action.primary {
-            background: var(--gold-gradient);
-            color: white;
-        }
-
-        .journey-card .btn-action.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-gold);
-        }
-
-        .journey-card .btn-action.secondary {
-            background: var(--gray-100);
-            color: var(--gray-700);
-        }
-
-        .journey-card .btn-action.secondary:hover {
-            background: var(--gray-200);
-        }
-
-        /* ============================================
-           SELLING CARDS - Relatórios e Laudos
-           ============================================ */
-        .selling-section {
-            margin-bottom: 32px;
-        }
-
-        .selling-section .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .selling-section .section-header h2 {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--gray-900);
-        }
-
-        .selling-section .section-header .sub {
-            font-size: 0.8rem;
-            color: var(--gray-400);
-        }
-
-        .selling-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .selling-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-200);
+            font-size: 0.7rem;
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
+        }
+        .dashboard-header .header-user .logout:hover {
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .selling-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-4px);
+        /* ===== BODY ===== */
+        .dashboard-body {
+            background: white;
+            padding: 32px;
+            border-left: 1px solid var(--gray-200);
+            border-right: 1px solid var(--gray-200);
         }
 
-        .selling-card.premium {
-            border-color: var(--gold);
-            background: linear-gradient(135deg, rgba(217, 119, 6, 0.02), rgba(245, 158, 11, 0.02));
+        /* ===== SAUDAÇÃO ===== */
+        .greeting-section {
+            margin-bottom: 24px;
         }
-
-        .selling-card .badge-premium {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--gold-gradient);
-            color: white;
-            font-size: 0.6rem;
+        .greeting-section h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
             font-weight: 700;
-            padding: 2px 12px;
-            border-radius: var(--radius-full);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            color: var(--gray-800);
         }
-
-        .selling-card .icon {
-            font-size: 2.4rem;
-            display: block;
-            margin-bottom: 12px;
+        .greeting-section h1 .highlight {
+            color: var(--gold);
         }
-
-        .selling-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--gray-900);
-        }
-
-        .selling-card .desc {
-            font-size: 0.85rem;
+        .greeting-section p {
             color: var(--gray-500);
-            line-height: 1.5;
-            margin: 4px 0 8px;
+            font-size: 0.95rem;
+            margin-top: 4px;
         }
 
-        .selling-card .features {
-            list-style: none;
-            margin: 8px 0 16px;
+        /* ===== CARDS ===== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
         }
-
-        .selling-card .features li {
-            font-size: 0.8rem;
-            color: var(--gray-600);
-            padding: 3px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .dashboard-card {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            transition: var(--transition);
+            cursor: pointer;
         }
-
-        .selling-card .features li .check {
-            color: var(--green);
+        .dashboard-card:hover {
+            border-color: var(--gold);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
         }
-
-        .selling-card .price {
-            font-family: var(--font-display);
+        .dashboard-card .card-icon {
+            font-size: 1.8rem;
+        }
+        .dashboard-card .card-number {
+            font-family: 'Poppins', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
+            color: var(--gray-800);
+        }
+        .dashboard-card .card-label {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+        .dashboard-card .card-link {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.8rem;
             color: var(--gold);
-            margin: 8px 0;
-        }
-
-        .selling-card .price small {
-            font-size: 1rem;
-            color: var(--gray-400);
-            font-weight: 400;
-        }
-
-        .selling-card .btn-buy {
-            padding: 10px 32px;
-            background: var(--gold-gradient);
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
+            text-decoration: none;
             font-weight: 600;
+        }
+        .dashboard-card .card-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== ÁREA CENTRAL ===== */
+        .dashboard-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin: 20px 0;
+        }
+        .main-section {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+        }
+        .main-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+        .main-section .section-content {
+            color: var(--gray-600);
             font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
+            line-height: 1.8;
+        }
+        .main-section .section-content .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .main-section .section-content .item:last-child {
+            border-bottom: none;
+        }
+        .main-section .section-content .item .label {
+            color: var(--gray-500);
+        }
+        .main-section .section-content .item .value {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+        .main-section .section-content .badge-status {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge-status.concluido {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        .badge-status.pendente {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        .badge-status.disponivel {
+            background: #DBEAFE;
+            color: #1E40AF;
         }
 
-        .selling-card .btn-buy:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-gold);
+        /* ===== TIMELINE ===== */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
         }
-
-        .selling-card .btn-buy.secondary {
-            background: var(--gray-100);
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gray-200);
+        }
+        .timeline-item {
+            position: relative;
+            padding: 8px 0 8px 16px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -16px;
+            top: 12px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--gold);
+        }
+        .timeline-item .timeline-date {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+        }
+        .timeline-item .timeline-text {
+            font-size: 0.85rem;
             color: var(--gray-700);
         }
-
-        .selling-card .btn-buy.secondary:hover {
-            background: var(--gray-200);
-            box-shadow: none;
+        .timeline-item .timeline-text strong {
+            color: var(--gray-800);
         }
 
-        /* ============================================
-           CHARTS
-           ============================================ */
-        .charts-grid {
+        /* ===== JORNADA ===== */
+        .journey-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-bottom: 32px;
+            gap: 8px;
         }
-
-        .chart-card {
+        .journey-item {
             background: white;
-            border-radius: var(--radius);
-            padding: 24px;
-            box-shadow: var(--shadow);
             border: 1px solid var(--gray-200);
-            transition: var(--transition);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .journey-item .j-icon {
+            font-size: 1.2rem;
+        }
+        .journey-item .j-text {
+            font-size: 0.8rem;
+            color: var(--gray-700);
+        }
+        .journey-item .j-text strong {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--gray-800);
         }
 
-        .chart-card:hover {
-            box-shadow: var(--shadow-md);
-            border-color: rgba(217, 119, 6, 0.1);
-        }
-
-        .chart-card .chart-header {
+        /* ===== FOOTER ===== */
+        .dashboard-footer {
+            background: var(--navy);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 0 0 var(--radius) var(--radius);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .dashboard-footer .footer-text {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .dashboard-footer .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+        .dashboard-footer .footer-links a {
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+        .dashboard-footer .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .chart-card .chart-header h3 {
-            font-family: var(--font-display);
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--gray-900);
-        }
-
-        .chart-container {
-            height: 200px;
-            position: relative;
-        }
-
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
-        @media (max-width: 1200px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .journey-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .selling-grid {
-                grid-template-columns: 1fr;
-            }
-            .charts-grid {
-                grid-template-columns: 1fr;
+        /* ===== RESPONSIVO ===== */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
-
-        @media (max-width: 992px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            .sidebar.open {
-                transform: translateX(0);
-            }
-            .main-content {
-                margin-left: 0;
-            }
-            .header .hamburger {
-                display: flex;
-            }
-            .header {
-                padding: 0 20px;
-            }
-            .content {
-                padding: 24px 20px 40px;
-            }
-        }
-
         @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            .journey-grid {
-                grid-template-columns: 1fr;
-            }
-            .header .page-title {
-                font-size: 1rem;
-            }
-            .header {
-                padding: 0 16px;
-            }
-            .content {
-                padding: 16px 16px 32px;
-            }
-            .welcome-banner {
-                padding: 24px 20px;
-            }
-            .welcome-banner .greeting {
-                font-size: 1.2rem;
-            }
-            .welcome-banner .stats-mini {
-                gap: 20px;
-                flex-wrap: wrap;
-            }
-            .profile-card {
+            .dashboard-header {
                 flex-direction: column;
                 text-align: center;
+                padding: 16px 20px;
+            }
+            .dashboard-header .header-user {
+                text-align: center;
+            }
+            .dashboard-body {
                 padding: 20px;
             }
-            .stat-card .stat-value {
-                font-size: 1.8rem;
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
             }
-            .chart-container {
-                height: 180px;
+            .dashboard-main {
+                grid-template-columns: 1fr;
             }
-            .header .right .btn-logout {
-                padding: 6px 16px;
-                font-size: 0.7rem;
+            .journey-grid {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .greeting-section h1 {
+                font-size: 1.2rem;
             }
         }
-
         @media (max-width: 480px) {
-            .header .right .btn-logout span {
-                display: none;
+            .dashboard-grid {
+                grid-template-columns: 1fr;
             }
-            .header .right .btn-logout .icon {
-                margin-right: 0;
-            }
-            .stat-card {
-                padding: 16px 18px;
-            }
-            .stat-card .stat-value {
-                font-size: 1.6rem;
-            }
-            .chart-card {
-                padding: 18px;
-            }
-            .journey-card {
-                padding: 18px;
-            }
-            .selling-card {
-                padding: 18px;
-            }
-        }
-
-        /* ============================================
-           DARK MODE
-           ============================================ */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: var(--gray-900);
-            }
-
-            .header {
-                background: rgba(30, 41, 59, 0.92);
-                border-color: var(--gray-700);
-            }
-
-            .header .page-title {
-                color: var(--white);
-            }
-
-            .header .right .btn-logout {
-                background: var(--gray-800);
-                border-color: var(--gray-700);
-                color: var(--gray-400);
-            }
-
-            .header .right .btn-logout:hover {
-                background: rgba(239, 68, 68, 0.1);
-                border-color: rgba(239, 68, 68, 0.2);
-                color: var(--red-light);
-            }
-
-            .header .hamburger span {
-                background: var(--white);
-            }
-
-            .stat-card {
-                background: var(--gray-800);
-                border-color: var(--gray-700);
-            }
-
-            .stat-card .stat-value {
-                color: var(--white);
-            }
-
-            .stat-card .stat-label {
-                color: var(--gray-500);
-            }
-
-            .stat-card .stat-desc {
-                color: var(--gray-500);
-            }
-
-            .chart-card {
-                background: var(--gray-800);
-                border-color: var(--gray-700);
-            }
-
-            .chart-card .chart-header h3 {
-                color: var(--white);
-            }
-
-            .profile-card {
-                background: var(--gray-800);
-                border-color: var(--gray-700);
-            }
-
-            .profile-card .info h2 {
-                color: var(--white);
-            }
-
-            .profile-card .info .email {
-                color: var(--gray-400);
-            }
-
-            .journey-card {
-                background: var(--gray-800);
-                border-color: var(--gray-700);
-            }
-
-            .journey-card h3 {
-                color: var(--white);
-            }
-
-            .journey-card .desc {
-                color: var(--gray-400);
-            }
-
-            .journey-card .progress .percent {
-                color: var(--gray-300);
-            }
-
-            .journey-card .btn-action.secondary {
-                background: var(--gray-700);
-                color: var(--gray-300);
-            }
-
-            .journey-card .btn-action.secondary:hover {
-                background: var(--gray-600);
-            }
-
-            .selling-card {
-                background: var(--gray-800);
-                border-color: var(--gray-700);
-            }
-
-            .selling-card.premium {
-                border-color: var(--gold);
-                background: linear-gradient(135deg, rgba(217, 119, 6, 0.05), rgba(245, 158, 11, 0.02));
-            }
-
-            .selling-card h3 {
-                color: var(--white);
-            }
-
-            .selling-card .desc {
-                color: var(--gray-400);
-            }
-
-            .selling-card .features li {
-                color: var(--gray-300);
-            }
-
-            .selling-card .btn-buy.secondary {
-                background: var(--gray-700);
-                color: var(--gray-300);
-            }
-
-            .selling-card .btn-buy.secondary:hover {
-                background: var(--gray-600);
-            }
-
-            .welcome-banner {
-                background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
-                border: 1px solid var(--gray-700);
-            }
-
-            .welcome-banner .greeting {
-                color: var(--white);
-            }
-
-            .welcome-banner .subtitle {
-                color: var(--gray-400);
-            }
-
-            .welcome-banner .stats-mini .item .label {
-                color: var(--gray-500);
-            }
-
-            .sidebar {
-                background: var(--gray-800);
-                border-right-color: var(--gray-700);
-            }
-
-            .sidebar .logo .logo-text .name {
-                color: var(--white);
-            }
-
-            .sidebar .logo .logo-text .sub {
-                color: var(--gray-500);
-            }
-
-            .sidebar .nav a {
-                color: var(--gray-400);
-            }
-
-            .sidebar .nav a:hover {
-                background: rgba(255, 255, 255, 0.04);
-                color: var(--white);
-            }
-
-            .sidebar .nav a.active {
-                background: rgba(217, 119, 6, 0.12);
-                color: var(--gold);
-            }
-
-            .sidebar .footer-sidebar {
-                border-color: var(--gray-700);
-            }
-
-            .sidebar .footer-sidebar .user {
-                background: rgba(255, 255, 255, 0.02);
-            }
-
-            .sidebar .footer-sidebar .user .info .name {
-                color: var(--white);
-            }
-
-            .sidebar .footer-sidebar .user .info .role {
-                color: var(--gray-500);
-            }
-
-            .sidebar .nav .nav-label {
-                color: var(--gray-500);
-            }
-
-            .journey-section .section-header h2 {
-                color: var(--white);
-            }
-
-            .selling-section .section-header h2 {
-                color: var(--white);
-            }
-        }
-
-        /* ============================================
-           ANIMAÇÕES
-           ============================================ */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .stat-card {
-            animation: fadeInUp 0.5s ease forwards;
-        }
-        .stat-card:nth-child(1) {
-            animation-delay: 0.05s;
-        }
-        .stat-card:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-        .stat-card:nth-child(3) {
-            animation-delay: 0.15s;
-        }
-        .stat-card:nth-child(4) {
-            animation-delay: 0.2s;
-        }
-
-        .journey-card {
-            animation: fadeInUp 0.5s ease forwards;
-        }
-        .journey-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-        .journey-card:nth-child(2) {
-            animation-delay: 0.15s;
-        }
-        .journey-card:nth-child(3) {
-            animation-delay: 0.2s;
-        }
-
-        .selling-card {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        .selling-card:nth-child(1) {
-            animation-delay: 0.2s;
-        }
-        .selling-card:nth-child(2) {
-            animation-delay: 0.25s;
-        }
-
-        .chart-card {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        .chart-card:nth-child(1) {
-            animation-delay: 0.2s;
-        }
-        .chart-card:nth-child(2) {
-            animation-delay: 0.25s;
-        }
-
-        .welcome-banner {
-            animation: fadeInUp 0.5s ease forwards;
-            animation-delay: 0s;
-        }
-        .profile-card {
-            animation: fadeInUp 0.5s ease forwards;
-            animation-delay: 0.05s;
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================
-    SIDEBAR
-    ============================================ -->
-    <aside class="sidebar" id="sidebar">
-        <a href="/participante/dashboard.html" class="logo">
-            <img src="/assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
-            <div class="logo-text">
-                <span class="name">VIGORRE <span class="one">ONE</span><span class="tm">™</span></span>
-                <span class="sub">People Intelligence Enterprise</span>
-            </div>
-        </a>
+    <div class="container">
 
-        <nav class="nav">
-            <span class="nav-label">Jornada</span>
-            <a href="/participante/dashboard.html" class="active">
-                <span class="icon">🧠</span> Autoconhecimento
-                <span class="badge">Live</span>
-            </a>
-            <a href="/participante/testes/index.html">
-                <span class="icon">📝</span> Avaliações
-                <span class="badge cyan">3</span>
-            </a>
-            <a href="/participante/resultados/index.html">
-                <span class="icon">📊</span> Resultados
-                <span class="badge">2</span>
-            </a>
-
-            <span class="nav-label">Desenvolvimento</span>
-            <a href="/participante/relatorios/index.html">
-                <span class="icon">📄</span> Relatórios
-            </a>
-            <a href="/participante/laudos/index.html">
-                <span class="icon">📋</span> Laudos Premium
-                <span class="badge">⭐</span>
-            </a>
-
-            <span class="nav-label">Perfil</span>
-            <a href="/participante/perfil/index.html">
-                <span class="icon">👤</span> Meu Perfil
-            </a>
-            <a href="/participante/configuracoes/index.html">
-                <span class="icon">⚙️</span> Configurações
-            </a>
-        </nav>
-
-        <div class="footer-sidebar">
-            <div class="user">
-                <div class="avatar" id="userAvatar">P</div>
-                <div class="info">
-                    <div class="name" id="userName">Participante</div>
-                    <div class="role">Em Desenvolvimento</div>
+        <!-- ===== HEADER ===== -->
+        <header class="dashboard-header">
+            <div class="logo">
+                <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <div class="logo-text">
+                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                    <span class="sub">People Analytics Enterprise</span>
                 </div>
             </div>
-        </div>
-    </aside>
-
-    <!-- ============================================
-    MAIN CONTENT
-    ============================================ -->
-    <div class="main-content">
-        <!-- HEADER -->
-        <header class="header">
-            <div class="left">
-                <button class="hamburger" id="hamburger" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <div class="page-title">
-                    🧠 <span class="highlight">Jornada do Autoconhecimento</span>
-                </div>
-            </div>
-            <div class="right">
-                <button class="btn-logout" onclick="logout()">
-                    <span class="icon">🚪</span>
-                    <span>Sair</span>
-                </button>
+            <div class="header-user">
+                <div class="greeting" id="greeting">Bom dia</div>
+                <div class="name" id="participantName">Carregando...</div>
+                <a href="#" class="logout" onclick="logout()">Sair</a>
             </div>
         </header>
 
-        <!-- CONTENT -->
-        <div class="content">
-            <!-- WELCOME BANNER -->
-            <div class="welcome-banner">
-                <div class="greeting">
-                    👋 Olá, <span class="highlight" id="welcomeName">Participante</span>
+        <!-- ===== BODY ===== -->
+        <div class="dashboard-body">
+
+            <!-- ===== SAUDAÇÃO ===== -->
+            <section class="greeting-section">
+                <h1>Olá, <span class="highlight" id="userName">Participante</span> 👋</h1>
+                <p id="motivationalMessage">Continue sua jornada de autoconhecimento e desenvolvimento.</p>
+            </section>
+
+            <!-- ===== CARDS ===== -->
+            <div class="dashboard-grid">
+                <div class="dashboard-card" onclick="window.location.href='../tests/disc/'">
+                    <div class="card-icon">🧠</div>
+                    <div class="card-number" id="testesConcluidos">0</div>
+                    <div class="card-label">Testes Concluídos</div>
+                    <a href="#" class="card-link">Realizar Teste →</a>
                 </div>
-                <div class="subtitle">
-                    🌟 Sua jornada de autoconhecimento começa aqui · 
-                    Neurociência · Psicologia · Psicanálise · Coaching
+                <div class="dashboard-card" onclick="window.location.href='../tests/disc/'">
+                    <div class="card-icon">📊</div>
+                    <div class="card-number" id="testesDisponiveis">5</div>
+                    <div class="card-label">Testes Disponíveis</div>
+                    <a href="#" class="card-link">Ver Testes →</a>
                 </div>
-                <div class="stats-mini">
-                    <div class="item">
-                        <div class="number" id="miniTests">0</div>
-                        <div class="label">Avaliações Realizadas</div>
-                    </div>
-                    <div class="item">
-                        <div class="number" id="miniCompleted">0</div>
-                        <div class="label">Concluídas</div>
-                    </div>
-                    <div class="item">
-                        <div class="number" id="miniPending">0</div>
-                        <div class="label">Pendentes</div>
-                    </div>
-                    <div class="item">
-                        <div class="number" id="miniInsights">0</div>
-                        <div class="label">Insights Gerados</div>
-                    </div>
+                <div class="dashboard-card" onclick="window.location.href='../relatorios/disc/'">
+                    <div class="card-icon">📄</div>
+                    <div class="card-number" id="relatoriosDisponiveis">0</div>
+                    <div class="card-label">Relatórios Disponíveis</div>
+                    <a href="#" class="card-link">Ver Relatórios →</a>
+                </div>
+                <div class="dashboard-card" onclick="window.location.href='../laudos/'">
+                    <div class="card-icon">📋</div>
+                    <div class="card-number" id="laudosDisponiveis">0</div>
+                    <div class="card-label">Laudos Disponíveis</div>
+                    <a href="#" class="card-link">Ver Laudos →</a>
                 </div>
             </div>
 
-            <!-- PROFILE CARD -->
-            <div class="profile-card">
-                <div class="avatar-large" id="userAvatarLarge">P</div>
-                <div class="info">
-                    <h2 id="profileName">Participante</h2>
-                    <div class="email" id="profileEmail">participante@email.com</div>
-                    <span class="status pending" id="profileStatus">⏳ Pendente</span>
-                    <div style="margin-top:8px;font-size:0.8rem;color:var(--gray-400);">
-                        🧠 Nível de Autoconhecimento: <strong id="selfAwarenessLevel" style="color:var(--gold);">Em Desenvolvimento</strong>
-                    </div>
-                </div>
-            </div>
+            <!-- ===== ÁREA CENTRAL ===== -->
+            <div class="dashboard-main">
 
-            <!-- STATS -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-top">
-                        <span class="stat-label">🧠 Neuroplasticidade</span>
-                        <span class="stat-icon">🧠</span>
-                    </div>
-                    <div class="stat-value" id="neuroplasticity">72%</div>
-                    <div class="stat-desc">Capacidade de adaptação e aprendizado</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-top">
-                        <span class="stat-label">❤️ Inteligência Emocional</span>
-                        <span class="stat-icon">❤️</span>
-                    </div>
-                    <div class="stat-value" id="emotionalIQ">68%</div>
-                    <div class="stat-desc">Autoconsciência e empatia</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-top">
-                        <span class="stat-label">🎯 Potencial de Liderança</span>
-                        <span class="stat-icon">🎯</span>
-                    </div>
-                    <div class="stat-value" id="leadership">55%</div>
-                    <div class="stat-desc">Capacidade de influenciar e inspirar</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-top">
-                        <span class="stat-label">💰 Mentalidade Financeira</span>
-                        <span class="stat-icon">💰</span>
-                    </div>
-                    <div class="stat-value" id="financialMindset">48%</div>
-                    <div class="stat-desc">Inteligência financeira e prosperidade</div>
-                </div>
-            </div>
-
-            <!-- JOURNEY CARDS - Neurociência -->
-            <div class="journey-section">
-                <div class="section-header">
-                    <h2>🌟 Pilares do Desenvolvimento</h2>
-                    <span class="sub">Baseado em Neurociência e Psicologia</span>
-                </div>
-                <div class="journey-grid">
-                    <div class="journey-card">
-                        <span class="icon">🧠</span>
-                        <h3>Neurociência</h3>
-                        <div class="desc">Entenda como seu cérebro funciona, como aprende e como pode reprogramar padrões para alcançar seus objetivos.</div>
-                        <div class="progress">
-                            <div class="bar"><div class="fill gold" style="width:72%"></div></div>
-                            <span class="percent">72%</span>
+                <!-- ===== TIMELINE ===== -->
+                <div class="main-section">
+                    <h3>📅 Minha Jornada</h3>
+                    <div class="section-content">
+                        <div class="timeline" id="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">Hoje</div>
+                                <div class="timeline-text">Bem-vindo(a) à sua jornada de autoconhecimento!</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">--</div>
+                                <div class="timeline-text">Complete seu primeiro teste: <strong>DISC</strong></div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">--</div>
+                                <div class="timeline-text">Gere seu <strong>Relatório Completo</strong></div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">--</div>
+                                <div class="timeline-text">Gere seu <strong>Laudo VIGOR®</strong></div>
+                            </div>
                         </div>
-                        <a href="/participante/testes/index.html" class="btn-action primary">📝 Avaliar Agora</a>
                     </div>
-                    <div class="journey-card">
-                        <span class="icon">❤️</span>
-                        <h3>Psicologia & Psicanálise</h3>
-                        <div class="desc">Explore suas motivações profundas, padrões de comportamento e como sua história molda suas decisões atuais.</div>
-                        <div class="progress">
-                            <div class="bar"><div class="fill cyan" style="width:68%"></div></div>
-                            <span class="percent">68%</span>
+                </div>
+
+                <!-- ===== JORNADA DE DESENVOLVIMENTO ===== -->
+                <div class="main-section">
+                    <h3>🚀 Minha Trilha de Desenvolvimento</h3>
+                    <div class="section-content">
+                        <div class="journey-grid" id="journeyGrid">
+                            <div class="journey-item">
+                                <span class="j-icon">📚</span>
+                                <div class="j-text"><strong>Leitura Recomendada</strong>Os 7 Hábitos - Stephen Covey</div>
+                            </div>
+                            <div class="journey-item">
+                                <span class="j-icon">🎓</span>
+                                <div class="j-text"><strong>Curso</strong>Inteligência Emocional</div>
+                            </div>
+                            <div class="journey-item">
+                                <span class="j-icon">📝</span>
+                                <div class="j-text"><strong>Exercício</strong>Diário de Reflexão</div>
+                            </div>
+                            <div class="journey-item">
+                                <span class="j-icon">🎯</span>
+                                <div class="j-text"><strong>Meta</strong>Concluir todos os testes</div>
+                            </div>
                         </div>
-                        <a href="/participante/testes/index.html" class="btn-action primary">📝 Avaliar Agora</a>
                     </div>
-                    <div class="journey-card">
-                        <span class="icon">🚀</span>
-                        <h3>Coaching & Performance</h3>
-                        <div class="desc">Desenvolva habilidades de liderança, comunicação, vendas e finanças para alcançar o próximo nível profissional.</div>
-                        <div class="progress">
-                            <div class="bar"><div class="fill purple" style="width:55%"></div></div>
-                            <span class="percent">55%</span>
-                        </div>
-                        <a href="/participante/testes/index.html" class="btn-action primary">📝 Avaliar Agora</a>
-                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== TESTES CONCLUÍDOS ===== -->
+            <div class="main-section" style="margin-top:16px;">
+                <h3>📊 Meu Progresso</h3>
+                <div class="section-content" id="progressContent">
+                    <div class="item"><span class="label">DISC</span><span class="value"><span class="badge-status pendente">Pendente</span></span></div>
+                    <div class="item"><span class="label">Big Five</span><span class="value"><span class="badge-status pendente">Pendente</span></span></div>
+                    <div class="item"><span class="label">Inteligência Emocional</span><span class="value"><span class="badge-status pendente">Pendente</span></span></div>
+                    <div class="item"><span class="label">Valores</span><span class="value"><span class="badge-status pendente">Pendente</span></span></div>
+                    <div class="item"><span class="label">SWOT</span><span class="value"><span class="badge-status pendente">Pendente</span></span></div>
                 </div>
             </div>
 
-            <!-- SELLING CARDS - Relatórios e Laudos -->
-            <div class="selling-section">
-                <div class="section-header">
-                    <h2>📋 Relatórios & Laudos Premium</h2>
-                    <span class="sub">Invista no seu desenvolvimento profissional</span>
-                </div>
-                <div class="selling-grid">
-                    <div class="selling-card">
-                        <span class="icon">📄</span>
-                        <h3>Relatório de Autoconhecimento</h3>
-                        <div class="desc">Análise completa do seu perfil comportamental, pontos fortes e áreas de desenvolvimento com base em neurociência.</div>
-                        <ul class="features">
-                            <li><span class="check">✅</span> Análise DISC detalhada</li>
-                            <li><span class="check">✅</span> Inteligência Emocional</li>
-                            <li><span class="check">✅</span> Perfil de liderança</li>
-                            <li><span class="check">✅</span> Recomendações personalizadas</li>
-                        </ul>
-                        <div class="price">R$ 49<small>,90</small></div>
-                        <button class="btn-buy" onclick="showToast('📄 Relatório de Autoconhecimento adquirido com sucesso!')">
-                            🛒 Adquirir Relatório
-                        </button>
-                    </div>
-                    <div class="selling-card premium">
-                        <span class="badge-premium">⭐ Premium</span>
-                        <span class="icon">📋</span>
-                        <h3>Laudo Premium + Coaching</h3>
-                        <div class="desc">Laudo completo com análise aprofundada de neurociência, psicologia e plano de desenvolvimento personalizado.</div>
-                        <ul class="features">
-                            <li><span class="check">✅</span> 60+ páginas de análise</li>
-                            <li><span class="check">✅</span> Plano de desenvolvimento</li>
-                            <li><span class="check">✅</span> 1 sessão de coaching</li>
-                            <li><span class="check">✅</span> Acompanhamento 30 dias</li>
-                            <li><span class="check">✅</span> Certificado de conclusão</li>
-                        </ul>
-                        <div class="price">R$ 149<small>,90</small></div>
-                        <button class="btn-buy" onclick="showToast('📋 Laudo Premium adquirido com sucesso! Em breve você receberá seu material.')">
-                            🛒 Adquirir Laudo Premium
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CHARTS -->
-            <div class="charts-grid">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3>📊 Perfil Comportamental DISC</h3>
-                        <span style="font-size:0.7rem;color:var(--gray-400);">Baseado em Neurociência</span>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="discChart"></canvas>
-                    </div>
-                </div>
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3>🧠 Inteligência Emocional</h3>
-                        <span style="font-size:0.7rem;color:var(--gray-400);">5 Pilares da IE</span>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="ieChart"></canvas>
-                    </div>
-                </div>
-            </div>
         </div>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="dashboard-footer">
+            <div class="footer-text">© 2026 VIGORRE ONE™ - Todos os direitos reservados</div>
+            <div class="footer-links">
+                <a href="../politica-privacidade.html">Privacidade</a>
+                <a href="../termos-uso.html">Termos</a>
+                <a href="../contato.html">Contato</a>
+            </div>
+        </footer>
+
     </div>
 
-    <!-- ============================================
-    SCRIPTS
-    ============================================ -->
-    <script src="/supabase-config.js"></script>
-    <script src="/auth.js"></script>
-    <script src="/middleware/auth-guard.js"></script>
+    <!-- ===== SCRIPTS ===== -->
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
 
     <script>
-        'use strict';
-
-        let discChartInstance = null;
-        let ieChartInstance = null;
-
-        // ============================================
-        // LOGOUT
-        // ============================================
-        function logout() {
-            if (confirm('Deseja realmente sair da plataforma?')) {
-                if (window.VigorreAuth) {
-                    window.VigorreAuth.logout();
-                } else {
-                    window.location.href = '/login.html';
-                }
-            }
-        }
-
-        // ============================================
-        // TOAST
-        // ============================================
-        function showToast(message) {
-            alert('🎉 ' + message);
-        }
-
-        // ============================================
-        // HAMBURGER
-        // ============================================
-        document.getElementById('hamburger').addEventListener('click', function() {
-            this.classList.toggle('open');
-            document.getElementById('sidebar').classList.toggle('open');
-        });
-
-        document.addEventListener('click', function(e) {
-            const sidebar = document.getElementById('sidebar');
-            const hamburger = document.getElementById('hamburger');
-            if (window.innerWidth <= 992) {
-                if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
-                    sidebar.classList.remove('open');
-                    hamburger.classList.remove('open');
-                }
-            }
-        });
-
-        // ============================================
-        // INICIALIZAÇÃO
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🧠 VIGORRE ONE™ - Jornada do Autoconhecimento');
+            console.log('📊 Dashboard Participante - VIGORRE ONE™');
 
-            if (window.VigorreAuth) {
-                const user = window.VigorreAuth.getCurrentUser();
-                if (user) {
-                    const name = user.name || 'Participante';
-                    const email = user.email || 'participante@email.com';
-                    
-                    document.getElementById('userName').textContent = name;
-                    document.getElementById('userAvatar').textContent = name[0].toUpperCase();
-                    document.getElementById('userAvatarLarge').textContent = name[0].toUpperCase();
-                    document.getElementById('welcomeName').textContent = name;
-                    document.getElementById('profileName').textContent = name;
-                    document.getElementById('profileEmail').textContent = email;
-                }
+            if (!VigorreAuth.requireAuth()) {
+                window.location.href = '../login.html';
+                return;
             }
 
-            setTimeout(() => {
-                loadStats();
-                loadProfileStatus();
-                renderCharts();
-            }, 300);
+            const user = VigorreAuth.getCurrentUser();
+            if (user) {
+                const nome = user.name || 'Participante';
+                document.getElementById('participantName').textContent = nome;
+                document.getElementById('userName').textContent = nome;
 
-            setInterval(() => {
-                loadStats();
-            }, 60000);
+                // Saudação
+                const hora = new Date().getHours();
+                let saudacao = 'Boa noite';
+                if (hora < 12) saudacao = 'Bom dia';
+                else if (hora < 18) saudacao = 'Boa tarde';
+                document.getElementById('greeting').textContent = saudacao;
+
+                // Mensagem motivacional
+                const mensagens = [
+                    'Continue sua jornada de autoconhecimento e desenvolvimento.',
+                    'Cada teste é um passo para se conhecer melhor.',
+                    'O autoconhecimento é o primeiro passo para a transformação.',
+                    'Você está no caminho certo para se tornar a melhor versão de si mesmo.',
+                    'Descubra seus talentos e potencialize suas habilidades.'
+                ];
+                document.getElementById('motivationalMessage').textContent = mensagens[Math.floor(Math.random() * mensagens
+                .length)];
+
+                // Carregar dados do participante
+                carregarDados(user);
+            }
         });
 
-        // ============================================
-        // PROFILE STATUS
-        // ============================================
-        function loadProfileStatus() {
+        async function carregarDados(user) {
             try {
-                const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const user = window.VigorreAuth ? window.VigorreAuth.getCurrentUser() : null;
-                
-                if (user) {
-                    const userData = participants.find(p => p.id === user.id || p.email === user.email);
-                    if (userData) {
-                        const statusEl = document.getElementById('profileStatus');
-                        const status = userData.status || 'pending';
-                        const statusMap = {
-                            'completed': '✅ Concluído',
-                            'in_progress': '🔄 Em andamento',
-                            'pending': '⏳ Pendente'
-                        };
-                        statusEl.textContent = statusMap[status] || '⏳ Pendente';
-                        statusEl.className = 'status ' + status;
+                const { data: resultados, error } = await supabase
+                    .from('resultados')
+                    .select('*')
+                    .eq('participante_id', user.id);
 
-                        // Nível de autoconhecimento
-                        const levels = ['Iniciante', 'Em Desenvolvimento', 'Intermediário', 'Avançado', 'Master'];
-                        const levelIndex = Math.min(Math.floor(Math.random() * 5), 4);
-                        document.getElementById('selfAwarenessLevel').textContent = levels[levelIndex];
-                    }
-                }
-            } catch (e) {
-                console.error('❌ Erro ao carregar status:', e);
-            }
-        }
+                if (error) throw error;
 
-        // ============================================
-        // STATS
-        // ============================================
-        function loadStats() {
-            try {
-                const participants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const user = window.VigorreAuth ? window.VigorreAuth.getCurrentUser() : null;
-                
-                let userTests = [];
-                if (user) {
-                    userTests = participants.filter(p => p.id === user.id || p.email === user.email);
-                }
+                const testesConcluidos = resultados ? resultados.length : 0;
+                const tipos = resultados ? resultados.map(r => r.tipo) : [];
 
-                const total = userTests.length || Math.floor(Math.random() * 5) + 2;
-                const completed = userTests.filter(p => p.status === 'completed').length || Math.floor(Math.random() * 2) + 1;
-                const pending = total - completed;
-                const insights = Math.floor(Math.random() * 10) + 5;
+                document.getElementById('testesConcluidos').textContent = testesConcluidos;
 
-                animateValue('totalTests', total);
-                animateValue('totalCompleted', completed);
-                animateValue('totalPending', pending);
-                animateValue('totalInsights', insights);
+                // Atualizar status dos testes
+                const statusMap = {
+                    'disc': 'DISC',
+                    'bigfive': 'Big Five',
+                    'ie': 'Inteligência Emocional',
+                    'valores': 'Valores',
+                    'swot': 'SWOT'
+                };
 
-                document.getElementById('miniTests').textContent = total;
-                document.getElementById('miniCompleted').textContent = completed;
-                document.getElementById('miniPending').textContent = pending;
-                document.getElementById('miniInsights').textContent = insights;
-
-                // Stats cards com valores dinâmicos
-                document.getElementById('neuroplasticity').textContent = Math.floor(Math.random() * 30) + 60 + '%';
-                document.getElementById('emotionalIQ').textContent = Math.floor(Math.random() * 30) + 55 + '%';
-                document.getElementById('leadership').textContent = Math.floor(Math.random() * 30) + 45 + '%';
-                document.getElementById('financialMindset').textContent = Math.floor(Math.random() * 30) + 35 + '%';
-
-            } catch (e) {
-                console.error('❌ Erro ao carregar stats:', e);
-            }
-        }
-
-        function animateValue(id, target) {
-            const el = document.getElementById(id);
-            if (!el) return;
-            const current = parseInt(el.textContent.replace(/\D/g, '')) || 0;
-            const duration = 800;
-            const startTime = performance.now();
-
-            function update(now) {
-                const progress = Math.min((now - startTime) / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const value = Math.round(current + (target - current) * eased);
-                el.textContent = value;
-                if (progress < 1) requestAnimationFrame(update);
-            }
-            requestAnimationFrame(update);
-        }
-
-        // ============================================
-        // CHARTS
-        // ============================================
-        function renderCharts() {
-            try {
-                // DISC Chart
-                const discCtx = document.getElementById('discChart').getContext('2d');
-                if (discChartInstance) discChartInstance.destroy();
-                discChartInstance = new Chart(discCtx, {
-                    type: 'radar',
-                    data: {
-                        labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
-                        datasets: [{
-                            label: 'Seu Perfil DISC',
-                            data: [72, 45, 68, 55],
-                            backgroundColor: 'rgba(217, 119, 6, 0.08)',
-                            borderColor: '#D97706',
-                            borderWidth: 2.5,
-                            pointBackgroundColor: ['#EF4444', '#3B82F6', '#10B981', '#8B5CF6'],
-                            pointBorderColor: '#FFFFFF',
-                            pointBorderWidth: 2,
-                            pointRadius: 6,
-                            hoverRadius: 9
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    color: '#64748B',
-                                    font: { size: 10, weight: '500' },
-                                    usePointStyle: true,
-                                    pointStyle: 'circle'
-                                }
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(10, 37, 64, 0.92)',
-                                titleColor: '#FFFFFF',
-                                bodyColor: '#FFFFFF',
-                                cornerRadius: 10,
-                                padding: 14,
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.dataset.label + ': ' + context.parsed + '%';
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            r: {
-                                beginAtZero: true,
-                                max: 100,
-                                grid: { color: 'rgba(10, 37, 64, 0.06)' },
-                                ticks: {
-                                    color: '#94A3B8',
-                                    stepSize: 25,
-                                    backdropColor: 'transparent',
-                                    callback: function(v) { return v + '%'; }
-                                },
-                                pointLabels: {
-                                    color: '#64748B',
-                                    font: { size: 10, weight: '600' }
-                                }
-                            }
-                        },
-                        animation: { duration: 1000, easing: 'easeOutQuart' }
-                    }
+                const progressContent = document.getElementById('progressContent');
+                let html = '';
+                Object.keys(statusMap).forEach(key => {
+                    const concluido = tipos.includes(key);
+                    const status = concluido ? 'Concluído' : 'Pendente';
+                    const badge = concluido ? 'concluido' : 'pendente';
+                    html += `<div class="item"><span class="label">${statusMap[key]}</span><span class="value"><span class="badge-status ${badge}">${status}</span></span></div>`;
                 });
+                progressContent.innerHTML = html;
 
-                // IE Chart
-                const ieCtx = document.getElementById('ieChart').getContext('2d');
-                if (ieChartInstance) ieChartInstance.destroy();
-                ieChartInstance = new Chart(ieCtx, {
-                    type: 'radar',
-                    data: {
-                        labels: ['Autoconsciência', 'Autorregulação', 'Motivação', 'Empatia', 'Habilidades Sociais'],
-                        datasets: [{
-                            label: 'Inteligência Emocional',
-                            data: [75, 62, 80, 68, 55],
-                            backgroundColor: 'rgba(6, 182, 212, 0.08)',
-                            borderColor: '#06B6D4',
-                            borderWidth: 2.5,
-                            pointBackgroundColor: ['#7C3AED', '#10B981', '#F59E0B', '#EF4444', '#3B82F6'],
-                            pointBorderColor: '#FFFFFF',
-                            pointBorderWidth: 2,
-                            pointRadius: 6,
-                            hoverRadius: 9
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    color: '#64748B',
-                                    font: { size: 10, weight: '500' },
-                                    usePointStyle: true,
-                                    pointStyle: 'circle'
-                                }
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(10, 37, 64, 0.92)',
-                                titleColor: '#FFFFFF',
-                                bodyColor: '#FFFFFF',
-                                cornerRadius: 10,
-                                padding: 14,
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.dataset.label + ': ' + context.parsed + '%';
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            r: {
-                                beginAtZero: true,
-                                max: 100,
-                                grid: { color: 'rgba(10, 37, 64, 0.06)' },
-                                ticks: {
-                                    color: '#94A3B8',
-                                    stepSize: 25,
-                                    backdropColor: 'transparent',
-                                    callback: function(v) { return v + '%'; }
-                                },
-                                pointLabels: {
-                                    color: '#64748B',
-                                    font: { size: 9, weight: '600' }
-                                }
-                            }
-                        },
-                        animation: { duration: 1000, easing: 'easeOutQuart' }
-                    }
-                });
-            } catch (e) {
-                console.error('❌ Erro ao renderizar gráficos:', e);
+                // Atualizar relatórios e laudos
+                const { data: relatorios } = await supabase
+                    .from('relatorios')
+                    .select('id')
+                    .eq('participante_id', user.id);
+
+                const { data: laudos } = await supabase
+                    .from('laudos')
+                    .select('id')
+                    .eq('participante_id', user.id);
+
+                document.getElementById('relatoriosDisponiveis').textContent = relatorios ? relatorios.length : 0;
+                document.getElementById('laudosDisponiveis').textContent = laudos ? laudos.length : 0;
+
+                // Atualizar timeline
+                const timeline = document.getElementById('timeline');
+                let timelineHtml = `
+                            <div class="timeline-item">
+                                <div class="timeline-date">${new Date().toLocaleDateString('pt-BR')}</div>
+                                <div class="timeline-text">Bem-vindo(a) à sua jornada de autoconhecimento!</div>
+                            </div>
+                        `;
+
+                if (resultados && resultados.length > 0) {
+                    resultados.forEach(r => {
+                        const data = new Date(r.data).toLocaleDateString('pt-BR');
+                        const nome = statusMap[r.tipo] || r.tipo;
+                        timelineHtml += `
+                                    <div class="timeline-item">
+                                        <div class="timeline-date">${data}</div>
+                                        <div class="timeline-text">Teste <strong>${nome}</strong> concluído</div>
+                                    </div>
+                                `;
+                    });
+                } else {
+                    timelineHtml += `
+                                <div class="timeline-item">
+                                    <div class="timeline-date">--</div>
+                                    <div class="timeline-text">Complete seu primeiro teste: <strong>DISC</strong></div>
+                                </div>
+                            `;
+                }
+
+                timeline.innerHTML = timelineHtml;
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
             }
         }
 
-        console.log('🧠 VIGORRE ONE™ - Jornada do Autoconhecimento carregada com sucesso!');
+        function logout() {
+            VigorreAuth.logout();
+        }
     </script>
 
 </body>
