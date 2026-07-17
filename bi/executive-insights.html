@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Executive Insights | VIGORRE ONE™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/globals.css" />
+    <link rel="icon" href="../assets/images/logo-vigorre.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --navy: #0A2540;
+            --gold: #D97706;
+            --cyan: #06B6D4;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
+            --purple: #7C3AED;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
+            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header-print {
+            background: var(--navy);
+            color: white;
+            padding: 20px 32px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .header-print .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .header-print .logo .logo-img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+        .header-print .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.3px;
+        }
+        .header-print .logo .logo-text .name .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: var(--cyan);
+        }
+        .header-print .logo .logo-text .sub {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .header-print .header-title {
+            text-align: center;
+        }
+        .header-print .header-title h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .header-print .header-title .subtitle {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .header-print .header-user {
+            text-align: right;
+        }
+        .header-print .header-user .name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .header-print .header-user .role {
+            font-size: 0.7rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .header-print .header-user .logout {
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+        .header-print .header-user .logout:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .executive-body {
+            background: white;
+            padding: 32px;
+            border-left: 1px solid var(--gray-200);
+            border-right: 1px solid var(--gray-200);
+        }
+        .executive-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .executive-card {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            transition: var(--transition);
+        }
+        .executive-card:hover {
+            border-color: var(--gold);
+            box-shadow: var(--shadow-hover);
+        }
+        .executive-card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .executive-card .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        .executive-card .card-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin: 4px 0;
+        }
+        .executive-card .card-desc {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            line-height: 1.5;
+        }
+        .executive-card .card-trend {
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+        .executive-card .card-trend.positive {
+            color: var(--green);
+        }
+        .executive-card .card-trend.negative {
+            color: var(--red);
+        }
+        .insight-highlight {
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            margin: 16px 0;
+            border-left: 4px solid var(--gold);
+        }
+        .insight-highlight .insight-question {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        .insight-highlight .insight-answer {
+            font-size: 0.95rem;
+            color: var(--gray-700);
+            line-height: 1.7;
+            margin-top: 4px;
+        }
+        .executive-footer {
+            background: var(--navy);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .executive-footer .footer-text {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .executive-footer .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+        .executive-footer .footer-links a {
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+        .executive-footer .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        @media (max-width: 1024px) {
+            .executive-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .header-print {
+                flex-direction: column;
+                text-align: center;
+                padding: 16px 20px;
+            }
+            .header-print .header-user {
+                text-align: center;
+            }
+            .executive-body {
+                padding: 20px;
+            }
+            .executive-grid {
+                grid-template-columns: 1fr;
+            }
+            .executive-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header-print">
+            <div class="logo">
+                <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <div class="logo-text">
+                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                    <span class="sub">People Analytics Enterprise</span>
+                </div>
+            </div>
+            <div class="header-title">
+                <h1>🧠 Executive Insights</h1>
+                <div class="subtitle">Inteligência para Decisões Estratégicas</div>
+            </div>
+            <div class="header-user">
+                <div class="name" id="userName">Carregando...</div>
+                <div class="role">👔 Executive</div>
+                <a href="#" class="logout" onclick="logout()">Sair</a>
+            </div>
+        </header>
+
+        <div class="executive-body">
+
+            <!-- ===== PERGUNTAS DO CEO ===== -->
+            <div class="insight-highlight">
+                <div class="insight-question">❓ Estamos contratando pessoas compatíveis com nossa cultura?</div>
+                <div class="insight-answer" id="insightCultura">
+                    ✅ <strong>82%</strong> dos colaboradores possuem valores alinhados à cultura organizacional.
+                    Os valores predominantes são <strong>Realização (85%)</strong> e <strong>Autonomia (78%)</strong>,
+                    enquanto <strong>Colaboração (45%)</strong> precisa ser fortalecida.
+                    Recomenda-se reforçar programas de integração e mentoria.
+                </div>
+            </div>
+
+            <div class="insight-highlight">
+                <div class="insight-question">❓ Quais equipes possuem maior potencial de liderança?</div>
+                <div class="insight-answer" id="insightLideranca">
+                    🏆 A equipe de <strong>Vendas</strong> apresenta o maior potencial de liderança (78%),
+                    seguida por <strong>Marketing</strong> (72%) e <strong>Operações</strong> (65%).
+                    O índice de liderança geral é de <strong>65%</strong>.
+                    Recomenda-se investir em programas de desenvolvimento para gestores.
+                </div>
+            </div>
+
+            <div class="insight-highlight">
+                <div class="insight-question">❓ Onde está o maior risco de turnover?</div>
+                <div class="insight-answer" id="insightTurnover">
+                    ⚠️ O maior risco de turnover está no setor de <strong>Tecnologia</strong> (risco 72%),
+                    seguido por <strong>Comercial</strong> (68%) e <strong>Suporte</strong> (55%).
+                    Fatores críticos: <strong>baixa autonomia (45%)</strong> e <strong>falta de reconhecimento (42%)</strong>.
+                    Recomenda-se revisar planos de carreira e benefícios.
+                </div>
+            </div>
+
+            <div class="insight-highlight">
+                <div class="insight-question">❓ Qual setor precisa de treinamento urgente?</div>
+                <div class="insight-answer" id="insightTreinamento">
+                    📚 O setor de <strong>Operações</strong> apresenta maior necessidade de treinamento,
+                    com <strong>baixa inteligência emocional (48%)</strong> e <strong>baixa organização (52%)</strong>.
+                    Recomenda-se treinamento em <strong>Inteligência Emocional</strong> e <strong>Gestão do Tempo</strong>
+                    para os próximos 60 dias.
+                </div>
+            </div>
+
+            <div class="insight-highlight">
+                <div class="insight-question">❓ Quais competências estão em falta?</div>
+                <div class="insight-answer" id="insightCompetencias">
+                    🎯 As competências mais críticas em falta são:
+                    <strong>Liderança (55%)</strong>, <strong>Comunicação (48%)</strong> e
+                    <strong>Resiliência (52%)</strong>.
+                    Recomenda-se investir em programas de desenvolvimento de liderança
+                    e treinamento em comunicação assertiva.
+                </div>
+            </div>
+
+            <!-- ===== INDICADORES EXECUTIVOS ===== -->
+            <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--gray-800);margin:24px 0 12px;">
+                📊 Indicadores Estratégicos
+            </h3>
+
+            <div class="executive-grid">
+                <div class="executive-card">
+                    <div class="card-icon">📈</div>
+                    <div class="card-title">Índice de Desenvolvimento</div>
+                    <div class="card-value" id="idxDesenvolvimento">72%</div>
+                    <div class="card-desc">Capacidade de crescimento e evolução</div>
+                    <div class="card-trend positive">⬆ +5% este trimestre</div>
+                </div>
+
+                <div class="executive-card">
+                    <div class="card-icon">🧠</div>
+                    <div class="card-title">Índice de IE</div>
+                    <div class="card-value" id="idxIE">68%</div>
+                    <div class="card-desc">Inteligência Emocional geral</div>
+                    <div class="card-trend positive">⬆ +3% este trimestre</div>
+                </div>
+
+                <div class="executive-card">
+                    <div class="card-icon">👔</div>
+                    <div class="card-title">Índice de Liderança</div>
+                    <div class="card-value" id="idxLideranca">65%</div>
+                    <div class="card-desc">Potencial de liderança identificado</div>
+                    <div class="card-trend positive">⬆ +2% este trimestre</div>
+                </div>
+
+                <div class="executive-card">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">Índice de Organização</div>
+                    <div class="card-value" id="idxOrganizacao">58%</div>
+                    <div class="card-desc">Estrutura e disciplina</div>
+                    <div class="card-trend negative">⬇ -1% este trimestre</div>
+                </div>
+
+                <div class="executive-card">
+                    <div class="card-icon">💬</div>
+                    <div class="card-title">Índice de Comunicação</div>
+                    <div class="card-value" id="idxComunicacao">62%</div>
+                    <div class="card-desc">Eficácia da comunicação</div>
+                    <div class="card-trend positive">⬆ +4% este trimestre</div>
+                </div>
+
+                <div class="executive-card">
+                    <div class="card-icon">🔄</div>
+                    <div class="card-title">Índice de Adaptabilidade</div>
+                    <div class="card-value" id="idxAdaptabilidade">55%</div>
+                    <div class="card-desc">Capacidade de se adaptar a mudanças</div>
+                    <div class="card-trend negative">⬇ -2% este trimestre</div>
+                </div>
+            </div>
+
+            <!-- ===== RECOMENDAÇÕES EXECUTIVAS ===== -->
+            <div style="background:var(--gray-50);border-radius:var(--radius-sm);padding:20px 24px;border:1px solid var(--gray-200);margin-top:16px;">
+                <h3 style="font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:700;color:var(--gray-800);margin-bottom:8px;">
+                    🎯 Recomendações Executivas
+                </h3>
+                <ul style="list-style:none;color:var(--gray-600);font-size:0.9rem;line-height:1.8;">
+                    <li>✅ <strong>Prioridade 1:</strong> Fortalecer a <strong>Colaboração</strong> (atualmente 45%) através de programas de mentoria</li>
+                    <li>✅ <strong>Prioridade 2:</strong> Investir em <strong>Desenvolvimento de Liderança</strong> para o setor de Operações</li>
+                    <li>✅ <strong>Prioridade 3:</strong> Criar plano de retenção para o setor de <strong>Tecnologia</strong></li>
+                    <li>✅ <strong>Prioridade 4:</strong> Implementar treinamento de <strong>Inteligência Emocional</strong> para toda a empresa</li>
+                    <li>✅ <strong>Prioridade 5:</strong> Revisar plano de carreira para melhorar o <strong>Reconhecimento</strong></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <footer class="executive-footer">
+            <div class="footer-text">© 2026 VIGORRE ONE™ - Todos os direitos reservados</div>
+            <div class="footer-links">
+                <a href="../politica-privacidade.html">Privacidade</a>
+                <a href="../termos-uso.html">Termos</a>
+                <a href="../contato.html">Contato</a>
+                <a href="analytics.html">📊 People Analytics</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!VigorreAuth.requireAuth()) { window.location.href = '../login.html'; return; }
+            const user = VigorreAuth.getCurrentUser();
+            if (user) {
+                document.getElementById('userName').textContent = user.name || 'Executivo';
+            }
+            // Simulação de dados variáveis
+            const randomizar = (base, variacao) => Math.round(base + (Math.random() - 0.5) * variacao);
+
+            document.getElementById('idxDesenvolvimento').textContent = randomizar(72, 10) + '%';
+            document.getElementById('idxIE').textContent = randomizar(68, 10) + '%';
+            document.getElementById('idxLideranca').textContent = randomizar(65, 10) + '%';
+            document.getElementById('idxOrganizacao').textContent = randomizar(58, 10) + '%';
+            document.getElementById('idxComunicacao').textContent = randomizar(62, 10) + '%';
+            document.getElementById('idxAdaptabilidade').textContent = randomizar(55, 10) + '%';
+        });
+
+        function logout() { VigorreAuth.logout(); }
+    </script>
+</body>
+</html>
