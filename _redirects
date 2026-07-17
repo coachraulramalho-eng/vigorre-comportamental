@@ -1,42 +1,39 @@
 # ============================================
-# VIGORRE ONE™ - _REDIRECTS
-# INTERNACIONAL ENTERPRISE EDITION
-# ============================================
-# 
-# CONFIGURAÇÕES PARA VERCEL/CLOUDFLARE
-# - Redirecionamentos 301
-# - URL amigáveis
-# - SPA fallback
+# REDIRECTS - VIGORRE ONE™
+# Configuração para Vercel
 # ============================================
 
-# ============================================
-# REDIRECIONAMENTOS 301
-# ============================================
+# ===== REDIRECIONAMENTOS PRINCIPAIS =====
+/                    /index.html
+/login               /login.html
+/consentimento       /consentimento.html
+/privacidade         /politica-privacidade.html
+/termos              /termos-uso.html
+/contato             /contato.html
 
-/antiga-home            /                   301
-/old-about             /sobre.html         301
-/old-contact           /contato.html       301
-/old-pricing           /precos.html        301
+# ===== REDIRECIONAMENTOS DOS TESTES =====
+/disc                /tests/disc/
+/bigfive             /tests/bigfive/
+/ie                  /tests/ie/
+/valores             /tests/valores/
+/swot                /tests/swot/
+
+# ===== REDIRECIONAMENTOS DOS RELATÓRIOS =====
+/relatorio-disc      /relatorios/disc/
+/relatorio-bigfive   /relatorios/bigfive/
+/relatorio-ie        /relatorios/ie/
+/relatorio-valores   /relatorios/valores/
+/relatorio-swot      /relatorios/swot/
+
+# ===== REDIRECIONAMENTO DO LAUDO =====
+/laudo               /laudos/
+
+# ===== REDIRECIONAMENTO DO DASHBOARD =====
+/dashboard           /dashboard.html
 
 # ============================================
-# URL AMIGÁVEIS
+# PROTEÇÃO DE ARQUIVOS SENSÍVEIS
 # ============================================
-
-/login                  /login.html
-/dashboard              /admin/dashboard.html
-/recrutador             /recrutador/dashboard.html
-/participante           /participante/dashboard.html
-/empresa                /empresa/dashboard.html
-/consultor              /consultor/dashboard.html
-
-# ============================================
-# PROXY E API
-# ============================================
-
-/api/*                 https://api.vigorre.com/api/:splat  200
-
-# ============================================
-# FALLBACK SPA (para rotas não encontradas)
-# ============================================
-
-/* /index.html 200
+/.env                404
+/.git/*              404
+/node_modules/*      404
