@@ -7,380 +7,459 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="icon" href="assets/images/logo-vigorre.png" />
     <style>
-        :root {
-            --navy: #0A2540;
-            --gold: #D97706;
-            --gold-light: #F59E0B;
-            --cyan: #06B6D4;
-            --white: #FFFFFF;
-            --gray-50: #F8FAFC;
-            --gray-200: #E2E8F0;
-            --gray-400: #94A3B8;
-            --gray-500: #64748B;
-            --gray-700: #334155;
-            --gray-800: #1E293B;
-            --gray-900: #0F172A;
-            --radius: 16px;
-            --font-primary: 'Inter', sans-serif;
-            --font-display: 'Poppins', sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        * { margin:0; padding:0; box-sizing:border-box; }
+
         body {
             font-family: var(--font-primary);
-            background: var(--gray-900);
-            color: var(--white);
+            background: var(--bg-primary);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 20px;
-            background-image: radial-gradient(ellipse at 20% 50%, rgba(217,119,6,0.05) 0%, transparent 60%),
-                              radial-gradient(ellipse at 80% 50%, rgba(6,182,212,0.03) 0%, transparent 60%);
+            justify-content: center;
+            padding: 24px;
         }
-        .card {
-            background: var(--gray-800);
-            border-radius: var(--radius);
-            padding: 48px 40px;
+
+        .login-container {
             max-width: 420px;
             width: 100%;
-            border: 1px solid var(--gray-700);
-            box-shadow: 0 8px 48px rgba(0,0,0,0.4);
-            position: relative;
-            overflow: hidden;
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 40px 36px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
         }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--cyan));
-            opacity: 0.6;
-        }
-        .logo {
+
+        .login-logo {
             text-align: center;
             margin-bottom: 32px;
         }
-        .logo .name {
+
+        .login-logo .logo-img {
+            height: 56px;
+            width: auto;
+            margin-bottom: 8px;
+        }
+
+        .login-logo .logo-text {
             font-family: var(--font-display);
             font-size: 1.6rem;
             font-weight: 800;
+            color: var(--navy);
             letter-spacing: -0.5px;
         }
-        .logo .name .one {
+
+        .login-logo .logo-text .highlight {
             color: var(--gold);
         }
-        .logo .name .tm {
+
+        .login-logo .logo-text .tm {
             font-size: 0.5rem;
-            color: var(--gray-500);
             vertical-align: super;
+            color: var(--text-muted);
         }
-        .logo .sub {
-            font-size: 0.6rem;
-            color: var(--gray-500);
+
+        .login-logo .logo-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.12em;
-            display: block;
-            margin-top: -2px;
+            letter-spacing: 0.1em;
+            margin-top: 2px;
         }
-        .card h1 {
+
+        .login-title {
             font-family: var(--font-display);
             font-size: 1.2rem;
-            font-weight: 600;
+            font-weight: 700;
+            color: var(--text-primary);
             margin-bottom: 4px;
         }
-        .card .desc {
-            color: var(--gray-500);
+
+        .login-subtitle {
             font-size: 0.85rem;
+            color: var(--text-secondary);
             margin-bottom: 24px;
         }
+
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
+
         .form-group label {
             display: block;
             font-size: 0.8rem;
             font-weight: 600;
-            color: var(--gray-400);
+            color: var(--text-primary);
             margin-bottom: 4px;
         }
-        .form-group input,
-        .form-group select {
+
+        .form-group input {
             width: 100%;
             padding: 12px 16px;
-            background: var(--gray-900);
-            border: 1px solid var(--gray-700);
-            border-radius: 10px;
-            color: var(--white);
-            font-size: 0.95rem;
-            transition: 0.3s;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
             font-family: var(--font-primary);
+            font-size: 0.9rem;
+            transition: var(--transition);
+            background: var(--bg-primary);
+            color: var(--text-primary);
         }
-        .form-group input:focus,
-        .form-group select:focus {
+
+        .form-group input:focus {
             outline: none;
             border-color: var(--gold);
-            box-shadow: 0 0 0 4px rgba(217,119,6,0.05);
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
         }
-        .form-group select option {
-            background: var(--gray-800);
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
         }
-        .lgpd-check {
+
+        .form-group .input-hint {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .form-options {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin: 16px 0;
-            font-size: 0.75rem;
-            color: var(--gray-400);
-            line-height: 1.5;
+            justify-content: space-between;
+            align-items: center;
+            margin: 16px 0 24px;
         }
-        .lgpd-check input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-top: 2px;
-            accent-color: var(--gold);
+
+        .form-options label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
             cursor: pointer;
-            flex-shrink: 0;
         }
-        .lgpd-check a {
+
+        .form-options label input[type="checkbox"] {
+            accent-color: var(--gold);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .form-options a {
+            font-size: 0.8rem;
             color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-options a:hover {
             text-decoration: underline;
         }
+
         .btn-login {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
             border: none;
-            border-radius: 10px;
-            color: var(--white);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 8px;
+            border-radius: var(--radius-sm);
+            background: var(--gradient-gold);
+            color: white;
             font-family: var(--font-primary);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-gold);
         }
+
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 24px rgba(217,119,6,0.3);
+            box-shadow: var(--shadow-gold-hover);
         }
+
         .btn-login:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
-        .error {
-            color: #EF4444;
-            font-size: 0.8rem;
-            margin-top: 8px;
-            display: none;
-        }
-        .error.show {
-            display: block;
-        }
-        .success {
-            color: #10B981;
-            font-size: 0.8rem;
-            margin-top: 8px;
-            display: none;
-        }
-        .success.show {
-            display: block;
-        }
-        .demo-info {
-            margin-top: 20px;
-            padding: 12px 16px;
-            background: rgba(217,119,6,0.04);
-            border: 1px solid rgba(217,119,6,0.06);
-            border-radius: 10px;
-            font-size: 0.7rem;
-            color: var(--gray-400);
-            line-height: 1.6;
-        }
-        .demo-info strong {
-            color: var(--gold);
-        }
-        .demo-info .code {
-            background: var(--gray-900);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.7rem;
-            color: var(--gray-300);
-        }
-        .footer {
-            margin-top: 24px;
-            padding-top: 16px;
-            border-top: 1px solid var(--gray-700);
+
+        .login-footer {
             text-align: center;
-            font-size: 0.65rem;
-            color: var(--gray-500);
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
         }
+
+        .login-footer .footer-text {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .login-footer .footer-text a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .login-footer .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== LGPD ===== */
+        .lgpd-notice {
+            background: var(--info-bg);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border: 1px solid #BFDBFE;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .lgpd-notice .icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .lgpd-notice .text {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .lgpd-notice .text strong {
+            color: var(--text-primary);
+        }
+
+        .lgpd-notice .text a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .lgpd-notice .text a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== MENSAGEM ===== */
+        .message {
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .message.error {
+            display: block;
+            background: var(--danger-bg);
+            color: var(--danger);
+            border: 1px solid #FCA5A5;
+        }
+
+        .message.success {
+            display: block;
+            background: var(--success-bg);
+            color: var(--success);
+            border: 1px solid #6EE7B7;
+        }
+
+        /* ===== RESPONSIVO ===== */
         @media (max-width: 480px) {
-            .card { padding: 32px 20px; }
-            .logo .name { font-size: 1.3rem; }
-            .lgpd-check { font-size: 0.7rem; }
+            .login-container {
+                padding: 24px 20px;
+            }
+
+            .login-logo .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .login-logo .logo-img {
+                height: 40px;
+            }
+
+            .form-options {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
         }
-        @media (prefers-color-scheme: light) {
-            body {
-                background: #F8FAFC;
+
+        @media (max-width: 360px) {
+            .login-container {
+                padding: 16px;
             }
-            .card {
-                background: #FFFFFF;
-                border-color: #E2E8F0;
+        }
+
+        @media print {
+            .login-container {
+                box-shadow: none !important;
+                border: 1px solid #E2E8F0 !important;
             }
-            .card .desc { color: #64748B; }
-            .form-group input,
-            .form-group select {
-                background: #F8FAFC;
-                border-color: #E2E8F0;
-                color: #0F172A;
+            .btn-login {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
-            .form-group input:focus {
-                border-color: var(--gold);
-            }
-            .form-group label { color: #475569; }
-            .demo-info { border-color: rgba(217,119,6,0.1); }
-            .demo-info .code { background: #F1F5F9; color: #475569; }
-            .footer { border-color: #E2E8F0; color: #94A3B8; }
-            .lgpd-check { color: #64748B; }
-            .logo .sub { color: #94A3B8; }
-            .logo .name .tm { color: #94A3B8; }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="logo">
-            <span class="name">VIGORRE <span class="one">ONE</span><span class="tm">™</span></span>
-            <span class="sub">People Intelligence Enterprise</span>
+
+    <div class="login-container">
+
+        <!-- ===== LOGO ===== -->
+        <div class="login-logo">
+            <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+            <div class="logo-text">
+                VIGORRE <span class="highlight">ONE</span><span class="tm">™</span>
+            </div>
+            <div class="logo-sub">People Analytics Enterprise</div>
         </div>
 
-        <h1>Bem-vindo 👋</h1>
-        <p class="desc">Acesse sua conta para continuar</p>
+        <!-- ===== TÍTULO ===== -->
+        <h1 class="login-title">Acessar Plataforma</h1>
+        <p class="login-subtitle">Entre com suas credenciais para continuar</p>
 
-        <form id="loginForm" onsubmit="handleLogin(event)">
+        <!-- ===== LGPD ===== -->
+        <div class="lgpd-notice">
+            <span class="icon">🔒</span>
+            <div class="text">
+                <strong>LGPD</strong> - Ao acessar, você concorda com nossa
+                <a href="politica-privacidade.html">Política de Privacidade</a>.
+                Seus dados são tratados com segurança e transparência.
+            </div>
+        </div>
+
+        <!-- ===== MENSAGEM ===== -->
+        <div class="message" id="loginMessage"></div>
+
+        <!-- ===== FORMULÁRIO ===== -->
+        <form id="loginForm" onsubmit="return false;">
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="seu@email.com" required autocomplete="email" />
+                <input type="email" id="email" placeholder="seu@email.com" required />
             </div>
 
             <div class="form-group">
                 <label for="password">Senha</label>
-                <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password" />
+                <input type="password" id="password" placeholder="••••••••" required />
+                <div class="input-hint">Mínimo 8 caracteres, maiúscula, número e especial</div>
             </div>
 
-            <div class="form-group">
-                <label for="role">Perfil de Acesso</label>
-                <select id="role">
-                    <option value="admin">Administrador</option>
-                    <option value="organizacao" selected>Organização</option>
-                    <option value="participante">Participante</option>
-                </select>
-            </div>
-
-            <!-- LGPD Consentimento -->
-            <div class="lgpd-check">
-                <input type="checkbox" id="lgpdConsent" required />
-                <label for="lgpdConsent">
-                    🔒 Concordo com a <a href="#" onclick="alert('Política de Privacidade VIGORRE ONE™ - Seus dados são protegidos conforme LGPD.')">Política de Privacidade</a> e com o tratamento dos meus dados conforme a LGPD.
+            <div class="form-options">
+                <label>
+                    <input type="checkbox" id="remember" />
+                    Lembrar-me
                 </label>
+                <a href="#">Esqueceu a senha?</a>
             </div>
 
-            <div id="error" class="error"></div>
-            <div id="success" class="success"></div>
-
-            <button type="submit" class="btn-login" id="loginBtn">Entrar</button>
+            <button type="submit" class="btn-login" id="btnLogin">🔑 Entrar</button>
         </form>
 
-        <div class="demo-info">
-            <strong>🔑 Contas de Demonstração:</strong><br />
-            <span class="code">admin@vigorre.com</span> · <span class="code">empresa@vigorre.com</span> · <span class="code">participante@vigorre.com</span><br />
-            <span style="color:var(--gray-500);">(qualquer senha funciona)</span>
+        <!-- ===== FOOTER ===== -->
+        <div class="login-footer">
+            <div class="footer-text">
+                © 2026 <a href="index.html">VIGORRE ONE™</a> - Todos os direitos reservados
+                <br />
+                <a href="politica-privacidade.html">Privacidade</a> •
+                <a href="termos-uso.html">Termos de Uso</a> •
+                <a href="contato.html">Contato</a>
+            </div>
         </div>
 
-        <div class="footer">© 2026 VIGORRE ONE™ · People Analytics Enterprise · <a href="#" style="color:var(--gold);text-decoration:none;" onclick="alert('🔒 LGPD - Política de Privacidade VIGORRE ONE™')">LGPD</a></div>
     </div>
 
-    <script src="/supabase-config.js"></script>
-    <script src="/auth.js"></script>
+    <!-- ===== SCRIPTS ===== -->
+    <script src="supabase-config.js"></script>
+    <script src="auth.js"></script>
+
     <script>
-        // ============================================
-        // HANDLE LOGIN
-        // ============================================
-        function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const role = document.getElementById('role').value;
-            const lgpdConsent = document.getElementById('lgpdConsent').checked;
-            const errorEl = document.getElementById('error');
-            const successEl = document.getElementById('success');
-            const btn = document.getElementById('loginBtn');
-
-            // Reset messages
-            errorEl.classList.remove('show');
-            successEl.classList.remove('show');
-
-            // Validar campos
-            if (!email || !password) {
-                errorEl.textContent = 'Preencha todos os campos.';
-                errorEl.classList.add('show');
-                return;
-            }
-
-            // Validar LGPD
-            if (!lgpdConsent) {
-                errorEl.textContent = '🔒 Você precisa concordar com a Política de Privacidade (LGPD) para acessar.';
-                errorEl.classList.add('show');
-                return;
-            }
-
-            btn.disabled = true;
-            btn.textContent = '🔄 Entrando...';
-
-            try {
-                if (window.VigorreAuth) {
-                    // Tentar login com consentimento
-                    window.VigorreAuth.login(email, password, role, true);
-                } else {
-                    throw new Error('Sistema de autenticação não disponível.');
-                }
-            } catch (err) {
-                errorEl.textContent = err.message || 'Erro ao fazer login.';
-                errorEl.classList.add('show');
-                btn.disabled = false;
-                btn.textContent = 'Entrar';
-            }
-        }
-
-        // ============================================
-        // REDIRECIONAR SE JÁ LOGADO
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Verificar mensagem na URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const message = urlParams.get('message');
-            if (message) {
-                const successEl = document.getElementById('success');
-                successEl.textContent = 'ℹ️ ' + decodeURIComponent(message);
-                successEl.classList.add('show');
+            console.log('🔐 Login - VIGORRE ONE™');
+
+            const form = document.getElementById('loginForm');
+            const btnLogin = document.getElementById('btnLogin');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const messageEl = document.getElementById('loginMessage');
+
+            // Verifica se já está logado
+            if (VigorreAuth.isAuthenticated()) {
+                const user = VigorreAuth.getCurrentUser();
+                const redirects = {
+                    admin: '/admin/dashboard.html',
+                    organizacao: '/organizacao/dashboard.html',
+                    participante: '/participante/dashboard.html'
+                };
+                window.location.href = redirects[user.role] || '/dashboard.html';
+                return;
             }
 
-            if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
-                const user = window.VigorreAuth.getCurrentUser();
-                const redirects = {
-                    'admin': '/admin/dashboard.html',
-                    'organizacao': '/organizacao/dashboard.html',
-                    'participante': '/participante/dashboard.html'
-                };
-                window.location.href = redirects[user.role] || '/';
+            // Verifica mensagem na URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('message');
+            if (msg) {
+                showMessage(decodeURIComponent(msg), 'error');
+            }
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                handleLogin();
+            });
+
+            // Enter key
+            passwordInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') handleLogin();
+            });
+
+            function handleLogin() {
+                const email = emailInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                if (!email || !password) {
+                    showMessage('⚠️ Preencha todos os campos.', 'error');
+                    return;
+                }
+
+                btnLogin.disabled = true;
+                btnLogin.textContent = '⏳ Entrando...';
+
+                try {
+                    // Login com consentimento automático (o auth.js gerencia)
+                    const user = VigorreAuth.login(email, password);
+
+                    // Se chegou aqui, login foi bem-sucedido
+                    showMessage('✅ Login realizado com sucesso!', 'success');
+
+                    // Redirecionamento é feito pelo auth.js
+
+                } catch (error) {
+                    console.error('❌ Erro no login:', error);
+
+                    if (error.message.includes('consentimento')) {
+                        // Redireciona para consentimento
+                        window.location.href = 'consentimento.html';
+                        return;
+                    }
+
+                    showMessage('❌ ' + error.message, 'error');
+                    btnLogin.disabled = false;
+                    btnLogin.textContent = '🔑 Entrar';
+                }
+            }
+
+            function showMessage(text, type) {
+                messageEl.textContent = text;
+                messageEl.className = 'message ' + type;
             }
         });
-
-        console.log('✅ Página de Login com LGPD carregada com sucesso!');
     </script>
+
 </body>
 </html>
