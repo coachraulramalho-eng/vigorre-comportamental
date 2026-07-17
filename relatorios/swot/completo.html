@@ -8,777 +8,142 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
     <style>
-        /* ============================================
-           VIGORRE ONE™ - RELATÓRIO COMPLETO SWOT
-           INTERNATIONAL ENTERPRISE EDITION
-           ============================================ */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         :root {
-            --navy: #0A2540;
-            --navy-light: #1A3A5C;
-            --blue: #1D4ED8;
-            --blue-light: #3B82F6;
-            --cyan: #06B6D4;
-            --gold: #D97706;
-            --green: #10B981;
-            --red: #EF4444;
-            --orange: #F59E0B;
-            --purple: #7C3AED;
-            --pink: #EC4899;
-            --white: #FFFFFF;
-            --gray-50: #F8FAFC;
-            --gray-100: #F1F5F9;
-            --gray-200: #E2E8F0;
-            --gray-300: #CBD5E1;
-            --gray-400: #94A3B8;
-            --gray-500: #64748B;
-            --gray-600: #475569;
-            --gray-700: #334155;
-            --gray-800: #1E293B;
-            --gray-900: #0F172A;
-            --radius: 16px;
-            --radius-sm: 10px;
-            --radius-full: 9999px;
-            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
-            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.10);
-            --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-800);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        /* ============================================
-           HEADER PREMIUM
-           ============================================ */
-        .header-print {
-            background: var(--navy);
-            color: white;
-            padding: 24px 32px;
-            border-radius: var(--radius) var(--radius) 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header-print .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .header-print .logo .logo-img {
-            height: 44px;
-            width: auto;
-            display: block;
-        }
-
-        .header-print .logo .logo-text .name {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 800;
-            color: white;
-            letter-spacing: -0.3px;
-        }
-
-        .header-print .logo .logo-text .name .tm {
-            font-size: 0.4rem;
-            vertical-align: super;
-            color: var(--cyan);
-        }
-
-        .header-print .logo .logo-text .sub {
-            font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.35);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .header-print .header-title {
-            text-align: center;
-        }
-
-        .header-print .header-title h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .header-print .header-title .subtitle {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .header-print .header-user {
-            text-align: right;
-        }
-
-        .header-print .header-user .name {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .header-print .header-user .company {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .header-print .header-code {
-            font-size: 0.65rem;
-            color: rgba(255, 255, 255, 0.3);
-            font-family: 'Courier New', monospace;
-            margin-top: 2px;
-        }
-
-        /* ============================================
-           CORPO DO RELATÓRIO
-           ============================================ */
-        .report-body {
-            background: white;
-            padding: 32px;
-            border-left: 1px solid var(--gray-200);
-            border-right: 1px solid var(--gray-200);
-        }
-
-        .section {
-            margin-bottom: 32px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--gray-100);
-        }
-
-        .section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .section-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--gray-800);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title .number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            background: var(--purple);
-            color: white;
-            border-radius: 50%;
-            font-size: 0.75rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .section-text {
-            color: var(--gray-600);
-            line-height: 1.8;
-            font-size: 0.95rem;
-        }
-
-        .section-text strong {
-            color: var(--gray-800);
-        }
-
-        /* ============================================
-           CAPA
-           ============================================ */
-        .capa {
-            text-align: center;
-            padding: 60px 40px;
-            border-bottom: 2px solid var(--gray-200);
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .capa .capa-logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--navy);
-            margin-bottom: 8px;
-        }
-
-        .capa .capa-logo .tm {
-            font-size: 0.7rem;
-            vertical-align: super;
-            color: var(--purple);
-        }
-
-        .capa .capa-sub {
-            font-size: 0.9rem;
-            color: var(--gray-400);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-        }
-
-        .capa .capa-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--gray-800);
-            margin-bottom: 8px;
-        }
-
-        .capa .capa-title .highlight {
-            color: var(--purple);
-        }
-
-        .capa .capa-divider {
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(135deg, var(--purple), var(--cyan));
-            margin: 20px auto;
-            border-radius: 2px;
-        }
-
-        .capa .capa-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            max-width: 600px;
-            margin: 30px auto 0;
-        }
-
-        .capa .capa-info-item {
-            background: var(--gray-50);
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius-sm);
-            padding: 12px 16px;
-        }
-
-        .capa .capa-info-item .label {
-            font-size: 0.65rem;
-            color: var(--gray-400);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .capa .capa-info-item .value {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--gray-800);
-            margin-top: 2px;
-        }
-
-        .capa .capa-qr {
-            margin-top: 30px;
-        }
-
-        .capa .capa-qr .qr-placeholder {
-            width: 80px;
-            height: 80px;
-            background: var(--gray-100);
-            border: 2px dashed var(--gray-300);
-            border-radius: var(--radius-sm);
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            color: var(--gray-400);
-        }
-
-        /* ============================================
-           SUMÁRIO
-           ============================================ */
-        .sumario {
-            background: var(--gray-50);
-            border-radius: var(--radius-sm);
-            padding: 24px 32px;
-            margin-bottom: 32px;
-            border: 1px solid var(--gray-200);
-        }
-
-        .sumario h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--gray-800);
-            margin-bottom: 12px;
-        }
-
-        .sumario .sumario-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid var(--gray-100);
-            font-size: 0.85rem;
-            color: var(--gray-600);
-        }
-
-        .sumario .sumario-item:last-child {
-            border-bottom: none;
-        }
-
-        .sumario .sumario-item .page {
-            color: var(--gray-400);
-        }
-
-        /* ============================================
-           SWOT GRID
-           ============================================ */
-        .swot-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin: 16px 0;
-        }
-
-        .swot-card {
-            background: var(--gray-50);
-            border-radius: var(--radius-sm);
-            padding: 20px;
-            border: 1px solid var(--gray-200);
-            text-align: center;
-        }
-
-        .swot-card .swot-icon {
-            font-size: 2rem;
-        }
-
-        .swot-card .swot-name {
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--gray-800);
-        }
-
-        .swot-card .swot-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin: 4px 0;
-        }
-
-        .swot-card .swot-bar {
-            height: 4px;
-            background: var(--gray-200);
-            border-radius: 2px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .swot-card .swot-bar .fill {
-            height: 100%;
-            border-radius: 2px;
-            transition: width 0.8s ease;
-        }
-
-        .swot-card .swot-desc {
-            font-size: 0.8rem;
-            color: var(--gray-500);
-            margin-top: 8px;
-        }
-
-        .swot-card.swot-forcas .swot-value {
-            color: #10B981;
-        }
-        .swot-card.swot-forcas .swot-bar .fill {
-            background: #10B981;
-        }
-        .swot-card.swot-fraquezas .swot-value {
-            color: #EF4444;
-        }
-        .swot-card.swot-fraquezas .swot-bar .fill {
-            background: #EF4444;
-        }
-        .swot-card.swot-oportunidades .swot-value {
-            color: #3B82F6;
-        }
-        .swot-card.swot-oportunidades .swot-bar .fill {
-            background: #3B82F6;
-        }
-        .swot-card.swot-ameacas .swot-value {
-            color: #F59E0B;
-        }
-        .swot-card.swot-ameacas .swot-bar .fill {
-            background: #F59E0B;
-        }
-
-        /* ============================================
-           CHARTS
-           ============================================ */
-        .chart-container {
-            height: 240px;
-            position: relative;
-            margin: 16px 0;
-        }
-
-        /* ============================================
-           FEATURE LIST
-           ============================================ */
-        .feature-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            padding: 0;
-        }
-
-        .feature-list li {
-            background: var(--gray-50);
-            padding: 10px 16px;
-            border-radius: 6px;
-            color: var(--gray-700);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .feature-list li .check {
-            color: #10B981;
-            font-weight: 700;
-        }
-
-        /* ============================================
-           COMPATIBILIDADE
-           ============================================ */
-        .compatibilidade-card {
-            background: var(--gray-50);
-            border-radius: var(--radius-sm);
-            padding: 24px;
-            border: 1px solid var(--gray-200);
-            margin: 16px 0;
-        }
-
-        .compatibilidade-card .compat-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .compatibilidade-card .compat-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--purple);
-        }
-
-        .compatibilidade-card .compat-bar {
-            height: 8px;
-            background: var(--gray-200);
-            border-radius: 4px;
-            margin: 12px 0;
-            overflow: hidden;
-        }
-
-        .compatibilidade-card .compat-bar .fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.8s ease;
-        }
-
-        /* ============================================
-           ASSINATURA
-           ============================================ */
-        .assinatura {
-            text-align: center;
-            padding: 32px 0;
-            border-top: 2px solid var(--gray-200);
-            margin-top: 16px;
-        }
-
-        .assinatura .assinatura-qr {
-            display: inline-block;
-            padding: 16px;
-            background: var(--gray-50);
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius-sm);
-            margin-bottom: 12px;
-        }
-
-        .assinatura .assinatura-qr .qr-placeholder {
-            width: 80px;
-            height: 80px;
-            background: var(--gray-100);
-            border: 2px dashed var(--gray-300);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            color: var(--gray-400);
-        }
-
-        .assinatura .assinatura-code {
-            font-size: 0.7rem;
-            color: var(--gray-400);
-            font-family: 'Courier New', monospace;
-        }
-
-        /* ============================================
-           FOOTER PREMIUM
-           ============================================ */
-        .footer-print {
-            background: var(--navy);
-            color: white;
-            padding: 20px 32px;
-            border-radius: 0 0 var(--radius) var(--radius);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .footer-print .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-print .footer-logo .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--cyan);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 0.8rem;
-            color: var(--navy);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .footer-print .footer-logo .footer-text .name {
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
-        .footer-print .footer-logo .footer-text .name .tm {
-            font-size: 0.35rem;
-            vertical-align: super;
-            color: var(--cyan);
-        }
-
-        .footer-print .footer-logo .footer-text .tagline {
-            font-size: 0.55rem;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .footer-print .footer-contact {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .footer-print .footer-contact a {
-            color: rgba(255, 255, 255, 0.4);
-            text-decoration: none;
-            font-size: 0.7rem;
-            transition: var(--transition);
-        }
-
-        .footer-print .footer-contact a:hover {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .footer-print .footer-page {
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* ============================================
-           ACTIONS
-           ============================================ */
-        .actions-bar {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            padding: 16px 0;
-            border-top: 1px solid var(--gray-200);
-            margin-top: 16px;
-        }
-
-        .btn-action {
-            padding: 10px 24px;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            color: white;
-            box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: 1px solid var(--gray-200);
-        }
-
-        .btn-secondary:hover {
-            background: var(--gray-200);
-        }
-
-        .btn-success {
-            background: var(--green);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
-        }
-
-        /* ============================================
-           RESPONSIVO
-           ============================================ */
-        @media (max-width: 768px) {
-            .header-print {
-                flex-direction: column;
-                text-align: center;
-                padding: 16px 20px;
-            }
-            .header-print .header-user {
-                text-align: center;
-            }
-            .swot-grid {
-                grid-template-columns: 1fr;
-            }
-            .feature-list {
-                grid-template-columns: 1fr;
-            }
-            .capa .capa-info {
-                grid-template-columns: 1fr;
-            }
-            .report-body {
-                padding: 20px;
-            }
-            .footer-print {
-                flex-direction: column;
-                text-align: center;
-            }
-            .actions-bar {
-                flex-direction: column;
-            }
-            .btn-action {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .capa {
-                padding: 30px 20px;
-            }
-            .capa .capa-title {
-                font-size: 1.4rem;
-            }
-            .capa .capa-logo {
-                font-size: 1.8rem;
-            }
-            body {
-                padding: 10px;
-            }
-        }
-
-        @media print {
-            body {
-                background: white !important;
-                padding: 0 !important;
-            }
-            .header-print {
-                background: #0A2540 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                border-radius: 0 !important;
-            }
-            .footer-print {
-                background: #0A2540 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                border-radius: 0 !important;
-            }
-            .btn-action {
-                display: none !important;
-            }
-            .actions-bar {
-                display: none !important;
-            }
-            .report-body {
-                border: none !important;
-                padding: 20px !important;
-            }
-            .swot-card {
-                background: #F8FAFC !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            .feature-list li {
-                background: #F8FAFC !important;
-            }
-            .sumario {
-                background: #F8FAFC !important;
-            }
-            .capa .capa-info-item {
-                background: #F8FAFC !important;
-            }
-            .compatibilidade-card {
-                background: #F8FAFC !important;
-            }
-            .section {
-                page-break-inside: avoid;
-            }
-            .capa {
-                border-bottom: 2px solid #E2E8F0 !important;
-            }
-        }
+            --navy: #0A2540; --gold: #D97706; --gold-light: #FEF3C7; --cyan: #06B6D4;
+            --blue: #1D4ED8; --green: #10B981; --red: #EF4444; --orange: #F59E0B;
+            --purple: #7C3AED; --pink: #EC4899; --white: #FFFFFF;
+            --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1; --gray-400: #94A3B8; --gray-500: #64748B;
+            --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B;
+            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10,37,64,0.06);
+            --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        body { font-family:'Inter',sans-serif; background:var(--gray-50); color:var(--gray-800); min-height:100vh; padding:20px; }
+        .container { max-width:1100px; margin:0 auto; }
+        .header-print { background:var(--navy); color:white; padding:24px 32px; border-radius:var(--radius) var(--radius) 0 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .header-print .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+        .header-print .logo .logo-img { height:44px; width:auto; display:block; }
+        .header-print .logo .logo-text .name { font-family:'Poppins',sans-serif; font-size:1rem; font-weight:800; color:white; letter-spacing:-0.3px; }
+        .header-print .logo .logo-text .name .tm { font-size:0.4rem; vertical-align:super; color:var(--cyan); }
+        .header-print .logo .logo-text .sub { font-size:0.5rem; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.08em; }
+        .header-print .header-title { text-align:center; }
+        .header-print .header-title h1 { font-family:'Poppins',sans-serif; font-size:1.2rem; font-weight:700; }
+        .header-print .header-title .subtitle { font-size:0.75rem; color:rgba(255,255,255,0.4); }
+        .header-print .header-user { text-align:right; }
+        .header-print .header-user .name { font-weight:600; font-size:0.9rem; }
+        .header-print .header-user .company { font-size:0.75rem; color:rgba(255,255,255,0.4); }
+        .header-print .header-code { font-size:0.65rem; color:rgba(255,255,255,0.3); font-family:'Courier New',monospace; margin-top:2px; }
+        .report-body { background:white; padding:32px 40px; border-left:1px solid var(--gray-200); border-right:1px solid var(--gray-200); }
+        .section { margin-bottom:32px; padding-bottom:24px; border-bottom:1px solid var(--gray-100); }
+        .section:last-child { border-bottom:none; margin-bottom:0; }
+        .section-title { font-family:'Poppins',sans-serif; font-size:1.1rem; font-weight:700; color:var(--gray-800); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+        .section-title .number { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; background:var(--purple); color:white; border-radius:50%; font-size:0.75rem; font-weight:700; flex-shrink:0; }
+        .section-text { color:var(--gray-600); line-height:1.8; font-size:0.95rem; }
+        .section-text strong { color:var(--gray-800); }
+        .capa { text-align:center; padding:60px 40px; border-bottom:2px solid var(--gray-200); margin-bottom:32px; position:relative; }
+        .capa .capa-logo { font-family:'Poppins',sans-serif; font-size:2.5rem; font-weight:900; color:var(--navy); margin-bottom:8px; }
+        .capa .capa-logo .tm { font-size:0.7rem; vertical-align:super; color:var(--purple); }
+        .capa .capa-sub { font-size:0.9rem; color:var(--gray-400); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:40px; }
+        .capa .capa-title { font-family:'Poppins',sans-serif; font-size:2rem; font-weight:700; color:var(--gray-800); margin-bottom:8px; }
+        .capa .capa-title .highlight { color:var(--purple); }
+        .capa .capa-divider { width:80px; height:3px; background:linear-gradient(135deg,var(--purple),var(--cyan)); margin:20px auto; border-radius:2px; }
+        .capa .capa-info { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; max-width:600px; margin:30px auto 0; }
+        .capa .capa-info-item { background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-sm); padding:12px 16px; }
+        .capa .capa-info-item .label { font-size:0.65rem; color:var(--gray-400); text-transform:uppercase; letter-spacing:0.05em; }
+        .capa .capa-info-item .value { font-size:0.9rem; font-weight:600; color:var(--gray-800); margin-top:2px; }
+        .capa .capa-qr { margin-top:30px; }
+        .capa .capa-qr .qr-placeholder { width:80px; height:80px; background:var(--gray-100); border:2px dashed var(--gray-300); border-radius:var(--radius-sm); margin:0 auto; display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:var(--gray-400); }
+        .sumario { background:var(--gray-50); border-radius:var(--radius-sm); padding:24px 32px; margin-bottom:32px; border:1px solid var(--gray-200); }
+        .sumario h3 { font-family:'Poppins',sans-serif; font-size:1rem; font-weight:700; color:var(--gray-800); margin-bottom:12px; }
+        .sumario .sumario-item { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--gray-100); font-size:0.85rem; color:var(--gray-600); }
+        .sumario .sumario-item:last-child { border-bottom:none; }
+        .sumario .sumario-item .page { color:var(--gray-400); }
+        .swot-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0; }
+        .swot-card { background:var(--gray-50); border-radius:var(--radius-sm); padding:20px; border:1px solid var(--gray-200); text-align:center; }
+        .swot-card .swot-icon { font-size:2rem; }
+        .swot-card .swot-name { font-weight:700; font-size:1rem; color:var(--gray-800); }
+        .swot-card .swot-value { font-size:1.8rem; font-weight:800; margin:4px 0; }
+        .swot-card .swot-bar { height:4px; background:var(--gray-200); border-radius:2px; margin-top:8px; overflow:hidden; }
+        .swot-card .swot-bar .fill { height:100%; border-radius:2px; transition:width 0.8s ease; }
+        .swot-card .swot-desc { font-size:0.8rem; color:var(--gray-500); margin-top:8px; }
+        .swot-card.swot-forcas .swot-value { color:#10B981; }
+        .swot-card.swot-forcas .swot-bar .fill { background:#10B981; }
+        .swot-card.swot-fraquezas .swot-value { color:#EF4444; }
+        .swot-card.swot-fraquezas .swot-bar .fill { background:#EF4444; }
+        .swot-card.swot-oportunidades .swot-value { color:#3B82F6; }
+        .swot-card.swot-oportunidades .swot-bar .fill { background:#3B82F6; }
+        .swot-card.swot-ameacas .swot-value { color:#F59E0B; }
+        .swot-card.swot-ameacas .swot-bar .fill { background:#F59E0B; }
+        .feature-list { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:0; }
+        .feature-list li { background:var(--gray-50); padding:10px 16px; border-radius:6px; color:var(--gray-700); font-size:0.9rem; display:flex; align-items:center; gap:8px; }
+        .feature-list li .check { color:#10B981; font-weight:700; }
+        .perfil-card { background:var(--gray-50); border-radius:var(--radius-sm); padding:16px 20px; margin:8px 0; border-left:4px solid var(--gold); }
+        .perfil-card h4 { font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:700; color:var(--gray-700); margin-bottom:4px; }
+        .perfil-card p { font-size:0.9rem; color:var(--gray-600); line-height:1.7; }
+        .plano-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr; gap:12px; margin:12px 0; }
+        .plano-card { background:var(--gray-50); border-radius:var(--radius-sm); padding:16px 20px; border:1px solid var(--gray-200); text-align:center; }
+        .plano-card .plano-periodo { font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:700; color:var(--gold); }
+        .plano-card .plano-titulo { font-size:0.8rem; font-weight:600; color:var(--gray-700); }
+        .plano-card .plano-acoes { font-size:0.75rem; color:var(--gray-500); line-height:1.6; margin-top:4px; }
+        .assinatura { text-align:center; padding:32px 0; border-top:2px solid var(--gray-200); margin-top:16px; }
+        .assinatura .assinatura-qr { display:inline-block; padding:16px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-sm); margin-bottom:12px; }
+        .assinatura .assinatura-qr .qr-placeholder { width:80px; height:80px; background:var(--gray-100); border:2px dashed var(--gray-300); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:var(--gray-400); }
+        .assinatura .assinatura-code { font-size:0.7rem; color:var(--gray-400); font-family:'Courier New',monospace; }
+        .footer-print { background:var(--navy); color:white; padding:20px 32px; border-radius:0 0 var(--radius) var(--radius); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+        .footer-print .footer-logo { display:flex; align-items:center; gap:10px; }
+        .footer-print .footer-logo .logo-icon { width:32px; height:32px; background:var(--cyan); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:0.8rem; color:var(--navy); font-family:'Poppins',sans-serif; }
+        .footer-print .footer-logo .footer-text .name { font-family:'Poppins',sans-serif; font-size:0.8rem; font-weight:700; }
+        .footer-print .footer-logo .footer-text .name .tm { font-size:0.35rem; vertical-align:super; color:var(--cyan); }
+        .footer-print .footer-logo .footer-text .tagline { font-size:0.55rem; color:rgba(255,255,255,0.3); }
+        .footer-print .footer-contact { display:flex; gap:16px; flex-wrap:wrap; }
+        .footer-print .footer-contact a { color:rgba(255,255,255,0.4); text-decoration:none; font-size:0.7rem; transition:var(--transition); }
+        .footer-print .footer-contact a:hover { color:rgba(255,255,255,0.7); }
+        .footer-print .footer-page { font-size:0.7rem; color:rgba(255,255,255,0.3); }
+        .actions-bar { display:flex; justify-content:flex-end; gap:12px; padding:16px 0; border-top:1px solid var(--gray-200); margin-top:16px; }
+        .btn-action { padding:10px 24px; border:none; border-radius:var(--radius-sm); font-family:'Inter',sans-serif; font-weight:600; font-size:0.85rem; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; gap:8px; text-decoration:none; }
+        .btn-primary { background:linear-gradient(135deg,var(--blue),var(--cyan)); color:white; box-shadow:0 4px 16px rgba(29,78,216,0.2); }
+        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(29,78,216,0.3); }
+        .btn-secondary { background:var(--gray-100); color:var(--gray-700); border:1px solid var(--gray-200); }
+        .btn-secondary:hover { background:var(--gray-200); }
+        .btn-success { background:var(--green); color:white; }
+        .btn-success:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(16,185,129,0.25); }
+        @media (max-width:1024px) { .plano-grid { grid-template-columns:1fr 1fr 1fr; } }
+        @media (max-width:768px) { .header-print { flex-direction:column; text-align:center; padding:16px 20px; }
+            .header-print .header-user { text-align:center; }
+            .swot-grid { grid-template-columns:1fr; }
+            .feature-list { grid-template-columns:1fr; }
+            .capa .capa-info { grid-template-columns:1fr; }
+            .report-body { padding:20px; }
+            .footer-print { flex-direction:column; text-align:center; }
+            .actions-bar { flex-direction:column; }
+            .btn-action { justify-content:center; }
+            .plano-grid { grid-template-columns:1fr 1fr; } }
+        @media (max-width:480px) { .plano-grid { grid-template-columns:1fr; }
+            .capa { padding:30px 20px; }
+            .capa .capa-title { font-size:1.4rem; }
+            .capa .capa-logo { font-size:1.8rem; }
+            .container { padding:0; }
+            body { padding:10px; } }
+        @media print { body { background:white !important; padding:0 !important; }
+            .header-print { background:#0A2540 !important; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; border-radius:0 !important; }
+            .footer-print { background:#0A2540 !important; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; border-radius:0 !important; }
+            .btn-action { display:none !important; }
+            .actions-bar { display:none !important; }
+            .report-body { border:none !important; padding:20px !important; }
+            .swot-card { background:#F8FAFC !important; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+            .feature-list li { background:#F8FAFC !important; }
+            .sumario { background:#F8FAFC !important; }
+            .capa .capa-info-item { background:#F8FAFC !important; }
+            .perfil-card { background:#F8FAFC !important; }
+            .plano-card { background:#F8FAFC !important; }
+            .section { page-break-inside:avoid; }
+            .capa { border-bottom:2px solid #E2E8F0 !important; } }
     </style>
 </head>
 <body>
-
     <div class="container">
-
-        <!-- ============================================
-        HEADER PREMIUM
-        ============================================ -->
         <header class="header-print">
             <div class="logo">
                 <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
@@ -787,57 +152,34 @@
                     <span class="sub">People Analytics Enterprise</span>
                 </div>
             </div>
-
             <div class="header-title">
                 <h1>📋 Relatório Completo SWOT</h1>
                 <div class="subtitle">Análise Estratégica Pessoal Avançada</div>
             </div>
-
             <div class="header-user">
                 <div class="name" id="participantName">Carregando...</div>
                 <div class="company" id="participantCompany">Empresa: --</div>
-                <div class="header-code" id="reportCode">Código: VIG-2024-001</div>
+                <div class="header-code" id="reportCode">Código: VIG-2026-001</div>
             </div>
         </header>
-
-        <!-- ============================================
-        CORPO DO RELATÓRIO
-        ============================================ -->
         <div class="report-body">
 
-            <!-- ============================================
-            CAPA
-            ============================================ -->
+            <!-- CAPA -->
             <section class="capa">
                 <div class="capa-logo">VIGORRE ONE<span class="tm">™</span></div>
                 <div class="capa-sub">People Analytics Enterprise</div>
                 <div class="capa-divider"></div>
                 <div class="capa-title">Relatório <span class="highlight">Completo</span> SWOT</div>
                 <p style="color: var(--gray-500); font-size: 0.95rem; margin-bottom: 8px;">Análise Estratégica Pessoal • Matriz SWOT</p>
-
                 <div class="capa-info">
-                    <div class="capa-info-item">
-                        <div class="label">Participante</div>
-                        <div class="value" id="capaParticipant">Carregando...</div>
-                    </div>
-                    <div class="capa-info-item">
-                        <div class="label">Data da Avaliação</div>
-                        <div class="value" id="capaDate">--</div>
-                    </div>
-                    <div class="capa-info-item">
-                        <div class="label">Código do Relatório</div>
-                        <div class="value" id="capaCode">VIG-2024-001</div>
-                    </div>
+                    <div class="capa-info-item"><div class="label">Participante</div><div class="value" id="capaParticipant">Carregando...</div></div>
+                    <div class="capa-info-item"><div class="label">Data da Avaliação</div><div class="value" id="capaDate">--</div></div>
+                    <div class="capa-info-item"><div class="label">Código do Relatório</div><div class="value" id="capaCode">VIG-2026-001</div></div>
                 </div>
-
-                <div class="capa-qr">
-                    <div class="qr-placeholder">🔲 QR Code</div>
-                </div>
+                <div class="capa-qr"><div class="qr-placeholder">🔲 QR Code</div></div>
             </section>
 
-            <!-- ============================================
-            SUMÁRIO
-            ============================================ -->
+            <!-- SUMÁRIO -->
             <section class="sumario">
                 <h3>📑 Sumário</h3>
                 <div class="sumario-item"><span>1. Apresentação</span><span class="page">3</span></div>
@@ -846,221 +188,150 @@
                 <div class="sumario-item"><span>4. Matriz SWOT</span><span class="page">6</span></div>
                 <div class="sumario-item"><span>5. Análise Detalhada</span><span class="page">8</span></div>
                 <div class="sumario-item"><span>6. Estratégia Recomendada</span><span class="page">10</span></div>
-                <div class="sumario-item"><span>7. Plano de Ação Estratégico</span><span class="page">11</span></div>
-                <div class="sumario-item"><span>8. Compatibilidade com Vaga</span><span class="page">12</span></div>
-                <div class="sumario-item"><span>9. Parecer da IA</span><span class="page">13</span></div>
-                <div class="sumario-item"><span>10. Conclusão</span><span class="page">14</span></div>
-                <div class="sumario-item"><span>11. Assinatura Digital</span><span class="page">15</span></div>
+                <div class="sumario-item"><span>7. Perfil Social</span><span class="page">11</span></div>
+                <div class="sumario-item"><span>8. Perfil Familiar</span><span class="page">12</span></div>
+                <div class="sumario-item"><span>9. Plano de Ação Estratégico</span><span class="page">13</span></div>
+                <div class="sumario-item"><span>10. Plano 30/60/90/180/365 Dias</span><span class="page">14</span></div>
+                <div class="sumario-item"><span>11. Parecer da IA</span><span class="page">15</span></div>
+                <div class="sumario-item"><span>12. Conclusão</span><span class="page">16</span></div>
+                <div class="sumario-item"><span>13. Assinatura Digital</span><span class="page">17</span></div>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 1: APRESENTAÇÃO
-            ============================================ -->
+            <!-- SEÇÃO 1: APRESENTAÇÃO -->
             <section class="section">
                 <h2 class="section-title"><span class="number">1</span> Apresentação</h2>
-                <p class="section-text">
-                    Este relatório apresenta uma análise estratégica completa baseada na matriz SWOT (Forças, Fraquezas, Oportunidades e Ameaças).
-                    A análise SWOT é uma ferramenta de planejamento estratégico que ajuda a identificar fatores internos e externos
-                    que podem impactar seu desenvolvimento pessoal e profissional.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br />
-                    <strong>Data da Avaliação:</strong> <span id="apresentacaoDate">--</span><br />
-                    <strong>Teste Realizado:</strong> SWOT Pessoal<br />
-                    <strong>Código do Relatório:</strong> <span id="apresentacaoCode">VIG-2024-001</span>
-                </p>
+                <p class="section-text">Este relatório apresenta uma análise estratégica completa baseada na matriz SWOT (Forças, Fraquezas, Oportunidades e Ameaças). A análise SWOT é uma ferramenta de planejamento estratégico que ajuda a identificar fatores internos e externos que podem impactar seu desenvolvimento pessoal e profissional.</p>
+                <p class="section-text" style="margin-top:8px;"><strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br /><strong>Data da Avaliação:</strong> <span id="apresentacaoDate">--</span><br /><strong>Teste Realizado:</strong> SWOT Pessoal<br /><strong>Código do Relatório:</strong> <span id="apresentacaoCode">VIG-2026-001</span></p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 2: COMO INTERPRETAR
-            ============================================ -->
+            <!-- SEÇÃO 2: COMO INTERPRETAR -->
             <section class="section">
                 <h2 class="section-title"><span class="number">2</span> Como Interpretar Este Relatório</h2>
-                <p class="section-text">
-                    A análise SWOT é uma ferramenta poderosa para autoconhecimento e planejamento estratégico.
-                    Este relatório ajuda a identificar seus pontos fortes e fracos, além das oportunidades e ameaças
-                    no ambiente externo, para que você possa tomar decisões mais assertivas.
-                </p>
+                <p class="section-text">A análise SWOT é uma ferramenta poderosa para autoconhecimento e planejamento estratégico. Este relatório ajuda a identificar seus pontos fortes e fracos, além das oportunidades e ameaças no ambiente externo.</p>
+                <p class="section-text" style="margin-top:8px;"><strong>⚠️ Limitações:</strong> A análise SWOT reflete o momento atual. O ambiente e as competências podem mudar ao longo do tempo.</p>
+                <p class="section-text" style="margin-top:8px;"><strong>🔒 Ética e LGPD:</strong> Este relatório é gerado com total transparência e respeito à privacidade, em conformidade com a LGPD.</p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 3: METODOLOGIA E CONFIABILIDADE
-            ============================================ -->
+            <!-- SEÇÃO 3: METODOLOGIA -->
             <section class="section">
                 <h2 class="section-title"><span class="number">3</span> Metodologia e Confiabilidade</h2>
-                <p class="section-text">
-                    <strong>Como os resultados são calculados</strong>
-                    <br />
-                    O teste SWOT Pessoal avalia quatro dimensões: Forças, Fraquezas, Oportunidades e Ameaças.
-                    Cada dimensão é avaliada por meio de questões que medem sua percepção sobre cada área.
-                </p>
-                <p class="section-text" style="margin-top: 8px;">
-                    <strong>Confiabilidade</strong>
-                    <br />
-                    A análise SWOT é amplamente utilizada em planejamento estratégico e desenvolvimento pessoal,
-                    sendo uma ferramenta reconhecida internacionalmente.
-                </p>
+                <p class="section-text"><strong>Como os resultados são calculados</strong><br />O teste SWOT Pessoal avalia quatro dimensões: Forças, Fraquezas, Oportunidades e Ameaças, com 10 perguntas para cada dimensão.</p>
+                <p class="section-text" style="margin-top:8px;"><strong>Confiabilidade</strong><br />A análise SWOT é amplamente utilizada em planejamento estratégico e desenvolvimento pessoal.</p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 4: MATRIZ SWOT
-            ============================================ -->
+            <!-- SEÇÃO 4: MATRIZ SWOT -->
             <section class="section">
                 <h2 class="section-title"><span class="number">4</span> Matriz SWOT</h2>
-                <div class="swot-grid" id="swotGrid">
-                    <!-- Carregado via JavaScript -->
-                </div>
-                <div class="chart-container">
-                    <canvas id="swotChart"></canvas>
-                </div>
+                <div class="swot-grid" id="swotGrid"></div>
+                <div style="height:240px;position:relative;margin:16px 0;"><canvas id="swotChart"></canvas></div>
                 <p class="section-text" id="profileDescription">Carregando descrição...</p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 5: ANÁLISE DETALHADA
-            ============================================ -->
+            <!-- SEÇÃO 5: ANÁLISE DETALHADA -->
             <section class="section">
                 <h2 class="section-title"><span class="number">5</span> Análise Detalhada</h2>
                 <h3 style="font-size:0.9rem;color:var(--gray-700);margin-bottom:8px;">💪 Forças</h3>
-                <ul class="feature-list" id="strengthsList">
-                    <li><span class="check">✓</span> Carregando...</li>
-                </ul>
+                <ul class="feature-list" id="strengthsList"><li><span class="check">✓</span> Carregando...</li></ul>
                 <h3 style="font-size:0.9rem;color:var(--gray-700);margin:16px 0 8px;">🔻 Fraquezas</h3>
-                <ul class="feature-list" id="weaknessesList">
-                    <li><span class="check">✓</span> Carregando...</li>
-                </ul>
+                <ul class="feature-list" id="weaknessesList"><li><span class="check">✓</span> Carregando...</li></ul>
                 <h3 style="font-size:0.9rem;color:var(--gray-700);margin:16px 0 8px;">🚀 Oportunidades</h3>
-                <ul class="feature-list" id="opportunitiesList">
-                    <li><span class="check">✓</span> Carregando...</li>
-                </ul>
+                <ul class="feature-list" id="opportunitiesList"><li><span class="check">✓</span> Carregando...</li></ul>
                 <h3 style="font-size:0.9rem;color:var(--gray-700);margin:16px 0 8px;">⚠️ Ameaças</h3>
-                <ul class="feature-list" id="threatsList">
-                    <li><span class="check">✓</span> Carregando...</li>
-                </ul>
+                <ul class="feature-list" id="threatsList"><li><span class="check">✓</span> Carregando...</li></ul>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 6: ESTRATÉGIA RECOMENDADA
-            ============================================ -->
+            <!-- SEÇÃO 6: ESTRATÉGIA -->
             <section class="section">
                 <h2 class="section-title"><span class="number">6</span> Estratégia Recomendada</h2>
                 <p class="section-text" id="strategyText">Carregando estratégia...</p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 7: PLANO DE AÇÃO
-            ============================================ -->
+            <!-- SEÇÃO 7: PERFIL SOCIAL (NOVO) -->
             <section class="section">
-                <h2 class="section-title"><span class="number">7</span> Plano de Ação Estratégico</h2>
-                <ul class="feature-list" id="actionPlanList">
-                    <li><span class="check">✓</span> Carregando...</li>
-                </ul>
+                <h2 class="section-title"><span class="number">7</span> Perfil Social</h2>
+                <div class="perfil-card"><h4>🤝 Relacionamentos</h4><p id="socialAmizades">Carregando...</p></div>
+                <div class="perfil-card"><h4>🌐 Networking</h4><p id="socialNetworking">Carregando...</p></div>
+                <div class="perfil-card"><h4>⚡ Resolução de Conflitos</h4><p id="socialConflitos">Carregando...</p></div>
+                <div class="perfil-card"><h4>🧠 Inteligência Social</h4><p id="socialInteligencia">Carregando...</p></div>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 8: COMPATIBILIDADE COM VAGA
-            ============================================ -->
-            <section class="section" id="compatibilidadeSection">
-                <h2 class="section-title"><span class="number">8</span> Compatibilidade com Vaga</h2>
-                <div id="compatibilidadeContent">
-                    <p class="section-text">Carregando análise de compatibilidade...</p>
+            <!-- SEÇÃO 8: PERFIL FAMILIAR (NOVO) -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">8</span> Perfil Familiar</h2>
+                <div class="perfil-card"><h4>🏠 Convivência</h4><p id="familiarConveniencia">Carregando...</p></div>
+                <div class="perfil-card"><h4>❤️ Empatia</h4><p id="familiarEmpatia">Carregando...</p></div>
+                <div class="perfil-card"><h4>👂 Escuta</h4><p id="familiarEscuta">Carregando...</p></div>
+                <div class="perfil-card"><h4>⚖️ Equilíbrio</h4><p id="familiarEquilibrio">Carregando...</p></div>
+            </section>
+
+            <!-- SEÇÃO 9: PLANO DE AÇÃO -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">9</span> Plano de Ação Estratégico</h2>
+                <ul class="feature-list" id="actionPlanList"><li><span class="check">✓</span> Carregando...</li></ul>
+            </section>
+
+            <!-- SEÇÃO 10: PLANO 30/60/90/180/365 (NOVO) -->
+            <section class="section">
+                <h2 class="section-title"><span class="number">10</span> Plano 30/60/90/180/365 Dias</h2>
+                <div class="plano-grid">
+                    <div class="plano-card"><div class="plano-periodo">30 Dias</div><div class="plano-titulo">Diagnóstico</div><div class="plano-acoes">Mapear forças e fraquezas<br />Identificar oportunidades</div></div>
+                    <div class="plano-card"><div class="plano-periodo">60 Dias</div><div class="plano-titulo">Ação</div><div class="plano-acoes">Implementar plano estratégico<br />Desenvolver competências</div></div>
+                    <div class="plano-card"><div class="plano-periodo">90 Dias</div><div class="plano-titulo">Avaliação</div><div class="plano-acoes">Revisar progresso<br />Ajustar estratégias</div></div>
+                    <div class="plano-card"><div class="plano-periodo">180 Dias</div><div class="plano-titulo">Expansão</div><div class="plano-acoes">Ampliar ações<br />Novas oportunidades</div></div>
+                    <div class="plano-card"><div class="plano-periodo">365 Dias</div><div class="plano-titulo">Revisão</div><div class="plano-acoes">Análise anual<br />Nova matriz SWOT</div></div>
                 </div>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 9: PARECER DA IA
-            ============================================ -->
+            <!-- SEÇÃO 11: PARECER DA IA -->
             <section class="section">
-                <h2 class="section-title"><span class="number">9</span> Parecer da IA</h2>
+                <h2 class="section-title"><span class="number">11</span> Parecer da IA</h2>
                 <p class="section-text" id="iaOpinionText">Carregando parecer da IA...</p>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 10: CONCLUSÃO
-            ============================================ -->
+            <!-- SEÇÃO 12: CONCLUSÃO COM MENSAGEM MOTIVACIONAL -->
             <section class="section">
-                <h2 class="section-title"><span class="number">10</span> Conclusão</h2>
+                <h2 class="section-title"><span class="number">12</span> Conclusão</h2>
                 <p class="section-text" id="conclusionText">Carregando conclusão...</p>
+                <div style="background:var(--gold-light);border-radius:var(--radius-sm);padding:16px 20px;margin-top:12px;border-left:4px solid var(--gold);">
+                    <p style="font-weight:700;color:var(--gold);font-size:1rem;">🌟 Mensagem Motivacional</p>
+                    <p id="mensagemMotivacional" style="color:var(--gray-700);font-style:italic;font-size:0.95rem;line-height:1.7;">Carregando mensagem...</p>
+                </div>
             </section>
 
-            <!-- ============================================
-            SEÇÃO 11: ASSINATURA
-            ============================================ -->
+            <!-- SEÇÃO 13: ASSINATURA -->
             <section class="assinatura">
-                <div class="assinatura-qr">
-                    <div class="qr-placeholder">🔲 QR Code</div>
-                </div>
-                <p style="font-size:0.8rem;color:var(--gray-500);">
-                    <strong>VIGORRE ONE™</strong> • People Analytics Enterprise
-                </p>
-                <p style="font-size:0.7rem;color:var(--gray-400);">
-                    Este relatório é gerado automaticamente e possui validade de 12 meses.
-                </p>
-                <div class="assinatura-code" id="assinaturaCode">
-                    Código de Autenticação: VIG-2024-001 • Hash: a1b2c3d4e5f6
-                </div>
+                <div class="assinatura-qr"><div class="qr-placeholder">🔲 QR Code</div></div>
+                <p style="font-size:0.8rem;color:var(--gray-500);"><strong>VIGORRE ONE™</strong> • People Analytics Enterprise</p>
+                <p style="font-size:0.7rem;color:var(--gray-400);">Este relatório é gerado automaticamente e possui validade de 12 meses.</p>
+                <div class="assinatura-code" id="assinaturaCode">Código: VIG-2026-001 • Hash: a1b2c3d4e5f6</div>
             </section>
 
-            <!-- ============================================
-            AÇÕES
-            ============================================ -->
+            <!-- ACTIONS -->
             <div class="actions-bar">
                 <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
-                <a href="index.html" class="btn-action btn-secondary">📄 Versão Simples</a>
                 <button class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimir</button>
                 <button class="btn-action btn-success" onclick="downloadPDF()">📥 Baixar PDF</button>
             </div>
-
         </div>
 
-        <!-- ============================================
-        FOOTER PREMIUM
-        ============================================ -->
         <footer class="footer-print">
-            <div class="footer-logo">
-                <div class="logo-icon">V</div>
-                <div class="footer-text">
-                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                    <span class="tagline">People Analytics • Assessment Intelligence</span>
-                </div>
-            </div>
-            <div class="footer-contact">
-                <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
-                <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
-                <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
-            </div>
-            <div class="footer-page">Página <span id="pageNumber">1</span></div>
+            <div class="footer-logo"><div class="logo-icon">V</div><div class="footer-text"><span class="name">VIGORRE ONE<span class="tm">™</span></span><span class="tagline">People Analytics • Assessment Intelligence</span></div></div>
+            <div class="footer-contact"><a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a><a href="tel:+5534991850735">📱 (34) 99185-0735</a><a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a></div>
+            <div class="footer-page">Página <span id="pageNumber">1</span> de <span id="totalPages">17</span></div>
         </footer>
-
     </div>
 
-    <!-- ============================================
-    SCRIPTS
-    ============================================ -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
-    <script src="../../middleware/auth-guard.js"></script>
-
     <script>
-        /**
-         * ============================================
-         * VIGORRE ONE™ - RELATÓRIO COMPLETO SWOT
-         * ============================================
-         */
-
         'use strict';
-
-        // ============================================
-        // DADOS DE EXEMPLO
-        // ============================================
         var sampleData = {
             participantName: 'Ana Silva',
             companyName: 'TechCorp Solutions',
             participantId: 'P001',
             date: new Date().toISOString(),
-            reportCode: 'VIG-2024-001',
+            reportCode: 'VIG-2026-001',
             percentages: { forcas: 78, fraquezas: 45, oportunidades: 82, ameacas: 38 },
             topSwot: 'oportunidades',
             topPercent: 82,
@@ -1069,118 +340,38 @@
             job: 'Gerente de Projetos',
             compatibility: 74
         };
-
-        // ============================================
-        // CONFIGURAÇÃO SWOT
-        // ============================================
         var swotConfig = {
             forcas: { label: 'Forças', icon: '💪', color: '#10B981' },
             fraquezas: { label: 'Fraquezas', icon: '🔻', color: '#EF4444' },
             oportunidades: { label: 'Oportunidades', icon: '🚀', color: '#3B82F6' },
             ameacas: { label: 'Ameaças', icon: '⚠️', color: '#F59E0B' }
         };
-
         var swotKeys = ['forcas', 'fraquezas', 'oportunidades', 'ameacas'];
 
-        // ============================================
-        // DETALHES SWOT
-        // ============================================
-        var swotDetails = {
-            forcas: {
-                items: ['Liderança e tomada de decisão', 'Comunicação eficaz', 'Resiliência e adaptabilidade',
-                    'Capacidade analítica'
-                ],
-                desc: 'Suas forças são os pilares que sustentam seu desempenho e diferenciais competitivos.'
-            },
-            fraquezas: {
-                items: ['Gestão do tempo', 'Delegação de tarefas', 'Controle emocional em crises', 'Paciência processual'],
-                desc: 'Suas fraquezas são áreas que, se desenvolvidas, podem ampliar significativamente seu potencial.'
-            },
-            oportunidades: {
-                items: ['Novas tecnologias no mercado', 'Networking e relacionamentos', 'Desenvolvimento de liderança',
-                    'Expansão de habilidades'
-                ],
-                desc: 'As oportunidades representam caminhos para crescimento e evolução profissional.'
-            },
-            ameacas: {
-                items: ['Concorrência acirrada', 'Mudanças tecnológicas rápidas', 'Instabilidade econômica',
-                    'Alta carga de trabalho'
-                ],
-                desc: 'As ameaças exigem atenção e estratégias defensivas para minimizar impactos.'
-            }
-        };
-
-        // ============================================
-        // INICIALIZAÇÃO
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📄 Relatório Completo SWOT - VIGORRE ONE™');
-
-            var isAuth = window.VigorreAuth.isAuthenticated();
-            if (!isAuth) {
-                window.location.href = '../../login.html';
-                return;
-            }
-
+            if (!window.VigorreAuth.isAuthenticated()) { window.location.href = '../../login.html'; return; }
             loadData();
         });
 
-        // ============================================
-        // CARREGAR DADOS
-        // ============================================
         function loadData() {
             try {
                 var user = window.VigorreAuth.getCurrentUser();
-                if (!user) {
-                    renderReport(sampleData);
-                    return;
-                }
-
+                if (!user) { renderReport(sampleData); return; }
                 var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                 var participant = null;
-                for (var i = 0; i < allParticipants.length; i++) {
-                    if (allParticipants[i].id === user.id) {
-                        participant = allParticipants[i];
-                        break;
-                    }
-                }
-
-                if (!participant || !participant.results || !participant.results.SWOT) {
-                    renderReport(sampleData);
-                    return;
-                }
-
+                for (var i = 0; i < allParticipants.length; i++) { if (allParticipants[i].id === user.id) { participant = allParticipants[i]; break; } }
+                if (!participant || !participant.results || !participant.results.SWOT) { renderReport(sampleData); return; }
                 var swotResult = participant.results.SWOT;
                 var companyName = 'Autônomo';
                 var jobTitle = 'Não vinculado';
-
-                if (participant.companyId) {
-                    var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-                    for (var j = 0; j < companies.length; j++) {
-                        if (companies[j].id === participant.companyId) {
-                            companyName = companies[j].name;
-                            break;
-                        }
-                    }
-                }
-
-                if (participant.jobId) {
-                    var jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
-                    for (var k = 0; k < jobs.length; k++) {
-                        if (jobs[k].id === participant.jobId) {
-                            jobTitle = jobs[k].title || jobs[k].name || 'Vaga';
-                            break;
-                        }
-                    }
-                }
-
+                if (participant.companyId) { var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]'); for (var j = 0; j < companies.length; j++) { if (companies[j].id === participant.companyId) { companyName = companies[j].name; break; } } }
+                if (participant.jobId) { var jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]'); for (var k = 0; k < jobs.length; k++) { if (jobs[k].id === participant.jobId) { jobTitle = jobs[k].title || jobs[k].name || 'Vaga'; break; } } }
                 var data = {
                     participantName: participant.name || sampleData.participantName,
                     companyName: companyName,
                     participantId: participant.id || sampleData.participantId,
                     date: new Date().toISOString(),
-                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000))
-                        .padStart(3, '0'),
+                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0'),
                     percentages: swotResult.percentages || sampleData.percentages,
                     topSwot: swotResult.topSwot || sampleData.topSwot,
                     topPercent: swotResult.topPercent || sampleData.topPercent,
@@ -1189,272 +380,105 @@
                     job: jobTitle,
                     compatibility: Math.round(60 + Math.random() * 35)
                 };
-
                 renderReport(data);
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar dados:', error);
-                renderReport(sampleData);
-            }
+            } catch (error) { console.error('❌ Erro:', error);
+                renderReport(sampleData); }
         }
 
-        // ============================================
-        // RENDERIZAR RELATÓRIO
-        // ============================================
         function renderReport(data) {
             var pcts = data.percentages;
-            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
-                day: '2-digit',
-                month: 'long',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-
-            // Atualizar cabeçalho
+            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
             document.getElementById('participantName').textContent = data.participantName;
             document.getElementById('participantCompany').textContent = 'Empresa: ' + data.companyName;
             document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
-
-            // Atualizar capa
             document.getElementById('capaParticipant').textContent = data.participantName;
             document.getElementById('capaDate').textContent = dateFormatted;
             document.getElementById('capaCode').textContent = data.reportCode;
-
-            // Atualizar apresentação
             document.getElementById('apresentacaoParticipant').textContent = data.participantName;
             document.getElementById('apresentacaoDate').textContent = dateFormatted;
             document.getElementById('apresentacaoCode').textContent = data.reportCode;
-
-            // Atualizar assinatura
-            document.getElementById('assinaturaCode').textContent =
-                'Código de Autenticação: ' + data.reportCode + ' • Hash: ' + generateHash(data.participantId + data
-                    .reportCode);
-
-            // Atualizar página
+            document.getElementById('assinaturaCode').textContent = 'Código: ' + data.reportCode + ' • Hash: ' + generateHash(data.participantId + data.reportCode);
             document.getElementById('pageNumber').textContent = '1';
+            document.getElementById('totalPages').textContent = '17';
 
-            // ============================================
-            // 1. SWOT GRID
-            // ============================================
             var grid = document.getElementById('swotGrid');
             var gridHtml = '';
             for (var i = 0; i < swotKeys.length; i++) {
                 var key = swotKeys[i];
                 var config = swotConfig[key];
                 var value = pcts[key] || 0;
-                var className = 'swot-card swot-' + key;
-                var desc = '';
-                if (value >= 75) desc = config.icon + ' ' + config.label + ' muito forte. Excelente vantagem.';
-                else if (value >= 50) desc = config.icon + ' ' + config.label + ' em bom nível.';
-                else if (value >= 25) desc = config.icon + ' ' + config.label + ' em desenvolvimento.';
-                else desc = config.icon + ' ' + config.label + ' requer atenção prioritária.';
-
-                gridHtml += '<div class="' + className + '">';
-                gridHtml += '<div class="swot-icon">' + config.icon + '</div>';
-                gridHtml += '<div class="swot-name">' + config.label + '</div>';
-                gridHtml += '<div class="swot-value">' + value + '%</div>';
-                gridHtml += '<div class="swot-bar"><div class="fill" style="width:' + value + '%;"></div></div>';
-                gridHtml += '<div class="swot-desc">' + desc + '</div>';
-                gridHtml += '</div>';
+                var desc = value >= 75 ? config.icon + ' ' + config.label + ' muito forte.' : value >= 50 ? config.icon + ' ' + config.label + ' em bom nível.' : value >= 25 ? config.icon + ' ' + config.label + ' em desenvolvimento.' : config.icon + ' ' + config.label + ' requer atenção.';
+                gridHtml += '<div class="swot-card swot-' + key + '"><div class="swot-icon">' + config.icon + '</div><div class="swot-name">' + config.label + '</div><div class="swot-value">' + value + '%</div><div class="swot-bar"><div class="fill" style="width:' + value + '%;"></div></div><div class="swot-desc">' + desc + '</div></div>';
             }
             grid.innerHTML = gridHtml;
 
-            // ============================================
-            // 2. DESCRIÇÃO DO PERFIL
-            // ============================================
             var topConfig = swotConfig[data.topSwot];
             var bottomConfig = swotConfig[data.bottomSwot];
+            document.getElementById('profileDescription').innerHTML = '<strong>Quadrante Principal:</strong> ' + topConfig.icon + ' ' + topConfig.label + ' (' + data.topPercent + '%)<br /><strong>Quadrante Secundário:</strong> ' + bottomConfig.icon + ' ' + bottomConfig.label + ' (' + data.bottomPercent + '%)';
 
-            document.getElementById('profileDescription').innerHTML =
-                '<strong>Quadrante Principal:</strong> ' + topConfig.icon + ' ' + topConfig.label + ' (' + data
-                .topPercent + '%)<br />' +
-                '<strong>Quadrante Secundário:</strong> ' + bottomConfig.icon + ' ' + bottomConfig.label + ' (' +
-                data.bottomPercent + '%)<br /><br />' +
-                (data.topSwot === 'forcas' ?
-                    'Você possui vantagens competitivas significativas que podem ser potencializadas.' :
-                    data.topSwot === 'oportunidades' ?
-                    'Você está bem posicionado para aproveitar as oportunidades do mercado.' :
-                    data.topSwot === 'fraquezas' ?
-                    'Foco em desenvolver pontos fracos para se tornar mais competitivo.' :
-                    'Capacidade de enfrentar e superar desafios e ameaças.');
+            var strengthItems = ['Liderança e tomada de decisão', 'Comunicação eficaz', 'Resiliência e adaptabilidade', 'Capacidade analítica'];
+            var weaknessItems = ['Gestão do tempo', 'Delegação de tarefas', 'Controle emocional em crises', 'Paciência processual'];
+            var opportunityItems = ['Novas tecnologias no mercado', 'Networking e relacionamentos', 'Desenvolvimento de liderança', 'Expansão de habilidades'];
+            var threatItems = ['Concorrência acirrada', 'Mudanças tecnológicas rápidas', 'Instabilidade econômica', 'Alta carga de trabalho'];
 
-            // ============================================
-            // 3. ANÁLISE DETALHADA
-            // ============================================
-            var strengthItems = swotDetails.forcas.items;
-            var strengthsList = document.getElementById('strengthsList');
-            var strengthsHtml = '';
-            for (var i = 0; i < strengthItems.length; i++) {
-                strengthsHtml += '<li><span class="check">✓</span> ' + strengthItems[i] + '</li>';
-            }
-            strengthsList.innerHTML = strengthsHtml;
+            document.getElementById('strengthsList').innerHTML = strengthItems.map(s => '<li><span class="check">✓</span> ' + s + '</li>').join('');
+            document.getElementById('weaknessesList').innerHTML = weaknessItems.map(w => '<li><span class="check">✓</span> ' + w + '</li>').join('');
+            document.getElementById('opportunitiesList').innerHTML = opportunityItems.map(o => '<li><span class="check">✓</span> ' + o + '</li>').join('');
+            document.getElementById('threatsList').innerHTML = threatItems.map(t => '<li><span class="check">✓</span> ' + t + '</li>').join('');
 
-            var weaknessItems = swotDetails.fraquezas.items;
-            var weaknessesList = document.getElementById('weaknessesList');
-            var weaknessesHtml = '';
-            for (var i = 0; i < weaknessItems.length; i++) {
-                weaknessesHtml += '<li><span class="check">✓</span> ' + weaknessItems[i] + '</li>';
-            }
-            weaknessesList.innerHTML = weaknessesHtml;
+            var strategies = { forcas: 'Use suas forças para aproveitar oportunidades e mitigar ameaças.', fraquezas: 'Desenvolva planos para superar suas fraquezas.', oportunidades: 'Aproveite as oportunidades usando suas forças.', ameacas: 'Crie estratégias defensivas para reduzir o impacto das ameaças.' };
+            document.getElementById('strategyText').innerHTML = '<strong>Estratégia Recomendada:</strong> ' + (strategies[data.topSwot] || 'Desenvolva um plano estratégico equilibrado.') + '<br><br><strong>Perfil Estratégico:</strong> ' + (data.topSwot === 'forcas' ? '💪 Perfil de Força - Você possui vantagens competitivas.' : data.topSwot === 'oportunidades' ? '🚀 Perfil de Oportunidade - Você está bem posicionado para aproveitar o mercado.' : data.topSwot === 'fraquezas' ? '📈 Perfil de Desenvolvimento - Foco em melhorar pontos fracos.' : '🛡️ Perfil de Resiliência - Capacidade de enfrentar desafios.');
 
-            var opportunityItems = swotDetails.oportunidades.items;
-            var opportunitiesList = document.getElementById('opportunitiesList');
-            var opportunitiesHtml = '';
-            for (var i = 0; i < opportunityItems.length; i++) {
-                opportunitiesHtml += '<li><span class="check">✓</span> ' + opportunityItems[i] + '</li>';
-            }
-            opportunitiesList.innerHTML = opportunitiesHtml;
-
-            var threatItems = swotDetails.ameacas.items;
-            var threatsList = document.getElementById('threatsList');
-            var threatsHtml = '';
-            for (var i = 0; i < threatItems.length; i++) {
-                threatsHtml += '<li><span class="check">✓</span> ' + threatItems[i] + '</li>';
-            }
-            threatsList.innerHTML = threatsHtml;
-
-            // ============================================
-            // 4. ESTRATÉGIA RECOMENDADA
-            // ============================================
-            var strategies = {
-                forcas: 'Use suas forças para aproveitar oportunidades e mitigar ameaças. Invista em desenvolvimento contínuo.',
-                fraquezas: 'Desenvolva planos estruturados para superar suas fraquezas. Busque mentoria e capacitação.',
-                oportunidades: 'Aproveite as oportunidades usando suas forças e melhorando fraquezas. Seja proativo.',
-                ameacas: 'Crie estratégias defensivas robustas para reduzir o impacto das ameaças. Mantenha-se atualizado.'
+            // PERFIL SOCIAL
+            var socialTexts = {
+                forcas: { amizades: 'Constrói amizades com pessoas que compartilham sua força e determinação.', networking: 'Networking estratégico e proposital.', conflitos: 'Aborda conflitos com confiança.', inteligencia: 'Inteligência social baseada em liderança.' },
+                oportunidades: { amizades: 'Constrói amizades com pessoas que abrem portas.', networking: 'Networking expansivo e oportunista.', conflitos: 'Aborda conflitos buscando vantagens.', inteligencia: 'Inteligência social baseada em visão.' },
+                fraquezas: { amizades: 'Constrói amizades que oferecem suporte.', networking: 'Networking de apoio e desenvolvimento.', conflitos: 'Aborda conflitos com humildade.', inteligencia: 'Inteligência social baseada em autoconhecimento.' },
+                ameacas: { amizades: 'Constrói amizades que oferecem segurança.', networking: 'Networking de proteção.', conflitos: 'Aborda conflitos com cautela.', inteligencia: 'Inteligência social baseada em prevenção.' }
             };
+            var social = socialTexts[data.topSwot] || { amizades: 'Constrói amizades baseadas em sua análise SWOT.', networking: 'Networking alinhado com sua estratégia.', conflitos: 'Aborda conflitos estrategicamente.', inteligencia: 'Inteligência social estratégica.' };
+            document.getElementById('socialAmizades').textContent = social.amizades;
+            document.getElementById('socialNetworking').textContent = social.networking;
+            document.getElementById('socialConflitos').textContent = social.conflitos;
+            document.getElementById('socialInteligencia').textContent = social.inteligencia;
 
-            document.getElementById('strategyText').innerHTML =
-                '<strong>Estratégia Recomendada:</strong> ' + (strategies[data.topSwot] ||
-                    'Desenvolva um plano estratégico equilibrado.') +
-                '<br /><br /><strong>Perfil Estratégico:</strong> ' +
-                (data.topSwot === 'forcas' ?
-                    '💪 Perfil de Força - Você possui vantagens competitivas significativas. Continue potencializando seus pontos fortes.' :
-                    data.topSwot === 'oportunidades' ?
-                    '🚀 Perfil de Oportunidade - Você está bem posicionado para aproveitar o mercado. Agora é o momento de agir.' :
-                    data.topSwot === 'fraquezas' ?
-                    '📈 Perfil de Desenvolvimento - Foco em melhorar pontos fracos. Invista em autodesenvolvimento.' :
-                    '🛡️ Perfil de Resiliência - Capacidade de enfrentar desafios. Fortaleça suas estratégias defensivas.');
+            // PERFIL FAMILIAR
+            var familiarTexts = {
+                forcas: { convivencia: 'Família que reconhece e apoia suas forças.', empatia: 'Empatia baseada em força e apoio.', escuta: 'Escuta focada em soluções.', equilibrio: 'Equilíbrio entre força e cuidado.' },
+                oportunidades: { convivencia: 'Família que busca crescimento.', empatia: 'Empatia baseada em visão de futuro.', escuta: 'Escuta focada em oportunidades.', equilibrio: 'Equilíbrio entre família e oportunidades.' },
+                fraquezas: { convivencia: 'Família que apoia o desenvolvimento.', empatia: 'Empatia baseada em compreensão.', escuta: 'Escuta focada em desenvolvimento.', equilibrio: 'Equilíbrio entre apoio e evolução.' },
+                ameacas: { convivencia: 'Família que oferece segurança.', empatia: 'Empatia baseada em proteção.', escuta: 'Escuta focada em prevenção.', equilibrio: 'Equilíbrio entre segurança e bem-estar.' }
+            };
+            var familiar = familiarTexts[data.topSwot] || { convivencia: 'Convivência familiar baseada em sua análise SWOT.', empatia: 'Empatia familiar guiada por sua estratégia.', escuta: 'Escuta alinhada com seus objetivos.', equilibrio: 'Equilíbrio baseado em sua análise.' };
+            document.getElementById('familiarConveniencia').textContent = familiar.convivencia;
+            document.getElementById('familiarEmpatia').textContent = familiar.empatia;
+            document.getElementById('familiarEscuta').textContent = familiar.escuta;
+            document.getElementById('familiarEquilibrio').textContent = familiar.equilibrio;
 
-            // ============================================
-            // 5. PLANO DE AÇÃO
-            // ============================================
-            var actionPlans = [
-                '📌 Definir metas claras com base na análise SWOT',
-                '🎯 Priorizar ações que aproveitem forças e oportunidades',
-                '🛠️ Desenvolver plano de mitigação para fraquezas e ameaças',
-                '📊 Monitorar progresso e ajustar estratégias periodicamente',
-                '🤝 Buscar feedback e mentoria para áreas de desenvolvimento'
-            ];
-
+            var actionPlans = ['📌 Definir metas claras com base na análise SWOT', '🎯 Priorizar ações que aproveitem forças e oportunidades', '🛠️ Desenvolver plano de mitigação para fraquezas e ameaças', '📊 Monitorar progresso e ajustar estratégias'];
             if (pcts.forcas >= 60) actionPlans.unshift('💪 Potencializar forças para criar diferenciais competitivos');
-            if (pcts.oportunidades >= 60) actionPlans.unshift('🚀 Aproveitar oportunidades identificadas no mercado');
+            if (pcts.oportunidades >= 60) actionPlans.unshift('🚀 Aproveitar oportunidades identificadas');
             if (pcts.fraquezas >= 50) actionPlans.unshift('🔻 Desenvolver plano para reduzir impacto das fraquezas');
             if (pcts.ameacas >= 50) actionPlans.unshift('⚠️ Criar estratégias defensivas contra ameaças');
+            document.getElementById('actionPlanList').innerHTML = actionPlans.map((p, i) => '<li><span class="check">' + (i + 1) + '</span> ' + p + '</li>').join('');
 
-            var planList = document.getElementById('actionPlanList');
-            var planHtml = '';
-            for (var i = 0; i < actionPlans.length; i++) {
-                planHtml += '<li><span class="check">' + (i + 1) + '</span> ' + actionPlans[i] + '</li>';
-            }
-            planList.innerHTML = planHtml;
+            document.getElementById('iaOpinionText').textContent = 'Com base na análise SWOT, o participante apresenta um perfil estratégico com destaque para ' + topConfig.icon + ' ' + topConfig.label + ' (' + data.topPercent + '%). O quadrante com menor pontuação é ' + bottomConfig.icon + ' ' + bottomConfig.label + ' (' + data.bottomPercent + '%), indicando uma oportunidade de desenvolvimento estratégico.';
 
-            // ============================================
-            // 6. COMPATIBILIDADE COM VAGA
-            // ============================================
-            var compatSection = document.getElementById('compatibilidadeSection');
-            var compatContent = document.getElementById('compatibilidadeContent');
+            var conclusion = 'Sua análise SWOT revela um perfil estratégico com <strong>' + topConfig.icon + ' ' + topConfig.label + '</strong> como área predominante (' + data.topPercent + '%), indicando que ' + (data.topSwot === 'forcas' ? 'você possui vantagens competitivas sólidas' : data.topSwot === 'oportunidades' ? 'o momento é favorável para crescimento' : data.topSwot === 'fraquezas' ? 'há oportunidades de desenvolvimento' : 'você tem capacidade de enfrentar desafios') + '.';
+            document.getElementById('conclusionText').innerHTML = conclusion;
 
-            if (data.job && data.job !== 'Não vinculado') {
-                compatSection.style.display = 'block';
-                var compat = data.compatibility || Math.round(60 + Math.random() * 35);
-                var compatLevel = '';
-                var compatColor = '';
-                if (compat >= 80) { compatLevel = 'Excelente';
-                    compatColor = '#10B981'; } else if (compat >= 60) { compatLevel = 'Boa';
-                    compatColor = '#3B82F6'; } else if (compat >= 40) { compatLevel = 'Moderada';
-                    compatColor = '#F59E0B'; } else { compatLevel = 'Baixa';
-                    compatColor = '#EF4444'; }
+            var mensagem = {
+                forcas: '⭐ Você é uma pessoa de força e determinação. Continue usando suas vantagens para construir um futuro ainda mais brilhante!',
+                oportunidades: '⭐ Você tem um olhar aguçado para oportunidades. Continue aproveitando cada chance para crescer e evoluir!',
+                fraquezas: '⭐ Você tem a coragem de reconhecer suas fraquezas. Isso é o primeiro passo para transformá-las em pontos fortes!',
+                ameacas: '⭐ Você tem a sabedoria de enxergar as ameaças. Continue sendo essa pessoa estratégica e preparada para qualquer desafio!'
+            };
+            document.getElementById('mensagemMotivacional').textContent = mensagem[data.topSwot] || '⭐ Continue usando sua análise SWOT como ferramenta para crescer e evoluir a cada dia!';
 
-                compatContent.innerHTML =
-                    '<div class="compatibilidade-card"><div class="compat-top"><span style="font-weight:600;font-size:1rem;">🎯 ' +
-                    data.job +
-                    '</span><span class="compat-value" style="color:' + compatColor + ';">' + compat +
-                    '%</span></div><div class="compat-bar"><div class="fill" style="width:' + compat +
-                    '%;background:' + compatColor +
-                    ';"></div></div><p style="color:var(--gray-600);font-size:0.9rem;"><strong>Nível de Compatibilidade:</strong> ' +
-                    compatLevel + ' (' + compat +
-                    '%)</p><p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">' + (compat >= 80 ?
-                        'Perfil estratégico altamente alinhado com a função.' :
-                        compat >= 60 ?
-                        'Boa compatibilidade estratégica. Desenvolvimento direcionado pode ampliar o alinhamento.' :
-                        compat >= 40 ?
-                        'Compatibilidade moderada. Recomenda-se desenvolvimento específico.' :
-                        'Compatibilidade baixa. Avaliar outras posições mais alinhadas.') +
-                    '</p></div>';
-            } else {
-                compatSection.style.display = 'none';
-            }
-
-            // ============================================
-            // 7. PARECER DA IA
-            // ============================================
-            document.getElementById('iaOpinionText').textContent =
-                'Com base na análise SWOT, o participante apresenta um perfil estratégico com destaque para ' +
-                topConfig.icon + ' ' + topConfig.label + ' (' + data.topPercent +
-                '%). Esta é uma área de grande potencial que deve ser explorada. O quadrante com menor pontuação é ' +
-                bottomConfig.icon + ' ' + bottomConfig.label + ' (' + data.bottomPercent +
-                '%), indicando uma oportunidade de desenvolvimento estratégico. Recomenda-se um plano de ação que potencialize as ' +
-                (data.topSwot === 'forcas' ? 'forças identificadas' : data.topSwot === 'oportunidades' ?
-                    'oportunidades disponíveis' : data.topSwot === 'fraquezas' ? 'áreas de desenvolvimento' :
-                    'capacidade de resiliência') +
-                ' e mitigue os riscos associados às ' +
-                (data.bottomSwot === 'ameacas' ? 'ameaças' : data.bottomSwot === 'fraquezas' ? 'fraquezas' :
-                    'áreas de atenção') +
-                '. O momento é favorável para ' +
-                (data.topSwot === 'oportunidades' ? 'ações proativas e de expansão.' :
-                    data.topSwot === 'forcas' ? 'consolidar posições e ampliar vantagens.' :
-                    'desenvolvimento e fortalecimento interno.');
-
-            // ============================================
-            // 8. CONCLUSÃO
-            // ============================================
-            document.getElementById('conclusionText').innerHTML =
-                'Sua análise SWOT revela um perfil estratégico com <strong>' + topConfig.icon + ' ' + topConfig
-                .label + '</strong> como área predominante (' + data.topPercent +
-                '%), indicando que ' +
-                (data.topSwot === 'forcas' ?
-                    'você possui vantagens competitivas sólidas' :
-                    data.topSwot === 'oportunidades' ?
-                    'o momento é favorável para crescimento e expansão' :
-                    data.topSwot === 'fraquezas' ?
-                    'há oportunidades significativas de desenvolvimento pessoal' :
-                    'você tem capacidade de enfrentar desafios e adversidades') +
-                '.<br /><br /><strong>Mensagem Final:</strong><br />' +
-                (data.topPercent >= 70 ?
-                    'Parabéns! Sua análise SWOT indica um posicionamento estratégico favorável. Continue potencializando suas forças e aproveitando as oportunidades.' :
-                    data.topPercent >= 50 ?
-                    'Você está em um bom caminho. Com foco nas áreas identificadas, poderá ampliar significativamente seu impacto estratégico.' :
-                    'Este é um momento importante para reavaliar sua posição estratégica e desenvolver um plano de ação consistente.') +
-                '<br /><br /><strong>Próximos Passos:</strong><br />' +
-                '1. Revise sua análise SWOT periodicamente<br />' +
-                '2. Acompanhe o progresso das ações planejadas<br />' +
-                '3. Ajuste estratégias conforme mudanças no ambiente<br />' +
-                '4. Busque feedback para validação da análise';
-
-            // ============================================
-            // 9. GRÁFICOS
-            // ============================================
-            setTimeout(function() {
-                renderChart(pcts);
-            }, 300);
-
+            setTimeout(function() { renderChart(pcts); }, 300);
             console.log('✅ Relatório SWOT completo renderizado com sucesso!');
         }
 
-        // ============================================
-        // RENDERIZAR GRÁFICO
-        // ============================================
         function renderChart(percentages) {
             try {
                 var ctx = document.getElementById('swotChart').getContext('2d');
@@ -1464,12 +488,7 @@
                         labels: ['Forças', 'Fraquezas', 'Oportunidades', 'Ameaças'],
                         datasets: [{
                             label: 'Pontuação SWOT',
-                            data: [
-                                percentages.forcas || 0,
-                                percentages.fraquezas || 0,
-                                percentages.oportunidades || 0,
-                                percentages.ameacas || 0
-                            ],
+                            data: [percentages.forcas || 0, percentages.fraquezas || 0, percentages.oportunidades || 0, percentages.ameacas || 0],
                             backgroundColor: ['#10B981CC', '#EF4444CC', '#3B82F6CC', '#F59E0BCC'],
                             borderColor: ['#10B981', '#EF4444', '#3B82F6', '#F59E0B'],
                             borderWidth: 2,
@@ -1480,74 +499,36 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 100,
-                                grid: { color: 'rgba(10, 37, 64, 0.04)' },
-                                ticks: { color: '#94A3B8', callback: function(v) { return v + '%'; } }
-                            },
-                            x: {
-                                grid: { display: false },
-                                ticks: { color: '#94A3B8', font: { size: 11 } }
-                            }
-                        }
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, max: 100, grid: { color: 'rgba(10,37,64,0.04)' }, ticks: { color: '#94A3B8', callback: function(v) { return v + '%'; } } }, x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 11 } } } }
                     }
                 });
-            } catch (error) {
-                console.error('❌ Erro ao renderizar gráfico:', error);
-            }
+            } catch (error) { console.error('❌ Erro ao renderizar gráfico:', error); }
         }
 
-        // ============================================
-        // FUNÇÕES UTILITÁRIAS
-        // ============================================
-        function generateHash(data) {
-            var hash = 0;
-            for (var i = 0; i < data.length; i++) {
-                var char = data.charCodeAt(i);
+        function generateHash(data) { var hash = 0; for (var i = 0; i < data.length; i++) { var char = data.charCodeAt(i);
                 hash = ((hash << 5) - hash) + char;
-                hash = hash & hash;
-            }
-            return Math.abs(hash).toString(16).padStart(8, '0');
-        }
+                hash = hash & hash; } return Math.abs(hash).toString(16).padStart(8, '0'); }
 
-        function downloadPDF() {
-            showToast('📥 Iniciando download do PDF...', 'success');
-            setTimeout(function() {
-                window.print();
-            }, 500);
-        }
+        function downloadPDF() { showToast('📥 Iniciando download do PDF...', 'success');
+            setTimeout(function() { window.print(); }, 500); }
 
         function showToast(message, type) {
             var existing = document.getElementById('toast');
             if (existing) existing.remove();
-
             var toast = document.createElement('div');
             toast.id = 'toast';
-            toast.style.cssText =
-                'position:fixed;top:24px;right:24px;background:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:300;border-left:4px solid ' +
-                (type === 'success' ? '#10B981' : '#EF4444') + ';animation:slideIn 0.3s ease;';
+            toast.style.cssText = 'position:fixed;top:24px;right:24px;background:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:300;border-left:4px solid ' + (type === 'success' ? '#10B981' : '#EF4444') + ';animation:slideIn 0.3s ease;';
             toast.innerHTML = '<span>' + (type === 'success' ? '✅' : '❌') + '</span><span>' + message + '</span>';
             document.body.appendChild(toast);
-
-            setTimeout(function() {
-                toast.style.opacity = '0';
+            setTimeout(function() { toast.style.opacity = '0';
                 toast.style.transform = 'translateX(120%)';
-                setTimeout(function() { toast.remove(); }, 300);
-            }, 4000);
+                setTimeout(function() { toast.remove(); }, 300); }, 4000);
         }
-
         var style = document.createElement('style');
-        style.textContent =
-            '@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
+        style.textContent = '@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
         document.head.appendChild(style);
-
         console.log('📄 Relatório Completo SWOT carregado com sucesso!');
     </script>
-
 </body>
 </html>
