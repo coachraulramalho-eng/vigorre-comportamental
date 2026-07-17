@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assessment Inteligência Emocional - Vigorre One™</title>
+    <link rel="stylesheet" href="/assets/css/globals.css" />
+    <link rel="stylesheet" href="/assets/css/teste.css" />
+    <link rel="icon" href="/assets/images/logo-vigorre.png" />
+    <style>
+        .opcao-btn-likert-ie {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 16px;
+            background: #F8FAFC;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0A2540;
+            min-width: 60px;
+            flex: 1;
+            text-align: center;
+        }
+        .opcao-btn-likert-ie:hover:not(:disabled) {
+            border-color: #D97706;
+            background: #FEF3C7;
+            transform: translateY(-2px);
+        }
+        .opcao-btn-likert-ie:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .opcao-btn-likert-ie.selecionado {
+            border-color: #D97706;
+            background: #FEF3C7;
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+        }
+        .opcao-btn-likert-ie small {
+            font-weight: 400;
+            font-size: 0.65rem;
+            color: #94A3B8;
+        }
+        .questao-opcoes-ie {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .dimensao-dica {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #94A3B8;
+            margin-top: 12px;
+            padding: 8px;
+            background: #F1F5F9;
+            border-radius: 8px;
+        }
+        @media (max-width: 480px) {
+            .opcao-btn-likert-ie {
+                min-width: 50px;
+                padding: 8px 10px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="teste-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/assets/images/logo-vigorre.png" alt="Vigorre One™" />
+                <span>VIGORRE <span class="highlight">ONE</span><sup>™</sup></span>
+            </div>
+            <div class="teste-info">
+                <span>⏱️ <span id="teste-timer">08:00</span></span>
+                <span>📊 <span id="teste-progresso">0%</span></span>
+                <span class="teste-nome">IE</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== TELA DE INTRODUÇÃO ===== -->
+    <section id="teste-intro" class="teste-intro">
+        <div class="container">
+            <div class="intro-card">
+                <span class="badge">🧠 Assessment Inteligência Emocional Vigorre™</span>
+                <h1>Avalie sua Inteligência Emocional</h1>
+                <p class="intro-desc">Meça sua capacidade de reconhecer e gerenciar emoções.</p>
+
+                <div class="intro-info">
+                    <div class="info-item">
+                        <span class="icon">⏱️</span>
+                        <span>Duração: <strong>8 minutos</strong></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="icon">📊</span>
+                        <span>Perguntas: <strong>40</strong></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="icon">📋</span>
+                        <span>Formato: Escala <strong>Likert 1 a 5</strong></span>
+                    </div>
+                </div>
+
+                <div class="intro-dimensoes">
+                    <h4>📐 O que será avaliado:</h4>
+                    <div class="dimensao-grid">
+                        <div class="dimensao-item" style="border-color: #8B5CF6;">
+                            <span class="dim-label" style="color: #8B5CF6;">🧠</span>
+                            <span class="dim-name">Autoconsciência</span>
+                            <span class="dim-desc">Reconhecer suas emoções</span>
+                        </div>
+                        <div class="dimensao-item" style="border-color: #3B82F6;">
+                            <span class="dim-label" style="color: #3B82F6;">⚖️</span>
+                            <span class="dim-name">Autorregulação</span>
+                            <span class="dim-desc">Controlar reações</span>
+                        </div>
+                        <div class="dimensao-item" style="border-color: #10B981;">
+                            <span class="dim-label" style="color: #10B981;">🔥</span>
+                            <span class="dim-name">Motivação</span>
+                            <span class="dim-desc">Energia e propósito</span>
+                        </div>
+                        <div class="dimensao-item" style="border-color: #EC4899;">
+                            <span class="dim-label" style="color: #EC4899;">❤️</span>
+                            <span class="dim-name">Empatia</span>
+                            <span class="dim-desc">Compreender os outros</span>
+                        </div>
+                        <div class="dimensao-item" style="border-color: #F59E0B;">
+                            <span class="dim-label" style="color: #F59E0B;">🤝</span>
+                            <span class="dim-name">Habilidades Sociais</span>
+                            <span class="dim-desc">Relacionamentos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXEMPLO PRÁTICO -->
+                <div class="intro-exemplo">
+                    <h4>📝 EXEMPLO PRÁTICO</h4>
+                    <div class="exemplo-pergunta">
+                        <p><strong>Pergunta:</strong> "Reconheço minhas emoções no momento em que elas surgem."</p>
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px;">
+                            <span style="background: #F8FAFC; padding: 4px 10px; border-radius: 999px; font-size: 0.7rem;">1 = Nunca</span>
+                            <span style="background: #F8FAFC; padding: 4px 10px; border-radius: 999px; font-size: 0.7rem;">2 = Raramente</span>
+                            <span style="background: #F8FAFC; padding: 4px 10px; border-radius: 999px; font-size: 0.7rem;">3 = Às vezes</span>
+                            <span style="background: #F8FAFC; padding: 4px 10px; border-radius: 999px; font-size: 0.7rem;">4 = Frequentemente</span>
+                            <span style="background: #F8FAFC; padding: 4px 10px; border-radius: 999px; font-size: 0.7rem;">5 = Sempre</span>
+                        </div>
+                    </div>
+                    <div class="exemplo-como-responder">
+                        <p><strong>Como responder:</strong></p>
+                        <ol>
+                            <li>Leia a afirmação com atenção</li>
+                            <li>Pense em situações reais do seu dia a dia</li>
+                            <li>Escolha o número que <strong>melhor</strong> te representa</li>
+                            <li>Não existe resposta certa ou errada</li>
+                            <li>Confie em sua primeira impressão</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- LGPD -->
+                <div class="intro-lgpd">
+                    <h4>🔒 LGPD - Proteção de Dados</h4>
+                    <p>Ao realizar este teste, você concorda com nossa <a href="/politica-privacidade">Política de Privacidade</a>.</p>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="consentimento-lgpd" required />
+                        Li e concordo com os termos LGPD
+                    </label>
+                </div>
+
+                <!-- ALERTA SESSÃO ÚNICA -->
+                <div class="intro-alerta">
+                    <h4>⚠️ ATENÇÃO</h4>
+                    <p>Este teste deve ser respondido em uma <strong>única sessão contínua</strong>.</p>
+                    <ul>
+                        <li>Se você sair, fechar o navegador ou recarregar a página, seu progresso <strong>NÃO</strong> será salvo</li>
+                        <li>Você precisará recomeçar do zero</li>
+                    </ul>
+                    <div class="alertas">
+                        <span>✅ Escolha um momento sem interrupções</span>
+                        <span>✅ Reserve de 8 a 10 minutos</span>
+                        <span>✅ Mantenha a calma e responda com sinceridade</span>
+                    </div>
+                </div>
+
+                <button id="btn-iniciar" class="btn-primary" disabled>
+                    🔄 INICIAR TESTE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TELA DO TESTE ===== -->
+    <section id="teste-questoes" class="teste-questoes" style="display:none;">
+        <div class="container">
+            <div class="progress-bar">
+                <div id="progresso-bar" style="width:0%;"></div>
+            </div>
+
+            <div id="frase-motivacional" class="frase-motivacional">
+                "Respire fundo. Você tem todo o tempo do mundo."
+            </div>
+
+            <div class="questao-card">
+                <div class="questao-header">
+                    <span class="questao-numero">Pergunta <span id="questao-atual">1</span> de 40</span>
+                </div>
+                <div class="questao-enunciado" id="questao-enunciado">
+                    Reconheço minhas emoções no momento em que elas surgem.
+                </div>
+
+                <div class="questao-opcoes-ie">
+                    <button class="opcao-btn-likert-ie" data-valor="1">1<br/><small>Nunca</small></button>
+                    <button class="opcao-btn-likert-ie" data-valor="2">2<br/><small>Raramente</small></button>
+                    <button class="opcao-btn-likert-ie" data-valor="3">3<br/><small>Às vezes</small></button>
+                    <button class="opcao-btn-likert-ie" data-valor="4">4<br/><small>Frequentemente</small></button>
+                    <button class="opcao-btn-likert-ie" data-valor="5">5<br/><small>Sempre</small></button>
+                </div>
+
+                <div class="dimensao-dica" id="dica-dimensao">📍 Autoconsciência</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TELA DE CONCLUSÃO ===== -->
+    <section id="teste-conclusao" class="teste-conclusao" style="display:none;">
+        <div class="container">
+            <div class="conclusao-card">
+                <div class="conclusao-icon">🎉</div>
+                <h1>Teste Concluído com Sucesso!</h1>
+                <p>Seu resultado foi processado pela nossa IA e já está disponível.</p>
+
+                <div class="conclusao-resultado" id="resultado-simples">
+                    <!-- Resultado será inserido aqui -->
+                </div>
+
+                <div class="conclusao-opcoes">
+                    <div class="opcao-relatorio">
+                        <h3>📄 Relatório Executivo</h3>
+                        <p>20-30 páginas com análise completa</p>
+                        <span class="preco">1 crédito</span>
+                        <button class="btn-secondary" onclick="window.gerarRelatorio()">Gerar Relatório</button>
+                    </div>
+                    <div class="opcao-laudo">
+                        <h3>📋 Laudo VIGOR®</h3>
+                        <p>80-100 páginas com análise integrada</p>
+                        <span class="preco">1 crédito premium</span>
+                        <button class="btn-primary" onclick="window.gerarLaudo()">Gerar Laudo</button>
+                    </div>
+                </div>
+
+                <button class="btn-outline" onclick="window.location.href='/dashboard.html'">
+                    📊 Ir para Dashboard
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/data/perguntas-ie.js"></script>
+    <script src="/js/teste-controller.js"></script>
+
+    <script>
+        (function() {
+            'use strict';
+
+            if (!VigorreAuth.requireAuth()) return;
+
+            const user = VigorreAuth.getCurrentUser();
+            if (!user || !user.participantId) {
+                alert('⚠️ Participante não identificado. Faça login novamente.');
+                window.location.href = '/login.html';
+                return;
+            }
+
+            if (!VigorreAuth.verificarConsentimento(user.participantId)) {
+                if (confirm('🔒 Para realizar o teste, você precisa aceitar os termos LGPD.')) {
+                    window.location.href = '/consentimento.html';
+                }
+                return;
+            }
+
+            const controller = new TesteController({
+                tipo: 'ie',
+                perguntas: perguntasIE,
+                totalPerguntas: 40,
+                tempoLimite: 8,
+                participanteId: user.participantId
+            });
+
+            window.controller = controller;
+
+            document.getElementById('consentimento-lgpd').addEventListener('change', function() {
+                document.getElementById('btn-iniciar').disabled = !this.checked;
+            });
+
+            document.getElementById('btn-iniciar').addEventListener('click', function() {
+                try { controller.iniciar(); } catch (error) { alert(error.message); }
+            });
+
+            // Event listeners para Likert IE
+            document.querySelectorAll('.opcao-btn-likert-ie').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const valor = parseInt(this.dataset.valor);
+                    controller.salvarRespostaLikert(valor);
+                });
+            });
+
+            // Sobrescreve salvarResposta para IE (Likert)
+            controller.salvarRespostaLikert = function(valor) {
+                if (!this.testeAtivo) return;
+
+                const pergunta = this.perguntas[this.indiceAtual];
+                if (!pergunta) return;
+
+                document.querySelectorAll('.opcao-btn-likert-ie').forEach(b => {
+                    b.disabled = true;
+                    b.classList.remove('selecionado');
+                    if (parseInt(b.dataset.valor) === valor) {
+                        b.classList.add('selecionado');
+                    }
+                });
+
+                this.respostas.push({
+                    pergunta: this.indiceAtual,
+                    valor: valor,
+                    dimensao: pergunta.dimensao || 'self_awareness'
+                });
+
+                this.indiceAtual++;
+                if (this.indiceAtual % 2 === 0) this.proximaFrase();
+
+                setTimeout(() => { this.mostrarPergunta(this.indiceAtual); }, 300);
+            };
+
+            window.gerarRelatorio = function() { controller.gerarRelatorio(); };
+            window.gerarLaudo = function() { controller.gerarLaudo(); };
+
+            console.log('📋 Teste IE carregado com sucesso!');
+        })();
+    </script>
+
+</body>
+</html>
