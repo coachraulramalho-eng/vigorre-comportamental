@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resultado Big Five - Vigorre One™</title>
+    <link rel="stylesheet" href="/assets/css/globals.css" />
+    <link rel="icon" href="/assets/images/logo-vigorre.png" />
+    <style>
+        body {
+            background: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #E2E8F0;
+            margin-bottom: 32px;
+        }
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #0A2540;
+        }
+        .logo .highlight { color: #D97706; }
+        .logo sup { font-size: 0.5rem; color: #94A3B8; }
+        .badge {
+            background: #FEF3C7;
+            color: #D97706;
+            padding: 4px 16px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            color: #0A2540;
+            margin-bottom: 8px;
+        }
+        .subtitulo {
+            color: #64748B;
+            margin-bottom: 32px;
+        }
+        .perfil-destaque {
+            text-align: center;
+            padding: 24px;
+            background: linear-gradient(135deg, #F8FAFC, #FEF3C7);
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        .perfil-destaque .icone { font-size: 3rem; }
+        .perfil-destaque .nome {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0A2540;
+        }
+        .perfil-destaque .descricao {
+            color: #64748B;
+            font-size: 0.95rem;
+        }
+
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin: 24px 0;
+        }
+        .score-item {
+            text-align: center;
+            padding: 16px;
+            background: #F8FAFC;
+            border-radius: 12px;
+            border-top: 4px solid #94A3B8;
+        }
+        .score-item .label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #0A2540;
+        }
+        .score-item .value {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        .score-item .bar {
+            width: 100%;
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 999px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+        .score-item .bar .fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 1s ease;
+        }
+
+        .secoes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .secao {
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .secao h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: #0A2540;
+            margin-bottom: 8px;
+        }
+        .secao ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .secao ul li {
+            padding: 4px 0;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .btn-primary, .btn-secondary {
+            padding: 14px 32px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            color: #FFFFFF;
+            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.25);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(217, 119, 6, 0.35);
+        }
+        .btn-secondary {
+            background: #E2E8F0;
+            color: #0A2540;
+        }
+        .btn-secondary:hover {
+            background: #CBD5E1;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 24px; }
+            .scores-grid { grid-template-columns: 1fr 1fr; }
+            .secoes { grid-template-columns: 1fr; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                VIGORRE <span class="highlight">ONE</span><sup>™</sup>
+            </div>
+            <span class="badge">🧠 Resultado Big Five</span>
+        </div>
+
+        <h1>Sua Personalidade</h1>
+        <p class="subtitulo">Análise completa das cinco dimensões da sua personalidade</p>
+
+        <!-- Perfil Destaque -->
+        <div class="perfil-destaque">
+            <div class="icone" id="perfil-icone">🧠</div>
+            <div class="nome" id="perfil-nome">Abertura à Experiência</div>
+            <div class="descricao" id="perfil-descricao">Dimensão predominante da sua personalidade</div>
+        </div>
+
+        <!-- Scores -->
+        <div class="scores-grid">
+            <div class="score-item" style="border-color: #8B5CF6;">
+                <div class="label" style="color:#8B5CF6;">O</div>
+                <div class="value" style="color:#8B5CF6;" id="score-O">0%</div>
+                <div class="bar"><div class="fill" id="bar-O" style="width:0%; background:#8B5CF6;"></div></div>
+            </div>
+            <div class="score-item" style="border-color: #10B981;">
+                <div class="label" style="color:#10B981;">C</div>
+                <div class="value" style="color:#10B981;" id="score-C">0%</div>
+                <div class="bar"><div class="fill" id="bar-C" style="width:0%; background:#10B981;"></div></div>
+            </div>
+            <div class="score-item" style="border-color: #F59E0B;">
+                <div class="label" style="color:#F59E0B;">E</div>
+                <div class="value" style="color:#F59E0B;" id="score-E">0%</div>
+                <div class="bar"><div class="fill" id="bar-E" style="width:0%; background:#F59E0B;"></div></div>
+            </div>
+            <div class="score-item" style="border-color: #EC4899;">
+                <div class="label" style="color:#EC4899;">A</div>
+                <div class="value" style="color:#EC4899;" id="score-A">0%</div>
+                <div class="bar"><div class="fill" id="bar-A" style="width:0%; background:#EC4899;"></div></div>
+            </div>
+            <div class="score-item" style="border-color: #EF4444;">
+                <div class="label" style="color:#EF4444;">N</div>
+                <div class="value" style="color:#EF4444;" id="score-N">0%</div>
+                <div class="bar"><div class="fill" id="bar-N" style="width:0%; background:#EF4444;"></div></div>
+            </div>
+        </div>
+
+        <!-- Seções -->
+        <div class="secoes">
+            <div class="secao">
+                <h3>💪 Pontos Fortes</h3>
+                <ul id="pontos-fortes">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+            <div class="secao">
+                <h3>📈 Pontos de Desenvolvimento</h3>
+                <ul id="pontos-desenvolvimento">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="secoes">
+            <div class="secao">
+                <h3>🎯 Recomendações</h3>
+                <ul id="recomendacoes">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+            <div class="secao">
+                <h3>🏢 Ambientes Ideais</h3>
+                <ul id="ambientes">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="botoes">
+            <button class="btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+            <button class="btn-secondary" onclick="window.location.href='/dashboard.html'">📊 Voltar ao Dashboard</button>
+            <button class="btn-primary" onclick="window.location.href='/relatorios/bigfive'">📄 Ver Relatório Completo</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const resultado = localStorage.getItem('resultado_bigfive');
+            if (!resultado) {
+                document.querySelector('.container').innerHTML = `
+                    <div style="text-align:center; padding:60px 0;">
+                        <div style="font-size:4rem;">🧠</div>
+                        <h2>Nenhum resultado encontrado</h2>
+                        <p style="color:#64748B;">Faça o teste Big Five para ver seu resultado.</p>
+                        <a href="/tests/bigfive/" class="btn-primary" style="display:inline-block; margin-top:16px; padding:14px 32px; border-radius:9999px; text-decoration:none; color:#fff; background:linear-gradient(135deg,#D97706,#F59E0B);">Iniciar Teste</a>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const data = JSON.parse(resultado);
+                const scores = data.normalized || {};
+
+                const cores = {
+                    O: '#8B5CF6',
+                    C: '#10B981',
+                    E: '#F59E0B',
+                    A: '#EC4899',
+                    N: '#EF4444'
+                };
+
+                const nomes = {
+                    O: 'Abertura à Experiência',
+                    C: 'Conscienciosidade',
+                    E: 'Extroversão',
+                    A: 'Amabilidade',
+                    N: 'Neuroticismo'
+                };
+
+                const descricoes = {
+                    O: 'Criativo, curioso, mente aberta e apreciador de novas experiências',
+                    C: 'Organizado, disciplinado, confiável e orientado a metas',
+                    E: 'Sociável, energético, assertivo e comunicativo',
+                    A: 'Cooperativo, empático, confiável e gentil',
+                    N: 'Sensível, reativo, ansioso e emocionalmente instável'
+                };
+
+                const icones = {
+                    O: '🎨',
+                    C: '📋',
+                    E: '🗣️',
+                    A: '💝',
+                    N: '🌊'
+                };
+
+                // Preenche scores
+                Object.keys(nomes).forEach(dim => {
+                    const score = scores[dim] || 0;
+                    document.getElementById(`score-${dim}`).textContent = score + '%';
+                    document.getElementById(`bar-${dim}`).style.width = score + '%';
+                });
+
+                // Perfil predominante
+                const maior = Object.entries(scores).sort((a, b) => b[1] - a[1])[0];
+                if (maior) {
+                    document.getElementById('perfil-icone').textContent = icones[maior[0]] || '🧠';
+                    document.getElementById('perfil-nome').textContent = nomes[maior[0]] || 'Perfil';
+                    document.getElementById('perfil-descricao').textContent = descricoes[maior[0]] || 'Dimensão predominante';
+                }
+
+                // Pontos fortes (acima de 60%)
+                const fortes = Object.entries(scores)
+                    .filter(([k, v]) => v >= 60)
+                    .map(([k, v]) => `${icones[k] || '✅'} ${nomes[k] || k}`);
+                document.getElementById('pontos-fortes').innerHTML = 
+                    (fortes.length ? fortes.map(f => `<li>${f}</li>`).join('') : '<li>Equilibrado em todas as dimensões</li>');
+
+                // Pontos de desenvolvimento (abaixo de 40%)
+                const desenv = Object.entries(scores)
+                    .filter(([k, v]) => v < 40)
+                    .map(([k, v]) => `${icones[k] || '📌'} ${nomes[k] || k}`);
+                document.getElementById('pontos-desenvolvimento').innerHTML = 
+                    (desenv.length ? desenv.map(f => `<li>${f}</li>`).join('') : '<li>Nenhuma área crítica identificada</li>');
+
+                // Recomendações
+                const recs = [];
+                Object.entries(scores).forEach(([dim, score]) => {
+                    if (score < 40) {
+                        const dicas = {
+                            O: 'Explore novas experiências e saia da zona de conforto',
+                            C: 'Desenvolva organização e disciplina com ferramentas de produtividade',
+                            E: 'Fortaleça sua rede de contatos e habilidades de comunicação',
+                            A: 'Desenvolva empatia e pratique colaboração',
+                            N: 'Pratique mindfulness e técnicas de controle emocional'
+                        };
+                        recs.push(dicas[dim] || `Desenvolva ${nomes[dim]}`);
+                    }
+                });
+                document.getElementById('recomendacoes').innerHTML = 
+                    (recs.length ? recs.map(r => `<li>💡 ${r}</li>`).join('') : '<li>Continue mantendo seu bom desenvolvimento</li>');
+
+                // Ambientes ideais
+                const ambientes = {
+                    O: 'Ambientes criativos, inovadores e com novas oportunidades',
+                    C: 'Ambientes estruturados, com processos claros e metas definidas',
+                    E: 'Ambientes colaborativos, com interação social e networking',
+                    A: 'Ambientes com trabalho em equipe e cultura de apoio',
+                    N: 'Ambientes acolhedores, com baixo estresse e suporte emocional'
+                };
+                if (maior) {
+                    document.getElementById('ambientes').innerHTML = `<li>🏢 ${ambientes[maior[0]] || 'Ambiente equilibrado'}</li>`;
+                }
+
+            } catch (error) {
+                console.error('Erro ao carregar resultado:', error);
+            }
+        })();
+    </script>
+</body>
+</html>
