@@ -1,0 +1,375 @@
+/* ============================================
+   IA ASSISTANT - VIGORRE ONE™
+   Assistente flutuante com IA Gemini
+   ============================================ */
+
+.ia-assistant {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+/* ===== BOTÃO FLUTUANTE ===== */
+.ia-assistant-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--gradient-gold);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-gold);
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    position: relative;
+}
+
+.ia-assistant-toggle:hover {
+    transform: scale(1.08);
+    box-shadow: var(--shadow-gold-hover);
+}
+
+.ia-assistant-toggle:active {
+    transform: scale(0.95);
+}
+
+.ia-assistant-toggle .tooltip {
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--navy);
+    color: white;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.ia-assistant-toggle:hover .tooltip {
+    opacity: 1;
+}
+
+/* ===== BADGE DE NOTIFICAÇÃO ===== */
+.ia-assistant-toggle .badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--danger);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== JANELA DO CHAT ===== */
+.ia-assistant-window {
+    width: 400px;
+    max-width: calc(100vw - 48px);
+    height: 520px;
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-light);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+}
+
+.ia-assistant-window.open {
+    display: flex;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ===== HEADER DO CHAT ===== */
+.ia-assistant-window .ia-header {
+    padding: 16px 20px;
+    background: var(--gradient-gold);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.ia-assistant-window .ia-header .ia-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ia-assistant-window .ia-header .ia-title .icon {
+    font-size: 1.2rem;
+}
+
+.ia-assistant-window .ia-header .ia-close {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ia-assistant-window .ia-header .ia-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== CORPO DO CHAT ===== */
+.ia-assistant-window .ia-body {
+    flex: 1;
+    padding: 16px 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg-primary);
+}
+
+/* ===== MENSAGENS ===== */
+.ia-assistant-window .ia-body .ia-message {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    animation: messageIn 0.3s ease;
+}
+
+@keyframes messageIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ia-assistant-window .ia-body .ia-message.user {
+    align-self: flex-end;
+    background: var(--gradient-gold);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.ia-assistant-window .ia-body .ia-message.assistant {
+    align-self: flex-start;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-bottom-left-radius: 4px;
+    border: 1px solid var(--border-light);
+}
+
+.ia-assistant-window .ia-body .ia-message.assistant .ia-message-icon {
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.ia-assistant-window .ia-body .ia-message .ia-loading {
+    display: flex;
+    gap: 4px;
+    padding: 4px 0;
+}
+
+.ia-assistant-window .ia-body .ia-message .ia-loading span {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: loading 1.2s ease-in-out infinite;
+}
+
+.ia-assistant-window .ia-body .ia-message .ia-loading span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.ia-assistant-window .ia-body .ia-message .ia-loading span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes loading {
+    0%,
+    80%,
+    100% {
+        transform: scale(0.6);
+        opacity: 0.4;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===== SUGESTÕES ===== */
+.ia-assistant-window .ia-body .ia-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.ia-assistant-window .ia-body .ia-suggestions button {
+    padding: 6px 14px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-full);
+    background: var(--bg-white);
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.ia-assistant-window .ia-body .ia-suggestions button:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: var(--warning-bg);
+}
+
+/* ===== FOOTER DO CHAT ===== */
+.ia-assistant-window .ia-footer {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    background: var(--bg-white);
+}
+
+.ia-assistant-window .ia-footer input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-full);
+    font-family: var(--font-primary);
+    font-size: 0.85rem;
+    outline: none;
+    transition: var(--transition);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.ia-assistant-window .ia-footer input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+}
+
+.ia-assistant-window .ia-footer input::placeholder {
+    color: var(--text-muted);
+}
+
+.ia-assistant-window .ia-footer button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--gradient-gold);
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.ia-assistant-window .ia-footer button:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-gold-hover);
+}
+
+.ia-assistant-window .ia-footer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ===== SCROLLBAR ===== */
+.ia-assistant-window .ia-body::-webkit-scrollbar {
+    width: 4px;
+}
+
+.ia-assistant-window .ia-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.ia-assistant-window .ia-body::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: 4px;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 480px) {
+    .ia-assistant-window {
+        width: calc(100vw - 24px);
+        height: 460px;
+        bottom: 80px;
+        right: 12px;
+    }
+
+    .ia-assistant-toggle {
+        width: 52px;
+        height: 52px;
+        font-size: 1.4rem;
+    }
+
+    .ia-assistant-toggle .tooltip {
+        display: none;
+    }
+
+    .ia-assistant-window .ia-footer {
+        flex-direction: column;
+    }
+
+    .ia-assistant-window .ia-footer input {
+        border-radius: var(--radius-sm);
+    }
+
+    .ia-assistant-window .ia-footer button {
+        border-radius: var(--radius-sm);
+        padding: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .ia-assistant-window {
+        height: 380px;
+    }
+}
