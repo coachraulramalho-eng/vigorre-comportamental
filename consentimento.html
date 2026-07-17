@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consentimento LGPD - Vigorre One™</title>
+    <link rel="stylesheet" href="/assets/css/globals.css">
+</head>
+<body>
+    <div class="container consentimento-container">
+        <div class="consentimento-card">
+            <h1>🔒 Consentimento LGPD</h1>
+            <p>Para continuar utilizando a plataforma Vigorre One™, precisamos do seu consentimento para o tratamento de dados pessoais.</p>
+            
+            <div class="consentimento-texto">
+                <h3>O que você precisa saber:</h3>
+                <ul>
+                    <li>Seus dados serão utilizados exclusivamente para autoconhecimento e desenvolvimento profissional</li>
+                    <li>Você pode solicitar acesso, correção ou exclusão dos seus dados a qualquer momento</li>
+                    <li>Seus dados não serão compartilhados com terceiros sem sua autorização</li>
+                    <li>Os dados serão mantidos pelo período de 180 a 365 dias</li>
+                </ul>
+            </div>
+
+            <label class="checkbox-label">
+                <input type="checkbox" id="consentimento" required>
+                Li e concordo com os termos da <a href="/politica-privacidade">Política de Privacidade</a>
+            </label>
+
+            <button id="btn-consentir" class="btn-primary" disabled>
+                🔄 Continuar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('consentimento').addEventListener('change', function() {
+            document.getElementById('btn-consentir').disabled = !this.checked;
+        });
+
+        document.getElementById('btn-consentir').addEventListener('click', async function() {
+            const { data, error } = await supabase
+                .from('participantes')
+                .update({
+                    consentimento: true,
+                    consentimento_data: new Date().toISOString(),
+                    termo_versao: '3.0'
+                })
+                .eq('id', window.participanteId);
+
+            if (!error) {
+                window.location.href = '/dashboard';
+            }
+        });
+    </script>
+</body>
+</html>
