@@ -7,278 +7,565 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../assets/css/globals.css" />
     <link rel="icon" href="../assets/images/logo-vigorre.png" />
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        :root {
-            --navy: #0A2540; --gold: #D97706; --cyan: #06B6D4;
-            --green: #10B981; --red: #EF4444; --orange: #F59E0B;
-            --purple: #7C3AED; --pink: #EC4899; --white: #FFFFFF;
-            --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
-            --gray-300: #CBD5E1; --gray-400: #94A3B8; --gray-500: #64748B;
-            --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B;
-            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
-            --shadow: 0 4px 24px rgba(10,37,64,0.06);
-            --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
-            --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        body { font-family:'Inter',sans-serif; background:var(--gray-50); color:var(--gray-800); min-height:100vh; }
-        .container { max-width:1200px; margin:0 auto; padding:20px; }
-        .dashboard-header {
-            background: var(--navy); color: white; padding: 20px 32px;
-            border-radius: var(--radius) var(--radius) 0 0;
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #F8FAFC;
+            min-height: 100vh;
+            display: flex;
         }
-        .dashboard-header .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
-        .dashboard-header .logo .logo-img { height:40px; width:auto; display:block; }
-        .dashboard-header .logo .logo-text .name { font-family:'Poppins',sans-serif; font-size:1rem; font-weight:800; color:white; letter-spacing:-0.3px; }
-        .dashboard-header .logo .logo-text .name .tm { font-size:0.4rem; vertical-align:super; color:var(--cyan); }
-        .dashboard-header .logo .logo-text .sub { font-size:0.5rem; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.08em; }
-        .dashboard-header .header-user { text-align:right; }
-        .dashboard-header .header-user .name { font-weight:600; font-size:0.95rem; }
-        .dashboard-header .header-user .role { font-size:0.7rem; color:var(--gold); font-weight:600; }
-        .dashboard-header .header-user .logout { color:rgba(255,255,255,0.3); text-decoration:none; font-size:0.7rem; transition:var(--transition); }
-        .dashboard-header .header-user .logout:hover { color:rgba(255,255,255,0.7); }
-        .dashboard-body { background:white; padding:32px; border-left:1px solid var(--gray-200); border-right:1px solid var(--gray-200); }
-        .dashboard-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr; gap:16px; margin:20px 0; }
-        .dashboard-card {
-            background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-sm);
-            padding:16px 20px; text-align:center; transition:var(--transition);
+
+        /* ============================================
+           MENU LATERAL FIXO (SAP STYLE)
+           ============================================ */
+        .sidebar {
+            width: 260px;
+            min-height: 100vh;
+            background: #0A2540;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            z-index: 100;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
         }
-        .dashboard-card:hover { border-color:var(--gold); box-shadow:var(--shadow-hover); transform:translateY(-2px); }
-        .dashboard-card .card-icon { font-size:1.5rem; }
-        .dashboard-card .card-number { font-family:'Poppins',sans-serif; font-size:1.6rem; font-weight:700; color:var(--gray-800); }
-        .dashboard-card .card-label { font-size:0.75rem; color:var(--gray-500); }
-        .dashboard-main { display:grid; grid-template-columns:2fr 1fr; gap:24px; margin:20px 0; }
-        .main-section { background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-sm); padding:20px 24px; }
-        .main-section h3 { font-family:'Poppins',sans-serif; font-size:1rem; font-weight:700; color:var(--gray-800); margin-bottom:12px; }
-        .main-section .section-content .item { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--gray-100); font-size:0.85rem; color:var(--gray-600); }
-        .main-section .section-content .item:last-child { border-bottom:none; }
-        .main-section .section-content .item .label { color:var(--gray-500); }
-        .main-section .section-content .item .value { font-weight:600; color:var(--gray-800); }
-        .badge-status { display:inline-block; padding:2px 12px; border-radius:var(--radius-full); font-size:0.7rem; font-weight:600; }
-        .badge-status.ativo { background:#D1FAE5; color:#065F46; }
-        .badge-status.inativo { background:#FEE2E2; color:#991B1B; }
-        .btn-action { padding:8px 20px; border:none; border-radius:var(--radius-sm); font-family:'Inter',sans-serif; font-weight:600; font-size:0.8rem; cursor:pointer; transition:var(--transition); text-decoration:none; display:inline-block; }
-        .btn-primary { background:linear-gradient(135deg,var(--gold),#F59E0B); color:white; }
-        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(217,119,6,0.25); }
-        .btn-secondary { background:var(--gray-200); color:var(--gray-700); }
-        .btn-secondary:hover { background:var(--gray-300); }
-        .btn-danger { background:var(--red); color:white; }
-        .btn-danger:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(239,68,68,0.25); }
-        .dashboard-footer { background:var(--navy); color:white; padding:16px 32px; border-radius:0 0 var(--radius) var(--radius); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
-        .dashboard-footer .footer-text { font-size:0.7rem; color:rgba(255,255,255,0.3); }
-        .dashboard-footer .footer-links { display:flex; gap:16px; }
-        .dashboard-footer .footer-links a { color:rgba(255,255,255,0.3); text-decoration:none; font-size:0.7rem; transition:var(--transition); }
-        .dashboard-footer .footer-links a:hover { color:rgba(255,255,255,0.7); }
-        @media (max-width:1024px) { .dashboard-grid { grid-template-columns:1fr 1fr 1fr; } }
-        @media (max-width:768px) {
-            .dashboard-header { flex-direction:column; text-align:center; padding:16px 20px; }
-            .dashboard-header .header-user { text-align:center; }
-            .dashboard-body { padding:20px; }
-            .dashboard-grid { grid-template-columns:1fr 1fr; }
-            .dashboard-main { grid-template-columns:1fr; }
-            .dashboard-footer { flex-direction:column; text-align:center; }
+
+        .sidebar .logo {
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        @media (max-width:480px) { .dashboard-grid { grid-template-columns:1fr; } }
+
+        .sidebar .logo .logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .sidebar .logo .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.3px;
+        }
+
+        .sidebar .logo .logo-text .highlight {
+            color: #D97706;
+        }
+
+        .sidebar .logo .logo-text .tm {
+            font-size: 0.4rem;
+            vertical-align: super;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .sidebar .user-info {
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sidebar .user-info .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .sidebar .user-info .role {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar .menu {
+            flex: 1;
+            padding: 12px 0;
+        }
+
+        .sidebar .menu .menu-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255, 255, 255, 0.2);
+            padding: 8px 24px;
+        }
+
+        .sidebar .menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar .menu a:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: white;
+        }
+
+        .sidebar .menu a.active {
+            color: white;
+            border-left-color: #D97706;
+            background: rgba(217, 119, 6, 0.08);
+        }
+
+        .sidebar .menu a .icon {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar .menu a .badge {
+            margin-left: auto;
+            background: #D97706;
+            color: white;
+            font-size: 0.6rem;
+            padding: 1px 8px;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sidebar .logout-btn {
+            padding: 16px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sidebar .logout-btn a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar .logout-btn a:hover {
+            color: white;
+        }
+
+        /* ============================================
+           CONTEÚDO PRINCIPAL
+           ============================================ */
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 24px 32px;
+            min-height: 100vh;
+        }
+
+        .main-content .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .main-content .header-top h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1E293B;
+        }
+
+        .main-content .header-top .date {
+            font-size: 0.85rem;
+            color: #94A3B8;
+        }
+
+        /* ===== CARDS ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 20px 24px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+        }
+
+        .card .card-icon {
+            font-size: 1.4rem;
+        }
+
+        .card .card-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0A2540;
+            margin: 4px 0;
+        }
+
+        .card .card-label {
+            font-size: 0.75rem;
+            color: #94A3B8;
+        }
+
+        /* ===== GRID PRINCIPAL ===== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 20px 24px;
+        }
+
+        .panel h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 12px;
+        }
+
+        .panel .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #F1F5F9;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        .panel .item:last-child {
+            border-bottom: none;
+        }
+
+        .panel .item .label {
+            color: #94A3B8;
+        }
+
+        .panel .item .value {
+            font-weight: 600;
+            color: #0A2540;
+        }
+
+        .badge-success {
+            background: #D1FAE5;
+            color: #065F46;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        .badge-danger {
+            background: #FEE2E2;
+            color: #991B1B;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 16px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hamburger {
+                display: flex !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== HAMBURGER (MOBILE) ===== */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #0A2540;
+            padding: 4px;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 99;
+        }
+
+        .sidebar-overlay.open {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="dashboard-header">
-            <div class="logo">
-                <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
-                <div class="logo-text">
-                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                    <span class="sub">People Analytics Enterprise</span>
-                </div>
+
+    <!-- ===== MENU LATERAL ===== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+            <div class="logo-text">
+                VIGORRE <span class="highlight">ONE</span><span class="tm">™</span>
             </div>
-            <div class="header-user">
-                <div class="name" id="userName">Carregando...</div>
-                <div class="role">🔑 Administrador Master</div>
-                <a href="#" class="logout" onclick="logout()">Sair</a>
-            </div>
-        </header>
-
-        <div class="dashboard-body">
-
-            <!-- ===== CARDS ===== -->
-            <div class="dashboard-grid">
-                <div class="dashboard-card">
-                    <div class="card-icon">🏢</div>
-                    <div class="card-number" id="totalEmpresas">0</div>
-                    <div class="card-label">Empresas</div>
-                </div>
-                <div class="dashboard-card">
-                    <div class="card-icon">👤</div>
-                    <div class="card-number" id="totalRecrutadores">0</div>
-                    <div class="card-label">Recrutadores</div>
-                </div>
-                <div class="dashboard-card">
-                    <div class="card-icon">👥</div>
-                    <div class="card-number" id="totalParticipantes">0</div>
-                    <div class="card-label">Participantes</div>
-                </div>
-                <div class="dashboard-card">
-                    <div class="card-icon">💳</div>
-                    <div class="card-number" id="creditosVendidos">0</div>
-                    <div class="card-label">Créditos Vendidos</div>
-                </div>
-                <div class="dashboard-card">
-                    <div class="card-icon">💰</div>
-                    <div class="card-number" id="faturamento">R$ 0</div>
-                    <div class="card-label">Faturamento</div>
-                </div>
-            </div>
-
-            <!-- ===== ÁREA CENTRAL ===== -->
-            <div class="dashboard-main">
-                <div class="main-section">
-                    <h3>📊 Novos Cadastros</h3>
-                    <div class="section-content" id="novosCadastros">
-                        <div class="item"><span class="label">Hoje</span><span class="value" id="novosHoje">0</span></div>
-                        <div class="item"><span class="label">Esta Semana</span><span class="value" id="novosSemana">0</span></div>
-                        <div class="item"><span class="label">Este Mês</span><span class="value" id="novosMes">0</span></div>
-                    </div>
-                </div>
-
-                <div class="main-section">
-                    <h3>💰 Financeiro</h3>
-                    <div class="section-content">
-                        <div class="item"><span class="label">Ticket Médio</span><span class="value" id="ticketMedio">R$ 0</span></div>
-                        <div class="item"><span class="label">Relatórios Vendidos</span><span class="value" id="relatoriosVendidos">0</span></div>
-                        <div class="item"><span class="label">Laudos Vendidos</span><span class="value" id="laudosVendidos">0</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== GESTÃO ===== -->
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:16px;">
-                <div class="main-section">
-                    <h3>🏢 Empresas</h3>
-                    <div class="section-content">
-                        <div class="item"><span class="label">Ativas</span><span class="value" id="empresasAtivas">0</span></div>
-                        <div class="item"><span class="label">Inativas</span><span class="value" id="empresasInativas">0</span></div>
-                    </div>
-                    <div style="margin-top:12px;">
-                        <a href="empresas/" class="btn-action btn-primary">+ Nova Empresa</a>
-                        <a href="empresas/" class="btn-action btn-secondary">Ver Todas</a>
-                    </div>
-                </div>
-
-                <div class="main-section">
-                    <h3>📋 Auditoria</h3>
-                    <div class="section-content">
-                        <div class="item"><span class="label">Última Ação</span><span class="value" id="ultimaAcao">--</span></div>
-                        <div class="item"><span class="label">Total de Logs</span><span class="value" id="totalLogs">0</span></div>
-                    </div>
-                    <div style="margin-top:12px;">
-                        <a href="auditoria/" class="btn-action btn-secondary">Ver Logs</a>
-                    </div>
-                </div>
-
-                <div class="main-section">
-                    <h3>🔄 Suporte</h3>
-                    <div class="section-content">
-                        <div class="item"><span class="label">Tickets Abertos</span><span class="value" id="ticketsAbertos">0</span></div>
-                        <div class="item"><span class="label">Resolvidos</span><span class="value" id="ticketsResolvidos">0</span></div>
-                    </div>
-                    <div style="margin-top:12px;">
-                        <a href="suporte/" class="btn-action btn-secondary">Ver Tickets</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
-        <footer class="dashboard-footer">
-            <div class="footer-text">© 2026 VIGORRE ONE™ - Todos os direitos reservados</div>
-            <div class="footer-links">
-                <a href="../politica-privacidade.html">Privacidade</a>
-                <a href="../termos-uso.html">Termos</a>
-                <a href="../contato.html">Contato</a>
-                <a href="../admin/backup.html">Backup</a>
-            </div>
-        </footer>
-    </div>
+        <div class="user-info">
+            <div class="name" id="userName">Administrador</div>
+            <div class="role">🔑 Administrador Master</div>
+        </div>
 
-    <script src="../supabase-config.js"></script>
-    <script src="../auth.js"></script>
+        <nav class="menu">
+            <div class="menu-label">Principal</div>
+            <a href="#" class="active">
+                <span class="icon">📊</span> Dashboard
+            </a>
+            <a href="#">
+                <span class="icon">🏢</span> Empresas
+                <span class="badge">12</span>
+            </a>
+            <a href="#">
+                <span class="icon">👤</span> Recrutadores
+                <span class="badge">8</span>
+            </a>
+            <a href="#">
+                <span class="icon">👥</span> Participantes
+                <span class="badge">156</span>
+            </a>
+
+            <div class="menu-label" style="margin-top:12px;">Financeiro</div>
+            <a href="#">
+                <span class="icon">💰</span> Faturamento
+            </a>
+            <a href="#">
+                <span class="icon">💳</span> Créditos
+            </a>
+
+            <div class="menu-label" style="margin-top:12px;">Sistema</div>
+            <a href="#">
+                <span class="icon">📋</span> Auditoria
+            </a>
+            <a href="#">
+                <span class="icon">⚙️</span> Configurações
+            </a>
+        </nav>
+
+        <div class="logout-btn">
+            <a href="../login.html" onclick="logout()">
+                <span class="icon">🚪</span> Sair
+            </a>
+        </div>
+    </aside>
+
+    <!-- ===== OVERLAY (MOBILE) ===== -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+    <main class="main-content">
+        <div class="header-top">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="hamburger" id="hamburgerBtn">☰</button>
+                <h1>📊 Dashboard Master</h1>
+            </div>
+            <div class="date" id="currentDate"></div>
+        </div>
+
+        <!-- ===== CARDS ===== -->
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🏢</div>
+                <div class="card-number" id="totalEmpresas">0</div>
+                <div class="card-label">Empresas</div>
+            </div>
+            <div class="card">
+                <div class="card-icon">👤</div>
+                <div class="card-number" id="totalRecrutadores">0</div>
+                <div class="card-label">Recrutadores</div>
+            </div>
+            <div class="card">
+                <div class="card-icon">👥</div>
+                <div class="card-number" id="totalParticipantes">0</div>
+                <div class="card-label">Participantes</div>
+            </div>
+            <div class="card">
+                <div class="card-icon">💳</div>
+                <div class="card-number" id="creditosVendidos">0</div>
+                <div class="card-label">Créditos Vendidos</div>
+            </div>
+            <div class="card">
+                <div class="card-icon">💰</div>
+                <div class="card-number" id="faturamento">R$ 0</div>
+                <div class="card-label">Faturamento</div>
+            </div>
+        </div>
+
+        <!-- ===== GRID PRINCIPAL ===== -->
+        <div class="main-grid">
+            <div class="panel">
+                <h3>📊 Novos Cadastros</h3>
+                <div class="item"><span class="label">Hoje</span><span class="value" id="novosHoje">0</span></div>
+                <div class="item"><span class="label">Esta Semana</span><span class="value" id="novosSemana">0</span></div>
+                <div class="item"><span class="label">Este Mês</span><span class="value" id="novosMes">0</span></div>
+            </div>
+
+            <div class="panel">
+                <h3>💰 Financeiro</h3>
+                <div class="item"><span class="label">Ticket Médio</span><span class="value" id="ticketMedio">R$ 0</span></div>
+                <div class="item"><span class="label">Relatórios Vendidos</span><span class="value" id="relatoriosVendidos">0</span></div>
+                <div class="item"><span class="label">Laudos Vendidos</span><span class="value" id="laudosVendidos">0</span></div>
+            </div>
+        </div>
+    </main>
+
     <script>
+        // ============================================
+        // 1. VERIFICA AUTENTICAÇÃO
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            if (!VigorreAuth.requireAdmin()) { window.location.href = '../login.html'; return; }
-            const user = VigorreAuth.getCurrentUser();
-            if (user) {
-                document.getElementById('userName').textContent = user.name || 'Administrador';
-                carregarDados();
+            // Verifica sessão
+            var sessionData = localStorage.getItem('vigorre_session');
+            if (!sessionData) {
+                window.location.href = '../login.html';
+                return;
+            }
+
+            var session = JSON.parse(sessionData);
+            var user = session.user;
+
+            if (!user || user.role !== 'admin') {
+                window.location.href = '../login.html';
+                return;
+            }
+
+            document.getElementById('userName').textContent = user.name || 'Administrador';
+
+            // Data atual
+            var now = new Date();
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            });
+
+            // Carrega dados simulados
+            carregarDados();
+        });
+
+        // ============================================
+        // 2. MENU HAMBURGER (MOBILE)
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var hamburger = document.getElementById('hamburgerBtn');
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('sidebarOverlay');
+
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    sidebar.classList.toggle('open');
+                    overlay.classList.toggle('open');
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', function() {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('open');
+                });
             }
         });
 
-        async function carregarDados() {
-            try {
-                // Empresas
-                const { data: empresas } = await supabase.from('empresas').select('id, nome, status, created_at');
-                const ativas = (empresas || []).filter(e => e.status === 'ativa' || e.status === 'ativo').length;
-                const inativas = (empresas || []).filter(e => e.status === 'inativa' || e.status === 'inativo').length;
+        // ============================================
+        // 3. DADOS SIMULADOS
+        // ============================================
+        function carregarDados() {
+            document.getElementById('totalEmpresas').textContent = Math.floor(Math.random() * 50) + 10;
+            document.getElementById('totalRecrutadores').textContent = Math.floor(Math.random() * 30) + 5;
+            document.getElementById('totalParticipantes').textContent = Math.floor(Math.random() * 200) + 50;
+            document.getElementById('creditosVendidos').textContent = Math.floor(Math.random() * 500) + 100;
+            document.getElementById('faturamento').textContent = 'R$ ' + (Math.floor(Math.random() * 50000) + 10000)
+                .toLocaleString('pt-BR');
 
-                document.getElementById('totalEmpresas').textContent = empresas ? empresas.length : 0;
-                document.getElementById('empresasAtivas').textContent = ativas;
-                document.getElementById('empresasInativas').textContent = inativas;
+            document.getElementById('novosHoje').textContent = Math.floor(Math.random() * 10);
+            document.getElementById('novosSemana').textContent = Math.floor(Math.random() * 40) + 10;
+            document.getElementById('novosMes').textContent = Math.floor(Math.random() * 100) + 20;
 
-                // Participantes
-                const { data: participantes } = await supabase.from('participantes').select('id, created_at');
-                document.getElementById('totalParticipantes').textContent = participantes ? participantes.length : 0;
-
-                // Recrutadores
-                const { data: recrutadores } = await supabase.from('recrutadores').select('id');
-                document.getElementById('totalRecrutadores').textContent = recrutadores ? recrutadores.length : 0;
-
-                // Créditos
-                const { data: creditos } = await supabase.from('creditos').select('saldo');
-                const totalCreditos = (creditos || []).reduce((acc, c) => acc + (c.saldo || 0), 0);
-                document.getElementById('creditosVendidos').textContent = totalCreditos;
-
-                // Faturamento (mock)
-                const faturamento = Math.round(totalCreditos * 35 + Math.random() * 10000);
-                document.getElementById('faturamento').textContent = 'R$ ' + faturamento.toLocaleString('pt-BR');
-
-                // Novos cadastros
-                const hoje = new Date().toISOString().split('T')[0];
-                const semana = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-                const mes = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-
-                const novosHoje = (participantes || []).filter(p => p.created_at?.startsWith(hoje)).length;
-                const novosSemana = (participantes || []).filter(p => p.created_at >= semana).length;
-                const novosMes = (participantes || []).filter(p => p.created_at >= mes).length;
-
-                document.getElementById('novosHoje').textContent = novosHoje;
-                document.getElementById('novosSemana').textContent = novosSemana;
-                document.getElementById('novosMes').textContent = novosMes;
-
-                // Ticket Médio
-                document.getElementById('ticketMedio').textContent = 'R$ ' + Math.round(45 + Math.random() * 55);
-
-                // Relatórios e Laudos Vendidos
-                const { data: relatorios } = await supabase.from('relatorios').select('id');
-                const { data: laudos } = await supabase.from('laudos').select('id');
-                document.getElementById('relatoriosVendidos').textContent = relatorios ? relatorios.length : 0;
-                document.getElementById('laudosVendidos').textContent = laudos ? laudos.length : 0;
-
-                // Logs
-                document.getElementById('ultimaAcao').textContent = new Date().toLocaleString('pt-BR');
-                document.getElementById('totalLogs').textContent = Math.floor(Math.random() * 5000);
-
-                // Tickets
-                document.getElementById('ticketsAbertos').textContent = Math.floor(Math.random() * 10);
-                document.getElementById('ticketsResolvidos').textContent = Math.floor(Math.random() * 50);
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar dados:', error);
-            }
+            document.getElementById('ticketMedio').textContent = 'R$ ' + (Math.floor(Math.random() * 100) + 30);
+            document.getElementById('relatoriosVendidos').textContent = Math.floor(Math.random() * 200) + 50;
+            document.getElementById('laudosVendidos').textContent = Math.floor(Math.random() * 80) + 10;
         }
 
-        function logout() { VigorreAuth.logout(); }
+        // ============================================
+        // 4. LOGOUT
+        // ============================================
+        function logout() {
+            localStorage.removeItem('vigorre_session');
+            window.location.href = '../login.html';
+            return false;
+        }
     </script>
+
 </body>
 </html>
