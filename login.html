@@ -93,17 +93,17 @@
             background: #F1F5F9;
             border: 1px solid #E2E8F0;
             border-radius: 10px;
-            padding: 16px 20px;
+            padding: 14px 18px;
             margin-bottom: 20px;
         }
 
         .test-credentials .title {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: #0A2540;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -112,7 +112,7 @@
         .test-credentials .title .badge {
             background: #D97706;
             color: white;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             padding: 2px 10px;
             border-radius: 9999px;
             font-weight: 600;
@@ -122,8 +122,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 4px 0;
-            font-size: 0.8rem;
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
             border-bottom: 1px solid #E2E8F0;
         }
 
@@ -131,35 +134,43 @@
             border-bottom: none;
         }
 
+        .test-credentials .user-row:hover {
+            background: #E2E8F0;
+        }
+
         .test-credentials .user-row .role {
             font-weight: 600;
             color: #0A2540;
-            min-width: 100px;
+            min-width: 80px;
+            font-size: 0.7rem;
         }
 
         .test-credentials .user-row .email {
             color: #475569;
             font-family: 'Courier New', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
+            flex: 1;
+            padding: 0 8px;
         }
 
         .test-credentials .user-row .password {
             color: #D97706;
             font-weight: 700;
             font-family: 'Courier New', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             background: #FEF3C7;
             padding: 2px 10px;
             border-radius: 9999px;
+            white-space: nowrap;
         }
 
         .test-credentials .click-hint {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #94A3B8;
-            margin-top: 8px;
+            margin-top: 6px;
             text-align: center;
             border-top: 1px dashed #E2E8F0;
-            padding-top: 8px;
+            padding-top: 6px;
         }
 
         .test-credentials .click-hint span {
@@ -182,9 +193,15 @@
             margin-bottom: 4px;
         }
 
-        .form-group input {
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-wrapper input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 12px 48px 12px 16px;
             border: 1px solid #E2E8F0;
             border-radius: 10px;
             font-family: 'Inter', sans-serif;
@@ -194,14 +211,31 @@
             color: #1E293B;
         }
 
-        .form-group input:focus {
+        .password-wrapper input:focus {
             outline: none;
             border-color: #D97706;
             box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
         }
 
-        .form-group input::placeholder {
+        .password-wrapper input::placeholder {
             color: #94A3B8;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #94A3B8;
+            padding: 4px;
+            transition: color 0.3s;
+            line-height: 1;
+        }
+
+        .toggle-password:hover {
+            color: #0A2540;
         }
 
         /* ===== BOTÃO ===== */
@@ -301,10 +335,6 @@
             text-decoration: none;
         }
 
-        .login-footer .footer-text a:hover {
-            text-decoration: underline;
-        }
-
         /* ===== RESPONSIVO ===== */
         @media (max-width: 480px) {
             .login-container {
@@ -322,19 +352,22 @@
             .test-credentials .user-row {
                 flex-wrap: wrap;
                 gap: 4px;
+                padding: 8px 6px;
             }
 
             .test-credentials .user-row .role {
-                min-width: 80px;
-                font-size: 0.7rem;
+                min-width: 60px;
+                font-size: 0.6rem;
             }
 
             .test-credentials .user-row .email {
-                font-size: 0.6rem;
+                font-size: 0.55rem;
+                padding: 0 4px;
             }
 
             .test-credentials .user-row .password {
-                font-size: 0.6rem;
+                font-size: 0.55rem;
+                padding: 2px 8px;
             }
         }
     </style>
@@ -360,29 +393,29 @@
         <div class="test-credentials">
             <div class="title">
                 🔑 Credenciais de Teste
-                <span class="badge">Clique para copiar</span>
+                <span class="badge">Clique para preencher</span>
             </div>
 
-            <div class="user-row">
+            <div class="user-row" data-email="admin@vigorre.com" data-password="Admin@2026">
                 <span class="role">👑 Admin</span>
                 <span class="email">admin@vigorre.com</span>
-                <span class="password" onclick="copiarSenha('Admin@2026')">Admin@2026</span>
+                <span class="password">Admin@2026</span>
             </div>
 
-            <div class="user-row">
+            <div class="user-row" data-email="empresa@vigorre.com" data-password="Empresa@2026">
                 <span class="role">🏢 Empresa</span>
                 <span class="email">empresa@vigorre.com</span>
-                <span class="password" onclick="copiarSenha('Empresa@2026')">Empresa@2026</span>
+                <span class="password">Empresa@2026</span>
             </div>
 
-            <div class="user-row">
+            <div class="user-row" data-email="participante@vigorre.com" data-password="Part@2026">
                 <span class="role">👤 Participante</span>
                 <span class="email">participante@vigorre.com</span>
-                <span class="password" onclick="copiarSenha('Part@2026')">Part@2026</span>
+                <span class="password">Part@2026</span>
             </div>
 
             <div class="click-hint">
-                💡 Clique na <span>senha</span> para copiar
+                💡 Clique em uma linha para <span>preencher</span> os campos
             </div>
         </div>
 
@@ -402,12 +435,17 @@
         <form id="loginForm" onsubmit="return false;">
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="seu@email.com" />
+                <input type="email" id="email" placeholder="seu@email.com" autocomplete="username" />
             </div>
 
             <div class="form-group">
                 <label for="password">Senha</label>
-                <input type="password" id="password" placeholder="••••••••" />
+                <div class="password-wrapper">
+                    <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" />
+                    <button type="button" class="toggle-password" id="togglePassword" aria-label="Mostrar senha">
+                        👁️
+                    </button>
+                </div>
             </div>
 
             <button type="submit" class="btn-login" id="btnLogin">🔑 Entrar</button>
@@ -432,38 +470,56 @@
 
     <script>
         // ============================================
-        // FUNÇÃO PARA COPIAR SENHA
+        // 1. OLHO PARA MOSTRAR/ESCONDER SENHA
         // ============================================
-        function copiarSenha(senha) {
-            navigator.clipboard.writeText(senha).then(function() {
-                // Feedback visual
-                const elements = document.querySelectorAll('.password');
-                elements.forEach(el => {
-                    if (el.textContent === senha) {
-                        el.style.background = '#10B981';
-                        el.style.color = 'white';
-                        el.textContent = '✅ Copiado!';
-                        setTimeout(() => {
-                            el.style.background = '#FEF3C7';
-                            el.style.color = '#D97706';
-                            el.textContent = senha;
-                        }, 1500);
-                    }
-                });
-            }).catch(function() {
-                // Fallback: selecionar o texto
-                const input = document.createElement('input');
-                input.value = senha;
-                document.body.appendChild(input);
-                input.select();
-                document.execCommand('copy');
-                input.remove();
-                alert('📋 Senha copiada: ' + senha);
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🙈';
             });
-        }
+        });
 
         // ============================================
-        // LOGIN
+        // 2. CLICK NAS CREDENCIAIS PARA PREENCHER
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('.user-row');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const messageEl = document.getElementById('loginMessage');
+
+            rows.forEach(row => {
+                row.addEventListener('click', function() {
+                    const email = this.dataset.email;
+                    const password = this.dataset.password;
+
+                    emailInput.value = email;
+                    passwordInput.value = password;
+
+                    // Feedback visual
+                    emailInput.style.borderColor = '#10B981';
+                    passwordInput.style.borderColor = '#10B981';
+                    setTimeout(() => {
+                        emailInput.style.borderColor = '';
+                        passwordInput.style.borderColor = '';
+                    }, 2000);
+
+                    showMessage('✅ Credenciais preenchidas! Clique em Entrar.', 'success');
+
+                    // Esconde a mensagem após 3 segundos
+                    setTimeout(() => {
+                        messageEl.style.display = 'none';
+                    }, 3000);
+                });
+            });
+        });
+
+        // ============================================
+        // 3. FUNÇÃO DE LOGIN
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🔐 Login - VIGORRE ONE™');
@@ -496,25 +552,6 @@
                 if (e.key === 'Enter') handleLogin();
             });
 
-            // Clique nas credenciais para preencher automático
-            document.querySelectorAll('.user-row').forEach(row => {
-                row.style.cursor = 'pointer';
-                row.addEventListener('click', function() {
-                    const email = this.querySelector('.email').textContent;
-                    const password = this.querySelector('.password').textContent;
-                    emailInput.value = email;
-                    passwordInput.value = password;
-                    // Destaque
-                    emailInput.style.borderColor = '#10B981';
-                    passwordInput.style.borderColor = '#10B981';
-                    setTimeout(() => {
-                        emailInput.style.borderColor = '';
-                        passwordInput.style.borderColor = '';
-                    }, 2000);
-                    showMessage('✅ Credenciais preenchidas! Clique em Entrar.', 'success');
-                });
-            });
-
             function handleLogin() {
                 const email = emailInput.value.trim();
                 const password = passwordInput.value.trim();
@@ -528,8 +565,9 @@
                 btnLogin.textContent = '⏳ Entrando...';
 
                 try {
+                    // Tenta fazer login
                     const user = VigorreAuth.login(email, password);
-                    // O redirecionamento é feito pelo auth.js
+                    // Se chegou aqui, o redirecionamento é feito pelo auth.js
                 } catch (error) {
                     console.error('❌ Erro no login:', error);
 
@@ -547,6 +585,7 @@
             function showMessage(text, type) {
                 messageEl.textContent = text;
                 messageEl.className = 'message ' + type;
+                messageEl.style.display = 'block';
             }
         });
     </script>
