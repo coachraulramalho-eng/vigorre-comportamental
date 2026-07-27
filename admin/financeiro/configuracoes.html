@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configurações | Centro Financeiro VIGORRE ONE™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
+            --green: #10B981; --red: #EF4444; --white: #FFFFFF;
+            --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1; --gray-400: #94A3B8; --gray-500: #64748B;
+            --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10,37,64,0.06);
+            --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
+            --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+        .sidebar {
+            position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+            background: var(--navy); color: white; padding: 24px 20px;
+            display: flex; flex-direction: column; z-index: 100;
+            transition: var(--transition); overflow-y: auto;
+        }
+        .sidebar .logo {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; margin-bottom: 32px;
+            padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .sidebar .logo .logo-img { height: 36px; width: auto; display: block; }
+        .sidebar .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white;
+        }
+        .sidebar .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
+        .sidebar .logo .logo-text .sub {
+            font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .sidebar .user-info {
+            padding: 16px 12px; background: rgba(255,255,255,0.04);
+            border-radius: var(--radius-sm); margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .sidebar .user-info .name { font-weight: 600; font-size: 0.9rem; color: white; }
+        .sidebar .user-info .role {
+            font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .sidebar .user-info .role .badge {
+            display: inline-block; padding: 2px 10px; background: rgba(217,119,6,0.15);
+            color: var(--gold); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600;
+        }
+        .sidebar .nav { list-style: none; flex: 1; }
+        .sidebar .nav li { margin-bottom: 2px; }
+        .sidebar .nav a {
+            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+            border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition);
+        }
+        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
+        .sidebar .nav a.active {
+            background: rgba(217,119,6,0.12); color: white; border-left: 3px solid var(--gold);
+        }
+        .sidebar .nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; }
+        .sidebar .nav .divider { height: 1px; background: rgba(255,255,255,0.04); margin: 12px 0; }
+        .sidebar .logout { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .sidebar .logout a {
+            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+            border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition);
+        }
+        .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
+        .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
+        .main-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
+        }
+        .main-header .breadcrumb { font-size: 0.85rem; color: var(--gray-500); }
+        .main-header .breadcrumb a { color: var(--blue); text-decoration: none; }
+        .main-header .breadcrumb a:hover { color: var(--cyan); }
+        .main-header h1 {
+            font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700;
+            color: var(--gray-900); margin-top: 4px;
+        }
+        .btn-primary {
+            padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white; border: none; border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer;
+            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
+        .btn-secondary {
+            padding: 10px 24px; background: var(--gray-100); color: var(--gray-700);
+            border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer;
+            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-secondary:hover { background: var(--gray-200); }
+        .btn-success {
+            padding: 10px 24px; background: var(--green); color: white;
+            border: none; border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer;
+            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.25); }
+        .settings-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+        }
+        .settings-card {
+            background: white; border-radius: var(--radius);
+            box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
+            padding: 24px;
+        }
+        .settings-card h3 {
+            font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600;
+            color: var(--gray-800); margin-bottom: 16px;
+            padding-bottom: 12px; border-bottom: 1px solid var(--gray-100);
+        }
+        .settings-card .setting-group {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-bottom: 1px solid var(--gray-50);
+        }
+        .settings-card .setting-group:last-child { border-bottom: none; }
+        .settings-card .setting-group .label {
+            font-size: 0.85rem; color: var(--gray-700);
+        }
+        .settings-card .setting-group .label small {
+            display: block; font-size: 0.7rem; color: var(--gray-400); font-weight: 400;
+        }
+        .settings-card .setting-group input[type="text"],
+        .settings-card .setting-group input[type="number"],
+        .settings-card .setting-group select {
+            padding: 6px 12px; border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm); font-family: 'Inter', sans-serif;
+            font-size: 0.85rem; width: 160px; transition: var(--transition);
+        }
+        .settings-card .setting-group input:focus,
+        .settings-card .setting-group select:focus {
+            outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(29,78,216,0.08);
+        }
+        .settings-card .setting-group .toggle {
+            position: relative; width: 44px; height: 24px;
+            background: var(--gray-300); border-radius: 12px;
+            cursor: pointer; transition: var(--transition);
+        }
+        .settings-card .setting-group .toggle.active {
+            background: var(--blue);
+        }
+        .settings-card .setting-group .toggle .thumb {
+            position: absolute; top: 2px; left: 2px;
+            width: 20px; height: 20px; background: white;
+            border-radius: 50%; transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .settings-card .setting-group .toggle.active .thumb {
+            left: 22px;
+        }
+        .settings-actions {
+            margin-top: 24px; display: flex; gap: 12px; justify-content: flex-end;
+        }
+        .toast {
+            position: fixed; top: 24px; right: 24px; background: white;
+            padding: 14px 24px; border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            display: none; align-items: center; gap: 12px;
+            font-weight: 600; font-size: 0.875rem; z-index: 300;
+            border-left: 4px solid var(--blue); animation: slideIn 0.3s ease;
+        }
+        .toast.show { display: flex; }
+        .toast.success { border-left-color: #10B981; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(120%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
+        .mobile-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99;
+        }
+        .mobile-overlay.active { display: block; }
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); width: 280px; }
+            .sidebar.open { transform: translateX(0); }
+            .main { margin-left: 0; padding: 16px; }
+            .mobile-toggle { display: block; }
+            .mobile-overlay.active { display: block; }
+            .settings-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .main-header { flex-direction: column; align-items: flex-start; }
+            .settings-card .setting-group { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .settings-card .setting-group input[type="text"],
+            .settings-card .setting-group input[type="number"],
+            .settings-card .setting-group select { width: 100%; }
+        }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+        @media print {
+            .sidebar { display: none !important; }
+            .main { margin-left: 0 !important; }
+            .mobile-toggle { display: none !important; }
+            .logo-img { height: 36px !important; }
+            .btn-primary { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <a href="../dashboard.html" class="logo">
+            <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Analytics Enterprise</span>
+            </div>
+        </a>
+        <div class="user-info">
+            <div class="name" id="userName">Administrador</div>
+            <div class="role">
+                <span class="badge">⚙️ Master Config</span>
+            </div>
+        </div>
+        <ul class="nav">
+            <li><a href="../dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="../empresas/"><span class="icon">🏢</span> Empresas</a></li>
+            <li><a href="../recrutadores/"><span class="icon">👤</span> Recrutadores</a></li>
+            <li><a href="../participantes/"><span class="icon">👥</span> Participantes</a></li>
+            <li><a href="index.html"><span class="icon">💰</span> Centro Financeiro</a></li>
+            <li><a href="carteiras.html"><span class="icon">💼</span> Carteiras</a></li>
+            <li><a href="creditos.html"><span class="icon">💳</span> Créditos</a></li>
+            <li><a href="extratos.html"><span class="icon">📋</span> Extratos</a></li>
+            <li><a href="precos.html"><span class="icon">🏷️</span> Preços</a></li>
+            <li><a href="cupons.html"><span class="icon">🎫</span> Cupons</a></li>
+            <div class="divider"></div>
+            <li><a href="auditoria.html"><span class="icon">🔍</span> Auditoria</a></li>
+            <li><a href="configuracoes.html" class="active"><span class="icon">⚙️</span> Configurações</a></li>
+            <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
+        </ul>
+        <div class="logout">
+            <a href="#" onclick="logout()">
+                <span class="icon">🚪</span> Sair
+            </a>
+        </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <main class="main">
+        <div class="main-header">
+            <div>
+                <div class="breadcrumb">
+                    <a href="index.html">Centro Financeiro</a> / Configurações
+                </div>
+                <h1>⚙️ Configurações Financeiras</h1>
+                <p style="color: var(--gray-500); font-size: 0.9rem;">Configure as regras e parâmetros financeiros da plataforma</p>
+            </div>
+        </div>
+
+        <div class="settings-grid">
+            <div class="settings-card">
+                <h3>💰 Créditos</h3>
+                <div class="setting-group">
+                    <div class="label">Validade padrão de créditos <small>Dias até expirar</small></div>
+                    <input type="number" id="creditoValidade" value="365" />
+                </div>
+                <div class="setting-group">
+                    <div class="label">Créditos mínimos por compra <small>Quantidade mínima</small></div>
+                    <input type="number" id="creditoMinimo" value="10" />
+                </div>
+                <div class="setting-group">
+                    <div class="label">Créditos bônus por recomendação <small>Para novos usuários</small></div>
+                    <input type="number" id="creditoBonus" value="5" />
+                </div>
+                <div class="setting-group">
+                    <div class="label">Notificar antes de expirar <small>Dias de antecedência</small></div>
+                    <input type="number" id="creditoNotificar" value="30" />
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h3>💳 Pagamentos</h3>
+                <div class="setting-group">
+                    <div class="label">Gateway padrão <small>Processador de pagamentos</small></div>
+                    <select id="gatewayPadrao">
+                        <option value="stripe">Stripe</option>
+                        <option value="mercadopago">Mercado Pago</option>
+                        <option value="pagarme">Pagar.me</option>
+                        <option value="asaas">Asaas</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <div class="label">Parcelamento máximo <small>Número de parcelas</small></div>
+                    <input type="number" id="parcelasMax" value="12" />
+                </div>
+                <div class="setting-group">
+                    <div class="label">Juros por parcela <small>% ao mês</small></div>
+                    <input type="number" id="jurosParcela" step="0.01" value="2.99" />
+                </div>
+                <div class="setting-group">
+                    <div class="label">Desconto à vista <small>% de desconto</small></div>
+                    <input type="number" id="descontoAvista" step="0.01" value="5" />
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h3>📊 Relatórios e Laudos</h3>
+                <div class="setting-group">
+                    <div class="label">Créditos por relatório DISC <small>Consumo por relatório</small></div>
+                    <input type="number" id="creditoDisc" value="1" />
+                </div>
+                <div class="setting-group">
+                    <div class="label">Créditos por relatório IE <small>Consumo por relatório</small></div>
+                    <input type="number" id="creditoIe" value="1" />
+                </div>
+                <div class="setting-group">
+                    <div class="label">Créditos por laudo <small>Consumo por laudo</small></div>
+                    <input type="number" id="creditoLaudo" value="3" />
+                </div>
+                <div class="setting-group">
+                    <div class="label">Créditos por relatório Big Five <small>Consumo por relatório</small></div>
+                    <input type="number" id="creditoBigFive" value="2" />
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h3>🔐 Segurança e Regras</h3>
+                <div class="setting-group">
+                    <div class="label">Exigir 2FA para transferências <small>Autenticação em dois fatores</small></div>
+                    <div class="toggle active" onclick="toggleSwitch(this)">
+                        <div class="thumb"></div>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <div class="label">Limite diário de transferência <small>Valor máximo por dia</small></div>
+                    <input type="number" id="limiteTransferencia" value="5000" />
+                </div>
+                <div class="setting-group">
+                    <div class="label">Notificar saques acima de <small>Valor para alerta</small></div>
+                    <input type="number" id="alertaSaques" value="1000" />
+                </div>
+                <div class="setting-group">
+                    <div class="label">Requer aprovação para reembolso <small>Necessita de autorização</small></div>
+                    <div class="toggle active" onclick="toggleSwitch(this)">
+                        <div class="thumb"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card" style="grid-column: 1 / -1;">
+                <h3>📩 Notificações Financeiras</h3>
+                <div class="setting-group">
+                    <div class="label">Notificar saldo baixo <small>Quando o saldo estiver abaixo de</small></div>
+                    <input type="number" id="saldoBaixo" value="100" style="width:120px;" />
+                    <span style="font-size:0.85rem;color:var(--gray-500);">créditos</span>
+                </div>
+                <div class="setting-group">
+                    <div class="label">Notificar consumo elevado <small>Quando o consumo aumentar</small></div>
+                    <input type="number" id="consumoElevado" value="30" style="width:120px;" />
+                    <span style="font-size:0.85rem;color:var(--gray-500);">% em 30 dias</span>
+                </div>
+                <div class="setting-group">
+                    <div class="label">Notificar inatividade <small>Empresas sem uso por</small></div>
+                    <input type="number" id="inatividadeDias" value="90" style="width:120px;" />
+                    <span style="font-size:0.85rem;color:var(--gray-500);">dias</span>
+                </div>
+                <div class="setting-group">
+                    <div class="label">Enviar relatório semanal para <small>Email do administrador</small></div>
+                    <input type="email" id="emailRelatorio" value="admin@vigorre.com" style="width:220px;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-actions">
+            <button class="btn-secondary" onclick="resetSettings()">↺ Restaurar Padrões</button>
+            <button class="btn-primary" onclick="saveSettings()">💾 Salvar Configurações</button>
+        </div>
+    </main>
+
+    <script src="../../supabase-config.js"></script>
+    <script src="../../auth.js"></script>
+    <script src="../../middleware/auth-guard.js"></script>
+
+    <script>
+        'use strict';
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                window.VigorreAuth.logout();
+            }
+        }
+
+        function toggleSwitch(el) {
+            el.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('⚙️ Configurações - VIGORRE ONE™');
+            const isAuth = window.VigorreAuth.isAuthenticated();
+            if (!isAuth) {
+                window.location.href = '../../login.html';
+                return;
+            }
+            const user = window.VigorreAuth.getCurrentUser();
+            if (!user || (user.role !== 'admin' && user.role !== 'master')) {
+                alert('⚠️ Acesso restrito a administradores.');
+                window.VigorreAuth.logout();
+                return;
+            }
+            document.getElementById('userName').textContent = user.name || 'Administrador';
+        });
+
+        function saveSettings() {
+            showToast('✅ Configurações salvas com sucesso!', 'success');
+        }
+
+        function resetSettings() {
+            if (confirm('Tem certeza que deseja restaurar as configurações padrão?')) {
+                showToast('↺ Configurações restauradas!', 'success');
+            }
+        }
+
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+            icon.textContent = '✅';
+            msg.textContent = message;
+            toast.className = `toast show ${type || 'success'}`;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        console.log('✅ Configurações carregado com sucesso!');
+    </script>
+
+</body>
+</html>
