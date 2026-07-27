@@ -24,6 +24,7 @@
             --gold: #D97706;
             --green: #10B981;
             --red: #EF4444;
+            --orange: #F59E0B;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -285,6 +286,50 @@
 
         .btn-secondary:hover {
             background: var(--gray-200);
+        }
+
+        .btn-success {
+            padding: 10px 24px;
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-danger {
+            padding: 10px 24px;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.25);
         }
 
         .kpi-grid {
@@ -864,11 +909,11 @@
             </div>
             <div class="kpi-card">
                 <div class="kpi-top">
-                    <span class="kpi-label">Laudos Emitidos</span>
-                    <span class="kpi-icon">📋</span>
+                    <span class="kpi-label">Carteiras Ativas</span>
+                    <span class="kpi-icon">🏦</span>
                 </div>
-                <div class="kpi-value" id="kpiLaudos"><span class="loading-shimmer"></span></div>
-                <span class="kpi-change up" id="kpiLaudosChange">↑ Carregando...</span>
+                <div class="kpi-value" id="kpiCarteiras"><span class="loading-shimmer"></span></div>
+                <span class="kpi-change up" id="kpiCarteirasChange">↑ Carregando...</span>
             </div>
         </div>
 
@@ -909,10 +954,10 @@
                         <tr>
                             <th>#</th>
                             <th>Cliente</th>
-                            <th>Créditos</th>
+                            <th>Saldo</th>
                             <th>Relatórios</th>
                             <th>Laudos</th>
-                            <th>Valor</th>
+                            <th>Valor Estimado</th>
                             <th>Saúde</th>
                         </tr>
                     </thead>
@@ -956,13 +1001,18 @@
 
     </main>
 
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
     </script>
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script src="../../middleware/auth-guard.js"></script>
-    <script src="financeiro-db.js"></script>
-    <script src="financeiro-service.js"></script>
+    <script src="financeiro-conexao.js"></script>
 
     <script>
         'use strict';
@@ -995,22 +1045,6 @@
         // ============================================
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
-            if (!toast) {
-                const div = document.createElement('div');
-                div.id = 'toast';
-                div.className = 'toast';
-                div.innerHTML = `
-                    <span id="toastIcon">✅</span>
-                    <span id="toastMessage">${message}</span>
-                `;
-                document.body.appendChild(div);
-                setTimeout(() => {
-                    div.classList.add('show');
-                    setTimeout(() => div.classList.remove('show'), 4000);
-                }, 100);
-                return;
-            }
-
             const icon = document.getElementById('toastIcon');
             const msg = document.getElementById('toastMessage');
 
@@ -1051,22 +1085,15 @@
                 document.getElementById('userName').textContent = user.name || 'Administrador';
 
                 // Inicializar Supabase
-                if (window.FinanceiroDB) {
-                    window.FinanceiroDB.initSupabase();
+                if (window.VigorreFinanceiro) {
+                    window.VigorreFinanceiro.initSupabase();
                 }
 
                 // Buscar dados do dashboard
-                const dados = await window.financeiroService.getDashboardData();
-
-                // Atualizar KPIs
-                atualizarKPIs(dados);
-
-                // Atualizar IA
-                atualizarIA(dados);
-
-                // Buscar ranking e consumo
+                await carregarKPIs();
                 await carregarRanking();
                 await carregarConsumo();
+                await carregarAlertasIA();
 
                 // Renderizar gráficos
                 renderizarGraficos();
@@ -1079,115 +1106,64 @@
             } catch (error) {
                 console.error('❌ Erro ao carregar dashboard:', error);
                 showToast('Erro ao carregar dados do dashboard', 'error');
-
-                // Fallback para dados mock
                 carregarMockFallback();
             }
         }
 
         // ============================================
-        // ATUALIZAR KPIs
+        // CARREGAR KPIs
         // ============================================
-        function atualizarKPIs(dados) {
-            if (!dados) return;
+        async function carregarKPIs() {
+            try {
+                const financeiro = window.VigorreFinanceiro;
+                if (!financeiro) {
+                    throw new Error('Financeiro não disponível');
+                }
 
-            // Faturamento Hoje
-            const hojeEl = document.getElementById('kpiToday');
-            hojeEl.innerHTML = `R$ ${formatarMoeda(dados.faturamento_hoje || 0)}`;
+                // Buscar totais
+                const totais = await financeiro.Transacoes.getTotais();
 
-            const todayChange = document.getElementById('kpiTodayChange');
-            todayChange.textContent = dados.variacao_dia || '↑ +0%';
-            todayChange.className = `kpi-change ${dados.variacao_dia && dados.variacao_dia.includes('+') ? 'up' : 'down'}`;
+                // Faturamento Hoje
+                const hojeEl = document.getElementById('kpiToday');
+                hojeEl.innerHTML = `R$ ${formatarMoeda(totais.faturamento_hoje || 0)}`;
 
-            // Faturamento Mês
-            const mesEl = document.getElementById('kpiMonth');
-            mesEl.innerHTML = `R$ ${formatarMoeda(dados.faturamento_mes || 0)}`;
+                const todayChange = document.getElementById('kpiTodayChange');
+                todayChange.textContent = '↑ Hoje';
+                todayChange.className = 'kpi-change up';
 
-            const mesChange = document.getElementById('kpiMonthChange');
-            const percentual = dados.percentual_meta || 0;
-            mesChange.textContent = `↑ ${percentual}% da meta`;
-            mesChange.className = `kpi-change up`;
+                // Faturamento Mês
+                const mesEl = document.getElementById('kpiMonth');
+                mesEl.innerHTML = `R$ ${formatarMoeda(totais.faturamento_mes || 0)}`;
 
-            // Créditos Vendidos
-            const credEl = document.getElementById('kpiCredits');
-            credEl.textContent = formatarNumero(dados.total_creditos_vendidos || 0);
+                const mesChange = document.getElementById('kpiMonthChange');
+                mesChange.textContent = `↑ Este mês`;
+                mesChange.className = 'kpi-change up';
 
-            const credChange = document.getElementById('kpiCreditsChange');
-            credChange.textContent = '↑ Carregando...';
-            credChange.className = 'kpi-change up';
+                // Buscar créditos vendidos (entradas)
+                const transacoes = await financeiro.Transacoes.getAll({ tipo: 'entrada' });
+                const totalCreditos = transacoes.reduce((s, t) => s + (t.valor || 0), 0);
 
-            // Laudos Emitidos
-            const laudEl = document.getElementById('kpiLaudos');
-            laudEl.textContent = formatarNumero(dados.total_laudos || 0);
+                const credEl = document.getElementById('kpiCredits');
+                credEl.textContent = formatarNumero(totalCreditos);
 
-            const laudChange = document.getElementById('kpiLaudosChange');
-            laudChange.textContent = '↑ Carregando...';
-            laudChange.className = 'kpi-change up';
-        }
+                const credChange = document.getElementById('kpiCreditsChange');
+                credChange.textContent = '↑ Total vendidos';
+                credChange.className = 'kpi-change up';
 
-        // ============================================
-        // ATUALIZAR IA
-        // ============================================
-        function atualizarIA(dados) {
-            const container = document.getElementById('iaContent');
+                // Buscar total de carteiras
+                const carteiras = await financeiro.Carteiras.getAll();
+                const totalCarteiras = carteiras.length;
 
-            const alerts = [];
+                const cartEl = document.getElementById('kpiCarteiras');
+                cartEl.textContent = formatarNumero(totalCarteiras);
 
-            // Alerta baseado nos dados
-            if (dados.total_carteiras > 0) {
-                alerts.push({
-                    icon: '📊',
-                    title: `${dados.total_carteiras} carteiras ativas`,
-                    desc: 'Total de carteiras cadastradas no sistema'
-                });
+                const cartChange = document.getElementById('kpiCarteirasChange');
+                cartChange.textContent = '↑ Carteiras ativas';
+                cartChange.className = 'kpi-change up';
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar KPIs:', error);
             }
-
-            if (dados.faturamento_mes > 0) {
-                const meta = dados.meta_mes || 50000;
-                const perc = Math.round((dados.faturamento_mes / meta) * 100);
-                alerts.push({
-                    icon: '🎯',
-                    title: `${perc}% da meta mensal`,
-                    desc: `R$ ${formatarMoeda(dados.faturamento_mes)} de R$ ${formatarMoeda(meta)}`
-                });
-            }
-
-            if (dados.total_transacoes > 0) {
-                alerts.push({
-                    icon: '🔄',
-                    title: `${dados.total_transacoes} transações`,
-                    desc: 'Total de movimentações registradas'
-                });
-            }
-
-            if (dados.total_laudos > 0) {
-                alerts.push({
-                    icon: '📋',
-                    title: `${dados.total_laudos} laudos emitidos`,
-                    desc: 'Total de laudos gerados pela plataforma'
-                });
-            }
-
-            // Adicionar alerta padrão se não houver dados
-            if (alerts.length === 0) {
-                alerts.push({
-                    icon: 'ℹ️',
-                    title: 'Sistema pronto',
-                    desc: 'Aguardando movimentações financeiras'
-                });
-            }
-
-            container.innerHTML = alerts.map(item => `
-                <div class="ia-item" onclick="handleIAClick('${item.title}')">
-                    <div class="ia-item-icon">${item.icon}</div>
-                    <div class="ia-item-title">${item.title}</div>
-                    <div class="ia-item-desc">${item.desc}</div>
-                </div>
-            `).join('');
-        }
-
-        function handleIAClick(title) {
-            showToast(`🤖 IA: ${title}`, 'success');
         }
 
         // ============================================
@@ -1195,10 +1171,11 @@
         // ============================================
         async function carregarRanking() {
             try {
-                const tbody = document.getElementById('rankingTable');
+                const financeiro = window.VigorreFinanceiro;
+                if (!financeiro) throw new Error('Financeiro não disponível');
 
-                // Buscar carteiras
-                const carteiras = await window.financeiroService.getCarteiras();
+                const tbody = document.getElementById('rankingTable');
+                const carteiras = await financeiro.Carteiras.getAll();
 
                 if (!carteiras || carteiras.length === 0) {
                     tbody.innerHTML = `
@@ -1211,7 +1188,6 @@
                     return;
                 }
 
-                // Ordenar por saldo
                 const sorted = [...carteiras].sort((a, b) => (b.saldo || 0) - (a.saldo || 0));
 
                 const healthMap = {
@@ -1227,10 +1203,10 @@
                     return `
                         <tr>
                             <td>${i + 1}</td>
-                            <td><strong>${c.nome || c.usuario_id || 'Cliente'}</strong></td>
-                            <td>${saldo}</td>
-                            <td>${Math.floor(saldo * 0.3)}</td>
-                            <td>${Math.floor(saldo * 0.1)}</td>
+                            <td><strong>${c.nome || 'Cliente'}</strong></td>
+                            <td>${formatarNumero(saldo)}</td>
+                            <td>${formatarNumero(Math.floor(saldo * 0.3))}</td>
+                            <td>${formatarNumero(Math.floor(saldo * 0.1))}</td>
                             <td>R$ ${formatarMoeda(saldo * 7)}</td>
                             <td><span class="health-badge ${health}">${healthMap[health]}</span></td>
                         </tr>
@@ -1254,9 +1230,11 @@
         // ============================================
         async function carregarConsumo() {
             try {
-                const tbody = document.getElementById('consumoTable');
+                const financeiro = window.VigorreFinanceiro;
+                if (!financeiro) throw new Error('Financeiro não disponível');
 
-                const carteiras = await window.financeiroService.getCarteiras();
+                const tbody = document.getElementById('consumoTable');
+                const carteiras = await financeiro.Carteiras.getAll();
 
                 if (!carteiras || carteiras.length === 0) {
                     tbody.innerHTML = `
@@ -1279,10 +1257,10 @@
 
                     return `
                         <tr>
-                            <td><strong>${c.nome || c.usuario_id || 'Cliente'}</strong></td>
-                            <td>${saldo}</td>
-                            <td>${consumidos}</td>
-                            <td>${restantes}</td>
+                            <td><strong>${c.nome || 'Cliente'}</strong></td>
+                            <td>${formatarNumero(saldo)}</td>
+                            <td>${formatarNumero(consumidos)}</td>
+                            <td>${formatarNumero(restantes)}</td>
                             <td>⏳ ${dias > 0 ? `${dias} dias` : 'Sem previsão'}</td>
                         </tr>
                     `;
@@ -1301,6 +1279,84 @@
         }
 
         // ============================================
+        // CARREGAR ALERTAS IA
+        // ============================================
+        async function carregarAlertasIA() {
+            try {
+                const financeiro = window.VigorreFinanceiro;
+                if (!financeiro) throw new Error('Financeiro não disponível');
+
+                const container = document.getElementById('iaContent');
+                const carteiras = await financeiro.Carteiras.getAll();
+                const totais = await financeiro.Transacoes.getTotais();
+
+                const alerts = [];
+
+                // Alerta 1: Total de carteiras
+                if (carteiras && carteiras.length > 0) {
+                    alerts.push({
+                        icon: '🏦',
+                        title: `${carteiras.length} carteiras ativas`,
+                        desc: 'Total de carteiras cadastradas no sistema'
+                    });
+                }
+
+                // Alerta 2: Faturamento do mês
+                if (totais.faturamento_mes > 0) {
+                    alerts.push({
+                        icon: '📈',
+                        title: `R$ ${formatarMoeda(totais.faturamento_mes)} no mês`,
+                        desc: 'Faturamento acumulado no período'
+                    });
+                }
+
+                // Alerta 3: Créditos vendidos
+                const transacoes = await financeiro.Transacoes.getAll({ tipo: 'entrada' });
+                const totalCreditos = transacoes.reduce((s, t) => s + (t.valor || 0), 0);
+                if (totalCreditos > 0) {
+                    alerts.push({
+                        icon: '💳',
+                        title: `${formatarNumero(totalCreditos)} créditos vendidos`,
+                        desc: 'Total de créditos comercializados'
+                    });
+                }
+
+                // Alerta 4: Carteiras com saldo baixo
+                const baixoSaldo = carteiras ? carteiras.filter(c => (c.saldo || 0) < 100) : [];
+                if (baixoSaldo.length > 0) {
+                    alerts.push({
+                        icon: '⚠️',
+                        title: `${baixoSaldo.length} carteiras com saldo baixo`,
+                        desc: 'Recomenda-se contato comercial'
+                    });
+                }
+
+                if (alerts.length === 0) {
+                    alerts.push({
+                        icon: 'ℹ️',
+                        title: 'Sistema pronto',
+                        desc: 'Aguardando movimentações financeiras'
+                    });
+                }
+
+                container.innerHTML = alerts.map(item => `
+                    <div class="ia-item" onclick="handleIAClick('${item.title}')">
+                        <div class="ia-item-icon">${item.icon}</div>
+                        <div class="ia-item-title">${item.title}</div>
+                        <div class="ia-item-desc">${item.desc}</div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar alertas IA:', error);
+            }
+        }
+
+        function handleIAClick(title) {
+            showToast(`🤖 IA: ${title}`, 'success');
+        }
+
+        // ============================================
         // RENDERIZAR GRÁFICOS
         // ============================================
         function renderizarGraficos() {
@@ -1315,7 +1371,6 @@
                 fluxoChartInstance.destroy();
             }
 
-            // Gerar dados para o período selecionado
             const dias = parseInt(chartPeriod);
             const labels = [];
             const entradas = [];
@@ -1325,8 +1380,6 @@
                 const d = new Date();
                 d.setDate(d.getDate() - i);
                 labels.push(d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }));
-
-                // Dados mock para demonstração
                 entradas.push(Math.floor(Math.random() * 500) + 100);
                 saidas.push(Math.floor(Math.random() * 200) + 50);
             }
@@ -1448,7 +1501,6 @@
         // ============================================
         async function recarregarDados() {
             showToast('🔄 Atualizando dados...', 'success');
-            window.financeiroService.clearCache();
             await carregarDashboard();
             showToast('✅ Dados atualizados com sucesso!', 'success');
         }
@@ -1457,105 +1509,85 @@
         // FALLBACK MOCK
         // ============================================
         function carregarMockFallback() {
-            const dados = {
-                faturamento_hoje: 2580,
-                faturamento_mes: 42850,
-                total_carteiras: 45,
-                total_transacoes: 1280,
-                total_creditos_vendidos: 125000,
-                total_laudos: 342,
-                meta_mes: 50000,
-                percentual_meta: 85,
-                variacao_dia: '+18%'
-            };
+            const carteirasMock = [
+                { id: '1', nome: 'TechCorp Solutions', tipo: 'empresa', saldo: 1250 },
+                { id: '2', nome: 'InovaLab Brasil', tipo: 'empresa', saldo: 820 },
+                { id: '3', nome: 'StartupX Ventures', tipo: 'empresa', saldo: 450 },
+                { id: '4', nome: 'AgroTech Brasil', tipo: 'empresa', saldo: 280 },
+                { id: '5', nome: 'FinCorp Holdings', tipo: 'empresa', saldo: 150 }
+            ];
 
-            atualizarKPIs(dados);
-            atualizarIA(dados);
+            // KPIs
+            document.getElementById('kpiToday').innerHTML = 'R$ 2.580,00';
+            document.getElementById('kpiTodayChange').textContent = '↑ +18%';
+            document.getElementById('kpiTodayChange').className = 'kpi-change up';
 
-            document.getElementById('rankingTable').innerHTML = `
-                <tr>
-                    <td>1</td>
-                    <td><strong>TechCorp Solutions</strong></td>
-                    <td>1.250</td>
-                    <td>45</td>
-                    <td>12</td>
-                    <td>R$ 8.750</td>
-                    <td><span class="health-badge excelente">🟢 Excelente</span></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><strong>InovaLab Brasil</strong></td>
-                    <td>820</td>
-                    <td>32</td>
-                    <td>8</td>
-                    <td>R$ 5.400</td>
-                    <td><span class="health-badge excelente">🟢 Excelente</span></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><strong>StartupX Ventures</strong></td>
-                    <td>450</td>
-                    <td>18</td>
-                    <td>3</td>
-                    <td>R$ 3.200</td>
-                    <td><span class="health-badge atencao">🟡 Atenção</span></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><strong>AgroTech Brasil</strong></td>
-                    <td>280</td>
-                    <td>12</td>
-                    <td>2</td>
-                    <td>R$ 2.100</td>
-                    <td><span class="health-badge critico">🔴 Crítico</span></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><strong>FinCorp Holdings</strong></td>
-                    <td>150</td>
-                    <td>8</td>
-                    <td>1</td>
-                    <td>R$ 1.200</td>
-                    <td><span class="health-badge critico">🔴 Crítico</span></td>
-                </tr>
-            `;
+            document.getElementById('kpiMonth').innerHTML = 'R$ 42.850,00';
+            document.getElementById('kpiMonthChange').textContent = '↑ 85% da meta';
+            document.getElementById('kpiMonthChange').className = 'kpi-change up';
 
-            document.getElementById('consumoTable').innerHTML = `
-                <tr>
-                    <td><strong>TechCorp Solutions</strong></td>
-                    <td>1.250</td>
-                    <td>320</td>
-                    <td>930</td>
-                    <td>⏳ 45 dias</td>
-                </tr>
-                <tr>
-                    <td><strong>InovaLab Brasil</strong></td>
-                    <td>820</td>
-                    <td>180</td>
-                    <td>640</td>
-                    <td>⏳ 60 dias</td>
-                </tr>
-                <tr>
-                    <td><strong>StartupX Ventures</strong></td>
-                    <td>450</td>
-                    <td>280</td>
-                    <td>170</td>
-                    <td>⏳ 20 dias</td>
-                </tr>
-                <tr>
-                    <td><strong>AgroTech Brasil</strong></td>
-                    <td>280</td>
-                    <td>190</td>
-                    <td>90</td>
-                    <td>⏳ 12 dias</td>
-                </tr>
-                <tr>
-                    <td><strong>FinCorp Holdings</strong></td>
-                    <td>150</td>
-                    <td>120</td>
-                    <td>30</td>
-                    <td>⏳ 8 dias</td>
-                </tr>
+            document.getElementById('kpiCredits').textContent = '125.000';
+            document.getElementById('kpiCreditsChange').textContent = '↑ +12%';
+            document.getElementById('kpiCreditsChange').className = 'kpi-change up';
+
+            document.getElementById('kpiCarteiras').textContent = '45';
+            document.getElementById('kpiCarteirasChange').textContent = '↑ +5%';
+            document.getElementById('kpiCarteirasChange').className = 'kpi-change up';
+
+            // Ranking
+            const rankingBody = document.getElementById('rankingTable');
+            const healthMap = { excelente: '🟢 Excelente', atencao: '🟡 Atenção', critico: '🔴 Crítico' };
+            rankingBody.innerHTML = carteirasMock.map((c, i) => {
+                const health = c.saldo > 500 ? 'excelente' : c.saldo > 100 ? 'atencao' : 'critico';
+                return `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td><strong>${c.nome}</strong></td>
+                        <td>${c.saldo}</td>
+                        <td>${Math.floor(c.saldo * 0.3)}</td>
+                        <td>${Math.floor(c.saldo * 0.1)}</td>
+                        <td>R$ ${formatarMoeda(c.saldo * 7)}</td>
+                        <td><span class="health-badge ${health}">${healthMap[health]}</span></td>
+                    </tr>
+                `;
+            }).join('');
+
+            // Consumo
+            const consumoBody = document.getElementById('consumoTable');
+            consumoBody.innerHTML = carteirasMock.map(c => {
+                const saldo = c.saldo;
+                const consumidos = Math.floor(saldo * 0.25);
+                const restantes = saldo - consumidos;
+                const dias = saldo > 0 ? Math.floor(saldo / 10) : 0;
+                return `
+                    <tr>
+                        <td><strong>${c.nome}</strong></td>
+                        <td>${saldo}</td>
+                        <td>${consumidos}</td>
+                        <td>${restantes}</td>
+                        <td>⏳ ${dias > 0 ? `${dias} dias` : 'Sem previsão'}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            // IA
+            const iaContainer = document.getElementById('iaContent');
+            iaContainer.innerHTML = `
+                <div class="ia-item" onclick="handleIAClick('Carteiras ativas')">
+                    <div class="ia-item-icon">🏦</div>
+                    <div class="ia-item-title">${carteirasMock.length} carteiras ativas</div>
+                    <div class="ia-item-desc">Total de carteiras cadastradas</div>
+                </div>
+                <div class="ia-item" onclick="handleIAClick('Faturamento')">
+                    <div class="ia-item-icon">📈</div>
+                    <div class="ia-item-title">R$ 42.850 no mês</div>
+                    <div class="ia-item-desc">Faturamento acumulado</div>
+                </div>
+                <div class="ia-item" onclick="handleIAClick('Alertas')">
+                    <div class="ia-item-icon">⚠️</div>
+                    <div class="ia-item-title">2 carteiras com saldo baixo</div>
+                    <div class="ia-item-desc">Recomenda-se contato comercial</div>
+                </div>
             `;
 
             document.getElementById('iaTimestamp').textContent = `Atualizado: ${new Date().toLocaleString('pt-BR')}`;
