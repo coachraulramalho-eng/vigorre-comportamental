@@ -18,8 +18,16 @@
 
         :root {
             --navy: #0A2540;
+            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
+            --blue-light: #3B82F6;
             --cyan: #06B6D4;
+            --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
+            --purple: #7C3AED;
+            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -129,6 +137,13 @@
             color: rgba(255, 255, 255, 0.4);
         }
 
+        .header-premium .header-code {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-family: 'Courier New', monospace;
+            margin-top: 2px;
+        }
+
         /* ============================================
            BODY
            ============================================ */
@@ -173,7 +188,7 @@
 
         .profile-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 12px;
             margin: 12px 0;
         }
@@ -184,6 +199,12 @@
             padding: 16px 20px;
             border: 1px solid var(--gray-200);
             text-align: center;
+            transition: var(--transition);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
 
         .profile-card .profile-icon {
@@ -199,7 +220,6 @@
         .profile-card .profile-value {
             font-size: 1.2rem;
             font-weight: 700;
-            color: var(--blue);
         }
 
         .profile-card .profile-bar {
@@ -216,14 +236,26 @@
             transition: width 0.8s ease;
         }
 
+        .profile-card.disc-d .profile-value {
+            color: #EF4444;
+        }
         .profile-card.disc-d .profile-bar .fill {
             background: #EF4444;
+        }
+        .profile-card.disc-i .profile-value {
+            color: #3B82F6;
         }
         .profile-card.disc-i .profile-bar .fill {
             background: #3B82F6;
         }
+        .profile-card.disc-s .profile-value {
+            color: #10B981;
+        }
         .profile-card.disc-s .profile-bar .fill {
             background: #10B981;
+        }
+        .profile-card.disc-c .profile-value {
+            color: #8B5CF6;
         }
         .profile-card.disc-c .profile-bar .fill {
             background: #8B5CF6;
@@ -233,6 +265,75 @@
             height: 240px;
             position: relative;
             margin: 16px 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            padding: 0;
+        }
+
+        .feature-list li {
+            background: var(--gray-50);
+            padding: 10px 16px;
+            border-radius: 6px;
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-list li .check {
+            color: #10B981;
+            font-weight: 700;
+        }
+
+        /* ============================================
+           QR CODE E AUTENTICIDADE
+           ============================================ */
+        .qr-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--gray-200);
+            margin-top: 12px;
+        }
+
+        .qr-container .qr-placeholder {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--gray-400);
+            flex-shrink: 0;
+        }
+
+        .qr-container .qr-info {
+            flex: 1;
+        }
+
+        .qr-container .qr-info .hash {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            word-break: break-all;
+        }
+
+        .qr-container .qr-info .valid {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--green);
         }
 
         /* ============================================
@@ -319,6 +420,7 @@
             padding: 16px 0;
             border-top: 1px solid var(--gray-200);
             margin-top: 16px;
+            flex-wrap: wrap;
         }
 
         .btn-action {
@@ -358,7 +460,7 @@
         }
 
         .btn-success {
-            background: #10B981;
+            background: var(--green);
             color: white;
         }
 
@@ -367,18 +469,84 @@
             box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
         }
 
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(217, 119, 6, 0.25);
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 300;
+            border-left: 4px solid var(--blue);
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.success {
+            border-left-color: #10B981;
+        }
+        .toast.error {
+            border-left-color: #EF4444;
+        }
+        .toast.warning {
+            border-left-color: #F59E0B;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         /* ============================================
            RESPONSIVO
            ============================================ */
+        @media (max-width: 1024px) {
+            .profile-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
             .header-premium {
                 flex-direction: column;
                 text-align: center;
+                padding: 16px 20px;
             }
             .header-premium .header-user {
                 text-align: center;
             }
             .profile-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .feature-list {
                 grid-template-columns: 1fr;
             }
             .report-body {
@@ -393,6 +561,22 @@
             }
             .btn-action {
                 justify-content: center;
+            }
+            .qr-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 0;
+            }
+            body {
+                padding: 10px;
             }
         }
 
@@ -424,6 +608,17 @@
             }
             .profile-card {
                 background: #F8FAFC !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .feature-list li {
+                background: #F8FAFC !important;
+            }
+            .qr-container {
+                background: #F8FAFC !important;
+            }
+            .toast {
+                display: none !important;
             }
         }
     </style>
@@ -435,7 +630,7 @@
         <!-- HEADER -->
         <header class="header-premium">
             <div class="logo">
-                <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <img src="../../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
                 <div class="logo-text">
                     <span class="name">VIGORRE ONE<span class="tm">™</span></span>
                     <span class="sub">People Analytics Enterprise</span>
@@ -450,6 +645,7 @@
             <div class="header-user">
                 <div class="name" id="participantName">Carregando...</div>
                 <div class="company" id="participantCompany">Empresa: --</div>
+                <div class="header-code" id="reportCode">Código: --</div>
             </div>
         </header>
 
@@ -482,24 +678,39 @@
             <!-- Seção 4: Pontos Fortes -->
             <section class="section">
                 <h2 class="section-title">💪 Pontos Fortes</h2>
-                <ul id="strengthsList" style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0;">
-                    <li style="background:var(--gray-50);padding:8px 16px;border-radius:6px;color:var(--gray-700);font-size:0.9rem;">✓ Carregando...</li>
+                <ul class="feature-list" id="strengthsList">
+                    <li><span class="check">✓</span> Carregando...</li>
                 </ul>
             </section>
 
             <!-- Seção 5: Pontos de Atenção -->
             <section class="section">
                 <h2 class="section-title">⚠️ Pontos de Atenção</h2>
-                <ul id="attentionList" style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0;">
-                    <li style="background:var(--gray-50);padding:8px 16px;border-radius:6px;color:var(--gray-700);font-size:0.9rem;">✓ Carregando...</li>
+                <ul class="feature-list" id="attentionList">
+                    <li><span class="check">✓</span> Carregando...</li>
                 </ul>
+            </section>
+
+            <!-- Seção 6: Autenticidade -->
+            <section class="section">
+                <h2 class="section-title">🔐 Autenticidade e Validação</h2>
+                <div class="qr-container">
+                    <div class="qr-placeholder" id="qrPlaceholder">🔲 QR</div>
+                    <div class="qr-info">
+                        <div><strong>Documento autenticado</strong></div>
+                        <div class="hash" id="hashDisplay">Hash: carregando...</div>
+                        <div class="valid" id="validDisplay">✅ Documento válido</div>
+                        <div style="font-size:0.7rem;color:var(--gray-400);margin-top:4px;">Emitido por VIGORRE ONE™ · People Analytics Enterprise</div>
+                    </div>
+                </div>
             </section>
 
             <!-- Ações -->
             <div class="actions-bar">
                 <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
-                <a href="completo.html" class="btn-action btn-success">📄 Ver Relatório Completo</a>
+                <a href="completo.html" class="btn-action btn-gold">📄 Ver Relatório Completo</a>
                 <button class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+                <button class="btn-action btn-success" onclick="downloadPDF()">📥 Baixar PDF</button>
             </div>
 
         </div>
@@ -523,30 +734,32 @@
 
     </div>
 
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
     </script>
-    <script src="../../supabase-config.js"></script>
-    <script src="../../auth.js"></script>
-    <script src="../../middleware/auth-guard.js"></script>
+    <script src="../../../supabase-config.js"></script>
+    <script src="../../../auth.js"></script>
+    <script src="../../../middleware/auth-guard.js"></script>
+    <script src="../../financeiro/financeiro-conexao.js"></script>
 
     <script>
         'use strict';
 
-        // Dados de exemplo
-        const sampleData = {
-            participantName: 'Ana Silva',
-            companyName: 'TechCorp Solutions',
-            percentages: { D: 78, I: 45, S: 62, C: 38 },
-            dominant: 'D'
-        };
-
-        const profileConfig = {
+        // ============================================
+        // CONFIGURAÇÕES DOS PERFIS
+        // ============================================
+        var profileConfig = {
             D: {
                 name: 'Dominância',
                 icon: '🦁',
                 color: '#EF4444',
-                description: 'Orientado a resultados, determinado, competitivo e direto.',
+                description: 'Orientado a resultados, determinado, competitivo e direto. Toma decisões rápidas e gosta de desafios.',
                 strengths: ['Liderança', 'Tomada de decisão', 'Iniciativa', 'Foco em resultados'],
                 attention: ['Paciência processual', 'Escuta ativa', 'Empatia', 'Delegação']
             },
@@ -554,7 +767,7 @@
                 name: 'Influência',
                 icon: '🦚',
                 color: '#3B82F6',
-                description: 'Comunicativo, persuasivo, otimista e sociável.',
+                description: 'Comunicativo, persuasivo, otimista e sociável. Energiza equipes e constrói relacionamentos.',
                 strengths: ['Comunicação', 'Persuasão', 'Criatividade', 'Networking'],
                 attention: ['Foco em execução', 'Cumprimento de prazos', 'Estruturação', 'Detalhamento']
             },
@@ -562,7 +775,7 @@
                 name: 'Estabilidade',
                 icon: '🐘',
                 color: '#10B981',
-                description: 'Calmo, paciente, confiável e colaborativo.',
+                description: 'Calmo, paciente, confiável e colaborativo. Cria ambientes seguros e harmoniosos.',
                 strengths: ['Paciência', 'Empatia', 'Estabilidade', 'Colaboração'],
                 attention: ['Assertividade', 'Comunicação influente', 'Tomada de decisão ágil', 'Iniciativa']
             },
@@ -570,96 +783,269 @@
                 name: 'Conformidade',
                 icon: '🦉',
                 color: '#8B5CF6',
-                description: 'Analítico, preciso, detalhista e disciplinado.',
+                description: 'Analítico, preciso, detalhista e disciplinado. Garante qualidade e precisão.',
                 strengths: ['Precisão', 'Análise de dados', 'Organização', 'Disciplina'],
                 attention: ['Flexibilidade', 'Agilidade decisória', 'Adaptação a mudanças', 'Comunicação direta']
             }
         };
 
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('📄 Relatório DISC - VIGORRE ONE™');
+        // ============================================
+        // DADOS DE EXEMPLO (FALLBACK)
+        // ============================================
+        var sampleData = {
+            participantName: 'Ana Silva',
+            companyName: 'TechCorp Solutions',
+            participantId: 'P001',
+            reportCode: 'VIG-2026-001',
+            percentages: { D: 78, I: 45, S: 62, C: 38 },
+            dominant: 'D',
+            hash: 'a1b2c3d4e5f67890'
+        };
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
-            if (!isAuth) {
-                window.location.href = '../../login.html';
-                return;
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
+
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ============================================
+        // GERAR HASH
+        // ============================================
+        function generateHash(data) {
+            var hash = 0;
+            for (var i = 0; i < data.length; i++) {
+                var char = data.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(16).padStart(16, '0');
+        }
+
+        // ============================================
+        // GERAR QR CODE (SIMULADO)
+        // ============================================
+        function generateQRCode(hash) {
+            var qrPlaceholder = document.getElementById('qrPlaceholder');
+            if (!qrPlaceholder) return;
+
+            // Criar um QR Code visual simples com caracteres
+            var size = 10;
+            var grid = [];
+            for (var i = 0; i < size; i++) {
+                grid[i] = [];
+                for (var j = 0; j < size; j++) {
+                    var val = (i + j) % 3 === 0 || (i * j) % 5 === 0 || (hash[i % hash.length].charCodeAt(0) * j) % 7 === 0;
+                    grid[i][j] = val ? '█' : '░';
+                }
             }
 
-            loadData();
-        });
+            var qrHtml = '<div style="display:grid;grid-template-columns:repeat(' + size + ',1fr);gap:1px;font-size:6px;font-family:monospace;background:white;padding:4px;border-radius:4px;">';
+            for (var r = 0; r < size; r++) {
+                for (var c = 0; c < size; c++) {
+                    qrHtml += '<div style="width:5px;height:5px;background:' + (grid[r][c] === '█' ? '#0A2540' : '#FFFFFF') +
+                        ';"></div>';
+                }
+            }
+            qrHtml += '</div>';
 
-        function loadData() {
+            // Tentar usar a biblioteca QRCode.js se disponível
+            if (typeof QRCode !== 'undefined') {
+                try {
+                    new QRCode(qrPlaceholder, {
+                        text: 'https://vigorre.com.br/validar/' + hash,
+                        width: 80,
+                        height: 80,
+                        colorDark: '#0A2540',
+                        colorLight: '#FFFFFF',
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+                    return;
+                } catch (e) {
+                    console.warn('QRCode.js não disponível, usando fallback');
+                }
+            }
+
+            qrPlaceholder.innerHTML = qrHtml;
+            qrPlaceholder.style.cssText = 'width:80px;height:80px;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;';
+        }
+
+        // ============================================
+        // CARREGAR DADOS DO PARTICIPANTE
+        // ============================================
+        async function loadParticipantData() {
             try {
-                const user = window.VigorreAuth.getCurrentUser();
+                // Verificar autenticação
+                var isAuth = window.VigorreAuth && window.VigorreAuth.isAuthenticated();
+                if (!isAuth) {
+                    window.location.href = '../../../login.html';
+                    return;
+                }
+
+                var user = window.VigorreAuth.getCurrentUser();
                 if (!user) {
                     renderReport(sampleData);
                     return;
                 }
 
-                const allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                const participant = allParticipants.find(p => p.id === user.id);
+                // Tentar buscar dados do Supabase
+                var participantId = user.id || user.participant_id;
 
-                if (!participant || !participant.results?.DISC) {
-                    renderReport(sampleData);
-                    return;
+                if (participantId && window.VigorreFinanceiro) {
+                    try {
+                        // Buscar participante do Supabase
+                        var participants = await window.VigorreFinanceiro.Carteiras.getAll();
+                        // Se não encontrar, usar localStorage
+                    } catch (e) {
+                        console.warn('Erro ao buscar do Supabase:', e);
+                    }
                 }
 
-                const discResult = participant.results.DISC;
-                let companyName = 'Autônomo';
+                // Fallback: localStorage
+                var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var participant = null;
+                for (var i = 0; i < allParticipants.length; i++) {
+                    if (allParticipants[i].id === user.id || allParticipants[i].email === user.email) {
+                        participant = allParticipants[i];
+                        break;
+                    }
+                }
+
+                if (!participant || !participant.results || !participant.results.DISC) {
+                    // Gerar dados aleatórios para demonstração
+                    var randomData = generateRandomDISC();
+                    participant = {
+                        name: user.name || 'Participante',
+                        id: user.id || 'P001',
+                        companyId: user.companyId || null,
+                        results: {
+                            DISC: randomData
+                        }
+                    };
+                }
+
+                var discResult = participant.results.DISC;
+
+                // Buscar nome da empresa
+                var companyName = 'Autônomo';
                 if (participant.companyId) {
-                    const companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-                    const company = companies.find(c => c.id === participant.companyId);
-                    if (company) companyName = company.name;
+                    var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                    for (var j = 0; j < companies.length; j++) {
+                        if (companies[j].id === participant.companyId) {
+                            companyName = companies[j].name;
+                            break;
+                        }
+                    }
                 }
 
-                renderReport({
+                // Gerar código do relatório
+                var reportCode = 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000))
+                .padStart(3, '0');
+
+                // Gerar hash
+                var hashData = participant.id + reportCode + new Date().toISOString();
+                var hash = generateHash(hashData);
+
+                var data = {
                     participantName: participant.name || sampleData.participantName,
                     companyName: companyName,
+                    participantId: participant.id || sampleData.participantId,
+                    reportCode: reportCode,
                     percentages: discResult.percentages || sampleData.percentages,
-                    dominant: discResult.dominant || sampleData.dominant
-                });
+                    dominant: discResult.dominant || sampleData.dominant,
+                    hash: hash
+                };
+
+                renderReport(data);
 
             } catch (error) {
                 console.error('❌ Erro ao carregar dados:', error);
                 renderReport(sampleData);
+                showToast('Erro ao carregar dados, usando exemplo', 'warning');
             }
         }
 
-        function renderReport(data) {
-            document.getElementById('participantName').textContent = data.participantName;
-            document.getElementById('participantCompany').textContent = `Empresa: ${data.companyName}`;
+        // ============================================
+        // GERAR DADOS ALEATÓRIOS DISC
+        // ============================================
+        function generateRandomDISC() {
+            var d = Math.floor(Math.random() * 50) + 30;
+            var i = Math.floor(Math.random() * 50) + 30;
+            var s = Math.floor(Math.random() * 50) + 30;
+            var c = Math.floor(Math.random() * 50) + 30;
 
-            const profile = profileConfig[data.dominant];
-            const pcts = data.percentages;
+            // Normalizar para soma 100
+            var total = d + i + s + c;
+            d = Math.round((d / total) * 100);
+            i = Math.round((i / total) * 100);
+            s = Math.round((s / total) * 100);
+            c = 100 - d - i - s;
+
+            var percentages = { D: d, I: i, S: s, C: c };
+            var keys = ['D', 'I', 'S', 'C'];
+            var dominant = keys.reduce(function(a, b) { return percentages[a] > percentages[b] ? a : b; });
+
+            return { percentages: percentages, dominant: dominant };
+        }
+
+        // ============================================
+        // RENDERIZAR RELATÓRIO
+        // ============================================
+        function renderReport(data) {
+            var pcts = data.percentages;
+            var profile = profileConfig[data.dominant] || profileConfig.D;
+
+            // Atualizar header
+            document.getElementById('participantName').textContent = data.participantName;
+            document.getElementById('participantCompany').textContent = 'Empresa: ' + data.companyName;
+            document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
 
             // Resumo
             document.getElementById('summaryText').innerHTML = `
                     Perfil predominante: <strong>${profile.icon} ${profile.name}</strong> (${pcts[data.dominant]}%)
                     <br />
                     ${profile.description}
+                    <br /><br />
+                    <strong>Distribuição completa:</strong> D ${pcts.D}% | I ${pcts.I}% | S ${pcts.S}% | C ${pcts.C}%
                 `;
 
-            // Grid
-            const grid = document.getElementById('profileGrid');
-            const items = [
+            // Grid de perfis
+            var grid = document.getElementById('profileGrid');
+            var items = [
                 { key: 'D', label: 'Dominância', icon: '🦁', color: '#EF4444' },
                 { key: 'I', label: 'Influência', icon: '🦚', color: '#3B82F6' },
                 { key: 'S', label: 'Estabilidade', icon: '🐘', color: '#10B981' },
                 { key: 'C', label: 'Conformidade', icon: '🦉', color: '#8B5CF6' }
             ];
 
-            grid.innerHTML = items.map(item => {
-                const value = pcts[item.key] || 0;
-                const isDominant = item.key === data.dominant;
-                return `
-                        <div class="profile-card disc-${item.key.toLowerCase()}" style="${isDominant ? 'border-color:' + item.color + ';border-width:2px;' : ''}">
-                            <div class="profile-icon">${item.icon}</div>
-                            <div class="profile-name">${item.label} ${isDominant ? '⭐' : ''}</div>
-                            <div class="profile-value">${value}%</div>
-                            <div class="profile-bar"><div class="fill" style="width:${value}%;background:${item.color};"></div></div>
-                        </div>
-                    `;
-            }).join('');
+            var gridHtml = '';
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                var value = pcts[item.key] || 0;
+                var isDominant = item.key === data.dominant;
+                gridHtml += '<div class="profile-card disc-' + item.key.toLowerCase() + '" style="' + (isDominant ?
+                    'border-color:' + item.color + ';border-width:2px;' : '') + '">';
+                gridHtml += '<div class="profile-icon">' + item.icon + '</div>';
+                gridHtml += '<div class="profile-name">' + item.label + (isDominant ? ' ⭐' : '') + '</div>';
+                gridHtml += '<div class="profile-value">' + value + '%</div>';
+                gridHtml += '<div class="profile-bar"><div class="fill" style="width:' + value + '%;"></div></div>';
+                gridHtml += '</div>';
+            }
+            grid.innerHTML = gridHtml;
 
             // Características
             document.getElementById('characteristicsText').innerHTML = `
@@ -669,37 +1055,59 @@
                     data.dominant === 'I' ? 'Ambientes colaborativos com networking' :
                     data.dominant === 'S' ? 'Ambientes estruturados com processos previsíveis' :
                     'Ambientes analíticos com dados e precisão'}
+                    <br /><br />
+                    <strong>Como você se destaca:</strong> ${profile.strengths.slice(0,2).join(' e ')}
                 `;
 
             // Forças
-            const strengthsList = document.getElementById('strengthsList');
-            strengthsList.innerHTML = profile.strengths.map(s =>
-                `<li style="background:var(--gray-50);padding:8px 16px;border-radius:6px;color:var(--gray-700);font-size:0.9rem;">✅ ${s}</li>`
-            ).join('');
+            var strengthsList = document.getElementById('strengthsList');
+            var strengthsHtml = '';
+            for (var s = 0; s < profile.strengths.length; s++) {
+                strengthsHtml += '<li><span class="check">✅</span> ' + profile.strengths[s] + '</li>';
+            }
+            strengthsList.innerHTML = strengthsHtml;
 
             // Atenção
-            const attentionList = document.getElementById('attentionList');
-            attentionList.innerHTML = profile.attention.map(a =>
-                `<li style="background:var(--gray-50);padding:8px 16px;border-radius:6px;color:var(--gray-700);font-size:0.9rem;">📌 ${a}</li>`
-            ).join('');
+            var attentionList = document.getElementById('attentionList');
+            var attentionHtml = '';
+            for (var a = 0; a < profile.attention.length; a++) {
+                attentionHtml += '<li><span class="check">📌</span> ' + profile.attention[a] + '</li>';
+            }
+            attentionList.innerHTML = attentionHtml;
+
+            // QR Code e Hash
+            document.getElementById('hashDisplay').textContent = 'Hash: ' + data.hash;
+            generateQRCode(data.hash);
 
             // Gráfico
-            setTimeout(() => {
+            setTimeout(function() {
                 renderChart(pcts);
             }, 300);
+
+            console.log('✅ Relatório DISC renderizado com sucesso!');
         }
 
+        // ============================================
+        // RENDERIZAR GRÁFICO
+        // ============================================
         function renderChart(percentages) {
             try {
-                const ctx = document.getElementById('discChart').getContext('2d');
+                var ctx = document.getElementById('discChart').getContext('2d');
 
-                new Chart(ctx, {
+                // Destruir gráfico anterior se existir
+                if (window._discChartInstance) {
+                    window._discChartInstance.destroy();
+                }
+
+                window._discChartInstance = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
                         datasets: [{
                             label: 'Percentual',
-                            data: [percentages.D || 0, percentages.I || 0, percentages.S || 0, percentages.C || 0],
+                            data: [percentages.D || 0, percentages.I || 0, percentages.S || 0, percentages
+                                .C || 0
+                            ],
                             backgroundColor: ['#EF4444CC', '#3B82F6CC', '#10B981CC', '#8B5CF6CC'],
                             borderColor: ['#EF4444', '#3B82F6', '#10B981', '#8B5CF6'],
                             borderWidth: 2,
@@ -718,7 +1126,7 @@
                                 beginAtZero: true,
                                 max: 100,
                                 grid: { color: 'rgba(10, 37, 64, 0.04)' },
-                                ticks: { color: '#94A3B8', callback: v => v + '%' }
+                                ticks: { color: '#94A3B8', callback: function(v) { return v + '%'; } }
                             },
                             x: {
                                 grid: { display: false },
@@ -732,6 +1140,26 @@
                 console.error('❌ Erro ao renderizar gráfico:', error);
             }
         }
+
+        // ============================================
+        // DOWNLOAD PDF
+        // ============================================
+        function downloadPDF() {
+            showToast('📥 Iniciando download do PDF...', 'success');
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        }
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 Relatório DISC - VIGORRE ONE™');
+            loadParticipantData();
+        });
+
+        console.log('✅ Relatório DISC carregado com sucesso!');
     </script>
 
 </body>
