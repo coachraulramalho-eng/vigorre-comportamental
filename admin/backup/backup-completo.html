@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backup | VIGORRE ONE™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
+            --green: #10B981; --red: #EF4444; --white: #FFFFFF;
+            --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1; --gray-400: #94A3B8; --gray-500: #64748B;
+            --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --radius: 16px; --radius-sm: 10px; --shadow: 0 4px 24px rgba(10,37,64,0.06);
+            --transition: 0.3s ease;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+
+        .sidebar {
+            position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+            background: var(--navy); color: white; padding: 24px 20px;
+            display: flex; flex-direction: column; z-index: 100;
+            transition: var(--transition); overflow-y: auto;
+        }
+        .sidebar .logo {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; margin-bottom: 32px;
+            padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .sidebar .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white;
+        }
+        .sidebar .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
+        .sidebar .logo .logo-text .sub { font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+        .sidebar .user-info {
+            padding: 16px 12px; background: rgba(255,255,255,0.04);
+            border-radius: var(--radius-sm); margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .sidebar .user-info .name { font-weight: 600; font-size: 0.9rem; }
+        .sidebar .user-info .role { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+        .sidebar .user-info .role .badge {
+            display: inline-block; padding: 2px 10px; background: rgba(217,119,6,0.15);
+            color: var(--gold); border-radius: 999px; font-size: 0.6rem; font-weight: 600;
+        }
+        .sidebar .nav { list-style: none; flex: 1; }
+        .sidebar .nav li { margin-bottom: 2px; }
+        .sidebar .nav a {
+            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+            border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            transition: var(--transition); cursor: pointer;
+        }
+        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
+        .sidebar .nav a.active {
+            background: rgba(217,119,6,0.12); color: white; border-left: 3px solid var(--gold);
+        }
+        .sidebar .nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; }
+        .sidebar .nav .divider { height: 1px; background: rgba(255,255,255,0.04); margin: 12px 0; }
+        .sidebar .logout { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .sidebar .logout a {
+            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+            border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); cursor: pointer;
+        }
+        .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
+
+        .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
+        .main-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
+        }
+        .main-header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--gray-900); }
+        .main-header .subtitle { color: var(--gray-500); font-size: 0.9rem; }
+
+        .btn-primary {
+            padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white; border: none; border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer;
+            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
+        .btn-secondary {
+            padding: 10px 24px; background: var(--gray-100); color: var(--gray-700);
+            border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition);
+        }
+        .btn-secondary:hover { background: var(--gray-200); }
+        .btn-success {
+            padding: 10px 24px; background: var(--green); color: white;
+            border: none; border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition);
+        }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.25); }
+        .btn-danger {
+            padding: 10px 24px; background: var(--red); color: white;
+            border: none; border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition);
+        }
+        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(239,68,68,0.25); }
+
+        .backup-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .backup-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04);
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .backup-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(10,37,64,0.10); }
+
+        .backup-card .icon { font-size: 3rem; margin-bottom: 12px; }
+        .backup-card .title { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; }
+        .backup-card .desc { font-size: 0.85rem; color: var(--gray-500); margin: 4px 0 12px; }
+
+        .backup-list {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04);
+            margin-top: 20px;
+        }
+
+        .backup-list .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .backup-list .item:last-child { border-bottom: none; }
+
+        .backup-list .item .info .name { font-weight: 600; }
+        .backup-list .item .info .date { font-size: 0.8rem; color: var(--gray-500); }
+
+        .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
+        .mobile-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99;
+        }
+        .mobile-overlay.active { display: block; }
+
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); width: 280px; }
+            .sidebar.open { transform: translateX(0); }
+            .main { margin-left: 0; padding: 16px; }
+            .mobile-toggle { display: block; }
+            .mobile-overlay.active { display: block; }
+            .backup-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .main-header { flex-direction: column; align-items: flex-start; }
+        }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <a href="../dashboard.html" class="logo">
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Analytics Enterprise</span>
+            </div>
+        </a>
+        <div class="user-info">
+            <div class="name" id="userName">Administrador</div>
+            <div class="role"><span class="badge">👑 Master Admin</span></div>
+        </div>
+        <ul class="nav">
+            <li><a href="../dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="../empresas/index.html"><span class="icon">🏢</span> Empresas</a></li>
+            <li><a href="../recrutadores/index.html"><span class="icon">👤</span> Recrutadores</a></li>
+            <li><a href="../participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
+            <li><a href="../financeiro/index.html"><span class="icon">💰</span> Centro Financeiro</a></li>
+            <div class="divider"></div>
+            <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="backup-completo.html" class="active"><span class="icon">💾</span> Backup</a></li>
+            <li><a href="../financeiro/configuracoes.html"><span class="icon">⚙️</span> Configurações</a></li>
+        </ul>
+        <div class="logout">
+            <a href="#" onclick="logout()"><span class="icon">🚪</span> Sair</a>
+        </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <main class="main">
+        <div class="main-header">
+            <div>
+                <h1>💾 Backup</h1>
+                <p class="subtitle">Backup completo do sistema</p>
+            </div>
+            <div style="display:flex;gap:12px;">
+                <button class="btn-success" onclick="novoBackup()">📦 Criar Backup</button>
+                <button class="btn-secondary" onclick="recarregar()">🔄 Atualizar</button>
+            </div>
+        </div>
+
+        <div class="backup-grid">
+            <div class="backup-card" onclick="novoBackup()">
+                <div class="icon">📦</div>
+                <div class="title">Backup Completo</div>
+                <div class="desc">Todos os dados do sistema</div>
+                <button class="btn-primary" style="padding:8px 20px;font-size:0.8rem;">Iniciar</button>
+            </div>
+            <div class="backup-card" onclick="backupFinanceiro()">
+                <div class="icon">💰</div>
+                <div class="title">Backup Financeiro</div>
+                <div class="desc">Dados financeiros e transações</div>
+                <button class="btn-primary" style="padding:8px 20px;font-size:0.8rem;">Iniciar</button>
+            </div>
+            <div class="backup-card" onclick="backupConfig()">
+                <div class="icon">⚙️</div>
+                <div class="title">Backup Configurações</div>
+                <div class="desc">Configurações do sistema</div>
+                <button class="btn-primary" style="padding:8px 20px;font-size:0.8rem;">Iniciar</button>
+            </div>
+        </div>
+
+        <div class="backup-list">
+            <h3 style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:600;margin-bottom:16px;">📋 Histórico de Backups</h3>
+
+            <div class="item">
+                <div class="info">
+                    <div class="name">Backup Completo - 15/05/2025</div>
+                    <div class="date">15 de maio de 2025 - 14:30</div>
+                </div>
+                <div>
+                    <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">⬇️ Baixar</button>
+                    <button class="btn-danger" style="padding:4px 12px;font-size:0.7rem;">🗑️</button>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="info">
+                    <div class="name">Backup Financeiro - 14/05/2025</div>
+                    <div class="date">14 de maio de 2025 - 10:15</div>
+                </div>
+                <div>
+                    <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">⬇️ Baixar</button>
+                    <button class="btn-danger" style="padding:4px 12px;font-size:0.7rem;">🗑️</button>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="info">
+                    <div class="name">Backup Configurações - 13/05/2025</div>
+                    <div class="date">13 de maio de 2025 - 08:45</div>
+                </div>
+                <div>
+                    <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">⬇️ Baixar</button>
+                    <button class="btn-danger" style="padding:4px 12px;font-size:0.7rem;">🗑️</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('mobileOverlay').classList.toggle('active');
+        }
+
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                alert('Logout realizado!');
+                window.location.href = '../../login.html';
+            }
+        }
+
+        function novoBackup() {
+            if (confirm('📦 Criar backup completo do sistema?')) {
+                alert('✅ Backup completo criado com sucesso!');
+            }
+        }
+
+        function backupFinanceiro() {
+            if (confirm('💰 Criar backup financeiro?')) {
+                alert('✅ Backup financeiro criado com sucesso!');
+            }
+        }
+
+        function backupConfig() {
+            if (confirm('⚙️ Criar backup de configurações?')) {
+                alert('✅ Backup de configurações criado com sucesso!');
+            }
+        }
+
+        function recarregar() {
+            alert('🔄 Dados atualizados!');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Backup carregado!');
+        });
+    </script>
+
+</body>
+</html>
