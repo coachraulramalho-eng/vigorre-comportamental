@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Participantes | VIGORRE ONE™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
+            --green: #10B981; --red: #EF4444; --white: #FFFFFF;
+            --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1; --gray-400: #94A3B8; --gray-500: #64748B;
+            --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            --radius: 16px; --radius-sm: 10px; --shadow: 0 4px 24px rgba(10,37,64,0.06);
+            --transition: 0.3s ease;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+
+        .sidebar {
+            position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+            background: var(--navy); color: white; padding: 24px 20px;
+            display: flex; flex-direction: column; z-index: 100;
+            transition: var(--transition); overflow-y: auto;
+        }
+        .sidebar .logo {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; margin-bottom: 32px;
+            padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .sidebar .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white;
+        }
+        .sidebar .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
+        .sidebar .logo .logo-text .sub { font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+        .sidebar .user-info {
+            padding: 16px 12px; background: rgba(255,255,255,0.04);
+            border-radius: var(--radius-sm); margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .sidebar .user-info .name { font-weight: 600; font-size: 0.9rem; }
+        .sidebar .user-info .role { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+        .sidebar .user-info .role .badge {
+            display: inline-block; padding: 2px 10px; background: rgba(217,119,6,0.15);
+            color: var(--gold); border-radius: 999px; font-size: 0.6rem; font-weight: 600;
+        }
+        .sidebar .nav { list-style: none; flex: 1; }
+        .sidebar .nav li { margin-bottom: 2px; }
+        .sidebar .nav a {
+            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+            border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            transition: var(--transition); cursor: pointer;
+        }
+        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
+        .sidebar .nav a.active {
+            background: rgba(217,119,6,0.12); color: white; border-left: 3px solid var(--gold);
+        }
+        .sidebar .nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; }
+        .sidebar .nav .divider { height: 1px; background: rgba(255,255,255,0.04); margin: 12px 0; }
+        .sidebar .logout { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .sidebar .logout a {
+            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+            border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); cursor: pointer;
+        }
+        .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
+
+        .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
+        .main-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
+        }
+        .main-header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--gray-900); }
+        .main-header .subtitle { color: var(--gray-500); font-size: 0.9rem; }
+
+        .btn-primary {
+            padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white; border: none; border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer;
+            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
+        .btn-secondary {
+            padding: 10px 24px; background: var(--gray-100); color: var(--gray-700);
+            border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition);
+        }
+        .btn-secondary:hover { background: var(--gray-200); }
+
+        .table-card {
+            background: white; border-radius: var(--radius);
+            box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
+            overflow: hidden;
+        }
+        .table-container { overflow-x: auto; }
+        .table-container table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        .table-container th {
+            text-align: left; padding: 14px 18px; background: var(--gray-50);
+            font-weight: 600; color: var(--gray-500); font-size: 0.75rem;
+            text-transform: uppercase; border-bottom: 1px solid var(--gray-200);
+        }
+        .table-container td { padding: 14px 18px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
+        .table-container tr:last-child td { border-bottom: none; }
+        .table-container tr:hover td { background: var(--gray-50); }
+
+        .badge-status {
+            display: inline-block; padding: 3px 14px; border-radius: 999px;
+            font-size: 0.7rem; font-weight: 600;
+        }
+        .badge-status.completed { background: #D1FAE5; color: #065F46; }
+        .badge-status.pending { background: #FEF3C7; color: #92400E; }
+        .badge-status.invited { background: #DBEAFE; color: #1E40AF; }
+
+        .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
+        .mobile-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99;
+        }
+        .mobile-overlay.active { display: block; }
+
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); width: 280px; }
+            .sidebar.open { transform: translateX(0); }
+            .main { margin-left: 0; padding: 16px; }
+            .mobile-toggle { display: block; }
+            .mobile-overlay.active { display: block; }
+        }
+        @media (max-width: 768px) {
+            .main-header { flex-direction: column; align-items: flex-start; }
+        }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <a href="../dashboard.html" class="logo">
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Analytics Enterprise</span>
+            </div>
+        </a>
+        <div class="user-info">
+            <div class="name" id="userName">Administrador</div>
+            <div class="role"><span class="badge">👑 Master Admin</span></div>
+        </div>
+        <ul class="nav">
+            <li><a href="../dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="../empresas/index.html"><span class="icon">🏢</span> Empresas</a></li>
+            <li><a href="../recrutadores/index.html"><span class="icon">👤</span> Recrutadores</a></li>
+            <li><a href="index.html" class="active"><span class="icon">👥</span> Participantes</a></li>
+            <li><a href="../financeiro/index.html"><span class="icon">💰</span> Centro Financeiro</a></li>
+            <div class="divider"></div>
+            <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
+            <li><a href="../financeiro/configuracoes.html"><span class="icon">⚙️</span> Configurações</a></li>
+        </ul>
+        <div class="logout">
+            <a href="#" onclick="logout()"><span class="icon">🚪</span> Sair</a>
+        </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <main class="main">
+        <div class="main-header">
+            <div>
+                <h1>👥 Participantes</h1>
+                <p class="subtitle">Gerenciar participantes e candidatos</p>
+            </div>
+            <div style="display:flex;gap:12px;">
+                <button class="btn-primary" onclick="novoParticipante()">➕ Novo Participante</button>
+                <button class="btn-secondary" onclick="recarregar()">🔄 Atualizar</button>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Empresa</th>
+                            <th>Status</th>
+                            <th>Testes</th>
+                            <th style="text-align:center;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr>
+                            <td>1</td>
+                            <td><strong>Pedro Lima</strong></td>
+                            <td>pedro@email.com</td>
+                            <td>TechCorp Solutions</td>
+                            <td><span class="badge-status completed">✅ Concluído</span></td>
+                            <td>3</td>
+                            <td style="text-align:center;">
+                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">👁️</button>
+                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">✏️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>Mariana Costa</strong></td>
+                            <td>mariana@email.com</td>
+                            <td>InovaLab Brasil</td>
+                            <td><span class="badge-status pending">⏳ Pendente</span></td>
+                            <td>1</td>
+                            <td style="text-align:center;">
+                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">👁️</button>
+                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">✏️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>Rafael Almeida</strong></td>
+                            <td>rafael@email.com</td>
+                            <td>StartupX Ventures</td>
+                            <td><span class="badge-status invited">📩 Convidado</span></td>
+                            <td>0</td>
+                            <td style="text-align:center;">
+                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">👁️</button>
+                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">✏️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>Camila Rocha</strong></td>
+                            <td>camila@email.com</td>
+                            <td>AgroTech Brasil</td>
+                            <td><span class="badge-status completed">✅ Concluído</span></td>
+                            <td>2</td>
+                            <td style="text-align:center;">
+                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">👁️</button>
+                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">✏️</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('mobileOverlay').classList.toggle('active');
+        }
+
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                alert('Logout realizado!');
+                window.location.href = '../../login.html';
+            }
+        }
+
+        function novoParticipante() {
+            alert('📝 Abrir formulário de novo participante (em desenvolvimento)');
+        }
+
+        function recarregar() {
+            alert('🔄 Dados atualizados!');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Participantes carregado!');
+        });
+    </script>
+
+</body>
+</html>
