@@ -18,16 +18,11 @@
 
         :root {
             --navy: #0A2540;
-            --navy-light: #1A3A5C;
             --blue: #1D4ED8;
-            --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
             --green: #10B981;
             --red: #EF4444;
-            --orange: #F59E0B;
-            --purple: #7C3AED;
-            --pink: #EC4899;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -60,9 +55,6 @@
             margin: 0 auto;
         }
 
-        /* ============================================
-           HEADER
-           ============================================ */
         .header-premium {
             background: var(--navy);
             color: white;
@@ -144,9 +136,6 @@
             margin-top: 2px;
         }
 
-        /* ============================================
-           BODY
-           ============================================ */
         .report-body {
             background: white;
             padding: 32px;
@@ -291,9 +280,6 @@
             font-weight: 700;
         }
 
-        /* ============================================
-           QR CODE E AUTENTICIDADE
-           ============================================ */
         .qr-container {
             display: flex;
             align-items: center;
@@ -336,9 +322,6 @@
             color: var(--green);
         }
 
-        /* ============================================
-           FOOTER
-           ============================================ */
         .footer-premium {
             background: var(--navy);
             color: white;
@@ -410,9 +393,6 @@
             color: rgba(255, 255, 255, 0.3);
         }
 
-        /* ============================================
-           ACTIONS
-           ============================================ */
         .actions-bar {
             display: flex;
             justify-content: flex-end;
@@ -479,9 +459,6 @@
             box-shadow: 0 8px 30px rgba(217, 119, 6, 0.25);
         }
 
-        /* ============================================
-           TOAST
-           ============================================ */
         .toast {
             position: fixed;
             top: 24px;
@@ -525,9 +502,6 @@
             }
         }
 
-        /* ============================================
-           RESPONSIVO
-           ============================================ */
         @media (max-width: 1024px) {
             .profile-grid {
                 grid-template-columns: 1fr 1fr;
@@ -627,7 +601,6 @@
 
     <div class="container">
 
-        <!-- HEADER -->
         <header class="header-premium">
             <div class="logo">
                 <img src="../../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
@@ -649,33 +622,26 @@
             </div>
         </header>
 
-        <!-- BODY -->
         <div class="report-body">
 
-            <!-- Seção 1: Resumo -->
             <section class="section">
                 <h2 class="section-title">📋 Resumo do Perfil</h2>
                 <p class="section-text" id="summaryText">Carregando resumo...</p>
             </section>
 
-            <!-- Seção 2: Perfil DISC -->
             <section class="section">
                 <h2 class="section-title">📊 Distribuição dos Fatores DISC</h2>
-                <div class="profile-grid" id="profileGrid">
-                    <!-- Carregado via JS -->
-                </div>
+                <div class="profile-grid" id="profileGrid"></div>
                 <div class="chart-container">
                     <canvas id="discChart"></canvas>
                 </div>
             </section>
 
-            <!-- Seção 3: Características -->
             <section class="section">
                 <h2 class="section-title">💡 Características do Perfil</h2>
                 <p class="section-text" id="characteristicsText">Carregando características...</p>
             </section>
 
-            <!-- Seção 4: Pontos Fortes -->
             <section class="section">
                 <h2 class="section-title">💪 Pontos Fortes</h2>
                 <ul class="feature-list" id="strengthsList">
@@ -683,7 +649,6 @@
                 </ul>
             </section>
 
-            <!-- Seção 5: Pontos de Atenção -->
             <section class="section">
                 <h2 class="section-title">⚠️ Pontos de Atenção</h2>
                 <ul class="feature-list" id="attentionList">
@@ -691,7 +656,6 @@
                 </ul>
             </section>
 
-            <!-- Seção 6: Autenticidade -->
             <section class="section">
                 <h2 class="section-title">🔐 Autenticidade e Validação</h2>
                 <div class="qr-container">
@@ -705,7 +669,6 @@
                 </div>
             </section>
 
-            <!-- Ações -->
             <div class="actions-bar">
                 <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
                 <a href="completo.html" class="btn-action btn-gold">📄 Ver Relatório Completo</a>
@@ -715,7 +678,6 @@
 
         </div>
 
-        <!-- FOOTER -->
         <footer class="footer-premium">
             <div class="footer-logo">
                 <div class="logo-icon">V</div>
@@ -734,32 +696,28 @@
 
     </div>
 
-    <!-- TOAST -->
     <div class="toast" id="toast">
         <span id="toastIcon">✅</span>
         <span id="toastMessage">Mensagem</span>
     </div>
 
-    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
     </script>
     <script src="../../../supabase-config.js"></script>
     <script src="../../../auth.js"></script>
     <script src="../../../middleware/auth-guard.js"></script>
     <script src="../../financeiro/financeiro-conexao.js"></script>
+    <script src="../../test/algoritmos/calculadora.js"></script>
 
     <script>
         'use strict';
 
-        // ============================================
-        // CONFIGURAÇÕES DOS PERFIS
-        // ============================================
         var profileConfig = {
             D: {
                 name: 'Dominância',
                 icon: '🦁',
                 color: '#EF4444',
-                description: 'Orientado a resultados, determinado, competitivo e direto. Toma decisões rápidas e gosta de desafios.',
+                description: 'Orientado a resultados, determinado, competitivo e direto.',
                 strengths: ['Liderança', 'Tomada de decisão', 'Iniciativa', 'Foco em resultados'],
                 attention: ['Paciência processual', 'Escuta ativa', 'Empatia', 'Delegação']
             },
@@ -767,7 +725,7 @@
                 name: 'Influência',
                 icon: '🦚',
                 color: '#3B82F6',
-                description: 'Comunicativo, persuasivo, otimista e sociável. Energiza equipes e constrói relacionamentos.',
+                description: 'Comunicativo, persuasivo, otimista e sociável.',
                 strengths: ['Comunicação', 'Persuasão', 'Criatividade', 'Networking'],
                 attention: ['Foco em execução', 'Cumprimento de prazos', 'Estruturação', 'Detalhamento']
             },
@@ -775,7 +733,7 @@
                 name: 'Estabilidade',
                 icon: '🐘',
                 color: '#10B981',
-                description: 'Calmo, paciente, confiável e colaborativo. Cria ambientes seguros e harmoniosos.',
+                description: 'Calmo, paciente, confiável e colaborativo.',
                 strengths: ['Paciência', 'Empatia', 'Estabilidade', 'Colaboração'],
                 attention: ['Assertividade', 'Comunicação influente', 'Tomada de decisão ágil', 'Iniciativa']
             },
@@ -783,15 +741,12 @@
                 name: 'Conformidade',
                 icon: '🦉',
                 color: '#8B5CF6',
-                description: 'Analítico, preciso, detalhista e disciplinado. Garante qualidade e precisão.',
+                description: 'Analítico, preciso, detalhista e disciplinado.',
                 strengths: ['Precisão', 'Análise de dados', 'Organização', 'Disciplina'],
                 attention: ['Flexibilidade', 'Agilidade decisória', 'Adaptação a mudanças', 'Comunicação direta']
             }
         };
 
-        // ============================================
-        // DADOS DE EXEMPLO (FALLBACK)
-        // ============================================
         var sampleData = {
             participantName: 'Ana Silva',
             companyName: 'TechCorp Solutions',
@@ -802,30 +757,19 @@
             hash: 'a1b2c3d4e5f67890'
         };
 
-        // ============================================
-        // TOAST
-        // ============================================
         function showToast(message, type) {
             var toast = document.getElementById('toast');
             var icon = document.getElementById('toastIcon');
             var msg = document.getElementById('toastMessage');
-
             if (type === 'error') icon.textContent = '❌';
             else if (type === 'warning') icon.textContent = '⚠️';
             else icon.textContent = '✅';
-
             msg.textContent = message;
             toast.className = 'toast show ' + (type || 'success');
-
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(function() {
-                toast.classList.remove('show');
-            }, 4000);
+            toast._timeout = setTimeout(function() { toast.classList.remove('show'); }, 4000);
         }
 
-        // ============================================
-        // GERAR HASH
-        // ============================================
         function generateHash(data) {
             var hash = 0;
             for (var i = 0; i < data.length; i++) {
@@ -836,14 +780,9 @@
             return Math.abs(hash).toString(16).padStart(16, '0');
         }
 
-        // ============================================
-        // GERAR QR CODE (SIMULADO)
-        // ============================================
         function generateQRCode(hash) {
             var qrPlaceholder = document.getElementById('qrPlaceholder');
             if (!qrPlaceholder) return;
-
-            // Criar um QR Code visual simples com caracteres
             var size = 10;
             var grid = [];
             for (var i = 0; i < size; i++) {
@@ -853,8 +792,8 @@
                     grid[i][j] = val ? '█' : '░';
                 }
             }
-
-            var qrHtml = '<div style="display:grid;grid-template-columns:repeat(' + size + ',1fr);gap:1px;font-size:6px;font-family:monospace;background:white;padding:4px;border-radius:4px;">';
+            var qrHtml =
+                '<div style="display:grid;grid-template-columns:repeat(' + size + ',1fr);gap:1px;font-size:6px;font-family:monospace;background:white;padding:4px;border-radius:4px;">';
             for (var r = 0; r < size; r++) {
                 for (var c = 0; c < size; c++) {
                     qrHtml += '<div style="width:5px;height:5px;background:' + (grid[r][c] === '█' ? '#0A2540' : '#FFFFFF') +
@@ -862,60 +801,20 @@
                 }
             }
             qrHtml += '</div>';
-
-            // Tentar usar a biblioteca QRCode.js se disponível
-            if (typeof QRCode !== 'undefined') {
-                try {
-                    new QRCode(qrPlaceholder, {
-                        text: 'https://vigorre.com.br/validar/' + hash,
-                        width: 80,
-                        height: 80,
-                        colorDark: '#0A2540',
-                        colorLight: '#FFFFFF',
-                        correctLevel: QRCode.CorrectLevel.H
-                    });
-                    return;
-                } catch (e) {
-                    console.warn('QRCode.js não disponível, usando fallback');
-                }
-            }
-
             qrPlaceholder.innerHTML = qrHtml;
-            qrPlaceholder.style.cssText = 'width:80px;height:80px;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;';
+            qrPlaceholder.style.cssText =
+                'width:80px;height:80px;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;';
         }
 
-        // ============================================
-        // CARREGAR DADOS DO PARTICIPANTE
-        // ============================================
         async function loadParticipantData() {
             try {
-                // Verificar autenticação
                 var isAuth = window.VigorreAuth && window.VigorreAuth.isAuthenticated();
-                if (!isAuth) {
-                    window.location.href = '../../../login.html';
-                    return;
-                }
+                if (!isAuth) { window.location.href = '../../../login.html'; return; }
 
                 var user = window.VigorreAuth.getCurrentUser();
-                if (!user) {
-                    renderReport(sampleData);
-                    return;
-                }
+                if (!user) { renderReport(sampleData); return; }
 
-                // Tentar buscar dados do Supabase
-                var participantId = user.id || user.participant_id;
-
-                if (participantId && window.VigorreFinanceiro) {
-                    try {
-                        // Buscar participante do Supabase
-                        var participants = await window.VigorreFinanceiro.Carteiras.getAll();
-                        // Se não encontrar, usar localStorage
-                    } catch (e) {
-                        console.warn('Erro ao buscar do Supabase:', e);
-                    }
-                }
-
-                // Fallback: localStorage
+                // Buscar do localStorage
                 var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                 var participant = null;
                 for (var i = 0; i < allParticipants.length; i++) {
@@ -925,24 +824,47 @@
                     }
                 }
 
-                if (!participant || !participant.results || !participant.results.DISC) {
-                    // Gerar dados aleatórios para demonstração
-                    var randomData = generateRandomDISC();
-                    participant = {
-                        name: user.name || 'Participante',
-                        id: user.id || 'P001',
-                        companyId: user.companyId || null,
-                        results: {
-                            DISC: randomData
+                // Buscar resultado do Supabase
+                var resultado = null;
+                if (participant && window.VigorreFinanceiro) {
+                    try {
+                        var supabaseClient = window.VigorreFinanceiro.getSupabaseClient();
+                        if (supabaseClient) {
+                            var { data } = await supabaseClient
+                                .from('resultados')
+                                .select('resultado')
+                                .eq('participante_id', participant.id)
+                                .eq('teste_id', '11111111-1111-1111-1111-111111111111')
+                                .order('created_at', { ascending: false })
+                                .limit(1);
+
+                            if (data && data.length > 0) {
+                                resultado = data[0].resultado;
+                            }
                         }
+                    } catch (e) { console.warn('Erro ao buscar resultado:', e); }
+                }
+
+                // Se não achou no Supabase, tentar localStorage
+                if (!resultado && participant && participant.results && participant.results.DISC) {
+                    resultado = {
+                        percentuais: participant.results.DISC.percentages || participant.results.DISC.percentuais,
+                        dominante: participant.results.DISC.dominant
                     };
                 }
 
-                var discResult = participant.results.DISC;
+                // Se ainda não tem, usar fallback
+                if (!resultado) {
+                    var randomData = generateRandomDISC();
+                    resultado = {
+                        percentuais: randomData.percentuais,
+                        dominante: randomData.dominante
+                    };
+                    participant = { name: user.name || 'Participante', id: user.id || 'P001' };
+                }
 
-                // Buscar nome da empresa
                 var companyName = 'Autônomo';
-                if (participant.companyId) {
+                if (participant && participant.companyId) {
                     var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
                     for (var j = 0; j < companies.length; j++) {
                         if (companies[j].id === participant.companyId) {
@@ -952,21 +874,18 @@
                     }
                 }
 
-                // Gerar código do relatório
                 var reportCode = 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000))
-                .padStart(3, '0');
-
-                // Gerar hash
-                var hashData = participant.id + reportCode + new Date().toISOString();
+                    .padStart(3, '0');
+                var hashData = (participant ? participant.id : '') + reportCode + new Date().toISOString();
                 var hash = generateHash(hashData);
 
                 var data = {
-                    participantName: participant.name || sampleData.participantName,
+                    participantName: participant ? participant.name : sampleData.participantName,
                     companyName: companyName,
-                    participantId: participant.id || sampleData.participantId,
+                    participantId: participant ? participant.id : sampleData.participantId,
                     reportCode: reportCode,
-                    percentages: discResult.percentages || sampleData.percentages,
-                    dominant: discResult.dominant || sampleData.dominant,
+                    percentages: resultado.percentuais || sampleData.percentages,
+                    dominant: resultado.dominante || sampleData.dominant,
                     hash: hash
                 };
 
@@ -979,59 +898,43 @@
             }
         }
 
-        // ============================================
-        // GERAR DADOS ALEATÓRIOS DISC
-        // ============================================
         function generateRandomDISC() {
             var d = Math.floor(Math.random() * 50) + 30;
             var i = Math.floor(Math.random() * 50) + 30;
             var s = Math.floor(Math.random() * 50) + 30;
             var c = Math.floor(Math.random() * 50) + 30;
-
-            // Normalizar para soma 100
             var total = d + i + s + c;
             d = Math.round((d / total) * 100);
             i = Math.round((i / total) * 100);
             s = Math.round((s / total) * 100);
             c = 100 - d - i - s;
-
             var percentages = { D: d, I: i, S: s, C: c };
             var keys = ['D', 'I', 'S', 'C'];
             var dominant = keys.reduce(function(a, b) { return percentages[a] > percentages[b] ? a : b; });
-
-            return { percentages: percentages, dominant: dominant };
+            return { percentuais: percentages, dominante: dominant };
         }
 
-        // ============================================
-        // RENDERIZAR RELATÓRIO
-        // ============================================
         function renderReport(data) {
             var pcts = data.percentages;
             var profile = profileConfig[data.dominant] || profileConfig.D;
 
-            // Atualizar header
             document.getElementById('participantName').textContent = data.participantName;
             document.getElementById('participantCompany').textContent = 'Empresa: ' + data.companyName;
             document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
 
-            // Resumo
-            document.getElementById('summaryText').innerHTML = `
-                    Perfil predominante: <strong>${profile.icon} ${profile.name}</strong> (${pcts[data.dominant]}%)
-                    <br />
-                    ${profile.description}
-                    <br /><br />
-                    <strong>Distribuição completa:</strong> D ${pcts.D}% | I ${pcts.I}% | S ${pcts.S}% | C ${pcts.C}%
-                `;
+            document.getElementById('summaryText').innerHTML =
+                'Perfil predominante: <strong>' + profile.icon + ' ' + profile.name + '</strong> (' + pcts[data
+                    .dominant] +
+                '%)<br />' + profile.description +
+                '<br /><br /><strong>Distribuição completa:</strong> D ' + pcts.D + '% | I ' + pcts.I + '% | S ' +
+                pcts.S + '% | C ' + pcts.C + '%';
 
-            // Grid de perfis
             var grid = document.getElementById('profileGrid');
-            var items = [
-                { key: 'D', label: 'Dominância', icon: '🦁', color: '#EF4444' },
-                { key: 'I', label: 'Influência', icon: '🦚', color: '#3B82F6' },
-                { key: 'S', label: 'Estabilidade', icon: '🐘', color: '#10B981' },
-                { key: 'C', label: 'Conformidade', icon: '🦉', color: '#8B5CF6' }
+            var items = [{ key: 'D', label: 'Dominância', icon: '🦁', color: '#EF4444' }, { key: 'I',
+                    label: 'Influência', icon: '🦚', color: '#3B82F6' }, { key: 'S', label: 'Estabilidade',
+                    icon: '🐘', color: '#10B981' }, { key: 'C', label: 'Conformidade', icon: '🦉',
+                    color: '#8B5CF6' }
             ];
-
             var gridHtml = '';
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
@@ -1047,19 +950,15 @@
             }
             grid.innerHTML = gridHtml;
 
-            // Características
-            document.getElementById('characteristicsText').innerHTML = `
-                    <strong>Perfil ${profile.icon} ${profile.name}:</strong> ${profile.description}
-                    <br /><br />
-                    <strong>Ambiente ideal:</strong> ${data.dominant === 'D' ? 'Ambientes dinâmicos com desafios constantes' :
+            document.getElementById('characteristicsText').innerHTML =
+                '<strong>Perfil ' + profile.icon + ' ' + profile.name + ':</strong> ' + profile.description +
+                '<br /><br /><strong>Ambiente ideal:</strong> ' +
+                (data.dominant === 'D' ? 'Ambientes dinâmicos com desafios constantes' :
                     data.dominant === 'I' ? 'Ambientes colaborativos com networking' :
                     data.dominant === 'S' ? 'Ambientes estruturados com processos previsíveis' :
-                    'Ambientes analíticos com dados e precisão'}
-                    <br /><br />
-                    <strong>Como você se destaca:</strong> ${profile.strengths.slice(0,2).join(' e ')}
-                `;
+                    'Ambientes analíticos com dados e precisão') +
+                '<br /><br /><strong>Como você se destaca:</strong> ' + profile.strengths.slice(0, 2).join(' e ');
 
-            // Forças
             var strengthsList = document.getElementById('strengthsList');
             var strengthsHtml = '';
             for (var s = 0; s < profile.strengths.length; s++) {
@@ -1067,7 +966,6 @@
             }
             strengthsList.innerHTML = strengthsHtml;
 
-            // Atenção
             var attentionList = document.getElementById('attentionList');
             var attentionHtml = '';
             for (var a = 0; a < profile.attention.length; a++) {
@@ -1075,30 +973,17 @@
             }
             attentionList.innerHTML = attentionHtml;
 
-            // QR Code e Hash
             document.getElementById('hashDisplay').textContent = 'Hash: ' + data.hash;
             generateQRCode(data.hash);
 
-            // Gráfico
-            setTimeout(function() {
-                renderChart(pcts);
-            }, 300);
-
+            setTimeout(function() { renderChart(pcts); }, 300);
             console.log('✅ Relatório DISC renderizado com sucesso!');
         }
 
-        // ============================================
-        // RENDERIZAR GRÁFICO
-        // ============================================
         function renderChart(percentages) {
             try {
                 var ctx = document.getElementById('discChart').getContext('2d');
-
-                // Destruir gráfico anterior se existir
-                if (window._discChartInstance) {
-                    window._discChartInstance.destroy();
-                }
-
+                if (window._discChartInstance) { window._discChartInstance.destroy(); }
                 window._discChartInstance = new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -1118,42 +1003,22 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
+                        plugins: { legend: { display: false } },
                         scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 100,
-                                grid: { color: 'rgba(10, 37, 64, 0.04)' },
-                                ticks: { color: '#94A3B8', callback: function(v) { return v + '%'; } }
-                            },
-                            x: {
-                                grid: { display: false },
-                                ticks: { color: '#94A3B8', font: { size: 11 } }
-                            }
+                            y: { beginAtZero: true, max: 100, grid: { color: 'rgba(10,37,64,0.04)' },
+                                ticks: { color: '#94A3B8', callback: function(v) { return v + '%'; } } },
+                            x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 11 } } }
                         }
                     }
                 });
-
-            } catch (error) {
-                console.error('❌ Erro ao renderizar gráfico:', error);
-            }
+            } catch (error) { console.error('❌ Erro ao renderizar gráfico:', error); }
         }
 
-        // ============================================
-        // DOWNLOAD PDF
-        // ============================================
         function downloadPDF() {
             showToast('📥 Iniciando download do PDF...', 'success');
-            setTimeout(function() {
-                window.print();
-            }, 500);
+            setTimeout(function() { window.print(); }, 500);
         }
 
-        // ============================================
-        // INICIALIZAR
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📄 Relatório DISC - VIGORRE ONE™');
             loadParticipantData();
