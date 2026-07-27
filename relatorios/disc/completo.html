@@ -4,15 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Relatório Completo DISC | VIGORRE ONE™</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         :root {
             --navy: #0A2540;
             --navy-light: #1A3A5C;
@@ -43,6 +46,7 @@
             --shadow-lg: 0 12px 48px rgba(10, 37, 64, 0.12);
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--gray-50);
@@ -50,10 +54,15 @@
             min-height: 100vh;
             padding: 20px;
         }
+
         .container {
             max-width: 1100px;
             margin: 0 auto;
         }
+
+        /* ============================================
+           HEADER
+           ============================================ */
         .header-print {
             background: var(--navy);
             color: white;
@@ -65,17 +74,20 @@
             flex-wrap: wrap;
             gap: 16px;
         }
+
         .header-print .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
         }
+
         .header-print .logo .logo-img {
             height: 44px;
             width: auto;
             display: block;
         }
+
         .header-print .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
@@ -83,61 +95,77 @@
             color: white;
             letter-spacing: -0.3px;
         }
+
         .header-print .logo .logo-text .name .tm {
             font-size: 0.4rem;
             vertical-align: super;
             color: var(--cyan);
         }
+
         .header-print .logo .logo-text .sub {
             font-size: 0.5rem;
             color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
             letter-spacing: 0.08em;
         }
+
         .header-print .header-title {
             text-align: center;
         }
+
         .header-print .header-title h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
         }
+
         .header-print .header-title .subtitle {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
+
         .header-print .header-user {
             text-align: right;
         }
+
         .header-print .header-user .name {
             font-weight: 600;
             font-size: 0.9rem;
         }
+
         .header-print .header-user .company {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
         }
+
         .header-print .header-code {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: rgba(255, 255, 255, 0.3);
             font-family: 'Courier New', monospace;
             margin-top: 2px;
         }
+
+        /* ============================================
+           REPORT BODY
+           ============================================ */
         .report-body {
             background: white;
             padding: 32px 40px;
             border-left: 1px solid var(--gray-200);
             border-right: 1px solid var(--gray-200);
         }
+
         .section {
             margin-bottom: 32px;
             padding-bottom: 24px;
             border-bottom: 1px solid var(--gray-100);
         }
+
         .section:last-child {
             border-bottom: none;
             margin-bottom: 0;
         }
+
         .section-title {
             font-family: 'Poppins', sans-serif;
             font-size: 1.1rem;
@@ -148,6 +176,7 @@
             align-items: center;
             gap: 8px;
         }
+
         .section-title .number {
             display: inline-flex;
             align-items: center;
@@ -161,14 +190,17 @@
             font-weight: 700;
             flex-shrink: 0;
         }
+
         .section-text {
             color: var(--gray-600);
             line-height: 1.8;
             font-size: 0.95rem;
         }
+
         .section-text strong {
             color: var(--gray-800);
         }
+
         .section-subtitle {
             font-family: 'Poppins', sans-serif;
             font-size: 0.95rem;
@@ -176,6 +208,10 @@
             color: var(--gray-700);
             margin: 12px 0 6px;
         }
+
+        /* ============================================
+           CAPA
+           ============================================ */
         .capa {
             text-align: center;
             padding: 60px 40px;
@@ -183,6 +219,7 @@
             margin-bottom: 32px;
             position: relative;
         }
+
         .capa .capa-logo {
             font-family: 'Poppins', sans-serif;
             font-size: 2.5rem;
@@ -190,11 +227,13 @@
             color: var(--navy);
             margin-bottom: 8px;
         }
+
         .capa .capa-logo .tm {
             font-size: 0.7rem;
             vertical-align: super;
             color: var(--blue);
         }
+
         .capa .capa-sub {
             font-size: 0.9rem;
             color: var(--gray-400);
@@ -202,6 +241,7 @@
             text-transform: uppercase;
             margin-bottom: 40px;
         }
+
         .capa .capa-title {
             font-family: 'Poppins', sans-serif;
             font-size: 2rem;
@@ -209,9 +249,11 @@
             color: var(--gray-800);
             margin-bottom: 8px;
         }
+
         .capa .capa-title .highlight {
             color: var(--blue);
         }
+
         .capa .capa-divider {
             width: 80px;
             height: 3px;
@@ -219,6 +261,7 @@
             margin: 20px auto;
             border-radius: 2px;
         }
+
         .capa .capa-info {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -226,40 +269,48 @@
             max-width: 600px;
             margin: 30px auto 0;
         }
+
         .capa .capa-info-item {
             background: var(--gray-50);
             border: 1px solid var(--gray-200);
             border-radius: var(--radius-sm);
             padding: 12px 16px;
         }
+
         .capa .capa-info-item .label {
             font-size: 0.65rem;
             color: var(--gray-400);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
         .capa .capa-info-item .value {
             font-size: 0.9rem;
             font-weight: 600;
             color: var(--gray-800);
             margin-top: 2px;
         }
+
         .capa .capa-qr {
             margin-top: 30px;
         }
+
         .capa .capa-qr .qr-placeholder {
-            width: 80px;
-            height: 80px;
-            background: var(--gray-100);
-            border: 2px dashed var(--gray-300);
+            width: 100px;
+            height: 100px;
+            background: white;
+            border: 2px solid var(--gray-200);
             border-radius: var(--radius-sm);
             margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
-            color: var(--gray-400);
+            overflow: hidden;
         }
+
+        /* ============================================
+           SUMÁRIO
+           ============================================ */
         .sumario {
             background: var(--gray-50);
             border-radius: var(--radius-sm);
@@ -267,6 +318,7 @@
             margin-bottom: 32px;
             border: 1px solid var(--gray-200);
         }
+
         .sumario h3 {
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
@@ -274,6 +326,7 @@
             color: var(--gray-800);
             margin-bottom: 12px;
         }
+
         .sumario .sumario-item {
             display: flex;
             justify-content: space-between;
@@ -282,37 +335,54 @@
             font-size: 0.85rem;
             color: var(--gray-600);
         }
+
         .sumario .sumario-item:last-child {
             border-bottom: none;
         }
+
         .sumario .sumario-item .page {
             color: var(--gray-400);
         }
+
+        /* ============================================
+           PROFILES
+           ============================================ */
         .profile-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 12px;
             margin: 12px 0;
         }
+
         .profile-card {
             background: var(--gray-50);
             border-radius: var(--radius-sm);
             padding: 16px 20px;
             border: 1px solid var(--gray-200);
             text-align: center;
+            transition: var(--transition);
         }
+
+        .profile-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
         .profile-card .profile-icon {
             font-size: 1.5rem;
         }
+
         .profile-card .profile-name {
             font-weight: 700;
             font-size: 0.85rem;
             color: var(--gray-700);
         }
+
         .profile-card .profile-value {
             font-size: 1.2rem;
             font-weight: 700;
         }
+
         .profile-card .profile-bar {
             height: 4px;
             background: var(--gray-200);
@@ -320,11 +390,13 @@
             margin-top: 6px;
             overflow: hidden;
         }
+
         .profile-card .profile-bar .fill {
             height: 100%;
             border-radius: 2px;
             transition: width 0.8s ease;
         }
+
         .profile-card.disc-d .profile-value {
             color: #EF4444;
         }
@@ -349,6 +421,13 @@
         .profile-card.disc-c .profile-bar .fill {
             background: #8B5CF6;
         }
+
+        .chart-container {
+            height: 240px;
+            position: relative;
+            margin: 16px 0;
+        }
+
         .feature-list {
             list-style: none;
             display: grid;
@@ -356,6 +435,7 @@
             gap: 8px;
             padding: 0;
         }
+
         .feature-list li {
             background: var(--gray-50);
             padding: 10px 16px;
@@ -366,10 +446,12 @@
             align-items: center;
             gap: 8px;
         }
+
         .feature-list li .check {
             color: #10B981;
             font-weight: 700;
         }
+
         .badge-level {
             display: inline-block;
             padding: 4px 16px;
@@ -377,6 +459,7 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
+
         .badge-level.muito_alta {
             background: #D1FAE5;
             color: #065F46;
@@ -393,6 +476,7 @@
             background: #FEE2E2;
             color: #991B1B;
         }
+
         .perfil-card {
             background: var(--gray-50);
             border-radius: var(--radius-sm);
@@ -400,6 +484,7 @@
             margin: 8px 0;
             border-left: 4px solid var(--gold);
         }
+
         .perfil-card h4 {
             font-family: 'Poppins', sans-serif;
             font-size: 0.9rem;
@@ -407,47 +492,64 @@
             color: var(--gray-700);
             margin-bottom: 4px;
         }
+
         .perfil-card p {
             font-size: 0.9rem;
             color: var(--gray-600);
             line-height: 1.7;
         }
+
         .plano-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             gap: 12px;
             margin: 12px 0;
         }
+
         .plano-card {
             background: var(--gray-50);
             border-radius: var(--radius-sm);
             padding: 16px 20px;
             border: 1px solid var(--gray-200);
             text-align: center;
+            transition: var(--transition);
         }
+
+        .plano-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
         .plano-card .plano-periodo {
             font-family: 'Poppins', sans-serif;
             font-size: 0.9rem;
             font-weight: 700;
             color: var(--gold);
         }
+
         .plano-card .plano-titulo {
             font-size: 0.8rem;
             font-weight: 600;
             color: var(--gray-700);
         }
+
         .plano-card .plano-acoes {
             font-size: 0.75rem;
             color: var(--gray-500);
             line-height: 1.6;
             margin-top: 4px;
         }
+
+        /* ============================================
+           ASSINATURA
+           ============================================ */
         .assinatura {
             text-align: center;
             padding: 32px 0;
             border-top: 2px solid var(--gray-200);
             margin-top: 16px;
         }
+
         .assinatura .assinatura-qr {
             display: inline-block;
             padding: 16px;
@@ -456,23 +558,36 @@
             border-radius: var(--radius-sm);
             margin-bottom: 12px;
         }
+
         .assinatura .assinatura-qr .qr-placeholder {
-            width: 80px;
-            height: 80px;
-            background: var(--gray-100);
-            border: 2px dashed var(--gray-300);
+            width: 100px;
+            height: 100px;
+            background: white;
+            border: 2px solid var(--gray-200);
             border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
-            color: var(--gray-400);
+            overflow: hidden;
         }
+
         .assinatura .assinatura-code {
             font-size: 0.7rem;
             color: var(--gray-400);
             font-family: 'Courier New', monospace;
+            word-break: break-all;
         }
+
+        .assinatura .assinatura-valid {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--green);
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
         .footer-print {
             background: var(--navy);
             color: white;
@@ -484,11 +599,13 @@
             flex-wrap: wrap;
             gap: 12px;
         }
+
         .footer-print .footer-logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         .footer-print .footer-logo .logo-icon {
             width: 32px;
             height: 32px;
@@ -502,38 +619,49 @@
             color: var(--navy);
             font-family: 'Poppins', sans-serif;
         }
+
         .footer-print .footer-logo .footer-text .name {
             font-family: 'Poppins', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
         }
+
         .footer-print .footer-logo .footer-text .name .tm {
             font-size: 0.35rem;
             vertical-align: super;
             color: var(--cyan);
         }
+
         .footer-print .footer-logo .footer-text .tagline {
             font-size: 0.55rem;
             color: rgba(255, 255, 255, 0.3);
         }
+
         .footer-print .footer-contact {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
         }
+
         .footer-print .footer-contact a {
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             font-size: 0.7rem;
             transition: var(--transition);
         }
+
         .footer-print .footer-contact a:hover {
             color: rgba(255, 255, 255, 0.7);
         }
+
         .footer-print .footer-page {
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.3);
         }
+
+        /* ============================================
+           ACTIONS
+           ============================================ */
         .actions-bar {
             display: flex;
             justify-content: flex-end;
@@ -541,7 +669,9 @@
             padding: 16px 0;
             border-top: 1px solid var(--gray-200);
             margin-top: 16px;
+            flex-wrap: wrap;
         }
+
         .btn-action {
             padding: 10px 24px;
             border: none;
@@ -556,31 +686,97 @@
             gap: 8px;
             text-decoration: none;
         }
+
         .btn-primary {
             background: linear-gradient(135deg, var(--blue), var(--cyan));
             color: white;
             box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
         }
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(29, 78, 216, 0.3);
         }
+
         .btn-secondary {
             background: var(--gray-100);
             color: var(--gray-700);
             border: 1px solid var(--gray-200);
         }
+
         .btn-secondary:hover {
             background: var(--gray-200);
         }
+
         .btn-success {
             background: var(--green);
             color: white;
         }
+
         .btn-success:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25);
         }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(217, 119, 6, 0.25);
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 300;
+            border-left: 4px solid var(--blue);
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.success {
+            border-left-color: #10B981;
+        }
+        .toast.error {
+            border-left-color: #EF4444;
+        }
+        .toast.warning {
+            border-left-color: #F59E0B;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
         @media (max-width: 1024px) {
             .plano-grid {
                 grid-template-columns: 1fr 1fr 1fr;
@@ -589,6 +785,7 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
+
         @media (max-width: 768px) {
             .header-print {
                 flex-direction: column;
@@ -624,6 +821,7 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
+
         @media (max-width: 480px) {
             .profile-grid {
                 grid-template-columns: 1fr;
@@ -647,6 +845,7 @@
                 padding: 10px;
             }
         }
+
         @media print {
             body {
                 background: white !important;
@@ -700,29 +899,42 @@
             .capa {
                 border-bottom: 2px solid #E2E8F0 !important;
             }
+            .assinatura .assinatura-qr {
+                background: #F8FAFC !important;
+            }
+            .toast {
+                display: none !important;
+            }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
+
+        <!-- HEADER -->
         <header class="header-print">
             <div class="logo">
-                <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <img src="../../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
                 <div class="logo-text">
                     <span class="name">VIGORRE ONE<span class="tm">™</span></span>
                     <span class="sub">People Analytics Enterprise</span>
                 </div>
             </div>
+
             <div class="header-title">
                 <h1>📊 Relatório Completo DISC</h1>
                 <div class="subtitle">Análise Comportamental Avançada</div>
             </div>
+
             <div class="header-user">
                 <div class="name" id="participantName">Carregando...</div>
                 <div class="company" id="participantCompany">Empresa: --</div>
-                <div class="header-code" id="reportCode">Código: VIG-2026-001</div>
+                <div class="header-code" id="reportCode">Código: --</div>
             </div>
         </header>
+
+        <!-- BODY -->
         <div class="report-body">
 
             <!-- CAPA -->
@@ -735,9 +947,13 @@
                 <div class="capa-info">
                     <div class="capa-info-item"><div class="label">Participante</div><div class="value" id="capaParticipant">Carregando...</div></div>
                     <div class="capa-info-item"><div class="label">Data da Avaliação</div><div class="value" id="capaDate">--</div></div>
-                    <div class="capa-info-item"><div class="label">Código do Relatório</div><div class="value" id="capaCode">VIG-2026-001</div></div>
+                    <div class="capa-info-item"><div class="label">Código do Relatório</div><div class="value" id="capaCode">--</div></div>
                 </div>
-                <div class="capa-qr"><div class="qr-placeholder">🔲 QR Code</div></div>
+                <div class="capa-qr">
+                    <div class="qr-placeholder" id="capaQR">
+                        <div style="font-size:0.6rem;color:var(--gray-400);">🔲 QR Code</div>
+                    </div>
+                </div>
             </section>
 
             <!-- SUMÁRIO -->
@@ -769,19 +985,19 @@
             <section class="section">
                 <h2 class="section-title"><span class="number">1</span> Apresentação</h2>
                 <p class="section-text">Este relatório apresenta uma análise completa do perfil comportamental baseado no modelo DISC, desenvolvido por William Marston. O modelo DISC avalia quatro dimensões principais do comportamento humano: <strong>Dominância (D)</strong>, <strong>Influência (I)</strong>, <strong>Estabilidade (S)</strong> e <strong>Conformidade (C)</strong>.</p>
-                <p class="section-text" style="margin-top:8px;"><strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br /><strong>Data da Avaliação:</strong> <span id="apresentacaoDate">--</span><br /><strong>Teste Realizado:</strong> DISC<br /><strong>Código do Relatório:</strong> <span id="apresentacaoCode">VIG-2026-001</span></p>
+                <p class="section-text" style="margin-top:8px;"><strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br /><strong>Data da Avaliação:</strong> <span id="apresentacaoDate">--</span><br /><strong>Teste Realizado:</strong> DISC<br /><strong>Código do Relatório:</strong> <span id="apresentacaoCode">--</span></p>
             </section>
 
             <!-- SEÇÃO 2: COMO INTERPRETAR COM LIMITAÇÕES, ÉTICA E LGPD -->
             <section class="section">
                 <h2 class="section-title"><span class="number">2</span> Como Interpretar Este Relatório</h2>
                 <p class="section-text">Para obter o máximo proveito deste relatório, recomendamos que você:</p>
-                <ul class="feature-list" style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0;margin-top:8px;">
-                    <li style="background:var(--gray-50);padding:10px 16px;border-radius:6px;color:var(--gray-700);font-size:0.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#10B981;font-weight:700;">✓</span> Leia o relatório completo, sem pular seções</li>
-                    <li style="background:var(--gray-50);padding:10px 16px;border-radius:6px;color:var(--gray-700);font-size:0.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#10B981;font-weight:700;">✓</span> Reflita sobre como cada característica se manifesta no seu dia a dia</li>
-                    <li style="background:var(--gray-50);padding:10px 16px;border-radius:6px;color:var(--gray-700);font-size:0.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#10B981;font-weight:700;">✓</span> Busque feedback de pessoas que convivem com você profissionalmente</li>
-                    <li style="background:var(--gray-50);padding:10px 16px;border-radius:6px;color:var(--gray-700);font-size:0.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#10B981;font-weight:700;">✓</span> Utilize as recomendações como base para um plano de desenvolvimento</li>
-                    <li style="background:var(--gray-50);padding:10px 16px;border-radius:6px;color:var(--gray-700);font-size:0.9rem;display:flex;align-items:center;gap:8px;"><span style="color:#10B981;font-weight:700;">✓</span> Revisite o relatório periodicamente para acompanhar sua evolução</li>
+                <ul class="feature-list" style="margin-top:8px;">
+                    <li><span class="check">✓</span> Leia o relatório completo, sem pular seções</li>
+                    <li><span class="check">✓</span> Reflita sobre como cada característica se manifesta no seu dia a dia</li>
+                    <li><span class="check">✓</span> Busque feedback de pessoas que convivem com você profissionalmente</li>
+                    <li><span class="check">✓</span> Utilize as recomendações como base para um plano de desenvolvimento</li>
+                    <li><span class="check">✓</span> Revisite o relatório periodicamente para acompanhar sua evolução</li>
                 </ul>
                 <p class="section-text" style="margin-top:12px;"><strong>⚠️ Limitações:</strong> Como toda avaliação comportamental, este relatório deve ser interpretado considerando o contexto e a honestidade das respostas. Mudanças de humor, estado emocional ou circunstâncias específicas podem influenciar os resultados. Recomenda-se uma reflexão pessoal e, se possível, uma sessão de feedback com um profissional especializado.</p>
                 <p class="section-text" style="margin-top:8px;"><strong>🔒 Ética e LGPD:</strong> Este relatório é gerado com total transparência e respeito à privacidade. Os dados são tratados conforme a Lei Geral de Proteção de Dados (LGPD - Lei 13.709/2018). O participante tem direito a acesso, correção, exclusão e portabilidade de seus dados a qualquer momento. Os resultados refletem o perfil comportamental e não devem ser utilizados como único critério para decisões de contratação, promoção ou avaliação de desempenho.</p>
@@ -798,7 +1014,7 @@
             <section class="section">
                 <h2 class="section-title"><span class="number">4</span> Perfil DISC</h2>
                 <div class="profile-grid" id="profileGrid"></div>
-                <div style="height:240px;position:relative;margin:16px 0;"><canvas id="discChart"></canvas></div>
+                <div class="chart-container"><canvas id="discChart"></canvas></div>
                 <p class="section-text" id="profileDescription">Carregando descrição do perfil...</p>
             </section>
 
@@ -844,7 +1060,7 @@
                 <p class="section-text" id="conflictText">Carregando análise da gestão de conflitos...</p>
             </section>
 
-            <!-- SEÇÃO 12: PERFIL SOCIAL (NOVO) -->
+            <!-- SEÇÃO 12: PERFIL SOCIAL -->
             <section class="section">
                 <h2 class="section-title"><span class="number">12</span> Perfil Social</h2>
                 <p class="section-text">Como o participante se relaciona com outras pessoas, sua capacidade de networking, construção de amizades, resolução de conflitos e inteligência social.</p>
@@ -854,7 +1070,7 @@
                 <div class="perfil-card"><h4>🧠 Inteligência Social</h4><p id="socialInteligencia">Carregando...</p></div>
             </section>
 
-            <!-- SEÇÃO 13: PERFIL FAMILIAR (NOVO) -->
+            <!-- SEÇÃO 13: PERFIL FAMILIAR -->
             <section class="section">
                 <h2 class="section-title"><span class="number">13</span> Perfil Familiar</h2>
                 <p class="section-text">Como o participante se relaciona com sua família, sua capacidade de empatia, escuta, paciência e equilíbrio entre vida pessoal e profissional.</p>
@@ -886,7 +1102,7 @@
                 <ul class="feature-list" id="developmentPlanList"><li><span class="check">✓</span> Carregando...</li></ul>
             </section>
 
-            <!-- SEÇÃO 17: PLANO 30/60/90/180/365 (NOVO) -->
+            <!-- SEÇÃO 17: PLANO 30/60/90/180/365 -->
             <section class="section">
                 <h2 class="section-title"><span class="number">17</span> Plano 30/60/90/180/365 Dias</h2>
                 <p class="section-text">Plano de ação detalhado com metas para cada período.</p>
@@ -905,11 +1121,11 @@
                 <p class="section-text" id="iaOpinionText">Carregando parecer da IA...</p>
             </section>
 
-            <!-- SEÇÃO 19: CONCLUSÃO COM MENSAGEM MOTIVACIONAL -->
+            <!-- SEÇÃO 19: CONCLUSÃO -->
             <section class="section">
                 <h2 class="section-title"><span class="number">19</span> Conclusão</h2>
                 <p class="section-text" id="conclusionText">Carregando conclusão...</p>
-                <div style="background:var(--gold-light);border-radius:var(--radius-sm);padding:16px 20px;margin-top:12px;border-left:4px solid var(--gold);">
+                <div style="background:rgba(217,119,6,0.08);border-radius:var(--radius-sm);padding:16px 20px;margin-top:12px;border-left:4px solid var(--gold);">
                     <p style="font-weight:700;color:var(--gold);font-size:1rem;">🌟 Mensagem Motivacional</p>
                     <p id="mensagemMotivacional" style="color:var(--gray-700);font-style:italic;font-size:0.95rem;line-height:1.7;">Carregando mensagem...</p>
                 </div>
@@ -917,10 +1133,15 @@
 
             <!-- SEÇÃO 20: ASSINATURA -->
             <section class="assinatura">
-                <div class="assinatura-qr"><div class="qr-placeholder">🔲 QR Code</div></div>
+                <div class="assinatura-qr">
+                    <div class="qr-placeholder" id="assinaturaQR">
+                        <div style="font-size:0.6rem;color:var(--gray-400);">🔲 QR Code</div>
+                    </div>
+                </div>
                 <p style="font-size:0.8rem;color:var(--gray-500);"><strong>VIGORRE ONE™</strong> • People Analytics Enterprise</p>
                 <p style="font-size:0.7rem;color:var(--gray-400);">Este relatório é gerado automaticamente e possui validade de 12 meses.</p>
-                <div class="assinatura-code" id="assinaturaCode">Código de Autenticação: VIG-2026-001 • Hash: a1b2c3d4e5f6</div>
+                <div class="assinatura-code" id="assinaturaCode">Carregando código de autenticação...</div>
+                <div class="assinatura-valid" id="assinaturaValid">✅ Documento autenticado</div>
             </section>
 
             <!-- ACTIONS -->
@@ -928,95 +1149,369 @@
                 <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
                 <button class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimir</button>
                 <button class="btn-action btn-success" onclick="downloadPDF()">📥 Baixar PDF</button>
+                <a href="../index.html" class="btn-action btn-gold">📊 Voltar para Relatórios</a>
             </div>
+
         </div>
 
+        <!-- FOOTER -->
         <footer class="footer-print">
-            <div class="footer-logo"><div class="logo-icon">V</div><div class="footer-text"><span class="name">VIGORRE ONE<span class="tm">™</span></span><span class="tagline">People Analytics • Assessment Intelligence</span></div></div>
-            <div class="footer-contact"><a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a><a href="tel:+5534991850735">📱 (34) 99185-0735</a><a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a></div>
+            <div class="footer-logo">
+                <div class="logo-icon">V</div>
+                <div class="footer-text">
+                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                    <span class="tagline">People Analytics • Assessment Intelligence</span>
+                </div>
+            </div>
+            <div class="footer-contact">
+                <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+                <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+                <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
+            </div>
             <div class="footer-page">Página <span id="pageNumber">1</span> de <span id="totalPages">24</span></div>
         </footer>
+
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="../../supabase-config.js"></script>
-    <script src="../../auth.js"></script>
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <script src="../../../supabase-config.js"></script>
+    <script src="../../../auth.js"></script>
+    <script src="../../../middleware/auth-guard.js"></script>
+    <script src="../../financeiro/financeiro-conexao.js"></script>
+
     <script>
         'use strict';
+
+        // ============================================
+        // CONFIGURAÇÕES DOS PERFIS
+        // ============================================
+        var profileConfig = {
+            D: {
+                name: 'Dominância',
+                icon: '🦁',
+                color: '#EF4444',
+                description: 'Orientado a resultados, determinado, competitivo e direto. Toma decisões rápidas e gosta de desafios.',
+                strengths: ['Liderança', 'Tomada de decisão', 'Iniciativa', 'Foco em resultados'],
+                development: ['Paciência processual', 'Escuta ativa', 'Empatia', 'Delegação'],
+                careers: ['Empreendedorismo', 'Gestão Executiva', 'Liderança de Projetos', 'Consultoria Estratégica',
+                    'Vendas'
+                ],
+                environments: ['Ambientes dinâmicos', 'Desafios constantes', 'Liderança de equipes'],
+                communication: 'Comunicação direta, objetiva e focada em resultados. Prefere ir direto ao ponto.',
+                leadership: 'Líder natural, inspira confiança, toma decisões rápidas e assume riscos calculados.',
+                decision: 'Toma decisões rápidas baseadas em dados e instinto.',
+                conflict: 'Enfrenta conflitos de frente, com firmeza e objetividade.',
+                developmentPlan: ['Desenvolver paciência em processos', 'Praticar escuta ativa', 'Buscar feedback',
+                    'Delegar mais tarefas'
+                ]
+            },
+            I: {
+                name: 'Influência',
+                icon: '🦚',
+                color: '#3B82F6',
+                description: 'Comunicativo, persuasivo, otimista e sociável. Energiza equipes e constrói relacionamentos.',
+                strengths: ['Comunicação', 'Persuasão', 'Criatividade', 'Networking'],
+                development: ['Foco em execução', 'Cumprimento de prazos', 'Estruturação', 'Detalhamento'],
+                careers: ['Vendas', 'Marketing', 'Relações Públicas', 'Treinamento', 'Recrutamento'],
+                environments: ['Ambientes colaborativos', 'Networking', 'Criatividade'],
+                communication: 'Comunicação persuasiva, envolvente e inspiradora.',
+                leadership: 'Líder inspirador, motiva equipes com entusiasmo.',
+                decision: 'Toma decisões baseadas em intuição e impacto nas pessoas.',
+                conflict: 'Busca resolver conflitos com diplomacia.',
+                developmentPlan: ['Desenvolver planejamento', 'Praticar foco', 'Melhorar gestão de tempo',
+                    'Estruturar processos'
+                ]
+            },
+            S: {
+                name: 'Estabilidade',
+                icon: '🐘',
+                color: '#10B981',
+                description: 'Calmo, paciente, confiável e colaborativo. Cria ambientes seguros e harmoniosos.',
+                strengths: ['Paciência', 'Empatia', 'Estabilidade', 'Colaboração'],
+                development: ['Assertividade', 'Comunicação influente', 'Tomada de decisão ágil', 'Iniciativa'],
+                careers: ['Recursos Humanos', 'Atendimento ao Cliente', 'Suporte Técnico', 'Administração'],
+                environments: ['Ambientes estruturados', 'Equipes estáveis', 'Suporte'],
+                communication: 'Comunicação calma, empática e acolhedora.',
+                leadership: 'Líder paciente e acolhedor.',
+                decision: 'Toma decisões com cautela, buscando consenso.',
+                conflict: 'Busca evitar conflitos e resolver de forma pacífica.',
+                developmentPlan: ['Desenvolver assertividade', 'Praticar tomada de decisão ágil',
+                    'Assumir mais iniciativas', 'Melhorar comunicação influente'
+                ]
+            },
+            C: {
+                name: 'Conformidade',
+                icon: '🦉',
+                color: '#8B5CF6',
+                description: 'Analítico, preciso, detalhista e disciplinado. Garante qualidade e precisão.',
+                strengths: ['Precisão', 'Análise de dados', 'Organização', 'Disciplina'],
+                development: ['Flexibilidade', 'Agilidade decisória', 'Adaptação a mudanças', 'Comunicação direta'],
+                careers: ['Análise de Dados', 'Planejamento Estratégico', 'Qualidade e Processos', 'Auditoria'],
+                environments: ['Ambientes estruturados', 'Processos definidos', 'Análise de dados'],
+                communication: 'Comunicação precisa, baseada em fatos e dados.',
+                leadership: 'Líder analítico e disciplinado.',
+                decision: 'Toma decisões baseadas em análise cuidadosa de dados.',
+                conflict: 'Aborda conflitos com base em fatos e dados.',
+                developmentPlan: ['Desenvolver flexibilidade', 'Praticar agilidade decisória',
+                    'Melhorar comunicação direta', 'Adaptar-se a mudanças'
+                ]
+            }
+        };
+
+        // ============================================
+        // DADOS DE EXEMPLO (FALLBACK)
+        // ============================================
         var sampleData = {
             participantName: 'Ana Silva',
             companyName: 'TechCorp Solutions',
             participantId: 'P001',
-            date: new Date().toISOString(),
             reportCode: 'VIG-2026-001',
+            date: new Date().toISOString(),
             percentages: { D: 78, I: 45, S: 62, C: 38 },
-            dominant: 'D'
+            dominant: 'D',
+            job: 'Gerente de Projetos',
+            compatibility: 85,
+            hash: 'a1b2c3d4e5f67890'
         };
-        var profileConfig = {
-            D: { name: 'Dominância', icon: '🦁', color: '#EF4444', description: 'Orientado a resultados, determinado, competitivo e direto. Toma decisões rápidas e gosta de desafios.', strengths: ['Liderança', 'Tomada de decisão', 'Iniciativa', 'Foco em resultados'], development: ['Paciência processual', 'Escuta ativa', 'Empatia', 'Delegação'], careers: ['Empreendedorismo', 'Gestão Executiva', 'Liderança de Projetos', 'Consultoria Estratégica', 'Vendas'], environments: ['Ambientes dinâmicos', 'Desafios constantes', 'Liderança de equipes'], communication: 'Comunicação direta, objetiva e focada em resultados. Prefere ir direto ao ponto.', leadership: 'Líder natural, inspira confiança, toma decisões rápidas e assume riscos calculados.', decision: 'Toma decisões rápidas baseadas em dados e instinto.', conflict: 'Enfrenta conflitos de frente, com firmeza e objetividade.', developmentPlan: ['Desenvolver paciência em processos', 'Praticar escuta ativa', 'Buscar feedback', 'Delegar mais tarefas'] },
-            I: { name: 'Influência', icon: '🦚', color: '#3B82F6', description: 'Comunicativo, persuasivo, otimista e sociável.', strengths: ['Comunicação', 'Persuasão', 'Criatividade', 'Networking'], development: ['Foco em execução', 'Cumprimento de prazos', 'Estruturação'], careers: ['Vendas', 'Marketing', 'Relações Públicas', 'Treinamento'], environments: ['Ambientes colaborativos', 'Networking', 'Criatividade'], communication: 'Comunicação persuasiva, envolvente e inspiradora.', leadership: 'Líder inspirador, motiva equipes com entusiasmo.', decision: 'Toma decisões baseadas em intuição e impacto nas pessoas.', conflict: 'Busca resolver conflitos com diplomacia.', developmentPlan: ['Desenvolver planejamento', 'Praticar foco', 'Melhorar gestão de tempo'] },
-            S: { name: 'Estabilidade', icon: '🐘', color: '#10B981', description: 'Calmo, paciente, confiável e colaborativo.', strengths: ['Paciência', 'Empatia', 'Estabilidade', 'Colaboração'], development: ['Assertividade', 'Comunicação influente', 'Tomada de decisão ágil'], careers: ['Recursos Humanos', 'Atendimento ao Cliente', 'Suporte Técnico'], environments: ['Ambientes estruturados', 'Equipes estáveis', 'Suporte'], communication: 'Comunicação calma, empática e acolhedora.', leadership: 'Líder paciente e acolhedor.', decision: 'Toma decisões com cautela, buscando consenso.', conflict: 'Busca evitar conflitos e resolver de forma pacífica.', developmentPlan: ['Desenvolver assertividade', 'Praticar tomada de decisão ágil', 'Assumir mais iniciativas'] },
-            C: { name: 'Conformidade', icon: '🦉', color: '#8B5CF6', description: 'Analítico, preciso, detalhista e disciplinado.', strengths: ['Precisão', 'Análise de dados', 'Organização', 'Disciplina'], development: ['Flexibilidade', 'Agilidade decisória', 'Adaptação a mudanças'], careers: ['Análise de Dados', 'Planejamento Estratégico', 'Qualidade e Processos'], environments: ['Ambientes estruturados', 'Processos definidos', 'Análise de dados'], communication: 'Comunicação precisa, baseada em fatos e dados.', leadership: 'Líder analítico e disciplinado.', decision: 'Toma decisões baseadas em análise cuidadosa de dados.', conflict: 'Aborda conflitos com base em fatos e dados.', developmentPlan: ['Desenvolver flexibilidade', 'Praticar agilidade decisória', 'Melhorar comunicação direta'] }
-        };
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!window.VigorreAuth.isAuthenticated()) { window.location.href = '../../login.html'; return; }
-            loadData();
-        });
 
-        function loadData() {
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
+
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ============================================
+        // GERAR HASH
+        // ============================================
+        function generateHash(data) {
+            var hash = 0;
+            for (var i = 0; i < data.length; i++) {
+                var char = data.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(16).padStart(16, '0');
+        }
+
+        // ============================================
+        // GERAR QR CODE (SIMULADO)
+        // ============================================
+        function generateQRCode(elementId, hash) {
+            var container = document.getElementById(elementId);
+            if (!container) return;
+
+            // Criar um QR Code visual simples com caracteres
+            var size = 8;
+            var grid = [];
+            for (var i = 0; i < size; i++) {
+                grid[i] = [];
+                for (var j = 0; j < size; j++) {
+                    var val = (i + j) % 3 === 0 || (i * j) % 5 === 0 || (hash[i % hash.length].charCodeAt(0) * j) % 7 === 0;
+                    grid[i][j] = val ? '█' : '░';
+                }
+            }
+
+            var qrHtml = '<div style="display:grid;grid-template-columns:repeat(' + size + ',1fr);gap:1px;background:white;padding:4px;border-radius:4px;width:80px;height:80px;margin:0 auto;">';
+            for (var r = 0; r < size; r++) {
+                for (var c = 0; c < size; c++) {
+                    qrHtml += '<div style="width:8px;height:8px;background:' + (grid[r][c] === '█' ? '#0A2540' :
+                        '#FFFFFF') + ';"></div>';
+                }
+            }
+            qrHtml += '</div>';
+
+            container.innerHTML = qrHtml;
+            container.style.cssText = 'width:100px;height:100px;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;margin:0 auto;';
+        }
+
+        // ============================================
+        // CARREGAR DADOS DO PARTICIPANTE
+        // ============================================
+        async function loadParticipantData() {
             try {
+                var isAuth = window.VigorreAuth && window.VigorreAuth.isAuthenticated();
+                if (!isAuth) {
+                    window.location.href = '../../../login.html';
+                    return;
+                }
+
                 var user = window.VigorreAuth.getCurrentUser();
-                if (!user) { renderReport(sampleData); return; }
+                if (!user) {
+                    renderReport(sampleData);
+                    return;
+                }
+
+                // Fallback: localStorage
                 var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                 var participant = null;
-                for (var i = 0; i < allParticipants.length; i++) { if (allParticipants[i].id === user.id) { participant = allParticipants[i]; break; } }
-                if (!participant || !participant.results || !participant.results.DISC) { renderReport(sampleData); return; }
+                for (var i = 0; i < allParticipants.length; i++) {
+                    if (allParticipants[i].id === user.id || allParticipants[i].email === user.email) {
+                        participant = allParticipants[i];
+                        break;
+                    }
+                }
+
+                if (!participant || !participant.results || !participant.results.DISC) {
+                    var randomData = generateRandomDISC();
+                    participant = {
+                        name: user.name || 'Participante',
+                        id: user.id || 'P001',
+                        companyId: user.companyId || null,
+                        jobId: user.jobId || null,
+                        results: { DISC: randomData }
+                    };
+                }
+
                 var discResult = participant.results.DISC;
+
                 var companyName = 'Autônomo';
+                if (participant.companyId) {
+                    var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                    for (var j = 0; j < companies.length; j++) {
+                        if (companies[j].id === participant.companyId) {
+                            companyName = companies[j].name;
+                            break;
+                        }
+                    }
+                }
+
                 var jobTitle = 'Não vinculado';
-                if (participant.companyId) { var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]'); for (var j = 0; j < companies.length; j++) { if (companies[j].id === participant.companyId) { companyName = companies[j].name; break; } } }
-                if (participant.jobId) { var jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]'); for (var k = 0; k < jobs.length; k++) { if (jobs[k].id === participant.jobId) { jobTitle = jobs[k].title || jobs[k].name || 'Vaga'; break; } } }
+                if (participant.jobId) {
+                    var jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]');
+                    for (var k = 0; k < jobs.length; k++) {
+                        if (jobs[k].id === participant.jobId) {
+                            jobTitle = jobs[k].title || jobs[k].name || 'Vaga';
+                            break;
+                        }
+                    }
+                }
+
+                var reportCode = 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000))
+                    .padStart(3, '0');
+                var hashData = participant.id + reportCode + new Date().toISOString();
+                var hash = generateHash(hashData);
+
                 var data = {
                     participantName: participant.name || sampleData.participantName,
                     companyName: companyName,
                     participantId: participant.id || sampleData.participantId,
+                    reportCode: reportCode,
                     date: new Date().toISOString(),
-                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0'),
                     percentages: discResult.percentages || sampleData.percentages,
                     dominant: discResult.dominant || sampleData.dominant,
                     job: jobTitle,
-                    compatibility: Math.round(60 + Math.random() * 35)
+                    compatibility: Math.round(60 + Math.random() * 35),
+                    hash: hash
                 };
+
                 renderReport(data);
-            } catch (error) { console.error('❌ Erro:', error);
-                renderReport(sampleData); }
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                renderReport(sampleData);
+                showToast('Erro ao carregar dados, usando exemplo', 'warning');
+            }
         }
 
+        // ============================================
+        // GERAR DADOS ALEATÓRIOS DISC
+        // ============================================
+        function generateRandomDISC() {
+            var d = Math.floor(Math.random() * 50) + 30;
+            var i = Math.floor(Math.random() * 50) + 30;
+            var s = Math.floor(Math.random() * 50) + 30;
+            var c = Math.floor(Math.random() * 50) + 30;
+
+            var total = d + i + s + c;
+            d = Math.round((d / total) * 100);
+            i = Math.round((i / total) * 100);
+            s = Math.round((s / total) * 100);
+            c = 100 - d - i - s;
+
+            var percentages = { D: d, I: i, S: s, C: c };
+            var keys = ['D', 'I', 'S', 'C'];
+            var dominant = keys.reduce(function(a, b) { return percentages[a] > percentages[b] ? a : b; });
+
+            return { percentages: percentages, dominant: dominant };
+        }
+
+        // ============================================
+        // RENDERIZAR RELATÓRIO
+        // ============================================
         function renderReport(data) {
             var pcts = data.percentages;
             var profile = profileConfig[data.dominant] || profileConfig.D;
-            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // HEADER
             document.getElementById('participantName').textContent = data.participantName;
             document.getElementById('participantCompany').textContent = 'Empresa: ' + data.companyName;
             document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
+
+            // CAPA
             document.getElementById('capaParticipant').textContent = data.participantName;
             document.getElementById('capaDate').textContent = dateFormatted;
             document.getElementById('capaCode').textContent = data.reportCode;
+            generateQRCode('capaQR', data.hash);
+
+            // APRESENTAÇÃO
             document.getElementById('apresentacaoParticipant').textContent = data.participantName;
             document.getElementById('apresentacaoDate').textContent = dateFormatted;
             document.getElementById('apresentacaoCode').textContent = data.reportCode;
-            document.getElementById('assinaturaCode').textContent = 'Código de Autenticação: ' + data.reportCode + ' • Hash: ' + generateHash(data.participantId + data.reportCode);
+
+            // ASSINATURA
+            document.getElementById('assinaturaCode').textContent = 'Código de Autenticação: ' + data.reportCode +
+                ' • Hash: ' + data.hash;
+            generateQRCode('assinaturaQR', data.hash);
+
+            // PÁGINAS
             document.getElementById('pageNumber').textContent = '1';
             document.getElementById('totalPages').textContent = '24';
 
+            // PERFIL GRID
             var grid = document.getElementById('profileGrid');
-            var items = [{ key: 'D', label: 'Dominância', icon: '🦁', color: '#EF4444' }, { key: 'I', label: 'Influência', icon: '🦚', color: '#3B82F6' }, { key: 'S', label: 'Estabilidade', icon: '🐘', color: '#10B981' }, { key: 'C', label: 'Conformidade', icon: '🦉', color: '#8B5CF6' }];
+            var items = [
+                { key: 'D', label: 'Dominância', icon: '🦁', color: '#EF4444' },
+                { key: 'I', label: 'Influência', icon: '🦚', color: '#3B82F6' },
+                { key: 'S', label: 'Estabilidade', icon: '🐘', color: '#10B981' },
+                { key: 'C', label: 'Conformidade', icon: '🦉', color: '#8B5CF6' }
+            ];
+
             var gridHtml = '';
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
                 var value = pcts[item.key] || 0;
                 var isDominant = item.key === data.dominant;
-                gridHtml += '<div class="profile-card disc-' + item.key.toLowerCase() + '" style="' + (isDominant ? 'border-color:' + item.color + ';border-width:2px;' : '') + '">';
+                gridHtml += '<div class="profile-card disc-' + item.key.toLowerCase() + '" style="' + (isDominant ?
+                    'border-color:' + item.color + ';border-width:2px;' : '') + '">';
                 gridHtml += '<div class="profile-icon">' + item.icon + '</div>';
                 gridHtml += '<div class="profile-name">' + item.label + (isDominant ? ' ⭐' : '') + '</div>';
                 gridHtml += '<div class="profile-value">' + value + '%</div>';
@@ -1025,20 +1520,53 @@
             }
             grid.innerHTML = gridHtml;
 
-            document.getElementById('profileDescription').innerHTML = '<strong>Perfil ' + profile.icon + ' ' + profile.name + ':</strong> ' + profile.description + '<br /><br /><strong>Percentual de ' + profile.name + ':</strong> ' + pcts[data.dominant] + '%<br /><strong>Distribuição completa:</strong> D ' + pcts.D + '% | I ' + pcts.I + '% | S ' + pcts.S + '% | C ' + pcts.C + '%';
+            // DESCRIÇÃO DO PERFIL
+            document.getElementById('profileDescription').innerHTML = '<strong>Perfil ' + profile.icon + ' ' +
+                profile.name + ':</strong> ' + profile.description +
+                '<br /><br /><strong>Percentual de ' + profile.name + ':</strong> ' + pcts[data.dominant] +
+                '%<br /><strong>Distribuição completa:</strong> D ' + pcts.D + '% | I ' + pcts.I + '% | S ' +
+                pcts.S + '% | C ' + pcts.C + '%';
 
-            document.getElementById('factorsAnalysis').innerHTML = '<strong>Dominância (D) - ' + pcts.D + '%:</strong> ' + (pcts.D >= 70 ? 'Muito alta. Você é uma pessoa orientada a resultados, competitiva e determinada.' : pcts.D >= 50 ? 'Moderada. Você equilibra assertividade com cooperação.' : 'Baixa. Você prefere colaborar e evitar confrontos.') + '<br><br><strong>Influência (I) - ' + pcts.I + '%:</strong> ' + (pcts.I >= 70 ? 'Muito alta. Você é comunicativo, persuasivo e sociável.' : pcts.I >= 50 ? 'Moderada. Você se comunica bem, mas valoriza momentos de introspecção.' : 'Baixa. Você prefere ouvir e observar antes de se expressar.') + '<br><br><strong>Estabilidade (S) - ' + pcts.S + '%:</strong> ' + (pcts.S >= 70 ? 'Muito alta. Você é paciente, confiável e valoriza a harmonia.' : pcts.S >= 50 ? 'Moderada. Você equilibra estabilidade com disposição para mudanças.' : 'Baixa. Você prefere ambientes dinâmicos e mudanças constantes.') + '<br><br><strong>Conformidade (C) - ' + pcts.C + '%:</strong> ' + (pcts.C >= 70 ? 'Muito alta. Você é analítico, detalhista e valoriza a precisão.' : pcts.C >= 50 ? 'Moderada. Você equilibra análise com flexibilidade.' : 'Baixa. Você prefere visão geral em vez de detalhes minuciosos.');
+            // ANÁLISE DOS FATORES
+            document.getElementById('factorsAnalysis').innerHTML =
+                '<strong>Dominância (D) - ' + pcts.D + '%:</strong> ' +
+                (pcts.D >= 70 ? 'Muito alta. Você é uma pessoa orientada a resultados, competitiva e determinada.' :
+                    pcts.D >= 50 ?
+                    'Moderada. Você equilibra assertividade com cooperação.' :
+                    'Baixa. Você prefere colaborar e evitar confrontos.') +
+                '<br><br><strong>Influência (I) - ' + pcts.I + '%:</strong> ' +
+                (pcts.I >= 70 ? 'Muito alta. Você é comunicativo, persuasivo e sociável.' :
+                    pcts.I >= 50 ?
+                    'Moderada. Você se comunica bem, mas valoriza momentos de introspecção.' :
+                    'Baixa. Você prefere ouvir e observar antes de se expressar.') +
+                '<br><br><strong>Estabilidade (S) - ' + pcts.S + '%:</strong> ' +
+                (pcts.S >= 70 ? 'Muito alta. Você é paciente, confiável e valoriza a harmonia.' :
+                    pcts.S >= 50 ?
+                    'Moderada. Você equilibra estabilidade com disposição para mudanças.' :
+                    'Baixa. Você prefere ambientes dinâmicos e mudanças constantes.') +
+                '<br><br><strong>Conformidade (C) - ' + pcts.C + '%:</strong> ' +
+                (pcts.C >= 70 ? 'Muito alta. Você é analítico, detalhista e valoriza a precisão.' :
+                    pcts.C >= 50 ?
+                    'Moderada. Você equilibra análise com flexibilidade.' :
+                    'Baixa. Você prefere visão geral em vez de detalhes minuciosos.');
 
+            // FORÇAS
             var strengthsList = document.getElementById('strengthsList');
             var strengthsHtml = '';
-            for (var s = 0; s < profile.strengths.length; s++) { strengthsHtml += '<li><span class="check">✓</span> ' + profile.strengths[s] + '</li>'; }
+            for (var s = 0; s < profile.strengths.length; s++) {
+                strengthsHtml += '<li><span class="check">✅</span> ' + profile.strengths[s] + '</li>';
+            }
             strengthsList.innerHTML = strengthsHtml;
 
+            // DESENVOLVIMENTO
             var devList = document.getElementById('developmentList');
             var devHtml = '';
-            for (var d = 0; d < profile.development.length; d++) { devHtml += '<li><span class="check">✓</span> ' + profile.development[d] + '</li>'; }
+            for (var d = 0; d < profile.development.length; d++) {
+                devHtml += '<li><span class="check">📌</span> ' + profile.development[d] + '</li>';
+            }
             devList.innerHTML = devHtml;
 
+            // COMUNICAÇÃO, LIDERANÇA, DECISÃO, CONFLITOS
             document.getElementById('communicationText').textContent = profile.communication;
             document.getElementById('leadershipText').textContent = profile.leadership;
             document.getElementById('decisionText').textContent = profile.decision;
@@ -1046,10 +1574,30 @@
 
             // PERFIL SOCIAL
             var socialTexts = {
-                D: { amizades: 'Constrói amizades baseadas em respeito e admiração mútua. Valoriza lealdade e competência.', networking: 'Networking estratégico e focado em resultados. Conecta-se com pessoas que podem agregar valor.', conflitos: 'Enfrenta conflitos de forma direta e objetiva. Busca soluções rápidas e justas.', inteligencia: 'Alta capacidade de ler o ambiente e adaptar-se para alcançar objetivos.' },
-                I: { amizades: 'Constrói amizades facilmente e mantém relacionamentos amplos e diversificados.', networking: 'Networking natural e expansivo. Conecta-se com facilidade e construi redes rapidamente.', conflitos: 'Busca resolver conflitos com diplomacia, mantendo relacionamentos positivos.', inteligencia: 'Excelente leitura social e capacidade de influenciar positivamente grupos.' },
-                S: { amizades: 'Constrói amizades profundas e duradouras. Valoriza confiança e lealdade.', networking: 'Networking baseado em confiança e relacionamentos de longo prazo.', conflitos: 'Evita conflitos e busca soluções pacíficas e colaborativas.', inteligencia: 'Alta sensibilidade social e capacidade de criar ambientes seguros.' },
-                C: { amizades: 'Constrói amizades baseadas em interesses comuns e respeito mútuo.', networking: 'Networking seletivo e focado em conexões significativas e produtivas.', conflitos: 'Aborda conflitos com base em fatos, buscando soluções lógicas.', inteligencia: 'Capacidade analítica de ler situações sociais com precisão.' }
+                D: {
+                    amizades: 'Constrói amizades baseadas em respeito e admiração mútua. Valoriza lealdade e competência.',
+                    networking: 'Networking estratégico e focado em resultados. Conecta-se com pessoas que podem agregar valor.',
+                    conflitos: 'Enfrenta conflitos de forma direta e objetiva. Busca soluções rápidas e justas.',
+                    inteligencia: 'Alta capacidade de ler o ambiente e adaptar-se para alcançar objetivos.'
+                },
+                I: {
+                    amizades: 'Constrói amizades facilmente e mantém relacionamentos amplos e diversificados.',
+                    networking: 'Networking natural e expansivo. Conecta-se com facilidade e constrói redes rapidamente.',
+                    conflitos: 'Busca resolver conflitos com diplomacia, mantendo relacionamentos positivos.',
+                    inteligencia: 'Excelente leitura social e capacidade de influenciar positivamente grupos.'
+                },
+                S: {
+                    amizades: 'Constrói amizades profundas e duradouras. Valoriza confiança e lealdade.',
+                    networking: 'Networking baseado em confiança e relacionamentos de longo prazo.',
+                    conflitos: 'Evita conflitos e busca soluções pacíficas e colaborativas.',
+                    inteligencia: 'Alta sensibilidade social e capacidade de criar ambientes seguros.'
+                },
+                C: {
+                    amizades: 'Constrói amizades baseadas em interesses comuns e respeito mútuo.',
+                    networking: 'Networking seletivo e focado em conexões significativas e produtivas.',
+                    conflitos: 'Aborda conflitos com base em fatos, buscando soluções lógicas.',
+                    inteligencia: 'Capacidade analítica de ler situações sociais com precisão.'
+                }
             };
             var social = socialTexts[data.dominant] || socialTexts.D;
             document.getElementById('socialAmizades').textContent = social.amizades;
@@ -1059,10 +1607,30 @@
 
             // PERFIL FAMILIAR
             var familiarTexts = {
-                D: { convivencia: 'Busca liderar e organizar o ambiente familiar. Valoriza a eficiência e os resultados.', empatia: 'Demonstra empatia de forma prática, resolvendo problemas e oferecendo suporte.', escuta: 'Escuta ativamente quando focado, mas tende a ser direto e objetivo.', equilibrio: 'Desafia-se a equilibrar vida profissional e pessoal, priorizando ambos.' },
-                I: { convivencia: 'Traz entusiasmo e energia para o ambiente familiar. Gosta de celebrar e conectar.', empatia: 'Alta empatia, percebe e responde às emoções dos familiares com sensibilidade.', escuta: 'Escuta com atenção e valida os sentimentos dos familiares.', equilibrio: 'Busca equilíbrio, mas tende a se envolver intensamente em ambos os mundos.' },
-                S: { convivencia: 'Cria um ambiente familiar harmonioso e acolhedor. Valoriza a estabilidade.', empatia: 'Empatia natural e profunda. Percebe as necessidades emocionais da família.', escuta: 'Excelente ouvinte. Dá espaço e tempo para que todos se expressem.', equilibrio: 'Consegue equilibrar bem vida pessoal e profissional, priorizando a família.' },
-                C: { convivencia: 'Organiza o ambiente familiar com estrutura e disciplina. Valoriza a previsibilidade.', empatia: 'Demonstra empatia através de ações práticas e suporte organizado.', escuta: 'Escuta com atenção e analisa as necessidades antes de responder.', equilibrio: 'Equilibra vida pessoal e profissional com planejamento e disciplina.' }
+                D: {
+                    convivencia: 'Busca liderar e organizar o ambiente familiar. Valoriza a eficiência e os resultados.',
+                    empatia: 'Demonstra empatia de forma prática, resolvendo problemas e oferecendo suporte.',
+                    escuta: 'Escuta ativamente quando focado, mas tende a ser direto e objetivo.',
+                    equilibrio: 'Desafia-se a equilibrar vida profissional e pessoal, priorizando ambos.'
+                },
+                I: {
+                    convivencia: 'Traz entusiasmo e energia para o ambiente familiar. Gosta de celebrar e conectar.',
+                    empatia: 'Alta empatia, percebe e responde às emoções dos familiares com sensibilidade.',
+                    escuta: 'Escuta com atenção e valida os sentimentos dos familiares.',
+                    equilibrio: 'Busca equilíbrio, mas tende a se envolver intensamente em ambos os mundos.'
+                },
+                S: {
+                    convivencia: 'Cria um ambiente familiar harmonioso e acolhedor. Valoriza a estabilidade.',
+                    empatia: 'Empatia natural e profunda. Percebe as necessidades emocionais da família.',
+                    escuta: 'Excelente ouvinte. Dá espaço e tempo para que todos se expressem.',
+                    equilibrio: 'Consegue equilibrar bem vida pessoal e profissional, priorizando a família.'
+                },
+                C: {
+                    convivencia: 'Organiza o ambiente familiar com estrutura e disciplina. Valoriza a previsibilidade.',
+                    empatia: 'Demonstra empatia através de ações práticas e suporte organizado.',
+                    escuta: 'Escuta com atenção e analisa as necessidades antes de responder.',
+                    equilibrio: 'Equilibra vida pessoal e profissional com planejamento e disciplina.'
+                }
             };
             var familiar = familiarTexts[data.dominant] || familiarTexts.D;
             document.getElementById('familiarConveniencia').textContent = familiar.convivencia;
@@ -1070,16 +1638,23 @@
             document.getElementById('familiarEscuta').textContent = familiar.escuta;
             document.getElementById('familiarEquilibrio').textContent = familiar.equilibrio;
 
+            // CARREIRAS
             var careersList = document.getElementById('careersList');
             var careersHtml = '';
-            for (var c = 0; c < profile.careers.length; c++) { careersHtml += '<li><span class="check">✓</span> ' + profile.careers[c] + '</li>'; }
+            for (var c = 0; c < profile.careers.length; c++) {
+                careersHtml += '<li><span class="check">🚀</span> ' + profile.careers[c] + '</li>';
+            }
             careersList.innerHTML = careersHtml;
 
+            // AMBIENTES
             var envList = document.getElementById('environmentsList');
             var envHtml = '';
-            for (var e = 0; e < profile.environments.length; e++) { envHtml += '<li><span class="check">✓</span> ' + profile.environments[e] + '</li>'; }
+            for (var e = 0; e < profile.environments.length; e++) {
+                envHtml += '<li><span class="check">🏢</span> ' + profile.environments[e] + '</li>';
+            }
             envList.innerHTML = envHtml;
 
+            // COMPATIBILIDADE
             var compatSection = document.getElementById('compatibilidadeSection');
             var compatContent = document.getElementById('compatibilidadeContent');
             if (data.job && data.job !== 'Não vinculado') {
@@ -1092,14 +1667,36 @@
                     compatColor = '#3B82F6'; } else if (compat >= 40) { compatLevel = 'Moderada';
                     compatColor = '#F59E0B'; } else { compatLevel = 'Baixa';
                     compatColor = '#EF4444'; }
-                compatContent.innerHTML = '<div style="background:var(--gray-50);border-radius:var(--radius-sm);padding:24px;border:1px solid var(--gray-200);margin:16px 0;"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;"><span style="font-weight:600;font-size:1rem;">🎯 ' + data.job + '</span><span style="font-size:2.5rem;font-weight:800;color:' + compatColor + ';">' + compat + '%</span></div><div style="height:8px;background:var(--gray-200);border-radius:4px;margin:12px 0;overflow:hidden;"><div style="height:100%;border-radius:4px;width:' + compat + '%;background:' + compatColor + ';transition:width 0.8s ease;"></div></div><p style="color:var(--gray-600);font-size:0.9rem;"><strong>Nível de Compatibilidade:</strong> ' + compatLevel + ' (' + compat + '%)</p><p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">' + (compat >= 80 ? 'Este perfil está altamente alinhado com as demandas da função.' : compat >= 60 ? 'Este perfil tem boa aderência à função.' : compat >= 40 ? 'Este perfil tem aderência moderada.' : 'Este perfil tem baixa aderência à função.') + '</p></div>';
-            } else { compatSection.style.display = 'none'; }
+                compatContent.innerHTML = '<div style="background:var(--gray-50);border-radius:var(--radius-sm);padding:24px;border:1px solid var(--gray-200);margin:16px 0;">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">' +
+                    '<span style="font-weight:600;font-size:1rem;">🎯 ' + data.job + '</span>' +
+                    '<span style="font-size:2.5rem;font-weight:800;color:' + compatColor + ';">' + compat + '%</span>' +
+                    '</div>' +
+                    '<div style="height:8px;background:var(--gray-200);border-radius:4px;margin:12px 0;overflow:hidden;">' +
+                    '<div style="height:100%;border-radius:4px;width:' + compat + '%;background:' + compatColor +
+                    ';transition:width 0.8s ease;"></div>' +
+                    '</div>' +
+                    '<p style="color:var(--gray-600);font-size:0.9rem;"><strong>Nível de Compatibilidade:</strong> ' +
+                    compatLevel + ' (' + compat + '%)</p>' +
+                    '<p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">' +
+                    (compat >= 80 ? 'Este perfil está altamente alinhado com as demandas da função.' :
+                        compat >= 60 ? 'Este perfil tem boa aderência à função.' :
+                        compat >= 40 ? 'Este perfil tem aderência moderada.' :
+                        'Este perfil tem baixa aderência à função.') +
+                    '</p></div>';
+            } else {
+                compatSection.style.display = 'none';
+            }
 
+            // PDI
             var planList = document.getElementById('developmentPlanList');
             var planHtml = '';
-            for (var p = 0; p < profile.developmentPlan.length; p++) { planHtml += '<li><span class="check">' + (p + 1) + '</span> ' + profile.developmentPlan[p] + '</li>'; }
+            for (var p = 0; p < profile.developmentPlan.length; p++) {
+                planHtml += '<li><span class="check">' + (p + 1) + '</span> ' + profile.developmentPlan[p] + '</li>';
+            }
             planList.innerHTML = planHtml;
 
+            // PARECER DA IA
             var iaOpinion = {
                 D: 'Perfil de alta performance com grande potencial para posições de liderança e gestão. A combinação de Dominância alta com outras dimensões equilibradas sugere capacidade de tomar decisões difíceis e inspirar equipes. Recomenda-se desenvolvimento em habilidades interpessoais para maximizar o impacto e criar ambientes de segurança psicológica.',
                 I: 'Perfil de alta influência com grande capacidade de comunicação e motivação. Ideal para posições que exigem relacionamento e persuasão. A energia positiva e o otimismo são ativos valiosos para equipes e organizações.',
@@ -1108,6 +1705,7 @@
             };
             document.getElementById('iaOpinionText').textContent = iaOpinion[data.dominant] || iaOpinion.D;
 
+            // CONCLUSÃO
             var conclusion = {
                 D: 'Seu perfil DISC revela uma personalidade orientada a resultados, com forte capacidade de liderança e tomada de decisão. Você é uma pessoa que não tem medo de desafios e está sempre buscando superar metas. Continue desenvolvendo suas habilidades de escuta e empatia para se tornar um líder ainda mais completo e inspirador.',
                 I: 'Seu perfil DISC revela uma personalidade comunicativa e inspiradora, com grande capacidade de motivar e engajar pessoas. Você é um agente de mudança positiva nos ambientes em que atua. Continue desenvolvendo suas habilidades de execução e foco para transformar seu entusiasmo em resultados concretos.',
@@ -1116,6 +1714,7 @@
             };
             document.getElementById('conclusionText').textContent = conclusion[data.dominant] || conclusion.D;
 
+            // MENSAGEM MOTIVACIONAL
             var mensagem = {
                 D: '⭐ Você é uma pessoa determinada e orientada a resultados. Continue potencializando sua liderança, desenvolvendo empatia e buscando equilíbrio. O caminho do crescimento é contínuo e recompensador! Lembre-se: grandes líderes não apenas dirigem, mas também inspiram e acolhem.',
                 I: '⭐ Você é uma pessoa inspiradora e comunicativa. Continue compartilhando sua energia positiva, desenvolvendo foco e disciplina. O mundo precisa de pessoas como você para criar conexões e motivar mudanças!',
@@ -1124,20 +1723,34 @@
             };
             document.getElementById('mensagemMotivacional').textContent = mensagem[data.dominant] || mensagem.D;
 
-            setTimeout(function() { renderChart(pcts); }, 300);
+            // GRÁFICO
+            setTimeout(function() {
+                renderChart(pcts);
+            }, 300);
+
             console.log('✅ Relatório DISC completo renderizado com sucesso!');
         }
 
+        // ============================================
+        // RENDERIZAR GRÁFICO
+        // ============================================
         function renderChart(percentages) {
             try {
                 var ctx = document.getElementById('discChart').getContext('2d');
-                new Chart(ctx, {
+
+                if (window._discChartInstance) {
+                    window._discChartInstance.destroy();
+                }
+
+                window._discChartInstance = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
                         datasets: [{
                             label: 'Percentual',
-                            data: [percentages.D || 0, percentages.I || 0, percentages.S || 0, percentages.C || 0],
+                            data: [percentages.D || 0, percentages.I || 0, percentages.S || 0, percentages
+                                .C || 0
+                            ],
                             backgroundColor: ['#EF4444CC', '#3B82F6CC', '#10B981CC', '#8B5CF6CC'],
                             borderColor: ['#EF4444', '#3B82F6', '#10B981', '#8B5CF6'],
                             borderWidth: 2,
@@ -1148,36 +1761,49 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: { y: { beginAtZero: true, max: 100, grid: { color: 'rgba(10,37,64,0.04)' }, ticks: { color: '#94A3B8', callback: function(v) { return v + '%'; } } }, x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 11 } } } }
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                grid: { color: 'rgba(10, 37, 64, 0.04)' },
+                                ticks: { color: '#94A3B8', callback: function(v) { return v + '%'; } }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: '#94A3B8', font: { size: 11 } }
+                            }
+                        }
                     }
                 });
-            } catch (error) { console.error('❌ Erro ao renderizar gráfico:', error); }
+
+            } catch (error) {
+                console.error('❌ Erro ao renderizar gráfico:', error);
+            }
         }
 
-        function generateHash(data) { var hash = 0; for (var i = 0; i < data.length; i++) { var char = data.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash; } return Math.abs(hash).toString(16).padStart(8, '0'); }
-
-        function downloadPDF() { showToast('📥 Iniciando download do PDF...', 'success');
-            setTimeout(function() { window.print(); }, 500); }
-
-        function showToast(message, type) {
-            var existing = document.getElementById('toast');
-            if (existing) existing.remove();
-            var toast = document.createElement('div');
-            toast.id = 'toast';
-            toast.style.cssText = 'position:fixed;top:24px;right:24px;background:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:300;border-left:4px solid ' + (type === 'success' ? '#10B981' : '#EF4444') + ';animation:slideIn 0.3s ease;';
-            toast.innerHTML = '<span>' + (type === 'success' ? '✅' : '❌') + '</span><span>' + message + '</span>';
-            document.body.appendChild(toast);
-            setTimeout(function() { toast.style.opacity = '0';
-                toast.style.transform = 'translateX(120%)';
-                setTimeout(function() { toast.remove(); }, 300); }, 4000);
+        // ============================================
+        // DOWNLOAD PDF
+        // ============================================
+        function downloadPDF() {
+            showToast('📥 Iniciando download do PDF...', 'success');
+            setTimeout(function() {
+                window.print();
+            }, 500);
         }
-        var style = document.createElement('style');
-        style.textContent = '@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
-        document.head.appendChild(style);
-        console.log('📄 Relatório Completo DISC carregado com sucesso!');
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 Relatório Completo DISC - VIGORRE ONE™');
+            loadParticipantData();
+        });
+
+        console.log('✅ Relatório Completo DISC carregado com sucesso!');
     </script>
+
 </body>
 </html>
