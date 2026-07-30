@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teste Big Five | VIGORRE ONE™</title>
+    <title>Relatório Big Five | VIGORRE ONE™</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,13 +30,12 @@
             min-height: 100vh;
             padding: 20px;
         }
-        .container { max-width: 900px; margin: 0 auto; }
+        .container { max-width: 1100px; margin: 0 auto; }
 
-        /* HEADER */
         .header-premium {
             background: var(--navy);
             color: white;
-            padding: 20px 32px;
+            padding: 24px 32px;
             border-radius: var(--radius) var(--radius) 0 0;
             display: flex;
             justify-content: space-between;
@@ -47,9 +46,9 @@
         .header-premium .logo {
             display: flex; align-items: center; gap: 12px; text-decoration: none;
         }
-        .header-premium .logo .logo-img { height: 36px; width: auto; display: block; }
+        .header-premium .logo .logo-img { height: 40px; width: auto; display: block; }
         .header-premium .logo .logo-text .name {
-            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white;
+            font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 800; color: white;
         }
         .header-premium .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
         .header-premium .logo .logo-text .sub {
@@ -57,157 +56,160 @@
         }
         .header-premium .header-title { text-align: center; }
         .header-premium .header-title h1 {
-            font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700;
+            font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700;
         }
-        .header-premium .header-title .subtitle { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+        .header-premium .header-title .subtitle { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
         .header-premium .header-user { text-align: right; }
         .header-premium .header-user .name { font-weight: 600; font-size: 0.9rem; }
         .header-premium .header-user .company { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+        .header-premium .header-code {
+            font-size: 0.6rem; color: rgba(255,255,255,0.3); font-family: 'Courier New', monospace; margin-top: 2px;
+        }
 
-        /* BODY */
-        .test-body {
+        .report-body {
             background: white;
             padding: 32px;
             border-left: 1px solid var(--gray-200);
             border-right: 1px solid var(--gray-200);
-            min-height: 500px;
         }
 
-        /* INTRO */
-        .intro-section { text-align: center; padding: 40px 20px; }
-        .intro-section .icon { font-size: 4rem; margin-bottom: 16px; }
-        .intro-section h2 {
-            font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--gray-900);
-            margin-bottom: 8px;
+        .section {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--gray-100);
         }
-        .intro-section p {
-            color: var(--gray-500); font-size: 0.95rem; max-width: 600px;
-            margin: 0 auto 20px; line-height: 1.7;
-        }
-        .intro-section .info-box {
-            background: var(--gray-50); border-radius: var(--radius-sm); padding: 20px 24px;
-            max-width: 500px; margin: 0 auto 24px; border: 1px solid var(--gray-200);
-            text-align: left;
-        }
-        .intro-section .info-box .row {
-            display: flex; justify-content: space-between; padding: 6px 0;
-            font-size: 0.85rem; color: var(--gray-600); border-bottom: 1px solid var(--gray-100);
-        }
-        .intro-section .info-box .row:last-child { border-bottom: none; }
-        .intro-section .info-box .row .label { font-weight: 600; color: var(--gray-700); }
-        .intro-section .warning-box {
-            background: #FEF3C7; border-radius: var(--radius-sm); padding: 16px 20px;
-            max-width: 500px; margin: 0 auto 24px; border-left: 4px solid var(--gold);
-            text-align: left; font-size: 0.85rem; color: var(--gray-700);
-        }
-        .intro-section .warning-box strong { color: var(--gold); }
-        .btn-start {
-            padding: 14px 48px; background: linear-gradient(135deg, var(--purple), var(--cyan));
-            color: white; border: none; border-radius: var(--radius-full);
-            font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem;
-            cursor: pointer; transition: var(--transition);
-            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.25);
-        }
-        .btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124, 58, 237, 0.35); }
+        .section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
-        /* QUESTÃO */
-        .question-section { display: none; }
-        .question-section.active { display: block; }
-        .progress-bar {
-            width: 100%; height: 6px; background: var(--gray-200); border-radius: 3px;
-            margin-bottom: 24px; overflow: hidden;
+        .section-title {
+            font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700;
+            color: var(--gray-800); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
         }
-        .progress-bar .fill {
-            height: 100%; background: linear-gradient(135deg, var(--purple), var(--cyan));
-            border-radius: 3px; transition: width 0.5s ease;
+        .section-text {
+            color: var(--gray-600); line-height: 1.8; font-size: 0.95rem;
         }
-        .question-counter {
-            font-size: 0.85rem; color: var(--gray-400); margin-bottom: 8px;
-        }
-        .question-counter .number { font-weight: 700; color: var(--gray-700); }
-        .question-text {
-            font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 600;
-            color: var(--gray-800); margin-bottom: 20px; line-height: 1.5;
-        }
-        .likert-grid {
-            display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-            gap: 8px; margin: 16px 0;
-        }
-        .likert-btn {
-            padding: 14px 8px; border: 2px solid var(--gray-200); border-radius: var(--radius-sm);
-            background: white; font-family: 'Inter', sans-serif; font-size: 0.85rem;
-            cursor: pointer; transition: var(--transition); text-align: center;
-        }
-        .likert-btn:hover { border-color: var(--purple); background: var(--gray-50); }
-        .likert-btn .num { font-weight: 700; font-size: 1.1rem; display: block; }
-        .likert-btn .label { font-size: 0.6rem; color: var(--gray-400); }
-        .likert-btn.selected { border-color: var(--purple); background: #EDE9FE; }
-        .likert-btn.selected .num { color: var(--purple); }
-        .likert-btn.disabled { cursor: default; opacity: 0.5; }
-        .btn-next {
-            margin-top: 24px; padding: 12px 32px;
-            background: linear-gradient(135deg, var(--purple), var(--cyan));
-            color: white; border: none; border-radius: var(--radius-full);
-            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem;
-            cursor: pointer; transition: var(--transition); display: none;
-        }
-        .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,0.3); }
-        .btn-next.show { display: inline-block; }
+        .section-text strong { color: var(--gray-800); }
 
-        /* RESULTADO */
-        .result-section { display: none; }
-        .result-section.active { display: block; }
-        .result-section .result-icon { font-size: 3rem; text-align: center; margin-bottom: 8px; }
-        .result-section h2 {
-            font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 700;
-            text-align: center; color: var(--gray-900); margin-bottom: 4px;
+        .factors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 12px 0;
         }
-        .result-section .result-sub {
-            text-align: center; color: var(--gray-500); font-size: 0.95rem; margin-bottom: 20px;
+        .factor-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px 12px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+            transition: var(--transition);
         }
-        .result-card {
-            background: var(--gray-50); border-radius: var(--radius-sm); padding: 16px 20px;
-            border: 1px solid var(--gray-200); margin-bottom: 12px;
-        }
-        .result-card .label {
-            font-size: 0.7rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em;
-        }
-        .result-card .value {
-            font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700;
-        }
-        .result-card .bar {
+        .factor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+        .factor-card .factor-icon { font-size: 1.5rem; }
+        .factor-card .factor-name { font-weight: 700; font-size: 0.7rem; color: var(--gray-700); text-transform: uppercase; }
+        .factor-card .factor-value { font-size: 1.2rem; font-weight: 700; }
+        .factor-card .factor-bar {
             height: 4px; background: var(--gray-200); border-radius: 2px; margin-top: 6px; overflow: hidden;
         }
-        .result-card .bar .fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
-        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
-        .btn-result {
-            padding: 12px 32px; border: none; border-radius: var(--radius-full);
-            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem;
-            cursor: pointer; transition: var(--transition); text-decoration: none; text-align: center;
-            display: inline-block;
-        }
-        .btn-result-primary {
-            background: linear-gradient(135deg, var(--purple), var(--cyan)); color: white;
-        }
-        .btn-result-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,0.3); }
-        .btn-result-secondary {
-            background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200);
-        }
-        .btn-result-secondary:hover { background: var(--gray-200); }
-        .btn-result-gold {
-            background: linear-gradient(135deg, var(--gold), var(--orange)); color: white;
-        }
-        .btn-result-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(217,119,6,0.25); }
-        .result-actions {
-            display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;
-        }
-        .motivacional {
-            text-align: center; padding: 16px; background: var(--gray-50);
-            border-radius: var(--radius-sm); border: 1px solid var(--gray-200);
-            margin-top: 16px; font-style: italic; color: var(--gray-600); font-size: 0.9rem;
+        .factor-card .factor-bar .fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
+
+        .chart-container {
+            height: 280px;
+            position: relative;
+            margin: 16px 0;
         }
 
-        /* TOAST */
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            padding: 0;
+        }
+        .feature-list li {
+            background: var(--gray-50);
+            padding: 10px 16px;
+            border-radius: 6px;
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feature-list li .check { color: #10B981; font-weight: 700; }
+
+        .qr-container {
+            display: flex; align-items: center; gap: 16px; padding: 12px 16px;
+            background: var(--gray-50); border-radius: var(--radius-sm);
+            border: 1px solid var(--gray-200); margin-top: 12px;
+        }
+        .qr-container .qr-placeholder {
+            width: 60px; height: 60px; background: white; border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;
+            font-size: 0.6rem; color: var(--gray-400); flex-shrink: 0;
+        }
+        .qr-container .qr-info { flex: 1; }
+        .qr-container .qr-info .hash {
+            font-family: 'Courier New', monospace; font-size: 0.7rem; color: var(--gray-500); word-break: break-all;
+        }
+        .qr-container .qr-info .valid { font-size: 0.7rem; font-weight: 600; color: var(--green); }
+
+        .footer-premium {
+            background: var(--navy); color: white; padding: 20px 32px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+        }
+        .footer-premium .footer-logo {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .footer-premium .footer-logo .logo-icon {
+            width: 32px; height: 32px; background: var(--cyan); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 0.8rem; color: var(--navy); font-family: 'Poppins', sans-serif;
+        }
+        .footer-premium .footer-logo .footer-text .name {
+            font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700;
+        }
+        .footer-premium .footer-logo .footer-text .name .tm { font-size: 0.35rem; vertical-align: super; color: var(--cyan); }
+        .footer-premium .footer-logo .footer-text .tagline {
+            font-size: 0.55rem; color: rgba(255,255,255,0.3);
+        }
+        .footer-premium .footer-contact {
+            display: flex; gap: 16px; flex-wrap: wrap;
+        }
+        .footer-premium .footer-contact a {
+            color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.7rem; transition: var(--transition);
+        }
+        .footer-premium .footer-contact a:hover { color: rgba(255,255,255,0.7); }
+        .footer-premium .footer-page { font-size: 0.7rem; color: rgba(255,255,255,0.3); }
+
+        .actions-bar {
+            display: flex; justify-content: flex-end; gap: 12px;
+            padding: 16px 0; border-top: 1px solid var(--gray-200); margin-top: 16px; flex-wrap: wrap;
+        }
+        .btn-action {
+            padding: 10px 24px; border: none; border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.85rem;
+            cursor: pointer; transition: var(--transition);
+            display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            color: white; box-shadow: 0 4px 16px rgba(124,58,237,0.2);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,0.3); }
+        .btn-secondary {
+            background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200);
+        }
+        .btn-secondary:hover { background: var(--gray-200); }
+        .btn-success {
+            background: var(--green); color: white;
+        }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.25); }
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--orange)); color: white;
+        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(217,119,6,0.25); }
+
         .toast {
             position: fixed; top: 24px; right: 24px; background: white;
             padding: 14px 24px; border-radius: 12px;
@@ -225,37 +227,35 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        /* FOOTER */
-        .footer-premium {
-            background: var(--navy); color: white; padding: 16px 32px;
-            border-radius: 0 0 var(--radius) var(--radius);
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+        @media (max-width: 1024px) {
+            .factors-grid { grid-template-columns: 1fr 1fr 1fr; }
         }
-        .footer-premium .footer-text { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
-        .footer-premium .footer-text strong { color: rgba(255,255,255,0.6); }
-
-        /* RESPONSIVO */
         @media (max-width: 768px) {
             .header-premium { flex-direction: column; text-align: center; padding: 16px 20px; }
             .header-premium .header-user { text-align: center; }
-            .test-body { padding: 20px; }
-            .likert-grid { grid-template-columns: 1fr 1fr 1fr; }
-            .result-grid { grid-template-columns: 1fr; }
-            .intro-section { padding: 20px 10px; }
-            .result-actions { flex-direction: column; align-items: center; }
-            .btn-result { width: 100%; text-align: center; }
+            .factors-grid { grid-template-columns: 1fr 1fr; }
+            .feature-list { grid-template-columns: 1fr; }
+            .report-body { padding: 20px; }
+            .footer-premium { flex-direction: column; text-align: center; }
+            .actions-bar { flex-direction: column; }
+            .btn-action { justify-content: center; }
+            .qr-container { flex-direction: column; text-align: center; }
         }
         @media (max-width: 480px) {
-            .likert-grid { grid-template-columns: 1fr 1fr; }
-            .likert-btn { padding: 10px 4px; font-size: 0.7rem; }
+            .factors-grid { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0; }
+            body { padding: 10px; }
         }
         @media print {
             body { background: white !important; padding: 0 !important; }
             .header-premium { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; border-radius: 0 !important; }
             .footer-premium { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; border-radius: 0 !important; }
-            .btn-start, .btn-next, .btn-result { display: none !important; }
-            .test-body { border: none !important; }
-            .likert-btn { border: 1px solid #E2E8F0 !important; }
+            .btn-action { display: none !important; }
+            .actions-bar { display: none !important; }
+            .report-body { border: none !important; }
+            .factor-card { background: #F8FAFC !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .feature-list li { background: #F8FAFC !important; }
+            .qr-container { background: #F8FAFC !important; }
             .toast { display: none !important; }
         }
     </style>
@@ -264,7 +264,6 @@
 
     <div class="container">
 
-        <!-- HEADER -->
         <header class="header-premium">
             <div class="logo">
                 <img src="../../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
@@ -274,213 +273,112 @@
                 </div>
             </div>
             <div class="header-title">
-                <h1>🧬 Teste Big Five</h1>
+                <h1>🧬 Relatório Big Five</h1>
                 <div class="subtitle">Os 5 Grandes Fatores da Personalidade</div>
             </div>
             <div class="header-user">
                 <div class="name" id="participantName">Carregando...</div>
                 <div class="company" id="participantCompany">Empresa: --</div>
+                <div class="header-code" id="reportCode">Código: --</div>
             </div>
         </header>
 
-        <!-- BODY -->
-        <div class="test-body">
+        <div class="report-body">
 
-            <!-- INTRO -->
-            <div class="intro-section" id="introSection">
-                <div class="icon">🧬</div>
-                <h2>Descubra os 5 Fatores da Sua Personalidade</h2>
-                <p>O teste Big Five avalia cinco dimensões fundamentais da personalidade: Abertura, Conscienciosidade, Extroversão, Amabilidade e Neuroticismo.</p>
+            <section class="section">
+                <h2 class="section-title">🧬 Perfil Big Five</h2>
+                <p class="section-text" id="profileDescription">Carregando perfil...</p>
+            </section>
 
-                <div class="info-box">
-                    <div class="row"><span class="label">📝 Perguntas</span><span>60</span></div>
-                    <div class="row"><span class="label">⏱️ Tempo estimado</span><span>10-15 minutos</span></div>
-                    <div class="row"><span class="label">📋 Formato</span><span>Escala Likert 1-5</span></div>
-                    <div class="row"><span class="label">🎯 Resultado</span><span>Perfil dos 5 Fatores</span></div>
+            <section class="section">
+                <h2 class="section-title">📊 Distribuição dos Fatores</h2>
+                <div class="factors-grid" id="factorsGrid"></div>
+                <div class="chart-container">
+                    <canvas id="bigfiveChart"></canvas>
                 </div>
+            </section>
 
-                <div class="warning-box">
-                    <strong>⚠️ ATENÇÃO:</strong> Este teste deve ser respondido em uma <strong>única sessão contínua</strong>. Se você sair, fechar o navegador ou recarregar a página, seu progresso <strong>NÃO será salvo</strong> e você precisará recomeçar do zero.
+            <section class="section">
+                <h2 class="section-title">💡 Análise Detalhada</h2>
+                <p class="section-text" id="detailedAnalysis">Carregando análise...</p>
+                <p class="section-text" style="margin-top:16px;" id="recommendations">Carregando recomendações...</p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🔐 Autenticidade e Validação</h2>
+                <div class="qr-container">
+                    <div class="qr-placeholder" id="qrPlaceholder">🔲 QR</div>
+                    <div class="qr-info">
+                        <div><strong>Documento autenticado</strong></div>
+                        <div class="hash" id="hashDisplay">Hash: carregando...</div>
+                        <div class="valid" id="validDisplay">✅ Documento válido</div>
+                        <div style="font-size:0.7rem;color:var(--gray-400);margin-top:4px;">Emitido por VIGORRE ONE™ · People Analytics Enterprise</div>
+                    </div>
                 </div>
+            </section>
 
-                <button class="btn-start" onclick="iniciarTeste()">🔵 Iniciar Teste</button>
-            </div>
-
-            <!-- QUESTÕES -->
-            <div class="question-section" id="questionSection">
-                <div class="progress-bar">
-                    <div class="fill" id="progressFill" style="width:0%;"></div>
-                </div>
-
-                <div class="question-counter">
-                    Pergunta <span class="number" id="currentQuestion">1</span> de <span id="totalQuestions">60</span>
-                </div>
-
-                <div class="question-text" id="questionText">Carregando pergunta...</div>
-
-                <div class="likert-grid" id="likertGrid">
-                    <!-- Gerado via JS -->
-                </div>
-
-                <button class="btn-next" id="btnNext" onclick="proximaPergunta()">Próxima →</button>
-            </div>
-
-            <!-- RESULTADO -->
-            <div class="result-section" id="resultSection">
-                <div class="result-icon" id="resultIcon">🧬</div>
-                <h2 id="resultTitle">Teste Concluído!</h2>
-                <p class="result-sub" id="resultSub">Seu perfil Big Five foi calculado com sucesso.</p>
-
-                <div class="result-grid" id="resultGrid">
-                    <!-- Gerado via JS -->
-                </div>
-
-                <div class="result-card">
-                    <div class="label">Fator Principal</div>
-                    <div class="value" id="resultDominant" style="color:#7C3AED;">--</div>
-                </div>
-
-                <div class="motivacional" id="resultMotivacional">
-                    "O autoconhecimento é o primeiro passo para a transformação."
-                </div>
-
-                <div class="result-actions">
-                    <a href="../../relatorios/bigfive/index.html" class="btn-result btn-result-primary">📄 Ver Relatório Simples</a>
-                    <a href="../../relatorios/bigfive/completo.html" class="btn-result btn-result-gold">📋 Ver Relatório Completo</a>
-                    <button class="btn-result btn-result-secondary" onclick="reiniciarTeste()">🔄 Refazer Teste</button>
-                </div>
+            <div class="actions-bar">
+                <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
+                <a href="completo.html" class="btn-action btn-gold">📄 Ver Relatório Completo</a>
+                <button class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+                <button class="btn-action btn-success" onclick="downloadPDF()">📥 Baixar PDF</button>
             </div>
 
         </div>
 
-        <!-- FOOTER -->
         <footer class="footer-premium">
-            <div class="footer-text">
-                <strong>VIGORRE ONE™</strong> · People Analytics Enterprise
+            <div class="footer-logo">
+                <div class="logo-icon">V</div>
+                <div class="footer-text">
+                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                    <span class="tagline">People Analytics • Assessment Intelligence</span>
+                </div>
             </div>
-            <div class="footer-text">
-                © 2026 · Todos os direitos reservados
+            <div class="footer-contact">
+                <a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a>
+                <a href="tel:+5534991850735">📱 (34) 99185-0735</a>
+                <a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a>
             </div>
+            <div class="footer-page">Página 1 de 1</div>
         </footer>
 
     </div>
 
-    <!-- TOAST -->
     <div class="toast" id="toast">
         <span id="toastIcon">✅</span>
         <span id="toastMessage">Mensagem</span>
     </div>
 
-    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="../../../supabase-config.js"></script>
     <script src="../../../auth.js"></script>
     <script src="../../../middleware/auth-guard.js"></script>
     <script src="../../financeiro/financeiro-conexao.js"></script>
-    <script src="../algoritmos/calculadora.js"></script>
+    <script src="../../test/algoritmos/calculadora.js"></script>
 
     <script>
         'use strict';
 
-        // ============================================
-        // VARIÁVEIS GLOBAIS
-        // ============================================
-        var perguntas = [];
-        var respostas = [];
-        var perguntaAtual = 0;
-        var totalPerguntas = 60;
-        var participanteId = null;
-        var testeId = '22222222-2222-2222-2222-222222222222';
+        var factorConfig = {
+            'O': { label: 'Abertura', icon: '🎨', color: '#8B5CF6', desc: 'Criatividade, curiosidade, apreço por novas experiências.' },
+            'C': { label: 'Conscienciosidade', icon: '📋', color: '#10B981', desc: 'Organização, disciplina, persistência, orientação a metas.' },
+            'E': { label: 'Extroversão', icon: '🌟', color: '#F59E0B', desc: 'Sociabilidade, energia, assertividade, busca por estímulos.' },
+            'A': { label: 'Amabilidade', icon: '💛', color: '#EC4899', desc: 'Confiança, altruísmo, cooperação, empatia.' },
+            'N': { label: 'Neuroticismo', icon: '🌊', color: '#EF4444', desc: 'Estabilidade emocional, ansiedade, vulnerabilidade ao estresse.' }
+        };
+        var factorKeys = ['O', 'C', 'E', 'A', 'N'];
 
-        // ============================================
-        // PERGUNTAS LOCAIS (FALLBACK) - 60 perguntas Big Five
-        // ============================================
-        function gerarPerguntasLocais() {
-            var perguntasLocal = [];
-            var textos = [
-                "Sou curioso sobre muitas coisas diferentes.",
-                "Não tenho dificuldade em manter as coisas organizadas.",
-                "Gosto de ser o centro das atenções.",
-                "Confio nas pessoas facilmente.",
-                "Frequentemente me sinto tenso e ansioso.",
-                "Tenho uma imaginação ativa.",
-                "Presto atenção aos detalhes.",
-                "Sinto-me energizado em ambientes sociais.",
-                "Sou compreensivo com os outros.",
-                "Fico facilmente preocupado com as coisas.",
-                "Aprecio novas experiências.",
-                "Sou disciplinado e cumpro prazos.",
-                "Prefiro trabalhar em equipe.",
-                "Trato todos com respeito.",
-                "Costumo me sentir triste ou deprimido.",
-                "Gosto de explorar novas ideias.",
-                "Mantenho minha mesa e espaço organizados.",
-                "Tenho facilidade para fazer amigos.",
-                "Sou tolerante com as falhas dos outros.",
-                "Me preocupo com coisas que podem dar errado.",
-                "Tenho interesse em arte e cultura.",
-                "Concluo as tarefas que começo.",
-                "Gosto de conversar com estranhos.",
-                "Ajudo os outros sempre que posso.",
-                "Costumo me sentir inseguro.",
-                "Sou criativo na resolução de problemas.",
-                "Planejo minhas atividades com antecedência.",
-                "Me sinto bem em festas e eventos.",
-                "Sou generoso com meu tempo.",
-                "Fico nervoso em situações novas.",
-                "Gosto de aprender coisas novas.",
-                "Sou uma pessoa organizada.",
-                "Tenho facilidade para me comunicar.",
-                "Dou o benefício da dúvida aos outros.",
-                "Frequentemente me sinto sobrecarregado.",
-                "Gosto de desafios intelectuais.",
-                "Cumpro minhas obrigações.",
-                "Tenho uma rede ampla de contatos.",
-                "Sou paciente com as pessoas.",
-                "Tenho dificuldade para relaxar.",
-                "Sou aberto a mudanças.",
-                "Sou metódico no que faço.",
-                "Gosto de conhecer pessoas novas.",
-                "Sou respeitoso com todos.",
-                "Reajo fortemente a críticas.",
-                "Gosto de ler e estudar.",
-                "Sou confiável e responsável.",
-                "Tenho facilidade para me expressar.",
-                "Sou gentil com os outros.",
-                "Fico abalado com facilidade.",
-                "Busco novas experiências.",
-                "Sou persistente em meus objetivos.",
-                "Tenho facilidade para influenciar pessoas.",
-                "Sou colaborativo.",
-                "Tenho medo de cometer erros.",
-                "Sou curioso sobre o mundo.",
-                "Gosto de manter tudo em ordem.",
-                "Me sinto confiante em situações sociais.",
-                "Sou empático com os sentimentos dos outros.",
-                "Costumo me sentir culpado."
-            ];
+        var sampleData = {
+            participantName: 'Ana Silva',
+            companyName: 'TechCorp Solutions',
+            participantId: 'P001',
+            reportCode: 'VIG-2026-001',
+            percentuais: { O: 72, C: 68, E: 55, A: 65, N: 42 },
+            topFactor: 'O',
+            topPercent: 72,
+            hash: 'a1b2c3d4e5f67890'
+        };
 
-            var dimensoes = [
-                'O','C','E','A','N','O','C','E','A','N',
-                'O','C','E','A','N','O','C','E','A','N',
-                'O','C','E','A','N','O','C','E','A','N',
-                'O','C','E','A','N','O','C','E','A','N',
-                'O','C','E','A','N','O','C','E','A','N',
-                'O','C','E','A','N','O','C','E','A','N'
-            ];
-
-            for (var i = 0; i < textos.length; i++) {
-                perguntasLocal.push({
-                    numero: i + 1,
-                    texto: textos[i],
-                    dimensao: dimensoes[i] || 'O'
-                });
-            }
-            return perguntasLocal;
-        }
-
-        // ============================================
-        // TOAST
-        // ============================================
         function showToast(message, type) {
             var toast = document.getElementById('toast');
             var icon = document.getElementById('toastIcon');
@@ -494,405 +392,252 @@
             toast._timeout = setTimeout(function() { toast.classList.remove('show'); }, 4000);
         }
 
-        // ============================================
-        // CARREGAR PARTICIPANTE
-        // ============================================
-        async function carregarParticipante() {
+        function generateHash(data) {
+            var hash = 0;
+            for (var i = 0; i < data.length; i++) {
+                var char = data.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(16).padStart(16, '0');
+        }
+
+        function generateQRCode(hash) {
+            var qrPlaceholder = document.getElementById('qrPlaceholder');
+            if (!qrPlaceholder) return;
+            var size = 10;
+            var grid = [];
+            for (var i = 0; i < size; i++) {
+                grid[i] = [];
+                for (var j = 0; j < size; j++) {
+                    var val = (i + j) % 3 === 0 || (i * j) % 5 === 0 || (hash[i % hash.length].charCodeAt(0) * j) % 7 === 0;
+                    grid[i][j] = val ? '█' : '░';
+                }
+            }
+            var qrHtml = '<div style="display:grid;grid-template-columns:repeat(' + size + ',1fr);gap:1px;font-size:6px;font-family:monospace;background:white;padding:4px;border-radius:4px;">';
+            for (var r = 0; r < size; r++) {
+                for (var c = 0; c < size; c++) {
+                    qrHtml += '<div style="width:5px;height:5px;background:' + (grid[r][c] === '█' ? '#0A2540' : '#FFFFFF') + ';"></div>';
+                }
+            }
+            qrHtml += '</div>';
+            qrPlaceholder.innerHTML = qrHtml;
+            qrPlaceholder.style.cssText = 'width:80px;height:80px;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;';
+        }
+
+        async function loadParticipantData() {
             try {
                 var isAuth = window.VigorreAuth && window.VigorreAuth.isAuthenticated();
                 if (!isAuth) { window.location.href = '../../../login.html'; return; }
 
                 var user = window.VigorreAuth.getCurrentUser();
-                if (!user) {
-                    document.getElementById('participantName').textContent = 'Participante';
-                    return;
-                }
+                if (!user) { renderReport(sampleData); return; }
 
-                document.getElementById('participantName').textContent = user.name || 'Participante';
-                participanteId = user.id || user.participant_id;
+                // Buscar resultado do localStorage
+                var resultado = localStorage.getItem('vigorre_bigfive_resultado');
+                var resultData = null;
 
-                if (participanteId && window.VigorreFinanceiro) {
+                if (resultado) {
                     try {
-                        var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                        var participant = null;
-                        for (var i = 0; i < allParticipants.length; i++) {
-                            if (allParticipants[i].id === participanteId) { participant = allParticipants[i]; break; }
-                        }
-                        if (participant && participant.companyId) {
-                            var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
-                            for (var j = 0; j < companies.length; j++) {
-                                if (companies[j].id === participant.companyId) {
-                                    document.getElementById('participantCompany').textContent = 'Empresa: ' + companies[j].name;
-                                    break;
-                                }
-                            }
-                        }
-                    } catch (e) { console.warn('Erro ao buscar empresa:', e); }
+                        resultData = JSON.parse(resultado);
+                    } catch (e) {}
                 }
 
-                await carregarPerguntas();
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar participante:', error);
-                showToast('Erro ao carregar dados', 'error');
-            }
-        }
-
-        // ============================================
-        // CARREGAR PERGUNTAS DO SUPABASE
-        // ============================================
-        async function carregarPerguntas() {
-            try {
-                var supabaseClient = window.VigorreFinanceiro ? window.VigorreFinanceiro.getSupabaseClient() : null;
-
-                if (supabaseClient) {
-                    var { data, error } = await supabaseClient
-                        .from('perguntas')
-                        .select('*')
-                        .eq('teste_id', testeId)
-                        .order('numero');
-
-                    if (error) { throw new Error('Fallback'); }
-
-                    if (data && data.length > 0) {
-                        perguntas = data;
-                        totalPerguntas = perguntas.length;
-                        document.getElementById('totalQuestions').textContent = totalPerguntas;
-                        console.log('✅ ' + totalPerguntas + ' perguntas carregadas do Supabase');
-                        return;
+                if (!resultData) {
+                    var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                    var participant = null;
+                    for (var i = 0; i < allParticipants.length; i++) {
+                        if (allParticipants[i].id === user.id || allParticipants[i].email === user.email) {
+                            participant = allParticipants[i];
+                            break;
+                        }
+                    }
+                    if (participant && participant.results && participant.results.BigFive) {
+                        resultData = {
+                            percentuais: participant.results.BigFive.percentages || participant.results.BigFive.percentuais,
+                            topFactor: participant.results.BigFive.topFactor,
+                            topPercent: participant.results.BigFive.topPercent
+                        };
                     }
                 }
 
-                console.warn('⚠️ Usando perguntas locais (fallback)');
-                perguntas = gerarPerguntasLocais();
-                totalPerguntas = perguntas.length;
-                document.getElementById('totalQuestions').textContent = totalPerguntas;
-
-            } catch (error) {
-                console.warn('⚠️ Erro ao carregar perguntas, usando fallback:', error);
-                perguntas = gerarPerguntasLocais();
-                totalPerguntas = perguntas.length;
-                document.getElementById('totalQuestions').textContent = totalPerguntas;
-            }
-        }
-
-        // ============================================
-        // INICIAR TESTE
-        // ============================================
-        function iniciarTeste() {
-            document.getElementById('introSection').style.display = 'none';
-            document.getElementById('questionSection').classList.add('active');
-            perguntaAtual = 0;
-            respostas = [];
-            mostrarPergunta();
-        }
-
-        // ============================================
-        // MOSTRAR PERGUNTA
-        // ============================================
-        function mostrarPergunta() {
-            if (perguntaAtual >= totalPerguntas) {
-                finalizarTeste();
-                return;
-            }
-
-            var p = perguntas[perguntaAtual];
-            document.getElementById('currentQuestion').textContent = perguntaAtual + 1;
-            document.getElementById('questionText').textContent = p.texto;
-
-            var progresso = ((perguntaAtual) / totalPerguntas) * 100;
-            document.getElementById('progressFill').style.width = progresso + '%';
-
-            var grid = document.getElementById('likertGrid');
-            grid.innerHTML = '';
-
-            var labels = ['Discordo Totalmente', 'Discordo Parcialmente', 'Neutro', 'Concordo Parcialmente', 'Concordo Totalmente'];
-            for (var i = 1; i <= 5; i++) {
-                var btn = document.createElement('button');
-                btn.className = 'likert-btn';
-                btn.innerHTML = '<span class="num">' + i + '</span><span class="label">' + labels[i - 1] + '</span>';
-                btn.dataset.valor = i;
-                btn.onclick = function(ev) { selecionarOpcao(ev.currentTarget); };
-                grid.appendChild(btn);
-            }
-
-            document.getElementById('btnNext').classList.remove('show');
-
-            var frases = [
-                '🧠 Seja sincero. O teste é para você.',
-                '🌱 Cada resposta é um passo no autoconhecimento.',
-                '💪 Confie em si mesmo.',
-                '🌟 Não existe resposta certa ou errada.',
-                '🚀 Continue assim! Você está indo bem.'
-            ];
-            var frase = frases[Math.floor(Math.random() * frases.length)];
-            var motivacional = document.querySelector('.motivacional');
-            if (!motivacional) {
-                var div = document.createElement('div');
-                div.className = 'motivacional';
-                div.id = 'motivacionalFrase';
-                div.textContent = frase;
-                document.getElementById('questionSection').appendChild(div);
-            } else {
-                motivacional.textContent = frase;
-            }
-        }
-
-        // ============================================
-        // SELECIONAR OPÇÃO
-        // ============================================
-        function selecionarOpcao(el) {
-            var btns = document.querySelectorAll('.likert-btn');
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].classList.remove('selected');
-            }
-            el.classList.add('selected');
-
-            var p = perguntas[perguntaAtual];
-            var valor = parseInt(el.dataset.valor);
-
-            respostas[perguntaAtual] = {
-                pergunta: p.numero,
-                valor: valor,
-                dimensao: p.dimensao || 'O'
-            };
-
-            document.getElementById('btnNext').classList.add('show');
-        }
-
-        // ============================================
-        // PRÓXIMA PERGUNTA
-        // ============================================
-        function proximaPergunta() {
-            if (!respostas[perguntaAtual]) {
-                showToast('Selecione uma opção antes de continuar', 'warning');
-                return;
-            }
-            perguntaAtual++;
-            mostrarPergunta();
-        }
-
-        // ============================================
-        // FINALIZAR TESTE
-        // ============================================
-        async function finalizarTeste() {
-            document.getElementById('questionSection').classList.remove('active');
-            document.getElementById('progressFill').style.width = '100%';
-
-            showToast('🧠 Calculando seu perfil Big Five...', 'success');
-
-            try {
-                var resultado = window.VigorreCalculadora.calcularBigFive(respostas);
-                await salvarResultado(resultado);
-                exibirResultado(resultado);
-
-            } catch (error) {
-                console.error('❌ Erro ao finalizar teste:', error);
-                showToast('Erro ao calcular resultado', 'error');
-                var resultadoManual = calcularBigFiveManual(respostas);
-                exibirResultado(resultadoManual);
-            }
-        }
-
-        // ============================================
-        // CALCULAR BIG FIVE MANUAL (FALLBACK)
-        // ============================================
-        function calcularBigFiveManual(respostas) {
-            var dimensoes = { 'O': [], 'C': [], 'E': [], 'A': [], 'N': [] };
-
-            for (var i = 0; i < respostas.length; i++) {
-                var r = respostas[i];
-                var dim = r.dimensao || 'O';
-                if (dimensoes[dim]) {
-                    dimensoes[dim].push(r.valor);
+                if (!resultData) {
+                    var randomData = generateRandomBigFive();
+                    resultData = {
+                        percentuais: randomData.percentuais,
+                        topFactor: randomData.topFactor,
+                        topPercent: randomData.topPercent
+                    };
                 }
-            }
 
-            var resultados = {};
-            for (var key in dimensoes) {
-                var values = dimensoes[key];
-                var soma = 0;
-                for (var j = 0; j < values.length; j++) { soma += values[j]; }
-                var media = values.length > 0 ? soma / values.length : 3;
-                var percentual = Math.round(((media - 1) / 4) * 100);
-                resultados[key] = percentual;
-            }
+                var companyName = 'Autônomo';
+                if (participant && participant.companyId) {
+                    var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                    for (var j = 0; j < companies.length; j++) {
+                        if (companies[j].id === participant.companyId) {
+                            companyName = companies[j].name;
+                            break;
+                        }
+                    }
+                }
 
+                var reportCode = 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+                var hashData = (participant ? participant.id : '') + reportCode + new Date().toISOString();
+                var hash = generateHash(hashData);
+
+                var data = {
+                    participantName: participant ? participant.name : sampleData.participantName,
+                    companyName: companyName,
+                    participantId: participant ? participant.id : sampleData.participantId,
+                    reportCode: reportCode,
+                    percentuais: resultData.percentuais,
+                    topFactor: resultData.topFactor,
+                    topPercent: resultData.topPercent,
+                    hash: hash
+                };
+
+                renderReport(data);
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                renderReport(sampleData);
+                showToast('Erro ao carregar dados, usando exemplo', 'warning');
+            }
+        }
+
+        function generateRandomBigFive() {
+            var pcts = {};
             var keys = ['O', 'C', 'E', 'A', 'N'];
+            var total = 0;
+            for (var i = 0; i < keys.length; i++) {
+                pcts[keys[i]] = Math.floor(Math.random() * 50) + 30;
+                total += pcts[keys[i]];
+            }
+            for (var key in pcts) {
+                pcts[key] = Math.round((pcts[key] / total) * 100);
+            }
             var topFactor = 'O';
             var topPercent = 0;
             for (var k = 0; k < keys.length; k++) {
-                if (resultados[keys[k]] > topPercent) {
-                    topPercent = resultados[keys[k]];
+                if (pcts[keys[k]] > topPercent) {
+                    topPercent = pcts[keys[k]];
                     topFactor = keys[k];
                 }
             }
-
-            return {
-                percentuais: resultados,
-                topFactor: topFactor,
-                topPercent: topPercent
-            };
+            return { percentuais: pcts, topFactor: topFactor, topPercent: topPercent };
         }
 
-        // ============================================
-        // SALVAR RESULTADO NO SUPABASE
-        // ============================================
-        async function salvarResultado(resultado) {
-            if (!participanteId) {
-                console.warn('⚠️ Participante não identificado, resultado não salvo');
-                salvarLocalmente(resultado);
-                return;
-            }
+        function renderReport(data) {
+            var pcts = data.percentuais;
+            var topConfig = factorConfig[data.topFactor];
 
-            try {
-                var supabaseClient = window.VigorreFinanceiro ? window.VigorreFinanceiro.getSupabaseClient() : null;
-                if (!supabaseClient) { salvarLocalmente(resultado); return; }
+            document.getElementById('participantName').textContent = data.participantName;
+            document.getElementById('participantCompany').textContent = 'Empresa: ' + data.companyName;
+            document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
 
-                var dados = {
-                    participante_id: participanteId,
-                    teste_id: testeId,
-                    resultado: {
-                        percentuais: resultado.resultados ? resultado.resultados : resultado.percentuais,
-                        topFactor: resultado.topFactor,
-                        topPercent: resultado.topPercent,
-                        data: new Date().toISOString()
-                    }
-                };
+            document.getElementById('profileDescription').innerHTML =
+                '<strong>Fator Principal:</strong> ' + topConfig.icon + ' ' + topConfig.label + ' (' + data.topPercent + '%)<br>' +
+                topConfig.desc +
+                '<br><br><strong>Distribuição:</strong> ' +
+                factorKeys.map(function(k) { return factorConfig[k].icon + ' ' + k + ' ' + (pcts[k] || 0) + '%'; }).join(' | ');
 
-                var { error } = await supabaseClient.from('resultados').insert([dados]);
-                if (error) { salvarLocalmente(resultado); }
-                else { console.log('✅ Resultado Big Five salvo no Supabase'); }
-
-            } catch (error) {
-                salvarLocalmente(resultado);
-            }
-        }
-
-        // ============================================
-        // SALVAR LOCALMENTE (FALLBACK)
-        // ============================================
-        function salvarLocalmente(resultado) {
-            try {
-                localStorage.setItem('resultado_bigfive', JSON.stringify({
-                    percentuais: resultado.resultados ? resultado.resultados : resultado.percentuais,
-                    topFactor: resultado.topFactor,
-                    topPercent: resultado.topPercent,
-                    data: new Date().toISOString()
-                }));
-
-                var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                var participant = null;
-                for (var i = 0; i < allParticipants.length; i++) {
-                    if (allParticipants[i].id === participanteId) { participant = allParticipants[i]; break; }
-                }
-
-                if (participant) {
-                    if (!participant.results) participant.results = {};
-                    participant.results.BigFive = {
-                        percentages: resultado.resultados ? resultado.resultados : resultado.percentuais,
-                        topFactor: resultado.topFactor,
-                        topPercent: resultado.topPercent,
-                        date: new Date().toISOString()
-                    };
-                    localStorage.setItem('vigorre_participants', JSON.stringify(allParticipants));
-                    console.log('✅ Resultado Big Five salvo localmente');
-                }
-            } catch (e) { console.warn('⚠️ Erro ao salvar localmente:', e); }
-        }
-
-        // ============================================
-        // EXIBIR RESULTADO
-        // ============================================
-        function exibirResultado(resultado) {
-            document.getElementById('resultSection').classList.add('active');
-
-            var pcts = resultado.percentuais || resultado.resultados || {};
-            var topFactor = resultado.topFactor || 'O';
-            var topPercent = resultado.topPercent || pcts[topFactor] || 0;
-
-            var factorConfig = {
-                'O': { label: 'Abertura', icon: '🎨', color: '#8B5CF6' },
-                'C': { label: 'Conscienciosidade', icon: '📋', color: '#10B981' },
-                'E': { label: 'Extroversão', icon: '🌟', color: '#F59E0B' },
-                'A': { label: 'Amabilidade', icon: '💛', color: '#EC4899' },
-                'N': { label: 'Neuroticismo', icon: '🌊', color: '#EF4444' }
-            };
-
-            var grid = document.getElementById('resultGrid');
-            grid.innerHTML = '';
-
-            var keys = ['O', 'C', 'E', 'A', 'N'];
-            for (var i = 0; i < keys.length; i++) {
-                var key = keys[i];
-                var value = pcts[key] || 0;
+            var grid = document.getElementById('factorsGrid');
+            var gridHtml = '';
+            for (var i = 0; i < factorKeys.length; i++) {
+                var key = factorKeys[i];
                 var config = factorConfig[key];
-                var card = document.createElement('div');
-                card.className = 'result-card';
-                card.innerHTML = `
-                    <div class="label">${config.icon} ${config.label}</div>
-                    <div class="value" style="color:${config.color}">${value}%</div>
-                    <div class="bar"><div class="fill" style="width:${value}%;background:${config.color};"></div></div>
-                `;
-                grid.appendChild(card);
+                var value = pcts[key] || 0;
+                var isTop = key === data.topFactor;
+                gridHtml += '<div class="factor-card" style="' + (isTop ? 'border-color:' + config.color + ';border-width:2px;' : '') + '">';
+                gridHtml += '<div class="factor-icon">' + config.icon + '</div>';
+                gridHtml += '<div class="factor-name">' + config.label + (isTop ? ' ⭐' : '') + '</div>';
+                gridHtml += '<div class="factor-value" style="color:' + config.color + ';">' + value + '%</div>';
+                gridHtml += '<div class="factor-bar"><div class="fill" style="width:' + value + '%;background:' + config.color + ';"></div></div>';
+                gridHtml += '</div>';
             }
+            grid.innerHTML = gridHtml;
 
-            var topConfig = factorConfig[topFactor];
-            document.getElementById('resultDominant').textContent = topConfig.icon + ' ' + topConfig.label + ' (' + topPercent + '%)';
-            document.getElementById('resultDominant').style.color = topConfig.color;
-            document.getElementById('resultIcon').textContent = '🧬';
-            document.getElementById('resultTitle').textContent = 'Perfil ' + topConfig.label + '!';
-            document.getElementById('resultSub').textContent = 'Sua personalidade é marcada por ' + topConfig.label.toLowerCase() + '. Continue para ver o relatório completo.';
+            var top3 = Object.entries(pcts).sort(function(a, b) { return b[1] - a[1]; }).slice(0, 3);
+            document.getElementById('detailedAnalysis').innerHTML =
+                '<strong>Fatores mais fortes:</strong><br>' +
+                top3.map(function(item) { return factorConfig[item[0]].icon + ' ' + factorConfig[item[0]].label + ' (' + item[1] + '%)'; }).join(' | ') +
+                '<br><br><strong>' + topConfig.icon + ' ' + topConfig.label + ' em destaque:</strong><br>' +
+                topConfig.desc;
 
-            var frases = [
-                '"O autoconhecimento é o primeiro passo para a transformação."',
-                '"Conhecer a si mesmo é o começo de toda sabedoria." - Aristóteles',
-                '"Seu potencial é ilimitado quando você se conhece verdadeiramente."'
-            ];
-            document.getElementById('resultMotivacional').textContent = frases[Math.floor(Math.random() * frases.length)];
+            var recs = {
+                'O': ['Buscar ambientes que valorizem criatividade e inovação', 'Participar de projetos que exijam pensamento fora da caixa', 'Cultivar curiosidade e aprendizado contínuo'],
+                'C': ['Manter organização e disciplina como diferenciais competitivos', 'Buscar posições que exijam planejamento e execução', 'Compartilhar métodos de organização com a equipe'],
+                'E': ['Utilizar habilidades de comunicação e influência', 'Buscar posições que valorizem networking e relacionamento', 'Desenvolver presença e liderança em eventos'],
+                'A': ['Fortalecer relacionamentos e trabalho em equipe', 'Buscar posições que exijam empatia e cooperação', 'Desenvolver liderança com base em confiança e colaboração'],
+                'N': ['Desenvolver resiliência e estabilidade emocional', 'Praticar mindfulness e gestão de estresse', 'Buscar ambientes que valorizem equilíbrio emocional']
+            };
+            var recList = recs[data.topFactor] || ['Desenvolver autoconhecimento contínuo'];
+            document.getElementById('recommendations').innerHTML =
+                '<strong>🎯 Recomendações:</strong><br>' +
+                recList.map(function(r) { return '• ' + r; }).join('<br>');
 
-            // Salvar para os relatórios
+            document.getElementById('hashDisplay').textContent = 'Hash: ' + data.hash;
+            generateQRCode(data.hash);
+
+            setTimeout(function() { renderChart(pcts); }, 300);
+            console.log('✅ Relatório Big Five renderizado com sucesso!');
+        }
+
+        function renderChart(percentages) {
             try {
-                localStorage.setItem('vigorre_bigfive_resultado', JSON.stringify({
-                    percentuais: pcts,
-                    topFactor: topFactor,
-                    topPercent: topPercent,
-                    data: new Date().toISOString()
-                }));
-            } catch (e) {}
+                var ctx = document.getElementById('bigfiveChart').getContext('2d');
+                if (window._bigfiveChartInstance) { window._bigfiveChartInstance.destroy(); }
 
-            showToast('✅ Teste Big Five concluído com sucesso!', 'success');
+                var labels = factorKeys.map(function(k) { return factorConfig[k].label; });
+                var data = factorKeys.map(function(k) { return percentages[k] || 0; });
+                var colors = factorKeys.map(function(k) { return factorConfig[k].color; });
+
+                window._bigfiveChartInstance = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Big Five',
+                            data: data,
+                            backgroundColor: 'rgba(124, 58, 237, 0.12)',
+                            borderColor: '#7C3AED',
+                            borderWidth: 3,
+                            pointBackgroundColor: colors,
+                            pointBorderColor: '#FFFFFF',
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 7
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 100,
+                                grid: { color: 'rgba(10,37,64,0.04)' },
+                                ticks: { color: '#94A3B8', stepSize: 25, backdropColor: 'transparent', callback: function(v) { return v + '%'; } },
+                                pointLabels: { color: '#64748B', font: { size: 10, weight: '600' } }
+                            }
+                        }
+                    }
+                });
+            } catch (error) { console.error('❌ Erro ao renderizar gráfico:', error); }
         }
 
-        // ============================================
-        // REINICIAR TESTE
-        // ============================================
-        function reiniciarTeste() {
-            document.getElementById('resultSection').classList.remove('active');
-            document.getElementById('introSection').style.display = 'block';
-            perguntaAtual = 0;
-            respostas = [];
-            document.getElementById('progressFill').style.width = '0%';
+        function downloadPDF() {
+            showToast('📥 Iniciando download do PDF...', 'success');
+            setTimeout(function() { window.print(); }, 500);
         }
 
-        // ============================================
-        // INICIALIZAR
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🧬 Teste Big Five - VIGORRE ONE™');
-            carregarParticipante();
+            console.log('🧬 Relatório Big Five - VIGORRE ONE™');
+            loadParticipantData();
         });
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                var btnNext = document.getElementById('btnNext');
-                if (btnNext.classList.contains('show')) {
-                    proximaPergunta();
-                }
-            }
-        });
-
-        console.log('✅ Teste Big Five carregado com sucesso!');
+        console.log('✅ Relatório Big Five carregado com sucesso!');
     </script>
 
 </body>
