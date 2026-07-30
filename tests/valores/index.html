@@ -101,4 +101,699 @@
         .btn-start {
             padding: 14px 48px; background: linear-gradient(135deg, var(--gold), var(--orange));
             color: white; border: none; border-radius: var(--radius-full);
-            font-family: 'Inter', sans-serif; font-weight:
+            font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem;
+            cursor: pointer; transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(217,119,6,0.25);
+        }
+        .btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(217,119,6,0.35); }
+
+        .question-section { display: none; }
+        .question-section.active { display: block; }
+        .progress-bar {
+            width: 100%; height: 6px; background: var(--gray-200); border-radius: 3px;
+            margin-bottom: 24px; overflow: hidden;
+        }
+        .progress-bar .fill {
+            height: 100%; background: linear-gradient(135deg, var(--gold), var(--orange));
+            border-radius: 3px; transition: width 0.5s ease;
+        }
+        .question-counter {
+            font-size: 0.85rem; color: var(--gray-400); margin-bottom: 8px;
+        }
+        .question-counter .number { font-weight: 700; color: var(--gray-700); }
+        .question-text {
+            font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 600;
+            color: var(--gray-800); margin-bottom: 20px; line-height: 1.5;
+        }
+
+        .likert-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 8px; margin: 16px 0;
+        }
+        .likert-btn {
+            padding: 14px 8px; border: 2px solid var(--gray-200); border-radius: var(--radius-sm);
+            background: white; font-family: 'Inter', sans-serif; font-size: 0.85rem;
+            cursor: pointer; transition: var(--transition); text-align: center;
+        }
+        .likert-btn:hover { border-color: var(--gold); background: var(--gray-50); }
+        .likert-btn .num { font-weight: 700; font-size: 1.1rem; display: block; }
+        .likert-btn .label { font-size: 0.6rem; color: var(--gray-400); }
+        .likert-btn.selected { border-color: var(--gold); background: #FEF3C7; }
+        .likert-btn.selected .num { color: var(--gold); }
+        .likert-btn.disabled { cursor: default; opacity: 0.5; }
+        .btn-next {
+            margin-top: 24px; padding: 12px 32px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white; border: none; border-radius: var(--radius-full);
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem;
+            cursor: pointer; transition: var(--transition); display: none;
+        }
+        .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(217,119,6,0.3); }
+        .btn-next.show { display: inline-block; }
+
+        .result-section { display: none; }
+        .result-section.active { display: block; }
+        .result-section .result-icon { font-size: 3rem; text-align: center; margin-bottom: 8px; }
+        .result-section h2 {
+            font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 700;
+            text-align: center; color: var(--gray-900); margin-bottom: 4px;
+        }
+        .result-section .result-sub {
+            text-align: center; color: var(--gray-500); font-size: 0.95rem; margin-bottom: 20px;
+        }
+        .result-card {
+            background: var(--gray-50); border-radius: var(--radius-sm); padding: 16px 20px;
+            border: 1px solid var(--gray-200); margin-bottom: 12px;
+        }
+        .result-card .label {
+            font-size: 0.7rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .result-card .value {
+            font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700;
+        }
+        .result-card .bar {
+            height: 4px; background: var(--gray-200); border-radius: 2px; margin-top: 6px; overflow: hidden;
+        }
+        .result-card .bar .fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
+        .result-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .btn-result {
+            padding: 12px 32px; border: none; border-radius: var(--radius-full);
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem;
+            cursor: pointer; transition: var(--transition); text-decoration: none; text-align: center;
+            display: inline-block;
+        }
+        .btn-result-primary {
+            background: linear-gradient(135deg, var(--gold), var(--orange)); color: white;
+        }
+        .btn-result-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(217,119,6,0.3); }
+        .btn-result-secondary {
+            background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200);
+        }
+        .btn-result-secondary:hover { background: var(--gray-200); }
+        .result-actions {
+            display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;
+        }
+        .motivacional {
+            text-align: center; padding: 16px; background: var(--gray-50);
+            border-radius: var(--radius-sm); border: 1px solid var(--gray-200);
+            margin-top: 16px; font-style: italic; color: var(--gray-600); font-size: 0.9rem;
+        }
+
+        .toast {
+            position: fixed; top: 24px; right: 24px; background: white;
+            padding: 14px 24px; border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            display: none; align-items: center; gap: 12px;
+            font-weight: 600; font-size: 0.875rem; z-index: 300;
+            border-left: 4px solid var(--blue); animation: slideIn 0.3s ease;
+        }
+        .toast.show { display: flex; }
+        .toast.success { border-left-color: #10B981; }
+        .toast.error { border-left-color: #EF4444; }
+        .toast.warning { border-left-color: #F59E0B; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(120%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .footer-premium {
+            background: var(--navy); color: white; padding: 16px 32px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+        }
+        .footer-premium .footer-text { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+        .footer-premium .footer-text strong { color: rgba(255,255,255,0.6); }
+
+        @media (max-width: 768px) {
+            .header-premium { flex-direction: column; text-align: center; padding: 16px 20px; }
+            .header-premium .header-user { text-align: center; }
+            .test-body { padding: 20px; }
+            .likert-grid { grid-template-columns: 1fr 1fr 1fr; }
+            .result-grid { grid-template-columns: 1fr 1fr; }
+            .intro-section { padding: 20px 10px; }
+            .result-actions { flex-direction: column; align-items: center; }
+            .btn-result { width: 100%; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .likert-grid { grid-template-columns: 1fr 1fr; }
+            .result-grid { grid-template-columns: 1fr; }
+        }
+        @media print {
+            body { background: white !important; padding: 0 !important; }
+            .header-premium { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; border-radius: 0 !important; }
+            .footer-premium { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; border-radius: 0 !important; }
+            .btn-start, .btn-next, .btn-result { display: none !important; }
+            .test-body { border: none !important; }
+            .likert-btn { border: 1px solid #E2E8F0 !important; }
+            .toast { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <header class="header-premium">
+            <div class="logo">
+                <img src="../../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <div class="logo-text">
+                    <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                    <span class="sub">People Analytics Enterprise</span>
+                </div>
+            </div>
+            <div class="header-title">
+                <h1>💎 Teste Valores</h1>
+                <div class="subtitle">Descubra o que realmente importa para você</div>
+            </div>
+            <div class="header-user">
+                <div class="name" id="participantName">Carregando...</div>
+                <div class="company" id="participantCompany">Empresa: --</div>
+            </div>
+        </header>
+
+        <div class="test-body">
+
+            <div class="intro-section" id="introSection">
+                <div class="icon">💎</div>
+                <h2>Descubra seus Valores</h2>
+                <p>O teste de Valores identifica o que é mais importante para você, ajudando a alinhar suas decisões e objetivos com o que realmente importa.</p>
+
+                <div class="info-box">
+                    <div class="row"><span class="label">📝 Perguntas</span><span>36</span></div>
+                    <div class="row"><span class="label">⏱️ Tempo estimado</span><span>6-10 minutos</span></div>
+                    <div class="row"><span class="label">📋 Formato</span><span>Escala Likert 1-5</span></div>
+                    <div class="row"><span class="label">🎯 Resultado</span><span>Ranking de 12 valores</span></div>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ ATENÇÃO:</strong> Este teste deve ser respondido em uma <strong>única sessão contínua</strong>. Se você sair, fechar o navegador ou recarregar a página, seu progresso <strong>NÃO será salvo</strong> e você precisará recomeçar do zero.
+                </div>
+
+                <button class="btn-start" onclick="iniciarTeste()">🔵 Iniciar Teste</button>
+            </div>
+
+            <div class="question-section" id="questionSection">
+                <div class="progress-bar">
+                    <div class="fill" id="progressFill" style="width:0%;"></div>
+                </div>
+
+                <div class="question-counter">
+                    Pergunta <span class="number" id="currentQuestion">1</span> de <span id="totalQuestions">36</span>
+                </div>
+
+                <div class="question-text" id="questionText">Carregando pergunta...</div>
+
+                <div class="likert-grid" id="likertGrid">
+                    <!-- Gerado via JS -->
+                </div>
+
+                <button class="btn-next" id="btnNext" onclick="proximaPergunta()">Próxima →</button>
+            </div>
+
+            <div class="result-section" id="resultSection">
+                <div class="result-icon" id="resultIcon">💎</div>
+                <h2 id="resultTitle">Teste Concluído!</h2>
+                <p class="result-sub" id="resultSub">Seus valores foram identificados com sucesso.</p>
+
+                <div class="result-grid" id="resultGrid"></div>
+
+                <div class="result-card">
+                    <div class="label">Valor Principal</div>
+                    <div class="value" id="resultPrincipal" style="color:#D97706;">--</div>
+                </div>
+
+                <div class="motivacional" id="resultMotivacional">
+                    "Conhecer seus valores é o primeiro passo para uma vida com propósito."
+                </div>
+
+                <div class="result-actions">
+                    <a href="../../relatorios/valores/index.html" class="btn-result btn-result-primary">📄 Ver Relatório Simples</a>
+                    <button class="btn-result btn-result-secondary" onclick="reiniciarTeste()">🔄 Refazer Teste</button>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="footer-premium">
+            <div class="footer-text">
+                <strong>VIGORRE ONE™</strong> · People Analytics Enterprise
+            </div>
+            <div class="footer-text">
+                © 2026 · Todos os direitos reservados
+            </div>
+        </footer>
+
+    </div>
+
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="../../../supabase-config.js"></script>
+    <script src="../../../auth.js"></script>
+    <script src="../../../middleware/auth-guard.js"></script>
+    <script src="../../financeiro/financeiro-conexao.js"></script>
+    <script src="../algoritmos/calculadora.js"></script>
+
+    <script>
+        'use strict';
+
+        var perguntas = [];
+        var respostas = [];
+        var perguntaAtual = 0;
+        var totalPerguntas = 36;
+        var participanteId = null;
+        var testeId = '44444444-4444-4444-4444-444444444444';
+
+        function gerarPerguntasLocais() {
+            var perguntasLocal = [];
+            var textos = [
+                "Alcançar metas desafiadoras.",
+                "Ser reconhecido pelo meu trabalho.",
+                "Ter estabilidade profissional.",
+                "Ter liberdade para tomar decisões.",
+                "Aprender coisas novas constantemente.",
+                "Trabalhar em equipe.",
+                "Ter um ambiente de trabalho previsível.",
+                "Criar soluções inovadoras.",
+                "Contribuir para um propósito maior.",
+                "Agir com honestidade e transparência.",
+                "Ter equilíbrio entre vida pessoal e profissional.",
+                "Gerar resultados concretos.",
+                "Ser o melhor na minha área.",
+                "Ter visibilidade na organização.",
+                "Ter um emprego seguro.",
+                "Ter autonomia sobre meu trabalho.",
+                "Buscar conhecimento continuamente.",
+                "Colaborar com pessoas.",
+                "Ter processos claros e definidos.",
+                "Ser criativo e pensar diferente.",
+                "Ter um propósito de vida.",
+                "Agir com integridade.",
+                "Ter tempo para família e lazer.",
+                "Superar metas estabelecidas.",
+                "Ser bem-sucedido profissionalmente.",
+                "Receber reconhecimento público.",
+                "Ter um futuro profissional garantido.",
+                "Ter controle sobre minha agenda.",
+                "Crescer intelectualmente.",
+                "Fazer parte de uma equipe coesa.",
+                "Ter rotina e estrutura.",
+                "Inovar e criar novas soluções.",
+                "Fazer a diferença na vida das pessoas.",
+                "Ser ético em todas as decisões.",
+                "Ter qualidade de vida.",
+                "Entregar resultados excepcionais."
+            ];
+
+            var dimensoes = [
+                'Realização', 'Reconhecimento', 'Segurança', 'Autonomia', 'Aprendizado',
+                'Colaboração', 'Estabilidade', 'Inovação', 'Propósito', 'Ética',
+                'Qualidade de Vida', 'Resultado',
+                'Realização', 'Reconhecimento', 'Segurança', 'Autonomia', 'Aprendizado',
+                'Colaboração', 'Estabilidade', 'Inovação', 'Propósito', 'Ética',
+                'Qualidade de Vida', 'Resultado',
+                'Realización', 'Reconocimiento', 'Seguridad', 'Autonomía', 'Aprendizaje',
+                'Colaboración', 'Estabilidad', 'Innovación', 'Propósito', 'Ética',
+                'Calidad de Vida', 'Resultado'
+            ];
+
+            for (var i = 0; i < textos.length; i++) {
+                perguntasLocal.push({
+                    numero: i + 1,
+                    texto: textos[i],
+                    dimensao: dimensoes[i] || 'Realização'
+                });
+            }
+            return perguntasLocal;
+        }
+
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() { toast.classList.remove('show'); }, 4000);
+        }
+
+        async function carregarParticipante() {
+            try {
+                var isAuth = window.VigorreAuth && window.VigorreAuth.isAuthenticated();
+                if (!isAuth) { window.location.href = '../../../login.html'; return; }
+
+                var user = window.VigorreAuth.getCurrentUser();
+                if (!user) {
+                    document.getElementById('participantName').textContent = 'Participante';
+                    return;
+                }
+
+                document.getElementById('participantName').textContent = user.name || 'Participante';
+                participanteId = user.id || user.participant_id;
+
+                if (participanteId && window.VigorreFinanceiro) {
+                    try {
+                        var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                        var participant = null;
+                        for (var i = 0; i < allParticipants.length; i++) {
+                            if (allParticipants[i].id === participanteId) { participant = allParticipants[i]; break; }
+                        }
+                        if (participant && participant.companyId) {
+                            var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                            for (var j = 0; j < companies.length; j++) {
+                                if (companies[j].id === participant.companyId) {
+                                    document.getElementById('participantCompany').textContent = 'Empresa: ' + companies[j].name;
+                                    break;
+                                }
+                            }
+                        }
+                    } catch (e) { console.warn('Erro ao buscar empresa:', e); }
+                }
+
+                await carregarPerguntas();
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar participante:', error);
+                showToast('Erro ao carregar dados', 'error');
+            }
+        }
+
+        async function carregarPerguntas() {
+            try {
+                var supabaseClient = window.VigorreFinanceiro ? window.VigorreFinanceiro.getSupabaseClient() : null;
+
+                if (supabaseClient) {
+                    var { data, error } = await supabaseClient
+                        .from('perguntas')
+                        .select('*')
+                        .eq('teste_id', testeId)
+                        .order('numero');
+
+                    if (error) { throw new Error('Fallback'); }
+
+                    if (data && data.length > 0) {
+                        perguntas = data;
+                        totalPerguntas = perguntas.length;
+                        document.getElementById('totalQuestions').textContent = totalPerguntas;
+                        console.log('✅ ' + totalPerguntas + ' perguntas carregadas do Supabase');
+                        return;
+                    }
+                }
+
+                console.warn('⚠️ Usando perguntas locais (fallback)');
+                perguntas = gerarPerguntasLocais();
+                totalPerguntas = perguntas.length;
+                document.getElementById('totalQuestions').textContent = totalPerguntas;
+
+            } catch (error) {
+                console.warn('⚠️ Erro ao carregar perguntas, usando fallback:', error);
+                perguntas = gerarPerguntasLocais();
+                totalPerguntas = perguntas.length;
+                document.getElementById('totalQuestions').textContent = totalPerguntas;
+            }
+        }
+
+        function iniciarTeste() {
+            document.getElementById('introSection').style.display = 'none';
+            document.getElementById('questionSection').classList.add('active');
+            perguntaAtual = 0;
+            respostas = [];
+            mostrarPergunta();
+        }
+
+        function mostrarPergunta() {
+            if (perguntaAtual >= totalPerguntas) {
+                finalizarTeste();
+                return;
+            }
+
+            var p = perguntas[perguntaAtual];
+            document.getElementById('currentQuestion').textContent = perguntaAtual + 1;
+            document.getElementById('questionText').textContent = p.texto;
+
+            var progresso = ((perguntaAtual) / totalPerguntas) * 100;
+            document.getElementById('progressFill').style.width = progresso + '%';
+
+            var grid = document.getElementById('likertGrid');
+            grid.innerHTML = '';
+
+            var labels = ['Não importante', 'Pouco importante', 'Importante', 'Muito importante', 'Extremamente importante'];
+            for (var i = 1; i <= 5; i++) {
+                var btn = document.createElement('button');
+                btn.className = 'likert-btn';
+                btn.innerHTML = '<span class="num">' + i + '</span><span class="label">' + labels[i - 1] + '</span>';
+                btn.dataset.valor = i;
+                btn.onclick = function(ev) { selecionarOpcao(ev.currentTarget); };
+                grid.appendChild(btn);
+            }
+
+            document.getElementById('btnNext').classList.remove('show');
+
+            var frases = [
+                '💎 Seja sincero. O teste é para você.',
+                '🌟 Pense no que realmente importa na sua vida.',
+                '🚀 Continue assim! Você está indo bem.',
+                '🌈 Não existe resposta certa ou errada.'
+            ];
+            var frase = frases[Math.floor(Math.random() * frases.length)];
+            var motivacional = document.querySelector('.motivacional');
+            if (!motivacional) {
+                var div = document.createElement('div');
+                div.className = 'motivacional';
+                div.id = 'motivacionalFrase';
+                div.textContent = frase;
+                document.getElementById('questionSection').appendChild(div);
+            } else {
+                motivacional.textContent = frase;
+            }
+        }
+
+        function selecionarOpcao(el) {
+            var btns = document.querySelectorAll('.likert-btn');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove('selected');
+            }
+            el.classList.add('selected');
+
+            var p = perguntas[perguntaAtual];
+            var valor = parseInt(el.dataset.valor);
+
+            respostas[perguntaAtual] = {
+                pergunta: p.numero,
+                valor: valor,
+                dimensao: p.dimensao || 'Realização'
+            };
+
+            document.getElementById('btnNext').classList.add('show');
+        }
+
+        function proximaPergunta() {
+            if (!respostas[perguntaAtual]) {
+                showToast('Selecione uma opção antes de continuar', 'warning');
+                return;
+            }
+            perguntaAtual++;
+            mostrarPergunta();
+        }
+
+        async function finalizarTeste() {
+            document.getElementById('questionSection').classList.remove('active');
+            document.getElementById('progressFill').style.width = '100%';
+
+            showToast('💎 Identificando seus valores...', 'success');
+
+            try {
+                var resultado = window.VigorreCalculadora.calcularValores(respostas);
+                await salvarResultado(resultado);
+                exibirResultado(resultado);
+
+            } catch (error) {
+                console.error('❌ Erro ao finalizar teste:', error);
+                showToast('Erro ao calcular resultado', 'error');
+                var resultadoManual = calcularValoresManual(respostas);
+                exibirResultado(resultadoManual);
+            }
+        }
+
+        function calcularValoresManual(respostas) {
+            var dimensoes = {
+                'Realização': [], 'Reconhecimento': [], 'Segurança': [], 'Autonomia': [],
+                'Aprendizado': [], 'Colaboração': [], 'Estabilidade': [], 'Inovação': [],
+                'Propósito': [], 'Ética': [], 'Qualidade de Vida': [], 'Resultado': []
+            };
+
+            for (var i = 0; i < respostas.length; i++) {
+                var r = respostas[i];
+                if (dimensoes[r.dimensao]) {
+                    dimensoes[r.dimensao].push(r.valor);
+                }
+            }
+
+            var resultados = {};
+            for (var dim in dimensoes) {
+                var values = dimensoes[dim];
+                var soma = 0;
+                for (var j = 0; j < values.length; j++) { soma += values[j]; }
+                var media = values.length > 0 ? soma / values.length : 3;
+                var percentual = Math.round(((media - 1) / 4) * 100);
+                resultados[dim] = percentual;
+            }
+
+            var ranking = Object.entries(resultados).sort(function(a, b) { return b[1] - a[1]; });
+            var top = ranking[0] ? ranking[0][0] : 'Realização';
+
+            return {
+                resultados: resultados,
+                ranking: ranking,
+                top: top
+            };
+        }
+
+        async function salvarResultado(resultado) {
+            if (!participanteId) {
+                console.warn('⚠️ Participante não identificado, resultado não salvo');
+                salvarLocalmente(resultado);
+                return;
+            }
+
+            try {
+                var supabaseClient = window.VigorreFinanceiro ? window.VigorreFinanceiro.getSupabaseClient() : null;
+                if (!supabaseClient) { salvarLocalmente(resultado); return; }
+
+                var dados = {
+                    participante_id: participanteId,
+                    teste_id: testeId,
+                    resultado: {
+                        resultados: resultado.resultados,
+                        ranking: resultado.ranking,
+                        top: resultado.top,
+                        data: new Date().toISOString()
+                    }
+                };
+
+                var { error } = await supabaseClient.from('resultados').insert([dados]);
+                if (error) { salvarLocalmente(resultado); }
+                else { console.log('✅ Resultado Valores salvo no Supabase'); }
+
+            } catch (error) {
+                salvarLocalmente(resultado);
+            }
+        }
+
+        function salvarLocalmente(resultado) {
+            try {
+                localStorage.setItem('resultado_valores', JSON.stringify({
+                    resultados: resultado.resultados,
+                    ranking: resultado.ranking,
+                    top: resultado.top,
+                    data: new Date().toISOString()
+                }));
+
+                var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                var participant = null;
+                for (var i = 0; i < allParticipants.length; i++) {
+                    if (allParticipants[i].id === participanteId) { participant = allParticipants[i]; break; }
+                }
+
+                if (participant) {
+                    if (!participant.results) participant.results = {};
+                    participant.results.Valores = {
+                        resultados: resultado.resultados,
+                        ranking: resultado.ranking,
+                        top: resultado.top,
+                        date: new Date().toISOString()
+                    };
+                    localStorage.setItem('vigorre_participants', JSON.stringify(allParticipants));
+                    console.log('✅ Resultado Valores salvo localmente');
+                }
+
+            } catch (e) { console.warn('⚠️ Erro ao salvar localmente:', e); }
+        }
+
+        function exibirResultado(resultado) {
+            document.getElementById('resultSection').classList.add('active');
+
+            var ranking = resultado.ranking || [];
+            var top = resultado.top || 'Realização';
+
+            var icons = {
+                'Realização': '🎯', 'Reconhecimento': '🏆', 'Segurança': '🛡️', 'Autonomia': '🚀',
+                'Aprendizado': '📚', 'Colaboração': '🤝', 'Estabilidade': '🏛️', 'Inovação': '💡',
+                'Propósito': '🌟', 'Ética': '⚖️', 'Qualidade de Vida': '🌿', 'Resultado': '📊'
+            };
+
+            var grid = document.getElementById('resultGrid');
+            grid.innerHTML = '';
+
+            var top3 = ranking.slice(0, 3);
+            for (var i = 0; i < top3.length; i++) {
+                var item = top3[i];
+                var key = item[0];
+                var value = item[1];
+                var card = document.createElement('div');
+                card.className = 'result-card';
+                card.innerHTML = `
+                    <div class="label">${icons[key] || '💎'} ${key}</div>
+                    <div class="value" style="color:#D97706;">${value}%</div>
+                    <div class="bar"><div class="fill" style="width:${value}%;background:#D97706;"></div></div>
+                `;
+                grid.appendChild(card);
+            }
+
+            document.getElementById('resultPrincipal').textContent = (icons[top] || '💎') + ' ' + top;
+            document.getElementById('resultIcon').textContent = '💎';
+            document.getElementById('resultTitle').textContent = 'Valor Principal: ' + top + '!';
+            document.getElementById('resultSub').textContent = 'Seus valores foram identificados. Continue para ver o relatório completo.';
+
+            var frases = [
+                '"Conhecer seus valores é o primeiro passo para uma vida com propósito."',
+                '"Seus valores são a bússola que guia suas decisões."',
+                '"Viver de acordo com seus valores é a chave para a realização pessoal."'
+            ];
+            document.getElementById('resultMotivacional').textContent = frases[Math.floor(Math.random() * frases.length)];
+
+            try {
+                localStorage.setItem('vigorre_valores_resultado', JSON.stringify({
+                    resultados: resultado.resultados,
+                    ranking: ranking,
+                    top: top,
+                    data: new Date().toISOString()
+                }));
+            } catch (e) {}
+
+            showToast('✅ Teste Valores concluído com sucesso!', 'success');
+        }
+
+        function reiniciarTeste() {
+            document.getElementById('resultSection').classList.remove('active');
+            document.getElementById('introSection').style.display = 'block';
+            perguntaAtual = 0;
+            respostas = [];
+            document.getElementById('progressFill').style.width = '0%';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('💎 Teste Valores - VIGORRE ONE™');
+            carregarParticipante();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                var btnNext = document.getElementById('btnNext');
+                if (btnNext.classList.contains('show')) {
+                    proximaPergunta();
+                }
+            }
+        });
+
+        console.log('✅ Teste Valores carregado com sucesso!');
+    </script>
+
+</body>
+</html>
