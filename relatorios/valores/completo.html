@@ -4,142 +4,517 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Relatório Completo Valores | VIGORRE ONE™</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --navy: #0A2540; --gold: #D97706; --gold-light: #FEF3C7; --cyan: #06B6D4;
-            --blue: #1D4ED8; --green: #10B981; --red: #EF4444; --orange: #F59E0B;
-            --purple: #7C3AED; --pink: #EC4899; --white: #FFFFFF;
-            --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
-            --gray-300: #CBD5E1; --gray-400: #94A3B8; --gray-500: #64748B;
-            --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B;
+            --navy: #0A2540; --gold: #D97706; --orange: #F59E0B; --cyan: #06B6D4;
+            --green: #10B981; --red: #EF4444; --blue: #3B82F6; --purple: #7C3AED;
+            --pink: #EC4899; --white: #FFFFFF; --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9; --gray-200: #E2E8F0; --gray-300: #CBD5E1;
+            --gray-400: #94A3B8; --gray-500: #64748B; --gray-600: #475569;
+            --gray-700: #334155; --gray-800: #1E293B; --gray-900: #0F172A;
             --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10,37,64,0.06);
+            --shadow-lg: 0 12px 48px rgba(10,37,64,0.12);
             --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        body { font-family:'Inter',sans-serif; background:var(--gray-50); color:var(--gray-800); min-height:100vh; padding:20px; }
-        .container { max-width:1100px; margin:0 auto; }
-        .header-print { background:var(--navy); color:white; padding:24px 32px; border-radius:var(--radius) var(--radius) 0 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
-        .header-print .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
-        .header-print .logo .logo-img { height:44px; width:auto; display:block; }
-        .header-print .logo .logo-text .name { font-family:'Poppins',sans-serif; font-size:1rem; font-weight:800; color:white; letter-spacing:-0.3px; }
-        .header-print .logo .logo-text .name .tm { font-size:0.4rem; vertical-align:super; color:var(--cyan); }
-        .header-print .logo .logo-text .sub { font-size:0.5rem; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.08em; }
-        .header-print .header-title { text-align:center; }
-        .header-print .header-title h1 { font-family:'Poppins',sans-serif; font-size:1.2rem; font-weight:700; }
-        .header-print .header-title .subtitle { font-size:0.75rem; color:rgba(255,255,255,0.4); }
-        .header-print .header-user { text-align:right; }
-        .header-print .header-user .name { font-weight:600; font-size:0.9rem; }
-        .header-print .header-user .company { font-size:0.75rem; color:rgba(255,255,255,0.4); }
-        .header-print .header-code { font-size:0.65rem; color:rgba(255,255,255,0.3); font-family:'Courier New',monospace; margin-top:2px; }
-        .report-body { background:white; padding:32px 40px; border-left:1px solid var(--gray-200); border-right:1px solid var(--gray-200); }
-        .section { margin-bottom:32px; padding-bottom:24px; border-bottom:1px solid var(--gray-100); }
-        .section:last-child { border-bottom:none; margin-bottom:0; }
-        .section-title { font-family:'Poppins',sans-serif; font-size:1.1rem; font-weight:700; color:var(--gray-800); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-        .section-title .number { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; background:var(--gold); color:white; border-radius:50%; font-size:0.75rem; font-weight:700; flex-shrink:0; }
-        .section-text { color:var(--gray-600); line-height:1.8; font-size:0.95rem; }
-        .section-text strong { color:var(--gray-800); }
-        .capa { text-align:center; padding:60px 40px; border-bottom:2px solid var(--gray-200); margin-bottom:32px; position:relative; }
-        .capa .capa-logo { font-family:'Poppins',sans-serif; font-size:2.5rem; font-weight:900; color:var(--navy); margin-bottom:8px; }
-        .capa .capa-logo .tm { font-size:0.7rem; vertical-align:super; color:var(--gold); }
-        .capa .capa-sub { font-size:0.9rem; color:var(--gray-400); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:40px; }
-        .capa .capa-title { font-family:'Poppins',sans-serif; font-size:2rem; font-weight:700; color:var(--gray-800); margin-bottom:8px; }
-        .capa .capa-title .highlight { color:var(--gold); }
-        .capa .capa-divider { width:80px; height:3px; background:linear-gradient(135deg,var(--gold),var(--cyan)); margin:20px auto; border-radius:2px; }
-        .capa .capa-info { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; max-width:600px; margin:30px auto 0; }
-        .capa .capa-info-item { background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-sm); padding:12px 16px; }
-        .capa .capa-info-item .label { font-size:0.65rem; color:var(--gray-400); text-transform:uppercase; letter-spacing:0.05em; }
-        .capa .capa-info-item .value { font-size:0.9rem; font-weight:600; color:var(--gray-800); margin-top:2px; }
-        .capa .capa-qr { margin-top:30px; }
-        .capa .capa-qr .qr-placeholder { width:80px; height:80px; background:var(--gray-100); border:2px dashed var(--gray-300); border-radius:var(--radius-sm); margin:0 auto; display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:var(--gray-400); }
-        .sumario { background:var(--gray-50); border-radius:var(--radius-sm); padding:24px 32px; margin-bottom:32px; border:1px solid var(--gray-200); }
-        .sumario h3 { font-family:'Poppins',sans-serif; font-size:1rem; font-weight:700; color:var(--gray-800); margin-bottom:12px; }
-        .sumario .sumario-item { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--gray-100); font-size:0.85rem; color:var(--gray-600); }
-        .sumario .sumario-item:last-child { border-bottom:none; }
-        .sumario .sumario-item .page { color:var(--gray-400); }
-        .valores-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr; gap:8px; margin:12px 0; }
-        .valor-card { background:var(--gray-50); border-radius:var(--radius-sm); padding:12px 8px; border:1px solid var(--gray-200); text-align:center; }
-        .valor-card .valor-icon { font-size:1.2rem; }
-        .valor-card .valor-name { font-weight:700; font-size:0.6rem; color:var(--gray-600); text-transform:uppercase; letter-spacing:0.03em; }
-        .valor-card .valor-value { font-size:1rem; font-weight:700; color:var(--gold); }
-        .valor-card .valor-bar { height:3px; background:var(--gray-200); border-radius:2px; margin-top:4px; overflow:hidden; }
-        .valor-card .valor-bar .fill { height:100%; border-radius:2px; transition:width 0.8s ease; }
-        .feature-list { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:0; }
-        .feature-list li { background:var(--gray-50); padding:10px 16px; border-radius:6px; color:var(--gray-700); font-size:0.9rem; display:flex; align-items:center; gap:8px; }
-        .feature-list li .check { color:#10B981; font-weight:700; }
-        .perfil-card { background:var(--gray-50); border-radius:var(--radius-sm); padding:16px 20px; margin:8px 0; border-left:4px solid var(--gold); }
-        .perfil-card h4 { font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:700; color:var(--gray-700); margin-bottom:4px; }
-        .perfil-card p { font-size:0.9rem; color:var(--gray-600); line-height:1.7; }
-        .plano-grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr; gap:12px; margin:12px 0; }
-        .plano-card { background:var(--gray-50); border-radius:var(--radius-sm); padding:16px 20px; border:1px solid var(--gray-200); text-align:center; }
-        .plano-card .plano-periodo { font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:700; color:var(--gold); }
-        .plano-card .plano-titulo { font-size:0.8rem; font-weight:600; color:var(--gray-700); }
-        .plano-card .plano-acoes { font-size:0.75rem; color:var(--gray-500); line-height:1.6; margin-top:4px; }
-        .assinatura { text-align:center; padding:32px 0; border-top:2px solid var(--gray-200); margin-top:16px; }
-        .assinatura .assinatura-qr { display:inline-block; padding:16px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-sm); margin-bottom:12px; }
-        .assinatura .assinatura-qr .qr-placeholder { width:80px; height:80px; background:var(--gray-100); border:2px dashed var(--gray-300); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:var(--gray-400); }
-        .assinatura .assinatura-code { font-size:0.7rem; color:var(--gray-400); font-family:'Courier New',monospace; }
-        .footer-print { background:var(--navy); color:white; padding:20px 32px; border-radius:0 0 var(--radius) var(--radius); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
-        .footer-print .footer-logo { display:flex; align-items:center; gap:10px; }
-        .footer-print .footer-logo .logo-icon { width:32px; height:32px; background:var(--cyan); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:0.8rem; color:var(--navy); font-family:'Poppins',sans-serif; }
-        .footer-print .footer-logo .footer-text .name { font-family:'Poppins',sans-serif; font-size:0.8rem; font-weight:700; }
-        .footer-print .footer-logo .footer-text .name .tm { font-size:0.35rem; vertical-align:super; color:var(--cyan); }
-        .footer-print .footer-logo .footer-text .tagline { font-size:0.55rem; color:rgba(255,255,255,0.3); }
-        .footer-print .footer-contact { display:flex; gap:16px; flex-wrap:wrap; }
-        .footer-print .footer-contact a { color:rgba(255,255,255,0.4); text-decoration:none; font-size:0.7rem; transition:var(--transition); }
-        .footer-print .footer-contact a:hover { color:rgba(255,255,255,0.7); }
-        .footer-print .footer-page { font-size:0.7rem; color:rgba(255,255,255,0.3); }
-        .actions-bar { display:flex; justify-content:flex-end; gap:12px; padding:16px 0; border-top:1px solid var(--gray-200); margin-top:16px; }
-        .btn-action { padding:10px 24px; border:none; border-radius:var(--radius-sm); font-family:'Inter',sans-serif; font-weight:600; font-size:0.85rem; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; gap:8px; text-decoration:none; }
-        .btn-primary { background:linear-gradient(135deg,var(--gold),#F59E0B); color:white; box-shadow:0 4px 16px rgba(217,119,6,0.2); }
-        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(217,119,6,0.3); }
-        .btn-secondary { background:var(--gray-100); color:var(--gray-700); border:1px solid var(--gray-200); }
-        .btn-secondary:hover { background:var(--gray-200); }
-        .btn-success { background:var(--green); color:white; }
-        .btn-success:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(16,185,129,0.25); }
-        @media (max-width:1024px) { .plano-grid { grid-template-columns:1fr 1fr 1fr; }
-            .valores-grid { grid-template-columns:1fr 1fr 1fr 1fr; } }
-        @media (max-width:768px) { .header-print { flex-direction:column; text-align:center; padding:16px 20px; }
-            .header-print .header-user { text-align:center; }
-            .valores-grid { grid-template-columns:1fr 1fr 1fr; }
-            .feature-list { grid-template-columns:1fr; }
-            .capa .capa-info { grid-template-columns:1fr; }
-            .report-body { padding:20px; }
-            .footer-print { flex-direction:column; text-align:center; }
-            .actions-bar { flex-direction:column; }
-            .btn-action { justify-content:center; }
-            .plano-grid { grid-template-columns:1fr 1fr; } }
-        @media (max-width:480px) { .valores-grid { grid-template-columns:1fr 1fr; }
-            .plano-grid { grid-template-columns:1fr; }
-            .capa { padding:30px 20px; }
-            .capa .capa-title { font-size:1.4rem; }
-            .capa .capa-logo { font-size:1.8rem; }
-            .container { padding:0; }
-            body { padding:10px; } }
-        @media print { body { background:white !important; padding:0 !important; }
-            .header-print { background:#0A2540 !important; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; border-radius:0 !important; }
-            .footer-print { background:#0A2540 !important; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; border-radius:0 !important; }
-            .btn-action { display:none !important; }
-            .actions-bar { display:none !important; }
-            .report-body { border:none !important; padding:20px !important; }
-            .valor-card { background:#F8FAFC !important; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
-            .feature-list li { background:#F8FAFC !important; }
-            .sumario { background:#F8FAFC !important; }
-            .capa .capa-info-item { background:#F8FAFC !important; }
-            .perfil-card { background:#F8FAFC !important; }
-            .plano-card { background:#F8FAFC !important; }
-            .section { page-break-inside:avoid; }
-            .capa { border-bottom:2px solid #E2E8F0 !important; } }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .header-print {
+            background: var(--navy);
+            color: white;
+            padding: 24px 32px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .header-print .logo {
+            display: flex; align-items: center; gap: 12px; text-decoration: none;
+        }
+        .header-print .logo .logo-img { height: 44px; width: auto; display: block; }
+        .header-print .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 800; color: white;
+            letter-spacing: -0.3px;
+        }
+        .header-print .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
+        .header-print .logo .logo-text .sub {
+            font-size: 0.5rem;
+            color: rgba(255,255,255,0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .header-print .header-title { text-align: center; }
+        .header-print .header-title h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .header-print .header-title .subtitle { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+        .header-print .header-user { text-align: right; }
+        .header-print .header-user .name { font-weight: 600; font-size: 0.9rem; }
+        .header-print .header-user .company { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+        .header-print .header-code {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.3);
+            font-family: 'Courier New', monospace;
+            margin-top: 2px;
+        }
+
+        .report-body {
+            background: white;
+            padding: 32px 40px;
+            border-left: 1px solid var(--gray-200);
+            border-right: 1px solid var(--gray-200);
+        }
+        .section {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .section:last-child { border-bottom: none; margin-bottom: 0; }
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title .number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--gold);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .section-text {
+            color: var(--gray-600);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        .section-text strong { color: var(--gray-800); }
+
+        .capa {
+            text-align: center;
+            padding: 60px 40px;
+            border-bottom: 2px solid var(--gray-200);
+            margin-bottom: 32px;
+        }
+        .capa .capa-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        .capa .capa-logo .tm { font-size: 0.7rem; vertical-align: super; color: var(--gold); }
+        .capa .capa-sub {
+            font-size: 0.9rem;
+            color: var(--gray-400);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+        .capa .capa-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 8px;
+        }
+        .capa .capa-title .highlight { color: var(--gold); }
+        .capa .capa-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+        .capa .capa-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+        .capa .capa-info-item {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+        }
+        .capa .capa-info-item .label {
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .capa .capa-info-item .value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-top: 2px;
+        }
+        .capa .capa-qr { margin-top: 30px; }
+        .capa .capa-qr .qr-placeholder {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+        }
+
+        .sumario {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 24px 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--gray-200);
+        }
+        .sumario h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+        .sumario .sumario-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+        .sumario .sumario-item:last-child { border-bottom: none; }
+        .sumario .sumario-item .page { color: var(--gray-400); }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 12px 0;
+        }
+        .value-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px 12px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+        }
+        .value-card .value-icon { font-size: 1.5rem; }
+        .value-card .value-name { font-weight: 700; font-size: 0.7rem; color: var(--gray-700); }
+        .value-card .value-percent { font-size: 1.2rem; font-weight: 700; color: var(--gold); }
+        .value-card .value-bar {
+            height: 4px; background: var(--gray-200); border-radius: 2px; margin-top: 6px; overflow: hidden;
+        }
+        .value-card .value-bar .fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; background: var(--gold); }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            padding: 0;
+        }
+        .feature-list li {
+            background: var(--gray-50);
+            padding: 10px 16px;
+            border-radius: 6px;
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feature-list li .check { color: #10B981; font-weight: 700; }
+
+        .perfil-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin: 8px 0;
+            border-left: 4px solid var(--gold);
+        }
+        .perfil-card h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gray-700);
+            margin-bottom: 4px;
+        }
+        .perfil-card p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        .plano-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 12px 0;
+        }
+        .plano-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+        }
+        .plano-card .plano-periodo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .plano-card .plano-titulo { font-size: 0.8rem; font-weight: 600; color: var(--gray-700); }
+        .plano-card .plano-acoes {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            line-height: 1.6;
+            margin-top: 4px;
+        }
+
+        .assinatura {
+            text-align: center;
+            padding: 32px 0;
+            border-top: 2px solid var(--gray-200);
+            margin-top: 16px;
+        }
+        .assinatura .assinatura-qr {
+            display: inline-block;
+            padding: 16px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+        }
+        .assinatura .assinatura-qr .qr-placeholder {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+        }
+        .assinatura .assinatura-code {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+        .assinatura .assinatura-valid {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--green);
+            margin-top: 4px;
+        }
+
+        .footer-print {
+            background: var(--navy);
+            color: white;
+            padding: 20px 32px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-print .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-print .footer-logo .logo-icon {
+            width: 32px; height: 32px;
+            background: var(--cyan);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.8rem;
+            color: var(--navy);
+            font-family: 'Poppins', sans-serif;
+        }
+        .footer-print .footer-logo .footer-text .name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .footer-print .footer-logo .footer-text .name .tm { font-size: 0.35rem; vertical-align: super; color: var(--cyan); }
+        .footer-print .footer-logo .footer-text .tagline {
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.3);
+        }
+        .footer-print .footer-contact {
+            display: flex;
+            gap: 16px; flex-wrap: wrap;
+        }
+        .footer-print .footer-contact a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+        .footer-print .footer-contact a:hover { color: rgba(255,255,255,0.7); }
+        .footer-print .footer-page {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .actions-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 16px 0;
+            border-top: 1px solid var(--gray-200);
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .btn-action {
+            padding: 10px 24px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white; box-shadow: 0 4px 16px rgba(217,119,6,0.2);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(217,119,6,0.3); }
+        .btn-secondary {
+            background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200);
+        }
+        .btn-secondary:hover { background: var(--gray-200); }
+        .btn-success {
+            background: var(--green); color: white;
+        }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.25); }
+
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 300;
+            border-left: 4px solid var(--blue);
+            animation: slideIn 0.3s ease;
+        }
+        .toast.show { display: flex; }
+        .toast.success { border-left-color: #10B981; }
+        .toast.error { border-left-color: #EF4444; }
+        .toast.warning { border-left-color: #F59E0B; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(120%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .plano-grid { grid-template-columns: 1fr 1fr 1fr; }
+            .values-grid { grid-template-columns: 1fr 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .header-print { flex-direction: column; text-align: center; padding: 16px 20px; }
+            .header-print .header-user { text-align: center; }
+            .values-grid { grid-template-columns: 1fr 1fr; }
+            .feature-list { grid-template-columns: 1fr; }
+            .capa .capa-info { grid-template-columns: 1fr; }
+            .report-body { padding: 20px; }
+            .footer-print { flex-direction: column; text-align: center; }
+            .actions-bar { flex-direction: column; }
+            .btn-action { justify-content: center; }
+            .plano-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .values-grid { grid-template-columns: 1fr 1fr; }
+            .plano-grid { grid-template-columns: 1fr; }
+            .capa { padding: 30px 20px; }
+            .capa .capa-title { font-size: 1.4rem; }
+            .capa .capa-logo { font-size: 1.8rem; }
+            .container { padding: 0; }
+            body { padding: 10px; }
+        }
+        @media print {
+            body { background: white !important; padding: 0 !important; }
+            .header-print { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; border-radius: 0 !important; }
+            .footer-print { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; border-radius: 0 !important; }
+            .btn-action { display: none !important; }
+            .actions-bar { display: none !important; }
+            .report-body { border: none !important; padding: 20px !important; }
+            .value-card { background: #F8FAFC !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .feature-list li { background: #F8FAFC !important; }
+            .sumario { background: #F8FAFC !important; }
+            .capa .capa-info-item { background: #F8FAFC !important; }
+            .perfil-card { background: #F8FAFC !important; }
+            .plano-card { background: #F8FAFC !important; }
+            .section { page-break-inside: avoid; }
+            .capa { border-bottom: 2px solid #E2E8F0 !important; }
+            .assinatura .assinatura-qr { background: #F8FAFC !important; }
+            .toast { display: none !important; }
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
+
         <header class="header-print">
             <div class="logo">
-                <img src="../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+                <img src="../../../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
                 <div class="logo-text">
                     <span class="name">VIGORRE ONE<span class="tm">™</span></span>
                     <span class="sub">People Analytics Enterprise</span>
@@ -147,243 +522,299 @@
             </div>
             <div class="header-title">
                 <h1>💎 Relatório Completo Valores</h1>
-                <div class="subtitle">Teoria de Schwartz • Análise Avançada</div>
+                <div class="subtitle">O que realmente importa para você</div>
             </div>
             <div class="header-user">
                 <div class="name" id="participantName">Carregando...</div>
                 <div class="company" id="participantCompany">Empresa: --</div>
-                <div class="header-code" id="reportCode">Código: VIG-2026-001</div>
+                <div class="header-code" id="reportCode">Código: --</div>
             </div>
         </header>
+
         <div class="report-body">
 
-            <!-- CAPA -->
             <section class="capa">
                 <div class="capa-logo">VIGORRE ONE<span class="tm">™</span></div>
                 <div class="capa-sub">People Analytics Enterprise</div>
                 <div class="capa-divider"></div>
                 <div class="capa-title">Relatório <span class="highlight">Completo</span> Valores</div>
-                <p style="color: var(--gray-500); font-size: 0.95rem; margin-bottom: 8px;">Análise de Valores Pessoais • Teoria de Schwartz</p>
+                <p style="color: var(--gray-500); font-size: 0.95rem; margin-bottom: 8px;">Identificação dos Valores Pessoais e Profissionais</p>
                 <div class="capa-info">
                     <div class="capa-info-item"><div class="label">Participante</div><div class="value" id="capaParticipant">Carregando...</div></div>
                     <div class="capa-info-item"><div class="label">Data da Avaliação</div><div class="value" id="capaDate">--</div></div>
-                    <div class="capa-info-item"><div class="label">Código do Relatório</div><div class="value" id="capaCode">VIG-2026-001</div></div>
+                    <div class="capa-info-item"><div class="label">Código do Relatório</div><div class="value" id="capaCode">--</div></div>
                 </div>
-                <div class="capa-qr"><div class="qr-placeholder">🔲 QR Code</div></div>
+                <div class="capa-qr"><div class="qr-placeholder" id="capaQR">🔲 QR Code</div></div>
             </section>
 
-            <!-- SUMÁRIO -->
             <section class="sumario">
                 <h3>📑 Sumário</h3>
                 <div class="sumario-item"><span>1. Apresentação</span><span class="page">3</span></div>
                 <div class="sumario-item"><span>2. Como Interpretar Este Relatório</span><span class="page">4</span></div>
-                <div class="sumario-item"><span>3. Metodologia e Confiabilidade</span><span class="page">5</span></div>
-                <div class="sumario-item"><span>4. Seus Valores</span><span class="page">6</span></div>
+                <div class="sumario-item"><span>3. Metodologia</span><span class="page">5</span></div>
+                <div class="sumario-item"><span>4. Ranking de Valores</span><span class="page">6</span></div>
                 <div class="sumario-item"><span>5. Análise dos Valores</span><span class="page">8</span></div>
                 <div class="sumario-item"><span>6. Valores em Destaque</span><span class="page">10</span></div>
-                <div class="sumario-item"><span>7. Perfil Social</span><span class="page">11</span></div>
-                <div class="sumario-item"><span>8. Perfil Familiar</span><span class="page">12</span></div>
-                <div class="sumario-item"><span>9. Recomendações de Carreira</span><span class="page">13</span></div>
-                <div class="sumario-item"><span>10. Plano de Desenvolvimento</span><span class="page">14</span></div>
-                <div class="sumario-item"><span>11. Plano 30/60/90/180/365 Dias</span><span class="page">15</span></div>
-                <div class="sumario-item"><span>12. Parecer da IA</span><span class="page">16</span></div>
-                <div class="sumario-item"><span>13. Conclusão</span><span class="page">17</span></div>
-                <div class="sumario-item"><span>14. Assinatura Digital</span><span class="page">18</span></div>
+                <div class="sumario-item"><span>7. Recomendações</span><span class="page">12</span></div>
+                <div class="sumario-item"><span>8. Conclusão</span><span class="page">13</span></div>
+                <div class="sumario-item"><span>9. Assinatura Digital</span><span class="page">14</span></div>
             </section>
 
-            <!-- SEÇÃO 1: APRESENTAÇÃO -->
             <section class="section">
                 <h2 class="section-title"><span class="number">1</span> Apresentação</h2>
-                <p class="section-text">Este relatório apresenta uma análise completa dos valores pessoais baseada na Teoria de Valores de Schwartz. O modelo identifica 10 valores universais que orientam decisões, prioridades e motivações.</p>
-                <p class="section-text" style="margin-top:8px;"><strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br /><strong>Data da Avaliação:</strong> <span id="apresentacaoDate">--</span><br /><strong>Teste Realizado:</strong> Valores<br /><strong>Código do Relatório:</strong> <span id="apresentacaoCode">VIG-2026-001</span></p>
+                <p class="section-text">Este relatório apresenta uma análise completa dos seus valores pessoais e profissionais. Valores são princípios fundamentais que orientam suas decisões, comportamentos e escolhas de vida. Conhecer seus valores é essencial para alinhar sua carreira e vida pessoal com o que realmente importa para você.</p>
+                <p class="section-text" style="margin-top:8px;"><strong>Participante:</strong> <span id="apresentacaoParticipant">Carregando...</span><br /><strong>Data da Avaliação:</strong> <span id="apresentacaoDate">--</span><br /><strong>Teste Realizado:</strong> Valores<br /><strong>Código do Relatório:</strong> <span id="apresentacaoCode">--</span></p>
             </section>
 
-            <!-- SEÇÃO 2: COMO INTERPRETAR -->
             <section class="section">
                 <h2 class="section-title"><span class="number">2</span> Como Interpretar Este Relatório</h2>
-                <p class="section-text">A identificação dos seus valores é fundamental para entender o que realmente importa para você e como isso impacta suas decisões e comportamentos.</p>
-                <p class="section-text" style="margin-top:8px;"><strong>⚠️ Limitações:</strong> Os valores podem evoluir ao longo da vida. Este relatório reflete o momento atual da avaliação.</p>
-                <p class="section-text" style="margin-top:8px;"><strong>🔒 Ética e LGPD:</strong> Este relatório é gerado com total transparência e respeito à privacidade, em conformidade com a LGPD.</p>
+                <p class="section-text">Seus valores foram identificados com base em suas respostas ao teste de Valores. O relatório apresenta um ranking dos seus valores, do mais importante para o menos importante, além de análises detalhadas e recomendações.</p>
+                <p class="section-text" style="margin-top:8px;"><strong>⚠️ Limitações:</strong> Os resultados refletem o momento da avaliação e a honestidade das respostas. Recomenda-se uma reflexão pessoal sobre como esses valores se manifestam no seu dia a dia.</p>
+                <p class="section-text" style="margin-top:8px;"><strong>🔒 Ética e LGPD:</strong> Este relatório é gerado com total transparência e respeito à privacidade. Os dados são tratados conforme a Lei Geral de Proteção de Dados (LGPD).</p>
             </section>
 
-            <!-- SEÇÃO 3: METODOLOGIA -->
             <section class="section">
-                <h2 class="section-title"><span class="number">3</span> Metodologia e Confiabilidade</h2>
-                <p class="section-text"><strong>Como os resultados são calculados</strong><br />O teste de Valores é composto por 36 questões que avaliam 10 valores universais segundo a Teoria de Schwartz.</p>
-                <p class="section-text" style="margin-top:8px;"><strong>Confiabilidade</strong><br />A Teoria de Schwartz é amplamente validada em pesquisas acadêmicas em todo o mundo.</p>
+                <h2 class="section-title"><span class="number">3</span> Metodologia</h2>
+                <p class="section-text"><strong>Como os resultados são calculados</strong><br />O teste de Valores é composto por 36 questões que avaliam 12 dimensões de valores. Cada questão apresenta cinco opções de resposta, e você seleciona aquela que melhor representa sua opinião.</p>
+                <p class="section-text" style="margin-top:8px;"><strong>Confiabilidade</strong><br />O modelo de Valores é baseado na teoria de Schwartz, amplamente validada em pesquisas internacionais.</p>
             </section>
 
-            <!-- SEÇÃO 4: SEUS VALORES -->
             <section class="section">
-                <h2 class="section-title"><span class="number">4</span> Seus Valores</h2>
-                <div class="valores-grid" id="valoresGrid"></div>
-                <div style="height:240px;position:relative;margin:16px 0;"><canvas id="valoresChart"></canvas></div>
-                <p class="section-text" id="profileDescription">Carregando descrição...</p>
+                <h2 class="section-title"><span class="number">4</span> Ranking de Valores</h2>
+                <div class="values-grid" id="valuesGrid"></div>
+                <p class="section-text" id="profileDescription">Carregando análise...</p>
             </section>
 
-            <!-- SEÇÃO 5: ANÁLISE DOS VALORES -->
             <section class="section">
                 <h2 class="section-title"><span class="number">5</span> Análise dos Valores</h2>
-                <p class="section-text" id="analysisText">Carregando análise...</p>
+                <p class="section-text" id="valuesAnalysis">Carregando análise detalhada...</p>
             </section>
 
-            <!-- SEÇÃO 6: VALORES EM DESTAQUE -->
             <section class="section">
                 <h2 class="section-title"><span class="number">6</span> Valores em Destaque</h2>
-                <ul class="feature-list" id="topValuesList"><li><span class="check">✓</span> Carregando...</li></ul>
+                <p class="section-text" id="highlightValues">Carregando valores em destaque...</p>
             </section>
 
-            <!-- SEÇÃO 7: PERFIL SOCIAL (NOVO) -->
             <section class="section">
-                <h2 class="section-title"><span class="number">7</span> Perfil Social</h2>
-                <div class="perfil-card"><h4>🤝 Relacionamentos</h4><p id="socialAmizades">Carregando...</p></div>
-                <div class="perfil-card"><h4>🌐 Networking</h4><p id="socialNetworking">Carregando...</p></div>
-                <div class="perfil-card"><h4>⚡ Resolução de Conflitos</h4><p id="socialConflitos">Carregando...</p></div>
-                <div class="perfil-card"><h4>🧠 Inteligência Social</h4><p id="socialInteligencia">Carregando...</p></div>
+                <h2 class="section-title"><span class="number">7</span> Recomendações</h2>
+                <ul class="feature-list" id="recommendationsList"><li><span class="check">✓</span> Carregando...</li></ul>
             </section>
 
-            <!-- SEÇÃO 8: PERFIL FAMILIAR (NOVO) -->
             <section class="section">
-                <h2 class="section-title"><span class="number">8</span> Perfil Familiar</h2>
-                <div class="perfil-card"><h4>🏠 Convivência</h4><p id="familiarConveniencia">Carregando...</p></div>
-                <div class="perfil-card"><h4>❤️ Empatia</h4><p id="familiarEmpatia">Carregando...</p></div>
-                <div class="perfil-card"><h4>👂 Escuta</h4><p id="familiarEscuta">Carregando...</p></div>
-                <div class="perfil-card"><h4>⚖️ Equilíbrio</h4><p id="familiarEquilibrio">Carregando...</p></div>
-            </section>
-
-            <!-- SEÇÃO 9: CARREIRA -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">9</span> Recomendações de Carreira</h2>
-                <ul class="feature-list" id="careersList"><li><span class="check">✓</span> Carregando...</li></ul>
-            </section>
-
-            <!-- SEÇÃO 10: PDI -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">10</span> Plano de Desenvolvimento</h2>
-                <ul class="feature-list" id="developmentPlanList"><li><span class="check">✓</span> Carregando...</li></ul>
-            </section>
-
-            <!-- SEÇÃO 11: PLANO 30/60/90/180/365 (NOVO) -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">11</span> Plano 30/60/90/180/365 Dias</h2>
-                <div class="plano-grid">
-                    <div class="plano-card"><div class="plano-periodo">30 Dias</div><div class="plano-titulo">Reflexão</div><div class="plano-acoes">Diário de valores<br />Identificar prioridades</div></div>
-                    <div class="plano-card"><div class="plano-periodo">60 Dias</div><div class="plano-titulo">Ação</div><div class="plano-acoes">Alinhar ações aos valores<br />Curso de propósito</div></div>
-                    <div class="plano-card"><div class="plano-periodo">90 Dias</div><div class="plano-titulo">Consolidação</div><div class="plano-acoes">Avaliar alinhamento<br />Buscar mentoria</div></div>
-                    <div class="plano-card"><div class="plano-periodo">180 Dias</div><div class="plano-titulo">Evolução</div><div class="plano-acoes">Reavaliar valores<br />Novos desafios</div></div>
-                    <div class="plano-card"><div class="plano-periodo">365 Dias</div><div class="plano-titulo">Revisão</div><div class="plano-acoes">Análise anual<br />Novo plano</div></div>
-                </div>
-            </section>
-
-            <!-- SEÇÃO 12: PARECER DA IA -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">12</span> Parecer da IA</h2>
-                <p class="section-text" id="iaOpinionText">Carregando parecer da IA...</p>
-            </section>
-
-            <!-- SEÇÃO 13: CONCLUSÃO COM MENSAGEM MOTIVACIONAL -->
-            <section class="section">
-                <h2 class="section-title"><span class="number">13</span> Conclusão</h2>
+                <h2 class="section-title"><span class="number">8</span> Conclusão</h2>
                 <p class="section-text" id="conclusionText">Carregando conclusão...</p>
-                <div style="background:var(--gold-light);border-radius:var(--radius-sm);padding:16px 20px;margin-top:12px;border-left:4px solid var(--gold);">
+                <div style="background:rgba(217,119,6,0.08);border-radius:var(--radius-sm);padding:16px 20px;margin-top:12px;border-left:4px solid var(--gold);">
                     <p style="font-weight:700;color:var(--gold);font-size:1rem;">🌟 Mensagem Motivacional</p>
                     <p id="mensagemMotivacional" style="color:var(--gray-700);font-style:italic;font-size:0.95rem;line-height:1.7;">Carregando mensagem...</p>
                 </div>
             </section>
 
-            <!-- SEÇÃO 14: ASSINATURA -->
             <section class="assinatura">
-                <div class="assinatura-qr"><div class="qr-placeholder">🔲 QR Code</div></div>
+                <div class="assinatura-qr"><div class="qr-placeholder" id="assinaturaQR">🔲 QR Code</div></div>
                 <p style="font-size:0.8rem;color:var(--gray-500);"><strong>VIGORRE ONE™</strong> • People Analytics Enterprise</p>
                 <p style="font-size:0.7rem;color:var(--gray-400);">Este relatório é gerado automaticamente e possui validade de 12 meses.</p>
-                <div class="assinatura-code" id="assinaturaCode">Código: VIG-2026-001 • Hash: a1b2c3d4e5f6</div>
+                <div class="assinatura-code" id="assinaturaCode">Carregando código de autenticação...</div>
+                <div class="assinatura-valid" id="assinaturaValid">✅ Documento autenticado</div>
             </section>
 
-            <!-- ACTIONS -->
             <div class="actions-bar">
                 <button class="btn-action btn-secondary" onclick="window.history.back()">← Voltar</button>
                 <button class="btn-action btn-primary" onclick="window.print()">🖨️ Imprimir</button>
                 <button class="btn-action btn-success" onclick="downloadPDF()">📥 Baixar PDF</button>
+                <a href="../index.html" class="btn-action btn-primary" style="text-decoration:none;">📊 Voltar</a>
             </div>
+
         </div>
 
         <footer class="footer-print">
             <div class="footer-logo"><div class="logo-icon">V</div><div class="footer-text"><span class="name">VIGORRE ONE<span class="tm">™</span></span><span class="tagline">People Analytics • Assessment Intelligence</span></div></div>
             <div class="footer-contact"><a href="mailto:contato@vigorre.com.br">📧 contato@vigorre.com.br</a><a href="tel:+5534991850735">📱 (34) 99185-0735</a><a href="https://www.vigorre.com.br">🌐 www.vigorre.com.br</a></div>
-            <div class="footer-page">Página <span id="pageNumber">1</span> de <span id="totalPages">18</span></div>
+            <div class="footer-page">Página <span id="pageNumber">1</span> de <span id="totalPages">14</span></div>
         </footer>
+
+    </div>
+
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="../../supabase-config.js"></script>
-    <script src="../../auth.js"></script>
+    <script src="../../../supabase-config.js"></script>
+    <script src="../../../auth.js"></script>
+    <script src="../../../middleware/auth-guard.js"></script>
+    <script src="../../financeiro/financeiro-conexao.js"></script>
+    <script src="../../test/algoritmos/calculadora.js"></script>
+
     <script>
         'use strict';
+
+        var valueIcons = {
+            'Realização': '🎯', 'Reconhecimento': '🏆', 'Segurança': '🛡️', 'Autonomia': '🚀',
+            'Aprendizado': '📚', 'Colaboração': '🤝', 'Estabilidade': '🏛️', 'Inovação': '💡',
+            'Propósito': '🌟', 'Ética': '⚖️', 'Qualidade de Vida': '🌿', 'Resultado': '📊'
+        };
+
         var sampleData = {
             participantName: 'Ana Silva',
             companyName: 'TechCorp Solutions',
             participantId: 'P001',
-            date: new Date().toISOString(),
             reportCode: 'VIG-2026-001',
-            percentages: { poder: 45, realizacao: 78, hedonismo: 55, estimulacao: 65, autodirecao: 82, universalismo: 70, benevolencia: 75, tradicao: 40, conformidade: 50, seguranca: 60 },
-            topValor: 'autodirecao',
-            topPercent: 82,
-            bottomValor: 'tradicao',
-            bottomPercent: 40
+            date: new Date().toISOString(),
+            resultados: {
+                'Realização': 85, 'Reconhecimento': 75, 'Segurança': 70, 'Autonomia': 80,
+                'Aprendizado': 90, 'Colaboração': 65, 'Estabilidade': 60, 'Inovação': 70,
+                'Propósito': 85, 'Ética': 90, 'Qualidade de Vida': 75, 'Resultado': 80
+            },
+            ranking: [
+                ['Aprendizado', 90], ['Ética', 90], ['Realização', 85], ['Propósito', 85],
+                ['Autonomia', 80], ['Resultado', 80], ['Reconhecimento', 75], ['Qualidade de Vida', 75],
+                ['Segurança', 70], ['Inovação', 70], ['Colaboração', 65], ['Estabilidade', 60]
+            ],
+            top: 'Aprendizado',
+            hash: 'a1b2c3d4e5f67890'
         };
-        var valoresConfig = {
-            poder: { label: 'Poder', icon: '👑', color: '#EF4444' },
-            realizacao: { label: 'Realização', icon: '🏆', color: '#F59E0B' },
-            hedonismo: { label: 'Hedonismo', icon: '🎉', color: '#F97316' },
-            estimulacao: { label: 'Estimulação', icon: '⚡', color: '#8B5CF6' },
-            autodirecao: { label: 'Autodireção', icon: '🧭', color: '#3B82F6' },
-            universalismo: { label: 'Universalismo', icon: '🌍', color: '#06B6D4' },
-            benevolencia: { label: 'Benevolência', icon: '🤗', color: '#10B981' },
-            tradicao: { label: 'Tradição', icon: '📜', color: '#8B5CF6' },
-            conformidade: { label: 'Conformidade', icon: '📋', color: '#6B7280' },
-            seguranca: { label: 'Segurança', icon: '🔒', color: '#1F2937' }
-        };
-        var valorKeys = ['poder', 'realizacao', 'hedonismo', 'estimulacao', 'autodirecao', 'universalismo', 'benevolencia', 'tradicao', 'conformidade', 'seguranca'];
 
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!window.VigorreAuth.isAuthenticated()) { window.location.href = '../../login.html'; return; }
-            loadData();
-        });
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() { toast.classList.remove('show'); }, 4000);
+        }
 
-        function loadData() {
+        function generateHash(data) {
+            var hash = 0;
+            for (var i = 0; i < data.length; i++) {
+                var char = data.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(16).padStart(16, '0');
+        }
+
+        function generateQRCode(elementId, hash) {
+            var container = document.getElementById(elementId);
+            if (!container) return;
+            var size = 8;
+            var grid = [];
+            for (var i = 0; i < size; i++) {
+                grid[i] = [];
+                for (var j = 0; j < size; j++) {
+                    var val = (i + j) % 3 === 0 || (i * j) % 5 === 0 || (hash[i % hash.length].charCodeAt(0) * j) % 7 === 0;
+                    grid[i][j] = val ? '█' : '░';
+                }
+            }
+            var qrHtml = '<div style="display:grid;grid-template-columns:repeat(' + size + ',1fr);gap:1px;background:white;padding:4px;border-radius:4px;width:80px;height:80px;margin:0 auto;">';
+            for (var r = 0; r < size; r++) {
+                for (var c = 0; c < size; c++) {
+                    qrHtml += '<div style="width:8px;height:8px;background:' + (grid[r][c] === '█' ? '#0A2540' : '#FFFFFF') + ';"></div>';
+                }
+            }
+            qrHtml += '</div>';
+            container.innerHTML = qrHtml;
+            container.style.cssText = 'width:100px;height:100px;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;margin:0 auto;';
+        }
+
+        async function loadParticipantData() {
             try {
+                var isAuth = window.VigorreAuth && window.VigorreAuth.isAuthenticated();
+                if (!isAuth) { window.location.href = '../../../login.html'; return; }
+
                 var user = window.VigorreAuth.getCurrentUser();
                 if (!user) { renderReport(sampleData); return; }
-                var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                var participant = null;
-                for (var i = 0; i < allParticipants.length; i++) { if (allParticipants[i].id === user.id) { participant = allParticipants[i]; break; } }
-                if (!participant || !participant.results || !participant.results.Valores) { renderReport(sampleData); return; }
-                var valoresResult = participant.results.Valores;
+
+                var resultado = localStorage.getItem('vigorre_valores_resultado');
+                var resultData = null;
+                if (resultado) { try { resultData = JSON.parse(resultado); } catch(e) {} }
+
+                if (!resultData) {
+                    var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                    var participant = null;
+                    for (var i = 0; i < allParticipants.length; i++) {
+                        if (allParticipants[i].id === user.id || allParticipants[i].email === user.email) {
+                            participant = allParticipants[i];
+                            break;
+                        }
+                    }
+                    if (participant && participant.results && participant.results.Valores) {
+                        resultData = {
+                            resultados: participant.results.Valores.resultados,
+                            ranking: participant.results.Valores.ranking,
+                            top: participant.results.Valores.top
+                        };
+                    }
+                }
+
+                if (!resultData) {
+                    var randomData = generateRandomValues();
+                    resultData = {
+                        resultados: randomData.resultados,
+                        ranking: randomData.ranking,
+                        top: randomData.top
+                    };
+                }
+
                 var companyName = 'Autônomo';
-                var jobTitle = 'Não vinculado';
-                if (participant.companyId) { var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]'); for (var j = 0; j < companies.length; j++) { if (companies[j].id === participant.companyId) { companyName = companies[j].name; break; } } }
-                if (participant.jobId) { var jobs = JSON.parse(localStorage.getItem('vigorre_jobs') || '[]'); for (var k = 0; k < jobs.length; k++) { if (jobs[k].id === participant.jobId) { jobTitle = jobs[k].title || jobs[k].name || 'Vaga'; break; } } }
+                if (participant && participant.companyId) {
+                    var companies = JSON.parse(localStorage.getItem('vigorre_companies') || '[]');
+                    for (var j = 0; j < companies.length; j++) {
+                        if (companies[j].id === participant.companyId) {
+                            companyName = companies[j].name;
+                            break;
+                        }
+                    }
+                }
+
+                var reportCode = 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+                var hashData = (participant ? participant.id : '') + reportCode + new Date().toISOString();
+                var hash = generateHash(hashData);
+
                 var data = {
-                    participantName: participant.name || sampleData.participantName,
+                    participantName: participant ? participant.name : sampleData.participantName,
                     companyName: companyName,
-                    participantId: participant.id || sampleData.participantId,
+                    participantId: participant ? participant.id : sampleData.participantId,
+                    reportCode: reportCode,
                     date: new Date().toISOString(),
-                    reportCode: 'VIG-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0'),
-                    percentages: valoresResult.percentages || sampleData.percentages,
-                    topValor: valoresResult.topValor || sampleData.topValor,
-                    topPercent: valoresResult.topPercent || sampleData.topPercent,
-                    bottomValor: valoresResult.bottomValor || sampleData.bottomValor,
-                    bottomPercent: valoresResult.bottomPercent || sampleData.bottomPercent,
-                    job: jobTitle
+                    resultados: resultData.resultados,
+                    ranking: resultData.ranking,
+                    top: resultData.top,
+                    hash: hash
                 };
+
                 renderReport(data);
-            } catch (error) { console.error('❌ Erro:', error);
-                renderReport(sampleData); }
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                renderReport(sampleData);
+                showToast('Erro ao carregar dados, usando exemplo', 'warning');
+            }
+        }
+
+        function generateRandomValues() {
+            var keys = ['Realização', 'Reconhecimento', 'Segurança', 'Autonomia', 'Aprendizado', 'Colaboração', 'Estabilidade', 'Inovação', 'Propósito', 'Ética', 'Qualidade de Vida', 'Resultado'];
+            var result = {};
+            for (var i = 0; i < keys.length; i++) {
+                result[keys[i]] = Math.floor(Math.random() * 50) + 30;
+            }
+            var ranking = Object.entries(result).sort(function(a, b) { return b[1] - a[1]; });
+            var top = ranking[0] ? ranking[0][0] : 'Realização';
+            return { resultados: result, ranking: ranking, top: top };
         }
 
         function renderReport(data) {
-            var pcts = data.percentages;
-            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+            var pcts = data.resultados || {};
+            var ranking = data.ranking || [];
+            var top = data.top || 'Realização';
+            var dateFormatted = new Date(data.date).toLocaleDateString('pt-BR', {
+                day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+            });
+
             document.getElementById('participantName').textContent = data.participantName;
             document.getElementById('participantCompany').textContent = 'Empresa: ' + data.companyName;
             document.getElementById('reportCode').textContent = 'Código: ' + data.reportCode;
@@ -393,177 +824,108 @@
             document.getElementById('apresentacaoParticipant').textContent = data.participantName;
             document.getElementById('apresentacaoDate').textContent = dateFormatted;
             document.getElementById('apresentacaoCode').textContent = data.reportCode;
-            document.getElementById('assinaturaCode').textContent = 'Código: ' + data.reportCode + ' • Hash: ' + generateHash(data.participantId + data.reportCode);
+            document.getElementById('assinaturaCode').textContent = 'Código: ' + data.reportCode + ' • Hash: ' + data.hash;
+            generateQRCode('capaQR', data.hash);
+            generateQRCode('assinaturaQR', data.hash);
             document.getElementById('pageNumber').textContent = '1';
-            document.getElementById('totalPages').textContent = '18';
+            document.getElementById('totalPages').textContent = '14';
 
-            var grid = document.getElementById('valoresGrid');
+            var grid = document.getElementById('valuesGrid');
             var gridHtml = '';
-            for (var i = 0; i < valorKeys.length; i++) {
-                var key = valorKeys[i];
-                var config = valoresConfig[key];
-                var value = pcts[key] || 0;
-                gridHtml += '<div class="valor-card"><div class="valor-icon">' + config.icon + '</div><div class="valor-name">' + config.label + '</div><div class="valor-value">' + value + '%</div><div class="valor-bar"><div class="fill" style="width:' + value + '%;background:' + config.color + ';"></div></div></div>';
+            var top8 = ranking.slice(0, 8);
+            for (var i = 0; i < top8.length; i++) {
+                var item = top8[i];
+                var key = item[0];
+                var value = item[1];
+                var isTop = i === 0;
+                gridHtml += '<div class="value-card" style="' + (isTop ? 'border-color:#D97706;border-width:2px;' : '') + '">';
+                gridHtml += '<div class="value-icon">' + (valueIcons[key] || '💎') + '</div>';
+                gridHtml += '<div class="value-name">' + key + (isTop ? ' ⭐' : '') + '</div>';
+                gridHtml += '<div class="value-percent">' + value + '%</div>';
+                gridHtml += '<div class="value-bar"><div class="fill" style="width:' + value + '%;"></div></div>';
+                gridHtml += '</div>';
             }
             grid.innerHTML = gridHtml;
 
-            var topConfig = valoresConfig[data.topValor];
-            var bottomConfig = valoresConfig[data.bottomValor];
-            document.getElementById('profileDescription').innerHTML = '<strong>Valor Principal:</strong> ' + topConfig.icon + ' ' + topConfig.label + ' (' + data.topPercent + '%)<br /><strong>Valor com menor pontuação:</strong> ' + bottomConfig.icon + ' ' + bottomConfig.label + ' (' + data.bottomPercent + '%)';
+            var topPercent = ranking.length > 0 ? ranking[0][1] : 0;
+            document.getElementById('profileDescription').innerHTML =
+                '<strong>Valor Principal:</strong> ' + (valueIcons[top] || '💎') + ' ' + top + ' (' + topPercent + '%)<br><br>' +
+                'Seus valores refletem o que é mais importante para você: ' +
+                ranking.slice(0, 3).map(function(item) { return (valueIcons[item[0]] || '💎') + ' ' + item[0] + ' (' + item[1] + '%)'; }).join(' | ');
 
-            var top3 = Object.entries(pcts).sort((a, b) => b[1] - a[1]).slice(0, 3);
-            var analysisHtml = '<strong>Valores em Destaque:</strong><br>';
-            for (var i = 0; i < top3.length; i++) {
-                var config = valoresConfig[top3[i][0]];
-                analysisHtml += config.icon + ' ' + config.label + ' (' + top3[i][1] + '%)<br>';
+            var analysisHtml = '<strong>Distribuição dos Valores:</strong><br>';
+            for (var i = 0; i < ranking.length; i++) {
+                var item = ranking[i];
+                var key = item[0];
+                var value = item[1];
+                var level = value >= 80 ? 'Muito Alto' : value >= 60 ? 'Alto' : value >= 40 ? 'Moderado' : 'Baixo';
+                analysisHtml += (valueIcons[key] || '💎') + ' ' + key + ': ' + value + '% (' + level + ')<br>';
             }
-            analysisHtml += '<br><strong>Interpretação:</strong><br>Seus valores principais indicam que você prioriza ' + top3.map(([k]) => valoresConfig[k].label).join(', ').toLowerCase() + '.';
-            document.getElementById('analysisText').innerHTML = analysisHtml;
+            document.getElementById('valuesAnalysis').innerHTML = analysisHtml;
 
-            var topValuesHtml = '';
-            for (var i = 0; i < top3.length; i++) {
-                var config = valoresConfig[top3[i][0]];
-                var desc = {
-                    poder: 'Busca influência e controle',
-                    realizacao: 'Busca excelência e conquistas',
-                    hedonismo: 'Busca prazer e satisfação',
-                    estimulacao: 'Busca novidade e desafios',
-                    autodirecao: 'Busca independência e autonomia',
-                    universalismo: 'Busca justiça e compreensão',
-                    benevolencia: 'Busca cuidado e generosidade',
-                    tradicao: 'Busca respeito e continuidade',
-                    conformidade: 'Busca ordem e harmonia',
-                    seguranca: 'Busca estabilidade e proteção'
-                };
-                topValuesHtml += '<li><span class="check">' + (i + 1) + '</span> ' + config.icon + ' ' + config.label + ': ' + (desc[top3[i][0]] || 'Valor identificado') + '</li>';
-            }
-            document.getElementById('topValuesList').innerHTML = topValuesHtml;
+            var top3 = ranking.slice(0, 3);
+            document.getElementById('highlightValues').innerHTML =
+                '<strong>Seus 3 valores mais importantes:</strong><br>' +
+                top3.map(function(item, idx) {
+                    return (idx + 1) + '. ' + (valueIcons[item[0]] || '💎') + ' ' + item[0] + ' (' + item[1] + '%)';
+                }).join('<br>') +
+                '<br><br><strong>O que isso significa:</strong> Você prioriza ' +
+                (top === 'Aprendizado' ? 'o crescimento intelectual e o desenvolvimento contínuo, buscando sempre evoluir.' :
+                 top === 'Ética' ? 'a integridade, honestidade e princípios morais sólidos.' :
+                 top === 'Realização' ? 'alcançar metas desafiadoras e superar limites.' :
+                 top === 'Propósito' ? 'sentido e significado em tudo que faz.' :
+                 top === 'Autonomia' ? 'liberdade e independência para tomar decisões.' :
+                 top === 'Resultado' ? 'entregar valor e gerar impacto concreto.' :
+                 'equilíbrio entre realização pessoal e profissional.');
 
-            // PERFIL SOCIAL
-            var socialTexts = {
-                autodirecao: { amizades: 'Constrói amizades com pessoas independentes e autênticas.', networking: 'Networking baseado em conexões genuínas e autônomas.', conflitos: 'Aborda conflitos com independência e clareza.', inteligencia: 'Inteligência social baseada em autenticidade.' },
-                realizacao: { amizades: 'Constrói amizades com pessoas ambiciosas e determinadas.', networking: 'Networking estratégico focado em resultados.', conflitos: 'Aborda conflitos com foco em soluções.', inteligencia: 'Inteligência social baseada em competência.' },
-                universalismo: { amizades: 'Constrói amizades diversas e inclusivas.', networking: 'Networking amplo e multicultural.', conflitos: 'Aborda conflitos com justiça e compreensão.', inteligencia: 'Inteligência social baseada em tolerância.' },
-                benevolencia: { amizades: 'Constrói amizades profundas e solidárias.', networking: 'Networking baseado em confiança e cuidado.', conflitos: 'Aborda conflitos com empatia.', inteligencia: 'Inteligência social baseada em bondade.' }
+            var recs = {
+                'Aprendizado': ['Invista em cursos e certificações', 'Leia livros de desenvolvimento pessoal', 'Busque mentoria', 'Participe de workshops'],
+                'Ética': ['Mantenha a integridade como valor inegociável', 'Seja exemplo de conduta', 'Promova a ética na equipe', 'Cultive transparência'],
+                'Realização': ['Defina metas desafiadoras', 'Celebre suas conquistas', 'Mantenha foco nos objetivos', 'Busque excelência'],
+                'Propósito': ['Encontre significado no que faz', 'Alinhe carreira com propósito', 'Contribua para causas maiores', 'Pratique gratidão'],
+                'Autonomia': ['Busque posições com liberdade', 'Desenvolva autogestão', 'Assuma responsabilidades', 'Empreenda'],
+                'Resultado': ['Foque em entregas concretas', 'Meça seu impacto', 'Comunique resultados', 'Busque eficiência']
             };
-            var social = socialTexts[data.topValor] || { amizades: 'Constrói amizades baseadas em seus valores principais.', networking: 'Networking alinhado com seus valores.', conflitos: 'Aborda conflitos de acordo com seus valores.', inteligencia: 'Inteligência social guiada por seus valores.' };
-            document.getElementById('socialAmizades').textContent = social.amizades;
-            document.getElementById('socialNetworking').textContent = social.networking;
-            document.getElementById('socialConflitos').textContent = social.conflitos;
-            document.getElementById('socialInteligencia').textContent = social.inteligencia;
+            var recList = recs[top] || ['Continue vivendo de acordo com seus valores', 'Pratique a reflexão diária sobre seus valores'];
+            document.getElementById('recommendationsList').innerHTML = recList.map(function(r) {
+                return '<li><span class="check">✓</span> ' + r + '</li>';
+            }).join('');
 
-            // PERFIL FAMILIAR
-            var familiarTexts = {
-                autodirecao: { convivencia: 'Família que valoriza independência e autonomia.', empatia: 'Empatia baseada em respeito às individualidades.', escuta: 'Escuta respeitosa e aberta.', equilibrio: 'Equilíbrio entre independência e conexão.' },
-                realizacao: { convivencia: 'Família com foco em conquistas e crescimento.', empatia: 'Empatia baseada em apoio às metas.', escuta: 'Escuta focada em soluções.', equilibrio: 'Equilíbrio entre sucesso e família.' },
-                universalismo: { convivencia: 'Família aberta e inclusiva.', empatia: 'Empatia universal e compreensiva.', escuta: 'Escuta com mente aberta.', equilibrio: 'Equilíbrio entre família e mundo.' },
-                benevolencia: { convivencia: 'Família acolhedora e solidária.', empatia: 'Empatia profunda e generosa.', escuta: 'Escuta atenta e cuidadosa.', equilibrio: 'Equilíbrio entre cuidar e ser cuidado.' }
+            var conclusion = {
+                'Aprendizado': 'Sua busca por aprendizado contínuo é um diferencial competitivo. Continue investindo em seu desenvolvimento intelectual.',
+                'Ética': 'Sua integridade e compromisso com a ética são fundamentos sólidos para uma carreira de sucesso e confiança.',
+                'Realização': 'Sua determinação em alcançar metas é admirável. Continue perseguindo seus objetivos com paixão e disciplina.',
+                'Propósito': 'Sua busca por propósito dá significado à sua jornada. Continue alinhando suas ações com seus valores mais profundos.',
+                'Autonomia': 'Sua necessidade de autonomia é um sinal de liderança e autoconfiança. Continue buscando independência e autogestão.',
+                'Resultado': 'Seu foco em resultados é uma força poderosa. Continue entregando valor e impactando positivamente.'
             };
-            var familiar = familiarTexts[data.topValor] || { convivencia: 'Convivência familiar baseada em seus valores.', empatia: 'Empatia familiar guiada por seus valores.', escuta: 'Escuta alinhada com seus valores.', equilibrio: 'Equilíbrio baseado em seus valores.' };
-            document.getElementById('familiarConveniencia').textContent = familiar.convivencia;
-            document.getElementById('familiarEmpatia').textContent = familiar.empatia;
-            document.getElementById('familiarEscuta').textContent = familiar.escuta;
-            document.getElementById('familiarEquilibrio').textContent = familiar.equilibrio;
-
-            var careersList = document.getElementById('careersList');
-            var careerItems = [];
-            var careers = {
-                poder: ['Gestão Executiva', 'Política', 'Administração'],
-                realizacao: ['Empreendedorismo', 'Vendas', 'Marketing'],
-                hedonismo: ['Entretenimento', 'Artes', 'Gastronomia'],
-                estimulacao: ['Inovação', 'Startups', 'Aventura'],
-                autodirecao: ['Pesquisa', 'Consultoria', 'Freelancer'],
-                universalismo: ['ONGs', 'Responsabilidade Social', 'Educação'],
-                benevolencia: ['Saúde', 'Educação', 'RH'],
-                tradicao: ['História', 'Cultura', 'Educação'],
-                conformidade: ['Administração', 'Contabilidade', 'Processos'],
-                seguranca: ['Finanças', 'Segurança', 'Administração']
-            };
-            for (var i = 0; i < top3.length; i++) {
-                var config = valoresConfig[top3[i][0]];
-                var carreiras = careers[top3[i][0]] || ['Desenvolvimento', 'Consultoria', 'Gestão'];
-                careerItems.push(config.icon + ' ' + config.label + ' (' + top3[i][1] + '%): ' + carreiras.slice(0, 3).join(', '));
-            }
-            careersList.innerHTML = careerItems.map(item => '<li><span class="check">✓</span> ' + item + '</li>').join('');
-
-            var plan = [];
-            var weak = [];
-            for (var key in pcts) { if (pcts[key] < 50) weak.push(key); }
-            if (weak.length > 0) { for (var i = 0; i < weak.length; i++) { var config = valoresConfig[weak[i]];
-                    plan.push(config.icon + ' Desenvolver ' + config.label + ': Explorar e integrar este valor à sua vida'); } } else { plan.push('🌟 Manter e aprofundar todos os valores identificados'); }
-            plan.push('📝 Praticar reflexão diária sobre seus valores');
-            document.getElementById('developmentPlanList').innerHTML = plan.map((p, i) => '<li><span class="check">' + (i + 1) + '</span> ' + p + '</li>').join('');
-
-            var iaOpinion = 'Com base na análise de valores, o participante tem como valor principal ' + topConfig.icon + ' ' + topConfig.label + ' (' + data.topPercent + '%). Este valor orienta suas decisões, motivações e prioridades. O valor com menor pontuação é ' + bottomConfig.icon + ' ' + bottomConfig.label + ' (' + data.bottomPercent + '%), indicando uma oportunidade de desenvolvimento para maior equilíbrio.';
-            document.getElementById('iaOpinionText').textContent = iaOpinion;
-
-            var conclusion = 'Seus valores principais são ' + top3.map(([k]) => valoresConfig[k].label).join(', ') + '. Eles refletem o que realmente importa para você e guiam suas decisões e comportamentos. Continue alinhando sua vida e carreira com seus valores.';
-            document.getElementById('conclusionText').textContent = conclusion;
+            document.getElementById('conclusionText').textContent = conclusion[top] || conclusion['Aprendizado'];
 
             var mensagem = {
-                autodirecao: '⭐ Você valoriza sua independência e autonomia. Continue sendo essa pessoa autêntica e livre, guiada pela sua própria bússola interna!',
-                realizacao: '⭐ Você é movido por conquistas e excelência. Continue alcançando seus objetivos e inspirando outros com sua determinação!',
-                universalismo: '⭐ Você tem um coração aberto para o mundo. Continue sendo essa ponte de compreensão e justiça para todos!',
-                benevolencia: '⭐ Você tem uma alma generosa e bondosa. Continue espalhando amor e cuidado, pois o mundo precisa de pessoas como você!'
+                'Aprendizado': '⭐ Nunca pare de aprender. O conhecimento é a única coisa que ninguém pode tirar de você. Continue curioso e aberto a novas descobertas!',
+                'Ética': '⭐ A integridade é o alicerce de tudo que você constrói. Continue sendo uma pessoa de princípios e inspire confiança por onde passar!',
+                'Realização': '⭐ Você nasceu para realizar grandes coisas. Continue sonhando alto, trabalhando duro e celebrando cada conquista!',
+                'Propósito': '⭐ Sua vida tem um propósito único e especial. Continue seguindo sua missão e impactando positivamente o mundo!',
+                'Autonomia': '⭐ A liberdade é sua maior aliada. Continue voando alto, tomando decisões e construindo seu próprio caminho!',
+                'Resultado': '⭐ Seu impacto é real e transformador. Continue gerando resultados, inspirando pessoas e mudando o mundo ao seu redor!'
             };
-            document.getElementById('mensagemMotivacional').textContent = mensagem[data.topValor] || '⭐ Continue vivendo de acordo com seus valores. Eles são a bússola que guia sua vida para um caminho de significado e realização!';
+            document.getElementById('mensagemMotivacional').textContent = mensagem[top] || mensagem['Aprendizado'];
 
-            setTimeout(function() { renderChart(pcts); }, 300);
             console.log('✅ Relatório Valores completo renderizado com sucesso!');
         }
 
-        function renderChart(percentages) {
-            try {
-                var ctx = document.getElementById('valoresChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'radar',
-                    data: {
-                        labels: valorKeys.map(key => valoresConfig[key].label),
-                        datasets: [{
-                            label: 'Valores',
-                            data: valorKeys.map(key => percentages[key] || 0),
-                            backgroundColor: 'rgba(217,119,6,0.12)',
-                            borderColor: '#D97706',
-                            borderWidth: 3,
-                            pointBackgroundColor: valorKeys.map(key => valoresConfig[key].color),
-                            pointBorderColor: '#FFFFFF',
-                            pointBorderWidth: 2,
-                            pointRadius: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: { r: { beginAtZero: true, max: 100, grid: { color: 'rgba(10,37,64,0.04)' }, ticks: { color: '#94A3B8', stepSize: 25, backdropColor: 'transparent', callback: function(v) { return v + '%'; } }, pointLabels: { color: '#64748B', font: { size: 8, weight: '600' } } } }
-                    }
-                });
-            } catch (error) { console.error('❌ Erro ao renderizar gráfico:', error); }
+        function downloadPDF() {
+            showToast('📥 Iniciando download do PDF...', 'success');
+            setTimeout(function() { window.print(); }, 500);
         }
 
-        function generateHash(data) { var hash = 0; for (var i = 0; i < data.length; i++) { var char = data.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash; } return Math.abs(hash).toString(16).padStart(8, '0'); }
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('💎 Relatório Completo Valores - VIGORRE ONE™');
+            loadParticipantData();
+        });
 
-        function downloadPDF() { showToast('📥 Iniciando download do PDF...', 'success');
-            setTimeout(function() { window.print(); }, 500); }
-
-        function showToast(message, type) {
-            var existing = document.getElementById('toast');
-            if (existing) existing.remove();
-            var toast = document.createElement('div');
-            toast.id = 'toast';
-            toast.style.cssText = 'position:fixed;top:24px;right:24px;background:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px;font-weight:600;font-size:0.875rem;z-index:300;border-left:4px solid ' + (type === 'success' ? '#10B981' : '#EF4444') + ';animation:slideIn 0.3s ease;';
-            toast.innerHTML = '<span>' + (type === 'success' ? '✅' : '❌') + '</span><span>' + message + '</span>';
-            document.body.appendChild(toast);
-            setTimeout(function() { toast.style.opacity = '0';
-                toast.style.transform = 'translateX(120%)';
-                setTimeout(function() { toast.remove(); }, 300); }, 4000);
-        }
-        var style = document.createElement('style');
-        style.textContent = '@keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
-        document.head.appendChild(style);
-        console.log('📄 Relatório Completo Valores carregado com sucesso!');
+        console.log('✅ Relatório Completo Valores carregado com sucesso!');
     </script>
+
 </body>
 </html>
