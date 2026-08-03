@@ -229,6 +229,19 @@
         .card .card-change { font-size: 0.7rem; font-weight: 600; }
         .card .card-change.up { color: var(--green); }
         .card .card-change.down { color: var(--red); }
+        .card .loading-shimmer {
+            height: 32px;
+            width: 60%;
+            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
 
         /* ===== MÓDULOS ===== */
         .modulos-grid {
@@ -256,6 +269,32 @@
         .modulo-card .modulo-title { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; }
         .modulo-card .modulo-desc { font-size: 0.85rem; color: var(--gray-500); margin-top: 4px; }
         .modulo-card .modulo-link { color: var(--blue); font-weight: 600; font-size: 0.85rem; margin-top: 12px; display: inline-block; }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 300;
+            border-left: 4px solid var(--blue);
+            animation: slideIn 0.3s ease;
+        }
+        .toast.show { display: flex; }
+        .toast.success { border-left-color: #10B981; }
+        .toast.error { border-left-color: #EF4444; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(120%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
         /* ===== MOBILE ===== */
         .mobile-toggle {
@@ -332,6 +371,8 @@
             <li><a href="agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
             <li><a href="backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
             <li><a href="financeiro/configuracoes.html"><span class="icon">⚙️</span> Configurações</a></li>
+            <li><a href="relatorios/disc/index.html"><span class="icon">📄</span> Relatórios</a></li>
+            <li><a href="laudos/completo.html"><span class="icon">📋</span> Laudo VIGOR®</a></li>
         </ul>
 
         <div class="logout">
@@ -348,7 +389,7 @@
                 <h1>📊 Dashboard</h1>
                 <p class="subtitle">Visão geral da plataforma VIGORRE ONE™</p>
             </div>
-            <button class="btn-primary" onclick="recarregar()">🔄 Atualizar</button>
+            <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
         </div>
 
         <!-- Cards -->
@@ -356,26 +397,26 @@
             <div class="card" onclick="window.location.href='financeiro/index.html'">
                 <div class="card-icon">💰</div>
                 <div class="card-label">Faturamento Total</div>
-                <div class="card-value" id="totalFaturamento">R$ 0</div>
-                <div class="card-change up">↑ Carregando...</div>
+                <div class="card-value" id="totalFaturamento"><span class="loading-shimmer"></span></div>
+                <div class="card-change up" id="faturamentoChange">💰 Carregando...</div>
             </div>
             <div class="card" onclick="window.location.href='empresas/index.html'">
                 <div class="card-icon">🏢</div>
                 <div class="card-label">Empresas</div>
-                <div class="card-value" id="totalEmpresas">0</div>
-                <div class="card-change up">↑ Carregando...</div>
+                <div class="card-value" id="totalEmpresas"><span class="loading-shimmer"></span></div>
+                <div class="card-change up" id="empresasChange">🏢 Carregando...</div>
             </div>
             <div class="card" onclick="window.location.href='recrutadores/index.html'">
                 <div class="card-icon">👤</div>
                 <div class="card-label">Recrutadores</div>
-                <div class="card-value" id="totalRecrutadores">0</div>
-                <div class="card-change up">↑ Carregando...</div>
+                <div class="card-value" id="totalRecrutadores"><span class="loading-shimmer"></span></div>
+                <div class="card-change up" id="recrutadoresChange">👤 Carregando...</div>
             </div>
             <div class="card" onclick="window.location.href='participantes/index.html'">
                 <div class="card-icon">👥</div>
                 <div class="card-label">Participantes</div>
-                <div class="card-value" id="totalParticipantes">0</div>
-                <div class="card-change up">↑ Carregando...</div>
+                <div class="card-value" id="totalParticipantes"><span class="loading-shimmer"></span></div>
+                <div class="card-change up" id="participantesChange">👥 Carregando...</div>
             </div>
         </div>
 
@@ -411,6 +452,20 @@
                 <span class="modulo-link">Acessar →</span>
             </a>
 
+            <a href="relatorios/disc/index.html" class="modulo-card">
+                <div class="modulo-icon">📄</div>
+                <div class="modulo-title">Relatórios</div>
+                <div class="modulo-desc">DISC, Big Five, IE, Valores, SWOT</div>
+                <span class="modulo-link">Acessar →</span>
+            </a>
+
+            <a href="laudos/completo.html" class="modulo-card">
+                <div class="modulo-icon">📋</div>
+                <div class="modulo-title">Laudo VIGOR®</div>
+                <div class="modulo-desc">Laudo completo com IA</div>
+                <span class="modulo-link">Acessar →</span>
+            </a>
+
             <a href="agenda/calendario.html" class="modulo-card">
                 <div class="modulo-icon">📅</div>
                 <div class="modulo-title">Agenda</div>
@@ -425,7 +480,7 @@
                 <span class="modulo-link">Acessar →</span>
             </a>
 
-            <a href="financeiro/configuracoes.html" class="modulo-card" style="grid-column: span 1;">
+            <a href="financeiro/configuracoes.html" class="modulo-card">
                 <div class="modulo-icon">⚙️</div>
                 <div class="modulo-title">Configurações</div>
                 <div class="modulo-desc">Configurações gerais do sistema</div>
@@ -433,6 +488,19 @@
             </a>
         </div>
     </main>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js">
+    </script>
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../middleware/auth-guard.js"></script>
+    <script src="financeiro/financeiro-conexao.js"></script>
 
     <script>
         // ============================================
@@ -448,42 +516,170 @@
         // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
-                alert('Logout realizado com sucesso!');
-                window.location.href = '../login.html';
+                window.VigorreAuth.logout();
             }
         }
 
         // ============================================
-        // RECARREGAR
+        // TOAST
         // ============================================
-        function recarregar() {
-            alert('🔄 Dados atualizados!');
-            location.reload();
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var icon = document.getElementById('toastIcon');
+            var msg = document.getElementById('toastMessage');
+
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
+
+            msg.textContent = message;
+            toast.className = 'toast show ' + (type || 'success');
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
         }
 
         // ============================================
-        // CARREGAR DADOS
+        // RECARREGAR DADOS
         // ============================================
-        function carregarDados() {
-            // Simular dados
-            document.getElementById('totalFaturamento').textContent = 'R$ 42.850,00';
-            document.getElementById('totalEmpresas').textContent = '12';
-            document.getElementById('totalRecrutadores').textContent = '8';
-            document.getElementById('totalParticipantes').textContent = '1.247';
+        function recarregarDados() {
+            showToast('🔄 Atualizando dados...', 'success');
+            carregarDashboard();
+        }
 
-            // Mudar para "Online"
-            document.querySelectorAll('.card-change').forEach(el => {
-                el.textContent = '✅ Online';
-                el.className = 'card-change up';
+        // ============================================
+        // CARREGAR DADOS DO SUPABASE
+        // ============================================
+        async function carregarDashboard() {
+            try {
+                console.log('📊 Carregando Dashboard...');
+
+                // Verificar autenticação
+                if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../login.html';
+                    return;
+                }
+
+                var user = window.VigorreAuth.getCurrentUser();
+                if (user) {
+                    document.getElementById('userName').textContent = user.name || 'Administrador';
+                }
+
+                // Buscar dados do Supabase
+                var supabaseClient = getSupabaseClient();
+
+                if (!supabaseClient) {
+                    // Fallback para dados mock
+                    carregarMock();
+                    return;
+                }
+
+                // 1. Buscar empresas
+                var { count: totalEmpresas, error: errEmpresas } = await supabaseClient
+                    .from('companies')
+                    .select('*', { count: 'exact', head: true });
+
+                if (errEmpresas) {
+                    console.warn('Erro ao buscar empresas:', errEmpresas);
+                    totalEmpresas = 0;
+                }
+
+                // 2. Buscar participantes
+                var { count: totalParticipantes, error: errParticipantes } = await supabaseClient
+                    .from('participants')
+                    .select('*', { count: 'exact', head: true });
+
+                if (errParticipantes) {
+                    console.warn('Erro ao buscar participantes:', errParticipantes);
+                    totalParticipantes = 0;
+                }
+
+                // 3. Buscar recrutadores
+                var { count: totalRecrutadores, error: errRecrutadores } = await supabaseClient
+                    .from('recruiters')
+                    .select('*', { count: 'exact', head: true });
+
+                if (errRecrutadores) {
+                    console.warn('Erro ao buscar recrutadores:', errRecrutadores);
+                    totalRecrutadores = 0;
+                }
+
+                // 4. Buscar transações para faturamento
+                var { data: transacoes, error: errTransacoes } = await supabaseClient
+                    .from('transacoes')
+                    .select('valor, tipo');
+
+                if (errTransacoes) {
+                    console.warn('Erro ao buscar transações:', errTransacoes);
+                    transacoes = [];
+                }
+
+                // Calcular faturamento total
+                var faturamentoTotal = 0;
+                if (transacoes && transacoes.length > 0) {
+                    for (var i = 0; i < transacoes.length; i++) {
+                        if (transacoes[i].tipo === 'entrada') {
+                            faturamentoTotal += transacoes[i].valor || 0;
+                        }
+                    }
+                }
+
+                // Atualizar cards
+                document.getElementById('totalEmpresas').textContent = totalEmpresas || 0;
+                document.getElementById('totalParticipantes').textContent = totalParticipantes || 0;
+                document.getElementById('totalRecrutadores').textContent = totalRecrutadores || 0;
+                document.getElementById('totalFaturamento').textContent = 'R$ ' + formatarMoeda(faturamentoTotal);
+
+                // Atualizar mudanças
+                document.getElementById('empresasChange').textContent = '🏢 ' + (totalEmpresas || 0) + ' ativas';
+                document.getElementById('participantesChange').textContent = '👥 ' + (totalParticipantes || 0) + ' ativos';
+                document.getElementById('recrutadoresChange').textContent = '👤 ' + (totalRecrutadores || 0) + ' ativos';
+                document.getElementById('faturamentoChange').textContent = '💰 R$ ' + formatarMoeda(faturamentoTotal);
+
+                console.log('✅ Dashboard carregado com sucesso!');
+                showToast('✅ Dados atualizados!', 'success');
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dashboard:', error);
+                carregarMock();
+            }
+        }
+
+        // ============================================
+        // FORMATAR MOEDA
+        // ============================================
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
             });
+        }
+
+        // ============================================
+        // DADOS MOCK (FALLBACK)
+        // ============================================
+        function carregarMock() {
+            document.getElementById('totalFaturamento').textContent = 'R$ 250,00';
+            document.getElementById('totalEmpresas').textContent = '1';
+            document.getElementById('totalRecrutadores').textContent = '0';
+            document.getElementById('totalParticipantes').textContent = '1';
+
+            document.getElementById('faturamentoChange').textContent = '💰 R$ 250,00';
+            document.getElementById('empresasChange').textContent = '🏢 1 ativa';
+            document.getElementById('recrutadoresChange').textContent = '👤 0 ativos';
+            document.getElementById('participantesChange').textContent = '👥 1 ativo';
+
+            showToast('📊 Usando dados de exemplo', 'warning');
         }
 
         // ============================================
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            carregarDados();
             console.log('✅ Dashboard carregado!');
+            carregarDashboard();
         });
     </script>
 
