@@ -1,6 +1,9 @@
-// ============================================
-// VIGORRE ONE™ - AUTH GUARD (COM LGPD E SEGURANÇA)
-// ============================================
+/**
+ * ============================================
+ * VIGORRE ONE™ - AUTH GUARD
+ * PROTEÇÃO DE ROTAS COM LGPD E SEGURANÇA
+ * ============================================
+ */
 
 'use strict';
 
@@ -16,9 +19,10 @@
     // PÁGINAS PÚBLICAS (não precisam de autenticação)
     // ============================================
     const PUBLIC_PAGES = [
-        '/', '/index.html', '/login.html',
+        '/', '/index.html', '/login.html', '/consentimento.html',
+        '/politica-privacidade.html', '/termos-uso.html', '/contato.html',
         '/assets/', '/favicon.ico', '/robots.txt',
-        '/sitemap.xml', '/manifest.json'
+        '/sitemap.xml', '/manifest.json', '/error.html'
     ];
 
     function isPublicPage(path) {
@@ -42,7 +46,7 @@
         // ============================================
         if (isPublicPage(path)) {
             // Se estiver logado e tentar acessar login, redirecionar para dashboard
-            if (user && (path === '/login.html' || path === '/')) {
+            if (user && (path === '/login.html' || path === '/consentimento.html' || path === '/')) {
                 const redirect = {
                     'admin': '/admin/dashboard.html',
                     'organizacao': '/organizacao/dashboard.html',
@@ -58,14 +62,13 @@
         // VERIFICAR AUTENTICAÇÃO
         // ============================================
         if (!user) {
-            // Salvar URL que estava tentando acessar
             localStorage.setItem('vigorre_redirect_after_login', path);
             window.location.href = '/login.html?redirect=' + encodeURIComponent(path);
             return false;
         }
 
         // ============================================
-        // VERIFICAR SESSÃO (LGPD)
+        // VERIFICAR SESSÃO
         // ============================================
         if (!window.VigorreAuth.checkSession()) {
             return false;
@@ -77,7 +80,6 @@
         // ADMIN: acesso total
         // ============================================
         if (role === 'admin') {
-            // Admin pode acessar tudo
             return true;
         }
 
@@ -88,7 +90,6 @@
             if (path.startsWith('/organizacao/')) {
                 return true;
             }
-            // Não tem permissão, redirecionar para dashboard
             window.location.href = '/organizacao/dashboard.html';
             return false;
         }
@@ -120,11 +121,9 @@
     // BLOQUEAR SETA DO NAVEGADOR
     // ============================================
     if (hasAccess) {
-        // Adicionar estado ao histórico para bloquear voltar
         history.pushState(null, null, window.location.href);
         window.addEventListener('popstate', function() {
             if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
-                // Recarregar a página atual em vez de voltar
                 window.location.reload();
             } else {
                 window.location.href = '/login.html';
@@ -133,12 +132,11 @@
     }
 
     // ============================================
-    // LGPD - COOKIE DE CONSENTIMENTO
+    // LGPD - COOKIE DE CONSENTIMENTO (BANNER)
     // ============================================
     function checkLgpdConsent() {
         const consent = localStorage.getItem('vigorre_lgpd_consent');
         if (!consent) {
-            // Mostrar banner LGPD
             const banner = document.createElement('div');
             banner.id = 'lgpd-banner';
             banner.style.cssText = `
@@ -163,7 +161,7 @@
                 <div style="flex:1;min-width:200px;">
                     🔒 <strong>LGPD</strong> - Utilizamos cookies para melhorar sua experiência. 
                     Ao continuar, você concorda com nossa 
-                    <a href="#" style="color:#D97706;text-decoration:underline;">Política de Privacidade</a>.
+                    <a href="/politica-privacidade.html" style="color:#D97706;text-decoration:underline;">Política de Privacidade</a>.
                 </div>
                 <div style="display:flex;gap:12px;">
                     <button onclick="document.getElementById('lgpd-banner').style.display='none';localStorage.setItem('vigorre_lgpd_consent','true');" 
@@ -185,5 +183,69 @@
         checkLgpdConsent();
     }
 
+    // ============================================
+    // FUNÇÕES AUXILIARES PARA USO NAS PÁGINAS
+    // ============================================
+    window.AuthGuard = {
+        // Verifica se o usuário pode acessar a página
+        check: function() {
+            return hasAccess;
+        },
+
+        // Redireciona para login se não autenticado
+        requireAuth: function() {
+            if (!window.VigorreAuth.isAuthenticated()) {
+                window.location.href = '/login.html';
+                return false;
+            }
+            return true;
+        },
+
+        // Redireciona se não for admin
+        requireAdmin: function() {
+            if (!window.VigorreAuth.isAdmin()) {
+                window.location.href = '/unauthorized.html';
+                return false;
+            }
+            return true;
+        },
+
+        // Redireciona se não for organização
+        requireOrganizacao: function() {
+            if (!window.VigorreAuth.isOrganizacao()) {
+                window.location.href = '/unauthorized.html';
+                return false;
+            }
+            return true;
+        },
+
+        // Redireciona se não for participante
+        requireParticipante: function() {
+            if (!window.VigorreAuth.isParticipante()) {
+                window.location.href = '/unauthorized.html';
+                return false;
+            }
+            return true;
+        },
+
+        // Obter usuário atual
+        getUser: function() {
+            return window.VigorreAuth.getCurrentUser();
+        },
+
+        // Fazer logout
+        logout: function(message) {
+            window.VigorreAuth.logout(message);
+        },
+
+        // Verificar permissão específica
+        hasRole: function(role) {
+            return window.VigorreAuth.hasRole(role);
+        }
+    };
+
     console.log('✅ Auth Guard com LGPD executado com sucesso.');
+    console.log('📌 Rota atual:', window.location.pathname);
+    console.log('🔐 Acesso:', hasAccess ? '✅ Permitido' : '❌ Negado');
+
 })();
