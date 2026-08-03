@@ -1,6 +1,9 @@
-// ============================================
-// VIGORRE ONE™ - AUTH.JS (COM LGPD, SESSÃO ÚNICA E CONSENTIMENTO)
-// ============================================
+/**
+ * ============================================
+ * VIGORRE ONE™ - AUTH.JS
+ * VERSÃO HÍBRIDA: LGPD + SUPABASE AUTH
+ * ============================================
+ */
 
 'use strict';
 
@@ -18,7 +21,7 @@ const REDIRECTS = {
 };
 
 // ============================================
-// GERENCIADOR DE AUTENTICAÇÃO COM LGPD
+// GERENCIADOR DE AUTENTICAÇÃO COM LGPD E SUPABASE
 // ============================================
 const VigorreAuth = {
     _currentUser: null,
@@ -26,11 +29,24 @@ const VigorreAuth = {
     _lastActivity: Date.now(),
     _consentimentoVersao: '3.0',
     _testeAtivo: false,
+    _supabase: null,
 
     // ============================================
     // INICIALIZAÇÃO
     // ============================================
     init() {
+        // Inicializar Supabase se disponível
+        if (typeof window !== 'undefined' && window.supabase) {
+            this._supabase = window.supabase;
+            console.log('✅ Supabase Auth disponível');
+        } else if (typeof window !== 'undefined' && window.createClient) {
+            const SUPABASE_URL = 'https://dfthdcnaqmqswidwgezj.supabase.co';
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmdGhkY25hcW1xc3dpZHdnZXpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk0NDU3MDksImV4cCI6MjA5NTAyMTcwOX0.ysTxq3RLw6E-7HrKsvAN2DGoTRYNNCVHXYKG0y6aFIQ';
+            this._supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            console.log('✅ Supabase Auth inicializado (fallback)');
+        }
+
+        // Carregar sessão do storage
         const sessionData = localStorage.getItem('vigorre_session');
         if (sessionData) {
             try {
@@ -69,21 +85,272 @@ const VigorreAuth = {
         return user && user.role === role;
     },
 
-    isOrganizacao() {
-        return this.hasRole(ROLES.ORGANIZACAO);
-    },
-
-    isAdmin() {
-        return this.hasRole(ROLES.ADMIN);
-    },
-
-    isParticipante() {
-        return this.hasRole(ROLES.PARTICIPANTE);
-    },
+    isOrganizacao() { return this.hasRole(ROLES.ORGANIZACAO); },
+    isAdmin() { return this.hasRole(ROLES.ADMIN); },
+    isParticipante() { return this.hasRole(ROLES.PARTICIPANTE); },
 
     getParticipanteId() {
         const user = this.getCurrentUser();
         return user?.participantId || user?.id || null;
+    },
+
+    // ============================================
+    // SUPABASE - LOGIN REAL
+    // ============================================
+    async login(email, password, role = ROLES.ORGANIZACAO, consent = false) {
+        if (!email || !password) {
+            throw new Error('Email e senha são obrigatórios.');
+        }
+
+        // Verificar se tem Supabase
+        if (this._supabase) {
+            try {
+                const { data, error } = await this._supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) {
+                    console.warn('⚠️ Erro no Supabase Auth, usando fallback:', error.message);
+                    return this._loginSimulado(email, password, role, consent);
+                }
+
+                if (data && data.user) {
+                    const perfil = await this._buscarPerfilSupabase(data.user.id);
+                    
+                    const user = {
+                        id: data.user.id,
+                        email: data.user.email,
+                        name: perfil?.name || data.user.email.split('@')[0] || 'Usuário',
+                        role: perfil?.role || role || ROLES.PARTICIPANTE,
+                        loginAt: new Date().toISOString(),
+                        ip: '0.0.0.0',
+                        userAgent: navigator.userAgent,
+                        consentimento: this.verificarConsentimento(data.user.id),
+                        supabase_user: true,
+                        ...(perfil?.company_id && { companyId: perfil.company_id }),
+                        ...(perfil?.participant_id && { participantId: perfil.participant_id })
+                    };
+
+                    this._setUserSession(user);
+                    this._logAccess(user);
+                    this._redirecionarDashboard(user);
+                    return user;
+                }
+            } catch (e) {
+                console.warn('⚠️ Erro no login Supabase:', e.message);
+                return this._loginSimulado(email, password, role, consent);
+            }
+        }
+
+        return this._loginSimulado(email, password, role, consent);
+    },
+
+    // ============================================
+    // SUPABASE - BUSCAR PERFIL
+    // ============================================
+    async _buscarPerfilSupabase(userId) {
+        if (!this._supabase) return null;
+
+        try {
+            const { data, error } = await this._supabase
+                .from('participants')
+                .select('*')
+                .eq('id', userId)
+                .single();
+
+            if (data) {
+                return {
+                    name: data.name,
+                    role: data.role || ROLES.PARTICIPANTE,
+                    company_id: data.company_id,
+                    participant_id: data.id
+                };
+            }
+
+            const { data: recruiterData } = await this._supabase
+                .from('recruiters')
+                .select('*')
+                .eq('id', userId)
+                .single();
+
+            if (recruiterData) {
+                return {
+                    name: recruiterData.name,
+                    role: ROLES.ORGANIZACAO,
+                    company_id: recruiterData.company_id
+                };
+            }
+
+            return null;
+        } catch (e) {
+            return null;
+        }
+    },
+
+    // ============================================
+    // SUPABASE - REGISTRO
+    // ============================================
+    async register(email, password, name, role = ROLES.PARTICIPANTE, companyId = null) {
+        if (!this._supabase) {
+            throw new Error('Supabase não disponível');
+        }
+
+        try {
+            const { data, error } = await this._supabase.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                    data: {
+                        name: name,
+                        role: role,
+                        company_id: companyId
+                    }
+                }
+            });
+
+            if (error) throw error;
+
+            if (data.user) {
+                await this._supabase
+                    .from('participants')
+                    .insert([{
+                        id: data.user.id,
+                        name: name || email.split('@')[0],
+                        email: email,
+                        company_id: companyId,
+                        role: role,
+                        status: 'active'
+                    }]);
+            }
+
+            return data.user;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    },
+
+    // ============================================
+    // SUPABASE - LOGOUT
+    // ============================================
+    async logout(message = 'Sessão encerrada.') {
+        const user = this._currentUser;
+        if (user) {
+            this._logLogout(user);
+        }
+
+        if (this._supabase) {
+            try {
+                await this._supabase.auth.signOut();
+            } catch (e) {
+                console.warn('⚠️ Erro ao fazer logout no Supabase:', e.message);
+            }
+        }
+
+        this._currentUser = null;
+        localStorage.removeItem('vigorre_session');
+        window.location.href = '/login.html?message=' + encodeURIComponent(message);
+    },
+
+    // ============================================
+    // LOGIN SIMULADO (FALLBACK)
+    // ============================================
+    _loginSimulado(email, password, role = ROLES.ORGANIZACAO, consent = false) {
+        const mockUsers = {
+            'admin@vigorre.com': {
+                name: 'Administrador',
+                role: ROLES.ADMIN,
+                id: 'admin_001',
+                password: 'Admin@2026'
+            },
+            'empresa@vigorre.com': {
+                name: 'Empresa Teste',
+                role: ROLES.ORGANIZACAO,
+                id: 'org_001',
+                password: 'Empresa@2026'
+            },
+            'participante@vigorre.com': {
+                name: 'João Silva',
+                role: ROLES.PARTICIPANTE,
+                id: 'part_001',
+                password: 'Part@2026'
+            }
+        };
+
+        const userData = mockUsers[email];
+        if (!userData) {
+            throw new Error('Usuário não encontrado. Use: admin@vigorre.com, empresa@vigorre.com ou participante@vigorre.com');
+        }
+
+        if (userData.password !== password) {
+            throw new Error('Senha inválida.');
+        }
+
+        if (!consent) {
+            const consentimento = this.verificarConsentimento(userData.id);
+            if (!consentimento) {
+                localStorage.setItem('pending_user', JSON.stringify({ email, role, userData }));
+                window.location.href = '/consentimento.html';
+                return;
+            }
+        }
+
+        const finalRole = role || userData.role;
+
+        const user = {
+            id: userData.id,
+            email: email,
+            name: userData.name,
+            role: finalRole,
+            loginAt: new Date().toISOString(),
+            ip: '0.0.0.0',
+            userAgent: navigator.userAgent,
+            consentimento: this.verificarConsentimento(userData.id),
+            supabase_user: false,
+            ...(finalRole === ROLES.ADMIN && { adminId: userData.id }),
+            ...(finalRole === ROLES.ORGANIZACAO && {
+                companyId: userData.id,
+                companyName: userData.name
+            }),
+            ...(finalRole === ROLES.PARTICIPANTE && {
+                participantId: userData.id
+            })
+        };
+
+        this._setUserSession(user);
+        this._logAccess(user);
+        this._redirecionarDashboard(user);
+        return user;
+    },
+
+    // ============================================
+    // SETAR SESSÃO DO USUÁRIO
+    // ============================================
+    _setUserSession(user) {
+        const session = {
+            user: user,
+            timestamp: Date.now(),
+            consentGiven: user.consentimento
+        };
+
+        this._currentUser = user;
+        this._lastActivity = Date.now();
+        localStorage.setItem('vigorre_session', JSON.stringify(session));
+    },
+
+    // ============================================
+    // REDIRECIONAMENTO DE DASHBOARD
+    // ============================================
+    _redirecionarDashboard(user) {
+        const redirects = {
+            [ROLES.ADMIN]: '/admin/dashboard.html',
+            [ROLES.ORGANIZACAO]: '/organizacao/dashboard.html',
+            [ROLES.PARTICIPANTE]: '/participante/dashboard.html'
+        };
+
+        const url = redirects[user.role] || '/dashboard.html';
+        console.log('🔀 Redirecionando para:', url);
+        window.location.href = url;
     },
 
     // ============================================
@@ -120,9 +387,6 @@ const VigorreAuth = {
         this._logConsentimento(participanteId, { acao: 'revogacao' });
     },
 
-    // ============================================
-    // LGPD - LOGS DE CONSENTIMENTO
-    // ============================================
     _logConsentimento(participanteId, data) {
         try {
             const logs = JSON.parse(localStorage.getItem('vigorre_consentimento_logs') || '[]');
@@ -193,122 +457,7 @@ const VigorreAuth = {
     },
 
     // ============================================
-    // LOGIN COM LGPD E CONSENTIMENTO
-    // ============================================
-    login(email, password, role = ROLES.ORGANIZACAO, consent = false) {
-        if (!email || !password) {
-            throw new Error('Email e senha são obrigatórios.');
-        }
-
-        // MOCK DE USUÁRIOS (SUBSTITUIR POR SUPABASE)
-        const mockUsers = {
-            'admin@vigorre.com': { 
-                name: 'Administrador', 
-                role: ROLES.ADMIN, 
-                id: 'admin_001',
-                password: 'Admin@2026'
-            },
-            'empresa@vigorre.com': { 
-                name: 'Empresa Teste', 
-                role: ROLES.ORGANIZACAO, 
-                id: 'org_001',
-                password: 'Empresa@2026'
-            },
-            'participante@vigorre.com': { 
-                name: 'João Silva', 
-                role: ROLES.PARTICIPANTE, 
-                id: 'part_001',
-                password: 'Part@2026'
-            }
-        };
-
-        const userData = mockUsers[email];
-        if (!userData) {
-            throw new Error('Usuário não encontrado. Use: admin@vigorre.com, empresa@vigorre.com ou participante@vigorre.com');
-        }
-
-        if (userData.password !== password) {
-            throw new Error('Senha inválida.');
-        }
-
-        // LGPD: Verificar consentimento
-        if (!consent) {
-            const consentimento = this.verificarConsentimento(userData.id);
-            if (!consentimento) {
-                localStorage.setItem('pending_user', JSON.stringify({ email, role, userData }));
-                window.location.href = '/consentimento.html';
-                return;
-            }
-        }
-
-        const finalRole = role || userData.role;
-
-        const user = {
-            id: userData.id,
-            email: email,
-            name: userData.name,
-            role: finalRole,
-            loginAt: new Date().toISOString(),
-            ip: '0.0.0.0',
-            userAgent: navigator.userAgent,
-            consentimento: this.verificarConsentimento(userData.id),
-            ...(finalRole === ROLES.ADMIN && { adminId: userData.id }),
-            ...(finalRole === ROLES.ORGANIZACAO && { 
-                companyId: userData.id, 
-                companyName: userData.name 
-            }),
-            ...(finalRole === ROLES.PARTICIPANTE && { 
-                participantId: userData.id 
-            })
-        };
-
-        const session = {
-            user: user,
-            timestamp: Date.now(),
-            consentGiven: user.consentimento
-        };
-
-        this._currentUser = user;
-        this._lastActivity = Date.now();
-        localStorage.setItem('vigorre_session', JSON.stringify(session));
-        this._logAccess(user);
-
-        // Redirecionar usando a função centralizada
-        this._redirecionarDashboard(user);
-
-        return user;
-    },
-
-    // ============================================
-    // REDIRECIONAMENTO DE DASHBOARD
-    // ============================================
-    _redirecionarDashboard(user) {
-        const redirects = {
-            [ROLES.ADMIN]: '/admin/dashboard.html',
-            [ROLES.ORGANIZACAO]: '/organizacao/dashboard.html',
-            [ROLES.PARTICIPANTE]: '/participante/dashboard.html'
-        };
-
-        const url = redirects[user.role] || '/dashboard.html';
-        console.log('🔀 Redirecionando para:', url);
-        window.location.href = url;
-    },
-
-    // ============================================
-    // LOGOUT
-    // ============================================
-    logout(message = 'Sessão encerrada.') {
-        const user = this._currentUser;
-        if (user) {
-            this._logLogout(user);
-        }
-        this._currentUser = null;
-        localStorage.removeItem('vigorre_session');
-        window.location.href = '/login.html?message=' + encodeURIComponent(message);
-    },
-
-    // ============================================
-    // LGPD - LOGS DE ACESSO
+    // LOGS DE ACESSO
     // ============================================
     _logAccess(user) {
         try {
@@ -380,7 +529,7 @@ const VigorreAuth = {
     verificarSessaoTeste(participanteId) {
         const session = localStorage.getItem(`teste_session_${participanteId}`);
         if (!session) return null;
-        
+
         try {
             const data = JSON.parse(session);
             if (Date.now() - data.inicio > 30 * 60 * 1000) {
@@ -406,7 +555,7 @@ const VigorreAuth = {
             especial: /[!@#$%^&*(),.?":{}|<>]/.test(senha)
         };
 
-        const valida = 
+        const valida =
             senha.length >= requisitos.min &&
             requisitos.maiuscula &&
             requisitos.minuscula &&
@@ -416,7 +565,7 @@ const VigorreAuth = {
         return {
             valida,
             requisitos,
-            mensagem: valida ? 'Senha válida' : 
+            mensagem: valida ? 'Senha válida' :
                 'Senha deve ter: 8 caracteres, maiúscula, minúscula, número e caractere especial'
         };
     },
@@ -445,7 +594,7 @@ const VigorreAuth = {
     },
 
     // ============================================
-    // ANONIMIZAÇÃO DE DADOS (LGPD)
+    // ANONIMIZAÇÃO DE DADOS
     // ============================================
     anonimizarDados(participanteId) {
         const dados = {
@@ -524,6 +673,19 @@ const VigorreAuth = {
             return false;
         }
         return true;
+    },
+
+    // ============================================
+    // REDIRECIONAR PARA LOGIN
+    // ============================================
+    redirectToLogin() {
+        window.location.href = '/login.html';
+    },
+
+    getRedirectPath() {
+        const user = this.getCurrentUser();
+        if (!user) return '/login.html';
+        return REDIRECTS[user.role] || '/dashboard.html';
     }
 };
 
@@ -544,6 +706,7 @@ const VigorreAuth = {
     });
 
     let inactivityTimer;
+
     function resetInactivityTimer() {
         clearTimeout(inactivityTimer);
         inactivityTimer = setTimeout(() => {
@@ -569,8 +732,9 @@ window.VigorreAuth = VigorreAuth;
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     VigorreAuth.init();
-    console.log('✅ VIGORRE ONE™ - Sistema de Autenticação LGPD carregado');
+    console.log('✅ VIGORRE ONE™ - Sistema de Autenticação LGPD + Supabase carregado');
     console.log('📋 Versão:', VigorreAuth._consentimentoVersao);
+    console.log('🔐 Supabase Auth:', VigorreAuth._supabase ? '✅ Disponível' : '❌ Não disponível (modo simulado)');
 });
 
-console.log('✅ VigorreAuth com LGPD + Sessão Única carregado com sucesso!');
+console.log('✅ VigorreAuth com LGPD + Sessão Única + Supabase carregado com sucesso!');
