@@ -10,6 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 
     <style>
+        /* ============================================
+           VIGORRE ONE™ - PREÇOS
+           ============================================ */
+
         * {
             margin: 0;
             padding: 0;
@@ -22,8 +26,11 @@
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --purple: #7C3AED;
+            --pink: #EC4899;
             --green: #10B981;
             --red: #EF4444;
+            --orange: #F59E0B;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -398,7 +405,6 @@
             background: #D1FAE5;
             color: #065F46;
         }
-
         .badge-status.inactive {
             background: #FEE2E2;
             color: #991B1B;
@@ -430,7 +436,6 @@
 
         .btn-action:hover {
             transform: translateY(-1px);
-            box-shadow: var(--shadow-sm);
         }
 
         .modal-overlay {
@@ -577,9 +582,11 @@
         .toast.error {
             border-left-color: #EF4444;
         }
-
         .toast.success {
             border-left-color: #10B981;
+        }
+        .toast.warning {
+            border-left-color: #F59E0B;
         }
 
         @keyframes slideIn {
@@ -591,6 +598,20 @@
                 opacity: 1;
                 transform: translateX(0);
             }
+        }
+
+        .loading-shimmer {
+            height: 32px;
+            width: 60%;
+            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
 
         .mobile-toggle {
@@ -742,7 +763,7 @@
                 <h1>🏷️ Tabela de Preços</h1>
                 <p style="color: var(--gray-500); font-size: 0.9rem;">Gerencie os preços de relatórios, laudos e pacotes</p>
             </div>
-            <div class="actions" style="display:flex;gap:12px;">
+            <div style="display:flex;gap:12px;">
                 <button class="btn-primary" onclick="openModal()">➕ Novo Preço</button>
                 <button class="btn-secondary" onclick="window.location.href='cupons.html'">🎫 Cupons</button>
             </div>
@@ -769,7 +790,7 @@
                     <tbody id="tableBody">
                         <tr>
                             <td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">
-                                Carregando preços...
+                                <span class="loading-shimmer" style="display:inline-block;width:200px;height:20px;"></span>
                             </td>
                         </tr>
                     </tbody>
@@ -798,7 +819,7 @@
                     <tbody id="pacotesBody">
                         <tr>
                             <td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">
-                                Carregando pacotes...
+                                <span class="loading-shimmer" style="display:inline-block;width:200px;height:20px;"></span>
                             </td>
                         </tr>
                     </tbody>
@@ -864,9 +885,18 @@
         </div>
     </div>
 
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script src="../../middleware/auth-guard.js"></script>
+    <script src="financeiro-conexao.js"></script>
 
     <script>
         'use strict';
@@ -874,6 +904,9 @@
         let prices = [];
         let pacotes = [];
 
+        // ============================================
+        // TOGGLE SIDEBAR
+        // ============================================
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobileOverlay');
@@ -881,64 +914,97 @@
             overlay.classList.toggle('active');
         }
 
+        // ============================================
+        // LOGOUT
+        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.VigorreAuth.logout();
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🏷️ Preços - VIGORRE ONE™');
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
-            if (!isAuth) {
-                window.location.href = '../../login.html';
-                return;
-            }
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
 
-            const user = window.VigorreAuth.getCurrentUser();
-            if (!user || (user.role !== 'admin' && user.role !== 'master')) {
-                alert('⚠️ Acesso restrito a administradores.');
-                window.VigorreAuth.logout();
-                return;
-            }
+            msg.textContent = message;
+            toast.className = 'toast show ' + type;
 
-            document.getElementById('userName').textContent = user.name || 'Administrador';
-
-            loadPrices();
-            loadPacotes();
-        });
-
-        function loadPrices() {
-            prices = [
-                { id: 'p1', product: 'Relatório DISC', type: 'relatorio_disc', unit: 'R$ 49,90', promo: 'R$ 39,90',
-                    validity: '2024-12-31', status: 'active' },
-                { id: 'p2', product: 'Relatório IE', type: 'relatorio_ie', unit: 'R$ 49,90', promo: 'R$ 39,90',
-                    validity: '2024-12-31', status: 'active' },
-                { id: 'p3', product: 'Laudo Vigorre', type: 'laudo', unit: 'R$ 149,90', promo: 'R$ 119,90',
-                    validity: '2024-12-31', status: 'active' },
-                { id: 'p4', product: 'Pacote Completo', type: 'pacote_completo', unit: 'R$ 299,90', promo: 'R$ 249,90',
-                    validity: '2024-12-31', status: 'active' }
-            ];
-
-            renderPrices();
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
         }
 
-        function loadPacotes() {
-            pacotes = [
-                { id: 'pac1', name: 'Básico', credits: 10, price: 'R$ 99,90', perCredit: 'R$ 9,99', savings: '0%',
-                    status: 'active' },
-                { id: 'pac2', name: 'Plus', credits: 25, price: 'R$ 199,90', perCredit: 'R$ 7,99', savings: '20%',
-                    status: 'active' },
-                { id: 'pac3', name: 'Pro', credits: 50, price: 'R$ 349,90', perCredit: 'R$ 6,99', savings: '30%',
-                    status: 'active' },
-                { id: 'pac4', name: 'Enterprise', credits: 100, price: 'R$ 599,90', perCredit: 'R$ 5,99', savings: '40%',
-                    status: 'active' }
-            ];
+        // ============================================
+        // CARREGAR DADOS
+        // ============================================
+        async function carregarDados() {
+            try {
+                console.log('🏷️ Carregando preços...');
 
-            renderPacotes();
+                if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../../login.html';
+                    return;
+                }
+
+                var user = window.VigorreAuth.getCurrentUser();
+                if (user) {
+                    document.getElementById('userName').textContent = user.name || 'Administrador';
+                }
+
+                var supabaseClient = getSupabaseClient();
+
+                if (!supabaseClient) {
+                    carregarMock();
+                    return;
+                }
+
+                // Buscar preços
+                var { data: precosData, error: errPrecos } = await supabaseClient
+                    .from('precos')
+                    .select('*')
+                    .order('produto');
+
+                if (errPrecos) {
+                    console.error('❌ Erro ao buscar preços:', errPrecos);
+                } else {
+                    prices = precosData || [];
+                }
+
+                // Buscar pacotes (simulados - podem vir de uma tabela separada ou ser fixos)
+                // Como não temos uma tabela de pacotes no Supabase, vamos usar dados fixos
+                pacotes = [
+                    { id: 'pac1', name: 'Básico', credits: 10, price: 'R$ 99,90', perCredit: 'R$ 9,99',
+                    savings: '0%', status: 'active' },
+                    { id: 'pac2', name: 'Plus', credits: 25, price: 'R$ 199,90', perCredit: 'R$ 7,99',
+                    savings: '20%', status: 'active' },
+                    { id: 'pac3', name: 'Pro', credits: 50, price: 'R$ 349,90', perCredit: 'R$ 6,99',
+                    savings: '30%', status: 'active' },
+                    { id: 'pac4', name: 'Enterprise', credits: 100, price: 'R$ 599,90', perCredit: 'R$ 5,99',
+                        savings: '40%', status: 'active' }
+                ];
+
+                renderPrices();
+                renderPacotes();
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                carregarMock();
+            }
         }
 
+        // ============================================
+        // RENDERIZAR PREÇOS
+        // ============================================
         function renderPrices() {
             const tbody = document.getElementById('tableBody');
 
@@ -950,23 +1016,31 @@
 
             const statusMap = { active: '✅ Ativo', inactive: '⛔ Inativo' };
 
-            tbody.innerHTML = prices.map(p => `
+            tbody.innerHTML = prices.map(p => {
+                const unit = p.preco_unitario ? `R$ ${formatarMoeda(p.preco_unitario)}` : '--';
+                const promo = p.preco_promocional ? `R$ ${formatarMoeda(p.preco_promocional)}` : '-';
+
+                return `
                     <tr>
-                        <td><strong>${p.product}</strong></td>
-                        <td style="font-size:0.8rem;color:var(--gray-500);">${p.type}</td>
-                        <td style="font-weight:700;">${p.unit}</td>
-                        <td style="color:var(--green);">${p.promo || '-'}</td>
-                        <td style="font-size:0.8rem;color:var(--gray-500);">${new Date(p.validity).toLocaleDateString('pt-BR')}</td>
-                        <td><span class="badge-status ${p.status}">${statusMap[p.status]}</span></td>
+                        <td><strong>${p.produto || '--'}</strong></td>
+                        <td style="font-size:0.8rem;color:var(--gray-500);">${p.tipo || '--'}</td>
+                        <td style="font-weight:700;">${unit}</td>
+                        <td style="color:var(--green);">${promo}</td>
+                        <td style="font-size:0.8rem;color:var(--gray-500);">${p.validade ? new Date(p.validade).toLocaleDateString('pt-BR') : '--'}</td>
+                        <td><span class="badge-status ${p.status || 'active'}">${statusMap[p.status] || '✅ Ativo'}</span></td>
                         <td style="text-align:center;">
                             <div class="actions-cell" style="justify-content:center;">
                                 <button class="btn-action edit" onclick="editPrice('${p.id}')">✏️</button>
                             </div>
                         </td>
                     </tr>
-                `).join('');
+                `;
+            }).join('');
         }
 
+        // ============================================
+        // RENDERIZAR PACOTES
+        // ============================================
         function renderPacotes() {
             const tbody = document.getElementById('pacotesBody');
 
@@ -995,6 +1069,9 @@
                 `).join('');
         }
 
+        // ============================================
+        // MODAL
+        // ============================================
         function openModal() {
             document.getElementById('modalTitle').textContent = 'Novo Preço';
             document.getElementById('priceForm').reset();
@@ -1005,34 +1082,175 @@
             document.getElementById('priceModal').classList.remove('active');
         }
 
+        // ============================================
+        // EDITAR PREÇO
+        // ============================================
         function editPrice(id) {
             const price = prices.find(p => p.id === id);
-            if (!price) return;
+            if (!price) {
+                showToast('❌ Preço não encontrado', 'error');
+                return;
+            }
 
             document.getElementById('modalTitle').textContent = 'Editar Preço';
-            document.getElementById('productType').value = price.type;
-            document.getElementById('priceUnit').value = parseFloat(price.unit.replace('R$ ', '').replace(',', '.'));
-            document.getElementById('pricePromo').value = parseFloat(price.promo.replace('R$ ', '').replace(',', '.'));
-            document.getElementById('priceValidity').value = price.validity;
-            document.getElementById('priceStatus').value = price.status;
+            document.getElementById('productType').value = price.tipo || '';
+            document.getElementById('priceUnit').value = price.preco_unitario || 0;
+            document.getElementById('pricePromo').value = price.preco_promocional || 0;
+            document.getElementById('priceValidity').value = price.validade || '';
+            document.getElementById('priceStatus').value = price.status || 'active';
 
+            // Guardar o ID para saber se é edição ou novo
+            document.getElementById('priceForm').dataset.editId = id;
             document.getElementById('priceModal').classList.add('active');
         }
 
+        // ============================================
+        // EDITAR PACOTE
+        // ============================================
         function editPacote(id) {
-            alert('✏️ Editar pacote: ' + id);
+            showToast('✏️ Editar pacote: ' + id, 'warning');
         }
 
-        function savePrice(e) {
+        // ============================================
+        // SALVAR PREÇO
+        // ============================================
+        async function savePrice(e) {
             e.preventDefault();
-            showToast('✅ Preço salvo com sucesso!', 'success');
-            closeModal();
+
+            const productType = document.getElementById('productType').value;
+            const priceUnit = parseFloat(document.getElementById('priceUnit').value);
+            const pricePromo = parseFloat(document.getElementById('pricePromo').value) || null;
+            const validity = document.getElementById('priceValidity').value || null;
+            const status = document.getElementById('priceStatus').value;
+
+            if (!productType || !priceUnit || priceUnit <= 0) {
+                showToast('❌ Preencha todos os campos obrigatórios', 'error');
+                return;
+            }
+
+            try {
+                var supabaseClient = getSupabaseClient();
+
+                if (!supabaseClient) {
+                    showToast('⚠️ Supabase não disponível', 'error');
+                    return;
+                }
+
+                // Mapear produto para nome
+                const productNames = {
+                    'relatorio_disc': 'Relatório DISC',
+                    'relatorio_ie': 'Relatório IE',
+                    'relatorio_valores': 'Relatório Valores',
+                    'relatorio_swot': 'Relatório SWOT',
+                    'relatorio_bigfive': 'Relatório Big Five',
+                    'laudo': 'Laudo Vigorre',
+                    'pacote_disc': 'Pacote DISC',
+                    'pacote_completo': 'Pacote Completo'
+                };
+
+                const dados = {
+                    produto: productNames[productType] || productType,
+                    tipo: productType,
+                    preco_unitario: priceUnit,
+                    preco_promocional: pricePromo,
+                    validade: validity,
+                    status: status,
+                    updated_at: new Date().toISOString()
+                };
+
+                const editId = document.getElementById('priceForm').dataset.editId;
+
+                let result;
+                if (editId) {
+                    // Atualizar existente
+                    const { data, error } = await supabaseClient
+                        .from('precos')
+                        .update(dados)
+                        .eq('id', editId)
+                        .select()
+                        .single();
+
+                    if (error) throw error;
+                    result = data;
+                    showToast('✅ Preço atualizado com sucesso!', 'success');
+                } else {
+                    // Criar novo
+                    dados.created_at = new Date().toISOString();
+                    const { data, error } = await supabaseClient
+                        .from('precos')
+                        .insert([dados])
+                        .select()
+                        .single();
+
+                    if (error) throw error;
+                    result = data;
+                    showToast('✅ Preço criado com sucesso!', 'success');
+                }
+
+                closeModal();
+                await carregarDados();
+
+            } catch (error) {
+                console.error('❌ Erro ao salvar preço:', error);
+                showToast('❌ Erro ao salvar preço', 'error');
+            }
         }
 
-        function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
+        // ============================================
+        // FUNÇÕES AUXILIARES
+        // ============================================
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
 
-            if (type === 'error') { icon.textContent = '❌'; } else if (type === 'warning') { icon.textContent = '⚠️'; } else
-                {
+        // ============================================
+        // DADOS MOCK (FALLBACK)
+        // ============================================
+        function carregarMock() {
+            prices = [
+                { id: 'p1', produto: 'Relatório DISC', tipo: 'relatorio_disc', preco_unitario: 49.90,
+                    preco_promocional: 39.90, validade: '2025-12-31', status: 'active' },
+                { id: 'p2', produto: 'Relatório IE', tipo: 'relatorio_ie', preco_unitario: 49.90,
+                    preco_promocional: 39.90, validade: '2025-12-31', status: 'active' },
+                { id: 'p3', produto: 'Laudo Vigorre', tipo: 'laudo', preco_unitario: 149.90, preco_promocional: 119.90,
+                    validade: '2025-12-31', status: 'active' },
+                { id: 'p4', produto: 'Pacote Completo', tipo: 'pacote_completo', preco_unitario: 299.90,
+                    preco_promocional: 249.90, validade: '2025-12-31', status: 'active' }
+            ];
+
+            pacotes = [
+                { id: 'pac1', name: 'Básico', credits: 10, price: 'R$ 99,90', perCredit: 'R$ 9,99', savings: '0%',
+                    status: 'active' },
+                { id: 'pac2', name: 'Plus', credits: 25, price: 'R$ 199,90', perCredit: 'R$ 7,99', savings: '20%',
+                    status: 'active' },
+                { id: 'pac3', name: 'Pro', credits: 50, price: 'R$ 349,90', perCredit: 'R$ 6,99', savings: '30%',
+                    status: 'active' },
+                { id: 'pac4', name: 'Enterprise', credits: 100, price: 'R$ 599,90', perCredit: 'R$ 5,99', savings: '40%',
+                    status: 'active' }
+            ];
+
+            renderPrices();
+            renderPacotes();
+            showToast('📊 Usando dados de exemplo', 'warning');
+        }
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🏷️ Preços - VIGORRE ONE™');
+            carregarDados();
+
+            document.getElementById('priceModal').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+        });
+
+        console.log('✅ Preços carregado com sucesso!');
+    </script>
+
+</body>
+</html>
