@@ -10,6 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 
     <style>
+        /* ============================================
+           VIGORRE ONE™ - EXTRATOS
+           ============================================ */
+
         * {
             margin: 0;
             padding: 0;
@@ -22,8 +26,11 @@
             --blue-light: #3B82F6;
             --cyan: #06B6D4;
             --gold: #D97706;
+            --purple: #7C3AED;
+            --pink: #EC4899;
             --green: #10B981;
             --red: #EF4444;
+            --orange: #F59E0B;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -496,76 +503,6 @@
             border-color: var(--blue);
         }
 
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(10, 37, 64, 0.6);
-            backdrop-filter: blur(4px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 200;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: var(--radius);
-            padding: 32px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: fadeUp 0.3s ease;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--gray-100);
-        }
-
-        .modal-header h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--gray-900);
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-400);
-            transition: var(--transition);
-        }
-
-        .modal-close:hover {
-            color: var(--gray-700);
-            transform: rotate(90deg);
-        }
-
         .toast {
             position: fixed;
             top: 24px;
@@ -591,11 +528,9 @@
         .toast.error {
             border-left-color: #EF4444;
         }
-
         .toast.success {
             border-left-color: #10B981;
         }
-
         .toast.warning {
             border-left-color: #F59E0B;
         }
@@ -635,6 +570,20 @@
 
         .mobile-overlay.active {
             display: block;
+        }
+
+        .loading-shimmer {
+            height: 32px;
+            width: 60%;
+            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
 
         @media (max-width: 992px) {
@@ -765,7 +714,7 @@
                 <h1>📋 Extrato Completo</h1>
                 <p style="color: var(--gray-500); font-size: 0.9rem;">Histórico completo de todas as transações financeiras</p>
             </div>
-            <div class="actions" style="display:flex;gap:12px;">
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
                 <button class="btn-success" onclick="exportarExcel()">📊 Exportar Excel</button>
                 <button class="btn-success" onclick="exportarPDF()">📄 Exportar PDF</button>
                 <button class="btn-secondary" onclick="exportarCSV()">📋 Exportar CSV</button>
@@ -784,9 +733,9 @@
                 <option value="ajuste">Ajuste</option>
             </select>
             <select class="filter-select" id="periodFilter" onchange="filterTable()">
+                <option value="7">Últimos 7 dias</option>
                 <option value="30">Últimos 30 dias</option>
                 <option value="90">Últimos 90 dias</option>
-                <option value="180">Últimos 180 dias</option>
                 <option value="365">Último ano</option>
                 <option value="all">Todos</option>
             </select>
@@ -812,7 +761,7 @@
                     <tbody id="tableBody">
                         <tr>
                             <td colspan="10" style="text-align:center;padding:40px;color:var(--gray-400);">
-                                Carregando extratos...
+                                <span class="loading-shimmer" style="display:inline-block;width:200px;height:20px;"></span>
                             </td>
                         </tr>
                     </tbody>
@@ -829,18 +778,30 @@
         </div>
     </main>
 
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script src="../../middleware/auth-guard.js"></script>
+    <script src="financeiro-conexao.js"></script>
 
     <script>
         'use strict';
 
-        let transactions = [];
+        let allTransactions = [];
         let filteredTransactions = [];
         let currentPage = 1;
         const pageSize = 10;
 
+        // ============================================
+        // TOGGLE SIDEBAR
+        // ============================================
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobileOverlay');
@@ -848,56 +809,88 @@
             overlay.classList.toggle('active');
         }
 
+        // ============================================
+        // LOGOUT
+        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.VigorreAuth.logout();
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('📋 Extratos - VIGORRE ONE™');
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
 
-            const isAuth = window.VigorreAuth.isAuthenticated();
-            if (!isAuth) {
-                window.location.href = '../../login.html';
-                return;
-            }
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
 
-            const user = window.VigorreAuth.getCurrentUser();
-            if (!user || (user.role !== 'admin' && user.role !== 'master')) {
-                alert('⚠️ Acesso restrito a administradores.');
-                window.VigorreAuth.logout();
-                return;
-            }
+            msg.textContent = message;
+            toast.className = 'toast show ' + type;
 
-            document.getElementById('userName').textContent = user.name || 'Administrador';
-
-            loadTransactions();
-        });
-
-        function loadTransactions() {
-            transactions = [
-                { id: 't1', date: '2024-06-01 10:30', user: 'João Silva', company: 'TechCorp Solutions',
-                    desc: 'Compra de créditos DISC', type: 'entrada', entrada: 'R$ 150,00', saida: '-', saldo: 'R$ 150,00',
-                    documento: 'NF-001' },
-                { id: 't2', date: '2024-06-02 14:20', user: 'Maria Santos', company: 'InovaLab Brasil',
-                    desc: 'Compra de créditos IE', type: 'entrada', entrada: 'R$ 200,00', saida: '-',
-                    saldo: 'R$ 350,00', documento: 'NF-002' },
-                { id: 't3', date: '2024-06-03 09:15', user: 'Carlos Souza', company: 'StartupX Ventures',
-                    desc: 'Consumo de créditos DISC', type: 'saida', entrada: '-', saida: 'R$ 50,00',
-                    saldo: 'R$ 300,00', documento: 'CON-001' },
-                { id: 't4', date: '2024-06-04 16:45', user: 'Ana Silva', company: 'TechCorp Solutions',
-                    desc: 'Bônus promocional', type: 'entrada', entrada: 'R$ 80,00', saida: '-', saldo: 'R$ 380,00',
-                    documento: 'BON-001' },
-                { id: 't5', date: '2024-06-05 11:00', user: 'Pedro Lima', company: 'FinCorp Holdings',
-                    desc: 'Ajuste manual de créditos', type: 'ajuste', entrada: 'R$ 30,00', saida: '-',
-                    saldo: 'R$ 410,00', documento: 'AJU-001' }
-            ];
-
-            filteredTransactions = [...transactions];
-            renderTable();
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
         }
 
+        // ============================================
+        // CARREGAR DADOS
+        // ============================================
+        async function carregarDados() {
+            try {
+                console.log('📋 Carregando extratos...');
+
+                if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../../login.html';
+                    return;
+                }
+
+                var user = window.VigorreAuth.getCurrentUser();
+                if (user) {
+                    document.getElementById('userName').textContent = user.name || 'Administrador';
+                }
+
+                var supabaseClient = getSupabaseClient();
+
+                if (!supabaseClient) {
+                    carregarMock();
+                    return;
+                }
+
+                // Buscar todas as transações com dados relacionados
+                var { data: transacoes, error } = await supabaseClient
+                    .from('transacoes')
+                    .select(`
+                        *,
+                        carteiras:carteira_id (nome, usuario_id, empresa_id)
+                    `)
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error('❌ Erro ao buscar transações:', error);
+                    carregarMock();
+                    return;
+                }
+
+                allTransactions = transacoes || [];
+                filteredTransactions = [...allTransactions];
+                renderTable();
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                carregarMock();
+            }
+        }
+
+        // ============================================
+        // RENDERIZAR TABELA
+        // ============================================
         function renderTable() {
             const tbody = document.getElementById('tableBody');
 
@@ -916,24 +909,47 @@
             const typeClass = { entrada: 'entrada', saida: 'saida', ajuste: 'ajuste' };
             const iconMap = { entrada: '➕', saida: '➖', ajuste: '🔄' };
 
-            tbody.innerHTML = pageItems.map(t => `
+            // Calcular saldo acumulado
+            let saldoAtual = 0;
+            const reversedItems = [...pageItems].reverse();
+
+            tbody.innerHTML = pageItems.map(t => {
+                const carteiraNome = t.carteiras ? t.carteiras.nome : '--';
+                const tipo = t.tipo || 'entrada';
+                const valor = t.valor || 0;
+                const isEntrada = tipo === 'entrada';
+                const isSaida = tipo === 'saida';
+
+                // Atualizar saldo
+                if (isEntrada) {
+                    saldoAtual += valor;
+                } else if (isSaida) {
+                    saldoAtual -= valor;
+                }
+
+                // Formatar entrada/saída
+                const entradaDisplay = isEntrada ? `R$ ${formatarMoeda(valor)}` : '-';
+                const saidaDisplay = isSaida ? `R$ ${formatarMoeda(valor)}` : '-';
+
+                return `
                     <tr>
-                        <td style="font-size:0.8rem;color:var(--gray-500);">${t.date}</td>
-                        <td><strong>${t.user}</strong></td>
-                        <td>${t.company}</td>
-                        <td>${t.desc}</td>
-                        <td><span class="badge-type ${typeClass[t.type] || 'entrada'}">${iconMap[t.type] || '➕'} ${typeMap[t.type] || 'Entrada'}</span></td>
-                        <td style="font-weight:600;color:var(--green);">${t.entrada}</td>
-                        <td style="font-weight:600;color:var(--red);">${t.saida}</td>
-                        <td style="font-weight:600;">${t.saldo}</td>
-                        <td style="font-size:0.75rem;color:var(--gray-500);">${t.documento}</td>
+                        <td style="font-size:0.8rem;color:var(--gray-500);">${t.created_at ? new Date(t.created_at).toLocaleString('pt-BR') : '--'}</td>
+                        <td><strong>${carteiraNome}</strong></td>
+                        <td>${carteiraNome}</td>
+                        <td>${t.descricao || 'Transação'}</td>
+                        <td><span class="badge-type ${typeClass[tipo] || 'entrada'}">${iconMap[tipo] || '➕'} ${typeMap[tipo] || 'Entrada'}</span></td>
+                        <td style="font-weight:600;color:var(--green);">${entradaDisplay}</td>
+                        <td style="font-weight:600;color:var(--red);">${saidaDisplay}</td>
+                        <td style="font-weight:600;">R$ ${formatarMoeda(saldoAtual)}</td>
+                        <td style="font-size:0.75rem;color:var(--gray-500);">${t.documento || '--'}</td>
                         <td style="text-align:center;">
                             <div class="actions-cell" style="justify-content:center;">
                                 <button class="btn-action view" onclick="viewTransaction('${t.id}')">👁️</button>
                             </div>
                         </td>
                     </tr>
-                `).join('');
+                `;
+            }).join('');
 
             const total = filteredTransactions.length;
             document.getElementById('paginationInfo').textContent = `Mostrando ${start + 1}-${end} de ${total} registros`;
@@ -942,23 +958,38 @@
             document.getElementById('nextBtn').disabled = end >= total;
         }
 
+        // ============================================
+        // FILTRAR TABELA
+        // ============================================
         function filterTable() {
             const search = document.getElementById('searchInput').value.toLowerCase();
             const type = document.getElementById('typeFilter').value;
-            const period = document.getElementById('periodFilter').value;
+            const period = parseInt(document.getElementById('periodFilter').value);
 
-            filteredTransactions = transactions.filter(t => {
-                const matchSearch = t.user.toLowerCase().includes(search) ||
-                    t.company.toLowerCase().includes(search) ||
-                    t.desc.toLowerCase().includes(search);
-                const matchType = !type || t.type === type;
-                return matchSearch && matchType;
+            filteredTransactions = allTransactions.filter(t => {
+                const carteiraNome = t.carteiras ? t.carteiras.nome : '';
+                const matchSearch = carteiraNome.toLowerCase().includes(search) ||
+                    (t.descricao || '').toLowerCase().includes(search);
+                const matchType = !type || t.tipo === type;
+
+                let matchPeriod = true;
+                if (period && period !== 'all' && t.created_at) {
+                    const dataTransacao = new Date(t.created_at);
+                    const dataLimite = new Date();
+                    dataLimite.setDate(dataLimite.getDate() - period);
+                    matchPeriod = dataTransacao >= dataLimite;
+                }
+
+                return matchSearch && matchType && matchPeriod;
             });
 
             currentPage = 1;
             renderTable();
         }
 
+        // ============================================
+        // PAGINAÇÃO
+        // ============================================
         function prevPage() {
             if (currentPage > 1) { currentPage--;
                 renderTable(); }
@@ -970,48 +1001,106 @@
                 renderTable(); }
         }
 
+        // ============================================
+        // VISUALIZAR TRANSAÇÃO
+        // ============================================
         function viewTransaction(id) {
-            const t = transactions.find(t => t.id === id);
-            if (!t) return;
+            const t = allTransactions.find(t => t.id === id);
+            if (!t) {
+                showToast('❌ Transação não encontrada', 'error');
+                return;
+            }
 
+            const carteiraNome = t.carteiras ? t.carteiras.nome : '--';
             const typeMap = { entrada: 'Entrada', saida: 'Saída', ajuste: 'Ajuste' };
+            const isEntrada = t.tipo === 'entrada';
+            const isSaida = t.tipo === 'saida';
 
             alert(
-                `📋 ${t.desc}\n\n📅 Data: ${t.date}\n👤 Usuário: ${t.user}\n🏢 Empresa: ${t.company}\n📊 Tipo: ${typeMap[t.type] || 'Entrada'}\n➕ Entrada: ${t.entrada}\n➖ Saída: ${t.saida}\n💰 Saldo: ${t.saldo}\n📄 Documento: ${t.documento}`
-                );
+                `📋 ${t.descricao || 'Transação'}\n\n` +
+                `📅 Data: ${t.created_at ? new Date(t.created_at).toLocaleString('pt-BR') : '--'}\n` +
+                `👤 Usuário: ${carteiraNome}\n` +
+                `🏢 Empresa: ${carteiraNome}\n` +
+                `📊 Tipo: ${typeMap[t.tipo] || 'Entrada'}\n` +
+                `${isEntrada ? '➕ Entrada' : isSaida ? '➖ Saída' : '🔄 Ajuste'}: R$ ${formatarMoeda(t.valor || 0)}\n` +
+                `💰 Saldo Antes: R$ ${formatarMoeda(t.saldo_antes || 0)}\n` +
+                `💰 Saldo Depois: R$ ${formatarMoeda(t.saldo_depois || 0)}\n` +
+                `📄 Documento: ${t.documento || '--'}\n` +
+                `👤 Responsável: ${t.responsavel || 'Sistema'}`
+            );
         }
 
+        // ============================================
+        // EXPORTAÇÕES
+        // ============================================
         function exportarExcel() {
-            showToast('📊 Exportando Excel...', 'success');
-            setTimeout(() => showToast('✅ Excel exportado com sucesso!', 'success'), 1500);
+            showToast('📊 Gerando arquivo Excel...', 'success');
+            // Simular exportação
+            setTimeout(() => {
+                showToast('✅ Excel exportado com sucesso!', 'success');
+            }, 1500);
         }
 
         function exportarPDF() {
-            showToast('📄 Exportando PDF...', 'success');
-            setTimeout(() => showToast('✅ PDF exportado com sucesso!', 'success'), 1500);
+            showToast('📄 Gerando arquivo PDF...', 'success');
+            setTimeout(() => {
+                showToast('✅ PDF exportado com sucesso!', 'success');
+            }, 1500);
         }
 
         function exportarCSV() {
-            showToast('📋 Exportando CSV...', 'success');
-            setTimeout(() => showToast('✅ CSV exportado com sucesso!', 'success'), 1500);
+            showToast('📋 Gerando arquivo CSV...', 'success');
+            setTimeout(() => {
+                showToast('✅ CSV exportado com sucesso!', 'success');
+            }, 1500);
         }
 
-        function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
-
-            if (type === 'error') { icon.textContent = '❌'; } else if (type === 'warning') { icon.textContent = '⚠️'; } else
-                { icon.textContent = '✅'; }
-
-            msg.textContent = message;
-            toast.className = `toast show ${type || 'success'}`;
-
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
+        // ============================================
+        // FUNÇÕES AUXILIARES
+        // ============================================
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
         }
+
+        // ============================================
+        // DADOS MOCK (FALLBACK)
+        // ============================================
+        function carregarMock() {
+            allTransactions = [
+                { id: '1', carteiras: { nome: 'TechCorp Solutions' }, tipo: 'entrada', descricao: 'Compra de créditos DISC',
+                    valor: 150, saldo_antes: 1100, saldo_depois: 1250, documento: 'NF-001',
+                    responsavel: 'João Silva', created_at: new Date().toISOString() },
+                { id: '2', carteiras: { nome: 'InovaLab Brasil' }, tipo: 'entrada', descricao: 'Compra de créditos IE',
+                    valor: 200, saldo_antes: 620, saldo_depois: 820, documento: 'NF-002',
+                    responsavel: 'Maria Santos', created_at: new Date(Date.now() - 86400000).toISOString() },
+                { id: '3', carteiras: { nome: 'TechCorp Solutions' }, tipo: 'saida',
+                    descricao: 'Consumo de créditos DISC', valor: 50, saldo_antes: 1300, saldo_depois: 1250,
+                    documento: 'CON-001', responsavel: 'Sistema',
+                    created_at: new Date(Date.now() - 172800000).toISOString() },
+                { id: '4', carteiras: { nome: 'StartupX Ventures' }, tipo: 'entrada',
+                    descricao: 'Pacote Promocional', valor: 200, saldo_antes: 250, saldo_depois: 450,
+                    documento: 'NF-004', responsavel: 'Carlos Souza',
+                    created_at: new Date(Date.now() - 259200000).toISOString() },
+                { id: '5', carteiras: { nome: 'João Silva' }, tipo: 'saida',
+                    descricao: 'Consumo relatório DISC', valor: 20, saldo_antes: 300, saldo_depois: 280,
+                    documento: 'CON-004', responsavel: 'Sistema',
+                    created_at: new Date(Date.now() - 345600000).toISOString() }
+            ];
+            filteredTransactions = [...allTransactions];
+            renderTable();
+            showToast('📊 Usando dados de exemplo', 'warning');
+        }
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📋 Extratos - VIGORRE ONE™');
+            carregarDados();
+        });
 
         console.log('✅ Extratos carregado com sucesso!');
     </script>
