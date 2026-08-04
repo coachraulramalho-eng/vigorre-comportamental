@@ -4,25 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assinaturas | Centro Financeiro VIGORRE ONE™</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
             --green: #10B981; --red: #EF4444; --orange: #F59E0B; --purple: #7C3AED;
-            --white: #FFFFFF;
-            --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
-            --gray-300: #CBD5E1; --gray-400: #94A3B8; --gray-500: #64748B;
-            --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B;
-            --gray-900: #0F172A;
+            --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0; --gray-300: #CBD5E1; --gray-400: #94A3B8;
+            --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155;
+            --gray-800: #1E293B; --gray-900: #0F172A;
             --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10,37,64,0.06);
             --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
             --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+        }
+
         .sidebar {
             position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
             background: var(--navy); color: white; padding: 24px 20px;
@@ -60,7 +67,8 @@
         .sidebar .nav a {
             display: flex; align-items: center; gap: 12px; padding: 10px 14px;
             border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            transition: var(--transition); cursor: pointer;
         }
         .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
         .sidebar .nav a.active {
@@ -72,10 +80,16 @@
         .sidebar .logout a {
             display: flex; align-items: center; gap: 12px; padding: 10px 14px;
             border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            transition: var(--transition); cursor: pointer;
         }
         .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
-        .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
+
+        .main {
+            margin-left: 260px;
+            padding: 24px 32px 40px;
+            min-height: 100vh;
+        }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
@@ -84,9 +98,10 @@
         .main-header .breadcrumb a { color: var(--blue); text-decoration: none; }
         .main-header .breadcrumb a:hover { color: var(--cyan); }
         .main-header h1 {
-            font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700;
-            color: var(--gray-900); margin-top: 4px;
+            font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
+            margin-top: 4px;
         }
+
         .btn-primary {
             padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
             color: white; border: none; border-radius: var(--radius-sm);
@@ -108,13 +123,7 @@
             transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
         }
         .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.25); }
-        .btn-danger {
-            padding: 10px 24px; background: var(--red); color: white;
-            border: none; border-radius: var(--radius-sm);
-            font-weight: 600; font-size: 0.875rem; cursor: pointer;
-            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
-        }
-        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(239,68,68,0.25); }
+
         .filters-bar {
             display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;
         }
@@ -140,6 +149,7 @@
             font-size: 0.9rem; background: white; min-width: 160px; cursor: pointer;
         }
         .filter-select:focus { outline: none; border-color: var(--blue); }
+
         .table-card {
             background: white; border-radius: var(--radius);
             box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
@@ -161,6 +171,7 @@
         }
         .table-container tr:last-child td { border-bottom: none; }
         .table-container tr:hover td { background: var(--gray-50); }
+
         .badge-status {
             display: inline-block; padding: 3px 14px; border-radius: var(--radius-full);
             font-size: 0.7rem; font-weight: 600;
@@ -170,6 +181,7 @@
         .badge-status.pending { background: #FEF3C7; color: #92400E; }
         .badge-status.canceled { background: #FEE2E2; color: #991B1B; }
         .badge-status.trial { background: #DBEAFE; color: #1E40AF; }
+
         .actions-cell { display: flex; gap: 8px; flex-wrap: wrap; }
         .btn-action {
             padding: 6px 12px; border-radius: 6px; font-size: 0.75rem;
@@ -180,6 +192,7 @@
         .btn-action.delete { background: #FEE2E2; color: #991B1B; }
         .btn-action.view { background: #DBEAFE; color: #1E40AF; }
         .btn-action:hover { transform: translateY(-1px); }
+
         .pagination {
             display: flex; justify-content: space-between; align-items: center;
             padding: 16px 18px; border-top: 1px solid var(--gray-100);
@@ -194,6 +207,7 @@
         }
         .pagination .buttons button:hover { background: var(--gray-50); border-color: var(--blue); }
         .pagination .buttons button.active { background: var(--blue); color: white; border-color: var(--blue); }
+
         .stats-grid {
             display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 28px;
         }
@@ -207,7 +221,7 @@
         .stats-card .value {
             font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
         }
-        .stats-card .sub { font-size: 0.75rem; color: var(--gray-400); }
+
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(10,37,64,0.6); backdrop-filter: blur(4px);
@@ -236,6 +250,7 @@
             cursor: pointer; color: var(--gray-400); transition: var(--transition);
         }
         .modal-close:hover { color: var(--gray-700); transform: rotate(90deg); }
+
         .form-group { margin-bottom: 16px; }
         .form-group label {
             display: block; font-size: 0.85rem; font-weight: 600;
@@ -259,6 +274,7 @@
             margin-top: 24px; padding-top: 16px;
             border-top: 1px solid var(--gray-100);
         }
+
         .toast {
             position: fixed; top: 24px; right: 24px; background: white;
             padding: 14px 24px; border-radius: 12px;
@@ -274,12 +290,28 @@
             from { opacity: 0; transform: translateX(120%); }
             to { opacity: 1; transform: translateX(0); }
         }
+
+        .loading-shimmer {
+            height: 32px;
+            width: 60%;
+            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
         .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
         .mobile-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99;
         }
         .mobile-overlay.active { display: block; }
+
         @media (max-width: 992px) {
             .sidebar { transform: translateX(-100%); width: 280px; }
             .sidebar.open { transform: translateX(0); }
@@ -341,10 +373,9 @@
             <li><a href="assinaturas.html" class="active"><span class="icon">📋</span> Assinaturas</a></li>
             <div class="divider"></div>
             <li><a href="auditoria.html"><span class="icon">🔍</span> Auditoria</a></li>
-            <li><a href="configuracoes.html"><span class="icon">⚙️</span> Configurações</a></li>
-            <li><a href="reembolsos.html"><span class="icon">↩️</span> Reembolsos</a></li>
             <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
             <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
+            <li><a href="configuracoes.html"><span class="icon">⚙️</span> Configurações</a></li>
         </ul>
         <div class="logout">
             <a href="#" onclick="logout()">
@@ -373,23 +404,19 @@
         <div class="stats-grid">
             <div class="stats-card">
                 <div class="label">Assinaturas Ativas</div>
-                <div class="value">47</div>
-                <div class="sub">▲ +12% este mês</div>
+                <div class="value" id="totalAtivas"><span class="loading-shimmer"></span></div>
             </div>
             <div class="stats-card">
                 <div class="label">MRR (Receita Recorrente)</div>
-                <div class="value">R$ 12.450</div>
-                <div class="sub">▲ +8% este mês</div>
-            </div>
-            <div class="stats-card">
-                <div class="label">Churn Rate</div>
-                <div class="value">3,2%</div>
-                <div class="sub">▼ -0,5% este mês</div>
+                <div class="value" id="totalMRR"><span class="loading-shimmer"></span></div>
             </div>
             <div class="stats-card">
                 <div class="label">Ticket Médio</div>
-                <div class="value">R$ 264,89</div>
-                <div class="sub">▲ +5% este mês</div>
+                <div class="value" id="ticketMedio"><span class="loading-shimmer"></span></div>
+            </div>
+            <div class="stats-card">
+                <div class="label">Planos</div>
+                <div class="value" id="totalPlanos"><span class="loading-shimmer"></span></div>
             </div>
         </div>
 
@@ -432,7 +459,7 @@
                     <tbody id="tableBody">
                         <tr>
                             <td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">
-                                Carregando assinaturas...
+                                <span class="loading-shimmer" style="display:inline-block;width:200px;height:20px;"></span>
                             </td>
                         </tr>
                     </tbody>
@@ -460,11 +487,6 @@
                     <label>Cliente <span class="required">*</span></label>
                     <select id="clientSelect" required>
                         <option value="">Selecione um cliente</option>
-                        <option value="techcorp">🏢 TechCorp Solutions</option>
-                        <option value="inovalab">🏢 InovaLab Brasil</option>
-                        <option value="startupx">🏢 StartupX Ventures</option>
-                        <option value="joao">👤 João Silva</option>
-                        <option value="maria">👤 Maria Santos</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -519,9 +541,17 @@
         </div>
     </div>
 
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script src="../../middleware/auth-guard.js"></script>
+    <script src="financeiro-conexao.js"></script>
 
     <script>
         'use strict';
@@ -544,63 +574,165 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('📋 Assinaturas - VIGORRE ONE™');
-            const isAuth = window.VigorreAuth.isAuthenticated();
-            if (!isAuth) {
-                window.location.href = '../../login.html';
-                return;
-            }
-            const user = window.VigorreAuth.getCurrentUser();
-            if (!user || (user.role !== 'admin' && user.role !== 'master')) {
-                alert('⚠️ Acesso restrito a administradores.');
-                window.VigorreAuth.logout();
-                return;
-            }
-            document.getElementById('userName').textContent = user.name || 'Administrador';
-            loadSubscriptions();
-        });
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + type;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
 
-        function loadSubscriptions() {
-            subscriptions = [
-                { id: 's1', client: 'TechCorp Solutions', plan: 'Enterprise', value: 'R$ 599,90', start: '2024-01-15', due: '2024-07-15', status: 'active' },
-                { id: 's2', client: 'InovaLab Brasil', plan: 'Pro', value: 'R$ 349,90', start: '2024-03-01', due: '2024-09-01', status: 'active' },
-                { id: 's3', client: 'João Silva', plan: 'Plus', value: 'R$ 199,90', start: '2024-06-10', due: '2024-07-10', status: 'trial' },
-                { id: 's4', client: 'StartupX Ventures', plan: 'Básico', value: 'R$ 99,90', start: '2024-02-20', due: '2024-05-20', status: 'pending' },
-                { id: 's5', client: 'Maria Santos', plan: 'Pro', value: 'R$ 349,90', start: '2023-12-01', due: '2024-06-01', status: 'canceled' }
-            ];
-            filteredSubscriptions = [...subscriptions];
-            renderTable();
+        async function carregarDados() {
+            try {
+                console.log('📋 Carregando assinaturas...');
+
+                if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../../login.html';
+                    return;
+                }
+
+                var user = window.VigorreAuth.getCurrentUser();
+                if (user) {
+                    document.getElementById('userName').textContent = user.name || 'Administrador';
+                }
+
+                var supabaseClient = getSupabaseClient();
+
+                if (!supabaseClient) {
+                    carregarMock();
+                    return;
+                }
+
+                var { data: assinaturas, error } = await supabaseClient
+                    .from('assinaturas')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error('❌ Erro ao buscar assinaturas:', error);
+                    carregarMock();
+                    return;
+                }
+
+                subscriptions = assinaturas || [];
+                filteredSubscriptions = [...subscriptions];
+
+                await atualizarStats();
+                renderTable();
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                carregarMock();
+            }
+        }
+
+        async function atualizarStats() {
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    carregarStatsMock();
+                    return;
+                }
+
+                var { data: ativas } = await supabaseClient
+                    .from('assinaturas')
+                    .select('*')
+                    .eq('status', 'active');
+
+                var totalAtivas = ativas ? ativas.length : 0;
+
+                var totalMRR = 0;
+                if (ativas && ativas.length > 0) {
+                    for (var i = 0; i < ativas.length; i++) {
+                        totalMRR += ativas[i].valor || 0;
+                    }
+                }
+
+                var ticketMedio = totalAtivas > 0 ? Math.round(totalMRR / totalAtivas) : 0;
+
+                var { data: todosPlanos } = await supabaseClient
+                    .from('assinaturas')
+                    .select('plano');
+
+                var planosUnicos = new Set();
+                if (todosPlanos && todosPlanos.length > 0) {
+                    for (var j = 0; j < todosPlanos.length; j++) {
+                        if (todosPlanos[j].plano) {
+                            planosUnicos.add(todosPlanos[j].plano);
+                        }
+                    }
+                }
+
+                document.getElementById('totalAtivas').textContent = totalAtivas;
+                document.getElementById('totalMRR').textContent = 'R$ ' + formatarMoeda(totalMRR);
+                document.getElementById('ticketMedio').textContent = 'R$ ' + formatarMoeda(ticketMedio);
+                document.getElementById('totalPlanos').textContent = planosUnicos.size || 0;
+
+            } catch (error) {
+                console.error('❌ Erro ao atualizar stats:', error);
+                carregarStatsMock();
+            }
+        }
+
+        function carregarStatsMock() {
+            document.getElementById('totalAtivas').textContent = '5';
+            document.getElementById('totalMRR').textContent = 'R$ 1.299,50';
+            document.getElementById('ticketMedio').textContent = 'R$ 259,90';
+            document.getElementById('totalPlanos').textContent = '4';
         }
 
         function renderTable() {
             const tbody = document.getElementById('tableBody');
+
             if (filteredSubscriptions.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">📭 Nenhuma assinatura encontrada</td></tr>';
+                tbody.innerHTML =
+                    '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">📭 Nenhuma assinatura encontrada</td></tr>';
                 document.getElementById('paginationInfo').textContent = 'Mostrando 0 de 0 assinaturas';
                 return;
             }
+
             const start = (currentPage - 1) * pageSize;
             const end = Math.min(start + pageSize, filteredSubscriptions.length);
             const pageItems = filteredSubscriptions.slice(start, end);
-            const statusMap = { active: '✅ Ativa', trial: '🔬 Trial', pending: '⏳ Pendente', canceled: '⛔ Cancelada', inactive: '📌 Inativa' };
-            tbody.innerHTML = pageItems.map(s => `
-                <tr>
-                    <td><strong>${s.client}</strong></td>
-                    <td style="font-weight:600;color:var(--blue);">${s.plan}</td>
-                    <td style="font-weight:700;color:var(--green);">${s.value}</td>
-                    <td style="font-size:0.8rem;color:var(--gray-500);">${new Date(s.start).toLocaleDateString('pt-BR')}</td>
-                    <td style="font-size:0.8rem;color:var(--gray-500);">${new Date(s.due).toLocaleDateString('pt-BR')}</td>
-                    <td><span class="badge-status ${s.status}">${statusMap[s.status]}</span></td>
-                    <td style="text-align:center;">
-                        <div class="actions-cell" style="justify-content:center;">
-                            <button class="btn-action view" onclick="viewSubscription('${s.id}')">👁️</button>
-                            <button class="btn-action edit" onclick="editSubscription('${s.id}')">✏️</button>
-                            <button class="btn-action delete" onclick="deleteSubscription('${s.id}')">🗑️</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
+
+            const statusMap = { active: '✅ Ativa', trial: '🔬 Trial', pending: '⏳ Pendente', canceled: '⛔ Cancelada',
+                inactive: '📌 Inativa' };
+
+            tbody.innerHTML = pageItems.map(s => {
+                const clienteId = s.cliente_id || '--';
+                const plano = s.plano || '--';
+                const valor = s.valor || 0;
+                const dataInicio = s.data_inicio ? new Date(s.data_inicio).toLocaleDateString('pt-BR') : '--';
+                const dataVencimento = s.data_vencimento ? new Date(s.data_vencimento).toLocaleDateString('pt-BR') :
+                    '--';
+                const status = s.status || 'active';
+
+                return `
+                    <tr>
+                        <td><strong>${clienteId}</strong></td>
+                        <td style="font-weight:600;color:var(--blue);">${plano}</td>
+                        <td style="font-weight:700;color:var(--green);">R$ ${formatarMoeda(valor)}</td>
+                        <td style="font-size:0.8rem;color:var(--gray-500);">${dataInicio}</td>
+                        <td style="font-size:0.8rem;color:var(--gray-500);">${dataVencimento}</td>
+                        <td><span class="badge-status ${status}">${statusMap[status]}</span></td>
+                        <td style="text-align:center;">
+                            <div class="actions-cell" style="justify-content:center;">
+                                <button class="btn-action view" onclick="viewSubscription('${s.id}')">👁️</button>
+                                <button class="btn-action edit" onclick="editSubscription('${s.id}')">✏️</button>
+                                <button class="btn-action delete" onclick="deleteSubscription('${s.id}')">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
             const total = filteredSubscriptions.length;
             document.getElementById('paginationInfo').textContent = `Mostrando ${start + 1}-${end} de ${total} assinaturas`;
             document.getElementById('pageIndicator').textContent = currentPage;
@@ -612,82 +744,281 @@
             const search = document.getElementById('searchInput').value.toLowerCase();
             const status = document.getElementById('statusFilter').value;
             const plan = document.getElementById('planFilter').value;
+
             filteredSubscriptions = subscriptions.filter(s => {
-                const matchSearch = s.client.toLowerCase().includes(search);
+                const matchSearch = (s.cliente_id || '').toLowerCase().includes(search);
                 const matchStatus = !status || s.status === status;
-                const matchPlan = !plan || s.plan.toLowerCase() === plan.toLowerCase();
+                const matchPlan = !plan || s.plano === plan;
                 return matchSearch && matchStatus && matchPlan;
             });
+
             currentPage = 1;
             renderTable();
         }
 
         function prevPage() {
-            if (currentPage > 1) { currentPage--; renderTable(); }
+            if (currentPage > 1) { currentPage--;
+                renderTable(); }
         }
 
         function nextPage() {
             const totalPages = Math.ceil(filteredSubscriptions.length / pageSize);
-            if (currentPage < totalPages) { currentPage++; renderTable(); }
+            if (currentPage < totalPages) { currentPage++;
+                renderTable(); }
         }
 
         function openModal() {
             document.getElementById('modalTitle').textContent = 'Nova Assinatura';
             document.getElementById('subscriptionForm').reset();
             document.getElementById('subscriptionModal').classList.add('active');
+            carregarClientes();
         }
 
         function closeModal() {
             document.getElementById('subscriptionModal').classList.remove('active');
         }
 
+        async function carregarClientes() {
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) return;
+
+                var { data: participantes } = await supabaseClient
+                    .from('participants')
+                    .select('id, name')
+                    .limit(50);
+
+                var select = document.getElementById('clientSelect');
+                var currentVal = select.value;
+                select.innerHTML = '<option value="">Selecione um cliente</option>';
+
+                if (participantes && participantes.length > 0) {
+                    for (var i = 0; i < participantes.length; i++) {
+                        var opt = document.createElement('option');
+                        opt.value = participantes[i].id;
+                        opt.textContent = participantes[i].name || 'Participante';
+                        select.appendChild(opt);
+                    }
+                }
+
+                if (currentVal) select.value = currentVal;
+
+            } catch (error) {
+                console.warn('⚠️ Erro ao carregar clientes:', error);
+            }
+        }
+
         function editSubscription(id) {
             const sub = subscriptions.find(s => s.id === id);
-            if (!sub) return;
+            if (!sub) {
+                showToast('❌ Assinatura não encontrada', 'error');
+                return;
+            }
+
             document.getElementById('modalTitle').textContent = 'Editar Assinatura';
-            document.getElementById('clientSelect').value = sub.client.toLowerCase().replace(/ /g, '');
-            document.getElementById('planSelect').value = sub.plan.toLowerCase();
-            document.getElementById('startDate').value = sub.start;
-            document.getElementById('subscriptionStatus').value = sub.status;
+            document.getElementById('clientSelect').value = sub.cliente_id || '';
+            document.getElementById('planSelect').value = sub.plano || 'basico';
+            document.getElementById('startDate').value = sub.data_inicio || '';
+            document.getElementById('periodSelect').value = sub.periodo || 'monthly';
+            document.getElementById('subscriptionStatus').value = sub.status || 'active';
+            document.getElementById('discountValue').value = sub.desconto || 0;
+            document.getElementById('subscriptionObs').value = '';
+
+            document.getElementById('subscriptionForm').dataset.editId = id;
             document.getElementById('subscriptionModal').classList.add('active');
+            carregarClientes();
         }
 
         function viewSubscription(id) {
             const sub = subscriptions.find(s => s.id === id);
-            if (!sub) return;
-            const statusMap = { active: '✅ Ativa', trial: '🔬 Trial', pending: '⏳ Pendente', canceled: '⛔ Cancelada', inactive: '📌 Inativa' };
-            alert(`📋 Assinatura\n\n👤 Cliente: ${sub.client}\n📊 Plano: ${sub.plan}\n💰 Valor: ${sub.value}\n📅 Início: ${new Date(sub.start).toLocaleDateString('pt-BR')}\n📅 Vencimento: ${new Date(sub.due).toLocaleDateString('pt-BR')}\n📌 Status: ${statusMap[sub.status]}`);
+            if (!sub) {
+                showToast('❌ Assinatura não encontrada', 'error');
+                return;
+            }
+
+            const statusMap = { active: '✅ Ativa', trial: '🔬 Trial', pending: '⏳ Pendente', canceled: '⛔ Cancelada',
+                inactive: '📌 Inativa' };
+
+            alert(
+                `📋 Assinatura\n\n` +
+                `👤 Cliente: ${sub.cliente_id || '--'}\n` +
+                `📊 Plano: ${sub.plano || '--'}\n` +
+                `💰 Valor: R$ ${formatarMoeda(sub.valor || 0)}\n` +
+                `📅 Início: ${sub.data_inicio ? new Date(sub.data_inicio).toLocaleDateString('pt-BR') : '--'}\n` +
+                `📅 Vencimento: ${sub.data_vencimento ? new Date(sub.data_vencimento).toLocaleDateString('pt-BR') : '--'}\n` +
+                `📌 Status: ${statusMap[sub.status] || '✅ Ativa'}`
+            );
         }
 
-        function deleteSubscription(id) {
+        async function deleteSubscription(id) {
             if (!confirm('Tem certeza que deseja excluir esta assinatura?')) return;
-            subscriptions = subscriptions.filter(s => s.id !== id);
-            filteredSubscriptions = [...subscriptions];
-            renderTable();
-            showToast('🗑️ Assinatura excluída com sucesso!', 'success');
+
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    showToast('⚠️ Supabase não disponível', 'error');
+                    return;
+                }
+
+                var { error } = await supabaseClient
+                    .from('assinaturas')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) {
+                    console.error('❌ Erro ao excluir assinatura:', error);
+                    showToast('❌ Erro ao excluir assinatura', 'error');
+                    return;
+                }
+
+                showToast('🗑️ Assinatura excluída com sucesso!', 'success');
+                await carregarDados();
+
+            } catch (error) {
+                console.error('❌ Erro ao excluir assinatura:', error);
+                showToast('❌ Erro ao excluir assinatura', 'error');
+            }
         }
 
-        function saveSubscription(e) {
+        async function saveSubscription(e) {
             e.preventDefault();
-            showToast('✅ Assinatura salva com sucesso!', 'success');
-            closeModal();
+
+            const clienteId = document.getElementById('clientSelect').value;
+            const plano = document.getElementById('planSelect').value;
+            const dataInicio = document.getElementById('startDate').value;
+            const periodo = document.getElementById('periodSelect').value;
+            const status = document.getElementById('subscriptionStatus').value;
+            const desconto = parseFloat(document.getElementById('discountValue').value) || 0;
+            const observacao = document.getElementById('subscriptionObs').value;
+
+            if (!clienteId || !plano || !dataInicio) {
+                showToast('❌ Preencha todos os campos obrigatórios', 'error');
+                return;
+            }
+
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    showToast('⚠️ Supabase não disponível', 'error');
+                    return;
+                }
+
+                // Calcular valor baseado no plano
+                const planosValores = {
+                    basico: 99.90,
+                    plus: 199.90,
+                    pro: 349.90,
+                    enterprise: 599.90
+                };
+
+                const valorBase = planosValores[plano] || 0;
+                const valorFinal = valorBase - desconto;
+
+                // Calcular data de vencimento
+                const dataInicioObj = new Date(dataInicio);
+                let dataVencimento = new Date(dataInicioObj);
+
+                switch (periodo) {
+                    case 'monthly':
+                        dataVencimento.setMonth(dataVencimento.getMonth() + 1);
+                        break;
+                    case 'quarterly':
+                        dataVencimento.setMonth(dataVencimento.getMonth() + 3);
+                        break;
+                    case 'semiannual':
+                        dataVencimento.setMonth(dataVencimento.getMonth() + 6);
+                        break;
+                    case 'annual':
+                        dataVencimento.setFullYear(dataVencimento.getFullYear() + 1);
+                        break;
+                    default:
+                        dataVencimento.setMonth(dataVencimento.getMonth() + 1);
+                }
+
+                const dados = {
+                    cliente_id: clienteId,
+                    cliente_tipo: 'pessoa',
+                    plano: plano,
+                    valor: valorFinal,
+                    data_inicio: dataInicio,
+                    data_vencimento: dataVencimento.toISOString().split('T')[0],
+                    periodo: periodo,
+                    status: status,
+                    desconto: desconto,
+                    updated_at: new Date().toISOString()
+                };
+
+                const editId = document.getElementById('subscriptionForm').dataset.editId;
+
+                if (editId) {
+                    const { data, error } = await supabaseClient
+                        .from('assinaturas')
+                        .update(dados)
+                        .eq('id', editId)
+                        .select()
+                        .single();
+
+                    if (error) throw error;
+                    showToast('✅ Assinatura atualizada com sucesso!', 'success');
+                } else {
+                    dados.created_at = new Date().toISOString();
+                    const { data, error } = await supabaseClient
+                        .from('assinaturas')
+                        .insert([dados])
+                        .select()
+                        .single();
+
+                    if (error) throw error;
+                    showToast('✅ Assinatura criada com sucesso!', 'success');
+                }
+
+                closeModal();
+                await carregarDados();
+
+            } catch (error) {
+                console.error('❌ Erro ao salvar assinatura:', error);
+                showToast('❌ Erro ao salvar assinatura', 'error');
+            }
         }
 
-        function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
-            if (type === 'error') { icon.textContent = '❌'; } else if (type === 'warning') { icon.textContent = '⚠️'; } else { icon.textContent = '✅'; }
-            msg.textContent = message;
-            toast.className = `toast show ${type || 'success'}`;
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
         }
 
-        document.getElementById('subscriptionModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
+        function carregarMock() {
+            subscriptions = [
+                { id: 's1', cliente_id: 'TechCorp Solutions', plano: 'Enterprise', valor: 599.90,
+                    data_inicio: '2024-01-15', data_vencimento: '2024-07-15', periodo: 'monthly', status: 'active',
+                    desconto: 0 },
+                { id: 's2', cliente_id: 'InovaLab Brasil', plano: 'Pro', valor: 349.90,
+                    data_inicio: '2024-03-01', data_vencimento: '2024-09-01', periodo: 'monthly', status: 'active',
+                    desconto: 0 },
+                { id: 's3', cliente_id: 'João Silva', plano: 'Plus', valor: 199.90,
+                    data_inicio: '2024-06-10', data_vencimento: '2024-07-10', periodo: 'monthly', status: 'trial',
+                    desconto: 50 },
+                { id: 's4', cliente_id: 'StartupX Ventures', plano: 'Básico', valor: 99.90,
+                    data_inicio: '2024-02-20', data_vencimento: '2024-05-20', periodo: 'monthly', status: 'pending',
+                    desconto: 0 },
+                { id: 's5', cliente_id: 'Maria Santos', plano: 'Pro', valor: 349.90,
+                    data_inicio: '2023-12-01', data_vencimento: '2024-06-01', periodo: 'monthly', status: 'canceled',
+                    desconto: 0 }
+            ];
+            filteredSubscriptions = [...subscriptions];
+            carregarStatsMock();
+            renderTable();
+            showToast('📊 Usando dados de exemplo', 'warning');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📋 Assinaturas - VIGORRE ONE™');
+            carregarDados();
+
+            document.getElementById('subscriptionModal').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
         });
 
         console.log('✅ Assinaturas carregado com sucesso!');
