@@ -11,7 +11,7 @@
     <link rel="icon" href="assets/images/logo-vigorre.png" />
     <style>
         /* ============================================
-           ROOT VARIABLES - PALETA PREMIUM
+           ROOT VARIABLES - PALETA MANTIDA
            ============================================ */
         :root {
             --navy: #0A2540;
@@ -46,8 +46,10 @@
             --shadow-hover: 0 12px 48px rgba(10, 37, 64, 0.10);
             --shadow-gold: 0 4px 24px rgba(217, 119, 6, 0.20);
             --shadow-gold-hover: 0 8px 40px rgba(217, 119, 6, 0.30);
+            --shadow-red: 0 4px 24px rgba(239, 68, 68, 0.15);
             --gradient-gold: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
             --gradient-hero: linear-gradient(135deg, #0A2540 0%, #1A3A5C 100%);
+            --gradient-red: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
             --gradient-card: linear-gradient(135deg, rgba(217, 119, 6, 0.03) 0%, rgba(217, 119, 6, 0.01) 100%);
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -109,9 +111,9 @@
             50% { transform: scale(1.05); }
         }
 
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(217, 119, 6, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(217, 119, 6, 0.4); }
         }
 
         @keyframes blink {
@@ -122,6 +124,11 @@
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
+        }
+
+        @keyframes countdown {
+            0% { opacity: 1; }
+            100% { opacity: 0.3; }
         }
 
         .animate-fade-up { opacity: 0; animation: fadeInUp 0.8s ease forwards; }
@@ -140,9 +147,10 @@
         .pulse-animation { animation: pulse 2s ease-in-out infinite; }
         .blink-animation { animation: blink 1.5s ease-in-out infinite; }
         .float-animation { animation: float 3s ease-in-out infinite; }
+        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
 
         /* ============================================
-           HEADER - PREMIUM
+           HEADER
            ============================================ */
         .header {
             background: rgba(255, 255, 255, 0.95);
@@ -242,7 +250,7 @@
         .header .nav .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold-hover); }
 
         /* ============================================
-           HERO - PREMIUM
+           HERO
            ============================================ */
         .hero {
             padding: 90px 0 70px;
@@ -261,18 +269,6 @@
             width: 700px;
             height: 700px;
             background: radial-gradient(circle, rgba(217, 119, 6, 0.06) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.04) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
@@ -515,7 +511,7 @@
         }
 
         /* ============================================
-           CARDS DOS TESTES - PREMIUM
+           CARDS DOS TESTES
            ============================================ */
         .test-grid {
             display: grid;
@@ -593,24 +589,12 @@
         .test-card .test-link:hover { transform: translateX(4px); color: var(--gold-light); }
 
         /* ============================================
-           TECNOLOGIA VIGOR® - PREMIUM
+           TECNOLOGIA VIGOR®
            ============================================ */
         .vigor-section {
             background: var(--bg-secondary);
             position: relative;
             overflow: hidden;
-        }
-
-        .vigor-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(217, 119, 6, 0.03) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
         }
 
         .vigor-grid {
@@ -840,42 +824,78 @@
         .business-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
 
         /* ============================================
-           PRICING - ULTRA PREMIUM
+           PRICING - NOVO VISUAL IMPACTANTE
            ============================================ */
         .pricing-section {
-            background: var(--bg-white);
+            background: var(--bg-primary);
             padding: 80px 0;
+        }
+
+        .pricing-section .pricing-top {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .pricing-section .pricing-top .pricing-urgency {
+            display: inline-block;
+            background: var(--gradient-red);
+            color: white;
+            padding: 8px 24px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .pricing-section .pricing-top .pricing-urgency .icon { margin-right: 6px; }
+
+        .pricing-section .pricing-top .pricing-sub {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 8px;
         }
 
         .pricing-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 20px;
+            margin-top: 32px;
         }
 
+        /* Card Base */
         .pricing-card {
             background: var(--bg-white);
-            border: 1px solid var(--border-light);
             border-radius: var(--radius);
-            padding: 32px 24px;
-            text-align: center;
+            padding: 0;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
         }
 
         .pricing-card:hover {
-            border-color: var(--border-gold);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
-            transform: translateY(-6px);
+            border-color: var(--border-gold);
         }
 
-        .pricing-card .promo-badge {
+        /* Card Header */
+        .pricing-card .pricing-header {
+            padding: 24px 24px 16px;
+            text-align: center;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .pricing-card .pricing-header .pricing-badge {
             position: absolute;
-            top: 14px;
-            right: 14px;
-            background: var(--red);
+            top: -8px;
+            right: 16px;
+            background: var(--gradient-red);
             color: white;
             padding: 4px 14px;
             border-radius: var(--radius-full);
@@ -884,67 +904,130 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             animation: pulse 2s ease-in-out infinite;
+            box-shadow: var(--shadow-red);
         }
 
-        .pricing-card .pricing-icon { font-size: 2.2rem; margin-bottom: 6px; display: block; }
-        .pricing-card .pricing-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
-
-        .pricing-card .pricing-price {
-            font-family: var(--font-display);
+        .pricing-card .pricing-header .pricing-icon {
             font-size: 2.4rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .pricing-card .pricing-header .pricing-name {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .pricing-card .pricing-header .pricing-name.gold-text {
+            color: var(--gold);
+        }
+
+        .pricing-card .pricing-header .pricing-subtitle {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Card Price */
+        .pricing-card .pricing-body {
+            padding: 20px 24px 24px;
+            text-align: center;
+        }
+
+        .pricing-card .pricing-body .pricing-price {
+            font-family: var(--font-display);
+            font-size: 2.6rem;
             font-weight: 800;
             color: var(--navy);
-            margin: 10px 0 2px;
+            line-height: 1;
         }
 
-        .pricing-card .pricing-price .currency { font-size: 1rem; vertical-align: super; font-weight: 600; }
+        .pricing-card .pricing-body .pricing-price .currency {
+            font-size: 1.1rem;
+            vertical-align: super;
+            font-weight: 600;
+        }
 
-        .pricing-card .pricing-price .price-original {
-            font-size: 0.95rem;
+        .pricing-card .pricing-body .pricing-price .price-original {
+            font-size: 1rem;
             color: var(--text-muted);
             text-decoration: line-through;
             font-weight: 400;
             display: block;
-            margin-top: -4px;
+            margin-top: 2px;
         }
 
-        .pricing-card .pricing-period {
-            font-size: 0.8rem;
+        .pricing-card .pricing-body .pricing-period {
+            font-size: 0.75rem;
             color: var(--text-muted);
             display: block;
             margin-top: 2px;
         }
 
-        .pricing-card .pricing-divider {
-            height: 1px;
-            background: var(--border-light);
-            margin: 16px 0;
+        .pricing-card .pricing-body .pricing-savings {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 2px 14px;
+            background: var(--green-light);
+            color: var(--green);
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 700;
         }
 
+        /* Card Features */
         .pricing-card .pricing-features {
             list-style: none;
-            padding: 0;
-            margin: 0 0 16px 0;
+            padding: 0 24px 16px;
+            margin: 0;
+            text-align: left;
         }
 
         .pricing-card .pricing-features li {
-            padding: 5px 0;
-            font-size: 0.85rem;
+            padding: 6px 0;
+            font-size: 0.82rem;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.4);
         }
 
-        .pricing-card .pricing-features li .check { color: var(--green); font-weight: 700; font-size: 1rem; }
-        .pricing-card .pricing-features li .cross { color: var(--red); font-weight: 700; font-size: 1rem; }
+        .pricing-card .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card .pricing-features li .check {
+            color: var(--green);
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .pricing-card .pricing-features li .cross {
+            color: var(--red);
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .pricing-card .pricing-features li .feature-icon {
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        /* Card Cupom */
+        .pricing-card .pricing-cupom-area {
+            padding: 0 24px 16px;
+            text-align: center;
+        }
 
         .pricing-card .pricing-cupom {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin: 4px 0 8px;
             padding: 6px 16px;
             background: rgba(217, 119, 6, 0.06);
             border: 1px dashed var(--gold);
@@ -974,6 +1057,11 @@
             color: var(--green);
         }
 
+        /* Card Button */
+        .pricing-card .pricing-footer {
+            padding: 0 24px 24px;
+        }
+
         .pricing-card .btn-pricing {
             padding: 12px 32px;
             border: none;
@@ -986,6 +1074,7 @@
             text-decoration: none;
             display: inline-block;
             width: 100%;
+            text-align: center;
         }
 
         .pricing-card .btn-pricing.primary {
@@ -994,7 +1083,10 @@
             box-shadow: var(--shadow-gold);
         }
 
-        .pricing-card .btn-pricing.primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold-hover); }
+        .pricing-card .btn-pricing.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold-hover);
+        }
 
         .pricing-card .btn-pricing.secondary {
             background: var(--bg-primary);
@@ -1002,10 +1094,26 @@
             border: 2px solid var(--border-light);
         }
 
-        .pricing-card .btn-pricing.secondary:hover { border-color: var(--gold); background: rgba(217, 119, 6, 0.03); }
+        .pricing-card .btn-pricing.secondary:hover {
+            border-color: var(--gold);
+            background: rgba(217, 119, 6, 0.03);
+        }
 
+        .pricing-card .btn-pricing.red {
+            background: var(--gradient-red);
+            color: white;
+            box-shadow: var(--shadow-red);
+        }
+
+        .pricing-card .btn-pricing.red:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Card Timer */
         .pricing-card .pricing-timer {
-            margin-top: 10px;
+            padding: 0 24px 16px;
+            text-align: center;
             font-size: 0.7rem;
             color: var(--red);
             font-weight: 600;
@@ -1017,17 +1125,73 @@
 
         .pricing-card .pricing-timer .timer-icon { animation: pulse 1.5s ease-in-out infinite; }
 
-        .pricing-card.premium-card {
-            border-color: var(--border-gold);
+        /* Card - Destaque Premium */
+        .pricing-card.premium {
+            border-color: var(--gold);
+            box-shadow: var(--shadow-gold);
             background: var(--gradient-card);
         }
 
-        .pricing-card.premium-card .pricing-name {
+        .pricing-card.premium:hover {
+            box-shadow: var(--shadow-gold-hover);
+            border-color: var(--gold);
+        }
+
+        .pricing-card.premium .pricing-header {
+            background: rgba(217, 119, 6, 0.04);
+            border-bottom-color: var(--border-gold);
+        }
+
+        .pricing-card.premium .pricing-header .pricing-icon {
+            filter: drop-shadow(0 2px 8px rgba(217, 119, 6, 0.2));
+        }
+
+        .pricing-card.premium .pricing-body .pricing-price {
             color: var(--gold);
         }
 
+        .pricing-card.premium .pricing-body .pricing-savings {
+            background: rgba(217, 119, 6, 0.1);
+            color: var(--gold);
+        }
+
+        .pricing-card .pricing-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .pricing-card:hover .pricing-glow {
+            opacity: 1;
+        }
+
+        /* Card - Destaque Promo */
+        .pricing-card.promo-card .pricing-header {
+            background: rgba(239, 68, 68, 0.03);
+            border-bottom-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .pricing-card.promo-card .pricing-header .pricing-badge {
+            background: var(--gradient-red);
+        }
+
+        .pricing-card.promo-card .pricing-body .pricing-price {
+            color: var(--red);
+        }
+
+        .pricing-card.promo-card .pricing-body .pricing-savings {
+            background: var(--red-light);
+            color: var(--red);
+        }
+
         /* ============================================
-           CONTATO - COM EMAIL
+           CONTATO
            ============================================ */
         .contact-section {
             background: var(--bg-secondary);
@@ -1105,12 +1269,6 @@
 
         .contact-content .contact-items .contact-item .ci-text a:hover { color: var(--gold); }
 
-        .contact-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
         .contact-image .contact-illustration {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
@@ -1161,7 +1319,7 @@
         }
 
         /* ============================================
-           FOOTER - CORRIGIDO
+           FOOTER
            ============================================ */
         .footer {
             background: var(--navy);
@@ -1277,7 +1435,7 @@
             .test-grid { grid-template-columns: 1fr; }
             .why-grid { grid-template-columns: 1fr; }
             .business-grid { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 32px auto 0; }
             .vigor-content .vigor-features { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: 1fr; text-align: center; }
             .contact-content p { margin: 0 auto 24px; }
@@ -1288,6 +1446,7 @@
             .hero .hero-image .dashboard-mockup { padding: 20px 16px; }
             .vigor-image .vigor-diagram .vigor-circle { grid-template-columns: 1fr 1fr 1fr; }
             .contact-image .contact-illustration { padding: 32px 20px; }
+            .pricing-card .pricing-body .pricing-price { font-size: 2.2rem; }
         }
 
         @media (max-width: 480px) {
@@ -1296,8 +1455,13 @@
             .section { padding: 40px 0; }
             .hero { padding: 50px 0 30px; }
             .hero .hero-buttons { flex-direction: column; align-items: center; }
-            .pricing-card { padding: 24px 16px; }
-            .pricing-card .pricing-price { font-size: 2rem; }
+            .pricing-card { border-radius: var(--radius-sm); }
+            .pricing-card .pricing-header { padding: 16px 16px 12px; }
+            .pricing-card .pricing-body { padding: 16px; }
+            .pricing-card .pricing-features { padding: 0 16px 12px; }
+            .pricing-card .pricing-cupom-area { padding: 0 16px 12px; }
+            .pricing-card .pricing-footer { padding: 0 16px 16px; }
+            .pricing-card .pricing-timer { padding: 0 16px 12px; }
             .vigor-image .vigor-diagram .vigor-circle { grid-template-columns: 1fr 1fr; }
             .contact-content .contact-items .contact-item { width: 100%; justify-content: center; }
         }
@@ -1383,7 +1547,7 @@
     </section>
 
     <!-- ============================================
-    CARDS DOS TESTES - RESTAURADOS
+    CARDS DOS TESTES
     ============================================ -->
     <section class="section" id="testes">
         <div class="container">
@@ -1514,26 +1678,26 @@
                 <div class="why-card animate-fade-up animate-delay-1">
                     <span class="why-icon">🧠</span>
                     <h3>Autoconhecimento Profundo</h3>
-                    <p>Entenda suas emoções, reações e comportamentos. Descubra por que você age de determinada forma e como isso afeta sua vida. O conhecimento de si mesmo é o primeiro passo para a verdadeira transformação.</p>
-                    <span class="why-stat">📊 +80% de clareza sobre si mesmo</span>
+                    <p>Entenda suas emoções, reações e comportamentos. Descubra por que você age de determinada forma e como isso afeta sua vida.</p>
+                    <span class="why-stat">📊 +80% de clareza</span>
                 </div>
                 <div class="why-card animate-fade-up animate-delay-2">
                     <span class="why-icon">🎯</span>
                     <h3>Carreira com Propósito</h3>
-                    <p>Alinhe sua carreira com seus talentos naturais. Descubra quais áreas você tem mais potencial e onde pode brilhar. Não trabalhe apenas — trabalhe com significado.</p>
-                    <span class="why-stat">💼 67% mudam de carreira após o teste</span>
+                    <p>Alinhe sua carreira com seus talentos naturais. Descubra quais áreas você tem mais potencial e onde pode brilhar.</p>
+                    <span class="why-stat">💼 67% mudam de carreira</span>
                 </div>
                 <div class="why-card animate-fade-up animate-delay-3">
                     <span class="why-icon">❤️</span>
                     <h3>Relacionamentos mais Saudáveis</h3>
-                    <p>Entenda como você se relaciona com os outros. Melhore sua comunicação, empatia e conexões pessoais e profissionais. Relacionamentos saudáveis começam com autoconhecimento.</p>
-                    <span class="why-stat">🤝 +45% melhora nos relacionamentos</span>
+                    <p>Entenda como você se relaciona com os outros. Melhore sua comunicação, empatia e conexões pessoais e profissionais.</p>
+                    <span class="why-stat">🤝 +45% melhora</span>
                 </div>
                 <div class="why-card animate-fade-up animate-delay-4">
                     <span class="why-icon">🧘</span>
                     <h3>Equilíbrio Emocional</h3>
-                    <p>Aprenda a gerenciar suas emoções, reduzir o estresse e aumentar sua resiliência diante dos desafios da vida. A verdadeira força vem do equilíbrio interior.</p>
-                    <span class="why-stat">🌿 -52% de estresse após 3 meses</span>
+                    <p>Aprenda a gerenciar suas emoções, reduzir o estresse e aumentar sua resiliência diante dos desafios da vida.</p>
+                    <span class="why-stat">🌿 -52% de estresse</span>
                 </div>
             </div>
         </div>
@@ -1553,7 +1717,7 @@
                 <div class="business-card animate-fade-up animate-delay-1">
                     <span class="business-number">70%</span>
                     <h4>Redução de Turnover</h4>
-                    <p>Empresas que usam avaliações comportamentais reduzem em até 70% a rotatividade de funcionários nos primeiros 12 meses.</p>
+                    <p>Empresas que usam avaliações comportamentais reduzem em até 70% a rotatividade de funcionários.</p>
                 </div>
                 <div class="business-card animate-fade-up animate-delay-2">
                     <span class="business-number">85%</span>
@@ -1585,219 +1749,304 @@
     </section>
 
     <!-- ============================================
-    PLANOS E PREÇOS - ULTRA PREMIUM
+    PLANOS E PREÇOS - NOVO VISUAL IMPACTANTE
     ============================================ -->
     <section class="pricing-section" id="planos">
         <div class="container">
             <div class="section-header">
-                <span class="badge">💰 PLANOS</span>
+                <span class="badge">💰 OFERTA IMPERDÍVEL</span>
                 <h2>Invista no seu <span class="highlight">desenvolvimento</span></h2>
                 <p>O menor preço do mercado com a melhor entrega. Promoção por tempo limitado!</p>
             </div>
 
+            <div class="pricing-top">
+                <span class="pricing-urgency">
+                    <span class="icon">⏰</span> ÚLTIMAS HORAS - PROMOÇÃO ESPECIAL
+                </span>
+                <p class="pricing-sub">Garanta já o seu pacote com desconto exclusivo. Essa oportunidade não vai durar!</p>
+            </div>
+
             <!-- Relatórios -->
-            <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:20px;text-align:center;letter-spacing:-0.3px;">
+            <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-top:16px;text-align:center;letter-spacing:-0.3px;">
                 📄 Créditos de Relatório
             </h3>
             <div class="pricing-grid" style="margin-bottom:56px;">
                 <!-- Unitário Promo -->
-                <div class="pricing-card animate-fade-up animate-delay-1">
-                    <span class="promo-badge">🔥 PROMO</span>
-                    <span class="pricing-icon">📄</span>
-                    <div class="pricing-name">Unitário</div>
-                    <div class="pricing-price">
-                        <span class="currency">R$</span>24,90
-                        <span class="price-original">R$ 35,00</span>
+                <div class="pricing-card promo-card animate-fade-up animate-delay-1">
+                    <div class="pricing-glow"></div>
+                    <div class="pricing-header">
+                        <span class="pricing-badge">🔥 PROMO</span>
+                        <span class="pricing-icon">📄</span>
+                        <div class="pricing-name">Unitário</div>
+                        <div class="pricing-subtitle">1 crédito</div>
                     </div>
-                    <span class="pricing-period">1 crédito</span>
-                    <div class="pricing-divider"></div>
+                    <div class="pricing-body">
+                        <div class="pricing-price">
+                            <span class="currency">R$</span>24,90
+                            <span class="price-original">R$ 35,00</span>
+                        </div>
+                        <span class="pricing-savings">💰 Economia de 29%</span>
+                        <span class="pricing-period">por relatório</span>
+                    </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> 1 relatório completo</li>
                         <li><span class="check">✓</span> PDI personalizado</li>
                         <li><span class="cross">✕</span> Laudo VIGOR®</li>
                     </ul>
-                    <span class="pricing-cupom" data-cupom="RELATO01">
-                        🎫 <span class="cupom-text">RELATO01</span>
-                        <span class="copy-icon">📋</span>
-                    </span>
+                    <div class="pricing-cupom-area">
+                        <span class="pricing-cupom" data-cupom="RELATO01">
+                            🎫 <span class="cupom-text">RELATO01</span>
+                            <span class="copy-icon">📋</span>
+                        </span>
+                    </div>
                     <div class="pricing-timer">
                         <span class="timer-icon">⏰</span> Oferta por tempo limitado
                     </div>
-                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
+                    <div class="pricing-footer">
+                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
+                    </div>
                 </div>
 
                 <!-- Básico Promo -->
-                <div class="pricing-card animate-fade-up animate-delay-2">
-                    <span class="promo-badge">🔥 PROMO</span>
-                    <span class="pricing-icon">📄</span>
-                    <div class="pricing-name">Básico</div>
-                    <div class="pricing-price">
-                        <span class="currency">R$</span>199,90
-                        <span class="price-original">R$ 350,00</span>
+                <div class="pricing-card promo-card animate-fade-up animate-delay-2">
+                    <div class="pricing-glow"></div>
+                    <div class="pricing-header">
+                        <span class="pricing-badge">🔥 PROMO</span>
+                        <span class="pricing-icon">📄</span>
+                        <div class="pricing-name">Básico</div>
+                        <div class="pricing-subtitle">10 créditos</div>
                     </div>
-                    <span class="pricing-period">10 créditos</span>
-                    <div class="pricing-divider"></div>
+                    <div class="pricing-body">
+                        <div class="pricing-price">
+                            <span class="currency">R$</span>199,90
+                            <span class="price-original">R$ 350,00</span>
+                        </div>
+                        <span class="pricing-savings">💰 Economia de 43%</span>
+                        <span class="pricing-period">por relatório</span>
+                    </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> 10 relatórios</li>
                         <li><span class="check">✓</span> PDI personalizado</li>
                         <li><span class="cross">✕</span> Laudo VIGOR®</li>
                     </ul>
-                    <span class="pricing-cupom" data-cupom="RELATO10">
-                        🎫 <span class="cupom-text">RELATO10</span>
-                        <span class="copy-icon">📋</span>
-                    </span>
+                    <div class="pricing-cupom-area">
+                        <span class="pricing-cupom" data-cupom="RELATO10">
+                            🎫 <span class="cupom-text">RELATO10</span>
+                            <span class="copy-icon">📋</span>
+                        </span>
+                    </div>
                     <div class="pricing-timer">
                         <span class="timer-icon">⏰</span> Oferta por tempo limitado
                     </div>
-                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
+                    <div class="pricing-footer">
+                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
+                    </div>
                 </div>
 
-                <!-- Ouro -->
-                <div class="pricing-card premium-card animate-fade-up animate-delay-3">
-                    <span class="pricing-icon" style="font-size:2.2rem;">✨</span>
-                    <div class="pricing-name" style="color:var(--gold);">Ouro</div>
-                    <div class="pricing-price">
-                        <span class="currency">R$</span>1.400
-                        <span class="price-original" style="opacity:0;">—</span>
+                <!-- Ouro Premium -->
+                <div class="pricing-card premium animate-fade-up animate-delay-3">
+                    <div class="pricing-glow"></div>
+                    <div class="pricing-header">
+                        <span class="pricing-badge" style="background:var(--gradient-gold);">⭐ DESTAQUE</span>
+                        <span class="pricing-icon" style="filter:drop-shadow(0 2px 8px rgba(217,119,6,0.2));">✨</span>
+                        <div class="pricing-name gold-text">Ouro</div>
+                        <div class="pricing-subtitle">50 créditos</div>
                     </div>
-                    <span class="pricing-period">50 créditos</span>
-                    <div class="pricing-divider"></div>
+                    <div class="pricing-body">
+                        <div class="pricing-price" style="color:var(--gold);">
+                            <span class="currency">R$</span>1.400
+                            <span class="price-original" style="opacity:0;">—</span>
+                        </div>
+                        <span class="pricing-savings" style="background:rgba(217,119,6,0.1);color:var(--gold);">⭐ Melhor Custo-Benefício</span>
+                        <span class="pricing-period">por relatório</span>
+                    </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> 50 relatórios</li>
                         <li><span class="check">✓</span> PDI personalizado</li>
                         <li><span class="check">✓</span> Laudo VIGOR® (3 créditos)</li>
                     </ul>
-                    <span style="opacity:0;display:block;margin:4px 0 8px;padding:6px 16px;">—</span>
-                    <a href="login.html" class="btn-pricing primary">Comprar</a>
+                    <div class="pricing-cupom-area" style="opacity:0;height:28px;"></div>
+                    <div class="pricing-footer">
+                        <a href="login.html" class="btn-pricing primary">⭐ Comprar Agora</a>
+                    </div>
                 </div>
 
                 <!-- Platina Promo -->
-                <div class="pricing-card animate-fade-up animate-delay-4">
-                    <span class="promo-badge">🔥 PROMO</span>
-                    <span class="pricing-icon">📄</span>
-                    <div class="pricing-name">Platina</div>
-                    <div class="pricing-price">
-                        <span class="currency">R$</span>1.700
-                        <span class="price-original">R$ 2.500</span>
+                <div class="pricing-card promo-card animate-fade-up animate-delay-4">
+                    <div class="pricing-glow"></div>
+                    <div class="pricing-header">
+                        <span class="pricing-badge">🔥 PROMO</span>
+                        <span class="pricing-icon">📄</span>
+                        <div class="pricing-name">Platina</div>
+                        <div class="pricing-subtitle">100 créditos</div>
                     </div>
-                    <span class="pricing-period">100 créditos</span>
-                    <div class="pricing-divider"></div>
+                    <div class="pricing-body">
+                        <div class="pricing-price">
+                            <span class="currency">R$</span>1.700
+                            <span class="price-original">R$ 2.500</span>
+                        </div>
+                        <span class="pricing-savings">💰 Economia de 32%</span>
+                        <span class="pricing-period">por relatório</span>
+                    </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> 100 relatórios</li>
                         <li><span class="check">✓</span> PDI personalizado</li>
                         <li><span class="check">✓</span> Laudo VIGOR® (3 créditos)</li>
                     </ul>
-                    <span class="pricing-cupom" data-cupom="RELATO100">
-                        🎫 <span class="cupom-text">RELATO100</span>
-                        <span class="copy-icon">📋</span>
-                    </span>
+                    <div class="pricing-cupom-area">
+                        <span class="pricing-cupom" data-cupom="RELATO100">
+                            🎫 <span class="cupom-text">RELATO100</span>
+                            <span class="copy-icon">📋</span>
+                        </span>
+                    </div>
                     <div class="pricing-timer">
                         <span class="timer-icon">⏰</span> Oferta por tempo limitado
                     </div>
-                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
+                    <div class="pricing-footer">
+                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
+                    </div>
                 </div>
             </div>
 
             <!-- Laudos Premium -->
-            <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:20px;text-align:center;letter-spacing:-0.3px;">
+            <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-top:16px;text-align:center;letter-spacing:-0.3px;">
                 ⭐ Laudo VIGOR® (80-100 páginas)
             </h3>
             <div class="pricing-grid">
                 <!-- Unitário Premium Promo -->
-                <div class="pricing-card animate-fade-up animate-delay-5">
-                    <span class="promo-badge">🔥 PROMO</span>
-                    <span class="pricing-icon">⭐</span>
-                    <div class="pricing-name">Unitário Premium</div>
-                    <div class="pricing-price">
-                        <span class="currency">R$</span>99,90
-                        <span class="price-original">R$ 199,90</span>
+                <div class="pricing-card promo-card animate-fade-up animate-delay-5">
+                    <div class="pricing-glow"></div>
+                    <div class="pricing-header">
+                        <span class="pricing-badge">🔥 PROMO</span>
+                        <span class="pricing-icon">⭐</span>
+                        <div class="pricing-name">Unitário Premium</div>
+                        <div class="pricing-subtitle">1 laudo</div>
                     </div>
-                    <span class="pricing-period">1 laudo</span>
-                    <div class="pricing-divider"></div>
+                    <div class="pricing-body">
+                        <div class="pricing-price">
+                            <span class="currency">R$</span>99,90
+                            <span class="price-original">R$ 199,90</span>
+                        </div>
+                        <span class="pricing-savings">💰 Economia de 50%</span>
+                        <span class="pricing-period">por laudo</span>
+                    </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> 1 laudo completo</li>
                         <li><span class="check">✓</span> 80-100 páginas</li>
                         <li><span class="check">✓</span> Neurociência + Psicologia</li>
                     </ul>
-                    <span class="pricing-cupom" data-cupom="LAUDO1">
-                        🎫 <span class="cupom-text">LAUDO1</span>
-                        <span class="copy-icon">📋</span>
-                    </span>
+                    <div class="pricing-cupom-area">
+                        <span class="pricing-cupom" data-cupom="LAUDO1">
+                            🎫 <span class="cupom-text">LAUDO1</span>
+                            <span class="copy-icon">📋</span>
+                        </span>
+                    </div>
                     <div class="pricing-timer">
                         <span class="timer-icon">⏰</span> Oferta por tempo limitado
                     </div>
-                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
+                    <div class="pricing-footer">
+                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
+                    </div>
                 </div>
 
                 <!-- Básico Premium Promo -->
-                <div class="pricing-card animate-fade-up animate-delay-6">
-                    <span class="promo-badge">🔥 PROMO</span>
-                    <span class="pricing-icon">⭐</span>
-                    <div class="pricing-name">Básico Premium</div>
-                    <div class="pricing-price">
-                        <span class="currency">R$</span>240,00
-                        <span class="price-original">R$ 500,00</span>
+                <div class="pricing-card promo-card animate-fade-up animate-delay-6">
+                    <div class="pricing-glow"></div>
+                    <div class="pricing-header">
+                        <span class="pricing-badge">🔥 PROMO</span>
+                        <span class="pricing-icon">⭐</span>
+                        <div class="pricing-name">Básico Premium</div>
+                        <div class="pricing-subtitle">3 laudos</div>
                     </div>
-                    <span class="pricing-period">3 laudos</span>
-                    <div class="pricing-divider"></div>
+                    <div class="pricing-body">
+                        <div class="pricing-price">
+                            <span class="currency">R$</span>240,00
+                            <span class="price-original">R$ 500,00</span>
+                        </div>
+                        <span class="pricing-savings">💰 Economia de 52%</span>
+                        <span class="pricing-period">por laudo</span>
+                    </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> 3 laudos</li>
                         <li><span class="check">✓</span> 80-100 páginas</li>
                         <li><span class="check">✓</span> Neurociência + Psicologia</li>
                     </ul>
-                    <span class="pricing-cupom" data-cupom="LAUDO3">
-                        🎫 <span class="cupom-text">LAUDO3</span>
-                        <span class="copy-icon">📋</span>
-                    </span>
+                    <div class="pricing-cupom-area">
+                        <span class="pricing-cupom" data-cupom="LAUDO3">
+                            🎫 <span class="cupom-text">LAUDO3</span>
+                            <span class="copy-icon">📋</span>
+                        </span>
+                    </div>
                     <div class="pricing-timer">
                         <span class="timer-icon">⏰</span> Oferta por tempo limitado
                     </div>
-                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
+                    <div class="pricing-footer">
+                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
+                    </div>
                 </div>
 
                 <!-- Ouro Premium -->
-                <div class="pricing-card premium-card animate-fade-up animate-delay-7">
-                    <span class="pricing-icon" style="font-size:2.2rem;">✨</span>
-                    <div class="pricing-name" style="color:var(--gold);">Ouro Premium</div>
-                    <div class="pricing-price">
-                        <span class="currency">R$</span>1.290
-                        <span class="price-original" style="opacity:0;">—</span>
+                <div class="pricing-card premium animate-fade-up animate-delay-7">
+                    <div class="pricing-glow"></div>
+                    <div class="pricing-header">
+                        <span class="pricing-badge" style="background:var(--gradient-gold);">⭐ DESTAQUE</span>
+                        <span class="pricing-icon" style="filter:drop-shadow(0 2px 8px rgba(217,119,6,0.2));">✨</span>
+                        <div class="pricing-name gold-text">Ouro Premium</div>
+                        <div class="pricing-subtitle">10 laudos</div>
                     </div>
-                    <span class="pricing-period">10 laudos</span>
-                    <div class="pricing-divider"></div>
+                    <div class="pricing-body">
+                        <div class="pricing-price" style="color:var(--gold);">
+                            <span class="currency">R$</span>1.290
+                            <span class="price-original" style="opacity:0;">—</span>
+                        </div>
+                        <span class="pricing-savings" style="background:rgba(217,119,6,0.1);color:var(--gold);">⭐ Melhor Custo-Benefício</span>
+                        <span class="pricing-period">por laudo</span>
+                    </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> 10 laudos</li>
                         <li><span class="check">✓</span> 80-100 páginas</li>
                         <li><span class="check">✓</span> Neurociência + Psicologia</li>
                     </ul>
-                    <span style="opacity:0;display:block;margin:4px 0 8px;padding:6px 16px;">—</span>
-                    <a href="login.html" class="btn-pricing primary">Comprar</a>
+                    <div class="pricing-cupom-area" style="opacity:0;height:28px;"></div>
+                    <div class="pricing-footer">
+                        <a href="login.html" class="btn-pricing primary">⭐ Comprar Agora</a>
+                    </div>
                 </div>
 
                 <!-- Ouro Premium Promo -->
-                <div class="pricing-card animate-fade-up animate-delay-8">
-                    <span class="promo-badge">🔥 PROMO</span>
-                    <span class="pricing-icon">⭐</span>
-                    <div class="pricing-name">Ouro Premium</div>
-                    <div class="pricing-price">
-                        <span class="currency">R$</span>700,00
-                        <span class="price-original">R$ 2.000,00</span>
+                <div class="pricing-card promo-card animate-fade-up animate-delay-8">
+                    <div class="pricing-glow"></div>
+                    <div class="pricing-header">
+                        <span class="pricing-badge">🔥 PROMO</span>
+                        <span class="pricing-icon">⭐</span>
+                        <div class="pricing-name">Ouro Premium</div>
+                        <div class="pricing-subtitle">10 laudos</div>
                     </div>
-                    <span class="pricing-period">10 laudos</span>
-                    <div class="pricing-divider"></div>
+                    <div class="pricing-body">
+                        <div class="pricing-price">
+                            <span class="currency">R$</span>700,00
+                            <span class="price-original">R$ 2.000,00</span>
+                        </div>
+                        <span class="pricing-savings">💰 Economia de 65%</span>
+                        <span class="pricing-period">por laudo</span>
+                    </div>
                     <ul class="pricing-features">
                         <li><span class="check">✓</span> 10 laudos</li>
                         <li><span class="check">✓</span> 80-100 páginas</li>
                         <li><span class="check">✓</span> Neurociência + Psicologia</li>
                     </ul>
-                    <span class="pricing-cupom" data-cupom="LAUDO10">
-                        🎫 <span class="cupom-text">LAUDO10</span>
-                        <span class="copy-icon">📋</span>
-                    </span>
+                    <div class="pricing-cupom-area">
+                        <span class="pricing-cupom" data-cupom="LAUDO10">
+                            🎫 <span class="cupom-text">LAUDO10</span>
+                            <span class="copy-icon">📋</span>
+                        </span>
+                    </div>
                     <div class="pricing-timer">
                         <span class="timer-icon">⏰</span> Oferta por tempo limitado
                     </div>
-                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
+                    <div class="pricing-footer">
+                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
+                    </div>
                 </div>
             </div>
 
@@ -1814,7 +2063,7 @@
     </section>
 
     <!-- ============================================
-    CONTATO - COM EMAIL
+    CONTATO
     ============================================ -->
     <section class="contact-section" id="contato">
         <div class="container">
@@ -1855,7 +2104,7 @@
     </section>
 
     <!-- ============================================
-    FOOTER - CORRIGIDO
+    FOOTER
     ============================================ -->
     <footer class="footer">
         <div class="container">
