@@ -3,221 +3,605 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Participante | VIGORRE ONE™</title>
+    <title>Dashboard | VIGORRE ONE™</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-    <link rel="icon" href="../assets/images/logo-vigorre.png" />
+
     <style>
-        /* ===== MESMO ESTILO DOS DASHBOARDS ===== */
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Inter',sans-serif; background:#F8FAFC; min-height:100vh; display:flex; }
-        .sidebar {
-            width:260px; min-height:100vh; background:#0A2540; color:white;
-            position:fixed; top:0; left:0; bottom:0; display:flex; flex-direction:column;
-            padding:0; z-index:100; overflow-y:auto; transition:transform 0.3s ease;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
+            --green: #10B981; --red: #EF4444; --orange: #F59E0B; --purple: #7C3AED;
+            --pink: #EC4899; --white: #FFFFFF; --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9; --gray-200: #E2E8F0; --gray-300: #CBD5E1;
+            --gray-400: #94A3B8; --gray-500: #64748B; --gray-600: #475569;
+            --gray-700: #334155; --gray-800: #1E293B; --gray-900: #0F172A;
+            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10,37,64,0.06);
+            --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
+            --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        .sidebar .logo { padding:20px 24px; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; gap:10px; }
-        .sidebar .logo .logo-img { height:32px; width:auto; }
-        .sidebar .logo .logo-text { font-family:'Poppins',sans-serif; font-size:1rem; font-weight:800; color:white; letter-spacing:-0.3px; }
-        .sidebar .logo .logo-text .highlight { color:#D97706; }
-        .sidebar .logo .logo-text .tm { font-size:0.4rem; vertical-align:super; color:rgba(255,255,255,0.3); }
-        .sidebar .user-info { padding:16px 24px; border-bottom:1px solid rgba(255,255,255,0.06); }
-        .sidebar .user-info .name { font-weight:600; font-size:0.9rem; color:white; }
-        .sidebar .user-info .role { font-size:0.7rem; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.05em; }
-        .sidebar .menu { flex:1; padding:12px 0; }
-        .sidebar .menu .menu-label { font-size:0.6rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.2); padding:8px 24px; }
-        .sidebar .menu a { display:flex; align-items:center; gap:12px; padding:10px 24px; color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.85rem; transition:all 0.2s ease; border-left:3px solid transparent; }
-        .sidebar .menu a:hover { background:rgba(255,255,255,0.04); color:white; }
-        .sidebar .menu a.active { color:white; border-left-color:#D97706; background:rgba(217,119,6,0.08); }
-        .sidebar .menu a .icon { font-size:1.2rem; width:24px; text-align:center; }
-        .sidebar .logout-btn { padding:16px 24px; border-top:1px solid rgba(255,255,255,0.06); }
-        .sidebar .logout-btn a { display:flex; align-items:center; gap:12px; color:rgba(255,255,255,0.3); text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
-        .sidebar .logout-btn a:hover { color:white; }
-
-        .main-content { margin-left:260px; flex:1; padding:24px 32px; min-height:100vh; }
-        .main-content .header-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
-        .main-content .header-top h1 { font-family:'Poppins',sans-serif; font-size:1.4rem; font-weight:700; color:#1E293B; }
-        .main-content .header-top h1 .highlight { color:#D97706; }
-        .main-content .header-top .date { font-size:0.85rem; color:#94A3B8; }
-        .main-content .greeting { color:#64748B; margin-bottom:20px; }
-
-        .cards-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
-        .card { background:white; border:1px solid #E2E8F0; border-radius:12px; padding:20px 24px; cursor:pointer; transition:all 0.2s; }
-        .card:hover { border-color:#D97706; box-shadow:0 4px 12px rgba(0,0,0,0.04); }
-        .card .card-icon { font-size:1.4rem; }
-        .card .card-number { font-family:'Poppins',sans-serif; font-size:1.6rem; font-weight:700; color:#0A2540; margin:4px 0; }
-        .card .card-label { font-size:0.75rem; color:#94A3B8; }
-        .card .card-link { font-size:0.7rem; color:#D97706; text-decoration:none; font-weight:600; }
-
-        .main-grid { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
-        .panel { background:white; border:1px solid #E2E8F0; border-radius:12px; padding:20px 24px; }
-        .panel h3 { font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:700; color:#1E293B; margin-bottom:12px; }
-        .panel .item { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #F1F5F9; font-size:0.85rem; color:#475569; }
-        .panel .item:last-child { border-bottom:none; }
-        .panel .item .label { color:#94A3B8; }
-        .panel .item .value { font-weight:600; color:#0A2540; }
-
-        .badge-status { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:0.65rem; font-weight:600; }
-        .badge-status.concluido { background:#D1FAE5; color:#065F46; }
-        .badge-status.pendente { background:#FEF3C7; color:#92400E; }
-        .badge-status.disponivel { background:#DBEAFE; color:#1E40AF; }
-
-        @media (max-width:1024px) { .cards-grid { grid-template-columns:repeat(2,1fr); } }
-        @media (max-width:768px) {
-            .sidebar { transform:translateX(-100%); width:280px; }
-            .sidebar.open { transform:translateX(0); }
-            .main-content { margin-left:0; padding:16px; }
-            .cards-grid { grid-template-columns:1fr 1fr; }
-            .main-grid { grid-template-columns:1fr; }
-            .hamburger { display:flex !important; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
         }
-        @media (max-width:480px) { .cards-grid { grid-template-columns:1fr; } }
-        .hamburger { display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#0A2540; padding:4px; }
-        .sidebar-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.3); z-index:99; }
-        .sidebar-overlay.open { display:block; }
-        @media (max-width:768px) { .hamburger { display:block; } }
+
+        .header-participante {
+            background: var(--navy);
+            color: white;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-bottom: 3px solid var(--gold);
+        }
+        .header-participante .logo {
+            display: flex; align-items: center; gap: 12px; text-decoration: none;
+        }
+        .header-participante .logo .logo-img { height: 36px; width: auto; display: block; }
+        .header-participante .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white;
+        }
+        .header-participante .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
+        .header-participante .logo .logo-text .sub {
+            font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .header-participante .user-info {
+            text-align: right;
+        }
+        .header-participante .user-info .name {
+            font-weight: 600; font-size: 0.9rem;
+        }
+        .header-participante .user-info .company {
+            font-size: 0.75rem; color: rgba(255,255,255,0.4);
+        }
+        .header-participante .user-info .badge {
+            display: inline-block; padding: 2px 10px; background: rgba(217,119,6,0.15);
+            color: var(--gold); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600;
+        }
+
+        .saudacao {
+            padding: 24px 32px;
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .saudacao h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        .saudacao p {
+            color: var(--gray-500);
+            font-size: 0.95rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 24px 32px;
+        }
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .card .card-icon { font-size: 2rem; margin-bottom: 8px; }
+        .card .card-label { font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .card .card-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        .card .card-change {
+            font-size: 0.7rem; font-weight: 600;
+        }
+        .card .card-change.up { color: var(--green); }
+        .card .card-change.down { color: var(--red); }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            padding: 0 32px 24px;
+        }
+        .section-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04);
+            margin-bottom: 20px;
+        }
+        .section-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+
+        .teste-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .teste-item:last-child { border-bottom: none; }
+        .teste-item .info .nome {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--gray-800);
+        }
+        .teste-item .info .desc {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+        .teste-item .status {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+        }
+        .teste-item .status.concluido {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        .teste-item .status.pendente {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        .teste-item .status.disponivel {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+        .btn-action {
+            padding: 6px 16px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,78,216,0.25); }
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white;
+        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217,119,6,0.25); }
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+        }
+        .btn-secondary:hover { background: var(--gray-200); }
+        .btn-success {
+            background: var(--green);
+            color: white;
+        }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(16,185,129,0.25); }
+
+        .toast {
+            position: fixed; top: 24px; right: 24px; background: white;
+            padding: 14px 24px; border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            display: none; align-items: center; gap: 12px;
+            font-weight: 600; font-size: 0.875rem; z-index: 300;
+            border-left: 4px solid var(--blue);
+            animation: slideIn 0.3s ease;
+        }
+        .toast.show { display: flex; }
+        .toast.success { border-left-color: #10B981; }
+        .toast.error { border-left-color: #EF4444; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(120%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .loading-shimmer {
+            height: 32px; width: 60%;
+            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @media (max-width: 1024px) {
+            .cards-grid { grid-template-columns: repeat(2, 1fr); }
+            .main-content { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .header-participante { flex-direction: column; text-align: center; }
+            .header-participante .user-info { text-align: center; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .saudacao { padding: 16px 20px; }
+            .cards-grid { padding: 16px 20px; }
+            .main-content { padding: 0 20px 16px; }
+        }
+
+        @media print {
+            .header-participante { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .btn-action { display: none !important; }
+            .card { border: 1px solid #E2E8F0 !important; }
+        }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar" id="sidebar">
+    <header class="header-participante">
         <div class="logo">
             <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
-            <div class="logo-text">VIGORRE <span class="highlight">ONE</span><span class="tm">™</span></div>
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Analytics Enterprise</span>
+            </div>
         </div>
         <div class="user-info">
-            <div class="name" id="userName">Participante</div>
-            <div class="role">👤 Autoconhecimento</div>
+            <div class="name" id="participantName">Carregando...</div>
+            <div class="company" id="participantCompany">Empresa: --</div>
+            <div><span class="badge">👤 Participante</span></div>
         </div>
-        <nav class="menu">
-            <div class="menu-label">Principal</div>
-            <a href="#" class="active"><span class="icon">📊</span> Dashboard</a>
-            <a href="#"><span class="icon">🧠</span> Meus Testes</a>
-            <a href="#"><span class="icon">📄</span> Meus Relatórios</a>
-            <a href="#"><span class="icon">📋</span> Meus Laudos</a>
-            <div class="menu-label" style="margin-top:12px;">Desenvolvimento</div>
-            <a href="#"><span class="icon">📈</span> Minha Evolução</a>
-            <a href="#"><span class="icon">🎯</span> Minha Trilha</a>
-        </nav>
-        <div class="logout-btn">
-            <a href="../login.html" onclick="logout()"><span class="icon">🚪</span> Sair</a>
+    </header>
+
+    <section class="saudacao">
+        <h1 id="saudacaoText">👋 Olá, <span id="saudacaoNome">Participante</span>!</h1>
+        <p id="saudacaoMensagem">Bem-vindo à sua jornada de autoconhecimento. Continue evoluindo!</p>
+    </section>
+
+    <div class="cards-grid">
+        <div class="card" onclick="window.location.href='meus-testes.html'">
+            <div class="card-icon">📝</div>
+            <div class="card-label">Testes Concluídos</div>
+            <div class="card-value" id="totalTestes"><span class="loading-shimmer"></span></div>
+            <div class="card-change up">✅ Realizados</div>
         </div>
-    </aside>
-
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-    <main class="main-content">
-        <div class="header-top">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <button class="hamburger" id="hamburgerBtn">☰</button>
-                <h1>Olá, <span class="highlight" id="userNameTitle">Participante</span> 👋</h1>
-            </div>
-            <div class="date" id="currentDate"></div>
+        <div class="card" onclick="window.location.href='meus-testes.html'">
+            <div class="card-icon">⏳</div>
+            <div class="card-label">Testes Disponíveis</div>
+            <div class="card-value" id="testesDisponiveis"><span class="loading-shimmer"></span></div>
+            <div class="card-change up">📌 Pendentes</div>
         </div>
-        <div class="greeting" id="greetingMessage">Continue sua jornada de autoconhecimento e desenvolvimento.</div>
-
-        <div class="cards-grid">
-            <div class="card" onclick="window.location.href='../tests/disc/'">
-                <div class="card-icon">🧠</div>
-                <div class="card-number" id="testesConcluidos">0</div>
-                <div class="card-label">Testes Concluídos</div>
-                <a href="#" class="card-link">Realizar Teste →</a>
-            </div>
-            <div class="card" onclick="window.location.href='../tests/disc/'">
-                <div class="card-icon">📊</div>
-                <div class="card-number" id="testesDisponiveis">5</div>
-                <div class="card-label">Testes Disponíveis</div>
-                <a href="#" class="card-link">Ver Testes →</a>
-            </div>
-            <div class="card" onclick="window.location.href='../relatorios/disc/'">
-                <div class="card-icon">📄</div>
-                <div class="card-number" id="relatoriosDisponiveis">0</div>
-                <div class="card-label">Relatórios Disponíveis</div>
-                <a href="#" class="card-link">Ver Relatórios →</a>
-            </div>
-            <div class="card" onclick="window.location.href='../laudos/'">
-                <div class="card-icon">📋</div>
-                <div class="card-number" id="laudosDisponiveis">0</div>
-                <div class="card-label">Laudos Disponíveis</div>
-                <a href="#" class="card-link">Ver Laudos →</a>
-            </div>
+        <div class="card" onclick="window.location.href='meus-relatorios.html'">
+            <div class="card-icon">📄</div>
+            <div class="card-label">Relatórios</div>
+            <div class="card-value" id="totalRelatorios"><span class="loading-shimmer"></span></div>
+            <div class="card-change up">📄 Disponíveis</div>
         </div>
+        <div class="card" onclick="window.location.href='meu-laudo.html'">
+            <div class="card-icon">📋</div>
+            <div class="card-label">Laudo VIGOR®</div>
+            <div class="card-value" id="temLaudo"><span class="loading-shimmer"></span></div>
+            <div class="card-change up">📋 Status</div>
+        </div>
+    </div>
 
-        <div class="main-grid">
-            <div class="panel">
-                <h3>📊 Meu Progresso</h3>
-                <div id="progressContent">
-                    <div class="item"><span class="label">DISC</span><span class="value"><span class="badge-status pendente">Pendente</span></span></div>
-                    <div class="item"><span class="label">Big Five</span><span class="value"><span class="badge-status pendente">Pendente</span></span></div>
-                    <div class="item"><span class="label">Inteligência Emocional</span><span class="value"><span class="badge-status pendente">Pendente</span></span></div>
-                    <div class="item"><span class="label">Valores</span><span class="value"><span class="badge-status pendente">Pendente</span></span></div>
-                    <div class="item"><span class="label">SWOT</span><span class="value"><span class="badge-status pendente">Pendente</span></span></div>
+    <div class="main-content">
+
+        <div class="content-left">
+            <div class="section-card">
+                <h3>📝 Meus Testes</h3>
+                <div id="listaTestes">
+                    <!-- Carregado via JS -->
                 </div>
             </div>
-            <div class="panel">
-                <h3>🚀 Minha Trilha</h3>
-                <div class="item"><span class="label">📚 Leitura</span><span class="value">Os 7 Hábitos</span></div>
-                <div class="item"><span class="label">🎓 Curso</span><span class="value">Inteligência Emocional</span></div>
-                <div class="item"><span class="label">📝 Exercício</span><span class="value">Diário de Reflexão</span></div>
-                <div class="item"><span class="label">🎯 Meta</span><span class="value">Concluir todos os testes</span></div>
+
+            <div class="section-card">
+                <h3>📄 Meus Relatórios</h3>
+                <div id="listaRelatorios">
+                    <!-- Carregado via JS -->
+                </div>
             </div>
         </div>
-    </main>
+
+        <div class="content-right">
+            <div class="section-card">
+                <h3>📋 Laudo VIGOR®</h3>
+                <div id="laudoStatus">
+                    <!-- Carregado via JS -->
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h3>📈 Minha Evolução</h3>
+                <div id="evolucaoContent">
+                    <!-- Carregado via JS -->
+                </div>
+            </div>
+
+            <div class="section-card" style="background:linear-gradient(135deg,var(--navy),var(--gray-800));color:white;">
+                <h3 style="color:white;">💡 Dica do Dia</h3>
+                <p id="dicaDoDia" style="font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.8);">
+                    "O autoconhecimento é o primeiro passo para a transformação. Comece hoje!"
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../middleware/auth-guard.js"></script>
+    <script src="../admin/financeiro/financeiro-conexao.js"></script>
+    <script src="../admin/ia/motor-ia.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var sessionData = localStorage.getItem('vigorre_session');
-            if (!sessionData) { window.location.href = '../login.html'; return; }
-            var session = JSON.parse(sessionData);
-            var user = session.user;
-            if (!user || user.role !== 'participante') { window.location.href = '../login.html'; return; }
-            document.getElementById('userName').textContent = user.name || 'Participante';
-            document.getElementById('userNameTitle').textContent = user.name || 'Participante';
-            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('pt-BR', { day: '2-digit',
-                month: 'long', year: 'numeric' });
+        'use strict';
 
-            var horas = new Date().getHours();
-            var saudacao = horas < 12 ? 'Bom dia' : horas < 18 ? 'Boa tarde' : 'Boa noite';
-            document.getElementById('greetingMessage').textContent = saudacao + '! Continue sua jornada de autoconhecimento.';
+        let participanteId = null;
+        let resultados = {};
 
-            carregarDados();
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var hamburger = document.getElementById('hamburgerBtn');
-            var sidebar = document.getElementById('sidebar');
-            var overlay = document.getElementById('sidebarOverlay');
-            if (hamburger) {
-                hamburger.addEventListener('click', function() { sidebar.classList.toggle('open');
-                    overlay.classList.toggle('open'); });
-            }
-            if (overlay) {
-                overlay.addEventListener('click', function() { sidebar.classList.remove('open');
-                    overlay.classList.remove('open'); });
-            }
-        });
-
-        function carregarDados() {
-            var concluidos = Math.floor(Math.random() * 3);
-            document.getElementById('testesConcluidos').textContent = concluidos;
-            document.getElementById('testesDisponiveis').textContent = 5 - concluidos;
-            document.getElementById('relatoriosDisponiveis').textContent = Math.floor(Math.random() * 3);
-            document.getElementById('laudosDisponiveis').textContent = Math.floor(Math.random() * 2);
-
-            var testes = ['DISC', 'Big Five', 'Inteligência Emocional', 'Valores', 'SWOT'];
-            var html = '';
-            testes.forEach(function(t) {
-                var status = Math.random() > 0.6 ? 'concluido' : 'pendente';
-                var label = status === 'concluido' ? 'Concluído' : 'Pendente';
-                html += '<div class="item"><span class="label">' + t + '</span><span class="value"><span class="badge-status ' +
-                    status + '">' + label + '</span></span></div>';
-            });
-            document.getElementById('progressContent').innerHTML = html;
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + type;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => { toast.classList.remove('show'); }, 4000);
         }
 
-        function logout() { localStorage.removeItem('vigorre_session');
-            window.location.href = '../login.html'; return false; }
+        async function carregarDashboard() {
+            try {
+                console.log('👤 Carregando Dashboard Participante...');
+
+                if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../login.html';
+                    return;
+                }
+
+                var user = window.VigorreAuth.getCurrentUser();
+                if (!user || user.role !== 'participante') {
+                    window.location.href = '../login.html';
+                    return;
+                }
+
+                participanteId = user.id || user.participantId;
+                document.getElementById('participantName').textContent = user.name || 'Participante';
+                document.getElementById('saudacaoNome').textContent = user.name || 'Participante';
+
+                var companyName = 'Autônomo';
+                if (user.companyId) {
+                    try {
+                        var supabaseClient = getSupabaseClient();
+                        if (supabaseClient) {
+                            var { data: company } = await supabaseClient
+                                .from('companies')
+                                .select('name')
+                                .eq('id', user.companyId)
+                                .single();
+                            if (company) companyName = company.name;
+                        }
+                    } catch (e) {}
+                }
+                document.getElementById('participantCompany').textContent = 'Empresa: ' + companyName;
+
+                await carregarResultados();
+                await atualizarCards();
+                await atualizarTestes();
+                await atualizarRelatorios();
+                await atualizarLaudo();
+                await atualizarEvolucao();
+                carregarDicaDoDia();
+
+                console.log('✅ Dashboard Participante carregado!');
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dashboard:', error);
+                showToast('Erro ao carregar dados', 'error');
+            }
+        }
+
+        async function carregarResultados() {
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                    var participant = allParticipants.find(p => p.id === participanteId);
+                    if (participant && participant.results) {
+                        resultados = participant.results;
+                    }
+                    return;
+                }
+
+                var { data, error } = await supabaseClient
+                    .from('resultados')
+                    .select('teste_id, resultado')
+                    .eq('participant_id', participanteId);
+
+                if (error) {
+                    console.warn('Erro ao buscar resultados:', error);
+                    return;
+                }
+
+                if (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var testeId = data[i].teste_id;
+                        var resultado = data[i].resultado;
+                        if (testeId === '11111111-1111-1111-1111-111111111111') resultados.DISC = resultado;
+                        else if (testeId === '22222222-2222-2222-2222-222222222222') resultados.BigFive = resultado;
+                        else if (testeId === '33333333-3333-3333-3333-333333333333') resultados.IE = resultado;
+                        else if (testeId === '44444444-4444-4444-4444-444444444444') resultados.Valores = resultado;
+                        else if (testeId === '55555555-5555-5555-5555-555555555555') resultados.SWOT = resultado;
+                    }
+                }
+
+            } catch (error) {
+                console.warn('⚠️ Erro ao carregar resultados:', error);
+            }
+        }
+
+        async function atualizarCards() {
+            var totalTestes = 0;
+            if (resultados.DISC) totalTestes++;
+            if (resultados.BigFive) totalTestes++;
+            if (resultados.IE) totalTestes++;
+            if (resultados.Valores) totalTestes++;
+            if (resultados.SWOT) totalTestes++;
+
+            var testesDisponiveis = 5 - totalTestes;
+
+            document.getElementById('totalTestes').textContent = totalTestes + '/5';
+            document.getElementById('testesDisponiveis').textContent = testesDisponiveis;
+            document.getElementById('totalRelatorios').textContent = totalTestes;
+
+            var temLaudo = totalTestes === 5 ? '✅ Disponível' : '⏳ ' + (5 - totalTestes) + ' testes faltam';
+            document.getElementById('temLaudo').textContent = temLaudo;
+            document.getElementById('temLaudo').style.color = totalTestes === 5 ? '#10B981' : '#F59E0B';
+        }
+
+        async function atualizarTestes() {
+            var container = document.getElementById('listaTestes');
+            var testes = [
+                { id: 'disc', nome: 'DISC', icon: '🦁', desc: 'Análise Comportamental', status: resultados.DISC ? 'concluido' : 'disponivel', label: resultados.DISC ? '✅ Concluído' : '📌 Disponível', link: resultados.DISC ? '../relatorios/disc/' : '../tests/disc/' },
+                { id: 'bigfive', nome: 'Big Five', icon: '🧬', desc: 'Os 5 Grandes Fatores', status: resultados.BigFive ? 'concluido' : 'disponivel', label: resultados.BigFive ? '✅ Concluído' : '📌 Disponível', link: resultados.BigFive ? '../relatorios/bigfive/' : '../tests/bigfive/' },
+                { id: 'ie', nome: 'IE', icon: '❤️', desc: 'Inteligência Emocional', status: resultados.IE ? 'concluido' : 'disponivel', label: resultados.IE ? '✅ Concluído' : '📌 Disponível', link: resultados.IE ? '../relatorios/ie/' : '../tests/ie/' },
+                { id: 'valores', nome: 'Valores', icon: '💎', desc: 'O que realmente importa', status: resultados.Valores ? 'concluido' : 'disponivel', label: resultados.Valores ? '✅ Concluído' : '📌 Disponível', link: resultados.Valores ? '../relatorios/valores/' : '../tests/valores/' },
+                { id: 'swot', nome: 'SWOT', icon: '📊', desc: 'Forças · Fraquezas · Oportunidades · Ameaças', status: resultados.SWOT ? 'concluido' : 'disponivel', label: resultados.SWOT ? '✅ Concluído' : '📌 Disponível', link: resultados.SWOT ? '../relatorios/swot/' : '../tests/swot/' }
+            ];
+
+            container.innerHTML = testes.map(t => `
+                <div class="teste-item">
+                    <div class="info">
+                        <div class="nome">${t.icon} ${t.nome}</div>
+                        <div class="desc">${t.desc}</div>
+                    </div>
+                    <div>
+                        <span class="status ${t.status}">${t.label}</span>
+                        <a href="${t.link}" class="btn-action ${t.status === 'concluido' ? 'btn-secondary' : 'btn-primary'}" style="margin-left:8px;">${t.status === 'concluido' ? '📄 Ver' : '▶️ Iniciar'}</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function atualizarRelatorios() {
+            var container = document.getElementById('listaRelatorios');
+            var relatorios = [
+                { id: 'disc', nome: 'DISC', icon: '🦁', desc: 'Análise comportamental', status: resultados.DISC ? 'concluido' : 'pendente', label: resultados.DISC ? '✅ Disponível' : '⏳ Aguardando', link: '../relatorios/disc/' },
+                { id: 'bigfive', nome: 'Big Five', icon: '🧬', desc: '5 grandes fatores', status: resultados.BigFive ? 'concluido' : 'pendente', label: resultados.BigFive ? '✅ Disponível' : '⏳ Aguardando', link: '../relatorios/bigfive/' },
+                { id: 'ie', nome: 'IE', icon: '❤️', desc: 'Inteligência Emocional', status: resultados.IE ? 'concluido' : 'pendente', label: resultados.IE ? '✅ Disponível' : '⏳ Aguardando', link: '../relatorios/ie/' },
+                { id: 'valores', nome: 'Valores', icon: '💎', desc: 'Valores pessoais', status: resultados.Valores ? 'concluido' : 'pendente', label: resultados.Valores ? '✅ Disponível' : '⏳ Aguardando', link: '../relatorios/valores/' },
+                { id: 'swot', nome: 'SWOT', icon: '📊', desc: 'Análise SWOT', status: resultados.SWOT ? 'concluido' : 'pendente', label: resultados.SWOT ? '✅ Disponível' : '⏳ Aguardando', link: '../relatorios/swot/' }
+            ];
+
+            container.innerHTML = relatorios.map(r => `
+                <div class="teste-item">
+                    <div class="info">
+                        <div class="nome">${r.icon} ${r.nome}</div>
+                        <div class="desc">${r.desc}</div>
+                    </div>
+                    <div>
+                        <span class="status ${r.status}">${r.label}</span>
+                        <a href="${r.link}" class="btn-action ${r.status === 'concluido' ? 'btn-success' : 'btn-secondary'}" style="margin-left:8px;">${r.status === 'concluido' ? '📄 Ver' : '⏳ Aguardar'}</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function atualizarLaudo() {
+            var totalTestes = 0;
+            if (resultados.DISC) totalTestes++;
+            if (resultados.BigFive) totalTestes++;
+            if (resultados.IE) totalTestes++;
+            if (resultados.Valores) totalTestes++;
+            if (resultados.SWOT) totalTestes++;
+
+            var container = document.getElementById('laudoStatus');
+            if (totalTestes === 5) {
+                container.innerHTML = `
+                    <div style="text-align:center;padding:10px 0;">
+                        <div style="font-size:2.5rem;margin-bottom:8px;">🎉</div>
+                        <p style="color:var(--green);font-weight:600;">✅ Laudo Disponível!</p>
+                        <p style="color:var(--gray-500);font-size:0.85rem;">80-100 páginas de análise integrada</p>
+                        <a href="../relatorios/laudo/completo.html" class="btn-action btn-gold" style="margin-top:8px;">📋 Gerar Laudo</a>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div style="text-align:center;padding:10px 0;">
+                        <div style="font-size:2.5rem;margin-bottom:8px;">⏳</div>
+                        <p style="color:var(--orange);font-weight:600;">${5 - totalTestes} testes faltam</p>
+                        <p style="color:var(--gray-500);font-size:0.85rem;">Complete todos os 5 testes</p>
+                        <a href="meus-testes.html" class="btn-action btn-primary" style="margin-top:8px;">📝 Ver Testes</a>
+                    </div>
+                `;
+            }
+        }
+
+        async function atualizarEvolucao() {
+            var totalTestes = 0;
+            if (resultados.DISC) totalTestes++;
+            if (resultados.BigFive) totalTestes++;
+            if (resultados.IE) totalTestes++;
+            if (resultados.Valores) totalTestes++;
+            if (resultados.SWOT) totalTestes++;
+
+            var container = document.getElementById('evolucaoContent');
+            container.innerHTML = `
+                <div style="text-align:center;padding:10px 0;">
+                    <div style="font-size:2rem;margin-bottom:8px;">📊</div>
+                    <p style="color:var(--gray-600);">${totalTestes}/5 testes concluídos</p>
+                    <div style="width:100%;height:6px;background:var(--gray-200);border-radius:3px;margin:8px 0;overflow:hidden;">
+                        <div style="height:100%;width:${(totalTestes/5)*100}%;background:var(--green);border-radius:3px;transition:width 0.8s ease;"></div>
+                    </div>
+                    <a href="minha-evolucao.html" class="btn-action btn-secondary" style="margin-top:4px;">📈 Ver Detalhes</a>
+                </div>
+            `;
+        }
+
+        function carregarDicaDoDia() {
+            var dicas = [
+                '"O autoconhecimento é o primeiro passo para a transformação."',
+                '"Conhecer a si mesmo é o começo de toda sabedoria." - Aristóteles',
+                '"A jornada do autoconhecimento é a mais valiosa que você pode fazer."',
+                '"Seu potencial é ilimitado quando você se conhece verdadeiramente."',
+                '"A mente que se abre a uma nova ideia jamais voltará ao seu tamanho original." - Albert Einstein'
+            ];
+            document.getElementById('dicaDoDia').textContent = dicas[Math.floor(Math.random() * dicas.length)];
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('👤 Dashboard Participante - VIGORRE ONE™');
+            carregarDashboard();
+        });
+
+        console.log('✅ Dashboard Participante carregado com sucesso!');
     </script>
 
 </body>
