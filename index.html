@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VIGORRE ONE™ — The Science of Human Intelligence | Enterprise People Analytics</title>
-    <meta name="description" content="Enterprise-grade people intelligence platform combining neuroscience, behavioral psychology, and predictive analytics. Trusted by leading organizations worldwide." />
+    <title>VIGORRE ONE™ — People Intelligence Enterprise</title>
+    <meta name="description" content="Avaliações comportamentais validadas cientificamente. Neurociência, Psicologia Cognitiva e People Analytics para desenvolvimento humano e corporativo." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="icon" href="assets/images/logo-vigorre.png" />
     <style>
         :root {
             --navy: #0A2540;
@@ -16,6 +17,7 @@
             --gold: #D97706;
             --gold-light: #FBBF24;
             --gold-glow: rgba(217, 119, 6, 0.15);
+            --gold-pale: rgba(217, 119, 6, 0.06);
             --white: #FFFFFF;
             --bg: #FAFAFA;
             --bg-alt: #F4F5F7;
@@ -26,8 +28,6 @@
             --line-soft: #F1F3F5;
             --success: #059669;
             --radius: 4px;
-            --radius-lg: 8px;
-            --shadow-xs: 0 1px 2px rgba(10, 37, 64, 0.04);
             --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.06);
             --shadow: 0 8px 32px rgba(10, 37, 64, 0.08);
             --shadow-lg: 0 24px 64px rgba(10, 37, 64, 0.12);
@@ -49,7 +49,6 @@
         }
 
         .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
-        .container-narrow { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
 
         /* TYPOGRAPHY */
         .eyebrow {
@@ -92,31 +91,12 @@
             border: none;
             white-space: nowrap;
         }
-        .btn-primary {
-            background: var(--navy);
-            color: var(--white);
-        }
+        .btn-primary { background: var(--navy); color: var(--white); }
         .btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); box-shadow: var(--shadow); }
-        .btn-gold {
-            background: var(--gold);
-            color: var(--white);
-        }
+        .btn-gold { background: var(--gold); color: var(--white); }
         .btn-gold:hover { background: #c26a05; transform: translateY(-1px); box-shadow: var(--shadow-gold); }
-        .btn-ghost {
-            background: transparent;
-            color: var(--ink);
-            border: 1px solid var(--line);
-        }
+        .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
         .btn-ghost:hover { border-color: var(--ink); background: var(--bg-alt); }
-        .btn-link {
-            background: transparent;
-            color: var(--ink);
-            padding: 0;
-            font-weight: 500;
-            border-bottom: 1px solid var(--line);
-            border-radius: 0;
-        }
-        .btn-link:hover { border-color: var(--gold); color: var(--gold); }
 
         /* HEADER */
         .nav-wrap {
@@ -150,7 +130,6 @@
             color: var(--gold);
             font-weight: 800;
             font-size: 14px;
-            letter-spacing: -0.05em;
         }
         .nav-logo-text {
             font-weight: 700;
@@ -163,6 +142,14 @@
             color: var(--ink-muted);
             vertical-align: super;
             margin-left: 2px;
+        }
+        .nav-logo-sub {
+            display: block;
+            font-size: 9px;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: -2px;
             font-weight: 400;
         }
         .nav-menu {
@@ -175,17 +162,15 @@
             color: var(--ink-soft);
             text-decoration: none;
             font-size: 14px;
-            font-weight: 400;
             transition: color 0.2s;
         }
         .nav-menu a:hover { color: var(--ink); }
         .nav-cta {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
         .nav-cta a { font-size: 14px; text-decoration: none; color: var(--ink-soft); }
-        .nav-cta a:hover { color: var(--ink); }
 
         /* HERO */
         .hero {
@@ -224,6 +209,17 @@
             line-height: 1.6;
             margin-bottom: 40px;
             max-width: 520px;
+        }
+        .hero-highlight {
+            display: inline-block;
+            padding: 12px 20px;
+            background: var(--gold-pale);
+            border-left: 3px solid var(--gold);
+            color: var(--navy);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 28px;
+            line-height: 1.5;
         }
         .hero-actions {
             display: flex;
@@ -286,6 +282,7 @@
             align-items: center;
             justify-content: center;
             font-size: 16px;
+            font-weight: 700;
         }
         .hero-badge-text {
             font-size: 12px;
@@ -333,19 +330,11 @@
         .trust-logo:hover { opacity: 1; }
 
         /* SECTIONS */
-        .section {
-            padding: 120px 0;
-        }
+        .section { padding: 120px 0; }
         .section-alt { background: var(--bg); }
-        .section-dark {
-            background: var(--navy);
-            color: var(--white);
-        }
+        .section-dark { background: var(--navy); color: var(--white); }
         .section-dark h2, .section-dark h3 { color: var(--white); }
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
+        .section-header { text-align: center; margin-bottom: 80px; }
         .section-header h2 {
             font-size: clamp(36px, 4vw, 56px);
             font-weight: 600;
@@ -374,6 +363,9 @@
             padding: 48px 40px;
             transition: background 0.3s;
             position: relative;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         .assess-card:hover { background: var(--bg); }
         .assess-card::before {
@@ -408,7 +400,6 @@
             font-family: var(--mono);
             font-size: 12px;
             color: var(--ink);
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -417,7 +408,7 @@
             font-weight: 500;
             transition: gap 0.3s;
         }
-        .assess-link:hover { gap: 14px; color: var(--gold); }
+        .assess-card:hover .assess-link { gap: 14px; color: var(--gold); }
 
         /* TECHNOLOGY */
         .tech-grid {
@@ -538,7 +529,7 @@
             line-height: 1.7;
         }
 
-        /* ROI / STATS */
+        /* STATS */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -550,7 +541,6 @@
             background: var(--navy);
             padding: 56px 40px;
             text-align: center;
-            position: relative;
             transition: background 0.3s;
         }
         .stat-card:hover { background: var(--navy-deep); }
@@ -570,19 +560,69 @@
             letter-spacing: 0.02em;
         }
 
-        /* PRICING - ENTERPRISE ELEGANT */
+        /* PRICING */
+        .pricing-intro {
+            text-align: center;
+            padding: 24px;
+            background: var(--gold-pale);
+            border: 1px solid rgba(217, 119, 6, 0.2);
+            border-radius: 2px;
+            margin-bottom: 64px;
+            font-size: 14px;
+            color: var(--navy);
+            font-weight: 500;
+        }
+        .pricing-intro .mono {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .pricing-category {
+            margin-bottom: 80px;
+        }
+        .pricing-category-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--line);
+        }
+        .pricing-category-num {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+        }
+        .pricing-category-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+        .pricing-category-desc {
+            font-size: 13px;
+            color: var(--ink-muted);
+            margin-left: auto;
+        }
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 1px;
             background: var(--line);
             border: 1px solid var(--line);
         }
         .price-card {
             background: var(--white);
-            padding: 56px 48px;
+            padding: 40px 32px;
             transition: all 0.3s;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
         .price-card:hover { background: var(--bg); }
         .price-card.featured {
@@ -600,7 +640,7 @@
             font-size: 10px;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             font-weight: 500;
         }
         .price-tag.plain {
@@ -614,60 +654,78 @@
             border-bottom-color: rgba(255, 255, 255, 0.15);
         }
         .price-card h3 {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             letter-spacing: -0.02em;
         }
-        .price-desc {
-            font-size: 14px;
-            color: var(--ink-soft);
-            margin-bottom: 36px;
-            line-height: 1.6;
+        .price-subtitle {
+            font-size: 12px;
+            color: var(--ink-muted);
+            margin-bottom: 24px;
+            font-family: var(--mono);
+            letter-spacing: 0.05em;
         }
+        .price-card.featured .price-subtitle { color: rgba(255, 255, 255, 0.5); }
         .price-amount {
-            font-size: 56px;
+            font-size: 44px;
             font-weight: 300;
             letter-spacing: -0.04em;
             margin-bottom: 4px;
             line-height: 1;
         }
         .price-amount .currency {
-            font-size: 24px;
+            font-size: 18px;
             vertical-align: top;
             margin-right: 4px;
             color: var(--gold);
             font-weight: 500;
         }
         .price-amount .per {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--ink-muted);
             font-weight: 400;
             margin-left: 4px;
         }
         .price-card.featured .price-amount .per { color: rgba(255, 255, 255, 0.5); }
-        .price-note {
-            font-size: 12px;
+        .price-original {
+            font-size: 13px;
             color: var(--ink-muted);
-            margin-bottom: 40px;
-            font-family: var(--mono);
-            letter-spacing: 0.05em;
+            text-decoration: line-through;
+            margin-bottom: 4px;
         }
-        .price-card.featured .price-note { color: rgba(255, 255, 255, 0.4); }
+        .price-card.featured .price-original { color: rgba(255, 255, 255, 0.4); }
+        .price-savings {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(5, 150, 105, 0.08);
+            color: var(--success);
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            margin-top: 8px;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+        .price-card.featured .price-savings {
+            background: rgba(217, 119, 6, 0.15);
+            color: var(--gold-light);
+        }
         .price-features {
             list-style: none;
-            padding-top: 32px;
+            padding-top: 24px;
             border-top: 1px solid var(--line);
-            margin-bottom: 40px;
+            margin-bottom: 24px;
+            flex-grow: 1;
         }
         .price-card.featured .price-features { border-top-color: rgba(255, 255, 255, 0.15); }
         .price-features li {
-            padding: 10px 0;
-            font-size: 14px;
+            padding: 8px 0;
+            font-size: 13px;
             color: var(--ink-soft);
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 10px;
         }
         .price-card.featured .price-features li { color: rgba(255, 255, 255, 0.75); }
         .price-features li::before {
@@ -677,144 +735,190 @@
             background-repeat: no-repeat;
             background-position: center;
             flex-shrink: 0;
-            margin-top: 3px;
+            margin-top: 2px;
         }
+        .price-features li.off::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+        }
+        .price-features li.off { color: var(--ink-muted); }
+        .price-card.featured .price-features li.off { color: rgba(255, 255, 255, 0.4); }
+
+        /* CUPOM */
+        .price-coupon {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: var(--gold-pale);
+            border: 1px dashed var(--gold);
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .price-coupon:hover {
+            background: rgba(217, 119, 6, 0.12);
+            transform: translateY(-1px);
+        }
+        .price-coupon-label {
+            font-size: 10px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+        .price-coupon-code {
+            font-family: var(--mono);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--navy);
+            letter-spacing: 0.05em;
+        }
+        .price-coupon-copy {
+            font-size: 10px;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+        .price-coupon:hover .price-coupon-copy { color: var(--gold); }
+        .price-coupon.copied {
+            background: rgba(5, 150, 105, 0.08);
+            border-color: var(--success);
+            border-style: solid;
+        }
+        .price-coupon.copied .price-coupon-label,
+        .price-coupon.copied .price-coupon-code,
+        .price-coupon.copied .price-coupon-copy {
+            color: var(--success);
+        }
+
         .price-btn {
             display: block;
             width: 100%;
             text-align: center;
-            padding: 16px;
-            font-size: 14px;
+            padding: 14px;
+            font-size: 13px;
             font-weight: 500;
             text-decoration: none;
             border-radius: 2px;
             transition: all 0.3s;
+            letter-spacing: 0.02em;
         }
-        .price-btn-primary {
-            background: var(--navy);
-            color: var(--white);
-        }
-        .price-btn-primary:hover { background: var(--navy-light); }
-        .price-btn-gold {
-            background: var(--gold);
-            color: var(--white);
-        }
-        .price-btn-gold:hover { background: #c26a05; box-shadow: var(--shadow-gold); }
-        .price-btn-ghost {
-            background: transparent;
-            color: var(--ink);
-            border: 1px solid var(--line);
-        }
-        .price-card.featured .price-btn-ghost {
-            border-color: rgba(255, 255, 255, 0.2);
-            color: var(--white);
-        }
+        .price-btn-primary { background: var(--navy); color: var(--white); }
+        .price-btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); box-shadow: var(--shadow); }
+        .price-btn-gold { background: var(--gold); color: var(--white); }
+        .price-btn-gold:hover { background: #c26a05; box-shadow: var(--shadow-gold); transform: translateY(-1px); }
+        .price-btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+        .price-card.featured .price-btn-ghost { border-color: rgba(255, 255, 255, 0.2); color: var(--white); }
         .price-btn-ghost:hover { border-color: var(--ink); }
         .price-card.featured .price-btn-ghost:hover { border-color: var(--white); }
 
-        /* TESTIMONIALS */
-        .test-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-        .test-card {
-            padding: 40px;
-            border: 1px solid var(--line);
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-        .test-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow); }
-        .test-stars {
-            color: var(--gold);
-            font-size: 14px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-        .test-quote {
-            font-size: 16px;
-            line-height: 1.65;
-            color: var(--ink);
-            margin-bottom: 32px;
-            font-weight: 400;
-        }
-        .test-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-top: 24px;
-            border-top: 1px solid var(--line);
-        }
-        .test-avatar {
-            width: 44px; height: 44px;
-            border-radius: 50%;
-            background: var(--navy);
-            color: var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        .test-author-info h5 {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 2px;
-        }
-        .test-author-info span {
-            font-size: 12px;
-            color: var(--ink-muted);
-        }
-
-        /* SECURITY */
-        .security-grid {
+        /* CONTACT */
+        .contact-grid {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
             gap: 80px;
             align-items: center;
         }
-        .security-badges {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            margin-top: 32px;
+        .contact-content h2 {
+            font-size: clamp(32px, 3.5vw, 44px);
+            margin: 20px 0 20px;
+            letter-spacing: -0.03em;
         }
-        .security-badge {
-            padding: 20px 24px;
-            border: 1px solid var(--line);
-            border-radius: 2px;
+        .contact-content p {
+            font-size: 17px;
+            color: var(--ink-soft);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 480px;
+        }
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .contact-item {
             display: flex;
             align-items: center;
             gap: 16px;
+            padding: 18px 24px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 2px;
             transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
         }
-        .security-badge:hover { border-color: var(--gold); }
-        .security-badge-icon {
+        .contact-item:hover {
+            border-color: var(--gold);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
+        .contact-item-icon {
             width: 40px; height: 40px;
-            background: var(--bg);
+            background: var(--gold-pale);
+            color: var(--gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gold);
-            font-size: 18px;
+            font-size: 16px;
             flex-shrink: 0;
+            font-weight: 700;
         }
-        .security-badge-text h5 {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--ink);
+        .contact-item-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-item-label {
+            font-size: 11px;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
             margin-bottom: 2px;
         }
-        .security-badge-text span {
-            font-size: 12px;
-            color: var(--ink-muted);
+        .contact-item-value {
+            font-size: 15px;
+            color: var(--ink);
+            font-weight: 500;
+        }
+        .contact-visual {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .contact-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .contact-visual-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(10, 37, 64, 0.9) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            color: var(--white);
+        }
+        .contact-visual-overlay h4 {
+            font-size: 24px;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        .contact-visual-overlay p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 24px;
+            max-width: 360px;
         }
 
         /* CTA */
         .cta {
-            padding: 160px 0;
+            padding: 120px 0;
             text-align: center;
             background: var(--navy);
             color: var(--white);
@@ -842,13 +946,14 @@
             font-size: 18px;
             color: rgba(255, 255, 255, 0.7);
             max-width: 560px;
-            margin: 0 auto 48px;
+            margin: 0 auto 40px;
             line-height: 1.6;
         }
         .cta-actions {
             display: flex;
             gap: 16px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* FOOTER */
@@ -895,29 +1000,34 @@
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             font-size: 12px;
             color: rgba(255, 255, 255, 0.35);
-        }
-        .footer-social {
-            display: flex;
+            flex-wrap: wrap;
             gap: 16px;
         }
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.35);
+            margin-left: 16px;
+        }
+        .footer-bottom a:hover { color: var(--gold); }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .hero-grid, .tech-grid, .security-grid { grid-template-columns: 1fr; gap: 60px; }
-            .assess-grid, .sol-grid, .pricing-grid, .stats-grid, .test-grid { grid-template-columns: 1fr 1fr; }
+            .hero-grid, .tech-grid, .contact-grid { grid-template-columns: 1fr; gap: 60px; }
+            .assess-grid, .sol-grid, .pricing-grid, .stats-grid { grid-template-columns: 1fr 1fr; }
             .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
         }
         @media (max-width: 768px) {
             .nav-menu { display: none; }
             .hero { padding: 60px 0 80px; }
             .hero-metrics { flex-direction: column; gap: 24px; }
-            .assess-grid, .sol-grid, .pricing-grid, .stats-grid, .test-grid { grid-template-columns: 1fr; }
+            .assess-grid, .sol-grid, .pricing-grid, .stats-grid { grid-template-columns: 1fr; }
             .trust-logos { gap: 32px; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
             .section { padding: 80px 0; }
-            .cta { padding: 100px 0; }
+            .cta { padding: 80px 0; }
             .cta-actions { flex-direction: column; }
-            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .pricing-category-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .pricing-category-desc { margin-left: 0; }
         }
 
         /* ANIMATIONS */
@@ -936,59 +1046,66 @@
     <div class="nav-wrap">
         <div class="container">
             <nav class="nav">
-                <a href="#" class="nav-logo">
-                    <div class="nav-logo-mark">V</div>
-                    <div class="nav-logo-text">VIGORRE ONE<span class="tm">™</span></div>
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" style="height:32px;width:auto;" />
+                    <div>
+                        <div class="nav-logo-text">VIGORRE <span style="color:var(--gold)">ONE</span><span class="tm">™</span></div>
+                        <div class="nav-logo-sub">People Analytics Enterprise</div>
+                    </div>
                 </a>
                 <ul class="nav-menu">
-                    <li><a href="#platform">Platform</a></li>
-                    <li><a href="#technology">Technology</a></li>
-                    <li><a href="#solutions">Solutions</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#customers">Customers</a></li>
+                    <li><a href="#testes">Testes</a></li>
+                    <li><a href="#vigor">VIGOR®</a></li>
+                    <li><a href="#para-voce">Para Você</a></li>
+                    <li><a href="#para-empresas">Empresas</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                    <li><a href="#contato">Contato</a></li>
                 </ul>
                 <div class="nav-cta">
-                    <a href="#">Sign in</a>
-                    <a href="#contact" class="btn btn-primary">Request demo</a>
+                    <a href="login.html">Entrar</a>
+                    <a href="#planos" class="btn btn-gold" style="padding:10px 20px;font-size:13px;">Comprar Créditos</a>
                 </div>
             </nav>
         </div>
     </div>
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-content">
-                    <div class="eyebrow hero-eyebrow fade-up">Enterprise People Intelligence</div>
-                    <h1 class="fade-up-2">The science of <span class="serif">human intelligence</span>, engineered for the enterprise.</h1>
-                    <p class="hero-lead fade-up-3">VIGORRE ONE™ combines neuroscience, behavioral psychology, and predictive analytics to transform how leading organizations understand, develop, and retain their people.</p>
+                    <div class="eyebrow hero-eyebrow fade-up">People Intelligence</div>
+                    <h1 class="fade-up-2">A ciência do <span class="serif">potencial humano</span>, aplicada à sua jornada.</h1>
+                    <div class="hero-highlight fade-up-3">
+                        Invista em você. Compre créditos e tenha acesso a laudos científicos de até 100 páginas com análise integrada de neurociência, psicologia e coaching.
+                    </div>
+                    <p class="hero-lead fade-up-3">Seu potencial não é um mistério — é ciência. Cinco avaliações validadas internacionalmente, integradas pela exclusiva tecnologia VIGOR®, para uma visão completa do seu perfil comportamental.</p>
                     <div class="hero-actions fade-up-3">
-                        <a href="#contact" class="btn btn-gold">Request a demo</a>
-                        <a href="#platform" class="btn btn-ghost">Explore platform →</a>
+                        <a href="#planos" class="btn btn-gold">Comprar Créditos</a>
+                        <a href="#testes" class="btn btn-ghost">Conhecer Testes →</a>
                     </div>
                     <div class="hero-metrics fade-up-3">
                         <div>
-                            <div class="hero-metric-value">10M<span class="unit">+</span></div>
-                            <div class="hero-metric-label">Assessments delivered</div>
+                            <div class="hero-metric-value">5<span class="unit">+</span></div>
+                            <div class="hero-metric-label">Avaliações Científicas</div>
                         </div>
                         <div>
-                            <div class="hero-metric-value">99.9<span class="unit">%</span></div>
-                            <div class="hero-metric-label">Platform uptime</div>
+                            <div class="hero-metric-value">100<span class="unit">p</span></div>
+                            <div class="hero-metric-label">Laudo VIGOR®</div>
                         </div>
                         <div>
-                            <div class="hero-metric-value">4.9<span class="unit">/5</span></div>
-                            <div class="hero-metric-label">Customer rating</div>
+                            <div class="hero-metric-value">10<span class="unit">+</span></div>
+                            <div class="hero-metric-label">Anos de Pesquisa</div>
                         </div>
                     </div>
                 </div>
                 <div class="hero-visual fade-up-3">
-                    <img src="image:0" alt="Enterprise people intelligence" />
+                    <img src="image:0" alt="Plataforma de inteligência comportamental VIGORRE ONE" />
                     <div class="hero-badge">
-                        <div class="hero-badge-icon">✓</div>
+                        <div class="hero-badge-icon">V</div>
                         <div class="hero-badge-text">
-                            <strong>Scientifically Validated</strong>
-                            200+ peer-reviewed studies
+                            <strong>Tecnologia VIGOR®</strong>
+                            Método proprietário validado
                         </div>
                     </div>
                 </div>
@@ -999,350 +1116,486 @@
     <!-- TRUST -->
     <section class="trust">
         <div class="container">
-            <div class="trust-title">Trusted by leading organizations worldwide</div>
+            <div class="trust-title">Baseado em ciência validada internacionalmente</div>
             <div class="trust-logos">
-                <div class="trust-logo">MICROSOFT</div>
-                <div class="trust-logo">SALESFORCE</div>
-                <div class="trust-logo">DELOITTE</div>
-                <div class="trust-logo">ACCENTURE</div>
-                <div class="trust-logo">UNILEVER</div>
-                <div class="trust-logo">SIEMENS</div>
+                <div class="trust-logo">DISC</div>
+                <div class="trust-logo">BIG FIVE</div>
+                <div class="trust-logo">NEUROCIÊNCIA</div>
+                <div class="trust-logo">PSICOLOGIA</div>
+                <div class="trust-logo">COACHING</div>
+                <div class="trust-logo">PNL</div>
             </div>
         </div>
     </section>
 
-    <!-- PLATFORM -->
-    <section class="section" id="platform">
+    <!-- PLATFORM / TESTES -->
+    <section class="section" id="testes">
         <div class="container">
             <div class="section-header">
-                <div class="eyebrow">The Platform</div>
-                <h2>Five validated assessments. <br/>One unified intelligence layer.</h2>
-                <p>A comprehensive suite of behavioral and psychological evaluations, engineered for enterprise-grade accuracy and scalability.</p>
+                <div class="eyebrow">Avaliações Científicas</div>
+                <h2>5 testes validados. <br/><span class="serif">Uma única plataforma.</span></h2>
+                <p>Avaliações comportamentais reconhecidas internacionalmente, integradas em uma visão completa do seu perfil humano.</p>
             </div>
             <div class="assess-grid">
-                <div class="assess-card">
+                <a href="tests/disc/" class="assess-card">
                     <div class="assess-num">01 — DISC</div>
-                    <h3>Behavioral Profile</h3>
-                    <p>Map the four core behavioral dimensions—Dominance, Influence, Steadiness, Conscientiousness—that shape how people communicate, lead, and collaborate.</p>
-                    <a href="#" class="assess-link">Learn more →</a>
-                </div>
-                <div class="assess-card">
+                    <h3>Perfil Comportamental</h3>
+                    <p>Entenda seu perfil comportamental: Dominância, Influência, Estabilidade e Conformidade. Como você age, reage e se relaciona.</p>
+                    <span class="assess-link">Realizar Teste →</span>
+                </a>
+                <a href="tests/bigfive/" class="assess-card">
                     <div class="assess-num">02 — BIG FIVE</div>
-                    <h3>Personality Architecture</h3>
-                    <p>The gold standard in personality science. Measure the five universal traits that predict behavior across contexts with clinical precision.</p>
-                    <a href="#" class="assess-link">Learn more →</a>
-                </div>
-                <div class="assess-card">
-                    <div class="assess-num">03 — EQ</div>
-                    <h3>Emotional Intelligence</h3>
-                    <p>Quantify the emotional competencies that drive leadership effectiveness, team performance, and long-term career resilience.</p>
-                    <a href="#" class="assess-link">Learn more →</a>
-                </div>
-                <div class="assess-card">
-                    <div class="assess-num">04 — VALUES</div>
-                    <h3>Value Drivers</h3>
-                    <p>Identify the core motivational values that shape decision-making, engagement, and cultural alignment within organizations.</p>
-                    <a href="#" class="assess-link">Learn more →</a>
-                </div>
-                <div class="assess-card">
-                    <div class="assess-num">05 — SWOT</div>
-                    <h3>Strategic Self-Analysis</h3>
-                    <p>A structured framework for mapping strengths, development areas, opportunities, and risks—transforming insights into action plans.</p>
-                    <a href="#" class="assess-link">Learn more →</a>
-                </div>
-                <div class="assess-card">
-                    <div class="assess-num">06 — VIGOR® REPORT</div>
-                    <h3>Integrated Intelligence</h3>
-                    <p>80–100 pages of synthesized analysis combining all assessments into a single, actionable development blueprint powered by proprietary algorithms.</p>
-                    <a href="#" class="assess-link">Learn more →</a>
-                </div>
+                    <h3>Arquitetura da Personalidade</h3>
+                    <p>Os 5 grandes traços da personalidade: Abertura, Consciência, Extroversão, Amabilidade e Neuroticismo. O mapa completo da sua mente.</p>
+                    <span class="assess-link">Realizar Teste →</span>
+                </a>
+                <a href="tests/ie/" class="assess-card">
+                    <div class="assess-num">03 — INTELIGÊNCIA EMOCIONAL</div>
+                    <h3>Competências Emocionais</h3>
+                    <p>Capacidade de reconhecer, compreender e gerenciar emoções. O fator mais importante para o sucesso pessoal e profissional.</p>
+                    <span class="assess-link">Realizar Teste →</span>
+                </a>
+                <a href="tests/valores/" class="assess-card">
+                    <div class="assess-num">04 — VALORES PESSOAIS</div>
+                    <h3>Drivers Motivacionais</h3>
+                    <p>Descubra o que realmente importa para você. Valores que guiam suas decisões, carreira e relacionamentos ao longo da vida.</p>
+                    <span class="assess-link">Realizar Teste →</span>
+                </a>
+                <a href="tests/swot/" class="assess-card">
+                    <div class="assess-num">05 — SWOT PESSOAL</div>
+                    <h3>Análise Estratégica</h3>
+                    <p>Mapeie suas Forças, Fraquezas, Oportunidades e Ameaças. Um plano estratégico para sua vida e carreira com precisão científica.</p>
+                    <span class="assess-link">Realizar Teste →</span>
+                </a>
+                <a href="laudos/" class="assess-card">
+                    <div class="assess-num">06 — LAUDO VIGOR®</div>
+                    <h3>Inteligência Integrada</h3>
+                    <p>80-100 páginas de análise integrada com todos os testes. Neurociência + Psicologia + Coaching para seu desenvolvimento completo.</p>
+                    <span class="assess-link">Ver Laudo →</span>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- TECHNOLOGY -->
-    <section class="section section-alt" id="technology">
+    <section class="section section-alt" id="vigor">
         <div class="container">
             <div class="tech-grid">
                 <div class="tech-content">
-                    <div class="eyebrow">Proprietary Technology</div>
-                    <h2>The VIGOR® methodology.</h2>
-                    <p>A decade of research distilled into a five-pillar framework that synthesizes neuroscience, cognitive psychology, psychometrics, and behavioral coaching into one unified intelligence system.</p>
-                    <p>Unlike fragmented tools that measure isolated traits, VIGOR® delivers a multidimensional view of human potential—accurate, actionable, and scientifically rigorous.</p>
+                    <div class="eyebrow">Tecnologia Proprietária</div>
+                    <h2>O método <span class="serif">VIGOR®</span>.</h2>
+                    <p>Mais de uma década de pesquisa científica condensada em uma metodologia de cinco pilares que sintetiza neurociência, psicologia cognitiva, psicometria e coaching comportamental em um sistema unificado de inteligência humana.</p>
+                    <p>Diferente de ferramentas fragmentadas que medem traços isolados, o VIGOR® entrega uma visão multidimensional do potencial humano — precisa, acionável e cientificamente rigorosa.</p>
                     <div class="tech-features">
                         <div class="tech-feature">
-                            <div class="tech-feature-title">Vision</div>
-                            <div class="tech-feature-desc">Strategic self-awareness and long-term direction</div>
+                            <div class="tech-feature-title">Visão</div>
+                            <div class="tech-feature-desc">Autoconsciência estratégica e direção de longo prazo</div>
                         </div>
                         <div class="tech-feature">
-                            <div class="tech-feature-title">Intelligence</div>
-                            <div class="tech-feature-desc">Cognitive and emotional capability mapping</div>
+                            <div class="tech-feature-title">Inteligência</div>
+                            <div class="tech-feature-desc">Mapeamento de capacidades cognitivas e emocionais</div>
                         </div>
                         <div class="tech-feature">
-                            <div class="tech-feature-title">Governance</div>
-                            <div class="tech-feature-desc">Decision-making and self-regulation patterns</div>
+                            <div class="tech-feature-title">Gestão</div>
+                            <div class="tech-feature-desc">Padrões de tomada de decisão e autorregulação</div>
                         </div>
                         <div class="tech-feature">
-                            <div class="tech-feature-title">Organization</div>
-                            <div class="tech-feature-desc">Systems, habits, and execution frameworks</div>
+                            <div class="tech-feature-title">Organização</div>
+                            <div class="tech-feature-desc">Sistemas, hábitos e frameworks de execução</div>
                         </div>
                         <div class="tech-feature">
-                            <div class="tech-feature-title">Results</div>
-                            <div class="tech-feature-desc">Measurable outcomes and performance impact</div>
+                            <div class="tech-feature-title">Resultado</div>
+                            <div class="tech-feature-desc">Desfechos mensuráveis e impacto na performance</div>
                         </div>
                         <div class="tech-feature">
-                            <div class="tech-feature-title">Integration</div>
-                            <div class="tech-feature-desc">Synthesized insights across all dimensions</div>
+                            <div class="tech-feature-title">Integração</div>
+                            <div class="tech-feature-desc">Insights sintetizados entre todas as dimensões</div>
                         </div>
                     </div>
                 </div>
                 <div class="tech-visual">
-                    <img src="image:2" alt="VIGOR technology" />
+                    <img src="image:2" alt="Metodologia VIGOR tecnologia proprietária" />
                     <div class="tech-visual-overlay">
-                        <div class="label">Methodology</div>
-                        <h4>Five pillars. One unified framework.</h4>
+                        <div class="label">Metodologia Exclusiva</div>
+                        <h4>Cinco pilares. Um framework unificado.</h4>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SOLUTIONS -->
-    <section class="section" id="solutions">
+    <!-- PARA VOCÊ -->
+    <section class="section" id="para-voce">
         <div class="container">
             <div class="section-header">
-                <div class="eyebrow">Solutions</div>
-                <h2>Built for every <span class="serif">human challenge</span> your organization faces.</h2>
-                <p>From talent acquisition to leadership development, VIGORRE ONE™ provides the behavioral intelligence to make better decisions at every level.</p>
+                <div class="eyebrow">Para Você</div>
+                <h2>Por que o autoconhecimento <span class="serif">transforma vidas</span>.</h2>
+                <p>Descubra seu perfil comportamental e aplique a ciência no seu desenvolvimento pessoal e profissional.</p>
             </div>
             <div class="sol-grid">
                 <div class="sol-card">
                     <div class="sol-card-num">01</div>
-                    <h3>Talent Acquisition</h3>
-                    <p>Eliminate hiring bias. Predict candidate success with 85% accuracy using behavioral profiles matched to role requirements and team composition.</p>
+                    <h3>Autoconhecimento Profundo</h3>
+                    <p>Entenda suas emoções, reações e comportamentos. Descubra por que você age de determinada forma e como isso molda cada área da sua vida.</p>
                 </div>
                 <div class="sol-card">
                     <div class="sol-card-num">02</div>
-                    <h3>Leadership Development</h3>
-                    <p>Identify high-potential leaders and design personalized development journeys that build the specific competencies your organization needs.</p>
+                    <h3>Carreira com Propósito</h3>
+                    <p>Alinhe sua carreira com seus talentos naturais. Descubra as áreas onde você tem mais potencial e onde pode brilhar com autenticidade.</p>
                 </div>
                 <div class="sol-card">
                     <div class="sol-card-num">03</div>
-                    <h3>Team Performance</h3>
-                    <p>Map team dynamics, resolve conflicts, and engineer complementary compositions that multiply collective output and engagement.</p>
+                    <h3>Relacionamentos Saudáveis</h3>
+                    <p>Entenda como você se relaciona com os outros. Melhore sua comunicação, empatia e conexões pessoais e profissionais com base em dados.</p>
                 </div>
                 <div class="sol-card">
                     <div class="sol-card-num">04</div>
-                    <h3>Cultural Transformation</h3>
-                    <p>Measure, understand, and shape organizational culture through the aggregate behavioral intelligence of your workforce.</p>
+                    <h3>Equilíbrio Emocional</h3>
+                    <p>Aprenda a gerenciar suas emoções, reduzir o estresse e aumentar sua resiliência diante dos desafios da vida com técnicas cientificamente validadas.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- STATS -->
-    <section class="section section-dark">
+    <!-- PARA EMPRESAS -->
+    <section class="section section-dark" id="para-empresas">
         <div class="container">
             <div class="section-header">
-                <div class="eyebrow">Measured Impact</div>
-                <h2>The ROI of <span class="serif">behavioral intelligence</span>.</h2>
-                <p>Organizations that deploy VIGORRE ONE™ report measurable improvements across every people metric that matters.</p>
+                <div class="eyebrow">Para Empresas</div>
+                <h2>O ROI da <span class="serif">inteligência comportamental</span>.</h2>
+                <p>Organizações que utilizam avaliações científicas de pessoas reportam melhorias mensuráveis em todas as métricas que importam.</p>
             </div>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-value">70<span class="unit">%</span></div>
-                    <div class="stat-label">Reduction in unwanted turnover within the first year</div>
+                    <div class="stat-label">Redução de turnover no primeiro ano com avaliações comportamentais</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">85<span class="unit">%</span></div>
+                    <div class="stat-label">Aumento de performance em equipes alinhadas ao perfil certo</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">3<span class="unit">×</span></div>
-                    <div class="stat-label">Higher performance from behavior-matched hires</div>
+                    <div class="stat-label">Mais chances de sucesso em contratações baseadas em perfil comportamental</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">60<span class="unit">%</span></div>
-                    <div class="stat-label">Fewer internal conflicts in aligned teams</div>
+                    <div class="stat-label">Menos conflitos internos em equipes com perfis complementares</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value">2.5<span class="unit">×</span></div>
-                    <div class="stat-label">Greater engagement among understood employees</div>
-                </div>
+            </div>
+            <div style="margin-top:64px;text-align:center;">
+                <p style="color:rgba(255,255,255,0.7);font-size:17px;max-width:680px;margin:0 auto 32px;line-height:1.7;">
+                    Equipes com perfis complementares reduzem conflitos e multiplicam engajamento. Funcionários que se sentem compreendidos têm 2,5× mais produtividade e permanência.
+                </p>
+                <a href="#planos" class="btn btn-gold">Ver Planos Corporativos</a>
             </div>
         </div>
     </section>
 
     <!-- PRICING -->
-    <section class="section" id="pricing">
+    <section class="section" id="planos">
         <div class="container">
             <div class="section-header">
-                <div class="eyebrow">Pricing</div>
-                <h2>Transparent plans. <br/>No surprises.</h2>
-                <p>Choose the plan that fits your organization. Scale up or down anytime. All plans include enterprise-grade security and dedicated support.</p>
+                <div class="eyebrow">Investimento</div>
+                <h2>Planos transparentes. <br/><span class="serif">Sem surpresas.</span></h2>
+                <p>Escolha o plano que se adapta ao seu momento. Todos incluem segurança LGPD e suporte dedicado.</p>
             </div>
-            <div class="pricing-grid">
-                <!-- STARTER -->
-                <div class="price-card">
-                    <span class="price-tag plain">STARTER</span>
-                    <h3>Professional</h3>
-                    <p class="price-desc">For growing teams and individual consultants who need validated assessments with powerful reporting.</p>
-                    <div class="price-amount">
-                        <span class="currency">R$</span>249<span class="per">/month</span>
-                    </div>
-                    <div class="price-note">BILLED ANNUALLY · 10 REPORTS / MONTH</div>
-                    <ul class="price-features">
-                        <li>10 full behavioral reports per month</li>
-                        <li>All 5 core assessments included</li>
-                        <li>Personalized development plans (PDI)</li>
-                        <li>Team analytics dashboard</li>
-                        <li>Standard support (email)</li>
-                    </ul>
-                    <a href="#" class="price-btn price-btn-primary">Start with Professional</a>
-                </div>
 
-                <!-- ENTERPRISE - FEATURED -->
-                <div class="price-card featured">
-                    <span class="price-tag">MOST CHOSEN</span>
-                    <h3>Enterprise</h3>
-                    <p class="price-desc">For organizations deploying people intelligence at scale—with full VIGOR® reports and priority support.</p>
-                    <div class="price-amount">
-                        <span class="currency">R$</span>1.490<span class="per">/month</span>
-                    </div>
-                    <div class="price-note">BILLED ANNUALLY · 50 REPORTS / MONTH</div>
-                    <ul class="price-features">
-                        <li>50 full behavioral reports per month</li>
-                        <li>All 5 core assessments included</li>
-                        <li>Integrated VIGOR® reports (80–100 pages)</li>
-                        <li>Advanced team & organization analytics</li>
-                        <li>SSO, API access, custom integrations</li>
-                        <li>Priority support (chat + email)</li>
-                        <li>Dedicated customer success manager</li>
-                    </ul>
-                    <a href="#" class="price-btn price-btn-gold">Start with Enterprise</a>
-                </div>
+            <div class="pricing-intro">
+                <span class="mono">Oferta por tempo limitado</span>
+                Garanta seu pacote com condições especiais. Invista no seu desenvolvimento com o melhor custo-benefício do mercado.
+            </div>
 
-                <!-- CUSTOM -->
-                <div class="price-card">
-                    <span class="price-tag plain">CUSTOM</span>
-                    <h3>Global</h3>
-                    <p class="price-desc">For multinational organizations requiring unlimited scale, bespoke configurations, and strategic partnership.</p>
-                    <div class="price-amount">
-                        Custom
-                    </div>
-                    <div class="price-note">TAILORED TO YOUR ORGANIZATION</div>
-                    <ul class="price-features">
-                        <li>Unlimited reports and assessments</li>
-                        <li>Custom VIGOR® report configurations</li>
-                        <li>White-label options</li>
-                        <li>Dedicated infrastructure & SLA</li>
-                        <li>On-premise deployment available</li>
-                        <li>Executive advisory & training</li>
-                        <li>24/7 dedicated support team</li>
-                    </ul>
-                    <a href="#contact" class="price-btn price-btn-ghost">Talk to sales</a>
+            <!-- CRÉDITOS DE RELATÓRIO -->
+            <div class="pricing-category">
+                <div class="pricing-category-header">
+                    <span class="pricing-category-num">01</span>
+                    <span class="pricing-category-title">Créditos de Relatório</span>
+                    <span class="pricing-category-desc">Relatórios individuais com PDI personalizado</span>
                 </div>
+                <div class="pricing-grid">
+                    <!-- Unitário -->
+                    <div class="price-card">
+                        <span class="price-tag plain">UNITÁRIO</span>
+                        <h3>Essential</h3>
+                        <div class="price-subtitle">1 crédito</div>
+                        <div class="price-original">R$ 35,00</div>
+                        <div class="price-amount">
+                            <span class="currency">R$</span>24,90
+                        </div>
+                        <span class="price-savings">Economia de 29%</span>
+                        <ul class="price-features">
+                            <li>1 relatório comportamental completo</li>
+                            <li>PDI personalizado incluso</li>
+                            <li class="off">Laudo VIGOR® (80-100 páginas)</li>
+                            <li>Suporte por e-mail</li>
+                        </ul>
+                        <div class="price-coupon" data-cupom="RELATO01" onclick="copyCoupon(this)">
+                            <div>
+                                <div class="price-coupon-label">Cupom</div>
+                                <div class="price-coupon-code">RELATO01</div>
+                            </div>
+                            <div class="price-coupon-copy">Copiar</div>
+                        </div>
+                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                    </div>
+
+                    <!-- Básico -->
+                    <div class="price-card">
+                        <span class="price-tag plain">BÁSICO</span>
+                        <h3>Professional</h3>
+                        <div class="price-subtitle">10 créditos</div>
+                        <div class="price-original">R$ 350,00</div>
+                        <div class="price-amount">
+                            <span class="currency">R$</span>199,90
+                        </div>
+                        <span class="price-savings">Economia de 43%</span>
+                        <ul class="price-features">
+                            <li>10 relatórios comportamentais</li>
+                            <li>PDI personalizado incluso</li>
+                            <li class="off">Laudo VIGOR® (80-100 páginas)</li>
+                            <li>Suporte prioritário</li>
+                        </ul>
+                        <div class="price-coupon" data-cupom="RELATO10" onclick="copyCoupon(this)">
+                            <div>
+                                <div class="price-coupon-label">Cupom</div>
+                                <div class="price-coupon-code">RELATO10</div>
+                            </div>
+                            <div class="price-coupon-copy">Copiar</div>
+                        </div>
+                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                    </div>
+
+                    <!-- Ouro - FEATURED -->
+                    <div class="price-card featured">
+                        <span class="price-tag">MAIS ESCOLHIDO</span>
+                        <h3>Enterprise</h3>
+                        <div class="price-subtitle">50 créditos</div>
+                        <div class="price-amount">
+                            <span class="currency">R$</span>1.400
+                        </div>
+                        <span class="price-savings">Melhor custo-benefício</span>
+                        <ul class="price-features">
+                            <li>50 relatórios comportamentais</li>
+                            <li>PDI personalizado incluso</li>
+                            <li>Laudo VIGOR® (3 créditos inclusos)</li>
+                            <li>Customer Success dedicado</li>
+                            <li>Acesso prioritário a novos recursos</li>
+                        </ul>
+                        <div style="height:60px;"></div>
+                        <a href="login.html" class="price-btn price-btn-gold">Escolher Enterprise</a>
+                    </div>
+
+                    <!-- Platina -->
+                    <div class="price-card">
+                        <span class="price-tag plain">PLATINA</span>
+                        <h3>Global</h3>
+                        <div class="price-subtitle">100 créditos</div>
+                        <div class="price-original">R$ 2.500,00</div>
+                        <div class="price-amount">
+                            <span class="currency">R$</span>1.700
+                        </div>
+                        <span class="price-savings">Economia de 32%</span>
+                        <ul class="price-features">
+                            <li>100 relatórios comportamentais</li>
+                            <li>PDI personalizado incluso</li>
+                            <li>Laudo VIGOR® (3 créditos inclusos)</li>
+                            <li>Suporte dedicado 24/7</li>
+                            <li>API e integrações customizadas</li>
+                        </ul>
+                        <div class="price-coupon" data-cupom="RELATO100" onclick="copyCoupon(this)">
+                            <div>
+                                <div class="price-coupon-label">Cupom</div>
+                                <div class="price-coupon-code">RELATO100</div>
+                            </div>
+                            <div class="price-coupon-copy">Copiar</div>
+                        </div>
+                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAUDOS VIGOR -->
+            <div class="pricing-category">
+                <div class="pricing-category-header">
+                    <span class="pricing-category-num">02</span>
+                    <span class="pricing-category-title">Laudo VIGOR® (80-100 páginas)</span>
+                    <span class="pricing-category-desc">Análise integrada com neurociência e psicologia</span>
+                </div>
+                <div class="pricing-grid">
+                    <!-- Unitário Premium -->
+                    <div class="price-card">
+                        <span class="price-tag plain">UNITÁRIO</span>
+                        <h3>Essential</h3>
+                        <div class="price-subtitle">1 laudo completo</div>
+                        <div class="price-original">R$ 199,90</div>
+                        <div class="price-amount">
+                            <span class="currency">R$</span>99,90
+                        </div>
+                        <span class="price-savings">Economia de 50%</span>
+                        <ul class="price-features">
+                            <li>1 laudo VIGOR® completo</li>
+                            <li>80-100 páginas de análise</li>
+                            <li>Neurociência + Psicologia integradas</li>
+                            <li>Suporte por e-mail</li>
+                        </ul>
+                        <div class="price-coupon" data-cupom="LAUDO1" onclick="copyCoupon(this)">
+                            <div>
+                                <div class="price-coupon-label">Cupom</div>
+                                <div class="price-coupon-code">LAUDO1</div>
+                            </div>
+                            <div class="price-coupon-copy">Copiar</div>
+                        </div>
+                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                    </div>
+
+                    <!-- Básico Premium -->
+                    <div class="price-card">
+                        <span class="price-tag plain">BÁSICO</span>
+                        <h3>Professional</h3>
+                        <div class="price-subtitle">3 laudos completos</div>
+                        <div class="price-original">R$ 500,00</div>
+                        <div class="price-amount">
+                            <span class="currency">R$</span>240,00
+                        </div>
+                        <span class="price-savings">Economia de 52%</span>
+                        <ul class="price-features">
+                            <li>3 laudos VIGOR® completos</li>
+                            <li>80-100 páginas por laudo</li>
+                            <li>Neurociência + Psicologia integradas</li>
+                            <li>Suporte prioritário</li>
+                        </ul>
+                        <div class="price-coupon" data-cupom="LAUDO3" onclick="copyCoupon(this)">
+                            <div>
+                                <div class="price-coupon-label">Cupom</div>
+                                <div class="price-coupon-code">LAUDO3</div>
+                            </div>
+                            <div class="price-coupon-copy">Copiar</div>
+                        </div>
+                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                    </div>
+
+                    <!-- Ouro Premium - FEATURED -->
+                    <div class="price-card featured">
+                        <span class="price-tag">MAIS ESCOLHIDO</span>
+                        <h3>Enterprise</h3>
+                        <div class="price-subtitle">10 laudos completos</div>
+                        <div class="price-amount">
+                            <span class="currency">R$</span>1.290
+                        </div>
+                        <span class="price-savings">Melhor custo-benefício</span>
+                        <ul class="price-features">
+                            <li>10 laudos VIGOR® completos</li>
+                            <li>80-100 páginas por laudo</li>
+                            <li>Neurociência + Psicologia integradas</li>
+                            <li>Customer Success dedicado</li>
+                            <li>Sessão de devolutiva incluída</li>
+                        </ul>
+                        <div style="height:60px;"></div>
+                        <a href="login.html" class="price-btn price-btn-gold">Escolher Enterprise</a>
+                    </div>
+
+                    <!-- Platina Premium -->
+                    <div class="price-card">
+                        <span class="price-tag plain">PLATINA</span>
+                        <h3>Global</h3>
+                        <div class="price-subtitle">10 laudos completos</div>
+                        <div class="price-original">R$ 2.000,00</div>
+                        <div class="price-amount">
+                            <span class="currency">R$</span>700,00
+                        </div>
+                        <span class="price-savings">Economia de 65%</span>
+                        <ul class="price-features">
+                            <li>10 laudos VIGOR® completos</li>
+                            <li>80-100 páginas por laudo</li>
+                            <li>Neurociência + Psicologia integradas</li>
+                            <li>Suporte dedicado 24/7</li>
+                            <li>Consultoria estratégica incluída</li>
+                        </ul>
+                        <div class="price-coupon" data-cupom="LAUDO10" onclick="copyCoupon(this)">
+                            <div>
+                                <div class="price-coupon-label">Cupom</div>
+                                <div class="price-coupon-code">LAUDO10</div>
+                            </div>
+                            <div class="price-coupon-copy">Copiar</div>
+                        </div>
+                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align:center;padding:24px;background:var(--bg-alt);border-radius:2px;">
+                <p style="color:var(--ink-muted);font-size:13px;margin-bottom:8px;">
+                    Todos os planos incluem LGPD, segurança enterprise e suporte dedicado.
+                </p>
+                <p style="color:var(--ink);font-size:14px;font-weight:500;">
+                    O menor preço do mercado com a melhor entrega científica.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="section section-alt" id="customers">
+    <!-- CONTATO -->
+    <section class="section section-alt" id="contato">
         <div class="container">
-            <div class="section-header">
-                <div class="eyebrow">What customers say</div>
-                <h2>Trusted by <span class="serif">leaders</span> who value evidence.</h2>
-            </div>
-            <div class="test-grid">
-                <div class="test-card">
-                    <div class="test-stars">★★★★★</div>
-                    <p class="test-quote">"VIGORRE ONE transformed our hiring process. We reduced bad-fit hires by 68% in the first year. The VIGOR® reports became the foundation of our leadership academy."</p>
-                    <div class="test-author">
-                        <div class="test-avatar">MS</div>
-                        <div class="test-author-info">
-                            <h5>Marina Sato</h5>
-                            <span>CHRO · Fortune 500 Tech Company</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="test-card">
-                    <div class="test-stars">★★★★★</div>
-                    <p class="test-quote">"The scientific rigor is unmatched. After evaluating 12 different platforms, VIGORRE ONE was the only one that gave us actionable, validated insights we could trust at scale."</p>
-                    <div class="test-author">
-                        <div class="test-avatar">RK</div>
-                        <div class="test-author-info">
-                            <h5>Rafael Kim</h5>
-                            <span>VP People · Global Consulting Firm</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="test-card">
-                    <div class="test-stars">★★★★★</div>
-                    <p class="test-quote">"We use VIGORRE ONE for every C-suite search now. The multidimensional profiles give our clients clarity they've never had from any other assessment tool."</p>
-                    <div class="test-author">
-                        <div class="test-avatar">AL</div>
-                        <div class="test-author-info">
-                            <h5>Ana Luíza</h5>
-                            <span>Managing Partner · Executive Search</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECURITY -->
-    <section class="section" id="security">
-        <div class="container">
-            <div class="security-grid">
-                <div>
-                    <div class="eyebrow">Security & Compliance</div>
-                    <h2 style="font-size:clamp(32px,3.5vw,44px);margin:20px 0 20px;letter-spacing:-0.03em;">Built for enterprises that cannot compromise.</h2>
-                    <p style="font-size:17px;color:var(--ink-soft);line-height:1.7;max-width:520px;">Your people data is your most sensitive asset. VIGORRE ONE™ is engineered with the security, privacy, and compliance standards that global enterprises demand—built into every layer of the platform.</p>
-                    <div class="security-badges">
-                        <div class="security-badge">
-                            <div class="security-badge-icon">🛡</div>
-                            <div class="security-badge-text">
-                                <h5>SOC 2 Type II</h5>
-                                <span>Independently audited</span>
+            <div class="contact-grid">
+                <div class="contact-content">
+                    <div class="eyebrow">Contato</div>
+                    <h2>Fale com a <span class="serif">Vigorre</span>.</h2>
+                    <p>Tire suas dúvidas, solicite uma demonstração personalizada ou entre em contato diretamente com nosso time de especialistas.</p>
+                    <div class="contact-items">
+                        <a href="mailto:contato@vigorre.com.br" class="contact-item">
+                            <div class="contact-item-icon">@</div>
+                            <div class="contact-item-text">
+                                <span class="contact-item-label">E-mail</span>
+                                <span class="contact-item-value">contato@vigorre.com.br</span>
                             </div>
-                        </div>
-                        <div class="security-badge">
-                            <div class="security-badge-icon">✓</div>
-                            <div class="security-badge-text">
-                                <h5>LGPD & GDPR</h5>
-                                <span>Full compliance</span>
+                        </a>
+                        <a href="tel:+5534991850735" class="contact-item">
+                            <div class="contact-item-icon">☎</div>
+                            <div class="contact-item-text">
+                                <span class="contact-item-label">Telefone</span>
+                                <span class="contact-item-value">(34) 99185-0735</span>
                             </div>
-                        </div>
-                        <div class="security-badge">
-                            <div class="security-badge-icon">🔒</div>
-                            <div class="security-badge-text">
-                                <h5>ISO 27001</h5>
-                                <span>Information security</span>
+                        </a>
+                        <a href="https://www.vigorre.com.br" target="_blank" class="contact-item">
+                            <div class="contact-item-icon">⌘</div>
+                            <div class="contact-item-text">
+                                <span class="contact-item-label">Website</span>
+                                <span class="contact-item-value">www.vigorre.com.br</span>
                             </div>
-                        </div>
-                        <div class="security-badge">
-                            <div class="security-badge-icon">⚡</div>
-                            <div class="security-badge-text">
-                                <h5>99.9% SLA</h5>
-                                <span>Enterprise uptime guarantee</span>
+                        </a>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">◉</div>
+                            <div class="contact-item-text">
+                                <span class="contact-item-label">Localização</span>
+                                <span class="contact-item-value">Brasil · Atendimento Global</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tech-visual">
-                    <img src="image:3" alt="Enterprise security" />
+                <div class="contact-visual">
+                    <img src="image:3" alt="Contato Vigorre suporte enterprise" />
+                    <div class="contact-visual-overlay">
+                        <h4>Pronto para começar?</h4>
+                        <p>Entre em contato e descubra como a VIGORRE ONE™ pode transformar sua vida pessoal, profissional e sua empresa.</p>
+                        <a href="mailto:contato@vigorre.com.br" class="btn btn-gold">Enviar E-mail</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta" id="contact">
+    <!-- CTA FINAL -->
+    <section class="cta">
         <div class="container">
             <div class="cta-content">
-                <div class="eyebrow" style="justify-content:center;">Book a demo</div>
-                <h2>See VIGORRE ONE™ <br/>in action.</h2>
-                <p>Meet with our team for a personalized walkthrough of the platform. Understand how behavioral intelligence can transform your organization's people strategy.</p>
+                <div class="eyebrow" style="justify-content:center;">Invista no seu potencial</div>
+                <h2>Comece sua jornada de <span class="serif">autoconhecimento</span> hoje.</h2>
+                <p>Milhares de pessoas já transformaram suas vidas com a ciência da VIGORRE ONE™. Agora é a sua vez.</p>
                 <div class="cta-actions">
-                    <a href="mailto:contato@vigorre.com.br" class="btn btn-gold">Request a demo</a>
-                    <a href="#pricing" class="btn" style="background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.2);">View pricing</a>
+                    <a href="#planos" class="btn btn-gold">Comprar Créditos</a>
+                    <a href="#testes" class="btn btn-ghost" style="color:var(--white);border-color:rgba(255,255,255,0.2);">Conhecer Testes</a>
                 </div>
             </div>
         </div>
@@ -1353,59 +1606,132 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <a href="#" class="nav-logo">
-                        <div class="nav-logo-mark">V</div>
-                        <div class="nav-logo-text" style="color:var(--white);">VIGORRE ONE<span class="tm" style="color:rgba(255,255,255,0.4);">™</span></div>
+                    <a href="index.html" class="nav-logo">
+                        <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" style="height:32px;width:auto;" />
+                        <div>
+                            <div class="nav-logo-text" style="color:var(--white);">VIGORRE <span style="color:var(--gold)">ONE</span><span class="tm" style="color:rgba(255,255,255,0.4);">™</span></div>
+                            <div class="nav-logo-sub" style="color:rgba(255,255,255,0.4);">People Analytics Enterprise</div>
+                        </div>
                     </a>
-                    <p class="footer-brand-text">The enterprise platform for people intelligence. Combining neuroscience, psychology, and predictive analytics to help organizations understand their most important asset—their people.</p>
+                    <p class="footer-brand-text">Inteligência Humana. Dados. Decisões. A plataforma enterprise para avaliações comportamentais científicas e desenvolvimento humano integrado.</p>
                 </div>
                 <div>
-                    <h5>Platform</h5>
+                    <h5>Plataforma</h5>
                     <ul>
-                        <li><a href="#platform">Assessments</a></li>
-                        <li><a href="#technology">VIGOR® Methodology</a></li>
-                        <li><a href="#solutions">Solutions</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#testes">Testes</a></li>
+                        <li><a href="#vigor">Tecnologia VIGOR®</a></li>
+                        <li><a href="#para-voce">Para Você</a></li>
+                        <li><a href="#para-empresas">Para Empresas</a></li>
+                        <li><a href="#planos">Planos</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5>Solutions</h5>
+                    <h5>Empresa</h5>
                     <ul>
-                        <li><a href="#">Talent Acquisition</a></li>
-                        <li><a href="#">Leadership</a></li>
-                        <li><a href="#">Team Performance</a></li>
-                        <li><a href="#">Culture</a></li>
+                        <li><a href="politica-privacidade.html">Privacidade</a></li>
+                        <li><a href="termos-uso.html">Termos de Uso</a></li>
+                        <li><a href="consentimento.html">LGPD</a></li>
+                        <li><a href="#contato">Contato</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5>Company</h5>
+                    <h5>Avaliações</h5>
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#customers">Customers</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="tests/disc/">Teste DISC</a></li>
+                        <li><a href="tests/bigfive/">Big Five</a></li>
+                        <li><a href="tests/ie/">Inteligência Emocional</a></li>
+                        <li><a href="tests/valores/">Valores Pessoais</a></li>
+                        <li><a href="tests/swot/">SWOT Pessoal</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5>Resources</h5>
+                    <h5>Recursos</h5>
                     <ul>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">API Reference</a></li>
-                        <li><a href="#">Research</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="laudos/">Laudo VIGOR®</a></li>
+                        <li><a href="bi/analytics.html">People Analytics</a></li>
+                        <li><a href="login.html">Área do Cliente</a></li>
+                        <li><a href="#planos">Créditos</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div>© 2026 VIGORRE TECH™ · contato@vigorre.com.br · +55 34 99185-0735</div>
-                <div class="footer-social">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Security</a>
+                <div>
+                    © 2026 VIGORRE TECH™ · contato@vigorre.com.br · (34) 99185-0735 · www.vigorre.com.br
+                </div>
+                <div>
+                    <a href="politica-privacidade.html">Privacidade</a>
+                    <a href="termos-uso.html">Termos</a>
+                    <a href="consentimento.html">LGPD</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Copy coupon functionality
+        function copyCoupon(element) {
+            const coupon = element.getAttribute('data-cupom');
+            if (!coupon) return;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(coupon).then(() => {
+                    showCopied(element);
+                }).catch(() => {
+                    fallbackCopy(coupon, element);
+                });
+            } else {
+                fallbackCopy(coupon, element);
+            }
+        }
+
+        function fallbackCopy(text, element) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showCopied(element);
+            } catch (err) {
+                alert('Copie o cupom manualmente: ' + text);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showCopied(element) {
+            const originalHTML = element.innerHTML;
+            element.classList.add('copied');
+            element.innerHTML = `
+                <div>
+                    <div class="price-coupon-label">Cupom</div>
+                    <div class="price-coupon-code">COPIADO!</div>
+                </div>
+                <div class="price-coupon-copy">✓</div>
+            `;
+            setTimeout(() => {
+                element.classList.remove('copied');
+                element.innerHTML = originalHTML;
+            }, 2000);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#' || targetId === '#planos') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    const headerHeight = document.querySelector('.nav-wrap')?.offsetHeight || 72;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
