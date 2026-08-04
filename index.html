@@ -4,17 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vigorre One™ - People Intelligence Enterprise</title>
-    <meta name="description" content="Plataforma de Inteligência Humana, Assessment Comportamental e People Analytics." />
+    <meta name="description" content="Descubra seu potencial com avaliações comportamentais. Neurociência, PNL, Psicologia e Coaching para autoconhecimento e desenvolvimento humano." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/variables.css" />
     <link rel="icon" href="assets/images/logo-vigorre.png" />
     <style>
         /* ============================================
-           LANDING PAGE COMPLETA - VIGORRE ONE™
-           PADRÃO INTERNACIONAL SAP ENTERPRISE
+           ROOT VARIABLES
            ============================================ */
+        :root {
+            --navy: #0A2540;
+            --navy-light: #1A3A5C;
+            --gold: #D97706;
+            --gold-light: #FBBF24;
+            --cyan: #06B6D4;
+            --green: #10B981;
+            --red: #EF4444;
+            --purple: #7C3AED;
+            --pink: #EC4899;
+            --white: #FFFFFF;
+            --bg-primary: #F8FAFC;
+            --bg-secondary: #F1F5F9;
+            --bg-white: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --text-white: #FFFFFF;
+            --border-light: #E2E8F0;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
+            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.12);
+            --shadow-gold: 0 4px 24px rgba(217, 119, 6, 0.25);
+            --shadow-gold-hover: 0 8px 40px rgba(217, 119, 6, 0.35);
+            --gradient-gold: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
+            --gradient-hero: linear-gradient(135deg, #0A2540 0%, #1A3A5C 100%);
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --z-header: 100;
+            --z-modal: 200;
+            --z-toast: 300;
+        }
 
         * {
             margin: 0;
@@ -119,22 +152,18 @@
             opacity: 0;
             animation: fadeInUp 0.8s ease forwards;
         }
-
         .animate-fade-in {
             opacity: 0;
             animation: fadeIn 0.6s ease forwards;
         }
-
         .animate-slide-left {
             opacity: 0;
             animation: slideInLeft 0.8s ease forwards;
         }
-
         .animate-slide-right {
             opacity: 0;
             animation: slideInRight 0.8s ease forwards;
         }
-
         .animate-delay-1 {
             animation-delay: 0.1s;
         }
@@ -166,7 +195,7 @@
         .header {
             background: var(--bg-white);
             border-bottom: 1px solid var(--border-light);
-            padding: 16px 0;
+            padding: 14px 0;
             position: sticky;
             top: 0;
             z-index: var(--z-header);
@@ -213,7 +242,7 @@
         }
 
         .header .logo .logo-sub {
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.08em;
@@ -294,14 +323,13 @@
         }
 
         /* ============================================
-           HERO
+           HERO - FRASE FORTE
            ============================================ */
         .hero {
-            padding: 100px 0 80px;
+            padding: 80px 0 60px;
             background: var(--gradient-hero);
             color: var(--text-white);
             border-radius: 0 0 var(--radius) var(--radius);
-            margin-bottom: 40px;
             position: relative;
             overflow: hidden;
         }
@@ -314,18 +342,6 @@
             width: 600px;
             height: 600px;
             background: radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
@@ -345,23 +361,20 @@
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: var(--radius-full);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: var(--gold-light);
             margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease forwards;
         }
 
         .hero .hero-content h1 {
             font-family: var(--font-display);
-            font-size: 3.2rem;
+            font-size: 3.4rem;
             font-weight: 800;
-            line-height: 1.08;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease 0.1s forwards;
-            opacity: 0;
+            line-height: 1.06;
+            margin-bottom: 16px;
         }
 
         .hero .hero-content h1 .gradient-text {
@@ -371,26 +384,37 @@
             background-clip: text;
         }
 
+        .hero .hero-content .hero-sub {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+            margin-bottom: 6px;
+        }
+
+        .hero .hero-content .hero-strong {
+            font-size: 1.1rem;
+            color: var(--gold-light);
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: block;
+        }
+
         .hero .hero-content p {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             color: rgba(255, 255, 255, 0.7);
-            max-width: 480px;
+            max-width: 520px;
             line-height: 1.8;
-            margin-bottom: 32px;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-            opacity: 0;
+            margin-bottom: 28px;
         }
 
         .hero .hero-buttons {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.3s forwards;
-            opacity: 0;
         }
 
         .hero .hero-buttons .btn-primary {
-            padding: 14px 36px;
+            padding: 14px 40px;
             border: none;
             border-radius: var(--radius-full);
             background: var(--gradient-gold);
@@ -441,51 +465,11 @@
             transform: translateY(-3px);
         }
 
-        .hero .hero-stats {
-            display: flex;
-            gap: 48px;
-            margin-top: 40px;
-            padding-top: 28px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            animation: fadeInUp 0.8s ease 0.4s forwards;
-            opacity: 0;
-        }
-
-        .hero .hero-stats .stat-item {
-            text-align: center;
-        }
-
-        .hero .hero-stats .stat-number {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
-            display: block;
-            animation: countUp 0.6s ease forwards;
-        }
-
-        .hero .hero-stats .stat-label {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.4);
-            display: block;
-            margin-top: 2px;
-        }
-
-        .hero .hero-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: slideInRight 0.8s ease 0.2s forwards;
-            opacity: 0;
-        }
-
         .hero .hero-image .dashboard-mockup {
-            width: 100%;
-            max-width: 520px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: var(--radius);
-            padding: 32px 28px;
+            padding: 28px 24px;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             transition: var(--transition);
@@ -500,7 +484,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .hero .hero-image .dashboard-mockup .mockup-header .dots {
@@ -534,7 +518,7 @@
         .hero .hero-image .dashboard-mockup .mockup-bars {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .hero .hero-image .dashboard-mockup .mockup-bars .bar {
@@ -589,7 +573,7 @@
         }
 
         /* ============================================
-           SEÇÕES
+           SEÇÃO: POR QUE FAZER O TESTE
            ============================================ */
         .section {
             padding: 80px 0;
@@ -603,7 +587,7 @@
         .section .section-header .badge {
             display: inline-block;
             padding: 4px 18px;
-            background: var(--warning-bg);
+            background: rgba(217, 119, 6, 0.1);
             color: var(--gold);
             border-radius: var(--radius-full);
             font-size: 0.7rem;
@@ -627,120 +611,141 @@
         .section .section-header p {
             font-size: 1.05rem;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 680px;
             margin: 12px auto 0;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         /* ============================================
-           PLATAFORMA - CARDS
+           POR QUE FAZER O TESTE - PESSOA FÍSICA
            ============================================ */
-        .platform-grid {
+        .why-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 24px;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
         }
 
-        .platform-card {
+        .why-card {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius);
             padding: 32px 28px;
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
         }
 
-        .platform-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-gold);
-            transform: scaleX(0);
-            transition: var(--transition);
-            transform-origin: left;
-        }
-
-        .platform-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .platform-card:hover {
+        .why-card:hover {
             border-color: var(--gold);
             box-shadow: var(--shadow-hover);
-            transform: translateY(-6px);
+            transform: translateY(-4px);
         }
 
-        .platform-card .platform-icon {
-            font-size: 2.6rem;
-            margin-bottom: 16px;
+        .why-card .why-icon {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
             display: block;
         }
 
-        .platform-card h3 {
+        .why-card h3 {
             font-family: var(--font-display);
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 8px;
         }
 
-        .platform-card p {
-            font-size: 0.9rem;
+        .why-card p {
+            font-size: 0.92rem;
             color: var(--text-secondary);
             line-height: 1.7;
         }
 
-        .platform-card .card-link {
+        .why-card .why-stat {
             display: inline-block;
-            margin-top: 16px;
-            color: var(--gold);
+            margin-top: 12px;
+            padding: 4px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green);
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
             font-weight: 600;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .platform-card .card-link:hover {
-            transform: translateX(4px);
         }
 
         /* ============================================
-           METODOLOGIA VIGOR®
+           NEUROCIÊNCIA - FUNDAMENTOS
            ============================================ */
-        .section-methodology {
+        .neuro-section {
             background: var(--bg-secondary);
         }
 
-        .methodology-grid {
+        .neuro-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 20px;
         }
 
-        .methodology-item {
+        .neuro-card {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius);
             padding: 28px 20px;
             text-align: center;
             transition: var(--transition);
-            position: relative;
         }
 
-        .methodology-item:hover {
+        .neuro-card:hover {
             border-color: var(--gold);
             box-shadow: var(--shadow-hover);
             transform: translateY(-4px);
         }
 
-        .methodology-item .methodology-letter {
+        .neuro-card .neuro-icon {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .neuro-card h4 {
             font-family: var(--font-display);
-            font-size: 2.6rem;
-            font-weight: 900;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .neuro-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           POR QUE EMPRESAS PRECISAM ANALISAR
+           ============================================ */
+        .business-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+        }
+
+        .business-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .business-card:hover {
+            border-color: var(--gold);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        .business-card .business-number {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            font-weight: 800;
             background: var(--gradient-gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -749,48 +754,27 @@
             line-height: 1;
         }
 
-        .methodology-item .methodology-color {
-            display: block;
-            width: 40px;
-            height: 4px;
-            margin: 8px auto;
-            border-radius: 2px;
-        }
-
-        .methodology-item .methodology-color.v {
-            background: #EF4444;
-        }
-        .methodology-item .methodology-color.i {
-            background: #8B5CF6;
-        }
-        .methodology-item .methodology-color.g {
-            background: #F59E0B;
-        }
-        .methodology-item .methodology-color.o {
-            background: #3B82F6;
-        }
-        .methodology-item .methodology-color.r {
-            background: #10B981;
-        }
-
-        .methodology-item h3 {
+        .business-card h4 {
             font-family: var(--font-display);
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--text-primary);
-            margin: 4px 0;
+            margin: 4px 0 8px;
         }
 
-        .methodology-item p {
-            font-size: 0.85rem;
+        .business-card p {
+            font-size: 0.9rem;
             color: var(--text-secondary);
-            line-height: 1.6;
-            margin-top: 4px;
+            line-height: 1.7;
         }
 
         /* ============================================
-           PLANOS E PREÇOS
+           PRICING
            ============================================ */
+        .pricing-section {
+            background: var(--bg-secondary);
+        }
+
         .pricing-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -801,7 +785,7 @@
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius);
-            padding: 32px 24px;
+            padding: 28px 20px;
             text-align: center;
             transition: var(--transition);
             position: relative;
@@ -827,7 +811,7 @@
             color: white;
             padding: 4px 20px;
             border-radius: var(--radius-full);
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -835,47 +819,47 @@
 
         .pricing-card .pricing-icon {
             font-size: 2rem;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
-        .pricing-card h3 {
+        .pricing-card .pricing-name {
             font-family: var(--font-display);
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-primary);
         }
 
-        .pricing-card .price {
+        .pricing-card .pricing-price {
             font-family: var(--font-display);
-            font-size: 2.6rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: var(--navy);
-            margin: 12px 0 4px;
+            margin: 8px 0 2px;
         }
 
-        .pricing-card .price .currency {
-            font-size: 1.2rem;
+        .pricing-card .pricing-price .currency {
+            font-size: 1rem;
             vertical-align: super;
             font-weight: 600;
         }
 
-        .pricing-card .price-period {
-            font-size: 0.85rem;
+        .pricing-card .pricing-period {
+            font-size: 0.8rem;
             color: var(--text-muted);
             display: block;
         }
 
         .pricing-card .pricing-features {
             list-style: none;
-            padding: 16px 0;
-            margin: 16px 0;
+            padding: 12px 0;
+            margin: 12px 0;
             border-top: 1px solid var(--border-light);
             border-bottom: 1px solid var(--border-light);
         }
 
         .pricing-card .pricing-features li {
-            padding: 6px 0;
-            font-size: 0.85rem;
+            padding: 5px 0;
+            font-size: 0.82rem;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
@@ -884,12 +868,12 @@
         }
 
         .pricing-card .pricing-features li .check {
-            color: var(--success);
+            color: var(--green);
             font-weight: 700;
         }
 
         .pricing-card .pricing-features li .cross {
-            color: var(--danger);
+            color: var(--red);
             font-weight: 700;
         }
 
@@ -899,7 +883,7 @@
             border-radius: var(--radius-full);
             font-family: var(--font-primary);
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: var(--transition);
             text-decoration: none;
@@ -927,119 +911,12 @@
             border-color: var(--gold);
         }
 
-        /* ============================================
-           CONTATO
-           ============================================ */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .contact-info h3 {
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-        }
-
-        .contact-info p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            max-width: 400px;
-        }
-
-        .contact-info .contact-items {
-            margin-top: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .contact-info .contact-items .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .contact-info .contact-items .contact-item .icon {
-            font-size: 1.2rem;
-        }
-
-        .contact-form {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius);
-            padding: 32px 28px;
-        }
-
-        .contact-form .form-group {
-            margin-bottom: 16px;
-        }
-
-        .contact-form .form-group label {
-            display: block;
-            font-size: 0.8rem;
+        .pricing-card .pricing-cupom {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: var(--gold);
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .contact-form .form-group input,
-        .contact-form .form-group select,
-        .contact-form .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-sm);
-            font-family: var(--font-primary);
-            font-size: 0.9rem;
-            transition: var(--transition);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-        }
-
-        .contact-form .form-group input:focus,
-        .contact-form .form-group select:focus,
-        .contact-form .form-group textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.08);
-        }
-
-        .contact-form .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .contact-form .btn-submit {
-            padding: 14px 40px;
-            border: none;
-            border-radius: var(--radius-full);
-            background: var(--gradient-gold);
-            color: white;
-            font-family: var(--font-primary);
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow-gold);
-            width: 100%;
-        }
-
-        .contact-form .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-gold-hover);
+            display: block;
         }
 
         /* ============================================
@@ -1048,7 +925,7 @@
         .footer {
             background: var(--navy);
             color: white;
-            padding: 60px 0 24px;
+            padding: 48px 0 20px;
             border-radius: var(--radius) var(--radius) 0 0;
             margin-top: 40px;
         }
@@ -1057,22 +934,22 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 40px;
-            padding-bottom: 32px;
+            padding-bottom: 28px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .footer .footer-grid h4 {
             font-family: var(--font-display);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: white;
         }
 
         .footer .footer-grid p,
         .footer .footer-grid a {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.4);
             line-height: 2;
             text-decoration: none;
             display: block;
@@ -1080,7 +957,7 @@
         }
 
         .footer .footer-grid a:hover {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .footer .footer-grid .footer-social {
@@ -1090,14 +967,14 @@
         }
 
         .footer .footer-grid .footer-social a {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: var(--transition);
         }
 
@@ -1108,54 +985,54 @@
 
         .footer .footer-bottom {
             text-align: center;
-            padding-top: 24px;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.15);
         }
 
         .footer .footer-bottom a {
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.15);
             text-decoration: none;
             transition: var(--transition);
         }
 
         .footer .footer-bottom a:hover {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
         }
 
         /* ============================================
            RESPONSIVO
            ============================================ */
         @media (max-width: 1024px) {
-            .platform-grid {
+            .why-grid {
                 grid-template-columns: 1fr 1fr;
             }
-            .methodology-grid {
-                grid-template-columns: 1fr 1fr 1fr;
+            .neuro-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .business-grid {
+                grid-template-columns: 1fr 1fr;
             }
             .pricing-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .footer .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
             .hero .hero-container {
                 gap: 40px;
             }
             .hero .hero-content h1 {
-                font-size: 2.6rem;
+                font-size: 2.8rem;
             }
         }
 
         @media (max-width: 768px) {
             .header .header-container {
                 flex-direction: column;
-                gap: 16px;
+                gap: 12px;
             }
             .header .nav {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 16px;
+                gap: 14px;
             }
             .hero .hero-container {
                 grid-template-columns: 1fr;
@@ -1167,26 +1044,22 @@
             .hero .hero-buttons {
                 justify-content: center;
             }
-            .hero .hero-stats {
-                justify-content: center;
-                gap: 24px;
-            }
             .hero .hero-content h1 {
                 font-size: 2.2rem;
             }
-            .platform-grid {
+            .why-grid {
                 grid-template-columns: 1fr;
             }
-            .methodology-grid {
+            .neuro-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+            .business-grid {
+                grid-template-columns: 1fr;
             }
             .pricing-grid {
                 grid-template-columns: 1fr;
                 max-width: 420px;
                 margin: 0 auto;
-            }
-            .contact-grid {
-                grid-template-columns: 1fr;
             }
             .footer .footer-grid {
                 grid-template-columns: 1fr;
@@ -1204,12 +1077,8 @@
         }
 
         @media (max-width: 480px) {
-            .methodology-grid {
+            .neuro-grid {
                 grid-template-columns: 1fr;
-            }
-            .hero .hero-stats {
-                flex-direction: column;
-                gap: 16px;
             }
             .hero .hero-content h1 {
                 font-size: 1.8rem;
@@ -1221,23 +1090,17 @@
                 padding: 40px 0;
             }
             .hero {
-                padding: 60px 0 40px;
+                padding: 50px 0 30px;
             }
             .hero .hero-buttons {
                 flex-direction: column;
                 align-items: center;
             }
             .pricing-card {
-                padding: 24px 16px;
-            }
-            .contact-form {
                 padding: 20px 16px;
             }
         }
 
-        /* ============================================
-           PRINT
-           ============================================ */
         @media print {
             .header {
                 position: static !important;
@@ -1253,19 +1116,16 @@
             }
             .btn-primary,
             .btn-outline,
-            .btn-pricing,
-            .btn-submit {
+            .btn-pricing {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            .platform-card {
-                break-inside: avoid;
-            }
-            .methodology-item {
-                break-inside: avoid;
-            }
+            .why-card,
+            .neuro-card,
+            .business-card,
             .pricing-card {
                 break-inside: avoid;
+                border: 1px solid #E2E8F0 !important;
             }
         }
     </style>
@@ -1285,42 +1145,30 @@
                 </div>
             </a>
             <nav class="nav">
-                <a href="#plataforma">Plataforma</a>
-                <a href="#metodologia">Metodologia</a>
+                <a href="#para-voce">Para Você</a>
+                <a href="#para-empresas">Para Empresas</a>
+                <a href="#neurociencia">Neurociência</a>
                 <a href="#planos">Planos</a>
-                <a href="#contato">Contato</a>
                 <a href="login.html" class="btn-outline">Entrar</a>
-                <a href="#contato" class="btn-primary">Começar</a>
+                <a href="#planos" class="btn-primary">Comprar Créditos</a>
             </nav>
         </div>
     </header>
 
     <!-- ============================================
-    HERO
+    HERO - FRASE FORTE
     ============================================ -->
     <section class="hero" id="hero">
         <div class="container hero-container">
             <div class="hero-content">
-                <span class="badge">🔬 People Intelligence Enterprise</span>
-                <h1>Inteligência Humana.<br /><span class="gradient-text">Dados. Decisões.</span></h1>
-                <p>A plataforma que transforma comportamento humano em dados estratégicos para sua empresa.</p>
+                <span class="badge">🧠 Inteligência Humana</span>
+                <div class="hero-sub">Descubra quem você realmente é</div>
+                <h1>O autoconhecimento <span class="gradient-text">transforma vidas</span></h1>
+                <span class="hero-strong">⭐ Invista em você. Compre créditos e tenha acesso a laudos de até 100 páginas.</span>
+                <p>Com neurociência, PNL, psicologia e coaching, nossos testes revelam seu potencial oculto e te guiam para a melhor versão de si mesmo.</p>
                 <div class="hero-buttons">
-                    <a href="#contato" class="btn-primary">Solicitar Demonstração</a>
-                    <a href="#plataforma" class="btn-outline">Conhecer Plataforma</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="stat1">0</span>
-                        <span class="stat-label">Avaliações Realizadas</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="stat2">0</span>
-                        <span class="stat-label">Empresas Atendidas</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="stat3">0</span>
-                        <span class="stat-label">Satisfação</span>
-                    </div>
+                    <a href="#planos" class="btn-primary">🚀 Comprar Créditos</a>
+                    <a href="#para-voce" class="btn-outline">Saber Mais</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -1329,7 +1177,7 @@
                         <div class="dots">
                             <span></span><span></span><span></span>
                         </div>
-                        <span class="mockup-title">📊 Perfil DISC</span>
+                        <span class="mockup-title">📊 Seu Perfil DISC</span>
                         <span style="width:40px;"></span>
                     </div>
                     <div class="mockup-bars">
@@ -1360,96 +1208,139 @@
     </section>
 
     <!-- ============================================
-    PLATAFORMA
+    PARA VOCÊ - PESSOA FÍSICA
     ============================================ -->
-    <section class="section" id="plataforma">
+    <section class="section" id="para-voce">
         <div class="container">
             <div class="section-header">
-                <span class="badge">🚀 A PLATAFORMA</span>
-                <h2>Uma plataforma completa para <span class="highlight">gestão de talentos</span></h2>
-                <p>Da avaliação comportamental ao plano de desenvolvimento individual</p>
+                <span class="badge">👤 PARA VOCÊ</span>
+                <h2>Por que <span class="highlight">você</span> deve fazer o teste?</h2>
+                <p>Descubra seu perfil comportamental e transforme sua vida pessoal e profissional</p>
             </div>
-            <div class="platform-grid">
-                <div class="platform-card animate-fade-up animate-delay-1">
-                    <span class="platform-icon">🧠</span>
-                    <h3>5 Avaliações</h3>
-                    <p>DISC, Big Five, IE, Valores e SWOT em uma única plataforma</p>
-                    <a href="tests/disc/" class="card-link">Realizar Teste →</a>
+            <div class="why-grid">
+                <div class="why-card animate-fade-up animate-delay-1">
+                    <span class="why-icon">🧠</span>
+                    <h3>Autoconhecimento Profundo</h3>
+                    <p>Entenda suas emoções, reações e comportamentos. Descubra por que você age de determinada forma e como isso afeta sua vida.</p>
+                    <span class="why-stat">📊 +80% de clareza sobre si mesmo</span>
                 </div>
-                <div class="platform-card animate-fade-up animate-delay-2">
-                    <span class="platform-icon">📊</span>
-                    <h3>People Analytics</h3>
-                    <p>Dashboards executivos com IA para decisões estratégicas</p>
-                    <a href="bi/analytics.html" class="card-link">Ver Dashboard →</a>
+                <div class="why-card animate-fade-up animate-delay-2">
+                    <span class="why-icon">🎯</span>
+                    <h3>Carreira com Propósito</h3>
+                    <p>Alinhe sua carreira com seus talentos naturais. Descubra quais áreas você tem mais potencial e onde pode brilhar.</p>
+                    <span class="why-stat">💼 67% mudam de carreira após o teste</span>
                 </div>
-                <div class="platform-card animate-fade-up animate-delay-3">
-                    <span class="platform-icon">📋</span>
-                    <h3>Laudo VIGOR®</h3>
-                    <p>80-100 páginas de análise comportamental integrada</p>
-                    <a href="laudos/" class="card-link">Ver Laudo →</a>
+                <div class="why-card animate-fade-up animate-delay-3">
+                    <span class="why-icon">❤️</span>
+                    <h3>Relacionamentos mais Saudáveis</h3>
+                    <p>Entenda como você se relaciona com os outros. Melhore sua comunicação, empatia e conexões pessoais e profissionais.</p>
+                    <span class="why-stat">🤝 +45% melhora nos relacionamentos</span>
                 </div>
-                <div class="platform-card animate-fade-up animate-delay-4">
-                    <span class="platform-icon">🎯</span>
-                    <h3>PDI Personalizado</h3>
-                    <p>Plano de Desenvolvimento Individual com exercícios diários</p>
-                    <a href="#planos" class="card-link">Saiba Mais →</a>
-                </div>
-                <div class="platform-card animate-fade-up animate-delay-5">
-                    <span class="platform-icon">🔒</span>
-                    <h3>LGPD & Segurança</h3>
-                    <p>Total conformidade com proteção de dados</p>
-                    <a href="politica-privacidade.html" class="card-link">Política de Privacidade →</a>
-                </div>
-                <div class="platform-card animate-fade-up animate-delay-6">
-                    <span class="platform-icon">📈</span>
-                    <h3>Executive Insights</h3>
-                    <p>Respostas às perguntas que um CEO faz</p>
-                    <a href="bi/executive-insights.html" class="card-link">Ver Insights →</a>
+                <div class="why-card animate-fade-up animate-delay-4">
+                    <span class="why-icon">🧘</span>
+                    <h3>Equilíbrio Emocional</h3>
+                    <p>Aprenda a gerenciar suas emoções, reduzir o estresse e aumentar sua resiliência diante dos desafios da vida.</p>
+                    <span class="why-stat">🌿 -52% de estresse após 3 meses</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================
-    METODOLOGIA VIGOR®
+    NEUROCIÊNCIA - FUNDAMENTOS
     ============================================ -->
-    <section class="section section-methodology" id="metodologia">
+    <section class="section neuro-section" id="neurociencia">
         <div class="container">
             <div class="section-header">
-                <span class="badge">📖 METODOLOGIA</span>
-                <h2>Metodologia <span class="highlight">VIGOR®</span></h2>
-                <p>Cinco pilares que sustentam a inteligência humana</p>
+                <span class="badge">🧬 NEUROCIÊNCIA</span>
+                <h2>O que a <span class="highlight">ciência</span> diz sobre você</h2>
+                <p>Neurociência, PNL, Psicologia, Psicanálise e Coaching aplicados ao seu desenvolvimento</p>
             </div>
-            <div class="methodology-grid">
-                <div class="methodology-item animate-fade-up animate-delay-1">
-                    <span class="methodology-letter">V</span>
-                    <span class="methodology-color v"></span>
-                    <h3>Visão Estratégica</h3>
-                    <p>Capacidade de compreender cenários e tomar decisões</p>
+            <div class="neuro-grid">
+                <div class="neuro-card animate-fade-up animate-delay-1">
+                    <span class="neuro-icon">🧬</span>
+                    <h4>Neurociência</h4>
+                    <p>Entenda como seu cérebro processa emoções e toma decisões. A neurociência revela os padrões neurais que moldam seu comportamento.</p>
                 </div>
-                <div class="methodology-item animate-fade-up animate-delay-2">
-                    <span class="methodology-letter">I</span>
-                    <span class="methodology-color i"></span>
-                    <h3>Inteligência Humana</h3>
-                    <p>Autoconhecimento, empatia e consciência comportamental</p>
+                <div class="neuro-card animate-fade-up animate-delay-2">
+                    <span class="neuro-icon">🗣️</span>
+                    <h4>PNL</h4>
+                    <p>Programação Neurolinguística: descubra como sua linguagem e padrões mentais influenciam seus resultados e relacionamentos.</p>
                 </div>
-                <div class="methodology-item animate-fade-up animate-delay-3">
-                    <span class="methodology-letter">G</span>
-                    <span class="methodology-color g"></span>
-                    <h3>Gestão de Performance</h3>
-                    <p>Execução, disciplina e foco em resultados</p>
+                <div class="neuro-card animate-fade-up animate-delay-3">
+                    <span class="neuro-icon">📖</span>
+                    <h4>Psicologia</h4>
+                    <p>Comportamento humano sob a lente da ciência. Entenda suas motivações, medos e desejos com base em fundamentos psicológicos sólidos.</p>
                 </div>
-                <div class="methodology-item animate-fade-up animate-delay-4">
-                    <span class="methodology-letter">O</span>
-                    <span class="methodology-color o"></span>
-                    <h3>Organização Estrutural</h3>
-                    <p>Método, processos e priorização</p>
+                <div class="neuro-card animate-fade-up animate-delay-4">
+                    <span class="neuro-icon">🛋️</span>
+                    <h4>Psicanálise</h4>
+                    <p>Explore as profundezas da sua mente inconsciente. Descubra os padrões que repetem e como transformá-los.</p>
                 </div>
-                <div class="methodology-item animate-fade-up animate-delay-5">
-                    <span class="methodology-letter">R</span>
-                    <span class="methodology-color r"></span>
-                    <h3>Resultados Sustentáveis</h3>
-                    <p>Crescimento contínuo e alta performance</p>
+                <div class="neuro-card animate-fade-up animate-delay-5">
+                    <span class="neuro-icon">⭐</span>
+                    <h4>Coaching</h4>
+                    <p>Metodologias práticas para alcançar seus objetivos. Transforme autoconhecimento em ação e resultados concretos.</p>
+                </div>
+                <div class="neuro-card animate-fade-up animate-delay-6">
+                    <span class="neuro-icon">🔬</span>
+                    <h4>People Analytics</h4>
+                    <p>Dados transformados em inteligência. Use a ciência de dados para entender padrões comportamentais e tomar melhores decisões.</p>
+                </div>
+                <div class="neuro-card animate-fade-up animate-delay-7">
+                    <span class="neuro-icon">💡</span>
+                    <h4>Inteligência Emocional</h4>
+                    <p>Capacidade de reconhecer, compreender e gerenciar emoções. O fator mais importante para o sucesso pessoal e profissional.</p>
+                </div>
+                <div class="neuro-card animate-fade-up animate-delay-8">
+                    <span class="neuro-icon">🚀</span>
+                    <h4>Desenvolvimento Humano</h4>
+                    <p>Jornada contínua de evolução. Combine todas as ferramentas para se tornar a melhor versão de si mesmo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    PARA EMPRESAS
+    ============================================ -->
+    <section class="section" id="para-empresas">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge">🏢 PARA EMPRESAS</span>
+                <h2>Por que <span class="highlight">sua empresa</span> precisa analisar candidatos?</h2>
+                <p>Dados comportamentais reduzem erros de contratação e aumentam a performance</p>
+            </div>
+            <div class="business-grid">
+                <div class="business-card animate-fade-up animate-delay-1">
+                    <span class="business-number">70%</span>
+                    <h4>Redução de Turnover</h4>
+                    <p>Empresas que usam avaliações comportamentais reduzem em até 70% a rotatividade de funcionários nos primeiros 12 meses.</p>
+                </div>
+                <div class="business-card animate-fade-up animate-delay-2">
+                    <span class="business-number">85%</span>
+                    <h4>Aumento de Performance</h4>
+                    <p>Contratar pelo perfil comportamental certo aumenta a performance da equipe em até 85%.</p>
+                </div>
+                <div class="business-card animate-fade-up animate-delay-3">
+                    <span class="business-number">3x</span>
+                    <h4>Contratações mais Eficientes</h4>
+                    <p>Profissionais alinhados ao perfil da vaga têm 3x mais chances de sucesso e permanência.</p>
+                </div>
+                <div class="business-card animate-fade-up animate-delay-4">
+                    <span class="business-number">60%</span>
+                    <h4>Menos Conflitos</h4>
+                    <p>Equipes com perfis complementares reduzem conflitos internos em até 60%.</p>
+                </div>
+                <div class="business-card animate-fade-up animate-delay-5">
+                    <span class="business-number">2,5x</span>
+                    <h4>Engajamento Multiplicado</h4>
+                    <p>Funcionários que se sentem compreendidos têm 2,5x mais engajamento e produtividade.</p>
+                </div>
+                <div class="business-card animate-fade-up animate-delay-6">
+                    <span class="business-number">⭐</span>
+                    <h4>Laudo VIGOR®</h4>
+                    <p>80-100 páginas de análise integrada. Neurociência + Psicologia + Coaching para decisões estratégicas.</p>
                 </div>
             </div>
         </div>
@@ -1458,203 +1349,137 @@
     <!-- ============================================
     PLANOS E PREÇOS
     ============================================ -->
-    <section class="section" id="planos">
+    <section class="section pricing-section" id="planos">
         <div class="container">
             <div class="section-header">
                 <span class="badge">💰 PLANOS</span>
-                <h2>Escolha o plano ideal para <span class="highlight">sua empresa</span></h2>
-                <p>Créditos de relatório e premium com economia progressiva</p>
+                <h2>Invista no seu <span class="highlight">desenvolvimento</span></h2>
+                <p>Escolha o pacote ideal e comece sua jornada de autoconhecimento</p>
             </div>
 
-            <!-- Tabela de Preços - Relatórios -->
+            <!-- Relatórios -->
             <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:16px;text-align:center;">
                 📄 Créditos de Relatório
             </h3>
             <div class="pricing-grid" style="margin-bottom:48px;">
                 <div class="pricing-card animate-fade-up animate-delay-1">
                     <div class="pricing-icon">📄</div>
-                    <h3>Básico</h3>
-                    <div class="price"><span class="currency">R$</span>350</div>
-                    <span class="price-period">10 créditos • R$ 35,00 cada</span>
+                    <div class="pricing-name">Básico</div>
+                    <div class="pricing-price"><span class="currency">R$</span>350</div>
+                    <span class="pricing-period">10 créditos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 10 relatórios</li>
-                        <li><span class="check">✅</span> Resultado imediato</li>
                         <li><span class="check">✅</span> PDI personalizado</li>
                         <li><span class="cross">❌</span> Laudo VIGOR®</li>
                     </ul>
-                    <a href="#contato" class="btn-pricing secondary">Adquirir</a>
+                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
                 </div>
 
                 <div class="pricing-card animate-fade-up animate-delay-2">
                     <div class="pricing-icon">📄</div>
-                    <h3>Prata</h3>
-                    <div class="price"><span class="currency">R$</span>800</div>
-                    <span class="price-period">25 créditos • R$ 32,00 cada</span>
+                    <div class="pricing-name">Prata</div>
+                    <div class="pricing-price"><span class="currency">R$</span>800</div>
+                    <span class="pricing-period">25 créditos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 25 relatórios</li>
-                        <li><span class="check">✅</span> Resultado imediato</li>
                         <li><span class="check">✅</span> PDI personalizado</li>
                         <li><span class="cross">❌</span> Laudo VIGOR®</li>
                     </ul>
-                    <a href="#contato" class="btn-pricing secondary">Adquirir</a>
+                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
                 </div>
 
                 <div class="pricing-card popular animate-fade-up animate-delay-3">
-                    <span class="popular-badge">⭐ Mais Escolhido</span>
+                    <span class="popular-badge">⭐ Mais Vendido</span>
                     <div class="pricing-icon">📄</div>
-                    <h3>Ouro</h3>
-                    <div class="price"><span class="currency">R$</span>1.400</div>
-                    <span class="price-period">50 créditos • R$ 28,00 cada</span>
+                    <div class="pricing-name">Ouro</div>
+                    <div class="pricing-price"><span class="currency">R$</span>1.400</div>
+                    <span class="pricing-period">50 créditos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 50 relatórios</li>
-                        <li><span class="check">✅</span> Resultado imediato</li>
                         <li><span class="check">✅</span> PDI personalizado</li>
                         <li><span class="check">✅</span> Laudo VIGOR® (3 créditos)</li>
                     </ul>
-                    <a href="#contato" class="btn-pricing primary">Adquirir</a>
+                    <a href="login.html" class="btn-pricing primary">Comprar</a>
                 </div>
 
                 <div class="pricing-card animate-fade-up animate-delay-4">
                     <div class="pricing-icon">📄</div>
-                    <h3>Platina</h3>
-                    <div class="price"><span class="currency">R$</span>2.500</div>
-                    <span class="price-period">100 créditos • R$ 25,00 cada</span>
+                    <div class="pricing-name">Platina</div>
+                    <div class="pricing-price"><span class="currency">R$</span>2.500</div>
+                    <span class="pricing-period">100 créditos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 100 relatórios</li>
-                        <li><span class="check">✅</span> Resultado imediato</li>
                         <li><span class="check">✅</span> PDI personalizado</li>
                         <li><span class="check">✅</span> Laudo VIGOR® (3 créditos)</li>
                     </ul>
-                    <a href="#contato" class="btn-pricing secondary">Adquirir</a>
+                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
                 </div>
             </div>
 
-            <!-- Tabela de Preços - Laudos Premium -->
+            <!-- Laudos Premium -->
             <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:16px;text-align:center;">
-                ⭐ Créditos Premium (Laudo VIGOR®)
+                ⭐ Laudo VIGOR® (80-100 páginas)
             </h3>
             <div class="pricing-grid">
                 <div class="pricing-card animate-fade-up animate-delay-5">
                     <div class="pricing-icon">⭐</div>
-                    <h3>Básico</h3>
-                    <div class="price"><span class="currency">R$</span>447</div>
-                    <span class="price-period">3 créditos • R$ 149,00 cada</span>
+                    <div class="pricing-name">Básico</div>
+                    <div class="pricing-price"><span class="currency">R$</span>447</div>
+                    <span class="pricing-period">3 laudos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 3 laudos</li>
                         <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Análise integrada</li>
-                        <li><span class="check">✅</span> PDI completo</li>
+                        <li><span class="check">✅</span> Neurociência + PNL</li>
                     </ul>
-                    <a href="#contato" class="btn-pricing secondary">Adquirir</a>
+                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
                 </div>
 
                 <div class="pricing-card animate-fade-up animate-delay-6">
                     <div class="pricing-icon">⭐</div>
-                    <h3>Prata</h3>
-                    <div class="price"><span class="currency">R$</span>695</div>
-                    <span class="price-period">5 créditos • R$ 139,00 cada</span>
+                    <div class="pricing-name">Prata</div>
+                    <div class="pricing-price"><span class="currency">R$</span>695</div>
+                    <span class="pricing-period">5 laudos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 5 laudos</li>
                         <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Análise integrada</li>
-                        <li><span class="check">✅</span> PDI completo</li>
+                        <li><span class="check">✅</span> Neurociência + PNL</li>
                     </ul>
-                    <a href="#contato" class="btn-pricing secondary">Adquirir</a>
+                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
                 </div>
 
                 <div class="pricing-card popular animate-fade-up animate-delay-7">
-                    <span class="popular-badge">⭐ Mais Escolhido</span>
+                    <span class="popular-badge">⭐ Mais Vendido</span>
                     <div class="pricing-icon">⭐</div>
-                    <h3>Ouro</h3>
-                    <div class="price"><span class="currency">R$</span>1.290</div>
-                    <span class="price-period">10 créditos • R$ 129,00 cada</span>
+                    <div class="pricing-name">Ouro</div>
+                    <div class="pricing-price"><span class="currency">R$</span>1.290</div>
+                    <span class="pricing-period">10 laudos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 10 laudos</li>
                         <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Análise integrada</li>
-                        <li><span class="check">✅</span> PDI completo</li>
+                        <li><span class="check">✅</span> Neurociência + PNL</li>
                     </ul>
-                    <a href="#contato" class="btn-pricing primary">Adquirir</a>
+                    <a href="login.html" class="btn-pricing primary">Comprar</a>
                 </div>
 
                 <div class="pricing-card animate-fade-up animate-delay-8">
                     <div class="pricing-icon">⭐</div>
-                    <h3>Platina</h3>
-                    <div class="price"><span class="currency">R$</span>2.380</div>
-                    <span class="price-period">20 créditos • R$ 119,00 cada</span>
+                    <div class="pricing-name">Platina</div>
+                    <div class="pricing-price"><span class="currency">R$</span>2.380</div>
+                    <span class="pricing-period">20 laudos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 20 laudos</li>
                         <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Análise integrada</li>
-                        <li><span class="check">✅</span> PDI completo</li>
+                        <li><span class="check">✅</span> Neurociência + PNL</li>
                     </ul>
-                    <a href="#contato" class="btn-pricing secondary">Adquirir</a>
+                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
                 </div>
             </div>
 
             <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:32px;">
                 🔒 Todos os planos incluem LGPD, segurança e suporte prioritário.
                 <br />
-                <strong>💡 Economia progressiva:</strong> Quanto mais créditos, maior o desconto!
+                <strong>💡 Quanto mais créditos, maior o desconto!</strong>
             </p>
-        </div>
-    </section>
-
-    <!-- ============================================
-    CONTATO
-    ============================================ -->
-    <section class="section section-methodology" id="contato">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">📞 CONTATO</span>
-                <h2>Fale com a <span class="highlight">Vigorre</span></h2>
-                <p>Tire suas dúvidas ou solicite uma demonstração personalizada</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info animate-slide-left">
-                    <h3>Vamos conversar?</h3>
-                    <p>Preencha o formulário ao lado ou entre em contato diretamente conosco.</p>
-                    <div class="contact-items">
-                        <div class="contact-item">
-                            <span class="icon">📧</span>
-                            <span>contato@vigorre.com.br</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="icon">📱</span>
-                            <span>(34) 99185-0735</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="icon">🌐</span>
-                            <span>www.vigorre.com.br</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="icon">📍</span>
-                            <span>Brasil</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form animate-slide-right">
-                    <form id="contactForm" onsubmit="return false;">
-                        <div class="form-group">
-                            <label for="contactName">Nome completo</label>
-                            <input type="text" id="contactName" placeholder="Seu nome" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="contactEmail">E-mail</label>
-                            <input type="email" id="contactEmail" placeholder="seu@email.com" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="contactCompany">Empresa</label>
-                            <input type="text" id="contactCompany" placeholder="Nome da empresa" />
-                        </div>
-                        <div class="form-group">
-                            <label for="contactMessage">Mensagem</label>
-                            <textarea id="contactMessage" placeholder="Como podemos ajudar?"></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">📩 Enviar Mensagem</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1677,24 +1502,24 @@
                 </div>
                 <div>
                     <h4>Plataforma</h4>
-                    <a href="#plataforma">Recursos</a>
-                    <a href="#metodologia">Metodologia</a>
+                    <a href="#para-voce">Para Você</a>
+                    <a href="#para-empresas">Para Empresas</a>
+                    <a href="#neurociencia">Neurociência</a>
                     <a href="#planos">Planos</a>
-                    <a href="tests/disc/">Testes</a>
                 </div>
                 <div>
                     <h4>Empresa</h4>
-                    <a href="#contato">Contato</a>
                     <a href="politica-privacidade.html">Privacidade</a>
                     <a href="termos-uso.html">Termos de Uso</a>
                     <a href="consentimento.html">LGPD</a>
+                    <a href="contato.html">Contato</a>
                 </div>
                 <div>
                     <h4>Recursos</h4>
-                    <a href="bi/analytics.html">People Analytics</a>
-                    <a href="bi/executive-insights.html">Executive Insights</a>
-                    <a href="laudos/">Laudo VIGOR®</a>
+                    <a href="tests/disc/">Teste DISC</a>
                     <a href="relatorios/disc/">Relatórios</a>
+                    <a href="laudos/">Laudo VIGOR®</a>
+                    <a href="bi/analytics.html">People Analytics</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -1713,41 +1538,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🏠 Landing Page - VIGORRE ONE™');
-            console.log('📋 Padrão Internacional SAP Enterprise');
+            console.log('🧠 Neurociência + PNL + Psicologia + Psicanálise + Coaching');
 
             // ============================================
-            // ANIMAÇÃO DAS ESTATÍSTICAS
-            // ============================================
-            const stats = [
-                { id: 'stat1', target: 5000, suffix: '+' },
-                { id: 'stat2', target: 1200, suffix: '+' },
-                { id: 'stat3', target: 98, suffix: '%' }
-            ];
-
-            let statsAnimated = false;
-
-            function animateStats() {
-                if (statsAnimated) return;
-                statsAnimated = true;
-
-                stats.forEach(stat => {
-                    const el = document.getElementById(stat.id);
-                    if (!el) return;
-                    let current = 0;
-                    const increment = Math.ceil(stat.target / 80);
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= stat.target) {
-                            current = stat.target;
-                            clearInterval(timer);
-                        }
-                        el.textContent = current;
-                    }, 30);
-                });
-            }
-
-            // ============================================
-            // SCROLL REVEAL - ANIMAÇÃO AO ROLAR
+            // SCROLL REVEAL
             // ============================================
             const observerOptions = {
                 threshold: 0.15,
@@ -1764,27 +1558,18 @@
                             el.classList.contains('animate-slide-right')) {
                             el.style.opacity = '1';
                         }
-                        // Animação das estatísticas
-                        if (el.id === 'hero' || el.closest('.hero')) {
-                            animateStats();
-                        }
                     }
                 });
             }, observerOptions);
 
-            // Observar elementos com animações
             document.querySelectorAll('.animate-fade-up, .animate-fade-in, .animate-slide-left, .animate-slide-right')
                 .forEach(el => {
                     el.style.opacity = '0';
                     observer.observe(el);
                 });
 
-            // Observar a hero para ativar estatísticas
-            const hero = document.querySelector('.hero');
-            if (hero) observer.observe(hero);
-
             // ============================================
-            // ANIMAÇÃO DAS BARRAS DO MOCKUP (AO CARREGAR)
+            // ANIMAÇÃO DAS BARRAS DO MOCKUP
             // ============================================
             setTimeout(() => {
                 document.querySelectorAll('.bar-fill').forEach(bar => {
@@ -1797,29 +1582,7 @@
             }, 300);
 
             // ============================================
-            // FORMULÁRIO DE CONTATO
-            // ============================================
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const name = document.getElementById('contactName').value.trim();
-                    const email = document.getElementById('contactEmail').value.trim();
-                    const company = document.getElementById('contactCompany').value.trim();
-                    const message = document.getElementById('contactMessage').value.trim();
-
-                    if (!name || !email || !message) {
-                        alert('⚠️ Preencha todos os campos obrigatórios.');
-                        return;
-                    }
-
-                    alert('✅ Mensagem enviada com sucesso!\nEntraremos em contato em breve.');
-                    this.reset();
-                });
-            }
-
-            // ============================================
-            // SCROLL SUAVE PARA LINKS INTERNOS
+            // SCROLL SUAVE
             // ============================================
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
