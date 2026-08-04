@@ -73,12 +73,9 @@
         }
 
         .main-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 24px;
-            flex-wrap: wrap;
-            gap: 16px;
+            flex-wrap: wrap; gap: 16px;
         }
         .main-header h1 {
             font-family: 'Poppins', sans-serif;
@@ -319,10 +316,7 @@
         </div>
 
         <div class="laudo-status" id="laudoStatus">
-            <div class="icon" id="laudoIcon">📋</div>
-            <h2 id="laudoTitle">Carregando...</h2>
-            <p id="laudoDesc">Verificando seus testes...</p>
-            <div id="laudoActions"></div>
+            <!-- Carregado via JS -->
         </div>
 
         <div id="testesFaltantesContainer">
@@ -455,41 +449,33 @@
 
         function renderizarLaudo() {
             var totalTestes = 0;
-            var testesConcluidos = [];
-
-            if (resultados.DISC) { totalTestes++;
-                testesConcluidos.push('DISC'); }
-            if (resultados.BigFive) { totalTestes++;
-                testesConcluidos.push('Big Five'); }
-            if (resultados.IE) { totalTestes++;
-                testesConcluidos.push('IE'); }
-            if (resultados.Valores) { totalTestes++;
-                testesConcluidos.push('Valores'); }
-            if (resultados.SWOT) { totalTestes++;
-                testesConcluidos.push('SWOT'); }
+            if (resultados.DISC) totalTestes++;
+            if (resultados.BigFive) totalTestes++;
+            if (resultados.IE) totalTestes++;
+            if (resultados.Valores) totalTestes++;
+            if (resultados.SWOT) totalTestes++;
 
             var todosTestes = totalTestes === 5;
 
-            var statusIcon = document.getElementById('laudoIcon');
-            var statusTitle = document.getElementById('laudoTitle');
-            var statusDesc = document.getElementById('laudoDesc');
-            var statusActions = document.getElementById('laudoActions');
+            var statusContainer = document.getElementById('laudoStatus');
 
             if (todosTestes) {
-                statusIcon.textContent = '🎉';
-                statusTitle.textContent = 'Laudo VIGOR® Disponível!';
-                statusDesc.textContent = 'Parabéns! Você completou todos os 5 testes. Seu laudo completo já está disponível.';
-                statusActions.innerHTML = `
+                statusContainer.innerHTML = `
+                    <div class="icon">🎉</div>
+                    <h2>Laudo VIGOR® Disponível!</h2>
+                    <p>Parabéns! Você completou todos os 5 testes. Seu laudo completo já está disponível.</p>
                     <a href="../relatorios/laudo/completo.html" class="btn-gold">📋 Gerar Laudo VIGOR®</a>
+                    <div style="margin-top:12px;"><span class="status-badge disponivel">✅ Disponível</span></div>
                 `;
                 document.getElementById('testesFaltantesContainer').style.display = 'none';
             } else {
                 var faltam = 5 - totalTestes;
-                statusIcon.textContent = '⏳';
-                statusTitle.textContent = `Aguardando ${faltam} teste${faltam > 1 ? 's' : ''}`;
-                statusDesc.textContent = `Complete todos os 5 testes para gerar seu Laudo VIGOR® (80-100 páginas). Você já concluiu ${totalTestes}/5.`;
-                statusActions.innerHTML = `
+                statusContainer.innerHTML = `
+                    <div class="icon">⏳</div>
+                    <h2>Aguardando ${faltam} teste${faltam > 1 ? 's' : ''}</h2>
+                    <p>Complete todos os 5 testes para gerar seu Laudo VIGOR® (80-100 páginas). Você já concluiu ${totalTestes}/5.</p>
                     <a href="meus-testes.html" class="btn-primary">📝 Ir para Meus Testes</a>
+                    <div style="margin-top:12px;"><span class="status-badge indisponivel">⏳ ${faltam} teste(s) faltando</span></div>
                 `;
                 document.getElementById('testesFaltantesContainer').style.display = 'block';
                 renderizarTestesFaltantes();
