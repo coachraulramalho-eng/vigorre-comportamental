@@ -90,6 +90,7 @@
             padding: 24px 32px 40px;
             min-height: 100vh;
         }
+
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
@@ -192,14 +193,9 @@
         .toast.show { display: flex; }
         .toast.success { border-left-color: #10B981; }
         .toast.error { border-left-color: #EF4444; }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(120%); }
-            to { opacity: 1; transform: translateX(0); }
-        }
 
         .loading-shimmer {
-            height: 32px;
-            width: 60%;
+            height: 32px; width: 60%;
             background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
             background-size: 200% 100%;
             animation: shimmer 1.5s infinite;
@@ -440,6 +436,15 @@
     <script>
         'use strict';
 
+        // ============================================
+        // VARIÁVEIS
+        // ============================================
+        const CONFIG_KEY = 'financeiro_config';
+        let configLoaded = false;
+
+        // ============================================
+        // TOGGLE SIDEBAR
+        // ============================================
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobileOverlay');
@@ -447,12 +452,18 @@
             overlay.classList.toggle('active');
         }
 
+        // ============================================
+        // LOGOUT
+        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.VigorreAuth.logout();
             }
         }
 
+        // ============================================
+        // TOAST
+        // ============================================
         function showToast(message, type) {
             const toast = document.getElementById('toast');
             const icon = document.getElementById('toastIcon');
@@ -463,39 +474,306 @@
             msg.textContent = message;
             toast.className = 'toast show ' + type;
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
+            toast._timeout = setTimeout(() => { toast.classList.remove('show'); }, 4000);
         }
 
+        // ============================================
+        // TOGGLE SWITCH
+        // ============================================
         function toggleSwitch(el) {
             el.classList.toggle('active');
         }
 
-        function saveSettings() {
-            showToast('✅ Configurações salvas com sucesso!', 'success');
-        }
+        // ============================================
+        // CARREGAR CONFIGURAÇÕES DO SUPABASE
+        // ============================================
+        async function carregarConfiguracoes() {
+            try {
+                console.log('⚙️ Carregando configurações...');
 
-        function resetSettings() {
-            if (confirm('Tem certeza que deseja restaurar as configurações padrão?')) {
-                showToast('↺ Configurações restauradas!', 'success');
+                if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../../login.html';
+                    return;
+                }
+
+                var user = window.VigorreAuth.getCurrentUser();
+                if (user) {
+                    document.getElementById('userName').textContent = user.name || 'Administrador';
+                }
+
+                var supabaseClient = getSupabaseClient();
+
+                if (!supabaseClient) {
+                    console.warn('⚠️ Supabase não disponível, usando localStorage');
+                    carregarLocalStorage();
+                    return;
+                }
+
+                // Buscar configurações do Supabase
+                var { data, error } = await supabaseClient
+                    .from('configuracoes')
+                    .select('valor')
+                    .eq('chave', CONFIG_KEY)
+                    .single();
+
+                if (error) {
+                    if (error.code === 'PGRST116') {
+                        // Nenhuma configuração encontrada, usar padrão
+                        console.log('📌 Nenhuma configuração encontrada, usando padrão');
+                        aplicarConfiguracoesPadrao();
+                    } else {
+                        console.error('❌ Erro ao buscar configurações:', error);
+                        carregarLocalStorage();
+                    }
+                    return;
+                }
+
+                if (data && data.valor) {
+                    aplicarConfiguracoes(data.valor);
+                    console.log('✅ Configurações carregadas do Supabase');
+                } else {
+                    aplicarConfiguracoesPadrao();
+                }
+
+                configLoaded = true;
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar configurações:', error);
+                carregarLocalStorage();
             }
         }
 
+        // ============================================
+        // APLICAR CONFIGURAÇÕES
+        // ============================================
+        function aplicarConfiguracoes(config) {
+            try {
+                if (config.creditoValidade) document.getElementById('creditoValidade').value = config.creditoValidade;
+                if (config.creditoMinimo) document.getElementById('creditoMinimo').value = config.creditoMinimo;
+                if (config.creditoBonus) document.getElementById('creditoBonus').value = config.creditoBonus;
+                if (config.creditoNotificar) document.getElementById('creditoNotificar').value = config.creditoNotificar;
+                if (config.gatewayPadrao) document.getElementById('gatewayPadrao').value = config.gatewayPadrao;
+                if (config.parcelasMax) document.getElementById('parcelasMax').value = config.parcelasMax;
+                if (config.jurosParcela) document.getElementById('jurosParcela').value = config.jurosParcela;
+                if (config.descontoAvista) document.getElementById('descontoAvista').value = config.descontoAvista;
+                if (config.creditoDisc) document.getElementById('creditoDisc').value = config.creditoDisc;
+                if (config.creditoIe) document.getElementById('creditoIe').value = config.creditoIe;
+                if (config.creditoLaudo) document.getElementById('creditoLaudo').value = config.creditoLaudo;
+                if (config.creditoBigFive) document.getElementById('creditoBigFive').value = config.creditoBigFive;
+                if (config.limiteTransferencia) document.getElementById('limiteTransferencia').value = config
+                    .limiteTransferencia;
+                if (config.alertaSaques) document.getElementById('alertaSaques').value = config.alertaSaques;
+                if (config.saldoBaixo) document.getElementById('saldoBaixo').value = config.saldoBaixo;
+                if (config.consumoElevado) document.getElementById('consumoElevado').value = config.consumoElevado;
+                if (config.inatividadeDias) document.getElementById('inatividadeDias').value = config.inatividadeDias;
+                if (config.emailRelatorio) document.getElementById('emailRelatorio').value = config.emailRelatorio;
+
+                // Toggles
+                var toggles = document.querySelectorAll('.toggle');
+                if (toggles.length >= 2) {
+                    if (config.exigir2FA !== undefined) {
+                        if (config.exigir2FA) toggles[0].classList.add('active');
+                        else toggles[0].classList.remove('active');
+                    }
+                    if (config.requerAprovacaoReembolso !== undefined) {
+                        if (config.requerAprovacaoReembolso) toggles[1].classList.add('active');
+                        else toggles[1].classList.remove('active');
+                    }
+                }
+
+            } catch (error) {
+                console.error('❌ Erro ao aplicar configurações:', error);
+            }
+        }
+
+        // ============================================
+        // CONFIGURAÇÕES PADRÃO
+        // ============================================
+        function aplicarConfiguracoesPadrao() {
+            var padrao = {
+                creditoValidade: 365,
+                creditoMinimo: 10,
+                creditoBonus: 5,
+                creditoNotificar: 30,
+                gatewayPadrao: 'stripe',
+                parcelasMax: 12,
+                jurosParcela: 2.99,
+                descontoAvista: 5,
+                creditoDisc: 1,
+                creditoIe: 1,
+                creditoLaudo: 3,
+                creditoBigFive: 2,
+                exigir2FA: true,
+                limiteTransferencia: 5000,
+                alertaSaques: 1000,
+                requerAprovacaoReembolso: true,
+                saldoBaixo: 100,
+                consumoElevado: 30,
+                inatividadeDias: 90,
+                emailRelatorio: 'admin@vigorre.com'
+            };
+            aplicarConfiguracoes(padrao);
+            console.log('📌 Configurações padrão aplicadas');
+        }
+
+        // ============================================
+        // CARREGAR DO LOCALSTORAGE (FALLBACK)
+        // ============================================
+        function carregarLocalStorage() {
+            try {
+                var saved = localStorage.getItem('vigorre_financeiro_config');
+                if (saved) {
+                    var config = JSON.parse(saved);
+                    aplicarConfiguracoes(config);
+                    console.log('📂 Configurações carregadas do localStorage');
+                } else {
+                    aplicarConfiguracoesPadrao();
+                }
+            } catch (e) {
+                aplicarConfiguracoesPadrao();
+            }
+        }
+
+        // ============================================
+        // SALVAR CONFIGURAÇÕES NO SUPABASE
+        // ============================================
+        async function saveSettings() {
+            try {
+                console.log('💾 Salvando configurações...');
+
+                // Coletar dados do formulário
+                var config = {
+                    creditoValidade: parseInt(document.getElementById('creditoValidade').value) || 365,
+                    creditoMinimo: parseInt(document.getElementById('creditoMinimo').value) || 10,
+                    creditoBonus: parseInt(document.getElementById('creditoBonus').value) || 5,
+                    creditoNotificar: parseInt(document.getElementById('creditoNotificar').value) || 30,
+                    gatewayPadrao: document.getElementById('gatewayPadrao').value || 'stripe',
+                    parcelasMax: parseInt(document.getElementById('parcelasMax').value) || 12,
+                    jurosParcela: parseFloat(document.getElementById('jurosParcela').value) || 2.99,
+                    descontoAvista: parseFloat(document.getElementById('descontoAvista').value) || 5,
+                    creditoDisc: parseInt(document.getElementById('creditoDisc').value) || 1,
+                    creditoIe: parseInt(document.getElementById('creditoIe').value) || 1,
+                    creditoLaudo: parseInt(document.getElementById('creditoLaudo').value) || 3,
+                    creditoBigFive: parseInt(document.getElementById('creditoBigFive').value) || 2,
+                    limiteTransferencia: parseInt(document.getElementById('limiteTransferencia').value) || 5000,
+                    alertaSaques: parseInt(document.getElementById('alertaSaques').value) || 1000,
+                    saldoBaixo: parseInt(document.getElementById('saldoBaixo').value) || 100,
+                    consumoElevado: parseInt(document.getElementById('consumoElevado').value) || 30,
+                    inatividadeDias: parseInt(document.getElementById('inatividadeDias').value) || 90,
+                    emailRelatorio: document.getElementById('emailRelatorio').value || 'admin@vigorre.com'
+                };
+
+                // Toggles
+                var toggles = document.querySelectorAll('.toggle');
+                if (toggles.length >= 2) {
+                    config.exigir2FA = toggles[0].classList.contains('active');
+                    config.requerAprovacaoReembolso = toggles[1].classList.contains('active');
+                }
+
+                console.log('📋 Configurações:', config);
+
+                var supabaseClient = getSupabaseClient();
+
+                if (!supabaseClient) {
+                    // Fallback: salvar no localStorage
+                    localStorage.setItem('vigorre_financeiro_config', JSON.stringify(config));
+                    showToast('💾 Configurações salvas localmente (Supabase indisponível)', 'warning');
+                    return;
+                }
+
+                // Salvar no Supabase
+                var { data, error } = await supabaseClient
+                    .from('configuracoes')
+                    .upsert({
+                        chave: CONFIG_KEY,
+                        valor: config,
+                        descricao: 'Configurações do Centro Financeiro',
+                        updated_at: new Date().toISOString()
+                    })
+                    .select()
+                    .single();
+
+                if (error) {
+                    console.error('❌ Erro ao salvar configurações:', error);
+                    // Fallback: salvar no localStorage
+                    localStorage.setItem('vigorre_financeiro_config', JSON.stringify(config));
+                    showToast('⚠️ Erro ao salvar no Supabase, salvo localmente', 'error');
+                    return;
+                }
+
+                showToast('✅ Configurações salvas com sucesso!', 'success');
+
+            } catch (error) {
+                console.error('❌ Erro ao salvar configurações:', error);
+                showToast('❌ Erro ao salvar configurações', 'error');
+            }
+        }
+
+        // ============================================
+        // RESTAURAR CONFIGURAÇÕES PADRÃO
+        // ============================================
+        async function resetSettings() {
+            if (!confirm('Tem certeza que deseja restaurar as configurações padrão?')) return;
+
+            try {
+                var padrao = {
+                    creditoValidade: 365,
+                    creditoMinimo: 10,
+                    creditoBonus: 5,
+                    creditoNotificar: 30,
+                    gatewayPadrao: 'stripe',
+                    parcelasMax: 12,
+                    jurosParcela: 2.99,
+                    descontoAvista: 5,
+                    creditoDisc: 1,
+                    creditoIe: 1,
+                    creditoLaudo: 3,
+                    creditoBigFive: 2,
+                    exigir2FA: true,
+                    limiteTransferencia: 5000,
+                    alertaSaques: 1000,
+                    requerAprovacaoReembolso: true,
+                    saldoBaixo: 100,
+                    consumoElevado: 30,
+                    inatividadeDias: 90,
+                    emailRelatorio: 'admin@vigorre.com'
+                };
+
+                var supabaseClient = getSupabaseClient();
+
+                if (supabaseClient) {
+                    var { error } = await supabaseClient
+                        .from('configuracoes')
+                        .upsert({
+                            chave: CONFIG_KEY,
+                            valor: padrao,
+                            descricao: 'Configurações do Centro Financeiro (padrão)',
+                            updated_at: new Date().toISOString()
+                        });
+
+                    if (error) {
+                        console.error('❌ Erro ao restaurar configurações:', error);
+                        localStorage.setItem('vigorre_financeiro_config', JSON.stringify(padrao));
+                    }
+                } else {
+                    localStorage.setItem('vigorre_financeiro_config', JSON.stringify(padrao));
+                }
+
+                aplicarConfiguracoes(padrao);
+                showToast('↺ Configurações restauradas para o padrão!', 'success');
+
+            } catch (error) {
+                console.error('❌ Erro ao restaurar configurações:', error);
+                showToast('❌ Erro ao restaurar configurações', 'error');
+            }
+        }
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('⚙️ Configurações - VIGORRE ONE™');
-
-            if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
-                window.location.href = '../../login.html';
-                return;
-            }
-
-            var user = window.VigorreAuth.getCurrentUser();
-            if (user) {
-                document.getElementById('userName').textContent = user.name || 'Administrador';
-            }
-
-            console.log('✅ Configurações carregado com sucesso!');
+            carregarConfiguracoes();
         });
 
         console.log('✅ Configurações carregado com sucesso!');
