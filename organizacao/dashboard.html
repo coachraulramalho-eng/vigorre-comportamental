@@ -213,6 +213,18 @@
             color: #991B1B;
         }
 
+        .consumo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.85rem;
+        }
+        .consumo-item:last-child { border-bottom: none; }
+        .consumo-item .consumo-nome { font-weight: 600; color: var(--gray-700); }
+        .consumo-item .consumo-valor { font-weight: 700; color: var(--gold); }
+
         .btn-action {
             padding: 4px 12px;
             border: none;
@@ -261,6 +273,8 @@
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
         }
+
+        .chart-container { height: 200px; position: relative; }
 
         .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
         .mobile-overlay {
@@ -327,6 +341,7 @@
             <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
         </div>
 
+        <!-- CARDS -->
         <div class="cards-grid" id="cardsGrid">
             <div class="card" onclick="window.location.href='participantes.html'">
                 <div class="card-icon">👥</div>
@@ -354,8 +369,10 @@
             </div>
         </div>
 
+        <!-- CONTENT -->
         <div class="content-grid">
             <div>
+                <!-- Participantes -->
                 <div class="content-card">
                     <h3>📋 Últimos Participantes</h3>
                     <div id="listaParticipantes">
@@ -364,13 +381,23 @@
                     <a href="participantes.html" style="color:var(--blue);font-size:0.85rem;font-weight:600;text-decoration:none;">Ver todos →</a>
                 </div>
 
+                <!-- Consumo de Créditos -->
+                <div class="content-card">
+                    <h3>💳 Consumo de Créditos por Participante</h3>
+                    <div id="listaConsumo">
+                        <!-- Carregado via JS -->
+                    </div>
+                </div>
+
+                <!-- Gráfico DISC -->
                 <div class="content-card">
                     <h3>📊 Distribuição DISC</h3>
-                    <div style="height:200px;"><canvas id="discChart"></canvas></div>
+                    <div class="chart-container"><canvas id="discChart"></canvas></div>
                 </div>
             </div>
 
             <div>
+                <!-- Insights -->
                 <div class="content-card">
                     <h3>💡 Insights Rápidos</h3>
                     <div id="insightsContent">
@@ -378,6 +405,7 @@
                     </div>
                 </div>
 
+                <!-- Ações Rápidas -->
                 <div class="content-card" style="background:linear-gradient(135deg,var(--navy),var(--gray-800));color:white;">
                     <h3 style="color:white;">📌 Ações Rápidas</h3>
                     <div style="margin-top:8px;">
@@ -400,14 +428,13 @@
     <script src="../auth.js"></script>
     <script src="../middleware/auth-guard.js"></script>
     <script src="../admin/financeiro/financeiro-conexao.js"></script>
-    <script src="../admin/ia/motor-ia.js"></script>
 
     <script>
         'use strict';
 
         let empresaId = null;
         let participantes = [];
-        let resultados = {};
+        let consumoData = {};
 
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
@@ -467,7 +494,9 @@
                 await carregarCreditos();
                 await carregarRelatorios();
                 await carregarLaudos();
+                await carregarConsumo();
                 await carregarGraficoDISC();
+                await carregarInsights();
 
                 console.log('✅ Dashboard Empresa carregado!');
 
@@ -477,6 +506,9 @@
             }
         }
 
+        // ============================================
+        // 1. CARREGAR PARTICIPANTES
+        // ============================================
         async function carregarParticipantes() {
             try {
                 var supabaseClient = getSupabaseClient();
@@ -493,7 +525,6 @@
                 participantes = data || [];
                 document.getElementById('totalParticipantes').textContent = participantes.length;
 
-                // Últimos 5 participantes
                 var container = document.getElementById('listaParticipantes');
                 var recentes = participantes.slice(0, 5);
 
@@ -520,6 +551,9 @@
             }
         }
 
+        // ============================================
+        // 2. CARREGAR CRÉDITOS
+        // ============================================
         async function carregarCreditos() {
             try {
                 var supabaseClient = getSupabaseClient();
@@ -546,44 +580,131 @@
             }
         }
 
+        // ============================================
+        // 3. CARREGAR RELATÓRIOS
+        // ============================================
         async function carregarRelatorios() {
             try {
                 var supabaseClient = getSupabaseClient();
                 if (!supabaseClient) return;
 
-                var { count, error } = await supabaseClient
+                var { data, error } = await supabaseClient
                     .from('resultados')
-                    .select('*', { count: 'exact', head: true })
+                    .select('id')
                     .eq('empresa_id', empresaId);
 
                 if (error) throw error;
 
-                document.getElementById('totalRelatorios').textContent = count || 0;
+                document.getElementById('totalRelatorios').textContent = data ? data.length : 0;
 
             } catch (error) {
                 console.error('❌ Erro ao carregar relatórios:', error);
             }
         }
 
+        // ============================================
+        // 4. CARREGAR LAUDOS
+        // ============================================
         async function carregarLaudos() {
             try {
                 var supabaseClient = getSupabaseClient();
                 if (!supabaseClient) return;
 
-                var { count, error } = await supabaseClient
+                var { data, error } = await supabaseClient
                     .from('resultados_ia')
-                    .select('*', { count: 'exact', head: true })
+                    .select('id')
                     .eq('empresa_id', empresaId);
 
                 if (error) throw error;
 
-                document.getElementById('totalLaudos').textContent = count || 0;
+                document.getElementById('totalLaudos').textContent = data ? data.length : 0;
 
             } catch (error) {
                 console.error('❌ Erro ao carregar laudos:', error);
             }
         }
 
+        // ============================================
+        // 5. CARREGAR CONSUMO POR PARTICIPANTE (NOVO)
+        // ============================================
+        async function carregarConsumo() {
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) return;
+
+                // Buscar transações de saída (consumo)
+                var { data, error } = await supabaseClient
+                    .from('transacoes')
+                    .select('*')
+                    .eq('empresa_id', empresaId)
+                    .eq('tipo', 'saida');
+
+                if (error) throw error;
+
+                // Agrupar por participante
+                consumoData = {};
+                if (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var t = data[i];
+                        var key = t.usuario_id || 'unknown';
+                        if (!consumoData[key]) {
+                            consumoData[key] = { total: 0, count: 0, nome: 'Participante' };
+                        }
+                        consumoData[key].total += t.valor || 0;
+                        consumoData[key].count += 1;
+                    }
+                }
+
+                // Buscar nomes dos participantes
+                if (Object.keys(consumoData).length > 0) {
+                    var ids = Object.keys(consumoData).filter(id => id !== 'unknown');
+                    if (ids.length > 0) {
+                        var { data: participants } = await supabaseClient
+                            .from('participants')
+                            .select('id, name')
+                            .in('id', ids);
+
+                        if (participants) {
+                            for (var j = 0; j < participants.length; j++) {
+                                if (consumoData[participants[j].id]) {
+                                    consumoData[participants[j].id].nome = participants[j].name || 'Participante';
+                                }
+                            }
+                        }
+                    }
+                }
+
+                renderizarConsumo();
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar consumo:', error);
+            }
+        }
+
+        function renderizarConsumo() {
+            var container = document.getElementById('listaConsumo');
+
+            var items = Object.entries(consumoData)
+                .filter(([key, value]) => key !== 'unknown')
+                .sort((a, b) => b[1].total - a[1].total)
+                .slice(0, 10);
+
+            if (items.length === 0) {
+                container.innerHTML = '<div style="text-align:center;padding:12px;color:var(--gray-400);font-size:0.85rem;">📭 Nenhum consumo registrado</div>';
+                return;
+            }
+
+            container.innerHTML = items.map(([key, value]) => `
+                <div class="consumo-item">
+                    <span class="consumo-nome">${value.nome}</span>
+                    <span class="consumo-valor">${value.total} créditos (${value.count}x)</span>
+                </div>
+            `).join('');
+        }
+
+        // ============================================
+        // 6. GRÁFICO DISC
+        // ============================================
         async function carregarGraficoDISC() {
             try {
                 var supabaseClient = getSupabaseClient();
@@ -645,6 +766,86 @@
             }
         }
 
+        // ============================================
+        // 7. INSIGHTS
+        // ============================================
+        async function carregarInsights() {
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    carregarInsightsMock();
+                    return;
+                }
+
+                var { count: total } = await supabaseClient
+                    .from('participants')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('company_id', empresaId);
+
+                var { count: ativos } = await supabaseClient
+                    .from('participants')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('company_id', empresaId)
+                    .eq('status', 'active');
+
+                var { count: pendentes } = await supabaseClient
+                    .from('participants')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('company_id', empresaId)
+                    .eq('status', 'pending');
+
+                var container = document.getElementById('insightsContent');
+
+                var insights = [];
+                if (pendentes > 0) {
+                    insights.push({ icon: '📌', title: `${pendentes} participantes pendentes`, desc: 'Convide-os para completar os testes' });
+                }
+                if (total > 0 && ativos > 0) {
+                    insights.push({ icon: '📊', title: `${Math.round((ativos/total)*100)}% de participação ativa`, desc: `${ativos} de ${total} participantes` });
+                }
+                if (Object.keys(consumoData).length > 0) {
+                    var totalConsumo = Object.values(consumoData).reduce((s, v) => s + v.total, 0);
+                    insights.push({ icon: '💳', title: `${formatarNumero(totalConsumo)} créditos consumidos`, desc: 'Total de créditos utilizados' });
+                }
+
+                if (insights.length === 0) {
+                    insights.push({ icon: '💡', title: 'Comece a usar a plataforma', desc: 'Cadastre participantes e realize testes' });
+                }
+
+                container.innerHTML = insights.map(i => `
+                    <div style="padding:8px 0;border-bottom:1px solid var(--gray-100);">
+                        <div style="font-weight:600;font-size:0.9rem;">${i.icon} ${i.title}</div>
+                        <div style="font-size:0.8rem;color:var(--gray-500);">${i.desc}</div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar insights:', error);
+                carregarInsightsMock();
+            }
+        }
+
+        function carregarInsightsMock() {
+            var container = document.getElementById('insightsContent');
+            container.innerHTML = `
+                <div style="padding:8px 0;border-bottom:1px solid var(--gray-100);">
+                    <div style="font-weight:600;font-size:0.9rem;">💡 3 participantes pendentes</div>
+                    <div style="font-size:0.8rem;color:var(--gray-500);">Convide-os para completar os testes</div>
+                </div>
+                <div style="padding:8px 0;border-bottom:1px solid var(--gray-100);">
+                    <div style="font-weight:600;font-size:0.9rem;">📊 75% de participação ativa</div>
+                    <div style="font-size:0.8rem;color:var(--gray-500);">9 de 12 participantes</div>
+                </div>
+                <div style="padding:8px 0;">
+                    <div style="font-weight:600;font-size:0.9rem;">💳 320 créditos consumidos</div>
+                    <div style="font-size:0.8rem;color:var(--gray-500);">Total de créditos utilizados</div>
+                </div>
+            `;
+        }
+
+        // ============================================
+        // DADOS MOCK
+        // ============================================
         function carregarMock() {
             document.getElementById('totalParticipantes').textContent = '12';
             document.getElementById('totalRelatorios').textContent = '8';
@@ -667,22 +868,16 @@
                 </div>
             `;
 
-            var insights = document.getElementById('insightsContent');
-            insights.innerHTML = `
-                <div style="padding:8px 0;border-bottom:1px solid var(--gray-100);">
-                    <div style="font-weight:600;font-size:0.9rem;">💡 3 participantes pendentes</div>
-                    <div style="font-size:0.8rem;color:var(--gray-500);">Convide-os para completar os testes</div>
-                </div>
-                <div style="padding:8px 0;border-bottom:1px solid var(--gray-100);">
-                    <div style="font-weight:600;font-size:0.9rem;">📊 Perfil predominante: Dominância</div>
-                    <div style="font-size:0.8rem;color:var(--gray-500);">50% da equipe tem perfil D</div>
-                </div>
-                <div style="padding:8px 0;">
-                    <div style="font-weight:600;font-size:0.9rem;">📋 3 laudos disponíveis</div>
-                    <div style="font-size:0.8rem;color:var(--gray-500);">Laudos completos gerados pela IA</div>
-                </div>
+            // Consumo mock
+            var consumoContainer = document.getElementById('listaConsumo');
+            consumoContainer.innerHTML = `
+                <div class="consumo-item"><span class="consumo-nome">Ana Silva</span><span class="consumo-valor">45 créditos (12x)</span></div>
+                <div class="consumo-item"><span class="consumo-nome">João Santos</span><span class="consumo-valor">32 créditos (8x)</span></div>
+                <div class="consumo-item"><span class="consumo-nome">Pedro Lima</span><span class="consumo-valor">18 créditos (5x)</span></div>
+                <div class="consumo-item"><span class="consumo-nome">Carla Souza</span><span class="consumo-valor">12 créditos (3x)</span></div>
             `;
 
+            carregarInsightsMock();
             showToast('📊 Usando dados de exemplo', 'warning');
         }
 
