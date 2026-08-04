@@ -45,8 +45,6 @@
             --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --z-header: 100;
-            --z-modal: 200;
-            --z-toast: 300;
         }
 
         * {
@@ -148,6 +146,16 @@
             }
         }
 
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
         .animate-fade-up {
             opacity: 0;
             animation: fadeInUp 0.8s ease forwards;
@@ -187,6 +195,14 @@
         }
         .animate-delay-8 {
             animation-delay: 0.8s;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .blink-animation {
+            animation: blink 1.5s ease-in-out infinite;
         }
 
         /* ============================================
@@ -671,7 +687,7 @@
         }
 
         /* ============================================
-           NEUROCIÊNCIA - FUNDAMENTOS
+           FUNDAMENTOS CIENTÍFICOS
            ============================================ */
         .neuro-section {
             background: var(--bg-secondary);
@@ -679,7 +695,7 @@
 
         .neuro-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
         }
 
@@ -769,10 +785,11 @@
         }
 
         /* ============================================
-           PRICING
+           PRICING - COM CUPONS E PROMOÇÃO
            ============================================ */
         .pricing-section {
             background: var(--bg-secondary);
+            padding: 80px 0;
         }
 
         .pricing-grid {
@@ -789,17 +806,43 @@
             text-align: center;
             transition: var(--transition);
             position: relative;
+            overflow: hidden;
         }
 
         .pricing-card:hover {
             border-color: var(--gold);
             box-shadow: var(--shadow-hover);
-            transform: translateY(-4px);
+            transform: translateY(-6px);
+        }
+
+        .pricing-card .promo-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--red);
+            color: white;
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .pricing-card .promo-badge.limited {
+            background: #DC2626;
+            font-size: 0.55rem;
         }
 
         .pricing-card.popular {
             border-color: var(--gold);
             box-shadow: var(--shadow-gold);
+            transform: scale(1.02);
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.02) translateY(-6px);
         }
 
         .pricing-card.popular .popular-badge {
@@ -843,6 +886,15 @@
             font-weight: 600;
         }
 
+        .pricing-card .pricing-price .price-original {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-weight: 400;
+            display: block;
+            margin-top: -4px;
+        }
+
         .pricing-card .pricing-period {
             font-size: 0.8rem;
             color: var(--text-muted);
@@ -877,6 +929,34 @@
             font-weight: 700;
         }
 
+        .pricing-card .pricing-cupom {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 16px;
+            background: rgba(217, 119, 6, 0.08);
+            border: 1px dashed var(--gold);
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-card .pricing-cupom .copy-btn {
+            background: none;
+            border: none;
+            color: var(--gold);
+            cursor: pointer;
+            font-size: 0.7rem;
+            margin-left: 4px;
+            transition: var(--transition);
+        }
+
+        .pricing-card .pricing-cupom .copy-btn:hover {
+            color: var(--gold-light);
+        }
+
         .pricing-card .btn-pricing {
             padding: 12px 32px;
             border: none;
@@ -888,6 +968,8 @@
             transition: var(--transition);
             text-decoration: none;
             display: inline-block;
+            width: 100%;
+            margin-top: 4px;
         }
 
         .pricing-card .btn-pricing.primary {
@@ -909,14 +991,57 @@
 
         .pricing-card .btn-pricing.secondary:hover {
             border-color: var(--gold);
+            background: rgba(217, 119, 6, 0.04);
         }
 
-        .pricing-card .pricing-cupom {
+        .pricing-card .btn-pricing.gold {
+            background: var(--gradient-gold);
+            color: white;
+            box-shadow: var(--shadow-gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card .btn-pricing.gold::before {
+            content: '⚡ OFERTA LIMITADA';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .pricing-card .btn-pricing.gold:hover::before {
+            opacity: 1;
+        }
+
+        .pricing-card .btn-pricing.gold:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold-hover);
+        }
+
+        .pricing-card .pricing-timer {
             margin-top: 10px;
-            font-size: 0.75rem;
-            color: var(--gold);
+            font-size: 0.7rem;
+            color: var(--red);
             font-weight: 600;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .pricing-card .pricing-timer .timer-icon {
+            animation: pulse 1.5s ease-in-out infinite;
         }
 
         /* ============================================
@@ -1051,7 +1176,7 @@
                 grid-template-columns: 1fr;
             }
             .neuro-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
             }
             .business-grid {
                 grid-template-columns: 1fr;
@@ -1060,6 +1185,12 @@
                 grid-template-columns: 1fr;
                 max-width: 420px;
                 margin: 0 auto;
+            }
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            .pricing-card.popular:hover {
+                transform: scale(1) translateY(-6px);
             }
             .footer .footer-grid {
                 grid-template-columns: 1fr;
@@ -1077,9 +1208,6 @@
         }
 
         @media (max-width: 480px) {
-            .neuro-grid {
-                grid-template-columns: 1fr;
-            }
             .hero .hero-content h1 {
                 font-size: 1.8rem;
             }
@@ -1098,6 +1226,9 @@
             }
             .pricing-card {
                 padding: 20px 16px;
+            }
+            .pricing-card .pricing-price {
+                font-size: 1.8rem;
             }
         }
 
@@ -1147,7 +1278,6 @@
             <nav class="nav">
                 <a href="#para-voce">Para Você</a>
                 <a href="#para-empresas">Para Empresas</a>
-                <a href="#neurociencia">Neurociência</a>
                 <a href="#planos">Planos</a>
                 <a href="login.html" class="btn-outline">Entrar</a>
                 <a href="#planos" class="btn-primary">Comprar Créditos</a>
@@ -1165,7 +1295,7 @@
                 <div class="hero-sub">Descubra quem você realmente é</div>
                 <h1>O autoconhecimento <span class="gradient-text">transforma vidas</span></h1>
                 <span class="hero-strong">⭐ Invista em você. Compre créditos e tenha acesso a laudos de até 100 páginas.</span>
-                <p>Com neurociência, PNL, psicologia e coaching, nossos testes revelam seu potencial oculto e te guiam para a melhor versão de si mesmo.</p>
+                <p>Você já sentiu que poderia ser mais? Que algo dentro de você espera para ser descoberto? Seu potencial não é um mistério — é uma ciência. E agora você tem a chave para desbloqueá-lo.</p>
                 <div class="hero-buttons">
                     <a href="#planos" class="btn-primary">🚀 Comprar Créditos</a>
                     <a href="#para-voce" class="btn-outline">Saber Mais</a>
@@ -1177,7 +1307,7 @@
                         <div class="dots">
                             <span></span><span></span><span></span>
                         </div>
-                        <span class="mockup-title">📊 Seu Perfil DISC</span>
+                        <span class="mockup-title">📊 Seu Perfil Comportamental</span>
                         <span style="width:40px;"></span>
                     </div>
                     <div class="mockup-bars">
@@ -1221,25 +1351,25 @@
                 <div class="why-card animate-fade-up animate-delay-1">
                     <span class="why-icon">🧠</span>
                     <h3>Autoconhecimento Profundo</h3>
-                    <p>Entenda suas emoções, reações e comportamentos. Descubra por que você age de determinada forma e como isso afeta sua vida.</p>
+                    <p>Entenda suas emoções, reações e comportamentos. Descubra por que você age de determinada forma e como isso afeta sua vida. O conhecimento de si mesmo é o primeiro passo para a verdadeira transformação.</p>
                     <span class="why-stat">📊 +80% de clareza sobre si mesmo</span>
                 </div>
                 <div class="why-card animate-fade-up animate-delay-2">
                     <span class="why-icon">🎯</span>
                     <h3>Carreira com Propósito</h3>
-                    <p>Alinhe sua carreira com seus talentos naturais. Descubra quais áreas você tem mais potencial e onde pode brilhar.</p>
+                    <p>Alinhe sua carreira com seus talentos naturais. Descubra quais áreas você tem mais potencial e onde pode brilhar. Não trabalhe apenas — trabalhe com significado.</p>
                     <span class="why-stat">💼 67% mudam de carreira após o teste</span>
                 </div>
                 <div class="why-card animate-fade-up animate-delay-3">
                     <span class="why-icon">❤️</span>
                     <h3>Relacionamentos mais Saudáveis</h3>
-                    <p>Entenda como você se relaciona com os outros. Melhore sua comunicação, empatia e conexões pessoais e profissionais.</p>
+                    <p>Entenda como você se relaciona com os outros. Melhore sua comunicação, empatia e conexões pessoais e profissionais. Relacionamentos saudáveis começam com autoconhecimento.</p>
                     <span class="why-stat">🤝 +45% melhora nos relacionamentos</span>
                 </div>
                 <div class="why-card animate-fade-up animate-delay-4">
                     <span class="why-icon">🧘</span>
                     <h3>Equilíbrio Emocional</h3>
-                    <p>Aprenda a gerenciar suas emoções, reduzir o estresse e aumentar sua resiliência diante dos desafios da vida.</p>
+                    <p>Aprenda a gerenciar suas emoções, reduzir o estresse e aumentar sua resiliência diante dos desafios da vida. A verdadeira força vem do equilíbrio interior.</p>
                     <span class="why-stat">🌿 -52% de estresse após 3 meses</span>
                 </div>
             </div>
@@ -1247,55 +1377,45 @@
     </section>
 
     <!-- ============================================
-    NEUROCIÊNCIA - FUNDAMENTOS
+    FUNDAMENTOS CIENTÍFICOS
     ============================================ -->
     <section class="section neuro-section" id="neurociencia">
         <div class="container">
             <div class="section-header">
-                <span class="badge">🧬 NEUROCIÊNCIA</span>
+                <span class="badge">🔬 CIÊNCIA</span>
                 <h2>O que a <span class="highlight">ciência</span> diz sobre você</h2>
-                <p>Neurociência, PNL, Psicologia, Psicanálise e Coaching aplicados ao seu desenvolvimento</p>
+                <p>Décadas de pesquisa aplicadas ao seu desenvolvimento humano</p>
             </div>
             <div class="neuro-grid">
                 <div class="neuro-card animate-fade-up animate-delay-1">
                     <span class="neuro-icon">🧬</span>
-                    <h4>Neurociência</h4>
-                    <p>Entenda como seu cérebro processa emoções e toma decisões. A neurociência revela os padrões neurais que moldam seu comportamento.</p>
+                    <h4>Neurociência Aplicada</h4>
+                    <p>Seu cérebro processa emoções e decisões de forma única. Entenda os padrões neurais que moldam seu comportamento e aprenda a reprogramá-los.</p>
                 </div>
                 <div class="neuro-card animate-fade-up animate-delay-2">
                     <span class="neuro-icon">🗣️</span>
-                    <h4>PNL</h4>
-                    <p>Programação Neurolinguística: descubra como sua linguagem e padrões mentais influenciam seus resultados e relacionamentos.</p>
+                    <h4>Linguagem e Padrões Mentais</h4>
+                    <p>A forma como você fala e pensa influencia diretamente seus resultados. Descubra como seus padrões linguísticos criam sua realidade.</p>
                 </div>
                 <div class="neuro-card animate-fade-up animate-delay-3">
                     <span class="neuro-icon">📖</span>
-                    <h4>Psicologia</h4>
-                    <p>Comportamento humano sob a lente da ciência. Entenda suas motivações, medos e desejos com base em fundamentos psicológicos sólidos.</p>
+                    <h4>Comportamento Humano</h4>
+                    <p>Entenda suas motivações profundas, medos e desejos. O que realmente te move? A ciência do comportamento revela as respostas.</p>
                 </div>
                 <div class="neuro-card animate-fade-up animate-delay-4">
                     <span class="neuro-icon">🛋️</span>
-                    <h4>Psicanálise</h4>
-                    <p>Explore as profundezas da sua mente inconsciente. Descubra os padrões que repetem e como transformá-los.</p>
+                    <h4>Mente Inconsciente</h4>
+                    <p>Explore as profundezas da sua mente. Descubra os padrões que se repetem e como transformá-los em oportunidades de crescimento.</p>
                 </div>
                 <div class="neuro-card animate-fade-up animate-delay-5">
                     <span class="neuro-icon">⭐</span>
-                    <h4>Coaching</h4>
-                    <p>Metodologias práticas para alcançar seus objetivos. Transforme autoconhecimento em ação e resultados concretos.</p>
+                    <h4>Transformação Prática</h4>
+                    <p>Metodologias que transformam autoconhecimento em ação. Resultados reais, mensuráveis e sustentáveis na sua vida.</p>
                 </div>
                 <div class="neuro-card animate-fade-up animate-delay-6">
-                    <span class="neuro-icon">🔬</span>
-                    <h4>People Analytics</h4>
-                    <p>Dados transformados em inteligência. Use a ciência de dados para entender padrões comportamentais e tomar melhores decisões.</p>
-                </div>
-                <div class="neuro-card animate-fade-up animate-delay-7">
-                    <span class="neuro-icon">💡</span>
-                    <h4>Inteligência Emocional</h4>
-                    <p>Capacidade de reconhecer, compreender e gerenciar emoções. O fator mais importante para o sucesso pessoal e profissional.</p>
-                </div>
-                <div class="neuro-card animate-fade-up animate-delay-8">
-                    <span class="neuro-icon">🚀</span>
-                    <h4>Desenvolvimento Humano</h4>
-                    <p>Jornada contínua de evolução. Combine todas as ferramentas para se tornar a melhor versão de si mesmo.</p>
+                    <span class="neuro-icon">📊</span>
+                    <h4>Inteligência de Dados</h4>
+                    <p>Dados transformados em inteligência. Use a ciência de dados para entender padrões e tomar melhores decisões na sua vida.</p>
                 </div>
             </div>
         </div>
@@ -1347,14 +1467,14 @@
     </section>
 
     <!-- ============================================
-    PLANOS E PREÇOS
+    PLANOS E PREÇOS COM CUPONS
     ============================================ -->
-    <section class="section pricing-section" id="planos">
+    <section class="pricing-section" id="planos">
         <div class="container">
             <div class="section-header">
                 <span class="badge">💰 PLANOS</span>
                 <h2>Invista no seu <span class="highlight">desenvolvimento</span></h2>
-                <p>Escolha o pacote ideal e comece sua jornada de autoconhecimento</p>
+                <p>O menor preço do mercado com a melhor entrega. Promoção por tempo limitado!</p>
             </div>
 
             <!-- Relatórios -->
@@ -1362,56 +1482,89 @@
                 📄 Créditos de Relatório
             </h3>
             <div class="pricing-grid" style="margin-bottom:48px;">
+                <!-- Unitário Promo -->
                 <div class="pricing-card animate-fade-up animate-delay-1">
+                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
+                    <div class="pricing-icon">📄</div>
+                    <div class="pricing-name">Unitário</div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>24,90
+                        <span class="price-original">R$ 35,00</span>
+                    </div>
+                    <span class="pricing-period">1 crédito</span>
+                    <ul class="pricing-features">
+                        <li><span class="check">✅</span> 1 relatório completo</li>
+                        <li><span class="check">✅</span> PDI personalizado</li>
+                        <li><span class="cross">❌</span> Laudo VIGOR®</li>
+                    </ul>
+                    <span class="pricing-cupom">🎫 CUPOM: RELATO01</span>
+                    <div class="pricing-timer">
+                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
+                    </div>
+                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
+                </div>
+
+                <!-- Básico Promo -->
+                <div class="pricing-card animate-fade-up animate-delay-2">
+                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
                     <div class="pricing-icon">📄</div>
                     <div class="pricing-name">Básico</div>
-                    <div class="pricing-price"><span class="currency">R$</span>350</div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>199,90
+                        <span class="price-original">R$ 350,00</span>
+                    </div>
                     <span class="pricing-period">10 créditos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 10 relatórios</li>
                         <li><span class="check">✅</span> PDI personalizado</li>
                         <li><span class="cross">❌</span> Laudo VIGOR®</li>
                     </ul>
+                    <span class="pricing-cupom">🎫 CUPOM: RELATO10</span>
+                    <div class="pricing-timer">
+                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
+                    </div>
                     <a href="login.html" class="btn-pricing secondary">Comprar</a>
                 </div>
 
-                <div class="pricing-card animate-fade-up animate-delay-2">
-                    <div class="pricing-icon">📄</div>
-                    <div class="pricing-name">Prata</div>
-                    <div class="pricing-price"><span class="currency">R$</span>800</div>
-                    <span class="pricing-period">25 créditos</span>
-                    <ul class="pricing-features">
-                        <li><span class="check">✅</span> 25 relatórios</li>
-                        <li><span class="check">✅</span> PDI personalizado</li>
-                        <li><span class="cross">❌</span> Laudo VIGOR®</li>
-                    </ul>
-                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
-                </div>
-
+                <!-- Ouro (sem promo) -->
                 <div class="pricing-card popular animate-fade-up animate-delay-3">
-                    <span class="popular-badge">⭐ Mais Vendido</span>
+                    <span class="popular-badge">⭐ MAIS VENDIDO</span>
                     <div class="pricing-icon">📄</div>
                     <div class="pricing-name">Ouro</div>
-                    <div class="pricing-price"><span class="currency">R$</span>1.400</div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>1.400
+                        <span class="price-original" style="opacity:0;">—</span>
+                    </div>
                     <span class="pricing-period">50 créditos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 50 relatórios</li>
                         <li><span class="check">✅</span> PDI personalizado</li>
                         <li><span class="check">✅</span> Laudo VIGOR® (3 créditos)</li>
                     </ul>
+                    <span class="pricing-cupom" style="opacity:0;">—</span>
+                    <div class="pricing-timer" style="opacity:0;">—</div>
                     <a href="login.html" class="btn-pricing primary">Comprar</a>
                 </div>
 
+                <!-- Platina Promo -->
                 <div class="pricing-card animate-fade-up animate-delay-4">
+                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
                     <div class="pricing-icon">📄</div>
                     <div class="pricing-name">Platina</div>
-                    <div class="pricing-price"><span class="currency">R$</span>2.500</div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>1.700
+                        <span class="price-original">R$ 2.500</span>
+                    </div>
                     <span class="pricing-period">100 créditos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 100 relatórios</li>
                         <li><span class="check">✅</span> PDI personalizado</li>
                         <li><span class="check">✅</span> Laudo VIGOR® (3 créditos)</li>
                     </ul>
+                    <span class="pricing-cupom">🎫 CUPOM: RELATO100</span>
+                    <div class="pricing-timer">
+                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
+                    </div>
                     <a href="login.html" class="btn-pricing secondary">Comprar</a>
                 </div>
             </div>
@@ -1421,56 +1574,89 @@
                 ⭐ Laudo VIGOR® (80-100 páginas)
             </h3>
             <div class="pricing-grid">
+                <!-- Unitário Premium Promo -->
                 <div class="pricing-card animate-fade-up animate-delay-5">
+                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
                     <div class="pricing-icon">⭐</div>
-                    <div class="pricing-name">Básico</div>
-                    <div class="pricing-price"><span class="currency">R$</span>447</div>
+                    <div class="pricing-name">Unitário Premium</div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>99,90
+                        <span class="price-original">R$ 199,90</span>
+                    </div>
+                    <span class="pricing-period">1 laudo</span>
+                    <ul class="pricing-features">
+                        <li><span class="check">✅</span> 1 laudo completo</li>
+                        <li><span class="check">✅</span> 80-100 páginas</li>
+                        <li><span class="check">✅</span> Neurociência + Psicologia</li>
+                    </ul>
+                    <span class="pricing-cupom">🎫 CUPOM: LAUDO1</span>
+                    <div class="pricing-timer">
+                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
+                    </div>
+                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
+                </div>
+
+                <!-- Básico Premium Promo -->
+                <div class="pricing-card animate-fade-up animate-delay-6">
+                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
+                    <div class="pricing-icon">⭐</div>
+                    <div class="pricing-name">Básico Premium</div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>240,00
+                        <span class="price-original">R$ 500,00</span>
+                    </div>
                     <span class="pricing-period">3 laudos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 3 laudos</li>
                         <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Neurociência + PNL</li>
+                        <li><span class="check">✅</span> Neurociência + Psicologia</li>
                     </ul>
+                    <span class="pricing-cupom">🎫 CUPOM: LAUDO3</span>
+                    <div class="pricing-timer">
+                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
+                    </div>
                     <a href="login.html" class="btn-pricing secondary">Comprar</a>
                 </div>
 
-                <div class="pricing-card animate-fade-up animate-delay-6">
-                    <div class="pricing-icon">⭐</div>
-                    <div class="pricing-name">Prata</div>
-                    <div class="pricing-price"><span class="currency">R$</span>695</div>
-                    <span class="pricing-period">5 laudos</span>
-                    <ul class="pricing-features">
-                        <li><span class="check">✅</span> 5 laudos</li>
-                        <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Neurociência + PNL</li>
-                    </ul>
-                    <a href="login.html" class="btn-pricing secondary">Comprar</a>
-                </div>
-
+                <!-- Ouro Premium (sem promo) -->
                 <div class="pricing-card popular animate-fade-up animate-delay-7">
-                    <span class="popular-badge">⭐ Mais Vendido</span>
+                    <span class="popular-badge">⭐ MAIS VENDIDO</span>
                     <div class="pricing-icon">⭐</div>
-                    <div class="pricing-name">Ouro</div>
-                    <div class="pricing-price"><span class="currency">R$</span>1.290</div>
+                    <div class="pricing-name">Ouro Premium</div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>1.290
+                        <span class="price-original" style="opacity:0;">—</span>
+                    </div>
                     <span class="pricing-period">10 laudos</span>
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> 10 laudos</li>
                         <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Neurociência + PNL</li>
+                        <li><span class="check">✅</span> Neurociência + Psicologia</li>
                     </ul>
+                    <span class="pricing-cupom" style="opacity:0;">—</span>
+                    <div class="pricing-timer" style="opacity:0;">—</div>
                     <a href="login.html" class="btn-pricing primary">Comprar</a>
                 </div>
 
+                <!-- Ouro Premium Promo -->
                 <div class="pricing-card animate-fade-up animate-delay-8">
+                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
                     <div class="pricing-icon">⭐</div>
-                    <div class="pricing-name">Platina</div>
-                    <div class="pricing-price"><span class="currency">R$</span>2.380</div>
-                    <span class="pricing-period">20 laudos</span>
+                    <div class="pricing-name">Ouro Premium</div>
+                    <div class="pricing-price">
+                        <span class="currency">R$</span>700,00
+                        <span class="price-original">R$ 2.000,00</span>
+                    </div>
+                    <span class="pricing-period">10 laudos</span>
                     <ul class="pricing-features">
-                        <li><span class="check">✅</span> 20 laudos</li>
+                        <li><span class="check">✅</span> 10 laudos</li>
                         <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Neurociência + PNL</li>
+                        <li><span class="check">✅</span> Neurociência + Psicologia</li>
                     </ul>
+                    <span class="pricing-cupom">🎫 CUPOM: LAUDO10</span>
+                    <div class="pricing-timer">
+                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
+                    </div>
                     <a href="login.html" class="btn-pricing secondary">Comprar</a>
                 </div>
             </div>
@@ -1478,7 +1664,11 @@
             <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:32px;">
                 🔒 Todos os planos incluem LGPD, segurança e suporte prioritário.
                 <br />
-                <strong>💡 Quanto mais créditos, maior o desconto!</strong>
+                <strong style="color:var(--gold);">💡 O menor preço do mercado com a melhor entrega!</strong>
+                <br />
+                <span style="color:var(--red);font-weight:600;display:inline-block;margin-top:4px;animation:pulse 2s ease-in-out infinite;">
+                    ⏰ Promoção por tempo limitado — garanta já o seu!
+                </span>
             </p>
         </div>
     </section>
@@ -1504,8 +1694,8 @@
                     <h4>Plataforma</h4>
                     <a href="#para-voce">Para Você</a>
                     <a href="#para-empresas">Para Empresas</a>
-                    <a href="#neurociencia">Neurociência</a>
                     <a href="#planos">Planos</a>
+                    <a href="login.html">Entrar</a>
                 </div>
                 <div>
                     <h4>Empresa</h4>
@@ -1538,7 +1728,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🏠 Landing Page - VIGORRE ONE™');
-            console.log('🧠 Neurociência + PNL + Psicologia + Psicanálise + Coaching');
+            console.log('🧠 Neurociência + Psicologia + Coaching aplicados');
 
             // ============================================
             // SCROLL REVEAL
@@ -1580,6 +1770,28 @@
                     }, 500);
                 });
             }, 300);
+
+            // ============================================
+            // COPY CUPOM
+            // ============================================
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const cupom = this.closest('.pricing-cupom');
+                    const text = cupom.textContent.replace('🎫 CUPOM: ', '').trim();
+                    navigator.clipboard.writeText(text).then(() => {
+                        const original = cupom.textContent;
+                        cupom.textContent = '✅ CUPOM COPIADO!';
+                        cupom.style.color = 'var(--green)';
+                        setTimeout(() => {
+                            cupom.textContent = original;
+                            cupom.style.color = '';
+                        }, 2000);
+                    }).catch(() => {
+                        alert('Copie o cupom manualmente: ' + text);
+                    });
+                });
+            });
 
             // ============================================
             // SCROLL SUAVE
