@@ -386,61 +386,11 @@
 
         function renderizarTestes() {
             var testes = [
-                {
-                    id: 'disc',
-                    icon: '🦁',
-                    title: 'Teste DISC',
-                    desc: 'Identifica seu estilo comportamental predominante',
-                    tempo: '5-8 minutos',
-                    perguntas: 28,
-                    status: resultados.DISC ? 'concluido' : 'disponivel',
-                    label: resultados.DISC ? '✅ Concluído' : '📌 Disponível',
-                    link: '../tests/disc/'
-                },
-                {
-                    id: 'bigfive',
-                    icon: '🧬',
-                    title: 'Teste Big Five',
-                    desc: 'Os 5 grandes fatores da personalidade',
-                    tempo: '10-15 minutos',
-                    perguntas: 60,
-                    status: resultados.BigFive ? 'concluido' : 'disponivel',
-                    label: resultados.BigFive ? '✅ Concluído' : '📌 Disponível',
-                    link: '../tests/bigfive/'
-                },
-                {
-                    id: 'ie',
-                    icon: '❤️',
-                    title: 'Inteligência Emocional',
-                    desc: 'Avalia autoconsciência, empatia e habilidades sociais',
-                    tempo: '8-12 minutos',
-                    perguntas: 40,
-                    status: resultados.IE ? 'concluido' : 'disponivel',
-                    label: resultados.IE ? '✅ Concluído' : '📌 Disponível',
-                    link: '../tests/ie/'
-                },
-                {
-                    id: 'valores',
-                    icon: '💎',
-                    title: 'Teste Valores',
-                    desc: 'Descubra o que realmente importa para você',
-                    tempo: '6-10 minutos',
-                    perguntas: 36,
-                    status: resultados.Valores ? 'concluido' : 'disponivel',
-                    label: resultados.Valores ? '✅ Concluído' : '📌 Disponível',
-                    link: '../tests/valores/'
-                },
-                {
-                    id: 'swot',
-                    icon: '📊',
-                    title: 'Teste SWOT',
-                    desc: 'Análise de forças, fraquezas, oportunidades e ameaças',
-                    tempo: '8-12 minutos',
-                    perguntas: 40,
-                    status: resultados.SWOT ? 'concluido' : 'disponivel',
-                    label: resultados.SWOT ? '✅ Concluído' : '📌 Disponível',
-                    link: '../tests/swot/'
-                }
+                { id: 'disc', icon: '🦁', title: 'Teste DISC', desc: 'Identifica seu estilo comportamental predominante', tempo: '5-8 minutos', perguntas: 28, status: resultados.DISC ? 'concluido' : 'disponivel', label: resultados.DISC ? '✅ Concluído' : '📌 Disponível', link: resultados.DISC ? '../relatorios/disc/' : '../tests/disc/' },
+                { id: 'bigfive', icon: '🧬', title: 'Teste Big Five', desc: 'Os 5 grandes fatores da personalidade', tempo: '10-15 minutos', perguntas: 60, status: resultados.BigFive ? 'concluido' : 'disponivel', label: resultados.BigFive ? '✅ Concluído' : '📌 Disponível', link: resultados.BigFive ? '../relatorios/bigfive/' : '../tests/bigfive/' },
+                { id: 'ie', icon: '❤️', title: 'Inteligência Emocional', desc: 'Avalia autoconsciência, empatia e habilidades sociais', tempo: '8-12 minutos', perguntas: 40, status: resultados.IE ? 'concluido' : 'disponivel', label: resultados.IE ? '✅ Concluído' : '📌 Disponível', link: resultados.IE ? '../relatorios/ie/' : '../tests/ie/' },
+                { id: 'valores', icon: '💎', title: 'Teste Valores', desc: 'Descubra o que realmente importa para você', tempo: '6-10 minutos', perguntas: 36, status: resultados.Valores ? 'concluido' : 'disponivel', label: resultados.Valores ? '✅ Concluído' : '📌 Disponível', link: resultados.Valores ? '../relatorios/valores/' : '../tests/valores/' },
+                { id: 'swot', icon: '📊', title: 'Teste SWOT', desc: 'Análise de forças, fraquezas, oportunidades e ameaças', tempo: '8-12 minutos', perguntas: 40, status: resultados.SWOT ? 'concluido' : 'disponivel', label: resultados.SWOT ? '✅ Concluído' : '📌 Disponível', link: resultados.SWOT ? '../relatorios/swot/' : '../tests/swot/' }
             ];
 
             var grid = document.getElementById('testeGrid');
@@ -462,7 +412,7 @@
                         <div>
                             <span class="status ${t.status}">${t.label}</span>
                             ${t.status === 'concluido' ? 
-                                `<a href="../relatorios/${t.id}/" class="btn-secondary" style="margin-left:8px;">📄 Ver</a>` :
+                                `<a href="${t.link}" class="btn-secondary" style="margin-left:8px;">📄 Ver</a>` :
                                 `<a href="${t.link}" class="btn-primary" style="margin-left:8px;">▶️ Iniciar</a>`
                             }
                         </div>
