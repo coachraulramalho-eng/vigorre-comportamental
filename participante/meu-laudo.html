@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu Laudo | VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
+            --green: #10B981; --red: #EF4444; --orange: #F59E0B; --purple: #7C3AED;
+            --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0; --gray-300: #CBD5E1; --gray-400: #94A3B8;
+            --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155;
+            --gray-800: #1E293B; --gray-900: #0F172A;
+            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10,37,64,0.06);
+            --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
+            --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+        }
+
+        .header-participante {
+            background: var(--navy);
+            color: white;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-bottom: 3px solid var(--gold);
+        }
+        .header-participante .logo {
+            display: flex; align-items: center; gap: 12px; text-decoration: none;
+        }
+        .header-participante .logo .logo-img { height: 36px; width: auto; display: block; }
+        .header-participante .logo .logo-text .name {
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white;
+        }
+        .header-participante .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
+        .header-participante .logo .logo-text .sub {
+            font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .header-participante .user-info {
+            text-align: right;
+        }
+        .header-participante .user-info .name {
+            font-weight: 600; font-size: 0.9rem;
+        }
+        .header-participante .user-info .company {
+            font-size: 0.75rem; color: rgba(255,255,255,0.4);
+        }
+        .header-participante .user-info .badge {
+            display: inline-block; padding: 2px 10px; background: rgba(217,119,6,0.15);
+            color: var(--gold); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600;
+        }
+
+        .main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 32px 40px;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .main-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        .main-header .subtitle {
+            color: var(--gray-500);
+            font-size: 0.9rem;
+        }
+
+        .btn-back {
+            padding: 8px 20px;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-back:hover { background: var(--gray-200); }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,78,216,0.25); }
+
+        .btn-gold {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217,119,6,0.25); }
+
+        .laudo-status {
+            background: white;
+            border-radius: var(--radius);
+            padding: 32px 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .laudo-status .icon { font-size: 4rem; margin-bottom: 12px; }
+        .laudo-status h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        .laudo-status p {
+            color: var(--gray-500);
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 8px auto 16px;
+            line-height: 1.6;
+        }
+        .laudo-status .status-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .laudo-status .status-badge.disponivel {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        .laudo-status .status-badge.indisponivel {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .testes-faltantes {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .teste-faltante {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+        }
+        .teste-faltante .tf-icon { font-size: 1.5rem; }
+        .teste-faltante .tf-name { font-weight: 600; font-size: 0.85rem; color: var(--gray-700); }
+        .teste-faltante .tf-status {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
+            display: inline-block;
+            margin-top: 4px;
+        }
+        .teste-faltante .tf-status.concluido {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        .teste-faltante .tf-status.pendente {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .laudo-beneficios {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04);
+        }
+        .laudo-beneficios h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+        .laudo-beneficios .beneficios-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+        .laudo-beneficios .beneficio {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+        .laudo-beneficios .beneficio .b-icon { font-size: 1.2rem; }
+
+        .toast {
+            position: fixed; top: 24px; right: 24px; background: white;
+            padding: 14px 24px; border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            display: none; align-items: center; gap: 12px;
+            font-weight: 600; font-size: 0.875rem; z-index: 300;
+            border-left: 4px solid var(--blue);
+            animation: slideIn 0.3s ease;
+        }
+        .toast.show { display: flex; }
+        .toast.success { border-left-color: #10B981; }
+        .toast.error { border-left-color: #EF4444; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(120%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .loading-shimmer {
+            height: 32px; width: 60%;
+            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @media (max-width: 992px) {
+            .testes-faltantes { grid-template-columns: 1fr 1fr 1fr; }
+            .laudo-beneficios .beneficios-grid { grid-template-columns: 1fr; }
+            .header-participante { flex-direction: column; text-align: center; }
+            .header-participante .user-info { text-align: center; }
+            .main { padding: 16px 20px; }
+            .laudo-status { padding: 24px 20px; }
+        }
+        @media (max-width: 768px) {
+            .main-header { flex-direction: column; align-items: flex-start; }
+            .testes-faltantes { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media print {
+            .header-participante { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .btn-back, .btn-primary, .btn-gold { display: none !important; }
+            .laudo-status { border: 1px solid #E2E8F0 !important; }
+            .laudo-beneficios { border: 1px solid #E2E8F0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-participante">
+        <div class="logo">
+            <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Analytics Enterprise</span>
+            </div>
+        </div>
+        <div class="user-info">
+            <div class="name" id="participantName">Carregando...</div>
+            <div class="company" id="participantCompany">Empresa: --</div>
+            <div><span class="badge">👤 Participante</span></div>
+        </div>
+    </header>
+
+    <div class="main">
+        <div class="main-header">
+            <div>
+                <h1>📋 Meu Laudo VIGOR®</h1>
+                <p class="subtitle">Laudo comportamental completo com análise integrada</p>
+            </div>
+            <a href="index.html" class="btn-back">← Voltar ao Dashboard</a>
+        </div>
+
+        <div class="laudo-status" id="laudoStatus">
+            <div class="icon" id="laudoIcon">📋</div>
+            <h2 id="laudoTitle">Carregando...</h2>
+            <p id="laudoDesc">Verificando seus testes...</p>
+            <div id="laudoActions"></div>
+        </div>
+
+        <div id="testesFaltantesContainer">
+            <div class="testes-faltantes" id="testesFaltantes">
+                <!-- Carregado via JS -->
+            </div>
+        </div>
+
+        <div class="laudo-beneficios">
+            <h3>⭐ O que você vai encontrar no Laudo VIGOR®</h3>
+            <div class="beneficios-grid">
+                <div class="beneficio"><span class="b-icon">🧠</span> Análise integrada de todos os testes</div>
+                <div class="beneficio"><span class="b-icon">📊</span> 80-100 páginas de conteúdo</div>
+                <div class="beneficio"><span class="b-icon">🎯</span> PDI personalizado</div>
+                <div class="beneficio"><span class="b-icon">💪</span> Mapa de forças e potenciais</div>
+                <div class="beneficio"><span class="b-icon">📈</span> Plano 30/60/90/180/365 dias</div>
+                <div class="beneficio"><span class="b-icon">🔐</span> QR Code e Hash de autenticidade</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../middleware/auth-guard.js"></script>
+    <script src="../admin/financeiro/financeiro-conexao.js"></script>
+
+    <script>
+        'use strict';
+
+        let resultados = {};
+        let participanteId = null;
+
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + type;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => { toast.classList.remove('show'); }, 4000);
+        }
+
+        async function carregarDados() {
+            try {
+                if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../login.html';
+                    return;
+                }
+
+                var user = window.VigorreAuth.getCurrentUser();
+                if (!user || user.role !== 'participante') {
+                    window.location.href = '../login.html';
+                    return;
+                }
+
+                participanteId = user.id || user.participantId;
+                document.getElementById('participantName').textContent = user.name || 'Participante';
+
+                var companyName = 'Autônomo';
+                if (user.companyId) {
+                    try {
+                        var supabaseClient = getSupabaseClient();
+                        if (supabaseClient) {
+                            var { data: company } = await supabaseClient
+                                .from('companies')
+                                .select('name')
+                                .eq('id', user.companyId)
+                                .single();
+                            if (company) companyName = company.name;
+                        }
+                    } catch (e) {}
+                }
+                document.getElementById('participantCompany').textContent = 'Empresa: ' + companyName;
+
+                await carregarResultados();
+                renderizarLaudo();
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                showToast('Erro ao carregar dados', 'error');
+            }
+        }
+
+        async function carregarResultados() {
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
+                    var participant = allParticipants.find(p => p.id === participanteId);
+                    if (participant && participant.results) {
+                        resultados = participant.results;
+                    }
+                    return;
+                }
+
+                var { data, error } = await supabaseClient
+                    .from('resultados')
+                    .select('teste_id, resultado')
+                    .eq('participant_id', participanteId);
+
+                if (error) {
+                    console.warn('Erro ao buscar resultados:', error);
+                    return;
+                }
+
+                if (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var testeId = data[i].teste_id;
+                        var resultado = data[i].resultado;
+                        if (testeId === '11111111-1111-1111-1111-111111111111') resultados.DISC = resultado;
+                        else if (testeId === '22222222-2222-2222-2222-222222222222') resultados.BigFive = resultado;
+                        else if (testeId === '33333333-3333-3333-3333-333333333333') resultados.IE = resultado;
+                        else if (testeId === '44444444-4444-4444-4444-444444444444') resultados.Valores = resultado;
+                        else if (testeId === '55555555-5555-5555-5555-555555555555') resultados.SWOT = resultado;
+                    }
+                }
+
+            } catch (error) {
+                console.warn('⚠️ Erro ao carregar resultados:', error);
+            }
+        }
+
+        function renderizarLaudo() {
+            var totalTestes = 0;
+            var testesConcluidos = [];
+
+            if (resultados.DISC) { totalTestes++;
+                testesConcluidos.push('DISC'); }
+            if (resultados.BigFive) { totalTestes++;
+                testesConcluidos.push('Big Five'); }
+            if (resultados.IE) { totalTestes++;
+                testesConcluidos.push('IE'); }
+            if (resultados.Valores) { totalTestes++;
+                testesConcluidos.push('Valores'); }
+            if (resultados.SWOT) { totalTestes++;
+                testesConcluidos.push('SWOT'); }
+
+            var todosTestes = totalTestes === 5;
+
+            var statusIcon = document.getElementById('laudoIcon');
+            var statusTitle = document.getElementById('laudoTitle');
+            var statusDesc = document.getElementById('laudoDesc');
+            var statusActions = document.getElementById('laudoActions');
+
+            if (todosTestes) {
+                statusIcon.textContent = '🎉';
+                statusTitle.textContent = 'Laudo VIGOR® Disponível!';
+                statusDesc.textContent = 'Parabéns! Você completou todos os 5 testes. Seu laudo completo já está disponível.';
+                statusActions.innerHTML = `
+                    <a href="../relatorios/laudo/completo.html" class="btn-gold">📋 Gerar Laudo VIGOR®</a>
+                `;
+                document.getElementById('testesFaltantesContainer').style.display = 'none';
+            } else {
+                var faltam = 5 - totalTestes;
+                statusIcon.textContent = '⏳';
+                statusTitle.textContent = `Aguardando ${faltam} teste${faltam > 1 ? 's' : ''}`;
+                statusDesc.textContent = `Complete todos os 5 testes para gerar seu Laudo VIGOR® (80-100 páginas). Você já concluiu ${totalTestes}/5.`;
+                statusActions.innerHTML = `
+                    <a href="meus-testes.html" class="btn-primary">📝 Ir para Meus Testes</a>
+                `;
+                document.getElementById('testesFaltantesContainer').style.display = 'block';
+                renderizarTestesFaltantes();
+            }
+        }
+
+        function renderizarTestesFaltantes() {
+            var testes = [
+                { id: 'disc', nome: 'DISC', icon: '🦁', concluido: !!resultados.DISC },
+                { id: 'bigfive', nome: 'Big Five', icon: '🧬', concluido: !!resultados.BigFive },
+                { id: 'ie', nome: 'IE', icon: '❤️', concluido: !!resultados.IE },
+                { id: 'valores', nome: 'Valores', icon: '💎', concluido: !!resultados.Valores },
+                { id: 'swot', nome: 'SWOT', icon: '📊', concluido: !!resultados.SWOT }
+            ];
+
+            var container = document.getElementById('testesFaltantes');
+            container.innerHTML = '';
+
+            for (var i = 0; i < testes.length; i++) {
+                var t = testes[i];
+                var div = document.createElement('div');
+                div.className = 'teste-faltante';
+                div.innerHTML = `
+                    <div class="tf-icon">${t.icon}</div>
+                    <div class="tf-name">${t.nome}</div>
+                    <span class="tf-status ${t.concluido ? 'concluido' : 'pendente'}">${t.concluido ? '✅ Concluído' : '⏳ Pendente'}</span>
+                    ${!t.concluido ? `<a href="../tests/${t.id}/" class="btn-primary" style="padding:4px 12px;font-size:0.7rem;margin-top:8px;display:inline-block;">▶️ Fazer</a>` : ''}
+                `;
+                container.appendChild(div);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📋 Meu Laudo - VIGORRE ONE™');
+            carregarDados();
+        });
+
+        console.log('✅ Meu Laudo carregado com sucesso!');
+    </script>
+
+</body>
+</html>
