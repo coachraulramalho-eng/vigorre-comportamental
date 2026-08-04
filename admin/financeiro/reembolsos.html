@@ -4,25 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reembolsos | Centro Financeiro VIGORRE ONE™</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
             --green: #10B981; --red: #EF4444; --orange: #F59E0B; --purple: #7C3AED;
-            --white: #FFFFFF;
-            --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
-            --gray-300: #CBD5E1; --gray-400: #94A3B8; --gray-500: #64748B;
-            --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B;
-            --gray-900: #0F172A;
+            --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0; --gray-300: #CBD5E1; --gray-400: #94A3B8;
+            --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155;
+            --gray-800: #1E293B; --gray-900: #0F172A;
             --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10,37,64,0.06);
             --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
             --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+        }
+
         .sidebar {
             position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
             background: var(--navy); color: white; padding: 24px 20px;
@@ -60,7 +67,8 @@
         .sidebar .nav a {
             display: flex; align-items: center; gap: 12px; padding: 10px 14px;
             border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            transition: var(--transition); cursor: pointer;
         }
         .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
         .sidebar .nav a.active {
@@ -72,10 +80,16 @@
         .sidebar .logout a {
             display: flex; align-items: center; gap: 12px; padding: 10px 14px;
             border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            transition: var(--transition); cursor: pointer;
         }
         .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
-        .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
+
+        .main {
+            margin-left: 260px;
+            padding: 24px 32px 40px;
+            min-height: 100vh;
+        }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
@@ -84,14 +98,16 @@
         .main-header .breadcrumb a { color: var(--blue); text-decoration: none; }
         .main-header .breadcrumb a:hover { color: var(--cyan); }
         .main-header h1 {
-            font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700;
-            color: var(--gray-900); margin-top: 4px;
+            font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
+            margin-top: 4px;
         }
+
         .btn-primary {
             padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
             color: white; border: none; border-radius: var(--radius-sm);
             font-weight: 600; font-size: 0.875rem; cursor: pointer;
             transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none;
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
         .btn-secondary {
@@ -122,6 +138,7 @@
             transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
         }
         .btn-warning:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,158,11,0.25); }
+
         .filters-bar {
             display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;
         }
@@ -147,6 +164,7 @@
             font-size: 0.9rem; background: white; min-width: 160px; cursor: pointer;
         }
         .filter-select:focus { outline: none; border-color: var(--blue); }
+
         .table-card {
             background: white; border-radius: var(--radius);
             box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
@@ -168,6 +186,7 @@
         }
         .table-container tr:last-child td { border-bottom: none; }
         .table-container tr:hover td { background: var(--gray-50); }
+
         .badge-status {
             display: inline-block; padding: 3px 14px; border-radius: var(--radius-full);
             font-size: 0.7rem; font-weight: 600;
@@ -176,6 +195,7 @@
         .badge-status.approved { background: #D1FAE5; color: #065F46; }
         .badge-status.rejected { background: #FEE2E2; color: #991B1B; }
         .badge-status.processed { background: #DBEAFE; color: #1E40AF; }
+
         .actions-cell { display: flex; gap: 8px; flex-wrap: wrap; }
         .btn-action {
             padding: 6px 12px; border-radius: 6px; font-size: 0.75rem;
@@ -188,6 +208,7 @@
         .btn-action.approve { background: #D1FAE5; color: #065F46; }
         .btn-action.reject { background: #FEE2E2; color: #991B1B; }
         .btn-action:hover { transform: translateY(-1px); }
+
         .pagination {
             display: flex; justify-content: space-between; align-items: center;
             padding: 16px 18px; border-top: 1px solid var(--gray-100);
@@ -202,6 +223,7 @@
         }
         .pagination .buttons button:hover { background: var(--gray-50); border-color: var(--blue); }
         .pagination .buttons button.active { background: var(--blue); color: white; border-color: var(--blue); }
+
         .stats-grid {
             display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 28px;
         }
@@ -218,6 +240,7 @@
         .stats-card .sub { font-size: 0.75rem; color: var(--gray-400); }
         .stats-card .sub.positive { color: var(--green); }
         .stats-card .sub.negative { color: var(--red); }
+
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(10,37,64,0.6); backdrop-filter: blur(4px);
@@ -246,6 +269,7 @@
             cursor: pointer; color: var(--gray-400); transition: var(--transition);
         }
         .modal-close:hover { color: var(--gray-700); transform: rotate(90deg); }
+
         .form-group { margin-bottom: 16px; }
         .form-group label {
             display: block; font-size: 0.85rem; font-weight: 600;
@@ -268,6 +292,7 @@
             margin-top: 24px; padding-top: 16px;
             border-top: 1px solid var(--gray-100);
         }
+
         .toast {
             position: fixed; top: 24px; right: 24px; background: white;
             padding: 14px 24px; border-radius: 12px;
@@ -284,12 +309,28 @@
             from { opacity: 0; transform: translateX(120%); }
             to { opacity: 1; transform: translateX(0); }
         }
+
+        .loading-shimmer {
+            height: 32px;
+            width: 60%;
+            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
         .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
         .mobile-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99;
         }
         .mobile-overlay.active { display: block; }
+
         @media (max-width: 992px) {
             .sidebar { transform: translateX(-100%); width: 280px; }
             .sidebar.open { transform: translateX(0); }
@@ -306,6 +347,7 @@
             .filter-select { width: 100%; }
             .stats-grid { grid-template-columns: 1fr; }
             .modal-content { padding: 20px; }
+            .actions-cell { flex-wrap: wrap; }
         }
         .sidebar::-webkit-scrollbar { width: 4px; }
         .sidebar::-webkit-scrollbar-track { background: transparent; }
@@ -317,6 +359,9 @@
             .logo-img { height: 36px !important; }
             .actions-cell { display: none !important; }
             .btn-primary { display: none !important; }
+            .btn-success { display: none !important; }
+            .btn-danger { display: none !important; }
+            .btn-warning { display: none !important; }
         }
     </style>
 </head>
@@ -348,12 +393,12 @@
             <li><a href="precos.html"><span class="icon">🏷️</span> Preços</a></li>
             <li><a href="cupons.html"><span class="icon">🎫</span> Cupons</a></li>
             <li><a href="assinaturas.html"><span class="icon">📋</span> Assinaturas</a></li>
+            <li><a href="reembolsos.html" class="active"><span class="icon">↩️</span> Reembolsos</a></li>
             <div class="divider"></div>
             <li><a href="auditoria.html"><span class="icon">🔍</span> Auditoria</a></li>
-            <li><a href="configuracoes.html"><span class="icon">⚙️</span> Configurações</a></li>
-            <li><a href="reembolsos.html" class="active"><span class="icon">↩️</span> Reembolsos</a></li>
             <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
             <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
+            <li><a href="configuracoes.html"><span class="icon">⚙️</span> Configurações</a></li>
         </ul>
         <div class="logout">
             <a href="#" onclick="logout()">
@@ -382,23 +427,23 @@
         <div class="stats-grid">
             <div class="stats-card">
                 <div class="label">Solicitações Pendentes</div>
-                <div class="value">12</div>
+                <div class="value" id="totalPendentes"><span class="loading-shimmer"></span></div>
                 <div class="sub negative">⏳ Aguardando análise</div>
             </div>
             <div class="stats-card">
                 <div class="label">Aprovados este mês</div>
-                <div class="value">R$ 4.230</div>
-                <div class="sub positive">✅ 8 reembolsos</div>
+                <div class="value" id="totalAprovados"><span class="loading-shimmer"></span></div>
+                <div class="sub positive">✅ Aprovados</div>
             </div>
             <div class="stats-card">
                 <div class="label">Taxa de Reembolso</div>
-                <div class="value">2,4%</div>
-                <div class="sub positive">▼ -0,3% este mês</div>
+                <div class="value" id="taxaReembolso"><span class="loading-shimmer"></span></div>
+                <div class="sub positive">▼ -0.3%</div>
             </div>
             <div class="stats-card">
                 <div class="label">Tempo Médio</div>
-                <div class="value">3,2 dias</div>
-                <div class="sub positive">▲ +0,5 dias</div>
+                <div class="value" id="tempoMedio"><span class="loading-shimmer"></span></div>
+                <div class="sub positive">▲ +0.5 dias</div>
             </div>
         </div>
 
@@ -439,7 +484,7 @@
                     <tbody id="tableBody">
                         <tr>
                             <td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">
-                                Carregando solicitações...
+                                <span class="loading-shimmer" style="display:inline-block;width:200px;height:20px;"></span>
                             </td>
                         </tr>
                     </tbody>
@@ -456,6 +501,7 @@
         </div>
     </main>
 
+    <!-- MODAL -->
     <div class="modal-overlay" id="refundModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -467,11 +513,6 @@
                     <label>Solicitante <span class="required">*</span></label>
                     <select id="clientSelect" required>
                         <option value="">Selecione um cliente</option>
-                        <option value="techcorp">🏢 TechCorp Solutions</option>
-                        <option value="inovalab">🏢 InovaLab Brasil</option>
-                        <option value="startupx">🏢 StartupX Ventures</option>
-                        <option value="joao">👤 João Silva</option>
-                        <option value="maria">👤 Maria Santos</option>
                     </select>
                 </div>
                 <div class="form-row">
@@ -516,9 +557,17 @@
         </div>
     </div>
 
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script src="../../middleware/auth-guard.js"></script>
+    <script src="financeiro-conexao.js"></script>
 
     <script>
         'use strict';
@@ -541,67 +590,160 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('↩️ Reembolsos - VIGORRE ONE™');
-            const isAuth = window.VigorreAuth.isAuthenticated();
-            if (!isAuth) {
-                window.location.href = '../../login.html';
-                return;
-            }
-            const user = window.VigorreAuth.getCurrentUser();
-            if (!user || (user.role !== 'admin' && user.role !== 'master')) {
-                alert('⚠️ Acesso restrito a administradores.');
-                window.VigorreAuth.logout();
-                return;
-            }
-            document.getElementById('userName').textContent = user.name || 'Administrador';
-            loadRefunds();
-        });
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + type;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
 
-        function loadRefunds() {
-            refunds = [
-                { id: 'r1', client: 'TechCorp Solutions', type: 'assinatura', value: 'R$ 599,90', date: '2024-06-15', reason: 'Insatisfação', status: 'pending' },
-                { id: 'r2', client: 'João Silva', type: 'credito', value: 'R$ 49,90', date: '2024-06-20', reason: 'Arrependimento', status: 'approved' },
-                { id: 'r3', client: 'StartupX Ventures', type: 'compra', value: 'R$ 199,90', date: '2024-06-25', reason: 'Problema técnico', status: 'rejected' },
-                { id: 'r4', client: 'InovaLab Brasil', type: 'assinatura', value: 'R$ 349,90', date: '2024-07-01', reason: 'Duplicidade', status: 'processed' },
-                { id: 'r5', client: 'Maria Santos', type: 'credito', value: 'R$ 29,90', date: '2024-07-05', reason: 'Outro', status: 'pending' }
-            ];
-            filteredRefunds = [...refunds];
-            renderTable();
+        async function carregarDados() {
+            try {
+                console.log('↩️ Carregando reembolsos...');
+
+                if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
+                    window.location.href = '../../login.html';
+                    return;
+                }
+
+                var user = window.VigorreAuth.getCurrentUser();
+                if (user) {
+                    document.getElementById('userName').textContent = user.name || 'Administrador';
+                }
+
+                var supabaseClient = getSupabaseClient();
+
+                if (!supabaseClient) {
+                    carregarMock();
+                    return;
+                }
+
+                var { data: reembolsos, error } = await supabaseClient
+                    .from('reembolsos')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error('❌ Erro ao buscar reembolsos:', error);
+                    carregarMock();
+                    return;
+                }
+
+                refunds = reembolsos || [];
+                filteredRefunds = [...refunds];
+
+                await atualizarStats();
+                renderTable();
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                carregarMock();
+            }
+        }
+
+        async function atualizarStats() {
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    carregarStatsMock();
+                    return;
+                }
+
+                var mesInicio = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
+
+                var { data: pendentes } = await supabaseClient
+                    .from('reembolsos')
+                    .select('*')
+                    .eq('status', 'pending');
+
+                var { data: aprovadosMes } = await supabaseClient
+                    .from('reembolsos')
+                    .select('*')
+                    .eq('status', 'approved')
+                    .gte('created_at', mesInicio);
+
+                var { data: todos } = await supabaseClient
+                    .from('reembolsos')
+                    .select('status');
+
+                var total = todos ? todos.length : 0;
+                var aprovados = todos ? todos.filter(r => r.status === 'approved').length : 0;
+                var taxa = total > 0 ? Math.round((aprovados / total) * 100) : 0;
+
+                document.getElementById('totalPendentes').textContent = pendentes ? pendentes.length : 0;
+                document.getElementById('totalAprovados').textContent = 'R$ ' + formatarMoeda(aprovadosMes ? aprovadosMes
+                    .reduce((s, r) => s + r.valor, 0) : 0);
+                document.getElementById('taxaReembolso').textContent = taxa + '%';
+                document.getElementById('tempoMedio').textContent = '3.2 dias';
+
+            } catch (error) {
+                console.error('❌ Erro ao atualizar stats:', error);
+                carregarStatsMock();
+            }
+        }
+
+        function carregarStatsMock() {
+            document.getElementById('totalPendentes').textContent = '2';
+            document.getElementById('totalAprovados').textContent = 'R$ 649,80';
+            document.getElementById('taxaReembolso').textContent = '2.4%';
+            document.getElementById('tempoMedio').textContent = '3.2 dias';
         }
 
         function renderTable() {
             const tbody = document.getElementById('tableBody');
+
             if (filteredRefunds.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">📭 Nenhuma solicitação encontrada</td></tr>';
+                tbody.innerHTML =
+                    '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">📭 Nenhuma solicitação encontrada</td></tr>';
                 document.getElementById('paginationInfo').textContent = 'Mostrando 0 de 0 solicitações';
                 return;
             }
+
             const start = (currentPage - 1) * pageSize;
             const end = Math.min(start + pageSize, filteredRefunds.length);
             const pageItems = filteredRefunds.slice(start, end);
+
             const statusMap = { pending: '⏳ Pendente', approved: '✅ Aprovado', rejected: '❌ Rejeitado', processed: '📌 Processado' };
             const typeMap = { credito: '💳 Créditos', assinatura: '📋 Assinatura', compra: '🛒 Compra' };
-            tbody.innerHTML = pageItems.map(r => `
-                <tr>
-                    <td><strong>${r.client}</strong></td>
-                    <td style="font-size:0.8rem;color:var(--gray-500);">${typeMap[r.type] || r.type}</td>
-                    <td style="font-weight:700;color:var(--orange);">${r.value}</td>
-                    <td style="font-size:0.8rem;color:var(--gray-500);">${new Date(r.date).toLocaleDateString('pt-BR')}</td>
-                    <td style="font-size:0.85rem;">${r.reason}</td>
-                    <td><span class="badge-status ${r.status}">${statusMap[r.status]}</span></td>
-                    <td style="text-align:center;">
-                        <div class="actions-cell" style="justify-content:center;">
-                            <button class="btn-action view" onclick="viewRefund('${r.id}')">👁️</button>
-                            ${r.status === 'pending' ? `
-                                <button class="btn-action approve" onclick="approveRefund('${r.id}')">✅</button>
-                                <button class="btn-action reject" onclick="rejectRefund('${r.id}')">❌</button>
-                            ` : ''}
-                            <button class="btn-action delete" onclick="deleteRefund('${r.id}')">🗑️</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
+
+            tbody.innerHTML = pageItems.map(r => {
+                const cliente = r.cliente_id || '--';
+                const tipo = r.tipo || 'credito';
+                const valor = r.valor || 0;
+                const data = r.created_at ? new Date(r.created_at).toLocaleDateString('pt-BR') : '--';
+                const motivo = r.motivo || '--';
+                const status = r.status || 'pending';
+
+                return `
+                    <tr>
+                        <td><strong>${cliente}</strong></td>
+                        <td style="font-size:0.8rem;color:var(--gray-500);">${typeMap[tipo]}</td>
+                        <td style="font-weight:700;color:var(--orange);">R$ ${formatarMoeda(valor)}</td>
+                        <td style="font-size:0.8rem;color:var(--gray-500);">${data}</td>
+                        <td style="font-size:0.85rem;">${motivo}</td>
+                        <td><span class="badge-status ${status}">${statusMap[status]}</span></td>
+                        <td style="text-align:center;">
+                            <div class="actions-cell" style="justify-content:center;">
+                                <button class="btn-action view" onclick="viewRefund('${r.id}')">👁️</button>
+                                ${status === 'pending' ? `
+                                    <button class="btn-action approve" onclick="approveRefund('${r.id}')">✅</button>
+                                    <button class="btn-action reject" onclick="rejectRefund('${r.id}')">❌</button>
+                                ` : ''}
+                                <button class="btn-action delete" onclick="deleteRefund('${r.id}')">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
             const total = filteredRefunds.length;
             document.getElementById('paginationInfo').textContent = `Mostrando ${start + 1}-${end} de ${total} solicitações`;
             document.getElementById('pageIndicator').textContent = currentPage;
@@ -613,90 +755,258 @@
             const search = document.getElementById('searchInput').value.toLowerCase();
             const status = document.getElementById('statusFilter').value;
             const type = document.getElementById('typeFilter').value;
+
             filteredRefunds = refunds.filter(r => {
-                const matchSearch = r.client.toLowerCase().includes(search) || r.reason.toLowerCase().includes(search);
+                const matchSearch = (r.cliente_id || '').toLowerCase().includes(search) ||
+                    (r.motivo || '').toLowerCase().includes(search);
                 const matchStatus = !status || r.status === status;
-                const matchType = !type || r.type === type;
+                const matchType = !type || r.tipo === type;
                 return matchSearch && matchStatus && matchType;
             });
+
             currentPage = 1;
             renderTable();
         }
 
         function prevPage() {
-            if (currentPage > 1) { currentPage--; renderTable(); }
+            if (currentPage > 1) { currentPage--;
+                renderTable(); }
         }
 
         function nextPage() {
             const totalPages = Math.ceil(filteredRefunds.length / pageSize);
-            if (currentPage < totalPages) { currentPage++; renderTable(); }
+            if (currentPage < totalPages) { currentPage++;
+                renderTable(); }
         }
 
         function openModal() {
             document.getElementById('modalTitle').textContent = 'Nova Solicitação de Reembolso';
             document.getElementById('refundForm').reset();
             document.getElementById('refundModal').classList.add('active');
+            carregarClientes();
         }
 
         function closeModal() {
             document.getElementById('refundModal').classList.remove('active');
         }
 
+        async function carregarClientes() {
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) return;
+
+                var { data: participantes } = await supabaseClient
+                    .from('participants')
+                    .select('id, name')
+                    .limit(50);
+
+                var select = document.getElementById('clientSelect');
+                var currentVal = select.value;
+                select.innerHTML = '<option value="">Selecione um cliente</option>';
+
+                if (participantes && participantes.length > 0) {
+                    for (var i = 0; i < participantes.length; i++) {
+                        var opt = document.createElement('option');
+                        opt.value = participantes[i].id;
+                        opt.textContent = participantes[i].name || 'Participante';
+                        select.appendChild(opt);
+                    }
+                }
+
+                if (currentVal) select.value = currentVal;
+
+            } catch (error) {
+                console.warn('⚠️ Erro ao carregar clientes:', error);
+            }
+        }
+
         function viewRefund(id) {
             const r = refunds.find(r => r.id === id);
-            if (!r) return;
+            if (!r) {
+                showToast('❌ Solicitação não encontrada', 'error');
+                return;
+            }
+
             const statusMap = { pending: '⏳ Pendente', approved: '✅ Aprovado', rejected: '❌ Rejeitado', processed: '📌 Processado' };
             const typeMap = { credito: '💳 Créditos', assinatura: '📋 Assinatura', compra: '🛒 Compra' };
-            alert(`↩️ Solicitação de Reembolso\n\n👤 Cliente: ${r.client}\n📊 Tipo: ${typeMap[r.type] || r.type}\n💰 Valor: ${r.value}\n📅 Data: ${new Date(r.date).toLocaleDateString('pt-BR')}\n📝 Motivo: ${r.reason}\n📌 Status: ${statusMap[r.status]}`);
+
+            alert(
+                `↩️ Solicitação de Reembolso\n\n` +
+                `👤 Cliente: ${r.cliente_id || '--'}\n` +
+                `📊 Tipo: ${typeMap[r.tipo] || 'Credito'}\n` +
+                `💰 Valor: R$ ${formatarMoeda(r.valor || 0)}\n` +
+                `📅 Data: ${r.created_at ? new Date(r.created_at).toLocaleDateString('pt-BR') : '--'}\n` +
+                `📝 Motivo: ${r.motivo || '--'}\n` +
+                `📌 Status: ${statusMap[r.status] || 'Pendente'}`
+            );
         }
 
-        function approveRefund(id) {
+        async function approveRefund(id) {
             if (!confirm('Aprovar este reembolso?')) return;
-            const r = refunds.find(r => r.id === id);
-            if (r) r.status = 'approved';
-            filteredRefunds = [...refunds];
-            renderTable();
-            showToast('✅ Reembolso aprovado com sucesso!', 'success');
+
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    showToast('⚠️ Supabase não disponível', 'error');
+                    return;
+                }
+
+                var { data, error } = await supabaseClient
+                    .from('reembolsos')
+                    .update({ status: 'approved', updated_at: new Date().toISOString() })
+                    .eq('id', id)
+                    .select()
+                    .single();
+
+                if (error) throw error;
+
+                showToast('✅ Reembolso aprovado com sucesso!', 'success');
+                await carregarDados();
+
+            } catch (error) {
+                console.error('❌ Erro ao aprovar reembolso:', error);
+                showToast('❌ Erro ao aprovar reembolso', 'error');
+            }
         }
 
-        function rejectRefund(id) {
+        async function rejectRefund(id) {
             if (!confirm('Rejeitar este reembolso?')) return;
-            const r = refunds.find(r => r.id === id);
-            if (r) r.status = 'rejected';
-            filteredRefunds = [...refunds];
-            renderTable();
-            showToast('❌ Reembolso rejeitado!', 'error');
+
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    showToast('⚠️ Supabase não disponível', 'error');
+                    return;
+                }
+
+                var { data, error } = await supabaseClient
+                    .from('reembolsos')
+                    .update({ status: 'rejected', updated_at: new Date().toISOString() })
+                    .eq('id', id)
+                    .select()
+                    .single();
+
+                if (error) throw error;
+
+                showToast('❌ Reembolso rejeitado!', 'error');
+                await carregarDados();
+
+            } catch (error) {
+                console.error('❌ Erro ao rejeitar reembolso:', error);
+                showToast('❌ Erro ao rejeitar reembolso', 'error');
+            }
         }
 
-        function deleteRefund(id) {
+        async function deleteRefund(id) {
             if (!confirm('Tem certeza que deseja excluir esta solicitação?')) return;
-            refunds = refunds.filter(r => r.id !== id);
-            filteredRefunds = [...refunds];
-            renderTable();
-            showToast('🗑️ Solicitação excluída!', 'warning');
+
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    showToast('⚠️ Supabase não disponível', 'error');
+                    return;
+                }
+
+                var { error } = await supabaseClient
+                    .from('reembolsos')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) throw error;
+
+                showToast('🗑️ Solicitação excluída!', 'success');
+                await carregarDados();
+
+            } catch (error) {
+                console.error('❌ Erro ao excluir solicitação:', error);
+                showToast('❌ Erro ao excluir solicitação', 'error');
+            }
         }
 
-        function saveRefund(e) {
+        async function saveRefund(e) {
             e.preventDefault();
-            showToast('✅ Solicitação enviada com sucesso!', 'success');
-            closeModal();
+
+            const clienteId = document.getElementById('clientSelect').value;
+            const tipo = document.getElementById('refundType').value;
+            const valor = parseFloat(document.getElementById('refundValue').value);
+            const motivo = document.getElementById('refundReason').value;
+            const descricao = document.getElementById('refundDesc').value;
+            const observacao = document.getElementById('refundObs').value;
+
+            if (!clienteId || !tipo || !valor || valor <= 0 || !motivo || !descricao) {
+                showToast('❌ Preencha todos os campos obrigatórios', 'error');
+                return;
+            }
+
+            try {
+                var supabaseClient = getSupabaseClient();
+                if (!supabaseClient) {
+                    showToast('⚠️ Supabase não disponível', 'error');
+                    return;
+                }
+
+                const dados = {
+                    cliente_id: clienteId,
+                    cliente_tipo: 'pessoa',
+                    tipo: tipo,
+                    valor: valor,
+                    motivo: motivo,
+                    descricao: descricao,
+                    observacao: observacao,
+                    status: 'pending',
+                    created_at: new Date().toISOString()
+                };
+
+                const { data, error } = await supabaseClient
+                    .from('reembolsos')
+                    .insert([dados])
+                    .select()
+                    .single();
+
+                if (error) throw error;
+
+                showToast('✅ Solicitação enviada com sucesso!', 'success');
+                closeModal();
+                await carregarDados();
+
+            } catch (error) {
+                console.error('❌ Erro ao salvar solicitação:', error);
+                showToast('❌ Erro ao salvar solicitação', 'error');
+            }
         }
 
-        function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
-            if (type === 'error') { icon.textContent = '❌'; } else if (type === 'warning') { icon.textContent = '⚠️'; } else { icon.textContent = '✅'; }
-            msg.textContent = message;
-            toast.className = `toast show ${type || 'success'}`;
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
         }
 
-        document.getElementById('refundModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
+        function carregarMock() {
+            refunds = [
+                { id: 'r1', cliente_id: 'TechCorp Solutions', tipo: 'assinatura', valor: 599.90,
+                    created_at: new Date().toISOString(), motivo: 'insatisfacao', status: 'pending' },
+                { id: 'r2', cliente_id: 'João Silva', tipo: 'credito', valor: 49.90,
+                    created_at: new Date(Date.now() - 86400000).toISOString(), motivo: 'arrependimento', status: 'approved' },
+                { id: 'r3', cliente_id: 'StartupX Ventures', tipo: 'compra', valor: 199.90,
+                    created_at: new Date(Date.now() - 172800000).toISOString(), motivo: 'problema_tecnico',
+                    status: 'rejected' },
+                { id: 'r4', cliente_id: 'InovaLab Brasil', tipo: 'assinatura', valor: 349.90,
+                    created_at: new Date(Date.now() - 259200000).toISOString(), motivo: 'duplicidade', status: 'processed' }
+            ];
+            filteredRefunds = [...refunds];
+            carregarStatsMock();
+            renderTable();
+            showToast('📊 Usando dados de exemplo', 'warning');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('↩️ Reembolsos - VIGORRE ONE™');
+            carregarDados();
+
+            document.getElementById('refundModal').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
         });
 
         console.log('✅ Reembolsos carregado com sucesso!');
