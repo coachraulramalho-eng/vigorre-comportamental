@@ -3,1542 +3,992 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vigorre One™ - People Intelligence Enterprise</title>
-    <meta name="description" content="Descubra seu potencial com avaliações comportamentais. Neurociência, PNL, Psicologia e Coaching para autoconhecimento e desenvolvimento humano." />
+    <title>VIGORRE ONE™ — The Science of Human Intelligence | Enterprise People Analytics</title>
+    <meta name="description" content="Enterprise-grade people intelligence platform combining neuroscience, behavioral psychology, and predictive analytics. Trusted by leading organizations worldwide." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-    <link rel="icon" href="assets/images/logo-vigorre.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <style>
-        /* ============================================
-           ROOT VARIABLES - PALETA MANTIDA
-           ============================================ */
         :root {
             --navy: #0A2540;
+            --navy-deep: #051728;
             --navy-light: #1A3A5C;
-            --navy-dark: #061B2E;
             --gold: #D97706;
             --gold-light: #FBBF24;
-            --gold-pale: #FEF3C7;
-            --cyan: #06B6D4;
-            --green: #10B981;
-            --green-light: #D1FAE5;
-            --red: #EF4444;
-            --red-light: #FEE2E2;
-            --purple: #7C3AED;
-            --purple-light: #EDE9FE;
-            --pink: #EC4899;
+            --gold-glow: rgba(217, 119, 6, 0.15);
             --white: #FFFFFF;
-            --bg-primary: #F8FAFC;
-            --bg-secondary: #F1F5F9;
-            --bg-white: #FFFFFF;
-            --text-primary: #0F172A;
-            --text-secondary: #475569;
-            --text-muted: #94A3B8;
-            --text-white: #FFFFFF;
-            --border-light: #E2E8F0;
-            --border-gold: rgba(217, 119, 6, 0.2);
-            --radius: 16px;
-            --radius-sm: 10px;
-            --radius-full: 9999px;
-            --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.04);
-            --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
-            --shadow-hover: 0 12px 48px rgba(10, 37, 64, 0.10);
-            --shadow-gold: 0 4px 24px rgba(217, 119, 6, 0.20);
-            --shadow-gold-hover: 0 8px 40px rgba(217, 119, 6, 0.30);
-            --shadow-red: 0 4px 24px rgba(239, 68, 68, 0.15);
-            --gradient-gold: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
-            --gradient-hero: linear-gradient(135deg, #0A2540 0%, #1A3A5C 100%);
-            --gradient-red: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
-            --gradient-card: linear-gradient(135deg, rgba(217, 119, 6, 0.03) 0%, rgba(217, 119, 6, 0.01) 100%);
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --z-header: 100;
+            --bg: #FAFAFA;
+            --bg-alt: #F4F5F7;
+            --ink: #0A1628;
+            --ink-soft: #4B5563;
+            --ink-muted: #9CA3AF;
+            --line: #E5E7EB;
+            --line-soft: #F1F3F5;
+            --success: #059669;
+            --radius: 4px;
+            --radius-lg: 8px;
+            --shadow-xs: 0 1px 2px rgba(10, 37, 64, 0.04);
+            --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.06);
+            --shadow: 0 8px 32px rgba(10, 37, 64, 0.08);
+            --shadow-lg: 0 24px 64px rgba(10, 37, 64, 0.12);
+            --shadow-gold: 0 8px 32px rgba(217, 119, 6, 0.18);
+            --font: 'Inter', -apple-system, system-ui, sans-serif;
+            --serif: 'Instrument Serif', Georgia, serif;
+            --mono: 'JetBrains Mono', monospace;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
         body {
-            font-family: var(--font-primary);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
+            font-family: var(--font);
+            background: var(--white);
+            color: var(--ink);
+            line-height: 1.6;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+        .container-narrow { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
 
-        /* ============================================
-           ANIMAÇÕES
-           ============================================ */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(217, 119, 6, 0.2); }
-            50% { box-shadow: 0 0 40px rgba(217, 119, 6, 0.4); }
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        @keyframes countdown {
-            0% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-
-        .animate-fade-up { opacity: 0; animation: fadeInUp 0.8s ease forwards; }
-        .animate-fade-in { opacity: 0; animation: fadeIn 0.6s ease forwards; }
-        .animate-slide-left { opacity: 0; animation: slideInLeft 0.8s ease forwards; }
-        .animate-slide-right { opacity: 0; animation: slideInRight 0.8s ease forwards; }
-        .animate-delay-1 { animation-delay: 0.1s; }
-        .animate-delay-2 { animation-delay: 0.2s; }
-        .animate-delay-3 { animation-delay: 0.3s; }
-        .animate-delay-4 { animation-delay: 0.4s; }
-        .animate-delay-5 { animation-delay: 0.5s; }
-        .animate-delay-6 { animation-delay: 0.6s; }
-        .animate-delay-7 { animation-delay: 0.7s; }
-        .animate-delay-8 { animation-delay: 0.8s; }
-
-        .pulse-animation { animation: pulse 2s ease-in-out infinite; }
-        .blink-animation { animation: blink 1.5s ease-in-out infinite; }
-        .float-animation { animation: float 3s ease-in-out infinite; }
-        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
-
-        /* ============================================
-           HEADER
-           ============================================ */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
-            padding: 12px 0;
-            position: sticky;
-            top: 0;
-            z-index: var(--z-header);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-
-        .header .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .header .logo .logo-img {
-            height: 36px;
-            width: auto;
-            display: block;
-        }
-
-        .header .logo .logo-text {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--navy);
-            letter-spacing: -0.3px;
-        }
-
-        .header .logo .logo-text .highlight { color: var(--gold); }
-        .header .logo .logo-text .tm { font-size: 0.4rem; vertical-align: super; color: var(--text-muted); }
-        .header .logo .logo-sub { font-size: 0.45rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-top: -2px; }
-
-        .header .nav {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
-
-        .header .nav a {
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: var(--transition);
+        /* TYPOGRAPHY */
+        .eyebrow {
+            font-family: var(--mono);
+            font-size: 11px;
             font-weight: 500;
-            position: relative;
-        }
-
-        .header .nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-gold);
-            transition: var(--transition);
-        }
-
-        .header .nav a:hover::after { width: 100%; }
-        .header .nav a:hover { color: var(--navy); }
-
-        .header .nav .btn-outline {
-            padding: 8px 20px;
-            border: 2px solid var(--gold);
-            border-radius: var(--radius-full);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
             color: var(--gold);
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .header .nav .btn-outline::after { display: none; }
-        .header .nav .btn-outline:hover { background: var(--gold); color: white; }
-
-        .header .nav .btn-primary {
-            padding: 8px 24px;
-            border: none;
-            border-radius: var(--radius-full);
-            background: var(--gradient-gold);
-            color: white;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: var(--shadow-gold);
-        }
-
-        .header .nav .btn-primary::after { display: none; }
-        .header .nav .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold-hover); }
-
-        /* ============================================
-           HERO
-           ============================================ */
-        .hero {
-            padding: 90px 0 70px;
-            background: var(--gradient-hero);
-            color: var(--text-white);
-            border-radius: 0 0 var(--radius) var(--radius);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -40%;
-            right: -15%;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(217, 119, 6, 0.06) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .hero .hero-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero .hero-content .badge {
-            display: inline-block;
-            padding: 6px 20px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: var(--radius-full);
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--gold-light);
-            margin-bottom: 20px;
-        }
-
-        .hero .hero-content h1 {
-            font-family: var(--font-display);
-            font-size: 3.6rem;
-            font-weight: 800;
-            line-height: 1.05;
-            margin-bottom: 16px;
-        }
-
-        .hero .hero-content h1 .gradient-text {
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .hero-content .hero-sub {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.4);
-            font-weight: 300;
-            margin-bottom: 4px;
-        }
-
-        .hero .hero-content .hero-strong {
-            font-size: 1.1rem;
-            color: var(--gold-light);
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .hero .hero-content p {
-            font-size: 1.05rem;
-            color: rgba(255, 255, 255, 0.65);
-            max-width: 520px;
-            line-height: 1.8;
-            margin-bottom: 28px;
-        }
-
-        .hero .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .hero .hero-buttons .btn-primary {
-            padding: 14px 40px;
-            border: none;
-            border-radius: var(--radius-full);
-            background: var(--gradient-gold);
-            color: white;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-decoration: none;
-            transition: var(--transition);
-            box-shadow: var(--shadow-gold);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero .hero-buttons .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transition: 0.5s;
-        }
-
-        .hero .hero-buttons .btn-primary:hover::before { left: 100%; }
-        .hero .hero-buttons .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-gold-hover); }
-
-        .hero .hero-buttons .btn-outline {
-            padding: 14px 36px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--radius-full);
-            color: white;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .hero .hero-buttons .btn-outline:hover { border-color: white; background: rgba(255, 255, 255, 0.05); transform: translateY(-3px); }
-
-        .hero .hero-image .dashboard-mockup {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: var(--radius);
-            padding: 32px 28px;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            transition: var(--transition);
-        }
-
-        .hero .hero-image .dashboard-mockup:hover { border-color: rgba(255, 255, 255, 0.12); transform: translateY(-4px); }
-
-        .hero .hero-image .dashboard-mockup .mockup-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .hero .hero-image .dashboard-mockup .mockup-header .dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .hero .hero-image .dashboard-mockup .mockup-header .dots span {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: block;
-        }
-
-        .hero .hero-image .dashboard-mockup .mockup-header .dots span:nth-child(1) { background: #EF4444; }
-        .hero .hero-image .dashboard-mockup .mockup-header .dots span:nth-child(2) { background: #F59E0B; }
-        .hero .hero-image .dashboard-mockup .mockup-header .dots span:nth-child(3) { background: #10B981; }
-
-        .hero .hero-image .dashboard-mockup .mockup-header .mockup-title {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.3);
-            font-weight: 500;
-        }
-
-        .hero .hero-image .dashboard-mockup .mockup-bars {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .hero .hero-image .dashboard-mockup .mockup-bars .bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .hero .hero-image .dashboard-mockup .mockup-bars .bar .bar-label {
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.3);
-            width: 80px;
-            text-align: right;
-        }
-
-        .hero .hero-image .dashboard-mockup .mockup-bars .bar .bar-track {
-            flex: 1;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .hero .hero-image .dashboard-mockup .mockup-bars .bar .bar-track .bar-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 1.2s ease;
-        }
-
-        .hero .hero-image .dashboard-mockup .mockup-bars .bar .bar-track .bar-fill.d { background: #EF4444; width: 78%; }
-        .hero .hero-image .dashboard-mockup .mockup-bars .bar .bar-track .bar-fill.i { background: #3B82F6; width: 45%; }
-        .hero .hero-image .dashboard-mockup .mockup-bars .bar .bar-track .bar-fill.s { background: #10B981; width: 62%; }
-        .hero .hero-image .dashboard-mockup .mockup-bars .bar .bar-track .bar-fill.c { background: #8B5CF6; width: 38%; }
-
-        .hero .hero-image .dashboard-mockup .mockup-bars .bar .bar-percent {
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: 600;
-            width: 40px;
-        }
-
-        /* ============================================
-           SEÇÕES
-           ============================================ */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .section .section-header .badge {
-            display: inline-block;
-            padding: 4px 18px;
-            background: rgba(217, 119, 6, 0.08);
-            color: var(--gold);
-            border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 12px;
-        }
-
-        .section .section-header h2 {
-            font-family: var(--font-display);
-            font-size: 2.6rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .section .section-header h2 .highlight { color: var(--gold); }
-
-        .section .section-header p {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            max-width: 680px;
-            margin: 12px auto 0;
-            line-height: 1.7;
-        }
-
-        /* ============================================
-           CARDS DOS TESTES
-           ============================================ */
-        .test-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 24px;
-        }
-
-        .test-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius);
-            padding: 32px 28px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .test-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-gold);
-            transform: scaleX(0);
-            transition: var(--transition);
-            transform-origin: left;
-        }
-
-        .test-card:hover::before { transform: scaleX(1); }
-        .test-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow-hover); transform: translateY(-6px); }
-
-        .test-card .test-icon { font-size: 2.6rem; margin-bottom: 14px; display: block; }
-
-        .test-card .test-color {
-            display: inline-block;
-            width: 40px;
-            height: 4px;
-            border-radius: 2px;
-            margin-bottom: 12px;
-        }
-
-        .test-card .test-color.disc { background: #EF4444; }
-        .test-card .test-color.bigfive { background: #3B82F6; }
-        .test-card .test-color.ie { background: #10B981; }
-        .test-card .test-color.valores { background: #8B5CF6; }
-        .test-card .test-color.swot { background: #F59E0B; }
-
-        .test-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-        }
-
-        .test-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .test-card .test-link {
-            display: inline-block;
-            margin-top: 16px;
-            color: var(--gold);
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .test-card .test-link:hover { transform: translateX(4px); color: var(--gold-light); }
-
-        /* ============================================
-           TECNOLOGIA VIGOR®
-           ============================================ */
-        .vigor-section {
-            background: var(--bg-secondary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .vigor-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .vigor-content .vigor-badge {
-            display: inline-block;
-            padding: 4px 18px;
-            background: rgba(217, 119, 6, 0.08);
-            color: var(--gold);
-            border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 12px;
-        }
-
-        .vigor-content h2 {
-            font-family: var(--font-display);
-            font-size: 2.6rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-        }
-
-        .vigor-content h2 .highlight { color: var(--gold); }
-
-        .vigor-content p {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 16px;
-        }
-
-        .vigor-content .vigor-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .vigor-content .vigor-features .vf-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            padding: 8px 12px;
-            background: var(--bg-white);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-light);
-            transition: var(--transition);
-        }
-
-        .vigor-content .vigor-features .vf-item:hover {
-            border-color: var(--border-gold);
-            background: rgba(217, 119, 6, 0.02);
-        }
-
-        .vigor-content .vigor-features .vf-item .vf-icon { font-size: 1.1rem; }
-
-        .vigor-image .vigor-diagram {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius);
-            padding: 40px 32px;
-            text-align: center;
-            width: 100%;
-            max-width: 440px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .vigor-image .vigor-diagram:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-4px);
-        }
-
-        .vigor-image .vigor-diagram h3 {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .vigor-image .vigor-diagram .vigor-sub {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        .vigor-image .vigor-diagram .vigor-circle {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-            gap: 12px;
-        }
-
-        .vigor-image .vigor-diagram .vigor-circle .vc-item {
-            background: var(--bg-primary);
-            border-radius: var(--radius-sm);
-            padding: 16px 8px;
-            transition: var(--transition);
-            border: 1px solid transparent;
-        }
-
-        .vigor-image .vigor-diagram .vigor-circle .vc-item:hover {
-            background: rgba(217, 119, 6, 0.04);
-            border-color: var(--border-gold);
-            transform: translateY(-2px);
-        }
-
-        .vigor-image .vigor-diagram .vigor-circle .vc-item .vc-letter {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-            line-height: 1;
-        }
-
-        .vigor-image .vigor-diagram .vigor-circle .vc-item .vc-label {
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-top: 4px;
-            display: block;
-        }
-
-        .vigor-image .vigor-diagram .vigor-circle .vc-item .vc-color {
-            display: block;
-            width: 24px;
-            height: 3px;
-            margin: 6px auto 0;
-            border-radius: 2px;
-        }
-
-        .vigor-image .vigor-diagram .vigor-circle .vc-item .vc-color.v { background: #EF4444; }
-        .vigor-image .vigor-diagram .vigor-circle .vc-item .vc-color.i { background: #8B5CF6; }
-        .vigor-image .vigor-diagram .vigor-circle .vc-item .vc-color.g { background: #F59E0B; }
-        .vigor-image .vigor-diagram .vigor-circle .vc-item .vc-color.o { background: #3B82F6; }
-        .vigor-image .vigor-diagram .vigor-circle .vc-item .vc-color.r { background: #10B981; }
-
-        /* ============================================
-           POR QUE FAZER O TESTE
-           ============================================ */
-        .why-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        .why-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius);
-            padding: 32px 28px;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .why-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
-
-        .why-card .why-icon { font-size: 2.4rem; margin-bottom: 12px; display: block; }
-        .why-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
-        .why-card p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; }
-
-        .why-card .why-stat {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 4px 16px;
-            background: var(--green-light);
-            color: var(--green);
-            border-radius: var(--radius-full);
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* ============================================
-           PARA EMPRESAS
-           ============================================ */
-        .business-section {
-            background: var(--bg-secondary);
-        }
-
-        .business-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 24px;
-        }
-
-        .business-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius);
-            padding: 28px 24px;
-            transition: var(--transition);
-            position: relative;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .business-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
-
-        .business-card .business-number {
-            font-family: var(--font-display);
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-            line-height: 1;
-        }
-
-        .business-card h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--text-primary); margin: 4px 0 8px; }
-        .business-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
-
-        /* ============================================
-           PRICING - NOVO VISUAL IMPACTANTE
-           ============================================ */
-        .pricing-section {
-            background: var(--bg-primary);
-            padding: 80px 0;
-        }
-
-        .pricing-section .pricing-top {
-            text-align: center;
-            margin-bottom: 16px;
-        }
-
-        .pricing-section .pricing-top .pricing-urgency {
-            display: inline-block;
-            background: var(--gradient-red);
-            color: white;
-            padding: 8px 24px;
-            border-radius: var(--radius-full);
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .pricing-section .pricing-top .pricing-urgency .icon { margin-right: 6px; }
-
-        .pricing-section .pricing-top .pricing-sub {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-top: 8px;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 20px;
-            margin-top: 32px;
-        }
-
-        /* Card Base */
-        .pricing-card {
-            background: var(--bg-white);
-            border-radius: var(--radius);
-            padding: 0;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-light);
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--border-gold);
-        }
-
-        /* Card Header */
-        .pricing-card .pricing-header {
-            padding: 24px 24px 16px;
-            text-align: center;
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border-light);
-            position: relative;
-        }
-
-        .pricing-card .pricing-header .pricing-badge {
-            position: absolute;
-            top: -8px;
-            right: 16px;
-            background: var(--gradient-red);
-            color: white;
-            padding: 4px 14px;
-            border-radius: var(--radius-full);
-            font-size: 0.55rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            animation: pulse 2s ease-in-out infinite;
-            box-shadow: var(--shadow-red);
-        }
-
-        .pricing-card .pricing-header .pricing-icon {
-            font-size: 2.4rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .pricing-card .pricing-header .pricing-name {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .pricing-card .pricing-header .pricing-name.gold-text {
-            color: var(--gold);
-        }
-
-        .pricing-card .pricing-header .pricing-subtitle {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        /* Card Price */
-        .pricing-card .pricing-body {
-            padding: 20px 24px 24px;
-            text-align: center;
-        }
-
-        .pricing-card .pricing-body .pricing-price {
-            font-family: var(--font-display);
-            font-size: 2.6rem;
-            font-weight: 800;
-            color: var(--navy);
-            line-height: 1;
-        }
-
-        .pricing-card .pricing-body .pricing-price .currency {
-            font-size: 1.1rem;
-            vertical-align: super;
-            font-weight: 600;
-        }
-
-        .pricing-card .pricing-body .pricing-price .price-original {
-            font-size: 1rem;
-            color: var(--text-muted);
-            text-decoration: line-through;
-            font-weight: 400;
-            display: block;
-            margin-top: 2px;
-        }
-
-        .pricing-card .pricing-body .pricing-period {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: block;
-            margin-top: 2px;
-        }
-
-        .pricing-card .pricing-body .pricing-savings {
-            display: inline-block;
-            margin-top: 6px;
-            padding: 2px 14px;
-            background: var(--green-light);
-            color: var(--green);
-            border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 700;
-        }
-
-        /* Card Features */
-        .pricing-card .pricing-features {
-            list-style: none;
-            padding: 0 24px 16px;
-            margin: 0;
-            text-align: left;
-        }
-
-        .pricing-card .pricing-features li {
-            padding: 6px 0;
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.4);
-        }
-
-        .pricing-card .pricing-features li:last-child {
-            border-bottom: none;
-        }
-
-        .pricing-card .pricing-features li .check {
-            color: var(--green);
-            font-weight: 700;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .pricing-card .pricing-features li .cross {
-            color: var(--red);
-            font-weight: 700;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .pricing-card .pricing-features li .feature-icon {
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-
-        /* Card Cupom */
-        .pricing-card .pricing-cupom-area {
-            padding: 0 24px 16px;
-            text-align: center;
-        }
-
-        .pricing-card .pricing-cupom {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 16px;
-            background: rgba(217, 119, 6, 0.06);
-            border: 1px dashed var(--gold);
-            border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        }
+        .eyebrow::before {
+            content: '';
+            width: 20px; height: 1px;
+            background: var(--gold);
+        }
+        h1, h2, h3, h4 {
+            font-family: var(--font);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: var(--ink);
+        }
+        .serif { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--gold); }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.3s var(--ease);
             cursor: pointer;
-            transition: var(--transition);
-            user-select: none;
-        }
-
-        .pricing-card .pricing-cupom:hover {
-            background: rgba(217, 119, 6, 0.12);
-            transform: scale(1.02);
-        }
-
-        .pricing-card .pricing-cupom .cupom-text { font-weight: 700; }
-        .pricing-card .pricing-cupom .copy-icon { font-size: 0.7rem; opacity: 0.5; transition: var(--transition); }
-        .pricing-card .pricing-cupom:hover .copy-icon { opacity: 1; }
-
-        .pricing-card .pricing-cupom.copied {
-            background: rgba(16, 185, 129, 0.08);
-            border-color: var(--green);
-            color: var(--green);
-        }
-
-        /* Card Button */
-        .pricing-card .pricing-footer {
-            padding: 0 24px 24px;
-        }
-
-        .pricing-card .btn-pricing {
-            padding: 12px 32px;
             border: none;
-            border-radius: var(--radius-full);
-            font-family: var(--font-primary);
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-            width: 100%;
-            text-align: center;
+            white-space: nowrap;
         }
-
-        .pricing-card .btn-pricing.primary {
-            background: var(--gradient-gold);
-            color: white;
-            box-shadow: var(--shadow-gold);
-        }
-
-        .pricing-card .btn-pricing.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-gold-hover);
-        }
-
-        .pricing-card .btn-pricing.secondary {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            border: 2px solid var(--border-light);
-        }
-
-        .pricing-card .btn-pricing.secondary:hover {
-            border-color: var(--gold);
-            background: rgba(217, 119, 6, 0.03);
-        }
-
-        .pricing-card .btn-pricing.red {
-            background: var(--gradient-red);
-            color: white;
-            box-shadow: var(--shadow-red);
-        }
-
-        .pricing-card .btn-pricing.red:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.3);
-        }
-
-        /* Card Timer */
-        .pricing-card .pricing-timer {
-            padding: 0 24px 16px;
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--red);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-
-        .pricing-card .pricing-timer .timer-icon { animation: pulse 1.5s ease-in-out infinite; }
-
-        /* Card - Destaque Premium */
-        .pricing-card.premium {
-            border-color: var(--gold);
-            box-shadow: var(--shadow-gold);
-            background: var(--gradient-card);
-        }
-
-        .pricing-card.premium:hover {
-            box-shadow: var(--shadow-gold-hover);
-            border-color: var(--gold);
-        }
-
-        .pricing-card.premium .pricing-header {
-            background: rgba(217, 119, 6, 0.04);
-            border-bottom-color: var(--border-gold);
-        }
-
-        .pricing-card.premium .pricing-header .pricing-icon {
-            filter: drop-shadow(0 2px 8px rgba(217, 119, 6, 0.2));
-        }
-
-        .pricing-card.premium .pricing-body .pricing-price {
-            color: var(--gold);
-        }
-
-        .pricing-card.premium .pricing-body .pricing-savings {
-            background: rgba(217, 119, 6, 0.1);
-            color: var(--gold);
-        }
-
-        .pricing-card .pricing-glow {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(217, 119, 6, 0.03) 0%, transparent 70%);
-            pointer-events: none;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .pricing-card:hover .pricing-glow {
-            opacity: 1;
-        }
-
-        /* Card - Destaque Promo */
-        .pricing-card.promo-card .pricing-header {
-            background: rgba(239, 68, 68, 0.03);
-            border-bottom-color: rgba(239, 68, 68, 0.1);
-        }
-
-        .pricing-card.promo-card .pricing-header .pricing-badge {
-            background: var(--gradient-red);
-        }
-
-        .pricing-card.promo-card .pricing-body .pricing-price {
-            color: var(--red);
-        }
-
-        .pricing-card.promo-card .pricing-body .pricing-savings {
-            background: var(--red-light);
-            color: var(--red);
-        }
-
-        /* ============================================
-           CONTATO
-           ============================================ */
-        .contact-section {
-            background: var(--bg-secondary);
-            padding: 80px 0;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .contact-content .contact-badge {
-            display: inline-block;
-            padding: 4px 18px;
-            background: rgba(217, 119, 6, 0.08);
-            color: var(--gold);
-            border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 12px;
-        }
-
-        .contact-content h2 {
-            font-family: var(--font-display);
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-        }
-
-        .contact-content h2 .highlight { color: var(--gold); }
-
-        .contact-content p {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 24px;
-            max-width: 460px;
-        }
-
-        .contact-content .contact-items {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .contact-content .contact-items .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: var(--bg-white);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-light);
-            transition: var(--transition);
-        }
-
-        .contact-content .contact-items .contact-item:hover {
-            border-color: var(--border-gold);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .contact-content .contact-items .contact-item .ci-icon { font-size: 1.2rem; }
-        .contact-content .contact-items .contact-item .ci-text { font-size: 0.9rem; color: var(--text-secondary); }
-
-        .contact-content .contact-items .contact-item .ci-text a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .contact-content .contact-items .contact-item .ci-text a:hover { color: var(--gold); }
-
-        .contact-image .contact-illustration {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius);
-            padding: 48px 32px;
-            text-align: center;
-            width: 100%;
-            max-width: 440px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .contact-image .contact-illustration:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-4px);
-        }
-
-        .contact-image .contact-illustration .contact-emoji { font-size: 4rem; display: block; margin-bottom: 16px; }
-
-        .contact-image .contact-illustration h4 {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .contact-image .contact-illustration p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin: 8px 0 16px;
-        }
-
-        .contact-image .contact-illustration .btn-email {
-            display: inline-block;
-            padding: 12px 32px;
-            background: var(--gradient-gold);
-            color: white;
-            border-radius: var(--radius-full);
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: var(--shadow-gold);
-        }
-
-        .contact-image .contact-illustration .btn-email:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-gold-hover);
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-        .footer {
+        .btn-primary {
             background: var(--navy);
-            color: white;
-            padding: 48px 0 20px;
-            border-radius: var(--radius) var(--radius) 0 0;
+            color: var(--white);
         }
-
-        .footer .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 40px;
-            padding-bottom: 28px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        .btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); box-shadow: var(--shadow); }
+        .btn-gold {
+            background: var(--gold);
+            color: var(--white);
         }
-
-        .footer .footer-grid h4 {
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: white;
+        .btn-gold:hover { background: #c26a05; transform: translateY(-1px); box-shadow: var(--shadow-gold); }
+        .btn-ghost {
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid var(--line);
         }
-
-        .footer .footer-grid p,
-        .footer .footer-grid a {
-            font-size: 0.82rem;
-            color: rgba(255, 255, 255, 0.35);
-            line-height: 2;
-            text-decoration: none;
-            display: block;
-            transition: var(--transition);
+        .btn-ghost:hover { border-color: var(--ink); background: var(--bg-alt); }
+        .btn-link {
+            background: transparent;
+            color: var(--ink);
+            padding: 0;
+            font-weight: 500;
+            border-bottom: 1px solid var(--line);
+            border-radius: 0;
         }
+        .btn-link:hover { border-color: var(--gold); color: var(--gold); }
 
-        .footer .footer-grid a:hover { color: rgba(255, 255, 255, 0.6); }
-
-        .footer .footer-grid .footer-social {
+        /* HEADER */
+        .nav-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--line-soft);
+        }
+        .nav {
             display: flex;
-            gap: 12px;
-            margin-top: 8px;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
         }
-
-        .footer .footer-grid .footer-social a {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .nav-logo-mark {
+            width: 32px;
+            height: 32px;
+            background: var(--navy);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            transition: var(--transition);
+            color: var(--gold);
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: -0.05em;
         }
-
-        .footer .footer-grid .footer-social a:hover { border-color: var(--gold); color: var(--gold); background: rgba(217, 119, 6, 0.05); }
-
-        .footer .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-        }
-
-        .footer .footer-bottom .footer-brand {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
+        .nav-logo-text {
             font-weight: 700;
-            color: white;
+            font-size: 15px;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+        .nav-logo-text .tm {
+            font-size: 9px;
+            color: var(--ink-muted);
+            vertical-align: super;
+            margin-left: 2px;
+            font-weight: 400;
+        }
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+        .nav-menu a {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+        .nav-menu a:hover { color: var(--ink); }
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .nav-cta a { font-size: 14px; text-decoration: none; color: var(--ink-soft); }
+        .nav-cta a:hover { color: var(--ink); }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            padding: 80px 0 120px;
+            background: linear-gradient(180deg, var(--white) 0%, var(--bg) 100%);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-eyebrow { margin-bottom: 24px; }
+        .hero h1 {
+            font-size: clamp(44px, 5.5vw, 72px);
+            font-weight: 600;
+            line-height: 1.02;
+            margin-bottom: 28px;
+            letter-spacing: -0.035em;
+        }
+        .hero-lead {
+            font-size: 18px;
+            color: var(--ink-soft);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 520px;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+        .hero-metrics {
+            display: flex;
+            gap: 48px;
+            padding-top: 40px;
+            border-top: 1px solid var(--line);
+        }
+        .hero-metric-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -0.02em;
             margin-bottom: 4px;
         }
-
-        .footer .footer-bottom .footer-brand .highlight { color: var(--gold); }
-
-        .footer .footer-bottom .footer-info {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.2);
-            line-height: 1.8;
+        .hero-metric-value .unit { color: var(--gold); font-size: 20px; }
+        .hero-metric-label {
+            font-size: 12px;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+        .hero-visual {
+            position: relative;
+            aspect-ratio: 4/5;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .hero-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-badge {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 16px 20px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow);
+        }
+        .hero-badge-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gold);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .hero-badge-text {
+            font-size: 12px;
+            color: var(--ink-soft);
+        }
+        .hero-badge-text strong {
+            display: block;
+            color: var(--ink);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
         }
 
-        .footer .footer-bottom .footer-info a {
-            color: rgba(255, 255, 255, 0.2);
+        /* TRUST BAR */
+        .trust {
+            padding: 48px 0;
+            background: var(--white);
+            border-top: 1px solid var(--line-soft);
+            border-bottom: 1px solid var(--line-soft);
+        }
+        .trust-title {
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+        .trust-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 56px;
+            flex-wrap: wrap;
+        }
+        .trust-logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+            opacity: 0.5;
+            letter-spacing: -0.02em;
+            transition: opacity 0.3s;
+        }
+        .trust-logo:hover { opacity: 1; }
+
+        /* SECTIONS */
+        .section {
+            padding: 120px 0;
+        }
+        .section-alt { background: var(--bg); }
+        .section-dark {
+            background: var(--navy);
+            color: var(--white);
+        }
+        .section-dark h2, .section-dark h3 { color: var(--white); }
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .section-header h2 {
+            font-size: clamp(36px, 4vw, 56px);
+            font-weight: 600;
+            margin: 20px 0 24px;
+            letter-spacing: -0.03em;
+        }
+        .section-header p {
+            font-size: 18px;
+            color: var(--ink-soft);
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .section-dark .section-header p { color: rgba(255, 255, 255, 0.65); }
+
+        /* ASSESSMENTS */
+        .assess-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+        .assess-card {
+            background: var(--white);
+            padding: 48px 40px;
+            transition: background 0.3s;
+            position: relative;
+        }
+        .assess-card:hover { background: var(--bg); }
+        .assess-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--gold);
+            transition: width 0.5s var(--ease);
+        }
+        .assess-card:hover::before { width: 100%; }
+        .assess-num {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+        .assess-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        .assess-card p {
+            font-size: 14px;
+            color: var(--ink-soft);
+            line-height: 1.65;
+            margin-bottom: 24px;
+        }
+        .assess-link {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ink);
             text-decoration: none;
-            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: gap 0.3s;
+        }
+        .assess-link:hover { gap: 14px; color: var(--gold); }
+
+        /* TECHNOLOGY */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .tech-content h2 {
+            font-size: clamp(36px, 4vw, 52px);
+            margin: 20px 0 28px;
+            letter-spacing: -0.03em;
+        }
+        .tech-content p {
+            font-size: 17px;
+            color: var(--ink-soft);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .tech-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 36px;
+        }
+        .tech-feature {
+            padding: 20px 0;
+            border-top: 1px solid var(--line);
+        }
+        .tech-feature-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tech-feature-title::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+        .tech-feature-desc {
+            font-size: 13px;
+            color: var(--ink-soft);
+            line-height: 1.6;
+            padding-left: 14px;
+        }
+        .tech-visual {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .tech-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .tech-visual-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10, 37, 64, 0.3) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 32px;
+            color: var(--white);
+        }
+        .tech-visual-overlay .label {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 8px;
+        }
+        .tech-visual-overlay h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--white);
         }
 
-        .footer .footer-bottom .footer-info a:hover { color: rgba(255, 255, 255, 0.4); }
-
-        .footer .footer-bottom .footer-divider {
-            color: rgba(255, 255, 255, 0.06);
-            margin: 0 6px;
+        /* SOLUTIONS */
+        .sol-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+        .sol-card {
+            background: var(--white);
+            padding: 56px 48px;
+            transition: background 0.3s;
+        }
+        .sol-card:hover { background: var(--bg); }
+        .sol-card-num {
+            font-family: var(--mono);
+            font-size: 48px;
+            font-weight: 300;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: -0.05em;
+        }
+        .sol-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .sol-card p {
+            font-size: 15px;
+            color: var(--ink-soft);
+            line-height: 1.7;
         }
 
-        /* ============================================
-           RESPONSIVO
-           ============================================ */
+        /* ROI / STATS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .stat-card {
+            background: var(--navy);
+            padding: 56px 40px;
+            text-align: center;
+            position: relative;
+            transition: background 0.3s;
+        }
+        .stat-card:hover { background: var(--navy-deep); }
+        .stat-value {
+            font-size: 56px;
+            font-weight: 300;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 12px;
+            letter-spacing: -0.04em;
+        }
+        .stat-value .unit { font-size: 32px; }
+        .stat-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            letter-spacing: 0.02em;
+        }
+
+        /* PRICING - ENTERPRISE ELEGANT */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+        .price-card {
+            background: var(--white);
+            padding: 56px 48px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .price-card:hover { background: var(--bg); }
+        .price-card.featured {
+            background: var(--navy);
+            color: var(--white);
+        }
+        .price-card.featured h3, .price-card.featured .price-amount { color: var(--white); }
+        .price-card.featured p, .price-card.featured .price-desc { color: rgba(255, 255, 255, 0.65); }
+        .price-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--gold);
+            color: var(--white);
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+        .price-tag.plain {
+            background: transparent;
+            color: var(--ink-muted);
+            padding: 4px 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .price-card.featured .price-tag.plain {
+            color: rgba(255, 255, 255, 0.5);
+            border-bottom-color: rgba(255, 255, 255, 0.15);
+        }
+        .price-card h3 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        .price-desc {
+            font-size: 14px;
+            color: var(--ink-soft);
+            margin-bottom: 36px;
+            line-height: 1.6;
+        }
+        .price-amount {
+            font-size: 56px;
+            font-weight: 300;
+            letter-spacing: -0.04em;
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+        .price-amount .currency {
+            font-size: 24px;
+            vertical-align: top;
+            margin-right: 4px;
+            color: var(--gold);
+            font-weight: 500;
+        }
+        .price-amount .per {
+            font-size: 14px;
+            color: var(--ink-muted);
+            font-weight: 400;
+            margin-left: 4px;
+        }
+        .price-card.featured .price-amount .per { color: rgba(255, 255, 255, 0.5); }
+        .price-note {
+            font-size: 12px;
+            color: var(--ink-muted);
+            margin-bottom: 40px;
+            font-family: var(--mono);
+            letter-spacing: 0.05em;
+        }
+        .price-card.featured .price-note { color: rgba(255, 255, 255, 0.4); }
+        .price-features {
+            list-style: none;
+            padding-top: 32px;
+            border-top: 1px solid var(--line);
+            margin-bottom: 40px;
+        }
+        .price-card.featured .price-features { border-top-color: rgba(255, 255, 255, 0.15); }
+        .price-features li {
+            padding: 10px 0;
+            font-size: 14px;
+            color: var(--ink-soft);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .price-card.featured .price-features li { color: rgba(255, 255, 255, 0.75); }
+        .price-features li::before {
+            content: '';
+            width: 14px; height: 14px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23D97706' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        .price-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .price-btn-primary {
+            background: var(--navy);
+            color: var(--white);
+        }
+        .price-btn-primary:hover { background: var(--navy-light); }
+        .price-btn-gold {
+            background: var(--gold);
+            color: var(--white);
+        }
+        .price-btn-gold:hover { background: #c26a05; box-shadow: var(--shadow-gold); }
+        .price-btn-ghost {
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid var(--line);
+        }
+        .price-card.featured .price-btn-ghost {
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+        .price-btn-ghost:hover { border-color: var(--ink); }
+        .price-card.featured .price-btn-ghost:hover { border-color: var(--white); }
+
+        /* TESTIMONIALS */
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .test-card {
+            padding: 40px;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .test-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow); }
+        .test-stars {
+            color: var(--gold);
+            font-size: 14px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        .test-quote {
+            font-size: 16px;
+            line-height: 1.65;
+            color: var(--ink);
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+        .test-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 24px;
+            border-top: 1px solid var(--line);
+        }
+        .test-avatar {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--navy);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .test-author-info h5 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        .test-author-info span {
+            font-size: 12px;
+            color: var(--ink-muted);
+        }
+
+        /* SECURITY */
+        .security-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .security-badges {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .security-badge {
+            padding: 20px 24px;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s;
+        }
+        .security-badge:hover { border-color: var(--gold); }
+        .security-badge-icon {
+            width: 40px; height: 40px;
+            background: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .security-badge-text h5 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        .security-badge-text span {
+            font-size: 12px;
+            color: var(--ink-muted);
+        }
+
+        /* CTA */
+        .cta {
+            padding: 160px 0;
+            text-align: center;
+            background: var(--navy);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 1200px; height: 1200px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .cta-content { position: relative; z-index: 1; }
+        .cta h2 {
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 600;
+            color: var(--white);
+            margin: 20px 0 24px;
+            letter-spacing: -0.03em;
+        }
+        .cta p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 560px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+        }
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--navy-deep);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 80px 0 40px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 64px;
+        }
+        .footer-brand-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 320px;
+            margin-top: 20px;
+        }
+        .footer h5 {
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 12px; }
+        .footer a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .footer a:hover { color: var(--gold); }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.35);
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .test-grid { grid-template-columns: 1fr 1fr; }
-            .vigor-grid { grid-template-columns: 1fr; }
-            .why-grid { grid-template-columns: 1fr 1fr; }
-            .business-grid { grid-template-columns: 1fr 1fr; }
-            .pricing-grid { grid-template-columns: 1fr 1fr; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .hero .hero-container { gap: 40px; }
-            .hero .hero-content h1 { font-size: 2.8rem; }
-            .footer .footer-grid { grid-template-columns: 1fr 1fr; }
+            .hero-grid, .tech-grid, .security-grid { grid-template-columns: 1fr; gap: 60px; }
+            .assess-grid, .sol-grid, .pricing-grid, .stats-grid, .test-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
         }
-
         @media (max-width: 768px) {
-            .header .header-container { flex-direction: column; gap: 12px; }
-            .header .nav { flex-wrap: wrap; justify-content: center; gap: 14px; }
-            .hero .hero-container { grid-template-columns: 1fr; text-align: center; }
-            .hero .hero-content p { margin: 0 auto 24px; }
-            .hero .hero-buttons { justify-content: center; }
-            .hero .hero-content h1 { font-size: 2.2rem; }
-            .test-grid { grid-template-columns: 1fr; }
-            .why-grid { grid-template-columns: 1fr; }
-            .business-grid { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 32px auto 0; }
-            .vigor-content .vigor-features { grid-template-columns: 1fr; }
-            .contact-grid { grid-template-columns: 1fr; text-align: center; }
-            .contact-content p { margin: 0 auto 24px; }
-            .contact-content .contact-items { align-items: center; }
-            .footer .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .footer .footer-grid .footer-social { justify-content: center; }
-            .section .section-header h2 { font-size: 1.8rem; }
-            .hero .hero-image .dashboard-mockup { padding: 20px 16px; }
-            .vigor-image .vigor-diagram .vigor-circle { grid-template-columns: 1fr 1fr 1fr; }
-            .contact-image .contact-illustration { padding: 32px 20px; }
-            .pricing-card .pricing-body .pricing-price { font-size: 2.2rem; }
+            .nav-menu { display: none; }
+            .hero { padding: 60px 0 80px; }
+            .hero-metrics { flex-direction: column; gap: 24px; }
+            .assess-grid, .sol-grid, .pricing-grid, .stats-grid, .test-grid { grid-template-columns: 1fr; }
+            .trust-logos { gap: 32px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .section { padding: 80px 0; }
+            .cta { padding: 100px 0; }
+            .cta-actions { flex-direction: column; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
         }
 
-        @media (max-width: 480px) {
-            .hero .hero-content h1 { font-size: 1.8rem; }
-            .container { padding: 0 16px; }
-            .section { padding: 40px 0; }
-            .hero { padding: 50px 0 30px; }
-            .hero .hero-buttons { flex-direction: column; align-items: center; }
-            .pricing-card { border-radius: var(--radius-sm); }
-            .pricing-card .pricing-header { padding: 16px 16px 12px; }
-            .pricing-card .pricing-body { padding: 16px; }
-            .pricing-card .pricing-features { padding: 0 16px 12px; }
-            .pricing-card .pricing-cupom-area { padding: 0 16px 12px; }
-            .pricing-card .pricing-footer { padding: 0 16px 16px; }
-            .pricing-card .pricing-timer { padding: 0 16px 12px; }
-            .vigor-image .vigor-diagram .vigor-circle { grid-template-columns: 1fr 1fr; }
-            .contact-content .contact-items .contact-item { width: 100%; justify-content: center; }
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+        .fade-up { animation: fadeUp 0.8s var(--ease) both; }
+        .fade-up-2 { animation: fadeUp 0.8s var(--ease) 0.15s both; }
+        .fade-up-3 { animation: fadeUp 0.8s var(--ease) 0.3s both; }
     </style>
 </head>
 <body>
 
-    <!-- ============================================
-    HEADER
-    ============================================ -->
-    <header class="header" id="header">
-        <div class="container header-container">
-            <a href="index.html" class="logo">
-                <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
-                <div class="logo-text">
-                    VIGORRE <span class="highlight">ONE</span><span class="tm">™</span>
-                    <span class="logo-sub">People Analytics Enterprise</span>
-                </div>
-            </a>
+    <!-- NAV -->
+    <div class="nav-wrap">
+        <div class="container">
             <nav class="nav">
-                <a href="#testes">Testes</a>
-                <a href="#vigor">VIGOR®</a>
-                <a href="#para-voce">Para Você</a>
-                <a href="#para-empresas">Empresas</a>
-                <a href="#planos">Planos</a>
-                <a href="#contato">Contato</a>
-                <a href="login.html" class="btn-outline">Entrar</a>
-                <a href="#planos" class="btn-primary">Comprar Créditos</a>
+                <a href="#" class="nav-logo">
+                    <div class="nav-logo-mark">V</div>
+                    <div class="nav-logo-text">VIGORRE ONE<span class="tm">™</span></div>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="#platform">Platform</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#customers">Customers</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="#">Sign in</a>
+                    <a href="#contact" class="btn btn-primary">Request demo</a>
+                </div>
             </nav>
         </div>
-    </header>
+    </div>
 
-    <!-- ============================================
-    HERO
-    ============================================ -->
-    <section class="hero" id="hero">
-        <div class="container hero-container">
-            <div class="hero-content">
-                <span class="badge">🧠 Inteligência Humana</span>
-                <div class="hero-sub">Descubra quem você realmente é</div>
-                <h1>O autoconhecimento <span class="gradient-text">transforma vidas</span></h1>
-                <span class="hero-strong">⭐ Invista em você. Compre créditos e tenha acesso a laudos de até 100 páginas.</span>
-                <p>Você já sentiu que poderia ser mais? Que algo dentro de você espera para ser descoberto? Seu potencial não é um mistério — é uma ciência. E agora você tem a chave para desbloqueá-lo.</p>
-                <div class="hero-buttons">
-                    <a href="#planos" class="btn-primary">🚀 Comprar Créditos</a>
-                    <a href="#testes" class="btn-outline">Conhecer Testes</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="dashboard-mockup">
-                    <div class="mockup-header">
-                        <div class="dots">
-                            <span></span><span></span><span></span>
-                        </div>
-                        <span class="mockup-title">📊 Seu Perfil Comportamental</span>
-                        <span style="width:40px;"></span>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="eyebrow hero-eyebrow fade-up">Enterprise People Intelligence</div>
+                    <h1 class="fade-up-2">The science of <span class="serif">human intelligence</span>, engineered for the enterprise.</h1>
+                    <p class="hero-lead fade-up-3">VIGORRE ONE™ combines neuroscience, behavioral psychology, and predictive analytics to transform how leading organizations understand, develop, and retain their people.</p>
+                    <div class="hero-actions fade-up-3">
+                        <a href="#contact" class="btn btn-gold">Request a demo</a>
+                        <a href="#platform" class="btn btn-ghost">Explore platform →</a>
                     </div>
-                    <div class="mockup-bars">
-                        <div class="bar">
-                            <span class="bar-label">Dominância</span>
-                            <div class="bar-track"><div class="bar-fill d"></div></div>
-                            <span class="bar-percent">78%</span>
+                    <div class="hero-metrics fade-up-3">
+                        <div>
+                            <div class="hero-metric-value">10M<span class="unit">+</span></div>
+                            <div class="hero-metric-label">Assessments delivered</div>
                         </div>
-                        <div class="bar">
-                            <span class="bar-label">Influência</span>
-                            <div class="bar-track"><div class="bar-fill i"></div></div>
-                            <span class="bar-percent">45%</span>
+                        <div>
+                            <div class="hero-metric-value">99.9<span class="unit">%</span></div>
+                            <div class="hero-metric-label">Platform uptime</div>
                         </div>
-                        <div class="bar">
-                            <span class="bar-label">Estabilidade</span>
-                            <div class="bar-track"><div class="bar-fill s"></div></div>
-                            <span class="bar-percent">62%</span>
+                        <div>
+                            <div class="hero-metric-value">4.9<span class="unit">/5</span></div>
+                            <div class="hero-metric-label">Customer rating</div>
                         </div>
-                        <div class="bar">
-                            <span class="bar-label">Conformidade</span>
-                            <div class="bar-track"><div class="bar-fill c"></div></div>
-                            <span class="bar-percent">38%</span>
+                    </div>
+                </div>
+                <div class="hero-visual fade-up-3">
+                    <img src="image:0" alt="Enterprise people intelligence" />
+                    <div class="hero-badge">
+                        <div class="hero-badge-icon">✓</div>
+                        <div class="hero-badge-text">
+                            <strong>Scientifically Validated</strong>
+                            200+ peer-reviewed studies
                         </div>
                     </div>
                 </div>
@@ -1546,754 +996,416 @@
         </div>
     </section>
 
-    <!-- ============================================
-    CARDS DOS TESTES
-    ============================================ -->
-    <section class="section" id="testes">
+    <!-- TRUST -->
+    <section class="trust">
+        <div class="container">
+            <div class="trust-title">Trusted by leading organizations worldwide</div>
+            <div class="trust-logos">
+                <div class="trust-logo">MICROSOFT</div>
+                <div class="trust-logo">SALESFORCE</div>
+                <div class="trust-logo">DELOITTE</div>
+                <div class="trust-logo">ACCENTURE</div>
+                <div class="trust-logo">UNILEVER</div>
+                <div class="trust-logo">SIEMENS</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLATFORM -->
+    <section class="section" id="platform">
         <div class="container">
             <div class="section-header">
-                <span class="badge">📋 AVALIAÇÕES</span>
-                <h2>5 testes científicos em <span class="highlight">uma única plataforma</span></h2>
-                <p>Avaliações validadas internacionalmente para uma visão completa do seu perfil</p>
+                <div class="eyebrow">The Platform</div>
+                <h2>Five validated assessments. <br/>One unified intelligence layer.</h2>
+                <p>A comprehensive suite of behavioral and psychological evaluations, engineered for enterprise-grade accuracy and scalability.</p>
+            </div>
+            <div class="assess-grid">
+                <div class="assess-card">
+                    <div class="assess-num">01 — DISC</div>
+                    <h3>Behavioral Profile</h3>
+                    <p>Map the four core behavioral dimensions—Dominance, Influence, Steadiness, Conscientiousness—that shape how people communicate, lead, and collaborate.</p>
+                    <a href="#" class="assess-link">Learn more →</a>
+                </div>
+                <div class="assess-card">
+                    <div class="assess-num">02 — BIG FIVE</div>
+                    <h3>Personality Architecture</h3>
+                    <p>The gold standard in personality science. Measure the five universal traits that predict behavior across contexts with clinical precision.</p>
+                    <a href="#" class="assess-link">Learn more →</a>
+                </div>
+                <div class="assess-card">
+                    <div class="assess-num">03 — EQ</div>
+                    <h3>Emotional Intelligence</h3>
+                    <p>Quantify the emotional competencies that drive leadership effectiveness, team performance, and long-term career resilience.</p>
+                    <a href="#" class="assess-link">Learn more →</a>
+                </div>
+                <div class="assess-card">
+                    <div class="assess-num">04 — VALUES</div>
+                    <h3>Value Drivers</h3>
+                    <p>Identify the core motivational values that shape decision-making, engagement, and cultural alignment within organizations.</p>
+                    <a href="#" class="assess-link">Learn more →</a>
+                </div>
+                <div class="assess-card">
+                    <div class="assess-num">05 — SWOT</div>
+                    <h3>Strategic Self-Analysis</h3>
+                    <p>A structured framework for mapping strengths, development areas, opportunities, and risks—transforming insights into action plans.</p>
+                    <a href="#" class="assess-link">Learn more →</a>
+                </div>
+                <div class="assess-card">
+                    <div class="assess-num">06 — VIGOR® REPORT</div>
+                    <h3>Integrated Intelligence</h3>
+                    <p>80–100 pages of synthesized analysis combining all assessments into a single, actionable development blueprint powered by proprietary algorithms.</p>
+                    <a href="#" class="assess-link">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGY -->
+    <section class="section section-alt" id="technology">
+        <div class="container">
+            <div class="tech-grid">
+                <div class="tech-content">
+                    <div class="eyebrow">Proprietary Technology</div>
+                    <h2>The VIGOR® methodology.</h2>
+                    <p>A decade of research distilled into a five-pillar framework that synthesizes neuroscience, cognitive psychology, psychometrics, and behavioral coaching into one unified intelligence system.</p>
+                    <p>Unlike fragmented tools that measure isolated traits, VIGOR® delivers a multidimensional view of human potential—accurate, actionable, and scientifically rigorous.</p>
+                    <div class="tech-features">
+                        <div class="tech-feature">
+                            <div class="tech-feature-title">Vision</div>
+                            <div class="tech-feature-desc">Strategic self-awareness and long-term direction</div>
+                        </div>
+                        <div class="tech-feature">
+                            <div class="tech-feature-title">Intelligence</div>
+                            <div class="tech-feature-desc">Cognitive and emotional capability mapping</div>
+                        </div>
+                        <div class="tech-feature">
+                            <div class="tech-feature-title">Governance</div>
+                            <div class="tech-feature-desc">Decision-making and self-regulation patterns</div>
+                        </div>
+                        <div class="tech-feature">
+                            <div class="tech-feature-title">Organization</div>
+                            <div class="tech-feature-desc">Systems, habits, and execution frameworks</div>
+                        </div>
+                        <div class="tech-feature">
+                            <div class="tech-feature-title">Results</div>
+                            <div class="tech-feature-desc">Measurable outcomes and performance impact</div>
+                        </div>
+                        <div class="tech-feature">
+                            <div class="tech-feature-title">Integration</div>
+                            <div class="tech-feature-desc">Synthesized insights across all dimensions</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-visual">
+                    <img src="image:2" alt="VIGOR technology" />
+                    <div class="tech-visual-overlay">
+                        <div class="label">Methodology</div>
+                        <h4>Five pillars. One unified framework.</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTIONS -->
+    <section class="section" id="solutions">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">Solutions</div>
+                <h2>Built for every <span class="serif">human challenge</span> your organization faces.</h2>
+                <p>From talent acquisition to leadership development, VIGORRE ONE™ provides the behavioral intelligence to make better decisions at every level.</p>
+            </div>
+            <div class="sol-grid">
+                <div class="sol-card">
+                    <div class="sol-card-num">01</div>
+                    <h3>Talent Acquisition</h3>
+                    <p>Eliminate hiring bias. Predict candidate success with 85% accuracy using behavioral profiles matched to role requirements and team composition.</p>
+                </div>
+                <div class="sol-card">
+                    <div class="sol-card-num">02</div>
+                    <h3>Leadership Development</h3>
+                    <p>Identify high-potential leaders and design personalized development journeys that build the specific competencies your organization needs.</p>
+                </div>
+                <div class="sol-card">
+                    <div class="sol-card-num">03</div>
+                    <h3>Team Performance</h3>
+                    <p>Map team dynamics, resolve conflicts, and engineer complementary compositions that multiply collective output and engagement.</p>
+                </div>
+                <div class="sol-card">
+                    <div class="sol-card-num">04</div>
+                    <h3>Cultural Transformation</h3>
+                    <p>Measure, understand, and shape organizational culture through the aggregate behavioral intelligence of your workforce.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">Measured Impact</div>
+                <h2>The ROI of <span class="serif">behavioral intelligence</span>.</h2>
+                <p>Organizations that deploy VIGORRE ONE™ report measurable improvements across every people metric that matters.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">70<span class="unit">%</span></div>
+                    <div class="stat-label">Reduction in unwanted turnover within the first year</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3<span class="unit">×</span></div>
+                    <div class="stat-label">Higher performance from behavior-matched hires</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">60<span class="unit">%</span></div>
+                    <div class="stat-label">Fewer internal conflicts in aligned teams</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2.5<span class="unit">×</span></div>
+                    <div class="stat-label">Greater engagement among understood employees</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">Pricing</div>
+                <h2>Transparent plans. <br/>No surprises.</h2>
+                <p>Choose the plan that fits your organization. Scale up or down anytime. All plans include enterprise-grade security and dedicated support.</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- STARTER -->
+                <div class="price-card">
+                    <span class="price-tag plain">STARTER</span>
+                    <h3>Professional</h3>
+                    <p class="price-desc">For growing teams and individual consultants who need validated assessments with powerful reporting.</p>
+                    <div class="price-amount">
+                        <span class="currency">R$</span>249<span class="per">/month</span>
+                    </div>
+                    <div class="price-note">BILLED ANNUALLY · 10 REPORTS / MONTH</div>
+                    <ul class="price-features">
+                        <li>10 full behavioral reports per month</li>
+                        <li>All 5 core assessments included</li>
+                        <li>Personalized development plans (PDI)</li>
+                        <li>Team analytics dashboard</li>
+                        <li>Standard support (email)</li>
+                    </ul>
+                    <a href="#" class="price-btn price-btn-primary">Start with Professional</a>
+                </div>
+
+                <!-- ENTERPRISE - FEATURED -->
+                <div class="price-card featured">
+                    <span class="price-tag">MOST CHOSEN</span>
+                    <h3>Enterprise</h3>
+                    <p class="price-desc">For organizations deploying people intelligence at scale—with full VIGOR® reports and priority support.</p>
+                    <div class="price-amount">
+                        <span class="currency">R$</span>1.490<span class="per">/month</span>
+                    </div>
+                    <div class="price-note">BILLED ANNUALLY · 50 REPORTS / MONTH</div>
+                    <ul class="price-features">
+                        <li>50 full behavioral reports per month</li>
+                        <li>All 5 core assessments included</li>
+                        <li>Integrated VIGOR® reports (80–100 pages)</li>
+                        <li>Advanced team & organization analytics</li>
+                        <li>SSO, API access, custom integrations</li>
+                        <li>Priority support (chat + email)</li>
+                        <li>Dedicated customer success manager</li>
+                    </ul>
+                    <a href="#" class="price-btn price-btn-gold">Start with Enterprise</a>
+                </div>
+
+                <!-- CUSTOM -->
+                <div class="price-card">
+                    <span class="price-tag plain">CUSTOM</span>
+                    <h3>Global</h3>
+                    <p class="price-desc">For multinational organizations requiring unlimited scale, bespoke configurations, and strategic partnership.</p>
+                    <div class="price-amount">
+                        Custom
+                    </div>
+                    <div class="price-note">TAILORED TO YOUR ORGANIZATION</div>
+                    <ul class="price-features">
+                        <li>Unlimited reports and assessments</li>
+                        <li>Custom VIGOR® report configurations</li>
+                        <li>White-label options</li>
+                        <li>Dedicated infrastructure & SLA</li>
+                        <li>On-premise deployment available</li>
+                        <li>Executive advisory & training</li>
+                        <li>24/7 dedicated support team</li>
+                    </ul>
+                    <a href="#contact" class="price-btn price-btn-ghost">Talk to sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section section-alt" id="customers">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">What customers say</div>
+                <h2>Trusted by <span class="serif">leaders</span> who value evidence.</h2>
             </div>
             <div class="test-grid">
-                <div class="test-card animate-fade-up animate-delay-1">
-                    <span class="test-icon">📊</span>
-                    <span class="test-color disc"></span>
-                    <h3>DISC</h3>
-                    <p>Entenda seu perfil comportamental: Dominância, Influência, Estabilidade e Conformidade. Como você age, reage e se relaciona.</p>
-                    <a href="tests/disc/" class="test-link">Realizar Teste →</a>
+                <div class="test-card">
+                    <div class="test-stars">★★★★★</div>
+                    <p class="test-quote">"VIGORRE ONE transformed our hiring process. We reduced bad-fit hires by 68% in the first year. The VIGOR® reports became the foundation of our leadership academy."</p>
+                    <div class="test-author">
+                        <div class="test-avatar">MS</div>
+                        <div class="test-author-info">
+                            <h5>Marina Sato</h5>
+                            <span>CHRO · Fortune 500 Tech Company</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="test-card animate-fade-up animate-delay-2">
-                    <span class="test-icon">🧠</span>
-                    <span class="test-color bigfive"></span>
-                    <h3>Big Five</h3>
-                    <p>Os 5 grandes traços da personalidade: Abertura, Consciência, Extroversão, Amabilidade e Neuroticismo. O mapa completo da sua mente.</p>
-                    <a href="tests/bigfive/" class="test-link">Realizar Teste →</a>
+                <div class="test-card">
+                    <div class="test-stars">★★★★★</div>
+                    <p class="test-quote">"The scientific rigor is unmatched. After evaluating 12 different platforms, VIGORRE ONE was the only one that gave us actionable, validated insights we could trust at scale."</p>
+                    <div class="test-author">
+                        <div class="test-avatar">RK</div>
+                        <div class="test-author-info">
+                            <h5>Rafael Kim</h5>
+                            <span>VP People · Global Consulting Firm</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="test-card animate-fade-up animate-delay-3">
-                    <span class="test-icon">❤️</span>
-                    <span class="test-color ie"></span>
-                    <h3>Inteligência Emocional</h3>
-                    <p>Capacidade de reconhecer, compreender e gerenciar emoções. O fator mais importante para o sucesso pessoal e profissional.</p>
-                    <a href="tests/ie/" class="test-link">Realizar Teste →</a>
-                </div>
-                <div class="test-card animate-fade-up animate-delay-4">
-                    <span class="test-icon">⭐</span>
-                    <span class="test-color valores"></span>
-                    <h3>Valores Pessoais</h3>
-                    <p>Descubra o que realmente importa para você. Valores que guiam suas decisões, carreira e relacionamentos.</p>
-                    <a href="tests/valores/" class="test-link">Realizar Teste →</a>
-                </div>
-                <div class="test-card animate-fade-up animate-delay-5">
-                    <span class="test-icon">🎯</span>
-                    <span class="test-color swot"></span>
-                    <h3>SWOT Pessoal</h3>
-                    <p>Mapeie suas Forças, Fraquezas, Oportunidades e Ameaças. Um plano estratégico para sua vida e carreira.</p>
-                    <a href="tests/swot/" class="test-link">Realizar Teste →</a>
-                </div>
-                <div class="test-card animate-fade-up animate-delay-6">
-                    <span class="test-icon">📋</span>
-                    <span class="test-color" style="background:var(--gold);"></span>
-                    <h3>Laudo VIGOR®</h3>
-                    <p>80-100 páginas de análise integrada com todos os testes. Neurociência + Psicologia + Coaching para seu desenvolvimento completo.</p>
-                    <a href="laudos/" class="test-link">Ver Laudo →</a>
+                <div class="test-card">
+                    <div class="test-stars">★★★★★</div>
+                    <p class="test-quote">"We use VIGORRE ONE for every C-suite search now. The multidimensional profiles give our clients clarity they've never had from any other assessment tool."</p>
+                    <div class="test-author">
+                        <div class="test-avatar">AL</div>
+                        <div class="test-author-info">
+                            <h5>Ana Luíza</h5>
+                            <span>Managing Partner · Executive Search</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-    TECNOLOGIA VIGOR®
-    ============================================ -->
-    <section class="section vigor-section" id="vigor">
+    <!-- SECURITY -->
+    <section class="section" id="security">
         <div class="container">
-            <div class="vigor-grid">
-                <div class="vigor-content animate-slide-left">
-                    <span class="vigor-badge">🔬 TECNOLOGIA EXCLUSIVA</span>
-                    <h2>Tecnologia <span class="highlight">VIGOR®</span></h2>
-                    <p>
-                        A Tecnologia VIGOR® é um método proprietário que integra cinco pilares científicos para uma análise comportamental completa e precisa.
-                    </p>
-                    <p>
-                        <strong>Diferente de outras ferramentas</strong> que avaliam apenas um aspecto da personalidade, a VIGOR® combina neurociência, psicologia cognitiva, análise de dados e coaching para entregar um diagnóstico profundo e um plano de desenvolvimento personalizado.
-                    </p>
-                    <div class="vigor-features">
-                        <div class="vf-item"><span class="vf-icon">✅</span> 5 avaliações integradas</div>
-                        <div class="vf-item"><span class="vf-icon">✅</span> Análise multidimensional</div>
-                        <div class="vf-item"><span class="vf-icon">✅</span> Laudo de 80-100 páginas</div>
-                        <div class="vf-item"><span class="vf-icon">✅</span> PDI personalizado</div>
-                        <div class="vf-item"><span class="vf-icon">✅</span> Base científica validada</div>
-                        <div class="vf-item"><span class="vf-icon">✅</span> Mais de 10 anos de pesquisa</div>
-                    </div>
-                </div>
-                <div class="vigor-image animate-slide-right">
-                    <div class="vigor-diagram">
-                        <h3>Os 5 Pilares VIGOR®</h3>
-                        <p class="vigor-sub">A base da sua transformação</p>
-                        <div class="vigor-circle">
-                            <div class="vc-item">
-                                <span class="vc-letter">V</span>
-                                <span class="vc-color v"></span>
-                                <span class="vc-label">Visão</span>
+            <div class="security-grid">
+                <div>
+                    <div class="eyebrow">Security & Compliance</div>
+                    <h2 style="font-size:clamp(32px,3.5vw,44px);margin:20px 0 20px;letter-spacing:-0.03em;">Built for enterprises that cannot compromise.</h2>
+                    <p style="font-size:17px;color:var(--ink-soft);line-height:1.7;max-width:520px;">Your people data is your most sensitive asset. VIGORRE ONE™ is engineered with the security, privacy, and compliance standards that global enterprises demand—built into every layer of the platform.</p>
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <div class="security-badge-icon">🛡</div>
+                            <div class="security-badge-text">
+                                <h5>SOC 2 Type II</h5>
+                                <span>Independently audited</span>
                             </div>
-                            <div class="vc-item">
-                                <span class="vc-letter">I</span>
-                                <span class="vc-color i"></span>
-                                <span class="vc-label">Inteligência</span>
+                        </div>
+                        <div class="security-badge">
+                            <div class="security-badge-icon">✓</div>
+                            <div class="security-badge-text">
+                                <h5>LGPD & GDPR</h5>
+                                <span>Full compliance</span>
                             </div>
-                            <div class="vc-item">
-                                <span class="vc-letter">G</span>
-                                <span class="vc-color g"></span>
-                                <span class="vc-label">Gestão</span>
+                        </div>
+                        <div class="security-badge">
+                            <div class="security-badge-icon">🔒</div>
+                            <div class="security-badge-text">
+                                <h5>ISO 27001</h5>
+                                <span>Information security</span>
                             </div>
-                            <div class="vc-item">
-                                <span class="vc-letter">O</span>
-                                <span class="vc-color o"></span>
-                                <span class="vc-label">Organização</span>
-                            </div>
-                            <div class="vc-item">
-                                <span class="vc-letter">R</span>
-                                <span class="vc-color r"></span>
-                                <span class="vc-label">Resultado</span>
+                        </div>
+                        <div class="security-badge">
+                            <div class="security-badge-icon">⚡</div>
+                            <div class="security-badge-text">
+                                <h5>99.9% SLA</h5>
+                                <span>Enterprise uptime guarantee</span>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="tech-visual">
+                    <img src="image:3" alt="Enterprise security" />
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-    PARA VOCÊ - PESSOA FÍSICA
-    ============================================ -->
-    <section class="section" id="para-voce">
+    <!-- CTA -->
+    <section class="cta" id="contact">
         <div class="container">
-            <div class="section-header">
-                <span class="badge">👤 PARA VOCÊ</span>
-                <h2>Por que <span class="highlight">você</span> deve fazer o teste?</h2>
-                <p>Descubra seu perfil comportamental e transforme sua vida pessoal e profissional</p>
-            </div>
-            <div class="why-grid">
-                <div class="why-card animate-fade-up animate-delay-1">
-                    <span class="why-icon">🧠</span>
-                    <h3>Autoconhecimento Profundo</h3>
-                    <p>Entenda suas emoções, reações e comportamentos. Descubra por que você age de determinada forma e como isso afeta sua vida.</p>
-                    <span class="why-stat">📊 +80% de clareza</span>
-                </div>
-                <div class="why-card animate-fade-up animate-delay-2">
-                    <span class="why-icon">🎯</span>
-                    <h3>Carreira com Propósito</h3>
-                    <p>Alinhe sua carreira com seus talentos naturais. Descubra quais áreas você tem mais potencial e onde pode brilhar.</p>
-                    <span class="why-stat">💼 67% mudam de carreira</span>
-                </div>
-                <div class="why-card animate-fade-up animate-delay-3">
-                    <span class="why-icon">❤️</span>
-                    <h3>Relacionamentos mais Saudáveis</h3>
-                    <p>Entenda como você se relaciona com os outros. Melhore sua comunicação, empatia e conexões pessoais e profissionais.</p>
-                    <span class="why-stat">🤝 +45% melhora</span>
-                </div>
-                <div class="why-card animate-fade-up animate-delay-4">
-                    <span class="why-icon">🧘</span>
-                    <h3>Equilíbrio Emocional</h3>
-                    <p>Aprenda a gerenciar suas emoções, reduzir o estresse e aumentar sua resiliência diante dos desafios da vida.</p>
-                    <span class="why-stat">🌿 -52% de estresse</span>
+            <div class="cta-content">
+                <div class="eyebrow" style="justify-content:center;">Book a demo</div>
+                <h2>See VIGORRE ONE™ <br/>in action.</h2>
+                <p>Meet with our team for a personalized walkthrough of the platform. Understand how behavioral intelligence can transform your organization's people strategy.</p>
+                <div class="cta-actions">
+                    <a href="mailto:contato@vigorre.com.br" class="btn btn-gold">Request a demo</a>
+                    <a href="#pricing" class="btn" style="background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.2);">View pricing</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-    PARA EMPRESAS
-    ============================================ -->
-    <section class="section business-section" id="para-empresas">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">🏢 PARA EMPRESAS</span>
-                <h2>Por que <span class="highlight">sua empresa</span> precisa analisar candidatos?</h2>
-                <p>Dados comportamentais reduzem erros de contratação e aumentam a performance</p>
-            </div>
-            <div class="business-grid">
-                <div class="business-card animate-fade-up animate-delay-1">
-                    <span class="business-number">70%</span>
-                    <h4>Redução de Turnover</h4>
-                    <p>Empresas que usam avaliações comportamentais reduzem em até 70% a rotatividade de funcionários.</p>
-                </div>
-                <div class="business-card animate-fade-up animate-delay-2">
-                    <span class="business-number">85%</span>
-                    <h4>Aumento de Performance</h4>
-                    <p>Contratar pelo perfil comportamental certo aumenta a performance da equipe em até 85%.</p>
-                </div>
-                <div class="business-card animate-fade-up animate-delay-3">
-                    <span class="business-number">3x</span>
-                    <h4>Contratações mais Eficientes</h4>
-                    <p>Profissionais alinhados ao perfil da vaga têm 3x mais chances de sucesso e permanência.</p>
-                </div>
-                <div class="business-card animate-fade-up animate-delay-4">
-                    <span class="business-number">60%</span>
-                    <h4>Menos Conflitos</h4>
-                    <p>Equipes com perfis complementares reduzem conflitos internos em até 60%.</p>
-                </div>
-                <div class="business-card animate-fade-up animate-delay-5">
-                    <span class="business-number">2,5x</span>
-                    <h4>Engajamento Multiplicado</h4>
-                    <p>Funcionários que se sentem compreendidos têm 2,5x mais engajamento e produtividade.</p>
-                </div>
-                <div class="business-card animate-fade-up animate-delay-6">
-                    <span class="business-number">⭐</span>
-                    <h4>Laudo VIGOR®</h4>
-                    <p>80-100 páginas de análise integrada. Neurociência + Psicologia + Coaching para decisões estratégicas.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-    PLANOS E PREÇOS - NOVO VISUAL IMPACTANTE
-    ============================================ -->
-    <section class="pricing-section" id="planos">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">💰 OFERTA IMPERDÍVEL</span>
-                <h2>Invista no seu <span class="highlight">desenvolvimento</span></h2>
-                <p>O menor preço do mercado com a melhor entrega. Promoção por tempo limitado!</p>
-            </div>
-
-            <div class="pricing-top">
-                <span class="pricing-urgency">
-                    <span class="icon">⏰</span> ÚLTIMAS HORAS - PROMOÇÃO ESPECIAL
-                </span>
-                <p class="pricing-sub">Garanta já o seu pacote com desconto exclusivo. Essa oportunidade não vai durar!</p>
-            </div>
-
-            <!-- Relatórios -->
-            <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-top:16px;text-align:center;letter-spacing:-0.3px;">
-                📄 Créditos de Relatório
-            </h3>
-            <div class="pricing-grid" style="margin-bottom:56px;">
-                <!-- Unitário Promo -->
-                <div class="pricing-card promo-card animate-fade-up animate-delay-1">
-                    <div class="pricing-glow"></div>
-                    <div class="pricing-header">
-                        <span class="pricing-badge">🔥 PROMO</span>
-                        <span class="pricing-icon">📄</span>
-                        <div class="pricing-name">Unitário</div>
-                        <div class="pricing-subtitle">1 crédito</div>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="pricing-price">
-                            <span class="currency">R$</span>24,90
-                            <span class="price-original">R$ 35,00</span>
-                        </div>
-                        <span class="pricing-savings">💰 Economia de 29%</span>
-                        <span class="pricing-period">por relatório</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> 1 relatório completo</li>
-                        <li><span class="check">✓</span> PDI personalizado</li>
-                        <li><span class="cross">✕</span> Laudo VIGOR®</li>
-                    </ul>
-                    <div class="pricing-cupom-area">
-                        <span class="pricing-cupom" data-cupom="RELATO01">
-                            🎫 <span class="cupom-text">RELATO01</span>
-                            <span class="copy-icon">📋</span>
-                        </span>
-                    </div>
-                    <div class="pricing-timer">
-                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
-                    </div>
-                    <div class="pricing-footer">
-                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
-                    </div>
-                </div>
-
-                <!-- Básico Promo -->
-                <div class="pricing-card promo-card animate-fade-up animate-delay-2">
-                    <div class="pricing-glow"></div>
-                    <div class="pricing-header">
-                        <span class="pricing-badge">🔥 PROMO</span>
-                        <span class="pricing-icon">📄</span>
-                        <div class="pricing-name">Básico</div>
-                        <div class="pricing-subtitle">10 créditos</div>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="pricing-price">
-                            <span class="currency">R$</span>199,90
-                            <span class="price-original">R$ 350,00</span>
-                        </div>
-                        <span class="pricing-savings">💰 Economia de 43%</span>
-                        <span class="pricing-period">por relatório</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> 10 relatórios</li>
-                        <li><span class="check">✓</span> PDI personalizado</li>
-                        <li><span class="cross">✕</span> Laudo VIGOR®</li>
-                    </ul>
-                    <div class="pricing-cupom-area">
-                        <span class="pricing-cupom" data-cupom="RELATO10">
-                            🎫 <span class="cupom-text">RELATO10</span>
-                            <span class="copy-icon">📋</span>
-                        </span>
-                    </div>
-                    <div class="pricing-timer">
-                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
-                    </div>
-                    <div class="pricing-footer">
-                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
-                    </div>
-                </div>
-
-                <!-- Ouro Premium -->
-                <div class="pricing-card premium animate-fade-up animate-delay-3">
-                    <div class="pricing-glow"></div>
-                    <div class="pricing-header">
-                        <span class="pricing-badge" style="background:var(--gradient-gold);">⭐ DESTAQUE</span>
-                        <span class="pricing-icon" style="filter:drop-shadow(0 2px 8px rgba(217,119,6,0.2));">✨</span>
-                        <div class="pricing-name gold-text">Ouro</div>
-                        <div class="pricing-subtitle">50 créditos</div>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="pricing-price" style="color:var(--gold);">
-                            <span class="currency">R$</span>1.400
-                            <span class="price-original" style="opacity:0;">—</span>
-                        </div>
-                        <span class="pricing-savings" style="background:rgba(217,119,6,0.1);color:var(--gold);">⭐ Melhor Custo-Benefício</span>
-                        <span class="pricing-period">por relatório</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> 50 relatórios</li>
-                        <li><span class="check">✓</span> PDI personalizado</li>
-                        <li><span class="check">✓</span> Laudo VIGOR® (3 créditos)</li>
-                    </ul>
-                    <div class="pricing-cupom-area" style="opacity:0;height:28px;"></div>
-                    <div class="pricing-footer">
-                        <a href="login.html" class="btn-pricing primary">⭐ Comprar Agora</a>
-                    </div>
-                </div>
-
-                <!-- Platina Promo -->
-                <div class="pricing-card promo-card animate-fade-up animate-delay-4">
-                    <div class="pricing-glow"></div>
-                    <div class="pricing-header">
-                        <span class="pricing-badge">🔥 PROMO</span>
-                        <span class="pricing-icon">📄</span>
-                        <div class="pricing-name">Platina</div>
-                        <div class="pricing-subtitle">100 créditos</div>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="pricing-price">
-                            <span class="currency">R$</span>1.700
-                            <span class="price-original">R$ 2.500</span>
-                        </div>
-                        <span class="pricing-savings">💰 Economia de 32%</span>
-                        <span class="pricing-period">por relatório</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> 100 relatórios</li>
-                        <li><span class="check">✓</span> PDI personalizado</li>
-                        <li><span class="check">✓</span> Laudo VIGOR® (3 créditos)</li>
-                    </ul>
-                    <div class="pricing-cupom-area">
-                        <span class="pricing-cupom" data-cupom="RELATO100">
-                            🎫 <span class="cupom-text">RELATO100</span>
-                            <span class="copy-icon">📋</span>
-                        </span>
-                    </div>
-                    <div class="pricing-timer">
-                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
-                    </div>
-                    <div class="pricing-footer">
-                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Laudos Premium -->
-            <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-top:16px;text-align:center;letter-spacing:-0.3px;">
-                ⭐ Laudo VIGOR® (80-100 páginas)
-            </h3>
-            <div class="pricing-grid">
-                <!-- Unitário Premium Promo -->
-                <div class="pricing-card promo-card animate-fade-up animate-delay-5">
-                    <div class="pricing-glow"></div>
-                    <div class="pricing-header">
-                        <span class="pricing-badge">🔥 PROMO</span>
-                        <span class="pricing-icon">⭐</span>
-                        <div class="pricing-name">Unitário Premium</div>
-                        <div class="pricing-subtitle">1 laudo</div>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="pricing-price">
-                            <span class="currency">R$</span>99,90
-                            <span class="price-original">R$ 199,90</span>
-                        </div>
-                        <span class="pricing-savings">💰 Economia de 50%</span>
-                        <span class="pricing-period">por laudo</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> 1 laudo completo</li>
-                        <li><span class="check">✓</span> 80-100 páginas</li>
-                        <li><span class="check">✓</span> Neurociência + Psicologia</li>
-                    </ul>
-                    <div class="pricing-cupom-area">
-                        <span class="pricing-cupom" data-cupom="LAUDO1">
-                            🎫 <span class="cupom-text">LAUDO1</span>
-                            <span class="copy-icon">📋</span>
-                        </span>
-                    </div>
-                    <div class="pricing-timer">
-                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
-                    </div>
-                    <div class="pricing-footer">
-                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
-                    </div>
-                </div>
-
-                <!-- Básico Premium Promo -->
-                <div class="pricing-card promo-card animate-fade-up animate-delay-6">
-                    <div class="pricing-glow"></div>
-                    <div class="pricing-header">
-                        <span class="pricing-badge">🔥 PROMO</span>
-                        <span class="pricing-icon">⭐</span>
-                        <div class="pricing-name">Básico Premium</div>
-                        <div class="pricing-subtitle">3 laudos</div>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="pricing-price">
-                            <span class="currency">R$</span>240,00
-                            <span class="price-original">R$ 500,00</span>
-                        </div>
-                        <span class="pricing-savings">💰 Economia de 52%</span>
-                        <span class="pricing-period">por laudo</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> 3 laudos</li>
-                        <li><span class="check">✓</span> 80-100 páginas</li>
-                        <li><span class="check">✓</span> Neurociência + Psicologia</li>
-                    </ul>
-                    <div class="pricing-cupom-area">
-                        <span class="pricing-cupom" data-cupom="LAUDO3">
-                            🎫 <span class="cupom-text">LAUDO3</span>
-                            <span class="copy-icon">📋</span>
-                        </span>
-                    </div>
-                    <div class="pricing-timer">
-                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
-                    </div>
-                    <div class="pricing-footer">
-                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
-                    </div>
-                </div>
-
-                <!-- Ouro Premium -->
-                <div class="pricing-card premium animate-fade-up animate-delay-7">
-                    <div class="pricing-glow"></div>
-                    <div class="pricing-header">
-                        <span class="pricing-badge" style="background:var(--gradient-gold);">⭐ DESTAQUE</span>
-                        <span class="pricing-icon" style="filter:drop-shadow(0 2px 8px rgba(217,119,6,0.2));">✨</span>
-                        <div class="pricing-name gold-text">Ouro Premium</div>
-                        <div class="pricing-subtitle">10 laudos</div>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="pricing-price" style="color:var(--gold);">
-                            <span class="currency">R$</span>1.290
-                            <span class="price-original" style="opacity:0;">—</span>
-                        </div>
-                        <span class="pricing-savings" style="background:rgba(217,119,6,0.1);color:var(--gold);">⭐ Melhor Custo-Benefício</span>
-                        <span class="pricing-period">por laudo</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> 10 laudos</li>
-                        <li><span class="check">✓</span> 80-100 páginas</li>
-                        <li><span class="check">✓</span> Neurociência + Psicologia</li>
-                    </ul>
-                    <div class="pricing-cupom-area" style="opacity:0;height:28px;"></div>
-                    <div class="pricing-footer">
-                        <a href="login.html" class="btn-pricing primary">⭐ Comprar Agora</a>
-                    </div>
-                </div>
-
-                <!-- Ouro Premium Promo -->
-                <div class="pricing-card promo-card animate-fade-up animate-delay-8">
-                    <div class="pricing-glow"></div>
-                    <div class="pricing-header">
-                        <span class="pricing-badge">🔥 PROMO</span>
-                        <span class="pricing-icon">⭐</span>
-                        <div class="pricing-name">Ouro Premium</div>
-                        <div class="pricing-subtitle">10 laudos</div>
-                    </div>
-                    <div class="pricing-body">
-                        <div class="pricing-price">
-                            <span class="currency">R$</span>700,00
-                            <span class="price-original">R$ 2.000,00</span>
-                        </div>
-                        <span class="pricing-savings">💰 Economia de 65%</span>
-                        <span class="pricing-period">por laudo</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> 10 laudos</li>
-                        <li><span class="check">✓</span> 80-100 páginas</li>
-                        <li><span class="check">✓</span> Neurociência + Psicologia</li>
-                    </ul>
-                    <div class="pricing-cupom-area">
-                        <span class="pricing-cupom" data-cupom="LAUDO10">
-                            🎫 <span class="cupom-text">LAUDO10</span>
-                            <span class="copy-icon">📋</span>
-                        </span>
-                    </div>
-                    <div class="pricing-timer">
-                        <span class="timer-icon">⏰</span> Oferta por tempo limitado
-                    </div>
-                    <div class="pricing-footer">
-                        <a href="login.html" class="btn-pricing red">🔥 Garantir Agora</a>
-                    </div>
-                </div>
-            </div>
-
-            <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:40px;">
-                🔒 Todos os planos incluem LGPD, segurança e suporte prioritário.
-                <br />
-                <strong style="color:var(--gold);">💡 O menor preço do mercado com a melhor entrega!</strong>
-                <br />
-                <span style="color:var(--red);font-weight:600;display:inline-block;margin-top:4px;animation:pulse 2s ease-in-out infinite;">
-                    ⏰ Promoção por tempo limitado — garanta já o seu!
-                </span>
-            </p>
-        </div>
-    </section>
-
-    <!-- ============================================
-    CONTATO
-    ============================================ -->
-    <section class="contact-section" id="contato">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-content animate-slide-left">
-                    <span class="contact-badge">📞 CONTATO</span>
-                    <h2>Fale com a <span class="highlight">Vigorre</span></h2>
-                    <p>Tire suas dúvidas, solicite uma demonstração personalizada ou entre em contato diretamente conosco.</p>
-                    <div class="contact-items">
-                        <div class="contact-item">
-                            <span class="ci-icon">📧</span>
-                            <span class="ci-text"><a href="mailto:contato@vigorre.com.br">contato@vigorre.com.br</a></span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="ci-icon">📱</span>
-                            <span class="ci-text"><a href="tel:+5534991850735">(34) 99185-0735</a></span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="ci-icon">🌐</span>
-                            <span class="ci-text"><a href="https://www.vigorre.com.br" target="_blank">www.vigorre.com.br</a></span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="ci-icon">📍</span>
-                            <span class="ci-text">Brasil</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-image animate-slide-right">
-                    <div class="contact-illustration">
-                        <span class="contact-emoji">💬</span>
-                        <h4>Pronto para começar?</h4>
-                        <p>Entre em contato conosco e descubra como a VIGORRE ONE™ pode transformar sua vida e sua empresa.</p>
-                        <a href="mailto:contato@vigorre.com.br" class="btn-email">✉️ Enviar E-mail</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-    FOOTER
-    ============================================ -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <h4>VIGORRE ONE™</h4>
-                    <p style="color:rgba(255,255,255,0.25);font-size:0.75rem;">
-                        Inteligência Humana. Dados. Decisões.
-                    </p>
-                    <div class="footer-social">
-                        <a href="#" title="LinkedIn">🔗</a>
-                        <a href="#" title="Instagram">📸</a>
-                        <a href="#" title="YouTube">▶️</a>
-                    </div>
+                    <a href="#" class="nav-logo">
+                        <div class="nav-logo-mark">V</div>
+                        <div class="nav-logo-text" style="color:var(--white);">VIGORRE ONE<span class="tm" style="color:rgba(255,255,255,0.4);">™</span></div>
+                    </a>
+                    <p class="footer-brand-text">The enterprise platform for people intelligence. Combining neuroscience, psychology, and predictive analytics to help organizations understand their most important asset—their people.</p>
                 </div>
                 <div>
-                    <h4>Plataforma</h4>
-                    <a href="#testes">Testes</a>
-                    <a href="#vigor">Tecnologia VIGOR®</a>
-                    <a href="#para-voce">Para Você</a>
-                    <a href="#para-empresas">Para Empresas</a>
-                    <a href="#planos">Planos</a>
+                    <h5>Platform</h5>
+                    <ul>
+                        <li><a href="#platform">Assessments</a></li>
+                        <li><a href="#technology">VIGOR® Methodology</a></li>
+                        <li><a href="#solutions">Solutions</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
                 </div>
                 <div>
-                    <h4>Empresa</h4>
-                    <a href="politica-privacidade.html">Privacidade</a>
-                    <a href="termos-uso.html">Termos de Uso</a>
-                    <a href="consentimento.html">LGPD</a>
-                    <a href="#contato">Contato</a>
+                    <h5>Solutions</h5>
+                    <ul>
+                        <li><a href="#">Talent Acquisition</a></li>
+                        <li><a href="#">Leadership</a></li>
+                        <li><a href="#">Team Performance</a></li>
+                        <li><a href="#">Culture</a></li>
+                    </ul>
                 </div>
                 <div>
-                    <h4>Recursos</h4>
-                    <a href="tests/disc/">Teste DISC</a>
-                    <a href="tests/bigfive/">Big Five</a>
-                    <a href="tests/ie/">Inteligência Emocional</a>
-                    <a href="laudos/">Laudo VIGOR®</a>
-                    <a href="bi/analytics.html">People Analytics</a>
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#customers">Customers</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div class="footer-brand">
-                    VIGORRE <span class="highlight">TECH</span><span style="font-weight:400;font-size:0.7rem;color:rgba(255,255,255,0.2);">™</span>
-                </div>
-                <div class="footer-info">
-                    © 2026 VIGORRE TECH™ &bull; www.vigorre.com.br &bull; (34) 99185-0735 &bull; contato@vigorre.com.br
-                    <br />
-                    <a href="politica-privacidade.html">Política de Privacidade</a>
-                    <span class="footer-divider">•</span>
-                    <a href="termos-uso.html">Termos de Uso</a>
+                <div>© 2026 VIGORRE TECH™ · contato@vigorre.com.br · +55 34 99185-0735</div>
+                <div class="footer-social">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Security</a>
                 </div>
             </div>
         </div>
     </footer>
-
-    <!-- ============================================
-    SCRIPTS
-    ============================================ -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🏠 Landing Page - VIGORRE ONE™');
-            console.log('🧠 Tecnologia VIGOR® - 5 pilares');
-
-            // ============================================
-            // SCROLL REVEAL
-            // ============================================
-            const observerOptions = {
-                threshold: 0.15,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        if (el.classList.contains('animate-fade-up') ||
-                            el.classList.contains('animate-fade-in') ||
-                            el.classList.contains('animate-slide-left') ||
-                            el.classList.contains('animate-slide-right')) {
-                            el.style.opacity = '1';
-                        }
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.animate-fade-up, .animate-fade-in, .animate-slide-left, .animate-slide-right')
-                .forEach(el => {
-                    el.style.opacity = '0';
-                    observer.observe(el);
-                });
-
-            // ============================================
-            // ANIMAÇÃO DAS BARRAS DO MOCKUP
-            // ============================================
-            setTimeout(() => {
-                document.querySelectorAll('.bar-fill').forEach(bar => {
-                    const width = bar.style.width;
-                    bar.style.width = '0%';
-                    setTimeout(() => {
-                        bar.style.width = width;
-                    }, 500);
-                });
-            }, 300);
-
-            // ============================================
-            // COPY CUPOM - FUNCIONANDO
-            // ============================================
-            document.querySelectorAll('.pricing-cupom').forEach(cupomEl => {
-                cupomEl.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const cupom = this.getAttribute('data-cupom');
-                    if (!cupom) return;
-
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard.writeText(cupom).then(() => {
-                            const originalHTML = this.innerHTML;
-                            this.classList.add('copied');
-                            this.innerHTML = '✅ <span class="cupom-text">COPIADO!</span>';
-                            this.style.borderColor = 'var(--green)';
-                            this.style.color = 'var(--green)';
-
-                            setTimeout(() => {
-                                this.classList.remove('copied');
-                                this.innerHTML = originalHTML;
-                                this.style.borderColor = '';
-                                this.style.color = '';
-                            }, 2500);
-                        }).catch(() => {
-                            fallbackCopy(cupom, this);
-                        });
-                    } else {
-                        fallbackCopy(cupom, this);
-                    }
-                });
-            });
-
-            function fallbackCopy(cupom, element) {
-                const textArea = document.createElement('textarea');
-                textArea.value = cupom;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    const originalHTML = element.innerHTML;
-                    element.classList.add('copied');
-                    element.innerHTML = '✅ <span class="cupom-text">COPIADO!</span>';
-                    element.style.borderColor = 'var(--green)';
-                    element.style.color = 'var(--green)';
-
-                    setTimeout(() => {
-                        element.classList.remove('copied');
-                        element.innerHTML = originalHTML;
-                        element.style.borderColor = '';
-                        element.style.color = '';
-                    }, 2500);
-                } catch (err) {
-                    alert('Copie o cupom manualmente: ' + cupom);
-                }
-                document.body.removeChild(textArea);
-            }
-
-            // Estilo de cursor
-            document.querySelectorAll('.pricing-cupom').forEach(el => {
-                el.style.cursor = 'pointer';
-            });
-
-            // ============================================
-            // SCROLL SUAVE
-            // ============================================
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                        e.preventDefault();
-                        const headerHeight = document.querySelector('.header')?.offsetHeight || 70;
-                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset -
-                            headerHeight;
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            console.log('✅ Landing Page carregada com sucesso!');
-        });
-    </script>
 
 </body>
 </html>
