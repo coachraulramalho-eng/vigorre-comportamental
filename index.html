@@ -11,17 +11,22 @@
     <link rel="icon" href="assets/images/logo-vigorre.png" />
     <style>
         /* ============================================
-           ROOT VARIABLES - PALETA MANTIDA
+           ROOT VARIABLES - PALETA PREMIUM
            ============================================ */
         :root {
             --navy: #0A2540;
             --navy-light: #1A3A5C;
+            --navy-dark: #061B2E;
             --gold: #D97706;
             --gold-light: #FBBF24;
+            --gold-pale: #FEF3C7;
             --cyan: #06B6D4;
             --green: #10B981;
+            --green-light: #D1FAE5;
             --red: #EF4444;
+            --red-light: #FEE2E2;
             --purple: #7C3AED;
+            --purple-light: #EDE9FE;
             --pink: #EC4899;
             --white: #FFFFFF;
             --bg-primary: #F8FAFC;
@@ -32,18 +37,21 @@
             --text-muted: #94A3B8;
             --text-white: #FFFFFF;
             --border-light: #E2E8F0;
+            --border-gold: rgba(217, 119, 6, 0.2);
             --radius: 16px;
             --radius-sm: 10px;
             --radius-full: 9999px;
+            --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.04);
             --shadow: 0 4px 24px rgba(10, 37, 64, 0.06);
-            --shadow-hover: 0 8px 40px rgba(10, 37, 64, 0.12);
-            --shadow-gold: 0 4px 24px rgba(217, 119, 6, 0.25);
-            --shadow-gold-hover: 0 8px 40px rgba(217, 119, 6, 0.35);
+            --shadow-hover: 0 12px 48px rgba(10, 37, 64, 0.10);
+            --shadow-gold: 0 4px 24px rgba(217, 119, 6, 0.20);
+            --shadow-gold-hover: 0 8px 40px rgba(217, 119, 6, 0.30);
             --gradient-gold: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
             --gradient-hero: linear-gradient(135deg, #0A2540 0%, #1A3A5C 100%);
+            --gradient-card: linear-gradient(135deg, rgba(217, 119, 6, 0.03) 0%, rgba(217, 119, 6, 0.01) 100%);
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --z-header: 100;
         }
 
@@ -63,6 +71,8 @@
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
@@ -109,6 +119,11 @@
             50% { opacity: 0.3; }
         }
 
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
         .animate-fade-up { opacity: 0; animation: fadeInUp 0.8s ease forwards; }
         .animate-fade-in { opacity: 0; animation: fadeIn 0.6s ease forwards; }
         .animate-slide-left { opacity: 0; animation: slideInLeft 0.8s ease forwards; }
@@ -124,20 +139,20 @@
 
         .pulse-animation { animation: pulse 2s ease-in-out infinite; }
         .blink-animation { animation: blink 1.5s ease-in-out infinite; }
+        .float-animation { animation: float 3s ease-in-out infinite; }
 
         /* ============================================
-           HEADER
+           HEADER - PREMIUM
            ============================================ */
         .header {
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border-light);
-            padding: 14px 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            padding: 12px 0;
             position: sticky;
             top: 0;
             z-index: var(--z-header);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
         .header .header-container {
@@ -178,7 +193,7 @@
         }
 
         .header .nav a {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-secondary);
             text-decoration: none;
             transition: var(--transition);
@@ -227,10 +242,10 @@
         .header .nav .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold-hover); }
 
         /* ============================================
-           HERO
+           HERO - PREMIUM
            ============================================ */
         .hero {
-            padding: 80px 0 60px;
+            padding: 90px 0 70px;
             background: var(--gradient-hero);
             color: var(--text-white);
             border-radius: 0 0 var(--radius) var(--radius);
@@ -241,11 +256,23 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, transparent 70%);
+            top: -40%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.04) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
@@ -263,7 +290,7 @@
             display: inline-block;
             padding: 6px 20px;
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--radius-full);
             font-size: 0.65rem;
             font-weight: 600;
@@ -275,9 +302,9 @@
 
         .hero .hero-content h1 {
             font-family: var(--font-display);
-            font-size: 3.4rem;
+            font-size: 3.6rem;
             font-weight: 800;
-            line-height: 1.06;
+            line-height: 1.05;
             margin-bottom: 16px;
         }
 
@@ -290,22 +317,22 @@
 
         .hero .hero-content .hero-sub {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
             font-weight: 300;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .hero .hero-content .hero-strong {
             font-size: 1.1rem;
             color: var(--gold-light);
             font-weight: 600;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             display: block;
         }
 
         .hero .hero-content p {
             font-size: 1.05rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.65);
             max-width: 520px;
             line-height: 1.8;
             margin-bottom: 28px;
@@ -348,7 +375,7 @@
 
         .hero .hero-buttons .btn-outline {
             padding: 14px 36px;
-            border: 2px solid rgba(255, 255, 255, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: var(--radius-full);
             color: white;
             font-weight: 600;
@@ -360,10 +387,10 @@
         .hero .hero-buttons .btn-outline:hover { border-color: white; background: rgba(255, 255, 255, 0.05); transform: translateY(-3px); }
 
         .hero .hero-image .dashboard-mockup {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: var(--radius);
-            padding: 28px 24px;
+            padding: 32px 28px;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             transition: var(--transition);
@@ -460,7 +487,7 @@
         .section .section-header .badge {
             display: inline-block;
             padding: 4px 18px;
-            background: rgba(217, 119, 6, 0.1);
+            background: rgba(217, 119, 6, 0.08);
             color: var(--gold);
             border-radius: var(--radius-full);
             font-size: 0.7rem;
@@ -472,7 +499,7 @@
 
         .section .section-header h2 {
             font-family: var(--font-display);
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             font-weight: 700;
             color: var(--text-primary);
         }
@@ -488,7 +515,7 @@
         }
 
         /* ============================================
-           CARDS DOS TESTES - RESTAURADOS
+           CARDS DOS TESTES - PREMIUM
            ============================================ */
         .test-grid {
             display: grid;
@@ -504,6 +531,7 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-sm);
         }
 
         .test-card::before {
@@ -520,13 +548,9 @@
         }
 
         .test-card:hover::before { transform: scaleX(1); }
-        .test-card:hover { border-color: var(--gold); box-shadow: var(--shadow-hover); transform: translateY(-6px); }
+        .test-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow-hover); transform: translateY(-6px); }
 
-        .test-card .test-icon {
-            font-size: 2.6rem;
-            margin-bottom: 16px;
-            display: block;
-        }
+        .test-card .test-icon { font-size: 2.6rem; margin-bottom: 14px; display: block; }
 
         .test-card .test-color {
             display: inline-block;
@@ -566,26 +590,42 @@
             transition: var(--transition);
         }
 
-        .test-card .test-link:hover { transform: translateX(4px); }
+        .test-card .test-link:hover { transform: translateX(4px); color: var(--gold-light); }
 
         /* ============================================
-           TECNOLOGIA VIGOR® - DIFERENCIAL
+           TECNOLOGIA VIGOR® - PREMIUM
            ============================================ */
         .vigor-section {
             background: var(--bg-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vigor-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
         .vigor-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 60px;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .vigor-content .vigor-badge {
             display: inline-block;
             padding: 4px 18px;
-            background: rgba(217, 119, 6, 0.1);
+            background: rgba(217, 119, 6, 0.08);
             color: var(--gold);
             border-radius: var(--radius-full);
             font-size: 0.7rem;
@@ -597,7 +637,7 @@
 
         .vigor-content h2 {
             font-family: var(--font-display);
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 16px;
@@ -615,7 +655,7 @@
         .vigor-content .vigor-features {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             margin-top: 20px;
         }
 
@@ -625,17 +665,19 @@
             gap: 10px;
             font-size: 0.9rem;
             color: var(--text-secondary);
+            padding: 8px 12px;
+            background: var(--bg-white);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
         }
 
-        .vigor-content .vigor-features .vf-item .vf-icon {
-            font-size: 1.2rem;
+        .vigor-content .vigor-features .vf-item:hover {
+            border-color: var(--border-gold);
+            background: rgba(217, 119, 6, 0.02);
         }
 
-        .vigor-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .vigor-content .vigor-features .vf-item .vf-icon { font-size: 1.1rem; }
 
         .vigor-image .vigor-diagram {
             background: var(--bg-white);
@@ -654,11 +696,23 @@
             transform: translateY(-4px);
         }
 
+        .vigor-image .vigor-diagram h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .vigor-image .vigor-diagram .vigor-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
         .vigor-image .vigor-diagram .vigor-circle {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             gap: 12px;
-            margin-top: 20px;
         }
 
         .vigor-image .vigor-diagram .vigor-circle .vc-item {
@@ -666,10 +720,12 @@
             border-radius: var(--radius-sm);
             padding: 16px 8px;
             transition: var(--transition);
+            border: 1px solid transparent;
         }
 
         .vigor-image .vigor-diagram .vigor-circle .vc-item:hover {
-            background: rgba(217, 119, 6, 0.05);
+            background: rgba(217, 119, 6, 0.04);
+            border-color: var(--border-gold);
             transform: translateY(-2px);
         }
 
@@ -714,7 +770,7 @@
         .why-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 24px;
         }
 
         .why-card {
@@ -723,9 +779,10 @@
             border-radius: var(--radius);
             padding: 32px 28px;
             transition: var(--transition);
+            box-shadow: var(--shadow-sm);
         }
 
-        .why-card:hover { border-color: var(--gold); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+        .why-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
 
         .why-card .why-icon { font-size: 2.4rem; margin-bottom: 12px; display: block; }
         .why-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
@@ -735,7 +792,7 @@
             display: inline-block;
             margin-top: 12px;
             padding: 4px 16px;
-            background: rgba(16, 185, 129, 0.1);
+            background: var(--green-light);
             color: var(--green);
             border-radius: var(--radius-full);
             font-size: 0.8rem;
@@ -745,6 +802,10 @@
         /* ============================================
            PARA EMPRESAS
            ============================================ */
+        .business-section {
+            background: var(--bg-secondary);
+        }
+
         .business-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -758,9 +819,10 @@
             padding: 28px 24px;
             transition: var(--transition);
             position: relative;
+            box-shadow: var(--shadow-sm);
         }
 
-        .business-card:hover { border-color: var(--gold); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+        .business-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
 
         .business-card .business-number {
             font-family: var(--font-display);
@@ -778,10 +840,10 @@
         .business-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
 
         /* ============================================
-           PRICING - COM CUPONS FUNCIONANDO
+           PRICING - ULTRA PREMIUM
            ============================================ */
         .pricing-section {
-            background: var(--bg-secondary);
+            background: var(--bg-white);
             padding: 80px 0;
         }
 
@@ -795,68 +857,50 @@
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius);
-            padding: 28px 20px;
+            padding: 32px 24px;
             text-align: center;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-sm);
         }
 
-        .pricing-card:hover { border-color: var(--gold); box-shadow: var(--shadow-hover); transform: translateY(-6px); }
+        .pricing-card:hover {
+            border-color: var(--border-gold);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-6px);
+        }
 
         .pricing-card .promo-badge {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 14px;
+            right: 14px;
             background: var(--red);
             color: white;
             padding: 4px 14px;
             border-radius: var(--radius-full);
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             animation: pulse 2s ease-in-out infinite;
         }
 
-        .pricing-card.popular {
-            border-color: var(--gold);
-            box-shadow: var(--shadow-gold);
-            transform: scale(1.02);
-        }
-
-        .pricing-card.popular:hover { transform: scale(1.02) translateY(-6px); }
-
-        .pricing-card.popular .popular-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gradient-gold);
-            color: white;
-            padding: 4px 20px;
-            border-radius: var(--radius-full);
-            font-size: 0.6rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .pricing-card .pricing-icon { font-size: 2rem; margin-bottom: 4px; }
+        .pricing-card .pricing-icon { font-size: 2.2rem; margin-bottom: 6px; display: block; }
         .pricing-card .pricing-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
 
         .pricing-card .pricing-price {
             font-family: var(--font-display);
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             font-weight: 800;
             color: var(--navy);
-            margin: 8px 0 2px;
+            margin: 10px 0 2px;
         }
 
         .pricing-card .pricing-price .currency { font-size: 1rem; vertical-align: super; font-weight: 600; }
 
         .pricing-card .pricing-price .price-original {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
             text-decoration: line-through;
             font-weight: 400;
@@ -864,36 +908,45 @@
             margin-top: -4px;
         }
 
-        .pricing-card .pricing-period { font-size: 0.8rem; color: var(--text-muted); display: block; }
+        .pricing-card .pricing-period {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .pricing-card .pricing-divider {
+            height: 1px;
+            background: var(--border-light);
+            margin: 16px 0;
+        }
 
         .pricing-card .pricing-features {
             list-style: none;
-            padding: 12px 0;
-            margin: 12px 0;
-            border-top: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
+            padding: 0;
+            margin: 0 0 16px 0;
         }
 
         .pricing-card .pricing-features li {
             padding: 5px 0;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
         }
 
-        .pricing-card .pricing-features li .check { color: var(--green); font-weight: 700; }
-        .pricing-card .pricing-features li .cross { color: var(--red); font-weight: 700; }
+        .pricing-card .pricing-features li .check { color: var(--green); font-weight: 700; font-size: 1rem; }
+        .pricing-card .pricing-features li .cross { color: var(--red); font-weight: 700; font-size: 1rem; }
 
         .pricing-card .pricing-cupom {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-top: 8px;
+            margin: 4px 0 8px;
             padding: 6px 16px;
-            background: rgba(217, 119, 6, 0.08);
+            background: rgba(217, 119, 6, 0.06);
             border: 1px dashed var(--gold);
             border-radius: var(--radius-full);
             font-size: 0.7rem;
@@ -907,24 +960,16 @@
         }
 
         .pricing-card .pricing-cupom:hover {
-            background: rgba(217, 119, 6, 0.15);
+            background: rgba(217, 119, 6, 0.12);
             transform: scale(1.02);
         }
 
-        .pricing-card .pricing-cupom .cupom-text {
-            font-weight: 700;
-        }
-
-        .pricing-card .pricing-cupom .copy-icon {
-            font-size: 0.7rem;
-            opacity: 0.6;
-            transition: var(--transition);
-        }
-
+        .pricing-card .pricing-cupom .cupom-text { font-weight: 700; }
+        .pricing-card .pricing-cupom .copy-icon { font-size: 0.7rem; opacity: 0.5; transition: var(--transition); }
         .pricing-card .pricing-cupom:hover .copy-icon { opacity: 1; }
 
         .pricing-card .pricing-cupom.copied {
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(16, 185, 129, 0.08);
             border-color: var(--green);
             color: var(--green);
         }
@@ -941,7 +986,6 @@
             text-decoration: none;
             display: inline-block;
             width: 100%;
-            margin-top: 4px;
         }
 
         .pricing-card .btn-pricing.primary {
@@ -958,7 +1002,7 @@
             border: 2px solid var(--border-light);
         }
 
-        .pricing-card .btn-pricing.secondary:hover { border-color: var(--gold); background: rgba(217, 119, 6, 0.04); }
+        .pricing-card .btn-pricing.secondary:hover { border-color: var(--gold); background: rgba(217, 119, 6, 0.03); }
 
         .pricing-card .pricing-timer {
             margin-top: 10px;
@@ -973,6 +1017,149 @@
 
         .pricing-card .pricing-timer .timer-icon { animation: pulse 1.5s ease-in-out infinite; }
 
+        .pricing-card.premium-card {
+            border-color: var(--border-gold);
+            background: var(--gradient-card);
+        }
+
+        .pricing-card.premium-card .pricing-name {
+            color: var(--gold);
+        }
+
+        /* ============================================
+           CONTATO - COM EMAIL
+           ============================================ */
+        .contact-section {
+            background: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .contact-content .contact-badge {
+            display: inline-block;
+            padding: 4px 18px;
+            background: rgba(217, 119, 6, 0.08);
+            color: var(--gold);
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .contact-content h2 {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .contact-content h2 .highlight { color: var(--gold); }
+
+        .contact-content p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            max-width: 460px;
+        }
+
+        .contact-content .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .contact-content .contact-items .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--bg-white);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .contact-content .contact-items .contact-item:hover {
+            border-color: var(--border-gold);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contact-content .contact-items .contact-item .ci-icon { font-size: 1.2rem; }
+        .contact-content .contact-items .contact-item .ci-text { font-size: 0.9rem; color: var(--text-secondary); }
+
+        .contact-content .contact-items .contact-item .ci-text a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-content .contact-items .contact-item .ci-text a:hover { color: var(--gold); }
+
+        .contact-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-image .contact-illustration {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 48px 32px;
+            text-align: center;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .contact-image .contact-illustration:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        .contact-image .contact-illustration .contact-emoji { font-size: 4rem; display: block; margin-bottom: 16px; }
+
+        .contact-image .contact-illustration h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .contact-image .contact-illustration p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 8px 0 16px;
+        }
+
+        .contact-image .contact-illustration .btn-email {
+            display: inline-block;
+            padding: 12px 32px;
+            background: var(--gradient-gold);
+            color: white;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .contact-image .contact-illustration .btn-email:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold-hover);
+        }
+
         /* ============================================
            FOOTER - CORRIGIDO
            ============================================ */
@@ -981,7 +1168,6 @@
             color: white;
             padding: 48px 0 20px;
             border-radius: var(--radius) var(--radius) 0 0;
-            margin-top: 40px;
         }
 
         .footer .footer-grid {
@@ -989,7 +1175,7 @@
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 40px;
             padding-bottom: 28px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .footer .footer-grid h4 {
@@ -1003,14 +1189,14 @@
         .footer .footer-grid p,
         .footer .footer-grid a {
             font-size: 0.82rem;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.35);
             line-height: 2;
             text-decoration: none;
             display: block;
             transition: var(--transition);
         }
 
-        .footer .footer-grid a:hover { color: rgba(255, 255, 255, 0.7); }
+        .footer .footer-grid a:hover { color: rgba(255, 255, 255, 0.6); }
 
         .footer .footer-grid .footer-social {
             display: flex;
@@ -1030,7 +1216,7 @@
             transition: var(--transition);
         }
 
-        .footer .footer-grid .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+        .footer .footer-grid .footer-social a:hover { border-color: var(--gold); color: var(--gold); background: rgba(217, 119, 6, 0.05); }
 
         .footer .footer-bottom {
             text-align: center;
@@ -1049,20 +1235,20 @@
 
         .footer .footer-bottom .footer-info {
             font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.25);
-            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.2);
+            line-height: 1.8;
         }
 
         .footer .footer-bottom .footer-info a {
-            color: rgba(255, 255, 255, 0.25);
+            color: rgba(255, 255, 255, 0.2);
             text-decoration: none;
             transition: var(--transition);
         }
 
-        .footer .footer-bottom .footer-info a:hover { color: rgba(255, 255, 255, 0.5); }
+        .footer .footer-bottom .footer-info a:hover { color: rgba(255, 255, 255, 0.4); }
 
         .footer .footer-bottom .footer-divider {
-            color: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.06);
             margin: 0 6px;
         }
 
@@ -1075,6 +1261,7 @@
             .why-grid { grid-template-columns: 1fr 1fr; }
             .business-grid { grid-template-columns: 1fr 1fr; }
             .pricing-grid { grid-template-columns: 1fr 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
             .hero .hero-container { gap: 40px; }
             .hero .hero-content h1 { font-size: 2.8rem; }
             .footer .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -1091,13 +1278,16 @@
             .why-grid { grid-template-columns: 1fr; }
             .business-grid { grid-template-columns: 1fr; }
             .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
-            .pricing-card.popular { transform: scale(1); }
-            .pricing-card.popular:hover { transform: scale(1) translateY(-6px); }
             .vigor-content .vigor-features { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; text-align: center; }
+            .contact-content p { margin: 0 auto 24px; }
+            .contact-content .contact-items { align-items: center; }
             .footer .footer-grid { grid-template-columns: 1fr; text-align: center; }
             .footer .footer-grid .footer-social { justify-content: center; }
             .section .section-header h2 { font-size: 1.8rem; }
             .hero .hero-image .dashboard-mockup { padding: 20px 16px; }
+            .vigor-image .vigor-diagram .vigor-circle { grid-template-columns: 1fr 1fr 1fr; }
+            .contact-image .contact-illustration { padding: 32px 20px; }
         }
 
         @media (max-width: 480px) {
@@ -1106,10 +1296,10 @@
             .section { padding: 40px 0; }
             .hero { padding: 50px 0 30px; }
             .hero .hero-buttons { flex-direction: column; align-items: center; }
-            .pricing-card { padding: 20px 16px; }
-            .pricing-card .pricing-price { font-size: 1.8rem; }
-            .vigor-image .vigor-diagram .vigor-circle { grid-template-columns: 1fr 1fr 1fr; }
-            .footer .footer-bottom .footer-info { font-size: 0.7rem; }
+            .pricing-card { padding: 24px 16px; }
+            .pricing-card .pricing-price { font-size: 2rem; }
+            .vigor-image .vigor-diagram .vigor-circle { grid-template-columns: 1fr 1fr; }
+            .contact-content .contact-items .contact-item { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -1129,10 +1319,11 @@
             </a>
             <nav class="nav">
                 <a href="#testes">Testes</a>
-                <a href="#vigor">Tecnologia VIGOR®</a>
+                <a href="#vigor">VIGOR®</a>
                 <a href="#para-voce">Para Você</a>
                 <a href="#para-empresas">Empresas</a>
                 <a href="#planos">Planos</a>
+                <a href="#contato">Contato</a>
                 <a href="login.html" class="btn-outline">Entrar</a>
                 <a href="#planos" class="btn-primary">Comprar Créditos</a>
             </nav>
@@ -1249,7 +1440,7 @@
     </section>
 
     <!-- ============================================
-    TECNOLOGIA VIGOR® - DIFERENCIAL
+    TECNOLOGIA VIGOR®
     ============================================ -->
     <section class="section vigor-section" id="vigor">
         <div class="container">
@@ -1274,8 +1465,8 @@
                 </div>
                 <div class="vigor-image animate-slide-right">
                     <div class="vigor-diagram">
-                        <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--text-primary);">Os 5 Pilares VIGOR®</h3>
-                        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:12px;">A base da sua transformação</p>
+                        <h3>Os 5 Pilares VIGOR®</h3>
+                        <p class="vigor-sub">A base da sua transformação</p>
                         <div class="vigor-circle">
                             <div class="vc-item">
                                 <span class="vc-letter">V</span>
@@ -1351,7 +1542,7 @@
     <!-- ============================================
     PARA EMPRESAS
     ============================================ -->
-    <section class="section" id="para-empresas" style="background:var(--bg-secondary);">
+    <section class="section business-section" id="para-empresas">
         <div class="container">
             <div class="section-header">
                 <span class="badge">🏢 PARA EMPRESAS</span>
@@ -1394,7 +1585,7 @@
     </section>
 
     <!-- ============================================
-    PLANOS E PREÇOS COM CUPONS
+    PLANOS E PREÇOS - ULTRA PREMIUM
     ============================================ -->
     <section class="pricing-section" id="planos">
         <div class="container">
@@ -1405,24 +1596,25 @@
             </div>
 
             <!-- Relatórios -->
-            <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:16px;text-align:center;">
+            <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:20px;text-align:center;letter-spacing:-0.3px;">
                 📄 Créditos de Relatório
             </h3>
-            <div class="pricing-grid" style="margin-bottom:48px;">
+            <div class="pricing-grid" style="margin-bottom:56px;">
                 <!-- Unitário Promo -->
                 <div class="pricing-card animate-fade-up animate-delay-1">
-                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
-                    <div class="pricing-icon">📄</div>
+                    <span class="promo-badge">🔥 PROMO</span>
+                    <span class="pricing-icon">📄</span>
                     <div class="pricing-name">Unitário</div>
                     <div class="pricing-price">
                         <span class="currency">R$</span>24,90
                         <span class="price-original">R$ 35,00</span>
                     </div>
                     <span class="pricing-period">1 crédito</span>
+                    <div class="pricing-divider"></div>
                     <ul class="pricing-features">
-                        <li><span class="check">✅</span> 1 relatório completo</li>
-                        <li><span class="check">✅</span> PDI personalizado</li>
-                        <li><span class="cross">❌</span> Laudo VIGOR®</li>
+                        <li><span class="check">✓</span> 1 relatório completo</li>
+                        <li><span class="check">✓</span> PDI personalizado</li>
+                        <li><span class="cross">✕</span> Laudo VIGOR®</li>
                     </ul>
                     <span class="pricing-cupom" data-cupom="RELATO01">
                         🎫 <span class="cupom-text">RELATO01</span>
@@ -1436,18 +1628,19 @@
 
                 <!-- Básico Promo -->
                 <div class="pricing-card animate-fade-up animate-delay-2">
-                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
-                    <div class="pricing-icon">📄</div>
+                    <span class="promo-badge">🔥 PROMO</span>
+                    <span class="pricing-icon">📄</span>
                     <div class="pricing-name">Básico</div>
                     <div class="pricing-price">
                         <span class="currency">R$</span>199,90
                         <span class="price-original">R$ 350,00</span>
                     </div>
                     <span class="pricing-period">10 créditos</span>
+                    <div class="pricing-divider"></div>
                     <ul class="pricing-features">
-                        <li><span class="check">✅</span> 10 relatórios</li>
-                        <li><span class="check">✅</span> PDI personalizado</li>
-                        <li><span class="cross">❌</span> Laudo VIGOR®</li>
+                        <li><span class="check">✓</span> 10 relatórios</li>
+                        <li><span class="check">✓</span> PDI personalizado</li>
+                        <li><span class="cross">✕</span> Laudo VIGOR®</li>
                     </ul>
                     <span class="pricing-cupom" data-cupom="RELATO10">
                         🎫 <span class="cupom-text">RELATO10</span>
@@ -1460,38 +1653,39 @@
                 </div>
 
                 <!-- Ouro -->
-                <div class="pricing-card popular animate-fade-up animate-delay-3">
-                    <span class="popular-badge">⭐ MAIS VENDIDO</span>
-                    <div class="pricing-icon">📄</div>
-                    <div class="pricing-name">Ouro</div>
+                <div class="pricing-card premium-card animate-fade-up animate-delay-3">
+                    <span class="pricing-icon" style="font-size:2.2rem;">✨</span>
+                    <div class="pricing-name" style="color:var(--gold);">Ouro</div>
                     <div class="pricing-price">
                         <span class="currency">R$</span>1.400
                         <span class="price-original" style="opacity:0;">—</span>
                     </div>
                     <span class="pricing-period">50 créditos</span>
+                    <div class="pricing-divider"></div>
                     <ul class="pricing-features">
-                        <li><span class="check">✅</span> 50 relatórios</li>
-                        <li><span class="check">✅</span> PDI personalizado</li>
-                        <li><span class="check">✅</span> Laudo VIGOR® (3 créditos)</li>
+                        <li><span class="check">✓</span> 50 relatórios</li>
+                        <li><span class="check">✓</span> PDI personalizado</li>
+                        <li><span class="check">✓</span> Laudo VIGOR® (3 créditos)</li>
                     </ul>
-                    <span style="opacity:0;display:block;margin-top:8px;padding:6px 16px;">—</span>
+                    <span style="opacity:0;display:block;margin:4px 0 8px;padding:6px 16px;">—</span>
                     <a href="login.html" class="btn-pricing primary">Comprar</a>
                 </div>
 
                 <!-- Platina Promo -->
                 <div class="pricing-card animate-fade-up animate-delay-4">
-                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
-                    <div class="pricing-icon">📄</div>
+                    <span class="promo-badge">🔥 PROMO</span>
+                    <span class="pricing-icon">📄</span>
                     <div class="pricing-name">Platina</div>
                     <div class="pricing-price">
                         <span class="currency">R$</span>1.700
                         <span class="price-original">R$ 2.500</span>
                     </div>
                     <span class="pricing-period">100 créditos</span>
+                    <div class="pricing-divider"></div>
                     <ul class="pricing-features">
-                        <li><span class="check">✅</span> 100 relatórios</li>
-                        <li><span class="check">✅</span> PDI personalizado</li>
-                        <li><span class="check">✅</span> Laudo VIGOR® (3 créditos)</li>
+                        <li><span class="check">✓</span> 100 relatórios</li>
+                        <li><span class="check">✓</span> PDI personalizado</li>
+                        <li><span class="check">✓</span> Laudo VIGOR® (3 créditos)</li>
                     </ul>
                     <span class="pricing-cupom" data-cupom="RELATO100">
                         🎫 <span class="cupom-text">RELATO100</span>
@@ -1505,24 +1699,25 @@
             </div>
 
             <!-- Laudos Premium -->
-            <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:16px;text-align:center;">
+            <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:20px;text-align:center;letter-spacing:-0.3px;">
                 ⭐ Laudo VIGOR® (80-100 páginas)
             </h3>
             <div class="pricing-grid">
                 <!-- Unitário Premium Promo -->
                 <div class="pricing-card animate-fade-up animate-delay-5">
-                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
-                    <div class="pricing-icon">⭐</div>
+                    <span class="promo-badge">🔥 PROMO</span>
+                    <span class="pricing-icon">⭐</span>
                     <div class="pricing-name">Unitário Premium</div>
                     <div class="pricing-price">
                         <span class="currency">R$</span>99,90
                         <span class="price-original">R$ 199,90</span>
                     </div>
                     <span class="pricing-period">1 laudo</span>
+                    <div class="pricing-divider"></div>
                     <ul class="pricing-features">
-                        <li><span class="check">✅</span> 1 laudo completo</li>
-                        <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Neurociência + Psicologia</li>
+                        <li><span class="check">✓</span> 1 laudo completo</li>
+                        <li><span class="check">✓</span> 80-100 páginas</li>
+                        <li><span class="check">✓</span> Neurociência + Psicologia</li>
                     </ul>
                     <span class="pricing-cupom" data-cupom="LAUDO1">
                         🎫 <span class="cupom-text">LAUDO1</span>
@@ -1536,18 +1731,19 @@
 
                 <!-- Básico Premium Promo -->
                 <div class="pricing-card animate-fade-up animate-delay-6">
-                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
-                    <div class="pricing-icon">⭐</div>
+                    <span class="promo-badge">🔥 PROMO</span>
+                    <span class="pricing-icon">⭐</span>
                     <div class="pricing-name">Básico Premium</div>
                     <div class="pricing-price">
                         <span class="currency">R$</span>240,00
                         <span class="price-original">R$ 500,00</span>
                     </div>
                     <span class="pricing-period">3 laudos</span>
+                    <div class="pricing-divider"></div>
                     <ul class="pricing-features">
-                        <li><span class="check">✅</span> 3 laudos</li>
-                        <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Neurociência + Psicologia</li>
+                        <li><span class="check">✓</span> 3 laudos</li>
+                        <li><span class="check">✓</span> 80-100 páginas</li>
+                        <li><span class="check">✓</span> Neurociência + Psicologia</li>
                     </ul>
                     <span class="pricing-cupom" data-cupom="LAUDO3">
                         🎫 <span class="cupom-text">LAUDO3</span>
@@ -1560,38 +1756,39 @@
                 </div>
 
                 <!-- Ouro Premium -->
-                <div class="pricing-card popular animate-fade-up animate-delay-7">
-                    <span class="popular-badge">⭐ MAIS VENDIDO</span>
-                    <div class="pricing-icon">⭐</div>
-                    <div class="pricing-name">Ouro Premium</div>
+                <div class="pricing-card premium-card animate-fade-up animate-delay-7">
+                    <span class="pricing-icon" style="font-size:2.2rem;">✨</span>
+                    <div class="pricing-name" style="color:var(--gold);">Ouro Premium</div>
                     <div class="pricing-price">
                         <span class="currency">R$</span>1.290
                         <span class="price-original" style="opacity:0;">—</span>
                     </div>
                     <span class="pricing-period">10 laudos</span>
+                    <div class="pricing-divider"></div>
                     <ul class="pricing-features">
-                        <li><span class="check">✅</span> 10 laudos</li>
-                        <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Neurociência + Psicologia</li>
+                        <li><span class="check">✓</span> 10 laudos</li>
+                        <li><span class="check">✓</span> 80-100 páginas</li>
+                        <li><span class="check">✓</span> Neurociência + Psicologia</li>
                     </ul>
-                    <span style="opacity:0;display:block;margin-top:8px;padding:6px 16px;">—</span>
+                    <span style="opacity:0;display:block;margin:4px 0 8px;padding:6px 16px;">—</span>
                     <a href="login.html" class="btn-pricing primary">Comprar</a>
                 </div>
 
                 <!-- Ouro Premium Promo -->
                 <div class="pricing-card animate-fade-up animate-delay-8">
-                    <span class="promo-badge limited">🔥 PROMOÇÃO</span>
-                    <div class="pricing-icon">⭐</div>
+                    <span class="promo-badge">🔥 PROMO</span>
+                    <span class="pricing-icon">⭐</span>
                     <div class="pricing-name">Ouro Premium</div>
                     <div class="pricing-price">
                         <span class="currency">R$</span>700,00
                         <span class="price-original">R$ 2.000,00</span>
                     </div>
                     <span class="pricing-period">10 laudos</span>
+                    <div class="pricing-divider"></div>
                     <ul class="pricing-features">
-                        <li><span class="check">✅</span> 10 laudos</li>
-                        <li><span class="check">✅</span> 80-100 páginas</li>
-                        <li><span class="check">✅</span> Neurociência + Psicologia</li>
+                        <li><span class="check">✓</span> 10 laudos</li>
+                        <li><span class="check">✓</span> 80-100 páginas</li>
+                        <li><span class="check">✓</span> Neurociência + Psicologia</li>
                     </ul>
                     <span class="pricing-cupom" data-cupom="LAUDO10">
                         🎫 <span class="cupom-text">LAUDO10</span>
@@ -1604,7 +1801,7 @@
                 </div>
             </div>
 
-            <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:32px;">
+            <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:40px;">
                 🔒 Todos os planos incluem LGPD, segurança e suporte prioritário.
                 <br />
                 <strong style="color:var(--gold);">💡 O menor preço do mercado com a melhor entrega!</strong>
@@ -1617,6 +1814,47 @@
     </section>
 
     <!-- ============================================
+    CONTATO - COM EMAIL
+    ============================================ -->
+    <section class="contact-section" id="contato">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-content animate-slide-left">
+                    <span class="contact-badge">📞 CONTATO</span>
+                    <h2>Fale com a <span class="highlight">Vigorre</span></h2>
+                    <p>Tire suas dúvidas, solicite uma demonstração personalizada ou entre em contato diretamente conosco.</p>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <span class="ci-icon">📧</span>
+                            <span class="ci-text"><a href="mailto:contato@vigorre.com.br">contato@vigorre.com.br</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="ci-icon">📱</span>
+                            <span class="ci-text"><a href="tel:+5534991850735">(34) 99185-0735</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="ci-icon">🌐</span>
+                            <span class="ci-text"><a href="https://www.vigorre.com.br" target="_blank">www.vigorre.com.br</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="ci-icon">📍</span>
+                            <span class="ci-text">Brasil</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-image animate-slide-right">
+                    <div class="contact-illustration">
+                        <span class="contact-emoji">💬</span>
+                        <h4>Pronto para começar?</h4>
+                        <p>Entre em contato conosco e descubra como a VIGORRE ONE™ pode transformar sua vida e sua empresa.</p>
+                        <a href="mailto:contato@vigorre.com.br" class="btn-email">✉️ Enviar E-mail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
     FOOTER - CORRIGIDO
     ============================================ -->
     <footer class="footer">
@@ -1624,7 +1862,7 @@
             <div class="footer-grid">
                 <div>
                     <h4>VIGORRE ONE™</h4>
-                    <p style="color:rgba(255,255,255,0.3);font-size:0.75rem;">
+                    <p style="color:rgba(255,255,255,0.25);font-size:0.75rem;">
                         Inteligência Humana. Dados. Decisões.
                     </p>
                     <div class="footer-social">
@@ -1646,7 +1884,7 @@
                     <a href="politica-privacidade.html">Privacidade</a>
                     <a href="termos-uso.html">Termos de Uso</a>
                     <a href="consentimento.html">LGPD</a>
-                    <a href="contato.html">Contato</a>
+                    <a href="#contato">Contato</a>
                 </div>
                 <div>
                     <h4>Recursos</h4>
@@ -1659,7 +1897,7 @@
             </div>
             <div class="footer-bottom">
                 <div class="footer-brand">
-                    VIGORRE <span class="highlight">TECH</span><span style="font-weight:400;font-size:0.7rem;color:rgba(255,255,255,0.3);">™</span>
+                    VIGORRE <span class="highlight">TECH</span><span style="font-weight:400;font-size:0.7rem;color:rgba(255,255,255,0.2);">™</span>
                 </div>
                 <div class="footer-info">
                     © 2026 VIGORRE TECH™ &bull; www.vigorre.com.br &bull; (34) 99185-0735 &bull; contato@vigorre.com.br
@@ -1730,28 +1968,57 @@
                     const cupom = this.getAttribute('data-cupom');
                     if (!cupom) return;
 
-                    navigator.clipboard.writeText(cupom).then(() => {
-                        // Feedback visual
-                        const originalHTML = this.innerHTML;
-                        this.classList.add('copied');
-                        this.innerHTML = '✅ <span class="cupom-text">COPIADO!</span>';
-                        this.style.borderColor = 'var(--green)';
-                        this.style.color = 'var(--green)';
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(cupom).then(() => {
+                            const originalHTML = this.innerHTML;
+                            this.classList.add('copied');
+                            this.innerHTML = '✅ <span class="cupom-text">COPIADO!</span>';
+                            this.style.borderColor = 'var(--green)';
+                            this.style.color = 'var(--green)';
 
-                        setTimeout(() => {
-                            this.classList.remove('copied');
-                            this.innerHTML = originalHTML;
-                            this.style.borderColor = '';
-                            this.style.color = '';
-                        }, 2500);
-                    }).catch(() => {
-                        // Fallback
-                        alert('Copie o cupom manualmente: ' + cupom);
-                    });
+                            setTimeout(() => {
+                                this.classList.remove('copied');
+                                this.innerHTML = originalHTML;
+                                this.style.borderColor = '';
+                                this.style.color = '';
+                            }, 2500);
+                        }).catch(() => {
+                            fallbackCopy(cupom, this);
+                        });
+                    } else {
+                        fallbackCopy(cupom, this);
+                    }
                 });
+            });
 
-                // Estilo de cursor
-                cupomEl.style.cursor = 'pointer';
+            function fallbackCopy(cupom, element) {
+                const textArea = document.createElement('textarea');
+                textArea.value = cupom;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    const originalHTML = element.innerHTML;
+                    element.classList.add('copied');
+                    element.innerHTML = '✅ <span class="cupom-text">COPIADO!</span>';
+                    element.style.borderColor = 'var(--green)';
+                    element.style.color = 'var(--green)';
+
+                    setTimeout(() => {
+                        element.classList.remove('copied');
+                        element.innerHTML = originalHTML;
+                        element.style.borderColor = '';
+                        element.style.color = '';
+                    }, 2500);
+                } catch (err) {
+                    alert('Copie o cupom manualmente: ' + cupom);
+                }
+                document.body.removeChild(textArea);
+            }
+
+            // Estilo de cursor
+            document.querySelectorAll('.pricing-cupom').forEach(el => {
+                el.style.cursor = 'pointer';
             });
 
             // ============================================
