@@ -4,24 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Configurações | Centro Financeiro VIGORRE ONE™</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
-            --green: #10B981; --red: #EF4444; --white: #FFFFFF;
-            --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
-            --gray-300: #CBD5E1; --gray-400: #94A3B8; --gray-500: #64748B;
-            --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B;
-            --gray-900: #0F172A;
+            --green: #10B981; --red: #EF4444; --orange: #F59E0B; --purple: #7C3AED;
+            --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0; --gray-300: #CBD5E1; --gray-400: #94A3B8;
+            --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155;
+            --gray-800: #1E293B; --gray-900: #0F172A;
             --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10,37,64,0.06);
             --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
             --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+        }
+
         .sidebar {
             position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
             background: var(--navy); color: white; padding: 24px 20px;
@@ -59,7 +67,8 @@
         .sidebar .nav a {
             display: flex; align-items: center; gap: 12px; padding: 10px 14px;
             border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            transition: var(--transition); cursor: pointer;
         }
         .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
         .sidebar .nav a.active {
@@ -71,10 +80,16 @@
         .sidebar .logout a {
             display: flex; align-items: center; gap: 12px; padding: 10px 14px;
             border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            transition: var(--transition); cursor: pointer;
         }
         .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
-        .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
+
+        .main {
+            margin-left: 260px;
+            padding: 24px 32px 40px;
+            min-height: 100vh;
+        }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
@@ -83,14 +98,16 @@
         .main-header .breadcrumb a { color: var(--blue); text-decoration: none; }
         .main-header .breadcrumb a:hover { color: var(--cyan); }
         .main-header h1 {
-            font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700;
-            color: var(--gray-900); margin-top: 4px;
+            font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
+            margin-top: 4px;
         }
+
         .btn-primary {
             padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
             color: white; border: none; border-radius: var(--radius-sm);
             font-weight: 600; font-size: 0.875rem; cursor: pointer;
             transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none;
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
         .btn-secondary {
@@ -107,6 +124,7 @@
             transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
         }
         .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.25); }
+
         .settings-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
         }
@@ -162,6 +180,7 @@
         .settings-actions {
             margin-top: 24px; display: flex; gap: 12px; justify-content: flex-end;
         }
+
         .toast {
             position: fixed; top: 24px; right: 24px; background: white;
             padding: 14px 24px; border-radius: 12px;
@@ -172,16 +191,33 @@
         }
         .toast.show { display: flex; }
         .toast.success { border-left-color: #10B981; }
+        .toast.error { border-left-color: #EF4444; }
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(120%); }
             to { opacity: 1; transform: translateX(0); }
         }
+
+        .loading-shimmer {
+            height: 32px;
+            width: 60%;
+            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
         .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
         .mobile-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99;
         }
         .mobile-overlay.active { display: block; }
+
         @media (max-width: 992px) {
             .sidebar { transform: translateX(-100%); width: 280px; }
             .sidebar.open { transform: translateX(0); }
@@ -189,13 +225,13 @@
             .mobile-toggle { display: block; }
             .mobile-overlay.active { display: block; }
             .settings-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 768px) {
-            .main-header { flex-direction: column; align-items: flex-start; }
             .settings-card .setting-group { flex-direction: column; align-items: flex-start; gap: 8px; }
             .settings-card .setting-group input[type="text"],
             .settings-card .setting-group input[type="number"],
             .settings-card .setting-group select { width: 100%; }
+        }
+        @media (max-width: 768px) {
+            .main-header { flex-direction: column; align-items: flex-start; }
         }
         .sidebar::-webkit-scrollbar { width: 4px; }
         .sidebar::-webkit-scrollbar-track { background: transparent; }
@@ -206,6 +242,7 @@
             .mobile-toggle { display: none !important; }
             .logo-img { height: 36px !important; }
             .btn-primary { display: none !important; }
+            .btn-success { display: none !important; }
         }
     </style>
 </head>
@@ -236,9 +273,11 @@
             <li><a href="extratos.html"><span class="icon">📋</span> Extratos</a></li>
             <li><a href="precos.html"><span class="icon">🏷️</span> Preços</a></li>
             <li><a href="cupons.html"><span class="icon">🎫</span> Cupons</a></li>
-            <div class="divider"></div>
+            <li><a href="assinaturas.html"><span class="icon">📋</span> Assinaturas</a></li>
+            <li><a href="reembolsos.html"><span class="icon">↩️</span> Reembolsos</a></li>
             <li><a href="auditoria.html"><span class="icon">🔍</span> Auditoria</a></li>
             <li><a href="configuracoes.html" class="active"><span class="icon">⚙️</span> Configurações</a></li>
+            <div class="divider"></div>
             <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
             <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
         </ul>
@@ -259,6 +298,10 @@
                 </div>
                 <h1>⚙️ Configurações Financeiras</h1>
                 <p style="color: var(--gray-500); font-size: 0.9rem;">Configure as regras e parâmetros financeiros da plataforma</p>
+            </div>
+            <div style="display:flex;gap:12px;">
+                <button class="btn-secondary" onclick="resetSettings()">↺ Restaurar Padrões</button>
+                <button class="btn-primary" onclick="saveSettings()">💾 Salvar Configurações</button>
             </div>
         </div>
 
@@ -382,9 +425,17 @@
         </div>
     </main>
 
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
     <script src="../../supabase-config.js"></script>
     <script src="../../auth.js"></script>
     <script src="../../middleware/auth-guard.js"></script>
+    <script src="financeiro-conexao.js"></script>
 
     <script>
         'use strict';
@@ -402,25 +453,24 @@
             }
         }
 
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+            if (type === 'error') icon.textContent = '❌';
+            else if (type === 'warning') icon.textContent = '⚠️';
+            else icon.textContent = '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + type;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
         function toggleSwitch(el) {
             el.classList.toggle('active');
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('⚙️ Configurações - VIGORRE ONE™');
-            const isAuth = window.VigorreAuth.isAuthenticated();
-            if (!isAuth) {
-                window.location.href = '../../login.html';
-                return;
-            }
-            const user = window.VigorreAuth.getCurrentUser();
-            if (!user || (user.role !== 'admin' && user.role !== 'master')) {
-                alert('⚠️ Acesso restrito a administradores.');
-                window.VigorreAuth.logout();
-                return;
-            }
-            document.getElementById('userName').textContent = user.name || 'Administrador';
-        });
 
         function saveSettings() {
             showToast('✅ Configurações salvas com sucesso!', 'success');
@@ -432,18 +482,21 @@
             }
         }
 
-        function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
-            icon.textContent = '✅';
-            msg.textContent = message;
-            toast.className = `toast show ${type || 'success'}`;
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('⚙️ Configurações - VIGORRE ONE™');
+
+            if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
+                window.location.href = '../../login.html';
+                return;
+            }
+
+            var user = window.VigorreAuth.getCurrentUser();
+            if (user) {
+                document.getElementById('userName').textContent = user.name || 'Administrador';
+            }
+
+            console.log('✅ Configurações carregado com sucesso!');
+        });
 
         console.log('✅ Configurações carregado com sucesso!');
     </script>
