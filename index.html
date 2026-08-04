@@ -241,6 +241,17 @@
         .hero-frase-impacto .highlight {
             color: var(--gold-light);
         }
+        .hero-frase-impacto .frase-autor {
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            display: block;
+            margin-top: 6px;
+            letter-spacing: 0.02em;
+        }
+        .hero-frase-impacto .frase-autor .gold {
+            color: var(--gold-light);
+        }
         .hero-visual {
             position: relative;
             aspect-ratio: 4/5;
@@ -623,8 +634,20 @@
             background: var(--navy);
             color: var(--white);
         }
-        .price-card.featured h3, .price-card.featured .price-amount { color: var(--white); }
-        .price-card.featured p, .price-card.featured .price-desc { color: rgba(255, 255, 255, 0.65); }
+        .price-card.featured h3, 
+        .price-card.featured .price-amount, 
+        .price-card.featured .price-subtitle,
+        .price-card.featured .price-features li,
+        .price-card.featured .price-savings,
+        .price-card.featured .price-original { color: var(--white); }
+        .price-card.featured .price-features li.off { color: rgba(255, 255, 255, 0.4); }
+        .price-card.featured .price-features { border-top-color: rgba(255, 255, 255, 0.15); }
+        .price-card.featured .price-subtitle { color: rgba(255, 255, 255, 0.6); }
+        .price-card.featured .price-original { color: rgba(255, 255, 255, 0.4); }
+        .price-card.featured .price-savings { 
+            background: rgba(217, 119, 6, 0.2); 
+            color: var(--gold-light);
+        }
         .price-tag {
             display: inline-block;
             padding: 4px 12px;
@@ -660,7 +683,6 @@
             font-family: var(--mono);
             letter-spacing: 0.05em;
         }
-        .price-card.featured .price-subtitle { color: rgba(255, 255, 255, 0.5); }
         .price-amount {
             font-size: 44px;
             font-weight: 300;
@@ -681,14 +703,12 @@
             font-weight: 400;
             margin-left: 4px;
         }
-        .price-card.featured .price-amount .per { color: rgba(255, 255, 255, 0.5); }
         .price-original {
             font-size: 13px;
             color: var(--ink-muted);
             text-decoration: line-through;
             margin-bottom: 4px;
         }
-        .price-card.featured .price-original { color: rgba(255, 255, 255, 0.4); }
         .price-savings {
             display: inline-block;
             padding: 4px 10px;
@@ -701,10 +721,6 @@
             margin-bottom: 24px;
             font-weight: 500;
         }
-        .price-card.featured .price-savings {
-            background: rgba(217, 119, 6, 0.15);
-            color: var(--gold-light);
-        }
         .price-features {
             list-style: none;
             padding-top: 24px;
@@ -712,7 +728,6 @@
             margin-bottom: 24px;
             flex-grow: 1;
         }
-        .price-card.featured .price-features { border-top-color: rgba(255, 255, 255, 0.15); }
         .price-features li {
             padding: 8px 0;
             font-size: 13px;
@@ -721,7 +736,6 @@
             align-items: flex-start;
             gap: 10px;
         }
-        .price-card.featured .price-features li { color: rgba(255, 255, 255, 0.75); }
         .price-features li::before {
             content: '';
             width: 14px; height: 14px;
@@ -730,6 +744,9 @@
             background-position: center;
             flex-shrink: 0;
             margin-top: 2px;
+        }
+        .price-card.featured .price-features li::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23FBBF24' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
         }
         .price-features li.off::before {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
@@ -749,9 +766,16 @@
             cursor: pointer;
             transition: all 0.2s;
         }
+        .price-card.featured .price-coupon {
+            background: rgba(217, 119, 6, 0.12);
+            border-color: var(--gold-light);
+        }
         .price-coupon:hover {
             background: rgba(217, 119, 6, 0.12);
             transform: translateY(-1px);
+        }
+        .price-card.featured .price-coupon:hover {
+            background: rgba(217, 119, 6, 0.2);
         }
         .price-coupon-label {
             font-size: 10px;
@@ -760,6 +784,7 @@
             letter-spacing: 0.1em;
             font-weight: 500;
         }
+        .price-card.featured .price-coupon-label { color: var(--gold-light); }
         .price-coupon-code {
             font-family: var(--mono);
             font-size: 13px;
@@ -767,6 +792,7 @@
             color: var(--navy);
             letter-spacing: 0.05em;
         }
+        .price-card.featured .price-coupon-code { color: var(--white); }
         .price-coupon-copy {
             font-size: 10px;
             color: var(--ink-muted);
@@ -774,15 +800,26 @@
             letter-spacing: 0.1em;
             transition: color 0.2s;
         }
+        .price-card.featured .price-coupon-copy { color: rgba(255, 255, 255, 0.5); }
         .price-coupon:hover .price-coupon-copy { color: var(--gold); }
+        .price-card.featured .price-coupon:hover .price-coupon-copy { color: var(--gold-light); }
         .price-coupon.copied {
             background: rgba(5, 150, 105, 0.08);
             border-color: var(--success);
             border-style: solid;
         }
+        .price-card.featured .price-coupon.copied {
+            background: rgba(5, 150, 105, 0.15);
+            border-color: var(--success);
+        }
         .price-coupon.copied .price-coupon-label,
         .price-coupon.copied .price-coupon-code,
         .price-coupon.copied .price-coupon-copy {
+            color: var(--success);
+        }
+        .price-card.featured .price-coupon.copied .price-coupon-label,
+        .price-card.featured .price-coupon.copied .price-coupon-code,
+        .price-card.featured .price-coupon.copied .price-coupon-copy {
             color: var(--success);
         }
 
@@ -806,6 +843,36 @@
         .price-card.featured .price-btn-ghost { border-color: rgba(255, 255, 255, 0.2); color: var(--white); }
         .price-btn-ghost:hover { border-color: var(--ink); }
         .price-card.featured .price-btn-ghost:hover { border-color: var(--white); }
+
+        /* BOTÕES PADRÃO - MESMO TEXTO E COR */
+        .btn-padrao {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 14px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.3s;
+            letter-spacing: 0.02em;
+            background: var(--gold);
+            color: var(--white);
+        }
+        .btn-padrao:hover {
+            background: #c26a05;
+            box-shadow: var(--shadow-gold);
+            transform: translateY(-1px);
+        }
+        .price-card.featured .btn-padrao {
+            background: var(--gold);
+            color: var(--white);
+        }
+        .price-card.featured .btn-padrao:hover {
+            background: #c26a05;
+            box-shadow: var(--shadow-gold);
+            transform: translateY(-1px);
+        }
 
         /* CONTACT */
         .contact-grid {
@@ -950,27 +1017,28 @@
             flex-wrap: wrap;
         }
 
-        /* FOOTER */
+        /* FOOTER - FUNDO BRANCO, LETRAS AZUIS */
         .footer {
-            background: var(--navy-deep);
-            color: rgba(255, 255, 255, 0.6);
+            background: var(--white);
+            color: var(--navy);
             padding: 80px 0 40px;
+            border-top: 1px solid var(--line-soft);
         }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 64px;
+        .footer .nav-logo-text {
+            color: var(--navy);
+        }
+        .footer .nav-logo-sub {
+            color: var(--ink-muted);
         }
         .footer-brand-text {
             font-size: 14px;
             line-height: 1.7;
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--ink-soft);
             max-width: 320px;
             margin-top: 20px;
         }
         .footer h5 {
-            color: var(--white);
+            color: var(--navy);
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 0.05em;
@@ -980,34 +1048,43 @@
         .footer ul { list-style: none; }
         .footer ul li { margin-bottom: 12px; }
         .footer a {
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--ink-soft);
             text-decoration: none;
             font-size: 14px;
             transition: color 0.2s;
         }
         .footer a:hover { color: var(--gold); }
+        .footer .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 64px;
+        }
         .footer-bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid var(--line);
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.35);
+            color: var(--ink-muted);
             flex-wrap: wrap;
             gap: 16px;
         }
         .footer-bottom a {
-            color: rgba(255, 255, 255, 0.35);
+            color: var(--ink-muted);
             margin-left: 16px;
         }
         .footer-bottom a:hover { color: var(--gold); }
+        .footer .tech-gold {
+            color: var(--gold);
+        }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
             .hero-grid, .tech-grid, .contact-grid { grid-template-columns: 1fr; gap: 60px; }
             .assess-grid, .sol-grid, .pricing-grid, .stats-grid { grid-template-columns: 1fr 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
+            .footer .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
         }
         @media (max-width: 768px) {
             .nav-menu { display: none; }
@@ -1015,7 +1092,7 @@
             .hero-frase-impacto { font-size: 15px; padding: 16px 20px; }
             .assess-grid, .sol-grid, .pricing-grid, .stats-grid { grid-template-columns: 1fr; }
             .trust-logos { gap: 32px; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer .footer-grid { grid-template-columns: 1fr 1fr; }
             .section { padding: 80px 0; }
             .cta { padding: 80px 0; }
             .cta-actions { flex-direction: column; }
@@ -1078,11 +1155,10 @@
                         <a href="#planos" class="btn btn-gold">Comprar Créditos</a>
                         <a href="#testes" class="btn btn-ghost">Conhecer Testes →</a>
                     </div>
-                    <!-- FRASE DE IMPACTO - substituindo estatísticas -->
+                    <!-- FRASE DE IMPACTO - mantendo qualidade gráfica -->
                     <div class="hero-frase-impacto fade-up-3">
                         <span class="highlight">“O maior investimento que você pode fazer é em você mesmo.”</span>
-                        <br />
-                        <span style="font-size:13px;font-weight:300;color:rgba(255,255,255,0.6);">— Tecnologia VIGOR® · Mais de 10 anos de pesquisa científica</span>
+                        <span class="frase-autor">— Tecnologia <span class="gold">VIGOR®</span> · Mais de 10 anos de pesquisa científica</span>
                     </div>
                 </div>
                 <div class="hero-visual fade-up-3">
@@ -1273,7 +1349,7 @@
                 <p style="color:rgba(255,255,255,0.7);font-size:17px;max-width:680px;margin:0 auto 32px;line-height:1.7;">
                     Equipes com perfis complementares reduzem conflitos e multiplicam engajamento. Funcionários que se sentem compreendidos têm 2,5× mais produtividade e permanência.
                 </p>
-                <a href="#planos" class="btn btn-gold">Ver Planos Corporativos</a>
+                <a href="#planos" class="btn btn-gold">Nossos Planos</a>
             </div>
         </div>
     </section>
@@ -1323,7 +1399,7 @@
                             </div>
                             <div class="price-coupon-copy">Copiar</div>
                         </div>
-                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                        <a href="login.html" class="btn-padrao">Garantir Agora</a>
                     </div>
 
                     <!-- Básico -->
@@ -1349,7 +1425,7 @@
                             </div>
                             <div class="price-coupon-copy">Copiar</div>
                         </div>
-                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                        <a href="login.html" class="btn-padrao">Garantir Agora</a>
                     </div>
 
                     <!-- Ouro -->
@@ -1367,34 +1443,34 @@
                             <li>Customer Success dedicado</li>
                         </ul>
                         <div style="height:60px;"></div>
-                        <a href="login.html" class="price-btn price-btn-primary">Comprar</a>
+                        <a href="login.html" class="btn-padrao">Garantir Agora</a>
                     </div>
 
                     <!-- Platina - FEATURED (100 créditos) -->
                     <div class="price-card featured">
                         <span class="price-tag">MAIS ESCOLHIDO</span>
-                        <h3>Global</h3>
-                        <div class="price-subtitle">100 créditos</div>
-                        <div class="price-original">R$ 2.500,00</div>
-                        <div class="price-amount">
-                            <span class="currency">R$</span>1.700
+                        <h3 style="color:var(--white);">Global</h3>
+                        <div class="price-subtitle" style="color:rgba(255,255,255,0.6);">100 créditos</div>
+                        <div class="price-original" style="color:rgba(255,255,255,0.4);">R$ 2.500,00</div>
+                        <div class="price-amount" style="color:var(--white);">
+                            <span class="currency" style="color:var(--gold-light);">R$</span>1.700
                         </div>
-                        <span class="price-savings">Economia de 32%</span>
-                        <ul class="price-features">
-                            <li>100 relatórios comportamentais</li>
-                            <li>PDI personalizado incluso</li>
-                            <li>Laudo VIGOR® (3 créditos inclusos)</li>
-                            <li>Suporte dedicado 24/7</li>
-                            <li>API e integrações customizadas</li>
+                        <span class="price-savings" style="background:rgba(217,119,6,0.2);color:var(--gold-light);">Economia de 32%</span>
+                        <ul class="price-features" style="border-top-color:rgba(255,255,255,0.15);">
+                            <li style="color:rgba(255,255,255,0.85);">100 relatórios comportamentais</li>
+                            <li style="color:rgba(255,255,255,0.85);">PDI personalizado incluso</li>
+                            <li style="color:rgba(255,255,255,0.85);">Laudo VIGOR® (3 créditos inclusos)</li>
+                            <li style="color:rgba(255,255,255,0.85);">Suporte dedicado 24/7</li>
+                            <li style="color:rgba(255,255,255,0.85);">API e integrações customizadas</li>
                         </ul>
-                        <div class="price-coupon" data-cupom="RELATO100" onclick="copyCoupon(this)">
+                        <div class="price-coupon" data-cupom="RELATO100" onclick="copyCoupon(this)" style="background:rgba(217,119,6,0.12);border-color:var(--gold-light);">
                             <div>
-                                <div class="price-coupon-label">Cupom</div>
-                                <div class="price-coupon-code">RELATO100</div>
+                                <div class="price-coupon-label" style="color:var(--gold-light);">Cupom</div>
+                                <div class="price-coupon-code" style="color:var(--white);">RELATO100</div>
                             </div>
-                            <div class="price-coupon-copy">Copiar</div>
+                            <div class="price-coupon-copy" style="color:rgba(255,255,255,0.5);">Copiar</div>
                         </div>
-                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                        <a href="login.html" class="btn-padrao" style="background:var(--gold);color:var(--white);">Garantir Agora</a>
                     </div>
                 </div>
             </div>
@@ -1430,7 +1506,7 @@
                             </div>
                             <div class="price-coupon-copy">Copiar</div>
                         </div>
-                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                        <a href="login.html" class="btn-padrao">Garantir Agora</a>
                     </div>
 
                     <!-- Básico Premium -->
@@ -1456,7 +1532,7 @@
                             </div>
                             <div class="price-coupon-copy">Copiar</div>
                         </div>
-                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                        <a href="login.html" class="btn-padrao">Garantir Agora</a>
                     </div>
 
                     <!-- Ouro Premium -->
@@ -1474,34 +1550,34 @@
                             <li>Customer Success dedicado</li>
                         </ul>
                         <div style="height:60px;"></div>
-                        <a href="login.html" class="price-btn price-btn-primary">Comprar</a>
+                        <a href="login.html" class="btn-padrao">Garantir Agora</a>
                     </div>
 
                     <!-- Platina Premium - FEATURED (Global) -->
                     <div class="price-card featured">
                         <span class="price-tag">MAIS ESCOLHIDO</span>
-                        <h3>Global</h3>
-                        <div class="price-subtitle">10 laudos completos</div>
-                        <div class="price-original">R$ 2.000,00</div>
-                        <div class="price-amount">
-                            <span class="currency">R$</span>700,00
+                        <h3 style="color:var(--white);">Global</h3>
+                        <div class="price-subtitle" style="color:rgba(255,255,255,0.6);">10 laudos completos</div>
+                        <div class="price-original" style="color:rgba(255,255,255,0.4);">R$ 2.000,00</div>
+                        <div class="price-amount" style="color:var(--white);">
+                            <span class="currency" style="color:var(--gold-light);">R$</span>700,00
                         </div>
-                        <span class="price-savings">Economia de 65%</span>
-                        <ul class="price-features">
-                            <li>10 laudos VIGOR® completos</li>
-                            <li>80-100 páginas por laudo</li>
-                            <li>Neurociência + Psicologia integradas</li>
-                            <li>Suporte dedicado 24/7</li>
-                            <li>Consultoria estratégica incluída</li>
+                        <span class="price-savings" style="background:rgba(217,119,6,0.2);color:var(--gold-light);">Economia de 65%</span>
+                        <ul class="price-features" style="border-top-color:rgba(255,255,255,0.15);">
+                            <li style="color:rgba(255,255,255,0.85);">10 laudos VIGOR® completos</li>
+                            <li style="color:rgba(255,255,255,0.85);">80-100 páginas por laudo</li>
+                            <li style="color:rgba(255,255,255,0.85);">Neurociência + Psicologia integradas</li>
+                            <li style="color:rgba(255,255,255,0.85);">Suporte dedicado 24/7</li>
+                            <li style="color:rgba(255,255,255,0.85);">Consultoria estratégica incluída</li>
                         </ul>
-                        <div class="price-coupon" data-cupom="LAUDO10" onclick="copyCoupon(this)">
+                        <div class="price-coupon" data-cupom="LAUDO10" onclick="copyCoupon(this)" style="background:rgba(217,119,6,0.12);border-color:var(--gold-light);">
                             <div>
-                                <div class="price-coupon-label">Cupom</div>
-                                <div class="price-coupon-code">LAUDO10</div>
+                                <div class="price-coupon-label" style="color:var(--gold-light);">Cupom</div>
+                                <div class="price-coupon-code" style="color:var(--white);">LAUDO10</div>
                             </div>
-                            <div class="price-coupon-copy">Copiar</div>
+                            <div class="price-coupon-copy" style="color:rgba(255,255,255,0.5);">Copiar</div>
                         </div>
-                        <a href="login.html" class="price-btn price-btn-gold">Garantir Agora</a>
+                        <a href="login.html" class="btn-padrao" style="background:var(--gold);color:var(--white);">Garantir Agora</a>
                     </div>
                 </div>
             </div>
@@ -1583,7 +1659,7 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER - FUNDO BRANCO, LETRAS AZUIS -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1591,8 +1667,8 @@
                     <a href="index.html" class="nav-logo">
                         <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" style="height:32px;width:auto;" />
                         <div>
-                            <div class="nav-logo-text" style="color:var(--white);">VIGORRE <span style="color:var(--gold)">ONE</span><span class="tm" style="color:rgba(255,255,255,0.4);">™</span></div>
-                            <div class="nav-logo-sub" style="color:rgba(255,255,255,0.4);">People Analytics Enterprise</div>
+                            <div class="nav-logo-text" style="color:var(--navy);">VIGORRE <span style="color:var(--gold)">ONE</span><span class="tm" style="color:var(--ink-muted);">™</span></div>
+                            <div class="nav-logo-sub" style="color:var(--ink-muted);">People Analytics Enterprise</div>
                         </div>
                     </a>
                     <p class="footer-brand-text">Inteligência Humana. Dados. Decisões. A plataforma enterprise para avaliações comportamentais científicas e desenvolvimento humano integrado.</p>
@@ -1638,7 +1714,7 @@
             </div>
             <div class="footer-bottom">
                 <div>
-                    © 2026 VIGORRE TECH™ · contato@vigorre.com.br · (34) 99185-0735 · www.vigorre.com.br
+                    © 2026 VIGORRE <span class="tech-gold">TECH</span>™ · contato@vigorre.com.br · (34) 99185-0735 · www.vigorre.com.br
                 </div>
                 <div>
                     <a href="politica-privacidade.html">Privacidade</a>
