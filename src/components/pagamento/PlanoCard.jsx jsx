@@ -1,21 +1,43 @@
 import { BotaoComprar } from './BotaoComprar'
 
-export function PlanoCard({ usuarioId, plano }) {
+export function PlanoCard({ usuarioId, plano, destaque }) {
   return (
-    <div className="border rounded-lg p-6 shadow-sm hover:shadow-md transition">
+    <div className={`
+      border rounded-lg p-6 shadow-sm hover:shadow-md transition
+      ${destaque ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}
+    `}>
+      {destaque && (
+        <span className="inline-block bg-blue-500 text-white text-xs px-2 py-1 rounded-full mb-2">
+          Mais Escolhido
+        </span>
+      )}
+      
       <h3 className="text-xl font-bold">{plano.nome}</h3>
       <p className="text-gray-600 text-sm mt-1">{plano.descricao}</p>
+      
       <p className="text-3xl font-bold my-4">
         R$ {plano.preco.toFixed(2)}
       </p>
+      
       {plano.cupom && (
-        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
-          Cupom: {plano.cupom}
-        </span>
+        <div className="flex items-center gap-2 mt-2">
+          <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+            Cupom: {plano.cupom}
+          </span>
+          <button
+            onClick={() => navigator.clipboard.writeText(plano.cupom)}
+            className="text-xs text-blue-600 hover:underline"
+          >
+            Copiar
+          </button>
+        </div>
       )}
-      <BotaoComprar usuarioId={usuarioId} planoId={plano.id}>
-        Comprar agora
-      </BotaoComprar>
+      
+      <div className="mt-4">
+        <BotaoComprar usuarioId={usuarioId} planoId={plano.id}>
+          Comprar {plano.nome}
+        </BotaoComprar>
+      </div>
     </div>
   )
 }
