@@ -11,7 +11,7 @@
 
     <style>
         /* ============================================ */
-        /* CSS COMPLETO - MESMO ESTILO DO DASHBOARD   */
+        /* CSS COMPLETO                                */
         /* ============================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -33,9 +33,6 @@
             min-height: 100vh;
         }
 
-        /* ============================================ */
-        /* SIDEBAR - IDÊNTICO AO DASHBOARD PRINCIPAL   */
-        /* ============================================ */
         .sidebar {
             position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
             background: var(--navy); color: white; padding: 24px 20px;
@@ -106,9 +103,6 @@
             .mobile-overlay.active { display: block; }
         }
 
-        /* ============================================ */
-        /* MAIN CONTENT                                */
-        /* ============================================ */
         .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -184,11 +178,11 @@
 <body>
 
     <!-- ============================================ -->
-    <!-- SIDEBAR - MENU COMPLETO                     -->
+    <!-- SIDEBAR - MENU COM LINKS CORRIGIDOS         -->
     <!-- ============================================ -->
     <aside class="sidebar" id="sidebar">
-        <a href="/dashboard.html" class="logo">
-            <img src="/assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" onerror="this.style.display='none'" />
+        <a href="../dashboard.html" class="logo">
+            <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" onerror="this.style.display='none'" />
             <div class="logo-text">
                 <span class="name">VIGORRE ONE<span class="tm">™</span></span>
                 <span class="sub">People Analytics Enterprise</span>
@@ -199,17 +193,37 @@
             <div class="role"><span class="badge">🏢 Organização</span></div>
         </div>
         <ul class="nav">
-            <li><a href="/dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
-            <li><a href="/organizacao/dashboard.html" class="active"><span class="icon">🏢</span> Organização</a></li>
-            <li><a href="/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
-            <li><a href="/vagas/index.html"><span class="icon">💼</span> Vagas</a></li>
-            <li><a href="/testes/index.html"><span class="icon">📝</span> Testes</a></li>
-            <li><a href="/laudos/index.html"><span class="icon">📄</span> Laudos</a></li>
-            <li><a href="/creditos/index.html"><span class="icon">💳</span> Créditos</a></li>
-            <li><a href="/relatorios/index.html"><span class="icon">📊</span> Relatórios</a></li>
+            <!-- ✅ Dashboard Principal (VOLTA PARA RAIZ) -->
+            <li><a href="../dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+            
+            <!-- ✅ Organização (PÁGINA ATUAL) -->
+            <li><a href="dashboard.html" class="active"><span class="icon">🏢</span> Organização</a></li>
+            
+            <!-- ✅ Participantes (VOLTA PARA RAIZ) -->
+            <li><a href="../participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
+            
+            <!-- ✅ Vagas (VOLTA PARA RAIZ) -->
+            <li><a href="../vagas/index.html"><span class="icon">💼</span> Vagas</a></li>
+            
+            <!-- ✅ Testes (VOLTA PARA RAIZ) -->
+            <li><a href="../testes/index.html"><span class="icon">📝</span> Testes</a></li>
+            
+            <!-- ✅ Laudos (VOLTA PARA RAIZ) -->
+            <li><a href="../laudos/index.html"><span class="icon">📄</span> Laudos</a></li>
+            
+            <!-- ✅ Créditos (VOLTA PARA RAIZ) -->
+            <li><a href="../creditos/index.html"><span class="icon">💳</span> Créditos</a></li>
+            
+            <!-- ✅ Relatórios (VOLTA PARA RAIZ) -->
+            <li><a href="../relatorios/index.html"><span class="icon">📊</span> Relatórios</a></li>
+            
             <div class="divider"></div>
-            <li><a href="/config/index.html"><span class="icon">⚙️</span> Configurações</a></li>
-            <li><a href="/admin/financeiro/index.html"><span class="icon">💰</span> Financeiro</a></li>
+            
+            <!-- ✅ Configurações (VOLTA PARA RAIZ) -->
+            <li><a href="../config/index.html"><span class="icon">⚙️</span> Configurações</a></li>
+            
+            <!-- ✅ Financeiro (VOLTA PARA RAIZ) -->
+            <li><a href="../admin/financeiro/index.html"><span class="icon">💰</span> Financeiro</a></li>
         </ul>
         <div class="logout">
             <a href="#" onclick="logout()"><span class="icon">🚪</span> Sair</a>
@@ -232,22 +246,22 @@
 
         <!-- CARDS -->
         <div class="cards-grid">
-            <div class="card" onclick="window.location.href='/organizacao/participantes/index.html'">
+            <div class="card" onclick="window.location.href='../participantes/index.html'">
                 <div class="card-icon">👥</div>
                 <div class="card-label">Participantes</div>
                 <div class="card-value" id="totalParticipantes">0</div>
             </div>
-            <div class="card" onclick="window.location.href='/organizacao/relatorios/index.html'">
+            <div class="card" onclick="window.location.href='../relatorios/index.html'">
                 <div class="card-icon">📄</div>
                 <div class="card-label">Relatórios</div>
                 <div class="card-value" id="totalRelatorios">0</div>
             </div>
-            <div class="card" onclick="window.location.href='/organizacao/creditos/index.html'">
+            <div class="card" onclick="window.location.href='../creditos/index.html'">
                 <div class="card-icon">💳</div>
                 <div class="card-label">Créditos</div>
                 <div class="card-value" id="totalCreditos">0</div>
             </div>
-            <div class="card" onclick="window.location.href='/organizacao/laudos/index.html'">
+            <div class="card" onclick="window.location.href='../laudos/index.html'">
                 <div class="card-icon">📋</div>
                 <div class="card-label">Laudos</div>
                 <div class="card-value" id="totalLaudos">0</div>
@@ -286,8 +300,8 @@
                 <div class="content-card" style="background:linear-gradient(135deg,var(--navy),var(--gray-800));color:white;">
                     <h3 style="color:white;">📌 Ações Rápidas</h3>
                     <div style="margin-top:8px;">
-                        <a href="/organizacao/configuracoes/index.html" class="btn-action btn-action-primary" style="display:block;text-align:center;margin-bottom:8px;padding:10px;background:var(--gold);color:var(--navy);">⚙️ Configurações</a>
-                        <a href="/organizacao/participantes/index.html" class="btn-action btn-action-secondary" style="display:block;text-align:center;padding:10px;color:white;background:rgba(255,255,255,0.1);">👥 Gerenciar Participantes</a>
+                        <a href="../organizacao/configuracoes/index.html" class="btn-action btn-action-primary" style="display:block;text-align:center;margin-bottom:8px;padding:10px;background:var(--gold);color:var(--navy);">⚙️ Configurações</a>
+                        <a href="../participantes/index.html" class="btn-action btn-action-secondary" style="display:block;text-align:center;padding:10px;color:white;background:rgba(255,255,255,0.1);">👥 Gerenciar Participantes</a>
                     </div>
                 </div>
             </div>
@@ -297,9 +311,9 @@
     <!-- ============================================ -->
     <!-- SCRIPTS                                     -->
     <!-- ============================================ -->
-    <script src="/supabase-config.js"></script>
-    <script src="/auth.js"></script>
-    <script src="/middleware/auth-guard.js"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../middleware/auth-guard.js"></script>
 
     <script>
         'use strict';
@@ -324,25 +338,22 @@
                 console.log('🏢 Dashboard Organização - VIGORRE ONE™');
 
                 if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
-                    window.location.href = '/login.html';
+                    window.location.href = '../login.html';
                     return;
                 }
 
                 var user = window.VigorreAuth.getCurrentUser();
                 if (!user) {
-                    window.location.href = '/login.html';
+                    window.location.href = '../login.html';
                     return;
                 }
 
-                // Atualizar nome do usuário
                 document.getElementById('userName').textContent = user.name || 'Organização';
 
-                // Dados da organização (mock - substituir com dados do Supabase)
+                // Dados mock - substituir com Supabase
                 document.getElementById('orgNome').textContent = user.companyName || 'Organização Exemplo';
                 document.getElementById('orgCnpj').textContent = '12.345.678/0001-99';
                 document.getElementById('orgSegmento').textContent = 'Tecnologia';
-
-                // Cards (mock)
                 document.getElementById('totalParticipantes').textContent = '12';
                 document.getElementById('totalRelatorios').textContent = '8';
                 document.getElementById('totalCreditos').textContent = '1.250';
@@ -355,7 +366,6 @@
             }
         }
 
-        // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
             carregarDashboard();
         });
