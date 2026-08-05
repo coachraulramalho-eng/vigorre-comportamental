@@ -10,9 +10,20 @@ export async function POST(request) {
   try {
     const { usuario_id, plano_id } = await request.json()
 
+    // Validar dados
+    if (!usuario_id || typeof usuario_id !== 'string') {
+      return NextResponse.json(
+        { error: 'Usuário inválido' },
+        { status: 400 }
+      )
+    }
+
     const plano = getPlano(plano_id)
     if (!plano) {
-      return NextResponse.json({ error: 'Plano não encontrado' }, { status: 404 })
+      return NextResponse.json(
+        { error: 'Plano não encontrado' },
+        { status: 404 }
+      )
     }
 
     const order_nsu = randomUUID()
@@ -25,12 +36,21 @@ export async function POST(request) {
         usuario_id: usuario_id,
         produto: plano.nome,
         valor_total: plano.preco,
-        status: 'pending'
+        status: 'pending',
+        tipo: plano.tipo || 'credito',
+        quantidade: plano.quantidade || 1,
+        metadata: {
+          plano_id: plano_id,
+          cupom: plano.cupom || null
+        }
       })
 
     if (pedidoError) {
-      console.error('Erro ao criar pedido:', pedidoError)
-      return NextResponse.json({ error: 'Erro ao criar pedido' }, { status: 500 })
+      console.error('❌ Erro ao criar pedido:', pedidoError)
+      return NextResponse.json(
+        { error: 'Erro ao criar pedido' },
+        { status: 500 }
+      )
     }
 
     // Criar preferência no Mercado Pago
@@ -67,8 +87,11 @@ export async function POST(request) {
     const data = await response.json()
 
     if (!response.ok) {
-      console.error('Erro Mercado Pago:', data)
-      return NextResponse.json({ error: 'Erro ao criar link de pagamento' }, { status: 500 })
+      console.error('❌ Erro Mercado Pago:', data)
+      return NextResponse.json(
+        { error: 'Erro ao criar link de pagamento' },
+        { status: 500 }
+      )
     }
 
     return NextResponse.json({
@@ -79,6 +102,9 @@ export async function POST(request) {
 
   } catch (error) {
     console.error('❌ Erro:', error)
-    return NextResponse.json({ error: 'Erro interno' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'Erro interno do servidor' },
+      { status: 500 }
+    )
   }
 }
