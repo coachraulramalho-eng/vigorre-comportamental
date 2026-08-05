@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Empresa | VIGORRE ONE™</title>
+    <title>Dashboard Organização | VIGORRE ONE™</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,6 +33,9 @@
             min-height: 100vh;
         }
 
+        /* ============================================ */
+        /* SIDEBAR - MENU FIXO                        */
+        /* ============================================ */
         .sidebar {
             position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
             background: var(--navy); color: white; padding: 24px 20px;
@@ -69,6 +72,13 @@
         /* ============================================ */
         /* SUBTÍTULOS DO MENU                          */
         /* ============================================ */
+        .sidebar .nav {
+            list-style: none;
+            flex: 1;
+            margin: 0;
+            padding: 0;
+        }
+        .sidebar .nav li { margin-bottom: 2px; }
         .sidebar .nav .nav-subtitle {
             font-size: 0.55rem;
             font-weight: 700;
@@ -83,15 +93,6 @@
             padding-top: 4px;
             border-top: none;
         }
-        .sidebar .nav a .icon {
-            font-size: 1.1rem;
-            width: 24px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .sidebar .nav { list-style: none; flex: 1; }
-        .sidebar .nav li { margin-bottom: 2px; }
         .sidebar .nav a {
             display: flex; align-items: center; gap: 12px; padding: 10px 14px;
             border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
@@ -102,8 +103,13 @@
         .sidebar .nav a.active {
             background: rgba(217,119,6,0.12); color: white; border-left: 3px solid var(--gold);
         }
-        .sidebar .nav .divider { height: 1px; background: rgba(255,255,255,0.04); margin: 12px 0; }
-        .sidebar .logout { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .sidebar .nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; flex-shrink: 0; }
+
+        .sidebar .logout {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
         .sidebar .logout a {
             display: flex; align-items: center; gap: 12px; padding: 10px 14px;
             border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
@@ -127,6 +133,9 @@
             .mobile-overlay.active { display: block; }
         }
 
+        /* ============================================ */
+        /* MAIN CONTENT                                */
+        /* ============================================ */
         .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -147,30 +156,6 @@
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
 
-        .btn-secondary {
-            padding: 10px 24px; background: var(--gray-100); color: var(--gray-700);
-            border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
-            font-weight: 600; font-size: 0.875rem; cursor: pointer;
-            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
-        }
-        .btn-secondary:hover { background: var(--gray-200); }
-        .btn-success {
-            padding: 10px 24px; background: var(--green); color: white;
-            border: none; border-radius: var(--radius-sm);
-            font-weight: 600; font-size: 0.875rem; cursor: pointer;
-            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
-        }
-        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.25); }
-        .btn-action {
-            padding: 4px 12px; border: none; border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.7rem;
-            cursor: pointer; transition: var(--transition); text-decoration: none; display: inline-block;
-        }
-        .btn-action-primary { background: var(--blue); color: white; }
-        .btn-action-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(29,78,216,0.2); }
-        .btn-action-secondary { background: var(--gray-100); color: var(--gray-700); }
-        .btn-action-secondary:hover { background: var(--gray-200); }
-
         .cards-grid {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px;
         }
@@ -186,12 +171,6 @@
             font-family: 'Poppins', sans-serif;
             font-size: 1.8rem; font-weight: 700; color: var(--gray-900);
         }
-        .card .card-change { font-size: 0.7rem; font-weight: 600; }
-        .card .card-change.up { color: var(--green); }
-        .card .card-change.down { color: var(--red); }
-
-        @media (max-width: 1200px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { .cards-grid { grid-template-columns: 1fr; } }
 
         .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
         .content-card {
@@ -204,29 +183,29 @@
         }
         @media (max-width: 1200px) { .content-grid { grid-template-columns: 1fr; } }
 
-        .participante-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 0; border-bottom: 1px solid var(--gray-100);
+        .info-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;
         }
-        .participante-item:last-child { border-bottom: none; }
-        .participante-item .info .nome { font-weight: 600; font-size: 0.9rem; color: var(--gray-800); }
-        .participante-item .info .email { font-size: 0.8rem; color: var(--gray-500); }
-        .participante-item .status {
-            font-size: 0.7rem; font-weight: 600; padding: 4px 12px; border-radius: var(--radius-full);
+        .info-card {
+            background: var(--gray-50); padding: 16px 20px; border-radius: var(--radius-sm);
         }
-        .participante-item .status.concluido { background: #D1FAE5; color: #065F46; }
-        .participante-item .status.pendente { background: #FEF3C7; color: #92400E; }
-        .participante-item .status.inativo { background: #FEE2E2; color: #991B1B; }
+        .info-card label { font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .info-card .value { font-weight: 600; font-size: 1rem; color: var(--gray-800); }
 
-        .consumo-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 0.85rem;
+        .btn-action {
+            padding: 4px 12px; border: none; border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.7rem;
+            cursor: pointer; transition: var(--transition); text-decoration: none; display: inline-block;
         }
-        .consumo-item:last-child { border-bottom: none; }
-        .consumo-item .consumo-nome { font-weight: 600; color: var(--gray-700); }
-        .consumo-item .consumo-valor { font-weight: 700; color: var(--gold); }
+        .btn-action-primary { background: var(--blue); color: white; }
+        .btn-action-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(29,78,216,0.2); }
+        .btn-action-secondary { background: var(--gray-100); color: var(--gray-700); }
+        .btn-action-secondary:hover { background: var(--gray-200); }
 
-        .chart-container { height: 200px; position: relative; }
+        @media (max-width: 768px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .cards-grid { grid-template-columns: 1fr; }
+        }
 
         .toast {
             position: fixed; top: 24px; right: 24px; background: white;
@@ -244,25 +223,12 @@
             from { opacity: 0; transform: translateX(120%); }
             to { opacity: 1; transform: translateX(0); }
         }
-
-        .loading-shimmer {
-            height: 32px; width: 60%;
-            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: 4px;
-            display: inline-block;
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
     </style>
 </head>
 <body>
 
     <!-- ============================================ -->
-    <!-- SIDEBAR - MENU COM SUBTÍTULOS               -->
+    <!-- SIDEBAR - MENU FIXO COMPLETO                -->
     <!-- ============================================ -->
     <aside class="sidebar" id="sidebar">
         <a href="/dashboard.html" class="logo">
@@ -274,20 +240,20 @@
         </a>
         <div class="user-info">
             <div class="name" id="userName">Carregando...</div>
-            <div class="role"><span class="badge">🏢 Empresa</span></div>
+            <div class="role"><span class="badge">🏢 Organização</span></div>
         </div>
 
         <!-- ============================================ -->
-        <!-- MENU COM SUBTÍTULOS                         -->
+        <!-- MENU COMPLETO COM TODOS OS LINKS            -->
         <!-- ============================================ -->
         <ul class="nav">
             <!-- ===== DASHBOARD ===== -->
             <li class="nav-subtitle">📊 DASHBOARD</li>
-            <li><a href="/dashboard.html" class="active"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="/dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
 
             <!-- ===== GESTÃO ===== -->
             <li class="nav-subtitle">🏢 GESTÃO</li>
-            <li><a href="/organizacao/dashboard.html"><span class="icon">🏢</span> Organização</a></li>
+            <li><a href="/organizacao/dashboard.html" class="active"><span class="icon">🏢</span> Organização</a></li>
             <li><a href="/organizacao/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
             <li><a href="/vagas/index.html"><span class="icon">💼</span> Vagas</a></li>
 
@@ -326,76 +292,70 @@
     <main class="main">
         <div class="main-header">
             <div>
-                <h1>🏢 Dashboard Empresa</h1>
-                <p class="subtitle">Visão geral da sua organização</p>
+                <h1>🏢 Dashboard Organização</h1>
+                <p class="subtitle">Gerencie as configurações e informações da sua organização</p>
             </div>
             <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
         </div>
 
         <!-- CARDS -->
-        <div class="cards-grid" id="cardsGrid">
+        <div class="cards-grid">
             <div class="card" onclick="window.location.href='/organizacao/participantes/index.html'">
                 <div class="card-icon">👥</div>
                 <div class="card-label">Participantes</div>
-                <div class="card-value" id="totalParticipantes"><span class="loading-shimmer"></span></div>
-                <div class="card-change up">✅ Ativos</div>
+                <div class="card-value" id="totalParticipantes">0</div>
             </div>
             <div class="card" onclick="window.location.href='/relatorios/index.html'">
                 <div class="card-icon">📄</div>
                 <div class="card-label">Relatórios</div>
-                <div class="card-value" id="totalRelatorios"><span class="loading-shimmer"></span></div>
-                <div class="card-change up">📄 Gerados</div>
+                <div class="card-value" id="totalRelatorios">0</div>
             </div>
             <div class="card" onclick="window.location.href='/creditos/index.html'">
                 <div class="card-icon">💳</div>
                 <div class="card-label">Créditos</div>
-                <div class="card-value" id="totalCreditos"><span class="loading-shimmer"></span></div>
-                <div class="card-change up">💳 Disponíveis</div>
+                <div class="card-value" id="totalCreditos">0</div>
             </div>
             <div class="card" onclick="window.location.href='/laudos/index.html'">
                 <div class="card-icon">📋</div>
                 <div class="card-label">Laudos</div>
-                <div class="card-value" id="totalLaudos"><span class="loading-shimmer"></span></div>
-                <div class="card-change up">📋 Emitidos</div>
+                <div class="card-value" id="totalLaudos">0</div>
             </div>
         </div>
 
-        <!-- CONTENT -->
+        <!-- CONTENT GRID -->
         <div class="content-grid">
             <div>
-                <!-- Participantes -->
+                <!-- Informações da Organização -->
                 <div class="content-card">
-                    <h3>📋 Últimos Participantes</h3>
-                    <div id="listaParticipantes"></div>
-                    <a href="/organizacao/participantes/index.html" style="color:var(--blue);font-size:0.85rem;font-weight:600;text-decoration:none;">Ver todos →</a>
-                </div>
-
-                <!-- Consumo de Créditos -->
-                <div class="content-card">
-                    <h3>💳 Consumo de Créditos por Participante</h3>
-                    <div id="listaConsumo"></div>
-                </div>
-
-                <!-- Gráfico DISC -->
-                <div class="content-card">
-                    <h3>📊 Distribuição DISC</h3>
-                    <div class="chart-container"><canvas id="discChart"></canvas></div>
+                    <h3>📋 Informações da Organização</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <label>Nome da Organização</label>
+                            <div class="value" id="orgNome">Carregando...</div>
+                        </div>
+                        <div class="info-card">
+                            <label>CNPJ</label>
+                            <div class="value" id="orgCnpj">Carregando...</div>
+                        </div>
+                        <div class="info-card">
+                            <label>Segmento</label>
+                            <div class="value" id="orgSegmento">Carregando...</div>
+                        </div>
+                        <div class="info-card">
+                            <label>Status</label>
+                            <div class="value" id="orgStatus">✅ Ativo</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div>
-                <!-- Insights -->
-                <div class="content-card">
-                    <h3>💡 Insights Rápidos</h3>
-                    <div id="insightsContent"></div>
-                </div>
-
                 <!-- Ações Rápidas -->
                 <div class="content-card" style="background:linear-gradient(135deg,var(--navy),var(--gray-800));color:white;">
                     <h3 style="color:white;">📌 Ações Rápidas</h3>
                     <div style="margin-top:8px;">
-                        <a href="/organizacao/participantes/index.html?action=novo" class="btn-action btn-action-primary" style="display:block;text-align:center;margin-bottom:8px;padding:10px;">➕ Novo Participante</a>
-                        <a href="/creditos/index.html" class="btn-action btn-action-secondary" style="display:block;text-align:center;padding:10px;color:white;background:rgba(255,255,255,0.1);">💳 Comprar Créditos</a>
+                        <a href="/organizacao/configuracoes/index.html" class="btn-action btn-action-primary" style="display:block;text-align:center;margin-bottom:8px;padding:10px;background:var(--gold);color:var(--navy);">⚙️ Configurações</a>
+                        <a href="/organizacao/participantes/index.html" class="btn-action btn-action-secondary" style="display:block;text-align:center;padding:10px;color:white;background:rgba(255,255,255,0.1);">👥 Gerenciar Participantes</a>
                     </div>
                 </div>
             </div>
@@ -413,18 +373,12 @@
     <!-- ============================================ -->
     <!-- SCRIPTS                                     -->
     <!-- ============================================ -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
     <script src="/middleware/auth-guard.js"></script>
-    <script src="/admin/financeiro/financeiro-conexao.js"></script>
 
     <script>
         'use strict';
-
-        let empresaId = null;
-        let participantes = [];
-        let consumoData = {};
 
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
@@ -437,27 +391,13 @@
             }
         }
 
-        function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
-            if (type === 'error') icon.textContent = '❌';
-            else if (type === 'warning') icon.textContent = '⚠️';
-            else icon.textContent = '✅';
-            msg.textContent = message;
-            toast.className = 'toast show ' + type;
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => { toast.classList.remove('show'); }, 4000);
-        }
-
         function recarregarDados() {
-            showToast('🔄 Atualizando dados...', 'success');
             carregarDashboard();
         }
 
         async function carregarDashboard() {
             try {
-                console.log('🏢 Carregando Dashboard Empresa...');
+                console.log('🏢 Dashboard Organização - VIGORRE ONE™');
 
                 if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
                     window.location.href = '/login.html';
@@ -465,392 +405,32 @@
                 }
 
                 var user = window.VigorreAuth.getCurrentUser();
-                if (!user || (user.role !== 'organizacao' && user.role !== 'empresa')) {
+                if (!user) {
                     window.location.href = '/login.html';
                     return;
                 }
 
-                document.getElementById('userName').textContent = user.name || 'Empresa';
-                empresaId = user.companyId || user.id;
+                document.getElementById('userName').textContent = user.name || 'Organização';
 
-                var supabaseClient = getSupabaseClient();
+                // Dados mock - substituir com Supabase
+                document.getElementById('orgNome').textContent = user.companyName || 'Organização Exemplo';
+                document.getElementById('orgCnpj').textContent = '12.345.678/0001-99';
+                document.getElementById('orgSegmento').textContent = 'Tecnologia';
+                document.getElementById('totalParticipantes').textContent = '12';
+                document.getElementById('totalRelatorios').textContent = '8';
+                document.getElementById('totalCreditos').textContent = '1.250';
+                document.getElementById('totalLaudos').textContent = '3';
 
-                if (!supabaseClient) {
-                    carregarMock();
-                    return;
-                }
-
-                await carregarParticipantes();
-                await carregarCreditos();
-                await carregarRelatorios();
-                await carregarLaudos();
-                await carregarConsumo();
-                await carregarGraficoDISC();
-                await carregarInsights();
-
-                console.log('✅ Dashboard Empresa carregado!');
+                console.log('✅ Dashboard Organização carregado!');
 
             } catch (error) {
                 console.error('❌ Erro ao carregar dashboard:', error);
-                carregarMock();
             }
-        }
-
-        async function carregarParticipantes() {
-            try {
-                var supabaseClient = getSupabaseClient();
-                if (!supabaseClient) return;
-
-                var { data, error } = await supabaseClient
-                    .from('participants')
-                    .select('*')
-                    .eq('company_id', empresaId)
-                    .order('created_at', { ascending: false });
-
-                if (error) throw error;
-
-                participantes = data || [];
-                document.getElementById('totalParticipantes').textContent = participantes.length;
-
-                var container = document.getElementById('listaParticipantes');
-                var recentes = participantes.slice(0, 5);
-
-                if (recentes.length === 0) {
-                    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--gray-400);">📭 Nenhum participante cadastrado</div>';
-                    return;
-                }
-
-                container.innerHTML = recentes.map(p => `
-                    <div class="participante-item">
-                        <div class="info">
-                            <div class="nome">${p.name || 'Participante'}</div>
-                            <div class="email">${p.email || '--'}</div>
-                        </div>
-                        <div>
-                            <span class="status ${p.status === 'active' ? 'concluido' : 'inativo'}">${p.status === 'active' ? '✅ Ativo' : '⛔ Inativo'}</span>
-                            <button class="btn-action btn-action-secondary" onclick="window.location.href='/participante/index.html?id=${p.id}'" style="margin-left:8px;">👁️</button>
-                        </div>
-                    </div>
-                `).join('');
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar participantes:', error);
-            }
-        }
-
-        async function carregarCreditos() {
-            try {
-                var supabaseClient = getSupabaseClient();
-                if (!supabaseClient) return;
-
-                var { data, error } = await supabaseClient
-                    .from('carteiras')
-                    .select('saldo')
-                    .eq('empresa_id', empresaId);
-
-                if (error) throw error;
-
-                var total = 0;
-                if (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        total += data[i].saldo || 0;
-                    }
-                }
-
-                document.getElementById('totalCreditos').textContent = formatarNumero(total);
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar créditos:', error);
-            }
-        }
-
-        async function carregarRelatorios() {
-            try {
-                var supabaseClient = getSupabaseClient();
-                if (!supabaseClient) return;
-
-                var { data, error } = await supabaseClient
-                    .from('resultados')
-                    .select('id')
-                    .eq('empresa_id', empresaId);
-
-                if (error) throw error;
-
-                document.getElementById('totalRelatorios').textContent = data ? data.length : 0;
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar relatórios:', error);
-            }
-        }
-
-        async function carregarLaudos() {
-            try {
-                var supabaseClient = getSupabaseClient();
-                if (!supabaseClient) return;
-
-                var { data, error } = await supabaseClient
-                    .from('resultados_ia')
-                    .select('id')
-                    .eq('empresa_id', empresaId);
-
-                if (error) throw error;
-
-                document.getElementById('totalLaudos').textContent = data ? data.length : 0;
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar laudos:', error);
-            }
-        }
-
-        async function carregarConsumo() {
-            try {
-                var supabaseClient = getSupabaseClient();
-                if (!supabaseClient) return;
-
-                var { data, error } = await supabaseClient
-                    .from('transacoes')
-                    .select('*')
-                    .eq('empresa_id', empresaId)
-                    .eq('tipo', 'saida');
-
-                if (error) throw error;
-
-                consumoData = {};
-                if (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var t = data[i];
-                        var key = t.usuario_id || 'unknown';
-                        if (!consumoData[key]) {
-                            consumoData[key] = { total: 0, count: 0, nome: 'Participante' };
-                        }
-                        consumoData[key].total += t.valor || 0;
-                        consumoData[key].count += 1;
-                    }
-                }
-
-                if (Object.keys(consumoData).length > 0) {
-                    var ids = Object.keys(consumoData).filter(id => id !== 'unknown');
-                    if (ids.length > 0) {
-                        var { data: participants } = await supabaseClient
-                            .from('participants')
-                            .select('id, name')
-                            .in('id', ids);
-
-                        if (participants) {
-                            for (var j = 0; j < participants.length; j++) {
-                                if (consumoData[participants[j].id]) {
-                                    consumoData[participants[j].id].nome = participants[j].name || 'Participante';
-                                }
-                            }
-                        }
-                    }
-                }
-
-                renderizarConsumo();
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar consumo:', error);
-            }
-        }
-
-        function renderizarConsumo() {
-            var container = document.getElementById('listaConsumo');
-
-            var items = Object.entries(consumoData)
-                .filter(([key, value]) => key !== 'unknown')
-                .sort((a, b) => b[1].total - a[1].total)
-                .slice(0, 10);
-
-            if (items.length === 0) {
-                container.innerHTML = '<div style="text-align:center;padding:12px;color:var(--gray-400);font-size:0.85rem;">📭 Nenhum consumo registrado</div>';
-                return;
-            }
-
-            container.innerHTML = items.map(([key, value]) => `
-                <div class="consumo-item">
-                    <span class="consumo-nome">${value.nome}</span>
-                    <span class="consumo-valor">${value.total} créditos (${value.count}x)</span>
-                </div>
-            `).join('');
-        }
-
-        async function carregarGraficoDISC() {
-            try {
-                var supabaseClient = getSupabaseClient();
-                if (!supabaseClient) return;
-
-                var { data, error } = await supabaseClient
-                    .from('resultados')
-                    .select('resultado')
-                    .eq('teste_id', '11111111-1111-1111-1111-111111111111')
-                    .eq('empresa_id', empresaId);
-
-                if (error) throw error;
-
-                var discCount = { D: 0, I: 0, S: 0, C: 0 };
-                if (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var resultado = data[i].resultado;
-                        if (resultado && resultado.percentuais) {
-                            var pcts = resultado.percentuais;
-                            var max = 0;
-                            var dom = 'D';
-                            for (var k in pcts) {
-                                if (pcts[k] > max) { max = pcts[k]; dom = k; }
-                            }
-                            if (discCount[dom] !== undefined) discCount[dom]++;
-                        }
-                    }
-                }
-
-                var ctx = document.getElementById('discChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
-                        datasets: [{
-                            label: 'Perfis',
-                            data: [discCount.D, discCount.I, discCount.S, discCount.C],
-                            backgroundColor: ['#EF4444CC', '#3B82F6CC', '#10B981CC', '#8B5CF6CC'],
-                            borderColor: ['#EF4444', '#3B82F6', '#10B981', '#8B5CF6'],
-                            borderWidth: 2,
-                            borderRadius: 8
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { beginAtZero: true, grid: { color: 'rgba(10,37,64,0.04)' }, ticks: { color: '#94A3B8' } },
-                            x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 10 } } }
-                        }
-                    }
-                });
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar gráfico DISC:', error);
-            }
-        }
-
-        async function carregarInsights() {
-            try {
-                var supabaseClient = getSupabaseClient();
-                if (!supabaseClient) {
-                    carregarInsightsMock();
-                    return;
-                }
-
-                var { count: total } = await supabaseClient
-                    .from('participants')
-                    .select('*', { count: 'exact', head: true })
-                    .eq('company_id', empresaId);
-
-                var { count: ativos } = await supabaseClient
-                    .from('participants')
-                    .select('*', { count: 'exact', head: true })
-                    .eq('company_id', empresaId)
-                    .eq('status', 'active');
-
-                var { count: pendentes } = await supabaseClient
-                    .from('participants')
-                    .select('*', { count: 'exact', head: true })
-                    .eq('company_id', empresaId)
-                    .eq('status', 'pending');
-
-                var container = document.getElementById('insightsContent');
-
-                var insights = [];
-                if (pendentes > 0) {
-                    insights.push({ icon: '📌', title: `${pendentes} participantes pendentes`, desc: 'Convide-os para completar os testes' });
-                }
-                if (total > 0 && ativos > 0) {
-                    insights.push({ icon: '📊', title: `${Math.round((ativos/total)*100)}% de participação ativa`, desc: `${ativos} de ${total} participantes` });
-                }
-                if (Object.keys(consumoData).length > 0) {
-                    var totalConsumo = Object.values(consumoData).reduce((s, v) => s + v.total, 0);
-                    insights.push({ icon: '💳', title: `${formatarNumero(totalConsumo)} créditos consumidos`, desc: 'Total de créditos utilizados' });
-                }
-
-                if (insights.length === 0) {
-                    insights.push({ icon: '💡', title: 'Comece a usar a plataforma', desc: 'Cadastre participantes e realize testes' });
-                }
-
-                container.innerHTML = insights.map(i => `
-                    <div style="padding:8px 0;border-bottom:1px solid var(--gray-100);">
-                        <div style="font-weight:600;font-size:0.9rem;">${i.icon} ${i.title}</div>
-                        <div style="font-size:0.8rem;color:var(--gray-500);">${i.desc}</div>
-                    </div>
-                `).join('');
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar insights:', error);
-                carregarInsightsMock();
-            }
-        }
-
-        function carregarInsightsMock() {
-            var container = document.getElementById('insightsContent');
-            container.innerHTML = `
-                <div style="padding:8px 0;border-bottom:1px solid var(--gray-100);">
-                    <div style="font-weight:600;font-size:0.9rem;">💡 3 participantes pendentes</div>
-                    <div style="font-size:0.8rem;color:var(--gray-500);">Convide-os para completar os testes</div>
-                </div>
-                <div style="padding:8px 0;border-bottom:1px solid var(--gray-100);">
-                    <div style="font-weight:600;font-size:0.9rem;">📊 75% de participação ativa</div>
-                    <div style="font-size:0.8rem;color:var(--gray-500);">9 de 12 participantes</div>
-                </div>
-                <div style="padding:8px 0;">
-                    <div style="font-weight:600;font-size:0.9rem;">💳 320 créditos consumidos</div>
-                    <div style="font-size:0.8rem;color:var(--gray-500);">Total de créditos utilizados</div>
-                </div>
-            `;
-        }
-
-        function carregarMock() {
-            document.getElementById('totalParticipantes').textContent = '12';
-            document.getElementById('totalRelatorios').textContent = '8';
-            document.getElementById('totalCreditos').textContent = '1.250';
-            document.getElementById('totalLaudos').textContent = '3';
-
-            var container = document.getElementById('listaParticipantes');
-            container.innerHTML = `
-                <div class="participante-item">
-                    <div class="info"><div class="nome">Ana Silva</div><div class="email">ana@techcorp.com</div></div>
-                    <div><span class="status concluido">✅ Ativo</span></div>
-                </div>
-                <div class="participante-item">
-                    <div class="info"><div class="nome">João Santos</div><div class="email">joao@techcorp.com</div></div>
-                    <div><span class="status concluido">✅ Ativo</span></div>
-                </div>
-                <div class="participante-item">
-                    <div class="info"><div class="nome">Maria Oliveira</div><div class="email">maria@techcorp.com</div></div>
-                    <div><span class="status pendente">⏳ Pendente</span></div>
-                </div>
-            `;
-
-            var consumoContainer = document.getElementById('listaConsumo');
-            consumoContainer.innerHTML = `
-                <div class="consumo-item"><span class="consumo-nome">Ana Silva</span><span class="consumo-valor">45 créditos (12x)</span></div>
-                <div class="consumo-item"><span class="consumo-nome">João Santos</span><span class="consumo-valor">32 créditos (8x)</span></div>
-                <div class="consumo-item"><span class="consumo-nome">Pedro Lima</span><span class="consumo-valor">18 créditos (5x)</span></div>
-                <div class="consumo-item"><span class="consumo-nome">Carla Souza</span><span class="consumo-valor">12 créditos (3x)</span></div>
-            `;
-
-            carregarInsightsMock();
-            showToast('📊 Usando dados de exemplo', 'warning');
-        }
-
-        function formatarNumero(valor) {
-            return valor.toLocaleString('pt-BR');
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🏢 Dashboard Empresa - VIGORRE ONE™');
             carregarDashboard();
         });
-
-        console.log('✅ Dashboard Empresa carregado com sucesso!');
     </script>
 
 </body>
