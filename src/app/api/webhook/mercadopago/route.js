@@ -8,6 +8,15 @@ export async function POST(request) {
     const body = await request.json()
     console.log('📥 Webhook recebido:', body)
 
+    // Verificar se o token existe
+    if (!MP_ACCESS_TOKEN) {
+      console.error('❌ MERCADO_PAGO_ACCESS_TOKEN não configurado!')
+      return NextResponse.json(
+        { error: 'Erro de configuração' },
+        { status: 500 }
+      )
+    }
+
     const paymentId = body.data?.id
     if (!paymentId) {
       return NextResponse.json(
