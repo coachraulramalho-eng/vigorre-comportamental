@@ -10,6 +10,15 @@ export async function POST(request) {
   try {
     const { usuario_id, plano_id } = await request.json()
 
+    // Validar se o token existe
+    if (!MP_ACCESS_TOKEN) {
+      console.error('❌ MERCADO_PAGO_ACCESS_TOKEN não configurado!')
+      return NextResponse.json(
+        { error: 'Erro de configuração do pagamento' },
+        { status: 500 }
+      )
+    }
+
     // Validar dados
     if (!usuario_id || typeof usuario_id !== 'string') {
       return NextResponse.json(
