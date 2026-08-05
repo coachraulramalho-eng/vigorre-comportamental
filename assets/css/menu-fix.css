@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[NOME DA PÁGINA] | VIGORRE ONE™</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- CSS do Menu Fixo -->
+    <style>
+        /* Cole aqui o CSS da seção 1 */
+    </style>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- SIDEBAR FIXA (MENU LATERAL)                -->
+    <!-- ============================================ -->
+    <aside class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <a href="/organizacao/dashboard.html" class="logo">
+            <img src="/assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Intelligence Enterprise</span>
+            </div>
+        </a>
+
+        <!-- Info do Usuário -->
+        <div class="user-info">
+            <div class="name" id="userName">Carregando...</div>
+            <div class="role"><span class="badge">🏢 Organização</span></div>
+        </div>
+
+        <!-- Menu de Navegação -->
+        <ul class="nav">
+            <!-- Dashboard -->
+            <li class="nav-subtitle">📊 DASHBOARD</li>
+            <li><a href="/organizacao/dashboard.html" data-modulo="dashboard"><span class="icon">📊</span> Dashboard</a></li>
+
+            <!-- Gestão -->
+            <li class="nav-subtitle">🏢 GESTÃO</li>
+            <li><a href="/organizacao/participantes/index.html" data-modulo="participantes"><span class="icon">👥</span> Participantes</a></li>
+            <li><a href="/organizacao/vagas/index.html" data-modulo="vagas"><span class="icon">💼</span> Vagas</a></li>
+            <li><a href="/organizacao/configuracoes/index.html" data-modulo="configuracoes"><span class="icon">⚙️</span> Configurações</a></li>
+
+            <!-- Avaliações -->
+            <li class="nav-subtitle">📝 AVALIAÇÕES</li>
+            <li><a href="/organizacao/testes/index.html" data-modulo="testes"><span class="icon">📝</span> Testes</a></li>
+            <li><a href="/organizacao/relatorios/index.html" data-modulo="relatorios"><span class="icon">📊</span> Relatórios</a></li>
+            <li><a href="/organizacao/laudos/index.html" data-modulo="laudos"><span class="icon">📄</span> Laudos</a></li>
+
+            <!-- Financeiro -->
+            <li class="nav-subtitle">💰 FINANCEIRO</li>
+            <li><a href="/organizacao/creditos/index.html" data-modulo="creditos"><span class="icon">💳</span> Créditos</a></li>
+
+            <!-- Inteligência -->
+            <li class="nav-subtitle">📈 INTELIGÊNCIA</li>
+            <li><a href="/bi/recrutador/index.html" data-modulo="bi"><span class="icon">📊</span> BI Organização</a></li>
+            <li><a href="/bi/analytics.html" data-modulo="bi"><span class="icon">📈</span> People Analytics</a></li>
+        </ul>
+
+        <!-- Logout -->
+        <div class="logout">
+            <a href="#" onclick="logout()"><span class="icon">🚪</span> Sair</a>
+        </div>
+    </aside>
+
+    <!-- Overlay Mobile -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- ============================================ -->
+    <!-- CONTEÚDO PRINCIPAL                         -->
+    <!-- ============================================ -->
+    <main class="main">
+        <div class="main-header">
+            <h1>🏢 Dashboard Organização</h1>
+            <p class="subtitle">Gerencie as configurações e informações da sua organização</p>
+        </div>
+        
+        <!-- Seu conteúdo aqui -->
+    </main>
+
+    <!-- Scripts -->
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
+    
+    <!-- Cole aqui o JS da seção 2 -->
+    <script>
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                localStorage.removeItem('vigorre_session');
+                localStorage.removeItem('vigorre_role');
+                window.location.href = '/login.html';
+            }
+        }
+    </script>
+
+</body>
+</html>
