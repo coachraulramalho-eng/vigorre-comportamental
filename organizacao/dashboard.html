@@ -11,7 +11,7 @@
 
     <style>
         /* ============================================ */
-        /* CSS COMPLETO                                */
+        /* CSS COMPLETO (identidade preservada)        */
         /* ============================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -228,10 +228,10 @@
 <body>
 
     <!-- ============================================ -->
-    <!-- SIDEBAR - MENU ORGANIZAÇÃO CORRIGIDO        -->
+    <!-- SIDEBAR - MENU ORGANIZAÇÃO (CORRIGIDO)     -->
     <!-- ============================================ -->
     <aside class="sidebar" id="sidebar">
-        <a href="/dashboard.html" class="logo">
+        <a href="/organizacao/dashboard.html" class="logo">
             <img src="/assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" onerror="this.style.display='none'" />
             <div class="logo-text">
                 <span class="name">VIGORRE ONE<span class="tm">™</span></span>
@@ -243,39 +243,33 @@
             <div class="role"><span class="badge">🏢 Organização</span></div>
         </div>
 
-        <!-- ============================================ -->
-        <!-- MENU ORGANIZAÇÃO - CORRIGIDO                -->
-        <!-- ============================================ -->
         <ul class="nav">
             <!-- ===== DASHBOARD ===== -->
             <li class="nav-subtitle">📊 DASHBOARD</li>
-            <li><a href="/dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="/organizacao/dashboard.html" data-modulo="dashboard"><span class="icon">📊</span> Dashboard</a></li>
 
             <!-- ===== GESTÃO ===== -->
             <li class="nav-subtitle">🏢 GESTÃO</li>
-            <li><a href="/organizacao/dashboard.html" class="active"><span class="icon">🏢</span> Organização</a></li>
-            <li><a href="/organizacao/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
-            <li><a href="/vagas/index.html"><span class="icon">💼</span> Vagas</a></li>
+            <li><a href="/organizacao/participantes/index.html" data-modulo="participantes"><span class="icon">👥</span> Participantes</a></li>
+            <li><a href="/organizacao/vagas/index.html" data-modulo="vagas"><span class="icon">💼</span> Vagas</a></li>
+            <li><a href="/organizacao/configuracoes/index.html" data-modulo="configuracoes"><span class="icon">⚙️</span> Configurações</a></li>
 
             <!-- ===== AVALIAÇÕES ===== -->
             <li class="nav-subtitle">📝 AVALIAÇÕES</li>
-            <li><a href="/testes/index.html"><span class="icon">📝</span> Testes</a></li>
-            <li><a href="/laudos/index.html"><span class="icon">📄</span> Laudos</a></li>
-            <li><a href="/relatorios/index.html"><span class="icon">📊</span> Relatórios</a></li>
+            <li><a href="/organizacao/testes/index.html" data-modulo="testes"><span class="icon">📝</span> Testes</a></li>
+            <li><a href="/organizacao/relatorios/index.html" data-modulo="relatorios"><span class="icon">📊</span> Relatórios</a></li>
+            <li><a href="/organizacao/laudos/index.html" data-modulo="laudos"><span class="icon">📄</span> Laudos</a></li>
 
             <!-- ===== CENTRAL FINANCEIRA ===== -->
+            <!-- Empresa vê apenas Créditos (seus créditos próprios). Financeiro global /admin é exclusivo Master/Staff (PRD 4.2) -->
             <li class="nav-subtitle">💰 CENTRAL FINANCEIRA</li>
-            <li><a href="/creditos/index.html"><span class="icon">💳</span> Créditos</a></li>
-            <li><a href="/admin/financeiro/index.html"><span class="icon">💰</span> Financeiro</a></li>
-            <li><a href="/admin/financeiro/extratos.html"><span class="icon">📊</span> Extratos</a></li>
-            <li><a href="/admin/financeiro/carteiras.html"><span class="icon">📋</span> Carteiras</a></li>
-            <li><a href="/admin/financeiro/cupons.html"><span class="icon">🎫</span> Cupons</a></li>
-            <li><a href="/admin/financeiro/assinaturas.html"><span class="icon">💳</span> Assinaturas</a></li>
-            <li><a href="/admin/financeiro/reembolsos.html"><span class="icon">💸</span> Reembolsos</a></li>
+            <li><a href="/organizacao/creditos/index.html" data-modulo="creditos"><span class="icon">💳</span> Créditos</a></li>
 
-            <!-- ===== SISTEMA ===== -->
-            <li class="nav-subtitle">⚙️ SISTEMA</li>
-            <li><a href="/config/index.html"><span class="icon">⚙️</span> Configurações</a></li>
+            <!-- ===== PEOPLE ANALYTICS / BI ===== -->
+            <li class="nav-subtitle">📈 INTELIGÊNCIA</li>
+            <li><a href="/bi/recrutador/index.html" data-modulo="bi"><span class="icon">📊</span> BI Organização</a></li>
+            <li><a href="/bi/analytics.html" data-modulo="bi"><span class="icon">📈</span> People Analytics</a></li>
+            <li><a href="/bi/executive-insights.html" data-modulo="bi"><span class="icon">💡</span> Executive Insights</a></li>
         </ul>
 
         <div class="logout">
@@ -304,17 +298,17 @@
                 <div class="card-label">Participantes</div>
                 <div class="card-value" id="totalParticipantes">0</div>
             </div>
-            <div class="card" onclick="window.location.href='/relatorios/index.html'">
+            <div class="card" onclick="window.location.href='/organizacao/relatorios/index.html'">
                 <div class="card-icon">📄</div>
                 <div class="card-label">Relatórios</div>
                 <div class="card-value" id="totalRelatorios">0</div>
             </div>
-            <div class="card" onclick="window.location.href='/creditos/index.html'">
+            <div class="card" onclick="window.location.href='/organizacao/creditos/index.html'">
                 <div class="card-icon">💳</div>
                 <div class="card-label">Créditos</div>
                 <div class="card-value" id="totalCreditos">0</div>
             </div>
-            <div class="card" onclick="window.location.href='/laudos/index.html'">
+            <div class="card" onclick="window.location.href='/organizacao/laudos/index.html'">
                 <div class="card-icon">📋</div>
                 <div class="card-label">Laudos</div>
                 <div class="card-value" id="totalLaudos">0</div>
@@ -355,6 +349,7 @@
                     <div style="margin-top:8px;">
                         <a href="/organizacao/configuracoes/index.html" class="btn-action btn-action-primary" style="display:block;text-align:center;margin-bottom:8px;padding:10px;background:var(--gold);color:var(--navy);">⚙️ Configurações</a>
                         <a href="/organizacao/participantes/index.html" class="btn-action btn-action-secondary" style="display:block;text-align:center;padding:10px;color:white;background:rgba(255,255,255,0.1);">👥 Gerenciar Participantes</a>
+                        <a href="/organizacao/creditos/index.html" class="btn-action btn-action-secondary" style="display:block;text-align:center;padding:10px;color:white;background:rgba(255,255,255,0.1);margin-top:8px;">💳 Comprar Créditos</a>
                     </div>
                 </div>
             </div>
@@ -375,6 +370,7 @@
     <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
     <script src="/middleware/auth-guard.js"></script>
+    <script src="/middleware/recruiter-guard.js"></script>
 
     <script>
         'use strict';
@@ -386,7 +382,13 @@
 
         function logout() {
             if (confirm('Deseja realmente sair?')) {
-                window.VigorreAuth.logout();
+                if (window.VigorreAuth && window.VigorreAuth.logout) {
+                    window.VigorreAuth.logout();
+                } else {
+                    localStorage.removeItem('vigorre_session');
+                    localStorage.removeItem('vigorre_role');
+                    window.location.href = '/login.html';
+                }
             }
         }
 
@@ -394,27 +396,64 @@
             carregarDashboard();
         }
 
+        // ===== DESTACA ITEM ATIVO NO MENU =====
+        function destacarItemAtivo() {
+            const atual = window.location.pathname;
+            document.querySelectorAll('.sidebar .nav a').forEach(link => {
+                const href = link.getAttribute('href');
+                if (!href) return;
+                link.classList.remove('active');
+                // Match exato ou por segmento do path
+                if (atual === href || atual.endsWith(href.replace(/^\//, ''))) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // ===== GUARDA DE ACESSO POR PERFIL (PRD 4.2) =====
+        function aplicarGuardaDeAcesso() {
+            // Matriz de acesso Empresa/Recrutador conforme PRD Cap. 4.2
+            const matriz = {
+                recrutador:  ['dashboard','participantes','testes','relatorios','laudos','creditos','vagas','configuracoes','bi'],
+                empresa:     ['dashboard','participantes','testes','relatorios','laudos','creditos','vagas','configuracoes','bi','financeiro_empresa'],
+                master:      ['dashboard','participantes','testes','relatorios','laudos','creditos','vagas','configuracoes','bi','financeiro','auditoria'],
+                staff:       ['dashboard','participantes','testes','relatorios','laudos','configuracoes']
+            };
+
+            const perfil = (localStorage.getItem('vigorre_role') || 'empresa').toLowerCase();
+            const permitidos = matriz[perfil] || matriz.empresa;
+
+            document.querySelectorAll('[data-modulo]').forEach(el => {
+                const modulo = el.dataset.modulo;
+                if (!permitidos.includes(modulo)) {
+                    el.closest('li').style.display = 'none';
+                }
+            });
+        }
+
         async function carregarDashboard() {
             try {
                 console.log('🏢 Dashboard Organização - VIGORRE ONE™');
 
-                if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
+                if (window.VigorreAuth && window.VigorreAuth.isAuthenticated && !window.VigorreAuth.isAuthenticated()) {
                     window.location.href = '/login.html';
                     return;
                 }
 
-                var user = window.VigorreAuth.getCurrentUser();
-                if (!user) {
-                    window.location.href = '/login.html';
-                    return;
-                }
+                const user = (window.VigorreAuth && window.VigorreAuth.getCurrentUser) ? window.VigorreAuth.getCurrentUser() : null;
 
-                document.getElementById('userName').textContent = user.name || 'Organização';
+                if (user) {
+                    document.getElementById('userName').textContent = user.name || user.companyName || 'Organização';
+                    document.getElementById('orgNome').textContent = user.companyName || 'Organização Exemplo';
+                } else {
+                    document.getElementById('userName').textContent = 'Organização';
+                    document.getElementById('orgNome').textContent = 'Organização Exemplo';
+                }
 
                 // Dados mock - substituir com Supabase
-                document.getElementById('orgNome').textContent = user.companyName || 'Organização Exemplo';
                 document.getElementById('orgCnpj').textContent = '12.345.678/0001-99';
                 document.getElementById('orgSegmento').textContent = 'Tecnologia';
+                document.getElementById('orgStatus').textContent = '✅ Ativo';
                 document.getElementById('totalParticipantes').textContent = '12';
                 document.getElementById('totalRelatorios').textContent = '8';
                 document.getElementById('totalCreditos').textContent = '1.250';
@@ -428,6 +467,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            destacarItemAtivo();
+            aplicarGuardaDeAcesso();
             carregarDashboard();
         });
     </script>
