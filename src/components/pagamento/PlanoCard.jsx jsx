@@ -1,0 +1,21 @@
+import { BotaoComprar } from './BotaoComprar'
+
+export function PlanoCard({ usuarioId, plano }) {
+  return (
+    <div className="border rounded-lg p-6 shadow-sm hover:shadow-md transition">
+      <h3 className="text-xl font-bold">{plano.nome}</h3>
+      <p className="text-gray-600 text-sm mt-1">{plano.descricao}</p>
+      <p className="text-3xl font-bold my-4">
+        R$ {plano.preco.toFixed(2)}
+      </p>
+      {plano.cupom && (
+        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+          Cupom: {plano.cupom}
+        </span>
+      )}
+      <BotaoComprar usuarioId={usuarioId} planoId={plano.id}>
+        Comprar agora
+      </BotaoComprar>
+    </div>
+  )
+}
