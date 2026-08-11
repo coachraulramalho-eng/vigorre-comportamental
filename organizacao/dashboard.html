@@ -275,6 +275,9 @@
             box-shadow: 0 8px 30px rgba(29,78,216,0.25);
         }
 
+        /* ============================================ */
+        /* CARDS DE ESTATÍSTICAS                       */
+        /* ============================================ */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -309,6 +312,74 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--gray-900);
+        }
+
+        /* ============================================ */
+        /* SUBTÍTULOS DE SEÇÃO DO DASHBOARD            */
+        /* ============================================ */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--gray-600);
+            margin: 32px 0 16px;
+        }
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        /* ============================================ */
+        /* GRID DE MÓDULOS                             */
+        /* ============================================ */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .module-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .module-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--cyan);
+        }
+        .module-card .m-icon {
+            font-size: 1.8rem;
+        }
+        .module-card .m-title {
+            font-weight: 700;
+            color: var(--gray-900);
+            font-size: 0.95rem;
+        }
+        .module-card .m-desc {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            line-height: 1.5;
+        }
+        .module-card .m-go {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-top: auto;
         }
 
         .content-grid {
@@ -439,6 +510,9 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
         }
         .sidebar::-webkit-scrollbar {
             width: 4px;
@@ -458,7 +532,7 @@
     <!-- SIDEBAR - MENU FIXO ORGANIZAÇÃO             -->
     <!-- ============================================ -->
     <aside class="sidebar" id="sidebar">
-        <a href="/dashboard.html" class="logo">
+        <a href="/organizacao/dashboard.html" class="logo">
             <span class="logo-text">
                 <span class="name">VIGORRE ONE<span class="tm">™</span></span>
                 <span class="sub">People Intelligence Enterprise</span>
@@ -470,38 +544,33 @@
         </div>
 
         <!-- ============================================ -->
-        <!-- MENU FIXO - TODOS OS MÓDULOS VISÍVEIS       -->
+        <!-- MENU FIXO - CORRETO E ORGANIZADO            -->
         <!-- ============================================ -->
         <ul class="nav">
             <!-- ===== DASHBOARD ===== -->
             <li class="nav-subtitle">📊 DASHBOARD</li>
-            <li><a href="/dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="/organizacao/dashboard.html" class="active"><span class="icon">📊</span> Dashboard</a></li>
 
             <!-- ===== GESTÃO ===== -->
             <li class="nav-subtitle">🏢 GESTÃO</li>
-            <li><a href="/organizacao/dashboard.html" class="active"><span class="icon">🏢</span> Organização</a></li>
             <li><a href="/organizacao/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
-            <li><a href="/vagas/index.html"><span class="icon">💼</span> Vagas</a></li>
+            <li><a href="/organizacao/vagas/index.html"><span class="icon">💼</span> Vagas</a></li>
 
             <!-- ===== AVALIAÇÕES ===== -->
             <li class="nav-subtitle">📝 AVALIAÇÕES</li>
-            <li><a href="/testes/index.html"><span class="icon">📝</span> Testes</a></li>
-            <li><a href="/laudos/index.html"><span class="icon">📄</span> Laudos</a></li>
-            <li><a href="/relatorios/index.html"><span class="icon">📊</span> Relatórios</a></li>
+            <li><a href="/organizacao/testes/index.html"><span class="icon">📝</span> Testes</a></li>
+            <li><a href="/organizacao/relatorios/index.html"><span class="icon">📊</span> Relatórios</a></li>
+            <li><a href="/organizacao/laudos/index.html"><span class="icon">📄</span> Laudos</a></li>
 
             <!-- ===== CENTRAL FINANCEIRA ===== -->
             <li class="nav-subtitle">💰 CENTRAL FINANCEIRA</li>
-            <li><a href="/creditos/index.html"><span class="icon">💳</span> Créditos</a></li>
-            <li><a href="/admin/financeiro/index.html"><span class="icon">💰</span> Financeiro</a></li>
-            <li><a href="/admin/financeiro/extratos.html"><span class="icon">📊</span> Extratos</a></li>
-            <li><a href="/admin/financeiro/carteiras.html"><span class="icon">📋</span> Carteiras</a></li>
-            <li><a href="/admin/financeiro/cupons.html"><span class="icon">🎫</span> Cupons</a></li>
-            <li><a href="/admin/financeiro/assinaturas.html"><span class="icon">💳</span> Assinaturas</a></li>
-            <li><a href="/admin/financeiro/reembolsos.html"><span class="icon">💸</span> Reembolsos</a></li>
+            <li><a href="/organizacao/creditos/index.html"><span class="icon">💳</span> Créditos</a></li>
+            <li><a href="/organizacao/financeiro/index.html"><span class="icon">💰</span> Financeiro</a></li>
+            <li><a href="/organizacao/financeiro/extratos.html"><span class="icon">🧾</span> Extratos</a></li>
 
             <!-- ===== SISTEMA ===== -->
             <li class="nav-subtitle">⚙️ SISTEMA</li>
-            <li><a href="/config/index.html"><span class="icon">⚙️</span> Configurações</a></li>
+            <li><a href="/organizacao/configuracoes/index.html"><span class="icon">⚙️</span> Configurações</a></li>
         </ul>
 
         <div class="logout">
@@ -517,41 +586,117 @@
     <main class="main">
         <div class="main-header">
             <div>
-                <h1>🏢 Dashboard Organização</h1>
-                <p class="subtitle">Gerencie as configurações e informações da sua organização</p>
+                <h1>🏢 Dashboard da Organização</h1>
+                <p class="subtitle">Visão geral da sua operação — gestão, avaliações e central financeira.</p>
             </div>
             <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
         </div>
 
-        <!-- CARDS -->
+        <!-- 📊 VISÃO GERAL -->
+        <div class="section-title">📊 Visão Geral</div>
         <div class="cards-grid">
             <div class="card" onclick="window.location.href='/organizacao/participantes/index.html'">
                 <div class="card-icon">👥</div>
                 <div class="card-label">Participantes</div>
                 <div class="card-value" id="totalParticipantes">0</div>
             </div>
-            <div class="card" onclick="window.location.href='/relatorios/index.html'">
-                <div class="card-icon">📄</div>
-                <div class="card-label">Relatórios</div>
-                <div class="card-value" id="totalRelatorios">0</div>
+            <div class="card" onclick="window.location.href='/organizacao/vagas/index.html'">
+                <div class="card-icon">💼</div>
+                <div class="card-label">Vagas Abertas</div>
+                <div class="card-value" id="totalVagas">0</div>
             </div>
-            <div class="card" onclick="window.location.href='/creditos/index.html'">
+            <div class="card" onclick="window.location.href='/organizacao/testes/index.html'">
+                <div class="card-icon">📝</div>
+                <div class="card-label">Testes Aplicados</div>
+                <div class="card-value" id="totalTestes">0</div>
+            </div>
+            <div class="card" onclick="window.location.href='/organizacao/creditos/index.html'">
                 <div class="card-icon">💳</div>
-                <div class="card-label">Créditos</div>
+                <div class="card-label">Saldo de Créditos</div>
                 <div class="card-value" id="totalCreditos">0</div>
-            </div>
-            <div class="card" onclick="window.location.href='/laudos/index.html'">
-                <div class="card-icon">📋</div>
-                <div class="card-label">Laudos</div>
-                <div class="card-value" id="totalLaudos">0</div>
             </div>
         </div>
 
-        <!-- CONTENT GRID -->
+        <!-- 🏢 GESTÃO -->
+        <div class="section-title">🏢 Gestão</div>
+        <div class="modules-grid">
+            <a class="module-card" href="/organizacao/participantes/index.html">
+                <span class="m-icon">👥</span>
+                <span class="m-title">Participantes</span>
+                <span class="m-desc">Gerencie candidatos e colaboradores, distribua créditos e acompanhe o consumo.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/organizacao/vagas/index.html">
+                <span class="m-icon">💼</span>
+                <span class="m-title">Vagas</span>
+                <span class="m-desc">Crie e acompanhe processos seletivos e posições abertas.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+        </div>
+
+        <!-- 📝 AVALIAÇÕES -->
+        <div class="section-title">📝 Avaliações</div>
+        <div class="modules-grid">
+            <a class="module-card" href="/organizacao/testes/index.html">
+                <span class="m-icon">📝</span>
+                <span class="m-title">Testes</span>
+                <span class="m-desc">Aplique avaliações DISC, Big Five, Inteligência Emocional, Valores e VIGOR.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/organizacao/relatorios/index.html">
+                <span class="m-icon">📊</span>
+                <span class="m-title">Relatórios</span>
+                <span class="m-desc">Relatórios individuais e comparativos de perfil e compatibilidade.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/organizacao/laudos/index.html">
+                <span class="m-icon">📄</span>
+                <span class="m-title">Laudos</span>
+                <span class="m-desc">Laudos completos gerados por IA com PDI e recomendações.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+        </div>
+
+        <!-- 💰 CENTRAL FINANCEIRA -->
+        <div class="section-title">💰 Central Financeira</div>
+        <div class="modules-grid">
+            <a class="module-card" href="/organizacao/creditos/index.html">
+                <span class="m-icon">💳</span>
+                <span class="m-title">Créditos</span>
+                <span class="m-desc">Compre pacotes, veja o saldo e distribua créditos para os participantes.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/organizacao/financeiro/index.html">
+                <span class="m-icon">💰</span>
+                <span class="m-title">Financeiro</span>
+                <span class="m-desc">Visão geral financeira da empresa: gastos, consumo e saldo.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/organizacao/financeiro/extratos.html">
+                <span class="m-icon">🧾</span>
+                <span class="m-title">Extratos</span>
+                <span class="m-desc">Histórico detalhado de todas as movimentações de créditos.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+        </div>
+
+        <!-- ⚙️ SISTEMA -->
+        <div class="section-title">⚙️ Sistema</div>
+        <div class="modules-grid">
+            <a class="module-card" href="/organizacao/configuracoes/index.html">
+                <span class="m-icon">⚙️</span>
+                <span class="m-title">Configurações</span>
+                <span class="m-desc">Dados da empresa, equipe, integrações e preferências.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+        </div>
+
+        <!-- CONTENT GRID - INFORMAÇÕES DA ORGANIZAÇÃO -->
+        <div class="section-title">📋 Informações da Organização</div>
         <div class="content-grid">
             <div>
                 <div class="content-card">
-                    <h3>📋 Informações da Organização</h3>
+                    <h3>🏢 Dados da Empresa</h3>
                     <div class="info-grid">
                         <div class="info-card">
                             <label>Nome da Organização</label>
@@ -579,6 +724,7 @@
                     <div style="margin-top:8px;">
                         <a href="/organizacao/configuracoes/index.html" class="btn-action btn-action-primary" style="display:block;text-align:center;margin-bottom:8px;padding:10px;background:var(--gold);color:var(--navy);">⚙️ Configurações</a>
                         <a href="/organizacao/participantes/index.html" class="btn-action btn-action-secondary" style="display:block;text-align:center;padding:10px;color:white;background:rgba(255,255,255,0.1);">👥 Gerenciar Participantes</a>
+                        <a href="/organizacao/creditos/index.html" class="btn-action btn-action-secondary" style="display:block;text-align:center;margin-top:8px;padding:10px;color:white;background:rgba(255,255,255,0.1);">💳 Comprar Créditos</a>
                     </div>
                 </div>
             </div>
@@ -637,10 +783,10 @@
                 document.getElementById('orgNome').textContent = user.companyName || 'Organização Exemplo';
                 document.getElementById('orgCnpj').textContent = '12.345.678/0001-99';
                 document.getElementById('orgSegmento').textContent = 'Tecnologia';
-                document.getElementById('totalParticipantes').textContent = '12';
-                document.getElementById('totalRelatorios').textContent = '8';
-                document.getElementById('totalCreditos').textContent = '1.250';
-                document.getElementById('totalLaudos').textContent = '3';
+                document.getElementById('totalParticipantes').textContent = '128';
+                document.getElementById('totalVagas').textContent = '6';
+                document.getElementById('totalTestes').textContent = '342';
+                document.getElementById('totalCreditos').textContent = '480';
 
                 console.log('✅ Dashboard Organização carregado!');
 
