@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard | VIGORRE ONE™</title>
+    <title>Meu Painel | VIGORRE ONE™</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <!-- ✅ MENU ÚNICO: só este CSS controla o menu -->
+    <link rel="stylesheet" href="/assets/css/menu-fix.css" />
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,178 +33,129 @@
             min-height: 100vh;
         }
 
-        .header-participante {
-            background: var(--navy);
-            color: white;
-            padding: 24px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            border-bottom: 3px solid var(--gold);
+        /* ✅ Conteúdo principal — offset do menu via menu-fix.css */
+        .main { padding: 24px 32px 40px; min-height: 100vh; }
+        .main-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
         }
-        .header-participante .logo {
-            display: flex; align-items: center; gap: 12px; text-decoration: none;
-        }
-        .header-participante .logo .logo-img { height: 36px; width: auto; display: block; }
-        .header-participante .logo .logo-text .name {
-            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white;
-        }
-        .header-participante .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
-        .header-participante .logo .logo-text .sub {
-            font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em;
-        }
-        .header-participante .user-info {
-            text-align: right;
-        }
-        .header-participante .user-info .name {
-            font-weight: 600; font-size: 0.9rem;
-        }
-        .header-participante .user-info .company {
-            font-size: 0.75rem; color: rgba(255,255,255,0.4);
-        }
-        .header-participante .user-info .badge {
-            display: inline-block; padding: 2px 10px; background: rgba(217,119,6,0.15);
-            color: var(--gold); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600;
-        }
-
-        .saudacao {
-            padding: 24px 32px;
-            background: white;
-            border-bottom: 1px solid var(--gray-200);
-        }
-        .saudacao h1 {
+        .main-header h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--gray-900);
+            font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
         }
-        .saudacao p {
-            color: var(--gray-500);
-            font-size: 0.95rem;
-        }
+        .main-header .subtitle { color: var(--gray-500); font-size: 0.9rem; }
 
+        .btn-primary {
+            padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white; border: none; border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer;
+            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
+
+        /* Banner de saudação */
+        .saudacao-banner {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            color: white; padding: 24px 28px; border-radius: var(--radius);
+            margin-bottom: 24px; box-shadow: var(--shadow);
+        }
+        .saudacao-banner h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem; font-weight: 700; margin-bottom: 4px;
+        }
+        .saudacao-banner p { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+
+        /* Cards de estatísticas */
         .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            padding: 24px 32px;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px;
         }
         .card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(10,37,64,0.04);
-            transition: var(--transition);
-            cursor: pointer;
+            background: white; border-radius: var(--radius); padding: 20px 24px;
+            box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
+            transition: var(--transition); cursor: pointer;
         }
         .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
         .card .card-icon { font-size: 2rem; margin-bottom: 8px; }
         .card .card-label { font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
         .card .card-value {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--gray-900);
+            font-size: 1.8rem; font-weight: 700; color: var(--gray-900);
         }
-        .card .card-change {
-            font-size: 0.7rem; font-weight: 600;
-        }
-        .card .card-change.up { color: var(--green); }
-        .card .card-change.down { color: var(--red); }
 
-        .main-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-            padding: 0 32px 24px;
+        /* Subtítulos de seção */
+        .section-title {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.75rem; font-weight: 800; letter-spacing: 1.4px;
+            text-transform: uppercase; color: var(--gray-600);
+            margin: 32px 0 16px;
         }
-        .section-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(10,37,64,0.04);
+        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--gray-200); }
+
+        /* Grid de módulos */
+        .modules-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px; margin-bottom: 20px;
+        }
+        .module-card {
+            background: white; border: 1px solid var(--gray-200); border-radius: var(--radius);
+            padding: 20px; text-decoration: none; color: inherit;
+            display: flex; flex-direction: column; gap: 8px;
+            transition: var(--transition); box-shadow: var(--shadow);
+        }
+        .module-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--cyan); }
+        .module-card .m-icon { font-size: 1.8rem; }
+        .module-card .m-title { font-weight: 700; color: var(--gray-900); font-size: 0.95rem; }
+        .module-card .m-desc { font-size: 0.8rem; color: var(--gray-500); line-height: 1.5; }
+        .module-card .m-go { font-size: 0.8rem; font-weight: 700; color: var(--cyan); margin-top: auto; }
+
+        /* Listas de testes/relatórios */
+        .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .list-card {
+            background: white; border-radius: var(--radius); padding: 20px 24px;
+            box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
             margin-bottom: 20px;
         }
-        .section-card h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--gray-800);
-            margin-bottom: 12px;
+        .list-card h3 {
+            font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600;
+            color: var(--gray-800); margin-bottom: 12px;
         }
-
         .teste-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-bottom: 1px solid var(--gray-100);
         }
         .teste-item:last-child { border-bottom: none; }
-        .teste-item .info .nome {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--gray-800);
-        }
-        .teste-item .info .desc {
-            font-size: 0.8rem;
-            color: var(--gray-500);
-        }
+        .teste-item .info .nome { font-weight: 600; font-size: 0.9rem; color: var(--gray-800); }
+        .teste-item .info .desc { font-size: 0.8rem; color: var(--gray-500); }
         .teste-item .status {
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 4px 12px;
+            font-size: 0.7rem; font-weight: 600; padding: 4px 12px;
             border-radius: var(--radius-full);
         }
-        .teste-item .status.concluido {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-        .teste-item .status.pendente {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-        .teste-item .status.disponivel {
-            background: #DBEAFE;
-            color: #1E40AF;
-        }
+        .teste-item .status.concluido { background: #D1FAE5; color: #065F46; }
+        .teste-item .status.pendente { background: #FEF3C7; color: #92400E; }
+        .teste-item .status.disponivel { background: #DBEAFE; color: #1E40AF; }
+
         .btn-action {
-            padding: 6px 16px;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
+            padding: 6px 16px; border: none; border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.75rem;
+            cursor: pointer; transition: var(--transition); text-decoration: none;
+            display: inline-block; margin-left: 8px;
         }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            color: white;
+        .btn-action-primary { background: linear-gradient(135deg, var(--blue), var(--cyan)); color: white; }
+        .btn-gold { background: linear-gradient(135deg, var(--gold), var(--orange)); color: white; }
+        .btn-secondary { background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200); }
+        .btn-success { background: var(--green); color: white; }
+
+        /* Dica do dia */
+        .tip-card {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            color: white; border-radius: var(--radius); padding: 20px 24px;
+            box-shadow: var(--shadow); margin-top: 20px;
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,78,216,0.25); }
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold), var(--orange));
-            color: white;
+        .tip-card h3 {
+            color: white; font-family: 'Poppins', sans-serif; font-size: 1rem;
+            font-weight: 600; margin-bottom: 8px;
         }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217,119,6,0.25); }
-        .btn-secondary {
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: 1px solid var(--gray-200);
-        }
-        .btn-secondary:hover { background: var(--gray-200); }
-        .btn-success {
-            background: var(--green);
-            color: white;
-        }
-        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(16,185,129,0.25); }
+        .tip-card p { font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.8); font-style: italic; }
 
         .toast {
             position: fixed; top: 24px; right: 24px; background: white;
@@ -209,8 +163,7 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.12);
             display: none; align-items: center; gap: 12px;
             font-weight: 600; font-size: 0.875rem; z-index: 300;
-            border-left: 4px solid var(--blue);
-            animation: slideIn 0.3s ease;
+            border-left: 4px solid var(--blue); animation: slideIn 0.3s ease;
         }
         .toast.show { display: flex; }
         .toast.success { border-left-color: #10B981; }
@@ -233,130 +186,150 @@
             100% { background-position: 200% 0; }
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .cards-grid { grid-template-columns: repeat(2, 1fr); }
-            .main-content { grid-template-columns: 1fr; }
+            .content-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
-            .header-participante { flex-direction: column; text-align: center; }
-            .header-participante .user-info { text-align: center; }
             .cards-grid { grid-template-columns: 1fr; }
-            .saudacao { padding: 16px 20px; }
-            .cards-grid { padding: 16px 20px; }
-            .main-content { padding: 0 20px 16px; }
-        }
-
-        @media print {
-            .header-participante { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            .btn-action { display: none !important; }
-            .card { border: 1px solid #E2E8F0 !important; }
+            .main-header { flex-direction: column; align-items: flex-start; }
+            .modules-grid { grid-template-columns: 1fr; }
+            .main { padding: 16px; }
         }
     </style>
 </head>
-<body>
+<body data-profile="participante">
 
-    <header class="header-participante">
-        <div class="logo">
-            <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
-            <div class="logo-text">
-                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                <span class="sub">People Analytics Enterprise</span>
+    <!-- ✅ SEM menu hardcoded — o menu-fix.js injeta automaticamente -->
+
+    <main class="main vg-content">
+        <div class="main-header">
+            <div>
+                <h1 id="saudacaoText">👋 Olá, <span id="saudacaoNome">Participante</span>!</h1>
+                <p class="subtitle" id="saudacaoMensagem">Bem-vindo à sua jornada de autoconhecimento. Continue evoluindo!</p>
+            </div>
+            <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
+        </div>
+
+        <!-- Banner de saudação -->
+        <div class="saudacao-banner">
+            <h2>🎯 Sua jornada de autoconhecimento</h2>
+            <p>Complete os 5 testes comportamentais para liberar seu Laudo VIGOR® completo.</p>
+        </div>
+
+        <!-- 📊 VISÃO GERAL -->
+        <div class="section-title">📊 Visão Geral</div>
+        <div class="cards-grid">
+            <div class="card" onclick="window.location.href='/participante/meus-testes.html'">
+                <div class="card-icon">📝</div>
+                <div class="card-label">Testes Concluídos</div>
+                <div class="card-value" id="totalTestes"><span class="loading-shimmer"></span></div>
+            </div>
+            <div class="card" onclick="window.location.href='/participante/meus-testes.html'">
+                <div class="card-icon">⏳</div>
+                <div class="card-label">Testes Disponíveis</div>
+                <div class="card-value" id="testesDisponiveis"><span class="loading-shimmer"></span></div>
+            </div>
+            <div class="card" onclick="window.location.href='/participante/meus-relatorios.html'">
+                <div class="card-icon">📊</div>
+                <div class="card-label">Relatórios</div>
+                <div class="card-value" id="totalRelatorios"><span class="loading-shimmer"></span></div>
+            </div>
+            <div class="card" onclick="window.location.href='/participante/meus-creditos.html'">
+                <div class="card-icon">💳</div>
+                <div class="card-label">Meus Créditos</div>
+                <div class="card-value" id="totalCreditos">0</div>
             </div>
         </div>
-        <div class="user-info">
-            <div class="name" id="participantName">Carregando...</div>
-            <div class="company" id="participantCompany">Empresa: --</div>
-            <div><span class="badge">👤 Participante</span></div>
-        </div>
-    </header>
 
-    <section class="saudacao">
-        <h1 id="saudacaoText">👋 Olá, <span id="saudacaoNome">Participante</span>!</h1>
-        <p id="saudacaoMensagem">Bem-vindo à sua jornada de autoconhecimento. Continue evoluindo!</p>
-    </section>
+        <!-- 📝 MINHAS AVALIAÇÕES -->
+        <div class="section-title">📝 Minhas Avaliações</div>
+        <div class="modules-grid">
+            <a class="module-card" href="/participante/meus-testes.html">
+                <span class="m-icon">📝</span>
+                <span class="m-title">Meus Testes</span>
+                <span class="m-desc">DISC, Big Five, Inteligência Emocional, Valores e SWOT.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/participante/meus-relatorios.html">
+                <span class="m-icon">📊</span>
+                <span class="m-title">Meus Relatórios</span>
+                <span class="m-desc">Veja todos os seus relatórios comportamentais detalhados.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/participante/meu-laudo.html">
+                <span class="m-icon">📄</span>
+                <span class="m-title">Meu Laudo</span>
+                <span class="m-desc">Laudo VIGOR® completo com 80-100 páginas de análise integrada.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/participante/minha-evolucao.html">
+                <span class="m-icon">📈</span>
+                <span class="m-title">Minha Evolução</span>
+                <span class="m-desc">Acompanhe seu progresso e desenvolvimento ao longo do tempo.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+        </div>
 
-    <div class="cards-grid">
-        <div class="card" onclick="window.location.href='meus-testes.html'">
-            <div class="card-icon">📝</div>
-            <div class="card-label">Testes Concluídos</div>
-            <div class="card-value" id="totalTestes"><span class="loading-shimmer"></span></div>
-            <div class="card-change up">✅ Realizados</div>
+        <!-- 💰 MEU FINANCEIRO -->
+        <div class="section-title">💰 Meu Financeiro</div>
+        <div class="modules-grid">
+            <a class="module-card" href="/participante/meus-creditos.html">
+                <span class="m-icon">💳</span>
+                <span class="m-title">Meus Créditos</span>
+                <span class="m-desc">Veja seu saldo e compre créditos para gerar relatórios e laudos.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/participante/minhas-compras.html">
+                <span class="m-icon">🛒</span>
+                <span class="m-title">Minhas Compras</span>
+                <span class="m-desc">Histórico completo de compras e movimentações financeiras.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
         </div>
-        <div class="card" onclick="window.location.href='meus-testes.html'">
-            <div class="card-icon">⏳</div>
-            <div class="card-label">Testes Disponíveis</div>
-            <div class="card-value" id="testesDisponiveis"><span class="loading-shimmer"></span></div>
-            <div class="card-change up">📌 Pendentes</div>
-        </div>
-        <div class="card" onclick="window.location.href='meus-relatorios.html'">
-            <div class="card-icon">📄</div>
-            <div class="card-label">Relatórios</div>
-            <div class="card-value" id="totalRelatorios"><span class="loading-shimmer"></span></div>
-            <div class="card-change up">📄 Disponíveis</div>
-        </div>
-        <div class="card" onclick="window.location.href='meu-laudo.html'">
-            <div class="card-icon">📋</div>
-            <div class="card-label">Laudo VIGOR®</div>
-            <div class="card-value" id="temLaudo"><span class="loading-shimmer"></span></div>
-            <div class="card-change up">📋 Status</div>
-        </div>
-    </div>
 
-    <div class="main-content">
-
-        <div class="content-left">
-            <div class="section-card">
-                <h3>📝 Meus Testes</h3>
-                <div id="listaTestes">
-                    <!-- Carregado via JS -->
+        <!-- 📋 DETALHAMENTO -->
+        <div class="section-title">📋 Detalhamento</div>
+        <div class="content-grid">
+            <div>
+                <div class="list-card">
+                    <h3>📝 Meus Testes</h3>
+                    <div id="listaTestes"></div>
+                </div>
+                <div class="list-card">
+                    <h3>📊 Meus Relatórios</h3>
+                    <div id="listaRelatorios"></div>
                 </div>
             </div>
 
-            <div class="section-card">
-                <h3>📄 Meus Relatórios</h3>
-                <div id="listaRelatorios">
-                    <!-- Carregado via JS -->
+            <div>
+                <div class="list-card">
+                    <h3>📄 Laudo VIGOR®</h3>
+                    <div id="laudoStatus"></div>
+                </div>
+                <div class="list-card">
+                    <h3>📈 Minha Evolução</h3>
+                    <div id="evolucaoContent"></div>
+                </div>
+                <div class="tip-card">
+                    <h3>💡 Dica do Dia</h3>
+                    <p id="dicaDoDia">"O autoconhecimento é o primeiro passo para a transformação. Comece hoje!"</p>
                 </div>
             </div>
         </div>
-
-        <div class="content-right">
-            <div class="section-card">
-                <h3>📋 Laudo VIGOR®</h3>
-                <div id="laudoStatus">
-                    <!-- Carregado via JS -->
-                </div>
-            </div>
-
-            <div class="section-card">
-                <h3>📈 Minha Evolução</h3>
-                <div id="evolucaoContent">
-                    <!-- Carregado via JS -->
-                </div>
-            </div>
-
-            <div class="section-card" style="background:linear-gradient(135deg,var(--navy),var(--gray-800));color:white;">
-                <h3 style="color:white;">💡 Dica do Dia</h3>
-                <p id="dicaDoDia" style="font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.8);">
-                    "O autoconhecimento é o primeiro passo para a transformação. Comece hoje!"
-                </p>
-            </div>
-        </div>
-
-    </div>
+    </main>
 
     <div class="toast" id="toast">
         <span id="toastIcon">✅</span>
         <span id="toastMessage">Mensagem</span>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
-    </script>
-    <script src="../supabase-config.js"></script>
-    <script src="../auth.js"></script>
-    <script src="../middleware/auth-guard.js"></script>
-    <script src="../admin/financeiro/financeiro-conexao.js"></script>
-    <script src="../admin/ia/motor-ia.js"></script>
+    <!-- ✅ MENU ÚNICO injetado aqui -->
+    <script src="/assets/js/menu-fix.js"></script>
+
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
 
     <script>
         'use strict';
@@ -364,17 +337,19 @@
         let participanteId = null;
         let resultados = {};
 
+        function recarregarDados() {
+            carregarDashboard();
+        }
+
         function showToast(message, type) {
             const toast = document.getElementById('toast');
             const icon = document.getElementById('toastIcon');
             const msg = document.getElementById('toastMessage');
-            if (type === 'error') icon.textContent = '❌';
-            else if (type === 'warning') icon.textContent = '⚠️';
-            else icon.textContent = '✅';
+            icon.textContent = type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '✅';
             msg.textContent = message;
             toast.className = 'toast show ' + type;
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => { toast.classList.remove('show'); }, 4000);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
         async function carregarDashboard() {
@@ -382,35 +357,18 @@
                 console.log('👤 Carregando Dashboard Participante...');
 
                 if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
-                    window.location.href = '../login.html';
+                    window.location.href = '/login.html';
                     return;
                 }
 
                 var user = window.VigorreAuth.getCurrentUser();
                 if (!user || user.role !== 'participante') {
-                    window.location.href = '../login.html';
+                    window.location.href = '/login.html';
                     return;
                 }
 
                 participanteId = user.id || user.participantId;
-                document.getElementById('participantName').textContent = user.name || 'Participante';
                 document.getElementById('saudacaoNome').textContent = user.name || 'Participante';
-
-                var companyName = 'Autônomo';
-                if (user.companyId) {
-                    try {
-                        var supabaseClient = getSupabaseClient();
-                        if (supabaseClient) {
-                            var { data: company } = await supabaseClient
-                                .from('companies')
-                                .select('name')
-                                .eq('id', user.companyId)
-                                .single();
-                            if (company) companyName = company.name;
-                        }
-                    } catch (e) {}
-                }
-                document.getElementById('participantCompany').textContent = 'Empresa: ' + companyName;
 
                 await carregarResultados();
                 await atualizarCards();
@@ -430,13 +388,11 @@
 
         async function carregarResultados() {
             try {
-                var supabaseClient = getSupabaseClient();
+                var supabaseClient = typeof getSupabaseClient === 'function' ? getSupabaseClient() : null;
                 if (!supabaseClient) {
                     var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
                     var participant = allParticipants.find(p => p.id === participanteId);
-                    if (participant && participant.results) {
-                        resultados = participant.results;
-                    }
+                    if (participant && participant.results) resultados = participant.results;
                     return;
                 }
 
@@ -445,10 +401,7 @@
                     .select('teste_id, resultado')
                     .eq('participant_id', participanteId);
 
-                if (error) {
-                    console.warn('Erro ao buscar resultados:', error);
-                    return;
-                }
+                if (error) { console.warn('Erro ao buscar resultados:', error); return; }
 
                 if (data) {
                     for (var i = 0; i < data.length; i++) {
@@ -461,7 +414,6 @@
                         else if (testeId === '55555555-5555-5555-5555-555555555555') resultados.SWOT = resultado;
                     }
                 }
-
             } catch (error) {
                 console.warn('⚠️ Erro ao carregar resultados:', error);
             }
@@ -480,20 +432,16 @@
             document.getElementById('totalTestes').textContent = totalTestes + '/5';
             document.getElementById('testesDisponiveis').textContent = testesDisponiveis;
             document.getElementById('totalRelatorios').textContent = totalTestes;
-
-            var temLaudo = totalTestes === 5 ? '✅ Disponível' : '⏳ ' + (5 - totalTestes) + ' testes faltam';
-            document.getElementById('temLaudo').textContent = temLaudo;
-            document.getElementById('temLaudo').style.color = totalTestes === 5 ? '#10B981' : '#F59E0B';
         }
 
         async function atualizarTestes() {
             var container = document.getElementById('listaTestes');
             var testes = [
-                { id: 'disc', nome: 'DISC', icon: '🦁', desc: 'Análise Comportamental', status: resultados.DISC ? 'concluido' : 'disponivel', label: resultados.DISC ? '✅ Concluído' : '📌 Disponível', link: resultados.DISC ? '../relatorios/disc/' : '../tests/disc/' },
-                { id: 'bigfive', nome: 'Big Five', icon: '🧬', desc: 'Os 5 Grandes Fatores', status: resultados.BigFive ? 'concluido' : 'disponivel', label: resultados.BigFive ? '✅ Concluído' : '📌 Disponível', link: resultados.BigFive ? '../relatorios/bigfive/' : '../tests/bigfive/' },
-                { id: 'ie', nome: 'IE', icon: '❤️', desc: 'Inteligência Emocional', status: resultados.IE ? 'concluido' : 'disponivel', label: resultados.IE ? '✅ Concluído' : '📌 Disponível', link: resultados.IE ? '../relatorios/ie/' : '../tests/ie/' },
-                { id: 'valores', nome: 'Valores', icon: '💎', desc: 'O que realmente importa', status: resultados.Valores ? 'concluido' : 'disponivel', label: resultados.Valores ? '✅ Concluído' : '📌 Disponível', link: resultados.Valores ? '../relatorios/valores/' : '../tests/valores/' },
-                { id: 'swot', nome: 'SWOT', icon: '📊', desc: 'Forças · Fraquezas · Oportunidades · Ameaças', status: resultados.SWOT ? 'concluido' : 'disponivel', label: resultados.SWOT ? '✅ Concluído' : '📌 Disponível', link: resultados.SWOT ? '../relatorios/swot/' : '../tests/swot/' }
+                { id: 'disc', nome: 'DISC', icon: '🦁', desc: 'Análise Comportamental', status: resultados.DISC ? 'concluido' : 'disponivel', label: resultados.DISC ? '✅ Concluído' : '📌 Disponível', link: resultados.DISC ? '/participante/meus-relatorios.html' : '/testes/disc/' },
+                { id: 'bigfive', nome: 'Big Five', icon: '🧬', desc: 'Os 5 Grandes Fatores', status: resultados.BigFive ? 'concluido' : 'disponivel', label: resultados.BigFive ? '✅ Concluído' : '📌 Disponível', link: resultados.BigFive ? '/participante/meus-relatorios.html' : '/testes/bigfive/' },
+                { id: 'ie', nome: 'IE', icon: '❤️', desc: 'Inteligência Emocional', status: resultados.IE ? 'concluido' : 'disponivel', label: resultados.IE ? '✅ Concluído' : '📌 Disponível', link: resultados.IE ? '/participante/meus-relatorios.html' : '/testes/ie/' },
+                { id: 'valores', nome: 'Valores', icon: '💎', desc: 'O que realmente importa', status: resultados.Valores ? 'concluido' : 'disponivel', label: resultados.Valores ? '✅ Concluído' : '📌 Disponível', link: resultados.Valores ? '/participante/meus-relatorios.html' : '/testes/valores/' },
+                { id: 'swot', nome: 'SWOT', icon: '📊', desc: 'Forças · Fraquezas · Oportunidades · Ameaças', status: resultados.SWOT ? 'concluido' : 'disponivel', label: resultados.SWOT ? '✅ Concluído' : '📌 Disponível', link: resultados.SWOT ? '/participante/meus-relatorios.html' : '/testes/swot/' }
             ];
 
             container.innerHTML = testes.map(t => `
@@ -504,7 +452,7 @@
                     </div>
                     <div>
                         <span class="status ${t.status}">${t.label}</span>
-                        <a href="${t.link}" class="btn-action ${t.status === 'concluido' ? 'btn-secondary' : 'btn-primary'}" style="margin-left:8px;">${t.status === 'concluido' ? '📄 Ver' : '▶️ Iniciar'}</a>
+                        <a href="${t.link}" class="btn-action ${t.status === 'concluido' ? 'btn-secondary' : 'btn-action-primary'}">${t.status === 'concluido' ? '📄 Ver' : '▶️ Iniciar'}</a>
                     </div>
                 </div>
             `).join('');
@@ -513,11 +461,11 @@
         async function atualizarRelatorios() {
             var container = document.getElementById('listaRelatorios');
             var relatorios = [
-                { id: 'disc', nome: 'DISC', icon: '🦁', desc: 'Análise comportamental', status: resultados.DISC ? 'concluido' : 'pendente', label: resultados.DISC ? '✅ Disponível' : '⏳ Aguardando', link: '../relatorios/disc/' },
-                { id: 'bigfive', nome: 'Big Five', icon: '🧬', desc: '5 grandes fatores', status: resultados.BigFive ? 'concluido' : 'pendente', label: resultados.BigFive ? '✅ Disponível' : '⏳ Aguardando', link: '../relatorios/bigfive/' },
-                { id: 'ie', nome: 'IE', icon: '❤️', desc: 'Inteligência Emocional', status: resultados.IE ? 'concluido' : 'pendente', label: resultados.IE ? '✅ Disponível' : '⏳ Aguardando', link: '../relatorios/ie/' },
-                { id: 'valores', nome: 'Valores', icon: '💎', desc: 'Valores pessoais', status: resultados.Valores ? 'concluido' : 'pendente', label: resultados.Valores ? '✅ Disponível' : '⏳ Aguardando', link: '../relatorios/valores/' },
-                { id: 'swot', nome: 'SWOT', icon: '📊', desc: 'Análise SWOT', status: resultados.SWOT ? 'concluido' : 'pendente', label: resultados.SWOT ? '✅ Disponível' : '⏳ Aguardando', link: '../relatorios/swot/' }
+                { id: 'disc', nome: 'DISC', icon: '🦁', desc: 'Análise comportamental', status: resultados.DISC ? 'concluido' : 'pendente', label: resultados.DISC ? '✅ Disponível' : '⏳ Aguardando' },
+                { id: 'bigfive', nome: 'Big Five', icon: '🧬', desc: '5 grandes fatores', status: resultados.BigFive ? 'concluido' : 'pendente', label: resultados.BigFive ? '✅ Disponível' : '⏳ Aguardando' },
+                { id: 'ie', nome: 'IE', icon: '❤️', desc: 'Inteligência Emocional', status: resultados.IE ? 'concluido' : 'pendente', label: resultados.IE ? '✅ Disponível' : '⏳ Aguardando' },
+                { id: 'valores', nome: 'Valores', icon: '💎', desc: 'Valores pessoais', status: resultados.Valores ? 'concluido' : 'pendente', label: resultados.Valores ? '✅ Disponível' : '⏳ Aguardando' },
+                { id: 'swot', nome: 'SWOT', icon: '📊', desc: 'Análise SWOT', status: resultados.SWOT ? 'concluido' : 'pendente', label: resultados.SWOT ? '✅ Disponível' : '⏳ Aguardando' }
             ];
 
             container.innerHTML = relatorios.map(r => `
@@ -528,7 +476,7 @@
                     </div>
                     <div>
                         <span class="status ${r.status}">${r.label}</span>
-                        <a href="${r.link}" class="btn-action ${r.status === 'concluido' ? 'btn-success' : 'btn-secondary'}" style="margin-left:8px;">${r.status === 'concluido' ? '📄 Ver' : '⏳ Aguardar'}</a>
+                        <a href="/participante/meus-relatorios.html" class="btn-action ${r.status === 'concluido' ? 'btn-success' : 'btn-secondary'}">${r.status === 'concluido' ? '📄 Ver' : '⏳ Aguardar'}</a>
                     </div>
                 </div>
             `).join('');
@@ -549,7 +497,7 @@
                         <div style="font-size:2.5rem;margin-bottom:8px;">🎉</div>
                         <p style="color:var(--green);font-weight:600;">✅ Laudo Disponível!</p>
                         <p style="color:var(--gray-500);font-size:0.85rem;">80-100 páginas de análise integrada</p>
-                        <a href="../relatorios/laudo/completo.html" class="btn-action btn-gold" style="margin-top:8px;">📋 Gerar Laudo</a>
+                        <a href="/participante/meu-laudo.html" class="btn-action btn-gold" style="margin-top:8px;">📋 Gerar Laudo</a>
                     </div>
                 `;
             } else {
@@ -558,7 +506,7 @@
                         <div style="font-size:2.5rem;margin-bottom:8px;">⏳</div>
                         <p style="color:var(--orange);font-weight:600;">${5 - totalTestes} testes faltam</p>
                         <p style="color:var(--gray-500);font-size:0.85rem;">Complete todos os 5 testes</p>
-                        <a href="meus-testes.html" class="btn-action btn-primary" style="margin-top:8px;">📝 Ver Testes</a>
+                        <a href="/participante/meus-testes.html" class="btn-action btn-action-primary" style="margin-top:8px;">📝 Ver Testes</a>
                     </div>
                 `;
             }
@@ -580,7 +528,7 @@
                     <div style="width:100%;height:6px;background:var(--gray-200);border-radius:3px;margin:8px 0;overflow:hidden;">
                         <div style="height:100%;width:${(totalTestes/5)*100}%;background:var(--green);border-radius:3px;transition:width 0.8s ease;"></div>
                     </div>
-                    <a href="minha-evolucao.html" class="btn-action btn-secondary" style="margin-top:4px;">📈 Ver Detalhes</a>
+                    <a href="/participante/minha-evolucao.html" class="btn-action btn-secondary" style="margin-top:4px;">📈 Ver Detalhes</a>
                 </div>
             `;
         }
@@ -600,8 +548,6 @@
             console.log('👤 Dashboard Participante - VIGORRE ONE™');
             carregarDashboard();
         });
-
-        console.log('✅ Dashboard Participante carregado com sucesso!');
     </script>
 
 </body>
