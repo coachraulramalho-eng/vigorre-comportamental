@@ -10,9 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 
     <style>
-        /* ============================================ */
-        /* CSS COMPLETO                                */
-        /* ============================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
@@ -68,9 +65,6 @@
             color: var(--gold); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600;
         }
 
-        /* ============================================ */
-        /* SUBTÍTULOS E ITENS DO MENU - FIXOS          */
-        /* ============================================ */
         .sidebar .nav {
             list-style: none;
             flex: 1;
@@ -149,9 +143,6 @@
             .mobile-overlay.active { display: block; }
         }
 
-        /* ============================================ */
-        /* MAIN CONTENT                                */
-        /* ============================================ */
         .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -202,23 +193,6 @@
         .modulo-card .modulo-desc { font-size: 0.85rem; color: var(--gray-500); margin-top: 4px; }
         .modulo-card .modulo-link { color: var(--blue); font-weight: 600; font-size: 0.85rem; margin-top: 12px; display: inline-block; }
 
-        .toast {
-            position: fixed; top: 24px; right: 24px; background: white;
-            padding: 14px 24px; border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-            display: none; align-items: center; gap: 12px;
-            font-weight: 600; font-size: 0.875rem; z-index: 300;
-            border-left: 4px solid var(--blue);
-            animation: slideIn 0.3s ease;
-        }
-        .toast.show { display: flex; }
-        .toast.success { border-left-color: #10B981; }
-        .toast.error { border-left-color: #EF4444; }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(120%); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
         @media (max-width: 1200px) {
             .cards-grid { grid-template-columns: repeat(2, 1fr); }
             .modulos-grid { grid-template-columns: repeat(2, 1fr); }
@@ -261,27 +235,26 @@
 
             <!-- ===== GESTÃO ===== -->
             <li class="nav-subtitle">🏢 GESTÃO</li>
-            <li><a href="/admin/empresas/index.html"><span class="icon">🏢</span> Empresas</a></li>
-            <li><a href="/admin/recrutadores/index.html"><span class="icon">👤</span> Recrutadores</a></li>
+            <li><a href="/admin/empresas/index.html"><span class="icon">🏢</span> Empresas/Recrutadores</a></li>
             <li><a href="/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
 
             <!-- ===== CENTRAL FINANCEIRA ===== -->
             <li class="nav-subtitle">💰 CENTRAL FINANCEIRA</li>
             <li><a href="/admin/financeiro/index.html"><span class="icon">💰</span> Centro Financeiro</a></li>
-            <li><a href="/admin/carteiras/index.html"><span class="icon">📋</span> Carteiras</a></li>
-            <li><a href="/admin/creditos/index.html"><span class="icon">💳</span> Créditos</a></li>
-            <li><a href="/admin/extratos/index.html"><span class="icon">📊</span> Extratos</a></li>
-            <li><a href="/admin/precos/index.html"><span class="icon">🏷️</span> Preços</a></li>
+            <li><a href="/admin/financeiro/carteiras.html"><span class="icon">📋</span> Carteiras</a></li>
+            <li><a href="/admin/financeiro/creditos.html"><span class="icon">💳</span> Créditos</a></li>
+            <li><a href="/admin/financeiro/extratos.html"><span class="icon">📊</span> Extratos</a></li>
+            <li><a href="/admin/financeiro/precos.html"><span class="icon">🏷️</span> Preços</a></li>
 
             <!-- ===== AUDITORIA ===== -->
             <li class="nav-subtitle">🔍 AUDITORIA</li>
-            <li><a href="/admin/auditoria/index.html"><span class="icon">📋</span> Auditoria</a></li>
-            <li><a href="/admin/agenda/index.html"><span class="icon">📅</span> Agenda</a></li>
-            <li><a href="/admin/backup/index.html"><span class="icon">💾</span> Backup</a></li>
+            <li><a href="/admin/financeiro/auditoria.html"><span class="icon">📋</span> Auditoria</a></li>
+            <li><a href="/admin/agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="/admin/backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
 
             <!-- ===== SISTEMA ===== -->
             <li class="nav-subtitle">⚙️ SISTEMA</li>
-            <li><a href="/admin/configuracoes/index.html"><span class="icon">⚙️</span> Configurações</a></li>
+            <li><a href="/admin/financeiro/configuracoes.html"><span class="icon">⚙️</span> Configurações</a></li>
         </ul>
 
         <div class="logout">
@@ -303,7 +276,6 @@
             <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
         </div>
 
-        <!-- Cards -->
         <div class="cards-grid" id="cardsGrid">
             <div class="card" onclick="window.location.href='/admin/financeiro/index.html'">
                 <div class="card-icon">💰</div>
@@ -315,33 +287,25 @@
                 <div class="card-label">Empresas</div>
                 <div class="card-value" id="totalEmpresas">1.250</div>
             </div>
-            <div class="card" onclick="window.location.href='/admin/recrutadores/index.html'">
-                <div class="card-icon">👤</div>
-                <div class="card-label">Recrutadores</div>
-                <div class="card-value" id="totalRecrutadores">342</div>
-            </div>
             <div class="card" onclick="window.location.href='/participantes/index.html'">
                 <div class="card-icon">👥</div>
                 <div class="card-label">Participantes</div>
                 <div class="card-value" id="totalParticipantes">125.000</div>
             </div>
+            <div class="card" onclick="window.location.href='/admin/financeiro/creditos.html'">
+                <div class="card-icon">💳</div>
+                <div class="card-label">Créditos</div>
+                <div class="card-value" id="totalCreditos">342</div>
+            </div>
         </div>
 
-        <!-- Módulos -->
         <h2 style="font-family:'Poppins',sans-serif;font-size:1.2rem;font-weight:600;margin-bottom:16px;">🚀 Acessar Módulos</h2>
 
         <div class="modulos-grid">
             <a href="/admin/empresas/index.html" class="modulo-card">
                 <div class="modulo-icon">🏢</div>
-                <div class="modulo-title">Empresas</div>
-                <div class="modulo-desc">Gerenciar empresas cadastradas</div>
-                <span class="modulo-link">Acessar →</span>
-            </a>
-
-            <a href="/admin/recrutadores/index.html" class="modulo-card">
-                <div class="modulo-icon">👤</div>
-                <div class="modulo-title">Recrutadores</div>
-                <div class="modulo-desc">Gerenciar recrutadores e consultores</div>
+                <div class="modulo-title">Empresas/Recrutadores</div>
+                <div class="modulo-desc">Gerenciar empresas e recrutadores</div>
                 <span class="modulo-link">Acessar →</span>
             </a>
 
@@ -359,35 +323,35 @@
                 <span class="modulo-link">Acessar →</span>
             </a>
 
-            <a href="/admin/precos/index.html" class="modulo-card">
+            <a href="/admin/financeiro/precos.html" class="modulo-card">
                 <div class="modulo-icon">🏷️</div>
                 <div class="modulo-title">Preços</div>
                 <div class="modulo-desc">Gerenciar preços de relatórios e laudos</div>
                 <span class="modulo-link">Acessar →</span>
             </a>
 
-            <a href="/admin/auditoria/index.html" class="modulo-card">
+            <a href="/admin/financeiro/auditoria.html" class="modulo-card">
                 <div class="modulo-icon">📋</div>
                 <div class="modulo-title">Auditoria</div>
                 <div class="modulo-desc">Logs e auditoria do sistema</div>
                 <span class="modulo-link">Acessar →</span>
             </a>
 
-            <a href="/admin/agenda/index.html" class="modulo-card">
+            <a href="/admin/agenda/calendario.html" class="modulo-card">
                 <div class="modulo-icon">📅</div>
                 <div class="modulo-title">Agenda</div>
                 <div class="modulo-desc">Calendário e agendamentos</div>
                 <span class="modulo-link">Acessar →</span>
             </a>
 
-            <a href="/admin/backup/index.html" class="modulo-card">
+            <a href="/admin/backup/backup-completo.html" class="modulo-card">
                 <div class="modulo-icon">💾</div>
                 <div class="modulo-title">Backup</div>
                 <div class="modulo-desc">Backup completo do sistema</div>
                 <span class="modulo-link">Acessar →</span>
             </a>
 
-            <a href="/admin/configuracoes/index.html" class="modulo-card">
+            <a href="/admin/financeiro/configuracoes.html" class="modulo-card">
                 <div class="modulo-icon">⚙️</div>
                 <div class="modulo-title">Configurações</div>
                 <div class="modulo-desc">Configurações gerais do sistema</div>
@@ -396,45 +360,27 @@
         </div>
     </main>
 
-    <!-- Toast -->
-    <div class="toast" id="toast">
-        <span id="toastIcon">✅</span>
-        <span id="toastMessage">Mensagem</span>
-    </div>
-
     <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
     <script src="/middleware/auth-guard.js"></script>
     <script src="/admin/financeiro/financeiro-conexao.js"></script>
 
     <script>
-        // ============================================
-        // SIDEBAR TOGGLE
-        // ============================================
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
             document.getElementById('mobileOverlay').classList.toggle('active');
         }
 
-        // ============================================
-        // LOGOUT
-        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.location.href = '/login.html';
             }
         }
 
-        // ============================================
-        // RECARREGAR DADOS
-        // ============================================
         function recarregarDados() {
             alert('🔄 Dados atualizados!');
         }
 
-        // ============================================
-        // CARREGAR DADOS
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Dashboard Master - VIGORRE ONE™');
             console.log('✅ Dashboard carregado!');
