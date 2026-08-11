@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet" />
 
-    <!-- ✅ MENU ÚNICO: só estes 2 arquivos controlam o menu -->
     <link rel="stylesheet" href="/assets/css/menu-fix.css" />
 
     <style>
@@ -28,12 +27,9 @@
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-800);
-            min-height: 100vh;
+            background: var(--gray-50); color: var(--gray-800); min-height: 100vh;
         }
 
-        /* ✅ Conteúdo principal — offset do menu é controlado pelo menu-fix.css */
         .main { padding: 24px 32px 40px; min-height: 100vh; }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -120,14 +116,11 @@
 </head>
 <body data-profile="master">
 
-    <!-- ✅ SEM menu hardcoded — o menu-fix.js injeta automaticamente -->
-
-    <!-- ✅ Conteúdo principal com classe vg-content (offset do menu) -->
     <main class="main vg-content">
         <div class="main-header">
             <div>
                 <h1>👑 Dashboard Master Admin</h1>
-                <p class="subtitle">Visão global do ecossistema VIGORRE ONE™ — empresas, financeiro, auditoria e sistema.</p>
+                <p class="subtitle">Visão global do ecossistema VIGORRE ONE™ — empresas, recrutadores, participantes e financeiro.</p>
             </div>
             <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
         </div>
@@ -142,7 +135,7 @@
             </div>
             <div class="card" onclick="window.location.href='/admin/empresas/index.html'">
                 <div class="card-icon">🏢</div>
-                <div class="card-label">Empresas Ativas</div>
+                <div class="card-label">Empresas & Recrutadores</div>
                 <div class="card-value" id="totalEmpresas">1.250</div>
             </div>
             <div class="card" onclick="window.location.href='/admin/participantes/index.html'">
@@ -157,25 +150,19 @@
             </div>
         </div>
 
-        <!-- 🏢 GESTÃO -->
-        <div class="section-title">🏢 Gestão Global</div>
+        <!-- 🏢 GESTÃO (Agora apenas 2 módulos: Empresas & Recrutadores + Participantes) -->
+        <div class="section-title">🏢 Gestão</div>
         <div class="modules-grid">
             <a class="module-card" href="/admin/empresas/index.html">
                 <span class="m-icon">🏢</span>
-                <span class="m-title">Empresas</span>
-                <span class="m-desc">Gerencie todas as organizações cadastradas na plataforma.</span>
-                <span class="m-go">Acessar →</span>
-            </a>
-            <a class="module-card" href="/admin/recrutadores/index.html">
-                <span class="m-icon">🧑‍💼</span>
-                <span class="m-title">Recrutadores</span>
-                <span class="m-desc">Profissionais de RH e headhunters parceiros do ecossistema.</span>
+                <span class="m-title">Empresas & Recrutadores</span>
+                <span class="m-desc">Gestão unificada de Pessoas Jurídicas (CNPJ) e Pessoas Físicas (CPF) — empresas, headhunters e recrutadores independentes.</span>
                 <span class="m-go">Acessar →</span>
             </a>
             <a class="module-card" href="/admin/participantes/index.html">
                 <span class="m-icon">👥</span>
                 <span class="m-title">Participantes</span>
-                <span class="m-desc">Candidatos, colaboradores e usuários finais da plataforma.</span>
+                <span class="m-desc">Todos os participantes do ecossistema — autônomos e vinculados a empresas — em uma única tela.</span>
                 <span class="m-go">Acessar →</span>
             </a>
         </div>
@@ -186,7 +173,7 @@
             <a class="module-card" href="/admin/financeiro/index.html">
                 <span class="m-icon">💰</span>
                 <span class="m-title">Financeiro Global</span>
-                <span class="m-desc">Visão consolidada do financeiro de todas as empresas.</span>
+                <span class="m-desc">Visão consolidada do financeiro de todas as empresas e recrutadores do ecossistema.</span>
                 <span class="m-go">Acessar →</span>
             </a>
             <a class="module-card" href="/admin/financeiro/carteiras.html">
@@ -207,6 +194,18 @@
                 <span class="m-desc">Histórico consolidado de todas as movimentações financeiras.</span>
                 <span class="m-go">Acessar →</span>
             </a>
+            <a class="module-card" href="/admin/financeiro/assinaturas.html">
+                <span class="m-icon">🔁</span>
+                <span class="m-title">Assinaturas</span>
+                <span class="m-desc">Planos ativos, renovações e cancelamentos.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/admin/financeiro/reembolsos.html">
+                <span class="m-icon">↩️</span>
+                <span class="m-title">Reembolsos</span>
+                <span class="m-desc">Solicitações de reembolso e estornos em análise.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
             <a class="module-card" href="/admin/financeiro/precos.html">
                 <span class="m-icon">🏷️</span>
                 <span class="m-title">Preços</span>
@@ -219,9 +218,15 @@
                 <span class="m-desc">Crie e gerencie cupons de desconto promocionais.</span>
                 <span class="m-go">Acessar →</span>
             </a>
+            <a class="module-card" href="/admin/financeiro/configuracoes.html">
+                <span class="m-icon">⚙️</span>
+                <span class="m-title">Config. Financeiras</span>
+                <span class="m-desc">Gateways de pagamento, impostos e regras de cobrança.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
         </div>
 
-        <!-- 🔍 AUDITORIA E SISTEMA -->
+        <!-- 🔍 AUDITORIA & SISTEMA -->
         <div class="section-title">🔍 Auditoria & Sistema</div>
         <div class="modules-grid">
             <a class="module-card" href="/admin/financeiro/auditoria.html">
@@ -250,9 +255,7 @@
         <span id="toastMessage">Mensagem</span>
     </div>
 
-    <!-- ✅ MENU ÚNICO injetado aqui -->
     <script src="/assets/js/menu-fix.js"></script>
-
     <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
     <script src="/middleware/auth-guard.js"></script>
@@ -264,7 +267,7 @@
             showToast('Dados atualizados com sucesso!', 'success');
         }
 
-        function showToast(message, type) {
+        function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const icon = document.getElementById('toastIcon');
             const msg = document.getElementById('toastMessage');
