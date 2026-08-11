@@ -65,61 +65,26 @@
             color: var(--gold); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600;
         }
 
-        .sidebar .nav {
-            list-style: none;
-            flex: 1;
-            margin: 0;
-            padding: 0;
-        }
+        .sidebar .nav { list-style: none; flex: 1; margin: 0; padding: 0; }
         .sidebar .nav li { margin-bottom: 2px; }
         .sidebar .nav .nav-subtitle {
-            font-size: 0.55rem;
-            font-weight: 700;
-            color: rgba(255,255,255,0.25);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            padding: 16px 14px 6px 14px;
-            margin-top: 4px;
+            font-size: 0.55rem; font-weight: 700; color: rgba(255,255,255,0.25);
+            text-transform: uppercase; letter-spacing: 0.12em;
+            padding: 16px 14px 6px 14px; margin-top: 4px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
         }
-        .sidebar .nav .nav-subtitle:first-of-type {
-            padding-top: 4px;
-            border-top: none;
-        }
+        .sidebar .nav .nav-subtitle:first-of-type { padding-top: 4px; border-top: none; }
         .sidebar .nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
-            border-radius: var(--radius-sm);
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: var(--transition);
-            cursor: pointer;
+            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+            border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
+            text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            transition: var(--transition); cursor: pointer;
         }
-        .sidebar .nav a:hover {
-            background: rgba(255,255,255,0.06);
-            color: white;
-        }
-        .sidebar .nav a.active {
-            background: rgba(217,119,6,0.12);
-            color: white;
-            border-left: 3px solid var(--gold);
-        }
-        .sidebar .nav a .icon {
-            font-size: 1.1rem;
-            width: 24px;
-            text-align: center;
-            flex-shrink: 0;
-        }
+        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
+        .sidebar .nav a.active { background: rgba(217,119,6,0.12); color: white; border-left: 3px solid var(--gold); }
+        .sidebar .nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; flex-shrink: 0; }
 
-        .sidebar .logout {
-            margin-top: auto;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-        }
+        .sidebar .logout { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
         .sidebar .logout a {
             display: flex; align-items: center; gap: 12px; padding: 10px 14px;
             border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
@@ -128,7 +93,6 @@
         }
         .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
 
-        .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
         .mobile-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99;
@@ -139,7 +103,6 @@
             .sidebar { transform: translateX(-100%); width: 280px; }
             .sidebar.open { transform: translateX(0); }
             .main { margin-left: 0; padding: 16px; }
-            .mobile-toggle { display: block; }
             .mobile-overlay.active { display: block; }
         }
 
@@ -159,10 +122,12 @@
             color: white; border: none; border-radius: var(--radius-sm);
             font-weight: 600; font-size: 0.875rem; cursor: pointer;
             transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
-            text-decoration: none;
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
 
+        /* ============================================ */
+        /* CARDS DE ESTATÍSTICAS                       */
+        /* ============================================ */
         .cards-grid {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px;
         }
@@ -179,28 +144,59 @@
             font-size: 1.8rem; font-weight: 700; color: var(--gray-900);
         }
 
-        .modulos-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px;
+        /* ============================================ */
+        /* SUBTÍTULOS DE SEÇÃO                         */
+        /* ============================================ */
+        .section-title {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.75rem; font-weight: 800; letter-spacing: 1.4px;
+            text-transform: uppercase; color: var(--gray-600);
+            margin: 32px 0 16px;
         }
-        .modulo-card {
-            background: white; border-radius: var(--radius); padding: 24px;
-            box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
-            transition: var(--transition); cursor: pointer; text-decoration: none; color: var(--gray-800); display: block;
+        .section-title::after {
+            content: ""; flex: 1; height: 1px; background: var(--gray-200);
         }
-        .modulo-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-        .modulo-card .modulo-icon { font-size: 2.5rem; margin-bottom: 12px; }
-        .modulo-card .modulo-title { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; }
-        .modulo-card .modulo-desc { font-size: 0.85rem; color: var(--gray-500); margin-top: 4px; }
-        .modulo-card .modulo-link { color: var(--blue); font-weight: 600; font-size: 0.85rem; margin-top: 12px; display: inline-block; }
 
-        @media (max-width: 1200px) {
-            .cards-grid { grid-template-columns: repeat(2, 1fr); }
-            .modulos-grid { grid-template-columns: repeat(2, 1fr); }
+        /* ============================================ */
+        /* GRID DE MÓDULOS                             */
+        /* ============================================ */
+        .modules-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px; margin-bottom: 20px;
         }
+        .module-card {
+            background: white; border: 1px solid var(--gray-200); border-radius: var(--radius);
+            padding: 20px; text-decoration: none; color: inherit;
+            display: flex; flex-direction: column; gap: 8px;
+            transition: var(--transition); box-shadow: var(--shadow);
+        }
+        .module-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--gold); }
+        .module-card .m-icon { font-size: 1.8rem; }
+        .module-card .m-title { font-weight: 700; color: var(--gray-900); font-size: 0.95rem; }
+        .module-card .m-desc { font-size: 0.8rem; color: var(--gray-500); line-height: 1.5; }
+        .module-card .m-go { font-size: 0.8rem; font-weight: 700; color: var(--gold); margin-top: auto; }
+
+        .toast {
+            position: fixed; top: 24px; right: 24px; background: white;
+            padding: 14px 24px; border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            display: none; align-items: center; gap: 12px;
+            font-weight: 600; font-size: 0.875rem; z-index: 300;
+            border-left: 4px solid var(--blue); animation: slideIn 0.3s ease;
+        }
+        .toast.show { display: flex; }
+        .toast.success { border-left-color: #10B981; }
+        .toast.error { border-left-color: #EF4444; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(120%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (max-width: 1200px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
             .cards-grid { grid-template-columns: 1fr; }
-            .modulos-grid { grid-template-columns: 1fr; }
             .main-header { flex-direction: column; align-items: flex-start; }
+            .modules-grid { grid-template-columns: 1fr; }
         }
         .sidebar::-webkit-scrollbar { width: 4px; }
         .sidebar::-webkit-scrollbar-track { background: transparent; }
@@ -210,7 +206,7 @@
 <body>
 
     <!-- ============================================ -->
-    <!-- SIDEBAR - MENU FIXO                         -->
+    <!-- SIDEBAR - MENU FIXO MASTER ADMIN            -->
     <!-- ============================================ -->
     <aside class="sidebar" id="sidebar">
         <a href="/admin/dashboard.html" class="logo">
@@ -225,36 +221,32 @@
             <div class="role"><span class="badge">👑 Master Admin</span></div>
         </div>
 
-        <!-- ============================================ -->
-        <!-- MENU FIXO - TODOS OS ITENS VISÍVEIS         -->
-        <!-- ============================================ -->
         <ul class="nav">
-            <!-- ===== DASHBOARD ===== -->
             <li class="nav-subtitle">📊 DASHBOARD</li>
             <li><a href="/admin/dashboard.html" class="active"><span class="icon">📊</span> Dashboard</a></li>
 
-            <!-- ===== GESTÃO ===== -->
             <li class="nav-subtitle">🏢 GESTÃO</li>
-            <li><a href="/admin/empresas/index.html"><span class="icon">🏢</span> Empresas/Recrutadores</a></li>
-            <li><a href="/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
+            <li><a href="/admin/empresas/index.html"><span class="icon">🏢</span> Empresas</a></li>
+            <li><a href="/admin/recrutadores/index.html"><span class="icon">🧑‍💼</span> Recrutadores</a></li>
+            <li><a href="/admin/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
 
-            <!-- ===== CENTRAL FINANCEIRA ===== -->
             <li class="nav-subtitle">💰 CENTRAL FINANCEIRA</li>
-            <li><a href="/admin/financeiro/index.html"><span class="icon">💰</span> Centro Financeiro</a></li>
-            <li><a href="/admin/financeiro/carteiras.html"><span class="icon">📋</span> Carteiras</a></li>
+            <li><a href="/admin/financeiro/index.html"><span class="icon">💰</span> Financeiro Global</a></li>
+            <li><a href="/admin/financeiro/carteiras.html"><span class="icon">👛</span> Carteiras</a></li>
             <li><a href="/admin/financeiro/creditos.html"><span class="icon">💳</span> Créditos</a></li>
-            <li><a href="/admin/financeiro/extratos.html"><span class="icon">📊</span> Extratos</a></li>
+            <li><a href="/admin/financeiro/extratos.html"><span class="icon">🧾</span> Extratos</a></li>
+            <li><a href="/admin/financeiro/assinaturas.html"><span class="icon">🔁</span> Assinaturas</a></li>
+            <li><a href="/admin/financeiro/reembolsos.html"><span class="icon">↩️</span> Reembolsos</a></li>
             <li><a href="/admin/financeiro/precos.html"><span class="icon">🏷️</span> Preços</a></li>
+            <li><a href="/admin/financeiro/cupons.html"><span class="icon">🎟️</span> Cupons</a></li>
+            <li><a href="/admin/financeiro/configuracoes.html"><span class="icon">⚙️</span> Config. Financeiras</a></li>
 
-            <!-- ===== AUDITORIA ===== -->
-            <li class="nav-subtitle">🔍 AUDITORIA</li>
-            <li><a href="/admin/financeiro/auditoria.html"><span class="icon">📋</span> Auditoria</a></li>
-            <li><a href="/admin/agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
-            <li><a href="/admin/backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
+            <li class="nav-subtitle">📅 AGENDA</li>
+            <li><a href="/admin/agenda/calendario.html"><span class="icon">📅</span> Calendário</a></li>
 
-            <!-- ===== SISTEMA ===== -->
-            <li class="nav-subtitle">⚙️ SISTEMA</li>
-            <li><a href="/admin/financeiro/configuracoes.html"><span class="icon">⚙️</span> Configurações</a></li>
+            <li class="nav-subtitle">💾 SISTEMA</li>
+            <li><a href="/admin/financeiro/auditoria.html"><span class="icon">🔍</span> Auditoria</a></li>
+            <li><a href="/admin/backup/backup-completo.html"><span class="icon">💾</span> Backup Completo</a></li>
         </ul>
 
         <div class="logout">
@@ -270,95 +262,147 @@
     <main class="main">
         <div class="main-header">
             <div>
-                <h1>📊 Dashboard Master</h1>
-                <p class="subtitle">Visão geral da plataforma VIGORRE ONE™</p>
+                <h1>👑 Dashboard Master Admin</h1>
+                <p class="subtitle">Visão global do ecossistema VIGORRE ONE™ — empresas, financeiro, auditoria e sistema.</p>
             </div>
             <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
         </div>
 
-        <div class="cards-grid" id="cardsGrid">
+        <!-- 📊 VISÃO GERAL -->
+        <div class="section-title">📊 Visão Geral do Ecossistema</div>
+        <div class="cards-grid">
             <div class="card" onclick="window.location.href='/admin/financeiro/index.html'">
                 <div class="card-icon">💰</div>
                 <div class="card-label">Faturamento Total</div>
-                <div class="card-value" id="totalFaturamento">R$ 42.850,00</div>
+                <div class="card-value" id="totalFaturamento">R$ 42.850</div>
             </div>
             <div class="card" onclick="window.location.href='/admin/empresas/index.html'">
                 <div class="card-icon">🏢</div>
-                <div class="card-label">Empresas</div>
+                <div class="card-label">Empresas Ativas</div>
                 <div class="card-value" id="totalEmpresas">1.250</div>
             </div>
-            <div class="card" onclick="window.location.href='/participantes/index.html'">
+            <div class="card" onclick="window.location.href='/admin/participantes/index.html'">
                 <div class="card-icon">👥</div>
                 <div class="card-label">Participantes</div>
                 <div class="card-value" id="totalParticipantes">125.000</div>
             </div>
             <div class="card" onclick="window.location.href='/admin/financeiro/creditos.html'">
                 <div class="card-icon">💳</div>
-                <div class="card-label">Créditos</div>
-                <div class="card-value" id="totalCreditos">342</div>
+                <div class="card-label">Créditos em Circulação</div>
+                <div class="card-value" id="totalCreditos">342.500</div>
             </div>
         </div>
 
-        <h2 style="font-family:'Poppins',sans-serif;font-size:1.2rem;font-weight:600;margin-bottom:16px;">🚀 Acessar Módulos</h2>
-
-        <div class="modulos-grid">
-            <a href="/admin/empresas/index.html" class="modulo-card">
-                <div class="modulo-icon">🏢</div>
-                <div class="modulo-title">Empresas/Recrutadores</div>
-                <div class="modulo-desc">Gerenciar empresas e recrutadores</div>
-                <span class="modulo-link">Acessar →</span>
+        <!-- 🏢 GESTÃO -->
+        <div class="section-title">🏢 Gestão Global</div>
+        <div class="modules-grid">
+            <a class="module-card" href="/admin/empresas/index.html">
+                <span class="m-icon">🏢</span>
+                <span class="m-title">Empresas</span>
+                <span class="m-desc">Gerencie todas as organizações cadastradas na plataforma.</span>
+                <span class="m-go">Acessar →</span>
             </a>
-
-            <a href="/participantes/index.html" class="modulo-card">
-                <div class="modulo-icon">👥</div>
-                <div class="modulo-title">Participantes</div>
-                <div class="modulo-desc">Gerenciar participantes e candidatos</div>
-                <span class="modulo-link">Acessar →</span>
+            <a class="module-card" href="/admin/recrutadores/index.html">
+                <span class="m-icon">🧑‍💼</span>
+                <span class="m-title">Recrutadores</span>
+                <span class="m-desc">Profissionais de RH e headhunters parceiros do ecossistema.</span>
+                <span class="m-go">Acessar →</span>
             </a>
-
-            <a href="/admin/financeiro/index.html" class="modulo-card">
-                <div class="modulo-icon">💰</div>
-                <div class="modulo-title">Centro Financeiro</div>
-                <div class="modulo-desc">Dashboard financeiro, carteiras, créditos</div>
-                <span class="modulo-link">Acessar →</span>
+            <a class="module-card" href="/admin/participantes/index.html">
+                <span class="m-icon">👥</span>
+                <span class="m-title">Participantes</span>
+                <span class="m-desc">Candidatos, colaboradores e usuários finais da plataforma.</span>
+                <span class="m-go">Acessar →</span>
             </a>
+        </div>
 
-            <a href="/admin/financeiro/precos.html" class="modulo-card">
-                <div class="modulo-icon">🏷️</div>
-                <div class="modulo-title">Preços</div>
-                <div class="modulo-desc">Gerenciar preços de relatórios e laudos</div>
-                <span class="modulo-link">Acessar →</span>
+        <!-- 💰 CENTRAL FINANCEIRA -->
+        <div class="section-title">💰 Central Financeira Global</div>
+        <div class="modules-grid">
+            <a class="module-card" href="/admin/financeiro/index.html">
+                <span class="m-icon">💰</span>
+                <span class="m-title">Financeiro Global</span>
+                <span class="m-desc">Visão consolidada do financeiro de todas as empresas.</span>
+                <span class="m-go">Acessar →</span>
             </a>
-
-            <a href="/admin/financeiro/auditoria.html" class="modulo-card">
-                <div class="modulo-icon">📋</div>
-                <div class="modulo-title">Auditoria</div>
-                <div class="modulo-desc">Logs e auditoria do sistema</div>
-                <span class="modulo-link">Acessar →</span>
+            <a class="module-card" href="/admin/financeiro/carteiras.html">
+                <span class="m-icon">👛</span>
+                <span class="m-title">Carteiras</span>
+                <span class="m-desc">Saldo e movimentações de todas as carteiras de crédito.</span>
+                <span class="m-go">Acessar →</span>
             </a>
-
-            <a href="/admin/agenda/calendario.html" class="modulo-card">
-                <div class="modulo-icon">📅</div>
-                <div class="modulo-title">Agenda</div>
-                <div class="modulo-desc">Calendário e agendamentos</div>
-                <span class="modulo-link">Acessar →</span>
+            <a class="module-card" href="/admin/financeiro/creditos.html">
+                <span class="m-icon">💳</span>
+                <span class="m-title">Créditos</span>
+                <span class="m-desc">Gestão de pacotes, créditos emitidos e consumidos.</span>
+                <span class="m-go">Acessar →</span>
             </a>
-
-            <a href="/admin/backup/backup-completo.html" class="modulo-card">
-                <div class="modulo-icon">💾</div>
-                <div class="modulo-title">Backup</div>
-                <div class="modulo-desc">Backup completo do sistema</div>
-                <span class="modulo-link">Acessar →</span>
+            <a class="module-card" href="/admin/financeiro/extratos.html">
+                <span class="m-icon">🧾</span>
+                <span class="m-title">Extratos</span>
+                <span class="m-desc">Histórico consolidado de todas as movimentações financeiras.</span>
+                <span class="m-go">Acessar →</span>
             </a>
+            <a class="module-card" href="/admin/financeiro/assinaturas.html">
+                <span class="m-icon">🔁</span>
+                <span class="m-title">Assinaturas</span>
+                <span class="m-desc">Planos ativos, renovações e cancelamentos.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/admin/financeiro/reembolsos.html">
+                <span class="m-icon">↩️</span>
+                <span class="m-title">Reembolsos</span>
+                <span class="m-desc">Solicitações de reembolso e estornos em análise.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/admin/financeiro/precos.html">
+                <span class="m-icon">🏷️</span>
+                <span class="m-title">Preços</span>
+                <span class="m-desc">Defina preços de relatórios, laudos e pacotes.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/admin/financeiro/cupons.html">
+                <span class="m-icon">🎟️</span>
+                <span class="m-title">Cupons</span>
+                <span class="m-desc">Crie e gerencie cupons de desconto promocionais.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/admin/financeiro/configuracoes.html">
+                <span class="m-icon">⚙️</span>
+                <span class="m-title">Config. Financeiras</span>
+                <span class="m-desc">Gateways de pagamento, impostos e regras de cobrança.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+        </div>
 
-            <a href="/admin/financeiro/configuracoes.html" class="modulo-card">
-                <div class="modulo-icon">⚙️</div>
-                <div class="modulo-title">Configurações</div>
-                <div class="modulo-desc">Configurações gerais do sistema</div>
-                <span class="modulo-link">Acessar →</span>
+        <!-- 🔍 AUDITORIA E SISTEMA -->
+        <div class="section-title">🔍 Auditoria & Sistema</div>
+        <div class="modules-grid">
+            <a class="module-card" href="/admin/financeiro/auditoria.html">
+                <span class="m-icon">🔍</span>
+                <span class="m-title">Auditoria</span>
+                <span class="m-desc">Logs completos de acesso, alterações e transações do sistema.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/admin/agenda/calendario.html">
+                <span class="m-icon">📅</span>
+                <span class="m-title">Calendário</span>
+                <span class="m-desc">Agenda global de eventos, reuniões e vencimentos.</span>
+                <span class="m-go">Acessar →</span>
+            </a>
+            <a class="module-card" href="/admin/backup/backup-completo.html">
+                <span class="m-icon">💾</span>
+                <span class="m-title">Backup Completo</span>
+                <span class="m-desc">Histórico de backups, restaurações e integridade dos dados.</span>
+                <span class="m-go">Acessar →</span>
             </a>
         </div>
     </main>
+
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
 
     <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
@@ -373,16 +417,30 @@
 
         function logout() {
             if (confirm('Deseja realmente sair?')) {
-                window.location.href = '/login.html';
+                if (window.VigorreAuth) window.VigorreAuth.logout();
+                else window.location.href = '/login.html';
             }
         }
 
         function recarregarDados() {
-            alert('🔄 Dados atualizados!');
+            console.log('🔄 Recarregando dados do Master Admin...');
+            // Aqui você chamaria o financeiro-conexao.js para recarregar
+            showToast('Dados atualizados com sucesso!', 'success');
+        }
+
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+            icon.textContent = type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '✅';
+            msg.textContent = message;
+            toast.className = 'toast show ' + type;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📊 Dashboard Master - VIGORRE ONE™');
+            console.log('👑 Dashboard Master Admin - VIGORRE ONE™');
             console.log('✅ Dashboard carregado!');
         });
     </script>
