@@ -7,7 +7,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet" />
+
+    <!-- ✅ MENU ÚNICO: só estes 2 arquivos controlam o menu -->
+    <link rel="stylesheet" href="/assets/css/menu-fix.css" />
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,83 +33,8 @@
             min-height: 100vh;
         }
 
-        /* ============================================ */
-        /* SIDEBAR - MENU FIXO                         */
-        /* ============================================ */
-        .sidebar {
-            position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
-            background: var(--navy); color: white; padding: 24px 20px;
-            display: flex; flex-direction: column; z-index: 100;
-            transition: var(--transition); overflow-y: auto;
-        }
-        .sidebar .logo {
-            display: flex; align-items: center; gap: 12px;
-            text-decoration: none; margin-bottom: 32px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-        .sidebar .logo .logo-text .name {
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem; font-weight: 800; color: white;
-        }
-        .sidebar .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
-        .sidebar .logo .logo-text .sub {
-            font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.12em;
-        }
-        .sidebar .user-info {
-            padding: 16px 12px; background: rgba(255,255,255,0.04);
-            border-radius: var(--radius-sm); margin-bottom: 24px;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .sidebar .user-info .name { font-weight: 600; font-size: 0.9rem; color: white; }
-        .sidebar .user-info .role { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; }
-        .sidebar .user-info .role .badge {
-            display: inline-block; padding: 2px 10px; background: rgba(217,119,6,0.15);
-            color: var(--gold); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600;
-        }
-
-        .sidebar .nav { list-style: none; flex: 1; margin: 0; padding: 0; }
-        .sidebar .nav li { margin-bottom: 2px; }
-        .sidebar .nav .nav-subtitle {
-            font-size: 0.55rem; font-weight: 700; color: rgba(255,255,255,0.25);
-            text-transform: uppercase; letter-spacing: 0.12em;
-            padding: 16px 14px 6px 14px; margin-top: 4px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-        }
-        .sidebar .nav .nav-subtitle:first-of-type { padding-top: 4px; border-top: none; }
-        .sidebar .nav a {
-            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
-            border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500;
-            transition: var(--transition); cursor: pointer;
-        }
-        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
-        .sidebar .nav a.active { background: rgba(217,119,6,0.12); color: white; border-left: 3px solid var(--gold); }
-        .sidebar .nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; flex-shrink: 0; }
-
-        .sidebar .logout { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
-        .sidebar .logout a {
-            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
-            border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500;
-            transition: var(--transition); cursor: pointer;
-        }
-        .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
-
-        .mobile-overlay {
-            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99;
-        }
-        .mobile-overlay.active { display: block; }
-
-        @media (max-width: 992px) {
-            .sidebar { transform: translateX(-100%); width: 280px; }
-            .sidebar.open { transform: translateX(0); }
-            .main { margin-left: 0; padding: 16px; }
-            .mobile-overlay.active { display: block; }
-        }
-
-        .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
+        /* ✅ Conteúdo principal — offset do menu é controlado pelo menu-fix.css */
+        .main { padding: 24px 32px 40px; min-height: 100vh; }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
@@ -125,9 +53,6 @@
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
 
-        /* ============================================ */
-        /* CARDS DE ESTATÍSTICAS                       */
-        /* ============================================ */
         .cards-grid {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px;
         }
@@ -144,22 +69,14 @@
             font-size: 1.8rem; font-weight: 700; color: var(--gray-900);
         }
 
-        /* ============================================ */
-        /* SUBTÍTULOS DE SEÇÃO                         */
-        /* ============================================ */
         .section-title {
             display: flex; align-items: center; gap: 10px;
             font-size: 0.75rem; font-weight: 800; letter-spacing: 1.4px;
             text-transform: uppercase; color: var(--gray-600);
             margin: 32px 0 16px;
         }
-        .section-title::after {
-            content: ""; flex: 1; height: 1px; background: var(--gray-200);
-        }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--gray-200); }
 
-        /* ============================================ */
-        /* GRID DE MÓDULOS                             */
-        /* ============================================ */
         .modules-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 16px; margin-bottom: 20px;
@@ -197,69 +114,16 @@
             .cards-grid { grid-template-columns: 1fr; }
             .main-header { flex-direction: column; align-items: flex-start; }
             .modules-grid { grid-template-columns: 1fr; }
+            .main { padding: 16px; }
         }
-        .sidebar::-webkit-scrollbar { width: 4px; }
-        .sidebar::-webkit-scrollbar-track { background: transparent; }
-        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
     </style>
 </head>
-<body>
+<body data-profile="master">
 
-    <!-- ============================================ -->
-    <!-- SIDEBAR - MENU FIXO MASTER ADMIN            -->
-    <!-- ============================================ -->
-    <aside class="sidebar" id="sidebar">
-        <a href="/admin/dashboard.html" class="logo">
-            <div class="logo-text">
-                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                <span class="sub">People Intelligence Enterprise</span>
-            </div>
-        </a>
+    <!-- ✅ SEM menu hardcoded — o menu-fix.js injeta automaticamente -->
 
-        <div class="user-info">
-            <div class="name" id="userName">Administrador</div>
-            <div class="role"><span class="badge">👑 Master Admin</span></div>
-        </div>
-
-        <ul class="nav">
-            <li class="nav-subtitle">📊 DASHBOARD</li>
-            <li><a href="/admin/dashboard.html" class="active"><span class="icon">📊</span> Dashboard</a></li>
-
-            <li class="nav-subtitle">🏢 GESTÃO</li>
-            <li><a href="/admin/empresas/index.html"><span class="icon">🏢</span> Empresas</a></li>
-            <li><a href="/admin/recrutadores/index.html"><span class="icon">🧑‍💼</span> Recrutadores</a></li>
-            <li><a href="/admin/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
-
-            <li class="nav-subtitle">💰 CENTRAL FINANCEIRA</li>
-            <li><a href="/admin/financeiro/index.html"><span class="icon">💰</span> Financeiro Global</a></li>
-            <li><a href="/admin/financeiro/carteiras.html"><span class="icon">👛</span> Carteiras</a></li>
-            <li><a href="/admin/financeiro/creditos.html"><span class="icon">💳</span> Créditos</a></li>
-            <li><a href="/admin/financeiro/extratos.html"><span class="icon">🧾</span> Extratos</a></li>
-            <li><a href="/admin/financeiro/assinaturas.html"><span class="icon">🔁</span> Assinaturas</a></li>
-            <li><a href="/admin/financeiro/reembolsos.html"><span class="icon">↩️</span> Reembolsos</a></li>
-            <li><a href="/admin/financeiro/precos.html"><span class="icon">🏷️</span> Preços</a></li>
-            <li><a href="/admin/financeiro/cupons.html"><span class="icon">🎟️</span> Cupons</a></li>
-            <li><a href="/admin/financeiro/configuracoes.html"><span class="icon">⚙️</span> Config. Financeiras</a></li>
-
-            <li class="nav-subtitle">📅 AGENDA</li>
-            <li><a href="/admin/agenda/calendario.html"><span class="icon">📅</span> Calendário</a></li>
-
-            <li class="nav-subtitle">💾 SISTEMA</li>
-            <li><a href="/admin/financeiro/auditoria.html"><span class="icon">🔍</span> Auditoria</a></li>
-            <li><a href="/admin/backup/backup-completo.html"><span class="icon">💾</span> Backup Completo</a></li>
-        </ul>
-
-        <div class="logout">
-            <a href="#" onclick="logout()"><span class="icon">🚪</span> Sair</a>
-        </div>
-    </aside>
-
-    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
-
-    <!-- ============================================ -->
-    <!-- MAIN CONTENT                                -->
-    <!-- ============================================ -->
-    <main class="main">
+    <!-- ✅ Conteúdo principal com classe vg-content (offset do menu) -->
+    <main class="main vg-content">
         <div class="main-header">
             <div>
                 <h1>👑 Dashboard Master Admin</h1>
@@ -343,18 +207,6 @@
                 <span class="m-desc">Histórico consolidado de todas as movimentações financeiras.</span>
                 <span class="m-go">Acessar →</span>
             </a>
-            <a class="module-card" href="/admin/financeiro/assinaturas.html">
-                <span class="m-icon">🔁</span>
-                <span class="m-title">Assinaturas</span>
-                <span class="m-desc">Planos ativos, renovações e cancelamentos.</span>
-                <span class="m-go">Acessar →</span>
-            </a>
-            <a class="module-card" href="/admin/financeiro/reembolsos.html">
-                <span class="m-icon">↩️</span>
-                <span class="m-title">Reembolsos</span>
-                <span class="m-desc">Solicitações de reembolso e estornos em análise.</span>
-                <span class="m-go">Acessar →</span>
-            </a>
             <a class="module-card" href="/admin/financeiro/precos.html">
                 <span class="m-icon">🏷️</span>
                 <span class="m-title">Preços</span>
@@ -365,12 +217,6 @@
                 <span class="m-icon">🎟️</span>
                 <span class="m-title">Cupons</span>
                 <span class="m-desc">Crie e gerencie cupons de desconto promocionais.</span>
-                <span class="m-go">Acessar →</span>
-            </a>
-            <a class="module-card" href="/admin/financeiro/configuracoes.html">
-                <span class="m-icon">⚙️</span>
-                <span class="m-title">Config. Financeiras</span>
-                <span class="m-desc">Gateways de pagamento, impostos e regras de cobrança.</span>
                 <span class="m-go">Acessar →</span>
             </a>
         </div>
@@ -404,27 +250,17 @@
         <span id="toastMessage">Mensagem</span>
     </div>
 
+    <!-- ✅ MENU ÚNICO injetado aqui -->
+    <script src="/assets/js/menu-fix.js"></script>
+
     <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
     <script src="/middleware/auth-guard.js"></script>
     <script src="/admin/financeiro/financeiro-conexao.js"></script>
 
     <script>
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.getElementById('mobileOverlay').classList.toggle('active');
-        }
-
-        function logout() {
-            if (confirm('Deseja realmente sair?')) {
-                if (window.VigorreAuth) window.VigorreAuth.logout();
-                else window.location.href = '/login.html';
-            }
-        }
-
         function recarregarDados() {
             console.log('🔄 Recarregando dados do Master Admin...');
-            // Aqui você chamaria o financeiro-conexao.js para recarregar
             showToast('Dados atualizados com sucesso!', 'success');
         }
 
@@ -441,7 +277,6 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             console.log('👑 Dashboard Master Admin - VIGORRE ONE™');
-            console.log('✅ Dashboard carregado!');
         });
     </script>
 
