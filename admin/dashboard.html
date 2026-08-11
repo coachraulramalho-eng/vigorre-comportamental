@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 
     <style>
+        /* ============================================ */
+        /* CSS COMPLETO                                */
+        /* ============================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
@@ -30,7 +33,9 @@
             min-height: 100vh;
         }
 
-        /* ===== SIDEBAR ===== */
+        /* ============================================ */
+        /* SIDEBAR - MENU FIXO                         */
+        /* ============================================ */
         .sidebar {
             position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
             background: var(--navy); color: white; padding: 24px 20px;
@@ -40,7 +45,8 @@
         .sidebar .logo {
             display: flex; align-items: center; gap: 12px;
             text-decoration: none; margin-bottom: 32px;
-            padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .sidebar .logo .logo-text .name {
             font-family: 'Poppins', sans-serif;
@@ -62,29 +68,64 @@
             color: var(--gold); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600;
         }
 
-        /* ===== SUBTÍTULOS ===== */
-        .sidebar .nav { list-style: none; flex: 1; margin: 0; padding: 0; }
+        /* ============================================ */
+        /* SUBTÍTULOS E ITENS DO MENU - FIXOS          */
+        /* ============================================ */
+        .sidebar .nav {
+            list-style: none;
+            flex: 1;
+            margin: 0;
+            padding: 0;
+        }
         .sidebar .nav li { margin-bottom: 2px; }
         .sidebar .nav .nav-subtitle {
-            font-size: 0.55rem; font-weight: 700; color: rgba(255,255,255,0.25);
-            text-transform: uppercase; letter-spacing: 0.12em;
-            padding: 16px 14px 6px 14px; margin-top: 4px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 16px 14px 6px 14px;
+            margin-top: 4px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
         }
-        .sidebar .nav .nav-subtitle:first-of-type { padding-top: 4px; border-top: none; }
+        .sidebar .nav .nav-subtitle:first-of-type {
+            padding-top: 4px;
+            border-top: none;
+        }
         .sidebar .nav a {
-            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
-            border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500;
-            transition: var(--transition); cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
         }
-        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
+        .sidebar .nav a:hover {
+            background: rgba(255,255,255,0.06);
+            color: white;
+        }
         .sidebar .nav a.active {
-            background: rgba(217,119,6,0.12); color: white; border-left: 3px solid var(--gold);
+            background: rgba(217,119,6,0.12);
+            color: white;
+            border-left: 3px solid var(--gold);
         }
-        .sidebar .nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; flex-shrink: 0; }
+        .sidebar .nav a .icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+            flex-shrink: 0;
+        }
 
-        .sidebar .logout { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .sidebar .logout {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
         .sidebar .logout a {
             display: flex; align-items: center; gap: 12px; padding: 10px 14px;
             border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
@@ -108,14 +149,17 @@
             .mobile-overlay.active { display: block; }
         }
 
-        /* ===== MAIN ===== */
+        /* ============================================ */
+        /* MAIN CONTENT                                */
+        /* ============================================ */
         .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
         }
         .main-header h1 {
-            font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
         }
         .main-header .subtitle { color: var(--gray-500); font-size: 0.9rem; }
 
@@ -140,7 +184,8 @@
         .card .card-icon { font-size: 2rem; margin-bottom: 8px; }
         .card .card-label { font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
         .card .card-value {
-            font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--gray-900);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem; font-weight: 700; color: var(--gray-900);
         }
 
         .modulos-grid {
@@ -190,7 +235,9 @@
 </head>
 <body>
 
-    <!-- ===== SIDEBAR ===== -->
+    <!-- ============================================ -->
+    <!-- SIDEBAR - MENU FIXO                         -->
+    <!-- ============================================ -->
     <aside class="sidebar" id="sidebar">
         <a href="/admin/dashboard.html" class="logo">
             <div class="logo-text">
@@ -205,17 +252,20 @@
         </div>
 
         <!-- ============================================ -->
-        <!-- MENU COM SUBTÍTULOS                         -->
+        <!-- MENU FIXO - TODOS OS ITENS VISÍVEIS         -->
         <!-- ============================================ -->
         <ul class="nav">
+            <!-- ===== DASHBOARD ===== -->
             <li class="nav-subtitle">📊 DASHBOARD</li>
             <li><a href="/admin/dashboard.html" class="active"><span class="icon">📊</span> Dashboard</a></li>
 
+            <!-- ===== GESTÃO ===== -->
             <li class="nav-subtitle">🏢 GESTÃO</li>
             <li><a href="/admin/empresas/index.html"><span class="icon">🏢</span> Empresas</a></li>
             <li><a href="/admin/recrutadores/index.html"><span class="icon">👤</span> Recrutadores</a></li>
-            <li><a href="/admin/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
+            <li><a href="/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
 
+            <!-- ===== CENTRAL FINANCEIRA ===== -->
             <li class="nav-subtitle">💰 CENTRAL FINANCEIRA</li>
             <li><a href="/admin/financeiro/index.html"><span class="icon">💰</span> Centro Financeiro</a></li>
             <li><a href="/admin/carteiras/index.html"><span class="icon">📋</span> Carteiras</a></li>
@@ -223,11 +273,13 @@
             <li><a href="/admin/extratos/index.html"><span class="icon">📊</span> Extratos</a></li>
             <li><a href="/admin/precos/index.html"><span class="icon">🏷️</span> Preços</a></li>
 
+            <!-- ===== AUDITORIA ===== -->
             <li class="nav-subtitle">🔍 AUDITORIA</li>
             <li><a href="/admin/auditoria/index.html"><span class="icon">📋</span> Auditoria</a></li>
             <li><a href="/admin/agenda/index.html"><span class="icon">📅</span> Agenda</a></li>
             <li><a href="/admin/backup/index.html"><span class="icon">💾</span> Backup</a></li>
 
+            <!-- ===== SISTEMA ===== -->
             <li class="nav-subtitle">⚙️ SISTEMA</li>
             <li><a href="/admin/configuracoes/index.html"><span class="icon">⚙️</span> Configurações</a></li>
         </ul>
@@ -239,7 +291,9 @@
 
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
 
-    <!-- ===== MAIN ===== -->
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT                                -->
+    <!-- ============================================ -->
     <main class="main">
         <div class="main-header">
             <div>
@@ -266,7 +320,7 @@
                 <div class="card-label">Recrutadores</div>
                 <div class="card-value" id="totalRecrutadores">342</div>
             </div>
-            <div class="card" onclick="window.location.href='/admin/participantes/index.html'">
+            <div class="card" onclick="window.location.href='/participantes/index.html'">
                 <div class="card-icon">👥</div>
                 <div class="card-label">Participantes</div>
                 <div class="card-value" id="totalParticipantes">125.000</div>
@@ -291,7 +345,7 @@
                 <span class="modulo-link">Acessar →</span>
             </a>
 
-            <a href="/admin/participantes/index.html" class="modulo-card">
+            <a href="/participantes/index.html" class="modulo-card">
                 <div class="modulo-icon">👥</div>
                 <div class="modulo-title">Participantes</div>
                 <div class="modulo-desc">Gerenciar participantes e candidatos</div>
@@ -351,25 +405,39 @@
     <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
     <script src="/middleware/auth-guard.js"></script>
+    <script src="/admin/financeiro/financeiro-conexao.js"></script>
 
     <script>
+        // ============================================
+        // SIDEBAR TOGGLE
+        // ============================================
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
             document.getElementById('mobileOverlay').classList.toggle('active');
         }
 
+        // ============================================
+        // LOGOUT
+        // ============================================
         function logout() {
             if (confirm('Deseja realmente sair?')) {
                 window.location.href = '/login.html';
             }
         }
 
+        // ============================================
+        // RECARREGAR DADOS
+        // ============================================
         function recarregarDados() {
             alert('🔄 Dados atualizados!');
         }
 
+        // ============================================
+        // CARREGAR DADOS
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('✅ Dashboard Master carregado!');
+            console.log('📊 Dashboard Master - VIGORRE ONE™');
+            console.log('✅ Dashboard carregado!');
         });
     </script>
 
