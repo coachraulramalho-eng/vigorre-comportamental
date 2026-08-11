@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard | VIGORRE ONE™</title>
+    <title>Participantes | Master Admin | VIGORRE ONE™</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/assets/css/menu-fix.css" />
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
             --green: #10B981; --red: #EF4444; --orange: #F59E0B; --purple: #7C3AED;
-            --pink: #EC4899; --white: #FFFFFF; --gray-50: #F8FAFC;
-            --gray-100: #F1F5F9; --gray-200: #E2E8F0; --gray-300: #CBD5E1;
-            --gray-400: #94A3B8; --gray-500: #64748B; --gray-600: #475569;
-            --gray-700: #334155; --gray-800: #1E293B; --gray-900: #0F172A;
+            --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0; --gray-300: #CBD5E1; --gray-400: #94A3B8;
+            --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155;
+            --gray-800: #1E293B; --gray-900: #0F172A;
             --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
             --shadow: 0 4px 24px rgba(10,37,64,0.06);
             --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
@@ -25,786 +27,644 @@
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-800);
-            min-height: 100vh;
+            background: var(--gray-50); color: var(--gray-800); min-height: 100vh;
         }
 
-        /* ============================================
-           HEADER
-           ============================================ */
-        .header-participante {
-            background: var(--navy);
-            color: white;
-            padding: 24px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            border-bottom: 3px solid var(--gold);
+        .main { padding: 24px 32px 40px; min-height: 100vh; }
+        .main-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
         }
-        .header-participante .logo {
-            display: flex; align-items: center; gap: 12px; text-decoration: none;
-        }
-        .header-participante .logo .logo-img { height: 36px; width: auto; display: block; }
-        .header-participante .logo .logo-text .name {
-            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white;
-        }
-        .header-participante .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
-        .header-participante .logo .logo-text .sub {
-            font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em;
-        }
-        .header-participante .user-info {
-            text-align: right;
-        }
-        .header-participante .user-info .name {
-            font-weight: 600; font-size: 0.9rem;
-        }
-        .header-participante .user-info .company {
-            font-size: 0.75rem; color: rgba(255,255,255,0.4);
-        }
-        .header-participante .user-info .badge {
-            display: inline-block; padding: 2px 10px; background: rgba(217,119,6,0.15);
-            color: var(--gold); border-radius: var(--radius-full); font-size: 0.6rem; font-weight: 600;
-        }
-
-        /* ============================================
-           SAUDAÇÃO
-           ============================================ */
-        .saudacao {
-            padding: 24px 32px;
-            background: white;
-            border-bottom: 1px solid var(--gray-200);
-        }
-        .saudacao h1 {
+        .main-header h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--gray-900);
+            font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
         }
-        .saudacao p {
-            color: var(--gray-500);
-            font-size: 0.95rem;
-        }
+        .main-header .subtitle { color: var(--gray-500); font-size: 0.9rem; margin-top: 4px; }
 
-        /* ============================================
-           CARDS
-           ============================================ */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            padding: 24px 32px;
+        .btn-primary {
+            padding: 10px 20px; background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white; border: none; border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.875rem; cursor: pointer;
+            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none;
         }
-        .card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(10,37,64,0.04);
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
+
+        .btn-secondary {
+            padding: 8px 16px; background: var(--white); color: var(--gray-700);
+            border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+            font-weight: 600; font-size: 0.8rem; cursor: pointer;
+            transition: var(--transition); display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-secondary:hover { background: var(--gray-100); }
+
+        .btn-icon {
+            width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--gray-200);
+            background: white; cursor: pointer; display: inline-flex;
+            align-items: center; justify-content: center; transition: var(--transition);
+        }
+        .btn-icon:hover { background: var(--gray-100); transform: translateY(-1px); }
+        .btn-icon.danger:hover { background: #FEE2E2; border-color: #FECACA; color: var(--red); }
+        .btn-icon.success:hover { background: #D1FAE5; border-color: #A7F3D0; color: var(--green); }
+
+        /* Toggle de vínculo */
+        .vinculo-tabs {
+            display: inline-flex; background: var(--gray-100);
+            border-radius: var(--radius-sm); padding: 4px; margin-bottom: 20px;
+        }
+        .vinculo-tab {
+            padding: 10px 20px; border: none; background: transparent;
+            border-radius: 8px; font-weight: 600; font-size: 0.875rem;
+            cursor: pointer; transition: var(--transition); color: var(--gray-600);
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .vinculo-tab.active {
+            background: white; color: var(--gray-900);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .vinculo-tab .count {
+            background: var(--gray-200); color: var(--gray-700);
+            padding: 2px 8px; border-radius: var(--radius-full);
+            font-size: 0.7rem;
+        }
+        .vinculo-tab.active .count { background: var(--blue); color: white; }
+
+        /* Stats */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;
+        }
+        .stat-card {
+            background: white; border-radius: var(--radius); padding: 20px 24px;
+            box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
             transition: var(--transition);
-            cursor: pointer;
         }
-        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-        .card .card-icon { font-size: 2rem; margin-bottom: 8px; }
-        .card .card-label { font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
-        .card .card-value {
+        .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+        .stat-card .stat-icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .stat-card .stat-label {
+            font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase;
+            letter-spacing: 0.05em; font-weight: 600;
+        }
+        .stat-card .stat-value {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--gray-900);
+            font-size: 1.8rem; font-weight: 700; color: var(--gray-900); margin-top: 4px;
         }
-        .card .card-change {
+        .stat-card .stat-change { font-size: 0.75rem; font-weight: 600; margin-top: 4px; }
+        .stat-card .stat-change.up { color: var(--green); }
+
+        .section-title {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.75rem; font-weight: 800; letter-spacing: 1.4px;
+            text-transform: uppercase; color: var(--gray-600);
+            margin: 28px 0 16px;
+        }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--gray-200); }
+
+        .table-container {
+            background: white; border-radius: var(--radius); box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04); overflow: hidden;
+        }
+
+        .table-filters {
+            padding: 20px; border-bottom: 1px solid var(--gray-100);
+            display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+        }
+        .filter-search { flex: 1; min-width: 240px; position: relative; }
+        .filter-search input {
+            width: 100%; padding: 10px 14px 10px 40px;
+            border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+            font-size: 0.875rem; font-family: inherit;
+        }
+        .filter-search input:focus {
+            outline: none; border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
+        }
+        .filter-search::before {
+            content: "🔍"; position: absolute; left: 14px; top: 50%;
+            transform: translateY(-50%); font-size: 0.9rem;
+        }
+        .filter-select {
+            padding: 10px 14px; border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm); font-size: 0.875rem;
+            background: white; cursor: pointer; font-family: inherit;
+        }
+
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        .data-table thead { background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
+        .data-table th {
+            padding: 12px 16px; text-align: left;
+            font-size: 0.7rem; font-weight: 700;
+            color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .data-table td {
+            padding: 14px 16px; border-bottom: 1px solid var(--gray-100);
+            vertical-align: middle;
+        }
+        .data-table tbody tr { transition: var(--transition); }
+        .data-table tbody tr:hover { background: var(--gray-50); }
+        .data-table tbody tr:last-child td { border-bottom: none; }
+
+        .participant-cell { display: flex; align-items: center; gap: 12px; }
+        .avatar {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.875rem; flex-shrink: 0;
+        }
+        .avatar.autonomo { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+        .participant-info .name { font-weight: 600; color: var(--gray-900); }
+        .participant-info .email { font-size: 0.8rem; color: var(--gray-500); margin-top: 2px; }
+
+        .badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 4px 10px; border-radius: var(--radius-full);
             font-size: 0.7rem; font-weight: 600;
         }
-        .card .card-change.up { color: var(--green); }
-        .card .card-change.down { color: var(--red); }
+        .badge-ativo { background: #D1FAE5; color: #065F46; }
+        .badge-inativo { background: #F1F5F9; color: #475569; }
+        .badge-pendente { background: #FEF3C7; color: #92400E; }
+        .badge-bloqueado { background: #FEE2E2; color: #991B1B; }
+        .badge-autonomo { background: #EDE9FE; color: #6D28D9; }
+        .badge-empresa { background: #DBEAFE; color: #1E40AF; }
 
-        /* ============================================
-           ÁREA PRINCIPAL
-           ============================================ */
-        .main-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-            padding: 0 32px 24px;
+        .vinculo-cell {
+            display: flex; flex-direction: column; gap: 2px;
         }
-        .content-left { }
-        .content-right { }
+        .vinculo-cell .tipo {
+            font-weight: 600; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .vinculo-cell .nome-empresa {
+            font-size: 0.8rem; color: var(--gray-500);
+        }
 
-        .section-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(10,37,64,0.04);
-            margin-bottom: 20px;
-        }
-        .section-card h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--gray-800);
-            margin-bottom: 12px;
-        }
-        .section-card .empty {
-            text-align: center;
-            padding: 20px;
-            color: var(--gray-400);
-        }
-        .section-card .empty .icon { font-size: 2rem; }
+        .actions-cell { display: flex; gap: 6px; }
 
-        /* ============================================
-           LISTA DE TESTES
-           ============================================ */
-        .teste-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--gray-100);
+        .table-pagination {
+            padding: 16px 20px; border-top: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.85rem; color: var(--gray-600);
         }
-        .teste-item:last-child { border-bottom: none; }
-        .teste-item .info .nome {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--gray-800);
+        .pagination-buttons { display: flex; gap: 4px; }
+        .page-btn {
+            width: 32px; height: 32px; border-radius: 8px;
+            border: 1px solid var(--gray-200); background: white;
+            cursor: pointer; font-weight: 600; transition: var(--transition);
         }
-        .teste-item .info .desc {
-            font-size: 0.8rem;
-            color: var(--gray-500);
-        }
-        .teste-item .status {
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: var(--radius-full);
-        }
-        .teste-item .status.concluido {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-        .teste-item .status.pendente {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-        .teste-item .status.disponivel {
-            background: #DBEAFE;
-            color: #1E40AF;
-        }
-        .btn-action {
-            padding: 6px 16px;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--blue), var(--cyan));
-            color: white;
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,78,216,0.25); }
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold), var(--orange));
-            color: white;
-        }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217,119,6,0.25); }
-        .btn-secondary {
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: 1px solid var(--gray-200);
-        }
-        .btn-secondary:hover { background: var(--gray-200); }
-        .btn-success {
-            background: var(--green);
-            color: white;
-        }
-        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(16,185,129,0.25); }
+        .page-btn:hover { background: var(--gray-100); }
+        .page-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
 
-        /* ============================================
-           TOAST
-           ============================================ */
         .toast {
             position: fixed; top: 24px; right: 24px; background: white;
             padding: 14px 24px; border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.12);
             display: none; align-items: center; gap: 12px;
             font-weight: 600; font-size: 0.875rem; z-index: 300;
-            border-left: 4px solid var(--blue);
-            animation: slideIn 0.3s ease;
+            border-left: 4px solid var(--blue); animation: slideIn 0.3s ease;
         }
         .toast.show { display: flex; }
-        .toast.success { border-left-color: #10B981; }
-        .toast.error { border-left-color: #EF4444; }
+        .toast.success { border-left-color: var(--green); }
+        .toast.error { border-left-color: var(--red); }
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(120%); }
             to { opacity: 1; transform: translateX(0); }
         }
 
-        .loading-shimmer {
-            height: 32px; width: 60%;
-            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: 4px;
-            display: inline-block;
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(10,37,64,0.6); backdrop-filter: blur(4px);
+            z-index: 400; align-items: center; justify-content: center; padding: 20px;
         }
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+        .modal-overlay.show { display: flex; }
+        .modal {
+            background: white; border-radius: var(--radius);
+            max-width: 700px; width: 100%; max-height: 90vh;
+            overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            padding: 20px 24px; border-bottom: 1px solid var(--gray-200);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-header h3 { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; }
+        .modal-close {
+            width: 32px; height: 32px; border: none; background: var(--gray-100);
+            border-radius: 8px; cursor: pointer; font-size: 1rem;
+        }
+        .modal-body { padding: 24px; }
+        .modal-footer {
+            padding: 16px 24px; border-top: 1px solid var(--gray-200);
+            display: flex; justify-content: flex-end; gap: 8px;
         }
 
-        /* ============================================
-           RESPONSIVO
-           ============================================ */
-        @media (max-width: 1024px) {
-            .cards-grid { grid-template-columns: repeat(2, 1fr); }
-            .main-content { grid-template-columns: 1fr; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-size: 0.8rem; font-weight: 600;
+            color: var(--gray-700); margin-bottom: 6px;
         }
+        .form-group input, .form-group select {
+            width: 100%; padding: 10px 14px; border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm); font-size: 0.875rem; font-family: inherit;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none; border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
+        }
+
+        @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
-            .header-participante { flex-direction: column; text-align: center; }
-            .header-participante .user-info { text-align: center; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .saudacao { padding: 16px 20px; }
-            .cards-grid { padding: 16px 20px; }
-            .main-content { padding: 0 20px 16px; }
-        }
-
-        @media print {
-            .header-participante { background: #0A2540 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            .btn-action { display: none !important; }
-            .card { border: 1px solid #E2E8F0 !important; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .main-header { flex-direction: column; align-items: flex-start; }
+            .main { padding: 16px; }
+            .table-filters { flex-direction: column; align-items: stretch; }
+            .form-row { grid-template-columns: 1fr; }
+            .vinculo-tabs { width: 100%; }
+            .vinculo-tab { flex: 1; justify-content: center; font-size: 0.75rem; padding: 8px 12px; }
         }
     </style>
 </head>
-<body>
+<body data-profile="master">
 
-    <!-- ============================================
-    HEADER
-    ============================================ -->
-    <header class="header-participante">
-        <div class="logo">
-            <img src="../assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
-            <div class="logo-text">
-                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                <span class="sub">People Analytics Enterprise</span>
+    <main class="main vg-content">
+        <div class="main-header">
+            <div>
+                <h1>👥 Gestão Global de Participantes</h1>
+                <p class="subtitle">Todos os participantes do ecossistema VIGORRE ONE™ — autônomos e vinculados a empresas</p>
+            </div>
+            <button class="btn-primary" onclick="abrirModalNovo()">
+                <span>➕</span> Novo Participante
+            </button>
+        </div>
+
+        <!-- 🎯 TOGGLE POR VÍNCULO -->
+        <div class="vinculo-tabs">
+            <button class="vinculo-tab active" data-vinculo="todos" onclick="mudarVinculo('todos')">
+                <span>🌐</span> Todos <span class="count" id="countTodos">0</span>
+            </button>
+            <button class="vinculo-tab" data-vinculo="autonomo" onclick="mudarVinculo('autonomo')">
+                <span>👤</span> Autônomos <span class="count" id="countAutonomos">0</span>
+            </button>
+            <button class="vinculo-tab" data-vinculo="empresa" onclick="mudarVinculo('empresa')">
+                <span>🏢</span> Vinculados a Empresa <span class="count" id="countEmpresas">0</span>
+            </button>
+        </div>
+
+        <!-- 📊 STATS GLOBAIS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-label">Total de Participantes</div>
+                <div class="stat-value" id="statTotal">125.000</div>
+                <div class="stat-change up">↑ 12% no mês</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-label">Ativos</div>
+                <div class="stat-value" id="statAtivos">98.420</div>
+                <div class="stat-change up">↑ 8% no mês</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-label">Testes Aplicados (Total)</div>
+                <div class="stat-value" id="statTestes">412.580</div>
+                <div class="stat-change up">↑ 15% no mês</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📄</div>
+                <div class="stat-label">Laudos Gerados</div>
+                <div class="stat-value" id="statLaudos">24.850</div>
+                <div class="stat-change up">↑ 18% no mês</div>
             </div>
         </div>
-        <div class="user-info">
-            <div class="name" id="participantName">Carregando...</div>
-            <div class="company" id="participantCompany">Empresa: --</div>
-            <div><span class="badge">👤 Participante</span></div>
-        </div>
-    </header>
 
-    <!-- ============================================
-    SAUDAÇÃO
-    ============================================ -->
-    <section class="saudacao">
-        <h1 id="saudacaoText">👋 Olá, <span id="saudacaoNome">Participante</span>!</h1>
-        <p id="saudacaoMensagem">Bem-vindo à sua jornada de autoconhecimento. Continue evoluindo!</p>
-    </section>
+        <!-- 📋 LISTA GLOBAL DE PARTICIPANTES -->
+        <div class="section-title">📋 Todos os Participantes do Ecossistema</div>
+        <div class="table-container">
+            <div class="table-filters">
+                <div class="filter-search">
+                    <input type="text" id="searchInput" placeholder="Buscar por nome, email ou CPF..." />
+                </div>
+                <select class="filter-select" id="filterStatus">
+                    <option value="">Todos os status</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="pendente">Pendente</option>
+                    <option value="inativo">Inativo</option>
+                    <option value="bloqueado">Bloqueado</option>
+                </select>
+                <select class="filter-select" id="filterEmpresa">
+                    <option value="">Todas as empresas</option>
+                    <option value="autonomo">Apenas Autônomos</option>
+                    <option value="1">TechCorp Ltda</option>
+                    <option value="2">RH Solutions</option>
+                    <option value="3">Indústria ABC</option>
+                    <option value="4">Hospital São Lucas</option>
+                </select>
+                <button class="btn-secondary" onclick="exportarDados()">
+                    <span>📥</span> Exportar CSV
+                </button>
+            </div>
 
-    <!-- ============================================
-    CARDS
-    ============================================ -->
-    <div class="cards-grid">
-        <div class="card" onclick="window.location.href='meus-testes.html'">
-            <div class="card-icon">📝</div>
-            <div class="card-label">Testes Concluídos</div>
-            <div class="card-value" id="totalTestes"><span class="loading-shimmer"></span></div>
-            <div class="card-change up">✅ Realizados</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Participante</th>
+                        <th>CPF</th>
+                        <th>Vínculo</th>
+                        <th>Testes</th>
+                        <th>Laudo</th>
+                        <th>Status</th>
+                        <th>Cadastro</th>
+                        <th style="text-align:right;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyParticipantes"></tbody>
+            </table>
+
+            <div class="table-pagination">
+                <div>Mostrando <strong>1-10</strong> de <strong id="totalRegistros">0</strong> participantes</div>
+                <div class="pagination-buttons">
+                    <button class="page-btn">‹</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">...</button>
+                    <button class="page-btn">12.500</button>
+                    <button class="page-btn">›</button>
+                </div>
+            </div>
         </div>
-        <div class="card" onclick="window.location.href='meus-testes.html'">
-            <div class="card-icon">⏳</div>
-            <div class="card-label">Testes Disponíveis</div>
-            <div class="card-value" id="testesDisponiveis"><span class="loading-shimmer"></span></div>
-            <div class="card-change up">📌 Pendentes</div>
-        </div>
-        <div class="card" onclick="window.location.href='meus-relatorios.html'">
-            <div class="card-icon">📄</div>
-            <div class="card-label">Relatórios</div>
-            <div class="card-value" id="totalRelatorios"><span class="loading-shimmer"></span></div>
-            <div class="card-change up">📄 Disponíveis</div>
-        </div>
-        <div class="card" onclick="window.location.href='meu-laudo.html'">
-            <div class="card-icon">📋</div>
-            <div class="card-label">Laudo VIGOR®</div>
-            <div class="card-value" id="temLaudo"><span class="loading-shimmer"></span></div>
-            <div class="card-change up">📋 Status</div>
+    </main>
+
+    <!-- Modal Novo/Editar Participante -->
+    <div class="modal-overlay" id="modalParticipante">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Novo Participante</h3>
+                <button class="modal-close" onclick="fecharModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Tipo de Vínculo *</label>
+                    <select id="formVinculo" onchange="toggleEmpresa()">
+                        <option value="autonomo">👤 Autônomo (sem empresa)</option>
+                        <option value="empresa">🏢 Vinculado a uma empresa</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="grupoEmpresa" style="display:none;">
+                    <label>Empresa Vinculada *</label>
+                    <select id="formEmpresa">
+                        <option value="">Selecione a empresa...</option>
+                        <option value="1">TechCorp Ltda</option>
+                        <option value="2">RH Solutions</option>
+                        <option value="3">Indústria ABC</option>
+                        <option value="4">Hospital São Lucas</option>
+                        <option value="5">AgroBrasil Cooperativa</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome Completo *</label>
+                        <input type="text" id="formNome" placeholder="Nome do participante" />
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail *</label>
+                        <input type="email" id="formEmail" placeholder="email@exemplo.com" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>CPF *</label>
+                        <input type="text" id="formCpf" placeholder="000.000.000-00" />
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="text" id="formTelefone" placeholder="(00) 00000-0000" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Cargo / Função</label>
+                        <input type="text" id="formCargo" placeholder="Ex: Analista de RH" />
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="formStatus">
+                            <option value="ativo">Ativo</option>
+                            <option value="pendente">Pendente</option>
+                            <option value="inativo">Inativo</option>
+                            <option value="bloqueado">Bloqueado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="fecharModal()">Cancelar</button>
+                <button class="btn-primary" onclick="salvarParticipante()">💾 Salvar</button>
+            </div>
         </div>
     </div>
 
-    <!-- ============================================
-    CONTEÚDO PRINCIPAL
-    ============================================ -->
-    <div class="main-content">
-
-        <!-- COLUNA ESQUERDA -->
-        <div class="content-left">
-            <!-- Meus Testes -->
-            <div class="section-card">
-                <h3>📝 Meus Testes</h3>
-                <div id="listaTestes">
-                    <div class="teste-item">
-                        <div class="info">
-                            <div class="nome">DISC</div>
-                            <div class="desc">Análise Comportamental</div>
-                        </div>
-                        <div>
-                            <span class="status pendente" id="statusDisc">⏳ Pendente</span>
-                            <a href="../tests/disc/" class="btn-action btn-primary" style="margin-left:8px;">Iniciar</a>
-                        </div>
-                    </div>
-                    <div class="teste-item">
-                        <div class="info">
-                            <div class="nome">Big Five</div>
-                            <div class="desc">Os 5 Grandes Fatores</div>
-                        </div>
-                        <div>
-                            <span class="status pendente" id="statusBigFive">⏳ Pendente</span>
-                            <a href="../tests/bigfive/" class="btn-action btn-primary" style="margin-left:8px;">Iniciar</a>
-                        </div>
-                    </div>
-                    <div class="teste-item">
-                        <div class="info">
-                            <div class="nome">Inteligência Emocional</div>
-                            <div class="desc">Autoconsciência · Empatia</div>
-                        </div>
-                        <div>
-                            <span class="status pendente" id="statusIE">⏳ Pendente</span>
-                            <a href="../tests/ie/" class="btn-action btn-primary" style="margin-left:8px;">Iniciar</a>
-                        </div>
-                    </div>
-                    <div class="teste-item">
-                        <div class="info">
-                            <div class="nome">Valores</div>
-                            <div class="desc">O que realmente importa</div>
-                        </div>
-                        <div>
-                            <span class="status pendente" id="statusValores">⏳ Pendente</span>
-                            <a href="../tests/valores/" class="btn-action btn-primary" style="margin-left:8px;">Iniciar</a>
-                        </div>
-                    </div>
-                    <div class="teste-item">
-                        <div class="info">
-                            <div class="nome">SWOT</div>
-                            <div class="desc">Forças · Fraquezas · Oportunidades · Ameaças</div>
-                        </div>
-                        <div>
-                            <span class="status pendente" id="statusSWOT">⏳ Pendente</span>
-                            <a href="../tests/swot/" class="btn-action btn-primary" style="margin-left:8px;">Iniciar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Meus Relatórios -->
-            <div class="section-card">
-                <h3>📄 Meus Relatórios</h3>
-                <div id="listaRelatorios">
-                    <div class="teste-item">
-                        <div class="info">
-                            <div class="nome">Relatório DISC</div>
-                            <div class="desc">Análise comportamental simplificada</div>
-                        </div>
-                        <div>
-                            <span class="status pendente" id="relDisc">⏳ Aguardando</span>
-                            <a href="../relatorios/disc/" class="btn-action btn-secondary" style="margin-left:8px;">Ver</a>
-                        </div>
-                    </div>
-                    <div class="teste-item">
-                        <div class="info">
-                            <div class="nome">Relatório Big Five</div>
-                            <div class="desc">Os 5 grandes fatores</div>
-                        </div>
-                        <div>
-                            <span class="status pendente" id="relBigFive">⏳ Aguardando</span>
-                            <a href="../relatorios/bigfive/" class="btn-action btn-secondary" style="margin-left:8px;">Ver</a>
-                        </div>
-                    </div>
-                    <div class="teste-item">
-                        <div class="info">
-                            <div class="nome">Relatório IE</div>
-                            <div class="desc">Inteligência Emocional</div>
-                        </div>
-                        <div>
-                            <span class="status pendente" id="relIE">⏳ Aguardando</span>
-                            <a href="../relatorios/ie/" class="btn-action btn-secondary" style="margin-left:8px;">Ver</a>
-                        </div>
-                    </div>
-                    <div class="teste-item">
-                        <div class="info">
-                            <div class="nome">Relatório Valores</div>
-                            <div class="desc">O que realmente importa</div>
-                        </div>
-                        <div>
-                            <span class="status pendente" id="relValores">⏳ Aguardando</span>
-                            <a href="../relatorios/valores/" class="btn-action btn-secondary" style="margin-left:8px;">Ver</a>
-                        </div>
-                    </div>
-                    <div class="teste-item">
-                        <div class="info">
-                            <div class="nome">Relatório SWOT</div>
-                            <div class="desc">Análise estratégica</div>
-                        </div>
-                        <div>
-                            <span class="status pendente" id="relSWOT">⏳ Aguardando</span>
-                            <a href="../relatorios/swot/" class="btn-action btn-secondary" style="margin-left:8px;">Ver</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- COLUNA DIREITA -->
-        <div class="content-right">
-            <!-- Laudo VIGOR® -->
-            <div class="section-card">
-                <h3>📋 Laudo VIGOR®</h3>
-                <div id="laudoStatus">
-                    <div style="text-align:center;padding:20px;">
-                        <div style="font-size:3rem;margin-bottom:8px;">📋</div>
-                        <p style="color:var(--gray-500);font-size:0.9rem;">Complete todos os testes para gerar seu Laudo VIGOR® completo (80-100 páginas)</p>
-                        <div style="margin-top:12px;">
-                            <span class="status pendente" id="statusLaudo">⏳ Aguardando</span>
-                            <button class="btn-action btn-gold" onclick="window.location.href='../relatorios/laudo/completo.html'" style="margin-left:8px;">📋 Gerar Laudo</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Minha Evolução -->
-            <div class="section-card">
-                <h3>📈 Minha Evolução</h3>
-                <div id="evolucaoContent">
-                    <div style="text-align:center;padding:20px;">
-                        <div style="font-size:2rem;margin-bottom:8px;">📊</div>
-                        <p style="color:var(--gray-500);font-size:0.85rem;">Complete os testes para acompanhar sua evolução.</p>
-                        <p style="color:var(--gray-400);font-size:0.75rem;margin-top:4px;">Testes concluídos: <span id="evolucaoCount">0</span>/5</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dica do Dia -->
-            <div class="section-card" style="background:linear-gradient(135deg,var(--navy),var(--gray-800));color:white;">
-                <h3 style="color:white;">💡 Dica do Dia</h3>
-                <p id="dicaDoDia" style="font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.8);">
-                    "O autoconhecimento é o primeiro passo para a transformação. Comece hoje!"
-                </p>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- TOAST -->
     <div class="toast" id="toast">
         <span id="toastIcon">✅</span>
         <span id="toastMessage">Mensagem</span>
     </div>
 
-    <!-- SCRIPTS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
-    </script>
-    <script src="../supabase-config.js"></script>
-    <script src="../auth.js"></script>
-    <script src="../middleware/auth-guard.js"></script>
-    <script src="../admin/financeiro/financeiro-conexao.js"></script>
-    <script src="../admin/ia/motor-ia.js"></script>
+    <script src="/assets/js/menu-fix.js"></script>
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
 
     <script>
         'use strict';
 
-        let participanteId = null;
-        let resultados = {};
+        let filtroVinculo = 'todos';
 
-        // ============================================
-        // TOAST
-        // ============================================
-        function showToast(message, type) {
+        // Dados globais - TODOS os participantes do ecossistema (Master Admin enxerga tudo)
+        const demoParticipantes = [
+            { id: 1, nome: 'Ana Carolina Silva', email: 'ana.silva@empresa.com', cpf: '123.456.789-00', vinculo: 'empresa', empresaId: 1, empresaNome: 'TechCorp Ltda', cargo: 'Analista de RH', testes: '5/5', laudo: '✅ Gerado', status: 'ativo', data: '15/01/2026' },
+            { id: 2, nome: 'Bruno Oliveira Santos', email: 'bruno.santos@email.com', cpf: '234.567.890-11', vinculo: 'autonomo', empresaId: null, empresaNome: null, cargo: 'Consultor Independente', testes: '3/5', laudo: '⏳ Pendente', status: 'ativo', data: '22/02/2026' },
+            { id: 3, nome: 'Carla Mendes Ferreira', email: 'carla.mendes@rhsol.com', cpf: '345.678.901-22', vinculo: 'empresa', empresaId: 2, empresaNome: 'RH Solutions', cargo: 'Gerente de Talentos', testes: '5/5', laudo: '✅ Gerado', status: 'ativo', data: '10/03/2026' },
+            { id: 4, nome: 'Diego Pereira Costa', email: 'diego.costa@abc.com', cpf: '456.789.012-33', vinculo: 'empresa', empresaId: 3, empresaNome: 'Indústria ABC', cargo: 'Operador de Produção', testes: '2/5', laudo: '⏳ Pendente', status: 'pendente', data: '05/04/2026' },
+            { id: 5, nome: 'Eduarda Lima Souza', email: 'eduarda.lima@email.com', cpf: '567.890.123-44', vinculo: 'autonomo', empresaId: null, empresaNome: null, cargo: 'Estudante', testes: '0/5', laudo: '⏳ Pendente', status: 'inativo', data: '18/05/2026' },
+            { id: 6, nome: 'Felipe Augusto Rocha', email: 'felipe.rocha@tech.com', cpf: '678.901.234-55', vinculo: 'empresa', empresaId: 1, empresaNome: 'TechCorp Ltda', cargo: 'Desenvolvedor Senior', testes: '4/5', laudo: '⏳ Pendente', status: 'ativo', data: '28/05/2026' },
+            { id: 7, nome: 'Gabriela Nunes Prado', email: 'gabi.prado@rhsol.com', cpf: '789.012.345-66', vinculo: 'empresa', empresaId: 2, empresaNome: 'RH Solutions', cargo: 'Coordenadora de RH', testes: '5/5', laudo: '✅ Gerado', status: 'ativo', data: '12/06/2026' },
+            { id: 8, nome: 'Henrique Barbosa Alves', email: 'henrique.alves@email.com', cpf: '890.123.456-77', vinculo: 'autonomo', empresaId: null, empresaNome: null, cargo: 'Freelancer Designer', testes: '1/5', laudo: '⏳ Pendente', status: 'bloqueado', data: '20/06/2026' },
+            { id: 9, nome: 'Isabela Martins Duarte', email: 'isabela.duarte@hospital.com', cpf: '901.234.567-88', vinculo: 'empresa', empresaId: 4, empresaNome: 'Hospital São Lucas', cargo: 'Enfermeira Chefe', testes: '5/5', laudo: '✅ Gerado', status: 'ativo', data: '03/07/2026' },
+            { id: 10, nome: 'João Pedro Cardoso', email: 'joao.cardoso@tech.com', cpf: '012.345.678-99', vinculo: 'empresa', empresaId: 1, empresaNome: 'TechCorp Ltda', cargo: 'Analista de Dados', testes: '3/5', laudo: '⏳ Pendente', status: 'pendente', data: '15/07/2026' }
+        ];
+
+        function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
-            if (type === 'error') icon.textContent = '❌';
-            else if (type === 'warning') icon.textContent = '⚠️';
-            else icon.textContent = '✅';
-            msg.textContent = message;
+            document.getElementById('toastIcon').textContent = type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '✅';
+            document.getElementById('toastMessage').textContent = message;
             toast.className = 'toast show ' + type;
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => { toast.classList.remove('show'); }, 4000);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
-        // ============================================
-        // CARREGAR DADOS
-        // ============================================
-        async function carregarDashboard() {
-            try {
-                console.log('👤 Carregando Dashboard Participante...');
-
-                // Verificar autenticação
-                if (!window.VigorreAuth || !window.VigorreAuth.isAuthenticated()) {
-                    window.location.href = '../login.html';
-                    return;
-                }
-
-                var user = window.VigorreAuth.getCurrentUser();
-                if (!user) {
-                    window.location.href = '../login.html';
-                    return;
-                }
-
-                // Verificar se é participante
-                if (user.role !== 'participante') {
-                    showToast('⚠️ Acesso restrito a participantes', 'error');
-                    return;
-                }
-
-                participanteId = user.id || user.participantId;
-
-                // Atualizar header
-                document.getElementById('participantName').textContent = user.name || 'Participante';
-                document.getElementById('saudacaoNome').textContent = user.name || 'Participante';
-
-                // Buscar empresa
-                var companyName = 'Autônomo';
-                if (user.companyId) {
-                    try {
-                        var supabaseClient = getSupabaseClient();
-                        if (supabaseClient) {
-                            var { data: company } = await supabaseClient
-                                .from('companies')
-                                .select('name')
-                                .eq('id', user.companyId)
-                                .single();
-                            if (company) companyName = company.name;
-                        }
-                    } catch (e) { console.warn('Erro ao buscar empresa:', e); }
-                }
-                document.getElementById('participantCompany').textContent = 'Empresa: ' + companyName;
-
-                // Buscar resultados do participante
-                await carregarResultados();
-
-                // Atualizar cards
-                await atualizarCards();
-
-                // Atualizar lista de testes
-                await atualizarTestes();
-
-                // Atualizar lista de relatórios
-                await atualizarRelatorios();
-
-                // Atualizar laudo
-                await atualizarLaudo();
-
-                // Atualizar evolução
-                await atualizarEvolucao();
-
-                // Dica do dia
-                carregarDicaDoDia();
-
-                console.log('✅ Dashboard Participante carregado!');
-
-            } catch (error) {
-                console.error('❌ Erro ao carregar dashboard:', error);
-                showToast('Erro ao carregar dados', 'error');
-            }
+        function getIniciais(nome) {
+            return nome.split(' ').filter(Boolean).slice(0, 2).map(p => p[0]).join('').toUpperCase();
         }
 
-        // ============================================
-        // CARREGAR RESULTADOS
-        // ============================================
-        async function carregarResultados() {
-            try {
-                var supabaseClient = getSupabaseClient();
-                if (!supabaseClient) {
-                    // Fallback localStorage
-                    var allParticipants = JSON.parse(localStorage.getItem('vigorre_participants') || '[]');
-                    var participant = allParticipants.find(p => p.id === participanteId);
-                    if (participant && participant.results) {
-                        resultados = participant.results;
-                    }
-                    return;
-                }
-
-                var { data, error } = await supabaseClient
-                    .from('resultados')
-                    .select('teste_id, resultado')
-                    .eq('participant_id', participanteId);
-
-                if (error) {
-                    console.warn('Erro ao buscar resultados:', error);
-                    return;
-                }
-
-                if (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var testeId = data[i].teste_id;
-                        var resultado = data[i].resultado;
-                        // Mapear ID do teste para nome
-                        if (testeId === '11111111-1111-1111-1111-111111111111') resultados.DISC = resultado;
-                        else if (testeId === '22222222-2222-2222-2222-222222222222') resultados.BigFive = resultado;
-                        else if (testeId === '33333333-3333-3333-3333-333333333333') resultados.IE = resultado;
-                        else if (testeId === '44444444-4444-4444-4444-444444444444') resultados.Valores = resultado;
-                        else if (testeId === '55555555-5555-5555-5555-555555555555') resultados.SWOT = resultado;
-                    }
-                }
-
-                console.log('📊 Resultados carregados:', resultados);
-
-            } catch (error) {
-                console.warn('⚠️ Erro ao carregar resultados:', error);
-            }
+        function getBadgeStatus(status) {
+            const map = { 'ativo': 'badge-ativo', 'inativo': 'badge-inativo', 'pendente': 'badge-pendente', 'bloqueado': 'badge-bloqueado' };
+            return map[status] || 'badge-inativo';
         }
 
-        // ============================================
-        // ATUALIZAR CARDS
-        // ============================================
-        async function atualizarCards() {
-            var totalTestes = 0;
-            var testesDisponiveis = 0;
-
-            if (resultados.DISC) totalTestes++;
-            if (resultados.BigFive) totalTestes++;
-            if (resultados.IE) totalTestes++;
-            if (resultados.Valores) totalTestes++;
-            if (resultados.SWOT) totalTestes++;
-
-            testesDisponiveis = 5 - totalTestes;
-
-            document.getElementById('totalTestes').textContent = totalTestes + '/5';
-            document.getElementById('testesDisponiveis').textContent = testesDisponiveis;
-
-            // Relatórios
-            var totalRelatorios = totalTestes;
-            document.getElementById('totalRelatorios').textContent = totalRelatorios;
-
-            // Laudo
-            var temLaudo = totalTestes === 5 ? '✅ Disponível' : '⏳ ' + (5 - totalTestes) + ' testes faltam';
-            document.getElementById('temLaudo').textContent = temLaudo;
-            document.getElementById('temLaudo').style.color = totalTestes === 5 ? '#10B981' : '#F59E0B';
-        }
-
-        // ============================================
-        // ATUALIZAR TESTES
-        // ============================================
-        async function atualizarTestes() {
-            var testes = [
-                { id: 'DISC', nome: 'DISC', statusId: 'statusDisc', status: resultados.DISC ? 'concluido' : 'disponivel',
-                    label: resultados.DISC ? '✅ Concluído' : '📌 Disponível' },
-                { id: 'BigFive', nome: 'Big Five', statusId: 'statusBigFive', status: resultados.BigFive ? 'concluido' :
-                        'disponivel', label: resultados.BigFive ? '✅ Concluído' : '📌 Disponível' },
-                { id: 'IE', nome: 'Inteligência Emocional', statusId: 'statusIE', status: resultados.IE ? 'concluido' :
-                        'disponivel', label: resultados.IE ? '✅ Concluído' : '📌 Disponível' },
-                { id: 'Valores', nome: 'Valores', statusId: 'statusValores', status: resultados.Valores ? 'concluido' :
-                        'disponivel', label: resultados.Valores ? '✅ Concluído' : '📌 Disponível' },
-                { id: 'SWOT', nome: 'SWOT', statusId: 'statusSWOT', status: resultados.SWOT ? 'concluido' : 'disponivel',
-                    label: resultados.SWOT ? '✅ Concluído' : '📌 Disponível' }
-            ];
-
-            for (var i = 0; i < testes.length; i++) {
-                var t = testes[i];
-                var el = document.getElementById(t.statusId);
-                if (el) {
-                    el.textContent = t.label;
-                    el.className = 'status ' + t.status;
-                }
-            }
-        }
-
-        // ============================================
-        // ATUALIZAR RELATÓRIOS
-        // ============================================
-        async function atualizarRelatorios() {
-            var relatorios = [
-                { id: 'Disc', nome: 'DISC', statusId: 'relDisc', status: resultados.DISC ? 'concluido' : 'pendente',
-                    label: resultados.DISC ? '✅ Disponível' : '⏳ Aguardando' },
-                { id: 'BigFive', nome: 'Big Five', statusId: 'relBigFive', status: resultados.BigFive ? 'concluido' :
-                        'pendente', label: resultados.BigFive ? '✅ Disponível' : '⏳ Aguardando' },
-                { id: 'IE', nome: 'IE', statusId: 'relIE', status: resultados.IE ? 'concluido' : 'pendente',
-                    label: resultados.IE ? '✅ Disponível' : '⏳ Aguardando' },
-                { id: 'Valores', nome: 'Valores', statusId: 'relValores', status: resultados.Valores ? 'concluido' :
-                        'pendente', label: resultados.Valores ? '✅ Disponível' : '⏳ Aguardando' },
-                { id: 'SWOT', nome: 'SWOT', statusId: 'relSWOT', status: resultados.SWOT ? 'concluido' : 'pendente',
-                    label: resultados.SWOT ? '✅ Disponível' : '⏳ Aguardando' }
-            ];
-
-            for (var i = 0; i < relatorios.length; i++) {
-                var r = relatorios[i];
-                var el = document.getElementById(r.statusId);
-                if (el) {
-                    el.textContent = r.label;
-                    el.className = 'status ' + r.status;
-                }
-            }
-        }
-
-        // ============================================
-        // ATUALIZAR LAUDO
-        // ============================================
-        async function atualizarLaudo() {
-            var totalTestes = 0;
-            if (resultados.DISC) totalTestes++;
-            if (resultados.BigFive) totalTestes++;
-            if (resultados.IE) totalTestes++;
-            if (resultados.Valores) totalTestes++;
-            if (resultados.SWOT) totalTestes++;
-
-            var el = document.getElementById('statusLaudo');
-            if (totalTestes === 5) {
-                el.textContent = '✅ Disponível';
-                el.className = 'status concluido';
+        function renderVinculo(p) {
+            if (p.vinculo === 'autonomo') {
+                return `
+                    <div class="vinculo-cell">
+                        <span class="badge badge-autonomo">👤 AUTÔNOMO</span>
+                        <span class="nome-empresa">Sem vínculo empresarial</span>
+                    </div>
+                `;
             } else {
-                el.textContent = '⏳ ' + (5 - totalTestes) + ' testes faltam';
-                el.className = 'status pendente';
+                return `
+                    <div class="vinculo-cell">
+                        <span class="badge badge-empresa">🏢 EMPRESA</span>
+                        <span class="nome-empresa">${p.empresaNome}</span>
+                    </div>
+                `;
             }
         }
 
-        // ============================================
-        // ATUALIZAR EVOLUÇÃO
-        // ============================================
-        async function atualizarEvolucao() {
-            var totalTestes = 0;
-            if (resultados.DISC) totalTestes++;
-            if (resultados.BigFive) totalTestes++;
-            if (resultados.IE) totalTestes++;
-            if (resultados.Valores) totalTestes++;
-            if (resultados.SWOT) totalTestes++;
+        function renderParticipantes(lista) {
+            const tbody = document.getElementById('tbodyParticipantes');
+            document.getElementById('totalRegistros').textContent = lista.length.toLocaleString('pt-BR');
 
-            document.getElementById('evolucaoCount').textContent = totalTestes;
+            if (!lista || lista.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--gray-400);">Nenhum participante encontrado</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = lista.map(p => `
+                <tr>
+                    <td>
+                        <div class="participant-cell">
+                            <div class="avatar ${p.vinculo === 'autonomo' ? 'autonomo' : ''}">${getIniciais(p.nome)}</div>
+                            <div class="participant-info">
+                                <div class="name">${p.nome}</div>
+                                <div class="email">${p.email}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${p.cpf}</td>
+                    <td>${renderVinculo(p)}</td>
+                    <td><strong>${p.testes}</strong></td>
+                    <td>${p.laudo}</td>
+                    <td><span class="badge ${getBadgeStatus(p.status)}">${p.status.toUpperCase()}</span></td>
+                    <td>${p.data}</td>
+                    <td>
+                        <div class="actions-cell" style="justify-content:flex-end;">
+                            <button class="btn-icon" title="Ver perfil completo" onclick="verPerfil(${p.id})">👁️</button>
+                            <button class="btn-icon success" title="Editar" onclick="editarParticipante(${p.id})">✏️</button>
+                            <button class="btn-icon danger" title="Excluir" onclick="excluirParticipante(${p.id})">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
         }
 
-        // ============================================
-        // DICA DO DIA
-        // ============================================
-        function carregarDicaDoDia() {
-            var dicas = [
-                '"O autoconhecimento é o primeiro passo para a transformação."',
-                '"Conhecer a si mesmo é o começo de toda sabedoria." - Aristóteles',
-                '"A jornada do autoconhecimento é a mais valiosa que você pode fazer."',
-                '"Seu potencial é ilimitado quando você se conhece verdadeiramente."',
-                '"A mente que se abre a uma nova ideia jamais voltará ao seu tamanho original." - Albert Einstein',
-                '"O maior segredo para o sucesso é conhecer a si mesmo."'
-            ];
-            var dica = dicas[Math.floor(Math.random() * dicas.length)];
-            document.getElementById('dicaDoDia').textContent = dica;
+        function atualizarContadores() {
+            const autonomos = demoParticipantes.filter(p => p.vinculo === 'autonomo').length;
+            const empresas = demoParticipantes.filter(p => p.vinculo === 'empresa').length;
+            document.getElementById('countTodos').textContent = demoParticipantes.length;
+            document.getElementById('countAutonomos').textContent = autonomos;
+            document.getElementById('countEmpresas').textContent = empresas;
         }
 
-        // ============================================
-        // INICIALIZAR
-        // ============================================
+        function mudarVinculo(vinculo) {
+            filtroVinculo = vinculo;
+            document.querySelectorAll('.vinculo-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-vinculo="${vinculo}"]`).classList.add('active');
+            aplicarFiltros();
+        }
+
+        function aplicarFiltros() {
+            const busca = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('filterStatus').value;
+            const empresa = document.getElementById('filterEmpresa').value;
+
+            let filtrados = demoParticipantes.filter(p => {
+                const matchVinculo = filtroVinculo === 'todos' || p.vinculo === filtroVinculo;
+                const matchBusca = !busca || p.nome.toLowerCase().includes(busca) || p.email.toLowerCase().includes(busca) || p.cpf.includes(busca);
+                const matchStatus = !status || p.status === status;
+                const matchEmpresa = !empresa ||
+                    (empresa === 'autonomo' && p.vinculo === 'autonomo') ||
+                    (empresa !== 'autonomo' && p.empresaId == empresa);
+                return matchVinculo && matchBusca && matchStatus && matchEmpresa;
+            });
+
+            renderParticipantes(filtrados);
+        }
+
+        function toggleEmpresa() {
+            const vinculo = document.getElementById('formVinculo').value;
+            document.getElementById('grupoEmpresa').style.display = vinculo === 'empresa' ? 'block' : 'none';
+        }
+
+        function abrirModalNovo() {
+            document.getElementById('modalTitle').textContent = 'Novo Participante';
+            document.getElementById('formVinculo').value = 'autonomo';
+            toggleEmpresa();
+            ['formNome','formEmail','formCpf','formTelefone','formCargo'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            document.getElementById('formEmpresa').value = '';
+            document.getElementById('formStatus').value = 'ativo';
+            document.getElementById('modalParticipante').classList.add('show');
+        }
+
+        function editarParticipante(id) {
+            const p = demoParticipantes.find(x => x.id === id);
+            if (!p) return;
+            document.getElementById('modalTitle').textContent = 'Editar Participante';
+            document.getElementById('formVinculo').value = p.vinculo;
+            toggleEmpresa();
+            document.getElementById('formNome').value = p.nome;
+            document.getElementById('formEmail').value = p.email;
+            document.getElementById('formCpf').value = p.cpf;
+            document.getElementById('formCargo').value = p.cargo;
+            document.getElementById('formStatus').value = p.status;
+            if (p.empresaId) document.getElementById('formEmpresa').value = p.empresaId;
+            document.getElementById('modalParticipante').classList.add('show');
+        }
+
+        function fecharModal() {
+            document.getElementById('modalParticipante').classList.remove('show');
+        }
+
+        function salvarParticipante() {
+            showToast('Participante salvo com sucesso!', 'success');
+            fecharModal();
+        }
+
+        function excluirParticipante(id) {
+            if (!confirm('Deseja realmente excluir este participante? Esta ação é irreversível.')) return;
+            showToast('Participante excluído', 'success');
+        }
+
+        function verPerfil(id) {
+            const p = demoParticipantes.find(x => x.id === id);
+            if (!p) return;
+            showToast(`Visualizando perfil de ${p.nome}`, 'success');
+        }
+
+        function exportarDados() {
+            showToast('Exportando todos os participantes em CSV...', 'success');
+        }
+
+        document.getElementById('searchInput').addEventListener('input', aplicarFiltros);
+        document.getElementById('filterStatus').addEventListener('change', aplicarFiltros);
+        document.getElementById('filterEmpresa').addEventListener('change', aplicarFiltros);
+
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('👤 Dashboard Participante - VIGORRE ONE™');
-            carregarDashboard();
+            atualizarContadores();
+            renderParticipantes(demoParticipantes);
+            console.log('👥 Gestão Global de Participantes - Master Admin');
         });
-
-        console.log('✅ Dashboard Participante carregado com sucesso!');
     </script>
 
 </body>
