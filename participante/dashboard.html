@@ -7,9 +7,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet" />
 
-    <!-- ✅ MENU ÚNICO: só este CSS controla o menu -->
     <link rel="stylesheet" href="/assets/css/menu-fix.css" />
 
     <style>
@@ -28,12 +27,9 @@
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-800);
-            min-height: 100vh;
+            background: var(--gray-50); color: var(--gray-800); min-height: 100vh;
         }
 
-        /* ✅ Conteúdo principal — offset do menu via menu-fix.css */
         .main { padding: 24px 32px 40px; min-height: 100vh; }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -53,17 +49,44 @@
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
 
-        /* Banner de saudação */
-        .saudacao-banner {
-            background: linear-gradient(135deg, var(--navy), var(--gray-800));
-            color: white; padding: 24px 28px; border-radius: var(--radius);
+        /* Banner de vínculo - diferencia autônomo de vinculado */
+        .vinculo-banner {
+            border-radius: var(--radius); padding: 20px 28px;
             margin-bottom: 24px; box-shadow: var(--shadow);
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 16px;
+        }
+        .vinculo-banner.autonomo {
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            color: white;
+        }
+        .vinculo-banner.empresa {
+            background: linear-gradient(135deg, var(--navy), var(--gray-800));
+            color: white;
+        }
+        .vinculo-banner .info h2 {
+            font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700;
+            margin-bottom: 4px; display: flex; align-items: center; gap: 10px;
+        }
+        .vinculo-banner .info p { color: rgba(255,255,255,0.85); font-size: 0.9rem; }
+        .vinculo-banner .badge-vinculo {
+            display: inline-block; padding: 4px 12px;
+            background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
+            border-radius: var(--radius-full); font-size: 0.75rem;
+            font-weight: 700; letter-spacing: 0.05em;
+        }
+
+        /* Saudação */
+        .saudacao-banner {
+            background: white; border-radius: var(--radius); padding: 24px 28px;
+            margin-bottom: 24px; box-shadow: var(--shadow);
+            border-left: 4px solid var(--gold);
         }
         .saudacao-banner h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3rem; font-weight: 700; margin-bottom: 4px;
+            font-family: 'Poppins', sans-serif; font-size: 1.3rem;
+            font-weight: 700; margin-bottom: 4px; color: var(--gray-900);
         }
-        .saudacao-banner p { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+        .saudacao-banner p { color: var(--gray-500); font-size: 0.9rem; }
 
         /* Cards de estatísticas */
         .cards-grid {
@@ -76,13 +99,15 @@
         }
         .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
         .card .card-icon { font-size: 2rem; margin-bottom: 8px; }
-        .card .card-label { font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+        .card .card-label {
+            font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
         .card .card-value {
             font-family: 'Poppins', sans-serif;
             font-size: 1.8rem; font-weight: 700; color: var(--gray-900);
         }
 
-        /* Subtítulos de seção */
         .section-title {
             display: flex; align-items: center; gap: 10px;
             font-size: 0.75rem; font-weight: 800; letter-spacing: 1.4px;
@@ -91,7 +116,6 @@
         }
         .section-title::after { content: ""; flex: 1; height: 1px; background: var(--gray-200); }
 
-        /* Grid de módulos */
         .modules-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 16px; margin-bottom: 20px;
@@ -108,7 +132,29 @@
         .module-card .m-desc { font-size: 0.8rem; color: var(--gray-500); line-height: 1.5; }
         .module-card .m-go { font-size: 0.8rem; font-weight: 700; color: var(--cyan); margin-top: auto; }
 
-        /* Listas de testes/relatórios */
+        /* Área específica da empresa (aparece apenas quando vinculado) */
+        .empresa-section {
+            background: white; border-radius: var(--radius); padding: 24px;
+            box-shadow: var(--shadow); margin-bottom: 24px;
+            border-left: 4px solid var(--blue);
+        }
+        .empresa-section h3 {
+            font-family: 'Poppins', sans-serif; font-size: 1.1rem;
+            font-weight: 700; color: var(--gray-900); margin-bottom: 12px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .empresa-info-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .empresa-info-item label {
+            font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase;
+            letter-spacing: 0.05em; font-weight: 600;
+        }
+        .empresa-info-item .value {
+            font-weight: 600; color: var(--gray-900); font-size: 0.95rem; margin-top: 4px;
+        }
+
         .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
         .list-card {
             background: white; border-radius: var(--radius); padding: 20px 24px;
@@ -145,7 +191,6 @@
         .btn-secondary { background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200); }
         .btn-success { background: var(--green); color: white; }
 
-        /* Dica do dia */
         .tip-card {
             background: linear-gradient(135deg, var(--navy), var(--gray-800));
             color: white; border-radius: var(--radius); padding: 20px 24px;
@@ -178,8 +223,7 @@
             background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
             background-size: 200% 100%;
             animation: shimmer 1.5s infinite;
-            border-radius: 4px;
-            display: inline-block;
+            border-radius: 4px; display: inline-block;
         }
         @keyframes shimmer {
             0% { background-position: -200% 0; }
@@ -200,21 +244,31 @@
 </head>
 <body data-profile="participante">
 
-    <!-- ✅ SEM menu hardcoded — o menu-fix.js injeta automaticamente -->
-
     <main class="main vg-content">
         <div class="main-header">
             <div>
                 <h1 id="saudacaoText">👋 Olá, <span id="saudacaoNome">Participante</span>!</h1>
-                <p class="subtitle" id="saudacaoMensagem">Bem-vindo à sua jornada de autoconhecimento. Continue evoluindo!</p>
+                <p class="subtitle" id="saudacaoMensagem">Bem-vindo à sua jornada de autoconhecimento.</p>
             </div>
             <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
         </div>
 
-        <!-- Banner de saudação -->
+        <!-- 🎯 BANNER DE VÍNCULO (única diferença visual entre autônomo e vinculado) -->
+        <div class="vinculo-banner" id="vinculoBanner">
+            <div class="info">
+                <h2>
+                    <span id="vinculoIcon">👤</span>
+                    <span id="vinculoTitulo">Participante Autônomo</span>
+                </h2>
+                <p id="vinculoDescricao">Você está acessando a plataforma de forma independente.</p>
+            </div>
+            <span class="badge-vinculo" id="vinculoBadge">AUTÔNOMO</span>
+        </div>
+
+        <!-- Saudação -->
         <div class="saudacao-banner">
             <h2>🎯 Sua jornada de autoconhecimento</h2>
-            <p>Complete os 5 testes comportamentais para liberar seu Laudo VIGOR® completo.</p>
+            <p>Complete os 5 testes comportamentais para liberar seu Laudo VIGOR® completo (80-100 páginas).</p>
         </div>
 
         <!-- 📊 VISÃO GERAL -->
@@ -239,6 +293,32 @@
                 <div class="card-icon">💳</div>
                 <div class="card-label">Meus Créditos</div>
                 <div class="card-value" id="totalCreditos">0</div>
+            </div>
+        </div>
+
+        <!-- 🏢 SEÇÃO DA EMPRESA (apenas para vinculados) -->
+        <div id="secaoEmpresa" style="display:none;">
+            <div class="section-title">🏢 Minha Empresa</div>
+            <div class="empresa-section">
+                <h3><span>🏢</span> <span id="nomeEmpresaHeader">Nome da Empresa</span></h3>
+                <div class="empresa-info-grid">
+                    <div class="empresa-info-item">
+                        <label>Seu Cargo</label>
+                        <div class="value" id="meuCargo">--</div>
+                    </div>
+                    <div class="empresa-info-item">
+                        <label>Seu Gestor</label>
+                        <div class="value" id="meuGestor">--</div>
+                    </div>
+                    <div class="empresa-info-item">
+                        <label>Equipe / Setor</label>
+                        <div class="value" id="minhaEquipe">--</div>
+                    </div>
+                    <div class="empresa-info-item">
+                        <label>Data de Admissão</label>
+                        <div class="value" id="minhaAdmissao">--</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -324,9 +404,7 @@
         <span id="toastMessage">Mensagem</span>
     </div>
 
-    <!-- ✅ MENU ÚNICO injetado aqui -->
     <script src="/assets/js/menu-fix.js"></script>
-
     <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
     <script src="/middleware/auth-guard.js"></script>
@@ -336,20 +414,52 @@
 
         let participanteId = null;
         let resultados = {};
+        let dadosParticipante = {};
 
-        function recarregarDados() {
-            carregarDashboard();
-        }
-
-        function showToast(message, type) {
+        function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
-            icon.textContent = type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '✅';
-            msg.textContent = message;
+            document.getElementById('toastIcon').textContent = type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '✅';
+            document.getElementById('toastMessage').textContent = message;
             toast.className = 'toast show ' + type;
             clearTimeout(toast._timeout);
             toast._timeout = setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        function recarregarDados() { carregarDashboard(); }
+
+        // Configura o banner de vínculo baseado nos dados do usuário
+        function configurarBannerVinculo(user) {
+            const banner = document.getElementById('vinculoBanner');
+            const titulo = document.getElementById('vinculoTitulo');
+            const descricao = document.getElementById('vinculoDescricao');
+            const badge = document.getElementById('vinculoBadge');
+            const icone = document.getElementById('vinculoIcon');
+            const secaoEmpresa = document.getElementById('secaoEmpresa');
+
+            if (user.companyId && user.companyName) {
+                // PARTICIPANTE VINCULADO A EMPRESA
+                banner.className = 'vinculo-banner empresa';
+                icone.textContent = '🏢';
+                titulo.textContent = 'Vinculado à ' + user.companyName;
+                descricao.textContent = 'Você faz parte da equipe desta organização.';
+                badge.textContent = 'EMPRESA';
+
+                // Mostrar seção da empresa
+                secaoEmpresa.style.display = 'block';
+                document.getElementById('nomeEmpresaHeader').textContent = user.companyName;
+                document.getElementById('meuCargo').textContent = user.cargo || 'Não informado';
+                document.getElementById('meuGestor').textContent = user.gestor || 'Não informado';
+                document.getElementById('minhaEquipe').textContent = user.equipe || 'Não informado';
+                document.getElementById('minhaAdmissao').textContent = user.dataAdmissao || '--';
+            } else {
+                // PARTICIPANTE AUTÔNOMO
+                banner.className = 'vinculo-banner autonomo';
+                icone.textContent = '👤';
+                titulo.textContent = 'Participante Autônomo';
+                descricao.textContent = 'Você está acessando a plataforma de forma independente.';
+                badge.textContent = 'AUTÔNOMO';
+                secaoEmpresa.style.display = 'none';
+            }
         }
 
         async function carregarDashboard() {
@@ -362,13 +472,16 @@
                 }
 
                 var user = window.VigorreAuth.getCurrentUser();
-                if (!user || user.role !== 'participante') {
+                if (!user) {
                     window.location.href = '/login.html';
                     return;
                 }
 
                 participanteId = user.id || user.participantId;
                 document.getElementById('saudacaoNome').textContent = user.name || 'Participante';
+
+                // 🔑 CONFIGURAR BANNER DE VÍNCULO (única diferença do dashboard)
+                configurarBannerVinculo(user);
 
                 await carregarResultados();
                 await atualizarCards();
@@ -427,21 +540,19 @@
             if (resultados.Valores) totalTestes++;
             if (resultados.SWOT) totalTestes++;
 
-            var testesDisponiveis = 5 - totalTestes;
-
             document.getElementById('totalTestes').textContent = totalTestes + '/5';
-            document.getElementById('testesDisponiveis').textContent = testesDisponiveis;
+            document.getElementById('testesDisponiveis').textContent = 5 - totalTestes;
             document.getElementById('totalRelatorios').textContent = totalTestes;
         }
 
         async function atualizarTestes() {
             var container = document.getElementById('listaTestes');
             var testes = [
-                { id: 'disc', nome: 'DISC', icon: '🦁', desc: 'Análise Comportamental', status: resultados.DISC ? 'concluido' : 'disponivel', label: resultados.DISC ? '✅ Concluído' : '📌 Disponível', link: resultados.DISC ? '/participante/meus-relatorios.html' : '/testes/disc/' },
-                { id: 'bigfive', nome: 'Big Five', icon: '🧬', desc: 'Os 5 Grandes Fatores', status: resultados.BigFive ? 'concluido' : 'disponivel', label: resultados.BigFive ? '✅ Concluído' : '📌 Disponível', link: resultados.BigFive ? '/participante/meus-relatorios.html' : '/testes/bigfive/' },
-                { id: 'ie', nome: 'IE', icon: '❤️', desc: 'Inteligência Emocional', status: resultados.IE ? 'concluido' : 'disponivel', label: resultados.IE ? '✅ Concluído' : '📌 Disponível', link: resultados.IE ? '/participante/meus-relatorios.html' : '/testes/ie/' },
-                { id: 'valores', nome: 'Valores', icon: '💎', desc: 'O que realmente importa', status: resultados.Valores ? 'concluido' : 'disponivel', label: resultados.Valores ? '✅ Concluído' : '📌 Disponível', link: resultados.Valores ? '/participante/meus-relatorios.html' : '/testes/valores/' },
-                { id: 'swot', nome: 'SWOT', icon: '📊', desc: 'Forças · Fraquezas · Oportunidades · Ameaças', status: resultados.SWOT ? 'concluido' : 'disponivel', label: resultados.SWOT ? '✅ Concluído' : '📌 Disponível', link: resultados.SWOT ? '/participante/meus-relatorios.html' : '/testes/swot/' }
+                { nome: 'DISC', icon: '🦁', desc: 'Análise Comportamental', status: resultados.DISC ? 'concluido' : 'disponivel', label: resultados.DISC ? '✅ Concluído' : '📌 Disponível' },
+                { nome: 'Big Five', icon: '🧬', desc: 'Os 5 Grandes Fatores', status: resultados.BigFive ? 'concluido' : 'disponivel', label: resultados.BigFive ? '✅ Concluído' : '📌 Disponível' },
+                { nome: 'IE', icon: '❤️', desc: 'Inteligência Emocional', status: resultados.IE ? 'concluido' : 'disponivel', label: resultados.IE ? '✅ Concluído' : '📌 Disponível' },
+                { nome: 'Valores', icon: '💎', desc: 'O que realmente importa', status: resultados.Valores ? 'concluido' : 'disponivel', label: resultados.Valores ? '✅ Concluído' : '📌 Disponível' },
+                { nome: 'SWOT', icon: '📊', desc: 'Forças · Fraquezas · Oportunidades · Ameaças', status: resultados.SWOT ? 'concluido' : 'disponivel', label: resultados.SWOT ? '✅ Concluído' : '📌 Disponível' }
             ];
 
             container.innerHTML = testes.map(t => `
@@ -452,7 +563,6 @@
                     </div>
                     <div>
                         <span class="status ${t.status}">${t.label}</span>
-                        <a href="${t.link}" class="btn-action ${t.status === 'concluido' ? 'btn-secondary' : 'btn-action-primary'}">${t.status === 'concluido' ? '📄 Ver' : '▶️ Iniciar'}</a>
                     </div>
                 </div>
             `).join('');
@@ -461,11 +571,11 @@
         async function atualizarRelatorios() {
             var container = document.getElementById('listaRelatorios');
             var relatorios = [
-                { id: 'disc', nome: 'DISC', icon: '🦁', desc: 'Análise comportamental', status: resultados.DISC ? 'concluido' : 'pendente', label: resultados.DISC ? '✅ Disponível' : '⏳ Aguardando' },
-                { id: 'bigfive', nome: 'Big Five', icon: '🧬', desc: '5 grandes fatores', status: resultados.BigFive ? 'concluido' : 'pendente', label: resultados.BigFive ? '✅ Disponível' : '⏳ Aguardando' },
-                { id: 'ie', nome: 'IE', icon: '❤️', desc: 'Inteligência Emocional', status: resultados.IE ? 'concluido' : 'pendente', label: resultados.IE ? '✅ Disponível' : '⏳ Aguardando' },
-                { id: 'valores', nome: 'Valores', icon: '💎', desc: 'Valores pessoais', status: resultados.Valores ? 'concluido' : 'pendente', label: resultados.Valores ? '✅ Disponível' : '⏳ Aguardando' },
-                { id: 'swot', nome: 'SWOT', icon: '📊', desc: 'Análise SWOT', status: resultados.SWOT ? 'concluido' : 'pendente', label: resultados.SWOT ? '✅ Disponível' : '⏳ Aguardando' }
+                { nome: 'DISC', icon: '🦁', desc: 'Análise comportamental', status: resultados.DISC ? 'concluido' : 'pendente', label: resultados.DISC ? '✅ Disponível' : '⏳ Aguardando' },
+                { nome: 'Big Five', icon: '🧬', desc: '5 grandes fatores', status: resultados.BigFive ? 'concluido' : 'pendente', label: resultados.BigFive ? '✅ Disponível' : '⏳ Aguardando' },
+                { nome: 'IE', icon: '❤️', desc: 'Inteligência Emocional', status: resultados.IE ? 'concluido' : 'pendente', label: resultados.IE ? '✅ Disponível' : '⏳ Aguardando' },
+                { nome: 'Valores', icon: '💎', desc: 'Valores pessoais', status: resultados.Valores ? 'concluido' : 'pendente', label: resultados.Valores ? '✅ Disponível' : '⏳ Aguardando' },
+                { nome: 'SWOT', icon: '📊', desc: 'Análise SWOT', status: resultados.SWOT ? 'concluido' : 'pendente', label: resultados.SWOT ? '✅ Disponível' : '⏳ Aguardando' }
             ];
 
             container.innerHTML = relatorios.map(r => `
@@ -476,7 +586,6 @@
                     </div>
                     <div>
                         <span class="status ${r.status}">${r.label}</span>
-                        <a href="/participante/meus-relatorios.html" class="btn-action ${r.status === 'concluido' ? 'btn-success' : 'btn-secondary'}">${r.status === 'concluido' ? '📄 Ver' : '⏳ Aguardar'}</a>
                     </div>
                 </div>
             `).join('');
