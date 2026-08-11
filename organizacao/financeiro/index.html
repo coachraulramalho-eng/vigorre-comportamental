@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financeiro · Organização · Vigorre</title>
+  <link rel="stylesheet" href="/assets/css/menu-fix.css">
+  <link rel="stylesheet" href="/assets/css/globals.css">
+  <style>
+    .vg-page{padding:28px}
+    .vg-section-title{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#475569;margin:28px 0 16px}
+    .vg-section-title::after{content:"";flex:1;height:1px;background:#e2e8f0}
+    .vg-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+    .vg-stat{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px}
+    .vg-stat .label{font-size:12px;color:#64748b;font-weight:600}
+    .vg-stat .value{font-size:26px;font-weight:800;color:#0f172a;margin-top:6px}
+    .vg-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px;margin-top:16px}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #f1f5f9}
+    th{color:#64748b;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+    .pos{color:#10b981;font-weight:700}.neg{color:#ef4444;font-weight:700}
+  </style>
+</head>
+<body data-profile="organizacao">
+  <main class="vg-content">
+    <div class="vg-page">
+      <h1 style="margin:0 0 4px;font-size:24px;font-weight:800">💰 Financeiro da Empresa</h1>
+      <p style="color:#64748b;margin:0 0 8px">Visão geral financeira da organização.</p>
+
+      <div class="vg-section-title">Resumo</div>
+      <div class="vg-stats">
+        <div class="vg-stat"><div class="label">💳 Saldo de Créditos</div><div class="value" id="fin-saldo">0</div></div>
+        <div class="vg-stat"><div class="label">📉 Consumo no Mês</div><div class="value" id="fin-consumo">0</div></div>
+        <div class="vg-stat"><div class="label">💵 Total Investido</div><div class="value" id="fin-investido">R$ 0</div></div>
+        <div class="vg-stat"><div class="label">👥 Participantes Ativos</div><div class="value" id="fin-participantes">0</div></div>
+      </div>
+
+      <div class="vg-section-title">Últimas Movimentações</div>
+      <div class="vg-card">
+        <table>
+          <thead><tr><th>Data</th><th>Descrição</th><th>Tipo</th><th>Créditos</th></tr></thead>
+          <tbody id="fin-extrato"><!-- preenchido via JS --></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="/assets/js/menu-fix.js"></script>
+  <script>
+    // TODO: conectar ao financeiro-service.js / Supabase.
+    // Dados ilustrativos para a página funcionar de imediato:
+    document.getElementById('fin-saldo').textContent = 480;
+    document.getElementById('fin-consumo').textContent = 96;
+    document.getElementById('fin-investido').textContent = 'R$ 2.400';
+    document.getElementById('fin-participantes').textContent = 128;
+
+    const rows = [
+      ['11/08/2026','Compra de pacote 500 créditos','<span class="pos">Entrada</span>','<span class="pos">+500</span>'],
+      ['10/08/2026','Geração de laudo — Participante #102','<span class="neg">Saída</span>','<span class="neg">-3</span>'],
+      ['09/08/2026','Relatório de compatibilidade','<span class="neg">Saída</span>','<span class="neg">-2</span>'],
+      ['08/08/2026','Distribuição para equipe','<span class="neg">Saída</span>','<span class="neg">-40</span>']
+    ];
+    document.getElementById('fin-extrato').innerHTML =
+      rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+  </script>
+</body>
+</html>
