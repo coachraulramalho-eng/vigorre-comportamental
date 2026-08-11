@@ -3,276 +3,709 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Empresas | VIGORRE ONE™</title>
+    <title>Empresas & Recrutadores | Master Admin | VIGORRE ONE™</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/assets/css/menu-fix.css" />
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
-            --green: #10B981; --red: #EF4444; --white: #FFFFFF;
-            --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
-            --gray-300: #CBD5E1; --gray-400: #94A3B8; --gray-500: #64748B;
-            --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B;
-            --gray-900: #0F172A;
-            --radius: 16px; --radius-sm: 10px; --shadow: 0 4px 24px rgba(10,37,64,0.06);
-            --transition: 0.3s ease;
+            --green: #10B981; --red: #EF4444; --orange: #F59E0B; --purple: #7C3AED;
+            --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0; --gray-300: #CBD5E1; --gray-400: #94A3B8;
+            --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155;
+            --gray-800: #1E293B; --gray-900: #0F172A;
+            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
+            --shadow: 0 4px 24px rgba(10,37,64,0.06);
+            --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
+            --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50); color: var(--gray-800); min-height: 100vh;
+        }
 
-        .sidebar {
-            position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
-            background: var(--navy); color: white; padding: 24px 20px;
-            display: flex; flex-direction: column; z-index: 100;
-            transition: var(--transition); overflow-y: auto;
-        }
-        .sidebar .logo {
-            display: flex; align-items: center; gap: 12px;
-            text-decoration: none; margin-bottom: 32px;
-            padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-        .sidebar .logo .logo-text .name {
-            font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 800; color: white;
-        }
-        .sidebar .logo .logo-text .name .tm { font-size: 0.4rem; vertical-align: super; color: var(--cyan); }
-        .sidebar .logo .logo-text .sub { font-size: 0.5rem; color: rgba(255,255,255,0.4); text-transform: uppercase; }
-        .sidebar .user-info {
-            padding: 16px 12px; background: rgba(255,255,255,0.04);
-            border-radius: var(--radius-sm); margin-bottom: 24px;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .sidebar .user-info .name { font-weight: 600; font-size: 0.9rem; }
-        .sidebar .user-info .role { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; }
-        .sidebar .user-info .role .badge {
-            display: inline-block; padding: 2px 10px; background: rgba(217,119,6,0.15);
-            color: var(--gold); border-radius: 999px; font-size: 0.6rem; font-weight: 600;
-        }
-        .sidebar .nav { list-style: none; flex: 1; }
-        .sidebar .nav li { margin-bottom: 2px; }
-        .sidebar .nav a {
-            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
-            border-radius: var(--radius-sm); color: rgba(255,255,255,0.6);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500;
-            transition: var(--transition); cursor: pointer;
-        }
-        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: white; }
-        .sidebar .nav a.active {
-            background: rgba(217,119,6,0.12); color: white; border-left: 3px solid var(--gold);
-        }
-        .sidebar .nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; }
-        .sidebar .nav .divider { height: 1px; background: rgba(255,255,255,0.04); margin: 12px 0; }
-        .sidebar .logout { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
-        .sidebar .logout a {
-            display: flex; align-items: center; gap: 12px; padding: 10px 14px;
-            border-radius: var(--radius-sm); color: rgba(255,255,255,0.4);
-            text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); cursor: pointer;
-        }
-        .sidebar .logout a:hover { background: rgba(239,68,68,0.12); color: #F87171; }
-
-        .main { margin-left: 260px; padding: 24px 32px 40px; min-height: 100vh; }
+        .main { padding: 24px 32px 40px; min-height: 100vh; }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
         }
-        .main-header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--gray-900); }
-        .main-header .subtitle { color: var(--gray-500); font-size: 0.9rem; }
+        .main-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
+        }
+        .main-header .subtitle { color: var(--gray-500); font-size: 0.9rem; margin-top: 4px; }
 
         .btn-primary {
-            padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
+            padding: 10px 20px; background: linear-gradient(135deg, var(--blue), var(--cyan));
             color: white; border: none; border-radius: var(--radius-sm);
             font-weight: 600; font-size: 0.875rem; cursor: pointer;
             transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none;
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
+
         .btn-secondary {
-            padding: 10px 24px; background: var(--gray-100); color: var(--gray-700);
+            padding: 8px 16px; background: var(--white); color: var(--gray-700);
             border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
-            font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: var(--transition);
+            font-weight: 600; font-size: 0.8rem; cursor: pointer;
+            transition: var(--transition); display: inline-flex; align-items: center; gap: 6px;
         }
-        .btn-secondary:hover { background: var(--gray-200); }
+        .btn-secondary:hover { background: var(--gray-100); }
 
-        .table-card {
-            background: white; border-radius: var(--radius);
+        .btn-icon {
+            width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--gray-200);
+            background: white; cursor: pointer; display: inline-flex;
+            align-items: center; justify-content: center; transition: var(--transition);
+        }
+        .btn-icon:hover { background: var(--gray-100); transform: translateY(-1px); }
+        .btn-icon.danger:hover { background: #FEE2E2; border-color: #FECACA; color: var(--red); }
+        .btn-icon.success:hover { background: #D1FAE5; border-color: #A7F3D0; color: var(--green); }
+
+        /* Toggle de tipo (Empresas vs Recrutadores) */
+        .type-tabs {
+            display: inline-flex; background: var(--gray-100);
+            border-radius: var(--radius-sm); padding: 4px; margin-bottom: 20px;
+        }
+        .type-tab {
+            padding: 10px 24px; border: none; background: transparent;
+            border-radius: 8px; font-weight: 600; font-size: 0.875rem;
+            cursor: pointer; transition: var(--transition); color: var(--gray-600);
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .type-tab.active {
+            background: white; color: var(--gray-900);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .type-tab .count {
+            background: var(--gray-200); color: var(--gray-700);
+            padding: 2px 8px; border-radius: var(--radius-full);
+            font-size: 0.7rem;
+        }
+        .type-tab.active .count {
+            background: var(--blue); color: white;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;
+        }
+        .stat-card {
+            background: white; border-radius: var(--radius); padding: 20px 24px;
             box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
-            overflow: hidden;
+            transition: var(--transition);
         }
-        .table-container { overflow-x: auto; }
-        .table-container table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
-        .table-container th {
-            text-align: left; padding: 14px 18px; background: var(--gray-50);
-            font-weight: 600; color: var(--gray-500); font-size: 0.75rem;
-            text-transform: uppercase; border-bottom: 1px solid var(--gray-200);
+        .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+        .stat-card .stat-icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .stat-card .stat-label {
+            font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase;
+            letter-spacing: 0.05em; font-weight: 600;
         }
-        .table-container td { padding: 14px 18px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
-        .table-container tr:last-child td { border-bottom: none; }
-        .table-container tr:hover td { background: var(--gray-50); }
+        .stat-card .stat-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem; font-weight: 700; color: var(--gray-900); margin-top: 4px;
+        }
 
-        .badge-status {
-            display: inline-block; padding: 3px 14px; border-radius: 999px;
+        .section-title {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.75rem; font-weight: 800; letter-spacing: 1.4px;
+            text-transform: uppercase; color: var(--gray-600);
+            margin: 28px 0 16px;
+        }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--gray-200); }
+
+        .table-container {
+            background: white; border-radius: var(--radius); box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04); overflow: hidden;
+        }
+
+        .table-filters {
+            padding: 20px; border-bottom: 1px solid var(--gray-100);
+            display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+        }
+        .filter-search { flex: 1; min-width: 240px; position: relative; }
+        .filter-search input {
+            width: 100%; padding: 10px 14px 10px 40px;
+            border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+            font-size: 0.875rem; font-family: inherit;
+        }
+        .filter-search input:focus {
+            outline: none; border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
+        }
+        .filter-search::before {
+            content: "🔍"; position: absolute; left: 14px; top: 50%;
+            transform: translateY(-50%); font-size: 0.9rem;
+        }
+        .filter-select {
+            padding: 10px 14px; border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm); font-size: 0.875rem;
+            background: white; cursor: pointer; font-family: inherit;
+        }
+
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        .data-table thead { background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
+        .data-table th {
+            padding: 12px 16px; text-align: left;
+            font-size: 0.7rem; font-weight: 700;
+            color: var(--gray-600); text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .data-table td {
+            padding: 14px 16px; border-bottom: 1px solid var(--gray-100);
+            vertical-align: middle;
+        }
+        .data-table tbody tr { transition: var(--transition); }
+        .data-table tbody tr:hover { background: var(--gray-50); }
+        .data-table tbody tr:last-child td { border-bottom: none; }
+
+        .company-cell { display: flex; align-items: center; gap: 12px; }
+        .company-logo {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem; flex-shrink: 0;
+        }
+        .company-logo.recruiter {
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+        }
+        .company-info .name { font-weight: 600; color: var(--gray-900); }
+        .company-info .doc {
+            font-size: 0.8rem; color: var(--gray-500); margin-top: 2px;
+        }
+
+        .badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 4px 10px; border-radius: var(--radius-full);
             font-size: 0.7rem; font-weight: 600;
         }
-        .badge-status.active { background: #D1FAE5; color: #065F46; }
-        .badge-status.inactive { background: #FEE2E2; color: #991B1B; }
-        .badge-status.pending { background: #FEF3C7; color: #92400E; }
+        .badge-active { background: #D1FAE5; color: #065F46; }
+        .badge-inactive { background: #F1F5F9; color: #475569; }
+        .badge-pending { background: #FEF3C7; color: #92400E; }
+        .badge-trial { background: #DBEAFE; color: #1E40AF; }
 
-        .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-700); padding: 8px; }
-        .mobile-overlay {
-            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(10,37,64,0.4); backdrop-filter: blur(4px); z-index: 99;
-        }
-        .mobile-overlay.active { display: block; }
+        .actions-cell { display: flex; gap: 6px; }
 
-        @media (max-width: 992px) {
-            .sidebar { transform: translateX(-100%); width: 280px; }
-            .sidebar.open { transform: translateX(0); }
-            .main { margin-left: 0; padding: 16px; }
-            .mobile-toggle { display: block; }
-            .mobile-overlay.active { display: block; }
+        .table-pagination {
+            padding: 16px 20px; border-top: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.85rem; color: var(--gray-600);
         }
+        .pagination-buttons { display: flex; gap: 4px; }
+        .page-btn {
+            width: 32px; height: 32px; border-radius: 8px;
+            border: 1px solid var(--gray-200); background: white;
+            cursor: pointer; font-weight: 600; transition: var(--transition);
+        }
+        .page-btn:hover { background: var(--gray-100); }
+        .page-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+
+        /* Toast */
+        .toast {
+            position: fixed; top: 24px; right: 24px; background: white;
+            padding: 14px 24px; border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            display: none; align-items: center; gap: 12px;
+            font-weight: 600; font-size: 0.875rem; z-index: 300;
+            border-left: 4px solid var(--blue); animation: slideIn 0.3s ease;
+        }
+        .toast.show { display: flex; }
+        .toast.success { border-left-color: var(--green); }
+        .toast.error { border-left-color: var(--red); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(120%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(10,37,64,0.6); backdrop-filter: blur(4px);
+            z-index: 400; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal {
+            background: white; border-radius: var(--radius);
+            max-width: 700px; width: 100%; max-height: 90vh;
+            overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            padding: 20px 24px; border-bottom: 1px solid var(--gray-200);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-header h3 {
+            font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700;
+        }
+        .modal-close {
+            width: 32px; height: 32px; border: none; background: var(--gray-100);
+            border-radius: 8px; cursor: pointer; font-size: 1rem;
+        }
+        .modal-body { padding: 24px; }
+        .modal-footer {
+            padding: 16px 24px; border-top: 1px solid var(--gray-200);
+            display: flex; justify-content: flex-end; gap: 8px;
+        }
+
+        .form-row {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
+        }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-size: 0.8rem; font-weight: 600;
+            color: var(--gray-700); margin-bottom: 6px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 10px 14px; border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm); font-size: 0.875rem; font-family: inherit;
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-group input:focus, .form-group select:focus {
+            outline: none; border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
+        }
+
+        /* Tipo PJ/PF toggle dentro do modal */
+        .type-selector {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;
+        }
+        .type-option {
+            padding: 16px; border: 2px solid var(--gray-200);
+            border-radius: var(--radius-sm); cursor: pointer;
+            text-align: center; transition: var(--transition);
+        }
+        .type-option:hover { border-color: var(--gray-300); }
+        .type-option.active {
+            border-color: var(--blue); background: #EFF6FF;
+        }
+        .type-option .icon { font-size: 1.8rem; margin-bottom: 4px; }
+        .type-option .title { font-weight: 700; color: var(--gray-900); }
+        .type-option .desc { font-size: 0.75rem; color: var(--gray-500); margin-top: 2px; }
+
+        @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: 1fr; }
             .main-header { flex-direction: column; align-items: flex-start; }
+            .main { padding: 16px; }
+            .type-tabs { width: 100%; }
+            .type-tab { flex: 1; justify-content: center; }
+            .form-row { grid-template-columns: 1fr; }
+            .type-selector { grid-template-columns: 1fr; }
         }
-        .sidebar::-webkit-scrollbar { width: 4px; }
-        .sidebar::-webkit-scrollbar-track { background: transparent; }
-        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
     </style>
 </head>
-<body>
+<body data-profile="master">
 
-    <aside class="sidebar" id="sidebar">
-        <a href="../dashboard.html" class="logo">
-            <div class="logo-text">
-                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
-                <span class="sub">People Analytics Enterprise</span>
-            </div>
-        </a>
-        <div class="user-info">
-            <div class="name" id="userName">Administrador</div>
-            <div class="role"><span class="badge">👑 Master Admin</span></div>
-        </div>
-        <ul class="nav">
-            <li><a href="../dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
-            <li><a href="index.html" class="active"><span class="icon">🏢</span> Empresas</a></li>
-            <li><a href="../recrutadores/index.html"><span class="icon">👤</span> Recrutadores</a></li>
-            <li><a href="../participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
-            <li><a href="../financeiro/index.html"><span class="icon">💰</span> Centro Financeiro</a></li>
-            <div class="divider"></div>
-            <li><a href="../agenda/calendario.html"><span class="icon">📅</span> Agenda</a></li>
-            <li><a href="../backup/backup-completo.html"><span class="icon">💾</span> Backup</a></li>
-            <li><a href="../financeiro/configuracoes.html"><span class="icon">⚙️</span> Configurações</a></li>
-        </ul>
-        <div class="logout">
-            <a href="#" onclick="logout()"><span class="icon">🚪</span> Sair</a>
-        </div>
-    </aside>
-
-    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
-
-    <main class="main">
+    <main class="main vg-content">
         <div class="main-header">
             <div>
-                <h1>🏢 Empresas</h1>
-                <p class="subtitle">Gerenciar empresas cadastradas na plataforma</p>
+                <h1>🏢 Empresas & Recrutadores</h1>
+                <p class="subtitle">Gestão unificada de Pessoas Jurídicas (CNPJ) e Pessoas Físicas (CPF) do ecossistema</p>
             </div>
-            <div style="display:flex;gap:12px;">
-                <button class="btn-primary" onclick="novaEmpresa()">➕ Nova Empresa</button>
-                <button class="btn-secondary" onclick="recarregar()">🔄 Atualizar</button>
+            <button class="btn-primary" onclick="abrirModalNovo()">
+                <span>➕</span> Novo Cadastro
+            </button>
+        </div>
+
+        <!-- 🎯 TOGGLE TIPO -->
+        <div class="type-tabs">
+            <button class="type-tab active" data-type="todos" onclick="mudarTipo('todos')">
+                <span>📊</span> Todos <span class="count" id="countTodos">0</span>
+            </button>
+            <button class="type-tab" data-type="empresa" onclick="mudarTipo('empresa')">
+                <span>🏢</span> Empresas (CNPJ) <span class="count" id="countEmpresas">0</span>
+            </button>
+            <button class="type-tab" data-type="recrutador" onclick="mudarTipo('recrutador')">
+                <span>🧑‍💼</span> Recrutadores (CPF) <span class="count" id="countRecrutadores">0</span>
+            </button>
+        </div>
+
+        <!-- 📊 STATS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🏢</div>
+                <div class="stat-label">Total Cadastrados</div>
+                <div class="stat-value" id="statTotal">1.250</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-label">Ativos</div>
+                <div class="stat-value" id="statAtivos">1.024</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-label">Créditos Totais</div>
+                <div class="stat-value" id="statCreditos">48.520</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-label">Participantes Vinculados</div>
+                <div class="stat-value" id="statParticipantes">125.000</div>
             </div>
         </div>
 
-        <div class="table-card">
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Empresa</th>
-                            <th>CNPJ</th>
-                            <th>Recrutadores</th>
-                            <th>Status</th>
-                            <th>Plano</th>
-                            <th style="text-align:center;">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <tr>
-                            <td>1</td>
-                            <td><strong>TechCorp Solutions</strong></td>
-                            <td>12.345.678/0001-90</td>
-                            <td>3</td>
-                            <td><span class="badge-status active">✅ Ativa</span></td>
-                            <td>Enterprise</td>
-                            <td style="text-align:center;">
-                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">👁️</button>
-                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">✏️</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><strong>InovaLab Brasil</strong></td>
-                            <td>98.765.432/0001-10</td>
-                            <td>2</td>
-                            <td><span class="badge-status active">✅ Ativa</span></td>
-                            <td>Pro</td>
-                            <td style="text-align:center;">
-                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">👁️</button>
-                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">✏️</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><strong>StartupX Ventures</strong></td>
-                            <td>11.222.333/0001-44</td>
-                            <td>1</td>
-                            <td><span class="badge-status pending">⏳ Pendente</span></td>
-                            <td>Básico</td>
-                            <td style="text-align:center;">
-                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">👁️</button>
-                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">✏️</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td><strong>AgroTech Brasil</strong></td>
-                            <td>55.666.777/0001-88</td>
-                            <td>2</td>
-                            <td><span class="badge-status inactive">⛔ Inativa</span></td>
-                            <td>Plus</td>
-                            <td style="text-align:center;">
-                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">👁️</button>
-                                <button class="btn-secondary" style="padding:4px 12px;font-size:0.7rem;">✏️</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- 📋 LISTA -->
+        <div class="section-title">📋 Lista de Cadastros</div>
+        <div class="table-container">
+            <div class="table-filters">
+                <div class="filter-search">
+                    <input type="text" id="searchInput" placeholder="Buscar por nome, CNPJ/CPF, e-mail..." />
+                </div>
+                <select class="filter-select" id="filterStatus">
+                    <option value="">Todos os status</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="trial">Trial</option>
+                    <option value="pendente">Pendente</option>
+                    <option value="inativo">Inativo</option>
+                </select>
+                <select class="filter-select" id="filterPlano">
+                    <option value="">Todos os planos</option>
+                    <option value="starter">Starter</option>
+                    <option value="professional">Professional</option>
+                    <option value="enterprise">Enterprise</option>
+                </select>
+                <button class="btn-secondary" onclick="exportarDados()">
+                    <span>📥</span> Exportar
+                </button>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Cadastro</th>
+                        <th>Documento</th>
+                        <th>Tipo</th>
+                        <th>Plano</th>
+                        <th>Créditos</th>
+                        <th>Participantes</th>
+                        <th>Status</th>
+                        <th style="text-align:right;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyEmpresas">
+                    <!-- Preenchido via JS -->
+                </tbody>
+            </table>
+
+            <div class="table-pagination">
+                <div>Mostrando <strong>1-10</strong> de <strong>1.250</strong> cadastros</div>
+                <div class="pagination-buttons">
+                    <button class="page-btn">‹</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">...</button>
+                    <button class="page-btn">125</button>
+                    <button class="page-btn">›</button>
+                </div>
             </div>
         </div>
     </main>
 
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalCadastro">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Novo Cadastro</h3>
+                <button class="modal-close" onclick="fecharModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <!-- Seletor de tipo -->
+                <label style="font-size:0.8rem;font-weight:600;color:var(--gray-700);margin-bottom:8px;display:block;">Tipo de Cadastro *</label>
+                <div class="type-selector">
+                    <div class="type-option active" data-tipo="empresa" onclick="selecionarTipo('empresa')">
+                        <div class="icon">🏢</div>
+                        <div class="title">Pessoa Jurídica</div>
+                        <div class="desc">Empresa com CNPJ</div>
+                    </div>
+                    <div class="type-option" data-tipo="recrutador" onclick="selecionarTipo('recrutador')">
+                        <div class="icon">🧑‍💼</div>
+                        <div class="title">Pessoa Física</div>
+                        <div class="desc">Recrutador / Headhunter (CPF)</div>
+                    </div>
+                </div>
+
+                <!-- Campos PJ -->
+                <div id="camposPJ">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Razão Social *</label>
+                            <input type="text" id="formRazaoSocial" placeholder="Nome empresarial" />
+                        </div>
+                        <div class="form-group">
+                            <label>Nome Fantasia</label>
+                            <input type="text" id="formNomeFantasia" placeholder="Nome comercial" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>CNPJ *</label>
+                            <input type="text" id="formCnpj" placeholder="00.000.000/0001-00" />
+                        </div>
+                        <div class="form-group">
+                            <label>Inscrição Estadual</label>
+                            <input type="text" id="formIe" placeholder="IE ou Isento" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campos PF -->
+                <div id="camposPF" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nome Completo *</label>
+                            <input type="text" id="formNomePF" placeholder="Nome do recrutador" />
+                        </div>
+                        <div class="form-group">
+                            <label>CPF *</label>
+                            <input type="text" id="formCpf" placeholder="000.000.000-00" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campos comuns -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>E-mail *</label>
+                        <input type="email" id="formEmail" placeholder="contato@empresa.com" />
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone *</label>
+                        <input type="text" id="formTelefone" placeholder="(00) 00000-0000" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Segmento</label>
+                        <select id="formSegmento">
+                            <option value="">Selecione...</option>
+                            <option value="tecnologia">Tecnologia</option>
+                            <option value="industria">Indústria</option>
+                            <option value="servicos">Serviços</option>
+                            <option value="comercio">Comércio</option>
+                            <option value="agronegocio">Agronegócio</option>
+                            <option value="saude">Saúde</option>
+                            <option value="educacao">Educação</option>
+                            <option value="rh">Consultoria de RH</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Plano</label>
+                        <select id="formPlano">
+                            <option value="starter">Starter</option>
+                            <option value="professional">Professional</option>
+                            <option value="enterprise">Enterprise</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Endereço</label>
+                    <input type="text" id="formEndereco" placeholder="Rua, número, bairro, cidade/UF" />
+                </div>
+
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea id="formObs" placeholder="Observações internas sobre este cadastro..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="fecharModal()">Cancelar</button>
+                <button class="btn-primary" onclick="salvarCadastro()">💾 Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
+    <script src="/assets/js/menu-fix.js"></script>
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
+
     <script>
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.getElementById('mobileOverlay').classList.toggle('active');
+        'use strict';
+
+        let cadastros = [];
+        let filtroTipo = 'todos';
+        let tipoSelecionado = 'empresa';
+
+        const demoCadastros = [
+            { id: 1, tipo: 'empresa', nome: 'TechCorp Ltda', nomeFantasia: 'TechCorp', documento: '12.345.678/0001-99', email: 'contato@techcorp.com', telefone: '(11) 3000-0000', segmento: 'Tecnologia', plano: 'enterprise', creditos: 5200, participantes: 128, status: 'ativo' },
+            { id: 2, tipo: 'empresa', nome: 'RH Solutions Consultoria', nomeFantasia: 'RH Solutions', documento: '23.456.789/0001-00', email: 'contato@rhsol.com', telefone: '(11) 4000-0000', segmento: 'RH', plano: 'professional', creditos: 1850, participantes: 45, status: 'ativo' },
+            { id: 3, tipo: 'recrutador', nome: 'Marina Costa Headhunter', nomeFantasia: '', documento: '123.456.789-00', email: 'marina@headhunter.com', telefone: '(11) 98765-4321', segmento: 'RH', plano: 'professional', creditos: 320, participantes: 12, status: 'ativo' },
+            { id: 4, tipo: 'empresa', nome: 'Indústria ABC S.A.', nomeFantasia: 'ABC Industrial', documento: '34.567.890/0001-11', email: 'rh@abc.com', telefone: '(11) 5000-0000', segmento: 'Indústria', plano: 'enterprise', creditos: 8400, participantes: 420, status: 'ativo' },
+            { id: 5, tipo: 'recrutador', nome: 'João Pedro Talent Hunter', nomeFantasia: '', documento: '234.567.890-11', email: 'joao@talents.com', telefone: '(21) 99876-5432', segmento: 'RH', plano: 'starter', creditos: 150, participantes: 8, status: 'trial' },
+            { id: 6, tipo: 'empresa', nome: 'AgroBrasil Cooperativa', nomeFantasia: 'AgroBrasil', documento: '45.678.901/0001-22', email: 'rh@agrobr.com', telefone: '(62) 3000-0000', segmento: 'Agronegócio', plano: 'professional', creditos: 2100, participantes: 85, status: 'ativo' },
+            { id: 7, tipo: 'empresa', nome: 'Hospital São Lucas', nomeFantasia: 'São Lucas', documento: '56.789.012/0001-33', email: 'rh@saolucas.com', telefone: '(11) 6000-0000', segmento: 'Saúde', plano: 'enterprise', creditos: 4300, participantes: 240, status: 'ativo' },
+            { id: 8, tipo: 'recrutador', nome: 'Fernanda Executive Search', nomeFantasia: '', documento: '345.678.901-22', email: 'fernanda@exec.com', telefone: '(11) 97654-3210', segmento: 'RH', plano: 'professional', creditos: 580, participantes: 22, status: 'ativo' },
+            { id: 9, tipo: 'empresa', nome: 'Universidade Futuro', nomeFantasia: 'UniFuturo', documento: '67.890.123/0001-44', email: 'rh@unifuturo.edu', telefone: '(11) 7000-0000', segmento: 'Educação', plano: 'starter', creditos: 680, participantes: 32, status: 'pendente' },
+            { id: 10, tipo: 'recrutador', nome: 'Carlos RH Independente', nomeFantasia: '', documento: '456.789.012-33', email: 'carlos@rhi.com', telefone: '(31) 98765-1234', segmento: 'RH', plano: 'starter', creditos: 90, participantes: 5, status: 'inativo' }
+        ];
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastIcon').textContent = type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '✅';
+            document.getElementById('toastMessage').textContent = message;
+            toast.className = 'toast show ' + type;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
-        function logout() {
-            if (confirm('Deseja realmente sair?')) {
-                alert('Logout realizado!');
-                window.location.href = '../../login.html';
+        function getIniciais(nome) {
+            return nome.split(' ').filter(Boolean).slice(0, 2).map(p => p[0]).join('').toUpperCase();
+        }
+
+        function getBadgeClass(status) {
+            const map = { 'ativo': 'badge-active', 'inativo': 'badge-inactive', 'pendente': 'badge-pending', 'trial': 'badge-trial' };
+            return map[status] || 'badge-inactive';
+        }
+
+        function renderCadastros(lista) {
+            const tbody = document.getElementById('tbodyEmpresas');
+            if (!lista || lista.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--gray-400);">Nenhum cadastro encontrado</td></tr>`;
+                return;
             }
+            tbody.innerHTML = lista.map(c => `
+                <tr>
+                    <td>
+                        <div class="company-cell">
+                            <div class="company-logo ${c.tipo === 'recrutador' ? 'recruiter' : ''}">${getIniciais(c.nomeFantasia || c.nome)}</div>
+                            <div class="company-info">
+                                <div class="name">${c.nomeFantasia || c.nome}</div>
+                                <div class="doc">${c.email}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td><strong>${c.documento}</strong></td>
+                    <td>${c.tipo === 'empresa' ? '🏢 PJ' : '🧑‍💼 PF'}</td>
+                    <td><span style="text-transform:capitalize;">${c.plano}</span></td>
+                    <td><strong>${c.creditos.toLocaleString('pt-BR')}</strong></td>
+                    <td>${c.participantes.toLocaleString('pt-BR')}</td>
+                    <td><span class="badge ${getBadgeClass(c.status)}">${c.status.toUpperCase()}</span></td>
+                    <td>
+                        <div class="actions-cell" style="justify-content:flex-end;">
+                            <button class="btn-icon" title="Ver" onclick="verCadastro(${c.id})">👁️</button>
+                            <button class="btn-icon success" title="Editar" onclick="editarCadastro(${c.id})">✏️</button>
+                            <button class="btn-icon danger" title="Excluir" onclick="excluirCadastro(${c.id})">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
         }
 
-        function novaEmpresa() {
-            alert('📝 Abrir formulário de nova empresa (em desenvolvimento)');
+        function atualizarContadores() {
+            const empresas = demoCadastros.filter(c => c.tipo === 'empresa').length;
+            const recrutadores = demoCadastros.filter(c => c.tipo === 'recrutador').length;
+            document.getElementById('countTodos').textContent = demoCadastros.length;
+            document.getElementById('countEmpresas').textContent = empresas;
+            document.getElementById('countRecrutadores').textContent = recrutadores;
         }
 
-        function recarregar() {
-            alert('🔄 Dados atualizados!');
+        function mudarTipo(tipo) {
+            filtroTipo = tipo;
+            document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-type="${tipo}"]`).classList.add('active');
+            aplicarFiltros();
         }
+
+        function aplicarFiltros() {
+            const busca = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('filterStatus').value;
+            const plano = document.getElementById('filterPlano').value;
+
+            let filtrados = demoCadastros.filter(c => {
+                const matchTipo = filtroTipo === 'todos' || c.tipo === filtroTipo;
+                const matchBusca = !busca || c.nome.toLowerCase().includes(busca) || c.email.toLowerCase().includes(busca) || c.documento.includes(busca);
+                const matchStatus = !status || c.status === status;
+                const matchPlano = !plano || c.plano === plano;
+                return matchTipo && matchBusca && matchStatus && matchPlano;
+            });
+
+            renderCadastros(filtrados);
+        }
+
+        function selecionarTipo(tipo) {
+            tipoSelecionado = tipo;
+            document.querySelectorAll('.type-option').forEach(o => o.classList.remove('active'));
+            document.querySelector(`[data-tipo="${tipo}"]`).classList.add('active');
+            document.getElementById('camposPJ').style.display = tipo === 'empresa' ? 'block' : 'none';
+            document.getElementById('camposPF').style.display = tipo === 'recrutador' ? 'block' : 'none';
+        }
+
+        function abrirModalNovo() {
+            document.getElementById('modalTitle').textContent = 'Novo Cadastro';
+            selecionarTipo('empresa');
+            ['formRazaoSocial','formNomeFantasia','formCnpj','formIe','formNomePF','formCpf','formEmail','formTelefone','formEndereco','formObs'].forEach(id => {
+                const el = document.getElementById(id); if (el) el.value = '';
+            });
+            document.getElementById('formSegmento').value = '';
+            document.getElementById('formPlano').value = 'starter';
+            document.getElementById('modalCadastro').classList.add('show');
+        }
+
+        function editarCadastro(id) {
+            const c = demoCadastros.find(x => x.id === id);
+            if (!c) return;
+            document.getElementById('modalTitle').textContent = 'Editar Cadastro';
+            selecionarTipo(c.tipo);
+            if (c.tipo === 'empresa') {
+                document.getElementById('formRazaoSocial').value = c.nome;
+                document.getElementById('formNomeFantasia').value = c.nomeFantasia || '';
+                document.getElementById('formCnpj').value = c.documento;
+            } else {
+                document.getElementById('formNomePF').value = c.nome;
+                document.getElementById('formCpf').value = c.documento;
+            }
+            document.getElementById('formEmail').value = c.email;
+            document.getElementById('formTelefone').value = c.telefone;
+            document.getElementById('formPlano').value = c.plano;
+            document.getElementById('modalCadastro').classList.add('show');
+        }
+
+        function fecharModal() {
+            document.getElementById('modalCadastro').classList.remove('show');
+        }
+
+        function salvarCadastro() {
+            showToast('Cadastro salvo com sucesso!', 'success');
+            fecharModal();
+        }
+
+        function excluirCadastro(id) {
+            if (!confirm('Deseja realmente excluir este cadastro?')) return;
+            showToast('Cadastro excluído', 'success');
+        }
+
+        function verCadastro(id) {
+            const c = demoCadastros.find(x => x.id === id);
+            if (!c) return;
+            showToast(`Visualizando ${c.nome}`, 'success');
+        }
+
+        function exportarDados() {
+            showToast('Exportando dados em CSV...', 'success');
+        }
+
+        document.getElementById('searchInput').addEventListener('input', aplicarFiltros);
+        document.getElementById('filterStatus').addEventListener('change', aplicarFiltros);
+        document.getElementById('filterPlano').addEventListener('change', aplicarFiltros);
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('✅ Empresas carregado!');
+            cadastros = demoCadastros;
+            atualizarContadores();
+            renderCadastros(cadastros);
+            console.log('🏢 Gestão de Empresas & Recrutadores - Master Admin');
         });
     </script>
 
