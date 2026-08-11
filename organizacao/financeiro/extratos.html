@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extratos · Organização · Vigorre</title>
+  <link rel="stylesheet" href="/assets/css/menu-fix.css">
+  <link rel="stylesheet" href="/assets/css/globals.css">
+  <style>
+    .vg-page{padding:28px}
+    .vg-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px;margin-top:16px}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #f1f5f9}
+    th{color:#64748b;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+    .pos{color:#10b981;font-weight:700}.neg{color:#ef4444;font-weight:700}
+    .filters{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+    .filters select,.filters input{padding:9px 12px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px}
+  </style>
+</head>
+<body data-profile="organizacao">
+  <main class="vg-content">
+    <div class="vg-page">
+      <h1 style="margin:0;font-size:24px;font-weight:800">🧾 Extratos</h1>
+      <p style="color:#64748b;margin:6px 0 0">Histórico completo de movimentações de créditos.</p>
+
+      <div class="filters">
+        <input type="date" id="f-inicio">
+        <input type="date" id="f-fim">
+        <select id="f-tipo">
+          <option value="">Todos os tipos</option>
+          <option>Entrada</option>
+          <option>Saída</option>
+        </select>
+        <button onclick="alert('Conectar filtro ao financeiro-service.js')" style="padding:9px 16px;border:none;border-radius:10px;background:#10b981;color:#fff;font-weight:700;cursor:pointer">Filtrar</button>
+      </div>
+
+      <div class="vg-card">
+        <table>
+          <thead><tr><th>Data</th><th>Descrição</th><th>Participante</th><th>Tipo</th><th>Créditos</th><th>Saldo</th></tr></thead>
+          <tbody id="extrato-rows"><!-- preenchido via JS --></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="/assets/js/menu-fix.js"></script>
+  <script>
+    // TODO: conectar ao financeiro-service.js / Supabase.
+    const rows = [
+      ['11/08/2026','Compra de pacote 500 créditos','—','<span class="pos">Entrada</span>','<span class="pos">+500</span>',980],
+      ['10/08/2026','Geração de laudo','Participante #102','<span class="neg">Saída</span>','<span class="neg">-3</span>',480],
+      ['09/08/2026','Relatório de compatibilidade','Participante #088','<span class="neg">Saída</span>','<span class="neg">-2</span>',483],
+      ['08/08/2026','Distribuição para equipe','Equipe Comercial','<span class="neg">Saída</span>','<span class="neg">-40</span>',485]
+    ];
+    document.getElementById('extrato-rows').innerHTML =
+      rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+  </script>
+</body>
+</html>
