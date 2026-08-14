@@ -1,11 +1,16 @@
 /**
  * ============================================
  * VIGORRE ONE™ - SUPABASE CONFIG
- * INTERNATIONAL ENTERPRISE EDITION
+ * INTERNATIONAL ENTERPRISE EDITION - VERSÃO HÍBRIDA
  * ============================================
  * 
- * VERSÃO: 3.0.0
- * DATA: 14/07/2026
+ * VERSÃO: 3.1.0
+ * DATA: 14/08/2026
+ * 
+ * MODO HÍBRIDO:
+ * - Se Supabase estiver configurado: usa conexão real
+ * - Se falhar ou não estiver configurado: usa localStorage (modo mock)
+ * - Mantém toda a API existente (CRUD, cache, créditos, etc.)
  * 
  * TABELAS COMPLETAS:
  * - users, companies, participants, recruiters, consultants
@@ -29,13 +34,30 @@
 'use strict';
 
 // ============================================
+// 0. CARREGAR SDK DO SUPABASE SE NÃO ESTIVER PRESENTE
+// ============================================
+(function loadSupabaseSDK() {
+    if (typeof window !== 'undefined' && !window.supabase) {
+        try {
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+            script.async = false;
+            document.head.appendChild(script);
+            console.log('📦 SDK do Supabase carregado via CDN');
+        } catch (e) {
+            console.warn('⚠️ Não foi possível carregar o SDK do Supabase:', e.message);
+        }
+    }
+})();
+
+// ============================================
 // 1. CONFIGURAÇÃO SUPABASE
 // ============================================
 const SUPABASE_CONFIG = {
-    // CREDENCIAIS
-    url: 'https://seu-projeto.supabase.co',
-    anonKey: 'sua-chave-anon-aqui',
-    serviceRoleKey: 'sua-service-role-key-aqui',
+    // CREDENCIAIS REAIS
+    url: 'https://dfthdcnaqmqswidwgezj.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmdGhkY25hcW1xc3dpZHdnZXpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk0NDU3MDksImV4cCI6MjA5NTAyMTcwOX0.ysTxq3RLw6E-7HrKsvAN2DGoTRYNNCVHXYKG0y6aFIQ',
+    serviceRoleKey: '', // Manter vazia em produção (nunca expor no frontend)
     
     // CONFIGURAÇÕES
     timeout: 30000,
@@ -131,7 +153,7 @@ const SUPABASE_CONFIG = {
 };
 
 // ============================================
-// 2. CLASS SUPABASE SERVICE
+// 2. CLASS SUPABASE SERVICE (VERSÃO HÍBRIDA)
 // ============================================
 class SupabaseService {
     
@@ -141,6 +163,8 @@ class SupabaseService {
     constructor() {
         this.config = SUPABASE_CONFIG;
         this.isConnected = false;
+        this.mode = 'mock'; // 'real' ou 'mock'
+        this.supabaseClient = null;
         this.cache = new Map();
         this.cacheTTL = this.config.cacheTTL || 300000;
         this.retryAttempts = this.config.retryAttempts || 3;
@@ -149,7 +173,7 @@ class SupabaseService {
     }
     
     // ============================================
-    // 2.2 CONEXÃO
+    // 2.2 CONEXÃO (HÍBRIDA)
     // ============================================
     connect() {
         try {
@@ -157,20 +181,59 @@ class SupabaseService {
             console.log('📋 URL:', this.config.url);
             console.log('📋 Tabelas:', Object.keys(this.config.tables).length);
             
-            // Verificar credenciais
-            if (this.config.url === 'https://seu-projeto.supabase.co') {
-                console.warn('⚠️ Usando credenciais mockadas. Substitua pelas reais!');
+            // Verificar credenciais mockadas
+            if (this.config.url === 'https://seu-projeto.supabase.co' || !this.config.anonKey) {
+                console.warn('⚠️ Credenciais mockadas. Usando modo local.');
+                this.mode = 'mock';
+                this.isConnected = true;
+                return { success: true, mode: 'mock', message: 'Modo local ativado' };
             }
             
+            // Tentar conexão real com Supabase
+            if (typeof window !== 'undefined' && window.supabase && window.supabase.createClient) {
+                try {
+                    this.supabaseClient = window.supabase.createClient(
+                        this.config.url,
+                        this.config.anonKey
+                    );
+                    this.mode = 'real';
+                    this.isConnected = true;
+                    console.log('✅ Conectado ao Supabase REAL!');
+                    return { success: true, mode: 'real', message: 'Conectado ao Supabase' };
+                } catch (error) {
+                    console.warn('⚠️ Falha na conexão real:', error.message);
+                    console.warn('⚠️ Ativando modo local como fallback...');
+                    this.mode = 'mock';
+                    this.isConnected = true;
+                    return { success: true, mode: 'mock', message: 'Modo local ativado (fallback)' };
+                }
+            }
+            
+            // SDK não disponível: modo local
+            console.warn('⚠️ SDK do Supabase não disponível. Usando modo local.');
+            this.mode = 'mock';
             this.isConnected = true;
-            console.log('✅ Conectado ao Supabase com sucesso!');
-            return { success: true, message: 'Conectado com sucesso' };
+            return { success: true, mode: 'mock', message: 'Modo local ativado' };
             
         } catch (error) {
             console.error('❌ Erro ao conectar:', error);
             this.isConnected = false;
             return { success: false, error: error.message };
         }
+    }
+    
+    // Retorna cliente Supabase real (se disponível)
+    getClient() {
+        return this.supabaseClient;
+    }
+    
+    // Verifica modo atual
+    isReal() {
+        return this.mode === 'real';
+    }
+    
+    isMock() {
+        return this.mode === 'mock';
     }
     
     // ============================================
@@ -474,10 +537,9 @@ class SupabaseService {
             // Fazer join
             var joined = data.map(function(item) {
                 var foreignKeyValue = item[foreignKey];
-                return {
-                    ...item,
+                return Object.assign({}, item, {
                     _foreign: foreignMap[foreignKeyValue] || null
-                };
+                });
             });
             
             console.log(`🔗 Join ${table} + ${foreignTable}`);
@@ -530,17 +592,14 @@ class SupabaseService {
     // 2.11 UTILITÁRIOS
     // ============================================
     
-    // Obter nome da tabela
     getTableName(key) {
         return this.config.tables[key] || key;
     }
     
-    // Gerar ID único
     generateId() {
         return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
     }
     
-    // Sanitizar dados
     sanitizeData(data) {
         var sanitized = {};
         for (var key in data) {
@@ -558,7 +617,6 @@ class SupabaseService {
         return sanitized;
     }
     
-    // Validar dados
     validate(table, data) {
         var errors = [];
         
@@ -586,7 +644,6 @@ class SupabaseService {
             case 'participants':
             case 'participant':
                 if (!data.name) errors.push('Nome do participante é obrigatório');
-                if (!data.companyId) errors.push('Empresa é obrigatória');
                 break;
                 
             case 'wallets':
@@ -601,13 +658,11 @@ class SupabaseService {
         };
     }
     
-    // Validar e-mail
     validateEmail(email) {
         var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     }
     
-    // Validar CNPJ
     validateCNPJ(cnpj) {
         cnpj = cnpj.replace(/[^\d]/g, '');
         if (cnpj.length !== 14) return false;
@@ -718,15 +773,15 @@ class SupabaseService {
                 companyId: companyId,
                 balance: initialBalance || 0,
                 credits: {
-                    DISC: credits?.DISC || 0,
-                    IE: credits?.IE || 0,
-                    VALORES: credits?.VALORES || 0,
-                    SWOT: credits?.SWOT || 0,
-                    BIGFIVE: credits?.BIGFIVE || 0,
-                    COMPETENCIAS: credits?.COMPETENCIAS || 0,
-                    LIDERANCA: credits?.LIDERANCA || 0,
-                    POTENCIAL: credits?.POTENCIAL || 0,
-                    FITCULTURAL: credits?.FITCULTURAL || 0
+                    DISC: (credits && credits.DISC) || 0,
+                    IE: (credits && credits.IE) || 0,
+                    VALORES: (credits && credits.VALORES) || 0,
+                    SWOT: (credits && credits.SWOT) || 0,
+                    BIGFIVE: (credits && credits.BIGFIVE) || 0,
+                    COMPETENCIAS: (credits && credits.COMPETENCIAS) || 0,
+                    LIDERANCA: (credits && credits.LIDERANCA) || 0,
+                    POTENCIAL: (credits && credits.POTENCIAL) || 0,
+                    FITCULTURAL: (credits && credits.FITCULTURAL) || 0
                 },
                 status: 'ativa',
                 createdAt: new Date().toISOString(),
@@ -782,13 +837,11 @@ class SupabaseService {
             if (!creditType) throw new Error('Tipo de crédito é obrigatório');
             if (!quantity || quantity <= 0) throw new Error('Quantidade deve ser maior que zero');
             
-            // Buscar carteira
             var walletResult = this.read('wallets', walletId);
             if (!walletResult.success) return walletResult;
             
             var wallet = walletResult.data;
             
-            // Atualizar créditos
             var credits = wallet.credits || {};
             var creditTypes = ['DISC', 'IE', 'VALORES', 'SWOT', 'BIGFIVE', 'COMPETENCIAS', 'LIDERANCA', 'POTENCIAL',
                 'FITCULTURAL'
@@ -801,7 +854,6 @@ class SupabaseService {
             
             credits[typeUpper] = (credits[typeUpper] || 0) + quantity;
             
-            // Atualizar carteira
             var updateResult = this.update('wallets', walletId, {
                 credits: credits,
                 updatedAt: new Date().toISOString()
@@ -809,7 +861,6 @@ class SupabaseService {
             
             if (!updateResult.success) return updateResult;
             
-            // Registrar transação
             var transaction = {
                 id: this.generateId(),
                 walletId: walletId,
@@ -843,13 +894,11 @@ class SupabaseService {
             if (!creditType) throw new Error('Tipo de crédito é obrigatório');
             if (!quantity || quantity <= 0) throw new Error('Quantidade deve ser maior que zero');
             
-            // Buscar carteira
             var walletResult = this.read('wallets', walletId);
             if (!walletResult.success) return walletResult;
             
             var wallet = walletResult.data;
             
-            // Verificar saldo
             var credits = wallet.credits || {};
             var typeUpper = creditType.toUpperCase();
             var available = credits[typeUpper] || 0;
@@ -861,10 +910,8 @@ class SupabaseService {
                 };
             }
             
-            // Debitar créditos
             credits[typeUpper] = available - quantity;
             
-            // Atualizar carteira
             var updateResult = this.update('wallets', walletId, {
                 credits: credits,
                 updatedAt: new Date().toISOString()
@@ -872,7 +919,6 @@ class SupabaseService {
             
             if (!updateResult.success) return updateResult;
             
-            // Registrar transação
             var transaction = {
                 id: this.generateId(),
                 walletId: walletId,
@@ -956,7 +1002,7 @@ class SupabaseService {
                 description: description || '',
                 severity: severity || 'baixo',
                 ip: '127.0.0.1',
-                userAgent: navigator.userAgent || 'Mozilla/5.0',
+                userAgent: (typeof navigator !== 'undefined' && navigator.userAgent) || 'Mozilla/5.0',
                 date: new Date().toLocaleString('pt-BR'),
                 createdAt: new Date().toISOString()
             };
@@ -1017,12 +1063,17 @@ supabaseService.connect();
 // ============================================
 // 4. EXPORTAR PARA TODOS OS MÓDULOS
 // ============================================
-window.VIGORRE_CONFIG = SUPABASE_CONFIG;
-window.supabaseService = supabaseService;
+if (typeof window !== 'undefined') {
+    window.VIGORRE_CONFIG = SUPABASE_CONFIG;
+    window.supabaseService = supabaseService;
+    
+    // Também expõe a função para obter o cliente real (usado pelo auth.js)
+    window.getSupabaseClient = function() {
+        return supabaseService.getClient();
+    };
+}
 
-console.log('✅ VIGORRE ONE™ - Supabase Service carregado com sucesso!');
+console.log('✅ VIGORRE ONE™ - Supabase Service (HÍBRIDO) carregado!');
 console.log('📋 Tabelas disponíveis:', Object.keys(SUPABASE_CONFIG.tables).length);
-console.log('🔗 Métodos disponíveis:', Object.keys(supabaseService).filter(function(k) {
-    return typeof supabaseService[k] === 'function';
-}).length);
+console.log('🔗 Modo de operação:', supabaseService.mode.toUpperCase());
 console.log('💳 Tipos de crédito: DISC, IE, VALORES, SWOT, BIGFIVE, COMPETENCIAS, LIDERANCA, POTENCIAL, FITCULTURAL');
