@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | VIGORRE ONE™</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
     <link rel="icon" href="assets/images/logo-vigorre.png" />
+
     <style>
         * {
             margin: 0;
@@ -86,7 +89,6 @@
             margin-bottom: 20px;
         }
 
-        /* ===== CREDENCIAIS DE TESTE ===== */
         .test-credentials {
             background: #F1F5F9;
             border: 1px solid #E2E8F0;
@@ -178,7 +180,6 @@
             font-weight: 600;
         }
 
-        /* ===== FORM ===== */
         .form-group {
             margin-bottom: 16px;
         }
@@ -231,6 +232,26 @@
 
         .toggle-password:hover {
             color: #0A2540;
+        }
+
+        .terms-label {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: #475569;
+            cursor: pointer;
+        }
+
+        .terms-label input {
+            margin-top: 2px;
+        }
+
+        .terms-label a {
+            color: #D97706;
+            text-decoration: none;
+            font-weight: 600;
         }
 
         .btn-login {
@@ -336,25 +357,31 @@
             .login-container {
                 padding: 24px 20px;
             }
+
             .login-logo .logo-text {
                 font-size: 1.2rem;
             }
+
             .login-logo .logo-img {
                 height: 40px;
             }
+
             .test-credentials .user-row {
                 flex-wrap: wrap;
                 gap: 4px;
                 padding: 8px 6px;
             }
+
             .test-credentials .user-row .role {
                 min-width: 60px;
                 font-size: 0.6rem;
             }
+
             .test-credentials .user-row .email {
                 font-size: 0.55rem;
                 padding: 0 4px;
             }
+
             .test-credentials .user-row .pass {
                 font-size: 0.55rem;
                 padding: 2px 8px;
@@ -363,9 +390,7 @@
     </style>
 </head>
 <body>
-
     <div class="login-container">
-
         <!-- ===== LOGO ===== -->
         <div class="login-logo">
             <img src="assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" />
@@ -379,6 +404,11 @@
         <p class="login-subtitle">Entre com suas credenciais para continuar</p>
 
         <!-- ===== CREDENCIAIS DE TESTE ===== -->
+        <!--
+            ATENÇÃO:
+            Remova este bloco antes de publicar para produção.
+            Ele é útil apenas em ambiente interno de teste.
+        -->
         <div class="test-credentials">
             <div class="title">
                 🔑 Credenciais de Teste
@@ -435,6 +465,18 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="terms-label">
+                    <input type="checkbox" id="acceptTerms" />
+                    <span>
+                        Li e aceito os
+                        <a href="termos-uso.html" target="_blank">Termos de Uso</a>
+                        e a
+                        <a href="politica-privacidade.html" target="_blank">Política de Privacidade</a>.
+                    </span>
+                </label>
+            </div>
+
             <button type="submit" class="btn-login" id="btnLogin">🔑 Entrar</button>
         </form>
 
@@ -447,12 +489,11 @@
                 <a href="contato.html">Contato</a>
             </div>
         </div>
-
     </div>
 
     <script>
         // ============================================
-        // USUÁRIOS MOCKADOS (DIRETO NO LOGIN)
+        // USUÁRIOS MOCKADOS
         // ============================================
         var USERS = {
             'admin@vigorre.com': {
@@ -475,169 +516,167 @@
             }
         };
 
-        // ============================================
-        // REDIRECIONAMENTOS
-        // ============================================
         var REDIRECTS = {
             'admin': '/admin/dashboard.html',
             'organizacao': '/organizacao/dashboard.html',
             'participante': '/participante/dashboard.html'
         };
 
-        // ============================================
-        // 1. OLHO PARA MOSTRAR/ESCONDER SENHA
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
+        function showMessage(message, type) {
+            var messageEl = document.getElementById('loginMessage');
+
+            if (!messageEl) return;
+
+            messageEl.textContent = message;
+            messageEl.className = 'message ' + type;
+            messageEl.style.display = 'block';
+        }
+
+        function registrarConsentimento(userId) {
+            try {
+                var consentData = {
+                    consentido: true,
+                    versao: '3.0',
+                    data: new Date().toISOString(),
+                    ip: '0.0.0.0',
+                    userAgent: navigator.userAgent
+                };
+
+                localStorage.setItem('consentimento_' + userId, JSON.stringify(consentData));
+            } catch (e) {
+                console.warn('Não foi possível registrar consentimento.', e);
+            }
+        }
+
+        function fazerLogin() {
+            var emailInput = document.getElementById('email');
+            var passwordInput = document.getElementById('password');
+            var acceptTerms = document.getElementById('acceptTerms');
+            var btnLogin = document.getElementById('btnLogin');
+
+            var email = emailInput ? emailInput.value.trim() : '';
+            var password = passwordInput ? passwordInput.value.trim() : '';
+
+            if (!email || !password) {
+                showMessage('Preencha todos os campos.', 'error');
+                return;
+            }
+
+            if (!acceptTerms || !acceptTerms.checked) {
+                showMessage('É necessário aceitar os Termos de Uso e a Política de Privacidade.', 'error');
+                return;
+            }
+
+            if (btnLogin) {
+                btnLogin.disabled = true;
+                btnLogin.textContent = 'Entrando...';
+            }
+
+            var userData = USERS[email];
+
+            if (!userData) {
+                showMessage('Usuário não encontrado.', 'error');
+
+                if (btnLogin) {
+                    btnLogin.disabled = false;
+                    btnLogin.textContent = '🔑 Entrar';
+                }
+
+                return;
+            }
+
+            if (userData.password !== password) {
+                showMessage('Senha incorreta.', 'error');
+
+                if (btnLogin) {
+                    btnLogin.disabled = false;
+                    btnLogin.textContent = '🔑 Entrar';
+                }
+
+                return;
+            }
+
+            var user = {
+                id: userData.id,
+                email: email,
+                name: userData.name,
+                role: userData.role,
+                loginAt: new Date().toISOString(),
+                consentimento: true
+            };
+
+            if (user.role === 'admin') {
+                user.adminId = user.id;
+            }
+
+            if (user.role === 'organizacao') {
+                user.companyId = user.id;
+                user.companyName = user.name;
+            }
+
+            if (user.role === 'participante') {
+                user.participantId = user.id;
+            }
+
+            registrarConsentimento(user.id);
+
+            var session = {
+                user: user,
+                timestamp: Date.now(),
+                consentGiven: true
+            };
+
+            localStorage.setItem('vigorre_session', JSON.stringify(session));
+
+            showMessage('Login realizado com sucesso! Redirecionando...', 'success');
+
+            setTimeout(function () {
+                var redirect = REDIRECTS[user.role] || '/login.html';
+                window.location.href = redirect;
+            }, 700);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
             var togglePassword = document.getElementById('togglePassword');
             var passwordInput = document.getElementById('password');
 
             if (togglePassword && passwordInput) {
-                togglePassword.addEventListener('click', function() {
+                togglePassword.addEventListener('click', function () {
                     var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                     passwordInput.setAttribute('type', type);
                     this.textContent = type === 'password' ? '👁️' : '🙈';
                 });
             }
 
-            // ============================================
-            // 2. CLICK NAS CREDENCIAIS
-            // ============================================
-            var rows = document.querySelectorAll('.user-row');
-            var emailInput = document.getElementById('email');
-            var passwordInput2 = document.getElementById('password');
-            var messageEl = document.getElementById('loginMessage');
-
-            rows.forEach(function(row) {
-                row.addEventListener('click', function() {
-                    var email = this.getAttribute('data-email');
-                    var password = this.getAttribute('data-password');
-
-                    if (emailInput) emailInput.value = email;
-                    if (passwordInput2) passwordInput2.value = password;
-
-                    if (emailInput) emailInput.style.borderColor = '#10B981';
-                    if (passwordInput2) passwordInput2.style.borderColor = '#10B981';
-                    setTimeout(function() {
-                        if (emailInput) emailInput.style.borderColor = '';
-                        if (passwordInput2) passwordInput2.style.borderColor = '';
-                    }, 2000);
-
-                    if (messageEl) {
-                        messageEl.textContent = '✅ Credenciais preenchidas! Clique em Entrar.';
-                        messageEl.className = 'message success';
-                        messageEl.style.display = 'block';
-                        setTimeout(function() {
-                            messageEl.style.display = 'none';
-                        }, 3000);
-                    }
-                });
-            });
-        });
-
-        // ============================================
-        // 3. FUNÇÃO DE LOGIN
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
             var form = document.getElementById('loginForm');
-            var btnLogin = document.getElementById('btnLogin');
-            var emailInput = document.getElementById('email');
-            var passwordInput = document.getElementById('password');
-            var messageEl = document.getElementById('loginMessage');
 
             if (form) {
-                form.addEventListener('submit', function(e) {
+                form.addEventListener('submit', function (e) {
                     e.preventDefault();
                     fazerLogin();
                 });
             }
 
-            if (passwordInput) {
-                passwordInput.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        fazerLogin();
-                    }
+            var rows = document.querySelectorAll('.user-row');
+            var emailInput = document.getElementById('email');
+
+            rows.forEach(function (row) {
+                row.addEventListener('click', function () {
+                    var email = this.getAttribute('data-email');
+                    var password = this.getAttribute('data-password');
+
+                    if (emailInput) emailInput.value = email;
+                    if (passwordInput) passwordInput.value = password;
+
+                    showMessage('Credenciais preenchidas. Clique em Entrar.', 'success');
+
+                    setTimeout(function () {
+                        var messageEl = document.getElementById('loginMessage');
+                        if (messageEl) messageEl.style.display = 'none';
+                    }, 2500);
                 });
-            }
-
-            function fazerLogin() {
-                var email = emailInput ? emailInput.value.trim() : '';
-                var password = passwordInput ? passwordInput.value.trim() : '';
-
-                if (!email || !password) {
-                    if (messageEl) {
-                        messageEl.textContent = '⚠️ Preencha todos os campos.';
-                        messageEl.className = 'message error';
-                        messageEl.style.display = 'block';
-                    }
-                    return;
-                }
-
-                if (btnLogin) {
-                    btnLogin.disabled = true;
-                    btnLogin.textContent = '⏳ Entrando...';
-                }
-
-                // VERIFICA USUÁRIO
-                var userData = USERS[email];
-
-                if (!userData) {
-                    if (messageEl) {
-                        messageEl.textContent = '❌ Usuário não encontrado. Use: admin@vigorre.com, empresa@vigorre.com ou participante@vigorre.com';
-                        messageEl.className = 'message error';
-                        messageEl.style.display = 'block';
-                    }
-                    if (btnLogin) {
-                        btnLogin.disabled = false;
-                        btnLogin.textContent = '🔑 Entrar';
-                    }
-                    return;
-                }
-
-                if (userData.password !== password) {
-                    if (messageEl) {
-                        messageEl.textContent = '❌ Senha incorreta. Tente novamente.';
-                        messageEl.className = 'message error';
-                        messageEl.style.display = 'block';
-                    }
-                    if (btnLogin) {
-                        btnLogin.disabled = false;
-                        btnLogin.textContent = '🔑 Entrar';
-                    }
-                    return;
-                }
-
-                // LOGIN BEM-SUCEDIDO
-                if (messageEl) {
-                    messageEl.textContent = '✅ Login realizado com sucesso! Redirecionando...';
-                    messageEl.className = 'message success';
-                    messageEl.style.display = 'block';
-                }
-
-                // Cria sessão
-                var user = {
-                    id: userData.id,
-                    email: email,
-                    name: userData.name,
-                    role: userData.role,
-                    loginAt: new Date().toISOString()
-                };
-
-                var session = {
-                    user: user,
-                    timestamp: Date.now()
-                };
-
-                localStorage.setItem('vigorre_session', JSON.stringify(session));
-
-                // Redireciona
-                setTimeout(function() {
-                    var redirect = REDIRECTS[userData.role] || '/dashboard.html';
-                    window.location.href = redirect;
-                }, 800);
-            }
+            });
         });
     </script>
-
 </body>
 </html>
