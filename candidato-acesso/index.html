@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avaliação | VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
+            --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0; --gray-500: #64748B; --gray-700: #334155;
+            --gray-800: #1E293B; --gray-900: #0F172A;
+            --radius: 16px; --radius-sm: 10px;
+            --shadow: 0 4px 24px rgba(10,37,64,0.06);
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 480px;
+            width: 100%;
+            background: white;
+            padding: 48px 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        .logo .tm { font-size: 0.6rem; color: var(--cyan); }
+        .logo .sub {
+            font-size: 0.55rem;
+            font-weight: 400;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+        .container h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin: 24px 0 8px;
+        }
+        .container p {
+            color: var(--gray-500);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+        .container .candidato {
+            font-weight: 600;
+            color: var(--gold);
+        }
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--gray-700);
+            margin-bottom: 4px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            transition: 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29,78,216,0.25);
+        }
+        .lgpd {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            margin-top: 16px;
+        }
+        .lgpd a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .lgpd a:hover { text-decoration: underline; }
+        .teste-info {
+            background: var(--gray-50);
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+        .teste-info strong { color: var(--gray-800); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">
+            VIGORRE ONE<span class="tm">™</span>
+            <div class="sub">People Intelligence Enterprise</div>
+        </div>
+
+        <h1>📝 Avaliação Profissional</h1>
+        <p>
+            Olá, <span class="candidato" id="candidatoNome">João Silva</span>!
+            <br>Você foi convidado(a) a participar de uma avaliação profissional.
+        </p>
+
+        <div class="teste-info">
+            <strong>📋 Teste:</strong> <span id="testeNome">DISC</span><br>
+            <strong>📝 Perguntas:</strong> <span id="testePerguntas">28</span><br>
+            <strong>⏱️ Tempo estimado:</strong> <span id="testeTempo">5 minutos</span>
+        </div>
+
+        <form id="formAcesso" onsubmit="acessarAvaliacao(event)">
+            <div class="form-group">
+                <label>🔑 Senha de acesso</label>
+                <input type="password" id="senha" placeholder="Digite a senha recebida" required>
+            </div>
+
+            <div class="lgpd">
+                <label style="display:flex;align-items:center;gap:8px;font-weight:400;font-size:0.75rem;cursor:pointer;color:var(--gray-500);">
+                    <input type="checkbox" id="lgpd" required>
+                    Concordo com a <a href="#">Política de Privacidade</a> e o tratamento de dados conforme LGPD.
+                </label>
+            </div>
+
+            <button type="submit" class="btn">🚀 INICIAR AVALIAÇÃO</button>
+        </form>
+    </div>
+
+    <script>
+        // Simular dados do candidato (vindos da URL)
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+
+            if (token) {
+                // Buscar dados do candidato pelo token (simulação)
+                console.log('🔑 Token:', token);
+                document.getElementById('candidatoNome').textContent = 'João Silva';
+                document.getElementById('testeNome').textContent = 'DISC';
+                document.getElementById('testePerguntas').textContent = '28';
+                document.getElementById('testeTempo').textContent = '5 minutos';
+            } else {
+                // Fallback
+                document.getElementById('candidatoNome').textContent = 'Participante';
+            }
+        });
+
+        function acessarAvaliacao(event) {
+            event.preventDefault();
+
+            const senha = document.getElementById('senha').value.trim();
+            const lgpd = document.getElementById('lgpd').checked;
+
+            if (!senha) {
+                alert('⚠️ Digite a senha de acesso.');
+                return;
+            }
+
+            if (!lgpd) {
+                alert('⚠️ Você precisa aceitar os termos de privacidade.');
+                return;
+            }
+
+            // Simular validação
+            if (senha.length < 4) {
+                alert('❌ Senha inválida. Tente novamente.');
+                return;
+            }
+
+            alert('✅ Acesso autorizado! Iniciando avaliação...');
+            window.location.href = '/candidato-acesso/teste.html';
+        }
+    </script>
+
+</body>
+</html>
