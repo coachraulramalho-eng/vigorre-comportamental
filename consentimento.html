@@ -3,191 +3,384 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Consentimento LGPD - Vigorre One™</title>
-    <link rel="stylesheet" href="assets/css/globals.css" />
-    <link rel="stylesheet" href="assets/css/consentimento.css" />
+    <title>Consentimento LGPD | VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet" />
+
     <link rel="icon" href="assets/images/logo-vigorre.png" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F8FAFC;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 620px;
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 36px;
+            box-shadow: 0 12px 48px rgba(10, 37, 64, 0.12);
+            border: 1px solid #E2E8F0;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0A2540;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text .highlight {
+            color: #D97706;
+        }
+
+        .logo-text .tm {
+            font-size: 0.5rem;
+            vertical-align: super;
+            color: #94A3B8;
+        }
+
+        .logo-sub {
+            font-size: 0.7rem;
+            color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 2px;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #475569;
+            font-size: 0.92rem;
+            line-height: 1.65;
+            margin-bottom: 14px;
+        }
+
+        .card {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 18px 0;
+        }
+
+        .card h2 {
+            font-size: 0.95rem;
+            color: #0A2540;
+            margin-bottom: 8px;
+        }
+
+        .card ul {
+            margin-left: 18px;
+            color: #475569;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .checkbox-area {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 18px 0;
+        }
+
+        .checkbox-area input {
+            margin-top: 3px;
+        }
+
+        .checkbox-area label {
+            font-size: 0.88rem;
+            color: #334155;
+            line-height: 1.55;
+            cursor: pointer;
+        }
+
+        .checkbox-area a {
+            color: #D97706;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 13px 18px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-accept {
+            background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
+            color: white;
+            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.22);
+        }
+
+        .btn-accept:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(217, 119, 6, 0.3);
+        }
+
+        .btn-accept:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-reject {
+            background: #F1F5F9;
+            color: #334155;
+            border: 1px solid #E2E8F0;
+        }
+
+        .btn-reject:hover {
+            background: #E2E8F0;
+        }
+
+        .message {
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            display: none;
+        }
+
+        .message.error {
+            display: block;
+            background: #FEE2E2;
+            color: #B91C1C;
+            border: 1px solid #FCA5A5;
+        }
+
+        .message.success {
+            display: block;
+            background: #D1FAE5;
+            color: #065F46;
+            border: 1px solid #6EE7B7;
+        }
+
+        @media (max-width: 560px) {
+            .actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="consentimento-container">
-        <div class="consentimento-card">
-            <!-- Logo -->
-            <div class="consentimento-logo">
-                <img src="assets/images/logo-vigorre.png" alt="Vigorre One™" />
-                <span>VIGORRE <span class="highlight">ONE</span><sup>™</sup></span>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-text">
+                VIGORRE <span class="highlight">ONE</span><span class="tm">™</span>
             </div>
+            <div class="logo-sub">People Intelligence Enterprise</div>
+        </div>
 
-            <!-- Título -->
-            <h1>🔒 Consentimento LGPD</h1>
-            <p class="subtitulo">
-                Para continuar utilizando a plataforma Vigorre One™, precisamos do seu 
-                <strong>consentimento expresso</strong> para o tratamento de dados pessoais.
+        <h1>🔒 Consentimento LGPD</h1>
+
+        <p>
+            Antes de continuar, precisamos do seu consentimento para tratar seus dados pessoais
+            conforme a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).
+        </p>
+
+        <p>
+            Utilizamos seus dados para fornecer avaliações comportamentais, gerar resultados,
+            relatórios, laudos e melhorar sua experiência na plataforma Vigorre One™.
+        </p>
+
+        <div class="card">
+            <h2>📋 O que você precisa saber</h2>
+            <ul>
+                <li>Seus dados são utilizados para gerar avaliações e relatórios.</li>
+                <li>Você pode solicitar acesso, correção, portabilidade ou exclusão dos seus dados.</li>
+                <li>Você pode revogar este consentimento a qualquer momento.</li>
+                <li>Dados sensíveis são tratados com segurança e confidencialidade.</li>
+                <li>Nenhum dado é compartilhado sem base legal.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>📄 Documentos</h2>
+            <p style="margin-bottom:0;">
+                Leia com atenção:
+                <a href="politica-privacidade.html" target="_blank">Política de Privacidade</a>
+                e
+                <a href="termos-uso.html" target="_blank">Termos de Uso</a>.
             </p>
+        </div>
 
-            <!-- Texto completo -->
-            <div class="consentimento-texto">
-                <h3>📋 O que você precisa saber:</h3>
-                
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-icon">✅</span>
-                        <div>
-                            <strong>Finalidade</strong>
-                            <p>Seus dados serão utilizados exclusivamente para autoconhecimento, desenvolvimento profissional e gestão de talentos.</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">🔍</span>
-                        <div>
-                            <strong>Transparência</strong>
-                            <p>Você pode solicitar acesso, correção ou exclusão dos seus dados a qualquer momento.</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">🔒</span>
-                        <div>
-                            <strong>Segurança</strong>
-                            <p>Seus dados são protegidos com criptografia e não serão compartilhados com terceiros sem sua autorização.</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">⏱️</span>
-                        <div>
-                            <strong>Retenção</strong>
-                            <p>Os dados serão mantidos pelo período de <strong>180 a 365 dias</strong>, conforme configuração da plataforma.</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">📊</span>
-                        <div>
-                            <strong>Anonimização</strong>
-                            <p>Dados utilizados em relatórios estatísticos serão sempre anonimizados.</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">📝</span>
-                        <div>
-                            <strong>Logs</strong>
-                            <p>Todas as ações de consentimento são registradas com data, hora e IP.</p>
-                        </div>
-                    </div>
-                </div>
+        <div class="checkbox-area">
+            <input type="checkbox" id="aceitoConsentimento" />
+            <label for="aceitoConsentimento">
+                Li e compreendi as informações acima e <strong>autorizo</strong> o tratamento dos meus dados pessoais
+                pela Vigorre One™ para fins de avaliação comportamental, geração de relatórios, laudos,
+                trilhas de desenvolvimento e comunicações relacionadas à plataforma.
+            </label>
+        </div>
 
-                <div class="termos-destaque">
-                    <h4>📄 Termos de Uso</h4>
-                    <p>Ao aceitar, você concorda com nossa <a href="/politica-privacidade" target="_blank">Política de Privacidade</a> e com os <a href="/termos-uso" target="_blank">Termos de Uso</a> da plataforma.</p>
-                    <p><strong>Versão do termo:</strong> 3.0 (Julho/2026)</p>
-                </div>
-            </div>
+        <div class="message" id="consentMessage"></div>
 
-            <!-- Checkbox de consentimento -->
-            <div class="consentimento-checkbox">
-                <label class="checkbox-label">
-                    <input type="checkbox" id="consentimento-check" required />
-                    <span class="checkmark"></span>
-                    Li, entendi e concordo com os termos da <a href="/politica-privacidade" target="_blank">Política de Privacidade</a> e com o tratamento dos meus dados conforme descrito acima.
-                </label>
-            </div>
+        <div class="actions">
+            <button type="button" class="btn-reject" id="btnRecusar">
+                ❌ Recusar
+            </button>
 
-            <!-- Botões -->
-            <div class="consentimento-botoes">
-                <button id="btn-consentir" class="btn-primary" disabled>
-                    ✅ ACEITAR E CONTINUAR
-                </button>
-                <button id="btn-recusar" class="btn-outline">
-                    ❌ RECUSAR
-                </button>
-            </div>
-
-            <!-- Footer -->
-            <div class="consentimento-footer">
-                <p>© 2026 Vigorre One™ · People Intelligence Enterprise</p>
-                <p>
-                    <a href="/politica-privacidade">Política de Privacidade</a> · 
-                    <a href="/termos-uso">Termos de Uso</a> · 
-                    <a href="/contato">Contato</a>
-                </p>
-            </div>
+            <button type="button" class="btn-accept" id="btnAceitar" disabled>
+                ✅ Aceitar e continuar
+            </button>
         </div>
     </div>
 
-    <!-- ===== SCRIPTS ===== -->
-    <script src="supabase-config.js"></script>
-    <script src="auth.js"></script>
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
 
     <script>
-        (function() {
-            'use strict';
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.getElementById('aceitoConsentimento');
+            var btnAceitar = document.getElementById('btnAceitar');
+            var btnRecusar = document.getElementById('btnRecusar');
+            var message = document.getElementById('consentMessage');
 
-            const checkbox = document.getElementById('consentimento-check');
-            const btnConsentir = document.getElementById('btn-consentir');
-            const btnRecusar = document.getElementById('btn-recusar');
-
-            // Habilita botão quando checkbox é marcado
-            checkbox.addEventListener('change', function() {
-                btnConsentir.disabled = !this.checked;
-            });
-
-            // ACEITAR
-            btnConsentir.addEventListener('click', function() {
-                const pendingUser = localStorage.getItem('pending_user');
-                
-                if (pendingUser) {
-                    try {
-                        const userData = JSON.parse(pendingUser);
-                        
-                        // Registrar consentimento
-                        const consentimento = VigorreAuth.registrarConsentimento(userData.userData.id);
-                        
-                        // Limpar pending
-                        localStorage.removeItem('pending_user');
-                        
-                        // Fazer login com consentimento
-                        VigorreAuth.login(
-                            userData.email,
-                            userData.userData.password,
-                            userData.role,
-                            true // consentimento já foi dado
-                        );
-                        
-                    } catch (error) {
-                        console.error('Erro ao processar consentimento:', error);
-                        alert('❌ Erro ao processar consentimento. Tente novamente.');
-                    }
-                } else {
-                    // Se não veio de login, redirecionar para login
-                    alert('✅ Consentimento registrado com sucesso! Faça login para continuar.');
-                    window.location.href = '/login.html';
-                }
-            });
-
-            // RECUSAR
-            btnRecusar.addEventListener('click', function() {
-                if (confirm('⚠️ Você está recusando o consentimento LGPD. Isso impedirá o uso da plataforma. Deseja continuar?')) {
-                    localStorage.removeItem('pending_user');
-                    window.location.href = '/login.html?message=Consentimento%20LGPD%20recusado.';
-                }
-            });
-
-            // Verifica se veio de login
-            const pendingUser = localStorage.getItem('pending_user');
-            if (!pendingUser) {
-                // Não veio de login, mas pode estar logado sem consentimento
-                const user = VigorreAuth.getCurrentUser();
-                if (user && !VigorreAuth.verificarConsentimento(user.id)) {
-                    // Usuário logado sem consentimento - forçar consentimento
-                    console.log('⚠️ Usuário logado sem consentimento. Forçando consentimento.');
-                } else if (user && VigorreAuth.verificarConsentimento(user.id)) {
-                    // Usuário já tem consentimento - redirecionar
-                    window.location.href = '/dashboard.html';
-                }
+            function showMessage(text, type) {
+                message.textContent = text;
+                message.className = 'message ' + type;
             }
 
-            console.log('📋 Página de Consentimento LGPD carregada');
-            console.log('📌 Versão do termo:', VigorreAuth._consentimentoVersao);
+            checkbox.addEventListener('change', function () {
+                btnAceitar.disabled = !checkbox.checked;
+            });
 
-        })();
+            btnRecusar.addEventListener('click', function () {
+                localStorage.removeItem('pending_user');
+                showMessage('Consentimento recusado. Redirecionando para o login.', 'error');
+
+                setTimeout(function () {
+                    window.location.href = '/login.html';
+                }, 1200);
+            });
+
+            btnAceitar.addEventListener('click', function () {
+                if (!checkbox.checked) {
+                    showMessage('É necessário marcar a caixa de consentimento.', 'error');
+                    return;
+                }
+
+                var pending = null;
+
+                try {
+                    pending = JSON.parse(localStorage.getItem('pending_user') || 'null');
+                } catch (e) {
+                    pending = null;
+                }
+
+                var userId = pending && pending.userData ? pending.userData.id : null;
+
+                if (!userId) {
+                    showMessage('Nenhuma sessão pendente encontrada. Redirecionando para login.', 'error');
+
+                    setTimeout(function () {
+                        window.location.href = '/login.html';
+                    }, 1200);
+
+                    return;
+                }
+
+                var consentData = {
+                    consentido: true,
+                    versao: '3.0',
+                    data: new Date().toISOString(),
+                    ip: '0.0.0.0',
+                    userAgent: navigator.userAgent
+                };
+
+                localStorage.setItem('consentimento_' + userId, JSON.stringify(consentData));
+
+                var userData = pending.userData;
+
+                var user = {
+                    id: userData.id,
+                    email: pending.email || userData.email || '',
+                    name: userData.name || 'Usuário',
+                    role: userData.role || pending.role || 'participante',
+                    loginAt: new Date().toISOString(),
+                    consentimento: true
+                };
+
+                if (user.role === 'admin') {
+                    user.adminId = user.id;
+                }
+
+                if (user.role === 'organizacao') {
+                    user.companyId = user.id;
+                    user.companyName = user.name;
+                }
+
+                if (user.role === 'participante') {
+                    user.participantId = user.id;
+                }
+
+                var session = {
+                    user: user,
+                    timestamp: Date.now(),
+                    consentGiven: true
+                };
+
+                localStorage.setItem('vigorre_session', JSON.stringify(session));
+                localStorage.removeItem('pending_user');
+
+                showMessage('Consentimento registrado com sucesso! Redirecionando...', 'success');
+
+                setTimeout(function () {
+                    var redirects = {
+                        admin: '/admin/dashboard.html',
+                        organizacao: '/organizacao/dashboard.html',
+                        participante: '/participante/dashboard.html'
+                    };
+
+                    window.location.href = redirects[user.role] || '/login.html';
+                }, 1200);
+            });
+        });
     </script>
-
 </body>
 </html>
