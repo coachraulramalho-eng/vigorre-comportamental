@@ -4,20 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Consentimento LGPD | VIGORRE ONE™</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet" />
-
-    <link rel="icon" href="assets/images/logo-vigorre.png" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             background: #F8FAFC;
@@ -27,360 +18,100 @@
             justify-content: center;
             padding: 24px;
         }
-
         .container {
-            max-width: 620px;
+            max-width: 560px;
             width: 100%;
             background: #FFFFFF;
             border-radius: 16px;
-            padding: 36px;
-            box-shadow: 0 12px 48px rgba(10, 37, 64, 0.12);
+            padding: 40px;
+            box-shadow: 0 12px 48px rgba(10,37,64,0.12);
             border: 1px solid #E2E8F0;
         }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .logo-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #0A2540;
-            letter-spacing: -0.5px;
-        }
-
-        .logo-text .highlight {
-            color: #D97706;
-        }
-
-        .logo-text .tm {
-            font-size: 0.5rem;
-            vertical-align: super;
-            color: #94A3B8;
-        }
-
-        .logo-sub {
-            font-size: 0.7rem;
-            color: #94A3B8;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 2px;
-        }
-
         h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #0F172A;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #475569;
-            font-size: 0.92rem;
-            line-height: 1.65;
-            margin-bottom: 14px;
-        }
-
-        .card {
-            background: #F8FAFC;
-            border: 1px solid #E2E8F0;
-            border-radius: 12px;
-            padding: 18px;
-            margin: 18px 0;
-        }
-
-        .card h2 {
-            font-size: 0.95rem;
+            font-size: 1.4rem;
             color: #0A2540;
             margin-bottom: 8px;
         }
-
-        .card ul {
-            margin-left: 18px;
-            color: #475569;
-            font-size: 0.88rem;
-            line-height: 1.6;
-        }
-
-        .checkbox-area {
+        p { color: #475569; font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; }
+        .check {
             display: flex;
             gap: 10px;
             align-items: flex-start;
-            background: #FFFFFF;
+            background: #F8FAFC;
             border: 1px solid #E2E8F0;
-            border-radius: 12px;
-            padding: 16px;
-            margin: 18px 0;
+            border-radius: 10px;
+            padding: 14px;
+            margin: 16px 0;
         }
-
-        .checkbox-area input {
-            margin-top: 3px;
-        }
-
-        .checkbox-area label {
-            font-size: 0.88rem;
-            color: #334155;
-            line-height: 1.55;
-            cursor: pointer;
-        }
-
-        .checkbox-area a {
-            color: #D97706;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
+        .check input { margin-top: 3px; }
+        .actions { display: flex; gap: 12px; margin-top: 20px; }
         button {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 10px;
             border: none;
-            border-radius: 10px;
-            padding: 13px 18px;
             font-weight: 700;
-            font-size: 0.92rem;
             cursor: pointer;
-            transition: all 0.25s ease;
         }
-
-        .btn-accept {
-            background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
-            color: white;
-            box-shadow: 0 4px 16px rgba(217, 119, 6, 0.22);
-        }
-
-        .btn-accept:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(217, 119, 6, 0.3);
-        }
-
-        .btn-accept:disabled {
-            opacity: 0.45;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .btn-reject {
-            background: #F1F5F9;
-            color: #334155;
-            border: 1px solid #E2E8F0;
-        }
-
-        .btn-reject:hover {
-            background: #E2E8F0;
-        }
-
-        .message {
-            margin-top: 16px;
-            padding: 12px 14px;
-            border-radius: 10px;
-            font-size: 0.88rem;
-            display: none;
-        }
-
-        .message.error {
-            display: block;
-            background: #FEE2E2;
-            color: #B91C1C;
-            border: 1px solid #FCA5A5;
-        }
-
-        .message.success {
-            display: block;
-            background: #D1FAE5;
-            color: #065F46;
-            border: 1px solid #6EE7B7;
-        }
-
-        @media (max-width: 560px) {
-            .actions {
-                grid-template-columns: 1fr;
-            }
-        }
+        .btn-accept { background: linear-gradient(135deg, #D97706, #F59E0B); color: white; }
+        .btn-reject { background: #F1F5F9; color: #334155; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <div class="logo-text">
-                VIGORRE <span class="highlight">ONE</span><span class="tm">™</span>
-            </div>
-            <div class="logo-sub">People Intelligence Enterprise</div>
-        </div>
-
         <h1>🔒 Consentimento LGPD</h1>
-
         <p>
-            Antes de continuar, precisamos do seu consentimento para tratar seus dados pessoais
-            conforme a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).
+            Para continuar, precisamos do seu consentimento para tratar seus dados pessoais,
+            conforme a Lei Geral de Proteção de Dados (LGPD).
+        </p>
+        <p>
+            Seus dados serão utilizados para gerar avaliações comportamentais, relatórios, laudos
+            e trilhas de desenvolvimento. Você pode solicitar acesso, correção ou exclusão a qualquer momento.
         </p>
 
-        <p>
-            Utilizamos seus dados para fornecer avaliações comportamentais, gerar resultados,
-            relatórios, laudos e melhorar sua experiência na plataforma Vigorre One™.
-        </p>
-
-        <div class="card">
-            <h2>📋 O que você precisa saber</h2>
-            <ul>
-                <li>Seus dados são utilizados para gerar avaliações e relatórios.</li>
-                <li>Você pode solicitar acesso, correção, portabilidade ou exclusão dos seus dados.</li>
-                <li>Você pode revogar este consentimento a qualquer momento.</li>
-                <li>Dados sensíveis são tratados com segurança e confidencialidade.</li>
-                <li>Nenhum dado é compartilhado sem base legal.</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>📄 Documentos</h2>
-            <p style="margin-bottom:0;">
-                Leia com atenção:
-                <a href="politica-privacidade.html" target="_blank">Política de Privacidade</a>
-                e
-                <a href="termos-uso.html" target="_blank">Termos de Uso</a>.
-            </p>
-        </div>
-
-        <div class="checkbox-area">
-            <input type="checkbox" id="aceitoConsentimento" />
-            <label for="aceitoConsentimento">
-                Li e compreendi as informações acima e <strong>autorizo</strong> o tratamento dos meus dados pessoais
-                pela Vigorre One™ para fins de avaliação comportamental, geração de relatórios, laudos,
-                trilhas de desenvolvimento e comunicações relacionadas à plataforma.
+        <div class="check">
+            <input type="checkbox" id="aceito" />
+            <label for="aceito">
+                Li e aceito os <a href="termos-uso.html">Termos de Uso</a> e a
+                <a href="politica-privacidade.html">Política de Privacidade</a>.
             </label>
         </div>
 
-        <div class="message" id="consentMessage"></div>
-
         <div class="actions">
-            <button type="button" class="btn-reject" id="btnRecusar">
-                ❌ Recusar
-            </button>
-
-            <button type="button" class="btn-accept" id="btnAceitar" disabled>
-                ✅ Aceitar e continuar
-            </button>
+            <button class="btn-reject" onclick="recusar()">Recusar</button>
+            <button class="btn-accept" onclick="aceitar()">Aceitar e continuar</button>
         </div>
     </div>
 
-    <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var checkbox = document.getElementById('aceitoConsentimento');
-            var btnAceitar = document.getElementById('btnAceitar');
-            var btnRecusar = document.getElementById('btnRecusar');
-            var message = document.getElementById('consentMessage');
-
-            function showMessage(text, type) {
-                message.textContent = text;
-                message.className = 'message ' + type;
+        function aceitar() {
+            var checkbox = document.getElementById('aceito');
+            if (!checkbox.checked) {
+                alert('É necessário marcar o aceite para continuar.');
+                return;
             }
 
-            checkbox.addEventListener('change', function () {
-                btnAceitar.disabled = !checkbox.checked;
-            });
+            var pending = null;
+            try {
+                pending = JSON.parse(localStorage.getItem('pending_user') || 'null');
+            } catch (e) { }
 
-            btnRecusar.addEventListener('click', function () {
-                localStorage.removeItem('pending_user');
-                showMessage('Consentimento recusado. Redirecionando para o login.', 'error');
-
-                setTimeout(function () {
-                    window.location.href = '/login.html';
-                }, 1200);
-            });
-
-            btnAceitar.addEventListener('click', function () {
-                if (!checkbox.checked) {
-                    showMessage('É necessário marcar a caixa de consentimento.', 'error');
-                    return;
+            if (pending && pending.userData && pending.userData.id) {
+                if (window.VigorreAuth) {
+                    window.VigorreAuth.registrarConsentimento(pending.userData.id);
                 }
+            }
 
-                var pending = null;
+            localStorage.removeItem('pending_user');
+            window.location.href = '/login.html';
+        }
 
-                try {
-                    pending = JSON.parse(localStorage.getItem('pending_user') || 'null');
-                } catch (e) {
-                    pending = null;
-                }
-
-                var userId = pending && pending.userData ? pending.userData.id : null;
-
-                if (!userId) {
-                    showMessage('Nenhuma sessão pendente encontrada. Redirecionando para login.', 'error');
-
-                    setTimeout(function () {
-                        window.location.href = '/login.html';
-                    }, 1200);
-
-                    return;
-                }
-
-                var consentData = {
-                    consentido: true,
-                    versao: '3.0',
-                    data: new Date().toISOString(),
-                    ip: '0.0.0.0',
-                    userAgent: navigator.userAgent
-                };
-
-                localStorage.setItem('consentimento_' + userId, JSON.stringify(consentData));
-
-                var userData = pending.userData;
-
-                var user = {
-                    id: userData.id,
-                    email: pending.email || userData.email || '',
-                    name: userData.name || 'Usuário',
-                    role: userData.role || pending.role || 'participante',
-                    loginAt: new Date().toISOString(),
-                    consentimento: true
-                };
-
-                if (user.role === 'admin') {
-                    user.adminId = user.id;
-                }
-
-                if (user.role === 'organizacao') {
-                    user.companyId = user.id;
-                    user.companyName = user.name;
-                }
-
-                if (user.role === 'participante') {
-                    user.participantId = user.id;
-                }
-
-                var session = {
-                    user: user,
-                    timestamp: Date.now(),
-                    consentGiven: true
-                };
-
-                localStorage.setItem('vigorre_session', JSON.stringify(session));
-                localStorage.removeItem('pending_user');
-
-                showMessage('Consentimento registrado com sucesso! Redirecionando...', 'success');
-
-                setTimeout(function () {
-                    var redirects = {
-                        admin: '/admin/dashboard.html',
-                        organizacao: '/organizacao/dashboard.html',
-                        participante: '/participante/dashboard.html'
-                    };
-
-                    window.location.href = redirects[user.role] || '/login.html';
-                }, 1200);
-            });
-        });
+        function recusar() {
+            localStorage.removeItem('pending_user');
+            window.location.href = '/login.html';
+        }
     </script>
 </body>
 </html>
