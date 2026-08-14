@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova Avaliação | VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/assets/css/menu-fix.css" />
+
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            margin-bottom: 4px;
+        }
+        .form-group label .required {
+            color: var(--red);
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .teste-card {
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .teste-card:hover {
+            border-color: var(--blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        .teste-card.selected {
+            border-color: var(--gold);
+            background: rgba(217,119,6,0.04);
+        }
+        .teste-card .teste-icon { font-size: 2.5rem; margin-bottom: 8px; }
+        .teste-card .teste-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--gray-800);
+        }
+        .teste-card .teste-desc {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+        .teste-card .teste-meta {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            margin-top: 8px;
+        }
+        .teste-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(217,119,6,0.25);
+        }
+
+        @media (max-width: 992px) {
+            .form-row { grid-template-columns: 1fr; }
+            .teste-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .teste-grid { grid-template-columns: repeat(2, 1fr); }
+            .main-header { flex-direction: column; align-items: flex-start; }
+        }
+        @media (max-width: 480px) {
+            .teste-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- SIDEBAR - MENU MASTER                       -->
+    <!-- ============================================ -->
+    <aside class="sidebar" id="sidebar">
+        <a href="/admin/dashboard.html" class="logo">
+            <img src="/assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Intelligence Enterprise</span>
+            </div>
+        </a>
+
+        <div class="user-info">
+            <div class="name" id="userName">Administrador</div>
+            <div class="role"><span class="badge">👑 Master Admin</span></div>
+        </div>
+
+        <ul class="nav">
+            <li class="nav-subtitle">📊 DASHBOARD</li>
+            <li><a href="/admin/dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+
+            <li class="nav-subtitle">🏢 GESTÃO</li>
+            <li><a href="/admin/empresas/index.html"><span class="icon">🏢</span> Empresas</a></li>
+            <li><a href="/admin/recrutadores/index.html"><span class="icon">👤</span> Recrutadores</a></li>
+            <li><a href="/admin/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
+
+            <li class="nav-subtitle">📋 PROCESSOS SELETIVOS</li>
+            <li><a href="/admin/processoseletivo/index.html"><span class="icon">📋</span> Avaliações Rápidas</a></li>
+            <li><a href="/admin/processoseletivo/candidatos/index.html"><span class="icon">👤</span> Candidatos</a></li>
+            <li><a href="/admin/processoseletivo/relatorios/index.html"><span class="icon">📄</span> Relatórios</a></li>
+            <li><a href="/admin/processoseletivo/laudos/index.html"><span class="icon">📋</span> Laudos</a></li>
+
+            <li class="nav-subtitle">💰 CENTRAL FINANCEIRA</li>
+            <li><a href="/admin/financeiro/index.html"><span class="icon">💰</span> Financeiro Global</a></li>
+            <li><a href="/admin/financeiro/carteiras.html"><span class="icon">📋</span> Carteiras</a></li>
+            <li><a href="/admin/financeiro/creditos.html"><span class="icon">💳</span> Créditos</a></li>
+            <li><a href="/admin/financeiro/extratos.html"><span class="icon">📊</span> Extratos</a></li>
+            <li><a href="/admin/precos/index.html"><span class="icon">🏷️</span> Preços</a></li>
+
+            <li class="nav-subtitle">🔍 AUDITORIA</li>
+            <li><a href="/admin/auditoria/index.html"><span class="icon">📋</span> Auditoria</a></li>
+            <li><a href="/admin/agenda/index.html"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="/admin/backup/index.html"><span class="icon">💾</span> Backup</a></li>
+
+            <li class="nav-subtitle">⚙️ SISTEMA</li>
+            <li><a href="/admin/configuracoes/index.html"><span class="icon">⚙️</span> Configurações</a></li>
+        </ul>
+
+        <div class="logout">
+            <a href="#" onclick="logout()"><span class="icon">🚪</span> Sair</a>
+        </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT                                -->
+    <!-- ============================================ -->
+    <main class="main">
+        <div class="main-header">
+            <div>
+                <h1>➕ Nova Avaliação</h1>
+                <p class="subtitle">Cadastre um candidato e inicie um processo seletivo rápido</p>
+            </div>
+            <a href="/admin/processoseletivo/index.html" class="btn-primary" style="background:var(--gray-100);color:var(--gray-700);">← Voltar</a>
+        </div>
+
+        <div class="form-container">
+            <form id="formAvaliacao" onsubmit="criarAvaliacao(event)">
+
+                <!-- Dados do Candidato -->
+                <h2 style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:16px;">👤 Dados do Candidato</h2>
+
+                <div class="form-group">
+                    <label>Nome completo <span class="required">*</span></label>
+                    <input type="text" id="nome" placeholder="Digite o nome completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label>E-mail <span class="required">*</span></label>
+                    <input type="email" id="email" placeholder="Digite o e-mail" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Telefone/WhatsApp</label>
+                    <input type="text" id="telefone" placeholder="(00) 00000-0000">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Empresa</label>
+                        <input type="text" id="empresa" placeholder="Nome da empresa (opcional)">
+                    </div>
+                    <div class="form-group">
+                        <label>Vaga</label>
+                        <input type="text" id="vaga" placeholder="Ex: Analista de RH">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Nome do Processo</label>
+                    <input type="text" id="processo" placeholder="Ex: Processo Seletivo - Analista Administrativo">
+                </div>
+
+                <!-- Seleção do Teste -->
+                <h2 style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:600;margin:24px 0 16px;">📝 Escolha a Avaliação</h2>
+
+                <div class="teste-grid" id="testeGrid">
+                    <div class="teste-card" data-teste="disc" onclick="selecionarTeste(this)">
+                        <div class="teste-icon">🦁</div>
+                        <div class="teste-title">DISC</div>
+                        <div class="teste-desc">Perfil comportamental</div>
+                        <div class="teste-meta">28 perguntas · 5 min</div>
+                    </div>
+                    <div class="teste-card" data-teste="bigfive" onclick="selecionarTeste(this)">
+                        <div class="teste-icon">🧬</div>
+                        <div class="teste-title">Big Five</div>
+                        <div class="teste-desc">5 fatores de personalidade</div>
+                        <div class="teste-meta">60 perguntas · 12 min</div>
+                    </div>
+                    <div class="teste-card" data-teste="ie" onclick="selecionarTeste(this)">
+                        <div class="teste-icon">❤️</div>
+                        <div class="teste-title">IE</div>
+                        <div class="teste-desc">Inteligência Emocional</div>
+                        <div class="teste-meta">40 perguntas · 8 min</div>
+                    </div>
+                    <div class="teste-card" data-teste="valores" onclick="selecionarTeste(this)">
+                        <div class="teste-icon">💎</div>
+                        <div class="teste-title">Valores</div>
+                        <div class="teste-desc">Mapeamento de valores</div>
+                        <div class="teste-meta">36 perguntas · 6 min</div>
+                    </div>
+                    <div class="teste-card" data-teste="swot" onclick="selecionarTeste(this)">
+                        <div class="teste-icon">📊</div>
+                        <div class="teste-title">SWOT</div>
+                        <div class="teste-desc">Forças e oportunidades</div>
+                        <div class="teste-meta">40 perguntas · 10 min</div>
+                    </div>
+                </div>
+
+                <input type="hidden" id="testeSelecionado" value="">
+
+                <button type="submit" class="btn-submit">🚀 GERAR AVALIAÇÃO</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
+    <script src="/assets/js/menu-fix.js"></script>
+
+    <script>
+        let testeSelecionado = null;
+
+        function selecionarTeste(element) {
+            // Remover seleção anterior
+            document.querySelectorAll('.teste-card').forEach(c => c.classList.remove('selected'));
+            element.classList.add('selected');
+            testeSelecionado = element.dataset.teste;
+            document.getElementById('testeSelecionado').value = testeSelecionado;
+        }
+
+        function criarAvaliacao(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const telefone = document.getElementById('telefone').value.trim();
+            const empresa = document.getElementById('empresa').value.trim();
+            const vaga = document.getElementById('vaga').value.trim();
+            const processo = document.getElementById('processo').value.trim();
+
+            if (!nome || !email) {
+                alert('⚠️ Preencha o nome e e-mail do candidato.');
+                return;
+            }
+
+            if (!testeSelecionado) {
+                alert('⚠️ Selecione um teste para a avaliação.');
+                return;
+            }
+
+            // Gerar senha temporária
+            const senha = Math.random().toString(36).substring(2, 8).toUpperCase();
+
+            // Gerar link único
+            const token = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+            const link = `https://vigorre-comportamental.vercel.app/candidato-acesso/index.html?token=${token}`;
+
+            // Mostrar resultado
+            alert(`
+✅ AVALIAÇÃO CRIADA COM SUCESSO!
+
+Candidato: ${nome}
+E-mail: ${email}
+Teste: ${testeSelecionado.toUpperCase()}
+Empresa: ${empresa || 'Não informada'}
+Vaga: ${vaga || 'Não informada'}
+Processo: ${processo || 'Não informado'}
+
+🔗 Link de acesso: ${link}
+🔑 Senha: ${senha}
+
+📨 O acesso foi enviado para o e-mail do candidato.
+            `);
+
+            // Redirecionar para a lista
+            window.location.href = '/admin/processoseletivo/index.html';
+        }
+    </script>
+
+</body>
+</html>
