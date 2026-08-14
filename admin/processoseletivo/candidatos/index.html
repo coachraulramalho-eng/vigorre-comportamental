@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidatos | VIGORRE ONE™</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/assets/css/menu-fix.css" />
+
+    <style>
+        .table-container { overflow-x: auto; }
+        .table-container table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        .table-container th {
+            text-align: left; padding: 14px 18px; background: var(--gray-50);
+            font-weight: 600; color: var(--gray-500); font-size: 0.75rem;
+            text-transform: uppercase; border-bottom: 1px solid var(--gray-200);
+        }
+        .table-container td { padding: 14px 18px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
+        .table-container tr:last-child td { border-bottom: none; }
+        .table-container tr:hover td { background: var(--gray-50); }
+
+        .badge-status {
+            display: inline-block; padding: 3px 14px; border-radius: 999px;
+            font-size: 0.7rem; font-weight: 600;
+        }
+        .badge-status.ativo { background: #D1FAE5; color: #065F46; }
+        .badge-status.inativo { background: #FEE2E2; color: #991B1B; }
+        .badge-status.pendente { background: #FEF3C7; color: #92400E; }
+
+        .btn-sm {
+            padding: 4px 12px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-sm-primary { background: var(--blue); color: white; }
+        .btn-sm-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(29,78,216,0.2); }
+        .btn-sm-secondary { background: var(--gray-100); color: var(--gray-700); }
+        .btn-sm-secondary:hover { background: var(--gray-200); }
+
+        @media (max-width: 768px) {
+            .main-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- SIDEBAR - MENU MASTER                       -->
+    <!-- ============================================ -->
+    <aside class="sidebar" id="sidebar">
+        <a href="/admin/dashboard.html" class="logo">
+            <img src="/assets/images/logo-vigorre.png" alt="VIGORRE ONE™" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo-text">
+                <span class="name">VIGORRE ONE<span class="tm">™</span></span>
+                <span class="sub">People Intelligence Enterprise</span>
+            </div>
+        </a>
+
+        <div class="user-info">
+            <div class="name" id="userName">Administrador</div>
+            <div class="role"><span class="badge">👑 Master Admin</span></div>
+        </div>
+
+        <ul class="nav">
+            <li class="nav-subtitle">📊 DASHBOARD</li>
+            <li><a href="/admin/dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+
+            <li class="nav-subtitle">🏢 GESTÃO</li>
+            <li><a href="/admin/empresas/index.html"><span class="icon">🏢</span> Empresas</a></li>
+            <li><a href="/admin/recrutadores/index.html"><span class="icon">👤</span> Recrutadores</a></li>
+            <li><a href="/admin/participantes/index.html"><span class="icon">👥</span> Participantes</a></li>
+
+            <li class="nav-subtitle">📋 PROCESSOS SELETIVOS</li>
+            <li><a href="/admin/processoseletivo/index.html"><span class="icon">📋</span> Avaliações Rápidas</a></li>
+            <li><a href="/admin/processoseletivo/candidatos/index.html" class="active"><span class="icon">👤</span> Candidatos</a></li>
+            <li><a href="/admin/processoseletivo/relatorios/index.html"><span class="icon">📄</span> Relatórios</a></li>
+            <li><a href="/admin/processoseletivo/laudos/index.html"><span class="icon">📋</span> Laudos</a></li>
+
+            <li class="nav-subtitle">💰 CENTRAL FINANCEIRA</li>
+            <li><a href="/admin/financeiro/index.html"><span class="icon">💰</span> Financeiro Global</a></li>
+            <li><a href="/admin/financeiro/carteiras.html"><span class="icon">📋</span> Carteiras</a></li>
+            <li><a href="/admin/financeiro/creditos.html"><span class="icon">💳</span> Créditos</a></li>
+            <li><a href="/admin/financeiro/extratos.html"><span class="icon">📊</span> Extratos</a></li>
+            <li><a href="/admin/precos/index.html"><span class="icon">🏷️</span> Preços</a></li>
+
+            <li class="nav-subtitle">🔍 AUDITORIA</li>
+            <li><a href="/admin/auditoria/index.html"><span class="icon">📋</span> Auditoria</a></li>
+            <li><a href="/admin/agenda/index.html"><span class="icon">📅</span> Agenda</a></li>
+            <li><a href="/admin/backup/index.html"><span class="icon">💾</span> Backup</a></li>
+
+            <li class="nav-subtitle">⚙️ SISTEMA</li>
+            <li><a href="/admin/configuracoes/index.html"><span class="icon">⚙️</span> Configurações</a></li>
+        </ul>
+
+        <div class="logout">
+            <a href="#" onclick="logout()"><span class="icon">🚪</span> Sair</a>
+        </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT                                -->
+    <!-- ============================================ -->
+    <main class="main">
+        <div class="main-header">
+            <div>
+                <h1>👤 Candidatos</h1>
+                <p class="subtitle">Gerencie todos os candidatos cadastrados</p>
+            </div>
+            <a href="/admin/processoseletivo/nova-avaliacao.html" class="btn-primary">➕ Nova Avaliação</a>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Empresa</th>
+                        <th>Vaga</th>
+                        <th>Status</th>
+                        <th style="text-align:center;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>Ana Silva</strong></td>
+                        <td>ana@techcorp.com</td>
+                        <td>TechCorp</td>
+                        <td>Analista de RH</td>
+                        <td><span class="badge-status ativo">✅ Ativo</span></td>
+                        <td style="text-align:center;">
+                            <button class="btn-sm btn-sm-primary">👁️</button>
+                            <button class="btn-sm btn-sm-secondary">✏️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>João Santos</strong></td>
+                        <td>joao@inovalab.com</td>
+                        <td>InovaLab</td>
+                        <td>Vendedor</td>
+                        <td><span class="badge-status ativo">✅ Ativo</span></td>
+                        <td style="text-align:center;">
+                            <button class="btn-sm btn-sm-primary">👁️</button>
+                            <button class="btn-sm btn-sm-secondary">✏️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>Maria Oliveira</strong></td>
+                        <td>maria@startupx.com</td>
+                        <td>StartupX</td>
+                        <td>Assistente</td>
+                        <td><span class="badge-status pendente">⏳ Pendente</span></td>
+                        <td style="text-align:center;">
+                            <button class="btn-sm btn-sm-primary">👁️</button>
+                            <button class="btn-sm btn-sm-secondary">✏️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>Pedro Lima</strong></td>
+                        <td>pedro@agrotech.com</td>
+                        <td>AgroTech</td>
+                        <td>Supervisor</td>
+                        <td><span class="badge-status ativo">✅ Ativo</span></td>
+                        <td style="text-align:center;">
+                            <button class="btn-sm btn-sm-primary">👁️</button>
+                            <button class="btn-sm btn-sm-secondary">✏️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>Carla Souza</strong></td>
+                        <td>carla@fincorp.com</td>
+                        <td>FinCorp</td>
+                        <td>Gerente</td>
+                        <td><span class="badge-status ativo">✅ Ativo</span></td>
+                        <td style="text-align:center;">
+                            <button class="btn-sm btn-sm-primary">👁️</button>
+                            <button class="btn-sm btn-sm-secondary">✏️</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="/supabase-config.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/middleware/auth-guard.js"></script>
+    <script src="/assets/js/menu-fix.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('👤 Candidatos - VIGORRE ONE™');
+        });
+    </script>
+
+</body>
+</html>
