@@ -12,137 +12,315 @@
     <link rel="stylesheet" href="/assets/css/menu-fix.css" />
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
-            --green: #10B981; --red: #EF4444; --orange: #F59E0B; --purple: #7C3AED;
-            --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
-            --gray-200: #E2E8F0; --gray-300: #CBD5E1; --gray-400: #94A3B8;
-            --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155;
-            --gray-800: #1E293B; --gray-900: #0F172A;
-            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
+            --navy: #0A2540;
+            --blue: #1D4ED8;
+            --cyan: #06B6D4;
+            --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
+            --purple: #7C3AED;
+            --white: #FFFFFF;
+
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+
             --shadow: 0 4px 24px rgba(10,37,64,0.06);
             --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
             --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
         }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--gray-50); color: var(--gray-800); min-height: 100vh;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
         }
 
-        .main { padding: 24px 32px 40px; min-height: 100vh; }
-        .main-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
+        .main {
+            padding: 24px 32px 40px;
+            min-height: 100vh;
         }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
         .main-header h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            letter-spacing: -0.5px;
         }
-        .main-header .subtitle { color: var(--gray-500); font-size: 0.9rem; }
+
+        .main-header .subtitle {
+            color: var(--gray-500);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
 
         .btn-primary {
-            padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
-            color: white; border: none; border-radius: var(--radius-sm);
-            font-weight: 600; font-size: 0.875rem; cursor: pointer;
-            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29,78,216,0.25);
+        }
 
         .cards-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
         }
+
         .card {
-            background: white; border-radius: var(--radius); padding: 20px 24px;
-            box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
-            transition: var(--transition); cursor: pointer;
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04);
+            transition: var(--transition);
+            cursor: pointer;
         }
-        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-        .card .card-icon { font-size: 2rem; margin-bottom: 8px; }
-        .card .card-label { font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .card .card-label {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
         .card .card-value {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem; font-weight: 700; color: var(--gray-900);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gray-900);
         }
 
         .section-title {
-            display: flex; align-items: center; gap: 10px;
-            font-size: 0.75rem; font-weight: 800; letter-spacing: 1.4px;
-            text-transform: uppercase; color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--gray-600);
             margin: 32px 0 16px;
         }
-        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--gray-200); }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
 
         .modules-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 16px; margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
         }
+
         .module-card {
-            background: white; border: 1px solid var(--gray-200); border-radius: var(--radius);
-            padding: 20px; text-decoration: none; color: inherit;
-            display: flex; flex-direction: column; gap: 8px;
-            transition: var(--transition); box-shadow: var(--shadow);
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
         }
-        .module-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--gold); }
-        .module-card .m-icon { font-size: 1.8rem; }
-        .module-card .m-title { font-weight: 700; color: var(--gray-900); font-size: 0.95rem; }
-        .module-card .m-desc { font-size: 0.8rem; color: var(--gray-500); line-height: 1.5; }
-        .module-card .m-go { font-size: 0.8rem; font-weight: 700; color: var(--gold); margin-top: auto; }
+
+        .module-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--gold);
+        }
+
+        .module-card .m-icon {
+            font-size: 1.8rem;
+        }
+
+        .module-card .m-title {
+            font-weight: 700;
+            color: var(--gray-900);
+            font-size: 0.95rem;
+        }
+
+        .module-card .m-desc {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            line-height: 1.5;
+        }
+
+        .module-card .m-go {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-top: auto;
+        }
 
         .toast {
-            position: fixed; top: 24px; right: 24px; background: white;
-            padding: 14px 24px; border-radius: 12px;
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-            display: none; align-items: center; gap: 12px;
-            font-weight: 600; font-size: 0.875rem; z-index: 300;
-            border-left: 4px solid var(--blue); animation: slideIn 0.3s ease;
-        }
-        .toast.show { display: flex; }
-        .toast.success { border-left-color: #10B981; }
-        .toast.error { border-left-color: #EF4444; }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(120%); }
-            to { opacity: 1; transform: translateX(0); }
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 300;
+            border-left: 4px solid var(--blue);
+            animation: slideIn 0.3s ease;
         }
 
-        @media (max-width: 1200px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.success {
+            border-left-color: #10B981;
+        }
+
+        .toast.error {
+            border-left-color: #EF4444;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
-            .cards-grid { grid-template-columns: 1fr; }
-            .main-header { flex-direction: column; align-items: flex-start; }
-            .modules-grid { grid-template-columns: 1fr; }
-            .main { padding: 16px; }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main {
+                padding: 16px;
+            }
         }
     </style>
 </head>
-<body data-profile="master">
 
+<body data-profile="master">
     <main class="main vg-content">
         <div class="main-header">
             <div>
-                <h1>👑 Dashboard Master Admin</h1>
-                <p class="subtitle">Visão global do ecossistema VIGORRE ONE™ — empresas, recrutadores, participantes e financeiro.</p>
+                <h1 data-vg-greeting-title>Dashboard Master Admin</h1>
+                <p class="subtitle"
+                   data-vg-greeting-subtitle
+                   data-page-description="Visão global do ecossistema VIGORRE ONE™ — empresas, recrutadores, participantes, processo seletivo e financeiro.">
+                    Visão global do ecossistema VIGORRE ONE™.
+                </p>
             </div>
-            <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
+
+            <button class="btn-primary" onclick="recarregarDados()">
+                🔄 Atualizar
+            </button>
         </div>
 
         <!-- 📊 VISÃO GERAL -->
         <div class="section-title">📊 Visão Geral do Ecossistema</div>
+
         <div class="cards-grid">
             <div class="card" onclick="window.location.href='/admin/financeiro/index.html'">
                 <div class="card-icon">💰</div>
                 <div class="card-label">Faturamento Total</div>
                 <div class="card-value" id="totalFaturamento">R$ 42.850</div>
             </div>
+
             <div class="card" onclick="window.location.href='/admin/empresas/index.html'">
                 <div class="card-icon">🏢</div>
                 <div class="card-label">Empresas & Recrutadores</div>
                 <div class="card-value" id="totalEmpresas">1.250</div>
             </div>
+
             <div class="card" onclick="window.location.href='/admin/participantes/index.html'">
                 <div class="card-icon">👥</div>
                 <div class="card-label">Participantes</div>
                 <div class="card-value" id="totalParticipantes">125.000</div>
             </div>
+
             <div class="card" onclick="window.location.href='/admin/financeiro/creditos.html'">
                 <div class="card-icon">💳</div>
                 <div class="card-label">Créditos em Circulação</div>
@@ -150,101 +328,152 @@
             </div>
         </div>
 
-        <!-- 🏢 GESTÃO (Agora apenas 2 módulos: Empresas & Recrutadores + Participantes) -->
+        <!-- 🏢 GESTÃO -->
         <div class="section-title">🏢 Gestão</div>
+
         <div class="modules-grid">
             <a class="module-card" href="/admin/empresas/index.html">
                 <span class="m-icon">🏢</span>
                 <span class="m-title">Empresas & Recrutadores</span>
-                <span class="m-desc">Gestão unificada de Pessoas Jurídicas (CNPJ) e Pessoas Físicas (CPF) — empresas, headhunters e recrutadores independentes.</span>
+                <span class="m-desc">
+                    Gestão unificada de Pessoas Jurídicas (CNPJ) e Pessoas Físicas (CPF) — empresas, headhunters e recrutadores independentes.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/participantes/index.html">
                 <span class="m-icon">👥</span>
                 <span class="m-title">Participantes</span>
-                <span class="m-desc">Todos os participantes do ecossistema — autônomos e vinculados a empresas — em uma única tela.</span>
+                <span class="m-desc">
+                    Todos os participantes do ecossistema — autônomos e vinculados a empresas — em uma única tela.
+                </span>
+                <span class="m-go">Acessar →</span>
+            </a>
+
+            <a class="module-card" href="/admin/processoseletivo/index.html">
+                <span class="m-icon">📋</span>
+                <span class="m-title">Processo Seletivo</span>
+                <span class="m-desc">
+                    Avaliações rápidas e privadas para clientes específicos, com ou sem vínculo financeiro, empresa ou vaga.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
         </div>
 
         <!-- 💰 CENTRAL FINANCEIRA -->
         <div class="section-title">💰 Central Financeira Global</div>
+
         <div class="modules-grid">
             <a class="module-card" href="/admin/financeiro/index.html">
                 <span class="m-icon">💰</span>
                 <span class="m-title">Financeiro Global</span>
-                <span class="m-desc">Visão consolidada do financeiro de todas as empresas e recrutadores do ecossistema.</span>
+                <span class="m-desc">
+                    Visão consolidada do financeiro de todas as empresas e recrutadores do ecossistema.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/financeiro/carteiras.html">
                 <span class="m-icon">👛</span>
                 <span class="m-title">Carteiras</span>
-                <span class="m-desc">Saldo e movimentações de todas as carteiras de crédito.</span>
+                <span class="m-desc">
+                    Saldo e movimentações de todas as carteiras de crédito.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/financeiro/creditos.html">
                 <span class="m-icon">💳</span>
                 <span class="m-title">Créditos</span>
-                <span class="m-desc">Gestão de pacotes, créditos emitidos e consumidos.</span>
+                <span class="m-desc">
+                    Gestão de pacotes, créditos emitidos e consumidos.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/financeiro/extratos.html">
                 <span class="m-icon">🧾</span>
                 <span class="m-title">Extratos</span>
-                <span class="m-desc">Histórico consolidado de todas as movimentações financeiras.</span>
+                <span class="m-desc">
+                    Histórico consolidado de todas as movimentações financeiras.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/financeiro/assinaturas.html">
                 <span class="m-icon">🔁</span>
                 <span class="m-title">Assinaturas</span>
-                <span class="m-desc">Planos ativos, renovações e cancelamentos.</span>
+                <span class="m-desc">
+                    Planos ativos, renovações e cancelamentos.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/financeiro/reembolsos.html">
                 <span class="m-icon">↩️</span>
                 <span class="m-title">Reembolsos</span>
-                <span class="m-desc">Solicitações de reembolso e estornos em análise.</span>
+                <span class="m-desc">
+                    Solicitações de reembolso e estornos em análise.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/financeiro/precos.html">
                 <span class="m-icon">🏷️</span>
                 <span class="m-title">Preços</span>
-                <span class="m-desc">Defina preços de relatórios, laudos e pacotes.</span>
+                <span class="m-desc">
+                    Defina preços de relatórios, laudos e pacotes.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/financeiro/cupons.html">
                 <span class="m-icon">🎟️</span>
                 <span class="m-title">Cupons</span>
-                <span class="m-desc">Crie e gerencie cupons de desconto promocionais.</span>
+                <span class="m-desc">
+                    Crie e gerencie cupons de desconto promocionais.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/financeiro/configuracoes.html">
                 <span class="m-icon">⚙️</span>
                 <span class="m-title">Config. Financeiras</span>
-                <span class="m-desc">Gateways de pagamento, impostos e regras de cobrança.</span>
+                <span class="m-desc">
+                    Gateways de pagamento, impostos e regras de cobrança.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
         </div>
 
         <!-- 🔍 AUDITORIA & SISTEMA -->
         <div class="section-title">🔍 Auditoria & Sistema</div>
+
         <div class="modules-grid">
             <a class="module-card" href="/admin/financeiro/auditoria.html">
                 <span class="m-icon">🔍</span>
                 <span class="m-title">Auditoria</span>
-                <span class="m-desc">Logs completos de acesso, alterações e transações do sistema.</span>
+                <span class="m-desc">
+                    Logs completos de acesso, alterações e transações do sistema.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/agenda/calendario.html">
                 <span class="m-icon">📅</span>
                 <span class="m-title">Calendário</span>
-                <span class="m-desc">Agenda global de eventos, reuniões e vencimentos.</span>
+                <span class="m-desc">
+                    Agenda global de eventos, reuniões e vencimentos.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/admin/backup/backup-completo.html">
                 <span class="m-icon">💾</span>
                 <span class="m-title">Backup Completo</span>
-                <span class="m-desc">Histórico de backups, restaurações e integridade dos dados.</span>
+                <span class="m-desc">
+                    Histórico de backups, restaurações e integridade dos dados.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
         </div>
@@ -271,17 +500,19 @@
             const toast = document.getElementById('toast');
             const icon = document.getElementById('toastIcon');
             const msg = document.getElementById('toastMessage');
+
             icon.textContent = type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '✅';
             msg.textContent = message;
+
             toast.className = 'toast show ' + type;
+
             clearTimeout(toast._timeout);
             toast._timeout = setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('👑 Dashboard Master Admin - VIGORRE ONE™');
         });
     </script>
-
 </body>
 </html>
