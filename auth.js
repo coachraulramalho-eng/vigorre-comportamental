@@ -1,714 +1,826 @@
 /**
- * ============================================
+ * ============================================================
  * VIGORRE ONE™ - AUTH.JS
- * VERSÃO HÍBRIDA: LGPD + SUPABASE AUTH
- * ============================================
+ * VERSÃO CORRIGIDA
+ * - LGPD
+ * - Sessão
+ * - Supabase opcional
+ * - Fallback mock
+ * - Compatível com login.html e dashboards
+ * ============================================================
  */
+(function () {
+    'use strict';
 
-'use strict';
+    const ROLES = {
+        ADMIN: 'admin',
+        ORGANIZACAO: 'organizacao',
+        PARTICIPANTE: 'participante'
+    };
 
-// --- Configuração dos Perfis ---
-const ROLES = {
-    ADMIN: 'admin',
-    ORGANIZACAO: 'organizacao',
-    PARTICIPANTE: 'participante'
-};
+    const REDIRECTS = {
+        [ROLES.ADMIN]: '/admin/dashboard.html',
+        [ROLES.ORGANIZACAO]: '/organizacao/dashboard.html',
+        [ROLES.PARTICIPANTE]: '/participante/dashboard.html'
+    };
 
-const REDIRECTS = {
-    [ROLES.ADMIN]: '/admin/dashboard.html',
-    [ROLES.ORGANIZACAO]: '/organizacao/dashboard.html',
-    [ROLES.PARTICIPANTE]: '/participante/dashboard.html'
-};
+    function getSupabaseConfig() {
+        return window.VIGORRE_SUPABASE_CONFIG || {
+            url: window.SUPABASE_URL || null,
+            anonKey: window.SUPABASE_ANON_KEY || null,
+            enabled: false
+        };
+    }
 
-// ============================================
-// GERENCIADOR DE AUTENTICAÇÃO COM LGPD E SUPABASE
-// ============================================
-const VigorreAuth = {
-    _currentUser: null,
-    _sessionTimeout: 30 * 60 * 1000, // 30 minutos
-    _lastActivity: Date.now(),
-    _consentimentoVersao: '3.0',
-    _testeAtivo: false,
-    _supabase: null,
+    const VigorreAuth = {
+        _currentUser: null,
+        _sessionTimeout: 30 * 60 * 1000,
+        _lastActivity: Date.now(),
+        _consentimentoVersao: '3.0',
+        _testeAtivo: false,
+        _supabase: null,
 
-    // ============================================
-    // INICIALIZAÇÃO
-    // ============================================
-    init() {
-        // Inicializar Supabase se disponível
-        if (typeof window !== 'undefined' && window.supabase) {
-            this._supabase = window.supabase;
-            console.log('✅ Supabase Auth disponível');
-        } else if (typeof window !== 'undefined' && window.createClient) {
-            const SUPABASE_URL = 'https://dfthdcnaqmqswidwgezj.supabase.co';
-            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmdGhkY25hcW1xc3dpZHdnZXpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk0NDU3MDksImV4cCI6MjA5NTAyMTcwOX0.ysTxq3RLw6E-7HrKsvAN2DGoTRYNNCVHXYKG0y6aFIQ';
-            this._supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            console.log('✅ Supabase Auth inicializado (fallback)');
-        }
+        // ============================================================
+        // INICIALIZAÇÃO
+        // ============================================================
+        init() {
+            this._initSupabase();
 
-        // Carregar sessão do storage
-        const sessionData = localStorage.getItem('vigorre_session');
-        if (sessionData) {
-            try {
-                const session = JSON.parse(sessionData);
-                if (Date.now() - session.timestamp > this._sessionTimeout) {
-                    this.logout('Sessão expirada. Faça login novamente.');
-                    return null;
-                }
-                this._currentUser = session.user;
-                this._lastActivity = session.timestamp;
-                return this._currentUser;
-            } catch (e) {
-                this.logout('Sessão inválida.');
+            const sessionData = localStorage.getItem('vigorre_session');
+
+            if (!sessionData) {
                 return null;
             }
-        }
-        return null;
-    },
 
-    // ============================================
-    // GETTERS
-    // ============================================
-    getCurrentUser() {
-        if (!this._currentUser) {
-            this.init();
-        }
-        return this._currentUser;
-    },
-
-    isAuthenticated() {
-        return this.getCurrentUser() !== null;
-    },
-
-    hasRole(role) {
-        const user = this.getCurrentUser();
-        return user && user.role === role;
-    },
-
-    isOrganizacao() { return this.hasRole(ROLES.ORGANIZACAO); },
-    isAdmin() { return this.hasRole(ROLES.ADMIN); },
-    isParticipante() { return this.hasRole(ROLES.PARTICIPANTE); },
-
-    getParticipanteId() {
-        const user = this.getCurrentUser();
-        return user?.participantId || user?.id || null;
-    },
-
-    // ============================================
-    // SUPABASE - LOGIN REAL
-    // ============================================
-    async login(email, password, role = ROLES.ORGANIZACAO, consent = false) {
-        if (!email || !password) {
-            throw new Error('Email e senha são obrigatórios.');
-        }
-
-        // Verificar se tem Supabase
-        if (this._supabase) {
             try {
-                const { data, error } = await this._supabase.auth.signInWithPassword({
-                    email: email,
-                    password: password
-                });
+                const session = JSON.parse(sessionData);
 
-                if (error) {
-                    console.warn('⚠️ Erro no Supabase Auth, usando fallback:', error.message);
-                    return this._loginSimulado(email, password, role, consent);
+                if (!session || !session.user) {
+                    this._clearSession();
+                    return null;
                 }
 
-                if (data && data.user) {
-                    const perfil = await this._buscarPerfilSupabase(data.user.id);
-                    
-                    const user = {
-                        id: data.user.id,
-                        email: data.user.email,
-                        name: perfil?.name || data.user.email.split('@')[0] || 'Usuário',
-                        role: perfil?.role || role || ROLES.PARTICIPANTE,
-                        loginAt: new Date().toISOString(),
-                        ip: '0.0.0.0',
-                        userAgent: navigator.userAgent,
-                        consentimento: this.verificarConsentimento(data.user.id),
-                        supabase_user: true,
-                        ...(perfil?.company_id && { companyId: perfil.company_id }),
-                        ...(perfil?.participant_id && { participantId: perfil.participant_id })
-                    };
-
-                    this._setUserSession(user);
-                    this._logAccess(user);
-                    this._redirecionarDashboard(user);
-                    return user;
+                if (Date.now() - session.timestamp > this._sessionTimeout) {
+                    this._clearSession();
+                    return null;
                 }
+
+                this._currentUser = session.user;
+                this._lastActivity = session.timestamp;
+
+                return this._currentUser;
             } catch (e) {
-                console.warn('⚠️ Erro no login Supabase:', e.message);
-                return this._loginSimulado(email, password, role, consent);
+                this._clearSession();
+                return null;
             }
-        }
+        },
 
-        return this._loginSimulado(email, password, role, consent);
-    },
+        _initSupabase() {
+            if (this._supabase) return;
 
-    // ============================================
-    // SUPABASE - BUSCAR PERFIL
-    // ============================================
-    async _buscarPerfilSupabase(userId) {
-        if (!this._supabase) return null;
+            try {
+                if (typeof window.getSupabaseClient === 'function') {
+                    const client = window.getSupabaseClient();
 
-        try {
-            const { data, error } = await this._supabase
-                .from('participants')
-                .select('*')
-                .eq('id', userId)
-                .single();
-
-            if (data) {
-                return {
-                    name: data.name,
-                    role: data.role || ROLES.PARTICIPANTE,
-                    company_id: data.company_id,
-                    participant_id: data.id
-                };
-            }
-
-            const { data: recruiterData } = await this._supabase
-                .from('recruiters')
-                .select('*')
-                .eq('id', userId)
-                .single();
-
-            if (recruiterData) {
-                return {
-                    name: recruiterData.name,
-                    role: ROLES.ORGANIZACAO,
-                    company_id: recruiterData.company_id
-                };
-            }
-
-            return null;
-        } catch (e) {
-            return null;
-        }
-    },
-
-    // ============================================
-    // SUPABASE - REGISTRO
-    // ============================================
-    async register(email, password, name, role = ROLES.PARTICIPANTE, companyId = null) {
-        if (!this._supabase) {
-            throw new Error('Supabase não disponível');
-        }
-
-        try {
-            const { data, error } = await this._supabase.auth.signUp({
-                email: email,
-                password: password,
-                options: {
-                    data: {
-                        name: name,
-                        role: role,
-                        company_id: companyId
+                    if (client) {
+                        this._supabase = client;
+                        console.log('✅ Supabase disponível via getSupabaseClient()');
+                        return;
                     }
                 }
-            });
 
-            if (error) throw error;
+                const config = getSupabaseConfig();
 
-            if (data.user) {
-                await this._supabase
-                    .from('participants')
-                    .insert([{
-                        id: data.user.id,
-                        name: name || email.split('@')[0],
-                        email: email,
-                        company_id: companyId,
-                        role: role,
-                        status: 'active'
-                    }]);
-            }
+                if (window.supabase && config && config.url && config.anonKey && config.enabled !== false) {
+                    this._supabase = window.supabase.createClient(config.url, config.anonKey);
+                    console.log('✅ Supabase inicializado');
+                    return;
+                }
 
-            return data.user;
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    },
-
-    // ============================================
-    // SUPABASE - LOGOUT
-    // ============================================
-    async logout(message = 'Sessão encerrada.') {
-        const user = this._currentUser;
-        if (user) {
-            this._logLogout(user);
-        }
-
-        if (this._supabase) {
-            try {
-                await this._supabase.auth.signOut();
+                console.log('ℹ️ Supabase não disponível. Usando modo local/mock.');
             } catch (e) {
-                console.warn('⚠️ Erro ao fazer logout no Supabase:', e.message);
+                console.warn('⚠️ Erro ao inicializar Supabase:', e);
+                this._supabase = null;
             }
-        }
+        },
 
-        this._currentUser = null;
-        localStorage.removeItem('vigorre_session');
-        window.location.href = '/login.html?message=' + encodeURIComponent(message);
-    },
-
-    // ============================================
-    // LOGIN SIMULADO (FALLBACK)
-    // ============================================
-    _loginSimulado(email, password, role = ROLES.ORGANIZACAO, consent = false) {
-        const mockUsers = {
-            'admin@vigorre.com': {
-                name: 'Administrador',
-                role: ROLES.ADMIN,
-                id: 'admin_001',
-                password: 'Admin@2026'
-            },
-            'empresa@vigorre.com': {
-                name: 'Empresa Teste',
-                role: ROLES.ORGANIZACAO,
-                id: 'org_001',
-                password: 'Empresa@2026'
-            },
-            'participante@vigorre.com': {
-                name: 'João Silva',
-                role: ROLES.PARTICIPANTE,
-                id: 'part_001',
-                password: 'Part@2026'
+        // ============================================================
+        // GETTERS
+        // ============================================================
+        getCurrentUser() {
+            if (!this._currentUser) {
+                this.init();
             }
-        };
 
-        const userData = mockUsers[email];
-        if (!userData) {
-            throw new Error('Usuário não encontrado. Use: admin@vigorre.com, empresa@vigorre.com ou participante@vigorre.com');
-        }
+            return this._currentUser;
+        },
 
-        if (userData.password !== password) {
-            throw new Error('Senha inválida.');
-        }
+        isAuthenticated() {
+            return this.getCurrentUser() !== null;
+        },
 
-        if (!consent) {
-            const consentimento = this.verificarConsentimento(userData.id);
-            if (!consentimento) {
-                localStorage.setItem('pending_user', JSON.stringify({ email, role, userData }));
-                window.location.href = '/consentimento.html';
-                return;
+        hasRole(role) {
+            const user = this.getCurrentUser();
+            return !!(user && user.role === role);
+        },
+
+        isOrganizacao() {
+            return this.hasRole(ROLES.ORGANIZACAO);
+        },
+
+        isAdmin() {
+            return this.hasRole(ROLES.ADMIN);
+        },
+
+        isParticipante() {
+            return this.hasRole(ROLES.PARTICIPANTE);
+        },
+
+        getParticipanteId() {
+            const user = this.getCurrentUser();
+            return user?.participantId || user?.id || null;
+        },
+
+        getRedirectPath() {
+            const user = this.getCurrentUser();
+
+            if (!user) {
+                return '/login.html';
             }
-        }
 
-        const finalRole = role || userData.role;
+            return REDIRECTS[user.role] || '/login.html';
+        },
 
-        const user = {
-            id: userData.id,
-            email: email,
-            name: userData.name,
-            role: finalRole,
-            loginAt: new Date().toISOString(),
-            ip: '0.0.0.0',
-            userAgent: navigator.userAgent,
-            consentimento: this.verificarConsentimento(userData.id),
-            supabase_user: false,
-            ...(finalRole === ROLES.ADMIN && { adminId: userData.id }),
-            ...(finalRole === ROLES.ORGANIZACAO && {
-                companyId: userData.id,
-                companyName: userData.name
-            }),
-            ...(finalRole === ROLES.PARTICIPANTE && {
-                participantId: userData.id
-            })
-        };
+        // ============================================================
+        // LOGIN REAL COM SUPABASE
+        // ============================================================
+        async login(email, password, role = ROLES.PARTICIPANTE, consent = false) {
+            if (!email || !password) {
+                throw new Error('Email e senha são obrigatórios.');
+            }
 
-        this._setUserSession(user);
-        this._logAccess(user);
-        this._redirecionarDashboard(user);
-        return user;
-    },
+            this._initSupabase();
 
-    // ============================================
-    // SETAR SESSÃO DO USUÁRIO
-    // ============================================
-    _setUserSession(user) {
-        const session = {
-            user: user,
-            timestamp: Date.now(),
-            consentGiven: user.consentimento
-        };
+            if (this._supabase) {
+                try {
+                    const { data, error } = await this._supabase.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
 
-        this._currentUser = user;
-        this._lastActivity = Date.now();
-        localStorage.setItem('vigorre_session', JSON.stringify(session));
-    },
+                    if (error) {
+                        console.warn('⚠️ Erro no Supabase Auth, usando fallback:', error.message);
+                        return this._loginSimulado(email, password, role, consent);
+                    }
 
-    // ============================================
-    // REDIRECIONAMENTO DE DASHBOARD
-    // ============================================
-    _redirecionarDashboard(user) {
-        const redirects = {
-            [ROLES.ADMIN]: '/admin/dashboard.html',
-            [ROLES.ORGANIZACAO]: '/organizacao/dashboard.html',
-            [ROLES.PARTICIPANTE]: '/participante/dashboard.html'
-        };
+                    if (data && data.user) {
+                        const perfil = await this._buscarPerfilSupabase(data.user.id);
 
-        const url = redirects[user.role] || '/dashboard.html';
-        console.log('🔀 Redirecionando para:', url);
-        window.location.href = url;
-    },
+                        const user = {
+                            id: data.user.id,
+                            email: data.user.email,
+                            name: perfil?.name || data.user.email.split('@')[0] || 'Usuário',
+                            role: perfil?.role || role || ROLES.PARTICIPANTE,
+                            loginAt: new Date().toISOString(),
+                            ip: '0.0.0.0',
+                            userAgent: navigator.userAgent,
+                            consentimento: this.verificarConsentimento(data.user.id),
+                            supabase_user: true,
+                            ...(perfil?.company_id && { companyId: perfil.company_id }),
+                            ...(perfil?.participant_id && { participantId: perfil.participant_id })
+                        };
 
-    // ============================================
-    // LGPD - CONSENTIMENTO
-    // ============================================
-    verificarConsentimento(participanteId) {
-        const consentimento = localStorage.getItem(`consentimento_${participanteId}`);
-        if (consentimento) {
+                        if (consent) {
+                            this.registrarConsentimento(user.id);
+                            user.consentimento = true;
+                        }
+
+                        this._setUserSession(user);
+                        this._logAccess(user);
+                        this._redirecionarDashboard(user);
+
+                        return user;
+                    }
+                } catch (e) {
+                    console.warn('⚠️ Erro no login Supabase:', e.message);
+                    return this._loginSimulado(email, password, role, consent);
+                }
+            }
+
+            return this._loginSimulado(email, password, role, consent);
+        },
+
+        // ============================================================
+        // BUSCAR PERFIL NO SUPABASE
+        // ============================================================
+        async _buscarPerfilSupabase(userId) {
+            if (!this._supabase) return null;
+
+            try {
+                const { data } = await this._supabase
+                    .from('participants')
+                    .select('*')
+                    .eq('id', userId)
+                    .single();
+
+                if (data) {
+                    return {
+                        name: data.name,
+                        role: data.role || ROLES.PARTICIPANTE,
+                        company_id: data.company_id,
+                        participant_id: data.id
+                    };
+                }
+
+                const { data: recruiterData } = await this._supabase
+                    .from('recruiters')
+                    .select('*')
+                    .eq('id', userId)
+                    .single();
+
+                if (recruiterData) {
+                    return {
+                        name: recruiterData.name,
+                        role: ROLES.ORGANIZACAO,
+                        company_id: recruiterData.company_id
+                    };
+                }
+
+                return null;
+            } catch (e) {
+                return null;
+            }
+        },
+
+        // ============================================================
+        // REGISTRO
+        // ============================================================
+        async register(email, password, name, role = ROLES.PARTICIPANTE, companyId = null) {
+            this._initSupabase();
+
+            if (!this._supabase) {
+                throw new Error('Supabase não disponível para registro.');
+            }
+
+            try {
+                const { data, error } = await this._supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            name: name,
+                            role: role,
+                            company_id: companyId
+                        }
+                    }
+                });
+
+                if (error) throw error;
+
+                if (data.user) {
+                    await this._supabase
+                        .from('participants')
+                        .insert([{
+                            id: data.user.id,
+                            name: name || email.split('@')[0],
+                            email: email,
+                            company_id: companyId,
+                            role: role,
+                            status: 'active'
+                        }]);
+                }
+
+                return data.user;
+            } catch (error) {
+                throw new Error(error.message);
+            }
+        },
+
+        // ============================================================
+        // LOGOUT
+        // ============================================================
+        async logout(message = '') {
+            const user = this._currentUser;
+
+            if (user) {
+                this._logLogout(user);
+            }
+
+            if (this._supabase) {
+                try {
+                    await this._supabase.auth.signOut();
+                } catch (e) {
+                    console.warn('⚠️ Erro ao fazer logout no Supabase:', e.message);
+                }
+            }
+
+            this._clearSession();
+
+            const url = message
+                ? '/login.html?message=' + encodeURIComponent(message)
+                : '/login.html';
+
+            window.location.href = url;
+        },
+
+        _clearSession() {
+            this._currentUser = null;
+            localStorage.removeItem('vigorre_session');
+        },
+
+        // ============================================================
+        // LOGIN SIMULADO / FALLBACK
+        // ============================================================
+        _loginSimulado(email, password, role = ROLES.ORGANIZACAO, consent = false) {
+            const mockUsers = {
+                'admin@vigorre.com': {
+                    name: 'Administrador',
+                    role: ROLES.ADMIN,
+                    id: 'admin_001',
+                    password: 'Admin@2026'
+                },
+                'empresa@vigorre.com': {
+                    name: 'Empresa Teste',
+                    role: ROLES.ORGANIZACAO,
+                    id: 'org_001',
+                    password: 'Empresa@2026'
+                },
+                'participante@vigorre.com': {
+                    name: 'João Silva',
+                    role: ROLES.PARTICIPANTE,
+                    id: 'part_001',
+                    password: 'Part@2026'
+                }
+            };
+
+            const userData = mockUsers[email];
+
+            if (!userData) {
+                throw new Error('Usuário não encontrado.');
+            }
+
+            if (userData.password !== password) {
+                throw new Error('Senha inválida.');
+            }
+
+            if (consent) {
+                this.registrarConsentimento(userData.id);
+            } else {
+                const consentimento = this.verificarConsentimento(userData.id);
+
+                if (!consentimento) {
+                    localStorage.setItem('pending_user', JSON.stringify({
+                        email: email,
+                        role: role,
+                        userData: userData
+                    }));
+
+                    window.location.href = '/consentimento.html';
+                    return null;
+                }
+            }
+
+            const finalRole = role || userData.role;
+
+            const user = {
+                id: userData.id,
+                email: email,
+                name: userData.name,
+                role: finalRole,
+                loginAt: new Date().toISOString(),
+                ip: '0.0.0.0',
+                userAgent: navigator.userAgent,
+                consentimento: this.verificarConsentimento(userData.id),
+                supabase_user: false,
+                ...(finalRole === ROLES.ADMIN && { adminId: userData.id }),
+                ...(finalRole === ROLES.ORGANIZACAO && {
+                    companyId: userData.id,
+                    companyName: userData.name
+                }),
+                ...(finalRole === ROLES.PARTICIPANTE && {
+                    participantId: userData.id
+                })
+            };
+
+            this._setUserSession(user);
+            this._logAccess(user);
+            this._redirecionarDashboard(user);
+
+            return user;
+        },
+
+        // ============================================================
+        // SESSÃO
+        // ============================================================
+        _setUserSession(user) {
+            const session = {
+                user: user,
+                timestamp: Date.now(),
+                consentGiven: user.consentimento
+            };
+
+            this._currentUser = user;
+            this._lastActivity = Date.now();
+
+            localStorage.setItem('vigorre_session', JSON.stringify(session));
+        },
+
+        _redirecionarDashboard(user) {
+            const url = REDIRECTS[user.role] || '/login.html';
+
+            console.log('🔀 Redirecionando para:', url);
+
+            window.location.href = url;
+        },
+
+        // ============================================================
+        // LGPD - CONSENTIMENTO
+        // ============================================================
+        verificarConsentimento(participanteId) {
+            const consentimento = localStorage.getItem(`consentimento_${participanteId}`);
+
+            if (!consentimento) return false;
+
             try {
                 const data = JSON.parse(consentimento);
-                return data.consentido && data.versao === this._consentimentoVersao;
+
+                return !!(data.consentido && data.versao === this._consentimentoVersao);
             } catch {
                 return false;
             }
-        }
-        return false;
-    },
+        },
 
-    registrarConsentimento(participanteId) {
-        const data = {
-            consentido: true,
-            versao: this._consentimentoVersao,
-            data: new Date().toISOString(),
-            ip: '0.0.0.0',
-            userAgent: navigator.userAgent
-        };
-        localStorage.setItem(`consentimento_${participanteId}`, JSON.stringify(data));
-        this._logConsentimento(participanteId, data);
-        return data;
-    },
-
-    revogarConsentimento(participanteId) {
-        localStorage.removeItem(`consentimento_${participanteId}`);
-        this._logConsentimento(participanteId, { acao: 'revogacao' });
-    },
-
-    _logConsentimento(participanteId, data) {
-        try {
-            const logs = JSON.parse(localStorage.getItem('vigorre_consentimento_logs') || '[]');
-            logs.push({
-                participanteId,
-                ...data,
-                timestamp: new Date().toISOString()
-            });
-            if (logs.length > 1000) {
-                logs.splice(0, logs.length - 1000);
-            }
-            localStorage.setItem('vigorre_consentimento_logs', JSON.stringify(logs));
-        } catch (e) {
-            console.warn('⚠️ Não foi possível registrar log de consentimento');
-        }
-    },
-
-    // ============================================
-    // LGPD - DIREITOS DO PARTICIPANTE
-    // ============================================
-    solicitarAcessoDados() {
-        if (!this.isAuthenticated()) {
-            throw new Error('Você precisa estar logado.');
-        }
-        const user = this._currentUser;
-        const dados = {
-            usuario: user,
-            consentimentos: localStorage.getItem(`consentimento_${user.id}`) || null,
-            logs: JSON.parse(localStorage.getItem('vigorre_access_logs') || '[]')
-                .filter(log => log.userId === user.id)
-        };
-        return dados;
-    },
-
-    solicitarCorrecaoDados(campos) {
-        if (!this.isAuthenticated()) {
-            throw new Error('Você precisa estar logado.');
-        }
-        alert('📩 Solicitação de correção enviada. Você receberá um e-mail em até 48 horas.');
-        return true;
-    },
-
-    solicitarExclusaoDados() {
-        if (!this.isAuthenticated()) {
-            throw new Error('Você precisa estar logado.');
-        }
-        const user = this._currentUser;
-        if (confirm('🔒 LGPD: Esta ação irá solicitar a EXCLUSÃO PERMANENTE de todos os seus dados. Tem certeza?')) {
-            this.revogarConsentimento(user.id);
-            alert('📩 Solicitação de exclusão enviada. Você receberá um e-mail em até 48 horas.');
-            this.logout('Solicitação de exclusão de dados recebida.');
-        }
-    },
-
-    solicitarPortabilidadeDados() {
-        if (!this.isAuthenticated()) {
-            throw new Error('Você precisa estar logado.');
-        }
-        const dados = this.solicitarAcessoDados();
-        const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `dados_${this._currentUser.id}_${new Date().toISOString().split('T')[0]}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-        alert('📥 Download dos seus dados iniciado!');
-    },
-
-    // ============================================
-    // LOGS DE ACESSO
-    // ============================================
-    _logAccess(user) {
-        try {
-            const logs = JSON.parse(localStorage.getItem('vigorre_access_logs') || '[]');
-            logs.push({
-                userId: user.id,
-                email: user.email,
-                action: 'login',
-                timestamp: new Date().toISOString(),
+        registrarConsentimento(participanteId) {
+            const data = {
+                consentido: true,
+                versao: this._consentimentoVersao,
+                data: new Date().toISOString(),
                 ip: '0.0.0.0',
                 userAgent: navigator.userAgent
-            });
-            if (logs.length > 1000) {
-                logs.splice(0, logs.length - 1000);
+            };
+
+            localStorage.setItem(`consentimento_${participanteId}`, JSON.stringify(data));
+            this._logConsentimento(participanteId, data);
+
+            return data;
+        },
+
+        revogarConsentimento(participanteId) {
+            localStorage.removeItem(`consentimento_${participanteId}`);
+            this._logConsentimento(participanteId, { acao: 'revogacao' });
+        },
+
+        _logConsentimento(participanteId, data) {
+            try {
+                const logs = JSON.parse(localStorage.getItem('vigorre_consentimento_logs') || '[]');
+
+                logs.push({
+                    participanteId,
+                    ...data,
+                    timestamp: new Date().toISOString()
+                });
+
+                if (logs.length > 1000) {
+                    logs.splice(0, logs.length - 1000);
+                }
+
+                localStorage.setItem('vigorre_consentimento_logs', JSON.stringify(logs));
+            } catch (e) {
+                console.warn('⚠️ Não foi possível registrar log de consentimento.');
             }
-            localStorage.setItem('vigorre_access_logs', JSON.stringify(logs));
-        } catch (e) {
-            console.warn('⚠️ Não foi possível registrar log de acesso');
-        }
-    },
+        },
 
-    _logLogout(user) {
-        try {
-            const logs = JSON.parse(localStorage.getItem('vigorre_access_logs') || '[]');
-            logs.push({
-                userId: user.id,
-                email: user.email,
-                action: 'logout',
-                timestamp: new Date().toISOString()
-            });
-            if (logs.length > 1000) {
-                logs.splice(0, logs.length - 1000);
+        // ============================================================
+        // LGPD - DIREITOS DO PARTICIPANTE
+        // ============================================================
+        solicitarAcessoDados() {
+            if (!this.isAuthenticated()) {
+                throw new Error('Você precisa estar logado.');
             }
-            localStorage.setItem('vigorre_access_logs', JSON.stringify(logs));
-        } catch (e) {
-            console.warn('⚠️ Não foi possível registrar log de logout');
-        }
-    },
 
-    // ============================================
-    // SESSÃO ÚNICA - CONTROLE DE TESTE
-    // ============================================
-    iniciarTeste(participanteId, testeId) {
-        if (this._testeAtivo) {
-            throw new Error('⚠️ Você já possui um teste em andamento. Termine antes de iniciar outro.');
-        }
+            const user = this._currentUser;
 
-        if (!this.verificarConsentimento(participanteId)) {
-            throw new Error('⚠️ Consentimento LGPD não confirmado. Aceite os termos antes de iniciar o teste.');
-        }
+            return {
+                usuario: user,
+                consentimentos: localStorage.getItem(`consentimento_${user.id}`) || null,
+                logs: JSON.parse(localStorage.getItem('vigorre_access_logs') || '[]')
+                    .filter(log => log.userId === user.id)
+            };
+        },
 
-        const testeSession = {
-            participanteId,
-            testeId,
-            inicio: Date.now(),
-            status: 'em_andamento'
-        };
+        solicitarCorrecaoDados(campos) {
+            if (!this.isAuthenticated()) {
+                throw new Error('Você precisa estar logado.');
+            }
 
-        localStorage.setItem(`teste_session_${participanteId}`, JSON.stringify(testeSession));
-        this._testeAtivo = true;
-        return testeSession;
-    },
+            alert('📩 Solicitação de correção enviada. Você receberá um e-mail em até 48 horas.');
 
-    finalizarTeste(participanteId) {
-        localStorage.removeItem(`teste_session_${participanteId}`);
-        this._testeAtivo = false;
-    },
+            return true;
+        },
 
-    verificarSessaoTeste(participanteId) {
-        const session = localStorage.getItem(`teste_session_${participanteId}`);
-        if (!session) return null;
+        solicitarExclusaoDados() {
+            if (!this.isAuthenticated()) {
+                throw new Error('Você precisa estar logado.');
+            }
 
-        try {
-            const data = JSON.parse(session);
-            if (Date.now() - data.inicio > 30 * 60 * 1000) {
-                localStorage.removeItem(`teste_session_${participanteId}`);
-                this._testeAtivo = false;
+            const user = this._currentUser;
+
+            if (confirm('🔒 LGPD: Esta ação irá solicitar a EXCLUSÃO PERMANENTE de todos os seus dados. Tem certeza?')) {
+                this.revogarConsentimento(user.id);
+
+                alert('📩 Solicitação de exclusão enviada. Você receberá um e-mail em até 48 horas.');
+
+                this.logout('Solicitação de exclusão de dados recebida.');
+            }
+        },
+
+        solicitarPortabilidadeDados() {
+            if (!this.isAuthenticated()) {
+                throw new Error('Você precisa estar logado.');
+            }
+
+            const dados = this.solicitarAcessoDados();
+
+            const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `dados_${this._currentUser.id}_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+
+            URL.revokeObjectURL(url);
+
+            alert('📥 Download dos seus dados iniciado!');
+        },
+
+        // ============================================================
+        // LOGS DE ACESSO
+        // ============================================================
+        _logAccess(user) {
+            try {
+                const logs = JSON.parse(localStorage.getItem('vigorre_access_logs') || '[]');
+
+                logs.push({
+                    userId: user.id,
+                    email: user.email,
+                    action: 'login',
+                    timestamp: new Date().toISOString(),
+                    ip: '0.0.0.0',
+                    userAgent: navigator.userAgent
+                });
+
+                if (logs.length > 1000) {
+                    logs.splice(0, logs.length - 1000);
+                }
+
+                localStorage.setItem('vigorre_access_logs', JSON.stringify(logs));
+            } catch (e) {
+                console.warn('⚠️ Não foi possível registrar log de acesso.');
+            }
+        },
+
+        _logLogout(user) {
+            try {
+                const logs = JSON.parse(localStorage.getItem('vigorre_access_logs') || '[]');
+
+                logs.push({
+                    userId: user.id,
+                    email: user.email,
+                    action: 'logout',
+                    timestamp: new Date().toISOString()
+                });
+
+                if (logs.length > 1000) {
+                    logs.splice(0, logs.length - 1000);
+                }
+
+                localStorage.setItem('vigorre_access_logs', JSON.stringify(logs));
+            } catch (e) {
+                console.warn('⚠️ Não foi possível registrar log de logout.');
+            }
+        },
+
+        // ============================================================
+        // SESSÃO ÚNICA DE TESTE
+        // ============================================================
+        iniciarTeste(participanteId, testeId) {
+            const sessaoExistente = this.verificarSessaoTeste(participanteId);
+
+            if (sessaoExistente) {
+                throw new Error('⚠️ Você já possui um teste em andamento. Termine antes de iniciar outro.');
+            }
+
+            if (!this.verificarConsentimento(participanteId)) {
+                throw new Error('⚠️ Consentimento LGPD não confirmado. Aceite os termos antes de iniciar o teste.');
+            }
+
+            const testeSession = {
+                participanteId,
+                testeId,
+                inicio: Date.now(),
+                status: 'em_andamento'
+            };
+
+            localStorage.setItem(`teste_session_${participanteId}`, JSON.stringify(testeSession));
+
+            this._testeAtivo = true;
+
+            return testeSession;
+        },
+
+        finalizarTeste(participanteId) {
+            localStorage.removeItem(`teste_session_${participanteId}`);
+            this._testeAtivo = false;
+        },
+
+        verificarSessaoTeste(participanteId) {
+            const session = localStorage.getItem(`teste_session_${participanteId}`);
+
+            if (!session) return null;
+
+            try {
+                const data = JSON.parse(session);
+
+                if (Date.now() - data.inicio > 30 * 60 * 1000) {
+                    localStorage.removeItem(`teste_session_${participanteId}`);
+                    this._testeAtivo = false;
+                    return null;
+                }
+
+                return data;
+            } catch {
                 return null;
             }
-            return data;
-        } catch {
-            return null;
-        }
-    },
+        },
 
-    // ============================================
-    // POLÍTICA DE SENHA
-    // ============================================
-    validarSenha(senha) {
-        const requisitos = {
-            min: 8,
-            maiuscula: /[A-Z]/.test(senha),
-            minuscula: /[a-z]/.test(senha),
-            numero: /[0-9]/.test(senha),
-            especial: /[!@#$%^&*(),.?":{}|<>]/.test(senha)
-        };
+        // ============================================================
+        // POLÍTICA DE SENHA
+        // ============================================================
+        validarSenha(senha) {
+            const requisitos = {
+                min: 8,
+                maiuscula: /[A-Z]/.test(senha),
+                minuscula: /[a-z]/.test(senha),
+                numero: /[0-9]/.test(senha),
+                especial: /[!@#$%^&*(),.?":{}|<>]/.test(senha)
+            };
 
-        const valida =
-            senha.length >= requisitos.min &&
-            requisitos.maiuscula &&
-            requisitos.minuscula &&
-            requisitos.numero &&
-            requisitos.especial;
+            const valida =
+                senha.length >= requisitos.min &&
+                requisitos.maiuscula &&
+                requisitos.minuscula &&
+                requisitos.numero &&
+                requisitos.especial;
 
-        return {
-            valida,
-            requisitos,
-            mensagem: valida ? 'Senha válida' :
-                'Senha deve ter: 8 caracteres, maiúscula, minúscula, número e caractere especial'
-        };
-    },
+            return {
+                valida,
+                requisitos,
+                mensagem: valida
+                    ? 'Senha válida'
+                    : 'Senha deve ter: 8 caracteres, maiúscula, minúscula, número e caractere especial'
+            };
+        },
 
-    // ============================================
-    // AUDITORIA - LOG DE AÇÕES
-    // ============================================
-    logAcao(usuarioId, acao, dados) {
-        try {
-            const logs = JSON.parse(localStorage.getItem('vigorre_auditoria_logs') || '[]');
-            logs.push({
-                usuarioId,
-                acao,
-                dados: dados || {},
-                timestamp: new Date().toISOString(),
-                ip: '0.0.0.0',
-                userAgent: navigator.userAgent
-            });
-            if (logs.length > 5000) {
-                logs.splice(0, logs.length - 5000);
+        // ============================================================
+        // AUDITORIA
+        // ============================================================
+        logAcao(usuarioId, acao, dados) {
+            try {
+                const logs = JSON.parse(localStorage.getItem('vigorre_auditoria_logs') || '[]');
+
+                logs.push({
+                    usuarioId,
+                    acao,
+                    dados: dados || {},
+                    timestamp: new Date().toISOString(),
+                    ip: '0.0.0.0',
+                    userAgent: navigator.userAgent
+                });
+
+                if (logs.length > 5000) {
+                    logs.splice(0, logs.length - 5000);
+                }
+
+                localStorage.setItem('vigorre_auditoria_logs', JSON.stringify(logs));
+            } catch (e) {
+                console.warn('⚠️ Não foi possível registrar log de auditoria.');
             }
-            localStorage.setItem('vigorre_auditoria_logs', JSON.stringify(logs));
-        } catch (e) {
-            console.warn('⚠️ Não foi possível registrar log de auditoria');
-        }
-    },
+        },
 
-    // ============================================
-    // ANONIMIZAÇÃO DE DADOS
-    // ============================================
-    anonimizarDados(participanteId) {
-        const dados = {
-            participanteId,
-            anonimizado: true,
-            data: new Date().toISOString()
-        };
-        localStorage.setItem(`anonimizado_${participanteId}`, JSON.stringify(dados));
-        this.logAcao(participanteId, 'anonimizacao', dados);
-        return dados;
-    },
+        // ============================================================
+        // ANONIMIZAÇÃO
+        // ============================================================
+        anonimizarDados(participanteId) {
+            const dados = {
+                participanteId,
+                anonimizado: true,
+                data: new Date().toISOString()
+            };
 
-    isAnonimizado(participanteId) {
-        const data = localStorage.getItem(`anonimizado_${participanteId}`);
-        if (!data) return false;
-        try {
-            return JSON.parse(data).anonimizado;
-        } catch {
-            return false;
-        }
-    },
+            localStorage.setItem(`anonimizado_${participanteId}`, JSON.stringify(dados));
 
-    // ============================================
-    // VERIFICAR SESSÃO
-    // ============================================
-    checkSession() {
-        if (!this.isAuthenticated()) {
-            return false;
-        }
-        const session = JSON.parse(localStorage.getItem('vigorre_session') || '{}');
-        if (Date.now() - session.timestamp > this._sessionTimeout) {
-            this.logout('Sessão expirada. Faça login novamente.');
-            return false;
-        }
-        session.timestamp = Date.now();
-        localStorage.setItem('vigorre_session', JSON.stringify(session));
-        return true;
-    },
+            this.logAcao(participanteId, 'anonimizacao', dados);
 
-    // ============================================
-    // REQUER AUTENTICAÇÃO
-    // ============================================
-    requireAuth() {
-        if (!this.isAuthenticated()) {
-            this.logout('Acesso não autorizado.');
-            return false;
-        }
-        if (!this.checkSession()) {
-            return false;
-        }
-        return true;
-    },
+            return dados;
+        },
 
-    requireAdmin() {
-        if (!this.requireAuth()) return false;
-        if (!this.isAdmin()) {
-            this.logout('Acesso restrito a administradores.');
-            return false;
-        }
-        return true;
-    },
+        isAnonimizado(participanteId) {
+            const data = localStorage.getItem(`anonimizado_${participanteId}`);
 
-    requireOrganizacao() {
-        if (!this.requireAuth()) return false;
-        if (!this.isOrganizacao()) {
-            this.logout('Acesso restrito a organizações.');
-            return false;
-        }
-        return true;
-    },
+            if (!data) return false;
 
-    requireParticipante() {
-        if (!this.requireAuth()) return false;
-        if (!this.isParticipante()) {
-            this.logout('Acesso restrito a participantes.');
-            return false;
-        }
-        return true;
-    },
+            try {
+                return JSON.parse(data).anonimizado;
+            } catch {
+                return false;
+            }
+        },
 
-    // ============================================
-    // REDIRECIONAR PARA LOGIN
-    // ============================================
-    redirectToLogin() {
-        window.location.href = '/login.html';
-    },
+        // ============================================================
+        // VERIFICAÇÃO DE SESSÃO
+        // ============================================================
+        checkSession() {
+            if (!this.isAuthenticated()) {
+                return false;
+            }
 
-    getRedirectPath() {
-        const user = this.getCurrentUser();
-        if (!user) return '/login.html';
-        return REDIRECTS[user.role] || '/dashboard.html';
-    }
-};
+            const session = JSON.parse(localStorage.getItem('vigorre_session') || '{}');
 
-// ============================================
-// BLOQUEAR NAVEGAÇÃO
-// ============================================
-(function() {
-    window.addEventListener('popstate', function(event) {
-        if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
-            const user = window.VigorreAuth.getCurrentUser();
-            if (user) {
-                const redirect = REDIRECTS[user.role] || '/';
-                window.location.href = redirect;
-            } else {
+            if (Date.now() - session.timestamp > this._sessionTimeout) {
+                this.logout('Sessão expirada. Faça login novamente.');
+                return false;
+            }
+
+            session.timestamp = Date.now();
+
+            localStorage.setItem('vigorre_session', JSON.stringify(session));
+
+            return true;
+        },
+
+        // ============================================================
+        // REQUER AUTENTICAÇÃO
+        // ============================================================
+        requireAuth() {
+            if (!this.isAuthenticated()) {
                 window.location.href = '/login.html';
+                return false;
             }
-        }
-    });
 
+            if (!this.checkSession()) {
+                return false;
+            }
+
+            return true;
+        },
+
+        requireAdmin() {
+            if (!this.requireAuth()) return false;
+
+            if (!this.isAdmin()) {
+                this.logout('Acesso restrito a administradores.');
+                return false;
+            }
+
+            return true;
+        },
+
+        requireOrganizacao() {
+            if (!this.requireAuth()) return false;
+
+            if (!this.isOrganizacao()) {
+                this.logout('Acesso restrito a organizações.');
+                return false;
+            }
+
+            return true;
+        },
+
+        requireParticipante() {
+            if (!this.requireAuth()) return false;
+
+            if (!this.isParticipante()) {
+                this.logout('Acesso restrito a participantes.');
+                return false;
+            }
+
+            return true;
+        },
+
+        redirectToLogin() {
+            window.location.href = '/login.html';
+        }
+    };
+
+    // ============================================================
+    // INATIVIDADE
+    // ============================================================
     let inactivityTimer;
 
     function resetInactivityTimer() {
         clearTimeout(inactivityTimer);
+
         inactivityTimer = setTimeout(() => {
             if (window.VigorreAuth && window.VigorreAuth.isAuthenticated()) {
                 window.VigorreAuth.logout('Inatividade detectada. Sessão encerrada por segurança.');
@@ -719,22 +831,22 @@ const VigorreAuth = {
     ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'].forEach(event => {
         document.addEventListener(event, resetInactivityTimer);
     });
+
     resetInactivityTimer();
+
+    // ============================================================
+    // EXPORTAÇÃO GLOBAL
+    // ============================================================
+    window.VigorreAuth = VigorreAuth;
+
+    // ============================================================
+    // INICIALIZAÇÃO AUTOMÁTICA
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function () {
+        VigorreAuth.init();
+
+        console.log('✅ VIGORRE ONE™ - Auth carregado');
+        console.log('📋 Versão de consentimento:', VigorreAuth._consentimentoVersao);
+        console.log('🔐 Supabase:', VigorreAuth._supabase ? '✅ Disponível' : '❌ Modo local/mock');
+    });
 })();
-
-// ============================================
-// EXPORTAÇÃO GLOBAL
-// ============================================
-window.VigorreAuth = VigorreAuth;
-
-// ============================================
-// INICIALIZAÇÃO AUTOMÁTICA
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    VigorreAuth.init();
-    console.log('✅ VIGORRE ONE™ - Sistema de Autenticação LGPD + Supabase carregado');
-    console.log('📋 Versão:', VigorreAuth._consentimentoVersao);
-    console.log('🔐 Supabase Auth:', VigorreAuth._supabase ? '✅ Disponível' : '❌ Não disponível (modo simulado)');
-});
-
-console.log('✅ VigorreAuth com LGPD + Sessão Única + Supabase carregado com sucesso!');
