@@ -9,23 +9,46 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 
-    <!-- ✅ MENU ÚNICO: só este CSS controla o menu -->
     <link rel="stylesheet" href="/assets/css/menu-fix.css" />
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --navy: #0A2540; --blue: #1D4ED8; --cyan: #06B6D4; --gold: #D97706;
-            --green: #10B981; --red: #EF4444; --orange: #F59E0B; --purple: #7C3AED;
-            --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9;
-            --gray-200: #E2E8F0; --gray-300: #CBD5E1; --gray-400: #94A3B8;
-            --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155;
-            --gray-800: #1E293B; --gray-900: #0F172A;
-            --radius: 16px; --radius-sm: 10px; --radius-full: 9999px;
+            --navy: #0A2540;
+            --blue: #1D4ED8;
+            --cyan: #06B6D4;
+            --gold: #D97706;
+            --green: #10B981;
+            --red: #EF4444;
+            --orange: #F59E0B;
+            --purple: #7C3AED;
+            --white: #FFFFFF;
+
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
+
             --shadow: 0 4px 24px rgba(10,37,64,0.06);
             --shadow-hover: 0 8px 40px rgba(10,37,64,0.10);
             --transition: 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
         }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--gray-50);
@@ -33,155 +56,343 @@
             min-height: 100vh;
         }
 
-        /* ✅ Conteúdo principal — offset do menu via menu-fix.css */
-        .main { padding: 24px 32px 40px; min-height: 100vh; }
-        .main-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
+        .main {
+            padding: 24px 32px 40px;
+            min-height: 100vh;
         }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
         .main-header h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem; font-weight: 700; color: var(--gray-900);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gray-900);
             letter-spacing: -0.5px;
         }
-        .main-header .subtitle { color: var(--gray-500); font-size: 0.9rem; }
+
+        .main-header .subtitle {
+            color: var(--gray-500);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
 
         .btn-primary {
-            padding: 10px 24px; background: linear-gradient(135deg, var(--blue), var(--cyan));
-            color: white; border: none; border-radius: var(--radius-sm);
-            font-weight: 600; font-size: 0.875rem; cursor: pointer;
-            transition: var(--transition); display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(29,78,216,0.25); }
 
-        /* Cards de estatísticas */
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29,78,216,0.25);
+        }
+
         .cards-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
         }
+
         .card {
-            background: white; border-radius: var(--radius); padding: 20px 24px;
-            box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
-            transition: var(--transition); cursor: pointer;
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04);
+            transition: var(--transition);
+            cursor: pointer;
         }
-        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-        .card .card-icon { font-size: 2rem; margin-bottom: 8px; }
-        .card .card-label { font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .card .card-label {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
         .card .card-value {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem; font-weight: 700; color: var(--gray-900);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gray-900);
         }
 
-        /* Subtítulos de seção */
         .section-title {
-            display: flex; align-items: center; gap: 10px;
-            font-size: 0.75rem; font-weight: 800; letter-spacing: 1.4px;
-            text-transform: uppercase; color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--gray-600);
             margin: 32px 0 16px;
         }
-        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--gray-200); }
 
-        /* Grid de módulos */
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
         .modules-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 16px; margin-bottom: 20px;
-        }
-        .module-card {
-            background: white; border: 1px solid var(--gray-200); border-radius: var(--radius);
-            padding: 20px; text-decoration: none; color: inherit;
-            display: flex; flex-direction: column; gap: 8px;
-            transition: var(--transition); box-shadow: var(--shadow);
-        }
-        .module-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--cyan); }
-        .module-card .m-icon { font-size: 1.8rem; }
-        .module-card .m-title { font-weight: 700; color: var(--gray-900); font-size: 0.95rem; }
-        .module-card .m-desc { font-size: 0.8rem; color: var(--gray-500); line-height: 1.5; }
-        .module-card .m-go { font-size: 0.8rem; font-weight: 700; color: var(--cyan); margin-top: auto; }
-
-        /* Grid de conteúdo */
-        .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .content-card {
-            background: white; border-radius: var(--radius); padding: 20px 24px;
-            box-shadow: var(--shadow); border: 1px solid rgba(10,37,64,0.04);
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
             margin-bottom: 20px;
         }
+
+        .module-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .module-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--cyan);
+        }
+
+        .module-card .m-icon {
+            font-size: 1.8rem;
+        }
+
+        .module-card .m-title {
+            font-weight: 700;
+            color: var(--gray-900);
+            font-size: 0.95rem;
+        }
+
+        .module-card .m-desc {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            line-height: 1.5;
+        }
+
+        .module-card .m-go {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-top: auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(10,37,64,0.04);
+            margin-bottom: 20px;
+        }
+
         .content-card h3 {
-            font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600;
-            color: var(--gray-800); margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 12px;
         }
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
-        .info-card { background: var(--gray-50); padding: 16px 20px; border-radius: var(--radius-sm); }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .info-card {
+            background: var(--gray-50);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+        }
+
         .info-card label {
-            font-size: 0.7rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em;
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-        .info-card .value { font-weight: 600; font-size: 1rem; color: var(--gray-800); }
+
+        .info-card .value {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--gray-800);
+        }
 
         .btn-action {
-            padding: 10px 12px; border: none; border-radius: var(--radius-sm);
-            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.8rem;
-            cursor: pointer; transition: var(--transition);
-            text-decoration: none; display: block; text-align: center; margin-bottom: 8px;
+            padding: 10px 12px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-bottom: 8px;
         }
 
         .toast {
-            position: fixed; top: 24px; right: 24px; background: white;
-            padding: 14px 24px; border-radius: 12px;
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-            display: none; align-items: center; gap: 12px;
-            font-weight: 600; font-size: 0.875rem; z-index: 300;
-            border-left: 4px solid var(--blue); animation: slideIn 0.3s ease;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 300;
+            border-left: 4px solid var(--blue);
+            animation: slideIn 0.3s ease;
         }
-        .toast.show { display: flex; }
-        .toast.success { border-left-color: #10B981; }
-        .toast.error { border-left-color: #EF4444; }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.success {
+            border-left-color: #10B981;
+        }
+
+        .toast.error {
+            border-left-color: #EF4444;
+        }
+
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(120%); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         @media (max-width: 1200px) {
-            .cards-grid { grid-template-columns: repeat(2, 1fr); }
-            .content-grid { grid-template-columns: 1fr; }
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
         }
+
         @media (max-width: 768px) {
-            .cards-grid { grid-template-columns: 1fr; }
-            .info-grid { grid-template-columns: 1fr; }
-            .main-header { flex-direction: column; align-items: flex-start; }
-            .modules-grid { grid-template-columns: 1fr; }
-            .main { padding: 16px; }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main {
+                padding: 16px;
+            }
         }
     </style>
 </head>
+
 <body data-profile="organizacao">
-
-    <!-- ✅ SEM menu hardcoded — o menu-fix.js injeta automaticamente -->
-
     <main class="main vg-content">
         <div class="main-header">
             <div>
-                <h1>🏢 Dashboard da Organização</h1>
-                <p class="subtitle">Visão geral da sua operação — gestão, avaliações e central financeira.</p>
+                <h1 data-vg-greeting-title>Dashboard da Organização</h1>
+                <p class="subtitle"
+                   data-vg-greeting-subtitle
+                   data-page-description="Gestão dos seus participantes, avaliações, créditos e financeiro.">
+                    Visão geral da sua operação.
+                </p>
             </div>
-            <button class="btn-primary" onclick="recarregarDados()">🔄 Atualizar</button>
+
+            <button class="btn-primary" onclick="recarregarDados()">
+                🔄 Atualizar
+            </button>
         </div>
 
         <!-- 📊 VISÃO GERAL -->
         <div class="section-title">📊 Visão Geral</div>
+
         <div class="cards-grid">
             <div class="card" onclick="window.location.href='/organizacao/participantes/index.html'">
                 <div class="card-icon">👥</div>
                 <div class="card-label">Participantes</div>
                 <div class="card-value" id="totalParticipantes">0</div>
             </div>
+
             <div class="card" onclick="window.location.href='/organizacao/vagas/index.html'">
                 <div class="card-icon">💼</div>
-                <div class="card-label">Vagas Abertas</div>
+                <div class="card-label">Vagas Internas</div>
                 <div class="card-value" id="totalVagas">0</div>
             </div>
+
             <div class="card" onclick="window.location.href='/organizacao/testes/index.html'">
                 <div class="card-icon">📝</div>
                 <div class="card-label">Testes Aplicados</div>
                 <div class="card-value" id="totalTestes">0</div>
             </div>
+
             <div class="card" onclick="window.location.href='/organizacao/creditos/index.html'">
                 <div class="card-icon">💳</div>
                 <div class="card-label">Saldo de Créditos</div>
@@ -191,97 +402,129 @@
 
         <!-- 🏢 GESTÃO -->
         <div class="section-title">🏢 Gestão</div>
+
         <div class="modules-grid">
             <a class="module-card" href="/organizacao/participantes/index.html">
                 <span class="m-icon">👥</span>
                 <span class="m-title">Participantes</span>
-                <span class="m-desc">Gerencie candidatos e colaboradores, distribua créditos e acompanhe o consumo.</span>
+                <span class="m-desc">
+                    Gerencie candidatos e colaboradores, distribua créditos e acompanhe o consumo.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/organizacao/vagas/index.html">
                 <span class="m-icon">💼</span>
-                <span class="m-title">Vagas</span>
-                <span class="m-desc">Crie e acompanhe processos seletivos e posições abertas.</span>
+                <span class="m-title">Vagas Internas</span>
+                <span class="m-desc">
+                    Crie e acompanhe posições e processos internos, sem vínculo com recrutamento público.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
         </div>
 
         <!-- 📝 AVALIAÇÕES -->
         <div class="section-title">📝 Avaliações</div>
+
         <div class="modules-grid">
             <a class="module-card" href="/organizacao/testes/index.html">
                 <span class="m-icon">📝</span>
                 <span class="m-title">Testes</span>
-                <span class="m-desc">Aplique avaliações DISC, Big Five, Inteligência Emocional, Valores e VIGOR.</span>
+                <span class="m-desc">
+                    Aplique avaliações DISC, Big Five, Inteligência Emocional, Valores e SWOT.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/organizacao/relatorios/index.html">
                 <span class="m-icon">📊</span>
                 <span class="m-title">Relatórios</span>
-                <span class="m-desc">Relatórios individuais e comparativos de perfil e compatibilidade.</span>
+                <span class="m-desc">
+                    Relatórios individuais e comparativos de perfil e compatibilidade.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/organizacao/laudos/index.html">
                 <span class="m-icon">📄</span>
                 <span class="m-title">Laudos</span>
-                <span class="m-desc">Laudos completos gerados por IA com PDI e recomendações.</span>
+                <span class="m-desc">
+                    Laudos completos gerados por IA com PDI e recomendações.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
         </div>
 
         <!-- 💰 CENTRAL FINANCEIRA -->
         <div class="section-title">💰 Central Financeira</div>
+
         <div class="modules-grid">
             <a class="module-card" href="/organizacao/creditos/index.html">
                 <span class="m-icon">💳</span>
                 <span class="m-title">Créditos</span>
-                <span class="m-desc">Compre pacotes, veja o saldo e distribua créditos para os participantes.</span>
+                <span class="m-desc">
+                    Compre pacotes, veja o saldo e distribua créditos para os participantes.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/organizacao/financeiro/index.html">
                 <span class="m-icon">💰</span>
                 <span class="m-title">Financeiro</span>
-                <span class="m-desc">Visão geral financeira da empresa: gastos, consumo e saldo.</span>
+                <span class="m-desc">
+                    Visão geral financeira da empresa: gastos, consumo e saldo.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
+
             <a class="module-card" href="/organizacao/financeiro/extratos.html">
                 <span class="m-icon">🧾</span>
                 <span class="m-title">Extratos</span>
-                <span class="m-desc">Histórico detalhado de todas as movimentações de créditos.</span>
+                <span class="m-desc">
+                    Histórico detalhado de todas as movimentações de créditos.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
         </div>
 
         <!-- ⚙️ SISTEMA -->
         <div class="section-title">⚙️ Sistema</div>
+
         <div class="modules-grid">
             <a class="module-card" href="/organizacao/configuracoes/index.html">
                 <span class="m-icon">⚙️</span>
                 <span class="m-title">Configurações</span>
-                <span class="m-desc">Dados da empresa, equipe, integrações e preferências.</span>
+                <span class="m-desc">
+                    Dados da empresa, equipe, integrações e preferências.
+                </span>
                 <span class="m-go">Acessar →</span>
             </a>
         </div>
 
         <!-- 📋 INFORMAÇÕES DA ORGANIZAÇÃO -->
         <div class="section-title">📋 Informações da Organização</div>
+
         <div class="content-grid">
             <div>
                 <div class="content-card">
                     <h3>🏢 Dados da Empresa</h3>
+
                     <div class="info-grid">
                         <div class="info-card">
                             <label>Nome da Organização</label>
                             <div class="value" id="orgNome">Carregando...</div>
                         </div>
+
                         <div class="info-card">
                             <label>CNPJ</label>
                             <div class="value" id="orgCnpj">Carregando...</div>
                         </div>
+
                         <div class="info-card">
                             <label>Segmento</label>
                             <div class="value" id="orgSegmento">Carregando...</div>
                         </div>
+
                         <div class="info-card">
                             <label>Status</label>
                             <div class="value" id="orgStatus">✅ Ativo</div>
@@ -293,10 +536,19 @@
             <div>
                 <div class="content-card" style="background:linear-gradient(135deg,var(--navy),var(--gray-800));">
                     <h3 style="color:white;">📌 Ações Rápidas</h3>
+
                     <div style="margin-top:8px;">
-                        <a href="/organizacao/configuracoes/index.html" class="btn-action" style="background:var(--gold);color:var(--navy);">⚙️ Configurações</a>
-                        <a href="/organizacao/participantes/index.html" class="btn-action" style="color:white;background:rgba(255,255,255,0.1);">👥 Gerenciar Participantes</a>
-                        <a href="/organizacao/creditos/index.html" class="btn-action" style="color:white;background:rgba(255,255,255,0.1);">💳 Comprar Créditos</a>
+                        <a href="/organizacao/configuracoes/index.html" class="btn-action" style="background:var(--gold);color:var(--navy);">
+                            ⚙️ Configurações
+                        </a>
+
+                        <a href="/organizacao/participantes/index.html" class="btn-action" style="color:white;background:rgba(255,255,255,0.1);">
+                            👥 Gerenciar Participantes
+                        </a>
+
+                        <a href="/organizacao/creditos/index.html" class="btn-action" style="color:white;background:rgba(255,255,255,0.1);">
+                            💳 Comprar Créditos
+                        </a>
                     </div>
                 </div>
             </div>
@@ -308,9 +560,7 @@
         <span id="toastMessage">Mensagem</span>
     </div>
 
-    <!-- ✅ MENU ÚNICO injetado aqui -->
     <script src="/assets/js/menu-fix.js"></script>
-
     <script src="/supabase-config.js"></script>
     <script src="/auth.js"></script>
     <script src="/middleware/auth-guard.js"></script>
@@ -326,9 +576,12 @@
             const toast = document.getElementById('toast');
             const icon = document.getElementById('toastIcon');
             const msg = document.getElementById('toastMessage');
+
             icon.textContent = type === 'error' ? '❌' : '✅';
             msg.textContent = message;
+
             toast.className = 'toast show ' + (type || '');
+
             clearTimeout(toast._timeout);
             toast._timeout = setTimeout(() => toast.classList.remove('show'), 4000);
         }
@@ -343,6 +596,7 @@
                 }
 
                 var user = window.VigorreAuth.getCurrentUser();
+
                 if (!user) {
                     window.location.href = '/login.html';
                     return;
@@ -351,22 +605,21 @@
                 document.getElementById('orgNome').textContent = user.companyName || 'Organização Exemplo';
                 document.getElementById('orgCnpj').textContent = '12.345.678/0001-99';
                 document.getElementById('orgSegmento').textContent = 'Tecnologia';
+
                 document.getElementById('totalParticipantes').textContent = '128';
                 document.getElementById('totalVagas').textContent = '6';
                 document.getElementById('totalTestes').textContent = '342';
                 document.getElementById('totalCreditos').textContent = '480';
 
                 console.log('✅ Dashboard Organização carregado!');
-
             } catch (error) {
                 console.error('❌ Erro ao carregar dashboard:', error);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             carregarDashboard();
         });
     </script>
-
 </body>
 </html>
